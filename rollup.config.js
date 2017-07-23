@@ -10,18 +10,18 @@ const version = process.env.npm_package_version;
 
 const config = {
   entry: 'modules/index.js',
-  external: [],
-  globals: {},
   format: 'umd',
   moduleName: 'flopflip',
   sourceMap: true,
+  external: ['react', 'prop-types', 'redux', 'react-redux'],
+  globals: {
+    react: 'React',
+    'prop-types': 'PropTypes',
+    redux: 'redux',
+    'react-redux': 'react-redux',
+  },
   plugins: [
-    commonjs({
-      external: ['react', 'redux', 'react-redux', 'prop-types'],
-      namedExports: {
-        react: ['PropTypes', 'Children', 'Component', 'createElement'],
-      },
-    }),
+    commonjs(),
     babel({
       babelrc: false,
       exclude: 'node_modules/**',
