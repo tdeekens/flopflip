@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`with feature disabled with untoggled component should match snapshot 1`] = `
+<div>
+  UntoggledComponent
+</div>
+`;
+
+exports[`with feature disabled without untoggled component should match snapshot 1`] = `
+<Nothing
+  featureToggles={
+    Object {
+      "aFeatureToggle": false,
+    }
+  }
+/>
+`;
+
+exports[`with feature enabled with untoggled component should match snapshot 1`] = `
+<undefined
+  featureToggles={
+    Object {
+      "aFeatureToggle": true,
+    }
+  }
+/>
+`;
