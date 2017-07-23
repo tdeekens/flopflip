@@ -4,14 +4,6 @@
 </p>
 
 <p align="center">
-  <img alt="npm version" src="https://badge.fury.io/js/flopflip.svg)](https://badge.fury.io/js/flopflip"> ♦️
-  <a href="https://travis-ci.org/tdeekens/flopflip">
-    <img alt="Travis CI Status" src="https://travis-ci.org/tdeekens/flopflip.svg?branch=master)](https://travis-ci.org/tdeekens/flopflip.svg?branch=master"> ♦️
-  </a>
-  <img alt="Greenkeeper" src="https://badges.greenkeeper.io/tdeekens/flopflip.svg)](https://greenkeeper.io/">
-</p>
-
-<p align="center">
   <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/logo.png" /><br /><br />
   <i>Toggle features in LaunchDarkly with their state being maintained in a redux state slice being accessible through a set of Higher-Order Components in React (via recompose).</i><br />
 </p>
@@ -21,6 +13,10 @@
 
   <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/demo.gif" />
 </details>
+
+### Status
+
+[![Travis](https://img.shields.io/travis/tdeekens/flopflip.svg?style=flat-square)]() 💎 [![npm](https://img.shields.io/tdeekens/v/flopflip.svg?style=flat-square)]() 💎  [![David](https://img.shields.io/david/tdeekens/flopflip.svg?style=flat-square)]()
 
 ## Installation
 
