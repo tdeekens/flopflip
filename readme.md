@@ -148,9 +148,9 @@ const Component = props => {
   if (props.featureToggles[flagsNames.TOGGLE_A])
     return <h3>Something to render!</h3>;
   else if (props.featureToggles[flagsNames.TOGGLE_B])
-    return <h3>Something else render!</h3>;
+    return <h3>Something else to render!</h3>;
 
-  return <h3>Something different render!</h3>;
+  return <h3>Something different to render!</h3>;
 };
 
 export default injectFeatureToggles([flagsNames.TOGGLE_A, flagsNames.TOGGLE_B])(
@@ -162,7 +162,7 @@ The feature flags will be available as `props` within the component allowing som
 
 ### Module formats
 
-`Flopflip` is built as a UMD module using [`webpack`](https://github.com/tdeekens/flopflip/blob/master/webpack-config/umd.js). The distribution version is not added to `git` but created as a `preversion` [script](https://github.com/tdeekens/flopflip/blob/master/package.json).
+`Flopflip` is built as a UMD module using [`rollup`](https://github.com/tdeekens/flopflip/blob/master/rollup.config.js). The distribution version is not added to `git` but created as a `preversion` [script](https://github.com/tdeekens/flopflip/blob/master/package.json).
 
 - ...ESM just import the `modules/index.js` within your app.
 - ...CommonJS use the `dist/flopflip.js`
@@ -171,4 +171,4 @@ The feature flags will be available as `props` within the component allowing som
 
 All build files are part of the npm distribution using the [`files`](https://github.com/tdeekens/flopflip/blob/master/package.json) array to keep install time short.
 
-Also feel free to use [unpkg.com](https://unpkg.com/flopflip@latest/dist/umd/flopflip.js) as a CDN to the [dist](https://unpkg.com/flopflip@latest/dist/umd/) files.
+Also feel free to use [unpkg.com](https://unpkg.com/flopflip@latest/dist/flopflip.min.js) as a CDN to the [dist](https://unpkg.com/flopflip@latest/dist/) files.
