@@ -158,7 +158,7 @@ export default injectFeatureToggles([flagsNames.TOGGLE_A, flagsNames.TOGGLE_B])(
 );
 ```
 
-The feature flags will be available as `props` within the component allowing some custom decisions based on their value. This also applies a `React.Component` within which you might want to control custom behavior based on a toggle's value.
+The feature flags will be available as `props` within the component allowing some custom decisions based on their value.
 
 ### Module formats
 
