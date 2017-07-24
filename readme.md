@@ -83,6 +83,38 @@ const store = createStore(
 )
 ```
 
+Whenever setup is not preferred via the store enhance the same can be achieved using the `ConfigureFlopFlip` component.
+
+```js
+import { createStore, compose, applyMiddleware } from 'redux';
+import {
+  ConfigureFlopFlip,
+  reducer as featureToggleReducer,
+  STATE_SLICE as FEATURE_TOGGLE_STATE_SLICE
+} from 'flopflip';
+
+// Maintained somewhere within your application
+import user from './user';
+import appReducer from './reducer';
+
+const store = createStore(
+  combineReducers({
+    appReducer,
+    [FEATURE_TOGGLE_STATE_SLICE]: featureToggleReducer,
+  }),
+  initialState,
+  compose(
+    applyMiddleware(...),
+  )
+)
+
+// Somewhere where your <App /> is rendered
+
+<ConfigureFlopFlip user={user} clientSideId={clientSideId}>
+  <App />
+</ConfigureFlopFlip>
+```
+
 #### `FeatureToggled`
 
 The component renders its `children` depending on the state of a given feature flag. It also allows passing an optional `untoggledComponent` which will be rendered whenever the feature is disabled instead of `null`.
@@ -105,33 +137,33 @@ export default (
 
 #### `withFeatureToggle`
 
-The HoC to conditionally render a component based on a feature toggle's state. It accepts the feature toggle name and a an optional component to be rendered in case the feature is disabled.
+The HoC to conditionally render a component based on a feature toggle's state. It accepts the feature toggle name and an optional component to be rendered in case the feature is disabled.
 
-Without a component rendered in place of the `ComponentToToggled`:
+Without a component rendered in place of the `ComponentToBeToggled`:
 
 ```js
 import { withFeatureToggle } from 'flopflip';
 import flagsNames from './feature-flags';
 
-const ComponentToToggled = () => <h3>I might be gone or there!</h3>;
+const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
 
 export default withFeatureToggle(flagsNames.THE_FEATURE_TOGGLE)(
-  ComponentToToggled
+  ComponentToBeToggled
 );
 ```
 
-With a component rendered in place of the `ComponentToToggled`:
+With a component rendered in place of the `ComponentToBeToggled`:
 
 ```js
 import { withFeatureToggle } from 'flopflip';
 import flagsNames from './feature-flags';
 
-const ComponentToToggled = () => <h3>I might be gone or there!</h3>;
+const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
 const ComponentToBeRenderedInstead = () =>
   <h3>At least there is a fallback!</h3>;
 
 export default withFeatureToggle(flagsNames.THE_FEATURE_TOGGLE)(
-  ComponentToToggled,
+  ComponentToBeToggled,
   ComponentToBeRenderedInstead
 );
 ```

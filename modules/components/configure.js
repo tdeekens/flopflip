@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { initialize, listen } from './../utils/ld-wrapper';
-import { updateStatus, updateFlags } from './../actions/ducks';
+import { updateStatus, updateFlags } from './../ducks';
 
 export class Configure extends React.Component {
   static propTypes = {
@@ -24,14 +24,18 @@ export class Configure extends React.Component {
   };
 
   render() {
-    const client = initialize({
-      clientSideId: this.props.clientSideId,
-      user: this.props.user,
+    listen({
+      client: initialize({
+        clientSideId: this.props.clientSideId,
+        user: this.props.user,
+      }),
+      updateFlags: this.props.updateFlags,
+      updateStatus: this.props.updateStatus,
     });
 
-    listen({ client, dispatch: store.dispatch });
-
-    return React.Children.only(this.props.children);
+    return this.props.children
+      ? React.Children.only(this.props.children)
+      : null;
   }
 }
 
