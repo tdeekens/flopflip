@@ -105,7 +105,7 @@ export default (
 
 #### `withFeatureToggle`
 
-The HoC to conditionally render a component based on a feature toggle's state. It accepts the feature toggle name and a an optional component to be rendered in case the feature is disabled.
+The HoC to conditionally render a component based on a feature toggle's state. It accepts the feature toggle name and an optional component to be rendered in case the feature is disabled.
 
 Without a component rendered in place of the `ComponentToToggled`:
 
