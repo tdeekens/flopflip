@@ -9,6 +9,7 @@
     "format:md": "pmd *.md",
     "format:js": "prettier --write --trailing-comma es5 --single-quote 'modules/*.js' 'webpack-config/*.js' 'rollup.config.js' 'demo/*.js'",
     "test": "jest",
+    "test:ci": "npm run lint && npm run test",
     "test:watch": "npm test -- --watch",
     "test-coverage": "jest --coverage",
     "prebuild:umd": "rimraf dist/umd/**",
