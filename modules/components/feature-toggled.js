@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { STATE_SLICE } from './ducks';
+import { STATE_SLICE } from './../actions/ducks';
 
 export class FeatureToggled extends React.Component {
   static propTypes = {

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { compose, withProps } from 'recompose';
 import intersection from 'lodash.intersection';
-import { STATE_SLICE } from './ducks';
+import { STATE_SLICE } from './../actions/ducks';
 
 const filterFeatureToggles = (
   availableFeatureToggles,

@@ -1,7 +1,7 @@
-import { initialize, listen } from './ld-wrapper';
+import { initialize, listen } from './../utils/ld-wrapper';
 import createFlopFlipEnhancer from './store-enhancer';
 
-jest.mock('./ld-wrapper', () => ({
+jest.mock('./../utils/ld-wrapper', () => ({
   initialize: jest.fn(),
   listen: jest.fn(),
 }));

@@ -1,4 +1,4 @@
-import { initialize, listen } from './ld-wrapper';
+import { initialize, listen } from './../utils/ld-wrapper';
 
 export default function createFlopFlipEnhancer(clientSideId, user) {
   const client = initialize({ clientSideId, user });

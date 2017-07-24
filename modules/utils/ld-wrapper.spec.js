@@ -1,5 +1,5 @@
 import ldClient from 'ldclient-js';
-import { UPDATE_STATUS, UPDATE_FLAGS } from './ducks';
+import { UPDATE_STATUS, UPDATE_FLAGS } from './../actions/ducks';
 import { initialize, listen } from './ld-wrapper';
 
 jest.mock('ldclient-js', () => ({

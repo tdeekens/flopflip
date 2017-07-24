@@ -1,7 +1,7 @@
 import ldClient from 'ldclient-js';
 import camelCase from 'lodash.camelcase';
 import uuid from './uuid';
-import { updateStatus, updateFlags } from './ducks';
+import { updateStatus, updateFlags } from './../actions/ducks';
 
 const createAnonymousUser = () => ({
   key: uuid(),
