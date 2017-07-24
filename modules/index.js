@@ -1,9 +1,15 @@
-export { default as createFlopFlipEnhancer } from './store/store-enhancer';
-export { default as reducer, STATE_SLICE } from './actions/ducks';
+export { createFlopFlipEnhancer } from './store';
 export {
-  default as injectFeatureToggles,
-} from './components/inject-feature-toggles.js';
+  statusReducer,
+  updateStatus,
+  UPDATE_STATUS,
+  flagsReducer,
+  updateFlags,
+  UPDATE_FLAGS,
+} from './ducks';
 export {
-  default as withFeatureToggle,
-} from './components/with-feature-toggle.js';
-export { default as FeatureToggled } from './components/feature-toggled.js';
+  FeatureToggled,
+  injectFeatureToggles,
+  withFeatureToggles,
+  ConfigureFlopFlip,
+} from './components';
