@@ -6,12 +6,15 @@ jest.mock('./../utils/ld-wrapper', () => ({
   listen: jest.fn(),
 }));
 
+const client = { __client__: '__internal__' };
 const clientSideId = '123-abc';
 const user = { key: 'foo-user' };
 
 describe('when creating enhancer', () => {
   let enhancer;
   beforeEach(() => {
+    initialize.mockReturnValue(client);
+
     enhancer = createFlopFlipEnhancer(clientSideId, user);
   });
 
@@ -23,7 +26,7 @@ describe('when creating enhancer', () => {
     let dispatch;
 
     beforeEach(() => {
-      dispatch = jest.fn();
+      dispatch = jest.fn(() => jest.fn());
 
       const getState = () => ({});
       const next = jest.fn(() => ({ getState, dispatch }));
@@ -35,6 +38,14 @@ describe('when creating enhancer', () => {
 
     it('should `listen` on `ld-wrapper`', () => {
       expect(listen).toHaveBeenCalled();
+    });
+
+    it('should `listen` with `client`, `updateFlags` and `updateStatus`', () => {
+      expect(listen).toHaveBeenCalledWith({
+        client,
+        updateFlags: expect.any(Function),
+        updateStatus: expect.any(Function),
+      });
     });
   });
 });

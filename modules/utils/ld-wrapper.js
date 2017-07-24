@@ -1,7 +1,6 @@
 import ldClient from 'ldclient-js';
 import camelCase from 'lodash.camelcase';
 import uuid from './uuid';
-import { updateStatus, updateFlags } from './../ducks';
 
 const createAnonymousUser = () => ({
   key: uuid(),
@@ -29,7 +28,7 @@ const camelCaseFlags = rawFlags =>
 export const initialize = ({ clientSideId, user }) =>
   ldClient.initialize(clientSideId, user || createAnonymousUser());
 
-export const flagUpdates = ({ rawFlags, client, dispatch }) => {
+export const flagUpdates = ({ rawFlags, client, updateFlags }) => {
   // Dispatch whenever configured flag value changes
   for (const flagName in rawFlags) {
     if (Object.prototype.hasOwnProperty.call(rawFlags, flagName)) {
@@ -39,25 +38,23 @@ export const flagUpdates = ({ rawFlags, client, dispatch }) => {
           flagValue
         );
 
-        dispatch(
-          updateFlags({
-            [normalzedFlagName]: normalzedFlagValue,
-          })
-        );
+        updateFlags({
+          [normalzedFlagName]: normalzedFlagValue,
+        });
       });
     }
   }
 };
 
-export const listen = ({ client, dispatch }) => {
+export const listen = ({ client, updateFlags, updateStatus }) => {
   client.on('ready', () => {
-    dispatch(updateStatus({ isReady: true }));
+    updateStatus({ isReady: true });
 
     const rawFlags = client.allFlags();
     const camelCasedFlags = camelCaseFlags(rawFlags);
 
-    dispatch(updateFlags(camelCasedFlags));
+    updateFlags(camelCasedFlags);
 
-    flagUpdates({ rawFlags, client, dispatch });
+    flagUpdates({ rawFlags, client, updateFlags });
   });
 };

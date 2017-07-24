@@ -1,5 +1,4 @@
 import ldClient from 'ldclient-js';
-import { UPDATE_STATUS, UPDATE_FLAGS } from './../ducks';
 import { initialize, listen } from './ld-wrapper';
 
 jest.mock('ldclient-js', () => ({
@@ -23,7 +22,8 @@ describe('when initializing', () => {
 
   describe('when ready', () => {
     const flags = { 'some-flag-1': true, 'some-flag-2': false };
-    let dispatch;
+    let updateStatus;
+    let updateFlags;
     let client;
 
     beforeEach(() => {
@@ -31,40 +31,23 @@ describe('when initializing', () => {
         allFlags: jest.fn(() => flags),
         on: jest.fn((_, cb) => cb()),
       };
-      dispatch = jest.fn();
+      updateStatus = jest.fn();
+      updateFlags = jest.fn();
 
-      listen({ client, dispatch });
+      listen({ client, updateStatus, updateFlags });
     });
 
     describe('when `ldClient` is ready', () => {
-      it('should `dispatch` `updateStatus` action', () => {
-        expect(dispatch).toHaveBeenCalledWith({
-          type: UPDATE_STATUS,
-          payload: expect.any(Object),
-        });
-      });
-
       it('should `dispatch` `updateStatus` action with `isReady`', () => {
-        expect(dispatch).toHaveBeenCalledWith({
-          type: expect.any(String),
-          payload: { isReady: true },
-        });
-      });
-
-      it('should `dispatch` `updateFlags` action', () => {
-        expect(dispatch).toHaveBeenCalledWith({
-          type: UPDATE_FLAGS,
-          payload: expect.any(Object),
+        expect(updateStatus).toHaveBeenCalledWith({
+          isReady: true,
         });
       });
 
       it('should `dispatch` `updateFlags` action with camel cased `flags`', () => {
-        expect(dispatch).toHaveBeenCalledWith({
-          type: expect.any(String),
-          payload: {
-            someFlag1: true,
-            someFlag2: false,
-          },
+        expect(updateFlags).toHaveBeenCalledWith({
+          someFlag1: true,
+          someFlag2: false,
         });
       });
 
@@ -84,7 +67,7 @@ describe('when initializing', () => {
     describe('when flag updates', () => {
       beforeEach(() => {
         // Reset due to preivous dispatches
-        dispatch.mockClear();
+        updateFlags.mockClear();
 
         // Checking for change:* callbacks and settings all flags
         // to false.
@@ -94,24 +77,15 @@ describe('when initializing', () => {
       });
 
       it('should `dispatch` `updateFlags` action', () => {
-        expect(dispatch).toHaveBeenCalledWith({
-          type: UPDATE_FLAGS,
-          payload: expect.any(Object),
-        });
+        expect(updateFlags).toHaveBeenCalled();
       });
 
       it('should `dispatch` `updateFlags` action with camel cased `flags`', () => {
-        expect(dispatch).toHaveBeenCalledWith({
-          type: expect.any(String),
-          payload: {
-            someFlag1: false,
-          },
+        expect(updateFlags).toHaveBeenCalledWith({
+          someFlag1: false,
         });
-        expect(dispatch).toHaveBeenCalledWith({
-          type: expect.any(String),
-          payload: {
-            someFlag2: false,
-          },
+        expect(updateFlags).toHaveBeenCalledWith({
+          someFlag2: false,
         });
       });
     });
