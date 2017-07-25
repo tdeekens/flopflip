@@ -213,11 +213,12 @@ The feature flags will be available as `props` within the component allowing som
 
 `Flopflip` is built as a UMD module using [`rollup`](https://github.com/tdeekens/flopflip/blob/master/rollup.config.js). The distribution version is not added to `git` but created as a `preversion` [script](https://github.com/tdeekens/flopflip/blob/master/package.json).
 
-- ...ESM just import the `modules/index.js` within your app.
-- ...CommonJS use the `dist/flopflip.js`
-- ...AMD use the `dist/flopflip.js`
-- ...`<script />` link it to `dist/flopflip.js` or `dist/flopflip.min.js`
+- ...ESM just import the `dist/flopflip.es.js` within your app.
+  - ...it's a transpiled version accessible via the `pkg.module`
+- ...CommonJS use the `dist/flopflip.umd.js`
+- ...AMD use the `dist/flopflip.umd.js`
+- ...`<script />` link it to `dist/flopflip.umd.js` or `dist/flopflip.umd.min.js`
 
 All build files are part of the npm distribution using the [`files`](https://github.com/tdeekens/flopflip/blob/master/package.json) array to keep install time short.
 
-Also feel free to use [unpkg.com](https://unpkg.com/flopflip@latest/dist/flopflip.min.js) as a CDN to the [dist](https://unpkg.com/flopflip@latest/dist/) files.
+Also feel free to use [unpkg.com](https://unpkg.com/flopflip@latest/dist/flopflip.umd.min.js) as a CDN to the [dist](https://unpkg.com/flopflip@latest/dist/) files.
