@@ -4,6 +4,7 @@ import { Provider, connect } from 'react-redux';
 import classNames from 'classnames';
 import { bindActionCreators } from 'redux';
 import {
+  ConfigureFlopFlip,
   withFeatureToggle,
   injectFeatureToggles,
   FeatureToggled,
@@ -108,14 +109,19 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <div className="App">
-          <div className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h2>Welcome to flopflip</h2>
-          </div>
+        <ConfigureFlopFlip
+          clientSideId="596788417a20200c2b70c89e"
+          user={{ key: 'ld@tdeekens.name' }}
+        >
+          <div className="App">
+            <div className="App-header">
+              <img src={logo} className="App-logo" alt="logo" />
+              <h2>Welcome to flopflip</h2>
+            </div>
 
-          <ConnectedCounter />
-        </div>
+            <ConnectedCounter />
+          </div>
+        </ConfigureFlopFlip>
       </Provider>
     );
   }

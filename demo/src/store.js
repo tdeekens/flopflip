@@ -1,13 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import { createFlopFlipEnhancer } from 'flopflip';
+//import { createFlopFlipEnhancer } from 'flopflip';
 import rootReducer from './modules';
 
 const initialState = {};
 const enhancers = [
-  createFlopFlipEnhancer('596788417a20200c2b70c89e', {
-    key: 'ld@tdeekens.name',
-  }),
+  // createFlopFlipEnhancer('596788417a20200c2b70c89e', {
+  //   key: 'ld@tdeekens.name',
+  // }),
 ];
 const middleware = [thunk];
 

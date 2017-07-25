@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "flopflip": "^1.0.0",
+    "classnames": "^2.2.5",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
     "react-scripts": "1.0.10",
+    "recompose": "^0.24.0",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0",
-    "recompose": "^0.24.0"
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
