@@ -10,7 +10,6 @@ const version = process.env.npm_package_version;
 
 const config = {
   entry: 'modules/index.js',
-  format: 'umd',
   moduleName: 'flopflip',
   sourceMap: true,
   external: ['react', 'prop-types', 'redux', 'react-redux'],
