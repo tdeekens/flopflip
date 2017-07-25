@@ -19,15 +19,7 @@
     "build:umd:min": "cross-env NODE_ENV=production BABEL_ENV=rollup rollup -c -o dist/flopflip.min.js",
     "preversion": "npm run build"
   },
-  "files": [
-    "readme.md",
-    "modules/index.js",
-    "dist/**"
-  ],
-  "pre-commit": [
-    "lint",
-    "test"
-  ],
+  "files": ["readme.md", "modules/**/*.js", "dist/**"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tdeekens/flopflip.git"
@@ -38,10 +30,7 @@
     "url": "https://github.com/tdeekens/flopflip/issues"
   },
   "xo": {
-    "ignores": [
-      "demo/**/*.js",
-      "config/*.js"
-    ],
+    "ignores": ["demo/**/*.js", "config/*.js"],
     "semicolon": true,
     "space": 2,
     "parser": "babel-eslint",
@@ -51,14 +40,8 @@
       "plugin:jest/recommended",
       "prettier/react"
     ],
-    "envs": [
-      "es6",
-      "jest"
-    ],
-    "plugins": [
-      "prettier",
-      "jest"
-    ],
+    "envs": ["es6", "jest"],
+    "plugins": ["prettier", "jest"],
     "rules": {
       "prettier/prettier": [
         "error",
