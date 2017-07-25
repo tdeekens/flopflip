@@ -6,6 +6,6 @@ export { update as updateStatus, UPDATE_STATUS } from './status';
 export { update as updateFlags, UPDATE_FLAGS } from './flags';
 
 export const flopflipReducer = combineReducers({
-  flagsReducer,
-  statusReducer,
+  flags: flagsReducer,
+  status: statusReducer,
 });

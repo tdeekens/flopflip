@@ -1,7 +1,7 @@
 // Actions
 export const UPDATE_FLAGS = '@flopflip/flags/update';
 
-const initialState = { flags: {} };
+const initialState = {};
 
 // Reducer
 export default function reducer(state = initialState, action = {}) {
@@ -9,10 +9,7 @@ export default function reducer(state = initialState, action = {}) {
     case UPDATE_FLAGS:
       return {
         ...state,
-        flags: {
-          ...state.flags,
-          ...action.payload,
-        },
+        ...action.payload,
       };
 
     default:

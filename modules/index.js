@@ -12,6 +12,6 @@ export {
 export {
   FeatureToggled,
   injectFeatureToggles,
-  withFeatureToggles,
+  withFeatureToggle,
   ConfigureFlopFlip,
 } from './components';

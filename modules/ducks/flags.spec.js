@@ -41,7 +41,7 @@ describe('reducers', () => {
 
       it('should set the new flags', () => {
         expect(reducer(undefined, { type: UPDATE_FLAGS, payload })).toEqual({
-          flags: payload,
+          ...payload,
         });
       });
     });
@@ -56,10 +56,9 @@ describe('reducers', () => {
       });
 
       it('should merge with new flags', () => {
-        expect(
-          reducer({ flags: { c: true } }, { type: UPDATE_FLAGS, payload })
-        ).toEqual({
-          flags: { ...payload, c: true },
+        expect(reducer({ c: true }, { type: UPDATE_FLAGS, payload })).toEqual({
+          ...payload,
+          c: true,
         });
       });
     });
