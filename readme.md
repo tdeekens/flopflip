@@ -22,6 +22,17 @@
 
 `yarn add flopflip` or `npm i flopflip --save`
 
+## Demo
+
+A minimal [demo](/demo) exists and can adjusted to point to a [custom](https://github.com/tdeekens/flopflip/blob/master/demo/src/App.js#L108) LaunchDarkly account. You would have to create feature toggles according to the existing [flags](https://github.com/tdeekens/flopflip/blob/master/demo/src/flags.js) too.
+
+Then simply run:
+
+1. From the repositories root: `yarn build:watch`
+2. From `/demo`: first `yarn` and then `yarn start`
+
+A browser window should open and the network tab should show feature flags being loaded from LaunchDarkly.
+
 ## Documentation
 
 Flopflip allows you to manage feature flags through [LaunchDarkly](https://launchdarkly.com/) within an application written using React and Redux.
