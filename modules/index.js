@@ -1,10 +1,12 @@
-export { createFlopFlipEnhancer } from './store';
 export {
-  statusReducer,
+  createFlopFlipEnhancer,
+  STATE_SLICE as FLOPFLIP_STATE_SLICE,
+} from './store';
+export {
+  flopflipReducer,
   updateStatus,
-  UPDATE_STATUS,
-  flagsReducer,
   updateFlags,
+  UPDATE_STATUS,
   UPDATE_FLAGS,
 } from './ducks';
 export {
