@@ -16,7 +16,7 @@
 
 ### Status
 
-[![Travis](https://img.shields.io/travis/tdeekens/flopflip.svg?style=flat-square)](https://travis-ci.org/tdeekens/flopflip) 💎 [![npm](https://img.shields.io/tdeekens/v/flopflip.svg?style=flat-square)]() 💎  [![David](https://img.shields.io/david/tdeekens/flopflip.svg?style=flat-square)]()
+[![Travis](https://img.shields.io/travis/tdeekens/flopflip.svg?style=flat-square)](https://travis-ci.org/tdeekens/flopflip) 💎 [![npm](https://img.shields.io/npm/v/flopflip.svg?style=flat-square)](https://www.npmjs.com/package/flopflip) 💎  [![David](https://img.shields.io/david/tdeekens/flopflip.svg?style=flat-square)]()
 
 ## Installation
 
