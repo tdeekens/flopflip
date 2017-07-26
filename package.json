@@ -1,6 +1,6 @@
 {
   "name": "flopflip",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A feature toggle wrapper to use LaunchDarkly with React Redux",
   "main": "dist/flopflip.umd.js",
   "module": "dist/flopflip.es.js",
@@ -21,7 +21,11 @@
     "build:es": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/flopflip.es.js",
     "preversion": "npm run build"
   },
-  "files": ["readme.md", "modules/**/*.js", "dist/**"],
+  "files": [
+    "readme.md",
+    "modules/**/*.js",
+    "dist/**"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tdeekens/flopflip.git"
@@ -32,7 +36,10 @@
     "url": "https://github.com/tdeekens/flopflip/issues"
   },
   "xo": {
-    "ignores": ["demo/**/*.js", "config/*.js"],
+    "ignores": [
+      "demo/**/*.js",
+      "config/*.js"
+    ],
     "semicolon": true,
     "space": 2,
     "parser": "babel-eslint",
@@ -42,8 +49,14 @@
       "plugin:jest/recommended",
       "prettier/react"
     ],
-    "envs": ["es6", "jest"],
-    "plugins": ["prettier", "jest"],
+    "envs": [
+      "es6",
+      "jest"
+    ],
+    "plugins": [
+      "prettier",
+      "jest"
+    ],
     "rules": {
       "prettier/prettier": [
         "error",
