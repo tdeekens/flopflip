@@ -10,6 +10,7 @@
     "react-scripts": "1.0.10",
     "recompose": "^0.24.0",
     "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
