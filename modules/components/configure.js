@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { initialize, listen } from './../utils/ld-wrapper';
 import { updateStatus, updateFlags } from './../ducks';
 
@@ -41,7 +40,9 @@ export class Configure extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ updateStatus, updateFlags }, dispatch);
+const mapDispatchToProps = () => ({
+  updateStatus,
+  updateFlags,
+});
 
 export default connect(null, mapDispatchToProps)(Configure);
