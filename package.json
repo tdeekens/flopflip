@@ -1,6 +1,6 @@
 {
   "name": "flopflip",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A feature toggle wrapper to use LaunchDarkly with React Redux",
   "main": "dist/flopflip.umd.js",
   "module": "dist/flopflip.es.js",
