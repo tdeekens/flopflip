@@ -23,7 +23,7 @@ export class Configure extends React.Component {
     user: {},
   };
 
-  render() {
+  componentDidMount() {
     listen({
       client: initialize({
         clientSideId: this.props.clientSideId,
@@ -32,7 +32,9 @@ export class Configure extends React.Component {
       updateFlags: this.props.updateFlags,
       updateStatus: this.props.updateStatus,
     });
+  }
 
+  render() {
     return this.props.children
       ? React.Children.only(this.props.children)
       : null;

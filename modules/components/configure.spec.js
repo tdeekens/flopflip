@@ -27,29 +27,11 @@ describe('rendering', () => {
 
   beforeEach(() => {
     props = createTestProps();
-
-    initialize.mockReturnValue(props.client);
-
     wrapper = shallow(<Configure {...props} />);
   });
 
   it('should match snapshot', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
-  });
-
-  it('should `initialize` on the `ld-wrapper` with `clientSideId` and `user`', () => {
-    expect(initialize).toHaveBeenCalledWith({
-      clientSideId: props.clientSideId,
-      user: props.user,
-    });
-  });
-
-  it('should `listen` on the `ld-wrapper`', () => {
-    expect(listen).toHaveBeenCalledWith({
-      client: props.client,
-      updateFlags: props.updateFlags,
-      updateStatus: props.updateStatus,
-    });
   });
 
   describe('with `children`', () => {
@@ -68,6 +50,40 @@ describe('rendering', () => {
 
     it('should render `children`', () => {
       expect(wrapper).toRender(ChildComponent);
+    });
+  });
+});
+
+describe('lifecycle', () => {
+  let props;
+  let wrapper;
+
+  beforeEach(() => {
+    props = createTestProps();
+
+    initialize.mockReturnValue(props.client);
+
+    wrapper = shallow(<Configure {...props} />);
+  });
+
+  describe('componentDidMount', () => {
+    beforeEach(() => {
+      wrapper.instance().componentDidMount();
+    });
+
+    it('should `initialize` on the `ld-wrapper` with `clientSideId` and `user`', () => {
+      expect(initialize).toHaveBeenCalledWith({
+        clientSideId: props.clientSideId,
+        user: props.user,
+      });
+    });
+
+    it('should `listen` on the `ld-wrapper`', () => {
+      expect(listen).toHaveBeenCalledWith({
+        client: props.client,
+        updateFlags: props.updateFlags,
+        updateStatus: props.updateStatus,
+      });
     });
   });
 });
