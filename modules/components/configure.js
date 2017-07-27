@@ -40,9 +40,9 @@ export class Configure extends React.Component {
   }
 }
 
-const mapDispatchToProps = () => ({
+const mapDispatchToProps = {
   updateStatus,
   updateFlags,
-});
+};
 
 export default connect(null, mapDispatchToProps)(Configure);
