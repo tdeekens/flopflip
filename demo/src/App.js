@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { compose } from 'recompose';
 import { Provider, connect } from 'react-redux';
 import classNames from 'classnames';
-import { bindActionCreators } from 'redux';
 import {
   ConfigureFlopFlip,
   withFeatureToggle,
   injectFeatureToggles,
   FeatureToggled,
-} from 'flopflip';
+} from '@flopflip/react-redux';
+// change to `from '@flopflip/react-broadcast'` and everything will just work wtihout redux
 import {
   increment,
   incrementAsync,
@@ -92,16 +92,12 @@ const mapStateToProps = state => ({
   isDecrementing: state.counter.isDecrementing,
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      increment,
-      incrementAsync,
-      decrement,
-      decrementAsync,
-    },
-    dispatch
-  );
+const mapDispatchToProps = {
+  increment,
+  incrementAsync,
+  decrement,
+  decrementAsync,
+};
 
 const ConnectedCounter = connect(mapStateToProps, mapDispatchToProps)(Counter);
 

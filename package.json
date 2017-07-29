@@ -1,44 +1,39 @@
 {
   "name": "flopflip",
-  "version": "0.2.1",
-  "description": "A feature toggle wrapper to use LaunchDarkly with React Redux",
-  "main": "dist/flopflip.umd.js",
-  "module": "dist/flopflip.es.js",
+  "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
+    "postinstall": "check-node-version --package && lerna bootstrap && npm run build",
     "lint": "xo",
     "format": "run-p format:md format:js",
     "format:md": "pmd *.md",
-    "format:js": "prettier --write --trailing-comma es5 --single-quote 'modules/*.js' 'webpack-config/*.js' 'rollup.config.js' 'demo/*.js'",
+    "format:js": "prettier --write --trailing-comma es5 --single-quote '**/modules/**/*.js' '**/rollup.config.js' '**/demo/**/*.js'",
     "test": "jest",
     "test:ci": "npm run lint && npm run test",
     "test:watch": "npm test -- --watch",
-    "test-coverage": "jest --coverage",
-    "prebuild:umd": "rimraf dist/**",
-    "build": "run-p build:umd build:umd:min build:es",
-    "build:watch": "npm run build:umd -- -w",
-    "build:umd": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f umd -o dist/flopflip.umd.js",
-    "build:umd:min": "cross-env NODE_ENV=production BABEL_ENV=rollup rollup -c -f umd -o dist/flopflip.umd.min.js",
-    "build:es": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/flopflip.es.js",
-    "preversion": "npm run build"
+    "test:coverage": "jest --coverage",
+    "build": "lerna exec -- npm run build",
+    "build:watch": "lerna exec -- npm run build:watch"
   },
-  "files": [
-    "readme.md",
-    "modules/**/*.js",
-    "dist/**"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tdeekens/flopflip.git"
   },
   "author": "Tobias Deekens <nerd@tdeekens.name>",
   "license": "MIT",
+  "engines": {
+    "node": ">=6",
+    "npm": ">=3"
+  },
   "bugs": {
     "url": "https://github.com/tdeekens/flopflip/issues"
   },
   "xo": {
     "ignores": [
-      "demo/**/*.js",
-      "config/*.js"
+      "**/demo/**/*.js",
+      "config/*.js",
+      "**/rollup.config.js",
+      "packages/react-broadcast/modules/components/subscriber.js",
+      "packages/react-broadcast/modules/components/broadcast.js"
     ],
     "semicolon": true,
     "space": 2,
@@ -49,14 +44,8 @@
       "plugin:jest/recommended",
       "prettier/react"
     ],
-    "envs": [
-      "es6",
-      "jest"
-    ],
-    "plugins": [
-      "prettier",
-      "jest"
-    ],
+    "envs": ["es6", "jest"],
+    "plugins": ["prettier", "jest"],
     "rules": {
       "prettier/prettier": [
         "error",
@@ -77,7 +66,6 @@
     "babel-core": "^6.24.0",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
-    "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.6",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.4.0",
@@ -85,25 +73,22 @@
     "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "check-node-version": "^2.1.0",
     "cross-env": "^5.0.0",
-    "enzyme": "^2.9.1",
-    "enzyme-to-json": "^1.5.1",
     "eslint-config-prettier": "^2.1.1",
     "eslint-config-xo-react": "^0.13.0",
     "eslint-plugin-jest": "^20.0.3",
     "eslint-plugin-prettier": "^2.0.1",
     "eslint-plugin-react": "^7.1.0",
     "jest": "^20.0.4",
+    "lerna": "^2.0.0",
     "npm-run-all": "^4.0.2",
     "prettier": "^1.2.2",
     "prettier-markdown": "^0.1.8",
-    "react": "^15.0.0",
-    "react-dom": "^15.6.1",
-    "react-redux": "^5.0.5",
-    "react-test-renderer": "^15.6.1",
-    "redux": "^3.7.2",
+    "xo": "^0.18.2",
     "rimraf": "^2.5.4",
     "rollup": "^0.45.2",
+    "babel-plugin-external-helpers": "^6.22.0",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-bundle-size": "^1.0.1",
     "rollup-plugin-commonjs": "^8.0.2",
@@ -111,21 +96,7 @@
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^1.1.1",
     "rollup-plugin-uglify": "^2.0.0",
-    "rollup-watch": "^4.3.1",
-    "xo": "^0.18.1"
-  },
-  "dependencies": {
-    "ldclient-js": "^1.1.8",
-    "lodash.camelcase": "^4.3.0",
-    "lodash.intersection": "^4.4.0",
-    "recompose": "^0.24.0"
-  },
-  "peerDependencies": {
-    "prop-types": "15.5.10",
-    "react": "^15.6.0",
-    "react-dom": "^15.6.0",
-    "react-redux": "^5.0.5",
-    "redux": "^3.7.2"
+    "rollup-watch": "^4.3.1"
   },
   "jest": {
     "globals": {
@@ -135,7 +106,12 @@
     },
     "setupTestFrameworkScriptFile": "./config/jest.js",
     "testRegex": "\\.spec\\.js$",
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/packages/.*/node_modules",
+      "/packages/.*/dist"
+    ]
   },
   "keywords": [
     "react",

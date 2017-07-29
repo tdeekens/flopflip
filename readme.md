@@ -16,11 +16,43 @@
 
 ### Status
 
-[![Travis](https://img.shields.io/travis/tdeekens/flopflip.svg?style=flat-square)](https://travis-ci.org/tdeekens/flopflip) 💎 [![npm](https://img.shields.io/npm/v/flopflip.svg?style=flat-square)](https://www.npmjs.com/package/flopflip) 💎  [![David](https://img.shields.io/david/tdeekens/flopflip.svg?style=flat-square)]()
+[![Travis](https://img.shields.io/travis/tdeekens/flopflip.svg?style=flat-square)](https://travis-ci.org/tdeekens/flopflip)
+
+| Package | Version | Dependencies |
+|--------|-------|------------|
+| [`launchdarkly-wrapper`](/packages/launchdarkly-wrapper) | [![launchdarkly-wrapper Version][launchdarkly-wrapper-icon]][launchdarkly-wrapper-version] | [![launchdarkly-wrapper Dependencies Status][launchdarkly-wrapper-dependencies-icon]][launchdarkly-wrapper-dependencies] |
+| [`react`](/packages/react) | [![react Version][react-icon]][react-version] | [![react Dependencies Status][react-dependencies-icon]][react-dependencies] |
+| [`react-broadcast`](/packages/react-broadcast) | [![react-broadcast Version][react-broadcast-icon]][react-broadcast-version] | [![react-broadcast Dependencies Status][react-broadcast-dependencies-icon]][react-broadcast-dependencies] |
+| [`react-redux`](/packages/react-redux) | [![react-redux Version][react-redux-icon]][react-redux-version] | [![react-redux Dependencies Status][react-redux-dependencies-icon]][react-redux-dependencies] |
+
+[launchdarkly-wrapper-version]: https://www.npmjs.com/package/@flopflip/launchdarkly-wrapper
+[launchdarkly-wrapper-icon]: https://img.shields.io/npm/v/@flopflip/launchdarkly-wrapper.svg?style=flat-square
+[launchdarkly-wrapper-dependencies]: https://david-dm.org/flopflip/nodejs?path=packages/launchdarkly-wrapper
+[launchdarkly-wrapper-dependencies-icon]: https://img.shields.io/david/flopflip/nodejs.svg?path=packages/launchdarkly-wrapper&style=flat-square
+[react-version]: https://www.npmjs.com/package/@flopflip/react
+[react-icon]: https://img.shields.io/npm/v/@flopflip/react.svg?style=flat-square
+[react-dependencies]: https://david-dm.org/flopflip/nodejs?path=packages/react
+[react-dependencies-icon]: https://img.shields.io/david/flopflip/nodejs.svg?path=packages/react&style=flat-square
+[react-broadcast-version]: https://www.npmjs.com/package/@flopflip/react-broadcast
+[react-broadcast-icon]: https://img.shields.io/npm/v/@flopflip/react-broadcast.svg?style=flat-square
+[react-broadcast-dependencies]: https://david-dm.org/flopflip/nodejs?path=packages/react-broadcast
+[react-broadcast-dependencies-icon]: https://img.shields.io/david/flopflip/nodejs.svg?path=packages/react-broadcast&style=flat-square
+[react-redux-version]: https://www.npmjs.com/package/@flopflip/react-redux
+[react-redux-icon]: https://img.shields.io/npm/v/@flopflip/react-redux.svg?style=flat-square
+[react-redux-dependencies]: https://david-dm.org/flopflip/nodejs?path=packages/react-redux
+[react-redux-dependencies-icon]: https://img.shields.io/david/flopflip/nodejs.svg?path=packages/react-redux&style=flat-square
 
 ## Installation
 
-`yarn add flopflip` or `npm i flopflip --save`
+This is mono repository maintained using [lerna](https://github.com/lerna/lerna). It currently contains four [packages](/packages) in a `launchdarkly-wrapper`, `react`, `react-redux` and `react-broadcast`. You should not need the `launchdarkly-wrapper` yourself but one of our bindings (react-broadcast or react-redux). Both use the `react` package to share components.
+
+Depending on the preferred integration (with or without redux)
+
+`yarn add @flopflip/react-redux` or `npm i @flopflip/react-redux --save`
+
+or
+
+`yarn add @flopflip/react-broadcast` or `npm i @flopflip/react-broadcast --save`
 
 ## Demo
 
@@ -35,11 +67,9 @@ A browser window should open and the network tab should show feature flags being
 
 ## Documentation
 
-Flopflip allows you to manage feature flags through [LaunchDarkly](https://launchdarkly.com/) within an application written using React and Redux.
+Flopflip allows you to manage feature flags through [LaunchDarkly](https://launchdarkly.com/) within an application written using React with or without Redux.
 
-### API & exports
-
-The `modules/index.js` exports:
+### `@flopflip/react-redux` API & exports
 
 - `createFlopFlipEnhancer` a redux store enhancer to configure LaunchDarkly and add feature toggle state to your redux store
 - `ConfigureFlopFlip` a component to configure LaunchDarkly (alternative to the store enhancer)
@@ -70,7 +100,7 @@ import {
   // We refer to this state slice in the `injectFeatureToggles`
   // HoC and currently do not support a custom state slice.
   FLOPFLIP_STATE_SLICE
-} from 'flopflip';
+} from '@flopflip/react-redux';
 
 // Maintained somewhere within your application
 import user from './user';
@@ -79,7 +109,7 @@ import appReducer from './reducer';
 const store = createStore(
   combineReducers({
     appReducer,
-    [FLOPFLIP_STATE_SLICE]: featureToggleReducer,
+    [FLOPFLIP_STATE_SLICE]: flopflipReducer,
   }),
   initialState,
   compose(
@@ -95,7 +125,7 @@ const store = createStore(
 )
 ```
 
-Whenever setup is not preferred via the store enhance the same can be achieved using the `ConfigureFlopFlip` component.
+Whenever setup is not preferred via the store enhancer the same can be achieved using the `ConfigureFlopFlip` component.
 
 It takes the `props`:
 
@@ -108,7 +138,7 @@ import {
   ConfigureFlopFlip,
   flopflipReducer,
   FLOPFLIP_STATE_SLICE
-} from 'flopflip';
+} from '@flopflip/react-redux';
 
 // Maintained somewhere within your application
 import user from './user';
@@ -117,7 +147,7 @@ import appReducer from './reducer';
 const store = createStore(
   combineReducers({
     appReducer,
-    [FLOPFLIP_STATE_SLICE]: featureToggleReducer,
+    [FLOPFLIP_STATE_SLICE]: flopflipReducer,
   }),
   initialState,
   compose(
@@ -132,14 +162,39 @@ const store = createStore(
 </ConfigureFlopFlip>
 ```
 
+### `@flopflip/react-redux` API & exports
+
+- `ConfigureFlopFlip` a component to configure LaunchDarkly (using context and broadcasting over redux)
+- `withFeatureToggle` a Higher-Order Component (HoC) to conditionally render components depending on feature toggle state
+- `injectFeatureToggles` a HoC to inject requested feature toggles from existing feature toggles onto the `props` of a component
+- `FeatureToggled` a component conditionally rendering its `children` based on the status of a passed feature flag
+
+The configuration is the same as mentioned above
+
+```js
+import { ConfigureFlopFlip } from '@flopflip/react-redux';
+
+// Somewhere where your <App /> is rendered
+
+<ConfigureFlopFlip user={user} clientSideId={clientSideId}>
+  <App />
+</ConfigureFlopFlip>;
+```
+
+This `ConfigureFlopFlip` component form `@flopflip/react-broadcast` will use the context and a broadcasting system to reliably communicate with children toggling features.
+
+### `@flopflip/react-broadcast` `@flopflip/react-redux` API & exports for toggling
+
+Both packages `@flopflip/react-broadcast` and `@flopflip/react-redux` export the same set of components to toggle based on features. Only the import changes depending on if you chose to integrate with redux or without. Again, behind the scenes the build on `@flopflip/react` to share common logic.
+
 #### `FeatureToggled`
 
 The component renders its `children` depending on the state of a given feature flag. It also allows passing an optional `untoggledComponent` which will be rendered whenever the feature is disabled instead of `null`.
 
 ```js
 import React, { Component } from 'react';
-
-import { FeatureToggled } from 'flopflip';
+import { FeatureToggled } from '@flopflip/react-redux';
+// or import { FeatureToggled } from '@flopflip/react-broadcast';
 import flagsNames from './feature-flags';
 
 export default (
@@ -152,6 +207,8 @@ export default (
 );
 ```
 
+We actually recommend maintaining a list of constants with feature flag names somewhere within your application. This avoids typos and unexpected behavior. After all, the correct workings of your feature flags is crutial to your application.
+
 #### `withFeatureToggle`
 
 A HoC to conditionally render a component based on a feature toggle's state. It accepts the feature toggle name and an optional component to be rendered in case the feature is disabled.
@@ -159,7 +216,7 @@ A HoC to conditionally render a component based on a feature toggle's state. It 
 Without a component rendered in place of the `ComponentToBeToggled`:
 
 ```js
-import { withFeatureToggle } from 'flopflip';
+import { withFeatureToggle } from '@flopflip/react-redux';
 import flagsNames from './feature-flags';
 
 const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
@@ -172,7 +229,7 @@ export default withFeatureToggle(flagsNames.THE_FEATURE_TOGGLE)(
 With a component rendered in place of the `ComponentToBeToggled`:
 
 ```js
-import { withFeatureToggle } from 'flopflip';
+import { withFeatureToggle } from '@flopflip/react-redux';
 import flagsNames from './feature-flags';
 
 const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
@@ -190,7 +247,7 @@ export default withFeatureToggle(flagsNames.THE_FEATURE_TOGGLE)(
 This HoC matches feature toggles given against configured ones and injects the matching result. `withFeatureToggle` uses this to conditionally render a component.
 
 ```js
-import { injectFeatureToggles } from 'flopflip';
+import { injectFeatureToggles } from '@flopflip/react-redux';
 import flagsNames from './feature-flags';
 
 const Component = props => {
@@ -211,14 +268,18 @@ The feature flags will be available as `props` within the component allowing som
 
 ### Module formats
 
-`Flopflip` is built as a UMD module using [`rollup`](https://github.com/tdeekens/flopflip/blob/master/rollup.config.js). The distribution version is not added to `git` but created as a `preversion` [script](https://github.com/tdeekens/flopflip/blob/master/package.json).
+`@flopflip/react-redux` and `@flopflip/react-broadcast` is built for UMD (un- and minified) and ESM using [`rollup`](https://github.com/tdeekens/flopflip/packages/react-redux/blob/master/rollup.config.js).
 
-- ...ESM just import the `dist/flopflip.es.js` within your app.
+Both our `@flopflip/launchdarkly-wrapper` and `@flopflip/react` packages are "only" build for ESM and CommonJS (not UMD) as they are meant to be consumed by a module loader to be integrated.
+
+The `package.json` files contain a `main` and `module` entry to point to a CommonJS and ESM build.
+
+- ...ESM just import the `dist/@flopflip/<package>.es.js` within your app.
   - ...it's a transpiled version accessible via the `pkg.module`
-- ...CommonJS use the `dist/flopflip.umd.js`
-- ...AMD use the `dist/flopflip.umd.js`
-- ...`<script />` link it to `dist/flopflip.umd.js` or `dist/flopflip.umd.min.js`
+- ...CommonJS use the `dist/@flopflip/<package>.cjsjs`
+- ...AMD use the `dist/@flopflip/<package>.umd.js`
+- ...`<script />` link it to `dist/@flopflip/<package>.umd.js` or `dist/@flopflip/<package>.umd.min.js`
 
-All build files are part of the npm distribution using the [`files`](https://github.com/tdeekens/flopflip/blob/master/package.json) array to keep install time short.
+All build files are part of the npm distribution using the [`files`](https://github.com/tdeekens/@flopflip/packages/react-redux/blob/master/package.json) array to keep install time short.
 
-Also feel free to use [unpkg.com](https://unpkg.com/flopflip@latest/dist/flopflip.umd.min.js) as a CDN to the [dist](https://unpkg.com/flopflip@latest/dist/) files.
+Also feel free to use [unpkg.com](https://unpkg.com/@flopflip/react-redux@latest/dist/@flopflip-react-redux.umd.min.js) as a CDN to the [dist](https://unpkg.com/@flopflip/react-redux@latest/dist) files.

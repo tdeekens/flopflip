@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-//import { createFlopFlipEnhancer } from 'flopflip';
+//import { createFlopFlipEnhancer } from '@flopflip/react-redux';
 import rootReducer from './modules';
 
 const initialState = {};

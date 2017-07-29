@@ -1,0 +1,55 @@
+{
+  "name": "@flopflip/react",
+  "version": "1.0.0",
+  "description": "A feature toggle wrapper to use LaunchDarkly with React",
+  "main": "dist/@flopflip-react.cjs.js",
+  "module": "dist/@flopflip-react.es.js",
+  "scripts": {
+    "preversion": "npm run build",
+    "prebuild:umd": "rimraf dist/**",
+    "build": "cross-env run-p build:es build:cjs",
+    "build:watch": "cross-env npm run build:es -- -w",
+    "build:es": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/@flopflip-react.es.js",
+    "build:cjs": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f cjs -o dist/@flopflip-react.cjs.js"
+  },
+  "files": ["readme.md", "dist/**"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdeekens/flopflip.git"
+  },
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
+  },
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "devDependencies": {
+    "enzyme": "^2.9.1",
+    "enzyme-to-json": "^1.5.1",
+    "react": "^15.6.0",
+    "react-dom": "^15.6.0",
+    "prop-types": "15.5.10",
+    "react-dom": "^15.6.0",
+    "react-test-renderer": "^15.6.1"
+  },
+  "peerDependencies": {
+    "react": "^15.6.0",
+    "react-dom": "^15.6.0",
+    "prop-types": "15.5.10"
+  },
+  "dependencies": {
+    "lodash.intersection": "^4.4.0",
+    "recompose": "^0.24.0",
+    "@flopflip/launchdarkly-wrapper": "^1.0.0"
+  },
+  "keywords": [
+    "react",
+    "feature-flags",
+    "feature-toggles",
+    "LaunchDarkly",
+    "client"
+  ]
+}
