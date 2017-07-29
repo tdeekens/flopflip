@@ -1,11 +1,11 @@
 <p align="center">
   <b style="font-size: 25px">🎛 flopflip - Feature Toggling 🎚</b><br />
-  <i>flip or flop a feature in LaunchDarkly with real-time updates through a redux store.</i>
+  <i>flip or flop a feature in LaunchDarkly with real-time updates through a redux store or the context.</i>
 </p>
 
 <p align="center">
   <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/logo.png" /><br /><br />
-  <i>Toggle features in LaunchDarkly with their state being maintained in a redux state slice being accessible through a set of Higher-Order Components in React (via recompose).</i><br />
+  <i>Toggle features in LaunchDarkly with their state being maintained in a redux state slice or a broadcasting system (through the context) being accessible through a set of Higher-Order Components in React.</i><br />
 </p>
 
 <details>
