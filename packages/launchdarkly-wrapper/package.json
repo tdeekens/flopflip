@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/launchdarkly-wrapper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A wrapper around the LaunchDarkly client for flipflop",
   "main": "dist/@flopflip-launchdarkly-wrapper.cjs.js",
   "module": "dist/@flopflip-launchdarkly-wrapper.es.js",
@@ -12,7 +12,10 @@
     "build:es": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/@flopflip-launchdarkly-wrapper.es.js",
     "build:cjs": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f cjs -o dist/@flopflip-launchdarkly-wrapper.cjs.js"
   },
-  "files": ["readme.md", "dist/**"],
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
   "publishConfig": {
     "access": "public"
   },
@@ -34,5 +37,10 @@
     "ldclient-js": "^1.1.8",
     "lodash.camelcase": "^4.3.0"
   },
-  "keywords": ["feature-flags", "feature-toggles", "LaunchDarkly", "client"]
+  "keywords": [
+    "feature-flags",
+    "feature-toggles",
+    "LaunchDarkly",
+    "client"
+  ]
 }
