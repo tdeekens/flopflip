@@ -27,20 +27,20 @@
 
 [launchdarkly-wrapper-version]: https://www.npmjs.com/package/@flopflip/launchdarkly-wrapper
 [launchdarkly-wrapper-icon]: https://img.shields.io/npm/v/@flopflip/launchdarkly-wrapper.svg?style=flat-square
-[launchdarkly-wrapper-dependencies]: https://david-dm.org/flopflip/nodejs?path=packages/launchdarkly-wrapper
-[launchdarkly-wrapper-dependencies-icon]: https://img.shields.io/david/flopflip/nodejs.svg?path=packages/launchdarkly-wrapper&style=flat-square
+[launchdarkly-wrapper-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/launchdarkly-wrapper
+[launchdarkly-wrapper-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/launchdarkly-wrapper
 [react-version]: https://www.npmjs.com/package/@flopflip/react
 [react-icon]: https://img.shields.io/npm/v/@flopflip/react.svg?style=flat-square
-[react-dependencies]: https://david-dm.org/flopflip/nodejs?path=packages/react
-[react-dependencies-icon]: https://img.shields.io/david/flopflip/nodejs.svg?path=packages/react&style=flat-square
+[react-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/react
+[react-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/react
 [react-broadcast-version]: https://www.npmjs.com/package/@flopflip/react-broadcast
 [react-broadcast-icon]: https://img.shields.io/npm/v/@flopflip/react-broadcast.svg?style=flat-square
-[react-broadcast-dependencies]: https://david-dm.org/flopflip/nodejs?path=packages/react-broadcast
-[react-broadcast-dependencies-icon]: https://img.shields.io/david/flopflip/nodejs.svg?path=packages/react-broadcast&style=flat-square
+[react-broadcast-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/react-broadcast
+[react-broadcast-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/react-broadcast
 [react-redux-version]: https://www.npmjs.com/package/@flopflip/react-redux
 [react-redux-icon]: https://img.shields.io/npm/v/@flopflip/react-redux.svg?style=flat-square
-[react-redux-dependencies]: https://david-dm.org/flopflip/nodejs?path=packages/react-redux
-[react-redux-dependencies-icon]: https://img.shields.io/david/flopflip/nodejs.svg?path=packages/react-redux&style=flat-square
+[react-redux-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/react-redux
+[react-redux-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/react-redux
 
 ## Installation
 
