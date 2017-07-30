@@ -11,6 +11,7 @@
     "test:ci": "npm run lint && npm run test",
     "test:watch": "npm test -- --watch",
     "test:coverage": "jest --coverage",
+    "test:coverage:ci": "jest --no-watchman --coverage && codecov",
     "build": "lerna exec -- npm run build",
     "build:watch": "lerna exec -- npm run build:watch"
   },
@@ -66,6 +67,7 @@
     "babel-core": "^6.24.0",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
+    "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.6",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.4.0",
@@ -74,6 +76,7 @@
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "check-node-version": "^2.1.0",
+    "codecov": "^2.2.0",
     "cross-env": "^5.0.0",
     "eslint-config-prettier": "^2.1.1",
     "eslint-config-xo-react": "^0.13.0",
@@ -85,10 +88,8 @@
     "npm-run-all": "^4.0.2",
     "prettier": "^1.2.2",
     "prettier-markdown": "^0.1.8",
-    "xo": "^0.18.2",
     "rimraf": "^2.5.4",
     "rollup": "^0.45.2",
-    "babel-plugin-external-helpers": "^6.22.0",
     "rollup-plugin-babel": "^2.7.1",
     "rollup-plugin-bundle-size": "^1.0.1",
     "rollup-plugin-commonjs": "^8.0.2",
@@ -96,7 +97,8 @@
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-replace": "^1.1.1",
     "rollup-plugin-uglify": "^2.0.0",
-    "rollup-watch": "^4.3.1"
+    "rollup-watch": "^4.3.1",
+    "xo": "^0.18.2"
   },
   "jest": {
     "globals": {

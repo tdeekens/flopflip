@@ -5,7 +5,14 @@
 
 <p align="center">
   <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/logo.png" /><br /><br />
-  <i>Toggle features in LaunchDarkly with their state being maintained in a Redux state slice or a broadcasting system (through the context) being accessible through a set of Higher-Order Components in React.</i><br />
+  <i>Toggle features in LaunchDarkly with their state being maintained in a Redux state slice or a broadcasting system (through the context) being accessible through a set of Higher-Order Components in React.</i><br /><br />
+
+  <a href="https://travis-ci.org/tdeekens/flopflip">
+    <img alt="Travis CI Status" src="https://img.shields.io/travis/tdeekens/flopflip/master.svg?style=flat-square&label=travis">
+  </a>
+  <a href="https://codecov.io/gh/tdeekens/flopflip">
+    <img alt="Codecov Coverage Status" src="https://img.shields.io/codecov/c/github/tdeekens/flopflip.svg?style=flat-square">
+  </a>
 </p>
 
 <details>
@@ -13,10 +20,6 @@
 
   <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/demo.gif" />
 </details>
-
-### Status
-
-[![Travis](https://img.shields.io/travis/tdeekens/flopflip.svg?style=flat-square)](https://travis-ci.org/tdeekens/flopflip)
 
 | Package | Version | Dependencies |
 |--------|-------|------------|
