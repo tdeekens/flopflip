@@ -111,6 +111,11 @@
       "/node_modules/",
       "/packages/.*/node_modules",
       "/packages/.*/dist"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "packages/react-broadcast/modules/components/subscriber.js",
+      "packages/react-broadcast/modules/components/broadcast.js"
     ]
   },
   "keywords": [
