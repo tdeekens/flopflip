@@ -87,3 +87,11 @@ describe('lifecycle', () => {
     });
   });
 });
+
+describe('statics', () => {
+  describe('displayName', () => {
+    it('should be set to `ConfigureFlopflip`', () => {
+      expect(Configure.displayName).toEqual('ConfigureFlopflip')
+    })
+  })
+});

@@ -5,6 +5,7 @@ import { initialize, listen } from '@flopflip/launchdarkly-wrapper';
 import { updateStatus, updateFlags } from './../ducks';
 
 export class Configure extends React.Component {
+  static displayName = 'ConfigureFlopflip';
   static propTypes = {
     children: PropTypes.node,
     clientSideId: PropTypes.string.isRequired,
