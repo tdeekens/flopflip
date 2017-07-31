@@ -13,7 +13,8 @@
     "test:coverage": "jest --coverage",
     "test:coverage:ci": "jest --no-watchman --coverage && codecov",
     "build": "lerna exec -- npm run build",
-    "build:watch": "lerna exec -- npm run build:watch"
+    "build:watch": "lerna exec -- npm run build:watch",
+    "release": "npm run build && lerna publish"
   },
   "repository": {
     "type": "git",
