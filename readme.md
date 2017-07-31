@@ -52,7 +52,7 @@
 
 This is mono repository maintained using [lerna](https://github.com/lerna/lerna). It currently contains four [packages](/packages) in a `launchdarkly-wrapper`, `react`, `react-redux` and `react-broadcast`. You should not need the `launchdarkly-wrapper` yourself but one of our bindings (react-broadcast or react-redux). Both use the `react` package to share components.
 
-Depending on the preferred integration (with or without redux)
+Depending on the preferred integration (with or without redux) use:
 
 `yarn add @flopflip/react-redux` or `npm i @flopflip/react-redux --save`
 
@@ -62,7 +62,7 @@ or
 
 ## Demo
 
-A minimal [demo](/demo) exists and can adjusted to point to a [custom](https://github.com/tdeekens/flopflip/blob/master/demo/src/App.js#L108) LaunchDarkly account. You would have to create feature toggles according to the existing [flags](https://github.com/tdeekens/flopflip/blob/master/demo/src/flags.js) too.
+A minimal [demo](/demo) exists and can be adjusted to point to a [custom](https://github.com/tdeekens/flopflip/blob/master/demo/src/App.js#L108) LaunchDarkly account. You would have to create feature toggles according to the existing [flags](https://github.com/tdeekens/flopflip/blob/master/demo/src/flags.js), though.
 
 Then simply run:
 
@@ -93,7 +93,7 @@ Requires arguments of `clientSideId:string`, `user:object`.
 
 #### `reducer` & `STATE_SLICE`
 
-The flopflop reducer should be wired up with a `combineReducers` within your application in coordination with the `STATE_SLICE` which is used internally too to manage the location of the feature toggle states.
+The flopflip reducer should be wired up with a `combineReducers` within your application in coordination with the `STATE_SLICE` which is used internally too to manage the location of the feature toggle states.
 
 In context this configuration could look like:
 
