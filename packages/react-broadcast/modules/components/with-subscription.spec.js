@@ -25,3 +25,17 @@ describe('rendering', () => {
     expect(wrapper.find('Subscriber').prop('channel')).toBeDefined();
   });
 });
+
+describe('statics', () => {
+  let Component;
+  let wrapper;
+
+  beforeEach(() => {
+    Component = withSubscription('foo-prop-key')(TestComponent);
+    wrapper = shallow(<Component />);
+  });
+
+  it('should set the `displayName`', () => {
+    expect(Component.displayName).toEqual('withSubscription(TestComponent)');
+  });
+});
