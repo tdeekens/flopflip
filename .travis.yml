@@ -2,7 +2,7 @@ env:
   global:
     - PATH=$HOME/.yarn/bin:$PATH
 before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 0.27.5
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 0.28.4
 sudo: false
 language: node_js
 node_js:
