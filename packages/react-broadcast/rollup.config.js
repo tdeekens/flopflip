@@ -30,7 +30,6 @@ const config = {
       VERSION: `'${version}'`,
     }),
     resolve({
-      browser: true,
       module: true,
     }),
     bundleSize(),
