@@ -1,6 +1,6 @@
 <p align="center">
   <b style="font-size: 25px">🎛 flopflip - Feature Toggling 🎚</b><br />
-  <i>flip or flop a feature in LaunchDarkly with real-time updates through a Redux store React's context.</i>
+  <i>flip or flop a feature in LaunchDarkly with real-time updates through a Redux store by directly using React's context.</i>
 </p>
 
 <p align="center">
