@@ -1,8 +1,9 @@
 {
+  "private": true,
   "name": "flopflip",
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
-    "postinstall": "check-node-version --package && lerna bootstrap && npm run build",
+    "postinstall": "check-node-version --package && npm run build && npm run test",
     "lint": "xo",
     "format": "run-p format:md format:js",
     "format:md": "pmd *.md",
@@ -129,5 +130,6 @@
     "LaunchDarkly",
     "HoC",
     "store-enhancer"
-  ]
+  ],
+  "workspaces": ["packages/*"]
 }
