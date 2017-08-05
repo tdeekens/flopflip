@@ -1,10 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`rendering should match snapshot 1`] = `
-<Broadcast
-  channel="@flopflip"
-  value={Object {}}
+<FlagsSubscription
+  clientSideId="456"
+  onUpdateFlags={[Function]}
+  onUpdateStatus={[Function]}
+  shouldInitialize={[Function]}
+  user={
+    Object {
+      "key": "123",
+    }
+  }
 >
-  <ChildComponent />
-</Broadcast>
+  <Broadcast
+    channel="@flopflip"
+    value={Object {}}
+  >
+    <ChildComponent />
+  </Broadcast>
+</FlagsSubscription>
 `;

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import { initialize, listen } from '@flopflip/launchdarkly-wrapper';
+import { FlagsSubscription } from '@flopflip/react';
 import { updateStatus, updateFlags } from './../ducks';
 
 export class Configure extends React.Component {
@@ -12,38 +12,37 @@ export class Configure extends React.Component {
     user: PropTypes.shape({
       key: PropTypes.string,
     }),
+    shouldInitialize: PropTypes.func,
 
     // Connected
-    updateStatus: PropTypes.func.isRequired,
-    updateFlags: PropTypes.func.isRequired,
+    handleUpdateStatus: PropTypes.func.isRequired,
+    handleUpdateFlags: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     children: null,
     user: {},
+    shouldInitialize: () => true,
   };
 
-  componentDidMount() {
-    listen({
-      client: initialize({
-        clientSideId: this.props.clientSideId,
-        user: this.props.user,
-      }),
-      updateFlags: this.props.updateFlags,
-      updateStatus: this.props.updateStatus,
-    });
-  }
-
   render() {
-    return this.props.children
-      ? React.Children.only(this.props.children)
-      : null;
+    return (
+      <FlagsSubscription
+        clientSideId={this.props.clientSideId}
+        user={this.props.user}
+        shouldInitialize={this.props.shouldInitialize}
+        onUpdateStatus={this.props.handleUpdateStatus}
+        onUpdateFlags={this.props.handleUpdateFlags}
+      >
+        {this.props.children ? React.Children.only(this.props.children) : null}
+      </FlagsSubscription>
+    );
   }
 }
 
 const mapDispatchToProps = {
-  updateStatus,
-  updateFlags,
+  handleUpdateStatus: updateStatus,
+  handleUpdateFlags: updateFlags,
 };
 
 export default connect(null, mapDispatchToProps)(Configure);

@@ -1,13 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import { initialize, listen } from '@flopflip/launchdarkly-wrapper';
-import Configure from './configure';
-
-jest.mock('@flopflip/launchdarkly-wrapper', () => ({
-  initialize: jest.fn(),
-  listen: jest.fn(),
-}));
+import Configure, { FLAGS_CHANNEL } from './configure';
 
 const ChildComponent = () => <div />;
 
@@ -36,6 +30,14 @@ describe('rendering', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
+  it('should render a `FlagsSubcription`', () => {
+    expect(wrapper).toRender('FlagsSubscription');
+  });
+
+  it('should render a `Broadcast`', () => {
+    expect(wrapper).toRender('Broadcast');
+  });
+
   describe('with `children`', () => {
     let props;
 
@@ -53,9 +55,27 @@ describe('rendering', () => {
       expect(wrapper).toRender(ChildComponent);
     });
   });
+
+  describe('`of <FlagsSubscription />`', () => {
+    let flagsSubscriptionWrapper;
+
+    beforeEach(() => {
+      flagsSubscriptionWrapper = wrapper.find('FlagsSubscription');
+    });
+
+    it('should receive `clientSideId`', () => {
+      expect(flagsSubscriptionWrapper.prop('clientSideId')).toBe(
+        props.clientSideId
+      );
+    });
+
+    it('should receive `user`', () => {
+      expect(flagsSubscriptionWrapper.prop('user')).toBe(props.user);
+    });
+  });
 });
 
-describe('interacting', () => {
+describe('state', () => {
   let props;
   let wrapper;
 
@@ -96,17 +116,26 @@ describe('interacting', () => {
       expect(wrapper.state('status')).toEqual(newStatus);
     });
   });
+
+  describe('of `<Broadcast />`', () => {
+    it('should receive `flags` as `value`', () => {
+      expect(wrapper.find('Broadcast').prop('value')).toBe(
+        wrapper.state('flags')
+      );
+    });
+
+    it('should receive `FLAGS_CHANNEL` as `channel`', () => {
+      expect(wrapper.find('Broadcast').prop('channel')).toBe(FLAGS_CHANNEL);
+    });
+  });
 });
 
-describe('lifecycle', () => {
+describe('callbacks', () => {
   let props;
   let wrapper;
 
   beforeEach(() => {
     props = createTestProps();
-
-    initialize.mockReturnValue(props.client);
-
     wrapper = shallow(
       <Configure {...props}>
         <ChildComponent />
@@ -114,24 +143,29 @@ describe('lifecycle', () => {
     );
   });
 
-  describe('componentDidMount', () => {
+  describe('of `<FlagsSubscription />`', () => {
+    let flagsSubscriptionWrapper;
+
     beforeEach(() => {
-      wrapper.instance().componentDidMount();
+      flagsSubscriptionWrapper = wrapper.find('FlagsSubscription');
     });
 
-    it('should `initialize` on the `launchdarkly-wrapper` with `clientSideId` and `user`', () => {
-      expect(initialize).toHaveBeenCalledWith({
-        clientSideId: props.clientSideId,
-        user: props.user,
-      });
+    it('should receive `onUpdateFlags`', () => {
+      expect(flagsSubscriptionWrapper.prop('onUpdateStatus')).toBe(
+        wrapper.instance().handleUpdateStatus
+      );
     });
 
-    it('should `listen` on the `launchdarkly-wrapper`', () => {
-      expect(listen).toHaveBeenCalledWith({
-        client: props.client,
-        updateFlags: wrapper.instance().handleUpdateFlags,
-        updateStatus: wrapper.instance().handleUpdateStatus,
-      });
+    it('should receive `onUpdateFlags`', () => {
+      expect(flagsSubscriptionWrapper.prop('onUpdateFlags')).toBe(
+        wrapper.instance().handleUpdateFlags
+      );
+    });
+
+    it('should receive `shouldInitialize`', () => {
+      expect(flagsSubscriptionWrapper.prop('shouldInitialize')).toBe(
+        wrapper.prop('shouldInitialize')
+      );
     });
   });
 });
@@ -139,7 +173,21 @@ describe('lifecycle', () => {
 describe('statics', () => {
   describe('displayName', () => {
     it('should be set to `ConfigureFlopflip`', () => {
-      expect(Configure.displayName).toEqual('ConfigureFlopflip')
-    })
-  })
+      expect(Configure.displayName).toEqual('ConfigureFlopflip');
+    });
+  });
+
+  describe('defaultProps', () => {
+    it('should default `user` to an empty object', () => {
+      expect(Configure.defaultProps.user).toEqual({});
+    });
+
+    it('should default `children` to `null`', () => {
+      expect(Configure.defaultProps.children).toBe(null);
+    });
+
+    it('should default `shouldInitialize` to `true`', () => {
+      expect(Configure.defaultProps.shouldInitialize()).toBe(true);
+    });
+  });
 });
