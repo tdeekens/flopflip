@@ -73,6 +73,13 @@ describe('rendering', () => {
     it('should receive `user`', () => {
       expect(flagsSubscriptionWrapper).toHaveProp('user', props.user);
     });
+
+    it('should receive `defaultFlags`', () => {
+      expect(flagsSubscriptionWrapper).toHaveProp(
+        'defaultFlags',
+        wrapper.prop('defaultFlags')
+      );
+    });
   });
 });
 
@@ -129,6 +136,10 @@ describe('statics', () => {
   describe('defaultProps', () => {
     it('should default `user` to an empty object', () => {
       expect(Configure.defaultProps.user).toEqual({});
+    });
+
+    it('should default `defaultFlags` to an empty object', () => {
+      expect(Configure.defaultProps.defaultFlags).toEqual({});
     });
 
     it('should default `children` to `null`', () => {
