@@ -13,18 +13,6 @@ const normalizeFlag = (flagName, flagValue) => [
   flagValue === null ? false : flagValue,
 ];
 
-const camelCaseFlags = rawFlags =>
-  Object.entries(rawFlags).reduce((camelCasedFlags, [flagName, flagValue]) => {
-    const [normalzedFlagName, normalzedFlagValue] = normalizeFlag(
-      flagName,
-      flagValue
-    );
-    // Can't return expression as it is the assigned value
-    camelCasedFlags[normalzedFlagName] = normalzedFlagValue;
-
-    return camelCasedFlags;
-  }, {});
-
 const flagUpdates = ({ rawFlags, client, onUpdateFlags }) => {
   // Dispatch whenever configured flag value changes
   for (const flagName in rawFlags) {
@@ -42,6 +30,18 @@ const flagUpdates = ({ rawFlags, client, onUpdateFlags }) => {
     }
   }
 };
+
+export const camelCaseFlags = rawFlags =>
+  Object.entries(rawFlags).reduce((camelCasedFlags, [flagName, flagValue]) => {
+    const [normalzedFlagName, normalzedFlagValue] = normalizeFlag(
+      flagName,
+      flagValue
+    );
+    // Can't return expression as it is the assigned value
+    camelCasedFlags[normalzedFlagName] = normalzedFlagValue;
+
+    return camelCasedFlags;
+  }, {});
 
 export const initialize = ({ clientSideId, user }) =>
   ldClient.initialize(clientSideId, user || createAnonymousUser());

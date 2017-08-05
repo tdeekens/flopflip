@@ -1,1 +1,1 @@
-export { initialize, listen } from './client';
+export { initialize, listen, camelCaseFlags } from './client';
