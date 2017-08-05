@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/react",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A feature toggle wrapper to use LaunchDarkly with React",
   "main": "dist/@flopflip-react.cjs.js",
   "module": "dist/@flopflip-react.es.js",
@@ -13,7 +13,10 @@
     "build:es": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/@flopflip-react.es.js",
     "build:cjs": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f cjs -o dist/@flopflip-react.cjs.js"
   },
-  "files": ["readme.md", "dist/**"],
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
   "publishConfig": {
     "access": "public"
   },
@@ -41,7 +44,7 @@
     "react-dom": "^15.6.0"
   },
   "dependencies": {
-    "@flopflip/launchdarkly-wrapper": "^1.0.1",
+    "@flopflip/launchdarkly-wrapper": "^2.0.0",
     "lodash.intersection": "^4.4.0",
     "recompose": "^0.24.0"
   },
