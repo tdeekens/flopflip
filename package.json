@@ -80,6 +80,8 @@
     "check-node-version": "^2.1.0",
     "codecov": "^2.2.0",
     "cross-env": "^5.0.0",
+    "enzyme-matchers": "^3.6.1",
+    "enzyme-to-json": "^1.5.1",
     "eslint-config-prettier": "^2.1.1",
     "eslint-config-xo-react": "^0.13.0",
     "eslint-plugin-jest": "^20.0.3",
@@ -109,6 +111,7 @@
       }
     },
     "setupTestFrameworkScriptFile": "./config/jest.js",
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "testRegex": "\\.spec\\.js$",
     "testEnvironment": "jsdom",
     "testPathIgnorePatterns": [
