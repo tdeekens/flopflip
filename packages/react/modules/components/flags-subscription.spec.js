@@ -1,11 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { initialize, listen } from '@flopflip/launchdarkly-wrapper';
+import {
+  initialize,
+  listen,
+  camelCaseFlags,
+} from '@flopflip/launchdarkly-wrapper';
 import FlagSubscription from './flags-subscription';
 
 jest.mock('@flopflip/launchdarkly-wrapper', () => ({
   initialize: jest.fn(),
   listen: jest.fn(),
+  camelCaseFlags: jest.fn(_ => _),
 }));
 
 const ChildComponet = () => <div />;
@@ -163,6 +168,35 @@ describe('lifecycle', () => {
         expect(listen).not.toHaveBeenCalled();
       });
     });
+
+    describe('with `defaultFlags`', () => {
+      let wrapper;
+      let props;
+
+      beforeEach(() => {
+        props = createTestProps({
+          defaultFlags: {
+            aFlag: true,
+          },
+        });
+
+        wrapper = shallow(
+          <FlagSubscription {...props}>
+            <ChildComponet />
+          </FlagSubscription>
+        );
+
+        wrapper.instance().componentDidMount();
+      });
+
+      it('should invoke `camelCaseFlags` with the `defaultFlags`', () => {
+        expect(camelCaseFlags).toHaveBeenCalledWith(props.defaultFlags);
+      });
+
+      it('should invoke `onUpdateFlags` with camelcased `defaultFlags`', () => {
+        expect(props.onUpdateFlags).toHaveBeenCalledWith(props.defaultFlags);
+      });
+    });
   });
 
   describe('componentWillReceiveProps', () => {
@@ -263,6 +297,10 @@ describe('statics', () => {
   describe('defaultProps', () => {
     it('should default `user` to an empty object', () => {
       expect(FlagSubscription.defaultProps.user).toEqual({});
+    });
+
+    it('should default `defaultFlags` to an empty object', () => {
+      expect(FlagSubscription.defaultProps.defaultFlags).toEqual({});
     });
   });
 });
