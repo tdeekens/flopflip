@@ -136,7 +136,8 @@ Whenever setup is not preferred via the store enhancer the same can be achieved 
 It takes the `props`:
 
 - The `clientSideId` is your LaunchDarkly ID.
-- The `user` object needs at least a `key` attribute. An anonymous `key` will be generated using `uuid4` when nothing is specified. The user object can contain additional data.
+- The `user` object needs at least a `key` attribute. An anonymous `key` will be generated using a `uuid` when nothing is specified. The user object can contain additional data.
+- The `shouldInitialize` function can be used to defer the flag subscription setup towards LaunchDarkly (via their SDK). This might be helpful for cases in which you want to wait for the `key` to be present within your root component and you do not want `flopflip` to generate a `uuid` for you automatically. This callback is invoked everytime `ConfigureFlopFlip` receives new props
 
 ```js
 import { createStore, compose, applyMiddleware } from 'redux';
