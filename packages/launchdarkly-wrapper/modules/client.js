@@ -25,7 +25,7 @@ const camelCaseFlags = rawFlags =>
     return camelCasedFlags;
   }, {});
 
-const flagUpdates = ({ rawFlags, client, updateFlags }) => {
+const flagUpdates = ({ rawFlags, client, onUpdateFlags }) => {
   // Dispatch whenever configured flag value changes
   for (const flagName in rawFlags) {
     if (Object.prototype.hasOwnProperty.call(rawFlags, flagName)) {
@@ -35,7 +35,7 @@ const flagUpdates = ({ rawFlags, client, updateFlags }) => {
           flagValue
         );
 
-        updateFlags({
+        onUpdateFlags({
           [normalzedFlagName]: normalzedFlagValue,
         });
       });
@@ -46,15 +46,15 @@ const flagUpdates = ({ rawFlags, client, updateFlags }) => {
 export const initialize = ({ clientSideId, user }) =>
   ldClient.initialize(clientSideId, user || createAnonymousUser());
 
-export const listen = ({ client, updateFlags, updateStatus }) => {
+export const listen = ({ client, onUpdateFlags, onUpdateStatus }) => {
   client.on('ready', () => {
-    updateStatus({ isReady: true });
+    onUpdateStatus({ isReady: true });
 
     const rawFlags = client.allFlags();
     const camelCasedFlags = camelCaseFlags(rawFlags);
 
-    updateFlags(camelCasedFlags);
+    onUpdateFlags(camelCasedFlags);
 
-    flagUpdates({ rawFlags, client, updateFlags });
+    flagUpdates({ rawFlags, client, onUpdateFlags });
   });
 };
