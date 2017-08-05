@@ -1,5 +1,5 @@
 import ldClient from 'ldclient-js';
-import { initialize, listen } from './client';
+import { initialize, listen, camelCaseFlags } from './client';
 
 jest.mock('ldclient-js', () => ({
   initialize: jest.fn(() => ({
@@ -88,6 +88,30 @@ describe('when initializing', () => {
           someFlag2: false,
         });
       });
+    });
+  });
+});
+
+describe('camelCasedFlags', () => {
+  describe('with dashes', () => {
+    const rawFlags = {
+      'a-flag': true,
+      'flag-b-c': false,
+    };
+
+    it('should camel case to uppercased flag names', () => {
+      expect(camelCaseFlags(rawFlags)).toEqual({ aFlag: true, flagBC: false });
+    });
+  });
+
+  describe('with spaces', () => {
+    const rawFlags = {
+      'a flag': true,
+      'flag b-c': false,
+    };
+
+    it('should camel case to uppercased flag names', () => {
+      expect(camelCaseFlags(rawFlags)).toEqual({ aFlag: true, flagBC: false });
     });
   });
 });
