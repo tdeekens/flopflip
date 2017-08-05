@@ -9,8 +9,8 @@ export default function createFlopFlipEnhancer(clientSideId, user) {
 
     listen({
       client,
-      updateFlags: store.dispatch(updateFlags),
-      updateStatus: store.dispatch(updateStatus),
+      onUpdateFlags: store.dispatch(updateFlags),
+      onUpdateStatus: store.dispatch(updateStatus),
     });
 
     return store;
