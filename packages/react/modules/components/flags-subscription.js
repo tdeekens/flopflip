@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { initialize, listen } from '@flopflip/launchdarkly-wrapper';
+import {
+  initialize,
+  listen,
+  camelCaseFlags,
+} from '@flopflip/launchdarkly-wrapper';
 
 export default class FlagsSubscription extends React.Component {
   static propTypes = {
@@ -9,6 +13,7 @@ export default class FlagsSubscription extends React.Component {
     user: PropTypes.shape({
       key: PropTypes.string,
     }),
+    defaultFlags: PropTypes.object,
     onUpdateFlags: PropTypes.func.isRequired,
     onUpdateStatus: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
@@ -18,6 +23,7 @@ export default class FlagsSubscription extends React.Component {
 
   static defaultProps = {
     user: {},
+    defaultFlags: {},
   };
 
   initializeFlagListening = () => {
@@ -35,7 +41,14 @@ export default class FlagsSubscription extends React.Component {
     }
   };
 
+  handleDefaultFlags = defaultFlags => {
+    if (Object.keys(defaultFlags).length > 0) {
+      this.props.onUpdateFlags(camelCaseFlags(defaultFlags));
+    }
+  };
+
   componentDidMount() {
+    this.handleDefaultFlags(this.props.defaultFlags);
     if (this.props.shouldInitialize()) this.initializeFlagListening();
   }
 
