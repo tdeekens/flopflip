@@ -40,11 +40,11 @@ describe('when creating enhancer', () => {
       expect(listen).toHaveBeenCalled();
     });
 
-    it('should `listen` with `client`, `updateFlags` and `updateStatus`', () => {
+    it('should `listen` with `client`, `onUpdateFlags` and `onUpdateStatus`', () => {
       expect(listen).toHaveBeenCalledWith({
         client,
-        updateFlags: expect.any(Function),
-        updateStatus: expect.any(Function),
+        onUpdateFlags: expect.any(Function),
+        onUpdateStatus: expect.any(Function),
       });
     });
   });
