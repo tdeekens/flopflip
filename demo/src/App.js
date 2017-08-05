@@ -101,6 +101,7 @@ const mapDispatchToProps = {
 
 const ConnectedCounter = connect(mapStateToProps, mapDispatchToProps)(Counter);
 
+const defaultFlags = { 'aDefault-Flag': true };
 class App extends Component {
   render() {
     return (
@@ -108,6 +109,7 @@ class App extends Component {
         <ConfigureFlopFlip
           clientSideId="596788417a20200c2b70c89e"
           user={{ key: 'ld@tdeekens.name' }}
+          defaultFlags={defaultFlags}
         >
           <div className="App">
             <div className="App-header">
