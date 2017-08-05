@@ -3,7 +3,7 @@
   "name": "flopflip",
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
-    "postinstall": "check-node-version --package && npm run build && npm run test",
+    "postinstall": "check-node-version --package && npm run build",
     "lint": "xo",
     "format": "run-p format:md format:js",
     "format:md": "pmd *.md",
