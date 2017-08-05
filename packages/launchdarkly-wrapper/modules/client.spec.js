@@ -22,8 +22,8 @@ describe('when initializing', () => {
 
   describe('when ready', () => {
     const flags = { 'some-flag-1': true, 'some-flag-2': false };
-    let updateStatus;
-    let updateFlags;
+    let onUpdateStatus;
+    let onUpdateFlags;
     let client;
 
     beforeEach(() => {
@@ -31,21 +31,21 @@ describe('when initializing', () => {
         allFlags: jest.fn(() => flags),
         on: jest.fn((_, cb) => cb()),
       };
-      updateStatus = jest.fn();
-      updateFlags = jest.fn();
+      onUpdateStatus = jest.fn();
+      onUpdateFlags = jest.fn();
 
-      listen({ client, updateStatus, updateFlags });
+      listen({ client, onUpdateStatus, onUpdateFlags });
     });
 
     describe('when `ldClient` is ready', () => {
-      it('should `dispatch` `updateStatus` action with `isReady`', () => {
-        expect(updateStatus).toHaveBeenCalledWith({
+      it('should `dispatch` `onUpdateStatus` action with `isReady`', () => {
+        expect(onUpdateStatus).toHaveBeenCalledWith({
           isReady: true,
         });
       });
 
-      it('should `dispatch` `updateFlags` action with camel cased `flags`', () => {
-        expect(updateFlags).toHaveBeenCalledWith({
+      it('should `dispatch` `onUpdateFlags` action with camel cased `flags`', () => {
+        expect(onUpdateFlags).toHaveBeenCalledWith({
           someFlag1: true,
           someFlag2: false,
         });
@@ -67,7 +67,7 @@ describe('when initializing', () => {
     describe('when flag updates', () => {
       beforeEach(() => {
         // Reset due to preivous dispatches
-        updateFlags.mockClear();
+        onUpdateFlags.mockClear();
 
         // Checking for change:* callbacks and settings all flags
         // to false.
@@ -76,15 +76,15 @@ describe('when initializing', () => {
         });
       });
 
-      it('should `dispatch` `updateFlags` action', () => {
-        expect(updateFlags).toHaveBeenCalled();
+      it('should `dispatch` `onUpdateFlags` action', () => {
+        expect(onUpdateFlags).toHaveBeenCalled();
       });
 
-      it('should `dispatch` `updateFlags` action with camel cased `flags`', () => {
-        expect(updateFlags).toHaveBeenCalledWith({
+      it('should `dispatch` `onUpdateFlags` action with camel cased `flags`', () => {
+        expect(onUpdateFlags).toHaveBeenCalledWith({
           someFlag1: false,
         });
-        expect(updateFlags).toHaveBeenCalledWith({
+        expect(onUpdateFlags).toHaveBeenCalledWith({
           someFlag2: false,
         });
       });
