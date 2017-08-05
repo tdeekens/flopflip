@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
 import { initialize, listen } from '@flopflip/launchdarkly-wrapper';
 import { Configure } from './configure';
 
@@ -32,7 +31,7 @@ describe('rendering', () => {
   });
 
   it('should match snapshot', () => {
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a `FlagsSubcription`', () => {
@@ -65,13 +64,14 @@ describe('rendering', () => {
     });
 
     it('should receive `clientSideId`', () => {
-      expect(flagsSubscriptionWrapper.prop('clientSideId')).toBe(
+      expect(flagsSubscriptionWrapper).toHaveProp(
+        'clientSideId',
         props.clientSideId
       );
     });
 
     it('should receive `user`', () => {
-      expect(flagsSubscriptionWrapper.prop('user')).toBe(props.user);
+      expect(flagsSubscriptionWrapper).toHaveProp('user', props.user);
     });
   });
 });
@@ -97,19 +97,22 @@ describe('callbacks', () => {
     });
 
     it('should receive `onUpdateFlags`', () => {
-      expect(flagsSubscriptionWrapper.prop('onUpdateStatus')).toBe(
+      expect(flagsSubscriptionWrapper).toHaveProp(
+        'onUpdateStatus',
         props.handleUpdateStatus
       );
     });
 
     it('should receive `onUpdateFlags`', () => {
-      expect(flagsSubscriptionWrapper.prop('onUpdateFlags')).toBe(
+      expect(flagsSubscriptionWrapper).toHaveProp(
+        'onUpdateFlags',
         props.handleUpdateFlags
       );
     });
 
     it('should receive `shouldInitialize`', () => {
-      expect(flagsSubscriptionWrapper.prop('shouldInitialize')).toBe(
+      expect(flagsSubscriptionWrapper).toHaveProp(
+        'shouldInitialize',
         wrapper.prop('shouldInitialize')
       );
     });
