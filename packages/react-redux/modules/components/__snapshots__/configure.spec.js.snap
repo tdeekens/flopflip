@@ -3,6 +3,7 @@
 exports[`rendering should match snapshot 1`] = `
 <FlagsSubscription
   clientSideId="456"
+  defaultFlags={Object {}}
   onUpdateFlags={[Function]}
   onUpdateStatus={[Function]}
   shouldInitialize={[Function]}

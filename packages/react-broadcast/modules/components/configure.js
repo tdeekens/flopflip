@@ -12,6 +12,7 @@ export default class Configure extends React.Component {
     children: PropTypes.node,
     clientSideId: PropTypes.string.isRequired,
     shouldInitialize: PropTypes.func,
+    defaultFlags: PropTypes.object,
     user: PropTypes.shape({
       key: PropTypes.string,
     }),
@@ -20,6 +21,7 @@ export default class Configure extends React.Component {
   static defaultProps = {
     children: null,
     user: {},
+    defaultFlags: {},
     shouldInitialize: () => true,
   };
 
@@ -46,6 +48,7 @@ export default class Configure extends React.Component {
       <FlagsSubscription
         clientSideId={this.props.clientSideId}
         user={this.props.user}
+        defaultFlags={this.props.defaultFlags}
         shouldInitialize={this.props.shouldInitialize}
         onUpdateStatus={this.handleUpdateStatus}
         onUpdateFlags={this.handleUpdateFlags}
