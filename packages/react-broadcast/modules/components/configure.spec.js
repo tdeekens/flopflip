@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
 import Configure, { FLAGS_CHANNEL } from './configure';
 
 const ChildComponent = () => <div />;
@@ -27,7 +26,7 @@ describe('rendering', () => {
   });
 
   it('should match snapshot', () => {
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a `FlagsSubcription`', () => {
@@ -64,13 +63,14 @@ describe('rendering', () => {
     });
 
     it('should receive `clientSideId`', () => {
-      expect(flagsSubscriptionWrapper.prop('clientSideId')).toBe(
+      expect(flagsSubscriptionWrapper).toHaveProp(
+        'clientSideId',
         props.clientSideId
       );
     });
 
     it('should receive `user`', () => {
-      expect(flagsSubscriptionWrapper.prop('user')).toBe(props.user);
+      expect(flagsSubscriptionWrapper).toHaveProp('user', props.user);
     });
   });
 });
@@ -94,7 +94,7 @@ describe('state', () => {
     });
 
     it('should update the state', () => {
-      expect(wrapper.state('flags')).toEqual(newFlags);
+      expect(wrapper).toHaveState('flags', newFlags);
     });
   });
 
@@ -113,19 +113,20 @@ describe('state', () => {
     });
 
     it('should update the state', () => {
-      expect(wrapper.state('status')).toEqual(newStatus);
+      expect(wrapper).toHaveState('status', newStatus);
     });
   });
 
   describe('of `<Broadcast />`', () => {
     it('should receive `flags` as `value`', () => {
-      expect(wrapper.find('Broadcast').prop('value')).toBe(
+      expect(wrapper.find('Broadcast')).toHaveProp(
+        'value',
         wrapper.state('flags')
       );
     });
 
     it('should receive `FLAGS_CHANNEL` as `channel`', () => {
-      expect(wrapper.find('Broadcast').prop('channel')).toBe(FLAGS_CHANNEL);
+      expect(wrapper.find('Broadcast')).toHaveProp('channel', FLAGS_CHANNEL);
     });
   });
 });
@@ -151,19 +152,22 @@ describe('callbacks', () => {
     });
 
     it('should receive `onUpdateFlags`', () => {
-      expect(flagsSubscriptionWrapper.prop('onUpdateStatus')).toBe(
+      expect(flagsSubscriptionWrapper).toHaveProp(
+        'onUpdateStatus',
         wrapper.instance().handleUpdateStatus
       );
     });
 
     it('should receive `onUpdateFlags`', () => {
-      expect(flagsSubscriptionWrapper.prop('onUpdateFlags')).toBe(
+      expect(flagsSubscriptionWrapper).toHaveProp(
+        'onUpdateFlags',
         wrapper.instance().handleUpdateFlags
       );
     });
 
     it('should receive `shouldInitialize`', () => {
-      expect(flagsSubscriptionWrapper.prop('shouldInitialize')).toBe(
+      expect(flagsSubscriptionWrapper).toHaveProp(
+        'shouldInitialize',
         wrapper.prop('shouldInitialize')
       );
     });

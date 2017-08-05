@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
 import { initialize, listen } from '@flopflip/launchdarkly-wrapper';
 import FlagSubscription from './flags-subscription';
 
@@ -37,7 +36,7 @@ describe('rendering', () => {
   });
 
   it('should match snapshot', () => {
-    expect(toJson(wrapper)).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should render `children`', () => {
@@ -244,7 +243,7 @@ describe('state', () => {
   describe('isInitialized', () => {
     describe('when rendered', () => {
       it('should be `false`', () => {
-        expect(wrapper.state('isInitialized')).toBe(false);
+        expect(wrapper).toHaveState('isInitialized', false);
       });
     });
 
@@ -254,7 +253,7 @@ describe('state', () => {
       });
 
       it('should be `true`', () => {
-        expect(wrapper.state('isInitialized')).toBe(true);
+        expect(wrapper).toHaveState('isInitialized', true);
       });
     });
   });
