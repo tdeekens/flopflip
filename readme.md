@@ -175,6 +175,7 @@ const store = createStore(
 - `ConfigureFlopFlip` a component to configure LaunchDarkly (using context and broadcasting over redux)
 - `withFeatureToggle` a Higher-Order Component (HoC) to conditionally render components depending on feature toggle state
 - `injectFeatureToggles` a HoC to inject requested feature toggles from existing feature toggles onto the `props` of a component
+- `injectFeatureToggle` a HoC to inject a feature toggle from existing feature toggles onto the `props` of a component
 - `FeatureToggled` a component conditionally rendering its `children` based on the status of a passed feature flag
 
 The configuration is the same as mentioned above
@@ -252,7 +253,7 @@ export default withFeatureToggle(flagsNames.THE_FEATURE_TOGGLE)(
 
 #### `injectFeatureToggles`
 
-This HoC matches feature toggles given against configured ones and injects the matching result. `withFeatureToggle` uses this to conditionally render a component.
+This HoC matches feature toggles given against configured ones and injects the matching result.
 
 ```js
 import { injectFeatureToggles } from '@flopflip/react-redux';
@@ -268,6 +269,26 @@ const Component = props => {
 };
 
 export default injectFeatureToggles([flagsNames.TOGGLE_A, flagsNames.TOGGLE_B])(
+  Component
+);
+```
+
+#### `injectFeatureToggle`
+
+This HoC matches feature toggles given against configured ones and injects the matching result. `withFeatureToggle` uses this to conditionally render a component. You also may pass a second argument to overwrite the default `propKey` of the injected toggle (defaults to `isFeatureEnabled`).
+
+```js
+import { injectFeatureToggle } from '@flopflip/react-redux';
+import flagsNames from './feature-flags';
+
+const Component = props => {
+  if (props.isFeatureEnabled)
+    return <h3>Something to render!</h3>;
+
+  return <h3>Something different to render!</h3>;
+};
+
+export default injectFeatureToggle(flagsNames.TOGGLE_B)(
   Component
 );
 ```
