@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`injecting should match snapshot 1`] = `
+<TestComponent
+  availableFeatureToggles={
+    Object {
+      "aFeatureToggle": true,
+    }
+  }
+  featureToggle={true}
+/>
+`;
