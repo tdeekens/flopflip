@@ -60,4 +60,20 @@ describe('injecting', () => {
       );
     });
   });
+
+  describe('with non defined flagName', () => {
+    beforeEach(() => {
+      const anotherFlagName = 'anotherFeatureToggle';
+      availableFeatureToggles = { [flagName]: true };
+
+      Component = injectFeatureToggle(anotherFlagName)(TestComponent);
+      wrapper = shallow(
+        <Component availableFeatureToggles={availableFeatureToggles} />
+      );
+    });
+
+    it("should pass the feature toggle's state as `false`", () => {
+      expect(wrapper.find(TestComponent)).toHaveProp('isFeatureEnabled', false);
+    });
+  });
 });
