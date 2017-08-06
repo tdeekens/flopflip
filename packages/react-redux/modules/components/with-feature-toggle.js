@@ -1,9 +1,6 @@
 import { compose } from 'recompose';
 import { branchUntoggled } from '@flopflip/react';
-import injectFeatureToggles from './inject-feature-toggles';
+import injectFeatureToggle from './inject-feature-toggle';
 
-export default (featureToggle, UntoggledComponent) =>
-  compose(
-    injectFeatureToggles([featureToggle]),
-    branchUntoggled(UntoggledComponent)
-  );
+export default (flagName, UntoggledComponent) =>
+  compose(injectFeatureToggle(flagName), branchUntoggled(UntoggledComponent));
