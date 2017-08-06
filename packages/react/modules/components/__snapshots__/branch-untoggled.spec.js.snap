@@ -1,27 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`with feature disabled with untoggled component should match snapshot 1`] = `
+exports[`with \`flagName\` when feature is disabled with untoggled component should match snapshot 1`] = `
 <div>
   UntoggledComponent
 </div>
 `;
 
-exports[`with feature disabled without untoggled component should match snapshot 1`] = `
+exports[`with \`flagName\` when feature is disabled without untoggled component should match snapshot 1`] = `
 <Nothing
-  featureToggles={
-    Object {
-      "aFeatureToggle": false,
-    }
-  }
+  flagName="fooFlagName"
+  fooFlagName={false}
 />
 `;
 
-exports[`with feature enabled with untoggled component should match snapshot 1`] = `
-<undefined
-  featureToggles={
-    Object {
-      "aFeatureToggle": true,
-    }
-  }
+exports[`with \`flagName\` when feature is enabled with untoggled component should match snapshot 1`] = `
+<div>
+  FeatureComponent
+</div>
+`;
+
+exports[`with \`flagName\` when feature is enabled without untoggled component should match snapshot 1`] = `
+<div>
+  FeatureComponent
+</div>
+`;
+
+exports[`without \`flagName\` when feature is disabled with untoggled component should match snapshot 1`] = `
+<div>
+  UntoggledComponent
+</div>
+`;
+
+exports[`without \`flagName\` when feature is disabled without untoggled component should match snapshot 1`] = `
+<Nothing
+  isFeatureEnabled={false}
 />
+`;
+
+exports[`without \`flagName\` when feature is enabled with untoggled component should match snapshot 1`] = `
+<div>
+  FeatureComponent
+</div>
+`;
+
+exports[`without \`flagName\` when feature is enabled without untoggled component should match snapshot 1`] = `
+<div>
+  FeatureComponent
+</div>
 `;
