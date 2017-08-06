@@ -7,5 +7,5 @@ export const mapStateToProps = state => ({
   availableFeatureToggles: state[STATE_SLICE].flags,
 });
 
-export default flagName =>
-  compose(connect(mapStateToProps), injectFeatureToggle(flagName));
+export default (flagName, propKey) =>
+  compose(connect(mapStateToProps), injectFeatureToggle(flagName, propKey));
