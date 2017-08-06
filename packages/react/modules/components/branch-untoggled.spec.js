@@ -24,7 +24,7 @@ describe('with `flagName`', () => {
       let wrapper;
 
       beforeEach(() => {
-        Component = branchUntoggled()(FeatureComponent);
+        Component = branchUntoggled(undefined, flagName)(FeatureComponent);
         wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
       });
 
@@ -42,7 +42,9 @@ describe('with `flagName`', () => {
       let wrapper;
 
       beforeEach(() => {
-        Component = branchUntoggled(UntoggledComponent)(FeatureComponent);
+        Component = branchUntoggled(UntoggledComponent, flagName)(
+          FeatureComponent
+        );
         wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
       });
 
@@ -67,7 +69,9 @@ describe('with `flagName`', () => {
       let wrapper;
 
       beforeEach(() => {
-        Component = branchUntoggled(UntoggledComponent)(FeatureComponent);
+        Component = branchUntoggled(UntoggledComponent, flagName)(
+          FeatureComponent
+        );
         wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
       });
 
@@ -85,7 +89,7 @@ describe('with `flagName`', () => {
       let wrapper;
 
       beforeEach(() => {
-        Component = branchUntoggled()(FeatureComponent);
+        Component = branchUntoggled(undefined, flagName)(FeatureComponent);
         wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
       });
 
