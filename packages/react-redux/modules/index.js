@@ -11,6 +11,7 @@ export {
 } from './ducks';
 export {
   FeatureToggled,
+  injectFeatureToggle,
   injectFeatureToggles,
   withFeatureToggle,
   ConfigureFlopFlip,
