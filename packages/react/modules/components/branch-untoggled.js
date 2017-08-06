@@ -1,8 +1,8 @@
 import { branch, renderNothing, renderComponent } from 'recompose';
 
-const branchUntoggled = UntoggledComponent =>
+const branchUntoggled = (UntoggledComponent, flagName = 'isFeatureEnabled') =>
   branch(
-    ({ flagName = 'isFeatureEnabled', ...props }) => !props[flagName],
+    props => !props[flagName],
     UntoggledComponent ? renderComponent(UntoggledComponent) : renderNothing
   );
 
