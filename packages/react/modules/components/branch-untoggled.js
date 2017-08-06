@@ -2,7 +2,7 @@ import { branch, renderNothing, renderComponent } from 'recompose';
 
 const branchUntoggled = UntoggledComponent =>
   branch(
-    props => !Object.values(props.featureToggles).some(_ => _),
+    ({ flagName = 'isFeatureEnabled', ...props }) => !props[flagName],
     UntoggledComponent ? renderComponent(UntoggledComponent) : renderNothing
   );
 
