@@ -1,8 +1,8 @@
 import { withProps } from 'recompose';
 
-const injectFeatureToggle = flagName =>
+const injectFeatureToggle = (flagName, propKey = 'isFeatureEnabled') =>
   withProps(props => ({
-    featureToggle: props.availableFeatureToggles[flagName],
+    [propKey]: props.availableFeatureToggles[flagName],
   }));
 
 export default injectFeatureToggle;
