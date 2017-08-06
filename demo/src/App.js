@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import {
   ConfigureFlopFlip,
   withFeatureToggle,
-  injectFeatureToggles,
+  injectFeatureToggle,
   FeatureToggled,
 } from '@flopflip/react-redux';
 // change to `from '@flopflip/react-broadcast'` and everything will just work wtihout redux
@@ -33,23 +33,20 @@ const FeatureToggledIncrementAsyncButton = compose(
 const IncrementSyncButton = props =>
   <button
     className={classNames({
-      'incrementSyncButton--disabled':
-        props.featureToggles[flags.INCREMENT_SYNC_BUTTON] === false,
-      'incrementSyncButton--yellow':
-        props.featureToggles[flags.INCREMENT_SYNC_BUTTON] === 'yellow',
-      'incrementSyncButton--blue':
-        props.featureToggles[flags.INCREMENT_SYNC_BUTTON] === 'blue',
-      'incrementSyncButton--purple':
-        props.featureToggles[flags.INCREMENT_SYNC_BUTTON] === 'purple',
+      'incrementSyncButton--disabled': props.syncButtonStyle === false,
+      'incrementSyncButton--yellow': props.syncButtonStyle === 'yellow',
+      'incrementSyncButton--blue': props.syncButtonStyle === 'blue',
+      'incrementSyncButton--purple': props.syncButtonStyle === 'purple',
     })}
     onClick={props.increment}
     disabled={props.isIncrementing}
   >
     Increment
   </button>;
-const FeatureToggledIncrementSyncButton = injectFeatureToggles([
+const FeatureToggledIncrementSyncButton = injectFeatureToggle(
   flags.INCREMENT_SYNC_BUTTON,
-])(IncrementSyncButton);
+  'syncButtonStyle'
+)(IncrementSyncButton);
 
 const Counter = props =>
   <div>
