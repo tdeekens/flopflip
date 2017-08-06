@@ -1,12 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`injecting should match snapshot 1`] = `
+exports[`injecting with \`propKey\` should match snapshot 1`] = `
 <TestComponent
   availableFeatureToggles={
     Object {
       "aFeatureToggle": true,
     }
   }
-  featureToggle={true}
+  fooFlagPropName={true}
+/>
+`;
+
+exports[`injecting without \`propKey\` should match snapshot 1`] = `
+<TestComponent
+  availableFeatureToggles={
+    Object {
+      "aFeatureToggle": true,
+    }
+  }
+  isFeatureEnabled={true}
 />
 `;
