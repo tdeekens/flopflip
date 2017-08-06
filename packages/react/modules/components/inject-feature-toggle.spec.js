@@ -10,28 +10,54 @@ describe('injecting', () => {
   TestComponent.displayName = 'TestComponent';
   TestComponent.propTypes = {};
 
-  const featureToggle = 'aFeatureToggle';
+  const flagName = 'aFeatureToggle';
   let availableFeatureToggles;
   let Component;
   let wrapper;
 
-  beforeEach(() => {
-    availableFeatureToggles = { [featureToggle]: true };
+  describe('with `propKey`', () => {
+    const propKey = 'fooFlagPropName';
 
-    Component = injectFeatureToggle(featureToggle)(TestComponent);
-    wrapper = shallow(
-      <Component availableFeatureToggles={availableFeatureToggles} />
-    );
+    beforeEach(() => {
+      availableFeatureToggles = { [flagName]: true };
+
+      Component = injectFeatureToggle(flagName, propKey)(TestComponent);
+      wrapper = shallow(
+        <Component availableFeatureToggles={availableFeatureToggles} />
+      );
+    });
+
+    it('should match snapshot', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it("should pass the feature toggle's state as a `prop` of `propKey`", () => {
+      expect(wrapper.find(TestComponent)).toHaveProp(
+        propKey,
+        availableFeatureToggles[flagName]
+      );
+    });
   });
 
-  it('should match snapshot', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
+  describe('without `propKey`', () => {
+    beforeEach(() => {
+      availableFeatureToggles = { [flagName]: true };
 
-  it("should pass the feature toggle's state as a `prop`", () => {
-    expect(wrapper.find(TestComponent)).toHaveProp(
-      'featureToggle',
-      availableFeatureToggles[featureToggle]
-    );
+      Component = injectFeatureToggle(flagName)(TestComponent);
+      wrapper = shallow(
+        <Component availableFeatureToggles={availableFeatureToggles} />
+      );
+    });
+
+    it('should match snapshot', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it("should pass the feature toggle's state as a `prop` of `isFeatureEnabled`", () => {
+      expect(wrapper.find(TestComponent)).toHaveProp(
+        'isFeatureEnabled',
+        availableFeatureToggles[flagName]
+      );
+    });
   });
 });
