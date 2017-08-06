@@ -1,25 +1,19 @@
 import { withProps } from 'recompose';
 import intersection from 'lodash.intersection';
 
-const filterFeatureToggles = (
-  availableFeatureToggles,
-  requestedFeatureToggles
-) =>
-  intersection(
-    Object.keys(availableFeatureToggles),
-    requestedFeatureToggles
-  ).reduce(
+const filterFeatureToggles = (availableFeatureToggles, flagNames) =>
+  intersection(Object.keys(availableFeatureToggles), flagNames).reduce(
     (featureToggles, featureToggle) => ({
       [featureToggle]: availableFeatureToggles[featureToggle],
     }),
     {}
   );
 
-const injectFeatureToggles = requestedFeatureToggles =>
+const injectFeatureToggles = flagNames =>
   withProps(props => ({
     featureToggles: filterFeatureToggles(
       props.availableFeatureToggles,
-      requestedFeatureToggles
+      flagNames
     ),
   }));
 
