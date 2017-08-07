@@ -53,8 +53,8 @@ export default class FlagsSubscription extends React.Component {
       this.initializeFlagListening();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.shouldInitialize(nextProps.user))
+  componentDidUpdate() {
+    if (this.props.shouldInitialize(this.props.user))
       this.initializeFlagListening();
   }
 

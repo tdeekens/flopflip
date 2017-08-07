@@ -199,7 +199,7 @@ describe('lifecycle', () => {
     });
   });
 
-  describe('componentWillReceiveProps', () => {
+  describe('componentDidUpdate', () => {
     let wrapper;
     let props;
 
@@ -220,7 +220,7 @@ describe('lifecycle', () => {
       describe('when not initialized', () => {
         beforeEach(() => {
           wrapper.setState({ isInitialized: false });
-          wrapper.instance().componentWillReceiveProps(props);
+          wrapper.instance().componentDidUpdate();
         });
 
         it('should invoke `shouldInitialize`', () => {
@@ -239,7 +239,7 @@ describe('lifecycle', () => {
       describe('when already initialized', () => {
         beforeEach(() => {
           wrapper.setState({ isInitialized: true });
-          wrapper.instance().componentWillReceiveProps(props);
+          wrapper.instance().componentDidUpdate();
         });
 
         it('should not invoke `listen` on `launchdarkly-wrapper` again', () => {
@@ -259,7 +259,7 @@ describe('lifecycle', () => {
         );
 
         wrapper.setState({ isInitialized: false });
-        wrapper.instance().componentWillReceiveProps(props);
+        wrapper.instance().componentDidUpdate();
       });
 
       it('should invoke `shouldInitialize`', () => {
