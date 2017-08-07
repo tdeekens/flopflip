@@ -15,7 +15,7 @@ jest.mock('@flopflip/launchdarkly-wrapper', () => ({
 
 const ChildComponet = () => <div />;
 const createTestProps = props => ({
-  shouldInitialize: () => true,
+  shouldInitialize: jest.fn(() => true),
   clientSideId: 'foo-clientSideId',
   user: {
     key: 'foo-user-key',
@@ -220,7 +220,15 @@ describe('lifecycle', () => {
       describe('when not initialized', () => {
         beforeEach(() => {
           wrapper.setState({ isInitialized: false });
-          wrapper.instance().componentWillReceiveProps();
+          wrapper.instance().componentWillReceiveProps(props);
+        });
+
+        it('should invoke `shouldInitialize`', () => {
+          expect(props.shouldInitialize).toHaveBeenCalled();
+        });
+
+        it('should invoke `shouldInitialize` with `user`', () => {
+          expect(props.shouldInitialize).toHaveBeenCalledWith(props.user);
         });
 
         it('should invoke `listen` on `launchdarkly-wrapper`', () => {
@@ -231,7 +239,7 @@ describe('lifecycle', () => {
       describe('when already initialized', () => {
         beforeEach(() => {
           wrapper.setState({ isInitialized: true });
-          wrapper.instance().componentWillReceiveProps();
+          wrapper.instance().componentWillReceiveProps(props);
         });
 
         it('should not invoke `listen` on `launchdarkly-wrapper` again', () => {
@@ -243,7 +251,7 @@ describe('lifecycle', () => {
 
     describe('when `shouldInitialize` returns `false`', () => {
       beforeEach(() => {
-        props = createTestProps({ shouldInitialize: () => false });
+        props = createTestProps({ shouldInitialize: jest.fn(() => false) });
         wrapper = shallow(
           <FlagSubscription {...props}>
             <ChildComponet />
@@ -251,7 +259,15 @@ describe('lifecycle', () => {
         );
 
         wrapper.setState({ isInitialized: false });
-        wrapper.instance().componentWillReceiveProps();
+        wrapper.instance().componentWillReceiveProps(props);
+      });
+
+      it('should invoke `shouldInitialize`', () => {
+        expect(props.shouldInitialize).toHaveBeenCalled();
+      });
+
+      it('should invoke `shouldInitialize` with `user`', () => {
+        expect(props.shouldInitialize).toHaveBeenCalledWith(props.user);
       });
 
       it('should not invoke `listen` on `launchdarkly-wrapper`', () => {

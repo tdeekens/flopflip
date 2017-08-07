@@ -49,11 +49,13 @@ export default class FlagsSubscription extends React.Component {
 
   componentDidMount() {
     this.handleDefaultFlags(this.props.defaultFlags);
-    if (this.props.shouldInitialize()) this.initializeFlagListening();
+    if (this.props.shouldInitialize(this.props.user))
+      this.initializeFlagListening();
   }
 
-  componentWillReceiveProps() {
-    if (this.props.shouldInitialize()) this.initializeFlagListening();
+  componentWillReceiveProps(nextProps) {
+    if (this.props.shouldInitialize(nextProps.user))
+      this.initializeFlagListening();
   }
 
   render() {
