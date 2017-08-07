@@ -140,6 +140,9 @@ describe('lifecycle', () => {
       describe('when already initialized', () => {
         beforeEach(() => {
           wrapper.setState({ isInitialized: true });
+
+          listen.mockClear();
+
           wrapper.instance().componentDidMount();
         });
 
@@ -199,7 +202,7 @@ describe('lifecycle', () => {
     });
   });
 
-  describe('componentWillReceiveProps', () => {
+  describe('componentWillUpdate', () => {
     let wrapper;
     let props;
 
@@ -214,15 +217,9 @@ describe('lifecycle', () => {
 
     describe('when `shouldInitialize` returns `true`', () => {
       beforeEach(() => {
-        listen.mockClear();
+        wrapper.instance().componentWillUpdate(props);
       });
-
       describe('when not initialized', () => {
-        beforeEach(() => {
-          wrapper.setState({ isInitialized: false });
-          wrapper.instance().componentWillReceiveProps(props);
-        });
-
         it('should invoke `shouldInitialize`', () => {
           expect(props.shouldInitialize).toHaveBeenCalled();
         });
@@ -238,8 +235,9 @@ describe('lifecycle', () => {
 
       describe('when already initialized', () => {
         beforeEach(() => {
-          wrapper.setState({ isInitialized: true });
-          wrapper.instance().componentWillReceiveProps(props);
+          listen.mockClear();
+
+          wrapper.instance().componentWillUpdate(props);
         });
 
         it('should not invoke `listen` on `launchdarkly-wrapper` again', () => {
@@ -258,8 +256,7 @@ describe('lifecycle', () => {
           </FlagSubscription>
         );
 
-        wrapper.setState({ isInitialized: false });
-        wrapper.instance().componentWillReceiveProps(props);
+        wrapper.instance().componentWillUpdate(props);
       });
 
       it('should invoke `shouldInitialize`', () => {
