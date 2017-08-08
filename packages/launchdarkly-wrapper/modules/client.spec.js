@@ -4,6 +4,7 @@ import {
   listen,
   camelCaseFlags,
   createAnonymousUser,
+  changeUserContext,
 } from './client';
 
 jest.mock('ldclient-js', () => ({
@@ -94,6 +95,20 @@ describe('when initializing', () => {
         });
       });
     });
+  });
+});
+
+describe('when changing user context', () => {
+  let client;
+
+  beforeEach(() => {
+    client = { identify: jest.fn() };
+
+    changeUserContext({ client, user });
+  });
+
+  it('should invoke `identify` on the `client` with the `user`', () => {
+    expect(client.identify).toHaveBeenCalledWith(user);
   });
 });
 
