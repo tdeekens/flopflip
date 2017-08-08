@@ -15,7 +15,7 @@ jest.mock('@flopflip/launchdarkly-wrapper', () => ({
 
 const ChildComponet = () => <div />;
 const createTestProps = props => ({
-  shouldInitialize: jest.fn(() => true),
+  shouldInitialize: true,
   clientSideId: 'foo-clientSideId',
   user: {
     key: 'foo-user-key',
@@ -121,7 +121,7 @@ describe('lifecycle', () => {
       );
     });
 
-    describe('when `shouldInitialize` returns `true`', () => {
+    describe('when `shouldInitialize` is `true`', () => {
       beforeEach(() => {
         listen.mockClear();
       });
@@ -149,11 +149,11 @@ describe('lifecycle', () => {
       });
     });
 
-    describe('when `shouldInitialize` returns `false`', () => {
+    describe('when `shouldInitialize` is `false`', () => {
       beforeEach(() => {
         listen.mockClear();
 
-        props = createTestProps({ shouldInitialize: () => false });
+        props = createTestProps({ shouldInitialize: false });
         wrapper = shallow(
           <FlagSubscription {...props}>
             <ChildComponet />
@@ -212,7 +212,7 @@ describe('lifecycle', () => {
       );
     });
 
-    describe('when `shouldInitialize` returns `true`', () => {
+    describe('when `shouldInitialize` is `true`', () => {
       beforeEach(() => {
         listen.mockClear();
       });
@@ -221,14 +221,6 @@ describe('lifecycle', () => {
         beforeEach(() => {
           wrapper.setState({ isInitialized: false });
           wrapper.instance().componentDidUpdate();
-        });
-
-        it('should invoke `shouldInitialize`', () => {
-          expect(props.shouldInitialize).toHaveBeenCalled();
-        });
-
-        it('should invoke `shouldInitialize` with `user`', () => {
-          expect(props.shouldInitialize).toHaveBeenCalledWith(props.user);
         });
 
         it('should invoke `listen` on `launchdarkly-wrapper`', () => {
@@ -249,9 +241,9 @@ describe('lifecycle', () => {
       });
     });
 
-    describe('when `shouldInitialize` returns `false`', () => {
+    describe('when `shouldInitialize` is `false`', () => {
       beforeEach(() => {
-        props = createTestProps({ shouldInitialize: jest.fn(() => false) });
+        props = createTestProps({ shouldInitialize: false });
         wrapper = shallow(
           <FlagSubscription {...props}>
             <ChildComponet />
@@ -260,14 +252,6 @@ describe('lifecycle', () => {
 
         wrapper.setState({ isInitialized: false });
         wrapper.instance().componentDidUpdate();
-      });
-
-      it('should invoke `shouldInitialize`', () => {
-        expect(props.shouldInitialize).toHaveBeenCalled();
-      });
-
-      it('should invoke `shouldInitialize` with `user`', () => {
-        expect(props.shouldInitialize).toHaveBeenCalledWith(props.user);
       });
 
       it('should not invoke `listen` on `launchdarkly-wrapper`', () => {
