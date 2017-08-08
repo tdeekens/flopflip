@@ -1,9 +1,9 @@
 import ldClient from 'ldclient-js';
 import camelCase from 'lodash.camelcase';
-import uuid from './uuid';
+import nanoid from 'nanoid';
 
-const createAnonymousUser = () => ({
-  key: uuid(),
+export const createAnonymousUser = () => ({
+  key: nanoid(),
 });
 
 const normalizeFlag = (flagName, flagValue) => [

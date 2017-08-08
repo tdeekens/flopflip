@@ -1,5 +1,10 @@
 import ldClient from 'ldclient-js';
-import { initialize, listen, camelCaseFlags } from './client';
+import {
+  initialize,
+  listen,
+  camelCaseFlags,
+  createAnonymousUser,
+} from './client';
 
 jest.mock('ldclient-js', () => ({
   initialize: jest.fn(() => ({
@@ -113,5 +118,16 @@ describe('camelCasedFlags', () => {
     it('should camel case to uppercased flag names', () => {
       expect(camelCaseFlags(rawFlags)).toEqual({ aFlag: true, flagBC: false });
     });
+  });
+});
+
+describe('create anonymous user', () => {
+  it('should create user with uuid in key property', () => {
+    expect(createAnonymousUser().key).toBeDefined();
+  });
+
+  it('should create uuid of length `22`', () => {
+    // just to ensure regressions in the uuid library
+    expect(createAnonymousUser().key.length).toBe(22);
   });
 });
