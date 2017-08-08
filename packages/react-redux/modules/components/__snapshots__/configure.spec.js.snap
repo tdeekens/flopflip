@@ -6,7 +6,7 @@ exports[`rendering should match snapshot 1`] = `
   defaultFlags={Object {}}
   onUpdateFlags={[Function]}
   onUpdateStatus={[Function]}
-  shouldInitialize={[Function]}
+  shouldInitialize={true}
   user={
     Object {
       "key": "123",

@@ -13,7 +13,7 @@ export class Configure extends React.Component {
       key: PropTypes.string,
     }),
     defaultFlags: PropTypes.object,
-    shouldInitialize: PropTypes.func,
+    shouldInitialize: PropTypes.bool,
 
     // Connected
     handleUpdateStatus: PropTypes.func.isRequired,
@@ -24,7 +24,7 @@ export class Configure extends React.Component {
     children: null,
     user: {},
     defaultFlags: {},
-    shouldInitialize: () => true,
+    shouldInitialize: true,
   };
 
   render() {
