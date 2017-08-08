@@ -11,7 +11,7 @@ export default class Configure extends React.Component {
   static propTypes = {
     children: PropTypes.node,
     clientSideId: PropTypes.string.isRequired,
-    shouldInitialize: PropTypes.func,
+    shouldInitialize: PropTypes.bool,
     defaultFlags: PropTypes.object,
     user: PropTypes.shape({
       key: PropTypes.string,
@@ -22,7 +22,7 @@ export default class Configure extends React.Component {
     children: null,
     user: {},
     defaultFlags: {},
-    shouldInitialize: () => true,
+    shouldInitialize: true,
   };
 
   state = {

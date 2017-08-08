@@ -202,7 +202,7 @@ describe('statics', () => {
     });
 
     it('should default `shouldInitialize` to `true`', () => {
-      expect(Configure.defaultProps.shouldInitialize()).toBe(true);
+      expect(Configure.defaultProps.shouldInitialize).toBe(true);
     });
   });
 });
