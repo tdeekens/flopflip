@@ -14,6 +14,7 @@ export class Configure extends React.Component {
     }),
     defaultFlags: PropTypes.object,
     shouldInitialize: PropTypes.bool,
+    shouldChangeUserContext: PropTypes.bool,
 
     // Connected
     handleUpdateStatus: PropTypes.func.isRequired,
@@ -25,6 +26,7 @@ export class Configure extends React.Component {
     user: {},
     defaultFlags: {},
     shouldInitialize: true,
+    shouldChangeUserContext: false,
   };
 
   render() {
@@ -34,6 +36,7 @@ export class Configure extends React.Component {
         user={this.props.user}
         defaultFlags={this.props.defaultFlags}
         shouldInitialize={this.props.shouldInitialize}
+        shouldChangeUserContext={this.props.shouldChangeUserContext}
         onUpdateStatus={this.props.handleUpdateStatus}
         onUpdateFlags={this.props.handleUpdateFlags}
       >
