@@ -144,6 +144,7 @@ It takes the `props`:
 - The `clientSideId` is your LaunchDarkly ID.
 - The `user` object needs at least a `key` attribute. An anonymous `key` will be generated using a `uuid` when nothing is specified. The user object can contain additional data.
 - The `shouldInitialize` prop can be used to defer the flag subscription setup towards LaunchDarkly (via their SDK). This might be helpful for cases in which you want to wait for e.g. the `key` to be present within your root component and you do not want `flopflip` to generate a `uuid` for you automatically.
+- The `shouldChangeUserContext` boolean prop to indicate whether `flopflip` should watch the `key` property on the `user` to change the user context on LaunchDarkly's SDK (defaults to `false`)
 - The `defaultFlags` prop object can be used to specify default flag values until LaunchDarkly responds or in case flags were removed from their platform (flag keys will be camel cased as with response from LaunchDarkly's API so e.g. `{ 'a-flag': true }` becomes `{ aFlag: true }`)
 
 ```js
