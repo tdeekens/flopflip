@@ -21,6 +21,7 @@ jest.mock('@flopflip/launchdarkly-wrapper', () => ({
 const ChildComponet = () => <div />;
 const createTestProps = props => ({
   shouldInitialize: true,
+  shouldChangeUserContext: false,
   clientSideId: 'foo-clientSideId',
   user: {
     key: 'foo-user-key',
@@ -289,28 +290,63 @@ describe('lifecycle', () => {
     });
 
     describe('when `user` prop changed', () => {
-      let prevProps;
-      let client;
+      describe('with `shouldChangeUserContext` set to `true`', () => {
+        let prevProps;
+        let client;
 
-      beforeEach(() => {
-        prevProps = createTestProps({
-          user: {
-            key: 'foo-user-key-old',
-          },
+        beforeEach(() => {
+          props = createTestProps();
+          wrapper = shallow(
+            <FlagSubscription {...props}>
+              <ChildComponet />
+            </FlagSubscription>
+          );
+
+          prevProps = createTestProps({
+            user: {
+              key: 'foo-user-key-old',
+            },
+          });
+          client = { __id__: 'foo-client' };
+
+          wrapper.instance().client = client;
+
+          wrapper.setState({ isInitialized: false });
+          wrapper.instance().componentDidUpdate(prevProps);
         });
-        client = { __id__: 'foo-client' };
 
-        wrapper.instance().client = client;
-
-        wrapper.setState({ isInitialized: false });
-        wrapper.instance().componentDidUpdate(prevProps);
+        it('should invoke `changeUserContext` on `launchdarkly-wrapper` with new `user`', () => {
+          // New user is actually the old
+          expect(changeUserContext).toHaveBeenCalledWith({
+            user: props.user,
+            client,
+          });
+        });
       });
 
-      it('should invoke `changeUserContext` on `launchdarkly-wrapper` with new `user`', () => {
-        // New user is actually the old
-        expect(changeUserContext).toHaveBeenCalledWith({
-          user: props.user,
-          client,
+      describe('with `shouldChangeUserContext` set to `false`', () => {
+        let prevProps;
+        let client;
+
+        beforeEach(() => {
+          changeUserContext.mockClear();
+
+          prevProps = createTestProps({
+            user: {
+              key: 'foo-user-key-old',
+            },
+          });
+          client = { __id__: 'foo-client' };
+
+          wrapper.instance().client = client;
+
+          wrapper.setState({ isInitialized: false });
+          wrapper.instance().componentDidUpdate(prevProps);
+        });
+
+        it('should not invoke `changeUserContext` on `launchdarkly-wrapper`', () => {
+          // New user is actually the old
+          expect(changeUserContext).not.toHaveBeenCalled();
         });
       });
     });

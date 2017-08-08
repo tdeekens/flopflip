@@ -10,6 +10,7 @@ import {
 export default class FlagsSubscription extends React.Component {
   static propTypes = {
     shouldInitialize: PropTypes.bool.isRequired,
+    shouldChangeUserContext: PropTypes.bool.isRequired,
     clientSideId: PropTypes.string.isRequired,
     user: PropTypes.shape({
       key: PropTypes.string,
@@ -62,7 +63,11 @@ export default class FlagsSubscription extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.shouldInitialize) this.initializeFlagListening();
 
-    if (this.props.user && prevProps.user.key !== this.props.user.key)
+    if (
+      this.props.shouldChangeUserContext &&
+      this.props.user &&
+      prevProps.user.key !== this.props.user.key
+    )
       this.changeUserContext();
   }
 
