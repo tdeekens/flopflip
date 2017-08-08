@@ -3,6 +3,7 @@ import React from 'react';
 import {
   initialize,
   listen,
+  changeUserContext,
   camelCaseFlags,
 } from '@flopflip/launchdarkly-wrapper';
 
@@ -43,6 +44,10 @@ export default class FlagsSubscription extends React.Component {
     }
   };
 
+  changeUserContext = () => {
+    changeUserContext({ client: this.client, user: this.props.user });
+  };
+
   handleDefaultFlags = defaultFlags => {
     if (Object.keys(defaultFlags).length > 0) {
       this.props.onUpdateFlags(camelCaseFlags(defaultFlags));
@@ -54,8 +59,11 @@ export default class FlagsSubscription extends React.Component {
     if (this.props.shouldInitialize) this.initializeFlagListening();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (this.props.shouldInitialize) this.initializeFlagListening();
+
+    if (this.props.user && prevProps.user.key !== this.props.user.key)
+      this.changeUserContext();
   }
 
   render() {

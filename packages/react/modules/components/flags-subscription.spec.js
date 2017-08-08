@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import {
   initialize,
   listen,
+  changeUserContext,
   camelCaseFlags,
 } from '@flopflip/launchdarkly-wrapper';
 import FlagSubscription from './flags-subscription';
@@ -13,6 +14,7 @@ const clientInstance = '__client-instance__';
 jest.mock('@flopflip/launchdarkly-wrapper', () => ({
   initialize: jest.fn(_ => '__client-instance__'),
   listen: jest.fn(),
+  changeUserContext: jest.fn(),
   camelCaseFlags: jest.fn(_ => _),
 }));
 
@@ -108,6 +110,26 @@ describe('interacting', () => {
     it('should invoke `initialize` with `user`', () => {
       expect(initialize).toHaveBeenCalledWith({
         clientSideId: expect.any(String),
+        user: props.user,
+      });
+    });
+  });
+
+  describe('changeUserContext', () => {
+    let client;
+    let props;
+
+    beforeEach(() => {
+      client = { __id__: 'foo-client' };
+      props = createTestProps();
+
+      wrapper.instance().client = client;
+      wrapper.instance().changeUserContext();
+    });
+
+    it('should invoke `changeUserContext` on the `launchdarkly-wrapper`', () => {
+      expect(changeUserContext).toHaveBeenCalledWith({
+        client,
         user: props.user,
       });
     });
@@ -227,7 +249,7 @@ describe('lifecycle', () => {
       describe('when not initialized', () => {
         beforeEach(() => {
           wrapper.setState({ isInitialized: false });
-          wrapper.instance().componentDidUpdate();
+          wrapper.instance().componentDidUpdate(props);
         });
 
         it('should invoke `listen` on `launchdarkly-wrapper`', () => {
@@ -238,7 +260,7 @@ describe('lifecycle', () => {
       describe('when already initialized', () => {
         beforeEach(() => {
           wrapper.setState({ isInitialized: true });
-          wrapper.instance().componentDidUpdate();
+          wrapper.instance().componentDidUpdate(props);
         });
 
         it('should not invoke `listen` on `launchdarkly-wrapper` again', () => {
@@ -258,11 +280,38 @@ describe('lifecycle', () => {
         );
 
         wrapper.setState({ isInitialized: false });
-        wrapper.instance().componentDidUpdate();
+        wrapper.instance().componentDidUpdate(props);
       });
 
       it('should not invoke `listen` on `launchdarkly-wrapper`', () => {
         expect(listen).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('when `user` prop changed', () => {
+      let prevProps;
+      let client;
+
+      beforeEach(() => {
+        prevProps = createTestProps({
+          user: {
+            key: 'foo-user-key-old',
+          },
+        });
+        client = { __id__: 'foo-client' };
+
+        wrapper.instance().client = client;
+
+        wrapper.setState({ isInitialized: false });
+        wrapper.instance().componentDidUpdate(prevProps);
+      });
+
+      it('should invoke `changeUserContext` on `launchdarkly-wrapper` with new `user`', () => {
+        // New user is actually the old
+        expect(changeUserContext).toHaveBeenCalledWith({
+          user: props.user,
+          client,
+        });
       });
     });
   });
