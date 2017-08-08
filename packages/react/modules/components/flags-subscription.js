@@ -8,7 +8,7 @@ import {
 
 export default class FlagsSubscription extends React.Component {
   static propTypes = {
-    shouldInitialize: PropTypes.func.isRequired,
+    shouldInitialize: PropTypes.bool.isRequired,
     clientSideId: PropTypes.string.isRequired,
     user: PropTypes.shape({
       key: PropTypes.string,
@@ -49,13 +49,11 @@ export default class FlagsSubscription extends React.Component {
 
   componentDidMount() {
     this.handleDefaultFlags(this.props.defaultFlags);
-    if (this.props.shouldInitialize(this.props.user))
-      this.initializeFlagListening();
+    if (this.props.shouldInitialize) this.initializeFlagListening();
   }
 
   componentDidUpdate() {
-    if (this.props.shouldInitialize(this.props.user))
-      this.initializeFlagListening();
+    if (this.props.shouldInitialize) this.initializeFlagListening();
   }
 
   render() {
