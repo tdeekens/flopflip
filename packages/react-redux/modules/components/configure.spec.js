@@ -149,5 +149,9 @@ describe('statics', () => {
     it('should default `shouldInitialize` to `true`', () => {
       expect(Configure.defaultProps.shouldInitialize).toBe(true);
     });
+
+    it('should default `shouldChangeUserContext` to `false`', () => {
+      expect(Configure.defaultProps.shouldChangeUserContext.toBe(false);
+    });
   });
 });
