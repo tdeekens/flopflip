@@ -1,1 +1,6 @@
-export { initialize, listen, camelCaseFlags } from './client';
+export {
+  initialize,
+  listen,
+  changeUserContext,
+  camelCaseFlags,
+} from './client';

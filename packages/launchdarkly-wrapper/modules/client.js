@@ -58,3 +58,5 @@ export const listen = ({ client, onUpdateFlags, onUpdateStatus }) => {
     flagUpdates({ rawFlags, client, onUpdateFlags });
   });
 };
+
+export const changeUserContext = ({ client, user }) => client.identify(user);
