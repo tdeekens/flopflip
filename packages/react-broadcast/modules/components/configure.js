@@ -12,6 +12,7 @@ export default class Configure extends React.Component {
     children: PropTypes.node,
     clientSideId: PropTypes.string.isRequired,
     shouldInitialize: PropTypes.bool,
+    shouldChangeUserContext: PropTypes.bool,
     defaultFlags: PropTypes.object,
     user: PropTypes.shape({
       key: PropTypes.string,
@@ -23,6 +24,7 @@ export default class Configure extends React.Component {
     user: {},
     defaultFlags: {},
     shouldInitialize: true,
+    shouldChangeUserContext: false,
   };
 
   state = {
@@ -50,6 +52,7 @@ export default class Configure extends React.Component {
         user={this.props.user}
         defaultFlags={this.props.defaultFlags}
         shouldInitialize={this.props.shouldInitialize}
+        shouldChangeUserContext={this.props.shouldChangeUserContext}
         onUpdateStatus={this.handleUpdateStatus}
         onUpdateFlags={this.handleUpdateFlags}
       >
