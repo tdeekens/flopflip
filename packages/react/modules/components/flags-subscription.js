@@ -28,11 +28,13 @@ export default class FlagsSubscription extends React.Component {
 
   initializeFlagListening = () => {
     if (!this.state.isInitialized) {
+      this.client = initialize({
+        clientSideId: this.props.clientSideId,
+        user: this.props.user,
+      });
+
       listen({
-        client: initialize({
-          clientSideId: this.props.clientSideId,
-          user: this.props.user,
-        }),
+        client: this.client,
         onUpdateFlags: this.props.onUpdateFlags,
         onUpdateStatus: this.props.onUpdateStatus,
       });

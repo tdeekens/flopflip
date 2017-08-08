@@ -7,8 +7,11 @@ import {
 } from '@flopflip/launchdarkly-wrapper';
 import FlagSubscription from './flags-subscription';
 
+// Can not be referenced from the mock
+const clientInstance = '__client-instance__';
+
 jest.mock('@flopflip/launchdarkly-wrapper', () => ({
-  initialize: jest.fn(),
+  initialize: jest.fn(_ => '__client-instance__'),
   listen: jest.fn(),
   camelCaseFlags: jest.fn(_ => _),
 }));
@@ -73,15 +76,19 @@ describe('interacting', () => {
 
     it('should invoke `listen` with `onUpdateFlags`', () => {
       expect(listen).toHaveBeenCalledWith({
-        client: undefined,
+        client: clientInstance,
         onUpdateFlags: props.onUpdateFlags,
         onUpdateStatus: expect.any(Function),
       });
     });
 
+    it('should cache `client` on instance', () => {
+      expect(wrapper.instance().client).toEqual(clientInstance);
+    });
+
     it('should invoke `listen` with `onUpdateStatus`', () => {
       expect(listen).toHaveBeenCalledWith({
-        client: undefined,
+        client: clientInstance,
         onUpdateFlags: expect.any(Function),
         onUpdateStatus: props.onUpdateStatus,
       });
