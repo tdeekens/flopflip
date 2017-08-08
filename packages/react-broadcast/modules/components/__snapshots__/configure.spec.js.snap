@@ -6,7 +6,12 @@ exports[`rendering should match snapshot 1`] = `
   defaultFlags={Object {}}
   onUpdateFlags={[Function]}
   onUpdateStatus={[Function]}
+<<<<<<< HEAD
   shouldInitialize={true}
+=======
+  shouldChangeUserContext={false}
+  shouldInitialize={[Function]}
+>>>>>>> feat(react-broadcast): to pass down shouldChangeUserContext
   user={
     Object {
       "key": "123",
