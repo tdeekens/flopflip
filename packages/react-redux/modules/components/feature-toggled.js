@@ -6,4 +6,5 @@ export const mapStateToProps = (state, ownProps) => ({
   isFeatureEnabled: Boolean(state[STATE_SLICE].flags[ownProps.flag]),
 });
 
+/* istanbul ignore next */
 export default connect(mapStateToProps)(FeatureToggled);
