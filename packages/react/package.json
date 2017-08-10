@@ -13,10 +13,7 @@
     "build:es": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/@flopflip-react.es.js",
     "build:cjs": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f cjs -o dist/@flopflip-react.cjs.js"
   },
-  "files": [
-    "readme.md",
-    "dist/**"
-  ],
+  "files": ["readme.md", "dist/**"],
   "publishConfig": {
     "access": "public"
   },
@@ -46,6 +43,7 @@
   "dependencies": {
     "@flopflip/launchdarkly-wrapper": "^2.0.0",
     "lodash.intersection": "^4.4.0",
+    "lodash.isnil": "^4.0.0",
     "recompose": "^0.24.0"
   },
   "keywords": [
