@@ -9,10 +9,9 @@
     "format:md": "pmd *.md",
     "format:js": "prettier --write --trailing-comma es5 --single-quote '**/modules/**/*.js' '**/rollup.config.js' '**/demo/**/*.js'",
     "test": "jest",
-    "test:ci": "npm run lint && npm run test",
+    "test:ci": "npm run lint && jest --no-watchman --coverage && codecov",
     "test:watch": "npm test -- --watch",
     "test:coverage": "jest --coverage",
-    "test:coverage:ci": "jest --no-watchman --coverage && codecov",
     "build": "lerna exec -- npm run build",
     "build:watch": "lerna exec -- npm run build:watch",
     "release": "npm run build && lerna publish --registry=https://registry.npmjs.org/"
