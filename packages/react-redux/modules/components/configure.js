@@ -51,4 +51,5 @@ const mapDispatchToProps = {
   handleUpdateFlags: updateFlags,
 };
 
+/* istanbul ignore next */
 export default connect(null, mapDispatchToProps)(Configure);

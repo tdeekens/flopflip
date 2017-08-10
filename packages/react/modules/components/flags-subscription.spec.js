@@ -292,10 +292,14 @@ describe('lifecycle', () => {
     describe('when `user` prop changed', () => {
       describe('with `shouldChangeUserContext` set to `true`', () => {
         let prevProps;
-        let client;
 
         beforeEach(() => {
-          props = createTestProps();
+          changeUserContext.mockClear();
+
+          props = createTestProps({
+            shouldChangeUserContext: true,
+          });
+
           wrapper = shallow(
             <FlagSubscription {...props}>
               <ChildComponet />
@@ -303,13 +307,11 @@ describe('lifecycle', () => {
           );
 
           prevProps = createTestProps({
+            shouldChangeUserContext: true,
             user: {
               key: 'foo-user-key-old',
             },
           });
-          client = { __id__: 'foo-client' };
-
-          wrapper.instance().client = client;
 
           wrapper.setState({ isInitialized: false });
           wrapper.instance().componentDidUpdate(prevProps);
@@ -319,7 +321,7 @@ describe('lifecycle', () => {
           // New user is actually the old
           expect(changeUserContext).toHaveBeenCalledWith({
             user: props.user,
-            client,
+            client: clientInstance,
           });
         });
       });

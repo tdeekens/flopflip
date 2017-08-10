@@ -67,8 +67,9 @@ export default class FlagsSubscription extends React.Component {
       this.props.shouldChangeUserContext &&
       this.props.user &&
       prevProps.user.key !== this.props.user.key
-    )
+    ) {
       this.changeUserContext();
+    }
   }
 
   render() {
