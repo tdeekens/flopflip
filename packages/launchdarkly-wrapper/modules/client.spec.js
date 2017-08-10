@@ -1,4 +1,5 @@
 import ldClient from 'ldclient-js';
+import nanoid from 'nanoid';
 import {
   initialize,
   listen,
@@ -6,6 +7,8 @@ import {
   createAnonymousUser,
   changeUserContext,
 } from './client';
+
+jest.mock('nanoid', () => jest.fn(() => 'foo-random-id'));
 
 jest.mock('ldclient-js', () => ({
   initialize: jest.fn(() => ({
@@ -18,12 +21,26 @@ const clientSideId = '123-abc';
 const user = { key: 'foo-user' };
 
 describe('when initializing', () => {
-  beforeEach(() => {
-    initialize({ clientSideId, user });
+  describe('with user key', () => {
+    beforeEach(() => {
+      initialize({ clientSideId, user });
+    });
+
+    it('should initialize the `ld-client` with `clientSideId` and given `user`', () => {
+      expect(ldClient.initialize).toHaveBeenCalledWith(clientSideId, user);
+    });
   });
 
-  it('should initialize the `ld-client` with `clientSideId` and `user`', () => {
-    expect(ldClient.initialize).toHaveBeenCalledWith(clientSideId, user);
+  describe('without key', () => {
+    beforeEach(() => {
+      initialize({ clientSideId, user: {} });
+    });
+
+    it('should initialize the `ld-client` with `clientSideId` and random `user` `key`', () => {
+      expect(ldClient.initialize).toHaveBeenCalledWith(clientSideId, {
+        key: 'foo-random-id',
+      });
+    });
   });
 
   describe('when ready', () => {
@@ -141,8 +158,7 @@ describe('create anonymous user', () => {
     expect(createAnonymousUser().key).toBeDefined();
   });
 
-  it('should create uuid of length `22`', () => {
-    // Just to ensure regressions in the uuid library
-    expect(createAnonymousUser().key.length).toBe(22);
+  it('should create uuid of length `foo-random-id`', () => {
+    expect(createAnonymousUser().key.length).toBe(13);
   });
 });
