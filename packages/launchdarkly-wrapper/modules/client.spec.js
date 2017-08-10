@@ -1,5 +1,4 @@
 import ldClient from 'ldclient-js';
-import nanoid from 'nanoid';
 import {
   initialize,
   listen,
