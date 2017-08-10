@@ -8,4 +8,5 @@ export const mapStateToProps = state => ({
 });
 
 export default flagNames =>
+  /* istanbul ignore next */
   compose(connect(mapStateToProps), injectFeatureToggles(flagNames));
