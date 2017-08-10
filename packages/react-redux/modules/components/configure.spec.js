@@ -1,12 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { initialize, listen } from '@flopflip/launchdarkly-wrapper';
 import { Configure } from './configure';
-
-jest.mock('@flopflip/launchdarkly-wrapper', () => ({
-  initialize: jest.fn(),
-  listen: jest.fn(),
-}));
 
 const ChildComponent = () => <div />;
 const createTestProps = custom => ({
@@ -103,7 +97,7 @@ describe('callbacks', () => {
       flagsSubscriptionWrapper = wrapper.find('FlagsSubscription');
     });
 
-    it('should receive `onUpdateFlags`', () => {
+    it('should receive `onUpdateStatus`', () => {
       expect(flagsSubscriptionWrapper).toHaveProp(
         'onUpdateStatus',
         props.handleUpdateStatus
