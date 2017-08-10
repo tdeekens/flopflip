@@ -105,8 +105,9 @@ class App extends Component {
       <Provider store={store}>
         <ConfigureFlopFlip
           clientSideId="596788417a20200c2b70c89e"
-          user={{ key: 'ld@tdeekens.name' }}
+          user={{ key: 'ld-2@tdeekens.name' }}
           defaultFlags={defaultFlags}
+          shouldChangeUserContext={true}
         >
           <div className="App">
             <div className="App-header">
