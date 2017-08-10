@@ -158,7 +158,7 @@ describe('callbacks', () => {
       flagsSubscriptionWrapper = wrapper.find('FlagsSubscription');
     });
 
-    it('should receive `onUpdateFlags`', () => {
+    it('should receive `onUpdateStatus`', () => {
       expect(flagsSubscriptionWrapper).toHaveProp(
         'onUpdateStatus',
         wrapper.instance().handleUpdateStatus

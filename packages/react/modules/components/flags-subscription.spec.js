@@ -12,7 +12,7 @@ import FlagSubscription from './flags-subscription';
 const clientInstance = '__client-instance__';
 
 jest.mock('@flopflip/launchdarkly-wrapper', () => ({
-  initialize: jest.fn(_ => '__client-instance__'),
+  initialize: jest.fn(() => '__client-instance__'),
   listen: jest.fn(),
   changeUserContext: jest.fn(),
   camelCaseFlags: jest.fn(_ => _),
