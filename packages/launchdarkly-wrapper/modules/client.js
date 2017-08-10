@@ -44,7 +44,10 @@ export const camelCaseFlags = rawFlags =>
   }, {});
 
 export const initialize = ({ clientSideId, user }) =>
-  ldClient.initialize(clientSideId, user || createAnonymousUser());
+  ldClient.initialize(
+    clientSideId,
+    user && user.key ? user : createAnonymousUser()
+  );
 
 export const listen = ({ client, onUpdateFlags, onUpdateStatus }) => {
   client.on('ready', () => {
