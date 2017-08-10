@@ -151,7 +151,7 @@ describe('statics', () => {
     });
 
     it('should default `shouldChangeUserContext` to `false`', () => {
-      expect(Configure.defaultProps.shouldChangeUserContext.toBe(false);
+      expect(Configure.defaultProps.shouldChangeUserContext).toBe(false);
     });
   });
 });

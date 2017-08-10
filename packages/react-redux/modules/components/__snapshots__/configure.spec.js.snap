@@ -6,12 +6,8 @@ exports[`rendering should match snapshot 1`] = `
   defaultFlags={Object {}}
   onUpdateFlags={[Function]}
   onUpdateStatus={[Function]}
-<<<<<<< HEAD
-  shouldInitialize={true}
-=======
   shouldChangeUserContext={false}
-  shouldInitialize={[Function]}
->>>>>>> feat(react-redux): to pass down shouldChangeUserContext
+  shouldInitialize={true}
   user={
     Object {
       "key": "123",
