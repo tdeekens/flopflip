@@ -5,3 +5,11 @@ comment:
   require_base: no
   require_head: yes
   branches: null
+coverage:
+  status:
+    project:
+      default:
+        target: 90%
+    patch:
+      default:
+        target: 90%
