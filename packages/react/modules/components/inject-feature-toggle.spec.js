@@ -76,4 +76,22 @@ describe('injecting', () => {
       expect(wrapper.find(TestComponent)).toHaveProp('isFeatureEnabled', false);
     });
   });
+
+  describe('with multivariate flag', () => {
+    beforeEach(() => {
+      availableFeatureToggles = { [flagName]: 'blue' };
+
+      Component = injectFeatureToggle(flagName)(TestComponent);
+      wrapper = shallow(
+        <Component availableFeatureToggles={availableFeatureToggles} />
+      );
+    });
+
+    it("should pass the feature toggle's state as the value", () => {
+      expect(wrapper.find(TestComponent)).toHaveProp(
+        'isFeatureEnabled',
+        'blue'
+      );
+    });
+  });
 });
