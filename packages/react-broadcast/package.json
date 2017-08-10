@@ -48,6 +48,7 @@
   "dependencies": {
     "@flopflip/launchdarkly-wrapper": "^2.0.0",
     "@flopflip/react": "^1.1.5",
+    "lodash.isnil": "^4.0.0",
     "recompose": "^0.24.0"
   },
   "keywords": [

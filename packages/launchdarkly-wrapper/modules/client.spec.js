@@ -142,7 +142,7 @@ describe('create anonymous user', () => {
   });
 
   it('should create uuid of length `22`', () => {
-    // just to ensure regressions in the uuid library
+    // Just to ensure regressions in the uuid library
     expect(createAnonymousUser().key.length).toBe(22);
   });
 });

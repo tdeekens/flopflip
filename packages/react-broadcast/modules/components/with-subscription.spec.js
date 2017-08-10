@@ -27,11 +27,8 @@ describe('rendering', () => {
 
 describe('statics', () => {
   let Component;
-  let wrapper;
-
   beforeEach(() => {
     Component = withSubscription('foo-prop-key')(TestComponent);
-    wrapper = shallow(<Component />);
   });
 
   it('should set the `displayName`', () => {
