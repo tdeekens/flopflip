@@ -59,7 +59,8 @@
       "jest/no-disabled-tests": "warn",
       "jest/no-focused-tests": "error",
       "jest/no-identical-title": "error",
-      "jest/valid-expect": "error"
+      "jest/valid-expect": "error",
+      "max-nested-callbacks": ["error", 20]
     }
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
