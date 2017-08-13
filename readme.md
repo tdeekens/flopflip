@@ -22,7 +22,7 @@
   <br /><br />
 </details>
 
-## Browsers support
+## Browser support
 
 | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png" alt="IE / Edge" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png" alt="Firefox" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png" alt="Chrome" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png" alt="Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/opera.png" alt="Opera" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Opera | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari-ios.png" alt="iOS Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>iOS Safari | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome-android.png" alt="Chrome for Android" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome for Android |
 | --------- | --------- | --------- | --------- | --------- | --------- | --------- |
@@ -87,6 +87,7 @@ Flopflip allows you to manage feature flags through [LaunchDarkly](https://launc
 - `ConfigureFlopFlip` a component to configure LaunchDarkly (alternative to the store enhancer)
 - `reducer` and `STATE_SLICE` a reducer and the state slice for the feature toggle state
 - `withFeatureToggle` a Higher-Order Component (HoC) to conditionally render components depending on feature toggle state
+- `injectFeatureToggle` a HoC to inject a feature toggle onto the `props` of a component
 - `injectFeatureToggles` a HoC to inject requested feature toggles from existing feature toggles onto the `props` of a component
 - `FeatureToggled` a component conditionally rendering its `children` based on the status of a passed feature flag
 
@@ -181,8 +182,8 @@ const store = createStore(
 
 - `ConfigureFlopFlip` a component to configure LaunchDarkly (using context and broadcasting over redux)
 - `withFeatureToggle` a Higher-Order Component (HoC) to conditionally render components depending on feature toggle state
+- `injectFeatureToggle` a HoC to inject a feature toggle onto the `props` of a component
 - `injectFeatureToggles` a HoC to inject requested feature toggles from existing feature toggles onto the `props` of a component
-- `injectFeatureToggle` a HoC to inject a feature toggle from existing feature toggles onto the `props` of a component
 - `FeatureToggled` a component conditionally rendering its `children` based on the status of a passed feature flag
 
 The configuration is the same as mentioned above
