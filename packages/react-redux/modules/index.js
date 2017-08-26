@@ -1,3 +1,5 @@
+const version = VERSION;
+
 export {
   createFlopFlipEnhancer,
   STATE_SLICE as FLOPFLIP_STATE_SLICE,
@@ -16,3 +18,5 @@ export {
   withFeatureToggle,
   ConfigureFlopFlip,
 } from './components';
+
+export { version };
