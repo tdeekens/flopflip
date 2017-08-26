@@ -1,9 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`with \`flagName\` when feature is disabled with untoggled component should match snapshot 1`] = `
-<div>
-  UntoggledComponent
-</div>
+<renderComponent(UntoggledComponent)
+  flagName="fooFlagName"
+  fooFlagName={false}
+/>
 `;
 
 exports[`with \`flagName\` when feature is disabled without untoggled component should match snapshot 1`] = `
@@ -14,21 +15,23 @@ exports[`with \`flagName\` when feature is disabled without untoggled component 
 `;
 
 exports[`with \`flagName\` when feature is enabled with untoggled component should match snapshot 1`] = `
-<div>
-  FeatureComponent
-</div>
+<FeatureComponent
+  flagName="fooFlagName"
+  fooFlagName={true}
+/>
 `;
 
 exports[`with \`flagName\` when feature is enabled without untoggled component should match snapshot 1`] = `
-<div>
-  FeatureComponent
-</div>
+<FeatureComponent
+  flagName="fooFlagName"
+  fooFlagName={true}
+/>
 `;
 
 exports[`without \`flagName\` when feature is disabled with untoggled component should match snapshot 1`] = `
-<div>
-  UntoggledComponent
-</div>
+<renderComponent(UntoggledComponent)
+  isFeatureEnabled={false}
+/>
 `;
 
 exports[`without \`flagName\` when feature is disabled without untoggled component should match snapshot 1`] = `
@@ -38,13 +41,13 @@ exports[`without \`flagName\` when feature is disabled without untoggled compone
 `;
 
 exports[`without \`flagName\` when feature is enabled with untoggled component should match snapshot 1`] = `
-<div>
-  FeatureComponent
-</div>
+<FeatureComponent
+  isFeatureEnabled={true}
+/>
 `;
 
 exports[`without \`flagName\` when feature is enabled without untoggled component should match snapshot 1`] = `
-<div>
-  FeatureComponent
-</div>
+<FeatureComponent
+  isFeatureEnabled={true}
+/>
 `;
