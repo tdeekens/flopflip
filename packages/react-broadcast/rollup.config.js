@@ -3,15 +3,14 @@ const commonjs = require('rollup-plugin-commonjs');
 const babel = require('rollup-plugin-babel');
 const replace = require('rollup-plugin-replace');
 const uglify = require('rollup-plugin-uglify');
-const bundleSize = require('rollup-plugin-bundle-size');
 
 const env = process.env.NODE_ENV;
 const version = process.env.npm_package_version;
 
 const config = {
-  entry: 'modules/index.js',
-  moduleName: '@flopflip-react-broadcast',
-  sourceMap: true,
+  input: 'modules/index.js',
+  name: '@flopflip-react-broadcast',
+  sourcemap: true,
   external: ['react', 'prop-types'],
   globals: {
     react: 'React',
@@ -32,7 +31,6 @@ const config = {
     resolve({
       module: true,
     }),
-    bundleSize(),
   ],
 };
 
