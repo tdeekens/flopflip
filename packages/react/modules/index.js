@@ -1,3 +1,5 @@
+const version = VERSION;
+
 export {
   FeatureToggled,
   injectFeatureToggle,
@@ -5,3 +7,5 @@ export {
   branchUntoggled,
   FlagsSubscription,
 } from './components';
+
+export { version };
