@@ -7,6 +7,9 @@ const UntoggledComponent = () =>
     {'UntoggledComponent'}
   </div>;
 UntoggledComponent.displayName = 'UntoggledComponent';
+// This is a shortcut for test expectations on the display name as recompose
+// wraps it for us.
+UntoggledComponent.wrappedDisplayName = 'renderComponent(UntoggledComponent)';
 const FeatureComponent = () =>
   <div>
     {'FeatureComponent'}
@@ -33,7 +36,7 @@ describe('with `flagName`', () => {
       });
 
       it('should render the `FeatureComponent`', () => {
-        expect(wrapper).toHaveText('FeatureComponent');
+        expect(wrapper).toRender(FeatureComponent);
       });
     });
 
@@ -53,11 +56,11 @@ describe('with `flagName`', () => {
       });
 
       it('should not render the `UntoggledComponent`', () => {
-        expect(wrapper).not.toRender('UntoggledComponent');
+        expect(wrapper).not.toRender(UntoggledComponent.wrappedDisplayName);
       });
 
       it('should render the `FeatureComponent`', () => {
-        expect(wrapper).toHaveText('FeatureComponent');
+        expect(wrapper).toRender(FeatureComponent);
       });
     });
   });
@@ -80,7 +83,7 @@ describe('with `flagName`', () => {
       });
 
       it('should render the `UntoggledComponent`', () => {
-        expect(wrapper).toHaveText('UntoggledComponent');
+        expect(wrapper).toRender(UntoggledComponent.wrappedDisplayName);
       });
     });
 
@@ -122,7 +125,7 @@ describe('without `flagName`', () => {
       });
 
       it('should render the `FeatureComponent`', () => {
-        expect(wrapper).toHaveText('FeatureComponent');
+        expect(wrapper).toRender(FeatureComponent);
       });
     });
 
@@ -140,11 +143,11 @@ describe('without `flagName`', () => {
       });
 
       it('should not render the `UntoggledComponent`', () => {
-        expect(wrapper).not.toRender('UntoggledComponent');
+        expect(wrapper).not.toRender(UntoggledComponent.wrappedDisplayName);
       });
 
       it('should render the `FeatureComponent`', () => {
-        expect(wrapper).toHaveText('FeatureComponent');
+        expect(wrapper).toRender(FeatureComponent);
       });
     });
   });
@@ -165,7 +168,7 @@ describe('without `flagName`', () => {
       });
 
       it('should render the `UntoggledComponent`', () => {
-        expect(wrapper).toHaveText('UntoggledComponent');
+        expect(wrapper).toRender(UntoggledComponent.wrappedDisplayName);
       });
     });
 
