@@ -3,6 +3,7 @@ const commonjs = require('rollup-plugin-commonjs');
 const babel = require('rollup-plugin-babel');
 const replace = require('rollup-plugin-replace');
 const uglify = require('rollup-plugin-uglify');
+const builtins = require('rollup-plugin-node-builtins');
 
 const env = process.env.NODE_ENV;
 const version = process.env.npm_package_version;
@@ -31,6 +32,7 @@ const config = {
     resolve({
       module: true,
     }),
+    builtins(),
   ],
 };
 
