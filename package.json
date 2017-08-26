@@ -46,14 +46,8 @@
       "plugin:jest/recommended",
       "prettier/react"
     ],
-    "envs": [
-      "es6",
-      "jest"
-    ],
-    "plugins": [
-      "prettier",
-      "jest"
-    ],
+    "envs": ["es6", "jest"],
+    "plugins": ["prettier", "jest"],
     "rules": {
       "prettier/prettier": [
         "error",
@@ -66,10 +60,7 @@
       "jest/no-focused-tests": "error",
       "jest/no-identical-title": "error",
       "jest/valid-expect": "error",
-      "max-nested-callbacks": [
-        "error",
-        20
-      ]
+      "max-nested-callbacks": ["error", 20]
     }
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
@@ -104,7 +95,6 @@
     "rimraf": "^2.5.4",
     "rollup": "^0.48.2",
     "rollup-plugin-babel": "^3.0.2",
-    "rollup-plugin-bundle-size": "^1.0.1",
     "rollup-plugin-commonjs": "^8.2.0",
     "rollup-plugin-includepaths": "^0.2.2",
     "rollup-plugin-node-resolve": "^3.0.0",
@@ -120,9 +110,7 @@
       }
     },
     "setupTestFrameworkScriptFile": "./config/jest.js",
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "testRegex": "\\.spec\\.js$",
     "testEnvironment": "jsdom",
     "testPathIgnorePatterns": [
@@ -145,7 +133,5 @@
     "HoC",
     "store-enhancer"
   ],
-  "workspaces": [
-    "packages/*"
-  ]
+  "workspaces": ["packages/*"]
 }
