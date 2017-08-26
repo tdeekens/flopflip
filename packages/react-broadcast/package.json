@@ -15,10 +15,7 @@
     "build:es": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/@flopflip-react-broadcast.es.js",
     "build:cjs": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f cjs -o dist/@flopflip-react-broadcast.cjs.js"
   },
-  "files": [
-    "readme.md",
-    "dist/**"
-  ],
+  "files": ["readme.md", "dist/**"],
   "publishConfig": {
     "access": "public"
   },
@@ -36,19 +33,19 @@
     "enzyme": "^2.9.1",
     "enzyme-to-json": "^1.5.1",
     "prop-types": "15.5.10",
-    "react": "^15.6.0",
-    "react-dom": "^15.6.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "react-test-renderer": "^15.6.1"
   },
   "peerDependencies": {
-    "prop-types": "15.5.10",
+    "prop-types": "^15.5.10",
     "react": "^15.6.0",
     "react-dom": "^15.6.0"
   },
   "dependencies": {
     "@flopflip/launchdarkly-wrapper": "^2.1.0",
     "@flopflip/react": "^2.0.0",
-    "recompose": "^0.24.0"
+    "recompose": "^0.25.0"
   },
   "keywords": [
     "react",

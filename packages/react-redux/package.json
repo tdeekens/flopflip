@@ -15,10 +15,7 @@
     "build:es": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/@flopflip-react-redux.es.js",
     "build:cjs": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f cjs -o dist/@flopflip-react-redux.cjs.js"
   },
-  "files": [
-    "readme.md",
-    "dist/**"
-  ],
+  "files": ["readme.md", "dist/**"],
   "publishConfig": {
     "access": "public"
   },
@@ -36,16 +33,16 @@
     "enzyme": "^2.9.1",
     "enzyme-to-json": "^1.5.1",
     "prop-types": "15.5.10",
-    "react": "^15.6.0",
-    "react-dom": "^15.6.0",
-    "react-redux": "^5.0.5",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
     "react-test-renderer": "^15.6.1",
     "redux": "^3.7.2"
   },
   "dependencies": {
     "@flopflip/launchdarkly-wrapper": "^2.1.0",
     "@flopflip/react": "^2.0.0",
-    "recompose": "^0.24.0"
+    "recompose": "^0.25.0"
   },
   "peerDependencies": {
     "prop-types": "15.5.10",
@@ -54,10 +51,5 @@
     "react-redux": "^5.0.5",
     "redux": "^3.7.2"
   },
-  "keywords": [
-    "feature-flags",
-    "feature-toggles",
-    "LaunchDarkly",
-    "client"
-  ]
+  "keywords": ["feature-flags", "feature-toggles", "LaunchDarkly", "client"]
 }
