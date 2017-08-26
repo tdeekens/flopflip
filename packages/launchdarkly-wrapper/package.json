@@ -13,10 +13,7 @@
     "build:es": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/@flopflip-launchdarkly-wrapper.es.js",
     "build:cjs": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f cjs -o dist/@flopflip-launchdarkly-wrapper.cjs.js"
   },
-  "files": [
-    "readme.md",
-    "dist/**"
-  ],
+  "files": ["readme.md", "dist/**"],
   "publishConfig": {
     "access": "public"
   },
@@ -35,14 +32,9 @@
     "enzyme-to-json": "^1.5.1"
   },
   "dependencies": {
-    "ldclient-js": "^1.1.8",
+    "ldclient-js": "^1.1.12",
     "lodash.camelcase": "^4.3.0",
-    "nanoid": "^0.1.0"
+    "nanoid": "^0.2.0"
   },
-  "keywords": [
-    "feature-flags",
-    "feature-toggles",
-    "LaunchDarkly",
-    "client"
-  ]
+  "keywords": ["feature-flags", "feature-toggles", "LaunchDarkly", "client"]
 }
