@@ -241,7 +241,7 @@ import flagsNames from './feature-flags';
 
 const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
 
-export default withFeatureToggle({flagName: flagsNames.THE_FEATURE_TOGGLE})(
+export default withFeatureToggle({ flagName: flagsNames.THE_FEATURE_TOGGLE })(
   ComponentToBeToggled
 );
 ```
@@ -256,7 +256,7 @@ const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
 const ComponentToBeRenderedInstead = () =>
   <h3>At least there is a fallback!</h3>;
 
-export default withFeatureToggle({flagName: flagsNames.THE_FEATURE_TOGGLE})(
+export default withFeatureToggle({ flagName: flagsNames.THE_FEATURE_TOGGLE })(
   ComponentToBeToggled,
   ComponentToBeRenderedInstead
 );
@@ -272,10 +272,10 @@ const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
 const ComponentToBeRenderedInstead = () =>
   <h3>At least there is a fallback!</h3>;
 
-export default withFeatureToggle({flagName: flagsNames.THE_FEATURE_TOGGLE, flagVariate: 'variate1'})(
-  ComponentToBeToggled,
-  ComponentToBeRenderedInstead
-);
+export default withFeatureToggle({
+  flagName: flagsNames.THE_FEATURE_TOGGLE,
+  flagVariate: 'variate1'
+})(ComponentToBeToggled, ComponentToBeRenderedInstead);
 ```
 
 #### `injectFeatureToggles`
