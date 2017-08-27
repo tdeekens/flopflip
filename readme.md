@@ -12,10 +12,13 @@
   </a>
   <a href="https://codecov.io/gh/tdeekens/flopflip">
     <img alt="Codecov Coverage Status" src="https://img.shields.io/codecov/c/github/tdeekens/flopflip.svg?style=flat-square">
+  </a><br /><br />
+  <a href="https://techblog.commercetools.com/embracing-real-time-feature-toggling-in-your-react-application-a5e6052716a9">
+    Embracing real-time feature toggling in your React application
   </a>
 </p>
 
-<details>
+<details><br /><br />
   <summary>Want to see a demo?</summary>
 
   <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/demo.gif" />
