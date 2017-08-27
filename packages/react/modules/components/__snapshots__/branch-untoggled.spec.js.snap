@@ -1,5 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`with \`flagName\` and \`flagVariate\` when feature is disabled with untoggled component should match snapshot 1`] = `
+<renderComponent(UntoggledComponent)
+  flagName="fooFlagName"
+  fooFlagName="flagVariate2"
+/>
+`;
+
+exports[`with \`flagName\` and \`flagVariate\` when feature is disabled without untoggled component should match snapshot 1`] = `
+<Nothing
+  flagName="fooFlagName"
+  fooFlagName="flagVariate2"
+/>
+`;
+
+exports[`with \`flagName\` and \`flagVariate\` when feature is enabled with untoggled component should match snapshot 1`] = `
+<FeatureComponent
+  flagName="fooFlagName"
+  fooFlagName="fooflagVariate"
+/>
+`;
+
+exports[`with \`flagName\` and \`flagVariate\` when feature is enabled without untoggled component should match snapshot 1`] = `
+<FeatureComponent
+  flagName="fooFlagName"
+  fooFlagName="fooflagVariate"
+/>
+`;
+
 exports[`with \`flagName\` when feature is disabled with untoggled component should match snapshot 1`] = `
 <renderComponent(UntoggledComponent)
   flagName="fooFlagName"
