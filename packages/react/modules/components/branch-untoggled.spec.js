@@ -101,6 +101,102 @@ describe('with `flagName`', () => {
   });
 });
 
+describe('with `flagName` and `flagVariate`', () => {
+  const flagName = 'fooFlagName';
+  const flagVariate = 'fooflagVariate';
+
+  describe('when feature is enabled', () => {
+    const featureFlag = { [flagName]: flagVariate };
+
+    describe('without untoggled component', () => {
+      let Component;
+      let wrapper;
+
+      beforeEach(() => {
+        Component = branchUntoggled(undefined, flagName, flagVariate)(
+          FeatureComponent
+        );
+        wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
+      });
+
+      it('should match snapshot', () => {
+        expect(wrapper).toMatchSnapshot();
+      });
+
+      it('should render the `FeatureComponent`', () => {
+        expect(wrapper).toRender(FeatureComponent);
+      });
+    });
+
+    describe('with untoggled component', () => {
+      let Component;
+      let wrapper;
+
+      beforeEach(() => {
+        Component = branchUntoggled(UntoggledComponent, flagName, flagVariate)(
+          FeatureComponent
+        );
+        wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
+      });
+
+      it('should match snapshot', () => {
+        expect(wrapper).toMatchSnapshot();
+      });
+
+      it('should not render the `UntoggledComponent`', () => {
+        expect(wrapper).not.toRender(UntoggledComponent.wrappedDisplayName);
+      });
+
+      it('should render the `FeatureComponent`', () => {
+        expect(wrapper).toRender(FeatureComponent);
+      });
+    });
+  });
+  describe('when feature is disabled', () => {
+    const featureFlag = { [flagName]: 'flagVariate2' };
+
+    describe('with untoggled component', () => {
+      let Component;
+      let wrapper;
+
+      beforeEach(() => {
+        Component = branchUntoggled(UntoggledComponent, flagName, flagVariate)(
+          FeatureComponent
+        );
+        wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
+      });
+
+      it('should match snapshot', () => {
+        expect(wrapper).toMatchSnapshot();
+      });
+
+      it('should render the `UntoggledComponent`', () => {
+        expect(wrapper).toRender(UntoggledComponent.wrappedDisplayName);
+      });
+    });
+
+    describe('without untoggled component', () => {
+      let Component;
+      let wrapper;
+
+      beforeEach(() => {
+        Component = branchUntoggled(undefined, flagName, flagVariate)(
+          FeatureComponent
+        );
+        wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
+      });
+
+      it('should match snapshot', () => {
+        expect(wrapper).toMatchSnapshot();
+      });
+
+      it('should render `Nothing`', () => {
+        expect(wrapper).toRender('Nothing');
+      });
+    });
+  });
+});
+
 describe('without `flagName`', () => {
   describe('when feature is enabled', () => {
     const featureFlag = { isFeatureEnabled: true };

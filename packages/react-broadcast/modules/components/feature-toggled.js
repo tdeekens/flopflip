@@ -1,10 +1,10 @@
 import { compose, withProps } from 'recompose';
-import { FeatureToggled } from '@flopflip/react';
+import { FeatureToggled, isUntoggled } from '@flopflip/react';
 import withSubscription from './with-subscription';
 
 export default compose(
   withSubscription('availableFeatureToggles'),
   withProps(props => ({
-    isFeatureEnabled: Boolean(props.availableFeatureToggles[props.flag]),
+    isFeatureEnabled: !isUntoggled(props.flagName, props.flagVariate)(props),
   }))
 )(FeatureToggled);

@@ -219,7 +219,7 @@ import flagsNames from './feature-flags';
 
 export default (
   <FeatureToggled
-    flag={flagsNames.THE_FEATURE_TOGGLE}
+    flagName={flagsNames.THE_FEATURE_TOGGLE}
     untoggledComponent={<h3>At least there is a fallback!</h3>}
   >
     <h3>I might be gone or there!</h3>
@@ -241,7 +241,7 @@ import flagsNames from './feature-flags';
 
 const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
 
-export default withFeatureToggle(flagsNames.THE_FEATURE_TOGGLE)(
+export default withFeatureToggle({flagName: flagsNames.THE_FEATURE_TOGGLE})(
   ComponentToBeToggled
 );
 ```
@@ -256,7 +256,23 @@ const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
 const ComponentToBeRenderedInstead = () =>
   <h3>At least there is a fallback!</h3>;
 
-export default withFeatureToggle(flagsNames.THE_FEATURE_TOGGLE)(
+export default withFeatureToggle({flagName: flagsNames.THE_FEATURE_TOGGLE})(
+  ComponentToBeToggled,
+  ComponentToBeRenderedInstead
+);
+```
+
+or when the flag is multi variate
+
+```js
+import { withFeatureToggle } from '@flopflip/react-redux';
+import flagsNames from './feature-flags';
+
+const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
+const ComponentToBeRenderedInstead = () =>
+  <h3>At least there is a fallback!</h3>;
+
+export default withFeatureToggle({flagName: flagsNames.THE_FEATURE_TOGGLE, flagVariate: 'variate1'})(
   ComponentToBeToggled,
   ComponentToBeRenderedInstead
 );
