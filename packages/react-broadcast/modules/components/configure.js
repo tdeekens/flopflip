@@ -57,9 +57,9 @@ export default class Configure extends React.Component {
         onUpdateFlags={this.handleUpdateFlags}
       >
         <Broadcast channel={FLAGS_CHANNEL} value={this.state.flags}>
-          {this.props.children
-            ? React.Children.only(this.props.children)
-            : null}
+          {this.props.children ? (
+            React.Children.only(this.props.children)
+          ) : null}
         </Broadcast>
       </FlagsSubscription>
     );

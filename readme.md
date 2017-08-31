@@ -293,15 +293,12 @@ import { injectFeatureToggle } from '@flopflip/react-redux';
 import flagsNames from './feature-flags';
 
 const Component = props => {
-  if (props.isFeatureEnabled)
-    return <h3>Something to render!</h3>;
+  if (props.isFeatureEnabled) return <h3>Something to render!</h3>;
 
   return <h3>Something different to render!</h3>;
 };
 
-export default injectFeatureToggle(flagsNames.TOGGLE_B)(
-  Component
-);
+export default injectFeatureToggle(flagsNames.TOGGLE_B)(Component);
 ```
 
 The feature flags will be available as `props` within the component allowing some custom decisions based on their value.

@@ -3,10 +3,7 @@ import { shallow } from 'enzyme';
 import injectFeatureToggles from './inject-feature-toggles';
 
 describe('injecting', () => {
-  const TestComponent = () =>
-    <div>
-      {'Test'}
-    </div>;
+  const TestComponent = () => <div>{'Test'}</div>;
   TestComponent.displayName = 'TestComponent';
   TestComponent.propTypes = {};
 

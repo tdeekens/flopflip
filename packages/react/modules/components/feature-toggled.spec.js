@@ -2,15 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import FeatureToggled from './feature-toggled';
 
-const UntoggledComponent = (
-  <div>
-    {'UntoggledComponent'}
-  </div>
-);
-const FeatureComponent = () =>
-  <div>
-    {'FeatureComponent'}
-  </div>;
+const UntoggledComponent = <div>{'UntoggledComponent'}</div>;
+const FeatureComponent = () => <div>{'FeatureComponent'}</div>;
 
 describe('with feature disabled', () => {
   describe('with untoggled component', () => {

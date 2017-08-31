@@ -60,19 +60,18 @@ var Subscriber = (function(_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return (_ret = (
-      (_temp = (
-        (_this = _possibleConstructorReturn(
-          this,
-          _React$Component.call.apply(_React$Component, [this].concat(args))
-        )),
-        _this
+    return (
+      (_ret = ((_temp = ((_this = _possibleConstructorReturn(
+        this,
+        _React$Component.call.apply(_React$Component, [this].concat(args))
       )),
+      _this)),
       (_this.state = {
         value: null,
       }),
-      _temp
-    )), _possibleConstructorReturn(_this, _ret);
+      _temp)),
+      _possibleConstructorReturn(_this, _ret)
+    );
   }
 
   Subscriber.prototype.getBroadcast = function getBroadcast() {
