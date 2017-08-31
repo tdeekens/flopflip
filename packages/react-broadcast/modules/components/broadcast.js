@@ -121,17 +121,16 @@ var Broadcast = (function(_React$Component) {
       args[_key] = arguments[_key];
     }
 
-    return (_ret = (
-      (_temp = (
-        (_this = _possibleConstructorReturn(
-          this,
-          _React$Component.call.apply(_React$Component, [this].concat(args))
-        )),
-        _this
+    return (
+      (_ret = ((_temp = ((_this = _possibleConstructorReturn(
+        this,
+        _React$Component.call.apply(_React$Component, [this].concat(args))
       )),
+      _this)),
       (_this.broadcast = createBroadcast(_this.props.value)),
-      _temp
-    )), _possibleConstructorReturn(_this, _ret);
+      _temp)),
+      _possibleConstructorReturn(_this, _ret)
+    );
   }
 
   Broadcast.prototype.getChildContext = function getChildContext() {
@@ -141,11 +140,9 @@ var Broadcast = (function(_React$Component) {
       broadcasts: _extends(
         {},
         this.context.broadcasts,
-        (
-          (_extends2 = {}),
-          (_extends2[this.props.channel] = this.broadcast),
-          _extends2
-        )
+        ((_extends2 = {}),
+        (_extends2[this.props.channel] = this.broadcast),
+        _extends2)
       ),
     };
   };

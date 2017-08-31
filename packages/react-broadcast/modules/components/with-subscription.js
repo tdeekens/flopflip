@@ -9,8 +9,9 @@ const withSubscription = propKey => WrappedComponent => {
     render() {
       return (
         <Subscriber channel={FLAGS_CHANNEL}>
-          {data =>
-            <WrappedComponent {...{ [propKey]: data }} {...this.props} />}
+          {data => (
+            <WrappedComponent {...{ [propKey]: data }} {...this.props} />
+          )}
         </Subscriber>
       );
     }
