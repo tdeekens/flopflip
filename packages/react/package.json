@@ -7,16 +7,15 @@
   "browser": "dist/@flopflip-react.umd.js",
   "scripts": {
     "preversion": "npm run build",
-    "prebuild:umd": "rimraf dist/**",
+    "prebuild": "rimraf dist/**",
     "build": "cross-env run-p build:es build:cjs",
     "build:watch": "cross-env npm run build:es -- -w",
-    "build:es": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/@flopflip-react.es.js",
-    "build:cjs": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f cjs -o dist/@flopflip-react.cjs.js"
+    "build:es":
+      "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/@flopflip-react.es.js",
+    "build:cjs":
+      "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f cjs -o dist/@flopflip-react.cjs.js"
   },
-  "files": [
-    "readme.md",
-    "dist/**"
-  ],
+  "files": ["readme.md", "dist/**"],
   "publishConfig": {
     "access": "public"
   },
