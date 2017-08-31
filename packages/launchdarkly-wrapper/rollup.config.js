@@ -17,8 +17,7 @@ const config = {
     babel({
       babelrc: false,
       exclude: 'node_modules/**',
-      presets: [['es2015', { modules: false }], 'stage-0', 'react'],
-      plugins: ['external-helpers'],
+      presets: ['es2015-rollup', 'stage-0', 'react'],
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),
