@@ -2,7 +2,7 @@ import { STATE_SLICE } from './../store';
 import { mapStateToProps } from './feature-toggled';
 
 describe('mapStateToProps', () => {
-  describe('with existing `flagName` ', () => {
+  describe('with existing `flag` ', () => {
     let state;
 
     beforeEach(() => {
@@ -12,13 +12,13 @@ describe('mapStateToProps', () => {
     });
 
     it('should map `isFeatureEnabled` as `true` onto `props`', () => {
-      expect(
-        mapStateToProps(state, { flagName: 'flag1' }).isFeatureEnabled
-      ).toBe(true);
+      expect(mapStateToProps(state, { flag: 'flag1' }).isFeatureEnabled).toBe(
+        true
+      );
     });
   });
 
-  describe('without existing `flagName` ', () => {
+  describe('without existing `flag` ', () => {
     let state;
 
     beforeEach(() => {
@@ -28,13 +28,13 @@ describe('mapStateToProps', () => {
     });
 
     it('should map `isFeatureEnabled` as `false` onto `props`', () => {
-      expect(
-        mapStateToProps(state, { flagName: 'flag1' }).isFeatureEnabled
-      ).toBe(false);
+      expect(mapStateToProps(state, { flag: 'flag1' }).isFeatureEnabled).toBe(
+        false
+      );
     });
   });
 
-  describe('with matching `flagVariate`', () => {
+  describe('with matching `variate`', () => {
     let state;
 
     beforeEach(() => {
@@ -46,14 +46,14 @@ describe('mapStateToProps', () => {
     it('should map `isFeatureEnabled` as `true` onto `props`', () => {
       expect(
         mapStateToProps(state, {
-          flagName: 'flag1',
-          flagVariate: 'flagVariate1',
+          flag: 'flag1',
+          variate: 'flagVariate1',
         }).isFeatureEnabled
       ).toBe(true);
     });
   });
 
-  describe('with non-matching `flagVariate`', () => {
+  describe('with non-matching `variate`', () => {
     let state;
 
     beforeEach(() => {
@@ -65,8 +65,8 @@ describe('mapStateToProps', () => {
     it('should map `isFeatureEnabled` as `true` onto `props`', () => {
       expect(
         mapStateToProps(state, {
-          flagName: 'flag1',
-          flagVariate: 'flagVariate2',
+          flag: 'flag1',
+          variate: 'flagVariate2',
         }).isFeatureEnabled
       ).toBe(false);
     });
