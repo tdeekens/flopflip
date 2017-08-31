@@ -22,8 +22,8 @@ const config = {
     babel({
       babelrc: false,
       exclude: 'node_modules/**',
-      presets: [['es2015', { modules: false }], 'stage-0', 'react'],
-      plugins: ['external-helpers', 'transform-react-remove-prop-types'],
+      presets: ['es2015-rollup', 'stage-0', 'react'],
+      plugins: ['transform-react-remove-prop-types'],
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),
