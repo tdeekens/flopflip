@@ -22,15 +22,16 @@ import * as flags from './flags';
 
 const UntoggledFeature = <h6>Disabled Feature</h6>;
 
-const IncrementAsyncButton = props =>
+const IncrementAsyncButton = props => (
   <button onClick={props.incrementAsync} disabled={props.isIncrementing}>
     Increment Async
-  </button>;
+  </button>
+);
 const FeatureToggledIncrementAsyncButton = compose(
   withFeatureToggle(flags.INCREMENT_ASYNC_BUTTON, () => UntoggledFeature)
 )(IncrementAsyncButton);
 
-const IncrementSyncButton = props =>
+const IncrementSyncButton = props => (
   <button
     className={classNames({
       'incrementSyncButton--disabled': props.syncButtonStyle === false,
@@ -42,18 +43,17 @@ const IncrementSyncButton = props =>
     disabled={props.isIncrementing}
   >
     Increment
-  </button>;
+  </button>
+);
 const FeatureToggledIncrementSyncButton = injectFeatureToggle(
   flags.INCREMENT_SYNC_BUTTON,
   'syncButtonStyle'
 )(IncrementSyncButton);
 
-const Counter = props =>
+const Counter = props => (
   <div>
     <h1>Count around</h1>
-    <p>
-      Count: {props.count}
-    </p>
+    <p>Count: {props.count}</p>
 
     <div>
       <FeatureToggledIncrementSyncButton
@@ -81,7 +81,8 @@ const Counter = props =>
         </button>
       </FeatureToggled>
     </div>
-  </div>;
+  </div>
+);
 
 const mapStateToProps = state => ({
   count: state.counter.count,
