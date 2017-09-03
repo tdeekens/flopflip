@@ -1,6 +1,6 @@
 import { compose } from 'recompose';
 import isObject from 'lodash.isobject';
-import { branchUntoggled } from '@flopflip/react';
+import { branchUntoggled, defaultFlagName } from '@flopflip/react';
 import injectFeatureToggle from './inject-feature-toggle';
 
 const safelyExtractFlagAndVariate = options => {
@@ -9,7 +9,7 @@ const safelyExtractFlagAndVariate = options => {
     console.warn(
       '@flopflip/react-redux/with-feature-toggle: Please provide an object `{ flag: String, variate: ?String }`.'
     );
-    return { name: options };
+    return { flag: options };
   }
 
   return options;
@@ -21,6 +21,11 @@ export default (options, UntoggledComponent) => {
   );
   return compose(
     injectFeatureToggle(flag),
-    branchUntoggled(UntoggledComponent, flag, variate, defaultVariateValue)
+    branchUntoggled(
+      UntoggledComponent,
+      defaultFlagName,
+      variate,
+      defaultVariateValue
+    )
   );
 };

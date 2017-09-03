@@ -1,9 +1,11 @@
 import { branch, renderNothing, renderComponent } from 'recompose';
-import isFeatureEnabled from '../helpers/is-feature-enabled';
+import isFeatureEnabled, {
+  defaultFlagName,
+} from '../helpers/is-feature-enabled';
 
 const branchUntoggled = (
   UntoggledComponent,
-  flagName = 'isFeatureEnabled',
+  flagName = defaultFlagName,
   flagVariate = true,
   defaultVariateValue
 ) =>
