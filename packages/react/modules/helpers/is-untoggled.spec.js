@@ -1,19 +1,19 @@
 import isUntoggled from './is-untoggled';
 
 describe('with existing flag', () => {
-  describe('with flag variant', () => {
+  describe('with flag variate', () => {
     it('should indicate feature being toggled', () => {
-      const props = { fooFlag: 'foo-variant' };
-      expect(isUntoggled('fooFlag', 'foo-variant')(props)).toBe(false);
+      const props = { fooFlag: 'foo-variate' };
+      expect(isUntoggled('fooFlag', 'foo-variate')(props)).toBe(false);
     });
 
     it('should indicate feature being untoggled', () => {
-      const props = { fooFlag: 'foo-variant' };
-      expect(isUntoggled('fooFlag', 'foo-variant-1')(props)).toBe(true);
+      const props = { fooFlag: 'foo-variate' };
+      expect(isUntoggled('fooFlag', 'foo-variate-1')(props)).toBe(true);
     });
   });
 
-  describe('without flag variant', () => {
+  describe('without flag variate', () => {
     it('should indicate feature being toggled', () => {
       const props = { fooFlag: true };
       expect(isUntoggled('fooFlag')(props)).toBe(false);
