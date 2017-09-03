@@ -339,7 +339,6 @@ describe('without `flagName`', () => {
       });
     });
 
-
     describe('when flag is defined', () => {
       const featureFlag = { [flagName]: flagVariate };
 

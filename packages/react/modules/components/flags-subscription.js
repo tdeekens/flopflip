@@ -24,6 +24,7 @@ export default class FlagsSubscription extends React.Component {
   state = { isInitialized: false };
 
   static defaultProps = {
+    children: null,
     user: {},
     defaultFlags: {},
   };
