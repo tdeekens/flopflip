@@ -227,6 +227,39 @@ export default (
 );
 ```
 
+or with for multivariate feature toggles
+
+```js
+export default (
+  <FeatureToggled
+    flag={flagsNames.THE_FEATURE_TOGGLE}
+    variate={flagsNames.VARIATES.A}
+    untoggledComponent={<h3>At least there is a fallback!</h3>}
+  >
+    <h3>I might be gone or there!</h3>
+  </FeatureToggled>
+);
+```
+
+and with a default variate value (in case the feature does not exist)
+
+or with for multivariate feature toggles
+
+```js
+export default (
+  <FeatureToggled
+    flag={flagsNames.THE_FEATURE_TOGGLE}
+    variate={flagsNames.VARIATES.A}
+    defaultVariateValue={flagsNames.VARIATES.A}
+    untoggledComponent={<h3>At least there is a fallback!</h3>}
+  >
+    <h3>I might be gone or there!</h3>
+  </FeatureToggled>
+);
+```
+
+this last example will always turn the feature on if the variate or toggle does not exist. For this also look at `defaultFlags` for `ConfigureFlopFlip`.
+
 We actually recommend maintaining a list of constants with feature flag names somewhere within your application. This avoids typos and unexpected behavior. After all, the correct workings of your feature flags is crutial to your application.
 
 #### `withFeatureToggle`
@@ -275,6 +308,23 @@ const ComponentToBeRenderedInstead = () =>
 export default withFeatureToggle({
   flag: flagsNames.THE_FEATURE_TOGGLE,
   variate: 'variate1'
+})(ComponentToBeToggled, ComponentToBeRenderedInstead);
+```
+
+and with a default variate value (whenever the flag does not exist)
+
+```js
+import { withFeatureToggle } from '@flopflip/react-redux';
+import flagsNames from './feature-flags';
+
+const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
+const ComponentToBeRenderedInstead = () =>
+  <h3>At least there is a fallback!</h3>;
+
+export default withFeatureToggle({
+  flag: flagsNames.THE_FEATURE_TOGGLE,
+  variate: 'variate1'
+  defaultVariateValue: 'variate1'
 })(ComponentToBeToggled, ComponentToBeRenderedInstead);
 ```
 
