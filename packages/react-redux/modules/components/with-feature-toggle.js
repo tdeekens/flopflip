@@ -7,7 +7,7 @@ const safelyExtractFlagAndVariate = options => {
   if (!isObject(options)) {
     // "Legacy" API with just the name as parameter
     console.warn(
-      '@flopflip/react-redux/with-feature-toggle: Please provide an object `{ flag: String, variant: ?String }`.'
+      '@flopflip/react-redux/with-feature-toggle: Please provide an object `{ flag: String, variate: ?String }`.'
     );
     return { name: options };
   }
