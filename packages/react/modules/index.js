@@ -8,6 +8,6 @@ export {
   FlagsSubscription,
 } from './components';
 
-export { default as isUntoggled } from './helpers/is-untoggled';
+export { default as isFeatureEnabled } from './helpers/is-feature-enabled';
 
 export { version };

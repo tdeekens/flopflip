@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import { FeatureToggled, isUntoggled } from '@flopflip/react';
+import { FeatureToggled, isFeatureEnabled } from '@flopflip/react';
 import { STATE_SLICE } from './../store';
 
 export const mapStateToProps = (state, ownProps) => ({
-  isFeatureEnabled: !isUntoggled(ownProps.flag, ownProps.variate)(
+  isFeatureEnabled: isFeatureEnabled(ownProps.flag, ownProps.variate)(
     state[STATE_SLICE].flags
   ),
 });

@@ -1,5 +1,5 @@
 import { branch, renderNothing, renderComponent } from 'recompose';
-import isUntoggled from '../helpers/is-untoggled';
+import isFeatureEnabled from '../helpers/is-feature-enabled';
 
 const branchUntoggled = (
   UntoggledComponent,
@@ -7,7 +7,7 @@ const branchUntoggled = (
   flagVariate = true
 ) =>
   branch(
-    props => isUntoggled(flagName, flagVariate)(props),
+    props => !isFeatureEnabled(flagName, flagVariate)(props),
     UntoggledComponent ? renderComponent(UntoggledComponent) : renderNothing
   );
 
