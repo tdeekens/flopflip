@@ -87,9 +87,9 @@ describe('mapStateToProps', () => {
           mapStateToProps(state, {
             flag: 'flag1',
             variate: 'flagVariate2',
-            variate: 'flagVariate2',
+            defaultVariateValue: 'flagVariate2',
           }).isFeatureEnabled
-        ).toBe(false);
+        ).toBe(true);
       });
     });
   });
