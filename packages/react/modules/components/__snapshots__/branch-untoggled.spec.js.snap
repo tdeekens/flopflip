@@ -79,3 +79,22 @@ exports[`without \`flagName\` when feature is enabled without untoggled componen
   isFeatureEnabled={true}
 />
 `;
+
+exports[`without \`flagName\` with default variate value when flag is defined with flag variate and matching default should match snapshot 1`] = `
+<FeatureComponent
+  flagName="fooTestFlag"
+  fooTestFlag="fooTestVariate"
+/>
+`;
+
+exports[`without \`flagName\` with default variate value when flag is not defined with flag variate and matching default should match snapshot 1`] = `
+<FeatureComponent
+  flagName="fooTestFlag"
+/>
+`;
+
+exports[`without \`flagName\` with default variate value when flag is not defined with flag variate and non matching default should match snapshot 1`] = `
+<Nothing
+  flagName="fooTestFlag"
+/>
+`;
