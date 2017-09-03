@@ -1,5 +1,7 @@
 import isNil from 'lodash.isnil';
 
+export const defaultFlagName = 'isFeatureEnabled';
+
 /**
  * Given a `flagName`, a `flagVariate` and a `defaultVariateValue` returns
  * indicating if the given feature should be toggled (turned off).
@@ -11,7 +13,7 @@ import isNil from 'lodash.isnil';
  * @return {Boolean}                              Indicator if the flag should be toggled
  */
 const isFeatureEnabled = (
-  flagName,
+  flagName = defaultFlagName,
   flagVariate = true,
   defaultVariateValue
 ) => props =>
