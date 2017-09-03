@@ -152,6 +152,7 @@ describe('with `flagName` and `flagVariate`', () => {
       });
     });
   });
+
   describe('when feature is disabled', () => {
     const featureFlag = { [flagName]: 'flagVariate2' };
 
@@ -277,6 +278,94 @@ describe('without `flagName`', () => {
 
       it('should render `Nothing`', () => {
         expect(wrapper).toRender('Nothing');
+      });
+    });
+  });
+
+  describe('with default variate value', () => {
+    const flagName = 'fooTestFlag';
+    const flagVariate = 'fooTestVariate';
+
+    describe('when flag is not defined', () => {
+      const featureFlag = {};
+      describe('with flag variate and matching default', () => {
+        const flagVariateDefaultValue = flagVariate;
+
+        let Component;
+        let wrapper;
+
+        beforeEach(() => {
+          Component = branchUntoggled(
+            undefined,
+            flagName,
+            flagVariate,
+            flagVariateDefaultValue
+          )(FeatureComponent);
+          wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
+        });
+
+        it('should match snapshot', () => {
+          expect(wrapper).toMatchSnapshot();
+        });
+
+        it('should render the `FeatureComponent`', () => {
+          expect(wrapper).toRender(FeatureComponent);
+        });
+      });
+
+      describe('with flag variate and non matching default', () => {
+        const flagVariateDefaultValue = `${flagVariate}2`;
+
+        let Component;
+        let wrapper;
+
+        beforeEach(() => {
+          Component = branchUntoggled(
+            undefined,
+            flagName,
+            flagVariate,
+            flagVariateDefaultValue
+          )(FeatureComponent);
+          wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
+        });
+
+        it('should match snapshot', () => {
+          expect(wrapper).toMatchSnapshot();
+        });
+
+        it('should render the `Nothing`', () => {
+          expect(wrapper).toRender('Nothing');
+        });
+      });
+    });
+
+
+    describe('when flag is defined', () => {
+      const featureFlag = { [flagName]: flagVariate };
+
+      describe('with flag variate and matching default', () => {
+        const flagVariateDefaultValue = flagVariate;
+
+        let Component;
+        let wrapper;
+
+        beforeEach(() => {
+          Component = branchUntoggled(
+            undefined,
+            flagName,
+            flagVariate,
+            flagVariateDefaultValue
+          )(FeatureComponent);
+          wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
+        });
+
+        it('should match snapshot', () => {
+          expect(wrapper).toMatchSnapshot();
+        });
+
+        it('should render the `FeatureComponent`', () => {
+          expect(wrapper).toRender(FeatureComponent);
+        });
       });
     });
   });

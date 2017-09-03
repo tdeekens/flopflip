@@ -16,9 +16,11 @@ const safelyExtractFlagAndVariate = options => {
 };
 
 export default (options, UntoggledComponent) => {
-  const { flag, variate } = safelyExtractFlagAndVariate(options);
+  const { flag, variate, defaultVariateValue } = safelyExtractFlagAndVariate(
+    options
+  );
   return compose(
     injectFeatureToggle(flag),
-    branchUntoggled(UntoggledComponent, flag, variate)
+    branchUntoggled(UntoggledComponent, flag, variate, defaultVariateValue)
   );
 };
