@@ -18,7 +18,7 @@ export default class FlagsSubscription extends React.Component {
     defaultFlags: PropTypes.object,
     onUpdateFlags: PropTypes.func.isRequired,
     onUpdateStatus: PropTypes.func.isRequired,
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
   };
 
   state = { isInitialized: false };
