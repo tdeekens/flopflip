@@ -71,4 +71,26 @@ describe('mapStateToProps', () => {
       ).toBe(false);
     });
   });
+
+  describe('with default variate value', () => {
+    let state;
+
+    describe('with non existing flag', () => {
+      beforeEach(() => {
+        state = {
+          [STATE_SLICE]: { flags: { flag1: undefined } },
+        };
+      });
+
+      it('should map `isFeatureEnabled` as `true` onto `props`', () => {
+        expect(
+          mapStateToProps(state, {
+            flag: 'flag1',
+            variate: 'flagVariate2',
+            variate: 'flagVariate2',
+          }).isFeatureEnabled
+        ).toBe(false);
+      });
+    });
+  });
 });

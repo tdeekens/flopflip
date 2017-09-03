@@ -5,6 +5,10 @@ import withSubscription from './with-subscription';
 export default compose(
   withSubscription('availableFeatureToggles'),
   withProps(props => ({
-    isFeatureEnabled: isFeatureEnabled(props.flag, props.variate)(props),
+    isFeatureEnabled: isFeatureEnabled(
+      props.flag,
+      props.variate,
+      props.defaultVariateValue
+    )(props),
   }))
 )(FeatureToggled);
