@@ -18,7 +18,7 @@ jest.mock('@flopflip/launchdarkly-wrapper', () => ({
   camelCaseFlags: jest.fn(_ => _),
 }));
 
-const ChildComponet = () => <div />;
+const ChildComponent = () => <div />;
 const createTestProps = props => ({
   shouldInitialize: true,
   shouldChangeUserContext: false,
@@ -28,7 +28,7 @@ const createTestProps = props => ({
   },
   onUpdateFlags: jest.fn(),
   onUpdateStatus: jest.fn(),
-  children: ChildComponet,
+  children: ChildComponent,
 
   ...props,
 });
@@ -41,7 +41,7 @@ describe('rendering', () => {
     props = createTestProps();
     wrapper = shallow(
       <FlagSubscription {...props}>
-        <ChildComponet />
+        <ChildComponent />
       </FlagSubscription>
     );
   });
@@ -51,7 +51,7 @@ describe('rendering', () => {
   });
 
   it('should render `children`', () => {
-    expect(wrapper).toRender('ChildComponet');
+    expect(wrapper).toRender('ChildComponent');
   });
 });
 
@@ -63,7 +63,7 @@ describe('interacting', () => {
     props = createTestProps();
     wrapper = shallow(
       <FlagSubscription {...props}>
-        <ChildComponet />
+        <ChildComponent />
       </FlagSubscription>
     );
   });
@@ -146,7 +146,7 @@ describe('lifecycle', () => {
       props = createTestProps();
       wrapper = shallow(
         <FlagSubscription {...props}>
-          <ChildComponet />
+          <ChildComponent />
         </FlagSubscription>
       );
     });
@@ -186,7 +186,7 @@ describe('lifecycle', () => {
         props = createTestProps({ shouldInitialize: false });
         wrapper = shallow(
           <FlagSubscription {...props}>
-            <ChildComponet />
+            <ChildComponent />
           </FlagSubscription>
         );
 
@@ -212,7 +212,7 @@ describe('lifecycle', () => {
 
         wrapper = shallow(
           <FlagSubscription {...props}>
-            <ChildComponet />
+            <ChildComponent />
           </FlagSubscription>
         );
 
@@ -237,7 +237,7 @@ describe('lifecycle', () => {
       props = createTestProps();
       wrapper = shallow(
         <FlagSubscription {...props}>
-          <ChildComponet />
+          <ChildComponent />
         </FlagSubscription>
       );
     });
@@ -276,7 +276,7 @@ describe('lifecycle', () => {
         props = createTestProps({ shouldInitialize: false });
         wrapper = shallow(
           <FlagSubscription {...props}>
-            <ChildComponet />
+            <ChildComponent />
           </FlagSubscription>
         );
 
@@ -302,7 +302,7 @@ describe('lifecycle', () => {
 
           wrapper = shallow(
             <FlagSubscription {...props}>
-              <ChildComponet />
+              <ChildComponent />
             </FlagSubscription>
           );
 
@@ -363,7 +363,7 @@ describe('state', () => {
     props = createTestProps();
     wrapper = shallow(
       <FlagSubscription {...props}>
-        <ChildComponet />
+        <ChildComponent />
       </FlagSubscription>
     );
   });
