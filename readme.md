@@ -269,8 +269,9 @@ import { withFeatureToggle } from '@flopflip/react-redux';
 import flagsNames from './feature-flags';
 
 const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
-const ComponentToBeRenderedInstead = () =>
-  <h3>At least there is a fallback!</h3>;
+const ComponentToBeRenderedInstead = () => (
+  <h3>At least there is a fallback!</h3>
+);
 
 export default withFeatureToggle({ flag: flagsNames.THE_FEATURE_TOGGLE })(
   ComponentToBeToggled,
@@ -285,8 +286,9 @@ import { withFeatureToggle } from '@flopflip/react-redux';
 import flagsNames from './feature-flags';
 
 const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
-const ComponentToBeRenderedInstead = () =>
-  <h3>At least there is a fallback!</h3>;
+const ComponentToBeRenderedInstead = () => (
+  <h3>At least there is a fallback!</h3>
+);
 
 export default withFeatureToggle({
   flag: flagsNames.THE_FEATURE_TOGGLE,
