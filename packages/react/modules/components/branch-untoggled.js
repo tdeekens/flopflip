@@ -6,12 +6,10 @@ import isFeatureEnabled, {
 const branchUntoggled = (
   UntoggledComponent,
   flagName = defaultFlagName,
-  flagVariate = true,
-  defaultVariateValue
+  flagVariate = true
 ) =>
   branch(
-    props =>
-      !isFeatureEnabled(flagName, flagVariate, defaultVariateValue)(props),
+    props => !isFeatureEnabled(flagName, flagVariate)(props),
     UntoggledComponent ? renderComponent(UntoggledComponent) : renderNothing
   );
 
