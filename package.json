@@ -1,23 +1,20 @@
 {
   "private": true,
   "name": "flopflip",
-  "description":
-    "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
+  "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
     "postinstall": "check-node-version --package && npm run build",
     "lint": "xo",
     "format": "run-p format:md format:js",
     "format:md": "pmd *.md",
-    "format:js":
-      "prettier --write --trailing-comma es5 --single-quote '**/modules/**/*.js' '**/rollup.config.js' '**/demo/**/*.js'",
+    "format:js": "prettier --write --trailing-comma es5 --single-quote '**/modules/**/*.js' '**/rollup.config.js' '**/demo/**/*.js'",
     "test": "jest",
     "test:ci": "npm run lint && jest --no-watchman --coverage && codecov",
     "test:watch": "npm test -- --watch",
     "test:coverage": "jest --coverage",
     "build": "lerna run build",
     "build:watch": "lerna run build:watch",
-    "release":
-      "npm run build && lerna publish --registry=https://registry.npmjs.org/"
+    "release": "npm run build && lerna publish --registry=https://registry.npmjs.org/"
   },
   "repository": {
     "type": "git",
@@ -49,8 +46,14 @@
       "plugin:jest/recommended",
       "prettier/react"
     ],
-    "envs": ["es6", "jest"],
-    "plugins": ["prettier", "jest"],
+    "envs": [
+      "es6",
+      "jest"
+    ],
+    "plugins": [
+      "prettier",
+      "jest"
+    ],
     "rules": {
       "prettier/prettier": [
         "error",
@@ -63,16 +66,21 @@
       "jest/no-focused-tests": "error",
       "jest/no-identical-title": "error",
       "jest/valid-expect": "error",
-      "max-nested-callbacks": ["error", 20]
+      "max-nested-callbacks": [
+        "error",
+        20
+      ]
     },
-    "globals": ["VERSION"]
+    "globals": [
+      "VERSION"
+    ]
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
     "@commercetools/jest-enzyme-matchers": "^1.1.2",
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
-    "babel-jest": "^20.0.3",
+    "babel-jest": "^21.0.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.6",
     "babel-polyfill": "^6.26.0",
@@ -88,10 +96,10 @@
     "enzyme-to-json": "^1.5.1",
     "eslint-config-prettier": "^2.1.1",
     "eslint-config-xo-react": "^0.13.0",
-    "eslint-plugin-jest": "^20.0.3",
+    "eslint-plugin-jest": "^21.0.0",
     "eslint-plugin-prettier": "^2.2.0",
     "eslint-plugin-react": "^7.3.0",
-    "jest": "^20.0.4",
+    "jest": "^21.0.1",
     "lerna": "^2.1.2",
     "npm-run-all": "^4.1.1",
     "prettier": "^1.6.1",
@@ -115,7 +123,9 @@
       }
     },
     "setupTestFrameworkScriptFile": "./config/jest.js",
-    "snapshotSerializers": ["enzyme-to-json/serializer"],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
     "testRegex": "\\.spec\\.js$",
     "testEnvironment": "jsdom",
     "testPathIgnorePatterns": [
@@ -138,5 +148,7 @@
     "HoC",
     "store-enhancer"
   ],
-  "workspaces": ["packages/*"]
+  "workspaces": [
+    "packages/*"
+  ]
 }
