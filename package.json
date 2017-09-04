@@ -69,7 +69,7 @@
     "@commercetools/jest-enzyme-matchers": "^1.1.2",
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
-    "babel-jest": "^20.0.3",
+    "babel-jest": "^21.0.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.6",
     "babel-polyfill": "^6.26.0",
