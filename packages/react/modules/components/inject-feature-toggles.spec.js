@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { ALL_FLAGS } from '../constants';
 import injectFeatureToggles from './inject-feature-toggles';
 
 describe('injecting', () => {
@@ -7,17 +8,22 @@ describe('injecting', () => {
   TestComponent.displayName = 'TestComponent';
   TestComponent.propTypes = {};
 
+  const featureToggle = 'aFeatureToggle';
+  const createTestProps = custom => ({
+    [ALL_FLAGS]: { [featureToggle]: true },
+    ...custom,
+  });
+
   describe('with single feature toggle', () => {
-    const featureToggle = 'aFeatureToggle';
-    let featureToggles;
+    let props;
     let Component;
     let wrapper;
 
     beforeEach(() => {
-      featureToggles = { [featureToggle]: true };
+      props = createTestProps();
 
       Component = injectFeatureToggles([featureToggle])(TestComponent);
-      wrapper = shallow(<Component availableFeatureToggles={featureToggles} />);
+      wrapper = shallow(<Component {...props} />);
     });
 
     it('should match snapshot', () => {
@@ -25,82 +31,63 @@ describe('injecting', () => {
     });
 
     it('should pass all requested feature toggles as a `prop`', () => {
-      expect(wrapper.find(TestComponent)).toHaveProp(
-        'featureToggles',
-        featureToggles
-      );
+      expect(wrapper).toHaveProp('featureToggles', props[ALL_FLAGS]);
     });
 
     it("should pass the feature toggle's state as a `prop`", () => {
-      expect(wrapper.find(TestComponent)).toHaveProp('featureToggles', {
-        [featureToggle]: featureToggles[featureToggle],
+      expect(wrapper).toHaveProp('featureToggles', {
+        [featureToggle]: props[ALL_FLAGS][featureToggle],
       });
     });
   });
 
   describe('with multiple feature toggles', () => {
-    const featureToggle = 'aFeatureToggle';
-    let featureToggles;
     let Component;
+    let props;
     let wrapper;
 
     describe('with all toggles defined', () => {
       beforeEach(() => {
-        featureToggles = { [featureToggle]: true };
+        props = createTestProps();
 
         Component = injectFeatureToggles([featureToggle])(TestComponent);
-        wrapper = shallow(
-          <Component availableFeatureToggles={featureToggles} />
-        );
+        wrapper = shallow(<Component {...props} />);
       });
 
       it('should pass all requested feature toggles as a `prop`', () => {
-        expect(wrapper.find(TestComponent)).toHaveProp(
-          'featureToggles',
-          featureToggles
-        );
-      });
-
-      it("should pass the feature toggle's state as a `prop`", () => {
-        expect(wrapper.find(TestComponent)).toHaveProp('featureToggles', {
-          [featureToggle]: featureToggles[featureToggle],
-        });
+        expect(wrapper).toHaveProp('featureToggles', props[ALL_FLAGS]);
       });
     });
 
     describe('without all toggles defined', () => {
       let nonExistingFeatureToggle;
-      let existingFeatureToggle;
+      let props;
 
       beforeEach(() => {
-        existingFeatureToggle = featureToggle;
+        props = createTestProps();
         nonExistingFeatureToggle = 'anotherToggle';
 
-        featureToggles = { [existingFeatureToggle]: true };
-
         Component = injectFeatureToggles([
-          existingFeatureToggle,
+          featureToggle,
           nonExistingFeatureToggle,
         ])(TestComponent);
-        wrapper = shallow(
-          <Component availableFeatureToggles={featureToggles} />
-        );
+        wrapper = shallow(<Component {...props} />);
       });
 
       it('should pass requested feature toggles as a `prop`', () => {
-        expect(wrapper.find(TestComponent)).toHaveProp('featureToggles', {
-          [existingFeatureToggle]: expect.any(Boolean),
+        expect(wrapper).toHaveProp('featureToggles', {
+          [featureToggle]: expect.any(Boolean),
         });
       });
 
       it("should pass the feature toggle's state as a `prop`", () => {
-        expect(wrapper.find(TestComponent)).toHaveProp('featureToggles', {
-          [featureToggle]: featureToggles[existingFeatureToggle],
+        expect(wrapper).toHaveProp('featureToggles', {
+          [featureToggle]: props[ALL_FLAGS][featureToggle],
         });
       });
 
       it('should omit requested but non existent feature toggles from `props`', () => {
-        expect(wrapper.find(TestComponent)).not.toHaveProp('featureToggles', {
+        expect(wrapper).not.toHaveProp('featureToggles', {
           [nonExistingFeatureToggle]: expect.any(Boolean),
         });
       });

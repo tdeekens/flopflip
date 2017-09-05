@@ -1,6 +1,6 @@
 import { compose } from 'recompose';
 import isObject from 'lodash.isobject';
-import { branchUntoggled, defaultFlagName } from '@flopflip/react';
+import { branchUntoggled, DEFAULT_FLAG_NAME } from '@flopflip/react';
 import injectFeatureToggle from './inject-feature-toggle';
 
 const safelyExtractFlagAndVariate = options => {
@@ -19,6 +19,6 @@ export default (options, UntoggledComponent) => {
   const { flag, variate } = safelyExtractFlagAndVariate(options);
   return compose(
     injectFeatureToggle(flag),
-    branchUntoggled(UntoggledComponent, defaultFlagName, variate)
+    branchUntoggled(UntoggledComponent, DEFAULT_FLAG_NAME, variate)
   );
 };

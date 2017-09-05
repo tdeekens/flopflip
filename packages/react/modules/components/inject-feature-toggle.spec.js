@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { ALL_FLAGS } from '../constants';
 import injectFeatureToggle from './inject-feature-toggle';
 
 describe('injecting', () => {
@@ -8,20 +9,23 @@ describe('injecting', () => {
   TestComponent.propTypes = {};
 
   const flagName = 'aFeatureToggle';
-  let availableFeatureToggles;
+  const createTestProps = custom => ({
+    [ALL_FLAGS]: { [flagName]: true },
+    ...custom,
+  });
+
   let Component;
   let wrapper;
 
   describe('with `propKey`', () => {
+    let props;
     const propKey = 'fooFlagPropName';
 
     beforeEach(() => {
-      availableFeatureToggles = { [flagName]: true };
+      props = createTestProps();
 
       Component = injectFeatureToggle(flagName, propKey)(TestComponent);
-      wrapper = shallow(
-        <Component availableFeatureToggles={availableFeatureToggles} />
-      );
+      wrapper = shallow(<Component {...props} />);
     });
 
     it('should match snapshot', () => {
@@ -29,21 +33,18 @@ describe('injecting', () => {
     });
 
     it("should pass the feature toggle's state as a `prop` of `propKey`", () => {
-      expect(wrapper.find(TestComponent)).toHaveProp(
-        propKey,
-        availableFeatureToggles[flagName]
-      );
+      expect(wrapper).toHaveProp(propKey, props[ALL_FLAGS][flagName]);
     });
   });
 
   describe('without `propKey`', () => {
+    let props;
+
     beforeEach(() => {
-      availableFeatureToggles = { [flagName]: true };
+      props = createTestProps();
 
       Component = injectFeatureToggle(flagName)(TestComponent);
-      wrapper = shallow(
-        <Component availableFeatureToggles={availableFeatureToggles} />
-      );
+      wrapper = shallow(<Component {...props} />);
     });
 
     it('should match snapshot', () => {
@@ -51,44 +52,38 @@ describe('injecting', () => {
     });
 
     it("should pass the feature toggle's state as a `prop` of `isFeatureEnabled`", () => {
-      expect(wrapper.find(TestComponent)).toHaveProp(
-        'isFeatureEnabled',
-        availableFeatureToggles[flagName]
-      );
+      expect(wrapper).toHaveProp('isFeatureEnabled', true);
     });
   });
 
   describe('with non defined flagName', () => {
+    let props;
+
     beforeEach(() => {
       const anotherFlagName = 'anotherFeatureToggle';
-      availableFeatureToggles = { [flagName]: true };
+      props = createTestProps();
 
       Component = injectFeatureToggle(anotherFlagName)(TestComponent);
-      wrapper = shallow(
-        <Component availableFeatureToggles={availableFeatureToggles} />
-      );
+      wrapper = shallow(<Component {...props} />);
     });
 
     it("should pass the feature toggle's state as `false`", () => {
-      expect(wrapper.find(TestComponent)).toHaveProp('isFeatureEnabled', false);
+      expect(wrapper).toHaveProp('isFeatureEnabled', false);
     });
   });
 
   describe('with multivariate flag', () => {
+    let props;
+
     beforeEach(() => {
-      availableFeatureToggles = { [flagName]: 'blue' };
+      props = createTestProps({ [flagName]: 'blue' });
 
       Component = injectFeatureToggle(flagName)(TestComponent);
-      wrapper = shallow(
-        <Component availableFeatureToggles={availableFeatureToggles} />
-      );
+      wrapper = shallow(<Component {...props} />);
     });
 
     it("should pass the feature toggle's state as the value", () => {
-      expect(wrapper.find(TestComponent)).toHaveProp(
-        'isFeatureEnabled',
-        'blue'
-      );
+      expect(wrapper).toHaveProp(flagName, 'blue');
     });
   });
 });

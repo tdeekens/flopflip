@@ -1,4 +1,5 @@
 import { STATE_SLICE } from './../store';
+import { ALL_FLAGS } from '@flopflip/react';
 import { mapStateToProps } from './inject-feature-toggles';
 
 describe('mapStateToProps', () => {
@@ -12,8 +13,8 @@ describe('mapStateToProps', () => {
       };
     });
 
-    it('should map `flags` as `availableFeatureToggles` onto `props`', () => {
-      expect(mapStateToProps(state).availableFeatureToggles).toEqual(flags);
+    it('should map `flags` as `ALL_FLAGS` onto `props`', () => {
+      expect(mapStateToProps(state)[ALL_FLAGS]).toEqual(flags);
     });
   });
 
@@ -27,8 +28,8 @@ describe('mapStateToProps', () => {
       };
     });
 
-    it('should map `flags` as `availableFeatureToggles` onto `props`', () => {
-      expect(mapStateToProps(state).availableFeatureToggles).toEqual(flags);
+    it('should map `flags` as `ALL_FLAGS` onto `props`', () => {
+      expect(mapStateToProps(state)[ALL_FLAGS]).toEqual(flags);
     });
   });
 });
