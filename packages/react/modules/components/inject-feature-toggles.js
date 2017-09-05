@@ -1,20 +1,21 @@
 import { compose, withProps } from 'recompose';
 import intersection from 'lodash.intersection';
 import omitProps from '@hocs/omit-props';
-import { ALL_FLAGS } from '../constants';
+import { ALL_FLAGS, DEFAULT_FLAGS_PROP_KEY } from '../constants';
 
-const filterFeatureToggles = (allFlags, flagNames) =>
-  intersection(Object.keys(allFlags), flagNames).reduce(
+const filterFeatureToggles = (allFlags, demandedFlags) =>
+  intersection(Object.keys(allFlags), demandedFlags).reduce(
     (featureToggles, featureToggle) => ({
+      ...featureToggles,
       [featureToggle]: allFlags[featureToggle],
     }),
     {}
   );
 
-const injectFeatureToggles = flagNames =>
+const injectFeatureToggles = (flagNames, propKey = DEFAULT_FLAGS_PROP_KEY) =>
   compose(
     withProps(props => ({
-      featureToggles: filterFeatureToggles(props[ALL_FLAGS], flagNames),
+      [propKey]: filterFeatureToggles(props[ALL_FLAGS], flagNames),
     })),
     omitProps(ALL_FLAGS)
   );

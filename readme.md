@@ -245,7 +245,7 @@ this last example will always turn the feature on if the variate or toggle does 
 
 We actually recommend maintaining a list of constants with feature flag names somewhere within your application. This avoids typos and unexpected behavior. After all, the correct workings of your feature flags is crutial to your application.
 
-#### `withFeatureToggle`
+#### `withFeatureToggle({ flag: String, variate?: any })`
 
 A HoC to conditionally render a component based on a feature toggle's state. It accepts the feature toggle name and an optional component to be rendered in case the feature is disabled.
 
@@ -296,10 +296,9 @@ export default withFeatureToggle({
 })(ComponentToBeToggled, ComponentToBeRenderedInstead);
 ```
 
-#### `injectFeatureToggles`
+#### `injectFeatureToggles(flagNames: Array<String>, propKey?: String)`
 
 This HoC matches feature toggles given against configured ones and injects the matching result.
-
 ```js
 import { injectFeatureToggles } from '@flopflip/react-redux';
 import flagsNames from './feature-flags';
@@ -318,7 +317,7 @@ export default injectFeatureToggles([flagsNames.TOGGLE_A, flagsNames.TOGGLE_B])(
 );
 ```
 
-#### `injectFeatureToggle`
+#### `injectFeatureToggle(flag: String, propKey?: String)`
 
 This HoC matches feature toggles given against configured ones and injects the matching result. `withFeatureToggle` uses this to conditionally render a component. You also may pass a second argument to overwrite the default `propKey` of the injected toggle (defaults to `isFeatureEnabled`).
 

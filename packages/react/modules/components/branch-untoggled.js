@@ -1,10 +1,10 @@
 import { branch, renderNothing, renderComponent } from 'recompose';
 import isFeatureEnabled from '../helpers/is-feature-enabled';
-import { DEFAULT_FLAG_NAME } from '../constants';
+import { DEFAULT_FLAG_PROP_KEY } from '../constants';
 
 const branchUntoggled = (
   UntoggledComponent,
-  flagName = DEFAULT_FLAG_NAME,
+  flagName = DEFAULT_FLAG_PROP_KEY,
   flagVariate = true
 ) =>
   branch(
