@@ -7,6 +7,6 @@ export const mapStateToProps = state => ({
   [ALL_FLAGS]: state[STATE_SLICE].flags,
 });
 
-export default flagNames =>
+export default (flagNames, propKey) =>
   /* istanbul ignore next */
-  compose(connect(mapStateToProps), injectFeatureToggles(flagNames));
+  compose(connect(mapStateToProps), injectFeatureToggles(flagNames, propKey));

@@ -1,5 +1,5 @@
-import { STATE_SLICE } from './../store';
 import { ALL_FLAGS } from '@flopflip/react';
+import { STATE_SLICE } from './../store';
 import { mapStateToProps } from './inject-feature-toggles';
 
 describe('mapStateToProps', () => {
