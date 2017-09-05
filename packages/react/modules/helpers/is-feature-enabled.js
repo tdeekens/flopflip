@@ -1,4 +1,4 @@
-export const defaultFlagName = 'isFeatureEnabled';
+import { DEFAULT_FLAG_NAME } from '../constants';
 
 /**
  * Given a `flagName` and a `flagVariate`
@@ -10,7 +10,7 @@ export const defaultFlagName = 'isFeatureEnabled';
  * @return {Boolean}                              Indicator if the flag should be toggled
  */
 const isFeatureEnabled = (
-  flagName = defaultFlagName,
+  flagName = DEFAULT_FLAG_NAME,
   flagVariate = true
 ) => props => props[flagName] === flagVariate;
 

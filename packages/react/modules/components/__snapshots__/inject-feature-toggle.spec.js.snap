@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`injecting with \`propKey\` should match snapshot 1`] = `
-<TestComponent
-  availableFeatureToggles={
+<omitProps(TestComponent)
+  __flopflop_all_flags__={
     Object {
       "aFeatureToggle": true,
     }
@@ -12,8 +12,8 @@ exports[`injecting with \`propKey\` should match snapshot 1`] = `
 `;
 
 exports[`injecting without \`propKey\` should match snapshot 1`] = `
-<TestComponent
-  availableFeatureToggles={
+<omitProps(TestComponent)
+  __flopflop_all_flags__={
     Object {
       "aFeatureToggle": true,
     }
