@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@flopflip/launchdarkly-wrapper": "^2.1.1",
+    "@hocs/omit-props": "^0.2.1",
     "lodash.intersection": "^4.4.0",
     "lodash.isnil": "^4.0.0",
     "recompose": "^0.25.0"
