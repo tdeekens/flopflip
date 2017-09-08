@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/launchdarkly-wrapper",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "A wrapper around the LaunchDarkly client for flipflop",
   "main": "dist/@flopflip-launchdarkly-wrapper.cjs.js",
   "module": "dist/@flopflip-launchdarkly-wrapper.es.js",
@@ -10,12 +10,13 @@
     "prebuild": "rimraf dist/**",
     "build": "cross-env run-p build:es build:cjs",
     "build:watch": "cross-env npm run build:es -- -w",
-    "build:es":
-      "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/@flopflip-launchdarkly-wrapper.es.js",
-    "build:cjs":
-      "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f cjs -o dist/@flopflip-launchdarkly-wrapper.cjs.js"
+    "build:es": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/@flopflip-launchdarkly-wrapper.es.js",
+    "build:cjs": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f cjs -o dist/@flopflip-launchdarkly-wrapper.cjs.js"
   },
-  "files": ["readme.md", "dist/**"],
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
   "publishConfig": {
     "access": "public"
   },
@@ -38,5 +39,10 @@
     "lodash.camelcase": "^4.3.0",
     "nanoid": "^0.2.0"
   },
-  "keywords": ["feature-flags", "feature-toggles", "LaunchDarkly", "client"]
+  "keywords": [
+    "feature-flags",
+    "feature-toggles",
+    "LaunchDarkly",
+    "client"
+  ]
 }
