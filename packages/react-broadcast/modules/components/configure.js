@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { FlagsSubscription } from '@flopflip/react';
-import Broadcast from './broadcast';
+import { Broadcast } from 'react-broadcast';
 
 export const FLAGS_CHANNEL = '@flopflip';
 

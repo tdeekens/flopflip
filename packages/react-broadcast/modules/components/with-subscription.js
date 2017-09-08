@@ -1,6 +1,6 @@
 import React from 'react';
 import { wrapDisplayName } from 'recompose';
-import Subscriber from './subscriber';
+import { Subscriber } from 'react-broadcast';
 import { FLAGS_CHANNEL } from './configure';
 
 const withSubscription = propKey => WrappedComponent => {
