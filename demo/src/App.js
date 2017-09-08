@@ -28,7 +28,10 @@ const IncrementAsyncButton = props => (
   </button>
 );
 const FeatureToggledIncrementAsyncButton = compose(
-  withFeatureToggle(flags.INCREMENT_ASYNC_BUTTON, () => UntoggledFeature)
+  withFeatureToggle(
+    { flag: flags.INCREMENT_ASYNC_BUTTON },
+    () => UntoggledFeature
+  )
 )(IncrementAsyncButton);
 
 const IncrementSyncButton = props => (
