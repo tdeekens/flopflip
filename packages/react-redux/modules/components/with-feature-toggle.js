@@ -1,4 +1,4 @@
-import { compose } from 'recompose';
+import { compose, setDisplayName, wrapDisplayName } from 'recompose';
 import isObject from 'lodash.isobject';
 import { branchUntoggled, DEFAULT_FLAG_PROP_KEY } from '@flopflip/react';
 import injectFeatureToggle from './inject-feature-toggle';
@@ -15,10 +15,11 @@ const safelyExtractFlagAndVariate = options => {
   return options;
 };
 
-export default (options, UntoggledComponent) => {
+export default (options, UntoggledComponent) => EnhancedComponent => {
   const { flag, variate } = safelyExtractFlagAndVariate(options);
   return compose(
     injectFeatureToggle(flag),
-    branchUntoggled(UntoggledComponent, DEFAULT_FLAG_PROP_KEY, variate)
-  );
+    branchUntoggled(UntoggledComponent, DEFAULT_FLAG_PROP_KEY, variate),
+    setDisplayName(wrapDisplayName(EnhancedComponent, 'WithFeatureToggle'))
+  )(EnhancedComponent);
 };

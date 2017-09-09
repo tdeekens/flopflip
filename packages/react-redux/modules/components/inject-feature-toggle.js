@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { compose } from 'recompose';
+import { compose, setDisplayName, wrapDisplayName } from 'recompose';
 import { injectFeatureToggle, ALL_FLAGS } from '@flopflip/react';
 import { STATE_SLICE } from './../store';
 
@@ -7,6 +7,10 @@ export const mapStateToProps = state => ({
   [ALL_FLAGS]: state[STATE_SLICE].flags,
 });
 
-export default (flagName, propKey) =>
+export default (flagName, propKey) => EnhancedComponent =>
   /* istanbul ignore next */
-  compose(connect(mapStateToProps), injectFeatureToggle(flagName, propKey));
+  compose(
+    connect(mapStateToProps),
+    injectFeatureToggle(flagName, propKey),
+    setDisplayName(wrapDisplayName(EnhancedComponent, 'InjectFeatureToggle'))
+  )(EnhancedComponent);
