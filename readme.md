@@ -245,7 +245,7 @@ this last example will always turn the feature on if the variate or toggle does 
 
 We actually recommend maintaining a list of constants with feature flag names somewhere within your application. This avoids typos and unexpected behavior. After all, the correct workings of your feature flags is crutial to your application.
 
-#### `withFeatureToggle({ flag: String, variate?: any })`
+#### `withFeatureToggle({ flag: String, variate?: String | Boolean })`
 
 A HoC to conditionally render a component based on a feature toggle's state. It accepts the feature toggle name and an optional component to be rendered in case the feature is disabled.
 
