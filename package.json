@@ -1,20 +1,22 @@
 {
   "private": true,
   "name": "flopflip",
-  "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
+  "description":
+    "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
     "postinstall": "check-node-version --package && npm run build",
     "lint": "xo",
     "format": "run-p format:md format:js",
     "format:md": "pmd *.md",
-    "format:js": "prettier --write --trailing-comma es5 --single-quote '**/modules/**/*.js' '**/rollup.config.js' '**/demo/**/*.js'",
+    "format:js": "prettier --write '**/modules/**/*.js' '**/demo/**/*.js'",
     "test": "jest",
     "test:ci": "npm run lint && jest --no-watchman --coverage && codecov",
     "test:watch": "npm test -- --watch",
     "test:coverage": "jest --coverage",
     "build": "lerna run build",
     "build:watch": "lerna run build:watch",
-    "release": "npm run build && lerna publish --registry=https://registry.npmjs.org/"
+    "release":
+      "npm run build && lerna publish --registry=https://registry.npmjs.org/"
   },
   "repository": {
     "type": "git",
@@ -46,14 +48,8 @@
       "plugin:jest/recommended",
       "prettier/react"
     ],
-    "envs": [
-      "es6",
-      "jest"
-    ],
-    "plugins": [
-      "prettier",
-      "jest"
-    ],
+    "envs": ["es6", "jest"],
+    "plugins": ["prettier", "jest"],
     "rules": {
       "prettier/prettier": [
         "error",
@@ -66,14 +62,9 @@
       "jest/no-focused-tests": "error",
       "jest/no-identical-title": "error",
       "jest/valid-expect": "error",
-      "max-nested-callbacks": [
-        "error",
-        20
-      ]
+      "max-nested-callbacks": ["error", 20]
     },
-    "globals": [
-      "VERSION"
-    ]
+    "globals": ["VERSION"]
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
@@ -123,9 +114,7 @@
       }
     },
     "setupTestFrameworkScriptFile": "./config/jest.js",
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "testRegex": "\\.spec\\.js$",
     "testEnvironment": "jsdom",
     "testPathIgnorePatterns": [
@@ -148,7 +137,5 @@
     "HoC",
     "store-enhancer"
   ],
-  "workspaces": [
-    "packages/*"
-  ]
+  "workspaces": ["packages/*"]
 }
