@@ -232,8 +232,8 @@ or with for multivariate feature toggles
 ```js
 export default (
   <FeatureToggled
-    flag={flagsNames.THE_FEATURE_TOGGLE}
-    variate={flagsNames.VARIATES.A}
+    flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
+    variate={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
     untoggledComponent={<h3>At least there is a fallback!</h3>}
   >
     <h3>I might be gone or there!</h3>
