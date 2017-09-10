@@ -10,13 +10,12 @@
     "prebuild": "rimraf dist/**",
     "build": "cross-env run-p build:es build:cjs",
     "build:watch": "cross-env npm run build:es -- -w",
-    "build:es": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/@flopflip-launchdarkly-wrapper.es.js",
-    "build:cjs": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f cjs -o dist/@flopflip-launchdarkly-wrapper.cjs.js"
+    "build:es":
+      "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/@flopflip-launchdarkly-wrapper.es.js",
+    "build:cjs":
+      "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f cjs -o dist/@flopflip-launchdarkly-wrapper.cjs.js"
   },
-  "files": [
-    "readme.md",
-    "dist/**"
-  ],
+  "files": ["readme.md", "dist/**"],
   "publishConfig": {
     "access": "public"
   },
@@ -32,17 +31,13 @@
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
     "enzyme": "^2.9.1",
-    "enzyme-to-json": "^1.5.1"
+    "enzyme-to-json": "^1.5.1",
+    "rollup-plugin-filesize": "^1.4.2"
   },
   "dependencies": {
     "ldclient-js": "^1.1.12",
     "lodash.camelcase": "^4.3.0",
     "nanoid": "^0.2.0"
   },
-  "keywords": [
-    "feature-flags",
-    "feature-toggles",
-    "LaunchDarkly",
-    "client"
-  ]
+  "keywords": ["feature-flags", "feature-toggles", "LaunchDarkly", "client"]
 }

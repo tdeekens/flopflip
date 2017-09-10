@@ -1,7 +1,8 @@
 {
   "name": "@flopflip/react-redux",
   "version": "2.1.1",
-  "description": "A feature toggle wrapper to use LaunchDarkly with React Redux",
+  "description":
+    "A feature toggle wrapper to use LaunchDarkly with React Redux",
   "main": "dist/@flopflip-react-redux.cjs.js",
   "module": "dist/@flopflip-react-redux.es.js",
   "browser": "dist/@flopflip-react-redux.umd.js",
@@ -10,15 +11,16 @@
     "prebuild": "rimraf dist/**",
     "build": "cross-env run-p build:umd build:umd:min build:es build:cjs",
     "build:watch": "cross-env npm run build:es -- -w",
-    "build:umd": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f umd -o dist/@flopflip-react-redux.umd.js",
-    "build:umd:min": "cross-env NODE_ENV=production BABEL_ENV=rollup rollup -c -f umd -o dist/@flopflip-react-redux.umd.min.js",
-    "build:es": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/@flopflip-react-redux.es.js",
-    "build:cjs": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f cjs -o dist/@flopflip-react-redux.cjs.js"
+    "build:umd":
+      "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f umd -o dist/@flopflip-react-redux.umd.js",
+    "build:umd:min":
+      "cross-env NODE_ENV=production BABEL_ENV=rollup rollup -c -f umd -o dist/@flopflip-react-redux.umd.min.js",
+    "build:es":
+      "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/@flopflip-react-redux.es.js",
+    "build:cjs":
+      "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f cjs -o dist/@flopflip-react-redux.cjs.js"
   },
-  "files": [
-    "readme.md",
-    "dist/**"
-  ],
+  "files": ["readme.md", "dist/**"],
   "publishConfig": {
     "access": "public"
   },
@@ -40,7 +42,8 @@
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
     "react-test-renderer": "^15.6.1",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "rollup-plugin-filesize": "^1.4.2"
   },
   "dependencies": {
     "@flopflip/launchdarkly-wrapper": "^2.1.2",
@@ -55,10 +58,5 @@
     "react-redux": "^5.0.5",
     "redux": "^3.7.2"
   },
-  "keywords": [
-    "feature-flags",
-    "feature-toggles",
-    "LaunchDarkly",
-    "client"
-  ]
+  "keywords": ["feature-flags", "feature-toggles", "LaunchDarkly", "client"]
 }
