@@ -5,6 +5,8 @@ import withSubscription from './with-subscription';
 export default compose(
   withSubscription(ALL_FLAGS),
   withProps(props => ({
-    isFeatureEnabled: isFeatureEnabled(props.flag, props.variate)(props),
+    isFeatureEnabled: isFeatureEnabled(props.flag, props.variate)(
+      props[ALL_FLAGS]
+    ),
   }))
 )(FeatureToggled);
