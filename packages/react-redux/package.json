@@ -40,8 +40,7 @@
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
     "react-test-renderer": "^15.6.1",
-    "redux": "^3.7.2",
-    "rollup-plugin-filesize": "^1.4.2"
+    "redux": "^3.7.2"
   },
   "dependencies": {
     "@flopflip/launchdarkly-wrapper": "^2.1.3",

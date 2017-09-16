@@ -38,8 +38,7 @@
     "prop-types": "15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-test-renderer": "^15.6.1",
-    "rollup-plugin-filesize": "^1.4.2"
+    "react-test-renderer": "^15.6.1"
   },
   "peerDependencies": {
     "prop-types": "^15.5.10",

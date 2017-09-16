@@ -5,6 +5,7 @@ const replace = require('rollup-plugin-replace');
 const uglify = require('rollup-plugin-uglify');
 const builtins = require('rollup-plugin-node-builtins');
 const filesize = require('rollup-plugin-filesize');
+const analyzer = require('rollup-analyzer-plugin');
 
 const env = process.env.NODE_ENV;
 const version = process.env.npm_package_version;
@@ -37,6 +38,7 @@ const config = {
     }),
     builtins(),
     filesize(),
+    analyzer(),
   ],
 };
 
