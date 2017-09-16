@@ -11,7 +11,7 @@ export default class FlagsSubscription extends React.Component {
   static propTypes = {
     shouldInitialize: PropTypes.bool.isRequired,
     shouldChangeUserContext: PropTypes.bool.isRequired,
-    clientSideId: PropTypes.string.isRequired,
+    clientSideId: PropTypes.string,
     user: PropTypes.shape({
       key: PropTypes.string,
     }),
@@ -25,6 +25,7 @@ export default class FlagsSubscription extends React.Component {
 
   static defaultProps = {
     children: null,
+    clientSideId: null,
     user: {},
     defaultFlags: {},
   };

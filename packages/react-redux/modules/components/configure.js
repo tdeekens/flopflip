@@ -8,7 +8,7 @@ export class Configure extends React.Component {
   static displayName = 'ConfigureFlopflip';
   static propTypes = {
     children: PropTypes.node,
-    clientSideId: PropTypes.string.isRequired,
+    clientSideId: PropTypes.string,
     user: PropTypes.shape({
       key: PropTypes.string,
     }),
@@ -24,6 +24,7 @@ export class Configure extends React.Component {
   static defaultProps = {
     children: null,
     user: {},
+    clientSideId: null,
     defaultFlags: {},
     shouldInitialize: true,
     shouldChangeUserContext: false,
