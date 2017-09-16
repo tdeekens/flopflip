@@ -10,7 +10,7 @@ export default class Configure extends React.Component {
 
   static propTypes = {
     children: PropTypes.node,
-    clientSideId: PropTypes.string.isRequired,
+    clientSideId: PropTypes.string,
     shouldInitialize: PropTypes.bool,
     shouldChangeUserContext: PropTypes.bool,
     defaultFlags: PropTypes.object,
@@ -21,6 +21,7 @@ export default class Configure extends React.Component {
 
   static defaultProps = {
     children: null,
+    clientSideId: null,
     user: {},
     defaultFlags: {},
     shouldInitialize: true,
