@@ -33,17 +33,18 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "enzyme": "^2.9.1",
-    "enzyme-to-json": "^1.5.1",
-    "prop-types": "15.5.10",
+    "enzyme": "^3.0.0",
+    "enzyme-adapter-react-15": "^1.0.0",
+    "enzyme-to-json": "^3.0.0",
+    "prop-types": "15.6.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-test-renderer": "^15.6.1"
   },
   "peerDependencies": {
-    "prop-types": "^15.5.10",
-    "react": "^15.6.0",
-    "react-dom": "^15.6.0"
+    "prop-types": "^15.6.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   },
   "dependencies": {
     "@flopflip/launchdarkly-wrapper": "^2.1.3",
