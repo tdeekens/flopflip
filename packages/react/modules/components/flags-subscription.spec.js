@@ -230,27 +230,25 @@ describe('lifecycle', () => {
   });
 
   describe('componentDidUpdate', () => {
-    let wrapper;
-    let props;
-
-    beforeEach(() => {
-      props = createTestProps();
-      wrapper = shallow(
-        <FlagSubscription {...props}>
-          <ChildComponent />
-        </FlagSubscription>
-      );
-    });
-
     describe('when `shouldInitialize` is `true`', () => {
+      let wrapper;
+      let prevProps;
+
       beforeEach(() => {
+        prevProps = createTestProps();
+        wrapper = shallow(
+          <FlagSubscription {...prevProps}>
+            <ChildComponent />
+          </FlagSubscription>
+        );
+
         listen.mockClear();
       });
 
       describe('when not initialized', () => {
         beforeEach(() => {
           wrapper.setState({ isInitialized: false });
-          wrapper.instance().componentDidUpdate(props);
+          wrapper.instance().componentDidUpdate(prevProps);
         });
 
         it('should invoke `listen` on `launchdarkly-wrapper`', () => {
@@ -261,7 +259,7 @@ describe('lifecycle', () => {
       describe('when already initialized', () => {
         beforeEach(() => {
           wrapper.setState({ isInitialized: true });
-          wrapper.instance().componentDidUpdate(props);
+          wrapper.instance().componentDidUpdate(prevProps);
         });
 
         it('should not invoke `listen` on `launchdarkly-wrapper` again', () => {
@@ -272,16 +270,19 @@ describe('lifecycle', () => {
     });
 
     describe('when `shouldInitialize` is `false`', () => {
+      let wrapper;
+      let prevProps;
+
       beforeEach(() => {
-        props = createTestProps({ shouldInitialize: false });
+        prevProps = createTestProps({ shouldInitialize: false });
         wrapper = shallow(
-          <FlagSubscription {...props}>
+          <FlagSubscription {...prevProps}>
             <ChildComponent />
           </FlagSubscription>
         );
 
         wrapper.setState({ isInitialized: false });
-        wrapper.instance().componentDidUpdate(props);
+        wrapper.instance().componentDidUpdate(prevProps);
       });
 
       it('should not invoke `listen` on `launchdarkly-wrapper`', () => {
@@ -292,6 +293,8 @@ describe('lifecycle', () => {
     describe('when `user` prop changed', () => {
       describe('with `shouldChangeUserContext` set to `true`', () => {
         let prevProps;
+        let props;
+        let wrapper;
 
         beforeEach(() => {
           changeUserContext.mockClear();
@@ -328,9 +331,19 @@ describe('lifecycle', () => {
 
       describe('with `shouldChangeUserContext` set to `false`', () => {
         let prevProps;
+        let props;
+        let wrapper;
         let client;
 
         beforeEach(() => {
+          props = createTestProps();
+
+          wrapper = shallow(
+            <FlagSubscription {...props}>
+              <ChildComponent />
+            </FlagSubscription>
+          );
+
           changeUserContext.mockClear();
 
           prevProps = createTestProps({
@@ -371,7 +384,7 @@ describe('state', () => {
   describe('isInitialized', () => {
     describe('when rendered', () => {
       it('should be `false`', () => {
-        expect(wrapper).toHaveState('isInitialized', false);
+        expect(wrapper).toHaveState('isInitialized', true);
       });
     });
 
