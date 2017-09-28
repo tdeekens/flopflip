@@ -41,8 +41,8 @@
   },
   "peerDependencies": {
     "prop-types": "15.6.0",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react": "^15.6.0",
+    "react-dom": "^15.6.0"
   },
   "dependencies": {
     "@flopflip/launchdarkly-wrapper": "^2.1.3",
