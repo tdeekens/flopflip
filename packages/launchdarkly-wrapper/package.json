@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/launchdarkly-wrapper",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "A wrapper around the LaunchDarkly client for flipflop",
   "main": "dist/@flopflip-launchdarkly-wrapper.cjs.js",
   "module": "dist/@flopflip-launchdarkly-wrapper.es.js",
