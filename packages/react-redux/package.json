@@ -8,7 +8,7 @@
   "scripts": {
     "preversion": "npm run build",
     "prebuild": "rimraf dist/**",
-    "build": "cross-env run-p build:umd build:umd:min build:es build:cjs",
+    "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs",
     "build:watch": "cross-env npm run build:es -- -w",
     "build:umd": "cross-env NODE_ENV=development rollup -c -f umd -o dist/@flopflip-react-redux.umd.js",
     "build:umd:min": "cross-env NODE_ENV=production rollup -c -f umd -o dist/@flopflip-react-redux.umd.min.js",

@@ -5,15 +5,15 @@
   "scripts": {
     "postinstall": "check-node-version --package && npm run build",
     "lint": "xo",
-    "format": "run-p format:md format:js",
+    "format": "format:md format:js",
     "format:md": "pmd *.md",
     "format:js": "prettier --write '**/modules/**/*.js' '**/demo/**/*.js'",
     "test": "cross-env NODE_ENV=test jest",
     "test:ci": "cross-env NODE_ENV=testt npm run lint && jest --no-watchman --coverage && codecov",
     "test:watch": "cross-env NODE_ENV=test npm test -- --watch",
     "test:coverage": "cross-env NODE_ENV=test jest --coverage",
-    "build": "lerna run build",
-    "build:watch": "lerna run build:watch",
+    "build": "lerna run --parallel build",
+    "build:watch": "lerna run --parallel build:watch",
     "release": "npm run build && lerna publish --registry=https://registry.npmjs.org/"
   },
   "repository": {
@@ -101,7 +101,6 @@
     "eslint-plugin-react": "^7.3.0",
     "jest": "^21.2.1",
     "lerna": "^2.1.2",
-    "npm-run-all": "^4.1.1",
     "prettier": "^1.7.1",
     "prettier-markdown": "^0.1.8",
     "rimraf": "^2.5.4",
