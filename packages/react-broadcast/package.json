@@ -10,10 +10,10 @@
     "prebuild": "rimraf dist/**",
     "build": "cross-env run-p build:umd build:umd:min build:es build:cjs",
     "build:watch": "cross-env npm run build:es -- -w",
-    "build:umd": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f umd -o dist/@flopflip-react-broadcast.umd.js",
-    "build:umd:min": "cross-env NODE_ENV=production BABEL_ENV=rollup rollup -c -f umd -o dist/@flopflip-react-broadcast.umd.min.js",
-    "build:es": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/@flopflip-react-broadcast.es.js",
-    "build:cjs": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f cjs -o dist/@flopflip-react-broadcast.cjs.js"
+    "build:umd": "cross-env NODE_ENV=development rollup -c -f umd -o dist/@flopflip-react-broadcast.umd.js",
+    "build:umd:min": "cross-env NODE_ENV=production rollup -c -f umd -o dist/@flopflip-react-broadcast.umd.min.js",
+    "build:es": "cross-env NODE_ENV=development rollup -c -f es -o dist/@flopflip-react-broadcast.es.js",
+    "build:cjs": "cross-env NODE_ENV=production rollup -c -f cjs -o dist/@flopflip-react-broadcast.cjs.js"
   },
   "files": [
     "readme.md",
@@ -33,9 +33,9 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "enzyme": "^3.0.0",
-    "enzyme-adapter-react-15": "^1.0.0",
-    "enzyme-to-json": "^3.0.0",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-15": "^1.0.1",
+    "enzyme-to-json": "^3.1.1",
     "prop-types": "15.6.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -50,8 +50,8 @@
     "@flopflip/launchdarkly-wrapper": "^2.1.4",
     "@flopflip/react": "^2.1.3",
     "lodash.isobject": "^3.0.2",
-    "react-broadcast": "^0.4.2",
-    "recompose": "^0.25.0"
+    "react-broadcast": "^0.5.2",
+    "recompose": "^0.25.1"
   },
   "keywords": [
     "react",

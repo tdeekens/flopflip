@@ -10,8 +10,8 @@
     "prebuild": "rimraf dist/**",
     "build": "cross-env run-p build:es build:cjs",
     "build:watch": "cross-env npm run build:es -- -w",
-    "build:es": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f es -o dist/@flopflip-launchdarkly-wrapper.es.js",
-    "build:cjs": "cross-env NODE_ENV=development BABEL_ENV=rollup rollup -c -f cjs -o dist/@flopflip-launchdarkly-wrapper.cjs.js"
+    "build:es": "cross-env NODE_ENV=development rollup -c -f es -o dist/@flopflip-launchdarkly-wrapper.es.js",
+    "build:cjs": "cross-env NODE_ENV=development rollup -c -f cjs -o dist/@flopflip-launchdarkly-wrapper.cjs.js"
   },
   "files": [
     "readme.md",
@@ -31,9 +31,9 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "enzyme": "^3.0.0",
-    "enzyme-adapter-react-15": "^1.0.0",
-    "enzyme-to-json": "^3.0.0"
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-15": "^1.0.1",
+    "enzyme-to-json": "^3.1.1"
   },
   "dependencies": {
     "ldclient-js": "^1.1.12",
