@@ -5,10 +5,12 @@
       {
         "targets": {
           "browsers": ["last 2 versions"]
-        }
+        },
+        "modules": false
       }
     ],
     "stage-0",
     "react"
-  ]
+  ],
+  "plugins": ["external-helpers", "transform-react-remove-prop-types"]
 }

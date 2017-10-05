@@ -21,9 +21,9 @@ const config = {
   plugins: [
     commonjs(),
     babel({
-      babelrc: false,
+      babelrc: true,
       exclude: 'node_modules/**',
-      presets: ['es2015-rollup', 'stage-0', 'react'],
+      runtimeHelpers: true,
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),

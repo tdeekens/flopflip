@@ -5,7 +5,6 @@ const replace = require('rollup-plugin-replace');
 const uglify = require('rollup-plugin-uglify');
 const builtins = require('rollup-plugin-node-builtins');
 const filesize = require('rollup-plugin-filesize');
-const analyzer = require('rollup-analyzer-plugin');
 
 const env = process.env.NODE_ENV;
 const version = process.env.npm_package_version;
@@ -24,10 +23,9 @@ const config = {
   plugins: [
     commonjs(),
     babel({
-      babelrc: false,
+      babelrc: true,
       exclude: 'node_modules/**',
-      presets: ['es2015-rollup', 'stage-0', 'react'],
-      plugins: ['transform-react-remove-prop-types'],
+      runtimeHelpers: true,
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),
@@ -38,7 +36,6 @@ const config = {
     }),
     builtins(),
     filesize(),
-    analyzer(),
   ],
 };
 
