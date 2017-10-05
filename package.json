@@ -8,10 +8,10 @@
     "format": "run-p format:md format:js",
     "format:md": "pmd *.md",
     "format:js": "prettier --write '**/modules/**/*.js' '**/demo/**/*.js'",
-    "test": "jest",
-    "test:ci": "npm run lint && jest --no-watchman --coverage && codecov",
-    "test:watch": "npm test -- --watch",
-    "test:coverage": "jest --coverage",
+    "test": "cross-env NODE_ENV=test jest",
+    "test:ci": "cross-env NODE_ENV=testt npm run lint && jest --no-watchman --coverage && codecov",
+    "test:watch": "cross-env NODE_ENV=test npm test -- --watch",
+    "test:coverage": "cross-env NODE_ENV=test jest --coverage",
     "build": "lerna run build",
     "build:watch": "lerna run build:watch",
     "release": "npm run build && lerna publish --registry=https://registry.npmjs.org/"
@@ -86,7 +86,6 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.4.0",
     "babel-preset-es2015": "^6.24.1",
-    "babel-preset-es2015-rollup": "^3.0.0",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "check-node-version": "^2.1.0",
@@ -119,11 +118,6 @@
     "xo": "^0.18.2"
   },
   "jest": {
-    "globals": {
-      "process.env": {
-        "NODE_ENV": "test"
-      }
-    },
     "setupTestFrameworkScriptFile": "./config/jest.js",
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
@@ -136,9 +130,7 @@
       "/packages/.*/dist"
     ],
     "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "packages/react-broadcast/modules/components/subscriber.js",
-      "packages/react-broadcast/modules/components/broadcast.js"
+      "/node_modules/"
     ]
   },
   "keywords": [

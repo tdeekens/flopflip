@@ -1,16 +1,39 @@
 {
-  "presets": [
-    [
-      "env",
-      {
-        "targets": {
-          "browsers": ["last 2 versions"]
-        },
-        "modules": false
-      }
-    ],
-    "stage-0",
-    "react"
-  ],
-  "plugins": ["external-helpers", "transform-react-remove-prop-types"]
+  "env": {
+    "test": {
+      "presets": ["es2015", "stage-0", "react"]
+    },
+    "development": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "browsers": ["last 2 versions"]
+            },
+            "modules": false
+          }
+        ],
+        "stage-0",
+        "react"
+      ],
+      "plugins": ["external-helpers"]
+    },
+    "production": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "browsers": ["last 2 versions"]
+            },
+            "modules": false
+          }
+        ],
+        "stage-0",
+        "react"
+      ],
+      "plugins": ["external-helpers", "transform-react-remove-prop-types"]
+    }
+  }
 }
