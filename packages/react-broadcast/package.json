@@ -13,7 +13,7 @@
     "build:umd": "cross-env NODE_ENV=development rollup -c -f umd -o dist/@flopflip-react-broadcast.umd.js",
     "build:umd:min": "cross-env NODE_ENV=production rollup -c -f umd -o dist/@flopflip-react-broadcast.umd.min.js",
     "build:es": "cross-env NODE_ENV=development rollup -c -f es -o dist/@flopflip-react-broadcast.es.js",
-    "build:cjs": "cross-env NODE_ENV=production rollup -c -f cjs -o dist/@flopflip-react-broadcast.cjs.js"
+    "build:cjs": "cross-env NODE_ENV=development rollup -c -f cjs -o dist/@flopflip-react-broadcast.cjs.js"
   },
   "files": [
     "readme.md",
