@@ -7,7 +7,7 @@ import {
   camelCaseFlags,
 } from '@flopflip/launchdarkly-wrapper';
 
-export default class FlagsSubscription extends React.Component {
+export default class FlagsSubscription extends React.PureComponent {
   static propTypes = {
     shouldInitialize: PropTypes.bool.isRequired,
     shouldChangeUserContext: PropTypes.bool.isRequired,

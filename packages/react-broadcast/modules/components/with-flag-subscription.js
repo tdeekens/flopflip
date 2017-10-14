@@ -4,7 +4,7 @@ import { Subscriber } from 'react-broadcast';
 import { FLAGS_CHANNEL } from './configure';
 
 const withFlagSubscription = propKey => WrappedComponent => {
-  class Subscribed extends React.Component {
+  class Subscribed extends React.PureComponent {
     static displayName = wrapDisplayName(
       WrappedComponent,
       'withFlagSubscription'

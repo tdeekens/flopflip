@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class FeatureToggled extends React.Component {
+export default class FeatureToggled extends React.PureComponent {
   static propTypes = {
     untoggledComponent: PropTypes.element,
     children: PropTypes.element.isRequired,
