@@ -1,10 +1,10 @@
 import { compose, setDisplayName, wrapDisplayName } from 'recompose';
 import { injectFeatureToggle, ALL_FLAGS } from '@flopflip/react';
-import withSubscription from './with-subscription';
+import withFlagSubscription from './with-flag-subscription';
 
 export default (flagName, propKey) => EnhancedComponent =>
   compose(
-    withSubscription(ALL_FLAGS),
+    withFlagSubscription(ALL_FLAGS),
     injectFeatureToggle(flagName, propKey),
     setDisplayName(wrapDisplayName(EnhancedComponent, 'InjectFeatureToggle'))
   )(EnhancedComponent);
