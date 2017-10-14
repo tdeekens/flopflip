@@ -86,62 +86,17 @@ Flopflip allows you to manage feature flags through [LaunchDarkly](https://launc
 
 ### `@flopflip/react-redux` API & exports
 
-- `createFlopFlipEnhancer` a redux store enhancer to configure LaunchDarkly and add feature toggle state to your redux store
 - `ConfigureFlopFlip` a component to configure LaunchDarkly (alternative to the store enhancer)
-- `reducer` and `STATE_SLICE` a reducer and the state slice for the feature toggle state
 - `withFeatureToggle` a Higher-Order Component (HoC) to conditionally render components depending on feature toggle state
 - `injectFeatureToggle` a HoC to inject a feature toggle onto the `props` of a component
 - `injectFeatureToggles` a HoC to inject requested feature toggles from existing feature toggles onto the `props` of a component
 - `FeatureToggled` a component conditionally rendering its `children` based on the status of a passed feature flag
+- `reducer` and `STATE_SLICE` a reducer and the state slice for the feature toggle state
+- `createFlopFlipEnhancer` a redux store enhancer to configure LaunchDarkly and add feature toggle state to your redux store
 
-#### `createFlopFlipEnhancer`
+#### Configuration
 
-Requires arguments of `clientSideId:string`, `user:object`.
-
-- The `clientSideId` is your LaunchDarkly ID.
-- The `user` object needs at least a `key` attribute. An anonymous `key` will be generated using `uuid4` when nothing is specified. The user object can contain additional data.
-
-#### `reducer` & `STATE_SLICE`
-
-The flopflip reducer should be wired up with a `combineReducers` within your application in coordination with the `STATE_SLICE` which is used internally too to manage the location of the feature toggle states.
-
-In context this configuration could look like:
-
-```js
-import { createStore, compose, applyMiddleware } from 'redux';
-import {
-  createFlopFlipEnhancer,
-  flopflipReducer,
-
-  // We refer to this state slice in the `injectFeatureToggles`
-  // HoC and currently do not support a custom state slice.
-  FLOPFLIP_STATE_SLICE
-} from '@flopflip/react-redux';
-
-// Maintained somewhere within your application
-import user from './user';
-import appReducer from './reducer';
-
-const store = createStore(
-  combineReducers({
-    appReducer,
-    [FLOPFLIP_STATE_SLICE]: flopflipReducer,
-  }),
-  initialState,
-  compose(
-    applyMiddleware(...),
-    createFlopFlipEnhancer(
-      // NOTE:
-      //   This clientId is not secret to you  and can be found
-      //   within your settings on LaunchDarkly.
-      window.application.env.LD_CLIENT_ID,
-      user
-    )
-  )
-)
-```
-
-Whenever setup is not preferred via the store enhancer the same can be achieved using the `ConfigureFlopFlip` component.
+Setup is easiest using `ConfigureFlopFlip` which is available in both `@flopflip/react-broadcast` and `@flopflip/react-redux`. Feel free to skip this section whenever setup using a store enhancer (in a redux context) is preferred.
 
 It takes the `props`:
 
@@ -150,6 +105,20 @@ It takes the `props`:
 - The `shouldInitialize` prop can be used to defer the flag subscription setup towards LaunchDarkly (via their SDK). This might be helpful for cases in which you want to wait for e.g. the `key` to be present within your root component and you do not want `flopflip` to generate a `uuid` for you automatically.
 - The `shouldChangeUserContext` boolean prop to indicate whether `flopflip` should watch the `key` property on the `user` to change the user context on LaunchDarkly's SDK (defaults to `false`)
 - The `defaultFlags` prop object can be used to specify default flag values until LaunchDarkly responds or in case flags were removed from their platform (flag keys will be camel cased as with response from LaunchDarkly's API so e.g. `{ 'a-flag': true }` becomes `{ aFlag: true }`)
+
+Whenever you do not want to have the state of all flags persisted in redux the minimal configuration for a setup with `@flopflip/react-broadcast` would be nothing more than
+
+```js
+import { ConfigureFlopFlip } from '@flopflip/react-redux';
+
+<ConfigureFlopFlip user={user} clientSideId={clientSideId}>
+  <App />
+</ConfigureFlopFlip>;
+```
+
+This variant of the `ConfigureFlopFlip` component form `@flopflip/react-broadcast` will use the context and a broadcasting system to reliably communicate with children toggling features (you do not have to worry about any component returning `false` from `shouldComponentUpdate`).
+
+Given your preference is to have the feature flag's state persisted in redux you would simply add a reducer when creating your store
 
 ```js
 import { createStore, compose, applyMiddleware } from 'redux';
@@ -173,39 +142,24 @@ const store = createStore(
     applyMiddleware(...),
   )
 )
+```
 
-// Somewhere where your <App /> is rendered
+Whereas you would still wrap most or all of your application's tree in `ConfigureFlopFlip` to identify a user and setup the integration with LaunchDarkly
 
+```js
 <ConfigureFlopFlip user={user} clientSideId={clientSideId}>
   <App />
 </ConfigureFlopFlip>
 ```
 
-### `@flopflip/react-redux` API & exports
+### `@flopflip/react-broadcast` `@flopflip/react-redux` API & exports for toggling
 
-- `ConfigureFlopFlip` a component to configure LaunchDarkly (using context and broadcasting over redux)
+Apart from `ConfigureFlopFlip` both packages `@flopflip/react-broadcast` and `@flopflip/react-redux` export the same set of components to toggle based on features. Only the import changes depending on if you chose to integrate with redux or without. Again, behind the scenes the build on `@flopflip/react` to share common logic.
+
 - `withFeatureToggle` a Higher-Order Component (HoC) to conditionally render components depending on feature toggle state
 - `injectFeatureToggle` a HoC to inject a feature toggle onto the `props` of a component
 - `injectFeatureToggles` a HoC to inject requested feature toggles from existing feature toggles onto the `props` of a component
 - `FeatureToggled` a component conditionally rendering its `children` based on the status of a passed feature flag
-
-The configuration is the same as mentioned above
-
-```js
-import { ConfigureFlopFlip } from '@flopflip/react-redux';
-
-// Somewhere where your <App /> is rendered
-
-<ConfigureFlopFlip user={user} clientSideId={clientSideId}>
-  <App />
-</ConfigureFlopFlip>;
-```
-
-This `ConfigureFlopFlip` component form `@flopflip/react-broadcast` will use the context and a broadcasting system to reliably communicate with children toggling features.
-
-### `@flopflip/react-broadcast` `@flopflip/react-redux` API & exports for toggling
-
-Both packages `@flopflip/react-broadcast` and `@flopflip/react-redux` export the same set of components to toggle based on features. Only the import changes depending on if you chose to integrate with redux or without. Again, behind the scenes the build on `@flopflip/react` to share common logic.
 
 #### `FeatureToggled`
 
@@ -335,6 +289,53 @@ export default injectFeatureToggle(flagsNames.TOGGLE_B)(Component);
 ```
 
 The feature flags will be available as `props` within the component allowing some custom decisions based on their value.
+
+#### `createFlopFlipEnhancer`
+
+Requires arguments of `clientSideId:string`, `user:object`.
+
+- The `clientSideId` is your LaunchDarkly ID.
+- The `user` object needs at least a `key` attribute. An anonymous `key` will be generated using `uuid4` when nothing is specified. The user object can contain additional data.
+
+#### `reducer` & `STATE_SLICE`
+
+Another way to configure `flopflip` is using a store enhancer. For this a `flopflip` reducer should be wired up with a `combineReducers` within your application in coordination with the `STATE_SLICE` which is used internally too to manage the location of the feature toggle states. This setup eliminates the need to use `ConfigureFlopFlip` somewhere else in your application's component tree.
+
+In context this configuration could look like
+
+```js
+import { createStore, compose, applyMiddleware } from 'redux';
+import {
+  createFlopFlipEnhancer,
+  flopflipReducer,
+
+  // We refer to this state slice in the `injectFeatureToggles`
+  // HoC and currently do not support a custom state slice.
+  FLOPFLIP_STATE_SLICE
+} from '@flopflip/react-redux';
+
+// Maintained somewhere within your application
+import user from './user';
+import appReducer from './reducer';
+
+const store = createStore(
+  combineReducers({
+    appReducer,
+    [FLOPFLIP_STATE_SLICE]: flopflipReducer,
+  }),
+  initialState,
+  compose(
+    applyMiddleware(...),
+    createFlopFlipEnhancer(
+      // NOTE:
+      //   This clientId is not secret to you  and can be found
+      //   within your settings on LaunchDarkly.
+      window.application.env.LD_CLIENT_ID,
+      user
+    )
+  )
+)
+```
 
 ### Module formats
 
