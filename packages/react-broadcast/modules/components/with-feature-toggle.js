@@ -15,11 +15,11 @@ const safelyExtractFlagAndVariate = options => {
   return options;
 };
 
-export default (options, UntoggledComponent) => EnhancedComponent => {
+export default (options, UntoggledComponent) => WrappedComponent => {
   const { flag, variate } = safelyExtractFlagAndVariate(options);
   return compose(
     injectFeatureToggle(flag),
     branchUntoggled(UntoggledComponent, DEFAULT_FLAG_PROP_KEY, variate),
-    setDisplayName(wrapDisplayName(EnhancedComponent, 'WithFeatureToggle'))
-  )(EnhancedComponent);
+    setDisplayName(wrapDisplayName(WrappedComponent, 'withFeatureToggle'))
+  )(WrappedComponent);
 };
