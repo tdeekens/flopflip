@@ -35,19 +35,20 @@
   "devDependencies": {
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-15": "^1.0.1",
-    "enzyme-to-json": "^3.1.1",
+    "enzyme-to-json": "^3.1.2",
     "prop-types": "15.6.0",
+    "react": "^16.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-redux": "^5.0.6",
     "react-test-renderer": "^15.6.1",
+    "react-redux": "^5.0.6",
     "redux": "^3.7.2"
   },
   "dependencies": {
     "@flopflip/launchdarkly-wrapper": "^2.1.5",
     "@flopflip/react": "^2.1.4",
     "lodash.isobject": "^3.0.2",
-    "recompose": "^0.25.1"
+    "recompose": "^0.26.0"
   },
   "peerDependencies": {
     "prop-types": "15.6.0",
