@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { FlagsSubscription } from '@flopflip/react';
 import { updateStatus, updateFlags } from './../ducks';
 
-export class Configure extends React.Component {
+export class Configure extends React.PureComponent {
   static displayName = 'ConfigureFlopflip';
   static propTypes = {
     children: PropTypes.node,

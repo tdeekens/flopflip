@@ -5,7 +5,7 @@ import { Broadcast } from 'react-broadcast';
 
 export const FLAGS_CHANNEL = '@flopflip';
 
-export default class Configure extends React.Component {
+export default class Configure extends React.PureComponent {
   static displayName = 'ConfigureFlopflip';
 
   static propTypes = {
