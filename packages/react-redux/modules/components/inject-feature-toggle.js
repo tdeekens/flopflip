@@ -7,10 +7,10 @@ export const mapStateToProps = state => ({
   [ALL_FLAGS]: state[STATE_SLICE].flags,
 });
 
-export default (flagName, propKey) => EnhancedComponent =>
+export default (flagName, propKey) => WrappedComponent =>
   /* istanbul ignore next */
   compose(
     connect(mapStateToProps),
     injectFeatureToggle(flagName, propKey),
-    setDisplayName(wrapDisplayName(EnhancedComponent, 'InjectFeatureToggle'))
-  )(EnhancedComponent);
+    setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggle'))
+  )(WrappedComponent);
