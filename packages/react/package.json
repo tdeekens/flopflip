@@ -33,7 +33,7 @@
   "devDependencies": {
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-15": "^1.0.1",
-    "enzyme-to-json": "^3.1.1",
+    "enzyme-to-json": "^3.1.2",
     "prop-types": "15.6.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -46,10 +46,10 @@
   },
   "dependencies": {
     "@flopflip/launchdarkly-wrapper": "^2.1.5",
-    "@hocs/omit-props": "^0.2.1",
+    "@hocs/omit-props": "^0.3.0",
     "lodash.intersection": "^4.4.0",
     "lodash.isnil": "^4.0.0",
-    "recompose": "^0.25.1"
+    "recompose": "^0.26.0"
   },
   "keywords": [
     "react",

@@ -35,7 +35,7 @@
   "devDependencies": {
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-15": "^1.0.1",
-    "enzyme-to-json": "^3.1.1",
+    "enzyme-to-json": "^3.1.2",
     "prop-types": "15.6.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -51,7 +51,7 @@
     "@flopflip/react": "^2.1.4",
     "lodash.isobject": "^3.0.2",
     "react-broadcast": "^0.5.2",
-    "recompose": "^0.25.1"
+    "recompose": "^0.26.0"
   },
   "keywords": [
     "react",
