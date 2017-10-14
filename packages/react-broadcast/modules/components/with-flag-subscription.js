@@ -3,9 +3,12 @@ import { wrapDisplayName } from 'recompose';
 import { Subscriber } from 'react-broadcast';
 import { FLAGS_CHANNEL } from './configure';
 
-const withSubscription = propKey => WrappedComponent => {
+const withFlagSubscription = propKey => WrappedComponent => {
   class Subscribed extends React.Component {
-    static displayName = wrapDisplayName(WrappedComponent, 'withSubscription');
+    static displayName = wrapDisplayName(
+      WrappedComponent,
+      'withFlagSubscription'
+    );
     render() {
       return (
         <Subscriber channel={FLAGS_CHANNEL}>
@@ -20,4 +23,4 @@ const withSubscription = propKey => WrappedComponent => {
   return Subscribed;
 };
 
-export default withSubscription;
+export default withFlagSubscription;

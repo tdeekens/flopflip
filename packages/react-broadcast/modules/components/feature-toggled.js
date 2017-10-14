@@ -1,9 +1,9 @@
 import { compose, withProps } from 'recompose';
 import { FeatureToggled, isFeatureEnabled, ALL_FLAGS } from '@flopflip/react';
-import withSubscription from './with-subscription';
+import withFlagSubscription from './with-flag-subscription';
 
 export default compose(
-  withSubscription(ALL_FLAGS),
+  withFlagSubscription(ALL_FLAGS),
   withProps(props => ({
     isFeatureEnabled: isFeatureEnabled(props.flag, props.variate)(
       props[ALL_FLAGS]
