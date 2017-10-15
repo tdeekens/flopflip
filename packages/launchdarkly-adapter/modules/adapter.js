@@ -2,6 +2,12 @@ import ldClient from 'ldclient-js';
 import camelCase from 'lodash.camelcase';
 import nanoid from 'nanoid';
 
+const state = {
+  isReady: false,
+  user: null,
+  client: null,
+};
+
 const normalizeFlag = (flagName, flagValue) => [
   camelCase(flagName),
   // Multivariate flags contain a string or `null` - `false` seems
@@ -9,8 +15,8 @@ const normalizeFlag = (flagName, flagValue) => [
   flagValue === null ? false : flagValue,
 ];
 
-const flagUpdates = ({ rawFlags, client, onFlagsStateChange }) => {
-  // Dispatch whenever configured flag value changes
+const subscribeToFlags = ({ rawFlags, client, onFlagsStateChange }) => {
+  // Dispatch whenever a configured flag value changes
   for (const flagName in rawFlags) {
     if (Object.prototype.hasOwnProperty.call(rawFlags, flagName)) {
       client.on(`change:${flagName}`, flagValue => {
@@ -27,11 +33,25 @@ const flagUpdates = ({ rawFlags, client, onFlagsStateChange }) => {
   }
 };
 
-const changeUserContext = ({ client, nextUser }) => client.identify(nextUser);
-
 export const createAnonymousUser = () => ({
   key: nanoid(),
 });
+// NOTE: Used during testing to inject a mock client
+export const injectClient = client => {
+  if (!process.env.NODE_ENV !== 'test')
+    throw Error(
+      '@flopflip/launchdarkly-adapter: injecting a client is only allowed during testing.'
+    );
+
+  return (state.client = client);
+};
+
+const initializeUserContext = (clientSideId, user) =>
+  ldClient.initialize(
+    clientSideId,
+    user && user.key ? user : createAnonymousUser()
+  );
+const changeUserContext = (client, nextUser) => client.identify(nextUser);
 
 export const camelCaseFlags = rawFlags =>
   Object.entries(rawFlags).reduce((camelCasedFlags, [flagName, flagValue]) => {
@@ -45,27 +65,36 @@ export const camelCaseFlags = rawFlags =>
     return camelCasedFlags;
   }, {});
 
-const configure = ({ clientSideId, user }) =>
-  ldClient.initialize(
-    clientSideId,
-    user && user.key ? user : createAnonymousUser()
-  );
+const configure = ({ clientSideId, user }) => {
+  if (state.isReady === true && state.user && state.user.key !== user.key)
+    changeUserContext(state.client, user);
+  else state.client = initializeUserContext(clientSideId, user);
 
-const subscribe = ({ client, onFlagsStateChange, onStatusStateChange }) => {
-  client.on('ready', () => {
+  state.user = user;
+
+  return state.client;
+};
+
+const subscribe = ({ onFlagsStateChange, onStatusStateChange }) => {
+  if (!state.client)
+    throw Error(
+      '@flopflip/launchdarkly-adapter: please configure adapter before subscribing.'
+    );
+
+  state.client.on('ready', () => {
+    const rawFlags = state.client.allFlags();
+    // First update internal state
+    state.isReady = true;
+    // to then signal that the adapter is ready
     onStatusStateChange({ isReady: true });
-
-    const rawFlags = client.allFlags();
-    const camelCasedFlags = camelCaseFlags(rawFlags);
-
-    onFlagsStateChange(camelCasedFlags);
-
-    flagUpdates({ rawFlags, client, onFlagsStateChange });
+    // and flush initial state of flags
+    onFlagsStateChange(camelCaseFlags(rawFlags));
+    // to finally subscribe to later changes.
+    subscribeToFlags({ rawFlags, client: state.client, onFlagsStateChange });
   });
 };
 
 export default {
   configure,
   subscribe,
-  changeUserContext,
 };

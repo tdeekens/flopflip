@@ -1,5 +1,9 @@
 import ldClient from 'ldclient-js';
-import adapter, { camelCaseFlags, createAnonymousUser } from './adapter';
+import adapter, {
+  camelCaseFlags,
+  createAnonymousUser,
+  injectClient,
+} from './adapter';
 
 jest.mock('nanoid', () => jest.fn(() => 'foo-random-id'));
 
@@ -50,7 +54,9 @@ describe('when configuring', () => {
       onStatusStateChange = jest.fn();
       onFlagsStateChange = jest.fn();
 
-      adapter.subscribe({ client, onStatusStateChange, onFlagsStateChange });
+      injectClient(client);
+
+      adapter.subscribe({ onStatusStateChange, onFlagsStateChange });
     });
 
     describe('when `ldClient` is ready', () => {
@@ -80,13 +86,12 @@ describe('when configuring', () => {
       });
     });
 
-    describe('when flag updates', () => {
+    describe('with flag updates', () => {
       beforeEach(() => {
         // Reset due to preivous dispatches
         onFlagsStateChange.mockClear();
 
-        // Checking for change:* callbacks and settings all flags
-        // to false.
+        // Checking for change:* callbacks and settings all flags to false.
         client.on.mock.calls.forEach(([event, cb]) => {
           if (event.startsWith('change:')) cb(false);
         });
@@ -105,20 +110,24 @@ describe('when configuring', () => {
         });
       });
     });
-  });
-});
 
-describe('when changing user context', () => {
-  let client;
+    describe('when changing user context', () => {
+      const nextUser = { key: 'bar-user' };
+      let client;
 
-  beforeEach(() => {
-    client = { identify: jest.fn() };
+      beforeEach(() => {
+        client = { identify: jest.fn() };
 
-    adapter.changeUserContext({ client, nextUser: user });
-  });
+        injectClient(client);
 
-  it('should invoke `identify` on the `client` with the `user`', () => {
-    expect(client.identify).toHaveBeenCalledWith(user);
+        adapter.configure({ client, user });
+        adapter.configure({ client, user: nextUser });
+      });
+
+      it('should invoke `identify` on the `client` with the `user`', () => {
+        expect(client.identify).toHaveBeenCalledWith(user);
+      });
+    });
   });
 });
 
