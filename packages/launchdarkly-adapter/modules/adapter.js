@@ -2,10 +2,6 @@ import ldClient from 'ldclient-js';
 import camelCase from 'lodash.camelcase';
 import nanoid from 'nanoid';
 
-export const createAnonymousUser = () => ({
-  key: nanoid(),
-});
-
 const normalizeFlag = (flagName, flagValue) => [
   camelCase(flagName),
   // Multivariate flags contain a string or `null` - `false` seems
@@ -13,7 +9,7 @@ const normalizeFlag = (flagName, flagValue) => [
   flagValue === null ? false : flagValue,
 ];
 
-const flagUpdates = ({ rawFlags, client, onUpdateFlags }) => {
+const flagUpdates = ({ rawFlags, client, onFlagsStateChange }) => {
   // Dispatch whenever configured flag value changes
   for (const flagName in rawFlags) {
     if (Object.prototype.hasOwnProperty.call(rawFlags, flagName)) {
@@ -23,13 +19,19 @@ const flagUpdates = ({ rawFlags, client, onUpdateFlags }) => {
           flagValue
         );
 
-        onUpdateFlags({
+        onFlagsStateChange({
           [normalzedFlagName]: normalzedFlagValue,
         });
       });
     }
   }
 };
+
+const changeUserContext = ({ client, nextUser }) => client.identify(nextUser);
+
+export const createAnonymousUser = () => ({
+  key: nanoid(),
+});
 
 export const camelCaseFlags = rawFlags =>
   Object.entries(rawFlags).reduce((camelCasedFlags, [flagName, flagValue]) => {
@@ -43,23 +45,27 @@ export const camelCaseFlags = rawFlags =>
     return camelCasedFlags;
   }, {});
 
-export const initialize = ({ clientSideId, user }) =>
+const configure = ({ clientSideId, user }) =>
   ldClient.initialize(
     clientSideId,
     user && user.key ? user : createAnonymousUser()
   );
 
-export const listen = ({ client, onUpdateFlags, onUpdateStatus }) => {
+const subscribe = ({ client, onFlagsStateChange, onStatusStateChange }) => {
   client.on('ready', () => {
-    onUpdateStatus({ isReady: true });
+    onStatusStateChange({ isReady: true });
 
     const rawFlags = client.allFlags();
     const camelCasedFlags = camelCaseFlags(rawFlags);
 
-    onUpdateFlags(camelCasedFlags);
+    onFlagsStateChange(camelCasedFlags);
 
-    flagUpdates({ rawFlags, client, onUpdateFlags });
+    flagUpdates({ rawFlags, client, onFlagsStateChange });
   });
 };
 
-export const changeUserContext = ({ client, user }) => client.identify(user);
+export default {
+  configure,
+  subscribe,
+  changeUserContext,
+};
