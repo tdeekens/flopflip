@@ -11,7 +11,7 @@ const version = process.env.npm_package_version;
 
 const config = {
   input: 'modules/index.js',
-  name: '@flopflip-launchdarkly-wrapper',
+  name: '@flopflip-launchdarkly-adapter',
   sourcemap: true,
   plugins: [
     commonjs(),
