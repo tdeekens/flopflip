@@ -5,7 +5,7 @@ import {
   camelCaseFlags,
   createAnonymousUser,
   changeUserContext,
-} from './client';
+} from './adapter';
 
 jest.mock('nanoid', () => jest.fn(() => 'foo-random-id'));
 
