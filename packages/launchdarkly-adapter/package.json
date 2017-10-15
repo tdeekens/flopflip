@@ -1,17 +1,17 @@
 {
-  "name": "@flopflip/launchdarkly-wrapper",
+  "name": "@flopflip/launchdarkly-adapter",
   "version": "2.1.5",
-  "description": "A wrapper around the LaunchDarkly client for flipflop",
-  "main": "dist/@flopflip-launchdarkly-wrapper.cjs.js",
-  "module": "dist/@flopflip-launchdarkly-wrapper.es.js",
-  "browser": "dist/@flopflip-launchdarkly-wrapper.umd.js",
+  "description": "A adapter around the LaunchDarkly client for flipflop",
+  "main": "dist/@flopflip-launchdarkly-adapter.cjs.js",
+  "module": "dist/@flopflip-launchdarkly-adapter.es.js",
+  "browser": "dist/@flopflip-launchdarkly-adapter.umd.js",
   "scripts": {
     "preversion": "npm run build",
     "prebuild": "rimraf dist/**",
     "build": "cross-env npm run build:es && npm run build:cjs",
     "build:watch": "cross-env npm run build:es -- -w",
-    "build:es": "cross-env NODE_ENV=development rollup -c -f es -o dist/@flopflip-launchdarkly-wrapper.es.js",
-    "build:cjs": "cross-env NODE_ENV=development rollup -c -f cjs -o dist/@flopflip-launchdarkly-wrapper.cjs.js"
+    "build:es": "cross-env NODE_ENV=development rollup -c -f es -o dist/@flopflip-launchdarkly-adapter.es.js",
+    "build:cjs": "cross-env NODE_ENV=development rollup -c -f cjs -o dist/@flopflip-launchdarkly-adapter.cjs.js"
   },
   "files": [
     "readme.md",
