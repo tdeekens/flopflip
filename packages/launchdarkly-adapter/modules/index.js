@@ -5,6 +5,6 @@ export {
   listen,
   changeUserContext,
   camelCaseFlags,
-} from './client';
+} from './adapter';
 
 export { version };
