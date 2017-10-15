@@ -59,7 +59,7 @@
 
 ## Installation
 
-This is mono repository maintained using [lerna](https://github.com/lerna/lerna). It currently contains four [packages](/packages) in a `launchdarkly-wrapper`, `react`, `react-redux` and `react-broadcast`. You should not need the `launchdarkly-wrapper` yourself but one of our bindings (react-broadcast or react-redux). Both use the `react` package to share components.
+This is a mono repository maintained using [lerna](https://github.com/lerna/lerna). It currently contains four [packages](/packages) in a `launchdarkly-wrapper`, `react`, `react-redux` and `react-broadcast`. You should not need the `launchdarkly-wrapper` yourself but one of our bindings (react-broadcast or react-redux). Both use the `react` package to share components.
 
 Depending on the preferred integration (with or without redux) use:
 
@@ -84,7 +84,7 @@ A browser window should open and the network tab should show feature flags being
 
 Flopflip allows you to manage feature flags through [LaunchDarkly](https://launchdarkly.com/) within an application written using React with or without Redux.
 
-### `@flopflip/react-redux` API & exports
+### `@flopflip/react-redux` & `@flopflip/react-broadcast` API & exports
 
 - `ConfigureFlopFlip` a component to configure LaunchDarkly (alternative to the store enhancer)
 - `withFeatureToggle` a Higher-Order Component (HoC) to conditionally render components depending on feature toggle state
