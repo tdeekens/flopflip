@@ -1,11 +1,5 @@
 import ldClient from 'ldclient-js';
-import {
-  initialize,
-  listen,
-  camelCaseFlags,
-  createAnonymousUser,
-  changeUserContext,
-} from './adapter';
+import adapter, { camelCaseFlags, createAnonymousUser } from './adapter';
 
 jest.mock('nanoid', () => jest.fn(() => 'foo-random-id'));
 
@@ -19,10 +13,10 @@ jest.mock('ldclient-js', () => ({
 const clientSideId = '123-abc';
 const user = { key: 'foo-user' };
 
-describe('when initializing', () => {
+describe('when configuring', () => {
   describe('with user key', () => {
     beforeEach(() => {
-      initialize({ clientSideId, user });
+      adapter.configure({ clientSideId, user });
     });
 
     it('should initialize the `ld-client` with `clientSideId` and given `user`', () => {
@@ -32,7 +26,7 @@ describe('when initializing', () => {
 
   describe('without key', () => {
     beforeEach(() => {
-      initialize({ clientSideId, user: {} });
+      adapter.configure({ clientSideId, user: {} });
     });
 
     it('should initialize the `ld-client` with `clientSideId` and random `user` `key`', () => {
@@ -44,8 +38,8 @@ describe('when initializing', () => {
 
   describe('when ready', () => {
     const flags = { 'some-flag-1': true, 'some-flag-2': false };
-    let onUpdateStatus;
-    let onUpdateFlags;
+    let onStatusStateChange;
+    let onFlagsStateChange;
     let client;
 
     beforeEach(() => {
@@ -53,21 +47,21 @@ describe('when initializing', () => {
         allFlags: jest.fn(() => flags),
         on: jest.fn((_, cb) => cb()),
       };
-      onUpdateStatus = jest.fn();
-      onUpdateFlags = jest.fn();
+      onStatusStateChange = jest.fn();
+      onFlagsStateChange = jest.fn();
 
-      listen({ client, onUpdateStatus, onUpdateFlags });
+      adapter.subscribe({ client, onStatusStateChange, onFlagsStateChange });
     });
 
     describe('when `ldClient` is ready', () => {
       it('should `dispatch` `onUpdateStatus` action with `isReady`', () => {
-        expect(onUpdateStatus).toHaveBeenCalledWith({
+        expect(onStatusStateChange).toHaveBeenCalledWith({
           isReady: true,
         });
       });
 
-      it('should `dispatch` `onUpdateFlags` action with camel cased `flags`', () => {
-        expect(onUpdateFlags).toHaveBeenCalledWith({
+      it('should `dispatch` `onStatusStateChange` action with camel cased `flags`', () => {
+        expect(onFlagsStateChange).toHaveBeenCalledWith({
           someFlag1: true,
           someFlag2: false,
         });
@@ -89,7 +83,7 @@ describe('when initializing', () => {
     describe('when flag updates', () => {
       beforeEach(() => {
         // Reset due to preivous dispatches
-        onUpdateFlags.mockClear();
+        onFlagsStateChange.mockClear();
 
         // Checking for change:* callbacks and settings all flags
         // to false.
@@ -98,15 +92,15 @@ describe('when initializing', () => {
         });
       });
 
-      it('should `dispatch` `onUpdateFlags` action', () => {
-        expect(onUpdateFlags).toHaveBeenCalled();
+      it('should `dispatch` `onFlagsStateChange` action', () => {
+        expect(onFlagsStateChange).toHaveBeenCalled();
       });
 
-      it('should `dispatch` `onUpdateFlags` action with camel cased `flags`', () => {
-        expect(onUpdateFlags).toHaveBeenCalledWith({
+      it('should `dispatch` `onFlagsStateChange` action with camel cased `flags`', () => {
+        expect(onFlagsStateChange).toHaveBeenCalledWith({
           someFlag1: false,
         });
-        expect(onUpdateFlags).toHaveBeenCalledWith({
+        expect(onFlagsStateChange).toHaveBeenCalledWith({
           someFlag2: false,
         });
       });
@@ -120,7 +114,7 @@ describe('when changing user context', () => {
   beforeEach(() => {
     client = { identify: jest.fn() };
 
-    changeUserContext({ client, user });
+    adapter.changeUserContext({ client, nextUser: user });
   });
 
   it('should invoke `identify` on the `client` with the `user`', () => {
