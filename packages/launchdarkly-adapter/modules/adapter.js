@@ -4,6 +4,7 @@ import nanoid from 'nanoid';
 
 const state = {
   isReady: false,
+  isConfigured: false,
   user: null,
   client: null,
 };
@@ -36,14 +37,17 @@ const subscribeToFlags = ({ rawFlags, client, onFlagsStateChange }) => {
 export const createAnonymousUser = () => ({
   key: nanoid(),
 });
+
 // NOTE: Used during testing to inject a mock client
 export const injectClient = client => {
   if (process.env.NODE_ENV !== 'test')
-    throw Error(
+    throw new Error(
       '@flopflip/launchdarkly-adapter: injecting a client is only allowed during testing.'
     );
 
-  return (state.client = client);
+  state.client = client;
+
+  return state.client;
 };
 
 const initializeUserContext = (clientSideId, user) =>
@@ -65,17 +69,47 @@ export const camelCaseFlags = rawFlags =>
     return camelCasedFlags;
   }, {});
 
-const configure = ({ clientSideId, user }) => {
-  state.client = initializeUserContext(clientSideId, user);
+export const subscribe = ({ onFlagsStateChange, onStatusStateChange }) => {
+  if (!state.client)
+    throw new Error(
+      '@flopflip/launchdarkly-adapter: please configure adapter before subscribing.'
+    );
 
+  state.client.on('ready', () => {
+    const rawFlags = state.client.allFlags();
+    // First update internal state
+    state.isReady = true;
+    // ...to then signal that the adapter is ready
+    onStatusStateChange({ isReady: true });
+    // ...and flush initial state of flags
+    onFlagsStateChange(camelCaseFlags(rawFlags));
+    // ...to finally subscribe to later changes.
+    subscribeToFlags({ rawFlags, client: state.client, onFlagsStateChange });
+  });
+};
+
+const configure = ({
+  clientSideId,
+  user,
+  onFlagsStateChange,
+  onStatusStateChange,
+}) => {
+  state.client = initializeUserContext(clientSideId, user);
   state.user = user;
+
+  subscribe({
+    onFlagsStateChange,
+    onStatusStateChange,
+  });
+
+  state.isConfigured = true;
 
   return state.client;
 };
 
-const reConfigure = ({ user }) => {
-  if (state.isReady !== true && !state.user)
-    throw Error(
+const reconfigure = ({ user }) => {
+  if (!state.isReady || !state.isConfigured || !state.user)
+    throw new Error(
       '@flopflip/launchdarkly-adapter: please configure adapter before reconfiguring.'
     );
 
@@ -84,27 +118,12 @@ const reConfigure = ({ user }) => {
   state.user = user;
 };
 
-const subscribe = ({ onFlagsStateChange, onStatusStateChange }) => {
-  if (!state.client)
-    throw Error(
-      '@flopflip/launchdarkly-adapter: please configure adapter before subscribing.'
-    );
-
-  state.client.on('ready', () => {
-    const rawFlags = state.client.allFlags();
-    // First update internal state
-    state.isReady = true;
-    // to then signal that the adapter is ready
-    onStatusStateChange({ isReady: true });
-    // and flush initial state of flags
-    onFlagsStateChange(camelCaseFlags(rawFlags));
-    // to finally subscribe to later changes.
-    subscribeToFlags({ rawFlags, client: state.client, onFlagsStateChange });
-  });
-};
+export const isConfigured = () => state.isConfigured;
+export const isReady = () => state.isReady;
 
 export default {
+  isConfigured,
+  isReady,
   configure,
-  reConfigure,
-  subscribe,
+  reconfigure,
 };
