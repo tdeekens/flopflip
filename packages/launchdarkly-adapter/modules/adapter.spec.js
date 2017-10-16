@@ -111,21 +111,22 @@ describe('when configuring', () => {
       });
     });
 
-    describe('when changing user context', () => {
+    describe('when reconfiguring', () => {
       const nextUser = { key: 'bar-user' };
       let client;
 
       beforeEach(() => {
         client = { identify: jest.fn() };
 
+        adapter.configure({ clientSideId, user });
+
         injectClient(client);
 
-        adapter.configure({ client, user });
-        adapter.configure({ client, user: nextUser });
+        adapter.reConfigure({ user: nextUser });
       });
 
       it('should invoke `identify` on the `client` with the `user`', () => {
-        expect(client.identify).toHaveBeenCalledWith(user);
+        expect(client.identify).toHaveBeenCalledWith(nextUser);
       });
     });
   });
