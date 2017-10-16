@@ -1,77 +1,52 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  initialize,
-  listen,
-  changeUserContext,
-  camelCaseFlags,
-} from '@flopflip/launchdarkly-wrapper';
 
 export default class FlagsSubscription extends React.PureComponent {
   static propTypes = {
-    shouldInitialize: PropTypes.bool.isRequired,
-    shouldChangeUserContext: PropTypes.bool.isRequired,
-    clientSideId: PropTypes.string,
-    user: PropTypes.shape({
-      key: PropTypes.string,
-    }),
+    shouldConfigure: PropTypes.bool.isRequired,
+    shouldReconfigure: PropTypes.bool.isRequired,
+    adapterArgs: PropTypes.shape({
+      clientSideId: PropTypes.string,
+      user: PropTypes.shape({
+        key: PropTypes.string,
+      }),
+      onFlagsStateChange: PropTypes.func.isRequired,
+      onStatusStateChange: PropTypes.func.isRequired,
+    }).isRequired,
+    adapter: PropTypes.object.isRequired,
     defaultFlags: PropTypes.object,
-    onUpdateFlags: PropTypes.func.isRequired,
-    onUpdateStatus: PropTypes.func.isRequired,
     children: PropTypes.node,
   };
 
-  state = { isInitialized: false };
-
   static defaultProps = {
     children: null,
-    clientSideId: null,
-    user: {},
     defaultFlags: {},
-  };
-
-  initializeFlagListening = () => {
-    if (!this.state.isInitialized) {
-      this.client = initialize({
-        clientSideId: this.props.clientSideId,
-        user: this.props.user,
-      });
-
-      listen({
-        client: this.client,
-        onUpdateFlags: this.props.onUpdateFlags,
-        onUpdateStatus: this.props.onUpdateStatus,
-      });
-
-      this.setState({ isInitialized: true });
-    }
-  };
-
-  changeUserContext = () => {
-    changeUserContext({ client: this.client, user: this.props.user });
   };
 
   handleDefaultFlags = defaultFlags => {
     if (Object.keys(defaultFlags).length > 0) {
-      this.props.onUpdateFlags(camelCaseFlags(defaultFlags));
+      this.props.adapterArgs.onFlagsStateChange(defaultFlags);
     }
   };
 
   componentDidMount() {
     this.handleDefaultFlags(this.props.defaultFlags);
-    if (this.props.shouldInitialize) this.initializeFlagListening();
+    if (this.props.shouldConfigure)
+      this.props.adapter.configure(this.props.adapterArgs);
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.shouldInitialize) this.initializeFlagListening();
+  componentDidUpdate() {
+    if (this.props.shouldConfigure && !this.props.adapter.isConfigured()) {
+      this.props.adapter.configure(this.props.adapterArgs);
+      return;
+    }
 
     if (
-      this.props.shouldChangeUserContext &&
-      this.props.user &&
-      prevProps.user.key !== this.props.user.key
-    ) {
-      this.changeUserContext();
-    }
+      this.props.shouldReconfigure &&
+      this.props.adapter.isConfigured() &&
+      this.props.adapter.isReady()
+    )
+      this.props.adapter.reConfigure(this.props.adapterArgs);
   }
 
   render() {

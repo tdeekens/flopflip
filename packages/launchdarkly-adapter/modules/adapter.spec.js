@@ -2,6 +2,7 @@ import ldClient from 'ldclient-js';
 import adapter, {
   camelCaseFlags,
   createAnonymousUser,
+  subscribe,
   injectClient,
 } from './adapter';
 
@@ -56,7 +57,12 @@ describe('when configuring', () => {
 
       injectClient(client);
 
-      adapter.subscribe({ onStatusStateChange, onFlagsStateChange });
+      subscribe({
+        clientSideId,
+        user,
+        onStatusStateChange,
+        onFlagsStateChange,
+      });
     });
 
     describe('when `ldClient` is ready', () => {
@@ -122,7 +128,7 @@ describe('when configuring', () => {
 
         injectClient(client);
 
-        adapter.reConfigure({ user: nextUser });
+        adapter.reconfigure({ user: nextUser });
       });
 
       it('should invoke `identify` on the `client` with the `user`', () => {
