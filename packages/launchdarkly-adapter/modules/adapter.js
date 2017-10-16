@@ -38,7 +38,7 @@ export const createAnonymousUser = () => ({
 });
 // NOTE: Used during testing to inject a mock client
 export const injectClient = client => {
-  if (!process.env.NODE_ENV !== 'test')
+  if (process.env.NODE_ENV !== 'test')
     throw Error(
       '@flopflip/launchdarkly-adapter: injecting a client is only allowed during testing.'
     );
@@ -66,13 +66,22 @@ export const camelCaseFlags = rawFlags =>
   }, {});
 
 const configure = ({ clientSideId, user }) => {
-  if (state.isReady === true && state.user && state.user.key !== user.key)
-    changeUserContext(state.client, user);
-  else state.client = initializeUserContext(clientSideId, user);
+  state.client = initializeUserContext(clientSideId, user);
 
   state.user = user;
 
   return state.client;
+};
+
+const reConfigure = ({ user }) => {
+  if (state.isReady !== true && !state.user)
+    throw Error(
+      '@flopflip/launchdarkly-adapter: please configure adapter before reconfiguring.'
+    );
+
+  if (state.user.key !== user.key) changeUserContext(state.client, user);
+
+  state.user = user;
 };
 
 const subscribe = ({ onFlagsStateChange, onStatusStateChange }) => {
@@ -96,5 +105,6 @@ const subscribe = ({ onFlagsStateChange, onStatusStateChange }) => {
 
 export default {
   configure,
+  reConfigure,
   subscribe,
 };
