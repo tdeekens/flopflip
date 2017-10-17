@@ -1,11 +1,11 @@
 <p align="center">
   <b style="font-size: 25px">🎛 flopflip - Feature Toggling 🎚</b><br />
-  <i>flip or flop a feature in LaunchDarkly with real-time updates through a Redux store by directly using React's context.</i>
+  <i>flip or flop a feature in with real-time updates through a Redux store by directly using React's context.</i>
 </p>
 
 <p align="center">
   <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/logo.png" /><br /><br />
-  <i>Toggle features in LaunchDarkly with their state being maintained in a Redux state slice or a broadcasting system (through the context) being accessible through a set of Higher-Order Components in React.</i>
+  <i>Toggle features in being maintained in a Redux state slice or a broadcasting system (through the context) being accessible through a set of Higher-Order Components in React.</i>
   <br /><br />
   <a href="https://travis-ci.org/tdeekens/flopflip">
     <img alt="Travis CI Status" src="https://img.shields.io/travis/tdeekens/flopflip/master.svg?style=flat-square&label=travis">
@@ -82,17 +82,17 @@ A browser window should open and the network tab should show feature flags being
 
 ## Documentation
 
-Flopflip allows you to manage feature flags through [LaunchDarkly](https://launchdarkly.com/) within an application written using React with or without Redux.
+Flopflip allows you to manage feature flags through the notion of adapters (e.g. LaunchDarkly or LocalStorage) within an application written using React with or without Redux.
 
 ### `@flopflip/react-redux` & `@flopflip/react-broadcast` API & exports
 
-- `ConfigureFlopFlip` a component to configure LaunchDarkly (alternative to the store enhancer)
+- `ConfigureFlopFlip` a component to configure flopflip with an adapter (alternative to the store enhancer)
 - `withFeatureToggle` a Higher-Order Component (HoC) to conditionally render components depending on feature toggle state
 - `injectFeatureToggle` a HoC to inject a feature toggle onto the `props` of a component
 - `injectFeatureToggles` a HoC to inject requested feature toggles from existing feature toggles onto the `props` of a component
 - `FeatureToggled` a component conditionally rendering its `children` based on the status of a passed feature flag
 - `reducer` and `STATE_SLICE` a reducer and the state slice for the feature toggle state
-- `createFlopFlipEnhancer` a redux store enhancer to configure LaunchDarkly and add feature toggle state to your redux store
+- `createFlopFlipEnhancer` a redux store enhancer to configure flipflip and add feature toggle state to your redux store
 
 #### Configuration
 
@@ -100,18 +100,21 @@ Setup is easiest using `ConfigureFlopFlip` which is available in both `@flopflip
 
 It takes the `props`:
 
-- The `clientSideId` is your LaunchDarkly ID.
-- The `user` object needs at least a `key` attribute. An anonymous `key` will be generated using a `uuid` when nothing is specified. The user object can contain additional data.
-- The `shouldInitialize` prop can be used to defer the flag subscription setup towards LaunchDarkly (via their SDK). This might be helpful for cases in which you want to wait for e.g. the `key` to be present within your root component and you do not want `flopflip` to generate a `uuid` for you automatically.
-- The `shouldChangeUserContext` boolean prop to indicate whether `flopflip` should watch the `key` property on the `user` to change the user context on LaunchDarkly's SDK (defaults to `false`)
-- The `defaultFlags` prop object can be used to specify default flag values until LaunchDarkly responds or in case flags were removed from their platform (flag keys will be camel cased as with response from LaunchDarkly's API so e.g. `{ 'a-flag': true }` becomes `{ aFlag: true }`)
+- The `adapter` which can be e.g. `launchdarkly-adapter`
+  - An `adapter` should implement the following methods: `configure`, `reconfigure`, `isReady` and `isConfigured`
+- The `adapterArgs` containing whatever the underlying `adapter` accepts
+  - The `user` object is often the basis to identify an user to toggle features. The user object can contain any additional data.
+- The `shouldConfigure` prop can be used to defer the initial configuration the `adapter`. This might be helpful for cases in which you want to wait for e.g. the `key` to be present within your root component and you do not want `flopflip` to generate a `uuid` for you automatically.
+- The `shouldReconfigure` boolean prop to indicate whether `flopflip` should invoke `reconfigure` on the `adapter` with `adapterArgs` whenever any of the args changed
+- The `defaultFlags` prop object can be used to specify default flag values until an `adapter` responds or in case flags were removed
 
-Whenever you do not want to have the state of all flags persisted in redux the minimal configuration for a setup with `@flopflip/react-broadcast` would be nothing more than
+Whenever you do not want to have the state of all flags persisted in redux the minimal configuration for a setup with `@flopflip/react-broadcast` and LaunchDarkly would be nothing more than
 
 ```js
 import { ConfigureFlopFlip } from '@flopflip/react-redux';
+import adapter from '@flopflip/launchdarkly-adapter';
 
-<ConfigureFlopFlip user={user} clientSideId={clientSideId}>
+<ConfigureFlopFlip adapter={adapter} adapterArgs={{clientSideId, user}}>
   <App />
 </ConfigureFlopFlip>;
 ```
@@ -147,7 +150,9 @@ const store = createStore(
 Whereas you would still wrap most or all of your application's tree in `ConfigureFlopFlip` to identify a user and setup the integration with LaunchDarkly
 
 ```js
-<ConfigureFlopFlip user={user} clientSideId={clientSideId}>
+import adapter from '@flopflip/launchdarkly-adapter';
+
+<ConfigureFlopFlip adapter={adapter} adapterArgs={clientSideId, user}>
   <App />
 </ConfigureFlopFlip>
 ```
@@ -294,8 +299,9 @@ The feature flags will be available as `props` within the component allowing som
 
 Requires arguments of `clientSideId:string`, `user:object`.
 
-- The `clientSideId` is your LaunchDarkly ID.
-- The `user` object needs at least a `key` attribute. An anonymous `key` will be generated using `uuid4` when nothing is specified. The user object can contain additional data.
+- The `adapter`
+- The `adapterArgs` object
+  - Often with the before mentioned user object `user` object which often needs at least a `key` attribute
 
 #### `reducer` & `STATE_SLICE`
 
@@ -313,6 +319,7 @@ import {
   // HoC and currently do not support a custom state slice.
   FLOPFLIP_STATE_SLICE
 } from '@flopflip/react-redux';
+import adapter from '@flopflip/launchdarkly-adapter';
 
 // Maintained somewhere within your application
 import user from './user';
@@ -327,11 +334,11 @@ const store = createStore(
   compose(
     applyMiddleware(...),
     createFlopFlipEnhancer(
-      // NOTE:
-      //   This clientId is not secret to you  and can be found
-      //   within your settings on LaunchDarkly.
-      window.application.env.LD_CLIENT_ID,
-      user
+      adapter,
+      {
+        clientSideId: window.application.env.LD_CLIENT_ID,
+        user
+      }
     )
   )
 )
