@@ -114,7 +114,7 @@ Whenever you do not want to have the state of all flags persisted in redux the m
 import { ConfigureFlopFlip } from '@flopflip/react-redux';
 import adapter from '@flopflip/launchdarkly-adapter';
 
-<ConfigureFlopFlip adapter={adapter} adapterArgs={{clientSideId, user}}>
+<ConfigureFlopFlip adapter={adapter} adapterArgs={{ clientSideId, user }}>
   <App />
 </ConfigureFlopFlip>;
 ```
@@ -152,9 +152,9 @@ Whereas you would still wrap most or all of your application's tree in `Configur
 ```js
 import adapter from '@flopflip/launchdarkly-adapter';
 
-<ConfigureFlopFlip adapter={adapter} adapterArgs={clientSideId, user}>
+<ConfigureFlopFlip adapter={adapter} adapterArgs={(clientSideId, user)}>
   <App />
-</ConfigureFlopFlip>
+</ConfigureFlopFlip>;
 ```
 
 ### `@flopflip/react-broadcast` `@flopflip/react-redux` API & exports for toggling
