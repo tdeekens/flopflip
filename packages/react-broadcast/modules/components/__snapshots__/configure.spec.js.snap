@@ -2,17 +2,24 @@
 
 exports[`rendering should match snapshot 1`] = `
 <FlagsSubscription
-  clientSideId="456"
-  defaultFlags={Object {}}
-  onUpdateFlags={[Function]}
-  onUpdateStatus={[Function]}
-  shouldChangeUserContext={false}
-  shouldInitialize={true}
-  user={
+  adapter={
     Object {
-      "key": "123",
+      "configure": [Function],
+      "isConfigured": [Function],
+      "isReady": [Function],
+      "reconfigure": [Function],
     }
   }
+  adapterArgs={
+    Object {
+      "fooId": "foo-id",
+      "onFlagsStateChange": [Function],
+      "onStatusStateChange": [Function],
+    }
+  }
+  defaultFlags={Object {}}
+  shouldConfigure={true}
+  shouldReconfigure={false}
 >
   <Broadcast
     channel="@flopflip"

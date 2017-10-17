@@ -10,22 +10,22 @@ export default class Configure extends React.PureComponent {
 
   static propTypes = {
     children: PropTypes.node,
-    clientSideId: PropTypes.string,
-    shouldInitialize: PropTypes.bool,
-    shouldChangeUserContext: PropTypes.bool,
+    shouldConfigure: PropTypes.bool,
+    shouldReconfigure: PropTypes.bool,
     defaultFlags: PropTypes.object,
-    user: PropTypes.shape({
-      key: PropTypes.string,
-    }),
+    adapterArgs: PropTypes.shape({
+      user: PropTypes.shape({
+        key: PropTypes.string,
+      }),
+    }).isRequired,
+    adapter: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
     children: null,
-    clientSideId: null,
-    user: {},
     defaultFlags: {},
-    shouldInitialize: true,
-    shouldChangeUserContext: false,
+    shouldConfigure: true,
+    shouldReconfigure: false,
   };
 
   state = {
@@ -49,13 +49,15 @@ export default class Configure extends React.PureComponent {
   render() {
     return (
       <FlagsSubscription
-        clientSideId={this.props.clientSideId}
-        user={this.props.user}
+        adapter={this.props.adapter}
+        adapterArgs={{
+          ...this.props.adapterArgs,
+          onStatusStateChange: this.handleUpdateStatus,
+          onFlagsStateChange: this.handleUpdateFlags,
+        }}
         defaultFlags={this.props.defaultFlags}
-        shouldInitialize={this.props.shouldInitialize}
-        shouldChangeUserContext={this.props.shouldChangeUserContext}
-        onUpdateStatus={this.handleUpdateStatus}
-        onUpdateFlags={this.handleUpdateFlags}
+        shouldConfigure={this.props.shouldConfigure}
+        shouldReconfigure={this.props.shouldReconfigure}
       >
         <Broadcast channel={FLAGS_CHANNEL} value={this.state.flags}>
           {this.props.children
