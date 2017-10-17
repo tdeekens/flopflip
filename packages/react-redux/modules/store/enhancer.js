@@ -1,14 +1,11 @@
-import { initialize, listen } from '@flopflip/launchdarkly-wrapper';
 import { updateFlags, updateStatus } from './../ducks';
 
-export default function createFlopFlipEnhancer(clientSideId, user) {
-  const client = initialize({ clientSideId, user });
-
+export default function createFlopFlipEnhancer(adapter, adapterArgs) {
   return next => (...args) => {
     const store = next(...args);
 
-    listen({
-      client,
+    adapter.configure({
+      ...adapterArgs,
       onUpdateFlags: store.dispatch(updateFlags),
       onUpdateStatus: store.dispatch(updateStatus),
     });
