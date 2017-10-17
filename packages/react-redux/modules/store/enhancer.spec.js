@@ -1,25 +1,18 @@
-import { initialize, listen } from '@flopflip/launchdarkly-wrapper';
 import createFlopFlipEnhancer from './enhancer';
 
-jest.mock('@flopflip/launchdarkly-wrapper', () => ({
-  initialize: jest.fn(),
-  listen: jest.fn(),
-}));
-
-const client = { __client__: '__internal__' };
-const clientSideId = '123-abc';
-const user = { key: 'foo-user' };
+const adapterArgs = {
+  clientSideId: '123-abc',
+  user: { key: 'foo-user' },
+};
+const adapter = {
+  configure: jest.fn(),
+  reconfigure: jest.fn(),
+};
 
 describe('when creating enhancer', () => {
   let enhancer;
   beforeEach(() => {
-    initialize.mockReturnValue(client);
-
-    enhancer = createFlopFlipEnhancer(clientSideId, user);
-  });
-
-  it('should initialize the `launchdarkly-wrapper` with `clientSideId` and `user`', () => {
-    expect(initialize).toHaveBeenCalledWith({ clientSideId, user });
+    enhancer = createFlopFlipEnhancer(adapter, adapterArgs);
   });
 
   describe('with enhanced store', () => {
@@ -32,20 +25,33 @@ describe('when creating enhancer', () => {
       const next = jest.fn(() => ({ getState, dispatch }));
       const args = [''];
 
-      createFlopFlipEnhancer(clientSideId, user);
       enhancer(next)(args);
     });
 
-    it('should `listen` on `launchdarkly-wrapper`', () => {
-      expect(listen).toHaveBeenCalled();
+    it('should invoke `configure` on `adapter`', () => {
+      expect(adapter.configure).toHaveBeenCalled();
     });
 
-    it('should `listen` with `client`, `onUpdateFlags` and `onUpdateStatus`', () => {
-      expect(listen).toHaveBeenCalledWith({
-        client,
-        onUpdateFlags: expect.any(Function),
-        onUpdateStatus: expect.any(Function),
-      });
+    it('should invoke `configure` on `adapter` with `adapterArgs`', () => {
+      expect(adapter.configure).toHaveBeenCalledWith(
+        expect.objectContaining(adapterArgs)
+      );
+    });
+
+    it('should invoke `configure` on `adapter` with `onUpdateFlags`', () => {
+      expect(adapter.configure).toHaveBeenCalledWith(
+        expect.objectContaining({
+          onUpdateFlags: expect.any(Function),
+        })
+      );
+    });
+
+    it('should invoke `configure` on `adapter` with `onUpdateStatus`', () => {
+      expect(adapter.configure).toHaveBeenCalledWith(
+        expect.objectContaining({
+          onUpdateStatus: expect.any(Function),
+        })
+      );
     });
   });
 });
