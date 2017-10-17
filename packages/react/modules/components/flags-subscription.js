@@ -6,7 +6,6 @@ export default class FlagsSubscription extends React.PureComponent {
     shouldConfigure: PropTypes.bool.isRequired,
     shouldReconfigure: PropTypes.bool.isRequired,
     adapterArgs: PropTypes.shape({
-      clientSideId: PropTypes.string,
       user: PropTypes.shape({
         key: PropTypes.string,
       }),

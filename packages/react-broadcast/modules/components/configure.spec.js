@@ -5,9 +5,17 @@ import Configure, { FLAGS_CHANNEL } from './configure';
 const ChildComponent = () => <div />;
 
 const createTestProps = custom => ({
-  client: { __client__: '__internal__' },
-  user: { key: '123' },
-  clientSideId: '456',
+  shouldConfigure: true,
+  shouldReconfigure: false,
+  adapter: {
+    configure: jest.fn(),
+    reconfigure: jest.fn(),
+    isReady: jest.fn(),
+    isConfigured: jest.fn(),
+  },
+  adapterArgs: {
+    fooId: 'foo-id',
+  },
 
   ...custom,
 });
@@ -62,15 +70,21 @@ describe('rendering', () => {
       flagsSubscriptionWrapper = wrapper.find('FlagsSubscription');
     });
 
-    it('should receive `clientSideId`', () => {
+    it('should receive `adapterArgs`', () => {
       expect(flagsSubscriptionWrapper).toHaveProp(
-        'clientSideId',
-        props.clientSideId
+        'adapterArgs',
+        expect.objectContaining({})
       );
     });
 
-    it('should receive `user`', () => {
-      expect(flagsSubscriptionWrapper).toHaveProp('user', props.user);
+    it('should receive `onStatusStateChange` and `onFlagsStateChange` in `adapterArgs`', () => {
+      expect(flagsSubscriptionWrapper).toHaveProp(
+        'adapterArgs',
+        expect.objectContaining({
+          onStatusStateChange: wrapper.instance().handleUpdateStatus,
+          onFlagsStateChange: wrapper.instance().handleUpdateFlags,
+        })
+      );
     });
 
     it('should receive `defaultFlags`', () => {
@@ -138,49 +152,6 @@ describe('state', () => {
   });
 });
 
-describe('callbacks', () => {
-  let props;
-  let wrapper;
-
-  beforeEach(() => {
-    props = createTestProps();
-    wrapper = shallow(
-      <Configure {...props}>
-        <ChildComponent />
-      </Configure>
-    );
-  });
-
-  describe('of `<FlagsSubscription />`', () => {
-    let flagsSubscriptionWrapper;
-
-    beforeEach(() => {
-      flagsSubscriptionWrapper = wrapper.find('FlagsSubscription');
-    });
-
-    it('should receive `onUpdateStatus`', () => {
-      expect(flagsSubscriptionWrapper).toHaveProp(
-        'onUpdateStatus',
-        wrapper.instance().handleUpdateStatus
-      );
-    });
-
-    it('should receive `onUpdateFlags`', () => {
-      expect(flagsSubscriptionWrapper).toHaveProp(
-        'onUpdateFlags',
-        wrapper.instance().handleUpdateFlags
-      );
-    });
-
-    it('should receive `shouldInitialize`', () => {
-      expect(flagsSubscriptionWrapper).toHaveProp(
-        'shouldInitialize',
-        wrapper.prop('shouldInitialize')
-      );
-    });
-  });
-});
-
 describe('statics', () => {
   describe('displayName', () => {
     it('should be set to `ConfigureFlopflip`', () => {
@@ -189,10 +160,6 @@ describe('statics', () => {
   });
 
   describe('defaultProps', () => {
-    it('should default `user` to an empty object', () => {
-      expect(Configure.defaultProps.user).toEqual({});
-    });
-
     it('should default `defaultFlags` to an empty object', () => {
       expect(Configure.defaultProps.defaultFlags).toEqual({});
     });
@@ -201,12 +168,12 @@ describe('statics', () => {
       expect(Configure.defaultProps.children).toBe(null);
     });
 
-    it('should default `shouldInitialize` to `true`', () => {
-      expect(Configure.defaultProps.shouldInitialize).toBe(true);
+    it('should default `shouldConfigure` to `true`', () => {
+      expect(Configure.defaultProps.shouldConfigure).toBe(true);
     });
 
-    it('should default `shouldChangeUserContext` to `false`', () => {
-      expect(Configure.defaultProps.shouldChangeUserContext).toBe(false);
+    it('should default `shouldReconfigure` to `false`', () => {
+      expect(Configure.defaultProps.shouldReconfigure).toBe(false);
     });
   });
 });

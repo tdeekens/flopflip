@@ -8,13 +8,15 @@ export class Configure extends React.PureComponent {
   static displayName = 'ConfigureFlopflip';
   static propTypes = {
     children: PropTypes.node,
-    clientSideId: PropTypes.string,
-    user: PropTypes.shape({
-      key: PropTypes.string,
-    }),
+    shouldConfigure: PropTypes.bool,
+    shouldReconfigure: PropTypes.bool,
     defaultFlags: PropTypes.object,
-    shouldInitialize: PropTypes.bool,
-    shouldChangeUserContext: PropTypes.bool,
+    adapterArgs: PropTypes.shape({
+      user: PropTypes.shape({
+        key: PropTypes.string,
+      }),
+    }).isRequired,
+    adapter: PropTypes.object.isRequired,
 
     // Connected
     handleUpdateStatus: PropTypes.func.isRequired,
@@ -23,23 +25,23 @@ export class Configure extends React.PureComponent {
 
   static defaultProps = {
     children: null,
-    user: {},
-    clientSideId: null,
     defaultFlags: {},
-    shouldInitialize: true,
-    shouldChangeUserContext: false,
+    shouldConfigure: true,
+    shouldReconfigure: false,
   };
 
   render() {
     return (
       <FlagsSubscription
-        clientSideId={this.props.clientSideId}
-        user={this.props.user}
+        adapter={this.props.adapter}
+        adapterArgs={{
+          ...this.props.adapterArgs,
+          onStatusStateChange: this.props.handleUpdateStatus,
+          onFlagsStateChange: this.props.handleUpdateFlags,
+        }}
         defaultFlags={this.props.defaultFlags}
-        shouldInitialize={this.props.shouldInitialize}
-        shouldChangeUserContext={this.props.shouldChangeUserContext}
-        onUpdateStatus={this.props.handleUpdateStatus}
-        onUpdateFlags={this.props.handleUpdateFlags}
+        shouldConfigure={this.props.shouldConfigure}
+        shouldReconfigure={this.props.shouldReconfigure}
       >
         {this.props.children ? React.Children.only(this.props.children) : null}
       </FlagsSubscription>
