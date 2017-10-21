@@ -104,8 +104,8 @@ It takes the `props`:
   - An `adapter` should implement the following methods: `configure` and `reconfigure` which both must return a `Promise` as configuration can be an asynchronous task
 - The `adapterArgs` containing whatever the underlying `adapter` accepts
   - The `user` object is often the basis to identify an user to toggle features. The user object can contain any additional data.
+  - The `adapter` will receive `onFlagsStateChange` and `onStatusStateChange` will should be invoked accordingly to notify `react-broadcast` and `react-redux` about flag and status changes
 - The `shouldDeferAdapterConfiguration` prop can be used to defer the initial configuration the `adapter`. This might be helpful for cases in which you want to wait for e.g. the `key` to be present within your root component and you do not want `flopflip` to generate a `uuid` for you automatically.
-- The `shouldReconfigure` boolean prop to indicate whether `flopflip` should invoke `reconfigure` on the `adapter` with `adapterArgs` whenever any of the args changed
 - The `defaultFlags` prop object can be used to specify default flag values until an `adapter` responds or in case flags were removed
 
 Whenever you do not want to have the state of all flags persisted in redux the minimal configuration for a setup with `@flopflip/react-broadcast` and LaunchDarkly would be nothing more than
