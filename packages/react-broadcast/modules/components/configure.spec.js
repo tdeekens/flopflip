@@ -5,13 +5,9 @@ import Configure, { FLAGS_CHANNEL } from './configure';
 const ChildComponent = () => <div />;
 
 const createTestProps = custom => ({
-  shouldConfigure: true,
-  shouldReconfigure: false,
   adapter: {
     configure: jest.fn(),
     reconfigure: jest.fn(),
-    isReady: jest.fn(),
-    isConfigured: jest.fn(),
   },
   adapterArgs: {
     fooId: 'foo-id',
@@ -168,12 +164,10 @@ describe('statics', () => {
       expect(Configure.defaultProps.children).toBe(null);
     });
 
-    it('should default `shouldConfigure` to `true`', () => {
-      expect(Configure.defaultProps.shouldConfigure).toBe(true);
-    });
-
-    it('should default `shouldReconfigure` to `false`', () => {
-      expect(Configure.defaultProps.shouldReconfigure).toBe(false);
+    it('should default `shouldDeferAdapterConfiguration` to `true`', () => {
+      expect(Configure.defaultProps.shouldDeferAdapterConfiguration).toBe(
+        false
+      );
     });
   });
 });

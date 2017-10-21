@@ -10,8 +10,7 @@ export default class Configure extends React.PureComponent {
 
   static propTypes = {
     children: PropTypes.node,
-    shouldConfigure: PropTypes.bool,
-    shouldReconfigure: PropTypes.bool,
+    shouldDeferAdapterConfiguration: PropTypes.bool,
     defaultFlags: PropTypes.object,
     adapterArgs: PropTypes.shape({
       user: PropTypes.shape({
@@ -24,8 +23,7 @@ export default class Configure extends React.PureComponent {
   static defaultProps = {
     children: null,
     defaultFlags: {},
-    shouldConfigure: true,
-    shouldReconfigure: false,
+    shouldDeferAdapterConfiguration: false,
   };
 
   state = {
@@ -56,8 +54,9 @@ export default class Configure extends React.PureComponent {
           onFlagsStateChange: this.handleUpdateFlags,
         }}
         defaultFlags={this.props.defaultFlags}
-        shouldConfigure={this.props.shouldConfigure}
-        shouldReconfigure={this.props.shouldReconfigure}
+        shouldDeferAdapterConfiguration={
+          this.props.shouldDeferAdapterConfiguration
+        }
       >
         <Broadcast channel={FLAGS_CHANNEL} value={this.state.flags}>
           {this.props.children
