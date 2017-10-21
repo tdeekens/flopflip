@@ -2,10 +2,12 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import FeatureToggled from './feature-toggled';
 
-const UntoggledComponent = <div>{'UntoggledComponent'}</div>;
-const FeatureComponent = () => <div>{'FeatureComponent'}</div>;
+const UntoggledComponent = () => <div />;
+UntoggledComponent.displayName = 'UntoggledComponent';
+const FeatureComponent = () => <div />;
+FeatureComponent.displayName = 'FeatureComponent';
 
-describe('with feature disabled', () => {
+describe('when feature disabled', () => {
   describe('with untoggled component', () => {
     let wrapper;
 
@@ -13,7 +15,7 @@ describe('with feature disabled', () => {
       wrapper = shallow(
         <FeatureToggled
           isFeatureEnabled={false}
-          untoggledComponent={UntoggledComponent}
+          untoggledComponent={<UntoggledComponent />}
         >
           <FeatureComponent />
         </FeatureToggled>
@@ -25,11 +27,11 @@ describe('with feature disabled', () => {
     });
 
     it('should render the `UntoggledComponent`', () => {
-      expect(wrapper).toHaveText('UntoggledComponent');
+      expect(wrapper).toRender(UntoggledComponent);
     });
 
     it('should not render the `FeatureComponent`', () => {
-      expect(wrapper).not.toRender('FeatureComponent');
+      expect(wrapper).not.toRender(FeatureComponent);
     });
   });
 
@@ -38,9 +40,31 @@ describe('with feature disabled', () => {
 
     beforeEach(() => {
       wrapper = shallow(
+        <FeatureToggled isFeatureEnabled={false}>
+          <FeatureComponent />
+        </FeatureToggled>
+      );
+    });
+
+    it('should match snapshot', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not render the `FeatureComponent`', () => {
+      expect(wrapper).not.toRender(FeatureComponent);
+    });
+  });
+});
+
+describe('when feature enabled', () => {
+  let wrapper;
+
+  describe('with `children`', () => {
+    beforeEach(() => {
+      wrapper = shallow(
         <FeatureToggled
           isFeatureEnabled
-          untoggledComponent={UntoggledComponent}
+          untoggledComponent={<UntoggledComponent />}
         >
           <FeatureComponent />
         </FeatureToggled>
@@ -51,12 +75,36 @@ describe('with feature disabled', () => {
       expect(wrapper).toMatchSnapshot();
     });
 
-    it('should render the `UntoggledComponent`', () => {
-      expect(wrapper).not.toRender('UntoggledComponent');
+    it('should not render the `UntoggledComponent`', () => {
+      expect(wrapper).not.toRender(UntoggledComponent);
     });
 
     it('should render the `FeatureComponent`', () => {
-      expect(wrapper).toRender('FeatureComponent');
+      expect(wrapper).toRender(FeatureComponent);
+    });
+  });
+
+  describe('with `toggledComponent`', () => {
+    beforeEach(() => {
+      wrapper = shallow(
+        <FeatureToggled
+          isFeatureEnabled
+          untoggledComponent={<UntoggledComponent />}
+          toggledComponent={<FeatureComponent />}
+        />
+      );
+    });
+
+    it('should match snapshot', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not render the `UntoggledComponent`', () => {
+      expect(wrapper).not.toRender(UntoggledComponent);
+    });
+
+    it('should render the `FeatureComponent`', () => {
+      expect(wrapper).toRender(FeatureComponent);
     });
   });
 });

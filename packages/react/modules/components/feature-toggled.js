@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const isEmptyChildren = children => React.Children.count(children) === 0;
+
 export default class FeatureToggled extends React.PureComponent {
   static propTypes = {
-    untoggledComponent: PropTypes.element,
-    children: PropTypes.element.isRequired,
+    untoggledComponent: PropTypes.node,
+    toggledComponent: PropTypes.node,
+    children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
 
     // HoC
     isFeatureEnabled: PropTypes.bool.isRequired,
@@ -12,13 +15,24 @@ export default class FeatureToggled extends React.PureComponent {
 
   static defaultProps = {
     untoggledComponent: null,
+    toggledComponent: null,
+    children: null,
   };
 
   render() {
     if (this.props.isFeatureEnabled) {
-      return this.props.children;
+      if (!isEmptyChildren(this.props.toggledComponent))
+        return React.cloneElement(this.props.toggledComponent);
+
+      if (typeof this.props.children === 'function')
+        return this.props.children();
+
+      if (this.props.children && !isEmptyChildren(this.props.children))
+        return React.Children.only(this.props.children);
+    } else if (!isEmptyChildren(this.props.untoggledComponent)) {
+      return React.cloneElement(this.props.untoggledComponent);
     }
 
-    return this.props.untoggledComponent;
+    return null;
   }
 }
