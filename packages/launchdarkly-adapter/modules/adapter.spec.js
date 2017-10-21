@@ -60,6 +60,14 @@ describe('when configuring', () => {
     });
   });
 
+  describe('when reconfiguring before configured', () => {
+    it('should reject reconfiguration', () => {
+      return expect(adapter.reconfigure({ user })).rejects.toEqual(
+        expect.any(Error)
+      );
+    });
+  });
+
   describe('when ready', () => {
     let client;
     let onStatusStateChange;
@@ -148,7 +156,7 @@ describe('when configuring', () => {
 
         ldClient.initialize.mockReturnValue(client);
 
-        adapter
+        return adapter
           .configure({
             clientSideId,
             user,

@@ -59,14 +59,7 @@ export const camelCaseFlags = rawFlags =>
   }, {});
 
 const subscribe = ({ onFlagsStateChange, onStatusStateChange }) =>
-  new Promise((resolve, reject) => {
-    if (!adapterState.client)
-      reject(
-        new Error(
-          '@flopflip/launchdarkly-adapter: please configure adapter before subscribing.'
-        )
-      );
-
+  new Promise(resolve => {
     adapterState.client.on('ready', () => {
       const rawFlags = adapterState.client.allFlags();
       // First update internal state
@@ -112,7 +105,7 @@ const reconfigure = ({ user }) =>
       !adapterState.isConfigured ||
       !adapterState.user
     )
-      reject(
+      return reject(
         new Error(
           '@flopflip/launchdarkly-adapter: please configure adapter before reconfiguring.'
         )
