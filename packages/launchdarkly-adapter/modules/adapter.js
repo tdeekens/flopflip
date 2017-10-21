@@ -2,7 +2,7 @@ import ldClient from 'ldclient-js';
 import camelCase from 'lodash.camelcase';
 import nanoid from 'nanoid';
 
-const state = {
+const adapterState = {
   isReady: false,
   isConfigured: false,
   user: null,
@@ -16,7 +16,7 @@ const normalizeFlag = (flagName, flagValue) => [
   flagValue === null ? false : flagValue,
 ];
 
-const subscribeToFlags = ({ rawFlags, client, onFlagsStateChange }) => {
+const subscribeToFlagsChanges = ({ rawFlags, client, onFlagsStateChange }) => {
   // Dispatch whenever a configured flag value changes
   for (const flagName in rawFlags) {
     if (Object.prototype.hasOwnProperty.call(rawFlags, flagName)) {
@@ -45,9 +45,9 @@ export const injectClient = client => {
       '@flopflip/launchdarkly-adapter: injecting a client is only allowed during testing.'
     );
 
-  state.client = client;
+  adapterState.client = client;
 
-  return state.client;
+  return adapterState.client;
 };
 
 const initializeUserContext = (clientSideId, user) =>
@@ -57,6 +57,7 @@ const initializeUserContext = (clientSideId, user) =>
   );
 const changeUserContext = (client, nextUser) => client.identify(nextUser);
 
+// NOTE: Exported for testing only
 export const camelCaseFlags = rawFlags =>
   Object.entries(rawFlags).reduce((camelCasedFlags, [flagName, flagValue]) => {
     const [normalzedFlagName, normalzedFlagValue] = normalizeFlag(
@@ -69,24 +70,33 @@ export const camelCaseFlags = rawFlags =>
     return camelCasedFlags;
   }, {});
 
-export const subscribe = ({ onFlagsStateChange, onStatusStateChange }) => {
-  if (!state.client)
-    throw new Error(
-      '@flopflip/launchdarkly-adapter: please configure adapter before subscribing.'
-    );
+const subscribe = ({ onFlagsStateChange, onStatusStateChange }) =>
+  new Promise((resolve, reject) => {
+    if (!adapterState.client)
+      reject(
+        new Error(
+          '@flopflip/launchdarkly-adapter: please configure adapter before subscribing.'
+        )
+      );
 
-  state.client.on('ready', () => {
-    const rawFlags = state.client.allFlags();
-    // First update internal state
-    state.isReady = true;
-    // ...to then signal that the adapter is ready
-    onStatusStateChange({ isReady: true });
-    // ...and flush initial state of flags
-    onFlagsStateChange(camelCaseFlags(rawFlags));
-    // ...to finally subscribe to later changes.
-    subscribeToFlags({ rawFlags, client: state.client, onFlagsStateChange });
+    adapterState.client.on('ready', () => {
+      const rawFlags = adapterState.client.allFlags();
+      // First update internal state
+      adapterState.isReady = true;
+      // ...to then signal that the adapter is ready
+      onStatusStateChange({ isReady: true });
+      // ...and flush initial state of flags
+      onFlagsStateChange(camelCaseFlags(rawFlags));
+      // ...to finally subscribe to later changes.
+      subscribeToFlagsChanges({
+        rawFlags,
+        client: adapterState.client,
+        onFlagsStateChange,
+      });
+
+      return resolve();
+    });
   });
-};
 
 const configure = ({
   clientSideId,
@@ -94,36 +104,41 @@ const configure = ({
   onFlagsStateChange,
   onStatusStateChange,
 }) => {
-  state.client = initializeUserContext(clientSideId, user);
-  state.user = user;
+  adapterState.client = initializeUserContext(clientSideId, user);
+  adapterState.user = user;
 
-  subscribe({
+  return subscribe({
     onFlagsStateChange,
     onStatusStateChange,
+  }).then(() => {
+    adapterState.isConfigured = true;
+
+    return adapterState.client;
+  });
+};
+
+const reconfigure = ({ user }) =>
+  new Promise((resolve, reject) => {
+    if (
+      !adapterState.isReady ||
+      !adapterState.isConfigured ||
+      !adapterState.user
+    )
+      reject(
+        new Error(
+          '@flopflip/launchdarkly-adapter: please configure adapter before reconfiguring.'
+        )
+      );
+
+    if (adapterState.user.key !== user.key) {
+      changeUserContext(adapterState.client, user);
+      adapterState.user = user;
+    }
+
+    resolve();
   });
 
-  state.isConfigured = true;
-
-  return state.client;
-};
-
-const reconfigure = ({ user }) => {
-  if (!state.isReady || !state.isConfigured || !state.user)
-    throw new Error(
-      '@flopflip/launchdarkly-adapter: please configure adapter before reconfiguring.'
-    );
-
-  if (state.user.key !== user.key) changeUserContext(state.client, user);
-
-  state.user = user;
-};
-
-export const isConfigured = () => state.isConfigured;
-export const isReady = () => state.isReady;
-
 export default {
-  isConfigured,
-  isReady,
   configure,
   reconfigure,
 };
