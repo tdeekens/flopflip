@@ -200,6 +200,33 @@ export default (
 );
 ```
 
+or with `toggledComponent` prop
+
+```js
+export default (
+  <FeatureToggled
+    flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
+    variate={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
+    untoggledComponent={<h3>At least there is a fallback!</h3>}
+    toggledComponent={<h3>I might be gone or there!</h3>}
+  />
+);
+```
+
+or with Function as a Child
+
+```js
+export default (
+  <FeatureToggled
+    flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
+    variate={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
+    untoggledComponent={<h3>At least there is a fallback!</h3>}
+  >
+    {() => <h3>I might be gone or there!</h3>}
+  </FeatureToggled>
+);
+```
+
 this last example will always turn the feature on if the variate or toggle does not exist. For this also look at `defaultFlags` for `ConfigureFlopFlip`.
 
 We actually recommend maintaining a list of constants with feature flag names somewhere within your application. This avoids typos and unexpected behavior. After all, the correct workings of your feature flags is crutial to your application.
