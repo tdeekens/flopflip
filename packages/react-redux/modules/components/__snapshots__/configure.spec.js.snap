@@ -5,8 +5,6 @@ exports[`rendering should match snapshot 1`] = `
   adapter={
     Object {
       "configure": [Function],
-      "isConfigured": [Function],
-      "isReady": [Function],
       "reconfigure": [Function],
     }
   }
@@ -18,7 +16,6 @@ exports[`rendering should match snapshot 1`] = `
     }
   }
   defaultFlags={Object {}}
-  shouldConfigure={true}
-  shouldReconfigure={false}
+  shouldDeferAdapterConfiguration={false}
 />
 `;

@@ -8,8 +8,7 @@ export class Configure extends React.PureComponent {
   static displayName = 'ConfigureFlopflip';
   static propTypes = {
     children: PropTypes.node,
-    shouldConfigure: PropTypes.bool,
-    shouldReconfigure: PropTypes.bool,
+    shouldDeferAdapterConfiguration: PropTypes.bool,
     defaultFlags: PropTypes.object,
     adapterArgs: PropTypes.shape({
       user: PropTypes.shape({
@@ -26,8 +25,7 @@ export class Configure extends React.PureComponent {
   static defaultProps = {
     children: null,
     defaultFlags: {},
-    shouldConfigure: true,
-    shouldReconfigure: false,
+    shouldDeferAdapterConfiguration: false,
   };
 
   render() {
@@ -40,8 +38,9 @@ export class Configure extends React.PureComponent {
           onFlagsStateChange: this.props.handleUpdateFlags,
         }}
         defaultFlags={this.props.defaultFlags}
-        shouldConfigure={this.props.shouldConfigure}
-        shouldReconfigure={this.props.shouldReconfigure}
+        shouldDeferAdapterConfiguration={
+          this.props.shouldDeferAdapterConfiguration
+        }
       >
         {this.props.children ? React.Children.only(this.props.children) : null}
       </FlagsSubscription>
