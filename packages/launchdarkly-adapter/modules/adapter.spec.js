@@ -8,20 +8,34 @@ import adapter, {
 
 jest.mock('nanoid', () => jest.fn(() => 'foo-random-id'));
 
+const clientSideId = '123-abc';
+const user = { key: 'foo-user' };
+const flags = { 'some-flag-1': true, 'some-flag-2': false };
+
 jest.mock('ldclient-js', () => ({
   initialize: jest.fn(() => ({
-    on: jest.fn(),
-    allFlags: jest.fn(),
+    on: jest.fn((_, cb) => cb()),
+    allFlags: jest.fn(() => ({})),
   })),
 }));
 
-const clientSideId = '123-abc';
-const user = { key: 'foo-user' };
-
 describe('when configuring', () => {
+  let onStatusStateChange;
+  let onFlagsStateChange;
+
+  beforeEach(() => {
+    onStatusStateChange = jest.fn();
+    onFlagsStateChange = jest.fn();
+  });
+
   describe('with user key', () => {
     beforeEach(() => {
-      adapter.configure({ clientSideId, user });
+      return adapter.configure({
+        clientSideId,
+        user,
+        onStatusStateChange,
+        onFlagsStateChange,
+      });
     });
 
     it('should initialize the `ld-client` with `clientSideId` and given `user`', () => {
@@ -30,9 +44,14 @@ describe('when configuring', () => {
   });
 
   describe('without key', () => {
-    beforeEach(() => {
-      adapter.configure({ clientSideId, user: {} });
-    });
+    beforeEach(() =>
+      adapter.configure({
+        clientSideId,
+        user: {},
+        onStatusStateChange,
+        onFlagsStateChange,
+      })
+    );
 
     it('should initialize the `ld-client` with `clientSideId` and random `user` `key`', () => {
       expect(ldClient.initialize).toHaveBeenCalledWith(clientSideId, {
@@ -42,22 +61,21 @@ describe('when configuring', () => {
   });
 
   describe('when ready', () => {
-    const flags = { 'some-flag-1': true, 'some-flag-2': false };
+    let client;
     let onStatusStateChange;
     let onFlagsStateChange;
-    let client;
 
     beforeEach(() => {
-      client = {
-        allFlags: jest.fn(() => flags),
-        on: jest.fn((_, cb) => cb()),
-      };
       onStatusStateChange = jest.fn();
       onFlagsStateChange = jest.fn();
+      client = {
+        on: jest.fn((_, cb) => cb()),
+        allFlags: jest.fn(() => flags),
+      };
 
-      injectClient(client);
+      ldClient.initialize.mockReturnValue(client);
 
-      subscribe({
+      return adapter.configure({
         clientSideId,
         user,
         onStatusStateChange,
@@ -72,7 +90,7 @@ describe('when configuring', () => {
         });
       });
 
-      it('should `dispatch` `onStatusStateChange` action with camel cased `flags`', () => {
+      it('should `dispatch` `onStatusStateChange`', () => {
         expect(onFlagsStateChange).toHaveBeenCalledWith({
           someFlag1: true,
           someFlag2: false,
@@ -122,13 +140,22 @@ describe('when configuring', () => {
       let client;
 
       beforeEach(() => {
-        client = { identify: jest.fn() };
+        client = {
+          identify: jest.fn(),
+          on: jest.fn((_, cb) => cb()),
+          allFlags: jest.fn(() => ({})),
+        };
 
-        adapter.configure({ clientSideId, user });
+        ldClient.initialize.mockReturnValue(client);
 
-        injectClient(client);
-
-        adapter.reconfigure({ user: nextUser });
+        adapter
+          .configure({
+            clientSideId,
+            user,
+            onStatusStateChange,
+            onFlagsStateChange,
+          })
+          .then(() => adapter.reconfigure({ user: nextUser }));
       });
 
       it('should invoke `identify` on the `client` with the `user`', () => {
