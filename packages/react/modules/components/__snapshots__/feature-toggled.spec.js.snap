@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`with feature disabled with untoggled component should match snapshot 1`] = `
-<div>
-  UntoggledComponent
-</div>
-`;
+exports[`when feature disabled with untoggled component should match snapshot 1`] = `<UntoggledComponent />`;
 
-exports[`with feature disabled without untoggled component should match snapshot 1`] = `<FeatureComponent />`;
+exports[`when feature disabled without untoggled component should match snapshot 1`] = `""`;
+
+exports[`when feature enabled with \`children\` should match snapshot 1`] = `<FeatureComponent />`;
+
+exports[`when feature enabled with \`toggledComponent\` should match snapshot 1`] = `<FeatureComponent />`;
