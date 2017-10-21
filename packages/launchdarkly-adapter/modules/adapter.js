@@ -38,18 +38,6 @@ export const createAnonymousUser = () => ({
   key: nanoid(),
 });
 
-// NOTE: Used during testing to inject a mock client
-export const injectClient = client => {
-  if (process.env.NODE_ENV !== 'test')
-    throw new Error(
-      '@flopflip/launchdarkly-adapter: injecting a client is only allowed during testing.'
-    );
-
-  adapterState.client = client;
-
-  return adapterState.client;
-};
-
 const initializeUserContext = (clientSideId, user) =>
   ldClient.initialize(
     clientSideId,
