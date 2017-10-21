@@ -3,8 +3,7 @@ import React from 'react';
 
 export default class FlagsSubscription extends React.PureComponent {
   static propTypes = {
-    shouldConfigure: PropTypes.bool.isRequired,
-    shouldReconfigure: PropTypes.bool.isRequired,
+    shouldDeferAdapterConfiguration: PropTypes.bool,
     adapterArgs: PropTypes.shape({
       user: PropTypes.shape({
         key: PropTypes.string,
@@ -18,8 +17,13 @@ export default class FlagsSubscription extends React.PureComponent {
   };
 
   static defaultProps = {
+    shouldDeferAdapterConfiguration: false,
     children: null,
     defaultFlags: {},
+  };
+
+  state = {
+    isAdapterConfigured: false,
   };
 
   handleDefaultFlags = defaultFlags => {
@@ -30,22 +34,23 @@ export default class FlagsSubscription extends React.PureComponent {
 
   componentDidMount() {
     this.handleDefaultFlags(this.props.defaultFlags);
-    if (this.props.shouldConfigure)
-      this.props.adapter.configure(this.props.adapterArgs);
+
+    if (!this.props.shouldDeferAdapterConfiguration)
+      return this.props.adapter.configure(this.props.adapterArgs);
   }
 
   componentDidUpdate() {
-    if (this.props.shouldConfigure && !this.props.adapter.isConfigured()) {
-      this.props.adapter.configure(this.props.adapterArgs);
-      return;
+    if (
+      !this.props.shouldDeferAdapterConfiguration &&
+      !this.state.isAdapterConfigured
+    ) {
+      return this.props.adapter.configure(this.props.adapterArgs).then(() => {
+        this.setState({ isAdapterConfigured: true });
+      });
     }
 
-    if (
-      this.props.shouldReconfigure &&
-      this.props.adapter.isConfigured() &&
-      this.props.adapter.isReady()
-    )
-      this.props.adapter.reConfigure(this.props.adapterArgs);
+    if (this.state.isAdapterConfigured)
+      return this.props.adapter.reconfigure(this.props.adapterArgs);
   }
 
   render() {
