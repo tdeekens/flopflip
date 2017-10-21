@@ -4,8 +4,6 @@ import FlagSubscription from './flags-subscription';
 
 const ChildComponent = () => <div />;
 const createTestProps = props => ({
-  shouldConfigure: true,
-  shouldReconfigure: false,
   adapterArgs: {
     clientSideId: 'foo-clientSideId',
     user: {
@@ -15,10 +13,8 @@ const createTestProps = props => ({
     onStatusStateChange: jest.fn(),
   },
   adapter: {
-    configure: jest.fn(),
-    reconfigure: jest.fn(),
-    isReady: jest.fn(() => true),
-    isConfigured: jest.fn(() => false),
+    configure: jest.fn(() => Promise.resolve()),
+    reconfigure: jest.fn(() => Promise.resolve()),
   },
   children: ChildComponent,
 
@@ -61,11 +57,9 @@ describe('lifecycle', () => {
       );
     });
 
-    describe('when `shouldConfigure` is `true`', () => {
+    describe('when `shouldDeferAdapterConfiguration` is `false`', () => {
       describe('when not initialized', () => {
-        beforeEach(() => {
-          wrapper.instance().componentDidMount();
-        });
+        beforeEach(() => wrapper.instance().componentDidMount());
 
         it('should invoke `configure` on `adapter`', () => {
           expect(props.adapter.configure).toHaveBeenCalled();
@@ -79,16 +73,16 @@ describe('lifecycle', () => {
       });
     });
 
-    describe('when `shouldConfigure` is `false`', () => {
+    describe('when `shouldDeferAdapterConfiguration` is `true`', () => {
       beforeEach(() => {
-        props = createTestProps({ shouldConfigure: false });
+        props = createTestProps({ shouldDeferAdapterConfiguration: true });
         wrapper = shallow(
           <FlagSubscription {...props}>
             <ChildComponent />
           </FlagSubscription>
         );
 
-        wrapper.instance().componentDidMount();
+        return wrapper.instance().componentDidMount();
       });
 
       it('should not invoke `configure` on `adapter`', () => {
@@ -125,7 +119,7 @@ describe('lifecycle', () => {
   });
 
   describe('componentDidUpdate', () => {
-    describe('when `shouldConfigure` is `true`', () => {
+    describe('when `shouldDeferAdapterConfiguration` is `false`', () => {
       let props;
       let wrapper;
 
@@ -138,7 +132,7 @@ describe('lifecycle', () => {
             </FlagSubscription>
           );
 
-          wrapper.instance().componentDidUpdate();
+          return wrapper.instance().componentDidUpdate();
         });
 
         it('should invoke `configure` on `adapter`', () => {
@@ -154,73 +148,65 @@ describe('lifecycle', () => {
 
       describe('when already configured', () => {
         beforeEach(() => {
-          props = createTestProps({
-            adapter: {
-              configure: jest.fn(),
-              reconfigure: jest.fn(),
-              isReady: jest.fn(() => true),
-              isConfigured: jest.fn(() => true),
-            },
-          });
+          props = createTestProps();
           wrapper = shallow(
             <FlagSubscription {...props}>
               <ChildComponent />
             </FlagSubscription>
           );
 
+          wrapper.setState({ isAdapterConfigured: true });
+
           // Comes from `componentDidMount`
           props.adapter.configure.mockClear();
 
-          wrapper.instance().componentDidUpdate();
+          return wrapper.instance().componentDidUpdate();
         });
 
         it('should not invoke `configure` on `adapter` again', () => {
           expect(props.adapter.configure).not.toHaveBeenCalled();
         });
 
-        describe('when `shouldReconfigure` is `true`', () => {
+        describe('when reconfiguring', () => {
           beforeEach(() => {
-            props = createTestProps({
-              adapter: {
-                configure: jest.fn(),
-                reconfigure: jest.fn(),
-                isReady: jest.fn(() => true),
-                isConfigured: jest.fn(() => true),
-                shouldReconfigure: true,
-              },
-            });
+            props = createTestProps();
             wrapper = shallow(
               <FlagSubscription {...props}>
                 <ChildComponent />
               </FlagSubscription>
             );
-            wrapper.instance().componentDidUpdate();
+
+            wrapper.setState({ isAdapterConfigured: true });
+
+            return wrapper.instance().componentDidUpdate();
           });
 
           it('should invoke `reconfigure` on `adapter`', () => {
-            expect(props.adapter.configure).toHaveBeenCalled();
+            expect(props.adapter.reconfigure).toHaveBeenCalled();
           });
 
           it('should invoke `reconfigure` on `adapter` with `adapterArgs`', () => {
-            expect(props.adapter.configure).toHaveBeenCalled();
+            expect(props.adapter.reconfigure).toHaveBeenCalledWith(
+              props.adapterArgs
+            );
           });
         });
       });
     });
 
-    describe('when `shouldConfigure` is `false`', () => {
+    describe('when `shouldDeferAdapterConfiguration` is `true`', () => {
       let props;
       let wrapper;
 
       beforeEach(() => {
-        props = createTestProps({ shouldConfigure: false });
+        props = createTestProps({ shouldDeferAdapterConfiguration: true });
         wrapper = shallow(
           <FlagSubscription {...props}>
             <ChildComponent />
           </FlagSubscription>
         );
 
-        wrapper.instance().componentDidUpdate();
+        return wrapper.instance().componentDidUpdate();
       });
 
       it('should not invoke `configure` on `adapter`', () => {
