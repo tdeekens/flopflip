@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { compose } from 'recompose';
 import { Provider, connect } from 'react-redux';
 import classNames from 'classnames';
+import adapter from '@flopflip/launchdarkly-adapter';
 import {
   ConfigureFlopFlip,
   withFeatureToggle,
@@ -103,16 +104,17 @@ const mapDispatchToProps = {
 const ConnectedCounter = connect(mapStateToProps, mapDispatchToProps)(Counter);
 
 const defaultFlags = { 'aDefault-Flag': true };
+const adapterArgs = {
+  clientSideId: '596788417a20200c2b70c89e',
+  user: { key: 'ld-2@tdeekens.name' },
+  defaultFlags,
+};
+
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <ConfigureFlopFlip
-          clientSideId="596788417a20200c2b70c89e"
-          user={{ key: 'ld-2@tdeekens.name' }}
-          defaultFlags={defaultFlags}
-          shouldChangeUserContext={true}
-        >
+        <ConfigureFlopFlip adapter={adapter} adapterArgs={adapterArgs}>
           <div className="App">
             <div className="App-header">
               <img src={logo} className="App-logo" alt="logo" />
