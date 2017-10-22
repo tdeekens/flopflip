@@ -8,6 +8,6 @@
   <i>Toggle features with their state being maintained in a Redux state slice or a broadcasting system (through the context) being accessible through a set of Higher-Order Components in React.</i><br />
 </p>
 
-### `@flopflip/launchdarkly-react`
+### `@flopflip/memory-adapter`
 
 This repository is part of the `flopflip` mono repository. Please head [here](https://github.com/tdeekens/flopflip) for more information.

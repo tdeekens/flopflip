@@ -1,0 +1,43 @@
+{
+  "name": "@flopflip/memory-adapter",
+  "version": "1.0.0",
+  "description": "An in memory adapter for flipflop",
+  "main": "dist/@flopflip-memory-adapter.cjs.js",
+  "module": "dist/@flopflip-memory-adapter.es.js",
+  "browser": "dist/@flopflip-memory-adapter.umd.js",
+  "scripts": {
+    "preversion": "npm run build",
+    "prebuild": "rimraf dist/**",
+    "build": "cross-env npm run build:es && npm run build:cjs",
+    "build:watch": "cross-env npm run build:es -- -w",
+    "build:es": "cross-env NODE_ENV=development rollup -c -f es -o dist/@flopflip-memory-adapter.es.js",
+    "build:cjs": "cross-env NODE_ENV=development rollup -c -f cjs -o dist/@flopflip-memory-adapter.cjs.js"
+  },
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdeekens/flopflip.git"
+  },
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
+  },
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "lodash.camelcase": "^4.3.0"
+  },
+  "keywords": [
+    "feature-flags",
+    "feature-toggles",
+    "memory",
+    "client"
+  ]
+}
