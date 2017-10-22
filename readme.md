@@ -176,10 +176,11 @@ import { FeatureToggled } from '@flopflip/react-redux';
 // or import { FeatureToggled } from '@flopflip/react-broadcast';
 import flagsNames from './feature-flags';
 
+const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
 export default (
   <FeatureToggled
     flag={flagsNames.THE_FEATURE_TOGGLE}
-    untoggledComponent={<h3>At least there is a fallback!</h3>}
+    untoggledComponent={UntoggledComponent}
   >
     <h3>I might be gone or there!</h3>
   </FeatureToggled>
@@ -189,11 +190,13 @@ export default (
 or with for multivariate feature toggles
 
 ```js
+const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
+
 export default (
   <FeatureToggled
     flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
     variate={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
-    untoggledComponent={<h3>At least there is a fallback!</h3>}
+    untoggledComponent={UntoggledComponent}
   >
     <h3>I might be gone or there!</h3>
   </FeatureToggled>
@@ -203,12 +206,15 @@ export default (
 or with `toggledComponent` prop
 
 ```js
+const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
+const ToggledComponent = () => <h3>{'I might be gone or there!'}</h3>;
+
 export default (
   <FeatureToggled
     flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
     variate={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
-    untoggledComponent={<h3>At least there is a fallback!</h3>}
-    toggledComponent={<h3>I might be gone or there!</h3>}
+    untoggledComponent={UntoggledComponent}
+    toggledComponent={ToggledComponent}
   />
 );
 ```
@@ -216,14 +222,31 @@ export default (
 or with Function as a Child
 
 ```js
+const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
+
 export default (
   <FeatureToggled
     flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
     variate={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
-    untoggledComponent={<h3>At least there is a fallback!</h3>}
+    untoggledComponent={UntoggledComponent}
   >
     {() => <h3>I might be gone or there!</h3>}
   </FeatureToggled>
+);
+```
+
+or with a `render` prop. Note that the `render` prop will always be invoked not matter if the feature is on or off. It therefore also receives an `isFeatureEnabled` boolean argument.
+
+```js
+const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
+
+export default (
+  <FeatureToggled
+    flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
+    variate={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
+    untoggledComponent={UntoggledComponent}
+    render={({ isFeatureEnabled }) => <h3>I might be gone or there!</h3>}
+  />
 );
 ```
 
