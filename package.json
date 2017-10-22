@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "check-node-version --package && npm run build",
     "lint": "eslint --format 'node_modules/eslint-formatter-pretty' packages",
-    "format": "format:md format:js",
+    "format": "npm run format:md && npm run format:js",
     "format:md": "pmd *.md",
     "format:js": "prettier --write '**/modules/**/*.js' '**/demo/**/*.js'",
     "test": "cross-env NODE_ENV=test jest",
