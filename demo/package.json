@@ -14,7 +14,8 @@
     "redux-thunk": "^2.2.0",
     "@flopflip/react-redux": "^3.0.0",
     "@flopflip/react-broadcast": "^3.0.0",
-    "@flopflip/launchdarkly-adapter": "^1.0.0"
+    "@flopflip/launchdarkly-adapter": "^1.0.0",
+    "@flopflip/memory-adapter": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

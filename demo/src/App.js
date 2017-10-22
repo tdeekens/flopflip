@@ -3,6 +3,7 @@ import { compose } from 'recompose';
 import { Provider, connect } from 'react-redux';
 import classNames from 'classnames';
 import adapter from '@flopflip/launchdarkly-adapter';
+//import adapter, { updateFlags } from '@flopflip/memory-adapter';
 import {
   ConfigureFlopFlip,
   withFeatureToggle,
@@ -21,7 +22,7 @@ import store from './store';
 import './App.css';
 import * as flags from './flags';
 
-const UntoggledFeature = <h6>Disabled Feature</h6>;
+const UntoggledFeature = () => <h6>Disabled Feature</h6>;
 
 const IncrementAsyncButton = props => (
   <button onClick={props.incrementAsync} disabled={props.isIncrementing}>
@@ -29,10 +30,7 @@ const IncrementAsyncButton = props => (
   </button>
 );
 const FeatureToggledIncrementAsyncButton = compose(
-  withFeatureToggle(
-    { flag: flags.INCREMENT_ASYNC_BUTTON },
-    () => UntoggledFeature
-  )
+  withFeatureToggle({ flag: flags.INCREMENT_ASYNC_BUTTON }, UntoggledFeature)
 )(IncrementAsyncButton);
 
 const IncrementSyncButton = props => (
@@ -78,7 +76,7 @@ const Counter = props => (
       <br />
       <FeatureToggled
         flag={flags.DECREMENT_ASYNC_BUTTON}
-        untoggledComponent={<h6>Disabled Feature</h6>}
+        untoggledComponent={UntoggledFeature}
       >
         <button onClick={props.decrementAsync} disabled={props.isDecrementing}>
           Decrement Async
@@ -128,5 +126,7 @@ class App extends Component {
     );
   }
 }
+
+//window.updateFlags = updateFlags;
 
 export default App;
