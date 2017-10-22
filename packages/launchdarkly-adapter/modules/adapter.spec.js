@@ -1,10 +1,5 @@
 import ldClient from 'ldclient-js';
-import adapter, {
-  camelCaseFlags,
-  createAnonymousUser,
-  subscribe,
-  injectClient,
-} from './adapter';
+import adapter, { camelCaseFlags, createAnonymousUser } from './adapter';
 
 jest.mock('nanoid', () => jest.fn(() => 'foo-random-id'));
 
