@@ -2,9 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import FeatureToggled from './feature-toggled';
 
-const UntoggledComponent = () => <div />;
+const UntoggledComponent = () => <div>{'UntoggledComponent'}</div>;
 UntoggledComponent.displayName = 'UntoggledComponent';
-const FeatureComponent = () => <div />;
+const ToggledComponent = () => <div>{'ToggledComponent'}</div>;
+ToggledComponent.displayName = 'ToggledComponent';
+const FeatureComponent = () => <div>{'FeatureComponent'}</div>;
 FeatureComponent.displayName = 'FeatureComponent';
 
 describe('when feature disabled', () => {
@@ -15,7 +17,7 @@ describe('when feature disabled', () => {
       wrapper = shallow(
         <FeatureToggled
           isFeatureEnabled={false}
-          untoggledComponent={<UntoggledComponent />}
+          untoggledComponent={UntoggledComponent}
         >
           <FeatureComponent />
         </FeatureToggled>
@@ -64,7 +66,7 @@ describe('when feature enabled', () => {
       wrapper = shallow(
         <FeatureToggled
           isFeatureEnabled
-          untoggledComponent={<UntoggledComponent />}
+          untoggledComponent={UntoggledComponent}
         >
           <FeatureComponent />
         </FeatureToggled>
@@ -89,8 +91,8 @@ describe('when feature enabled', () => {
       wrapper = shallow(
         <FeatureToggled
           isFeatureEnabled
-          untoggledComponent={<UntoggledComponent />}
-          toggledComponent={<FeatureComponent />}
+          untoggledComponent={UntoggledComponent}
+          toggledComponent={FeatureComponent}
         />
       );
     });
@@ -105,6 +107,33 @@ describe('when feature enabled', () => {
 
     it('should render the `FeatureComponent`', () => {
       expect(wrapper).toRender(FeatureComponent);
+    });
+  });
+
+  describe('with `render`', () => {
+    let props;
+    beforeEach(() => {
+      props = {
+        isFeatureEnabled: true,
+        untoggledComponent: UntoggledComponent,
+        render: jest.fn(() => <div>{'FeatureComponent'}</div>),
+      };
+
+      wrapper = shallow(<FeatureToggled {...props} />);
+    });
+
+    it('should match snapshot', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should invoke `render`', () => {
+      expect(props.render).toHaveBeenCalled();
+    });
+
+    it('should invoke `render` with `isFeatureEnabled`', () => {
+      expect(props.render).toHaveBeenCalledWith({
+        isFeatureEnabled: props.isFeatureEnabled,
+      });
     });
   });
 });

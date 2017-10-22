@@ -6,4 +6,10 @@ exports[`when feature disabled without untoggled component should match snapshot
 
 exports[`when feature enabled with \`children\` should match snapshot 1`] = `<FeatureComponent />`;
 
+exports[`when feature enabled with \`render\` should match snapshot 1`] = `
+<div>
+  FeatureComponent
+</div>
+`;
+
 exports[`when feature enabled with \`toggledComponent\` should match snapshot 1`] = `<FeatureComponent />`;
