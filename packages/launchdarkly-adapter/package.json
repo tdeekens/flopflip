@@ -37,7 +37,7 @@
   "dependencies": {
     "ldclient-js": "^1.1.12",
     "lodash.camelcase": "^4.3.0",
-    "nanoid": "^0.2.1"
+    "nanoid": "^1.0.0"
   },
   "keywords": [
     "feature-flags",
