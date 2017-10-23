@@ -89,7 +89,7 @@
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "check-node-version": "^2.1.0",
-    "codecov": "^2.3.1",
+    "codecov": "^3.0.0",
     "cross-env": "^5.0.5",
     "enzyme": "^3.1.0",
     "enzyme-matchers": "^4.0.1",
