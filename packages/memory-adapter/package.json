@@ -4,7 +4,6 @@
   "description": "An in memory adapter for flipflop",
   "main": "dist/@flopflip-memory-adapter.cjs.js",
   "module": "dist/@flopflip-memory-adapter.es.js",
-  "browser": "dist/@flopflip-memory-adapter.umd.js",
   "scripts": {
     "preversion": "npm run build",
     "prebuild": "rimraf dist/**",
