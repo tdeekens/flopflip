@@ -1,6 +1,5 @@
-import ldClient from 'ldclient-js';
-import camelCase from 'lodash.camelcase';
-import nanoid from 'nanoid';
+import { initialize } from 'ldclient-js';
+import camelCase from 'camelcase';
 
 const adapterState = {
   isReady: false,
@@ -44,7 +43,7 @@ const ensureUserFromArgs = userArgs => ({
   ...userArgs,
 });
 const initializeUserContext = (clientSideId, user) =>
-  ldClient.initialize(clientSideId, user);
+  initialize(clientSideId, user);
 const changeUserContext = (client, nextUser) => client.identify(nextUser);
 
 // NOTE: Exported for testing only

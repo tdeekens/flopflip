@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "ldclient-js": "^1.1.12",
-    "lodash.camelcase": "^4.3.0"
+    "camelcase": "^4.1.0"
   },
   "keywords": [
     "feature-flags",
