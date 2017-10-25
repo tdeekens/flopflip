@@ -8,10 +8,10 @@
     "format": "npm run format:md && npm run format:js",
     "format:md": "pmd *.md",
     "format:js": "prettier --write '**/modules/**/*.js' '**/demo/**/*.js'",
-    "test": "cross-env NODE_ENV=test jest",
-    "test:ci": "cross-env NODE_ENV=test npm run lint && jest --no-watchman --coverage && codecov",
+    "test": "cross-env NODE_ENV=test jest --config .jestrc.json",
+    "test:ci": "cross-env NODE_ENV=test npm run lint && jest --config .jestrc.json --no-watchman --coverage && codecov",
     "test:watch": "cross-env NODE_ENV=test npm test -- --watch",
-    "test:coverage": "cross-env NODE_ENV=test jest --coverage",
+    "test:coverage": "cross-env NODE_ENV=test npm test -- --coverage",
     "build": "lerna run --parallel build",
     "build:watch": "lerna run --parallel build:watch",
     "release": "npm run build && lerna publish --registry=https://registry.npmjs.org/"
@@ -73,23 +73,6 @@
     "rollup-plugin-replace": "^2.0.0",
     "rollup-plugin-uglify": "^2.0.1",
     "rollup-watch": "^4.3.1"
-  },
-  "jest": {
-    "setupFiles": ["raf/polyfill", "jest-localstorage-mock"],
-    "setupTestFrameworkScriptFile": "./config/jest.js",
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "testRegex": "\\.spec\\.js$",
-    "testEnvironment": "jsdom",
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/packages/.*/node_modules",
-      "/packages/.*/dist"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/"
-    ]
   },
   "keywords": [
     "react",
