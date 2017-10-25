@@ -1,8 +1,6 @@
 import ldClient from 'ldclient-js';
 import adapter, { camelCaseFlags, createAnonymousUserKey } from './adapter';
 
-jest.mock('nanoid', () => jest.fn(() => 'foo-random-id'));
-
 const clientSideId = '123-abc';
 const user = { key: 'foo-user' };
 const flags = { 'some-flag-1': true, 'some-flag-2': false };
@@ -52,7 +50,7 @@ describe('when configuring', () => {
 
     it('should initialize the `ld-client` with `clientSideId` and random `user` `key`', () => {
       expect(ldClient.initialize).toHaveBeenCalledWith(clientSideId, {
-        key: 'foo-random-id',
+        key: expect.any(String),
         group: 'foo-group',
       });
     });
@@ -201,6 +199,6 @@ describe('create anonymous user', () => {
   });
 
   it('should create uuid of length `foo-random-id`', () => {
-    expect(createAnonymousUserKey().length).toBe(13);
+    expect(createAnonymousUserKey().length).toBe(11);
   });
 });
