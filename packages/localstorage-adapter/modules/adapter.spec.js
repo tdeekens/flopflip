@@ -36,8 +36,16 @@ describe('when configuring', () => {
       return adapter.reconfigure({ user });
     });
 
-    it('should reset local storage', () => {
+    it('should reset localstorage', () => {
       expect(localStorage.getItem(`${STORAGE_SLICE}__flags`)).toBe(null);
+    });
+
+    it('should invoke `onFlagsStateChange`', () => {
+      expect(adapterArgs.onFlagsStateChange).toHaveBeenCalled();
+    });
+
+    it('should invoke `onFlagsStateChange` with empty flags', () => {
+      expect(adapterArgs.onFlagsStateChange).toHaveBeenCalledWith({});
     });
   });
 

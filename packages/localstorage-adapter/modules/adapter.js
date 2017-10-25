@@ -48,6 +48,8 @@ const configure = ({ user, onFlagsStateChange, onStatusStateChange }) => {
 const reconfigure = ({ user }) => {
   storage.unset('flags');
 
+  adapterState.eventHandlerMap['onFlagsStateChange']({});
+
   return Promise.resolve();
 };
 export default {
