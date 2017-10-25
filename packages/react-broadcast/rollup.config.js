@@ -20,17 +20,17 @@ const config = {
   },
   plugins: [
     commonjs(),
-    babel({
-      babelrc: true,
-      exclude: 'node_modules/**',
-      runtimeHelpers: true,
+    resolve({
+      module: true,
     }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),
       VERSION: `'${version}'`,
     }),
-    resolve({
-      module: true,
+    babel({
+      babelrc: true,
+      exclude: 'node_modules/**',
+      runtimeHelpers: true,
     }),
     builtins(),
     filesize(),

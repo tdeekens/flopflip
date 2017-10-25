@@ -29,12 +29,7 @@
     "url": "https://github.com/tdeekens/flopflip/issues"
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
-  "devDependencies": {
-    "jest-localstorage-mock": "^2.0.1"
-  },
-  "dependencies": {
-    "lodash.camelcase": "^4.3.0"
-  },
+  "dependencies": {},
   "keywords": [
     "feature-flags",
     "feature-toggles",
