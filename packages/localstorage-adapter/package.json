@@ -1,0 +1,44 @@
+{
+  "name": "@flopflip/localstorage-adapter",
+  "version": "1.0.0",
+  "description": "An localstorage adapter for flipflop",
+  "main": "dist/@flopflip-localstorage-adapter.cjs.js",
+  "module": "dist/@flopflip-localstorage-adapter.es.js",
+  "scripts": {
+    "preversion": "npm run build",
+    "prebuild": "rimraf dist/**",
+    "build": "cross-env npm run build:es && npm run build:cjs",
+    "build:watch": "cross-env npm run build:es -- -w",
+    "build:es": "cross-env NODE_ENV=development rollup -c -f es -o dist/@flopflip-localstorage-adapter.es.js",
+    "build:cjs": "cross-env NODE_ENV=development rollup -c -f cjs -o dist/@flopflip-localstorage-adapter.cjs.js"
+  },
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdeekens/flopflip.git"
+  },
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
+  },
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "devDependencies": {
+    "jest-localstorage-mock": "^2.0.1"
+  },
+  "dependencies": {
+    "lodash.camelcase": "^4.3.0"
+  },
+  "keywords": [
+    "feature-flags",
+    "feature-toggles",
+    "localstorage",
+    "client"
+  ]
+}
