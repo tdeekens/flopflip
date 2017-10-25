@@ -37,7 +37,7 @@ const subscribeToFlagsChanges = ({ rawFlags, client, onFlagsStateChange }) => {
 export const createAnonymousUserKey = () => nanoid();
 
 const ensureUserFromArgs = userArgs => ({
-  key: userArgs.key ? userArgs.key : createAnonymousUserKey(),
+  key: userArgs && userArgs.key ? userArgs.key : createAnonymousUserKey(),
   ...userArgs,
 });
 const initializeUserContext = (clientSideId, user) =>
