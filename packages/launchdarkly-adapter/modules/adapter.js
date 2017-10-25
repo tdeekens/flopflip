@@ -34,7 +34,10 @@ const subscribeToFlagsChanges = ({ rawFlags, client, onFlagsStateChange }) => {
   }
 };
 
-export const createAnonymousUserKey = () => nanoid();
+export const createAnonymousUserKey = () =>
+  Math.random()
+    .toString(36)
+    .substring(2);
 
 const ensureUserFromArgs = userArgs => ({
   key: userArgs && userArgs.key ? userArgs.key : createAnonymousUserKey(),
