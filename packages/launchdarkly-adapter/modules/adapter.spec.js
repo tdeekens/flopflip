@@ -1,5 +1,5 @@
 import ldClient from 'ldclient-js';
-import adapter, { camelCaseFlags, createAnonymousUser } from './adapter';
+import adapter, { camelCaseFlags, createAnonymousUserKey } from './adapter';
 
 jest.mock('nanoid', () => jest.fn(() => 'foo-random-id'));
 
@@ -27,9 +27,9 @@ describe('when configuring', () => {
     beforeEach(() => {
       return adapter.configure({
         clientSideId,
-        user,
         onStatusStateChange,
         onFlagsStateChange,
+        ...user,
       });
     });
 
@@ -42,15 +42,18 @@ describe('when configuring', () => {
     beforeEach(() =>
       adapter.configure({
         clientSideId,
-        user: {},
         onStatusStateChange,
         onFlagsStateChange,
+        ...{
+          group: 'foo-group',
+        },
       })
     );
 
     it('should initialize the `ld-client` with `clientSideId` and random `user` `key`', () => {
       expect(ldClient.initialize).toHaveBeenCalledWith(clientSideId, {
         key: 'foo-random-id',
+        group: 'foo-group',
       });
     });
   });
@@ -80,9 +83,9 @@ describe('when configuring', () => {
 
       return adapter.configure({
         clientSideId,
-        user,
         onStatusStateChange,
         onFlagsStateChange,
+        ...user,
       });
     });
 
@@ -154,11 +157,11 @@ describe('when configuring', () => {
         return adapter
           .configure({
             clientSideId,
-            user,
             onStatusStateChange,
             onFlagsStateChange,
+            ...user,
           })
-          .then(() => adapter.reconfigure({ user: nextUser }));
+          .then(() => adapter.reconfigure(nextUser));
       });
 
       it('should invoke `identify` on the `client` with the `user`', () => {
@@ -194,10 +197,10 @@ describe('camelCasedFlags', () => {
 
 describe('create anonymous user', () => {
   it('should create user with uuid in key property', () => {
-    expect(createAnonymousUser().key).toBeDefined();
+    expect(createAnonymousUserKey()).toBeDefined();
   });
 
   it('should create uuid of length `foo-random-id`', () => {
-    expect(createAnonymousUser().key.length).toBe(13);
+    expect(createAnonymousUserKey().length).toBe(13);
   });
 });
