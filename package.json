@@ -75,7 +75,7 @@
     "rollup-watch": "^4.3.1"
   },
   "jest": {
-    "setupFiles": ["raf/polyfill"],
+    "setupFiles": ["raf/polyfill", "jest-localstorage-mock"],
     "setupTestFrameworkScriptFile": "./config/jest.js",
     "snapshotSerializers": [
       "enzyme-to-json/serializer"

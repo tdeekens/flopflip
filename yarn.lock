@@ -3312,6 +3312,10 @@ jest-jasmine2@^21.2.1:
     jest-snapshot "^21.2.1"
     p-cancelable "^0.3.0"
 
+jest-localstorage-mock@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/jest-localstorage-mock/-/jest-localstorage-mock-2.0.1.tgz#6bea41d1d7b70c1725a3d34f8cc261ef6cdb12fa"
+
 jest-matcher-utils@^21.2.1:
   version "21.2.1"
   resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-21.2.1.tgz#72c826eaba41a093ac2b4565f865eb8475de0f64"
@@ -4006,10 +4010,6 @@ nan@^2.3.0:
 nanoid@^0.2.1:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-0.2.2.tgz#e2ebc6ad3db5e0454fd8124d30ca39b06555fe56"
-
-nanoid@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-1.0.0.tgz#fd6c3d8c576ed6f7e6a45152c996ae3f5e7dfe36"
 
 natural-compare@^1.4.0:
   version "1.4.0"
