@@ -34,15 +34,14 @@ const subscribeToFlagsChanges = ({ rawFlags, client, onFlagsStateChange }) => {
   }
 };
 
-export const createAnonymousUser = () => ({
-  key: nanoid(),
-});
+export const createAnonymousUserKey = () => nanoid();
 
+const ensureUserFromArgs = userArgs => ({
+  key: userArgs.key ? userArgs.key : createAnonymousUserKey(),
+  ...userArgs,
+});
 const initializeUserContext = (clientSideId, user) =>
-  ldClient.initialize(
-    clientSideId,
-    user && user.key ? user : createAnonymousUser()
-  );
+  ldClient.initialize(clientSideId, user);
 const changeUserContext = (client, nextUser) => client.identify(nextUser);
 
 // NOTE: Exported for testing only
@@ -81,12 +80,13 @@ const subscribe = ({ onFlagsStateChange, onStatusStateChange }) =>
 
 const configure = ({
   clientSideId,
-  user,
   onFlagsStateChange,
   onStatusStateChange,
+
+  ...userArgs
 }) => {
-  adapterState.client = initializeUserContext(clientSideId, user);
-  adapterState.user = user;
+  adapterState.user = ensureUserFromArgs(userArgs);
+  adapterState.client = initializeUserContext(clientSideId, adapterState.user);
 
   return subscribe({
     onFlagsStateChange,
@@ -98,7 +98,13 @@ const configure = ({
   });
 };
 
-const reconfigure = ({ user }) =>
+const reconfigure = ({
+  clientSideId,
+  onFlagsStateChange,
+  onStatusStateChange,
+
+  ...userArgs
+}) =>
   new Promise((resolve, reject) => {
     if (
       !adapterState.isReady ||
@@ -111,9 +117,9 @@ const reconfigure = ({ user }) =>
         )
       );
 
-    if (adapterState.user.key !== user.key) {
-      changeUserContext(adapterState.client, user);
-      adapterState.user = user;
+    if (adapterState.user.key !== userArgs.key) {
+      adapterState.user = ensureUserFromArgs(userArgs);
+      changeUserContext(adapterState.client, adapterState.user);
     }
 
     resolve();
