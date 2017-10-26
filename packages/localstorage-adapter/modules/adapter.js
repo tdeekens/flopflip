@@ -22,13 +22,19 @@ export const updateFlags = flags => {
   adapterState.eventHandlerMap['onFlagsStateChange'](flags);
 };
 
-const subscribeToFlagsChanges = () => {
+const subscribeToFlagsChanges = ({ pollingInteral = 1000 }) => {
   setInterval(() => {
     adapterState.eventHandlerMap['onFlagsStateChange'](storage.get('flags'));
-  }, 1000);
+  }, pollingInteral);
 };
 
-const configure = ({ user, onFlagsStateChange, onStatusStateChange }) => {
+const configure = ({
+  user,
+  onFlagsStateChange,
+  onStatusStateChange,
+
+  ...remainingArgs
+}) => {
   adapterState.user = user;
 
   return Promise.resolve().then(() => {
@@ -41,7 +47,7 @@ const configure = ({ user, onFlagsStateChange, onStatusStateChange }) => {
     onStatusStateChange({ isReady: adapterState.isReady });
     onFlagsStateChange(storage.get('flags'));
 
-    subscribeToFlagsChanges();
+    subscribeToFlagsChanges({ pollingInteral: remainingArgs.pollingInteral });
   });
 };
 
