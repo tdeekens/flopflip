@@ -36,6 +36,14 @@ describe('when configuring', () => {
     it('should update the user', () => {
       expect(getUser()).toEqual(user);
     });
+
+    it('should invoke `onFlagsStateChange`', () => {
+      expect(adapterArgs.onFlagsStateChange).toHaveBeenCalled();
+    });
+
+    it('should invoke `onFlagsStateChange` with empty flags', () => {
+      expect(adapterArgs.onFlagsStateChange).toHaveBeenCalledWith({});
+    });
   });
 
   describe('when updating flags', () => {
