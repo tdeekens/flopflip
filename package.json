@@ -9,7 +9,7 @@
     "format:md": "pmd *.md",
     "format:js": "prettier --write '**/modules/**/*.js' '**/demo/**/*.js'",
     "test": "cross-env NODE_ENV=test jest --config .jestrc.json",
-    "test:ci": "cross-env NODE_ENV=test npm run lint && jest --config .jestrc.json --no-watchman --coverage && codecov",
+    "test:ci": "cross-env NODE_ENV=test npm run lint && npm test -- --no-watchman --coverage && codecov",
     "test:watch": "cross-env NODE_ENV=test npm test -- --watch",
     "test:coverage": "cross-env NODE_ENV=test npm test -- --coverage",
     "build": "lerna run --parallel build",
