@@ -22,7 +22,7 @@ export const updateFlags = flags => {
   adapterState.eventHandlerMap['onFlagsStateChange'](flags);
 };
 
-const subscribeToFlagsChanges = ({ pollingInteral = 1000 }) => {
+const subscribeToFlagsChanges = ({ pollingInteral = 1000 * 60 }) => {
   setInterval(() => {
     adapterState.eventHandlerMap['onFlagsStateChange'](storage.get('flags'));
   }, pollingInteral);

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { compose } from 'recompose';
 import { Provider, connect } from 'react-redux';
 import classNames from 'classnames';
-import adapter from '@flopflip/launchdarkly-adapter';
+//import adapter from '@flopflip/launchdarkly-adapter';
 //import adapter, { updateFlags } from '@flopflip/memory-adapter';
+import adapter, { updateFlags } from '@flopflip/localstorage-adapter';
 import {
   ConfigureFlopFlip,
   withFeatureToggle,
@@ -127,6 +128,6 @@ class App extends Component {
   }
 }
 
-//window.updateFlags = updateFlags;
+window.updateFlags = updateFlags;
 
 export default App;
