@@ -8,11 +8,18 @@ const filesize = require('rollup-plugin-filesize');
 
 const env = process.env.NODE_ENV;
 const version = process.env.npm_package_version;
+const name = process.env.npm_package_name;
+
+console.log(process.env.npm_package_name);
 
 const config = {
-  input: 'modules/index.js',
-  name: '@flopflip-localstorage-adapter',
+  name,
   sourcemap: true,
+  external: ['react', 'prop-types'],
+  globals: {
+    react: 'React',
+    'prop-types': 'PropTypes',
+  },
   plugins: [
     commonjs(),
     resolve({
