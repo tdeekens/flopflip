@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/memory-adapter",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "An in memory adapter for flipflop",
   "main": "dist/@flopflip-memory-adapter.cjs.js",
   "module": "dist/@flopflip-memory-adapter.es.js",
@@ -29,8 +29,6 @@
     "url": "https://github.com/tdeekens/flopflip/issues"
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
-  "devDependencies": {},
-  "dependencies": {},
   "keywords": [
     "feature-flags",
     "feature-toggles",

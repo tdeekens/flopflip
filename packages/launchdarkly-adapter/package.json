@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/launchdarkly-adapter",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "A adapter around the LaunchDarkly client for flipflop",
   "main": "dist/@flopflip-launchdarkly-adapter.cjs.js",
   "module": "dist/@flopflip-launchdarkly-adapter.es.js",
@@ -35,8 +35,8 @@
     "enzyme-to-json": "^3.1.1"
   },
   "dependencies": {
-    "ldclient-js": "^1.1.12",
-    "camelcase": "^4.1.0"
+    "camelcase": "^4.1.0",
+    "ldclient-js": "^1.1.12"
   },
   "keywords": [
     "feature-flags",

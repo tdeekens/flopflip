@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/localstorage-adapter",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "An localstorage adapter for flipflop",
   "main": "dist/@flopflip-localstorage-adapter.cjs.js",
   "module": "dist/@flopflip-localstorage-adapter.es.js",
@@ -29,7 +29,6 @@
     "url": "https://github.com/tdeekens/flopflip/issues"
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
-  "dependencies": {},
   "keywords": [
     "feature-flags",
     "feature-toggles",
