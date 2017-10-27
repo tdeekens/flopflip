@@ -37,6 +37,7 @@
 |--------|-------|------------|
 | [`launchdarkly-adapter`](/packages/launchdarkly-adapter) | [![launchdarkly-adapter Version][launchdarkly-adapter-icon]][launchdarkly-adapter-version] | [![launchdarkly-adapter Dependencies Status][launchdarkly-adapter-dependencies-icon]][launchdarkly-adapter-dependencies] |
 | [`memory-adapter`](/packages/memory-adapter) | [![memory-adapter Version][memory-adapter-icon]][memory-adapter-version] | [![memory-adapter Dependencies Status][memory-adapter-dependencies-icon]][memory-adapter-dependencies] |
+| [`localstorage-adapter`](/packages/localstorage-adapter) | [![localstorage-adapter Version][localstorage-adapter-icon]][localstorage-adapter-version] | [![localstorage-adapter Dependencies Status][localstorage-adapter-dependencies-icon]][localstorage-adapter-dependencies] |
 | [`react`](/packages/react) | [![react Version][react-icon]][react-version] | [![react Dependencies Status][react-dependencies-icon]][react-dependencies] |
 | [`react-broadcast`](/packages/react-broadcast) | [![react-broadcast Version][react-broadcast-icon]][react-broadcast-version] | [![react-broadcast Dependencies Status][react-broadcast-dependencies-icon]][react-broadcast-dependencies] |
 | [`react-redux`](/packages/react-redux) | [![react-redux Version][react-redux-icon]][react-redux-version] | [![react-redux Dependencies Status][react-redux-dependencies-icon]][react-redux-dependencies] |
@@ -49,6 +50,10 @@
 [memory-adapter-icon]: https://img.shields.io/npm/v/@flopflip/memory-adapter.svg?style=flat-square
 [memory-adapter-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/memory-adapter
 [memory-adapter-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/memory-adapter
+[localstorage-adapter-version]: https://www.npmjs.com/package/@flopflip/localstorage-adapter
+[localstorage-adapter-icon]: https://img.shields.io/npm/v/@flopflip/localstorage-adapter.svg?style=flat-square
+[localstorage-adapter-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/localstorage-adapter
+[localstorage-adapter-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/localstorage-adapter
 [react-version]: https://www.npmjs.com/package/@flopflip/react
 [react-icon]: https://img.shields.io/npm/v/@flopflip/react.svg?style=flat-square
 [react-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/react
@@ -64,7 +69,7 @@
 
 ## Installation
 
-This is a mono repository maintained using [lerna](https://github.com/lerna/lerna). It currently contains five [packages](/packages) in a `memory-adapter`, `launchdarkly-adapter`, `react`, `react-redux` and `react-broadcast`. You should not need the `launchdarkly-adapter` yourself but one of our bindings (react-broadcast or react-redux). Both use the `react` package to share components.
+This is a mono repository maintained using [lerna](https://github.com/lerna/lerna). It currently contains five [packages](/packages) in a `memory-adapter`, a `localstorage-adapter` or `launchdarkly-adapter`, `react`, `react-redux` and `react-broadcast`. You should not need the `launchdarkly-adapter` yourself but one of our bindings (react-broadcast or react-redux). Both use the `react` package to share components.
 
 Depending on the preferred integration (with or without redux) use:
 
@@ -112,6 +117,7 @@ It takes the `props`:
   - The `adapter` will receive `onFlagsStateChange` and `onStatusStateChange` will should be invoked accordingly to notify `react-broadcast` and `react-redux` about flag and status changes
 - The `shouldDeferAdapterConfiguration` prop can be used to defer the initial configuration the `adapter`. This might be helpful for cases in which you want to wait for e.g. the `key` to be present within your root component and you do not want `flopflip` to generate a `uuid` for you automatically.
 - The `defaultFlags` prop object can be used to specify default flag values until an `adapter` responds or in case flags were removed
+- The `localstorage-adapter` and `memory-adapter` expose a named `updateFlags` export which eases updating flags and flushes them to all components via `react-broadcast` or `react-redux`
 
 Whenever you do not want to have the state of all flags persisted in redux the minimal configuration for a setup with `@flopflip/react-broadcast` and LaunchDarkly would be nothing more than
 
@@ -119,6 +125,7 @@ Whenever you do not want to have the state of all flags persisted in redux the m
 import { ConfigureFlopFlip } from '@flopflip/react-redux';
 import adapter from '@flopflip/launchdarkly-adapter';
 // or import adapter from '@flopflip/memory-adapter';
+// or import adapter from '@flopflip/localstorage-adapter';
 
 <ConfigureFlopFlip adapter={adapter} adapterArgs={{ clientSideId, user }}>
   <App />
