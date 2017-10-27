@@ -10,8 +10,8 @@
     "prebuild": "rimraf dist/**",
     "build": "cross-env npm run build:es && npm run build:cjs",
     "build:watch": "cross-env npm run build:es -- -w",
-    "build:es": "cross-env NODE_ENV=development rollup -c -f es -o dist/@flopflip-react.es.js",
-    "build:cjs": "cross-env NODE_ENV=development rollup -c -f cjs -o dist/@flopflip-react.cjs.js"
+    "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.js -o dist/@flopflip-react.es.js",
+    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.js -o dist/@flopflip-react.cjs.js"
   },
   "files": [
     "readme.md",
