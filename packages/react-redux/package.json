@@ -44,7 +44,6 @@
     "redux": "^3.7.2"
   },
   "dependencies": {
-    "@flopflip/launchdarkly-wrapper": "^2.1.5",
     "@flopflip/react": "^3.0.0",
     "lodash.isobject": "^3.0.2",
     "recompose": "^0.26.0"

@@ -47,7 +47,6 @@
     "react-dom": "^15.6.0 || ^16.0.0"
   },
   "dependencies": {
-    "@flopflip/launchdarkly-wrapper": "^2.1.5",
     "@flopflip/react": "^3.0.0",
     "lodash.isobject": "^3.0.2",
     "react-broadcast": "^0.5.2",

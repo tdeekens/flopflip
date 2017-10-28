@@ -31,7 +31,6 @@
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
     "enzyme": "^3.1.0",
-    "enzyme-adapter-react-15": "^1.0.1",
     "enzyme-to-json": "^3.1.1"
   },
   "dependencies": {
