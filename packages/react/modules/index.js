@@ -3,7 +3,7 @@ const version = VERSION;
 export {
   injectFeatureToggle,
   injectFeatureToggles,
-  branchUntoggled,
+  branchOnFeatureToggle,
   FeatureToggled,
   FlagsSubscription,
 } from './components';

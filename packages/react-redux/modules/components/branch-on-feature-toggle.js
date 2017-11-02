@@ -7,5 +7,5 @@ export default ({ flag, variate }, UntoggledComponent) => WrappedComponent =>
   compose(
     injectFeatureToggle(flag),
     branchUntoggled(UntoggledComponent, DEFAULT_FLAG_PROP_KEY, variate),
-    setDisplayName(wrapDisplayName(WrappedComponent, 'withFeatureToggle'))
+    setDisplayName(wrapDisplayName(WrappedComponent, 'branchOnFeatureToggle'))
   )(WrappedComponent);
