@@ -97,7 +97,7 @@ Flopflip allows you to manage feature flags through the notion of adapters (e.g.
 ### `@flopflip/react-redux` & `@flopflip/react-broadcast` API & exports
 
 - `ConfigureFlopFlip` a component to configure flopflip with an adapter (alternative to the store enhancer)
-- `withFeatureToggle` a Higher-Order Component (HoC) to conditionally render components depending on feature toggle state
+- `branchOnFeatureToggle` a Higher-Order Component (HoC) to conditionally render components depending on feature toggle state
 - `injectFeatureToggle` a HoC to inject a feature toggle onto the `props` of a component
 - `injectFeatureToggles` a HoC to inject requested feature toggles from existing feature toggles onto the `props` of a component
 - `FeatureToggled` a component conditionally rendering its `children` based on the status of a passed feature flag
@@ -174,7 +174,7 @@ import adapter from '@flopflip/launchdarkly-adapter';
 
 Apart from `ConfigureFlopFlip` both packages `@flopflip/react-broadcast` and `@flopflip/react-redux` export the same set of components to toggle based on features. Only the import changes depending on if you chose to integrate with redux or without. Again, behind the scenes the build on `@flopflip/react` to share common logic.
 
-- `withFeatureToggle` a Higher-Order Component (HoC) to conditionally render components depending on feature toggle state
+- `branchOnFeatureToggle` a Higher-Order Component (HoC) to conditionally render components depending on feature toggle state
 - `injectFeatureToggle` a HoC to inject a feature toggle onto the `props` of a component
 - `injectFeatureToggles` a HoC to inject requested feature toggles from existing feature toggles onto the `props` of a component
 - `FeatureToggled` a component conditionally rendering its `children` based on the status of a passed feature flag
@@ -267,19 +267,19 @@ this last example will always turn the feature on if the variate or toggle does 
 
 We actually recommend maintaining a list of constants with feature flag names somewhere within your application. This avoids typos and unexpected behavior. After all, the correct workings of your feature flags is crutial to your application.
 
-#### `withFeatureToggle({ flag: String, variate?: String | Boolean })`
+#### `branchOnFeatureToggle({ flag: String, variate?: String | Boolean })`
 
 A HoC to conditionally render a component based on a feature toggle's state. It accepts the feature toggle name and an optional component to be rendered in case the feature is disabled.
 
 Without a component rendered in place of the `ComponentToBeToggled`:
 
 ```js
-import { withFeatureToggle } from '@flopflip/react-redux';
+import { branchOnFeatureToggle } from '@flopflip/react-redux';
 import flagsNames from './feature-flags';
 
 const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
 
-export default withFeatureToggle({ flag: flagsNames.THE_FEATURE_TOGGLE })(
+export default branchOnFeatureToggle({ flag: flagsNames.THE_FEATURE_TOGGLE })(
   ComponentToBeToggled
 );
 ```
@@ -287,7 +287,7 @@ export default withFeatureToggle({ flag: flagsNames.THE_FEATURE_TOGGLE })(
 With a component rendered in place of the `ComponentToBeToggled`:
 
 ```js
-import { withFeatureToggle } from '@flopflip/react-redux';
+import { branchOnFeatureToggle } from '@flopflip/react-redux';
 import flagsNames from './feature-flags';
 
 const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
@@ -295,7 +295,7 @@ const ComponentToBeRenderedInstead = () => (
   <h3>At least there is a fallback!</h3>
 );
 
-export default withFeatureToggle({ flag: flagsNames.THE_FEATURE_TOGGLE })(
+export default branchOnFeatureToggle({ flag: flagsNames.THE_FEATURE_TOGGLE })(
   ComponentToBeToggled,
   ComponentToBeRenderedInstead
 );
@@ -304,7 +304,7 @@ export default withFeatureToggle({ flag: flagsNames.THE_FEATURE_TOGGLE })(
 or when the flag is multi variate
 
 ```js
-import { withFeatureToggle } from '@flopflip/react-redux';
+import { branchOnFeatureToggle } from '@flopflip/react-redux';
 import flagsNames from './feature-flags';
 
 const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
@@ -312,7 +312,7 @@ const ComponentToBeRenderedInstead = () => (
   <h3>At least there is a fallback!</h3>
 );
 
-export default withFeatureToggle({
+export default branchOnFeatureToggle({
   flag: flagsNames.THE_FEATURE_TOGGLE,
   variate: 'variate1'
 })(ComponentToBeToggled, ComponentToBeRenderedInstead);
@@ -341,7 +341,7 @@ export default injectFeatureToggles([flagsNames.TOGGLE_A, flagsNames.TOGGLE_B])(
 
 #### `injectFeatureToggle(flag: String, propKey?: String)`
 
-This HoC matches feature toggles given against configured ones and injects the matching result. `withFeatureToggle` uses this to conditionally render a component. You also may pass a second argument to overwrite the default `propKey` of the injected toggle (defaults to `isFeatureEnabled`).
+This HoC matches feature toggles given against configured ones and injects the matching result. `branchOnFeatureToggle` uses this to conditionally render a component. You also may pass a second argument to overwrite the default `propKey` of the injected toggle (defaults to `isFeatureEnabled`).
 
 ```js
 import { injectFeatureToggle } from '@flopflip/react-redux';
