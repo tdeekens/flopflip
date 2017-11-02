@@ -409,7 +409,7 @@ const store = createStore(
 
 ### Module formats
 
-`@flopflip/react-redux` and `@flopflip/react-broadcast` is built for UMD (un- and minified) and ESM using [`rollup`](https://github.com/tdeekens/flopflip/packages/react-redux/blob/master/rollup.config.js).
+`@flopflip/react-redux` and `@flopflip/react-broadcast` is built for UMD (un- and minified) and ESM using [`rollup`](https://github.com/tdeekens/flopflip/blob/master/rollup.config.js).
 
 Both our `@flopflip/launchdarkly-wrapper` and `@flopflip/react` packages are "only" build for ESM and CommonJS (not UMD) as they are meant to be consumed by a module loader to be integrated.
 
@@ -421,6 +421,6 @@ The `package.json` files contain a `main` and `module` entry to point to a Commo
 - ...AMD use the `dist/@flopflip/<package>.umd.js`
 - ...`<script />` link it to `dist/@flopflip/<package>.umd.js` or `dist/@flopflip/<package>.umd.min.js`
 
-All build files are part of the npm distribution using the [`files`](https://github.com/tdeekens/@flopflip/packages/react-redux/blob/master/package.json) array to keep install time short.
+All build files are part of the npm distribution using the [`files`](https://github.com/tdeekens/flopflip/blob/master/packages/react-redux/package.json) array to keep install time short.
 
-Also feel free to use [unpkg.com](https://unpkg.com/@flopflip/react-redux@latest/dist/@flopflip-react-redux.umd.min.js) as a CDN to the [dist](https://unpkg.com/@flopflip/react-redux@latest/dist) files.
+Also feel free to use [unpkg.com](https://unpkg.com/@flopflip/react-redux@latest/dist/@flopflip-react-redux.umd.min.js) as a CDN to the [dist](https://unpkg.com/@flopflip/react-redux@3.0.1/dist/) files.
