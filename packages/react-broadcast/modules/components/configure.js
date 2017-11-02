@@ -28,7 +28,6 @@ export default class Configure extends React.PureComponent {
 
   state = {
     flags: {},
-    status: { isReady: false },
   };
 
   handleUpdateFlags = flags => {
@@ -40,9 +39,8 @@ export default class Configure extends React.PureComponent {
     }));
   };
 
-  handleUpdateStatus = status => {
-    this.setState({ status });
-  };
+  handleUpdateStatus = status =>
+    this.setState(prevState => ({ ...prevState, ...status }));
 
   render() {
     return (
