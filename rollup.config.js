@@ -15,10 +15,12 @@ console.log(process.env.npm_package_name);
 const config = {
   name,
   sourcemap: true,
-  external: ['react', 'prop-types'],
+  external: ['react', 'prop-types', 'redux', 'react-redux'],
   globals: {
     react: 'React',
     'prop-types': 'PropTypes',
+    redux: 'redux',
+    'react-redux': 'react-redux',
   },
   plugins: [
     commonjs(),
