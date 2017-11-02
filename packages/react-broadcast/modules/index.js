@@ -4,7 +4,7 @@ export {
   FeatureToggled,
   injectFeatureToggle,
   injectFeatureToggles,
-  withFeatureToggle,
+  branchOnFeatureToggle,
   ConfigureFlopFlip,
 } from './components';
 

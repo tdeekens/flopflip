@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import branchUntoggled from './branch-untoggled';
+import branchOnFeatureToggle from './branch-on-feature-toggle';
 
 const UntoggledComponent = () => <div>{'UntoggledComponent'}</div>;
 UntoggledComponent.displayName = 'UntoggledComponent';
@@ -21,7 +21,9 @@ describe('with `flagName`', () => {
       let wrapper;
 
       beforeEach(() => {
-        Component = branchUntoggled(undefined, flagName)(FeatureComponent);
+        Component = branchOnFeatureToggle(undefined, flagName)(
+          FeatureComponent
+        );
         wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
       });
 
@@ -39,7 +41,7 @@ describe('with `flagName`', () => {
       let wrapper;
 
       beforeEach(() => {
-        Component = branchUntoggled(UntoggledComponent, flagName)(
+        Component = branchOnFeatureToggle(UntoggledComponent, flagName)(
           FeatureComponent
         );
         wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
@@ -66,7 +68,7 @@ describe('with `flagName`', () => {
       let wrapper;
 
       beforeEach(() => {
-        Component = branchUntoggled(UntoggledComponent, flagName)(
+        Component = branchOnFeatureToggle(UntoggledComponent, flagName)(
           FeatureComponent
         );
         wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
@@ -86,7 +88,9 @@ describe('with `flagName`', () => {
       let wrapper;
 
       beforeEach(() => {
-        Component = branchUntoggled(undefined, flagName)(FeatureComponent);
+        Component = branchOnFeatureToggle(undefined, flagName)(
+          FeatureComponent
+        );
         wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
       });
 
@@ -113,7 +117,7 @@ describe('with `flagName` and `flagVariate`', () => {
       let wrapper;
 
       beforeEach(() => {
-        Component = branchUntoggled(undefined, flagName, flagVariate)(
+        Component = branchOnFeatureToggle(undefined, flagName, flagVariate)(
           FeatureComponent
         );
         wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
@@ -133,9 +137,11 @@ describe('with `flagName` and `flagVariate`', () => {
       let wrapper;
 
       beforeEach(() => {
-        Component = branchUntoggled(UntoggledComponent, flagName, flagVariate)(
-          FeatureComponent
-        );
+        Component = branchOnFeatureToggle(
+          UntoggledComponent,
+          flagName,
+          flagVariate
+        )(FeatureComponent);
         wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
       });
 
@@ -161,9 +167,11 @@ describe('with `flagName` and `flagVariate`', () => {
       let wrapper;
 
       beforeEach(() => {
-        Component = branchUntoggled(UntoggledComponent, flagName, flagVariate)(
-          FeatureComponent
-        );
+        Component = branchOnFeatureToggle(
+          UntoggledComponent,
+          flagName,
+          flagVariate
+        )(FeatureComponent);
         wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
       });
 
@@ -181,7 +189,7 @@ describe('with `flagName` and `flagVariate`', () => {
       let wrapper;
 
       beforeEach(() => {
-        Component = branchUntoggled(undefined, flagName, flagVariate)(
+        Component = branchOnFeatureToggle(undefined, flagName, flagVariate)(
           FeatureComponent
         );
         wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
@@ -207,7 +215,7 @@ describe('without `flagName`', () => {
       let wrapper;
 
       beforeEach(() => {
-        Component = branchUntoggled()(FeatureComponent);
+        Component = branchOnFeatureToggle()(FeatureComponent);
         wrapper = shallow(<Component {...featureFlag} />);
       });
 
@@ -225,7 +233,7 @@ describe('without `flagName`', () => {
       let wrapper;
 
       beforeEach(() => {
-        Component = branchUntoggled(UntoggledComponent)(FeatureComponent);
+        Component = branchOnFeatureToggle(UntoggledComponent)(FeatureComponent);
         wrapper = shallow(<Component {...featureFlag} />);
       });
 
@@ -250,7 +258,7 @@ describe('without `flagName`', () => {
       let wrapper;
 
       beforeEach(() => {
-        Component = branchUntoggled(UntoggledComponent)(FeatureComponent);
+        Component = branchOnFeatureToggle(UntoggledComponent)(FeatureComponent);
         wrapper = shallow(<Component {...featureFlag} />);
       });
 
@@ -268,7 +276,7 @@ describe('without `flagName`', () => {
       let wrapper;
 
       beforeEach(() => {
-        Component = branchUntoggled()(FeatureComponent);
+        Component = branchOnFeatureToggle()(FeatureComponent);
         wrapper = shallow(<Component {...featureFlag} />);
       });
 

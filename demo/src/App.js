@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import adapter, { updateFlags } from '@flopflip/localstorage-adapter';
 import {
   ConfigureFlopFlip,
-  withFeatureToggle,
+  branchOnFeatureToggle,
   injectFeatureToggle,
   FeatureToggled,
 } from '@flopflip/react-redux';
@@ -31,7 +31,10 @@ const IncrementAsyncButton = props => (
   </button>
 );
 const FeatureToggledIncrementAsyncButton = compose(
-  withFeatureToggle({ flag: flags.INCREMENT_ASYNC_BUTTON }, UntoggledFeature)
+  branchOnFeatureToggle(
+    { flag: flags.INCREMENT_ASYNC_BUTTON },
+    UntoggledFeature
+  )
 )(IncrementAsyncButton);
 
 const IncrementSyncButton = props => (
