@@ -2,11 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import FeatureToggled from './feature-toggled';
 
-const UntoggledComponent = () => <div>{'UntoggledComponent'}</div>;
+const UntoggledComponent = () => <div>UntoggledComponent</div>;
 UntoggledComponent.displayName = 'UntoggledComponent';
-const ToggledComponent = () => <div>{'ToggledComponent'}</div>;
+const ToggledComponent = () => <div>ToggledComponent</div>;
 ToggledComponent.displayName = 'ToggledComponent';
-const FeatureComponent = () => <div>{'FeatureComponent'}</div>;
+const FeatureComponent = () => <div>FeatureComponent</div>;
 FeatureComponent.displayName = 'FeatureComponent';
 
 describe('when feature disabled', () => {
@@ -116,7 +116,7 @@ describe('when feature enabled', () => {
       props = {
         isFeatureEnabled: true,
         untoggledComponent: UntoggledComponent,
-        render: jest.fn(() => <div>{'FeatureComponent'}</div>),
+        render: jest.fn(() => <div>FeatureComponent</div>),
       };
 
       wrapper = shallow(<FeatureToggled {...props} />);
