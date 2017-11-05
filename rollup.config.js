@@ -4,6 +4,7 @@ const babel = require('rollup-plugin-babel');
 const replace = require('rollup-plugin-replace');
 const uglify = require('rollup-plugin-uglify');
 const builtins = require('rollup-plugin-node-builtins');
+const globals = require('rollup-plugin-node-globals');
 const filesize = require('rollup-plugin-filesize');
 
 const env = process.env.NODE_ENV;
@@ -23,11 +24,16 @@ const config = {
     'react-redux': 'react-redux',
   },
   plugins: [
+    globals(),
+    builtins(),
     resolve({
       module: true,
       browser: true,
+      main: true,
     }),
-    commonjs(),
+    commonjs({
+      ignoreGlobal: true,
+    }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),
       VERSION: `'${version}'`,
@@ -37,7 +43,6 @@ const config = {
       exclude: 'node_modules/**',
       runtimeHelpers: true,
     }),
-    builtins(),
     filesize(),
   ],
 };
