@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rendering with multiple props should omit multiple props 1`] = `null`;
+
+exports[`rendering without any props should do nothing 1`] = `null`;
