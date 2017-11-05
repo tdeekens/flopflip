@@ -28,7 +28,6 @@ const config = {
     builtins(),
     resolve({
       module: true,
-      browser: true,
     }),
     commonjs({
       ignoreGlobal: true,
