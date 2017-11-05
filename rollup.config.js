@@ -48,7 +48,10 @@ if (env === 'production') {
   config.plugins.push(
     uglify({
       compress: {
+        screw_ie8: true,
+        dead_code: true,
         warnings: false,
+        drop_debugger: true,
       },
     })
   );

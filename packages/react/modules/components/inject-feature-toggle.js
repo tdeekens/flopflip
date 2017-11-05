@@ -1,6 +1,6 @@
 import { compose, withProps } from 'recompose';
 import isNil from 'lodash.isnil';
-import omitProps from '@hocs/omit-props';
+import { omitProps } from '../hocs';
 import { DEFAULT_FLAG_PROP_KEY, ALL_FLAGS } from '../constants';
 
 const injectFeatureToggle = (flagName, propKey = DEFAULT_FLAG_PROP_KEY) =>
