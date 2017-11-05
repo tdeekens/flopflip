@@ -9,12 +9,6 @@
     common-tags "1.4.0"
     react-display-name "0.2.0"
 
-"@hocs/omit-props@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@hocs/omit-props/-/omit-props-0.3.0.tgz#251495a4fbbf91b7e5b312e3467bcf78564cb70a"
-  dependencies:
-    just-omit "^1.0.1"
-
 "@types/node@*":
   version "8.0.47"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.47.tgz#968e596f91acd59069054558a00708c445ca30c2"
