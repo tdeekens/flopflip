@@ -29,7 +29,6 @@ const config = {
     resolve({
       module: true,
       browser: true,
-      main: true,
     }),
     commonjs({
       ignoreGlobal: true,
@@ -40,7 +39,6 @@ const config = {
     }),
     babel({
       babelrc: true,
-      exclude: 'node_modules/**',
       runtimeHelpers: true,
     }),
     filesize(),
