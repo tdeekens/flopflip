@@ -11,8 +11,6 @@ const env = process.env.NODE_ENV;
 const version = process.env.npm_package_version;
 const name = process.env.npm_package_name;
 
-console.log(process.env.npm_package_name);
-
 const config = {
   name,
   sourcemap: true,
@@ -24,17 +22,18 @@ const config = {
     'react-redux': 'react-redux',
   },
   plugins: [
+    replace({
+      'process.env.NODE_ENV': JSON.stringify(env),
+      VERSION: `'${version}'`,
+    }),
     globals(),
     builtins(),
     resolve({
       module: true,
+      main: true,
     }),
     commonjs({
       ignoreGlobal: true,
-    }),
-    replace({
-      'process.env.NODE_ENV': JSON.stringify(env),
-      VERSION: `'${version}'`,
     }),
     babel({
       babelrc: true,
@@ -48,7 +47,6 @@ if (env === 'production') {
   config.plugins.push(
     uglify({
       compress: {
-        screw_ie8: true,
         dead_code: true,
         warnings: false,
         drop_debugger: true,
