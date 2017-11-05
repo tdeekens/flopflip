@@ -23,10 +23,11 @@ const config = {
     'react-redux': 'react-redux',
   },
   plugins: [
-    commonjs(),
     resolve({
       module: true,
+      browser: true,
     }),
+    commonjs(),
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),
       VERSION: `'${version}'`,
