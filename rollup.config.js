@@ -30,6 +30,7 @@ const config = {
     builtins(),
     resolve({
       module: true,
+      jsnext: true,
       main: true,
     }),
     commonjs({
