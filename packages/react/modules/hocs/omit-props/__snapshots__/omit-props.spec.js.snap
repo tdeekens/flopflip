@@ -1,5 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`rendering with multiple props should omit multiple props 1`] = `null`;
+exports[`rendering with multiple props should omit multiple props 1`] = `
+<WrappedComponent
+  c={3}
+/>
+`;
 
-exports[`rendering without any props should do nothing 1`] = `null`;
+exports[`rendering without any props should do nothing 1`] = `
+<WrappedComponent
+  a={1}
+  b={2}
+  c={3}
+/>
+`;
