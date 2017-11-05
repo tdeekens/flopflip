@@ -4,6 +4,7 @@
   "snapshotSerializers": ["enzyme-to-json/serializer"],
   "testRegex": "\\.spec\\.js$",
   "testEnvironment": "jsdom",
+  "browser": true,
   "testPathIgnorePatterns": [
     "/node_modules/",
     "/packages/.*/node_modules",
