@@ -1,6 +1,6 @@
 import { compose, withProps } from 'recompose';
 import intersect from 'just-intersect';
-import omitProps from '@hocs/omit-props';
+import { omitProps } from '../hocs';
 import { ALL_FLAGS, DEFAULT_FLAGS_PROP_KEY } from '../constants';
 
 const filterFeatureToggles = (allFlags, demandedFlags) =>
