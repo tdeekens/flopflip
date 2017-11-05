@@ -1,5 +1,4 @@
 import { compose, setDisplayName, wrapDisplayName } from 'recompose';
-import isObject from 'lodash.isobject';
 import { branchOnFeatureToggle, DEFAULT_FLAG_PROP_KEY } from '@flopflip/react';
 import injectFeatureToggle from './inject-feature-toggle';
 
