@@ -63,7 +63,7 @@
     "prettier-markdown": "^0.1.8",
     "raf": "^3.4.0",
     "rimraf": "^2.6.2",
-    "rollup": "^0.50.0",
+    "rollup": "^0.51.0",
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-node-globals": "^1.1.0",
     "rollup-plugin-commonjs": "8.2.3",
