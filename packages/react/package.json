@@ -33,11 +33,11 @@
   "devDependencies": {
     "enzyme": "^3.1.1",
     "enzyme-adapter-react-16": "^1.0.4",
-    "enzyme-to-json": "^3.2.1",
+    "enzyme-to-json": "^3.2.2",
     "prop-types": "15.6.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-test-renderer": "^16.0.0"
+    "react": "^16.1.0",
+    "react-dom": "^16.1.0",
+    "react-test-renderer": "^16.1.0"
   },
   "peerDependencies": {
     "prop-types": "15.6.0",
