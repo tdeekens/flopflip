@@ -4,5 +4,5 @@ import * as commercetoolsEnzymeMatchers from '@commercetools/jest-enzyme-matcher
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-Enzyme.configure({ adapter: new Adapter() });
+Enzyme.configure({ adapter: new Adapter(), disableLifecycleMethods: true });
 expect.extend(commercetoolsEnzymeMatchers);

@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "enzyme": "^3.1.1",
+    "enzyme": "^3.2.0",
     "enzyme-to-json": "^3.2.2"
   },
   "dependencies": {

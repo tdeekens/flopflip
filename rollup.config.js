@@ -32,6 +32,7 @@ const config = {
       module: true,
       jsnext: true,
       main: true,
+      preferBuiltins: true,
     }),
     commonjs({
       ignoreGlobal: true,
