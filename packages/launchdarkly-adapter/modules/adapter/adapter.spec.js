@@ -2,7 +2,10 @@ import ldClient from 'ldclient-js';
 import adapter, { camelCaseFlags, createAnonymousUserKey } from './adapter';
 
 const clientSideId = '123-abc';
-const user = { key: 'foo-user' };
+const userWithKey = { key: 'foo-user' };
+const userWithoutKey = {
+  group: 'foo-group',
+};
 const flags = { 'some-flag-1': true, 'some-flag-2': false };
 
 jest.mock('ldclient-js', () => ({
@@ -25,14 +28,17 @@ describe('when configuring', () => {
     beforeEach(() => {
       return adapter.configure({
         clientSideId,
+        user: userWithKey,
         onStatusStateChange,
         onFlagsStateChange,
-        ...user,
       });
     });
 
     it('should initialize the `ld-client` with `clientSideId` and given `user`', () => {
-      expect(ldClient.initialize).toHaveBeenCalledWith(clientSideId, user);
+      expect(ldClient.initialize).toHaveBeenCalledWith(
+        clientSideId,
+        userWithKey
+      );
     });
   });
 
@@ -40,11 +46,9 @@ describe('when configuring', () => {
     beforeEach(() =>
       adapter.configure({
         clientSideId,
+        user: userWithoutKey,
         onStatusStateChange,
         onFlagsStateChange,
-        ...{
-          group: 'foo-group',
-        },
       })
     );
 
@@ -58,7 +62,7 @@ describe('when configuring', () => {
 
   describe('when reconfiguring before configured', () => {
     it('should reject reconfiguration', () => {
-      return expect(adapter.reconfigure({ user })).rejects.toEqual(
+      return expect(adapter.reconfigure({ user: userWithKey })).rejects.toEqual(
         expect.any(Error)
       );
     });
@@ -81,9 +85,9 @@ describe('when configuring', () => {
 
       return adapter.configure({
         clientSideId,
+        user: userWithKey,
         onStatusStateChange,
         onFlagsStateChange,
-        ...user,
       });
     });
 
@@ -155,11 +159,11 @@ describe('when configuring', () => {
         return adapter
           .configure({
             clientSideId,
+            user: userWithKey,
             onStatusStateChange,
             onFlagsStateChange,
-            ...user,
           })
-          .then(() => adapter.reconfigure(nextUser));
+          .then(() => adapter.reconfigure({ user: nextUser }));
       });
 
       it('should invoke `identify` on the `client` with the `user`', () => {

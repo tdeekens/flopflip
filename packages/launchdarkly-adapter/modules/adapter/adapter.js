@@ -39,9 +39,9 @@ export const createAnonymousUserKey = () =>
     .toString(36)
     .substring(2);
 
-const ensureUserFromArgs = userArgs => ({
-  key: userArgs && userArgs.key ? userArgs.key : createAnonymousUserKey(),
-  ...userArgs,
+const ensureUser = user => ({
+  key: user && user.key ? user.key : createAnonymousUserKey(),
+  ...user,
 });
 const initializeUserContext = (clientSideId, user) =>
   initialize(clientSideId, user);
@@ -83,12 +83,11 @@ const subscribe = ({ onFlagsStateChange, onStatusStateChange }) =>
 
 const configure = ({
   clientSideId,
+  user,
   onFlagsStateChange,
   onStatusStateChange,
-
-  ...userArgs
 }) => {
-  adapterState.user = ensureUserFromArgs(userArgs);
+  adapterState.user = ensureUser(user);
   adapterState.client = initializeUserContext(clientSideId, adapterState.user);
 
   return subscribe({
@@ -103,10 +102,9 @@ const configure = ({
 
 const reconfigure = ({
   clientSideId,
+  user,
   onFlagsStateChange,
   onStatusStateChange,
-
-  ...userArgs
 }) =>
   new Promise((resolve, reject) => {
     if (
@@ -120,8 +118,8 @@ const reconfigure = ({
         )
       );
 
-    if (adapterState.user.key !== userArgs.key) {
-      adapterState.user = ensureUserFromArgs(userArgs);
+    if (adapterState.user.key !== user.key) {
+      adapterState.user = ensureUser(user);
       changeUserContext(adapterState.client, adapterState.user);
     }
 
