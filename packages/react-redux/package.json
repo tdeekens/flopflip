@@ -33,14 +33,14 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "enzyme": "^3.1.1",
-    "enzyme-adapter-react-16": "^1.0.4",
+    "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.0",
     "enzyme-to-json": "^3.2.2",
     "prop-types": "15.6.0",
-    "react": "^16.1.0",
-    "react-dom": "^16.1.0",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
-    "react-test-renderer": "^16.1.0",
+    "react-test-renderer": "^16.1.1",
     "redux": "^3.7.2"
   },
   "dependencies": {
