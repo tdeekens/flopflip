@@ -1,0 +1,109 @@
+node6Environment: &node6Environment
+  docker:
+    - image: circleci/node:6
+  working_directory: ~/flopflip
+node8Environment: &node8Environment
+  docker:
+    - image: circleci/node:8
+  working_directory: ~/flopflip
+
+aliases:
+  - &restore_yarn_cache
+    keys:
+      - v1-yarn-cache-{{ checksum "yarn.lock" }}
+      - v1-yarn-cache
+
+  - &save_yarn_cache
+    key: v1-yarn-cache-{{ checksum "yarn.lock" }}
+    paths:
+      - node_modules
+
+  - &yarn_install
+    name: Installing
+    # Ignoring scripts (e.g. post-install) to gain more control
+    # in the jobs to only e.g. build when explicitely needed.
+    command: yarn install --pure-lockfile --ignore-scripts
+
+  - &yarn_bootstrap
+    name: Bootstraping
+    # Limiting the default concurrency (4) of lerna to 2
+    # as the build otherwise dies due to resouce restrictions.
+    command: yarn bootstrap --concurrency=2
+
+  - &yarn_build
+    name: Building
+    command: yarn build
+
+  - &unit_test
+    name: Unit testing
+    # Limiting the workers of Jest to 10
+    # as the build otherwise dies due to resouce restrictions.
+    command: yarn test:ci --maxWorkers=10
+
+  - &unit_test_with_coverage
+    name: Unit testing (with coverage report)
+    command: yarn test:ci:coverage
+
+version: 2
+jobs:
+  greenkeeper_lockfile:
+    <<: *node8Environment
+    steps:
+      - checkout
+      - restore-cache: *restore_yarn_cache
+      - run:
+          name: Installing greenkeeper-lockfile-update
+          command: yarn global add greenkeeper-lockfile@1 --prefix ~/.yarn
+      - run: *yarn_install
+      - save_cache: *save_yarn_cache
+      - run:
+          name: Updating greenkeeper-lockfile
+          command: ~/.yarn/bin/greenkeeper-lockfile-update
+      - run:
+          name: Uploading greenkeeper-lockfile
+          command: ~/.yarn/bin/greenkeeper-lockfile-upload
+  lint:
+    <<: *node8Environment
+    steps:
+      - checkout
+      - restore-cache: *restore_yarn_cache
+      - run: *yarn_install
+      - run: *yarn_bootstrap
+      - run: *yarn_build
+      - save_cache: *save_yarn_cache
+      - run:
+          name: Linting
+          command: yarn lint
+  test_unit_node_6:
+    <<: *node6Environment
+    steps:
+      - checkout
+      - restore-cache: *restore_yarn_cache
+      - run: *yarn_install
+      - run: *yarn_bootstrap
+      - run: *yarn_build
+      - save_cache: *save_yarn_cache
+      - run: *unit_test
+  test_unit_node_8:
+    <<: *node8Environment
+    steps:
+      - checkout
+      - restore-cache: *restore_yarn_cache
+      - run: *yarn_install
+      - run: *yarn_bootstrap
+      - run: *yarn_build
+      - save_cache: *save_yarn_cache
+      - run: *unit_test_with_coverage
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - greenkeeper_lockfile
+      - lint
+      - test_unit_node_6:
+          requires:
+            - lint
+      - test_unit_node_8:
+          requires:
+            - lint

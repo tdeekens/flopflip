@@ -7,8 +7,8 @@
   <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/logo.png" /><br /><br />
   <i>Toggle features in being maintained in a Redux state slice or a broadcasting system (through the context) being accessible through a set of Higher-Order Components in React.</i>
   <br /><br />
-  <a href="https://travis-ci.org/tdeekens/flopflip">
-    <img alt="Travis CI Status" src="https://img.shields.io/travis/tdeekens/flopflip/master.svg?style=flat-square&label=travis">
+  <a href="https://circleci.com/gh/tdeekens/flopflip">
+    <img alt="CircleCI Status" src="https://circleci.com/gh/tdeekens/flopflip.svg?style=shield&circle-token=63ee7a0e1c766b6b76da6f7ba4c7b9f2a7876191">
   </a>
   <a href="https://codecov.io/gh/tdeekens/flopflip">
     <img alt="Codecov Coverage Status" src="https://img.shields.io/codecov/c/github/tdeekens/flopflip.svg?style=flat-square">
