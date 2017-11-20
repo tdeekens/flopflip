@@ -1,0 +1,46 @@
+{
+  "name": "@flopflip/splitio-adapter",
+  "version": "1.0.0",
+  "description": "A adapter around the split.io client for flipflop",
+  "main": "dist/@flopflip-splitio-adapter.cjs.js",
+  "module": "dist/@flopflip-splitio-adapter.es.js",
+  "scripts": {
+    "preversion": "npm run build",
+    "prebuild": "rimraf dist/**",
+    "build": "cross-env npm run build:es && npm run build:cjs",
+    "build:watch": "cross-env npm run build:es -- -w",
+    "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.js -o dist/@flopflip-splitio-adapter.es.js",
+    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.js -o dist/@flopflip-splitio-adapter.cjs.js"
+  },
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdeekens/flopflip.git"
+  },
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
+  },
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "devDependencies": {
+    "enzyme": "^3.2.0",
+    "enzyme-to-json": "^3.2.2"
+  },
+  "dependencies": {
+    "@splitsoftware/splitio": "^9.3.6",
+    "camelcase": "^4.1.0"
+  },
+  "keywords": [
+    "feature-flags",
+    "feature-toggles",
+    "split.io",
+    "client"
+  ]
+}
