@@ -57,6 +57,7 @@ const initializeUserContext = (clientSideId, user) => {
       key: user.key,
     },
   });
+
   return {
     client: factory.client(),
     manager: factory.manager(),
@@ -121,7 +122,6 @@ const reconfigure = ({ user, onFlagsStateChange }) =>
           '@flopflip/splitio-adapter: please configure adapter before reconfiguring.'
         )
       );
-
     if (adapterState.user.key !== user.key) {
       adapterState.user = ensureUser(user);
       const names = adapterState.manager.names();
