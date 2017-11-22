@@ -53,10 +53,10 @@ const ensureUser = user => ({
   ...user,
 });
 
-const initializeClient = (clientSideId, user) => {
+const initializeClient = (authorizationKey, user) => {
   const factory = splitio({
     core: {
-      authorizationKey: clientSideId,
+      authorizationKey: authorizationKey,
       key: user.key,
     },
   });
@@ -90,13 +90,16 @@ const subscribe = ({ onFlagsStateChange, onStatusStateChange }) =>
   });
 
 const configure = ({
-  clientSideId,
+  authorizationKey,
   user,
   onFlagsStateChange,
   onStatusStateChange,
 }) => {
   adapterState.user = ensureUser(user);
-  const { client, manager } = initializeClient(clientSideId, adapterState.user);
+  const { client, manager } = initializeClient(
+    authorizationKey,
+    adapterState.user
+  );
   adapterState.client = client;
   adapterState.manager = manager;
 
