@@ -1,5 +1,9 @@
 import splitio from '@splitsoftware/splitio';
-import adapter, { camelCaseFlags, createAnonymousUserKey } from './adapter';
+import adapter, {
+  camelCaseFlags,
+  createAnonymousUserKey,
+  normalizeFlag,
+} from './adapter';
 
 jest.mock('@splitsoftware/splitio', () =>
   jest.fn(() => ({
@@ -233,5 +237,56 @@ describe('create anonymous user', () => {
 
   it('should create uuid of length `foo-random-id`', () => {
     expect(createAnonymousUserKey().length).toBeGreaterThan(0);
+  });
+});
+
+describe('normalizeFlag', () => {
+  const flagName = 'fooFlag';
+
+  describe('with `flagValue` being `null`', () => {
+    it('should return `false`', () => {
+      expect(normalizeFlag(flagName, null)).toEqual({
+        flagName,
+        flagValue: false,
+      });
+    });
+  });
+
+  describe('with `flagValue` being `on`', () => {
+    it('should return `true`', () => {
+      expect(normalizeFlag(flagName, 'on')).toEqual({
+        flagName,
+        flagValue: true,
+      });
+    });
+  });
+
+  describe('with `flagValue` being `off`', () => {
+    it('should return `false`', () => {
+      expect(normalizeFlag(flagName, 'off')).toEqual({
+        flagName,
+        flagValue: false,
+      });
+    });
+  });
+
+  describe('with anoy other `flagValue`', () => {
+    describe('with a `String`', () => {
+      it('should the `String`', () => {
+        expect(normalizeFlag(flagName, 'Yeehaaw')).toEqual({
+          flagName,
+          flagValue: 'Yeehaaw',
+        });
+      });
+    });
+
+    describe('with a `Number`', () => {
+      it('should the `Number`', () => {
+        expect(normalizeFlag(flagName, 42)).toEqual({
+          flagName,
+          flagValue: 42,
+        });
+      });
+    });
   });
 });
