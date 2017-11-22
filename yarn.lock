@@ -61,15 +61,6 @@
     common-tags "1.4.0"
     react-display-name "0.2.0"
 
-"@flopflip/react@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-4.0.0.tgz#924ba09344e8a1a5af553a82ce1b82e24f7b382d"
-  dependencies:
-    just-intersect "^2.0.0"
-    just-omit "^1.0.1"
-    lodash.isnil "^4.0.0"
-    recompose "^0.26.0"
-
 "@types/node@*":
   version "6.0.92"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.92.tgz#e7f721ae282772e12ba2579968c00d9cce422c5d"
@@ -3523,10 +3514,6 @@ jsx-ast-utils@^2.0.0:
   resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-2.0.1.tgz#e801b1b39985e20fffc87b40e3748080e2dcac7f"
   dependencies:
     array-includes "^3.0.3"
-
-just-intersect@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/just-intersect/-/just-intersect-2.0.0.tgz#02d9d2962440c021fe3342ae133751b048da5a64"
 
 just-intersect@^3.0.0:
   version "3.0.0"

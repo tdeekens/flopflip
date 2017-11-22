@@ -38,6 +38,7 @@ const config = {
       ignoreGlobal: true,
     }),
     babel({
+      exclude: ['node_modules/**'],
       babelrc: true,
       runtimeHelpers: true,
     }),
