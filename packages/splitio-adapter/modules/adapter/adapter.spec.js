@@ -1,32 +1,8 @@
 import splitio from '@splitsoftware/splitio';
 import adapter, { camelCaseFlags, createAnonymousUserKey } from './adapter';
 
-const clientSideId = '123-abc';
-const userWithKey = { key: 'foo-user' };
-const userWithoutKey = {
-  group: 'foo-group',
-};
-const names = ['some-flag-1', 'some-flag-2'];
-const flags = { 'some-flag-1': true, 'some-flag-2': false };
-
-jest.mock('@splitsoftware/splitio', () => {
-  /*const mockSplitio = {
-    client: jest.fn(),
-    manager: jest.fn(),
-  }
-  mockSplitio.client.mockImplementation(() => ({
-    on: jest.fn((_, cb) => cb()),
-    getTreatments: jest.fn(() => ({})),
-    Event: {
-      SDK_READY: 'SDK_READY',
-      SDK_UPDATE: 'SDK_UPDATE',
-    },
-  }))
-  mockSplitio.manager.mockImplementation(() => ({
-    names: jest.fn(() => []),
-  }))
-  return jest.fn(() => mockSplitio)*/
-  return jest.fn(() => ({
+jest.mock('@splitsoftware/splitio', () =>
+  jest.fn(() => ({
     client: jest.fn(() => ({
       on: jest.fn((_, cb) => cb()),
       getTreatments: jest.fn(() => ({})),
@@ -38,8 +14,16 @@ jest.mock('@splitsoftware/splitio', () => {
     manager: jest.fn(() => ({
       names: jest.fn(() => []),
     })),
-  }));
-});
+  }))
+);
+
+const clientSideId = '123-abc';
+const userWithKey = { key: 'foo-user' };
+const userWithoutKey = {
+  group: 'foo-group',
+};
+const names = ['some-flag-1', 'some-flag-2'];
+const flags = { 'some-flag-1': true, 'some-flag-2': false };
 
 describe('when configuring', () => {
   let onStatusStateChange;
@@ -100,15 +84,18 @@ describe('when configuring', () => {
 
   describe('when ready', () => {
     let factory;
+    let onStub;
     let onStatusStateChange;
     let onFlagsStateChange;
 
     beforeEach(() => {
       onStatusStateChange = jest.fn();
       onFlagsStateChange = jest.fn();
+      onStub = jest.fn((_, cb) => cb());
+
       factory = {
         client: jest.fn(() => ({
-          on: jest.fn((_, cb) => cb()),
+          on: onStub,
           getTreatments: jest.fn(() => flags),
           Event: {
             SDK_READY: 'SDK_READY',
@@ -145,7 +132,7 @@ describe('when configuring', () => {
       });
 
       it('should register callbacks to receive flag updates', () => {
-        expect(factory.client().on).toHaveBeenCalledWith(
+        expect(onStub).toHaveBeenCalledWith(
           factory.client().Event.SDK_UPDATE,
           expect.any(Function)
         );
@@ -154,22 +141,27 @@ describe('when configuring', () => {
 
     describe('when reconfiguring', () => {
       const nextUser = { key: 'bar-user' };
+      let namesStub;
+      let getTreatmentsStub;
       let factory;
 
       beforeEach(() => {
         onStatusStateChange = jest.fn();
         onFlagsStateChange = jest.fn();
+        namesStub = jest.fn(() => names);
+        getTreatmentsStub = jest.fn(() => flags);
+
         factory = {
           client: jest.fn(() => ({
             on: jest.fn((_, cb) => cb()),
-            getTreatments: jest.fn(() => flags),
+            getTreatments: getTreatmentsStub,
             Event: {
               SDK_READY: 'SDK_READY',
               SDK_UPDATE: 'SDK_UPDATE',
             },
           })),
           manager: jest.fn(() => ({
-            names: jest.fn(() => names),
+            names: namesStub,
           })),
         };
 
@@ -182,17 +174,25 @@ describe('when configuring', () => {
             onStatusStateChange,
             onFlagsStateChange,
           })
-          .then(() =>
+          .then(() => {
+            // NOTE: Clearing stubs as they are invoked
+            // first during `configure`.
+            namesStub.mockClear();
+            getTreatmentsStub.mockClear();
+
             adapter.reconfigure({
               user: nextUser,
               onStatusStateChange,
               onFlagsStateChange,
-            })
-          );
+            });
+          });
+      });
+
+      it('should invoke `names` after getting a new `manager`', () => {
+        expect(factory.manager().names).toHaveBeenCalled();
       });
 
       it('should invoke `getTreatments` on the `client` with the new `user`', () => {
-        expect(factory.manager().names).toHaveBeenCalled();
         expect(factory.client().getTreatments).toHaveBeenCalledWith(
           names,
           nextUser
