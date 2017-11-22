@@ -9,27 +9,30 @@ const adapterState = {
   manager: null,
 };
 
-const normalizeFlag = (flagName, flagValue) => {
-  let value;
+export const normalizeFlag = (flagName, flagValue) => {
+  let normalizeFlagValue;
   if (flagValue === null) {
-    value = false;
+    normalizeFlagValue = false;
   } else if (flagValue === 'on') {
-    value = true;
+    normalizeFlagValue = true;
   } else if (flagValue === 'off') {
-    value = false;
+    normalizeFlagValue = false;
   } else {
-    value = flagValue;
+    normalizeFlagValue = flagValue;
   }
   return {
-    name: camelCase(flagName),
-    value,
+    flagName: camelCase(flagName),
+    flagValue: normalizeFlagValue,
   };
 };
 
 export const camelCaseFlags = flags =>
   Object.entries(flags).reduce((acc, [flagName, flaValue]) => {
-    const { name, value } = normalizeFlag(flagName, flaValue);
-    acc[name] = value;
+    const {
+      flagName: normalizeFlagName,
+      flagValue: normalizeFlagValue,
+    } = normalizeFlag(flagName, flaValue);
+    acc[normalizeFlagName] = normalizeFlagValue;
     return acc;
   }, {});
 
