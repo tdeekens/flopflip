@@ -21,7 +21,7 @@ jest.mock('@splitsoftware/splitio', () =>
   }))
 );
 
-const clientSideId = '123-abc';
+const authorizationKey = '123-abc';
 const userWithKey = { key: 'foo-user' };
 const userWithoutKey = {
   group: 'foo-group',
@@ -41,17 +41,17 @@ describe('when configuring', () => {
   describe('with user key', () => {
     beforeEach(() => {
       return adapter.configure({
-        clientSideId,
+        authorizationKey,
         user: userWithKey,
         onStatusStateChange,
         onFlagsStateChange,
       });
     });
 
-    it('should initialize the `splitio` client with `clientSideId` and given `user`', () => {
+    it('should initialize the `splitio` client with `authorizationKey` and given `user`', () => {
       expect(splitio).toHaveBeenCalledWith({
         core: {
-          authorizationKey: clientSideId,
+          authorizationKey: authorizationKey,
           key: userWithKey.key,
         },
       });
@@ -61,17 +61,17 @@ describe('when configuring', () => {
   describe('without key', () => {
     beforeEach(() =>
       adapter.configure({
-        clientSideId,
+        authorizationKey,
         user: userWithoutKey,
         onStatusStateChange,
         onFlagsStateChange,
       })
     );
 
-    it('should initialize the `splitio` with `clientSideId` and random `user` `key`', () => {
+    it('should initialize the `splitio` with `authorizationKey` and random `user` `key`', () => {
       expect(splitio).toHaveBeenCalledWith({
         core: {
-          authorizationKey: clientSideId,
+          authorizationKey: authorizationKey,
           key: expect.any(String),
         },
       });
@@ -114,7 +114,7 @@ describe('when configuring', () => {
       splitio.mockReturnValue(factory);
 
       return adapter.configure({
-        clientSideId,
+        authorizationKey,
         user: userWithKey,
         onStatusStateChange,
         onFlagsStateChange,
@@ -173,7 +173,7 @@ describe('when configuring', () => {
 
         return adapter
           .configure({
-            clientSideId,
+            authorizationKey,
             user: userWithKey,
             onStatusStateChange,
             onFlagsStateChange,
