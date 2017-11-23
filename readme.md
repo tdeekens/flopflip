@@ -35,6 +35,7 @@
 
 | Package                                                  | Version                                                                                    | Dependencies                                                                                                             |
 | -------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| [`splitio-adapter`](/packages/splitio-adapter)           | [![splitio-adapter Version][splitio-adapter-icon]][splitio-adapter-version]                | [![splitio-adapter Dependencies Status][splitio-adapter-dependencies-icon]][splitio-adapter-dependencies]                |
 | [`launchdarkly-adapter`](/packages/launchdarkly-adapter) | [![launchdarkly-adapter Version][launchdarkly-adapter-icon]][launchdarkly-adapter-version] | [![launchdarkly-adapter Dependencies Status][launchdarkly-adapter-dependencies-icon]][launchdarkly-adapter-dependencies] |
 | [`memory-adapter`](/packages/memory-adapter)             | [![memory-adapter Version][memory-adapter-icon]][memory-adapter-version]                   | [![memory-adapter Dependencies Status][memory-adapter-dependencies-icon]][memory-adapter-dependencies]                   |
 | [`localstorage-adapter`](/packages/localstorage-adapter) | [![localstorage-adapter Version][localstorage-adapter-icon]][localstorage-adapter-version] | [![localstorage-adapter Dependencies Status][localstorage-adapter-dependencies-icon]][localstorage-adapter-dependencies] |
@@ -42,6 +43,7 @@
 | [`react-broadcast`](/packages/react-broadcast)           | [![react-broadcast Version][react-broadcast-icon]][react-broadcast-version]                | [![react-broadcast Dependencies Status][react-broadcast-dependencies-icon]][react-broadcast-dependencies]                |
 | [`react-redux`](/packages/react-redux)                   | [![react-redux Version][react-redux-icon]][react-redux-version]                            | [![react-redux Dependencies Status][react-redux-dependencies-icon]][react-redux-dependencies]                            |
 
+[splitio-adapter-version]: https://www.npmjs.com/package/@flopflip/splitio-adapter
 [launchdarkly-adapter-version]: https://www.npmjs.com/package/@flopflip/launchdarkly-adapter
 [launchdarkly-adapter-icon]: https://img.shields.io/npm/v/@flopflip/launchdarkly-adapter.svg?style=flat-square
 [launchdarkly-adapter-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/launchdarkly-adapter
