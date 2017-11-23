@@ -99,7 +99,11 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - greenkeeper_lockfile
+      - greenkeeper_lockfile:
+          filters:
+            branches:
+              only:
+                - /greenkeeper\/.*/
       - lint
       - test_unit_node_6:
           requires:
