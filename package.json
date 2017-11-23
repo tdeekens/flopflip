@@ -4,7 +4,7 @@
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
     "postinstall": "npm run bootstrap && npm run build",
-    "bootstrap": "check-node-version --package",
+    "bootstrap": "check-node-version --package --print",
     "lint": "eslint --format 'node_modules/eslint-formatter-pretty' packages",
     "format": "npm run format:md && npm run format:js",
     "format:md": "prettier --parser markdown --write '*.md'",
@@ -43,7 +43,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "check-node-version": "^2.1.0",
+    "check-node-version": "^3.0.0",
     "codecov": "^3.0.0",
     "cross-env": "^5.1.1",
     "enzyme": "^3.2.0",
