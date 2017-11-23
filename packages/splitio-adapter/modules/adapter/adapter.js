@@ -56,7 +56,7 @@ const ensureUser = user => ({
 const initializeClient = (authorizationKey, user) => {
   const factory = splitio({
     core: {
-      authorizationKey: authorizationKey,
+      authorizationKey,
       key: user.key,
     },
   });
