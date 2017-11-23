@@ -51,7 +51,7 @@ describe('when configuring', () => {
     it('should initialize the `splitio` client with `authorizationKey` and given `user`', () => {
       expect(splitio).toHaveBeenCalledWith({
         core: {
-          authorizationKey: authorizationKey,
+          authorizationKey,
           key: userWithKey.key,
         },
       });
@@ -71,7 +71,7 @@ describe('when configuring', () => {
     it('should initialize the `splitio` with `authorizationKey` and random `user` `key`', () => {
       expect(splitio).toHaveBeenCalledWith({
         core: {
-          authorizationKey: authorizationKey,
+          authorizationKey,
           key: expect.any(String),
         },
       });
