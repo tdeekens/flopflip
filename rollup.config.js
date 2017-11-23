@@ -41,7 +41,6 @@ const config = {
     babel({
       exclude: ['node_modules/**'],
       babelrc: true,
-      runtimeHelpers: true,
     }),
     filesize(),
   ],
