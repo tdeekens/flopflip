@@ -3,12 +3,12 @@ const commonjs = require('rollup-plugin-commonjs');
 const babel = require('rollup-plugin-babel');
 const replace = require('rollup-plugin-replace');
 const uglify = require('rollup-plugin-uglify');
+const json = require('rollup-plugin-json');
 const builtins = require('rollup-plugin-node-builtins');
 const globals = require('rollup-plugin-node-globals');
 const filesize = require('rollup-plugin-filesize');
 
 const env = process.env.NODE_ENV;
-const version = process.env.npm_package_version;
 const name = process.env.npm_package_name;
 
 const config = {
@@ -24,10 +24,10 @@ const config = {
   plugins: [
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),
-      VERSION: `'${version}'`,
     }),
     globals(),
     builtins(),
+    json(),
     resolve({
       module: true,
       jsnext: true,

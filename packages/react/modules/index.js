@@ -15,4 +15,4 @@ export {
   ALL_FLAGS,
 } from './constants';
 
-export { version };
+export { version } from '../package.json';

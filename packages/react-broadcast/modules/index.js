@@ -8,4 +8,4 @@ export {
   ConfigureFlopFlip,
 } from './components';
 
-export { version };
+export { version } from '../package.json';
