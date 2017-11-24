@@ -1,6 +1,6 @@
 import { createElement } from 'react';
 import { setDisplayName, wrapDisplayName } from 'recompose';
-import omit from 'just-omit';
+import omit from 'lodash.omit';
 
 const omitProps = (...propsToOmit) => WrappedComponent => {
   const WithPropsOmitted = props =>
