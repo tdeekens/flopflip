@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@splitsoftware/splitio": "^9.3.6",
-    "camelcase": "^4.1.0"
+    "lodash.camelcase": "^4.3.0"
   },
   "keywords": [
     "feature-flags",

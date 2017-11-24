@@ -1,5 +1,5 @@
 import splitio from '@splitsoftware/splitio';
-import camelCase from 'camelcase';
+import camelCase from 'lodash.camelcase';
 
 const adapterState = {
   isReady: false,

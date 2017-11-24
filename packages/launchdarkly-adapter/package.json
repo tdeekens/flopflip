@@ -34,8 +34,8 @@
     "enzyme-to-json": "^3.2.2"
   },
   "dependencies": {
-    "camelcase": "^4.1.0",
-    "ldclient-js": "^1.1.12"
+    "ldclient-js": "^1.1.12",
+    "lodash.camelcase": "^4.3.0"
   },
   "keywords": [
     "feature-flags",
