@@ -1,5 +1,3 @@
-const version = VERSION;
-
 export {
   injectFeatureToggle,
   injectFeatureToggles,

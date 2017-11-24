@@ -1,5 +1,3 @@
-const version = VERSION;
-
 export {
   createFlopFlipEnhancer,
   STATE_SLICE as FLOPFLIP_STATE_SLICE,
