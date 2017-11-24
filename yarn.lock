@@ -3567,6 +3567,10 @@ jsx-ast-utils@^2.0.0:
   dependencies:
     array-includes "^3.0.3"
 
+just-camel-case@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/just-camel-case/-/just-camel-case-2.0.0.tgz#575563b45c9aedca2f412161c4b968dc7e1c2e77"
+
 just-intersect@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/just-intersect/-/just-intersect-3.0.0.tgz#c0289030a3752fb7a9e1e64a1c838ed689bb0a54"
@@ -3851,9 +3855,9 @@ log-symbols@^2.0.0:
   dependencies:
     chalk "^2.0.1"
 
-"logplease@github:nicozelaya/logplease#1.3.0":
+logplease@NicoZelaya/logplease#1.3.0:
   version "1.3.0"
-  resolved "https://codeload.github.com/nicozelaya/logplease/tar.gz/b4ca204f892080a2011fe3b3f3b2b1c8c72bb29c"
+  resolved "https://codeload.github.com/NicoZelaya/logplease/tar.gz/b4ca204f892080a2011fe3b3f3b2b1c8c72bb29c"
 
 longest@^1.0.1:
   version "1.0.1"
