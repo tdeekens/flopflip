@@ -1,5 +1,5 @@
 import splitio from '@splitsoftware/splitio';
-import camelCase from 'just-camel-case';
+import camelCase from 'lodash.camelcase';
 
 const adapterState = {
   isReady: false,
@@ -20,6 +20,7 @@ export const normalizeFlag = (flagName, flagValue) => {
   } else {
     normalizeFlagValue = flagValue;
   }
+
   return {
     flagName: camelCase(flagName),
     flagValue: normalizeFlagValue,

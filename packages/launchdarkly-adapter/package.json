@@ -34,7 +34,7 @@
     "enzyme-to-json": "^3.2.2"
   },
   "dependencies": {
-    "just-camel-case": "^2.0.0",
+    "lodash.camelcase": "^4.3.0",
     "ldclient-js": "^1.1.12"
   },
   "keywords": [

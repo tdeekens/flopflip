@@ -1,5 +1,5 @@
 import { initialize } from 'ldclient-js';
-import camelCase from 'just-camel-case';
+import camelCase from 'lodash.camelcase';
 
 const adapterState = {
   isReady: false,

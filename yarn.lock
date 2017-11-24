@@ -3567,10 +3567,6 @@ jsx-ast-utils@^2.0.0:
   dependencies:
     array-includes "^3.0.3"
 
-just-camel-case@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/just-camel-case/-/just-camel-case-2.0.0.tgz#575563b45c9aedca2f412161c4b968dc7e1c2e77"
-
 just-intersect@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/just-intersect/-/just-intersect-3.0.0.tgz#c0289030a3752fb7a9e1e64a1c838ed689bb0a54"
@@ -3796,6 +3792,10 @@ lodash._getnative@^3.0.0:
 lodash._reinterpolate@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
+
+lodash.camelcase@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
 
 lodash.flattendeep@^4.4.0:
   version "4.4.0"
