@@ -429,6 +429,40 @@ export default injectFeatureToggle(flagsNames.TOGGLE_B)(Component);
 The feature flags will be available as `props` within the component allowing
 some custom decisions based on their value.
 
+### `@flopflip/react-redux` additional API & exports
+
+We also expose our internal selectors to access feature toggle(s) directly so
+that the use of `injectFeatureToggle` or `injectFeatureToggles` is not enforced
+or the only value to access flags from `@flopflip/react-redux`'s store slice.
+The two selectors `selectFeatureFlag` and `selectFeatureFlags` return the same
+values for flags as `injectFeatureToggle` and `injectFeatureToggles` would.
+
+An example usage for a connected component would be:
+
+```js
+const mapStateToProps = state => {
+  someOtherState: state.someOtherState,
+  isFeatureOn: selectFeatureFlag(state)('fooFlagName')
+}
+
+export default connect(mapStateToProps)(FooComponent)
+```
+
+instead of when using `injectFeatureToggle`:
+
+```js
+const mapStateToProps = state => {
+  someOtherState: state.someOtherState,
+}
+
+export default compose(
+  injectFeatureToggle('fooFlagName')
+  connect(mapStateToProps)
+)(FooComponent)
+```
+
+The same example above applies for `selectFeatureFlags`.
+
 #### `createFlopFlipEnhancer`
 
 Requires arguments of `clientSideId:string`, `user:object`.
