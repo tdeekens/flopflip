@@ -2,7 +2,7 @@
 
 exports[`injecting with single feature toggle should match snapshot 1`] = `
 <omitProps(TestComponent)
-  __flopflop_all_flags__={
+  @flopflip/flags={
     Object {
       "aFeatureToggle": true,
     }
