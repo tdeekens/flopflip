@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import { compose, setDisplayName, wrapDisplayName } from 'recompose';
-import { injectFeatureToggles, ALL_FLAGS } from '@flopflip/react';
+import { injectFeatureToggles, ALL_FLAGS_PROP_KEY } from '@flopflip/react';
 import { STATE_SLICE } from './../../store';
 
 export const mapStateToProps = state => ({
-  [ALL_FLAGS]: state[STATE_SLICE].flags,
+  [ALL_FLAGS_PROP_KEY]: state[STATE_SLICE].flags,
 });
 
 export default (flagNames, propKey) => WrappedComponent =>
