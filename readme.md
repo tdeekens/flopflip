@@ -440,20 +440,22 @@ values for flags as `injectFeatureToggle` and `injectFeatureToggles` would.
 An example usage for a connected component would be:
 
 ```js
-const mapStateToProps = state => {
+import { selectFeatureFlag } from '@flopflip/react-redux';
+
+const mapStateToProps = state => ({
   someOtherState: state.someOtherState,
   isFeatureOn: selectFeatureFlag(state)('fooFlagName')
-}
+})
 
 export default connect(mapStateToProps)(FooComponent)
 ```
 
-instead of when using `injectFeatureToggle`:
+as an alternative to using `injectFeatureToggle`:
 
 ```js
-const mapStateToProps = state => {
+const mapStateToProps = state => ({
   someOtherState: state.someOtherState,
-}
+})
 
 export default compose(
   injectFeatureToggle('fooFlagName')
