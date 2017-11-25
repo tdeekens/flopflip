@@ -8,6 +8,8 @@ export {
   updateFlags,
   UPDATE_STATUS,
   UPDATE_FLAGS,
+  selectFlags as selectFeatureFlags,
+  selectFlag as selectFeatureFlag,
 } from './ducks';
 export {
   FeatureToggled,

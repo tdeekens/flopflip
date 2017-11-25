@@ -1,4 +1,10 @@
-import reducer, { UPDATE_FLAGS, updateFlags } from './flags';
+import { STATE_SLICE } from '../../store';
+import reducer, {
+  UPDATE_FLAGS,
+  updateFlags,
+  selectFlag,
+  selectFlags,
+} from './flags';
 
 describe('constants', () => {
   it('should contain `flags/updateFlags`', () => {
@@ -60,6 +66,44 @@ describe('reducers', () => {
           ...payload,
           c: true,
         });
+      });
+    });
+  });
+});
+
+describe('selectors', () => {
+  let flags;
+  let state;
+
+  beforeEach(() => {
+    flags = {
+      flagA: true,
+      flagB: false,
+    };
+    state = {
+      [STATE_SLICE]: {
+        flags,
+      },
+    };
+  });
+
+  describe('selecting flags', () => {
+    it('should return all flags', () => {
+      expect(selectFlags(state)).toEqual(flags);
+    });
+  });
+
+  describe('selecting a flag', () => {
+    describe('when existing', () => {
+      it('should return the flag value', () => {
+        expect(selectFlag(state)('flagA')).toEqual(true);
+        expect(selectFlag(state)('flagB')).toEqual(false);
+      });
+    });
+
+    describe('when not existing', () => {
+      it('should return `undefined`', () => {
+        expect(selectFlag(state)('zFlag')).toBeUndefined();
       });
     });
   });
