@@ -2,7 +2,7 @@
 
 exports[`injecting with \`propKey\` should match snapshot 1`] = `
 <omitProps(TestComponent)
-  __flopflop_all_flags__={
+  @flopflip/flags={
     Object {
       "aFeatureToggle": true,
     }
@@ -13,7 +13,7 @@ exports[`injecting with \`propKey\` should match snapshot 1`] = `
 
 exports[`injecting without \`propKey\` should match snapshot 1`] = `
 <omitProps(TestComponent)
-  __flopflop_all_flags__={
+  @flopflip/flags={
     Object {
       "aFeatureToggle": true,
     }
