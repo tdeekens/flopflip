@@ -31,7 +31,10 @@ describe('injecting', () => {
     });
 
     it('should pass all requested feature toggles as a `prop`', () => {
-      expect(wrapper).toHaveProp(DEFAULT_FLAGS_PROP_KEY, props[ALL_FLAGS_PROP_KEY]);
+      expect(wrapper).toHaveProp(
+        DEFAULT_FLAGS_PROP_KEY,
+        props[ALL_FLAGS_PROP_KEY]
+      );
     });
 
     it("should pass the feature toggle's state as a `prop`", () => {
@@ -50,7 +53,10 @@ describe('injecting', () => {
     describe('with all toggles defined', () => {
       beforeEach(() => {
         props = createTestProps({
-          [ALL_FLAGS_PROP_KEY]: { [featureToggle]: true, [featureToggle2]: false },
+          [ALL_FLAGS_PROP_KEY]: {
+            [featureToggle]: true,
+            [featureToggle2]: false,
+          },
         });
 
         Component = injectFeatureToggles([featureToggle, featureToggle2])(
@@ -60,7 +66,10 @@ describe('injecting', () => {
       });
 
       it('should pass all requested feature toggles as a `prop`', () => {
-        expect(wrapper).toHaveProp(DEFAULT_FLAGS_PROP_KEY, props[ALL_FLAGS_PROP_KEY]);
+        expect(wrapper).toHaveProp(
+          DEFAULT_FLAGS_PROP_KEY,
+          props[ALL_FLAGS_PROP_KEY]
+        );
       });
     });
 
@@ -101,7 +110,10 @@ describe('injecting', () => {
     describe('with `propKey`', () => {
       beforeEach(() => {
         props = createTestProps({
-          [ALL_FLAGS_PROP_KEY]: { [featureToggle]: true, [featureToggle2]: false },
+          [ALL_FLAGS_PROP_KEY]: {
+            [featureToggle]: true,
+            [featureToggle2]: false,
+          },
         });
 
         Component = injectFeatureToggles(
