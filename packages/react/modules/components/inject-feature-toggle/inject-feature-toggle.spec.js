@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ALL_FLAGS } from '../../constants';
+import { ALL_FLAGS_PROP_KEY } from '../../constants';
 import injectFeatureToggle from './inject-feature-toggle';
 
 describe('injecting', () => {
@@ -10,7 +10,7 @@ describe('injecting', () => {
 
   const flagName = 'aFeatureToggle';
   const createTestProps = custom => ({
-    [ALL_FLAGS]: { [flagName]: true },
+    [ALL_FLAGS_PROP_KEY]: { [flagName]: true },
     ...custom,
   });
 
@@ -33,7 +33,7 @@ describe('injecting', () => {
     });
 
     it("should pass the feature toggle's state as a `prop` of `propKey`", () => {
-      expect(wrapper).toHaveProp(propKey, props[ALL_FLAGS][flagName]);
+      expect(wrapper).toHaveProp(propKey, props[ALL_FLAGS_PROP_KEY][flagName]);
     });
   });
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ALL_FLAGS, DEFAULT_FLAGS_PROP_KEY } from '../../constants';
+import { ALL_FLAGS_PROP_KEY, DEFAULT_FLAGS_PROP_KEY } from '../../constants';
 import injectFeatureToggles from './inject-feature-toggles';
 
 describe('injecting', () => {
@@ -10,7 +10,7 @@ describe('injecting', () => {
 
   const featureToggle = 'aFeatureToggle';
   const createTestProps = custom => ({
-    [ALL_FLAGS]: { [featureToggle]: true },
+    [ALL_FLAGS_PROP_KEY]: { [featureToggle]: true },
     ...custom,
   });
 
@@ -31,12 +31,12 @@ describe('injecting', () => {
     });
 
     it('should pass all requested feature toggles as a `prop`', () => {
-      expect(wrapper).toHaveProp(DEFAULT_FLAGS_PROP_KEY, props[ALL_FLAGS]);
+      expect(wrapper).toHaveProp(DEFAULT_FLAGS_PROP_KEY, props[ALL_FLAGS_PROP_KEY]);
     });
 
     it("should pass the feature toggle's state as a `prop`", () => {
       expect(wrapper).toHaveProp(DEFAULT_FLAGS_PROP_KEY, {
-        [featureToggle]: props[ALL_FLAGS][featureToggle],
+        [featureToggle]: props[ALL_FLAGS_PROP_KEY][featureToggle],
       });
     });
   });
@@ -50,7 +50,7 @@ describe('injecting', () => {
     describe('with all toggles defined', () => {
       beforeEach(() => {
         props = createTestProps({
-          [ALL_FLAGS]: { [featureToggle]: true, [featureToggle2]: false },
+          [ALL_FLAGS_PROP_KEY]: { [featureToggle]: true, [featureToggle2]: false },
         });
 
         Component = injectFeatureToggles([featureToggle, featureToggle2])(
@@ -60,7 +60,7 @@ describe('injecting', () => {
       });
 
       it('should pass all requested feature toggles as a `prop`', () => {
-        expect(wrapper).toHaveProp(DEFAULT_FLAGS_PROP_KEY, props[ALL_FLAGS]);
+        expect(wrapper).toHaveProp(DEFAULT_FLAGS_PROP_KEY, props[ALL_FLAGS_PROP_KEY]);
       });
     });
 
@@ -87,7 +87,7 @@ describe('injecting', () => {
 
       it("should pass the feature toggle's state as a `prop`", () => {
         expect(wrapper).toHaveProp(DEFAULT_FLAGS_PROP_KEY, {
-          [featureToggle]: props[ALL_FLAGS][featureToggle],
+          [featureToggle]: props[ALL_FLAGS_PROP_KEY][featureToggle],
         });
       });
 
@@ -101,7 +101,7 @@ describe('injecting', () => {
     describe('with `propKey`', () => {
       beforeEach(() => {
         props = createTestProps({
-          [ALL_FLAGS]: { [featureToggle]: true, [featureToggle2]: false },
+          [ALL_FLAGS_PROP_KEY]: { [featureToggle]: true, [featureToggle2]: false },
         });
 
         Component = injectFeatureToggles(
@@ -112,7 +112,7 @@ describe('injecting', () => {
       });
 
       it('should map all feature toggles', () => {
-        expect(wrapper).toHaveProp('fooPropKey', props[ALL_FLAGS]);
+        expect(wrapper).toHaveProp('fooPropKey', props[ALL_FLAGS_PROP_KEY]);
       });
     });
   });
