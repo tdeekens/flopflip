@@ -102,8 +102,8 @@ describe('selectors', () => {
     });
 
     describe('when not existing', () => {
-      it('should return `undefined`', () => {
-        expect(selectFlag(state)('zFlag')).toBeUndefined();
+      it('should return `false`', () => {
+        expect(selectFlag(state)('zFlag')).toEqual(false);
       });
     });
   });

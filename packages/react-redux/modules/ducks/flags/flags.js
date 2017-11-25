@@ -1,3 +1,4 @@
+import isNil from 'lodash.isnil';
 import { STATE_SLICE } from '../../store';
 
 // Actions
@@ -29,6 +30,7 @@ export const updateFlags = flags => ({
 export const selectFlags = state => state[STATE_SLICE].flags;
 export const selectFlag = state => flagName => {
   const allFlags = selectFlags(state);
+  const flagValue = allFlags[flagName];
 
-  return allFlags ? allFlags[flagName] : undefined;
+  return isNil(flagValue) ? false : flagValue;
 };
