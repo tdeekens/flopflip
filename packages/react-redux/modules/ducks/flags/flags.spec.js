@@ -96,14 +96,14 @@ describe('selectors', () => {
   describe('selecting a flag', () => {
     describe('when existing', () => {
       it('should return the flag value', () => {
-        expect(selectFlag(state)('flagA')).toEqual(true);
-        expect(selectFlag(state)('flagB')).toEqual(false);
+        expect(selectFlag('flagA')(state)).toEqual(true);
+        expect(selectFlag('flagB')(state)).toEqual(false);
       });
     });
 
     describe('when not existing', () => {
       it('should return `false`', () => {
-        expect(selectFlag(state)('zFlag')).toEqual(false);
+        expect(selectFlag('zFlag')(state)).toEqual(false);
       });
     });
   });

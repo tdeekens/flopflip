@@ -444,10 +444,10 @@ import { selectFeatureFlag } from '@flopflip/react-redux';
 
 const mapStateToProps = state => ({
   someOtherState: state.someOtherState,
-  isFeatureOn: selectFeatureFlag(state)('fooFlagName')
-})
+  isFeatureOn: selectFeatureFlag('fooFlagName')(state),
+});
 
-export default connect(mapStateToProps)(FooComponent)
+export default connect(mapStateToProps)(FooComponent);
 ```
 
 as an alternative to using `injectFeatureToggle`:

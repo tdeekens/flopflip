@@ -28,7 +28,7 @@ export const updateFlags = flags => ({
 
 // Selectors
 export const selectFlags = state => state[STATE_SLICE].flags;
-export const selectFlag = state => flagName => {
+export const selectFlag = flagName => state => {
   const allFlags = selectFlags(state);
   const flagValue = allFlags[flagName];
 
