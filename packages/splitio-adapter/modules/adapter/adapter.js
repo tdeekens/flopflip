@@ -54,12 +54,13 @@ const ensureUser = user => ({
   ...user,
 });
 
-const initializeClient = (authorizationKey, user) => {
+const initializeClient = (authorizationKey, user, params) => {
   const factory = splitio({
     core: {
       authorizationKey,
       key: user.key,
     },
+    ...params,
   });
 
   return {
@@ -95,11 +96,13 @@ const configure = ({
   user,
   onFlagsStateChange,
   onStatusStateChange,
+  ...adapterArgs
 }) => {
   adapterState.user = ensureUser(user);
   const { client, manager } = initializeClient(
     authorizationKey,
-    adapterState.user
+    adapterState.user,
+    adapterArgs
   );
   adapterState.client = client;
   adapterState.manager = manager;
