@@ -54,13 +54,13 @@ const ensureUser = user => ({
   ...user,
 });
 
-const initializeClient = (authorizationKey, user, params) => {
+const initializeClient = (authorizationKey, user, options) => {
   const factory = splitio({
     core: {
       authorizationKey,
       key: user.key,
     },
-    ...params,
+    ...options,
   });
 
   return {
