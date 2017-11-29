@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`injecting with single feature toggle should match snapshot 1`] = `
-<omitProps(TestComponent)
+<omitProps(onlyUpdateForKeys(TestComponent))
   @flopflip/flags={
     Object {
       "aFeatureToggle": true,
