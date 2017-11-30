@@ -20,6 +20,7 @@ exports[`rendering should match snapshot 1`] = `
 >
   <Broadcast
     channel="@flopflip"
+    compareValues={[Function]}
     value={Object {}}
   >
     <ChildComponent />

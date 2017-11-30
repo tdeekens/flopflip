@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@flopflip/react": "^4.0.5",
-    "react-broadcast": "^0.5.2",
+    "react-broadcast": "^0.6.0",
     "recompose": "^0.26.0"
   },
   "keywords": [
