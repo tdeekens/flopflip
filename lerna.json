@@ -4,5 +4,10 @@
   "version": "independent",
   "packages": ["packages/*"],
   "npmClient": "yarn",
-  "useWorkspaces": true
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "message": "chore(release): packages"
+    }
+  }
 }
