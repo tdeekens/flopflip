@@ -1,7 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ALL_FLAGS_PROP_KEY, DEFAULT_FLAGS_PROP_KEY } from '../../constants';
-import injectFeatureToggles from './inject-feature-toggles';
+import injectFeatureToggles, {
+  areOwnPropsEqual,
+} from './inject-feature-toggles';
 
 describe('injecting', () => {
   const TestComponent = () => <div>Test</div>;
@@ -125,6 +127,78 @@ describe('injecting', () => {
 
       it('should map all feature toggles', () => {
         expect(wrapper).toHaveProp('fooPropKey', props[ALL_FLAGS_PROP_KEY]);
+      });
+    });
+  });
+});
+
+describe('own props equality', () => {
+  let ownProps;
+  let nextOwnProps;
+  const createTestProps = custom => ({
+    [DEFAULT_FLAGS_PROP_KEY]: {
+      flagA: true,
+      flagB: false,
+    },
+    propA: true,
+    propB: 'foo',
+    ...custom,
+  });
+
+  describe('without feature flags change', () => {
+    describe('without other props changes', () => {
+      beforeEach(() => {
+        ownProps = createTestProps();
+        nextOwnProps = createTestProps();
+      });
+
+      it('should indicate equality in own props', () => {
+        expect(
+          areOwnPropsEqual(nextOwnProps, ownProps, DEFAULT_FLAGS_PROP_KEY)
+        ).toBe(true);
+      });
+    });
+
+    describe('with other prop changes', () => {
+      beforeEach(() => {
+        ownProps = createTestProps();
+        nextOwnProps = createTestProps({ propC: false });
+      });
+
+      it('should indicate difference in own props', () => {
+        expect(
+          areOwnPropsEqual(nextOwnProps, ownProps, DEFAULT_FLAGS_PROP_KEY)
+        ).toBe(false);
+      });
+    });
+  });
+  describe('with feature flags change', () => {
+    describe('without other props changes', () => {
+      beforeEach(() => {
+        ownProps = createTestProps();
+        nextOwnProps = createTestProps({
+          [DEFAULT_FLAGS_PROP_KEY]: { flagC: true },
+        });
+      });
+      it('should indicate difference in own props', () => {
+        expect(
+          areOwnPropsEqual(nextOwnProps, ownProps, DEFAULT_FLAGS_PROP_KEY)
+        ).toBe(false);
+      });
+    });
+    describe('with other props changes', () => {
+      beforeEach(() => {
+        ownProps = createTestProps();
+        nextOwnProps = createTestProps({
+          [DEFAULT_FLAGS_PROP_KEY]: { flagC: true },
+          propC: false,
+        });
+      });
+
+      it('should indicate differnce in own props', () => {
+        expect(
+          areOwnPropsEqual(nextOwnProps, ownProps, DEFAULT_FLAGS_PROP_KEY)
+        ).toBe(false);
       });
     });
   });
