@@ -383,7 +383,7 @@ export default branchOnFeatureToggle({
 })(ComponentToBeToggled, ComponentToBeRenderedInstead);
 ```
 
-#### `injectFeatureToggles(flagNames: Array<String>, propKey?: String)`
+#### `injectFeatureToggles(flagNames: Array<String>, propKey?: String, areOwnPropsEqual?: Function)`
 
 This HoC matches feature toggles given against configured ones and injects the
 matching result.
