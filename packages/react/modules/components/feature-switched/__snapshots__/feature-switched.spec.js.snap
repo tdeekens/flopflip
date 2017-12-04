@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rendering with a feature match should match snapshot 1`] = `
+<FeatureToggled
+  isFeatureEnabled={true}
+  render={null}
+  toggledComponent={null}
+  untoggledComponent={null}
+  variate="foo"
+>
+  <FeatureComponent
+    nbr={1}
+  />
+</FeatureToggled>
+`;
+
+exports[`rendering with multiple feature matchs should match snapshot 1`] = `
+<FeatureToggled
+  isFeatureEnabled={true}
+  render={null}
+  toggledComponent={null}
+  untoggledComponent={null}
+  variate="foo"
+>
+  <FeatureComponent
+    nbr={1}
+  />
+</FeatureToggled>
+`;
+
+exports[`rendering without a feature match should match snapshot 1`] = `""`;
