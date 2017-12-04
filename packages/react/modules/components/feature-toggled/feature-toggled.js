@@ -24,18 +24,17 @@ export default class FeatureToggled extends React.PureComponent {
 
   render() {
     if (this.props.isFeatureEnabled) {
-      if (typeof this.props.children === 'function')
-        return this.props.children();
-
       if (this.props.toggledComponent)
         return React.createElement(this.props.toggledComponent);
 
       if (this.props.children && !isEmptyChildren(this.props.children))
         return React.Children.only(this.props.children);
+
+      if (typeof this.props.render === 'function') return this.props.render();
     }
 
-    if (typeof this.props.render === 'function')
-      return this.props.render({
+    if (typeof this.props.children === 'function')
+      return this.props.children({
         isFeatureEnabled: this.props.isFeatureEnabled,
       });
 

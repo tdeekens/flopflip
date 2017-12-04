@@ -62,27 +62,56 @@ describe('when feature enabled', () => {
   let wrapper;
 
   describe('with `children`', () => {
-    beforeEach(() => {
-      wrapper = shallow(
-        <FeatureToggled
-          isFeatureEnabled
-          untoggledComponent={UntoggledComponent}
-        >
-          <FeatureComponent />
-        </FeatureToggled>
-      );
+    describe('being a `node`', () => {
+      beforeEach(() => {
+        wrapper = shallow(
+          <FeatureToggled
+            isFeatureEnabled
+            untoggledComponent={UntoggledComponent}
+          >
+            <FeatureComponent />
+          </FeatureToggled>
+        );
+      });
+
+      it('should match snapshot', () => {
+        expect(wrapper).toMatchSnapshot();
+      });
+
+      it('should not render the `UntoggledComponent`', () => {
+        expect(wrapper).not.toRender(UntoggledComponent);
+      });
+
+      it('should render the `FeatureComponent`', () => {
+        expect(wrapper).toRender(FeatureComponent);
+      });
     });
 
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
+    describe('being a `function`', () => {
+      let props;
+      beforeEach(() => {
+        props = {
+          isFeatureEnabled: true,
+          untoggledComponent: UntoggledComponent,
+          children: jest.fn(() => <div>FeatureComponent</div>),
+        };
 
-    it('should not render the `UntoggledComponent`', () => {
-      expect(wrapper).not.toRender(UntoggledComponent);
-    });
+        wrapper = shallow(<FeatureToggled {...props} />);
+      });
 
-    it('should render the `FeatureComponent`', () => {
-      expect(wrapper).toRender(FeatureComponent);
+      it('should match snapshot', () => {
+        expect(wrapper).toMatchSnapshot();
+      });
+
+      it('should invoke `children`', () => {
+        expect(props.children).toHaveBeenCalled();
+      });
+
+      it('should invoke `children` with `isFeatureEnabled`', () => {
+        expect(props.children).toHaveBeenCalledWith({
+          isFeatureEnabled: props.isFeatureEnabled,
+        });
+      });
     });
   });
 
@@ -128,12 +157,6 @@ describe('when feature enabled', () => {
 
     it('should invoke `render`', () => {
       expect(props.render).toHaveBeenCalled();
-    });
-
-    it('should invoke `render` with `isFeatureEnabled`', () => {
-      expect(props.render).toHaveBeenCalledWith({
-        isFeatureEnabled: props.isFeatureEnabled,
-      });
     });
   });
 });

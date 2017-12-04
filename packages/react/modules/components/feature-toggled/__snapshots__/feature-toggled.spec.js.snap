@@ -4,7 +4,13 @@ exports[`when feature disabled with untoggled component should match snapshot 1`
 
 exports[`when feature disabled without untoggled component should match snapshot 1`] = `""`;
 
-exports[`when feature enabled with \`children\` should match snapshot 1`] = `<FeatureComponent />`;
+exports[`when feature enabled with \`children\` being a \`function\` should match snapshot 1`] = `
+<div>
+  FeatureComponent
+</div>
+`;
+
+exports[`when feature enabled with \`children\` being a \`node\` should match snapshot 1`] = `<FeatureComponent />`;
 
 exports[`when feature enabled with \`render\` should match snapshot 1`] = `
 <div>
