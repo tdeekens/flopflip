@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
-import FeatureToggled from '../feature-toggled';
+import ToggleFeature from '../toggle-feature';
 import SwitchFeature from './switch-feature';
 
 const FeatureComponent = props => <div>FeatureComponent {props.nbr}</div>;
@@ -15,12 +15,12 @@ describe('rendering', () => {
     beforeEach(() => {
       wrapper = shallow(
         <SwitchFeature>
-          <FeatureToggled isFeatureEnabled variate="foo">
+          <ToggleFeature isFeatureEnabled variate="foo">
             <FeatureComponent nbr={1} />
-          </FeatureToggled>
-          <FeatureToggled isFeatureEnabled={false} variate="bar">
+          </ToggleFeature>
+          <ToggleFeature isFeatureEnabled={false} variate="bar">
             <FeatureComponent nbr={2} />
-          </FeatureToggled>
+          </ToggleFeature>
         </SwitchFeature>
       );
     });
@@ -33,8 +33,8 @@ describe('rendering', () => {
       expect(wrapper).toRender(FeatureComponent);
     });
 
-    it('should supply `variate` to the `FeatureToggled`', () => {
-      expect(wrapper.find(FeatureToggled)).toHaveProp('variate', 'foo');
+    it('should supply `variate` to the `ToggleFeature`', () => {
+      expect(wrapper.find(ToggleFeature)).toHaveProp('variate', 'foo');
     });
   });
 
@@ -44,12 +44,12 @@ describe('rendering', () => {
     beforeEach(() => {
       wrapper = shallow(
         <SwitchFeature>
-          <FeatureToggled isFeatureEnabled={false} variate="foo">
+          <ToggleFeature isFeatureEnabled={false} variate="foo">
             <FeatureComponent nbr={1} />
-          </FeatureToggled>
-          <FeatureToggled isFeatureEnabled={false} variate="bar">
+          </ToggleFeature>
+          <ToggleFeature isFeatureEnabled={false} variate="bar">
             <FeatureComponent nbr={2} />
-          </FeatureToggled>
+          </ToggleFeature>
         </SwitchFeature>
       );
     });
@@ -69,12 +69,12 @@ describe('rendering', () => {
     beforeEach(() => {
       wrapper = shallow(
         <SwitchFeature>
-          <FeatureToggled isFeatureEnabled variate="foo">
+          <ToggleFeature isFeatureEnabled variate="foo">
             <FeatureComponent nbr={1} />
-          </FeatureToggled>
-          <FeatureToggled isFeatureEnabled variate="bar">
+          </ToggleFeature>
+          <ToggleFeature isFeatureEnabled variate="bar">
             <FeatureComponent nbr={2} />
-          </FeatureToggled>
+          </ToggleFeature>
         </SwitchFeature>
       );
     });
@@ -88,7 +88,7 @@ describe('rendering', () => {
     });
 
     it('should not render the first `FeatureComponent`', () => {
-      expect(wrapper.find(FeatureToggled)).toHaveProp('variate', 'foo');
+      expect(wrapper.find(ToggleFeature)).toHaveProp('variate', 'foo');
     });
   });
 });
