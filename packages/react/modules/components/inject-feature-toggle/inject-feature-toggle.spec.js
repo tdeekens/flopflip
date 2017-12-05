@@ -72,7 +72,7 @@ describe('injecting', () => {
     });
   });
 
-  describe('with multivariate flag', () => {
+  describe('with multi variate flag', () => {
     let props;
 
     beforeEach(() => {

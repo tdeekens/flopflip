@@ -105,19 +105,19 @@ describe('with `flagName`', () => {
   });
 });
 
-describe('with `flagName` and `flagVariate`', () => {
+describe('with `flagName` and `flagVariation`', () => {
   const flagName = 'fooFlagName';
-  const flagVariate = 'fooflagVariate';
+  const flagVariation = 'fooflagVariation';
 
   describe('when feature is enabled', () => {
-    const featureFlag = { [flagName]: flagVariate };
+    const featureFlag = { [flagName]: flagVariation };
 
     describe('without untoggled component', () => {
       let Component;
       let wrapper;
 
       beforeEach(() => {
-        Component = branchOnFeatureToggle(undefined, flagName, flagVariate)(
+        Component = branchOnFeatureToggle(undefined, flagName, flagVariation)(
           FeatureComponent
         );
         wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
@@ -140,7 +140,7 @@ describe('with `flagName` and `flagVariate`', () => {
         Component = branchOnFeatureToggle(
           UntoggledComponent,
           flagName,
-          flagVariate
+          flagVariation
         )(FeatureComponent);
         wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
       });
@@ -160,7 +160,7 @@ describe('with `flagName` and `flagVariate`', () => {
   });
 
   describe('when feature is disabled', () => {
-    const featureFlag = { [flagName]: 'flagVariate2' };
+    const featureFlag = { [flagName]: 'flagVariation2' };
 
     describe('with untoggled component', () => {
       let Component;
@@ -170,7 +170,7 @@ describe('with `flagName` and `flagVariate`', () => {
         Component = branchOnFeatureToggle(
           UntoggledComponent,
           flagName,
-          flagVariate
+          flagVariation
         )(FeatureComponent);
         wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
       });
@@ -189,7 +189,7 @@ describe('with `flagName` and `flagVariate`', () => {
       let wrapper;
 
       beforeEach(() => {
-        Component = branchOnFeatureToggle(undefined, flagName, flagVariate)(
+        Component = branchOnFeatureToggle(undefined, flagName, flagVariation)(
           FeatureComponent
         );
         wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);

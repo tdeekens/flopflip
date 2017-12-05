@@ -5,10 +5,10 @@ import { DEFAULT_FLAG_PROP_KEY } from '../../constants';
 const branchOnFeatureToggle = (
   UntoggledComponent,
   flagName = DEFAULT_FLAG_PROP_KEY,
-  flagVariate = true
+  flagVariation = true
 ) =>
   branch(
-    props => !isFeatureEnabled(flagName, flagVariate)(props),
+    props => !isFeatureEnabled(flagName, flagVariation)(props),
     UntoggledComponent ? renderComponent(UntoggledComponent) : renderNothing
   );
 
