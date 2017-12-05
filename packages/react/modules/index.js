@@ -3,6 +3,7 @@ export {
   injectFeatureToggles,
   branchOnFeatureToggle,
   FeatureToggled,
+  ToggleFeature,
   FlagsSubscription,
 } from './components';
 
