@@ -123,7 +123,7 @@ without Redux.
   component
 * `injectFeatureToggles` a HoC to inject requested feature toggles from existing
   feature toggles onto the `props` of a component
-* `FeatureToggled` a component conditionally rendering its `children` based on
+* `ToggleFeature` a component conditionally rendering its `children` based on
   the status of a passed feature flag
 * `reducer` and `STATE_SLICE` a reducer and the state slice for the feature
   toggle state
@@ -231,10 +231,10 @@ share common logic.
   component
 * `injectFeatureToggles` a HoC to inject requested feature toggles from existing
   feature toggles onto the `props` of a component
-* `FeatureToggled` a component conditionally rendering its `children` based on
+* `ToggleFeature` a component conditionally rendering its `children` based on
   the status of a passed feature flag
 
-#### `FeatureToggled`
+#### `ToggleFeature`
 
 The component renders its `children` depending on the state of a given feature
 flag. It also allows passing an optional `untoggledComponent` which will be
@@ -242,18 +242,18 @@ rendered whenever the feature is disabled instead of `null`.
 
 ```js
 import React, { Component } from 'react';
-import { FeatureToggled } from '@flopflip/react-redux';
-// or import { FeatureToggled } from '@flopflip/react-broadcast';
+import { ToggleFeature } from '@flopflip/react-redux';
+// or import { ToggleFeature } from '@flopflip/react-broadcast';
 import flagsNames from './feature-flags';
 
 const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
 export default (
-  <FeatureToggled
+  <ToggleFeature
     flag={flagsNames.THE_FEATURE_TOGGLE}
     untoggledComponent={UntoggledComponent}
   >
     <h3>I might be gone or there!</h3>
-  </FeatureToggled>
+  </ToggleFeature>
 );
 ```
 
@@ -263,13 +263,13 @@ or with for multivariate feature toggles
 const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
 
 export default (
-  <FeatureToggled
+  <ToggleFeature
     flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
     variate={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
     untoggledComponent={UntoggledComponent}
   >
     <h3>I might be gone or there!</h3>
-  </FeatureToggled>
+  </ToggleFeature>
 );
 ```
 
@@ -280,7 +280,7 @@ const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
 const ToggledComponent = () => <h3>{'I might be gone or there!'}</h3>;
 
 export default (
-  <FeatureToggled
+  <ToggleFeature
     flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
     variate={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
     untoggledComponent={UntoggledComponent}
@@ -295,13 +295,13 @@ or with Function as a Child
 const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
 
 export default (
-  <FeatureToggled
+  <ToggleFeature
     flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
     variate={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
     untoggledComponent={UntoggledComponent}
   >
     {() => <h3>I might be gone or there!</h3>}
-  </FeatureToggled>
+  </ToggleFeature>
 );
 ```
 
@@ -313,7 +313,7 @@ matter if the feature is on or off. It therefore also receives an
 const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
 
 export default (
-  <FeatureToggled
+  <ToggleFeature
     flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
     variate={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
     untoggledComponent={UntoggledComponent}
