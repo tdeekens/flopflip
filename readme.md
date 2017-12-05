@@ -257,7 +257,7 @@ export default (
 );
 ```
 
-or with for multivariate feature toggles
+or with for multi variate feature toggles
 
 ```js
 const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
@@ -265,7 +265,7 @@ const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
 export default (
   <ToggleFeature
     flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
-    variate={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
+    variation={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
     untoggledComponent={UntoggledComponent}
   >
     <h3>I might be gone or there!</h3>
@@ -282,7 +282,7 @@ const ToggledComponent = () => <h3>{'I might be gone or there!'}</h3>;
 export default (
   <ToggleFeature
     flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
-    variate={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
+    variation={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
     untoggledComponent={UntoggledComponent}
     toggledComponent={ToggledComponent}
   />
@@ -297,7 +297,7 @@ const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
 export default (
   <ToggleFeature
     flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
-    variate={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
+    variation={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
     untoggledComponent={UntoggledComponent}
   >
     {() => <h3>I might be gone or there!</h3>}
@@ -315,22 +315,22 @@ const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
 export default (
   <ToggleFeature
     flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
-    variate={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
+    variation={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
     untoggledComponent={UntoggledComponent}
     render={({ isFeatureEnabled }) => <h3>I might be gone or there!</h3>}
   />
 );
 ```
 
-this last example will always turn the feature on if the variate or toggle does
-not exist. For this also look at `defaultFlags` for `ConfigureFlopFlip`.
+this last example will always turn the feature on if the variation or toggle
+does not exist. For this also look at `defaultFlags` for `ConfigureFlopFlip`.
 
 We actually recommend maintaining a list of constants with feature flag names
 somewhere within your application. This avoids typos and unexpected behavior.
 After all, the correct workings of your feature flags is crutial to your
 application.
 
-#### `branchOnFeatureToggle({ flag: String, variate?: String | Boolean })`
+#### `branchOnFeatureToggle({ flag: String, variation?: String | Boolean })`
 
 A HoC to conditionally render a component based on a feature toggle's state. It
 accepts the feature toggle name and an optional component to be rendered in case
@@ -366,7 +366,7 @@ export default branchOnFeatureToggle({ flag: flagsNames.THE_FEATURE_TOGGLE })(
 );
 ```
 
-or when the flag is multi variate
+or when the flag is multi variation
 
 ```js
 import { branchOnFeatureToggle } from '@flopflip/react-redux';
@@ -379,7 +379,7 @@ const ComponentToBeRenderedInstead = () => (
 
 export default branchOnFeatureToggle({
   flag: flagsNames.THE_FEATURE_TOGGLE,
-  variate: 'variate1',
+  variation: 'variate1',
 })(ComponentToBeToggled, ComponentToBeRenderedInstead);
 ```
 

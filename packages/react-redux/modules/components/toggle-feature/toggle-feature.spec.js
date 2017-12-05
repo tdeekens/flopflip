@@ -34,7 +34,7 @@ describe('mapStateToProps', () => {
     });
   });
 
-  describe('with matching `variate`', () => {
+  describe('with matching `variation`', () => {
     let state;
 
     beforeEach(() => {
@@ -47,13 +47,13 @@ describe('mapStateToProps', () => {
       expect(
         mapStateToProps(state, {
           flag: 'flag1',
-          variate: 'flagVariate1',
+          variation: 'flagVariate1',
         }).isFeatureEnabled
       ).toBe(true);
     });
   });
 
-  describe('with non-matching `variate`', () => {
+  describe('with non-matching `variation`', () => {
     let state;
 
     beforeEach(() => {
@@ -66,7 +66,7 @@ describe('mapStateToProps', () => {
       expect(
         mapStateToProps(state, {
           flag: 'flag1',
-          variate: 'flagVariate2',
+          variation: 'flagVariate2',
         }).isFeatureEnabled
       ).toBe(false);
     });
