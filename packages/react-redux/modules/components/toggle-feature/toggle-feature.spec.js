@@ -1,5 +1,5 @@
 import { STATE_SLICE } from './../../store';
-import { mapStateToProps } from './feature-toggled';
+import { mapStateToProps } from './toggle-feature';
 
 describe('mapStateToProps', () => {
   describe('with existing `flag` ', () => {
