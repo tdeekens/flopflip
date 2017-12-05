@@ -9,7 +9,7 @@ import {
   ConfigureFlopFlip,
   branchOnFeatureToggle,
   injectFeatureToggle,
-  FeatureToggled,
+  ToggleFeature,
 } from '@flopflip/react-redux';
 // change to `from '@flopflip/react-broadcast'` and everything will just work wtihout redux
 import {
@@ -78,14 +78,14 @@ const Counter = props => (
         Decrementing
       </button>
       <br />
-      <FeatureToggled
+      <ToggleFeature
         flag={flags.DECREMENT_ASYNC_BUTTON}
         untoggledComponent={UntoggledFeature}
       >
         <button onClick={props.decrementAsync} disabled={props.isDecrementing}>
           Decrement Async
         </button>
-      </FeatureToggled>
+      </ToggleFeature>
     </div>
   </div>
 );
