@@ -10,7 +10,7 @@ const adapterState = {
 
 const normalizeFlag = (flagName, flagValue) => [
   camelCase(flagName),
-  // Multivariate flags contain a string or `null` - `false` seems
+  // Multi variate flags contain a string or `null` - `false` seems
   // more natural.
   flagValue === null ? false : flagValue,
 ];
