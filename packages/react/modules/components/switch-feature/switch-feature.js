@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const isEmptyChildren = children => React.Children.count(children) === 0;
 
-export default class FeatureToggled extends React.PureComponent {
+export default class SwitchFeature extends React.PureComponent {
   static propTypes = {
     children: PropTypes.node.isRequired,
   };
