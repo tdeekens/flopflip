@@ -1,1 +1,1 @@
-export default from './feature-toggled';
+export default from './toggle-feature';
