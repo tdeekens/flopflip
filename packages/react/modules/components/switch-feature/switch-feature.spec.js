@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 import FeatureToggled from '../feature-toggled';
-import FeatureSwitched from './feature-switched';
+import SwitchFeature from './switch-feature';
 
 const FeatureComponent = props => <div>FeatureComponent {props.nbr}</div>;
 FeatureComponent.propTypes = { nbr: PropTypes.number.isRequired };
@@ -14,14 +14,14 @@ describe('rendering', () => {
 
     beforeEach(() => {
       wrapper = shallow(
-        <FeatureSwitched>
+        <SwitchFeature>
           <FeatureToggled isFeatureEnabled variate="foo">
             <FeatureComponent nbr={1} />
           </FeatureToggled>
           <FeatureToggled isFeatureEnabled={false} variate="bar">
             <FeatureComponent nbr={2} />
           </FeatureToggled>
-        </FeatureSwitched>
+        </SwitchFeature>
       );
     });
 
@@ -43,14 +43,14 @@ describe('rendering', () => {
 
     beforeEach(() => {
       wrapper = shallow(
-        <FeatureSwitched>
+        <SwitchFeature>
           <FeatureToggled isFeatureEnabled={false} variate="foo">
             <FeatureComponent nbr={1} />
           </FeatureToggled>
           <FeatureToggled isFeatureEnabled={false} variate="bar">
             <FeatureComponent nbr={2} />
           </FeatureToggled>
-        </FeatureSwitched>
+        </SwitchFeature>
       );
     });
 
@@ -68,14 +68,14 @@ describe('rendering', () => {
 
     beforeEach(() => {
       wrapper = shallow(
-        <FeatureSwitched>
+        <SwitchFeature>
           <FeatureToggled isFeatureEnabled variate="foo">
             <FeatureComponent nbr={1} />
           </FeatureToggled>
           <FeatureToggled isFeatureEnabled variate="bar">
             <FeatureComponent nbr={2} />
           </FeatureToggled>
-        </FeatureSwitched>
+        </SwitchFeature>
       );
     });
 
