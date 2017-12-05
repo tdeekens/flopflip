@@ -1,5 +1,8 @@
 import { STATE_SLICE } from './../../store';
+import warning from 'warning';
 import { mapStateToProps } from './feature-toggled';
+
+jest.mock('warning');
 
 describe('mapStateToProps', () => {
   describe('with existing `flag` ', () => {
