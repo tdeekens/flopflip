@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const isEmptyChildren = children => React.Children.count(children) === 0;
 
-export default class FeatureToggled extends React.PureComponent {
+export default class ToggleFeature extends React.PureComponent {
   static propTypes = {
     untoggledComponent: PropTypes.func,
     toggledComponent: PropTypes.func,
