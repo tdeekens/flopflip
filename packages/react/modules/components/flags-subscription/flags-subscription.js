@@ -28,8 +28,9 @@ export default class FlagsSubscription extends React.PureComponent {
     defaultFlags: {},
   };
 
-  state = {
-    adapterState: AdapterStates.UNCONFIGURED,
+  adapterState = AdapterStates.UNCONFIGURED;
+  setAdapterState = nextAdapterState => {
+    this.adapterState = nextAdapterState;
   };
 
   handleDefaultFlags = defaultFlags => {
@@ -42,9 +43,9 @@ export default class FlagsSubscription extends React.PureComponent {
     this.handleDefaultFlags(this.props.defaultFlags);
 
     if (!this.props.shouldDeferAdapterConfiguration) {
-      this.setState({ adapterState: AdapterStates.CONFIGURING });
+      this.setAdapterState(AdapterStates.CONFIGURING);
       return this.props.adapter.configure(this.props.adapterArgs).then(() => {
-        this.setState({ adapterState: AdapterStates.CONFIGURED });
+        this.setAdapterState(AdapterStates.CONFIGURED);
       });
     }
   }
@@ -53,22 +54,22 @@ export default class FlagsSubscription extends React.PureComponent {
     // NOTE: We have to be careful here to not double configure from `componentDidMount`.
     if (
       !this.props.shouldDeferAdapterConfiguration &&
-      this.state.adapterState !== AdapterStates.CONFIGURED &&
-      this.state.adapterState !== AdapterStates.CONFIGURING
+      this.adapterState !== AdapterStates.CONFIGURED &&
+      this.adapterState !== AdapterStates.CONFIGURING
     ) {
-      this.setState({ adapterState: AdapterStates.CONFIGURING }); // eslint-disable-line react/no-did-update-set-state
+      this.setAdapterState(AdapterStates.CONFIGURING);
 
       return this.props.adapter.configure(this.props.adapterArgs).then(() => {
-        this.setState({ adapterState: AdapterStates.CONFIGURED });
+        this.setAdapterState(AdapterStates.CONFIGURED);
       });
     } else if (
-      this.state.adapterState === AdapterStates.CONFIGURED &&
-      this.state.adapterState !== AdapterStates.CONFIGURING
+      this.adapterState === AdapterStates.CONFIGURED &&
+      this.adapterState !== AdapterStates.CONFIGURING
     ) {
-      this.setState({ adapterState: AdapterStates.CONFIGURING }); // eslint-disable-line react/no-did-update-set-state
+      this.setAdapterState(AdapterStates.CONFIGURING);
 
       return this.props.adapter.reconfigure(this.props.adapterArgs).then(() => {
-        this.setState({ adapterState: AdapterStates.CONFIGURED });
+        this.setAdapterState(AdapterStates.CONFIGURED);
       });
     }
   }
