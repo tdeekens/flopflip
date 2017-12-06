@@ -70,6 +70,16 @@ describe('lifecycle', () => {
             props.adapterArgs
           );
         });
+
+        describe('when the adapter configured', () => {
+          it('should set the state to not `isAdapterConfiguring`', () => {
+            expect(wrapper).toHaveState('isAdapterConfiguring', false);
+          });
+
+          it('should set the state to `isAdapterConfigured`', () => {
+            expect(wrapper).toHaveState('isAdapterConfigured', true);
+          });
+        });
       });
     });
 
@@ -144,6 +154,16 @@ describe('lifecycle', () => {
             props.adapterArgs
           );
         });
+
+        describe('when the adapter configured', () => {
+          it('should set the state to not `isAdapterConfiguring`', () => {
+            expect(wrapper).toHaveState('isAdapterConfiguring', false);
+          });
+
+          it('should set the state to `isAdapterConfigured`', () => {
+            expect(wrapper).toHaveState('isAdapterConfigured', true);
+          });
+        });
       });
 
       describe('when already configured', () => {
@@ -189,6 +209,16 @@ describe('lifecycle', () => {
             expect(props.adapter.reconfigure).toHaveBeenCalledWith(
               props.adapterArgs
             );
+          });
+
+          describe('when the adapter configured', () => {
+            it('should set the state to not `isAdapterConfiguring`', () => {
+              expect(wrapper).toHaveState('isAdapterConfiguring', false);
+            });
+
+            it('should set the state to `isAdapterConfigured`', () => {
+              expect(wrapper).toHaveState('isAdapterConfigured', true);
+            });
           });
         });
       });

@@ -24,6 +24,7 @@ export default class FlagsSubscription extends React.PureComponent {
 
   state = {
     isAdapterConfigured: false,
+    isAdapterConfiguring: false,
   };
 
   handleDefaultFlags = defaultFlags => {
@@ -35,22 +36,39 @@ export default class FlagsSubscription extends React.PureComponent {
   componentDidMount() {
     this.handleDefaultFlags(this.props.defaultFlags);
 
-    if (!this.props.shouldDeferAdapterConfiguration)
-      return this.props.adapter.configure(this.props.adapterArgs);
-  }
-
-  componentDidUpdate() {
-    if (
-      !this.props.shouldDeferAdapterConfiguration &&
-      !this.state.isAdapterConfigured
-    ) {
+    if (!this.props.shouldDeferAdapterConfiguration) {
+      this.setState({ isAdapterConfiguring: true });
       return this.props.adapter.configure(this.props.adapterArgs).then(() => {
+        this.setState({ isAdapterConfiguring: false });
         this.setState({ isAdapterConfigured: true });
       });
     }
+  }
 
-    if (this.state.isAdapterConfigured)
-      return this.props.adapter.reconfigure(this.props.adapterArgs);
+  componentDidUpdate() {
+    // NOTE: We have to be careful here to not double configure from `componentDidMount`.
+    if (
+      !this.props.shouldDeferAdapterConfiguration &&
+      !this.state.isAdapterConfiguring &&
+      !this.state.isAdapterConfigured
+    ) {
+      this.setState({ isAdapterConfiguring: true }); // eslint-disable-line react/no-did-update-set-state
+
+      return this.props.adapter.configure(this.props.adapterArgs).then(() => {
+        this.setState({ isAdapterConfigured: true });
+        this.setState({ isAdapterConfiguring: false });
+      });
+    } else if (
+      this.state.isAdapterConfigured &&
+      !this.state.isAdapterConfiguring
+    ) {
+      this.setState({ isAdapterConfiguring: true }); // eslint-disable-line react/no-did-update-set-state
+
+      return this.props.adapter.reconfigure(this.props.adapterArgs).then(() => {
+        this.setState({ isAdapterConfigured: true });
+        this.setState({ isAdapterConfiguring: false });
+      });
+    }
   }
 
   render() {
