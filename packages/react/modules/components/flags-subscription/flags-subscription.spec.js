@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import FlagSubscription from './flags-subscription';
+import FlagSubscription, { AdapterStates } from './flags-subscription';
 
 const ChildComponent = () => <div />;
 const createTestProps = props => ({
@@ -81,8 +81,11 @@ describe('lifecycle', () => {
             wrapper.instance().componentDidMount();
           });
 
-          it('should set the state to not `isAdapterConfiguring`', () => {
-            expect(wrapper).toHaveState('isAdapterConfiguring', true);
+          it('should set the state to configuring', () => {
+            expect(wrapper).toHaveState(
+              'adapterState',
+              AdapterStates.CONFIGURING
+            );
           });
         });
 
@@ -99,12 +102,11 @@ describe('lifecycle', () => {
             );
           });
 
-          it('should set the state to not `isAdapterConfiguring`', () => {
-            expect(wrapper).toHaveState('isAdapterConfiguring', false);
-          });
-
-          it('should set the state to `isAdapterConfigured`', () => {
-            expect(wrapper).toHaveState('isAdapterConfigured', true);
+          it('should set the state to configured', () => {
+            expect(wrapper).toHaveState(
+              'adapterState',
+              AdapterStates.CONFIGURED
+            );
           });
         });
       });
@@ -118,6 +120,8 @@ describe('lifecycle', () => {
             <ChildComponent />
           </FlagSubscription>
         );
+
+        wrapper.setState({ adapterState: AdapterStates.CONFIGURED });
 
         return wrapper.instance().componentDidMount();
       });
@@ -183,8 +187,11 @@ describe('lifecycle', () => {
             wrapper.instance().componentDidMount();
           });
 
-          it('should set the state to not `isAdapterConfiguring`', () => {
-            expect(wrapper).toHaveState('isAdapterConfiguring', true);
+          it('should set the state to configuring', () => {
+            expect(wrapper).toHaveState(
+              'adapterState',
+              AdapterStates.CONFIGURING
+            );
           });
         });
 
@@ -210,12 +217,11 @@ describe('lifecycle', () => {
             );
           });
 
-          it('should set the state to not `isAdapterConfiguring`', () => {
-            expect(wrapper).toHaveState('isAdapterConfiguring', false);
-          });
-
-          it('should set the state to `isAdapterConfigured`', () => {
-            expect(wrapper).toHaveState('isAdapterConfigured', true);
+          it('should set the state configured', () => {
+            expect(wrapper).toHaveState(
+              'adapterState',
+              AdapterStates.CONFIGURED
+            );
           });
         });
       });
@@ -229,7 +235,7 @@ describe('lifecycle', () => {
             </FlagSubscription>
           );
 
-          wrapper.setState({ isAdapterConfigured: true });
+          wrapper.setState({ adapterState: AdapterStates.CONFIGURED });
 
           // Comes from `componentDidMount`
           props.adapter.configure.mockClear();
@@ -255,15 +261,18 @@ describe('lifecycle', () => {
               </FlagSubscription>
             );
 
-            wrapper.setState({ isAdapterConfigured: true });
+            wrapper.setState({ adapterState: AdapterStates.CONFIGURED });
           });
 
           beforeEach(() => {
             wrapper.instance().componentDidUpdate();
           });
 
-          it('should set the state to not `isAdapterConfiguring`', () => {
-            expect(wrapper).toHaveState('isAdapterConfiguring', true);
+          it('should set the state configuring', () => {
+            expect(wrapper).toHaveState(
+              'adapterState',
+              AdapterStates.CONFIGURING
+            );
           });
         });
 
@@ -276,7 +285,7 @@ describe('lifecycle', () => {
               </FlagSubscription>
             );
 
-            wrapper.setState({ isAdapterConfigured: true });
+            wrapper.setState({ adapterState: AdapterStates.CONFIGURED });
 
             return wrapper.instance().componentDidUpdate();
           });
@@ -292,12 +301,11 @@ describe('lifecycle', () => {
           });
 
           describe('when the adapter configured', () => {
-            it('should set the state to not `isAdapterConfiguring`', () => {
-              expect(wrapper).toHaveState('isAdapterConfiguring', false);
-            });
-
-            it('should set the state to `isAdapterConfigured`', () => {
-              expect(wrapper).toHaveState('isAdapterConfigured', true);
+            it('should set the state to configured', () => {
+              expect(wrapper).toHaveState(
+                'adapterState',
+                AdapterStates.CONFIGURED
+              );
             });
           });
         });

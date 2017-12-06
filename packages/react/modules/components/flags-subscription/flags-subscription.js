@@ -1,6 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
+export const AdapterStates = {
+  UNCONFIGURED: 'unconfigured',
+  CONFIGURING: 'configuring',
+  CONFIGURED: 'configured',
+};
+
 export default class FlagsSubscription extends React.PureComponent {
   static propTypes = {
     shouldDeferAdapterConfiguration: PropTypes.bool,
@@ -23,8 +29,7 @@ export default class FlagsSubscription extends React.PureComponent {
   };
 
   state = {
-    isAdapterConfigured: false,
-    isAdapterConfiguring: false,
+    adapterState: AdapterStates.UNCONFIGURED,
   };
 
   handleDefaultFlags = defaultFlags => {
@@ -37,10 +42,9 @@ export default class FlagsSubscription extends React.PureComponent {
     this.handleDefaultFlags(this.props.defaultFlags);
 
     if (!this.props.shouldDeferAdapterConfiguration) {
-      this.setState({ isAdapterConfiguring: true });
+      this.setState({ adapterState: AdapterStates.CONFIGURING });
       return this.props.adapter.configure(this.props.adapterArgs).then(() => {
-        this.setState({ isAdapterConfiguring: false });
-        this.setState({ isAdapterConfigured: true });
+        this.setState({ adapterState: AdapterStates.CONFIGURED });
       });
     }
   }
@@ -49,24 +53,22 @@ export default class FlagsSubscription extends React.PureComponent {
     // NOTE: We have to be careful here to not double configure from `componentDidMount`.
     if (
       !this.props.shouldDeferAdapterConfiguration &&
-      !this.state.isAdapterConfiguring &&
-      !this.state.isAdapterConfigured
+      this.state.adapterState !== AdapterStates.CONFIGURED &&
+      this.state.adapterState !== AdapterStates.CONFIGURING
     ) {
-      this.setState({ isAdapterConfiguring: true }); // eslint-disable-line react/no-did-update-set-state
+      this.setState({ adapterState: AdapterStates.CONFIGURING }); // eslint-disable-line react/no-did-update-set-state
 
       return this.props.adapter.configure(this.props.adapterArgs).then(() => {
-        this.setState({ isAdapterConfigured: true });
-        this.setState({ isAdapterConfiguring: false });
+        this.setState({ adapterState: AdapterStates.CONFIGURED });
       });
     } else if (
-      this.state.isAdapterConfigured &&
-      !this.state.isAdapterConfiguring
+      this.state.adapterState === AdapterStates.CONFIGURED &&
+      this.state.adapterState !== AdapterStates.CONFIGURING
     ) {
-      this.setState({ isAdapterConfiguring: true }); // eslint-disable-line react/no-did-update-set-state
+      this.setState({ adapterState: AdapterStates.CONFIGURING }); // eslint-disable-line react/no-did-update-set-state
 
       return this.props.adapter.reconfigure(this.props.adapterArgs).then(() => {
-        this.setState({ isAdapterConfigured: true });
-        this.setState({ isAdapterConfiguring: false });
+        this.setState({ adapterState: AdapterStates.CONFIGURED });
       });
     }
   }
