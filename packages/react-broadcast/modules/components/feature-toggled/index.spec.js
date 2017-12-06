@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import warning from 'warning';
-import FeatureToggled from './feature-toggled';
+import FeatureToggled from './';
 
 jest.mock('warning');
 
