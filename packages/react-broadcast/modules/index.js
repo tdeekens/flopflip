@@ -1,5 +1,6 @@
 export {
   FeatureToggled,
+  ToggleFeature,
   injectFeatureToggle,
   injectFeatureToggles,
   branchOnFeatureToggle,
