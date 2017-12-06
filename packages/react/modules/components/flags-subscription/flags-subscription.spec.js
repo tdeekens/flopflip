@@ -59,19 +59,46 @@ describe('lifecycle', () => {
 
     describe('when `shouldDeferAdapterConfiguration` is `false`', () => {
       describe('when not initialized', () => {
-        beforeEach(() => wrapper.instance().componentDidMount());
+        describe('while configuring adapter', () => {
+          let wrapper;
+          let props;
 
-        it('should invoke `configure` on `adapter`', () => {
-          expect(props.adapter.configure).toHaveBeenCalled();
-        });
+          beforeEach(() => {
+            props = createTestProps({
+              // NOTE: Rejecting to not enter `then`.
+              adapter: {
+                configure: jest.fn(() => Promise.reject()),
+              },
+            });
+            wrapper = shallow(
+              <FlagSubscription {...props}>
+                <ChildComponent />
+              </FlagSubscription>
+            );
+          });
 
-        it('should invoke `configure` on `adapter` with `adapterArgs`', () => {
-          expect(props.adapter.configure).toHaveBeenCalledWith(
-            props.adapterArgs
-          );
+          beforeEach(() => {
+            wrapper.instance().componentDidMount();
+          });
+
+          it('should set the state to not `isAdapterConfiguring`', () => {
+            expect(wrapper).toHaveState('isAdapterConfiguring', true);
+          });
         });
 
         describe('when the adapter configured', () => {
+          beforeEach(() => wrapper.instance().componentDidMount());
+
+          it('should invoke `configure` on `adapter`', () => {
+            expect(props.adapter.configure).toHaveBeenCalled();
+          });
+
+          it('should invoke `configure` on `adapter` with `adapterArgs`', () => {
+            expect(props.adapter.configure).toHaveBeenCalledWith(
+              props.adapterArgs
+            );
+          });
+
           it('should set the state to not `isAdapterConfiguring`', () => {
             expect(wrapper).toHaveState('isAdapterConfiguring', false);
           });
@@ -134,28 +161,55 @@ describe('lifecycle', () => {
       let wrapper;
 
       describe('when not configured', () => {
-        beforeEach(() => {
-          props = createTestProps();
-          wrapper = shallow(
-            <FlagSubscription {...props}>
-              <ChildComponent />
-            </FlagSubscription>
-          );
+        describe('while configuring adapter', () => {
+          let wrapper;
+          let props;
 
-          return wrapper.instance().componentDidUpdate();
-        });
+          beforeEach(() => {
+            props = createTestProps({
+              // NOTE: Rejecting to not enter `then`.
+              adapter: {
+                configure: jest.fn(() => Promise.reject()),
+              },
+            });
+            wrapper = shallow(
+              <FlagSubscription {...props}>
+                <ChildComponent />
+              </FlagSubscription>
+            );
+          });
 
-        it('should invoke `configure` on `adapter`', () => {
-          expect(props.adapter.configure).toHaveBeenCalled();
-        });
+          beforeEach(() => {
+            wrapper.instance().componentDidMount();
+          });
 
-        it('should invoke `configure` on `adapter` with `adapterArgs`', () => {
-          expect(props.adapter.configure).toHaveBeenCalledWith(
-            props.adapterArgs
-          );
+          it('should set the state to not `isAdapterConfiguring`', () => {
+            expect(wrapper).toHaveState('isAdapterConfiguring', true);
+          });
         });
 
         describe('when the adapter configured', () => {
+          beforeEach(() => {
+            props = createTestProps();
+            wrapper = shallow(
+              <FlagSubscription {...props}>
+                <ChildComponent />
+              </FlagSubscription>
+            );
+
+            return wrapper.instance().componentDidUpdate();
+          });
+
+          it('should invoke `configure` on `adapter`', () => {
+            expect(props.adapter.configure).toHaveBeenCalled();
+          });
+
+          it('should invoke `configure` on `adapter` with `adapterArgs`', () => {
+            expect(props.adapter.configure).toHaveBeenCalledWith(
+              props.adapterArgs
+            );
+          });
+
           it('should set the state to not `isAdapterConfiguring`', () => {
             expect(wrapper).toHaveState('isAdapterConfiguring', false);
           });
@@ -185,6 +239,32 @@ describe('lifecycle', () => {
 
         it('should not invoke `configure` on `adapter` again', () => {
           expect(props.adapter.configure).not.toHaveBeenCalled();
+        });
+
+        describe('while reconfiguring', () => {
+          beforeEach(() => {
+            props = createTestProps({
+              // NOTE: Rejecting to not enter `then`.
+              adapter: {
+                reconfigure: jest.fn(() => Promise.reject()),
+              },
+            });
+            wrapper = shallow(
+              <FlagSubscription {...props}>
+                <ChildComponent />
+              </FlagSubscription>
+            );
+
+            wrapper.setState({ isAdapterConfigured: true });
+          });
+
+          beforeEach(() => {
+            wrapper.instance().componentDidUpdate();
+          });
+
+          it('should set the state to not `isAdapterConfiguring`', () => {
+            expect(wrapper).toHaveState('isAdapterConfiguring', true);
+          });
         });
 
         describe('when reconfiguring', () => {
