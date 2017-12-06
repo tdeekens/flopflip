@@ -82,8 +82,7 @@ describe('lifecycle', () => {
           });
 
           it('should set the state to configuring', () => {
-            expect(wrapper).toHaveState(
-              'adapterState',
+            expect(wrapper.instance().adapterState).toEqual(
               AdapterStates.CONFIGURING
             );
           });
@@ -103,8 +102,7 @@ describe('lifecycle', () => {
           });
 
           it('should set the state to configured', () => {
-            expect(wrapper).toHaveState(
-              'adapterState',
+            expect(wrapper.instance().adapterState).toEqual(
               AdapterStates.CONFIGURED
             );
           });
@@ -121,7 +119,7 @@ describe('lifecycle', () => {
           </FlagSubscription>
         );
 
-        wrapper.setState({ adapterState: AdapterStates.CONFIGURED });
+        wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
 
         return wrapper.instance().componentDidMount();
       });
@@ -188,8 +186,7 @@ describe('lifecycle', () => {
           });
 
           it('should set the state to configuring', () => {
-            expect(wrapper).toHaveState(
-              'adapterState',
+            expect(wrapper.instance().adapterState).toEqual(
               AdapterStates.CONFIGURING
             );
           });
@@ -218,8 +215,7 @@ describe('lifecycle', () => {
           });
 
           it('should set the state configured', () => {
-            expect(wrapper).toHaveState(
-              'adapterState',
+            expect(wrapper.instance().adapterState).toEqual(
               AdapterStates.CONFIGURED
             );
           });
@@ -235,7 +231,7 @@ describe('lifecycle', () => {
             </FlagSubscription>
           );
 
-          wrapper.setState({ adapterState: AdapterStates.CONFIGURED });
+          wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
 
           // Comes from `componentDidMount`
           props.adapter.configure.mockClear();
@@ -261,7 +257,7 @@ describe('lifecycle', () => {
               </FlagSubscription>
             );
 
-            wrapper.setState({ adapterState: AdapterStates.CONFIGURED });
+            wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
           });
 
           beforeEach(() => {
@@ -269,8 +265,7 @@ describe('lifecycle', () => {
           });
 
           it('should set the state configuring', () => {
-            expect(wrapper).toHaveState(
-              'adapterState',
+            expect(wrapper.instance().adapterState).toEqual(
               AdapterStates.CONFIGURING
             );
           });
@@ -285,7 +280,7 @@ describe('lifecycle', () => {
               </FlagSubscription>
             );
 
-            wrapper.setState({ adapterState: AdapterStates.CONFIGURED });
+            wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
 
             return wrapper.instance().componentDidUpdate();
           });
@@ -302,8 +297,7 @@ describe('lifecycle', () => {
 
           describe('when the adapter configured', () => {
             it('should set the state to configured', () => {
-              expect(wrapper).toHaveState(
-                'adapterState',
+              expect(wrapper.instance().adapterState).toEqual(
                 AdapterStates.CONFIGURED
               );
             });
