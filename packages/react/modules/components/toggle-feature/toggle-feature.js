@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 const isEmptyChildren = children => React.Children.count(children) === 0;
 
 export default class ToggleFeature extends React.PureComponent {
+  static displayName = 'ToggleFeature';
   static propTypes = {
     untoggledComponent: PropTypes.func,
     toggledComponent: PropTypes.func,
-
     render: PropTypes.func,
     children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-
     // HoC
     isFeatureEnabled: PropTypes.bool.isRequired,
   };

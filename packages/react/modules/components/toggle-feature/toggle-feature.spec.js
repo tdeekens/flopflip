@@ -160,3 +160,9 @@ describe('when feature enabled', () => {
     });
   });
 });
+
+describe('statics', () => {
+  it('should have a `diplayName`', () => {
+    expect(ToggleFeature.displayName).toEqual('ToggleFeature');
+  });
+});
