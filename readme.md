@@ -125,6 +125,8 @@ without Redux.
   feature toggles onto the `props` of a component
 * `ToggleFeature` a component conditionally rendering its `children` based on
   the status of a passed feature flag
+* `SwitchFeature` a component conditionally rendering the first
+  `<ToggleFeature>` child based on the status of its passed feature flag
 * `reducer` and `STATE_SLICE` a reducer and the state slice for the feature
   toggle state
 * `createFlopFlipEnhancer` a redux store enhancer to configure flipflip and add
@@ -233,6 +235,8 @@ share common logic.
   feature toggles onto the `props` of a component
 * `ToggleFeature` a component conditionally rendering its `children` based on
   the status of a passed feature flag
+* `SwitchFeature` a component that renders its first <ToggleFeature> child based
+  on the status of a passed feature flag
 
 #### `ToggleFeature`
 
@@ -329,6 +333,44 @@ We actually recommend maintaining a list of constants with feature flag names
 somewhere within your application. This avoids typos and unexpected behavior.
 After all, the correct workings of your feature flags is crutial to your
 application.
+
+#### `SwitchFeature`
+
+The component renders its first `ToggleFeature` child depending on the state of
+a given feature flag. This component is helps working with toggling of multi
+variate flags but does not restrict its `children` to that.
+
+_This example outlines the usage of different ways of working with
+`ToggleFeature`._
+
+```jsx
+<SwitchFeature>
+  <ToggleFeature
+    flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
+    variation={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
+    toggledComponent={MyFeatureComponent}
+  />
+  <ToggleFeature
+    flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
+    variation={flagsNames.THE_FEATURE_TOGGLE.VARIATES.B}
+    render={() => <p>Feature is turned on</p>}
+  />
+  <ToggleFeature
+    flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
+    variation={flagsNames.THE_FEATURE_TOGGLE.VARIATES.C}
+  >
+    {({ isFeautureEnabled }) => (
+      <p>Is the feature turned on?: {isFeatureEnabled}</p>
+    )}
+  </ToggleFeature>
+  <ToggleFeature
+    flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
+    variation={flagsNames.THE_FEATURE_TOGGLE.VARIATES.D}
+    toggledComponent={MyFeatureComponent}
+    untoggledComponent={MyDisabledFeatureComponent}
+  />
+</SwitchFeature>
+```
 
 #### `branchOnFeatureToggle({ flag: String, variation?: String | Boolean })`
 
