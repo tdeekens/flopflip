@@ -11,7 +11,7 @@ export const mapStateToProps = state => ({
 export default (flagNames, propKey) => WrappedComponent =>
   /* istanbul ignore next */
   compose(
-    connect(mapStateToProps),
+    setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggles')),
     injectFeatureToggles(flagNames, propKey),
-    setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggles'))
+    connect(mapStateToProps)
   )(WrappedComponent);

@@ -1,4 +1,4 @@
-import { compose, withProps } from 'recompose';
+import { compose, withProps, setDisplayName } from 'recompose';
 import {
   ToggleFeature,
   isFeatureEnabled,
@@ -7,10 +7,11 @@ import {
 import withFlagSubscription from '../with-flag-subscription/';
 
 export default compose(
-  withFlagSubscription(ALL_FLAGS_PROP_KEY),
+  setDisplayName(ToggleFeature.displayName),
   withProps(props => ({
     isFeatureEnabled: isFeatureEnabled(props.flag, props.variation)(
       props[ALL_FLAGS_PROP_KEY]
     ),
-  }))
+  })),
+  withFlagSubscription(ALL_FLAGS_PROP_KEY)
 )(ToggleFeature);

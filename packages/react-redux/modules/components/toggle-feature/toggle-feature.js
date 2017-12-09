@@ -1,3 +1,4 @@
+import { compose, setDisplayName } from 'recompose';
 import { connect } from 'react-redux';
 import { ToggleFeature, isFeatureEnabled } from '@flopflip/react';
 import { STATE_SLICE } from './../../store';
@@ -9,4 +10,7 @@ export const mapStateToProps = (state, ownProps) => ({
 });
 
 /* istanbul ignore next */
-export default connect(mapStateToProps)(ToggleFeature);
+export default compose(
+  setDisplayName(ToggleFeature.displayName),
+  connect(mapStateToProps)
+)(ToggleFeature);

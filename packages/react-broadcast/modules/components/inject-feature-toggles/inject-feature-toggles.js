@@ -4,7 +4,7 @@ import withFlagSubscription from '../with-flag-subscription/';
 
 export default (flagNames, propKey) => WrappedComponent =>
   compose(
-    withFlagSubscription(ALL_FLAGS_PROP_KEY),
+    setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggles')),
     injectFeatureToggles(flagNames, propKey),
-    setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggles'))
+    withFlagSubscription(ALL_FLAGS_PROP_KEY)
   )(WrappedComponent);
