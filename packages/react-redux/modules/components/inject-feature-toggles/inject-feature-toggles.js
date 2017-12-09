@@ -12,6 +12,6 @@ export default (flagNames, propKey) => WrappedComponent =>
   /* istanbul ignore next */
   compose(
     setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggles')),
-    injectFeatureToggles(flagNames, propKey),
-    connect(mapStateToProps)
+    connect(mapStateToProps),
+    injectFeatureToggles(flagNames, propKey)
   )(WrappedComponent);

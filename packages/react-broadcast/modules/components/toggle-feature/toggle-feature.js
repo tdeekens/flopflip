@@ -8,10 +8,10 @@ import withFlagSubscription from '../with-flag-subscription/';
 
 export default compose(
   setDisplayName(ToggleFeature.displayName),
+  withFlagSubscription(ALL_FLAGS_PROP_KEY),
   withProps(props => ({
     isFeatureEnabled: isFeatureEnabled(props.flag, props.variation)(
       props[ALL_FLAGS_PROP_KEY]
     ),
-  })),
-  withFlagSubscription(ALL_FLAGS_PROP_KEY)
+  }))
 )(ToggleFeature);

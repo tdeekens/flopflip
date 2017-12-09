@@ -5,6 +5,6 @@ import withFlagSubscription from '../with-flag-subscription/';
 export default (flagNames, propKey) => WrappedComponent =>
   compose(
     setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggles')),
-    injectFeatureToggles(flagNames, propKey),
-    withFlagSubscription(ALL_FLAGS_PROP_KEY)
+    withFlagSubscription(ALL_FLAGS_PROP_KEY),
+    injectFeatureToggles(flagNames, propKey)
   )(WrappedComponent);
