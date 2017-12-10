@@ -261,7 +261,7 @@ export default (
 );
 ```
 
-or with for multi variate feature toggles
+or with for multi variate feature toggles:
 
 ```js
 const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
@@ -277,7 +277,7 @@ export default (
 );
 ```
 
-or with `toggledComponent` prop
+or with `toggledComponent` prop:
 
 ```js
 const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
@@ -293,7 +293,7 @@ export default (
 );
 ```
 
-or with Function as a Child
+or with Function as a Child (FaaC) which is always invoked with an `isFeatureEnabled` argument:
 
 ```js
 const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
@@ -304,14 +304,12 @@ export default (
     variation={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
     untoggledComponent={UntoggledComponent}
   >
-    {() => <h3>I might be gone or there!</h3>}
+    {({ isFeatureEnabled }) => <h3>I might be gone or there!</h3>}
   </ToggleFeature>
 );
 ```
 
-or with a `render` prop. Note that the `render` prop will always be invoked not
-matter if the feature is on or off. It therefore also receives an
-`isFeatureEnabled` boolean argument.
+or with a `render` prop. Note that the `render` prop will only be invoked then the feature is turned on:
 
 ```js
 const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
@@ -321,7 +319,7 @@ export default (
     flag={flagsNames.THE_FEATURE_TOGGLE.NAME}
     variation={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
     untoggledComponent={UntoggledComponent}
-    render={({ isFeatureEnabled }) => <h3>I might be gone or there!</h3>}
+    render={() => <h3>I might be gone or there!</h3>}
   />
 );
 ```
