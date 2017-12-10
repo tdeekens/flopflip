@@ -1,0 +1,173 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when feature is disabled should match snapshot 1`] = `
+<ConfigureFlopflip
+  adapter={
+    Object {
+      "configure": [Function],
+      "reconfigure": [Function],
+    }
+  }
+  adapterArgs={Object {}}
+  defaultFlags={
+    Object {
+      "flag1": false,
+      "flag2": false,
+    }
+  }
+  shouldDeferAdapterConfiguration={false}
+>
+  <FlagsSubscription
+    adapter={
+      Object {
+        "configure": [Function],
+        "reconfigure": [Function],
+      }
+    }
+    adapterArgs={
+      Object {
+        "onFlagsStateChange": [Function],
+        "onStatusStateChange": [Function],
+      }
+    }
+    defaultFlags={
+      Object {
+        "flag1": false,
+        "flag2": false,
+      }
+    }
+    shouldDeferAdapterConfiguration={false}
+  >
+    <Broadcast
+      channel="@flopflip"
+      compareValues={[Function]}
+      value={
+        Object {
+          "flag1": false,
+          "flag2": false,
+        }
+      }
+    >
+      <ToggleFeature
+        flag="flag1"
+      >
+        <Subscriber
+          channel="@flopflip"
+        >
+          <withProps(ToggleFeature)
+            @flopflip/flags={
+              Object {
+                "flag1": false,
+                "flag2": false,
+              }
+            }
+            flag="flag1"
+          >
+            <ToggleFeature
+              @flopflip/flags={
+                Object {
+                  "flag1": false,
+                  "flag2": false,
+                }
+              }
+              flag="flag1"
+              isFeatureEnabled={false}
+              render={null}
+              toggledComponent={null}
+              untoggledComponent={null}
+            />
+          </withProps(ToggleFeature)>
+        </Subscriber>
+      </ToggleFeature>
+    </Broadcast>
+  </FlagsSubscription>
+</ConfigureFlopflip>
+`;
+
+exports[`when feature is disabled when enabling feature should match snapshot 1`] = `
+<ConfigureFlopflip
+  adapter={
+    Object {
+      "configure": [Function],
+      "reconfigure": [Function],
+    }
+  }
+  adapterArgs={Object {}}
+  defaultFlags={
+    Object {
+      "flag1": false,
+      "flag2": false,
+    }
+  }
+  shouldDeferAdapterConfiguration={false}
+>
+  <FlagsSubscription
+    adapter={
+      Object {
+        "configure": [Function],
+        "reconfigure": [Function],
+      }
+    }
+    adapterArgs={
+      Object {
+        "onFlagsStateChange": [Function],
+        "onStatusStateChange": [Function],
+      }
+    }
+    defaultFlags={
+      Object {
+        "flag1": false,
+        "flag2": false,
+      }
+    }
+    shouldDeferAdapterConfiguration={false}
+  >
+    <Broadcast
+      channel="@flopflip"
+      compareValues={[Function]}
+      value={
+        Object {
+          "flag1": true,
+          "flag2": false,
+        }
+      }
+    >
+      <ToggleFeature
+        flag="flag1"
+      >
+        <Subscriber
+          channel="@flopflip"
+        >
+          <withProps(ToggleFeature)
+            @flopflip/flags={
+              Object {
+                "flag1": true,
+                "flag2": false,
+              }
+            }
+            flag="flag1"
+          >
+            <ToggleFeature
+              @flopflip/flags={
+                Object {
+                  "flag1": true,
+                  "flag2": false,
+                }
+              }
+              flag="flag1"
+              isFeatureEnabled={true}
+              render={null}
+              toggledComponent={null}
+              untoggledComponent={null}
+            >
+              <FeatureComponent>
+                <div />
+              </FeatureComponent>
+            </ToggleFeature>
+          </withProps(ToggleFeature)>
+        </Subscriber>
+      </ToggleFeature>
+    </Broadcast>
+  </FlagsSubscription>
+</ConfigureFlopflip>
+`;
