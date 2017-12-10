@@ -1,0 +1,173 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`without \`propKey\` when feature is disabled should match snapshot 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(ConfigureFlopflip)
+    adapter={
+      Object {
+        "configure": [Function],
+        "reconfigure": [Function],
+      }
+    }
+    adapterArgs={Object {}}
+  >
+    <ConfigureFlopflip
+      adapter={
+        Object {
+          "configure": [Function],
+          "reconfigure": [Function],
+        }
+      }
+      adapterArgs={Object {}}
+      defaultFlags={Object {}}
+      handleUpdateFlags={[Function]}
+      handleUpdateStatus={[Function]}
+      shouldDeferAdapterConfiguration={false}
+    >
+      <FlagsSubscription
+        adapter={
+          Object {
+            "configure": [Function],
+            "reconfigure": [Function],
+          }
+        }
+        adapterArgs={
+          Object {
+            "onFlagsStateChange": [Function],
+            "onStatusStateChange": [Function],
+          }
+        }
+        defaultFlags={Object {}}
+        shouldDeferAdapterConfiguration={false}
+      >
+        <Container>
+          <injectFeatureToggle(FeatureComponent)>
+            <withProps(omitProps(FeatureComponent))
+              @flopflip/flags={
+                Object {
+                  "flag1": false,
+                }
+              }
+              dispatch={[Function]}
+            >
+              <omitProps(FeatureComponent)
+                @flopflip/flags={
+                  Object {
+                    "flag1": false,
+                  }
+                }
+                dispatch={[Function]}
+                isFeatureEnabled={false}
+              >
+                <FeatureComponent
+                  dispatch={[Function]}
+                  isFeatureEnabled={false}
+                >
+                  <div />
+                </FeatureComponent>
+              </omitProps(FeatureComponent)>
+            </withProps(omitProps(FeatureComponent))>
+          </injectFeatureToggle(FeatureComponent)>
+        </Container>
+      </FlagsSubscription>
+    </ConfigureFlopflip>
+  </Connect(ConfigureFlopflip)>
+</Provider>
+`;
+
+exports[`without \`propKey\` when feature is disabled when enabling feature should match snapshot 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(ConfigureFlopflip)
+    adapter={
+      Object {
+        "configure": [Function],
+        "reconfigure": [Function],
+      }
+    }
+    adapterArgs={Object {}}
+  >
+    <ConfigureFlopflip
+      adapter={
+        Object {
+          "configure": [Function],
+          "reconfigure": [Function],
+        }
+      }
+      adapterArgs={Object {}}
+      defaultFlags={Object {}}
+      handleUpdateFlags={[Function]}
+      handleUpdateStatus={[Function]}
+      shouldDeferAdapterConfiguration={false}
+    >
+      <FlagsSubscription
+        adapter={
+          Object {
+            "configure": [Function],
+            "reconfigure": [Function],
+          }
+        }
+        adapterArgs={
+          Object {
+            "onFlagsStateChange": [Function],
+            "onStatusStateChange": [Function],
+          }
+        }
+        defaultFlags={Object {}}
+        shouldDeferAdapterConfiguration={false}
+      >
+        <Container>
+          <injectFeatureToggle(FeatureComponent)>
+            <withProps(omitProps(FeatureComponent))
+              @flopflip/flags={
+                Object {
+                  "flag1": true,
+                }
+              }
+              dispatch={[Function]}
+            >
+              <omitProps(FeatureComponent)
+                @flopflip/flags={
+                  Object {
+                    "flag1": true,
+                  }
+                }
+                dispatch={[Function]}
+                isFeatureEnabled={true}
+              >
+                <FeatureComponent
+                  dispatch={[Function]}
+                  isFeatureEnabled={true}
+                >
+                  <div />
+                </FeatureComponent>
+              </omitProps(FeatureComponent)>
+            </withProps(omitProps(FeatureComponent))>
+          </injectFeatureToggle(FeatureComponent)>
+        </Container>
+      </FlagsSubscription>
+    </ConfigureFlopflip>
+  </Connect(ConfigureFlopflip)>
+</Provider>
+`;
