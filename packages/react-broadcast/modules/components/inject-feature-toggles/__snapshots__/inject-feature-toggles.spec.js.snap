@@ -1,0 +1,273 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`with \`propKey\` should match snapshot 1`] = `
+<ConfigureFlopflip
+  adapter={
+    Object {
+      "configure": [Function],
+      "reconfigure": [Function],
+    }
+  }
+  adapterArgs={Object {}}
+  defaultFlags={Object {}}
+  shouldDeferAdapterConfiguration={false}
+>
+  <FlagsSubscription
+    adapter={
+      Object {
+        "configure": [Function],
+        "reconfigure": [Function],
+      }
+    }
+    adapterArgs={
+      Object {
+        "onFlagsStateChange": [Function],
+        "onStatusStateChange": [Function],
+      }
+    }
+    defaultFlags={Object {}}
+    shouldDeferAdapterConfiguration={false}
+  >
+    <Broadcast
+      channel="@flopflip"
+      compareValues={[Function]}
+      value={Object {}}
+    >
+      <Container>
+        <injectFeatureToggles(FeatureComponent)>
+          <Subscriber
+            channel="@flopflip"
+          >
+            <withProps(omitProps(shouldUpdate(FeatureComponent)))
+              @flopflip/flags={Object {}}
+            >
+              <omitProps(shouldUpdate(FeatureComponent))
+                @flopflip/flags={Object {}}
+                fooBar={Object {}}
+              >
+                <shouldUpdate(FeatureComponent)
+                  fooBar={Object {}}
+                >
+                  <FeatureComponent
+                    fooBar={Object {}}
+                  >
+                    <div />
+                  </FeatureComponent>
+                </shouldUpdate(FeatureComponent)>
+              </omitProps(shouldUpdate(FeatureComponent))>
+            </withProps(omitProps(shouldUpdate(FeatureComponent)))>
+          </Subscriber>
+        </injectFeatureToggles(FeatureComponent)>
+      </Container>
+    </Broadcast>
+  </FlagsSubscription>
+</ConfigureFlopflip>
+`;
+
+exports[`without \`propKey\` when feature is disabled should match snapshot 1`] = `
+<ConfigureFlopflip
+  adapter={
+    Object {
+      "configure": [Function],
+      "reconfigure": [Function],
+    }
+  }
+  adapterArgs={Object {}}
+  defaultFlags={
+    Object {
+      "flag1": false,
+      "flag2": false,
+    }
+  }
+  shouldDeferAdapterConfiguration={false}
+>
+  <FlagsSubscription
+    adapter={
+      Object {
+        "configure": [Function],
+        "reconfigure": [Function],
+      }
+    }
+    adapterArgs={
+      Object {
+        "onFlagsStateChange": [Function],
+        "onStatusStateChange": [Function],
+      }
+    }
+    defaultFlags={
+      Object {
+        "flag1": false,
+        "flag2": false,
+      }
+    }
+    shouldDeferAdapterConfiguration={false}
+  >
+    <Broadcast
+      channel="@flopflip"
+      compareValues={[Function]}
+      value={
+        Object {
+          "flag1": false,
+          "flag2": false,
+        }
+      }
+    >
+      <Container>
+        <injectFeatureToggles(FeatureComponent)>
+          <Subscriber
+            channel="@flopflip"
+          >
+            <withProps(omitProps(shouldUpdate(FeatureComponent)))
+              @flopflip/flags={
+                Object {
+                  "flag1": false,
+                  "flag2": false,
+                }
+              }
+            >
+              <omitProps(shouldUpdate(FeatureComponent))
+                @flopflip/flags={
+                  Object {
+                    "flag1": false,
+                    "flag2": false,
+                  }
+                }
+                featureToggles={
+                  Object {
+                    "flag1": false,
+                    "flag2": false,
+                  }
+                }
+              >
+                <shouldUpdate(FeatureComponent)
+                  featureToggles={
+                    Object {
+                      "flag1": false,
+                      "flag2": false,
+                    }
+                  }
+                >
+                  <FeatureComponent
+                    featureToggles={
+                      Object {
+                        "flag1": false,
+                        "flag2": false,
+                      }
+                    }
+                  >
+                    <div />
+                  </FeatureComponent>
+                </shouldUpdate(FeatureComponent)>
+              </omitProps(shouldUpdate(FeatureComponent))>
+            </withProps(omitProps(shouldUpdate(FeatureComponent)))>
+          </Subscriber>
+        </injectFeatureToggles(FeatureComponent)>
+      </Container>
+    </Broadcast>
+  </FlagsSubscription>
+</ConfigureFlopflip>
+`;
+
+exports[`without \`propKey\` when feature is disabled when enabling feature should match snapshot 1`] = `
+<ConfigureFlopflip
+  adapter={
+    Object {
+      "configure": [Function],
+      "reconfigure": [Function],
+    }
+  }
+  adapterArgs={Object {}}
+  defaultFlags={
+    Object {
+      "flag1": false,
+      "flag2": false,
+    }
+  }
+  shouldDeferAdapterConfiguration={false}
+>
+  <FlagsSubscription
+    adapter={
+      Object {
+        "configure": [Function],
+        "reconfigure": [Function],
+      }
+    }
+    adapterArgs={
+      Object {
+        "onFlagsStateChange": [Function],
+        "onStatusStateChange": [Function],
+      }
+    }
+    defaultFlags={
+      Object {
+        "flag1": false,
+        "flag2": false,
+      }
+    }
+    shouldDeferAdapterConfiguration={false}
+  >
+    <Broadcast
+      channel="@flopflip"
+      compareValues={[Function]}
+      value={
+        Object {
+          "flag1": true,
+          "flag2": false,
+        }
+      }
+    >
+      <Container>
+        <injectFeatureToggles(FeatureComponent)>
+          <Subscriber
+            channel="@flopflip"
+          >
+            <withProps(omitProps(shouldUpdate(FeatureComponent)))
+              @flopflip/flags={
+                Object {
+                  "flag1": true,
+                  "flag2": false,
+                }
+              }
+            >
+              <omitProps(shouldUpdate(FeatureComponent))
+                @flopflip/flags={
+                  Object {
+                    "flag1": true,
+                    "flag2": false,
+                  }
+                }
+                featureToggles={
+                  Object {
+                    "flag1": true,
+                    "flag2": false,
+                  }
+                }
+              >
+                <shouldUpdate(FeatureComponent)
+                  featureToggles={
+                    Object {
+                      "flag1": true,
+                      "flag2": false,
+                    }
+                  }
+                >
+                  <FeatureComponent
+                    featureToggles={
+                      Object {
+                        "flag1": true,
+                        "flag2": false,
+                      }
+                    }
+                  >
+                    <div />
+                  </FeatureComponent>
+                </shouldUpdate(FeatureComponent)>
+              </omitProps(shouldUpdate(FeatureComponent))>
+            </withProps(omitProps(shouldUpdate(FeatureComponent)))>
+          </Subscriber>
+        </injectFeatureToggles(FeatureComponent)>
+      </Container>
+    </Broadcast>
+  </FlagsSubscription>
+</ConfigureFlopflip>
+`;
