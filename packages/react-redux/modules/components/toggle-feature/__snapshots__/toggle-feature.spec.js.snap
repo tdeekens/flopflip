@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ToggleFeature> when feature is disabled should match snapshot 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(ConfigureFlopflip)
+    adapter={
+      Object {
+        "configure": [Function],
+        "reconfigure": [Function],
+      }
+    }
+    adapterArgs={Object {}}
+  >
+    <ConfigureFlopflip
+      adapter={
+        Object {
+          "configure": [Function],
+          "reconfigure": [Function],
+        }
+      }
+      adapterArgs={Object {}}
+      defaultFlags={Object {}}
+      handleUpdateFlags={[Function]}
+      handleUpdateStatus={[Function]}
+      shouldDeferAdapterConfiguration={false}
+    >
+      <FlagsSubscription
+        adapter={
+          Object {
+            "configure": [Function],
+            "reconfigure": [Function],
+          }
+        }
+        adapterArgs={
+          Object {
+            "onFlagsStateChange": [Function],
+            "onStatusStateChange": [Function],
+          }
+        }
+        defaultFlags={Object {}}
+        shouldDeferAdapterConfiguration={false}
+      >
+        <ToggleFeature
+          flag="flag1"
+        >
+          <ToggleFeature
+            dispatch={[Function]}
+            flag="flag1"
+            isFeatureEnabled={false}
+            render={null}
+            toggledComponent={null}
+            untoggledComponent={null}
+          />
+        </ToggleFeature>
+      </FlagsSubscription>
+    </ConfigureFlopflip>
+  </Connect(ConfigureFlopflip)>
+</Provider>
+`;
+
+exports[`<ToggleFeature> when feature is disabled when enabling feature should match snapshot 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(ConfigureFlopflip)
+    adapter={
+      Object {
+        "configure": [Function],
+        "reconfigure": [Function],
+      }
+    }
+    adapterArgs={Object {}}
+  >
+    <ConfigureFlopflip
+      adapter={
+        Object {
+          "configure": [Function],
+          "reconfigure": [Function],
+        }
+      }
+      adapterArgs={Object {}}
+      defaultFlags={Object {}}
+      handleUpdateFlags={[Function]}
+      handleUpdateStatus={[Function]}
+      shouldDeferAdapterConfiguration={false}
+    >
+      <FlagsSubscription
+        adapter={
+          Object {
+            "configure": [Function],
+            "reconfigure": [Function],
+          }
+        }
+        adapterArgs={
+          Object {
+            "onFlagsStateChange": [Function],
+            "onStatusStateChange": [Function],
+          }
+        }
+        defaultFlags={Object {}}
+        shouldDeferAdapterConfiguration={false}
+      >
+        <ToggleFeature
+          flag="flag1"
+        >
+          <ToggleFeature
+            dispatch={[Function]}
+            flag="flag1"
+            isFeatureEnabled={true}
+            render={null}
+            toggledComponent={null}
+            untoggledComponent={null}
+          >
+            <FeatureComponent>
+              <div />
+            </FeatureComponent>
+          </ToggleFeature>
+        </ToggleFeature>
+      </FlagsSubscription>
+    </ConfigureFlopflip>
+  </Connect(ConfigureFlopflip)>
+</Provider>
+`;

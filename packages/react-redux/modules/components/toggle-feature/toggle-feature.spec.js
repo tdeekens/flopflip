@@ -1,5 +1,11 @@
+import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
+import React from 'react';
+import memoryAdapter from '@flopflip/memory-adapter';
+import configureStore from 'redux-mock-store';
+import Configure from '../configure';
 import { STATE_SLICE } from './../../store';
-import { mapStateToProps } from './toggle-feature';
+import ToggleFeature, { mapStateToProps } from './toggle-feature';
 
 describe('mapStateToProps', () => {
   describe('with existing `flag` ', () => {
@@ -69,6 +75,74 @@ describe('mapStateToProps', () => {
           variation: 'flagVariate2',
         }).isFeatureEnabled
       ).toBe(false);
+    });
+  });
+});
+
+const FeatureComponent = () => <div />;
+FeatureComponent.displayName = 'FeatureComponent';
+
+const createTestProps = custom => ({
+  adapterArgs: {},
+
+  ...custom,
+});
+const createMockStore = configureStore();
+
+describe('<ToggleFeature>', () => {
+  describe('when feature is disabled', () => {
+    let props;
+    let wrapper;
+    beforeEach(() => {
+      props = createTestProps();
+      const store = createMockStore({
+        [STATE_SLICE]: { flags: { flag1: false } },
+      });
+      props = createTestProps();
+      wrapper = mount(
+        <Provider store={store}>
+          <Configure {...props} adapter={memoryAdapter}>
+            <ToggleFeature flag="flag1">
+              <FeatureComponent />
+            </ToggleFeature>
+          </Configure>
+        </Provider>
+      );
+    });
+
+    it('should match snapshot', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should not render the `FeatureComponent`', () => {
+      expect(wrapper).not.toRender(FeatureComponent);
+    });
+
+    describe('when enabling feature', () => {
+      beforeEach(() => {
+        props = createTestProps();
+        const store = createMockStore({
+          [STATE_SLICE]: { flags: { flag1: true } },
+        });
+        props = createTestProps();
+        wrapper = mount(
+          <Provider store={store}>
+            <Configure {...props} adapter={memoryAdapter}>
+              <ToggleFeature flag="flag1">
+                <FeatureComponent />
+              </ToggleFeature>
+            </Configure>
+          </Provider>
+        );
+      });
+
+      it('should match snapshot', () => {
+        expect(wrapper).toMatchSnapshot();
+      });
+
+      it('should not render the `FeatureComponent`', () => {
+        expect(wrapper).toRender(FeatureComponent);
+      });
     });
   });
 });
