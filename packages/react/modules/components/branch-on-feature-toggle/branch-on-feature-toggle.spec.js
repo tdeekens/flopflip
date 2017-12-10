@@ -2,12 +2,16 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import branchOnFeatureToggle from './branch-on-feature-toggle';
 
-const UntoggledComponent = () => <div>UntoggledComponent</div>;
+const UntoggledComponent = () => (
+  <React.Fragment>UntoggledComponent</React.Fragment>
+);
 UntoggledComponent.displayName = 'UntoggledComponent';
 // This is a shortcut for test expectations on the display name as recompose
 // wraps it for us.
 UntoggledComponent.wrappedDisplayName = 'renderComponent(UntoggledComponent)';
-const FeatureComponent = () => <div>FeatureComponent</div>;
+const FeatureComponent = () => (
+  <React.Fragment>FeatureComponent</React.Fragment>
+);
 FeatureComponent.displayName = 'FeatureComponent';
 
 describe('with `flagName`', () => {

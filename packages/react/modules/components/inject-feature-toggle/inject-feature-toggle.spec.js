@@ -4,7 +4,7 @@ import { ALL_FLAGS_PROP_KEY } from '../../constants';
 import injectFeatureToggle from './inject-feature-toggle';
 
 describe('injecting', () => {
-  const TestComponent = () => <div>Test</div>;
+  const TestComponent = () => <React.Fragment>Test</React.Fragment>;
   TestComponent.displayName = 'TestComponent';
   TestComponent.propTypes = {};
 
