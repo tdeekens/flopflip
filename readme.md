@@ -1,5 +1,5 @@
 <p align="center">
-  <b style="font-size: 25px">🎛 flopflip - Feature Toggling 🎚</b><br />
+  <b style="font-size: 25px">🎚 flopflip - Feature Toggling 🚦</b><br />
   <i>flip or flop a feature in with real-time updates through a Redux store by directly using React's context.</i>
 </p>
 
