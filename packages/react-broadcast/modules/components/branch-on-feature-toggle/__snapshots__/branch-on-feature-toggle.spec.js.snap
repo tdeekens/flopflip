@@ -1,0 +1,283 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`with \`untoggledComponent when feature is disabled should match snapshot 1`] = `
+<ConfigureFlopflip
+  adapter={
+    Object {
+      "configure": [Function],
+      "reconfigure": [Function],
+    }
+  }
+  adapterArgs={Object {}}
+  defaultFlags={Object {}}
+  shouldDeferAdapterConfiguration={false}
+>
+  <FlagsSubscription
+    adapter={
+      Object {
+        "configure": [Function],
+        "reconfigure": [Function],
+      }
+    }
+    adapterArgs={
+      Object {
+        "onFlagsStateChange": [Function],
+        "onStatusStateChange": [Function],
+      }
+    }
+    defaultFlags={Object {}}
+    shouldDeferAdapterConfiguration={false}
+  >
+    <Broadcast
+      channel="@flopflip"
+      compareValues={[Function]}
+      value={Object {}}
+    >
+      <Container>
+        <branchOnFeatureToggle(ToggledComponent)>
+          <Subscriber
+            channel="@flopflip"
+          >
+            <withProps(omitProps(branch(ToggledComponent)))
+              @flopflip/flags={Object {}}
+            >
+              <omitProps(branch(ToggledComponent))
+                @flopflip/flags={Object {}}
+                isFeatureEnabled={false}
+              >
+                <branch(ToggledComponent)
+                  isFeatureEnabled={false}
+                >
+                  <renderComponent(UntoggledComponent)
+                    isFeatureEnabled={false}
+                  >
+                    <UntoggledComponent
+                      isFeatureEnabled={false}
+                    >
+                      <div />
+                    </UntoggledComponent>
+                  </renderComponent(UntoggledComponent)>
+                </branch(ToggledComponent)>
+              </omitProps(branch(ToggledComponent))>
+            </withProps(omitProps(branch(ToggledComponent)))>
+          </Subscriber>
+        </branchOnFeatureToggle(ToggledComponent)>
+      </Container>
+    </Broadcast>
+  </FlagsSubscription>
+</ConfigureFlopflip>
+`;
+
+exports[`with \`untoggledComponent when feature is disabled when enabling feature should match snapshot 1`] = `
+<ConfigureFlopflip
+  adapter={
+    Object {
+      "configure": [Function],
+      "reconfigure": [Function],
+    }
+  }
+  adapterArgs={Object {}}
+  defaultFlags={Object {}}
+  shouldDeferAdapterConfiguration={false}
+>
+  <FlagsSubscription
+    adapter={
+      Object {
+        "configure": [Function],
+        "reconfigure": [Function],
+      }
+    }
+    adapterArgs={
+      Object {
+        "onFlagsStateChange": [Function],
+        "onStatusStateChange": [Function],
+      }
+    }
+    defaultFlags={Object {}}
+    shouldDeferAdapterConfiguration={false}
+  >
+    <Broadcast
+      channel="@flopflip"
+      compareValues={[Function]}
+      value={
+        Object {
+          "flag1": true,
+        }
+      }
+    >
+      <Container>
+        <branchOnFeatureToggle(ToggledComponent)>
+          <Subscriber
+            channel="@flopflip"
+          >
+            <withProps(omitProps(branch(ToggledComponent)))
+              @flopflip/flags={
+                Object {
+                  "flag1": true,
+                }
+              }
+            >
+              <omitProps(branch(ToggledComponent))
+                @flopflip/flags={
+                  Object {
+                    "flag1": true,
+                  }
+                }
+                isFeatureEnabled={true}
+              >
+                <branch(ToggledComponent)
+                  isFeatureEnabled={true}
+                >
+                  <ToggledComponent
+                    isFeatureEnabled={true}
+                  >
+                    <div />
+                  </ToggledComponent>
+                </branch(ToggledComponent)>
+              </omitProps(branch(ToggledComponent))>
+            </withProps(omitProps(branch(ToggledComponent)))>
+          </Subscriber>
+        </branchOnFeatureToggle(ToggledComponent)>
+      </Container>
+    </Broadcast>
+  </FlagsSubscription>
+</ConfigureFlopflip>
+`;
+
+exports[`without \`untoggledComponent when feature is disabled should match snapshot 1`] = `
+<ConfigureFlopflip
+  adapter={
+    Object {
+      "configure": [Function],
+      "reconfigure": [Function],
+    }
+  }
+  adapterArgs={Object {}}
+  defaultFlags={Object {}}
+  shouldDeferAdapterConfiguration={false}
+>
+  <FlagsSubscription
+    adapter={
+      Object {
+        "configure": [Function],
+        "reconfigure": [Function],
+      }
+    }
+    adapterArgs={
+      Object {
+        "onFlagsStateChange": [Function],
+        "onStatusStateChange": [Function],
+      }
+    }
+    defaultFlags={Object {}}
+    shouldDeferAdapterConfiguration={false}
+  >
+    <Broadcast
+      channel="@flopflip"
+      compareValues={[Function]}
+      value={Object {}}
+    >
+      <Container>
+        <branchOnFeatureToggle(ToggledComponent)>
+          <Subscriber
+            channel="@flopflip"
+          >
+            <withProps(omitProps(branch(ToggledComponent)))
+              @flopflip/flags={Object {}}
+            >
+              <omitProps(branch(ToggledComponent))
+                @flopflip/flags={Object {}}
+                isFeatureEnabled={false}
+              >
+                <branch(ToggledComponent)
+                  isFeatureEnabled={false}
+                >
+                  <Nothing
+                    isFeatureEnabled={false}
+                  />
+                </branch(ToggledComponent)>
+              </omitProps(branch(ToggledComponent))>
+            </withProps(omitProps(branch(ToggledComponent)))>
+          </Subscriber>
+        </branchOnFeatureToggle(ToggledComponent)>
+      </Container>
+    </Broadcast>
+  </FlagsSubscription>
+</ConfigureFlopflip>
+`;
+
+exports[`without \`untoggledComponent when feature is disabled when enabling feature should match snapshot 1`] = `
+<ConfigureFlopflip
+  adapter={
+    Object {
+      "configure": [Function],
+      "reconfigure": [Function],
+    }
+  }
+  adapterArgs={Object {}}
+  defaultFlags={Object {}}
+  shouldDeferAdapterConfiguration={false}
+>
+  <FlagsSubscription
+    adapter={
+      Object {
+        "configure": [Function],
+        "reconfigure": [Function],
+      }
+    }
+    adapterArgs={
+      Object {
+        "onFlagsStateChange": [Function],
+        "onStatusStateChange": [Function],
+      }
+    }
+    defaultFlags={Object {}}
+    shouldDeferAdapterConfiguration={false}
+  >
+    <Broadcast
+      channel="@flopflip"
+      compareValues={[Function]}
+      value={
+        Object {
+          "flag1": true,
+        }
+      }
+    >
+      <Container>
+        <branchOnFeatureToggle(ToggledComponent)>
+          <Subscriber
+            channel="@flopflip"
+          >
+            <withProps(omitProps(branch(ToggledComponent)))
+              @flopflip/flags={
+                Object {
+                  "flag1": true,
+                }
+              }
+            >
+              <omitProps(branch(ToggledComponent))
+                @flopflip/flags={
+                  Object {
+                    "flag1": true,
+                  }
+                }
+                isFeatureEnabled={true}
+              >
+                <branch(ToggledComponent)
+                  isFeatureEnabled={true}
+                >
+                  <ToggledComponent
+                    isFeatureEnabled={true}
+                  >
+                    <div />
+                  </ToggledComponent>
+                </branch(ToggledComponent)>
+              </omitProps(branch(ToggledComponent))>
+            </withProps(omitProps(branch(ToggledComponent)))>
+          </Subscriber>
+        </branchOnFeatureToggle(ToggledComponent)>
+      </Container>
+    </Broadcast>
+  </FlagsSubscription>
+</ConfigureFlopflip>
+`;
