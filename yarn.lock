@@ -2051,6 +2051,12 @@ enzyme-to-json@^3.0.0, enzyme-to-json@^3.2.2:
   dependencies:
     lodash "^4.17.4"
 
+enzyme-to-json@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/enzyme-to-json/-/enzyme-to-json-3.3.0.tgz#553e23a09ffb4b0cf09287e2edf9c6539fddaa84"
+  dependencies:
+    lodash "^4.17.4"
+
 enzyme@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/enzyme/-/enzyme-3.2.0.tgz#998bdcda0fc71b8764a0017f7cc692c943f54a7a"
@@ -2118,9 +2124,9 @@ eslint-config-prettier@^2.9.0:
   dependencies:
     get-stdin "^5.0.1"
 
-eslint-config-xo-react@^0.14.0:
-  version "0.14.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-xo-react/-/eslint-config-xo-react-0.14.0.tgz#eaa3ecc14d3860b495f64dfc19a8674d21a93d40"
+eslint-config-xo-react@^0.15.0:
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-xo-react/-/eslint-config-xo-react-0.15.0.tgz#9dd9858cbeff2094d775db25ffb5f79b98c546e4"
 
 eslint-config-xo@^0.19.0:
   version "0.19.0"

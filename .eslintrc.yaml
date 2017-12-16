@@ -20,6 +20,7 @@ rules:
   jest/no-focused-tests: error
   jest/no-identical-title: error
   jest/valid-expect: error
+  react/destructuring-assignment: false
   max-nested-callbacks:
   - error
   - 20
