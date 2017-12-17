@@ -31,10 +31,10 @@
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
     "enzyme": "^3.2.0",
-    "enzyme-to-json": "^3.2.2"
+    "enzyme-to-json": "^3.3.0"
   },
   "dependencies": {
-    "ldclient-js": "^1.1.12",
+    "ldclient-js": "^1.2.0",
     "lodash.camelcase": "^4.3.0"
   },
   "keywords": [
