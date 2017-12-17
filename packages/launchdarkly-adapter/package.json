@@ -34,7 +34,7 @@
     "enzyme-to-json": "^3.3.0"
   },
   "dependencies": {
-    "ldclient-js": "^1.2.0",
+    "ldclient-js": "next",
     "lodash.camelcase": "^4.3.0"
   },
   "keywords": [
