@@ -304,7 +304,7 @@ export default (
     variation={flagsNames.THE_FEATURE_TOGGLE.VARIATES.A}
     untoggledComponent={UntoggledComponent}
   >
-    {({ isFeatureEnabled }) => <h3>I might be gone or there!</h3>}
+       {({ isFeatureEnabled }) => <h3>I might be gone or there!</h3>}
   </ToggleFeature>
 );
 ```
