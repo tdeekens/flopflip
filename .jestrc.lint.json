@@ -1,0 +1,4 @@
+{
+  "runner": "jest-runner-eslint",
+  "displayName": "lint"
+}

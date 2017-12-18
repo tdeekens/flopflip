@@ -1,6 +1,7 @@
 {
+  "displayName": "test",
   "setupFiles": ["raf/polyfill", "jest-localstorage-mock"],
-  "setupTestFrameworkScriptFile": "./config/jest.js",
+  "setupTestFrameworkScriptFile": "./.jest-runner-testrc.js",
   "snapshotSerializers": ["enzyme-to-json/serializer"],
   "testRegex": "\\.spec\\.js$",
   "testEnvironment": "jsdom",
