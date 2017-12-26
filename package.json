@@ -5,6 +5,7 @@
   "scripts": {
     "postinstall": "npm run bootstrap && npm run build",
     "bootstrap": "check-node-version --package --print",
+    "develop": "jest --projects .jestrc.*.json --watch",
     "lint": "jest --config .jestrc.lint.json",
     "format": "npm run format:md && npm run format:js",
     "format:md": "prettier --parser markdown --write '*.md'",
