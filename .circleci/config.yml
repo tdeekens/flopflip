@@ -79,10 +79,6 @@ jobs:
       - restore-cache: *restore_yarn_cache
       - run: *yarn_bootstrap
       - run: *yarn_build
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - flopflip
   lint:
     <<: *node8Environment
     steps:
@@ -91,24 +87,6 @@ jobs:
       - run: *yarn_install
       - run: *yarn_bootstrap
       - run: *yarn_lint
-  test_unit_node_6:
-    <<: *node6Environment
-    steps:
-      - checkout
-      - restore-cache: *restore_yarn_cache
-      - run: *yarn_install
-      - run: *yarn_bootstrap
-      - run: *unit_test
-  test_unit_node_8:
-    <<: *node8Environment
-    steps:
-      - checkout
-      - attach_workspace:
-          at: *working_directory
-      - restore-cache: *restore_yarn_cache
-      - run: *yarn_install
-      - run: *yarn_bootstrap
-      - run: *unit_test_with_coverage
   type_check:
     <<: *node8Environment
     steps:
@@ -117,6 +95,23 @@ jobs:
       - run: *yarn_install
       - run: *yarn_bootstrap
       - run: *yarn_type_check
+  build_test_unit_node_6:
+    <<: *node6Environment
+    steps:
+      - checkout
+      - restore-cache: *restore_yarn_cache
+      - run: *yarn_install
+      - run: *yarn_bootstrap
+      - run: *yarn_build
+  build_test_unit_node_8:
+    <<: *node8Environment
+    steps:
+      - checkout
+      - restore-cache: *restore_yarn_cache
+      - run: *yarn_install
+      - run: *yarn_bootstrap
+      - run: *yarn_build
+      - run: *unit_test_with_coverage
 
 workflows:
   version: 2
@@ -127,16 +122,13 @@ workflows:
             branches:
               only:
                 - /greenkeeper\/.*/
-      - build
-      - lint:
-          requires:
-            - build
+      - lint
       - type_check:
           requires:
             - lint
-      - test_unit_node_6:
+      - build_test_unit_node_6:
           requires:
             - type_check
-      - test_unit_node_8:
+      - build_test_unit_node_8:
           requires:
             - type_check
