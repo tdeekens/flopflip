@@ -11,25 +11,29 @@ aliases:
     paths:
       - node_modules
 
-  - &yarn_install
+  - &install
     name: Installing
     # Ignoring scripts (e.g. post-install) to gain more control
     # in the jobs to only e.g. build when explicitely needed.
     command: yarn install --pure-lockfile --ignore-scripts
 
-  - &yarn_bootstrap
+  - &bootstrap
     name: Bootstraping
     # Limiting the default concurrency (4) of lerna to 2
     # as the build otherwise dies due to resouce restrictions.
     command: yarn bootstrap --concurrency=2
   
-  - &yarn_lint
+  - &lint
     name: Linting
     command: yarn lint
   
-  - &yarn_type_check
+  - &type_check
     name: Type checking
     command: yarn flow
+
+  - &build
+    name: Building
+    command: yarn build
 
   - &unit_test
     name: Unit testing
@@ -40,10 +44,6 @@ aliases:
   - &unit_test_with_coverage
     name: Unit testing (with coverage report)
     command: yarn test:ci:coverage
-
-  - &yarn_build
-    name: Building
-    command: yarn build
 
 node6Environment: &node6Environment
   docker:
@@ -64,7 +64,7 @@ jobs:
       - run:
           name: Installing greenkeeper-lockfile-update
           command: yarn global add greenkeeper-lockfile@1 --prefix ~/.yarn
-      - run: *yarn_install
+      - run: *install
       - run:
           name: Updating greenkeeper-lockfile
           command: ~/.yarn/bin/greenkeeper-lockfile-update
@@ -75,43 +75,43 @@ jobs:
     <<: *node8Environment
     steps:
       - checkout
-      - run: *yarn_install
+      - run: *install
       - restore-cache: *restore_yarn_cache
-      - run: *yarn_bootstrap
-      - run: *yarn_build
+      - run: *bootstrap
+      - run: *build
   lint:
     <<: *node8Environment
     steps:
       - checkout
       - restore-cache: *restore_yarn_cache
-      - run: *yarn_install
-      - run: *yarn_bootstrap
-      - run: *yarn_lint
+      - run: *install
+      - run: *bootstrap
+      - run: *lint
   type_check:
     <<: *node8Environment
     steps:
       - checkout
       - restore-cache: *restore_yarn_cache
-      - run: *yarn_install
-      - run: *yarn_bootstrap
-      - run: *yarn_type_check
+      - run: *install
+      - run: *bootstrap
+      - run: *type_check
   build_test_unit_node_6:
     <<: *node6Environment
     steps:
       - checkout
       - restore-cache: *restore_yarn_cache
-      - run: *yarn_install
-      - run: *yarn_bootstrap
-      - run: *yarn_build
+      - run: *install
+      - run: *bootstrap
+      - run: *build
       - run: *unit_test
   build_test_unit_node_8:
     <<: *node8Environment
     steps:
       - checkout
       - restore-cache: *restore_yarn_cache
-      - run: *yarn_install
-      - run: *yarn_bootstrap
-      - run: *yarn_build
+      - run: *install
+      - run: *bootstrap
+      - run: *build
       - run: *unit_test_with_coverage
 
 workflows:
