@@ -9,9 +9,7 @@ import type {
   OnFlagsStateChangeCallback,
 } from './types';
 
-const adapterState: AdapterState = {
-  eventHandlerMap: {},
-};
+const adapterState: AdapterState = {};
 
 export const STORAGE_SLICE: string = '@flopflip';
 
@@ -34,7 +32,7 @@ const storage: Storage = {
 export const updateFlags = (flags: Flags): void => {
   storage.set('flags', flags);
 
-  adapterState.eventHandlerMap.onFlagsStateChange(flags);
+  adapterState.onFlagsStateChange(flags);
 };
 
 const subscribeToFlagsChanges = ({
@@ -43,7 +41,7 @@ const subscribeToFlagsChanges = ({
   pollingInteral: number,
 }) => {
   setInterval(() => {
-    adapterState.eventHandlerMap.onFlagsStateChange(storage.get('flags'));
+    adapterState.onFlagsStateChange(storage.get('flags'));
   }, pollingInteral);
 };
 
@@ -60,8 +58,8 @@ const configure = ({
     adapterState.isConfigured = true;
     adapterState.isReady = true;
 
-    adapterState.eventHandlerMap.onFlagsStateChange = onFlagsStateChange;
-    adapterState.eventHandlerMap.onStatusStateChange = onStatusStateChange;
+    adapterState.onFlagsStateChange = onFlagsStateChange;
+    adapterState.onStatusStateChange = onStatusStateChange;
 
     onStatusStateChange({ isReady: adapterState.isReady });
     onFlagsStateChange(storage.get('flags'));
@@ -73,7 +71,7 @@ const configure = ({
 const reconfigure = ({ user }: { user: User }): Promise<any> => {
   storage.unset('flags');
 
-  adapterState.eventHandlerMap['onFlagsStateChange']({});
+  adapterState['onFlagsStateChange']({});
 
   return Promise.resolve();
 };
