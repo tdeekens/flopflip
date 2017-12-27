@@ -11,7 +11,8 @@
           }
         ],
         "stage-0",
-        "react"
+        "react",
+        "flow"
       ]
     },
     "development": {
@@ -26,7 +27,8 @@
           }
         ],
         "stage-0",
-        "react"
+        "react",
+        "flow"
       ],
       "plugins": ["external-helpers"]
     },
@@ -42,9 +44,14 @@
           }
         ],
         "stage-0",
-        "react"
+        "react",
+        "flow"
       ],
-      "plugins": ["external-helpers", "transform-react-remove-prop-types"]
+      "plugins": [
+        "external-helpers",
+        "transform-react-remove-prop-types",
+        "babel-plugin-transform-flow-strip-types"
+      ]
     }
   }
 }
