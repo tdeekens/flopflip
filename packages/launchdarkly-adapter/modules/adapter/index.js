@@ -1,2 +1,2 @@
 export { default } from './adapter';
-export * from './types';
+export * as types from './types';
