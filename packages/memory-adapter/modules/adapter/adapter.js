@@ -1,10 +1,23 @@
-const adapterState = {
+// @flow
+import type {
+  User,
+  AdapterState,
+  ConfigurationArgs,
+  Flags,
+  OnStatusStateChangeCallback,
+  OnFlagsStateChangeCallback,
+} from './types';
+
+const adapterState: AdapterState = {
   flags: {},
   user: {},
-  eventHandlerMap: {},
 };
 
-const configure = ({ user, onFlagsStateChange, onStatusStateChange }) => {
+const configure = ({
+  user,
+  onFlagsStateChange,
+  onStatusStateChange,
+}: ConfigurationArgs): Promise<any> => {
   adapterState.user = user;
 
   return Promise.resolve().then(() => {
@@ -19,7 +32,7 @@ const configure = ({ user, onFlagsStateChange, onStatusStateChange }) => {
   });
 };
 
-const reconfigure = ({ user }) => {
+const reconfigure = ({ user }: { user: User }): Promise<any> => {
   updateUser(user);
 
   adapterState.flags = {};
@@ -28,20 +41,20 @@ const reconfigure = ({ user }) => {
   return Promise.resolve();
 };
 
-const updateUser = user => {
+const updateUser = (user: User): User => {
   adapterState.user = user;
 };
 
-export const updateFlags = flags => {
+export const updateFlags = (flags: Flags): void => {
   adapterState.flags = {
     ...adapterState.flags,
     ...flags,
   };
 
-  adapterState.eventHandlerMap['onFlagsStateChange'](adapterState.flags);
+  adapterState.onFlagsStateChange(adapterState.flags);
 };
 
-export const getUser = () => adapterState.user;
+export const getUser = (): User => adapterState.user;
 
 export default {
   configure,
