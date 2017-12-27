@@ -1,13 +1,6 @@
-node6Environment: &node6Environment
-  docker:
-    - image: circleci/node:6
-  working_directory: ~/flopflip
-node8Environment: &node8Environment
-  docker:
-    - image: circleci/node:8
-  working_directory: ~/flopflip
-
 aliases:
+  - &working_directory ~/flopflip
+
   - &restore_yarn_cache
     keys:
       - v1-yarn-cache-{{ checksum "yarn.lock" }}
@@ -52,6 +45,15 @@ aliases:
     name: Building
     command: yarn build
 
+node6Environment: &node6Environment
+  docker:
+    - image: circleci/node:6
+  working_directory: *working_directory
+node8Environment: &node8Environment
+  docker:
+    - image: circleci/node:8
+  working_directory: *working_directory
+
 version: 2
 jobs:
   greenkeeper_lockfile:
@@ -63,13 +65,24 @@ jobs:
           name: Installing greenkeeper-lockfile-update
           command: yarn global add greenkeeper-lockfile@1 --prefix ~/.yarn
       - run: *yarn_install
-      - save_cache: *save_yarn_cache
       - run:
           name: Updating greenkeeper-lockfile
           command: ~/.yarn/bin/greenkeeper-lockfile-update
       - run:
           name: Uploading greenkeeper-lockfile
           command: ~/.yarn/bin/greenkeeper-lockfile-upload
+  build:
+    <<: *node8Environment
+    steps:
+      - checkout
+      - run: *yarn_install
+      - restore-cache: *restore_yarn_cache
+      - run: *yarn_bootstrap
+      - run: *yarn_build
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - flopflip
   lint:
     <<: *node8Environment
     steps:
@@ -85,12 +98,13 @@ jobs:
       - restore-cache: *restore_yarn_cache
       - run: *yarn_install
       - run: *yarn_bootstrap
-      - save_cache: *save_yarn_cache
       - run: *unit_test
   test_unit_node_8:
     <<: *node8Environment
     steps:
       - checkout
+      - attach_workspace:
+          at: *working_directory
       - restore-cache: *restore_yarn_cache
       - run: *yarn_install
       - run: *yarn_bootstrap
@@ -103,14 +117,6 @@ jobs:
       - run: *yarn_install
       - run: *yarn_bootstrap
       - run: *yarn_type_check
-  build:
-    <<: *node8Environment
-    steps:
-      - checkout
-      - restore-cache: *restore_yarn_cache
-      - run: *yarn_install
-      - run: *yarn_bootstrap
-      - run: *yarn_build
 
 workflows:
   version: 2
@@ -121,17 +127,16 @@ workflows:
             branches:
               only:
                 - /greenkeeper\/.*/
-      - lint
-      - test_unit_node_6:
+      - build
+      - lint:
           requires:
-            - lint
-      - test_unit_node_8:
-          requires:
-            - lint
+            - build
       - type_check:
           requires:
-            - test_unit_node_8
-            - test_unit_node_6
-      - build:
+            - lint
+      - test_unit_node_6:
+          requires:
+            - type_check
+      - test_unit_node_8:
           requires:
             - type_check
