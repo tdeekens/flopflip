@@ -18,6 +18,7 @@ env:
 plugins:
   - prettier
   - jest
+  - flowtype-errors
 rules:
   prettier/prettier:
   - error
@@ -31,5 +32,6 @@ rules:
   max-nested-callbacks:
   - error
   - 20
+  flowtype-errors/show-errors: 2
 globals:
   VERSION: true
