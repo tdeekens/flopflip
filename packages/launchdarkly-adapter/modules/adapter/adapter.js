@@ -1,29 +1,17 @@
 // @flow
-
+import type {
+  FlagValue,
+  FlagName,
+  User,
+  Client,
+  AdapterState,
+  Flag,
+  Flags,
+  OnFlagsStateChangeCallback,
+  OnStatusStateChangeCallback,
+} from './types';
 import { initialize } from 'ldclient-js';
 import camelCase from 'lodash.camelcase';
-
-type FlagValue = boolean | string;
-type FlagName = string;
-type User = {
-  key: string,
-};
-type Client = {
-  identify: (nextUser: User) => void,
-  on: (state: string, () => void) => void,
-  on: (state: string, (flagName: FlagName) => void) => void,
-  allFlags: () => Flags | null,
-};
-type AdapterState = {
-  isReady: boolean,
-  isConfigured: boolean,
-  user: ?User,
-  client: ?Client,
-};
-type Flag = [FlagName, FlagValue];
-type Flags = { [FlagName]: FlagValue };
-type OnFlagsStateChangeCallback = Flags => void;
-type OnStatusStateChangeCallback = ({ [string]: boolean }) => void;
 
 const adapterState: AdapterState = {
   isReady: false,
