@@ -13,14 +13,17 @@ const name = process.env.npm_package_name;
 
 const config = {
   name,
-  sourcemap: true,
-  external: ['react', 'prop-types', 'redux', 'react-redux'],
-  globals: {
-    react: 'React',
-    'prop-types': 'PropTypes',
-    redux: 'redux',
-    'react-redux': 'react-redux',
+  ouput: {
+    name,
+    sourcemap: true,
+    globals: {
+      react: 'React',
+      'prop-types': 'PropTypes',
+      redux: 'redux',
+      'react-redux': 'react-redux',
+    },
   },
+  external: ['react', 'prop-types', 'redux', 'react-redux'],
   plugins: [
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),
