@@ -29,10 +29,14 @@ aliases:
     # Limiting the default concurrency (4) of lerna to 2
     # as the build otherwise dies due to resouce restrictions.
     command: yarn bootstrap --concurrency=2
-
-  - &yarn_build
-    name: Building
-    command: yarn build
+  
+  - &yarn_lint
+    name: Linting
+    command: yarn lint
+  
+  - &yarn_type_check
+    name: Type checking
+    command: yarn flow
 
   - &unit_test
     name: Unit testing
@@ -43,6 +47,10 @@ aliases:
   - &unit_test_with_coverage
     name: Unit testing (with coverage report)
     command: yarn test:ci:coverage
+
+  - &yarn_build
+    name: Building
+    command: yarn build
 
 version: 2
 jobs:
@@ -69,11 +77,7 @@ jobs:
       - restore-cache: *restore_yarn_cache
       - run: *yarn_install
       - run: *yarn_bootstrap
-      - run: *yarn_build
-      - save_cache: *save_yarn_cache
-      - run:
-          name: Linting
-          command: yarn lint
+      - run: *yarn_lint
   test_unit_node_6:
     <<: *node6Environment
     steps:
@@ -81,7 +85,6 @@ jobs:
       - restore-cache: *restore_yarn_cache
       - run: *yarn_install
       - run: *yarn_bootstrap
-      - run: *yarn_build
       - save_cache: *save_yarn_cache
       - run: *unit_test
   test_unit_node_8:
@@ -91,9 +94,23 @@ jobs:
       - restore-cache: *restore_yarn_cache
       - run: *yarn_install
       - run: *yarn_bootstrap
-      - run: *yarn_build
-      - save_cache: *save_yarn_cache
       - run: *unit_test_with_coverage
+  type_check:
+    <<: *node8Environment
+    steps:
+      - checkout
+      - restore-cache: *restore_yarn_cache
+      - run: *yarn_install
+      - run: *yarn_bootstrap
+      - run: *yarn_type_check
+  build:
+    <<: *node8Environment
+    steps:
+      - checkout
+      - restore-cache: *restore_yarn_cache
+      - run: *yarn_install
+      - run: *yarn_bootstrap
+      - run: *yarn_build
 
 workflows:
   version: 2
@@ -111,3 +128,10 @@ workflows:
       - test_unit_node_8:
           requires:
             - lint
+      - type_check:
+          requires:
+            - test_unit_node_8
+            - test_unit_node_6
+      - build:
+          requires:
+            - type_check
