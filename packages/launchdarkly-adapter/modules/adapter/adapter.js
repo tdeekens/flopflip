@@ -14,17 +14,18 @@ type Client = {
   on: (state: string, (flagName: FlagName) => void) => void,
   allFlags: () => Flags | null,
 };
+type AdapterState = {
+  isReady: boolean,
+  isConfigured: boolean,
+  user: ?User,
+  client: ?Client,
+};
 type Flag = [FlagName, FlagValue];
 type Flags = { [FlagName]: FlagValue };
 type OnFlagsStateChangeCallback = Flags => void;
 type OnStatusStateChangeCallback = ({ [string]: boolean }) => void;
 
-const adapterState: {
-  isReady: boolean,
-  isConfigured: boolean,
-  user: ?User,
-  client: ?Client,
-} = {
+const adapterState: AdapterState = {
   isReady: false,
   isConfigured: false,
   user: null,
