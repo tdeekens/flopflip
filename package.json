@@ -13,7 +13,7 @@
     "format:js": "prettier --write '**/modules/**/*.js' '**/demo/**/*.js'",
     "test": "cross-env NODE_ENV=test jest --config .jestrc.test.json",
     "test:ci": "cross-env NODE_ENV=test npm test -- --no-watchman",
-    "test:ci:coverage": "cross-env NODE_ENV=test npm run lint && npm test -- --no-watchman --coverage && codecov",
+    "test:ci:coverage": "cross-env NODE_ENV=test npm test -- --no-watchman --coverage && codecov",
     "test:watch": "cross-env NODE_ENV=test npm test -- --watch",
     "test:coverage": "cross-env NODE_ENV=test npm test -- --coverage",
     "build": "lerna run --parallel build",
