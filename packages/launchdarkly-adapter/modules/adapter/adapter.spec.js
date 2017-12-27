@@ -24,6 +24,14 @@ describe('when configuring', () => {
     onFlagsStateChange = jest.fn();
   });
 
+  describe('when reconfiguring before configured', () => {
+    it('should reject reconfiguration', () => {
+      return expect(adapter.reconfigure({ user: userWithKey })).rejects.toEqual(
+        expect.any(Error)
+      );
+    });
+  });
+
   describe('with user key', () => {
     beforeEach(() => {
       return adapter.configure({
@@ -57,14 +65,6 @@ describe('when configuring', () => {
         key: expect.any(String),
         group: 'foo-group',
       });
-    });
-  });
-
-  describe('when reconfiguring before configured', () => {
-    it('should reject reconfiguration', () => {
-      return expect(adapter.reconfigure({ user: userWithKey })).rejects.toEqual(
-        expect.any(Error)
-      );
     });
   });
 
