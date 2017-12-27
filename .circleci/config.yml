@@ -103,6 +103,7 @@ jobs:
       - run: *yarn_install
       - run: *yarn_bootstrap
       - run: *yarn_build
+      - run: *unit_test
   build_test_unit_node_8:
     <<: *node8Environment
     steps:
