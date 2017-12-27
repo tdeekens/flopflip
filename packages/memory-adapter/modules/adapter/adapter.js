@@ -24,8 +24,8 @@ const configure = ({
     adapterState.isConfigured = true;
     adapterState.isReady = true;
 
-    adapterState.eventHandlerMap['onFlagsStateChange'] = onFlagsStateChange;
-    adapterState.eventHandlerMap['onStatusStateChange'] = onStatusStateChange;
+    adapterState.onFlagsStateChange = onFlagsStateChange;
+    adapterState.onStatusStateChange = onStatusStateChange;
 
     onStatusStateChange({ isReady: adapterState.isReady });
     onFlagsStateChange(adapterState.flags);
@@ -36,7 +36,7 @@ const reconfigure = ({ user }: { user: User }): Promise<any> => {
   updateUser(user);
 
   adapterState.flags = {};
-  adapterState.eventHandlerMap['onFlagsStateChange']({});
+  adapterState.onFlagsStateChange({});
 
   return Promise.resolve();
 };
