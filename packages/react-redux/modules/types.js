@@ -17,4 +17,5 @@ export type Adapter = {
 };
 type State = {
   +flags: Flags,
+  +status: AdapterStatus,
 };
