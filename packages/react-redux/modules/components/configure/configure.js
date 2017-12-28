@@ -1,26 +1,37 @@
-import PropTypes from 'prop-types';
+// @flow
+
+import type {
+  Flags,
+  AdapterArgs,
+  AdapterState,
+  AdapterStatus,
+} from '../../types.js';
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { FlagsSubscription } from '@flopflip/react';
 import { updateStatus, updateFlags } from './../../ducks';
 
-export class Configure extends React.PureComponent {
-  static displayName = 'ConfigureFlopflip';
-  static propTypes = {
-    children: PropTypes.node,
-    shouldDeferAdapterConfiguration: PropTypes.bool,
-    defaultFlags: PropTypes.object,
-    adapterArgs: PropTypes.shape({
-      user: PropTypes.shape({
-        key: PropTypes.string,
-      }),
-    }).isRequired,
-    adapter: PropTypes.object.isRequired,
+type Props = {
+  children: number,
+  shouldDeferAdapterConfiguration?: boolean,
+  defaultFlags?: Flags,
+  adapterArgs: AdapterArgs,
+  adapter: mixed,
+};
+type ConnectedProps = {
+  handleUpdateStatus: Function,
+  handleUpdateFlags: Function,
+};
+type State = {
+  flags: Flags,
+};
 
-    // Connected
-    handleUpdateStatus: PropTypes.func.isRequired,
-    handleUpdateFlags: PropTypes.func.isRequired,
-  };
+export class Configure extends React.PureComponent<
+  Props & ConnectedProps,
+  State
+> {
+  static displayName = 'ConfigureFlopflip';
 
   static defaultProps = {
     children: null,
@@ -48,7 +59,7 @@ export class Configure extends React.PureComponent {
   }
 }
 
-const mapDispatchToProps = {
+const mapDispatchToProps: ConnectedProps = {
   handleUpdateStatus: updateStatus,
   handleUpdateFlags: updateFlags,
 };

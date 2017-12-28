@@ -1,10 +1,18 @@
-// Actions
-export const UPDATE_STATUS = '@flopflip/status/update';
+// @flow
 
-const initialState = { isReady: false };
+import type { State, AdapterStatus } from '../../types.js';
+import type { Action, UpdateStatusAction } from '../../types.js';
+
+// Actions
+export const UPDATE_STATUS: string = '@flopflip/status/update';
+
+const initialState: State = { isReady: false };
 
 // Reducer
-export default function reducer(state = initialState, action = {}) {
+export default function reducer(
+  state: State = initialState,
+  action: Action = {}
+): State {
   switch (action.type) {
     case UPDATE_STATUS:
       return {
@@ -18,7 +26,7 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 // Action Creators
-export const updateStatus = status => ({
+export const updateStatus = (status: AdapterStatus): UpdateStatusAction => ({
   type: UPDATE_STATUS,
   payload: status,
 });
