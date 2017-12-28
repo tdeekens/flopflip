@@ -1,3 +1,5 @@
+// @flow
+
 import { compose, withProps, setDisplayName } from 'recompose';
 import {
   ToggleFeature,

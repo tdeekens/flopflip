@@ -1,23 +1,30 @@
-import PropTypes from 'prop-types';
+// @flow
+
+import type {
+  Flags,
+  AdapterArgs,
+  AdapterState,
+  AdapterStatus,
+} from '../types.js';
+
 import React from 'react';
 import { FlagsSubscription } from '@flopflip/react';
 import { Broadcast } from 'react-broadcast';
 import { FLAGS_CHANNEL } from '../../constants';
 
-export default class Configure extends React.PureComponent {
-  static displayName = 'ConfigureFlopflip';
+type Props = {
+  children: number,
+  shouldDeferAdapterConfiguration?: boolean,
+  defaultFlags?: Flags,
+  adapterArgs: AdapterArgs,
+  adapter: mixed,
+};
+type State = {
+  flags: Flags,
+};
 
-  static propTypes = {
-    children: PropTypes.node,
-    shouldDeferAdapterConfiguration: PropTypes.bool,
-    defaultFlags: PropTypes.object,
-    adapterArgs: PropTypes.shape({
-      user: PropTypes.shape({
-        key: PropTypes.string,
-      }),
-    }).isRequired,
-    adapter: PropTypes.object.isRequired,
-  };
+export default class Configure extends React.PureComponent<Props, State> {
+  static displayName = 'ConfigureFlopflip';
 
   static defaultProps = {
     children: null,
@@ -25,11 +32,11 @@ export default class Configure extends React.PureComponent {
     shouldDeferAdapterConfiguration: false,
   };
 
-  state = {
+  state: { flags: Flags } = {
     flags: {},
   };
 
-  handleUpdateFlags = flags => {
+  handleUpdateFlags = (flags: Flags): void => {
     this.setState(prevState => ({
       flags: {
         ...prevState.flags,
@@ -38,7 +45,7 @@ export default class Configure extends React.PureComponent {
     }));
   };
 
-  handleUpdateStatus = status =>
+  handleUpdateStatus = (status: AdapterStatus): void =>
     this.setState(prevState => ({ ...prevState, ...status }));
 
   render() {
