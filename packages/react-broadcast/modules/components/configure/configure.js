@@ -2,6 +2,7 @@
 
 import type {
   Flags,
+  Adapter,
   AdapterArgs,
   AdapterState,
   AdapterStatus,
@@ -17,7 +18,7 @@ type Props = {
   shouldDeferAdapterConfiguration?: boolean,
   defaultFlags?: Flags,
   adapterArgs: AdapterArgs,
-  adapter: mixed,
+  adapter: Adapter,
 };
 type State = {
   flags: Flags,
