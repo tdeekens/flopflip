@@ -94,6 +94,7 @@ jobs:
       - restore-cache: *restore_yarn_cache
       - run: *install
       - run: *bootstrap
+      - run: *build
       - run: *type_check
   build_test_unit_node_6:
     <<: *node6Environment
