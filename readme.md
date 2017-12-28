@@ -1,12 +1,32 @@
 <p align="center">
-  <b style="font-size: 25px">🎚 flopflip - Feature Toggling 🚦</b><br />
-  <i>flip or flop a feature in with real-time updates through a Redux store by directly using React's context.</i>
+  <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/logo.png" /><br /><br />
+</p>
+
+<h2 align="center">🎚 flopflip - Feature Toggling 🚦</h2>
+<p align="center">
+  <i>Toggle features (flip or flop) in being maintained in a Redux state slice or a broadcasting system (through the context) being accessible through a set of Higher-Order Components in React.</i>
 </p>
 
 <p align="center">
-  <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/logo.png" /><br /><br />
-  <i>Toggle features in being maintained in a Redux state slice or a broadcasting system (through the context) being accessible through a set of Higher-Order Components in React.</i>
-  <br /><br />
+  <em>
+  ❤️ Built with:
+  · Flow
+  · Jest
+  · Redux
+  · React
+  · Recompose
+  · Enzyme
+  · ESLint
+  · Prettier
+  · Babel
+  · Lodash
+  · Lerna
+  · Rollup
+  🙏
+  </em>
+</p>
+
+<p align="center">
   <a href="https://circleci.com/gh/tdeekens/flopflip">
     <img alt="CircleCI Status" src="https://circleci.com/gh/tdeekens/flopflip.svg?style=shield&circle-token=63ee7a0e1c766b6b76da6f7ba4c7b9f2a7876191">
   </a>
