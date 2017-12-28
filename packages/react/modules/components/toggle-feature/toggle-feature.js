@@ -1,18 +1,28 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+// @flow
 
-const isEmptyChildren = children => React.Children.count(children) === 0;
+import type {
+  FlagName,
+  FlagVariation,
+  Flags,
+  Adapter,
+  AdapterArgs,
+} from '../../types.js';
 
-export default class ToggleFeature extends React.PureComponent {
+import * as React from 'react';
+
+type Props = {
+  untoggledComponent: React.ComponentType<any>,
+  toggledComponent: React.ComponentType<any>,
+  render: () => React.Node,
+  children: ({ isFeatureEnabled: boolean }) => React.Node | React.Node,
+  isFeatureEnabled: boolean,
+};
+
+const isEmptyChildren = (children: React.Node): boolean =>
+  React.Children.count(children) === 0;
+
+export default class ToggleFeature extends React.PureComponent<Props> {
   static displayName = 'ToggleFeature';
-  static propTypes = {
-    untoggledComponent: PropTypes.func,
-    toggledComponent: PropTypes.func,
-    render: PropTypes.func,
-    children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-    // HoC
-    isFeatureEnabled: PropTypes.bool.isRequired,
-  };
 
   static defaultProps = {
     untoggledComponent: null,
@@ -21,7 +31,7 @@ export default class ToggleFeature extends React.PureComponent {
     children: null,
   };
 
-  render() {
+  render(): React.Node | null {
     if (this.props.isFeatureEnabled) {
       if (this.props.toggledComponent)
         return React.createElement(this.props.toggledComponent);
