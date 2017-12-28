@@ -1,10 +1,21 @@
-import React from 'react';
+// @flow
+
+import type { FlagName, FlagVariation } from '../types.js';
+
+import * as React from 'react';
 import { wrapDisplayName } from 'recompose';
 import { Subscriber } from 'react-broadcast';
 import { FLAGS_CHANNEL } from '../../constants';
 
-const withFlagSubscription = propKey => WrappedComponent => {
-  class WithFlagSubscription extends React.PureComponent {
+type RequiredProps = {};
+type ProvidedProps = {};
+
+const withFlagSubscription = (propKey: string) => (
+  WrappedComponent: React.ComponentType<RequiredProps>
+) => {
+  class WithFlagSubscription extends React.PureComponent<
+    $Diff<RequiredProps, ProvidedProps>
+  > {
     static displayName = wrapDisplayName(
       WrappedComponent,
       'withFlagSubscription'
