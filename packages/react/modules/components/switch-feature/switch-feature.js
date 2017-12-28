@@ -1,15 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+// @flow
 
-const isEmptyChildren = children => React.Children.count(children) === 0;
+import type {
+  FlagName,
+  FlagVariation,
+  Flags,
+  Adapter,
+  AdapterArgs,
+} from '../../types.js';
 
-export default class SwitchFeature extends React.PureComponent {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-  };
+import * as React from 'react';
 
-  render() {
-    let variate, child;
+type Props = {
+  children: React.Node,
+};
+
+const isEmptyChildren = (children: React.Node): boolean =>
+  React.Children.count(children) === 0;
+
+export default class SwitchFeature extends React.PureComponent<Props> {
+  render(): React.Node | void {
+    let variate: ?FlagVariation;
+    let child: ?React.Element<any>;
     React.Children.forEach(this.props.children, element => {
       if (variate == null && React.isValidElement(element)) {
         child = element;
@@ -17,6 +28,6 @@ export default class SwitchFeature extends React.PureComponent {
       }
     });
 
-    return variate ? React.cloneElement(child, { variate }) : null;
+    return variate && child ? React.cloneElement(child, { variate }) : null;
   }
 }

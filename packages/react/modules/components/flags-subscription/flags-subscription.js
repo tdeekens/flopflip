@@ -1,45 +1,54 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+// @flow
 
-export const AdapterStates = {
+import type {
+  FlagName,
+  FlagVariation,
+  Flags,
+  Adapter,
+  AdapterArgs,
+} from '../../types.js';
+
+import * as React from 'react';
+import PropTypes from 'prop-types';
+
+export const AdapterStates: {
+  UNCONFIGURED: string,
+  CONFIGURING: string,
+  CONFIGURED: string,
+} = {
   UNCONFIGURED: 'unconfigured',
   CONFIGURING: 'configuring',
   CONFIGURED: 'configured',
 };
 
-export default class FlagsSubscription extends React.PureComponent {
-  static propTypes = {
-    shouldDeferAdapterConfiguration: PropTypes.bool,
-    adapterArgs: PropTypes.shape({
-      user: PropTypes.shape({
-        key: PropTypes.string,
-      }),
-      onFlagsStateChange: PropTypes.func.isRequired,
-      onStatusStateChange: PropTypes.func.isRequired,
-    }).isRequired,
-    adapter: PropTypes.object.isRequired,
-    defaultFlags: PropTypes.object,
-    children: PropTypes.node,
-  };
+type Props = {
+  shouldDeferAdapterConfiguration?: boolean,
+  adapter: Adapter,
+  adapterArgs: AdapterArgs,
+  defaultFlags?: Flags,
+  children: React.Component<any>,
+};
+type AdapterState = $Values<typeof AdapterStates>;
 
+export default class FlagsSubscription extends React.PureComponent<Props> {
   static defaultProps = {
     shouldDeferAdapterConfiguration: false,
     children: null,
     defaultFlags: {},
   };
 
-  adapterState = AdapterStates.UNCONFIGURED;
-  setAdapterState = nextAdapterState => {
+  adapterState: AdapterState = AdapterStates.UNCONFIGURED;
+  setAdapterState = (nextAdapterState: AdapterState): void => {
     this.adapterState = nextAdapterState;
   };
 
-  handleDefaultFlags = defaultFlags => {
+  handleDefaultFlags = (defaultFlags: Flags): void => {
     if (Object.keys(defaultFlags).length > 0) {
       this.props.adapterArgs.onFlagsStateChange(defaultFlags);
     }
   };
 
-  componentDidMount() {
+  componentDidMount(): Promise<any> | void {
     this.handleDefaultFlags(this.props.defaultFlags);
 
     if (!this.props.shouldDeferAdapterConfiguration) {
@@ -50,7 +59,7 @@ export default class FlagsSubscription extends React.PureComponent {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(): Promise<any> | void {
     // NOTE: We have to be careful here to not double configure from `componentDidMount`.
     if (
       !this.props.shouldDeferAdapterConfiguration &&
@@ -74,7 +83,7 @@ export default class FlagsSubscription extends React.PureComponent {
     }
   }
 
-  render() {
+  render(): void {
     return React.Children.only(this.props.children);
   }
 }

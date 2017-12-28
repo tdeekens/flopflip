@@ -1,23 +1,38 @@
+// @flow
+
+import type { FlagName, Flags, Flag } from '../../types.js';
+
+import * as React from 'react';
+
 import { compose, withProps, shouldUpdate, shallowEqual } from 'recompose';
 import intersection from 'lodash.intersection';
 import omit from 'lodash.omit';
 import { omitProps } from '../../hocs';
 import { ALL_FLAGS_PROP_KEY, DEFAULT_FLAGS_PROP_KEY } from '../../constants';
 
-const filterFeatureToggles = (allFlags, demandedFlags) =>
+type RequiredProps = {};
+type ProvidedProps = {};
+
+const filterFeatureToggles = (allFlags: Flags, demandedFlags: Flags) =>
   intersection(Object.keys(allFlags), demandedFlags).reduce(
-    (featureToggles, featureToggle) => ({
+    (featureToggles: Flags, featureToggle: Flag) => ({
       ...featureToggles,
       [featureToggle]: allFlags[featureToggle],
     }),
     {}
   );
 
-export const areOwnPropsEqual = (nextOwnProps, ownProps, propKey) => {
-  const featureFlagProps = ownProps[propKey];
-  const remainingProps = omit(ownProps, [propKey]);
-  const nextFeatureFlagProps = nextOwnProps[propKey];
-  const nextRemainingProps = omit(nextOwnProps, [propKey]);
+export const areOwnPropsEqual = (
+  nextOwnProps: ProvidedProps,
+  ownProps: ProvidedProps,
+  propKey: string
+): boolean => {
+  const featureFlagProps: Flags = ownProps[propKey];
+  const remainingProps: $Diff<ProvidedProps, Flags> = omit(ownProps, [propKey]);
+  const nextFeatureFlagProps: Flags = nextOwnProps[propKey];
+  const nextRemainingProps: $Diff<ProvidedProps, Flags> = omit(nextOwnProps, [
+    propKey,
+  ]);
 
   return (
     shallowEqual(featureFlagProps, nextFeatureFlagProps) &&
@@ -26,17 +41,21 @@ export const areOwnPropsEqual = (nextOwnProps, ownProps, propKey) => {
 };
 
 const injectFeatureToggles = (
-  flagNames,
-  propKey = DEFAULT_FLAGS_PROP_KEY,
-  areOwnPropsEqual = areOwnPropsEqual
-) =>
+  flagNames: Array<FlagName>,
+  propKey: string = DEFAULT_FLAGS_PROP_KEY,
+  areOwnPropsEqual: (
+    ProvidedProps,
+    ProvidedProps,
+    string
+  ) => boolean = areOwnPropsEqual
+): React.ComponentType<$Diff<RequiredProps, ProvidedProps>> =>
   compose(
-    withProps(props => ({
+    withProps((props: RequiredProps) => ({
       [propKey]: filterFeatureToggles(props[ALL_FLAGS_PROP_KEY], flagNames),
     })),
     omitProps(ALL_FLAGS_PROP_KEY),
     shouldUpdate(
-      (props, nextProps) =>
+      (props: ProvidedProps, nextProps: ProvidedProps) =>
         typeof areOwnPropsEqual === 'function'
           ? !areOwnPropsEqual(props, nextProps, propKey)
           : true
