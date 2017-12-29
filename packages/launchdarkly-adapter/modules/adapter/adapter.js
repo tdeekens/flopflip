@@ -70,11 +70,14 @@ const changeUserContext = (nextUser: User): void =>
     ? adapterState.client.identify(nextUser)
     : undefined;
 
-// NOTE: Exported for testing only
+// NOTE: Custom flow-typed replacement for `Object.entries` due to
+// flow loosing type information through `Object.entries`.
+// Issue: https://github.com/facebook/flow/issues/2174
 function entries<T>(obj: { [string]: T }): Array<[string, T]> {
   const keys: string[] = Object.keys(obj);
   return keys.map(key => [key, obj[key]]);
 }
+// NOTE: Exported for testing only
 export const camelCaseFlags = (rawFlags: Flags): Flags =>
   entries(rawFlags).reduce((camelCasedFlags, [flagName, flagValue]) => {
     const [normalzedFlagName, normalzedFlagValue]: Flag = normalizeFlag(
