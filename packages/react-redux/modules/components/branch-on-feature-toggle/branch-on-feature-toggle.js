@@ -9,7 +9,7 @@ import injectFeatureToggle from './../inject-feature-toggle';
 
 type RequiredProps = {};
 type ProvidedProps = {
-  [DEFAULT_FLAG_PROP_KEY]: FlagVariation | void,
+  [propKey: string]: FlagVariation | void,
 };
 
 export default <RequiredProps, ProvidedProps>(
