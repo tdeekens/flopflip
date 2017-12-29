@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default class FeatureToggled extends React.PureComponent<Props> {
-  render() {
+  render(): React.Element<any> {
     warning(
       false,
       '`<FeatureToggled />` has been deprecated, please us `<ToggleFeature />`'

@@ -82,7 +82,7 @@ export default class FlagsSubscription extends React.PureComponent<Props> {
     }
   }
 
-  render(): void {
+  render(): React.Node {
     return React.Children.only(this.props.children);
   }
 }

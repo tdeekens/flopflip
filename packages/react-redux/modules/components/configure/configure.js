@@ -39,7 +39,7 @@ export class Configure extends React.PureComponent<
     shouldDeferAdapterConfiguration: false,
   };
 
-  render() {
+  render(): React.Node {
     return (
       <FlagsSubscription
         adapter={this.props.adapter}

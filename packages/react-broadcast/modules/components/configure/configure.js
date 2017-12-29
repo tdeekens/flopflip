@@ -8,7 +8,7 @@ import type {
   AdapterStatus,
 } from '../types.js';
 
-import React from 'react';
+import * as React from 'react';
 import { FlagsSubscription } from '@flopflip/react';
 import { Broadcast } from 'react-broadcast';
 import { FLAGS_CHANNEL } from '../../constants';
@@ -49,7 +49,7 @@ export default class Configure extends React.PureComponent<Props, State> {
   handleUpdateStatus = (status: AdapterStatus): void =>
     this.setState(prevState => ({ ...prevState, ...status }));
 
-  render() {
+  render(): React.Node {
     return (
       <FlagsSubscription
         adapter={this.props.adapter}

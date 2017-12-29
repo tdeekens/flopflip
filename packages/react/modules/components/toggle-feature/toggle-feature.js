@@ -31,7 +31,7 @@ export default class ToggleFeature extends React.PureComponent<Props> {
     children: null,
   };
 
-  render(): React.Node | null {
+  render(): React.Node {
     if (this.props.isFeatureEnabled) {
       if (this.props.toggledComponent)
         return React.createElement(this.props.toggledComponent);
