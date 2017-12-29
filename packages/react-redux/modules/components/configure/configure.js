@@ -7,21 +7,21 @@ import type {
   AdapterStatus,
 } from '../../types.js';
 
-import React from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { FlagsSubscription } from '@flopflip/react';
 import { updateStatus, updateFlags } from './../../ducks';
 
 type Props = {
-  children: number,
+  children?: React.Node,
   shouldDeferAdapterConfiguration?: boolean,
   defaultFlags?: Flags,
   adapterArgs: AdapterArgs,
   adapter: mixed,
 };
 type ConnectedProps = {
-  handleUpdateStatus: Function,
-  handleUpdateFlags: Function,
+  handleUpdateStatus: () => void,
+  handleUpdateFlags: () => void,
 };
 type State = {
   flags: Flags,
