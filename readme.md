@@ -10,14 +10,14 @@
 <p align="center">
   <em>
   ❤️ Built with:
-  · Flow
-  · Jest
-  · Redux
   · React
+  · Redux
   · Recompose
+  · Jest
+  · Prettier
+  · Flow
   · Enzyme
   · ESLint
-  · Prettier
   · Babel
   · Lodash
   · Lerna
