@@ -35,3 +35,8 @@ rules:
   flowtype-errors/show-errors: 2
 globals:
   VERSION: true
+overrides:
+- files:
+  - "*.spec.js"
+  rules:
+    react/prop-types: 0

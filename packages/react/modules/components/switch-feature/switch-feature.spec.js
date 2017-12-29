@@ -6,7 +6,6 @@ import SwitchFeature from './switch-feature';
 const FeatureComponent = props => (
   <React.Fragment>FeatureComponent {props.nbr}</React.Fragment>
 );
-FeatureComponent.propTypes = { nbr: PropTypes.number.isRequired };
 FeatureComponent.displayName = 'FeatureComponent';
 
 describe('rendering', () => {
