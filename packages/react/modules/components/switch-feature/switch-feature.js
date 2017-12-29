@@ -18,7 +18,7 @@ const isEmptyChildren = (children: React.Node): boolean =>
   React.Children.count(children) === 0;
 
 export default class SwitchFeature extends React.PureComponent<Props> {
-  render(): React.Node | void {
+  render(): React.Node {
     let variate: ?FlagVariation;
     let child: ?React.Element<any>;
     React.Children.forEach(this.props.children, element => {

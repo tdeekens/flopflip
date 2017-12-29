@@ -20,7 +20,7 @@ const withFlagSubscription = (propKey: string) => (
       WrappedComponent,
       'withFlagSubscription'
     );
-    render() {
+    render(): React.Node {
       return (
         <Subscriber channel={FLAGS_CHANNEL}>
           {data => (
