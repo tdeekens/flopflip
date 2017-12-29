@@ -9,8 +9,8 @@
 
 <p align="center">
   <em>
-  ❤️ Built with:
-  · React
+  ❤️
+  React
   · Redux
   · Recompose
   · Jest
