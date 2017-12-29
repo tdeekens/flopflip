@@ -10,6 +10,8 @@ export type AdapterArgs = {
   user: {
     key?: string,
   },
+  onFlagsStateChange: () => void,
+  onStatusStateChange: () => void,
 };
 export type AdapterStatus = {
   isReady?: boolean,
