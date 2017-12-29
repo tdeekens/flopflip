@@ -47,11 +47,7 @@
         "react",
         "flow"
       ],
-      "plugins": [
-        "external-helpers",
-        "transform-react-remove-prop-types",
-        "babel-plugin-transform-flow-strip-types"
-      ]
+      "plugins": ["external-helpers", "babel-plugin-transform-flow-strip-types"]
     }
   }
 }

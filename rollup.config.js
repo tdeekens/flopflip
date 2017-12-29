@@ -18,12 +18,11 @@ const config = {
     sourcemap: true,
     globals: {
       react: 'React',
-      'prop-types': 'PropTypes',
       redux: 'redux',
       'react-redux': 'react-redux',
     },
   },
-  external: ['react', 'prop-types', 'redux', 'react-redux'],
+  external: ['react', 'redux', 'react-redux'],
   plugins: [
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { shallow } from 'enzyme';
 import ToggleFeature from '../toggle-feature';
 import SwitchFeature from './switch-feature';

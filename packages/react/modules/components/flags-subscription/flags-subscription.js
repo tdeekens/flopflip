@@ -9,7 +9,6 @@ import type {
 } from '../../types.js';
 
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
 export const AdapterStates: {
   UNCONFIGURED: string,
