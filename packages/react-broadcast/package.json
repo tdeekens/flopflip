@@ -19,6 +19,8 @@
     "readme.md",
     "dist/**"
   ],
+    "types": "./types/index.d.ts",
+
   "publishConfig": {
     "access": "public"
   },
