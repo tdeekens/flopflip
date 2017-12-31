@@ -8,9 +8,7 @@ import { branchOnFeatureToggle, DEFAULT_FLAG_PROP_KEY } from '@flopflip/react';
 import injectFeatureToggle from './../inject-feature-toggle';
 
 type RequiredProps = {};
-type ProvidedProps = {
-  [propKey: string]: FlagVariation | void,
-};
+type ProvidedProps = {};
 
 export default <RequiredProps, ProvidedProps>(
   { flag, variation }: { flag: FlagName, variation: FlagVariation },
