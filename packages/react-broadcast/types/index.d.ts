@@ -9,9 +9,9 @@ declare module '@flopflip/react-broadcast' {
   export type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
 
   export interface ComponentEnhancerWithProps<ProvidedProps, RerquiredProps> {
-    <P extends ProvidedProps>(component: Component<P>): React.ComponentType<
-      Omit<P, keyof ProvidedProps> & RerquiredProps
-    >;
+    <P extends ProvidedProps>(
+      component: React.ComponentType<P>
+    ): React.ComponentType<Omit<P, keyof ProvidedProps> & RerquiredProps>;
   }
 
   export type FlagName = string;
@@ -20,7 +20,7 @@ declare module '@flopflip/react-broadcast' {
     flag: FlagName;
     variation?: FlagVariation;
   }
-  export type Flags = { [FlagName]: FlagVariation };
+  export type Flags = { [flagName: string]: FlagVariation };
   export type AdapterArgs = {
     user: {
       key?: string;
@@ -49,6 +49,9 @@ declare module '@flopflip/react-broadcast' {
     adapter: Adapter;
     children: React.ReactNode;
   }
+  export interface SwitcComponenthProps {
+    children?: React.ReactNode;
+  }
 
   export function branchOnFeatureToggle<P extends {}>(
     flag: Flag,
@@ -65,6 +68,11 @@ declare module '@flopflip/react-broadcast' {
     propKey?: string
   ): ComponentEnhancerWithProps<{ [propKey: string]: Flags }, {}>;
 
+  export class SwitchFeature extends React.Component<
+    SwitcComponenthProps,
+    any
+  > {}
+
   export class ToggleFeature extends React.Component<
     ToggleComponentProps,
     any
@@ -74,4 +82,7 @@ declare module '@flopflip/react-broadcast' {
     ConfigureComponentProps,
     any
   > {}
+
+  export function selectFlags(state: {}): Flags;
+  export function selectFlag(flagName: FlagName): (state: {}) => Flags;
 }
