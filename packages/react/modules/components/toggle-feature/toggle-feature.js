@@ -14,7 +14,7 @@ type Props = {
   untoggledComponent: React.ComponentType<any>,
   toggledComponent: React.ComponentType<any>,
   render: () => React.Node,
-  children: ({ isFeatureEnabled: boolean }) => React.Node | React.Node,
+  children: ({ isFeatureEnabled: boolean }) => React.Node,
   isFeatureEnabled: boolean,
 };
 
