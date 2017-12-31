@@ -9,9 +9,9 @@ declare module '@flopflip/react-redux' {
   export type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
 
   export interface ComponentEnhancerWithProps<ProvidedProps, RerquiredProps> {
-    <P extends ProvidedProps>(component: Component<P>): React.ComponentType<
-      Omit<P, keyof ProvidedProps> & RerquiredProps
-    >;
+    <P extends ProvidedProps>(
+      component: React.ComponentType<P>
+    ): React.ComponentType<Omit<P, keyof ProvidedProps> & RerquiredProps>;
   }
 
   export type FlagName = string;
@@ -20,7 +20,7 @@ declare module '@flopflip/react-redux' {
     flag: FlagName;
     variation?: FlagVariation;
   }
-  export type Flags = { [FlagName]: FlagVariation };
+  export type Flags = { [flagName: string]: FlagVariation };
   export type AdapterArgs = {
     user: {
       key?: string;
