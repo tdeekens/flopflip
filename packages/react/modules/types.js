@@ -14,8 +14,8 @@ export type AdapterStatus = {
   isConfigured?: boolean,
 };
 export type Adapter = {
-  configure: AdapterArgs => Promise<any>,
-  reconfigure: AdapterArgs => Promise<any>,
+  configure: (adapterArgs: AdapterArgs) => Promise<any>,
+  reconfigure: (adapterArgs: AdapterArgs) => Promise<any>,
 };
 type State = {
   +flags: Flags,

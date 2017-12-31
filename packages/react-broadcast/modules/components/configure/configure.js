@@ -14,7 +14,7 @@ import { Broadcast } from 'react-broadcast';
 import { FLAGS_CHANNEL } from '../../constants';
 
 type Props = {
-  children: number,
+  children: React.Node,
   shouldDeferAdapterConfiguration?: boolean,
   defaultFlags?: Flags,
   adapterArgs: AdapterArgs,
