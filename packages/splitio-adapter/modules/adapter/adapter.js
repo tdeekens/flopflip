@@ -54,13 +54,27 @@ const ensureUser = user => ({
   ...user,
 });
 
-const initializeClient = (authorizationKey, user, options) => {
+// NOTE: Little helper to omit properties from an object.
+// `lodash.omit` is too heavy in bundle size to add as a dependency.
+const omit = (obj, keys) =>
+  Object.entries(obj)
+    .filter(([key]) => !keys.includes(key))
+    .reduce(
+      (acc, [key, value]) => ({
+        ...acc,
+        [key]: value,
+      }),
+      {}
+    );
+
+const initializeClient = (authorizationKey, key, options = {}) => {
   const factory = splitio({
+    ...omit(options, 'core'),
     core: {
       authorizationKey,
-      key: user.key,
+      key,
+      ...options.core,
     },
-    ...options,
   });
 
   return {
@@ -94,6 +108,7 @@ const subscribe = ({ onFlagsStateChange, onStatusStateChange }) =>
 const configure = ({
   authorizationKey,
   user,
+  options,
   onFlagsStateChange,
   onStatusStateChange,
   ...adapterArgs
@@ -101,7 +116,8 @@ const configure = ({
   adapterState.user = ensureUser(user);
   const { client, manager } = initializeClient(
     authorizationKey,
-    adapterState.user,
+    adapterState.user.key,
+    options,
     adapterArgs
   );
   adapterState.client = client;

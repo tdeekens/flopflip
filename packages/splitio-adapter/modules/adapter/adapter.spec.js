@@ -86,6 +86,60 @@ describe('when configuring', () => {
     });
   });
 
+  describe('with options', () => {
+    const options = {
+      additional: 'option',
+    };
+
+    beforeEach(() => {
+      return adapter.configure({
+        authorizationKey,
+        user: userWithKey,
+        options,
+        onStatusStateChange,
+        onFlagsStateChange,
+      });
+    });
+
+    it('should initialize the `splitio` client with `options`', () => {
+      expect(splitio).toHaveBeenCalledWith({
+        ...options,
+        core: {
+          authorizationKey,
+          key: userWithKey.key,
+        },
+      });
+    });
+  });
+
+  describe('with `core` options', () => {
+    const coreOptions = {
+      additional: 'core-option',
+    };
+
+    beforeEach(() => {
+      return adapter.configure({
+        authorizationKey,
+        user: userWithKey,
+        options: {
+          core: coreOptions,
+        },
+        onStatusStateChange,
+        onFlagsStateChange,
+      });
+    });
+
+    it('should initialize the `splitio` client with `core` options in `core` property', () => {
+      expect(splitio).toHaveBeenCalledWith({
+        core: {
+          ...coreOptions,
+          authorizationKey,
+          key: userWithKey.key,
+        },
+      });
+    });
+  });
+
   describe('when ready', () => {
     let factory;
     let onStub;
