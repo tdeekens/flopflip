@@ -3,5 +3,6 @@
 exports[`rendering should match snapshot 1`] = `
 <Subscriber
   channel="@flopflip"
+  quiet={false}
 />
 `;

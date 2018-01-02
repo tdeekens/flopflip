@@ -53,6 +53,7 @@ exports[`when feature is disabled should match snapshot 1`] = `
       >
         <Subscriber
           channel="@flopflip"
+          quiet={false}
         >
           <withProps(ToggleFeature)
             @flopflip/flags={
@@ -137,6 +138,7 @@ exports[`when feature is disabled when enabling feature should match snapshot 1`
       >
         <Subscriber
           channel="@flopflip"
+          quiet={false}
         >
           <withProps(ToggleFeature)
             @flopflip/flags={

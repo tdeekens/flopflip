@@ -37,6 +37,7 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
         <branchOnFeatureToggle(ToggledComponent)>
           <Subscriber
             channel="@flopflip"
+            quiet={false}
           >
             <withProps(omitProps(branch(ToggledComponent)))
               @flopflip/flags={Object {}}
@@ -109,6 +110,7 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
         <branchOnFeatureToggle(ToggledComponent)>
           <Subscriber
             channel="@flopflip"
+            quiet={false}
           >
             <withProps(omitProps(branch(ToggledComponent)))
               @flopflip/flags={
@@ -181,6 +183,7 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
         <branchOnFeatureToggle(ToggledComponent)>
           <Subscriber
             channel="@flopflip"
+            quiet={false}
           >
             <withProps(omitProps(branch(ToggledComponent)))
               @flopflip/flags={Object {}}
@@ -247,6 +250,7 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
         <branchOnFeatureToggle(ToggledComponent)>
           <Subscriber
             channel="@flopflip"
+            quiet={false}
           >
             <withProps(omitProps(branch(ToggledComponent)))
               @flopflip/flags={

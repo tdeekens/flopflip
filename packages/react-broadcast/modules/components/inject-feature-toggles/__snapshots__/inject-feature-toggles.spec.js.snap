@@ -37,6 +37,7 @@ exports[`with \`propKey\` should match snapshot 1`] = `
         <injectFeatureToggles(FeatureComponent)>
           <Subscriber
             channel="@flopflip"
+            quiet={false}
           >
             <withProps(omitProps(shouldUpdate(FeatureComponent)))
               @flopflip/flags={Object {}}
@@ -116,6 +117,7 @@ exports[`without \`propKey\` when feature is disabled should match snapshot 1`] 
         <injectFeatureToggles(FeatureComponent)>
           <Subscriber
             channel="@flopflip"
+            quiet={false}
           >
             <withProps(omitProps(shouldUpdate(FeatureComponent)))
               @flopflip/flags={
@@ -220,6 +222,7 @@ exports[`without \`propKey\` when feature is disabled when enabling feature shou
         <injectFeatureToggles(FeatureComponent)>
           <Subscriber
             channel="@flopflip"
+            quiet={false}
           >
             <withProps(omitProps(shouldUpdate(FeatureComponent)))
               @flopflip/flags={
