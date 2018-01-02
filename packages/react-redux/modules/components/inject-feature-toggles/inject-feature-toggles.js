@@ -16,12 +16,20 @@ export const mapStateToProps = (state: mixed) => ({
   [ALL_FLAGS_PROP_KEY]: selectFlags(state),
 });
 
-export default (flagNames: Array<FlagName>, propKey?: string) => (
+export default (
+  flagNames: Array<FlagName>,
+  propKey?: string,
+  areOwnPropsEqual?: (
+    nextOwnProps: ProvidedProps,
+    ownProps: ProvidedProps,
+    propKey: string
+  ) => boolean
+) => (
   WrappedComponent: React.ComponentType<$Diff<RequiredProps, ProvidedProps>>
 ) =>
   /* istanbul ignore next */
   compose(
     setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggles')),
     connect(mapStateToProps),
-    injectFeatureToggles(flagNames, propKey)
+    injectFeatureToggles(flagNames, propKey, areOwnPropsEqual)
   )(WrappedComponent);

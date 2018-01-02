@@ -44,9 +44,9 @@ const injectFeatureToggles = (
   flagNames: Array<FlagName>,
   propKey: string = DEFAULT_FLAGS_PROP_KEY,
   areOwnPropsEqual: (
-    ProvidedProps,
-    ProvidedProps,
-    string
+    nextOwnProps: ProvidedProps,
+    ownProps: ProvidedProps,
+    propKey: string
   ) => boolean = areOwnPropsEqual
 ): React.ComponentType<$Diff<RequiredProps, ProvidedProps>> =>
   compose(
