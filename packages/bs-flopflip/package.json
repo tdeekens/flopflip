@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "scripts": {
-    "prebuild": "npm run clean",
+    "prebuild": "bsb -clean-world",
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
     "clean": "bsb -clean-world",
