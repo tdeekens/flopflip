@@ -12,8 +12,7 @@ const env = process.env.NODE_ENV;
 const name = process.env.npm_package_name;
 
 const config = {
-  name,
-  ouput: {
+  output: {
     name,
     sourcemap: true,
     globals: {
