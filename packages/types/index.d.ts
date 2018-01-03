@@ -1,7 +1,7 @@
-// Type definitions for @flopflip/react-broadcast 5.x
+// Type definitions for @flopflip/react 5.x
 // TypeScript Version: 2.x
 
-declare module '@flopflip/react-broadcast' {
+declare module '@flopflip/types' {
   import * as React from 'react';
 
   export type Diff<T extends string, U extends string> = ({ [P in T]: P } &
@@ -82,7 +82,4 @@ declare module '@flopflip/react-broadcast' {
     ConfigureComponentProps,
     any
   > {}
-
-  export function selectFlags(state: {}): Flags;
-  export function selectFlag(flagName: FlagName): (state: {}) => Flags;
 }

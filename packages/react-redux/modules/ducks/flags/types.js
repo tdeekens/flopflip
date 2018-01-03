@@ -1,4 +1,4 @@
-import type { Flags } from '../../types.js';
+import type { Flags } from '@flopflip/types';
 
 type UpdateFlagsAction = {
   type: '@flopflip/flags/update',

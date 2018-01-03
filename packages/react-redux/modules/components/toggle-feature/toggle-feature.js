@@ -1,6 +1,6 @@
 // @flow
 
-import type { FlagName, FlagVariation, Flags, State } from '../../types.js';
+import type { FlagName, FlagVariation, Flags, State } from '@flopflip/types';
 
 import { compose, setDisplayName } from 'recompose';
 import { connect } from 'react-redux';

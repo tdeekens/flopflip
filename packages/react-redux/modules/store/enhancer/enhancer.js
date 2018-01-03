@@ -1,7 +1,8 @@
 // @flow
 
 import type { Store } from 'redux';
-import type { Adapter, AdapterArgs, State } from '../../types.js';
+import type { Adapter, AdapterArgs } from '@flopflip/types';
+import type { State } from '../../types';
 
 import { updateFlags, updateStatus } from '../../ducks';
 

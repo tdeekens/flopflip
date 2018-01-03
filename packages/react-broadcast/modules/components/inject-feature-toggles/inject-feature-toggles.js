@@ -1,6 +1,6 @@
 // @flow
 
-import type { FlagName } from '../types.js';
+import type { FlagName } from '@flopflip/types';
 
 import * as React from 'react';
 import { compose, setDisplayName, wrapDisplayName } from 'recompose';

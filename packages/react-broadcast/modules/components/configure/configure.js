@@ -6,7 +6,7 @@ import type {
   AdapterArgs,
   AdapterState,
   AdapterStatus,
-} from '../types.js';
+} from '@flopflip/types';
 
 import * as React from 'react';
 import { FlagsSubscription } from '@flopflip/react';
