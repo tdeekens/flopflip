@@ -82,7 +82,4 @@ declare module '@flopflip/types' {
     ConfigureComponentProps,
     any
   > {}
-
-  export function selectFlags(state: {}): Flags;
-  export function selectFlag(flagName: FlagName): (state: {}) => Flags;
 }
