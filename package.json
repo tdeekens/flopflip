@@ -12,6 +12,7 @@
     "format": "npm run format:md && npm run format:js",
     "format:md": "prettier --parser markdown --write '*.md'",
     "format:js": "prettier --write '**/modules/**/*.js' '**/demo/**/*.js'",
+    "format:ts": "prettier --parser typescript --write '*.ts'",
     "fix:eslint": "eslint --fix --format=node_modules/eslint-formatter-pretty",
     "test": "cross-env NODE_ENV=test jest --config .jestrc.test.json",
     "test:ci": "cross-env NODE_ENV=test npm test -- --no-watchman",
@@ -104,15 +105,23 @@
     "packages/*"
   ],
   "lint-staged": {
-    "demo/**": [
+    "demo/**/*.js": [
       "npm run fix:eslint",
-      "npm run format",
+      "npm run format:js",
       "git add"
     ],
-    "packages/**": [
+    "packages/**/*.ts": [
+      "npm run format:ts",
+      "git add"
+    ],
+    "packages/**/*.js": [
       "npm run fix:eslint",
-      "npm run format",
+      "npm run format:js",
       "npm run flow",
+      "git add"
+    ],
+    "*.md": [
+      "npm run format:md",
       "git add"
     ]
   }
