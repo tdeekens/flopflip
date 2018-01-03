@@ -1,0 +1,30 @@
+{
+  "name": "@flopflip/types",
+  "version": "1.0.0",
+  "description": "Type definitions for flipflop",
+  "main": "index.js",
+  "module": "index.js",
+  "scripts": {},
+  "files": [
+    "readme.md",
+    "types/**"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdeekens/flopflip.git"
+  },
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
+  },
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "keywords": [
+    "feature-flags",
+    "feature-toggles",
+    "types"
+  ]
+}

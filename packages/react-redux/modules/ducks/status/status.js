@@ -1,6 +1,7 @@
 // @flow
 
-import type { State, AdapterStatus } from '../../types.js';
+import type { AdapterStatus } from '@flopflip/types';
+import type { State } from '../../types';
 import type { Action, UpdateStatusAction } from '../../types.js';
 
 // Actions

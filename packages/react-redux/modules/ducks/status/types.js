@@ -1,4 +1,4 @@
-import type { AdapterStatus } from '../../types.js';
+import type { AdapterStatus } from '@flopflip/types';
 
 type UpdateFlagsAction = {
   type: '@flopflip/status/update',

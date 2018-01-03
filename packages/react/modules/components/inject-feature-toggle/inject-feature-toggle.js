@@ -1,6 +1,6 @@
 // @flow
 
-import type { FlagName, FlagValue } from '../../types.js';
+import type { FlagName, FlagValue } from '@flopflip/types';
 
 import * as React from 'react';
 import { compose, withProps } from 'recompose';

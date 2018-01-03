@@ -1,6 +1,6 @@
 // @flow
 
-import type { FlagName, Flags, Flag } from '../../types.js';
+import type { FlagName, Flags, Flag } from '@flopflip/types';
 
 import * as React from 'react';
 

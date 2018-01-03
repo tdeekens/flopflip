@@ -7,7 +7,7 @@
   "browser": "dist/@flopflip-react.umd.js",
   "scripts": {
     "preversion": "npm run build",
-    "prebuild": "rimraf dist/**",
+    "prebuild": "rimraf dist/** && cpx typings/* dist/typings",
     "build": "cross-env npm run build:es && npm run build:cjs",
     "build:watch": "cross-env npm run build:es -- -w",
     "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.js -o dist/@flopflip-react.es.js",
@@ -17,6 +17,7 @@
     "readme.md",
     "dist/**"
   ],
+  "types": "dist/typings/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
@@ -36,13 +37,15 @@
     "enzyme-to-json": "^3.3.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-test-renderer": "^16.2.0"
+    "react-test-renderer": "^16.2.0",
+    "cpx": "^1.5.0"
   },
   "peerDependencies": {
     "react": "^15.6.0 || ^16.0.0",
     "react-dom": "^15.6.0 || ^16.0.0"
   },
   "dependencies": {
+    "@flopflip/types": "^1.0.0",
     "lodash.intersection": "^4.4.0",
     "lodash.isnil": "^4.0.0",
     "lodash.omit": "^4.5.0",
