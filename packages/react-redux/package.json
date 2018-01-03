@@ -7,7 +7,7 @@
   "browser": "dist/@flopflip-react-redux.umd.js",
   "scripts": {
     "preversion": "npm run build",
-    "prebuild": "rimraf dist/**",
+    "prebuild": "rimraf dist/** && cpx typings/* dist/typings",
     "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs",
     "build:watch": "cross-env npm run build:es -- -w",
     "build:umd": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f umd -i modules/index.js -o dist/@flopflip-react-redux.umd.js",
@@ -19,7 +19,7 @@
     "readme.md",
     "dist/**"
   ],
-  "types": "./types/index.d.ts",
+  "types": "dist/typings/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
@@ -41,9 +41,11 @@
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-test-renderer": "^16.2.0",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "cpx": "^1.5.0"
   },
   "dependencies": {
+    "@flopflip/types": "^1.0.0",
     "@flopflip/react": "^5.0.5",
     "lodash.isnil": "^4.0.0",
     "recompose": "^0.26.0"

@@ -1,12 +1,7 @@
 // @flow
 
-import type {
-  State,
-  FlagName,
-  FlagVariation,
-  Flag,
-  Flags,
-} from '../../types.js';
+import type { FlagName, FlagVariation, Flag, Flags } from '@flopflip/types';
+import type { State } from '../../types';
 import type { Action, UpdateFlagsAction } from './types.js';
 
 import isNil from 'lodash.isnil';
