@@ -8,6 +8,9 @@ export type AdapterArgs = {
   },
   onFlagsStateChange: () => void,
   onStatusStateChange: () => void,
+  remainingArgs: {
+    pollingInteral: number,
+  },
 };
 export type AdapterStatus = {
   isReady?: boolean,
