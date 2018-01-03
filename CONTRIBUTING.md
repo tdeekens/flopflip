@@ -18,6 +18,31 @@ with the project.
    developers, or if you do not have permission to do that, you may request the
    second reviewer to merge it for you.
 
+## Git Commit Guidelines
+
+In order to ensure consistent naming and readable commit messages, we use
+[commitizen](https://github.com/ajoslin/conventional-changelog). In particular
+we use `cz-conventional-changelog` (used by the Angular.js team), which helps
+creating the commit messages.
+
+```bash
+npm i -g commitizen
+```
+
+Then simply execute `git cz` and you will be prompted to follow the instructions
+to create your commit message.
+
+### Good commit messages
+
+A good commit message should complete the sentence: _"If applied, this commit
+will ..."_. There's more information about good commit messages
+[here](https://chris.beams.io/posts/git-commit/) (We deviate on the
+capitalization part).
+
+* use imperative, present tense: “change” not “changed” nor “changes”
+* don't capitalize first letter
+* no dot (.) at the end
+
 ## Code of Conduct
 
 ### Our Pledge
