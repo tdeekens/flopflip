@@ -62,15 +62,8 @@ export const normalizeFlag = (
   return [camelCase(flagName), normalizeFlagValue];
 };
 
-// NOTE: Custom flow-typed replacement for `Object.entries` due to
-// flow loosing type information through `Object.entries`.
-// Issue: https://github.com/facebook/flow/issues/2174
-function entries<T>(obj: { [string]: T }): Array<[string, T]> {
-  const keys: string[] = Object.keys(obj);
-  return keys.map(key => [key, obj[key]]);
-}
 export const camelCaseFlags = (flags: Flags) =>
-  entries(flags).reduce((camelCasedFlags, [flagName, flaValue]) => {
+  Object.entries(flags).reduce((camelCasedFlags, [flagName, flaValue]) => {
     const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
       flagName,
       flaValue
@@ -114,7 +107,7 @@ const ensureUser = (user: User): User => ({
 // NOTE: Little helper to omit properties from an object.
 // `lodash.omit` is too heavy in bundle size to add as a dependency.
 const omit = (obj: {}, keys: Array<mixed>): {} =>
-  entries(obj)
+  Object.entries(obj)
     .filter(([key]) => !keys.includes(key))
     .reduce(
       (acc, [key, value]) => ({
