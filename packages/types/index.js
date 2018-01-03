@@ -17,3 +17,5 @@ export type Adapter = {
   configure: (adapterArgs: AdapterArgs) => Promise<any>,
   reconfigure: (adapterArgs: AdapterArgs) => Promise<any>,
 };
+export type OnFlagsStateChangeCallback = Flags => void;
+export type OnStatusStateChangeCallback = ({ [string]: boolean }) => void;

@@ -1,17 +1,28 @@
 // @flow
 import type {
-  FlagValue,
   FlagName,
+  FlagVariation,
   User,
-  Client,
-  AdapterState,
   Flag,
   Flags,
   OnFlagsStateChangeCallback,
   OnStatusStateChangeCallback,
-} from './types';
+} from '@flopflip/types';
 import { initialize } from 'ldclient-js';
 import camelCase from 'lodash.camelcase';
+
+type Client = {
+  identify: (nextUser: User) => void,
+  on: (state: string, () => void) => void,
+  on: (state: string, (flagName: FlagName) => void) => void,
+  allFlags: () => Flags | null,
+};
+type AdapterState = {
+  isReady: boolean,
+  isConfigured: boolean,
+  user: ?User,
+  client: ?Client,
+};
 
 const adapterState: AdapterState = {
   isReady: false,
@@ -20,7 +31,7 @@ const adapterState: AdapterState = {
   client: null,
 };
 
-const normalizeFlag = (flagName: FlagName, flagValue?: FlagValue): Flag => [
+const normalizeFlag = (flagName: FlagName, flagValue?: FlagVariation): Flag => [
   camelCase(flagName),
   // Multi variate flags contain a string or `null` - `false` seems more natural.
   flagValue === null || flagValue === undefined ? false : flagValue,
