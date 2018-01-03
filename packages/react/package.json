@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
+    "@flopflip/types": "^1.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.0",
@@ -45,7 +46,6 @@
     "react-dom": "^15.6.0 || ^16.0.0"
   },
   "dependencies": {
-    "@flopflip/types": "^1.0.0",
     "lodash.intersection": "^4.4.0",
     "lodash.isnil": "^4.0.0",
     "lodash.omit": "^4.5.0",
