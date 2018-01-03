@@ -91,12 +91,12 @@ function entries<T>(obj: { [string]: T }): Array<[string, T]> {
 // NOTE: Exported for testing only
 export const camelCaseFlags = (rawFlags: Flags): Flags =>
   entries(rawFlags).reduce((camelCasedFlags, [flagName, flagValue]) => {
-    const [normalzedFlagName, normalzedFlagValue]: Flag = normalizeFlag(
+    const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
       flagName,
       flagValue
     );
     // Can't return expression as it is the assigned value
-    camelCasedFlags[normalzedFlagName] = normalzedFlagValue;
+    camelCasedFlags[normalizedFlagName] = normalizedFlagValue;
 
     return camelCasedFlags;
   }, {});
