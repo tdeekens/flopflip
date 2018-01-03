@@ -2,5 +2,5 @@
 // TypeScript Version: 2.x
 
 declare module '@flopflip/react-broadcast' {
-  export * from '@flopflip/react/typings';
+  export * from '@flopflip/types';
 }
