@@ -3,11 +3,11 @@
 import type {
   User,
   AdapterState,
-  ConfigurationArgs,
+  AdapterArgs,
   Flags,
   OnStatusStateChangeCallback,
   OnFlagsStateChangeCallback,
-} from './types';
+} from '@flopflip/types';
 
 const adapterState: AdapterState = {
   flags: {},
@@ -18,7 +18,7 @@ const configure = ({
   user,
   onFlagsStateChange,
   onStatusStateChange,
-}: ConfigurationArgs): Promise<any> => {
+}: AdapterArgs): Promise<any> => {
   adapterState.user = user;
 
   return Promise.resolve().then(() => {
