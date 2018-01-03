@@ -3,8 +3,9 @@
   "name": "flopflip",
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
-    "postinstall": "npm run bootstrap && npm run build",
-    "bootstrap": "check-node-version --package --print",
+    "postinstall": "npm run bootstrap",
+    "bootstrap": "check-node-version --package --print && npm run bootstrap:lerna",
+    "bootstrap:lerna": "lerna boostrap --concurrency=2",
     "develop": "jest --projects .jestrc.*.json --watch",
     "lint": "jest --config .jestrc.lint.json",
     "flow": "flow",

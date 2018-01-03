@@ -15,13 +15,11 @@ aliases:
     name: Installing
     # Ignoring scripts (e.g. post-install) to gain more control
     # in the jobs to only e.g. build when explicitely needed.
-    command: yarn install --pure-lockfile --ignore-scripts
+    command: yarn install --pure-lockfile
 
   - &bootstrap
     name: Bootstraping
-    # Limiting the default concurrency (4) of lerna to 2
-    # as the build otherwise dies due to resouce restrictions.
-    command: yarn bootstrap --concurrency=2
+    command: yarn bootstrap
   
   - &lint
     name: Linting
