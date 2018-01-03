@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "bs-flopflip",
+  "name": "@flopflip/bs-flopflip",
   "version": "0.1.0",
   "description": "BuckleScript bindings for flopflip",
   "license": "MIT",

@@ -7,16 +7,16 @@
 #### yarn
 
 ```bash
-$ yarn add bs-flopflip
+$ yarn add @flopflip/bs-flopflip
 ```
 
 #### bsconfig
 
-Add `bs-flopflip` to your `bs-dependencies`: **bsconfig.json**
+Add `@flopflip/bs-flopflip` to your `bs-dependencies`: **bsconfig.json**
 
 ```json
 "bs-dependencies": [
-  "bs-flopflip",
+  "@flopflip/bs-flopflip",
   ...
 ]
 ```

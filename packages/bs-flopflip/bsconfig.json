@@ -1,5 +1,5 @@
 {
-  "name": "bs-flopflip",
+  "name": "@flopflip/bs-flopflip",
   "sources": [
     {
       "dir": "src",
