@@ -2,12 +2,17 @@
 import type {
   User,
   AdapterState,
-  ConfigurationArgs,
-  Storage,
+  AdapterArgs,
   Flags,
   OnStatusStateChangeCallback,
   OnFlagsStateChangeCallback,
-} from './types';
+} from '@flopflip/types';
+
+type Storage = {
+  get: (key: string) => ?string,
+  set: (key: string, value: mixed) => boolean,
+  unset: (key: string) => void,
+};
 
 const adapterState: AdapterState = {};
 
@@ -51,7 +56,7 @@ const configure = ({
   onStatusStateChange,
 
   ...remainingArgs
-}: ConfigurationArgs): Promise<any> => {
+}: AdapterArgs): Promise<any> => {
   adapterState.user = user;
 
   return Promise.resolve().then(() => {
