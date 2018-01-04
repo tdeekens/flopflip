@@ -9,6 +9,7 @@ import type {
 } from '@flopflip/types';
 
 import * as React from 'react';
+import { PureComponent } from 'react';
 
 type Props = {
   children: React.Node,
@@ -17,7 +18,7 @@ type Props = {
 const isEmptyChildren = (children: React.Node): boolean =>
   React.Children.count(children) === 0;
 
-export default class SwitchFeature extends React.PureComponent<Props> {
+export default class SwitchFeature extends PureComponent<Props> {
   render(): React.Node {
     let variate: ?FlagVariation;
     let child: ?React.Element<any>;

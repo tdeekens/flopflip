@@ -9,6 +9,7 @@ import type {
 } from '@flopflip/types';
 
 import * as React from 'react';
+import { PureComponent } from 'react';
 
 type Props = {
   untoggledComponent: React.ComponentType<any>,
@@ -21,7 +22,7 @@ type Props = {
 const isEmptyChildren = (children: React.Node): boolean =>
   React.Children.count(children) === 0;
 
-export default class ToggleFeature extends React.PureComponent<Props> {
+export default class ToggleFeature extends PureComponent<Props> {
   static displayName = 'ToggleFeature';
 
   static defaultProps = {

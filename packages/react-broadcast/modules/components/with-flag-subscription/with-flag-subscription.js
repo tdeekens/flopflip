@@ -3,6 +3,7 @@
 import type { FlagName, FlagVariation } from '@flopflip/types';
 
 import * as React from 'react';
+import { PureComponent } from 'react';
 import { wrapDisplayName } from 'recompose';
 import { Subscriber } from 'react-broadcast';
 import { FLAGS_CHANNEL } from '../../constants';
@@ -13,7 +14,7 @@ type ProvidedProps = {};
 const withFlagSubscription = (propKey: string) => (
   WrappedComponent: React.ComponentType<RequiredProps>
 ) => {
-  class WithFlagSubscription extends React.PureComponent<
+  class WithFlagSubscription extends PureComponent<
     $Diff<RequiredProps, ProvidedProps>
   > {
     static displayName = wrapDisplayName(

@@ -9,6 +9,7 @@ import type {
 } from '@flopflip/types';
 
 import * as React from 'react';
+import { PureComponent } from 'react';
 
 export const AdapterStates: {
   UNCONFIGURED: string,
@@ -29,7 +30,7 @@ type Props = {
 };
 type AdapterState = $Values<typeof AdapterStates>;
 
-export default class FlagsSubscription extends React.PureComponent<Props> {
+export default class FlagsSubscription extends PureComponent<Props> {
   static defaultProps = {
     shouldDeferAdapterConfiguration: false,
     children: null,
