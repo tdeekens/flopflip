@@ -46,39 +46,6 @@ let optionToBool = optional =>
 external toAny : 'a => any = "%identity";
 
 /* Module definitions (the actual bindings) */
-[@bs.module "@flopflip/react-broadcast"]
-external branchOnFeatureToggle :
-  (
-    ~flag: flag,
-    ~untoggledComponent: option(ReasonReact.reactClass)=?,
-    unit,
-    ReasonReact.reactClass
-  ) =>
-  ReasonReact.reactClass =
-  "branchOnFeatureToggle";
-
-[@bs.module "@flopflip/react-broadcast"]
-external injectFeatureToggle :
-  (
-    ~flagName: flagName,
-    ~propKey: option(string)=?,
-    unit,
-    ReasonReact.reactClass
-  ) =>
-  ReasonReact.reactClass =
-  "injectFeatureToggle";
-
-[@bs.module "@flopflip/react-broadcast"]
-external injectFeatureToggles :
-  (
-    ~flagNames: array(flagName),
-    ~propKey: option(string)=?,
-    unit,
-    ReasonReact.reactClass
-  ) =>
-  ReasonReact.reactClass =
-  "injectFeatureToggles";
-
 module ConfigureFlopFlip = {
   [@bs.module "@flopflip/react-broadcast"]
   external reactClass : ReasonReact.reactClass = "ConfigureFlopFlip";
