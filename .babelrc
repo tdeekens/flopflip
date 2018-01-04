@@ -47,7 +47,7 @@
         "react",
         "flow"
       ],
-      "plugins": ["external-helpers", "babel-plugin-transform-flow-strip-types"]
+      "plugins": ["external-helpers"]
     }
   }
 }
