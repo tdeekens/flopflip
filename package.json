@@ -114,12 +114,6 @@
       "npm run format:ts",
       "git add"
     ],
-    "packages/**/*.js": [
-      "npm run fix:eslint",
-      "npm run format:js",
-      "npm run flow",
-      "git add"
-    ],
     "*.md": [
       "npm run format:md",
       "git add"
