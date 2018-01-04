@@ -62,7 +62,12 @@
 | [`react`](/packages/react)                               | [![react Version][react-icon]][react-version]                                              | [![react Dependencies Status][react-dependencies-icon]][react-dependencies]                                              |
 | [`react-broadcast`](/packages/react-broadcast)           | [![react-broadcast Version][react-broadcast-icon]][react-broadcast-version]                | [![react-broadcast Dependencies Status][react-broadcast-dependencies-icon]][react-broadcast-dependencies]                |
 | [`react-redux`](/packages/react-redux)                   | [![react-redux Version][react-redux-icon]][react-redux-version]                            | [![react-redux Dependencies Status][react-redux-dependencies-icon]][react-redux-dependencies]                            |
+| [`types`](/packages/types)                               | [![types Version][types-icon]][types-version]                                              | [![types Dependencies Status][types-dependencies-icon]][types-dependencies]                                              |
 
+[types-version]: https://www.npmjs.com/package/@flopflip/types
+[types-icon]: https://img.shields.io/npm/v/@flopflip/types.svg?style=flat-square
+[types-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/types
+[types-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&
 [splitio-adapter-version]: https://www.npmjs.com/package/@flopflip/splitio-adapter
 [splitio-adapter-icon]: https://img.shields.io/npm/v/@flopflip/splitio-adapter.svg?style=flat-square
 [splitio-adapter-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/splitio-adapter
