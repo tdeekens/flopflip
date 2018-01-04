@@ -38,7 +38,7 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@commitlint/cli": "^5.2.6",
+    "@commitlint/cli": "^5.2.8",
     "@commitlint/config-conventional": "^5.2.3",
     "@commercetools/jest-enzyme-matchers": "^1.1.2",
     "babel-core": "^6.26.0",
