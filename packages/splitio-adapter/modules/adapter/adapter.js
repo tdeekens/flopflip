@@ -30,9 +30,9 @@ type AdapterState = {
   manager: ?Manager,
 };
 type ClientInitializationOptions = {
-  [key: mixed]: mixed,
-  core: {
-    [key: mixed]: mixed,
+  [key: mixed]: ?mixed,
+  core?: {
+    [key: mixed]: ?mixed,
   },
 };
 
@@ -120,7 +120,7 @@ const omit = (obj: {}, keys: Array<mixed>): {} =>
 const initializeClient = (
   authorizationKey: string,
   key: string,
-  options: ClientInitializationOptions
+  options: ClientInitializationOptions = {}
 ): { client: Client, manager: Manager } => {
   const factory = splitio({
     ...omit(options, ['core']),

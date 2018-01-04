@@ -299,47 +299,35 @@ describe('normalizeFlag', () => {
 
   describe('with `flagValue` being `null`', () => {
     it('should return `false`', () => {
-      expect(normalizeFlag(flagName, null)).toEqual({
-        flagName,
-        flagValue: false,
-      });
+      expect(normalizeFlag(flagName, null)).toEqual([flagName, false]);
     });
   });
 
   describe('with `flagValue` being `on`', () => {
     it('should return `true`', () => {
-      expect(normalizeFlag(flagName, 'on')).toEqual({
-        flagName,
-        flagValue: true,
-      });
+      expect(normalizeFlag(flagName, 'on')).toEqual([flagName, true]);
     });
   });
 
   describe('with `flagValue` being `off`', () => {
     it('should return `false`', () => {
-      expect(normalizeFlag(flagName, 'off')).toEqual({
-        flagName,
-        flagValue: false,
-      });
+      expect(normalizeFlag(flagName, 'off')).toEqual([flagName, false]);
     });
   });
 
   describe('with anoy other `flagValue`', () => {
     describe('with a `String`', () => {
       it('should the `String`', () => {
-        expect(normalizeFlag(flagName, 'Yeehaaw')).toEqual({
+        expect(normalizeFlag(flagName, 'Yeehaaw')).toEqual([
           flagName,
-          flagValue: 'Yeehaaw',
-        });
+          'Yeehaaw',
+        ]);
       });
     });
 
     describe('with a `Number`', () => {
       it('should the `Number`', () => {
-        expect(normalizeFlag(flagName, 42)).toEqual({
-          flagName,
-          flagValue: 42,
-        });
+        expect(normalizeFlag(flagName, 42)).toEqual([flagName, 42]);
       });
     });
   });
