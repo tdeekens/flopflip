@@ -16,10 +16,6 @@ aliases:
     # Ignoring scripts (e.g. post-install) to gain more control
     # in the jobs to only e.g. build when explicitely needed.
     command: yarn install --pure-lockfile
-
-  - &bootstrap
-    name: Bootstraping
-    command: yarn bootstrap
   
   - &lint
     name: Linting
@@ -75,7 +71,6 @@ jobs:
       - checkout
       - run: *install
       - restore-cache: *restore_yarn_cache
-      - run: *bootstrap
       - run: *build
   lint:
     <<: *node8Environment
@@ -83,7 +78,6 @@ jobs:
       - checkout
       - restore-cache: *restore_yarn_cache
       - run: *install
-      - run: *bootstrap
       - run: *lint
   type_check:
     <<: *node8Environment
@@ -91,7 +85,6 @@ jobs:
       - checkout
       - restore-cache: *restore_yarn_cache
       - run: *install
-      - run: *bootstrap
       - run: *build
       - run: *type_check
   build_test_unit_node_6:
@@ -100,7 +93,6 @@ jobs:
       - checkout
       - restore-cache: *restore_yarn_cache
       - run: *install
-      - run: *bootstrap
       - run: *build
       - run: *unit_test
   build_test_unit_node_8:
@@ -109,7 +101,6 @@ jobs:
       - checkout
       - restore-cache: *restore_yarn_cache
       - run: *install
-      - run: *bootstrap
       - run: *build
       - run: *unit_test_with_coverage
 
