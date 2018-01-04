@@ -6,6 +6,7 @@ const uglify = require('rollup-plugin-uglify');
 const json = require('rollup-plugin-json');
 const builtins = require('rollup-plugin-node-builtins');
 const globals = require('rollup-plugin-node-globals');
+const flow = require('rollup-plugin-flow');
 const filesize = require('rollup-plugin-filesize');
 
 const env = process.env.NODE_ENV;
@@ -40,6 +41,7 @@ const config = {
       ignoreGlobal: true,
       exclude: ['packages/**'],
     }),
+    flow({ all: true }),
     babel({
       exclude: ['node_modules/**'],
       babelrc: true,
