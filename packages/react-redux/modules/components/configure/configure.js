@@ -8,6 +8,7 @@ import type {
 } from '@flopflip/types';
 
 import * as React from 'react';
+import { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { FlagsSubscription } from '@flopflip/react';
 import { updateStatus, updateFlags } from './../../ducks';
@@ -27,10 +28,7 @@ type State = {
   flags: Flags,
 };
 
-export class Configure extends React.PureComponent<
-  Props & ConnectedProps,
-  State
-> {
+export class Configure extends PureComponent<Props & ConnectedProps, State> {
   static displayName = 'ConfigureFlopflip';
 
   static defaultProps = {

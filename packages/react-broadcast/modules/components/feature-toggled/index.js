@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from 'react';
+import { PureComponent } from 'react';
 import warning from 'warning';
 import ToggleFeature from '../toggle-feature';
 
@@ -8,7 +9,7 @@ type Props = {
   children?: React.Node,
 };
 
-export default class FeatureToggled extends React.PureComponent<Props> {
+export default class FeatureToggled extends PureComponent<Props> {
   render(): React.Element<any> {
     warning(
       false,

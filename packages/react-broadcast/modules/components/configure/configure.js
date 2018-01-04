@@ -9,6 +9,7 @@ import type {
 } from '@flopflip/types';
 
 import * as React from 'react';
+import { PureComponent } from 'react';
 import { FlagsSubscription } from '@flopflip/react';
 import { Broadcast } from 'react-broadcast';
 import { FLAGS_CHANNEL } from '../../constants';
@@ -24,7 +25,7 @@ type State = {
   flags: Flags,
 };
 
-export default class Configure extends React.PureComponent<Props, State> {
+export default class Configure extends PureComponent<Props, State> {
   static displayName = 'ConfigureFlopflip';
 
   static defaultProps = {
