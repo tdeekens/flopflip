@@ -8,20 +8,19 @@ import type {
   AdapterArgs,
 } from '@flopflip/types';
 
-import * as React from 'react';
-import { PureComponent } from 'react';
+import React, { PureComponent, type Node, type Element } from 'react';
 
 type Props = {
-  children: React.Node,
+  children: Node,
 };
 
-const isEmptyChildren = (children: React.Node): boolean =>
+const isEmptyChildren = (children: Node): boolean =>
   React.Children.count(children) === 0;
 
 export default class SwitchFeature extends PureComponent<Props> {
-  render(): React.Node {
+  render(): Node {
     let variate: ?FlagVariation;
-    let child: ?React.Element<any>;
+    let child: ?Element<any>;
     React.Children.forEach(this.props.children, element => {
       if (variate == null && React.isValidElement(element)) {
         child = element;

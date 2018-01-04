@@ -2,7 +2,7 @@
 
 import type { FlagName } from '@flopflip/types';
 
-import * as React from 'react';
+import React, { type ComponentType } from 'react';
 import { compose, setDisplayName, wrapDisplayName } from 'recompose';
 import { injectFeatureToggles, ALL_FLAGS_PROP_KEY } from '@flopflip/react';
 import withFlagSubscription from '../with-flag-subscription/';
@@ -18,9 +18,7 @@ export default <RequiredProps, ProvidedProps>(
     ownProps: ProvidedProps,
     propKey: string
   ) => boolean
-) => (
-  WrappedComponent: React.ComponentType<$Diff<RequiredProps, ProvidedProps>>
-) =>
+) => (WrappedComponent: ComponentType<$Diff<RequiredProps, ProvidedProps>>) =>
   compose(
     setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggles')),
     withFlagSubscription(ALL_FLAGS_PROP_KEY),

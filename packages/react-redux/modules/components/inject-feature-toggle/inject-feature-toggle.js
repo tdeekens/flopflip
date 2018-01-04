@@ -2,7 +2,7 @@
 
 import type { FlagName } from '@flopflip/types';
 
-import * as React from 'react';
+import React, { type ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { compose, setDisplayName, wrapDisplayName } from 'recompose';
 import { selectFlags } from '../../ducks';
@@ -17,7 +17,7 @@ export const mapStateToProps = (state: mixed) => ({
 });
 
 export default (flagName: FlagName, propKey?: string) => (
-  WrappedComponent: React.ComponentType<$Diff<RequiredProps, ProvidedProps>>
+  WrappedComponent: ComponentType<$Diff<RequiredProps, ProvidedProps>>
 ) =>
   /* istanbul ignore next */
   compose(

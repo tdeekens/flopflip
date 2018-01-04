@@ -7,14 +7,13 @@ import type {
   AdapterStatus,
 } from '@flopflip/types';
 
-import * as React from 'react';
-import { PureComponent } from 'react';
+import React, { PureComponent, type ComponentType, type Node } from 'react';
 import { connect } from 'react-redux';
 import { FlagsSubscription } from '@flopflip/react';
 import { updateStatus, updateFlags } from './../../ducks';
 
 type Props = {
-  children?: React.Node,
+  children?: Node,
   shouldDeferAdapterConfiguration?: boolean,
   defaultFlags?: Flags,
   adapterArgs: AdapterArgs,
@@ -37,7 +36,7 @@ export class Configure extends PureComponent<Props & ConnectedProps, State> {
     shouldDeferAdapterConfiguration: false,
   };
 
-  render(): React.Node {
+  render(): Node {
     return (
       <FlagsSubscription
         adapter={this.props.adapter}
