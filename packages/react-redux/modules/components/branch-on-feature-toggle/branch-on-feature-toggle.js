@@ -2,7 +2,7 @@
 
 import type { FlagName, FlagVariation } from '@flopflip/types';
 
-import * as React from 'react';
+import React, { type ComponentType } from 'react';
 import { compose, setDisplayName, wrapDisplayName } from 'recompose';
 import { branchOnFeatureToggle, DEFAULT_FLAG_PROP_KEY } from '@flopflip/react';
 import injectFeatureToggle from './../inject-feature-toggle';
@@ -12,10 +12,8 @@ type ProvidedProps = {};
 
 export default <RequiredProps, ProvidedProps>(
   { flag, variation }: { flag: FlagName, variation: FlagVariation },
-  UntoggledComponent: React.ComponentType<any>
-) => (
-  WrappedComponent: React.ComponentType<$Diff<RequiredProps, ProvidedProps>>
-) =>
+  UntoggledComponent: ComponentType<any>
+) => (WrappedComponent: ComponentType<$Diff<RequiredProps, ProvidedProps>>) =>
   compose(
     setDisplayName(wrapDisplayName(WrappedComponent, 'branchOnFeatureToggle')),
     injectFeatureToggle(flag),

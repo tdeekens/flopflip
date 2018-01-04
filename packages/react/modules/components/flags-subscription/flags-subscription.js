@@ -8,8 +8,7 @@ import type {
   AdapterArgs,
 } from '@flopflip/types';
 
-import * as React from 'react';
-import { PureComponent } from 'react';
+import React, { PureComponent, type Node } from 'react';
 
 export const AdapterStates: {
   UNCONFIGURED: string,
@@ -83,7 +82,7 @@ export default class FlagsSubscription extends PureComponent<Props> {
     }
   }
 
-  render(): React.Node {
+  render(): Node {
     return React.Children.only(this.props.children);
   }
 }

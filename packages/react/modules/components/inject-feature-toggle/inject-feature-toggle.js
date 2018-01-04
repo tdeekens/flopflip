@@ -2,7 +2,7 @@
 
 import type { FlagName, FlagValue } from '@flopflip/types';
 
-import * as React from 'react';
+import React, { type ComponentType } from 'react';
 import { compose, withProps } from 'recompose';
 import isNil from 'lodash.isnil';
 import { omitProps } from '../../hocs';
@@ -14,7 +14,7 @@ type ProvidedProps = {};
 const injectFeatureToggle = (
   flagName: FlagName,
   propKey: string = DEFAULT_FLAG_PROP_KEY
-): React.ComponentType<$Diff<RequiredProps, ProvidedProps>> =>
+): ComponentType<$Diff<RequiredProps, ProvidedProps>> =>
   compose(
     withProps((props: RequiredProps) => {
       const flagValue: FlagValue = props[ALL_FLAGS_PROP_KEY][flagName];

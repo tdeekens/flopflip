@@ -2,7 +2,7 @@
 
 import type { FlagName, Flags, Flag } from '@flopflip/types';
 
-import * as React from 'react';
+import React, { type ComponentType } from 'react';
 
 import { compose, withProps, shouldUpdate, shallowEqual } from 'recompose';
 import intersection from 'lodash.intersection';
@@ -48,7 +48,7 @@ const injectFeatureToggles = (
     ownProps: ProvidedProps,
     propKey: string
   ) => boolean = areOwnPropsEqual
-): React.ComponentType<$Diff<RequiredProps, ProvidedProps>> =>
+): ComponentType<$Diff<RequiredProps, ProvidedProps>> =>
   compose(
     withProps((props: RequiredProps) => ({
       [propKey]: filterFeatureToggles(props[ALL_FLAGS_PROP_KEY], flagNames),

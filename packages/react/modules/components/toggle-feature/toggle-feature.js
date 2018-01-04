@@ -8,18 +8,17 @@ import type {
   AdapterArgs,
 } from '@flopflip/types';
 
-import * as React from 'react';
-import { PureComponent } from 'react';
+import React, { PureComponent, type ComponentType, type Node } from 'react';
 
 type Props = {
-  untoggledComponent: React.ComponentType<any>,
-  toggledComponent: React.ComponentType<any>,
-  render: () => React.Node,
-  children: ({ isFeatureEnabled: boolean }) => React.Node,
+  untoggledComponent: ComponentType<any>,
+  toggledComponent: ComponentType<any>,
+  render: () => Node,
+  children: ({ isFeatureEnabled: boolean }) => Node,
   isFeatureEnabled: boolean,
 };
 
-const isEmptyChildren = (children: React.Node): boolean =>
+const isEmptyChildren = (children: Node): boolean =>
   React.Children.count(children) === 0;
 
 export default class ToggleFeature extends PureComponent<Props> {
@@ -32,7 +31,7 @@ export default class ToggleFeature extends PureComponent<Props> {
     children: null,
   };
 
-  render(): React.Node {
+  render(): Node {
     if (this.props.isFeatureEnabled) {
       if (this.props.toggledComponent)
         return React.createElement(this.props.toggledComponent);

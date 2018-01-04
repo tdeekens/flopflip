@@ -1,16 +1,15 @@
 // @flow
 
-import * as React from 'react';
-import { PureComponent } from 'react';
+import React, { PureComponent, type ComponentType, type Node } from 'react';
 import warning from 'warning';
 import ToggleFeature from '../toggle-feature';
 
 type Props = {
-  children?: React.Node,
+  children?: Node,
 };
 
 export default class FeatureToggled extends PureComponent<Props> {
-  render(): React.Element<any> {
+  render(): Node {
     warning(
       false,
       '`<FeatureToggled />` has been deprecated, please us `<ToggleFeature />`'
