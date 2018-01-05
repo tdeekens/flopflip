@@ -70,7 +70,7 @@
     common-tags "1.4.0"
     react-display-name "0.2.0"
 
-"@commitlint/cli@^5.2.6":
+"@commitlint/cli@^5.2.8":
   version "5.2.8"
   resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-5.2.8.tgz#593e0d16d1d6ebba9994893a4cc933d1b212ae0c"
   dependencies:
