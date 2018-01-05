@@ -1,0 +1,42 @@
+{
+  "private": true,
+  "name": "@flopflip/reason-bindings",
+  "version": "0.1.0",
+  "description": "BuckleScript bindings for ReasonML of flopflip React components",
+  "license": "MIT",
+  "author": "Nicola Molinari <me@emmenko.org> (http://emmenko.org)",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdeekens/flopflip.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
+  },
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "scripts": {
+    "prebuild": "bsb -clean-world",
+    "build": "bsb -make-world",
+    "start": "bsb -make-world -w",
+    "clean": "bsb -clean-world",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "bs-platform": "^2.1.0"
+  },
+  "devDependencies": {
+    "bs-platform": "^2.1.0",
+    "reason-react": "^0.3.0"
+  },
+  "keywords": [
+    "feature-flags",
+    "feature-toggles",
+    "LaunchDarkly",
+    "client",
+    "reason",
+    "bucklescript",
+    "bindings"
+  ]
+}
