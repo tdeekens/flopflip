@@ -70,7 +70,7 @@
     common-tags "1.4.0"
     react-display-name "0.2.0"
 
-"@commitlint/cli@^5.2.6":
+"@commitlint/cli@^5.2.8":
   version "5.2.8"
   resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-5.2.8.tgz#593e0d16d1d6ebba9994893a4cc933d1b212ae0c"
   dependencies:
@@ -2768,9 +2768,9 @@ flexbuffer@0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/flexbuffer/-/flexbuffer-0.0.6.tgz#039fdf23f8823e440c38f3277e6fef1174215b30"
 
-flow-bin@^0.62.0:
-  version "0.62.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.62.0.tgz#14bca669a6e3f95c0bc0c2d1eb55ec4e98cb1d83"
+flow-bin@^0.63.0:
+  version "0.63.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.63.0.tgz#5b7233dd556bcb1fcd19b8af11cc6fbc8f210253"
 
 flow-remove-types@^1.1.0:
   version "1.2.3"
