@@ -65,7 +65,7 @@
     "eslint-plugin-prettier": "^2.4.0",
     "eslint-plugin-react": "^7.5.1",
     "eslint-plugin-flowtype-errors": "^3.3.6",
-    "flow-bin": "^0.62.0",
+    "flow-bin": "^0.63.0",
     "husky": "^0.14.3",
     "jest": "^22.0.4",
     "jest-enzyme": "^4.0.2",
