@@ -1,0 +1,3 @@
+include FlopFlip__Types;
+
+module ConfigureFlopFlip = FlopFlip_ReactBroadcast__ConfigureFlopFlip;

@@ -1,4 +1,4 @@
-open FlopFlipTypes;
+open FlopFlip__Types;
 
 [@bs.module "@flopflip/react-broadcast"]
 external reactClass : ReasonReact.reactClass = "ConfigureFlopFlip";
