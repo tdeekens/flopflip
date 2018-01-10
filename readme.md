@@ -35,6 +35,9 @@
   </a><br /><br />
   <a href="https://techblog.commercetools.com/embracing-real-time-feature-toggling-in-your-react-application-a5e6052716a9">
     Embracing real-time feature toggling in your React application
+  </a><br /><br />
+  <a href="https://www.youtube.com/watch?v=x-IqMNFPmkk">
+    Feature flagging with LaunchDarkly - Fun Fun Function
   </a>
 </p>
 
