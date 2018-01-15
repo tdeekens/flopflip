@@ -1,3 +1,5 @@
 include FlopFlip__Types;
 
 module ConfigureFlopFlip = FlopFlip_ReactBroadcast__ConfigureFlopFlip;
+
+module ToggleFeature = FlopFlip_ReactBroadcast__ToggleFeature;

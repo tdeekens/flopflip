@@ -43,3 +43,5 @@ let optionToBool = optional =>
   };
 
 external toAny : 'a => any = "%identity";
+
+external toFlagVariation : 'a => flagVariation = "%identity";
