@@ -12,7 +12,7 @@ module Subscriber = {
 };
 
 [@bs.module "@flopflip/react"]
-external isFeaturedEnabled :
+external isFeatureEnabled :
   (
     ~flagName: string,
     ~flagVariation: Js.Nullable.t(flagVariation)=?,
@@ -32,7 +32,7 @@ let make = (~flag, ~variate: Js.Nullable.t(flagVariation), children) => {
       (
         data => {
           let isEnabled =
-            isFeaturedEnabled(~flagName=flag, ~flagVariation=variate, data);
+            isFeatureEnabled(~flagName=flag, ~flagVariation=variate, data);
           children[0](isEnabled);
         }
       )
