@@ -1,0 +1,26 @@
+{
+  "name": "@flopflip/reason-bindings",
+  "sources": [
+    {
+      "dir": "src",
+      "public": "all"
+    },
+    {
+      "dir": "examples",
+      "type": "dev"
+    }
+  ],
+  "bs-dependencies": ["reason-react"],
+  "bsc-flags": ["-bs-super-errors"],
+  "reason": {
+    "react-jsx": 2
+  },
+  "refmt": 3,
+  "package-specs": [
+    {
+      "module": "es6",
+      "in-source": true
+    }
+  ],
+  "suffix": ".bs.js"
+}
