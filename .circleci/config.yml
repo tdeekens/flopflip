@@ -92,6 +92,7 @@ jobs:
 workflows:
   version: 2
   build_and_test:
+    jobs:
       - lint
       - type_check:
           requires:
