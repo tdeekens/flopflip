@@ -2,52 +2,46 @@
 # yarn lockfile v1
 
 
-"@flopflip/launchdarkly-adapter@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-1.0.1.tgz#1b566fc9cc54bdb2f3fa6107f42ed661e652f4f6"
+"@flopflip/launchdarkly-adapter@2.0.8":
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.0.8.tgz#5fdd5886e57b612b3653998033f651e6b68bdaa5"
   dependencies:
-    camelcase "^4.1.0"
-    ldclient-js "^1.1.12"
+    ldclient-js "^1.2.0"
+    lodash.camelcase "^4.3.0"
 
-"@flopflip/localstorage-adapter@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-1.0.0.tgz#bd33e4d945c9d7d406455eed6a8d3bb271b763c6"
+"@flopflip/localstorage-adapter@1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-1.0.5.tgz#775cf6010712d734f74b2b0c43000e83964dfb27"
 
-"@flopflip/memory-adapter@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-1.0.0.tgz#6207a701bc93bf05046ea8a66b32358e87b0f90a"
+"@flopflip/memory-adapter@1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-1.0.5.tgz#095db39a0caf48a4f62eb1798625155aa2ffdb0b"
 
-"@flopflip/react-broadcast@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-3.0.2.tgz#d41e8ece270bba69d3c7a4826cbb85c4509a2c15"
+"@flopflip/react-broadcast@5.1.2":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-5.1.2.tgz#3f694f32a389107ef814af57b44aa7219ae0bf4b"
   dependencies:
-    "@flopflip/react" "^3.0.1"
-    lodash.isobject "^3.0.2"
-    react-broadcast "^0.5.2"
+    "@flopflip/react" "^5.0.7"
+    react-broadcast "^0.6.1"
     recompose "^0.26.0"
 
-"@flopflip/react-redux@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-3.0.1.tgz#77bf7ca59bd1cc08e0a188481b87a77df3850f2c"
+"@flopflip/react-redux@5.1.2":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-5.1.2.tgz#d51fa542f60167115e0b91b6c251459814137d04"
   dependencies:
-    "@flopflip/react" "^3.0.1"
-    lodash.isobject "^3.0.2"
-    recompose "^0.26.0"
-
-"@flopflip/react@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-3.0.1.tgz#40f93bdca9af54d903f7a1cb535e47083104e4e2"
-  dependencies:
-    "@hocs/omit-props" "^0.3.0"
-    lodash.intersection "^4.4.0"
+    "@flopflip/react" "^5.0.7"
     lodash.isnil "^4.0.0"
     recompose "^0.26.0"
 
-"@hocs/omit-props@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@hocs/omit-props/-/omit-props-0.3.0.tgz#251495a4fbbf91b7e5b312e3467bcf78564cb70a"
+"@flopflip/react@^5.0.7":
+  version "5.0.7"
+  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-5.0.7.tgz#8a95621a7696df524282b19dec4c2f650d3215ce"
   dependencies:
-    just-omit "^1.0.1"
+    lodash.intersection "^4.4.0"
+    lodash.isnil "^4.0.0"
+    lodash.omit "^4.5.0"
+    recompose "^0.26.0"
+    warning "^3.0.0"
 
 Base64@1.0.0:
   version "1.0.0"
@@ -1485,7 +1479,7 @@ clap@^1.0.9:
   dependencies:
     chalk "^1.1.3"
 
-classnames@^2.2.5:
+classnames@2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
@@ -3946,10 +3940,6 @@ jsx-ast-utils@^2.0.0:
   dependencies:
     array-includes "^3.0.3"
 
-just-omit@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/just-omit/-/just-omit-1.0.1.tgz#0109882a2a11323d59034be805ee978b5b8999a4"
-
 killable@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/killable/-/killable-1.0.0.tgz#da8b84bd47de5395878f95d64d02f2449fe05e6b"
@@ -3992,9 +3982,9 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-ldclient-js@^1.1.12:
-  version "1.1.12"
-  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-1.1.12.tgz#06ea0dc2326bd84116f0c6674ccd8ff7a83e7d8d"
+ldclient-js@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-1.2.0.tgz#c9e97ee9489842729df2530e4f34c96313bf5b3b"
   dependencies:
     Base64 "1.0.0"
     escape-string-regexp "1.0.5"
@@ -4092,13 +4082,13 @@ lodash.isnil@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/lodash.isnil/-/lodash.isnil-4.0.0.tgz#49e28cd559013458c814c5479d3c663a21bfaa6c"
 
-lodash.isobject@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/lodash.isobject/-/lodash.isobject-3.0.2.tgz#3c8fb8d5b5bf4bf90ae06e14f2a530a4ed935e1d"
-
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
+
+lodash.omit@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.omit/-/lodash.omit-4.5.0.tgz#6eb19ae5a1ee1dd9df0b969e66ce0b7fa30b5e60"
 
 lodash.template@^4.4.0:
   version "4.4.0"
@@ -5160,7 +5150,7 @@ prop-types@^15.5.10:
     fbjs "^0.8.9"
     loose-envify "^1.3.1"
 
-prop-types@^15.5.6, prop-types@^15.6.0:
+prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -5264,12 +5254,12 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-broadcast@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/react-broadcast/-/react-broadcast-0.5.2.tgz#97d326094346003373f4cc4af1150fac5d2f625b"
+react-broadcast@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/react-broadcast/-/react-broadcast-0.6.1.tgz#9e8c3a301a2ccfe6ecb8bb4f32a02b8cf27f9c0f"
   dependencies:
     invariant "^2.2.1"
-    prop-types "^15.5.6"
+    prop-types "^15.6.0"
 
 react-dev-utils@^4.2.1:
   version "4.2.1"
@@ -5294,9 +5284,9 @@ react-dev-utils@^4.2.1:
     strip-ansi "3.0.1"
     text-table "0.2.0"
 
-react-dom@^16.0.0:
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.0.0.tgz#9cc3079c3dcd70d4c6e01b84aab2a7e34c303f58"
+react-dom@16.2.0:
+  version "16.2.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.2.0.tgz#69003178601c0ca19b709b33a83369fe6124c044"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
@@ -5307,7 +5297,7 @@ react-error-overlay@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
 
-react-redux@^5.0.6:
+react-redux@5.0.6:
   version "5.0.6"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.6.tgz#23ed3a4f986359d68b5212eaaa681e60d6574946"
   dependencies:
@@ -5361,9 +5351,9 @@ react-scripts@1.0.17:
   optionalDependencies:
     fsevents "1.1.2"
 
-react@^16.0.0:
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.0.0.tgz#ce7df8f1941b036f02b2cca9dbd0cb1f0e855e2d"
+react@16.2.0:
+  version "16.2.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
@@ -5437,7 +5427,7 @@ readdirp@^2.0.0:
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
 
-recompose@^0.26.0:
+recompose@0.26.0, recompose@^0.26.0:
   version "0.26.0"
   resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.26.0.tgz#9babff039cb72ba5bd17366d55d7232fbdfb2d30"
   dependencies:
@@ -5473,17 +5463,17 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
-redux-logger@^3.0.6:
+redux-logger@3.0.6:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-3.0.6.tgz#f7555966f3098f3c88604c449cf0baf5778274bf"
   dependencies:
     deep-diff "^0.3.5"
 
-redux-thunk@^2.2.0:
+redux-thunk@2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
 
-redux@^3.7.2:
+redux@3.7.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.7.2.tgz#06b73123215901d25d065be342eb026bc1c8537b"
   dependencies:
@@ -6506,6 +6496,12 @@ walker@~1.0.5:
   resolved "https://registry.yarnpkg.com/walker/-/walker-1.0.7.tgz#2f7f9b8fd10d677262b18a884e28d19618e028fb"
   dependencies:
     makeerror "1.0.x"
+
+warning@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-3.0.0.tgz#32e5377cb572de4ab04753bdf8821c01ed605b7c"
+  dependencies:
+    loose-envify "^1.0.0"
 
 watch@~0.10.0:
   version "0.10.0"
