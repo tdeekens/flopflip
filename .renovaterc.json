@@ -1,19 +1,6 @@
 {
   "extends": ["config:base"],
-  "packagePatterns": ["^@flopflip/"],
   "lockFileMaintenance": {
     "enabled": true
-  },
-  "semanticCommits": false,
-  "prTitle":
-    "{{semanticCommitType}}({{semanticCommitScope}}): {{#if isPin}}Pin{{else}}{{#if isRollback}}Roll back{{else}}Update{{/if}}{{/if}} {{depName}} to {{#unless isRange}}v{{/unless}}{{#if isMajor}}{{newVersionMajor}}.x{{else}}{{newVersion}}{{/if}}",
-  "commitMessage":
-    "{{semanticCommitType}}({{semanticCommitScope}}): Update {{depName}} to {{#unless isRange}}v{{/unless}}{{newVersion}}",
-  "packageRules": [
-    {
-      "packagePatterns": ["*"],
-      "excludePackagePatterns": [],
-      "enabled": false
-    }
-  ]
+  }
 }
