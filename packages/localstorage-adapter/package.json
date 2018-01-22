@@ -10,7 +10,7 @@
     "build": "cross-env npm run build:es && npm run build:cjs",
     "build:watch": "cross-env npm run build:es -- -w",
     "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.js -o dist/@flopflip-localstorage-adapter.es.js",
-    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.js -o dist/@flopflip-launchdarkly-adapter.cjs.js"
+    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.js -o dist/@flopflip-localstorage-adapter.cjs.js"
   },
   "files": [
     "readme.md",
