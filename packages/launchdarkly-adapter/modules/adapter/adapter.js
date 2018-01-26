@@ -8,6 +8,7 @@ import type {
   OnFlagsStateChangeCallback,
   OnStatusStateChangeCallback,
 } from '@flopflip/types';
+import warning from 'warning';
 import { initialize } from 'ldclient-js';
 import camelCase from 'lodash.camelcase';
 
@@ -80,8 +81,14 @@ const changeUserContext = (nextUser: User): void =>
   adapterState.client && adapterState.client.identify
     ? adapterState.client.identify(nextUser)
     : undefined;
-const updateUserContext = (updatedUserProps: User): void =>
-  changeUserContext({ ...adapterState.user, ...updatedUserProps });
+const updateUserContext = (updatedUserProps: User): void => {
+  warning(
+    adapterState.isConfigured && adapterState.isReady,
+    '@flopflip/launchdarkly-adapter: adapter not ready and configured. User context can not be updated before.'
+  );
+
+  return changeUserContext({ ...adapterState.user, ...updatedUserProps });
+};
 
 // NOTE: Exported for testing only
 export const camelCaseFlags = (rawFlags: Flags): Flags =>
