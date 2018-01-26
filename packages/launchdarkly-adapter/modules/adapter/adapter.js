@@ -80,6 +80,8 @@ const changeUserContext = (nextUser: User): void =>
   adapterState.client && adapterState.client.identify
     ? adapterState.client.identify(nextUser)
     : undefined;
+const updateUserContext = (updatedUserProps: User): void =>
+  changeUserContext({ ...adapterState.user, ...updatedUserProps });
 
 // NOTE: Exported for testing only
 export const camelCaseFlags = (rawFlags: Flags): Flags =>
@@ -186,4 +188,5 @@ const reconfigure = ({
 export default {
   configure,
   reconfigure,
+  updateUserContext,
 };

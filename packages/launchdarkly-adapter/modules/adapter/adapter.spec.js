@@ -1,5 +1,9 @@
 import ldClient from 'ldclient-js';
-import adapter, { camelCaseFlags, createAnonymousUserKey } from './adapter';
+import adapter, {
+  camelCaseFlags,
+  createAnonymousUserKey,
+  updateUserContext,
+} from './adapter';
 
 const clientSideId = '123-abc';
 const userWithKey = { key: 'foo-user' };
