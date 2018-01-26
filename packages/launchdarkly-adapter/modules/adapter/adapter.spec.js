@@ -1,9 +1,5 @@
 import ldClient from 'ldclient-js';
-import adapter, {
-  camelCaseFlags,
-  createAnonymousUserKey,
-  updateUserContext,
-} from './adapter';
+import adapter, { camelCaseFlags, createAnonymousUserKey } from './adapter';
 
 const clientSideId = '123-abc';
 const userWithKey = { key: 'foo-user' };
@@ -172,6 +168,61 @@ describe('when configuring', () => {
 
       it('should invoke `identify` on the `client` with the `user`', () => {
         expect(client.identify).toHaveBeenCalledWith(nextUser);
+      });
+    });
+
+    describe('when updating user context', () => {
+      const updatedUserProps = {
+        bar: 'baz',
+        foo: 'far',
+      };
+
+      beforeEach(() => {
+        client = {
+          identify: jest.fn(),
+          on: jest.fn((_, cb) => cb()),
+          allFlags: jest.fn(() => ({})),
+        };
+
+        ldClient.initialize.mockReturnValue(client);
+
+        return adapter.configure({
+          clientSideId,
+          user: userWithKey,
+          onStatusStateChange,
+          onFlagsStateChange,
+        });
+      });
+
+      describe('with partial prop update', () => {
+        beforeEach(() => {
+          adapter.updateUserContext(updatedUserProps);
+        });
+
+        it('should invoke `identify` on the client with the updated props', () => {
+          expect(client.identify).toHaveBeenCalledWith(
+            expect.objectContaining(updatedUserProps)
+          );
+        });
+
+        it('should invoke `identify` on the client with the old props', () => {
+          expect(client.identify).toHaveBeenCalledWith(
+            expect.objectContaining(userWithKey)
+          );
+        });
+      });
+
+      describe('with full prop update', () => {
+        beforeEach(() => {
+          adapter.updateUserContext({ ...userWithKey, ...updatedUserProps });
+        });
+
+        it('should invoke `identify` on the client with the full props', () => {
+          expect(client.identify).toHaveBeenCalledWith({
+            ...userWithKey,
+            ...updatedUserProps,
+          });
+        });
       });
     });
   });
