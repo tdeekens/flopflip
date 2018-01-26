@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@flopflip/launchdarkly-adapter@2.0.8":
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.0.8.tgz#5fdd5886e57b612b3653998033f651e6b68bdaa5"
+"@flopflip/launchdarkly-adapter@2.0.9":
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.0.9.tgz#fe4722958c73ba9d72320535df41141847ce5b8a"
   dependencies:
     ldclient-js "^1.2.0"
     lodash.camelcase "^4.3.0"
