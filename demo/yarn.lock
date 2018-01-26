@@ -17,11 +17,11 @@
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-1.0.5.tgz#095db39a0caf48a4f62eb1798625155aa2ffdb0b"
 
-"@flopflip/react-broadcast@5.1.2":
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-5.1.2.tgz#3f694f32a389107ef814af57b44aa7219ae0bf4b"
+"@flopflip/react-broadcast@5.1.4":
+  version "5.1.4"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-5.1.4.tgz#d34fd389f0b0332bbb9cf137ef5f7cfed33be877"
   dependencies:
-    "@flopflip/react" "^5.0.7"
+    "@flopflip/react" "^5.0.9"
     react-broadcast "^0.6.1"
     recompose "^0.26.0"
 
@@ -32,16 +32,6 @@
     "@flopflip/react" "^5.0.9"
     lodash.isnil "^4.0.0"
     recompose "^0.26.0"
-
-"@flopflip/react@^5.0.7":
-  version "5.0.7"
-  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-5.0.7.tgz#8a95621a7696df524282b19dec4c2f650d3215ce"
-  dependencies:
-    lodash.intersection "^4.4.0"
-    lodash.isnil "^4.0.0"
-    lodash.omit "^4.5.0"
-    recompose "^0.26.0"
-    warning "^3.0.0"
 
 "@flopflip/react@^5.0.9":
   version "5.0.9"
