@@ -25,17 +25,27 @@
     react-broadcast "^0.6.1"
     recompose "^0.26.0"
 
-"@flopflip/react-redux@5.1.2":
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-5.1.2.tgz#d51fa542f60167115e0b91b6c251459814137d04"
+"@flopflip/react-redux@5.1.3":
+  version "5.1.3"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-5.1.3.tgz#801992a7b7bb0fc71001b5631b05619b63307401"
   dependencies:
-    "@flopflip/react" "^5.0.7"
+    "@flopflip/react" "^5.0.8"
     lodash.isnil "^4.0.0"
     recompose "^0.26.0"
 
 "@flopflip/react@^5.0.7":
   version "5.0.7"
   resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-5.0.7.tgz#8a95621a7696df524282b19dec4c2f650d3215ce"
+  dependencies:
+    lodash.intersection "^4.4.0"
+    lodash.isnil "^4.0.0"
+    lodash.omit "^4.5.0"
+    recompose "^0.26.0"
+    warning "^3.0.0"
+
+"@flopflip/react@^5.0.8":
+  version "5.0.8"
+  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-5.0.8.tgz#5d9226aeecbd66329c17857fd433a310f20f9d1a"
   dependencies:
     lodash.intersection "^4.4.0"
     lodash.isnil "^4.0.0"
