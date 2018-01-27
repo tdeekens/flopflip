@@ -15,8 +15,12 @@ export default function createFlopFlipEnhancer(
 
     adapter.configure({
       ...adapterArgs,
-      onUpdateFlags: store.dispatch(updateFlags),
-      onUpdateStatus: store.dispatch(updateStatus),
+      /**
+       * NOTE: This is like `bindActionCreators` but the bound action
+       * creators are renamed to fit the adapter API and conventions.
+       */
+      onFlagsStateChange: (...args) => store.dispatch(updateFlags(...args)),
+      onStatusStateChange: (...args) => store.dispatch(updateStatus(...args)),
     });
 
     return store;

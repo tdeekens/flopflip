@@ -1,3 +1,4 @@
+import { updateFlags, updateStatus } from '../../ducks';
 import createFlopFlipEnhancer from './enhancer';
 
 const adapterArgs = {
@@ -19,7 +20,7 @@ describe('when creating enhancer', () => {
     let dispatch;
 
     beforeEach(() => {
-      dispatch = jest.fn(() => jest.fn());
+      dispatch = jest.fn();
 
       const getState = () => ({});
       const next = jest.fn(() => ({ getState, dispatch }));
@@ -38,20 +39,72 @@ describe('when creating enhancer', () => {
       );
     });
 
-    it('should invoke `configure` on `adapter` with `onUpdateFlags`', () => {
+    it('should invoke `configure` on `adapter` with `onFlagsStateChange`', () => {
       expect(adapter.configure).toHaveBeenCalledWith(
         expect.objectContaining({
-          onUpdateFlags: expect.any(Function),
+          onFlagsStateChange: expect.any(Function),
         })
       );
     });
 
-    it('should invoke `configure` on `adapter` with `onUpdateStatus`', () => {
+    it('should invoke `configure` on `adapter` with `onStatusStateChange`', () => {
       expect(adapter.configure).toHaveBeenCalledWith(
         expect.objectContaining({
-          onUpdateStatus: expect.any(Function),
+          onStatusStateChange: expect.any(Function),
         })
       );
+    });
+
+    describe('when invoking  `onFlagsStateChange`', () => {
+      let nextFlags = {
+        foo: true,
+      };
+
+      beforeEach(() => {
+        const { onFlagsStateChange } = adapter.configure.mock.calls[
+          adapter.configure.mock.calls.length - 1
+        ][0];
+
+        onFlagsStateChange(nextFlags);
+      });
+
+      it('should match snapshot', () => {
+        expect(dispatch).toMatchSnapshot();
+      });
+
+      it('should invoke `dispatch`', () => {
+        expect(dispatch).toHaveBeenCalled();
+      });
+
+      it('should invoke `dispatch` with `updateFlags`', () => {
+        expect(dispatch).toHaveBeenCalledWith(updateFlags(nextFlags));
+      });
+    });
+
+    describe('when invoking  `onStatusStateChange`', () => {
+      let nextStatus = {
+        isReady: true,
+      };
+
+      beforeEach(() => {
+        const { onStatusStateChange } = adapter.configure.mock.calls[
+          adapter.configure.mock.calls.length - 1
+        ][0];
+
+        onStatusStateChange(nextStatus);
+      });
+
+      it('should match snapshot', () => {
+        expect(dispatch).toMatchSnapshot();
+      });
+
+      it('should invoke `dispatch`', () => {
+        expect(dispatch).toHaveBeenCalled();
+      });
+
+      it('should invoke `dispatch` with `updateStatus`', () => {
+        expect(dispatch).toHaveBeenCalledWith(updateStatus(nextStatus));
+      });
     });
   });
 });
