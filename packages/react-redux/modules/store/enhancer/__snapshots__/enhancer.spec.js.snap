@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when creating enhancer with enhanced store when invoking  \`onFlagsStateChange\` should match snapshot 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "payload": Object {
+          "foo": true,
+        },
+        "type": "@flopflip/flags/update",
+      },
+    ],
+  ],
+}
+`;
+
+exports[`when creating enhancer with enhanced store when invoking  \`onStatusStateChange\` should match snapshot 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "payload": Object {
+          "isReady": true,
+        },
+        "type": "@flopflip/status/update",
+      },
+    ],
+  ],
+}
+`;
