@@ -1,14 +1,21 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-//import { createFlopFlipEnhancer } from '@flopflip/react-redux';
+import adapter from '@flopflip/localstorage-adapter';
+import { createFlopFlipEnhancer } from '@flopflip/react-redux';
 import rootReducer from './modules';
+
+const defaultFlags = { 'aDefault-Flag': true };
+const adapterArgs = {
+  clientSideId: '596788417a20200c2b70c89e',
+  user: { key: 'ld-2@tdeekens.name' },
+  defaultFlags,
+};
 
 const initialState = {};
 const enhancers = [
-  // createFlopFlipEnhancer('596788417a20200c2b70c89e', {
-  //   key: 'ld@tdeekens.name',
-  // }),
+  // NOTE: Comment in the line below to add the store enhancer.
+  // createFlopFlipEnhancer(adapter, adapterArgs)
 ];
 const middleware = [thunk, logger];
 
