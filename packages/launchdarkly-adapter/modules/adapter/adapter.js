@@ -15,7 +15,7 @@ import camelCase from 'lodash.camelcase';
 type Client = {
   identify: (nextUser: User) => Promise<Object>,
   waitUntilReady: () => Promise<any>,
-  on: (state: string, (flagName: FlagName) => void) => void,
+  on: (eventName: string, (flagName: FlagName) => void) => void,
   allFlags: () => Flags | null,
 };
 type AdapterState = {
