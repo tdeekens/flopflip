@@ -13,8 +13,8 @@ import { initialize } from 'ldclient-js';
 import camelCase from 'lodash.camelcase';
 
 type Client = {
-  identify: (nextUser: User) => void,
-  on: (state: string, () => void) => void,
+  identify: (nextUser: User) => Promise<Object>,
+  waitUntilReady: () => Promise<any>,
   on: (state: string, (flagName: FlagName) => void) => void,
   allFlags: () => Flags | null,
 };
@@ -77,11 +77,13 @@ const ensureUser = (user: User): User => ({
 });
 const initializeClient = (clientSideId: string, user: User): Client =>
   initialize(clientSideId, user);
-const changeUserContext = (nextUser: User): void =>
+const changeUserContext = (nextUser: User): Promise<any> =>
   adapterState.client && adapterState.client.identify
     ? adapterState.client.identify(nextUser)
-    : undefined;
-const updateUserContext = (updatedUserProps: User): void => {
+    : Promise.reject(
+        new Error('Can not change user context: client not yet initialized.')
+      );
+const updateUserContext = (updatedUserProps: User): Promise<any> => {
   warning(
     adapterState.isConfigured && adapterState.isReady,
     '@flopflip/launchdarkly-adapter: adapter not ready and configured. User context can not be updated before.'
@@ -109,33 +111,32 @@ const subscribe = ({
 }: {
   onFlagsStateChange: OnFlagsStateChangeCallback,
   onStatusStateChange: OnStatusStateChangeCallback,
-}): Promise<any> =>
-  new Promise((resolve, reject) => {
-    if (adapterState.client) {
-      adapterState.client.on('ready', () => {
-        const rawFlags = adapterState.client
-          ? adapterState.client.allFlags()
-          : null;
-        // First update internal state
-        adapterState.isReady = true;
-        // ...to then signal that the adapter is ready
-        onStatusStateChange({ isReady: true });
-        if (rawFlags) {
-          // ...and flush initial state of flags
-          onFlagsStateChange(camelCaseFlags(rawFlags));
-          // ...to finally subscribe to later changes.
-          subscribeToFlagsChanges({
-            rawFlags,
-            onFlagsStateChange,
-          });
-        }
-
-        return resolve();
-      });
-    } else {
-      reject(new Error('Can not subscribte with non initialized client.'));
-    }
-  });
+}): Promise<any> => {
+  if (adapterState.client) {
+    return adapterState.client.waitUntilReady().then(() => {
+      const rawFlags = adapterState.client
+        ? adapterState.client.allFlags()
+        : null;
+      // First update internal state
+      adapterState.isReady = true;
+      // ...to then signal that the adapter is ready
+      onStatusStateChange({ isReady: true });
+      if (rawFlags) {
+        // ...and flush initial state of flags
+        onFlagsStateChange(camelCaseFlags(rawFlags));
+        // ...to finally subscribe to later changes.
+        subscribeToFlagsChanges({
+          rawFlags,
+          onFlagsStateChange,
+        });
+      }
+    });
+  } else {
+    return Promise.reject(
+      new Error('Can not subscribte with non initialized client.')
+    );
+  }
+};
 
 const configure = ({
   clientSideId,
@@ -171,26 +172,22 @@ const reconfigure = ({
   user: User,
   onFlagsStateChange: OnFlagsStateChangeCallback,
   onStatusStateChange: OnStatusStateChangeCallback,
-}): Promise<any> =>
-  new Promise((resolve, reject) => {
-    if (
-      !adapterState.isReady ||
-      !adapterState.isConfigured ||
-      !adapterState.user
-    )
-      return reject(
-        new Error(
-          '@flopflip/launchdarkly-adapter: please configure adapter before reconfiguring.'
-        )
-      );
+}): Promise<any> => {
+  if (!adapterState.isReady || !adapterState.isConfigured || !adapterState.user)
+    return Promise.reject(
+      new Error(
+        '@flopflip/launchdarkly-adapter: please configure adapter before reconfiguring.'
+      )
+    );
 
-    if (adapterState.user.key !== user.key) {
-      adapterState.user = ensureUser(user);
-      changeUserContext(adapterState.user);
-    }
+  if (adapterState.user.key !== user.key) {
+    adapterState.user = ensureUser(user);
 
-    resolve();
-  });
+    return changeUserContext(adapterState.user);
+  }
+
+  return Promise.resolve();
+};
 
 export default {
   configure,
