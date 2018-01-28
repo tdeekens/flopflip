@@ -7,14 +7,15 @@ const userWithoutKey = {
   group: 'foo-group',
 };
 const flags = { 'some-flag-1': true, 'some-flag-2': false };
+const createClient = jest.fn(apiOverwrites => ({
+  waitUntilReady: jest.fn(() => Promise.resolve()),
+  on: jest.fn((_, cb) => cb()),
+  allFlags: jest.fn(() => ({})),
 
-jest.mock('ldclient-js', () => ({
-  initialize: jest.fn(() => ({
-    waitUntilReady: jest.fn(() => Promise.resolve()),
-    on: jest.fn((_, cb) => cb()),
-    allFlags: jest.fn(() => ({})),
-  })),
+  ...apiOverwrites,
 }));
+
+jest.mock('ldclient-js');
 
 describe('when configuring', () => {
   let onStatusStateChange;
@@ -23,6 +24,8 @@ describe('when configuring', () => {
   beforeEach(() => {
     onStatusStateChange = jest.fn();
     onFlagsStateChange = jest.fn();
+
+    ldClient.initialize.mockReturnValue(createClient());
   });
 
   describe('when reconfiguring before configured', () => {
@@ -77,11 +80,9 @@ describe('when configuring', () => {
     beforeEach(() => {
       onStatusStateChange = jest.fn();
       onFlagsStateChange = jest.fn();
-      client = {
-        waitUntilReady: jest.fn(() => Promise.resolve()),
-        on: jest.fn((_, cb) => cb()),
+      client = createClient({
         allFlags: jest.fn(() => flags),
-      };
+      });
 
       ldClient.initialize.mockReturnValue(client);
 
@@ -150,12 +151,9 @@ describe('when configuring', () => {
       let client;
 
       beforeEach(() => {
-        client = {
+        client = createClient({
           identify: jest.fn(() => Promise.resolve()),
-          waitUntilReady: jest.fn(() => Promise.resolve()),
-          on: jest.fn((_, cb) => cb()),
-          allFlags: jest.fn(() => ({})),
-        };
+        });
 
         ldClient.initialize.mockReturnValue(client);
 
@@ -181,12 +179,9 @@ describe('when configuring', () => {
       };
 
       beforeEach(() => {
-        client = {
+        client = createClient({
           identify: jest.fn(() => Promise.resolve()),
-          waitUntilReady: jest.fn(() => Promise.resolve()),
-          on: jest.fn((_, cb) => cb()),
-          allFlags: jest.fn(() => ({})),
-        };
+        });
 
         ldClient.initialize.mockReturnValue(client);
 
