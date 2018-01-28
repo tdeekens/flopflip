@@ -10,6 +10,7 @@ const flags = { 'some-flag-1': true, 'some-flag-2': false };
 
 jest.mock('ldclient-js', () => ({
   initialize: jest.fn(() => ({
+    waitUntilReady: jest.fn(() => Promise.resolve()),
     on: jest.fn((_, cb) => cb()),
     allFlags: jest.fn(() => ({})),
   })),
@@ -77,6 +78,7 @@ describe('when configuring', () => {
       onStatusStateChange = jest.fn();
       onFlagsStateChange = jest.fn();
       client = {
+        waitUntilReady: jest.fn(() => Promise.resolve()),
         on: jest.fn((_, cb) => cb()),
         allFlags: jest.fn(() => flags),
       };
@@ -149,7 +151,8 @@ describe('when configuring', () => {
 
       beforeEach(() => {
         client = {
-          identify: jest.fn(),
+          identify: jest.fn(() => Promise.resolve()),
+          waitUntilReady: jest.fn(() => Promise.resolve()),
           on: jest.fn((_, cb) => cb()),
           allFlags: jest.fn(() => ({})),
         };
@@ -179,7 +182,8 @@ describe('when configuring', () => {
 
       beforeEach(() => {
         client = {
-          identify: jest.fn(),
+          identify: jest.fn(() => Promise.resolve()),
+          waitUntilReady: jest.fn(() => Promise.resolve()),
           on: jest.fn((_, cb) => cb()),
           allFlags: jest.fn(() => ({})),
         };
@@ -196,7 +200,7 @@ describe('when configuring', () => {
 
       describe('with partial prop update', () => {
         beforeEach(() => {
-          adapter.updateUserContext(updatedUserProps);
+          return adapter.updateUserContext(updatedUserProps);
         });
 
         it('should invoke `identify` on the client with the updated props', () => {
@@ -214,7 +218,10 @@ describe('when configuring', () => {
 
       describe('with full prop update', () => {
         beforeEach(() => {
-          adapter.updateUserContext({ ...userWithKey, ...updatedUserProps });
+          return adapter.updateUserContext({
+            ...userWithKey,
+            ...updatedUserProps,
+          });
         });
 
         it('should invoke `identify` on the client with the full props', () => {
