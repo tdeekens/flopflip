@@ -52,13 +52,13 @@ const subscribeToFlagsChanges = ({
       adapterState.client
     ) {
       adapterState.client.on(`change:${flagName}`, flagValue => {
-        const [normalzedFlagName, normalzedFlagValue] = normalizeFlag(
+        const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
           flagName,
           flagValue
         );
 
         onFlagsStateChange({
-          [normalzedFlagName]: normalzedFlagValue,
+          [normalizedFlagName]: normalizedFlagValue,
         });
       });
     }
