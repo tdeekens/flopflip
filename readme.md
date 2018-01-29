@@ -428,9 +428,8 @@ const ComponentToBeRenderedInstead = () => (
   <h3>At least there is a fallback!</h3>
 );
 
-export default branchOnFeatureToggle({ flag: flagsNames.THE_FEATURE_TOGGLE })(
-  ComponentToBeToggled,
-  ComponentToBeRenderedInstead
+export default branchOnFeatureToggle({ flag: flagsNames.THE_FEATURE_TOGGLE }, ComponentToBeRenderedInstead)(
+  ComponentToBeToggled
 );
 ```
 
@@ -448,7 +447,7 @@ const ComponentToBeRenderedInstead = () => (
 export default branchOnFeatureToggle({
   flag: flagsNames.THE_FEATURE_TOGGLE,
   variation: 'variate1',
-})(ComponentToBeToggled, ComponentToBeRenderedInstead);
+}, ComponentToBeRenderedInstead)(ComponentToBeToggled);
 ```
 
 #### `injectFeatureToggles(flagNames: Array<String>, propKey?: String, areOwnPropsEqual?: Function)`
