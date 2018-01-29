@@ -5383,9 +5383,9 @@ redis-parser@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/redis-parser/-/redis-parser-1.3.0.tgz#806ebe7bbfb7d34e4d7c1e9ef282efcfad04126a"
 
-redux-mock-store@1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/redux-mock-store/-/redux-mock-store-1.5.0.tgz#ec51e6b46ce5ea67445fe65fd2fe769469ad36ed"
+redux-mock-store@1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/redux-mock-store/-/redux-mock-store-1.5.1.tgz#fca4335392e66605420b5559fe02fc5b8bb6d63c"
   dependencies:
     lodash.isplainobject "^4.0.6"
 
