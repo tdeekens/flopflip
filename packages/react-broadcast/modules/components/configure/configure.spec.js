@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Configure from './configure';
-import { FLAGS_CHANNEL } from '../../constants';
 
 const ChildComponent = () => <div />;
 
@@ -38,8 +37,8 @@ describe('rendering', () => {
     expect(wrapper).toRender('ConfigureAdapter');
   });
 
-  it('should render a `Broadcast`', () => {
-    expect(wrapper).toRender('Broadcast');
+  it('should render a `<FlagContext.Provider>`', () => {
+    expect(wrapper).toRender('Provider');
   });
 
   describe('with `children`', () => {
@@ -135,16 +134,12 @@ describe('state', () => {
     });
   });
 
-  describe('of `<Broadcast />`', () => {
+  describe('of `<FlagsContext.Provider />`', () => {
     it('should receive `flags` as `value`', () => {
-      expect(wrapper.find('Broadcast')).toHaveProp(
+      expect(wrapper.find('Provider')).toHaveProp(
         'value',
         wrapper.state('flags')
       );
-    });
-
-    it('should receive `FLAGS_CHANNEL` as `channel`', () => {
-      expect(wrapper.find('Broadcast')).toHaveProp('channel', FLAGS_CHANNEL);
     });
   });
 });

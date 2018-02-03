@@ -4,8 +4,7 @@ import type { FlagName, FlagVariation } from '@flopflip/types';
 
 import React, { PureComponent, type ComponentType, type Node } from 'react';
 import { wrapDisplayName } from 'recompose';
-import { Subscriber } from 'react-broadcast';
-import { FLAGS_CHANNEL } from '../../constants';
+import { FlagsContext } from '../configure';
 
 type RequiredProps = {};
 type ProvidedProps = {};
@@ -22,11 +21,11 @@ const withFlagSubscription = (propKey: string) => (
     );
     render(): Node {
       return (
-        <Subscriber channel={FLAGS_CHANNEL}>
-          {data => (
-            <WrappedComponent {...{ [propKey]: data }} {...this.props} />
+        <FlagsContext.Consumer>
+          {flags => (
+            <WrappedComponent {...{ [propKey]: flags }} {...this.props} />
           )}
-        </Subscriber>
+        </FlagsContext.Consumer>
       );
     }
   }

@@ -38,9 +38,7 @@ exports[`when feature is disabled should match snapshot 1`] = `
     }
     shouldDeferAdapterConfiguration={false}
   >
-    <Broadcast
-      channel="@flopflip"
-      compareValues={[Function]}
+    <Provider
       value={
         Object {
           "flag1": false,
@@ -51,10 +49,7 @@ exports[`when feature is disabled should match snapshot 1`] = `
       <ToggleFeature
         flag="flag1"
       >
-        <Subscriber
-          channel="@flopflip"
-          quiet={false}
-        >
+        <Consumer>
           <withProps(ToggleFeature)
             @flopflip/flags={
               Object {
@@ -78,9 +73,9 @@ exports[`when feature is disabled should match snapshot 1`] = `
               untoggledComponent={null}
             />
           </withProps(ToggleFeature)>
-        </Subscriber>
+        </Consumer>
       </ToggleFeature>
-    </Broadcast>
+    </Provider>
   </ConfigureAdapter>
 </ConfigureFlopflip>
 `;
@@ -123,9 +118,7 @@ exports[`when feature is disabled when enabling feature should match snapshot 1`
     }
     shouldDeferAdapterConfiguration={false}
   >
-    <Broadcast
-      channel="@flopflip"
-      compareValues={[Function]}
+    <Provider
       value={
         Object {
           "flag1": true,
@@ -136,10 +129,7 @@ exports[`when feature is disabled when enabling feature should match snapshot 1`
       <ToggleFeature
         flag="flag1"
       >
-        <Subscriber
-          channel="@flopflip"
-          quiet={false}
-        >
+        <Consumer>
           <withProps(ToggleFeature)
             @flopflip/flags={
               Object {
@@ -167,9 +157,9 @@ exports[`when feature is disabled when enabling feature should match snapshot 1`
               </FeatureComponent>
             </ToggleFeature>
           </withProps(ToggleFeature)>
-        </Subscriber>
+        </Consumer>
       </ToggleFeature>
-    </Broadcast>
+    </Provider>
   </ConfigureAdapter>
 </ConfigureFlopflip>
 `;

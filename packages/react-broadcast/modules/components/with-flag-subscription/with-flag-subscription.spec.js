@@ -16,12 +16,8 @@ describe('rendering', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render a `Subscriber`', () => {
-    expect(wrapper).toRender('Subscriber');
-  });
-
-  it('should supply a `channel` to the `Subscriber`', () => {
-    expect(wrapper.find('Subscriber')).toHaveProp('channel');
+  it('should render a `<FlagsContext.Consumer>`', () => {
+    expect(wrapper).toRender('Consumer');
   });
 });
 

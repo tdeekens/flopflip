@@ -9,9 +9,8 @@ import type {
 } from '@flopflip/types';
 
 import React, { PureComponent, type ComponentType, type Node } from 'react';
+import createReactContext, { type Context } from 'create-react-context';
 import { ConfigureAdapter } from '@flopflip/react';
-import { Broadcast } from 'react-broadcast';
-import { FLAGS_CHANNEL } from '../../constants';
 
 type Props = {
   children: Node,
@@ -23,6 +22,8 @@ type Props = {
 type State = {
   flags: Flags,
 };
+
+export const FlagsContext: Context<Flags> = createReactContext({});
 
 export default class Configure extends PureComponent<Props, State> {
   static displayName = 'ConfigureFlopflip';
@@ -63,11 +64,11 @@ export default class Configure extends PureComponent<Props, State> {
           this.props.shouldDeferAdapterConfiguration
         }
       >
-        <Broadcast channel={FLAGS_CHANNEL} value={this.state.flags}>
+        <FlagsContext.Provider value={this.state.flags}>
           {this.props.children
             ? React.Children.only(this.props.children)
             : null}
-        </Broadcast>
+        </FlagsContext.Provider>
       </ConfigureAdapter>
     );
   }
