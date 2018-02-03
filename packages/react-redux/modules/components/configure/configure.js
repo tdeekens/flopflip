@@ -9,7 +9,7 @@ import type {
 
 import React, { PureComponent, type ComponentType, type Node } from 'react';
 import { connect } from 'react-redux';
-import { FlagsSubscription } from '@flopflip/react';
+import { ConfigureAdapter } from '@flopflip/react';
 import { updateStatus, updateFlags } from './../../ducks';
 
 type Props = {
@@ -38,7 +38,7 @@ export class Configure extends PureComponent<Props & ConnectedProps, State> {
 
   render(): Node {
     return (
-      <FlagsSubscription
+      <ConfigureAdapter
         adapter={this.props.adapter}
         adapterArgs={{
           ...this.props.adapterArgs,
@@ -51,7 +51,7 @@ export class Configure extends PureComponent<Props & ConnectedProps, State> {
         }
       >
         {this.props.children ? React.Children.only(this.props.children) : null}
-      </FlagsSubscription>
+      </ConfigureAdapter>
     );
   }
 }

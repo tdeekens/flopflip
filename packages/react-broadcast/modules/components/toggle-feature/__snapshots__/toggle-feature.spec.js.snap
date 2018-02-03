@@ -17,7 +17,7 @@ exports[`when feature is disabled should match snapshot 1`] = `
   }
   shouldDeferAdapterConfiguration={false}
 >
-  <FlagsSubscription
+  <ConfigureAdapter
     adapter={
       Object {
         "configure": [Function],
@@ -81,7 +81,7 @@ exports[`when feature is disabled should match snapshot 1`] = `
         </Subscriber>
       </ToggleFeature>
     </Broadcast>
-  </FlagsSubscription>
+  </ConfigureAdapter>
 </ConfigureFlopflip>
 `;
 
@@ -102,7 +102,7 @@ exports[`when feature is disabled when enabling feature should match snapshot 1`
   }
   shouldDeferAdapterConfiguration={false}
 >
-  <FlagsSubscription
+  <ConfigureAdapter
     adapter={
       Object {
         "configure": [Function],
@@ -170,6 +170,6 @@ exports[`when feature is disabled when enabling feature should match snapshot 1`
         </Subscriber>
       </ToggleFeature>
     </Broadcast>
-  </FlagsSubscription>
+  </ConfigureAdapter>
 </ConfigureFlopflip>
 `;

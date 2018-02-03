@@ -35,7 +35,7 @@ exports[`injectFeatureToggles with \`propKey\` should match snapshot 1`] = `
       handleUpdateStatus={[Function]}
       shouldDeferAdapterConfiguration={false}
     >
-      <FlagsSubscription
+      <ConfigureAdapter
         adapter={
           Object {
             "configure": [Function],
@@ -97,7 +97,7 @@ exports[`injectFeatureToggles with \`propKey\` should match snapshot 1`] = `
             </withProps(omitProps(shouldUpdate(FeatureComponent)))>
           </injectFeatureToggles(FeatureComponent)>
         </Container>
-      </FlagsSubscription>
+      </ConfigureAdapter>
     </ConfigureFlopflip>
   </Connect(ConfigureFlopflip)>
 </Provider>
@@ -138,7 +138,7 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled shoul
       handleUpdateStatus={[Function]}
       shouldDeferAdapterConfiguration={false}
     >
-      <FlagsSubscription
+      <ConfigureAdapter
         adapter={
           Object {
             "configure": [Function],
@@ -205,7 +205,7 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled shoul
             </withProps(omitProps(shouldUpdate(FeatureComponent)))>
           </injectFeatureToggles(FeatureComponent)>
         </Container>
-      </FlagsSubscription>
+      </ConfigureAdapter>
     </ConfigureFlopflip>
   </Connect(ConfigureFlopflip)>
 </Provider>
@@ -246,7 +246,7 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled when 
       handleUpdateStatus={[Function]}
       shouldDeferAdapterConfiguration={false}
     >
-      <FlagsSubscription
+      <ConfigureAdapter
         adapter={
           Object {
             "configure": [Function],
@@ -308,7 +308,7 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled when 
             </withProps(omitProps(shouldUpdate(FeatureComponent)))>
           </injectFeatureToggles(FeatureComponent)>
         </Container>
-      </FlagsSubscription>
+      </ConfigureAdapter>
     </ConfigureFlopflip>
   </Connect(ConfigureFlopflip)>
 </Provider>

@@ -12,7 +12,7 @@ exports[`with \`propKey\` should match snapshot 1`] = `
   defaultFlags={Object {}}
   shouldDeferAdapterConfiguration={false}
 >
-  <FlagsSubscription
+  <ConfigureAdapter
     adapter={
       Object {
         "configure": [Function],
@@ -61,7 +61,7 @@ exports[`with \`propKey\` should match snapshot 1`] = `
         </injectFeatureToggles(FeatureComponent)>
       </Container>
     </Broadcast>
-  </FlagsSubscription>
+  </ConfigureAdapter>
 </ConfigureFlopflip>
 `;
 
@@ -82,7 +82,7 @@ exports[`without \`propKey\` when feature is disabled should match snapshot 1`] 
   }
   shouldDeferAdapterConfiguration={false}
 >
-  <FlagsSubscription
+  <ConfigureAdapter
     adapter={
       Object {
         "configure": [Function],
@@ -166,7 +166,7 @@ exports[`without \`propKey\` when feature is disabled should match snapshot 1`] 
         </injectFeatureToggles(FeatureComponent)>
       </Container>
     </Broadcast>
-  </FlagsSubscription>
+  </ConfigureAdapter>
 </ConfigureFlopflip>
 `;
 
@@ -187,7 +187,7 @@ exports[`without \`propKey\` when feature is disabled when enabling feature shou
   }
   shouldDeferAdapterConfiguration={false}
 >
-  <FlagsSubscription
+  <ConfigureAdapter
     adapter={
       Object {
         "configure": [Function],
@@ -271,6 +271,6 @@ exports[`without \`propKey\` when feature is disabled when enabling feature shou
         </injectFeatureToggles(FeatureComponent)>
       </Container>
     </Broadcast>
-  </FlagsSubscription>
+  </ConfigureAdapter>
 </ConfigureFlopflip>
 `;
