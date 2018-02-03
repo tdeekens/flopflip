@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import FlagSubscription, { AdapterStates } from './flags-subscription';
+import ConfigureAdapter, { AdapterStates } from './configure-adapter';
 
 const ChildComponent = () => <div />;
 const createTestProps = props => ({
@@ -28,9 +28,9 @@ describe('rendering', () => {
   beforeEach(() => {
     props = createTestProps();
     wrapper = shallow(
-      <FlagSubscription {...props}>
+      <ConfigureAdapter {...props}>
         <ChildComponent />
-      </FlagSubscription>
+      </ConfigureAdapter>
     );
   });
 
@@ -51,9 +51,9 @@ describe('lifecycle', () => {
     beforeEach(() => {
       props = createTestProps();
       wrapper = shallow(
-        <FlagSubscription {...props}>
+        <ConfigureAdapter {...props}>
           <ChildComponent />
-        </FlagSubscription>
+        </ConfigureAdapter>
       );
     });
 
@@ -71,9 +71,9 @@ describe('lifecycle', () => {
               },
             });
             wrapper = shallow(
-              <FlagSubscription {...props}>
+              <ConfigureAdapter {...props}>
                 <ChildComponent />
-              </FlagSubscription>
+              </ConfigureAdapter>
             );
           });
 
@@ -88,7 +88,7 @@ describe('lifecycle', () => {
           });
         });
 
-        describe('when the adapter configured', () => {
+        describe('when the adapter configures', () => {
           beforeEach(() => wrapper.instance().componentDidMount());
 
           it('should invoke `configure` on `adapter`', () => {
@@ -114,9 +114,9 @@ describe('lifecycle', () => {
       beforeEach(() => {
         props = createTestProps({ shouldDeferAdapterConfiguration: true });
         wrapper = shallow(
-          <FlagSubscription {...props}>
+          <ConfigureAdapter {...props}>
             <ChildComponent />
-          </FlagSubscription>
+          </ConfigureAdapter>
         );
 
         wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
@@ -141,9 +141,9 @@ describe('lifecycle', () => {
         });
 
         wrapper = shallow(
-          <FlagSubscription {...props}>
+          <ConfigureAdapter {...props}>
             <ChildComponent />
-          </FlagSubscription>
+          </ConfigureAdapter>
         );
 
         wrapper.instance().componentDidMount();
@@ -175,9 +175,9 @@ describe('lifecycle', () => {
               },
             });
             wrapper = shallow(
-              <FlagSubscription {...props}>
+              <ConfigureAdapter {...props}>
                 <ChildComponent />
-              </FlagSubscription>
+              </ConfigureAdapter>
             );
           });
 
@@ -196,9 +196,9 @@ describe('lifecycle', () => {
           beforeEach(() => {
             props = createTestProps();
             wrapper = shallow(
-              <FlagSubscription {...props}>
+              <ConfigureAdapter {...props}>
                 <ChildComponent />
-              </FlagSubscription>
+              </ConfigureAdapter>
             );
 
             return wrapper.instance().componentDidUpdate();
@@ -226,9 +226,9 @@ describe('lifecycle', () => {
         beforeEach(() => {
           props = createTestProps();
           wrapper = shallow(
-            <FlagSubscription {...props}>
+            <ConfigureAdapter {...props}>
               <ChildComponent />
-            </FlagSubscription>
+            </ConfigureAdapter>
           );
 
           wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
@@ -252,9 +252,9 @@ describe('lifecycle', () => {
               },
             });
             wrapper = shallow(
-              <FlagSubscription {...props}>
+              <ConfigureAdapter {...props}>
                 <ChildComponent />
-              </FlagSubscription>
+              </ConfigureAdapter>
             );
 
             wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
@@ -275,9 +275,9 @@ describe('lifecycle', () => {
           beforeEach(() => {
             props = createTestProps();
             wrapper = shallow(
-              <FlagSubscription {...props}>
+              <ConfigureAdapter {...props}>
                 <ChildComponent />
-              </FlagSubscription>
+              </ConfigureAdapter>
             );
 
             wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
@@ -313,9 +313,9 @@ describe('lifecycle', () => {
       beforeEach(() => {
         props = createTestProps({ shouldDeferAdapterConfiguration: true });
         wrapper = shallow(
-          <FlagSubscription {...props}>
+          <ConfigureAdapter {...props}>
             <ChildComponent />
-          </FlagSubscription>
+          </ConfigureAdapter>
         );
 
         return wrapper.instance().componentDidUpdate();
@@ -331,7 +331,7 @@ describe('lifecycle', () => {
 describe('statics', () => {
   describe('defaultProps', () => {
     it('should default `defaultFlags` to an empty object', () => {
-      expect(FlagSubscription.defaultProps.defaultFlags).toEqual({});
+      expect(ConfigureAdapter.defaultProps.defaultFlags).toEqual({});
     });
   });
 });
