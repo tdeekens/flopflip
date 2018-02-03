@@ -9,7 +9,7 @@ import type {
 } from '@flopflip/types';
 
 import React, { PureComponent, type ComponentType, type Node } from 'react';
-import { FlagsSubscription } from '@flopflip/react';
+import { ConfigureAdapter } from '@flopflip/react';
 import { Broadcast } from 'react-broadcast';
 import { FLAGS_CHANNEL } from '../../constants';
 
@@ -51,7 +51,7 @@ export default class Configure extends PureComponent<Props, State> {
 
   render(): Node {
     return (
-      <FlagsSubscription
+      <ConfigureAdapter
         adapter={this.props.adapter}
         adapterArgs={{
           ...this.props.adapterArgs,
@@ -68,7 +68,7 @@ export default class Configure extends PureComponent<Props, State> {
             ? React.Children.only(this.props.children)
             : null}
         </Broadcast>
-      </FlagsSubscription>
+      </ConfigureAdapter>
     );
   }
 }

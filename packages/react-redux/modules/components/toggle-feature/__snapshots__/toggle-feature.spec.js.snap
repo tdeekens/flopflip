@@ -35,7 +35,7 @@ exports[`<ToggleFeature> when feature is disabled should match snapshot 1`] = `
       handleUpdateStatus={[Function]}
       shouldDeferAdapterConfiguration={false}
     >
-      <FlagsSubscription
+      <ConfigureAdapter
         adapter={
           Object {
             "configure": [Function],
@@ -63,7 +63,7 @@ exports[`<ToggleFeature> when feature is disabled should match snapshot 1`] = `
             untoggledComponent={null}
           />
         </ToggleFeature>
-      </FlagsSubscription>
+      </ConfigureAdapter>
     </ConfigureFlopflip>
   </Connect(ConfigureFlopflip)>
 </Provider>
@@ -104,7 +104,7 @@ exports[`<ToggleFeature> when feature is disabled when enabling feature should m
       handleUpdateStatus={[Function]}
       shouldDeferAdapterConfiguration={false}
     >
-      <FlagsSubscription
+      <ConfigureAdapter
         adapter={
           Object {
             "configure": [Function],
@@ -136,7 +136,7 @@ exports[`<ToggleFeature> when feature is disabled when enabling feature should m
             </FeatureComponent>
           </ToggleFeature>
         </ToggleFeature>
-      </FlagsSubscription>
+      </ConfigureAdapter>
     </ConfigureFlopflip>
   </Connect(ConfigureFlopflip)>
 </Provider>

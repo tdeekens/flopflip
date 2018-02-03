@@ -32,8 +32,8 @@ describe('rendering', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render a `FlagsSubcription`', () => {
-    expect(wrapper).toRender('FlagsSubscription');
+  it('should render a `ConfigureAdapter`', () => {
+    expect(wrapper).toRender('ConfigureAdapter');
   });
 
   describe('with `children`', () => {
@@ -54,22 +54,22 @@ describe('rendering', () => {
     });
   });
 
-  describe('`of <FlagsSubscription />`', () => {
-    let flagsSubscriptionWrapper;
+  describe('`of <ConfigureAdapter />`', () => {
+    let configureAdapterWrapper;
 
     beforeEach(() => {
-      flagsSubscriptionWrapper = wrapper.find('FlagsSubscription');
+      configureAdapterWrapper = wrapper.find('ConfigureAdapter');
     });
 
     it('should receive `adapterArgs`', () => {
-      expect(flagsSubscriptionWrapper).toHaveProp(
+      expect(configureAdapterWrapper).toHaveProp(
         'adapterArgs',
         expect.objectContaining({})
       );
     });
 
     it('should receive `onStatusStateChange` and `onFlagsStateChange` in `adapterArgs`', () => {
-      expect(flagsSubscriptionWrapper).toHaveProp(
+      expect(configureAdapterWrapper).toHaveProp(
         'adapterArgs',
         expect.objectContaining({
           onStatusStateChange: props.handleUpdateStatus,
@@ -79,7 +79,7 @@ describe('rendering', () => {
     });
 
     it('should receive `defaultFlags`', () => {
-      expect(flagsSubscriptionWrapper).toHaveProp(
+      expect(configureAdapterWrapper).toHaveProp(
         'defaultFlags',
         wrapper.prop('defaultFlags')
       );

@@ -35,7 +35,7 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
       handleUpdateStatus={[Function]}
       shouldDeferAdapterConfiguration={false}
     >
-      <FlagsSubscription
+      <ConfigureAdapter
         adapter={
           Object {
             "configure": [Function],
@@ -90,7 +90,7 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
             </withProps(omitProps(branch(ToggledComponent)))>
           </branchOnFeatureToggle(ToggledComponent)>
         </Container>
-      </FlagsSubscription>
+      </ConfigureAdapter>
     </ConfigureFlopflip>
   </Connect(ConfigureFlopflip)>
 </Provider>
@@ -131,7 +131,7 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
       handleUpdateStatus={[Function]}
       shouldDeferAdapterConfiguration={false}
     >
-      <FlagsSubscription
+      <ConfigureAdapter
         adapter={
           Object {
             "configure": [Function],
@@ -181,7 +181,7 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
             </withProps(omitProps(branch(ToggledComponent)))>
           </branchOnFeatureToggle(ToggledComponent)>
         </Container>
-      </FlagsSubscription>
+      </ConfigureAdapter>
     </ConfigureFlopflip>
   </Connect(ConfigureFlopflip)>
 </Provider>
@@ -222,7 +222,7 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
       handleUpdateStatus={[Function]}
       shouldDeferAdapterConfiguration={false}
     >
-      <FlagsSubscription
+      <ConfigureAdapter
         adapter={
           Object {
             "configure": [Function],
@@ -270,7 +270,7 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
             </withProps(omitProps(branch(ToggledComponent)))>
           </branchOnFeatureToggle(ToggledComponent)>
         </Container>
-      </FlagsSubscription>
+      </ConfigureAdapter>
     </ConfigureFlopflip>
   </Connect(ConfigureFlopflip)>
 </Provider>
@@ -311,7 +311,7 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
       handleUpdateStatus={[Function]}
       shouldDeferAdapterConfiguration={false}
     >
-      <FlagsSubscription
+      <ConfigureAdapter
         adapter={
           Object {
             "configure": [Function],
@@ -361,7 +361,7 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
             </withProps(omitProps(branch(ToggledComponent)))>
           </branchOnFeatureToggle(ToggledComponent)>
         </Container>
-      </FlagsSubscription>
+      </ConfigureAdapter>
     </ConfigureFlopflip>
   </Connect(ConfigureFlopflip)>
 </Provider>
