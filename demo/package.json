@@ -12,7 +12,7 @@
     "redux": "3.7.2",
     "redux-logger": "3.0.6",
     "redux-thunk": "2.2.0",
-    "@flopflip/react-redux": "5.1.5",
+    "@flopflip/react-redux": "5.1.6",
     "@flopflip/react-broadcast": "5.1.5",
     "@flopflip/launchdarkly-adapter": "2.1.1",
     "@flopflip/memory-adapter": "1.0.5",
