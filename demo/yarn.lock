@@ -26,27 +26,17 @@
     create-react-context "^0.1.6"
     recompose "^0.26.0"
 
-"@flopflip/react-redux@5.1.5":
-  version "5.1.5"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-5.1.5.tgz#014216499dcee2d74004653ece38bdc5bc94dbf6"
+"@flopflip/react-redux@5.1.6":
+  version "5.1.6"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-5.1.6.tgz#0d1e7919c62109d7dac47a7b35d322bd5de1f79a"
   dependencies:
-    "@flopflip/react" "^5.0.9"
+    "@flopflip/react" "^5.0.10"
     lodash.isnil "^4.0.0"
     recompose "^0.26.0"
 
 "@flopflip/react@^5.0.10":
   version "5.0.10"
   resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-5.0.10.tgz#5758e913ee30eeefae16a35a84010c5b08da856b"
-  dependencies:
-    lodash.intersection "^4.4.0"
-    lodash.isnil "^4.0.0"
-    lodash.omit "^4.5.0"
-    recompose "^0.26.0"
-    warning "^3.0.0"
-
-"@flopflip/react@^5.0.9":
-  version "5.0.9"
-  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-5.0.9.tgz#97d340e7431ba8bcc8b2e8846770316a131d9da7"
   dependencies:
     lodash.intersection "^4.4.0"
     lodash.isnil "^4.0.0"
