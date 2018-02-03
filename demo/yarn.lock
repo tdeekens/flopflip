@@ -2,11 +2,11 @@
 # yarn lockfile v1
 
 
-"@flopflip/launchdarkly-adapter@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.1.0.tgz#116d8f1d1188398dbff1cd99f82b9223a0e04609"
+"@flopflip/launchdarkly-adapter@2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.1.1.tgz#93c6278b68d5c17fa7388bebaa6c9abcdb774c3f"
   dependencies:
-    ldclient-js "^1.2.0"
+    ldclient-js "^1.3.1"
     lodash.camelcase "^4.3.0"
     warning "^3.0.0"
 
@@ -3918,7 +3918,7 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-ldclient-js@^1.2.0:
+ldclient-js@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-1.3.1.tgz#f644a21ca11ad457a58a65f9f53d1120da49c0c5"
   dependencies:
