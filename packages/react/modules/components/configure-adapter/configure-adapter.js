@@ -29,7 +29,7 @@ type Props = {
 };
 type AdapterState = $Values<typeof AdapterStates>;
 
-export default class FlagsSubscription extends PureComponent<Props> {
+export default class ConfigureAdapter extends PureComponent<Props> {
   static defaultProps = {
     shouldDeferAdapterConfiguration: false,
     children: null,

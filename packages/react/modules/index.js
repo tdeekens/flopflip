@@ -4,7 +4,7 @@ export {
   branchOnFeatureToggle,
   ToggleFeature,
   SwitchFeature,
-  FlagsSubscription,
+  ConfigureAdapter,
 } from './components';
 
 export { default as isFeatureEnabled } from './helpers/is-feature-enabled';
