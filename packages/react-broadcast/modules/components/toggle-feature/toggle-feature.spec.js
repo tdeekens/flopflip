@@ -3,7 +3,6 @@ import { mount } from 'enzyme';
 import ToggleFeature from './toggle-feature';
 import Configure from '../configure';
 import memoryAdapter, { updateFlags } from '@flopflip/memory-adapter';
-import { FLAGS_CHANNEL } from '../../constants';
 
 const FeatureComponent = () => <div />;
 FeatureComponent.displayName = 'FeatureComponent';

@@ -3,7 +3,6 @@ import { mount } from 'enzyme';
 import branchOnFeatureToggle from './branch-on-feature-toggle';
 import Configure from '../configure';
 import memoryAdapter, { updateFlags } from '@flopflip/memory-adapter';
-import { FLAGS_CHANNEL } from '../../constants';
 
 const ToggledComponent = () => <div />;
 ToggledComponent.displayName = 'ToggledComponent';

@@ -28,17 +28,12 @@ exports[`with \`propKey\` should match snapshot 1`] = `
     defaultFlags={Object {}}
     shouldDeferAdapterConfiguration={false}
   >
-    <Broadcast
-      channel="@flopflip"
-      compareValues={[Function]}
+    <Provider
       value={Object {}}
     >
       <Container>
         <injectFeatureToggle(FeatureComponent)>
-          <Subscriber
-            channel="@flopflip"
-            quiet={false}
-          >
+          <Consumer>
             <withProps(omitProps(FeatureComponent))
               @flopflip/flags={Object {}}
             >
@@ -53,10 +48,10 @@ exports[`with \`propKey\` should match snapshot 1`] = `
                 </FeatureComponent>
               </omitProps(FeatureComponent)>
             </withProps(omitProps(FeatureComponent))>
-          </Subscriber>
+          </Consumer>
         </injectFeatureToggle(FeatureComponent)>
       </Container>
-    </Broadcast>
+    </Provider>
   </ConfigureAdapter>
 </ConfigureFlopflip>
 `;
@@ -89,17 +84,12 @@ exports[`without \`propKey\` when feature is disabled should match snapshot 1`] 
     defaultFlags={Object {}}
     shouldDeferAdapterConfiguration={false}
   >
-    <Broadcast
-      channel="@flopflip"
-      compareValues={[Function]}
+    <Provider
       value={Object {}}
     >
       <Container>
         <injectFeatureToggle(FeatureComponent)>
-          <Subscriber
-            channel="@flopflip"
-            quiet={false}
-          >
+          <Consumer>
             <withProps(omitProps(FeatureComponent))
               @flopflip/flags={Object {}}
             >
@@ -114,10 +104,10 @@ exports[`without \`propKey\` when feature is disabled should match snapshot 1`] 
                 </FeatureComponent>
               </omitProps(FeatureComponent)>
             </withProps(omitProps(FeatureComponent))>
-          </Subscriber>
+          </Consumer>
         </injectFeatureToggle(FeatureComponent)>
       </Container>
-    </Broadcast>
+    </Provider>
   </ConfigureAdapter>
 </ConfigureFlopflip>
 `;
@@ -150,9 +140,7 @@ exports[`without \`propKey\` when feature is disabled when enabling feature shou
     defaultFlags={Object {}}
     shouldDeferAdapterConfiguration={false}
   >
-    <Broadcast
-      channel="@flopflip"
-      compareValues={[Function]}
+    <Provider
       value={
         Object {
           "flag1": true,
@@ -161,10 +149,7 @@ exports[`without \`propKey\` when feature is disabled when enabling feature shou
     >
       <Container>
         <injectFeatureToggle(FeatureComponent)>
-          <Subscriber
-            channel="@flopflip"
-            quiet={false}
-          >
+          <Consumer>
             <withProps(omitProps(FeatureComponent))
               @flopflip/flags={
                 Object {
@@ -187,10 +172,10 @@ exports[`without \`propKey\` when feature is disabled when enabling feature shou
                 </FeatureComponent>
               </omitProps(FeatureComponent)>
             </withProps(omitProps(FeatureComponent))>
-          </Subscriber>
+          </Consumer>
         </injectFeatureToggle(FeatureComponent)>
       </Container>
-    </Broadcast>
+    </Provider>
   </ConfigureAdapter>
 </ConfigureFlopflip>
 `;

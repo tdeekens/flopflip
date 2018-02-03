@@ -28,17 +28,12 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
     defaultFlags={Object {}}
     shouldDeferAdapterConfiguration={false}
   >
-    <Broadcast
-      channel="@flopflip"
-      compareValues={[Function]}
+    <Provider
       value={Object {}}
     >
       <Container>
         <branchOnFeatureToggle(ToggledComponent)>
-          <Subscriber
-            channel="@flopflip"
-            quiet={false}
-          >
+          <Consumer>
             <withProps(omitProps(branch(ToggledComponent)))
               @flopflip/flags={Object {}}
             >
@@ -61,10 +56,10 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
                 </branch(ToggledComponent)>
               </omitProps(branch(ToggledComponent))>
             </withProps(omitProps(branch(ToggledComponent)))>
-          </Subscriber>
+          </Consumer>
         </branchOnFeatureToggle(ToggledComponent)>
       </Container>
-    </Broadcast>
+    </Provider>
   </ConfigureAdapter>
 </ConfigureFlopflip>
 `;
@@ -97,9 +92,7 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
     defaultFlags={Object {}}
     shouldDeferAdapterConfiguration={false}
   >
-    <Broadcast
-      channel="@flopflip"
-      compareValues={[Function]}
+    <Provider
       value={
         Object {
           "flag1": true,
@@ -108,10 +101,7 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
     >
       <Container>
         <branchOnFeatureToggle(ToggledComponent)>
-          <Subscriber
-            channel="@flopflip"
-            quiet={false}
-          >
+          <Consumer>
             <withProps(omitProps(branch(ToggledComponent)))
               @flopflip/flags={
                 Object {
@@ -138,10 +128,10 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
                 </branch(ToggledComponent)>
               </omitProps(branch(ToggledComponent))>
             </withProps(omitProps(branch(ToggledComponent)))>
-          </Subscriber>
+          </Consumer>
         </branchOnFeatureToggle(ToggledComponent)>
       </Container>
-    </Broadcast>
+    </Provider>
   </ConfigureAdapter>
 </ConfigureFlopflip>
 `;
@@ -174,17 +164,12 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
     defaultFlags={Object {}}
     shouldDeferAdapterConfiguration={false}
   >
-    <Broadcast
-      channel="@flopflip"
-      compareValues={[Function]}
+    <Provider
       value={Object {}}
     >
       <Container>
         <branchOnFeatureToggle(ToggledComponent)>
-          <Subscriber
-            channel="@flopflip"
-            quiet={false}
-          >
+          <Consumer>
             <withProps(omitProps(branch(ToggledComponent)))
               @flopflip/flags={Object {}}
             >
@@ -201,10 +186,10 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
                 </branch(ToggledComponent)>
               </omitProps(branch(ToggledComponent))>
             </withProps(omitProps(branch(ToggledComponent)))>
-          </Subscriber>
+          </Consumer>
         </branchOnFeatureToggle(ToggledComponent)>
       </Container>
-    </Broadcast>
+    </Provider>
   </ConfigureAdapter>
 </ConfigureFlopflip>
 `;
@@ -237,9 +222,7 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
     defaultFlags={Object {}}
     shouldDeferAdapterConfiguration={false}
   >
-    <Broadcast
-      channel="@flopflip"
-      compareValues={[Function]}
+    <Provider
       value={
         Object {
           "flag1": true,
@@ -248,10 +231,7 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
     >
       <Container>
         <branchOnFeatureToggle(ToggledComponent)>
-          <Subscriber
-            channel="@flopflip"
-            quiet={false}
-          >
+          <Consumer>
             <withProps(omitProps(branch(ToggledComponent)))
               @flopflip/flags={
                 Object {
@@ -278,10 +258,10 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
                 </branch(ToggledComponent)>
               </omitProps(branch(ToggledComponent))>
             </withProps(omitProps(branch(ToggledComponent)))>
-          </Subscriber>
+          </Consumer>
         </branchOnFeatureToggle(ToggledComponent)>
       </Container>
-    </Broadcast>
+    </Provider>
   </ConfigureAdapter>
 </ConfigureFlopflip>
 `;
