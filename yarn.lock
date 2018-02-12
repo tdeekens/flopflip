@@ -2385,9 +2385,9 @@ eslint-plugin-flowtype-errors@3.3.7:
     babel-runtime "^6.26.0"
     slash "^1.0.0"
 
-eslint-plugin-jest@21.9.0:
-  version "21.9.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.9.0.tgz#04d5687d8faa4dde3252b49bf76bd6fd73528102"
+eslint-plugin-jest@21.10.0:
+  version "21.10.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.10.0.tgz#f9499a59104f7ab3d2766a588ee9a8ff81a2fd46"
 
 eslint-plugin-prettier@2.6.0:
   version "2.6.0"
@@ -4423,7 +4423,7 @@ log-update@^1.0.2:
     ansi-escapes "^1.0.0"
     cli-cursor "^1.0.2"
 
-"logplease@github:NicoZelaya/logplease#1.3.0":
+logplease@NicoZelaya/logplease#1.3.0:
   version "1.3.0"
   resolved "https://codeload.github.com/NicoZelaya/logplease/tar.gz/b4ca204f892080a2011fe3b3f3b2b1c8c72bb29c"
 
