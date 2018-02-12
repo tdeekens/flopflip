@@ -32,7 +32,9 @@
   </a>
   <a href="https://codecov.io/gh/tdeekens/flopflip">
     <img alt="Codecov Coverage Status" src="https://img.shields.io/codecov/c/github/tdeekens/flopflip.svg?style=flat-square">
-  </a><br /><br />
+  </a>
+  <img alt="Made with Coffee" src="https://img.shields.io/badge/made%20with-%E2%98%95%EF%B8%8F%20coffee-yellow.svg">
+  <br /><br />
   <a href="https://techblog.commercetools.com/embracing-real-time-feature-toggling-in-your-react-application-a5e6052716a9">
     Embracing real-time feature toggling in your React application
   </a><br /><br />
