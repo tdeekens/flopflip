@@ -180,7 +180,7 @@ const reconfigure = ({
       )
     );
 
-  if (adapterState.user.key !== user.key) {
+  if (adapterState.user && adapterState.user.key !== user.key) {
     adapterState.user = ensureUser(user);
 
     return changeUserContext(adapterState.user);
