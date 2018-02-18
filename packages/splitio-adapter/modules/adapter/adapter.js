@@ -227,7 +227,7 @@ const reconfigure = ({
           '@flopflip/splitio-adapter: please configure adapter before reconfiguring.'
         )
       );
-    if (adapterState.user.key !== user.key) {
+    if (adapterState.user && adapterState.user.key !== user.key) {
       let flagNames: Array<FlagName>;
       let flags: Flags;
 
