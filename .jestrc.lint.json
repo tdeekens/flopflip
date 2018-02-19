@@ -1,4 +1,5 @@
 {
   "runner": "jest-runner-eslint",
-  "displayName": "lint"
+  "displayName": "lint",
+  "testMatch": ["<rootDir>/packages/**/*.js"]
 }
