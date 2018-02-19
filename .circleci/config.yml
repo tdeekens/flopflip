@@ -16,11 +16,11 @@ aliases:
     # Ignoring scripts (e.g. post-install) to gain more control
     # in the jobs to only e.g. build when explicitely needed.
     command: yarn install --pure-lockfile
-  
+
   - &lint
     name: Linting
     command: yarn lint
-  
+
   - &type_check
     name: Type checking
     command: yarn flow
@@ -63,6 +63,7 @@ jobs:
       - checkout
       - restore-cache: *restore_yarn_cache
       - run: *install
+      - run: *build
       - run: *lint
   type_check:
     <<: *node8Environment
