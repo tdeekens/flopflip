@@ -42,7 +42,7 @@
     "@commitlint/config-conventional": "6.1.0",
     "@commercetools/jest-enzyme-matchers": "1.1.2",
     "babel-core": "6.26.0",
-    "babel-eslint": "8.2.1",
+    "babel-eslint": "8.2.2",
     "babel-jest": "22.2.2",
     "babel-plugin-external-helpers": "6.22.0",
     "babel-polyfill": "6.26.0",
