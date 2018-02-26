@@ -4,11 +4,11 @@
 
 <h2 align="center">🎚 flopflip - Feature Toggling 🚦</h2>
 <p align="center">
-  <i>Toggle features (flip or flop) in being maintained in a Redux state slice or a broadcasting system (through the context) being accessible through a set of Higher-Order Components in React.</i>
+  <b>Toggle (flip or flop) features being stored in Redux or in a broadcasting system (through the context) via a set of React components or HoCs.</b>
 </p>
 
 <p align="center">
-  <em>
+  <sub>
   ❤️
   React
   · Redux
@@ -23,8 +23,10 @@
   · Lerna
   · Rollup
   🙏
-  </em>
+  </sub>
 </p>
+
+![divider](https://github.com/tdeekens/flopflip/raw/master/divider.png)
 
 <p align="center">
   <a href="https://circleci.com/gh/tdeekens/flopflip">
@@ -50,13 +52,15 @@
   <br /><br />
 </details>
 
-## Browser support
+![divider](https://github.com/tdeekens/flopflip/raw/master/divider.png)
+
+## ❯ Browser support
 
 | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png" alt="IE / Edge" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png" alt="Firefox" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png" alt="Chrome" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png" alt="Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/opera.png" alt="Opera" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Opera | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari-ios.png" alt="iOS Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>iOS Safari | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome-android.png" alt="Chrome for Android" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome for Android |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | IE11, Edge                                                                                                                                                                                                             | last 2 versions                                                                                                                                                                                                       | last 2 versions                                                                                                                                                                                                    | last 2 versions                                                                                                                                                                                                    | last 2 versions                                                                                                                                                                                                 | last 2 versions                                                                                                                                                                                                                | last version                                                                                                                                                                                                                                       |
 
-## Package Status
+## ❯ Package Status
 
 | Package                                                  | Version                                                                                    | Dependencies                                                                                                             |
 | -------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
@@ -102,7 +106,7 @@
 [react-redux-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/react-redux
 [react-redux-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/react-redux
 
-## Installation
+## ❯ Installation
 
 This is a mono repository maintained using
 [lerna](https://github.com/lerna/lerna). It currently contains five
@@ -120,7 +124,7 @@ or
 
 `yarn add @flopflip/react-broadcast` or `npm i @flopflip/react-broadcast --save`
 
-## Demo
+## ❯ Demo
 
 A minimal [demo](/demo) exists and can be adjusted to point to a
 [custom](https://github.com/tdeekens/flopflip/blob/master/demo/src/App.js#L108)
@@ -137,13 +141,13 @@ Then simply run:
 A browser window should open and the network tab should show feature flags being
 loaded from LaunchDarkly.
 
-## Documentation
+## ❯ Documentation
 
 Flopflip allows you to manage feature flags through the notion of adapters (e.g.
 LaunchDarkly or LocalStorage) within an application written using React with or
 without Redux.
 
-### `@flopflip/react-redux` & `@flopflip/react-broadcast` API & exports
+### `@flopflip/react-redux` & `@flopflip/react-broadcast` API
 
 * `ConfigureFlopFlip` a component to configure flopflip with an adapter
   (alternative to the store enhancer)
@@ -249,7 +253,7 @@ import adapter from '@flopflip/launchdarkly-adapter';
 </ConfigureFlopFlip>;
 ```
 
-### `@flopflip/react-broadcast` `@flopflip/react-redux` API & exports for toggling
+### `@flopflip/react-broadcast` `@flopflip/react-redux` API
 
 Apart from `ConfigureFlopFlip` both packages `@flopflip/react-broadcast` and
 `@flopflip/react-redux` export the same set of components to toggle based on
@@ -498,7 +502,7 @@ export default injectFeatureToggle(flagsNames.TOGGLE_B)(Component);
 The feature flags will be available as `props` within the component allowing
 some custom decisions based on their value.
 
-### `@flopflip/react-redux` additional API & exports
+### Additional `@flopflip/react-redux` API
 
 We also expose our internal selectors to access feature toggle(s) directly so
 that the use of `injectFeatureToggle` or `injectFeatureToggles` is not enforced
