@@ -26,8 +26,6 @@
   </sub>
 </p>
 
-![divider](https://github.com/tdeekens/flopflip/raw/master/divider.png)
-
 <p align="center">
   <a href="https://circleci.com/gh/tdeekens/flopflip">
     <img alt="CircleCI Status" src="https://circleci.com/gh/tdeekens/flopflip.svg?style=shield&circle-token=63ee7a0e1c766b6b76da6f7ba4c7b9f2a7876191">
@@ -51,8 +49,6 @@
   <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/demo.gif" />
   <br /><br />
 </details>
-
-![divider](https://github.com/tdeekens/flopflip/raw/master/divider.png)
 
 ## ❯ Browser support
 
