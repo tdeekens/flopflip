@@ -615,5 +615,5 @@ array to keep install time short.
 
 Also feel free to use
 [unpkg.com](https://unpkg.com/@flopflip/react-redux@latest/dist/@flopflip-react-redux.umd.min.js)
-as a CDN to the [dist](https://unpkg.com/@flopflip/react-redux@3.0.1/dist/)
+as a CDN to the [dist](https://unpkg.com/@flopflip/react-redux@latest/dist/)
 files.
