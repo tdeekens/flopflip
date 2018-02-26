@@ -44,7 +44,7 @@
 </p>
 
 <details><br /><br />
-  <summary>Want to see a demo?</summary>
+  <summary><b>Want to see a demo?</b></summary>
 
   <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/demo.gif" />
   <br /><br />
