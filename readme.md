@@ -131,8 +131,8 @@ though.
 
 Then simply run:
 
-1. From the repositories root: `yarn build:watch`
-2. From `/demo`: first `yarn` and then `yarn start`
+1.  From the repositories root: `yarn build:watch`
+2.  From `/demo`: first `yarn` and then `yarn start`
 
 A browser window should open and the network tab should show feature flags being
 loaded from LaunchDarkly.
@@ -430,9 +430,10 @@ const ComponentToBeRenderedInstead = () => (
   <h3>At least there is a fallback!</h3>
 );
 
-export default branchOnFeatureToggle({ flag: flagsNames.THE_FEATURE_TOGGLE }, ComponentToBeRenderedInstead)(
-  ComponentToBeToggled
-);
+export default branchOnFeatureToggle(
+  { flag: flagsNames.THE_FEATURE_TOGGLE },
+  ComponentToBeRenderedInstead
+)(ComponentToBeToggled);
 ```
 
 or when the flag is multi variation
@@ -446,10 +447,13 @@ const ComponentToBeRenderedInstead = () => (
   <h3>At least there is a fallback!</h3>
 );
 
-export default branchOnFeatureToggle({
-  flag: flagsNames.THE_FEATURE_TOGGLE,
-  variation: 'variate1',
-}, ComponentToBeRenderedInstead)(ComponentToBeToggled);
+export default branchOnFeatureToggle(
+  {
+    flag: flagsNames.THE_FEATURE_TOGGLE,
+    variation: 'variate1',
+  },
+  ComponentToBeRenderedInstead
+)(ComponentToBeToggled);
 ```
 
 #### `injectFeatureToggles(flagNames: Array<String>, propKey?: String, areOwnPropsEqual?: Function)`
