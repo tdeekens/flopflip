@@ -1,12 +1,12 @@
-import splitio from '@splitsoftware/splitio';
+import { SplitFactory } from '@splitsoftware/splitio';
 import adapter, {
   camelCaseFlags,
   createAnonymousUserKey,
   normalizeFlag,
 } from './adapter';
 
-jest.mock('@splitsoftware/splitio', () =>
-  jest.fn(() => ({
+jest.mock('@splitsoftware/splitio', () => ({
+  SplitFactory: jest.fn(() => ({
     client: jest.fn(() => ({
       on: jest.fn((_, cb) => cb()),
       getTreatments: jest.fn(() => ({})),
@@ -18,8 +18,8 @@ jest.mock('@splitsoftware/splitio', () =>
     manager: jest.fn(() => ({
       names: jest.fn(() => []),
     })),
-  }))
-);
+  })),
+}));
 
 const authorizationKey = '123-abc';
 const userWithKey = { key: 'foo-user' };
@@ -48,8 +48,8 @@ describe('when configuring', () => {
       });
     });
 
-    it('should initialize the `splitio` client with `authorizationKey` and given `user`', () => {
-      expect(splitio).toHaveBeenCalledWith({
+    it('should initialize the `SplitFactory` client with `authorizationKey` and given `user`', () => {
+      expect(SplitFactory).toHaveBeenCalledWith({
         core: {
           authorizationKey,
           key: userWithKey.key,
@@ -68,8 +68,8 @@ describe('when configuring', () => {
       })
     );
 
-    it('should initialize the `splitio` with `authorizationKey` and random `user` `key`', () => {
-      expect(splitio).toHaveBeenCalledWith({
+    it('should initialize the `SplitFactory` with `authorizationKey` and random `user` `key`', () => {
+      expect(SplitFactory).toHaveBeenCalledWith({
         core: {
           authorizationKey,
           key: expect.any(String),
@@ -101,8 +101,8 @@ describe('when configuring', () => {
       });
     });
 
-    it('should initialize the `splitio` client with `options`', () => {
-      expect(splitio).toHaveBeenCalledWith({
+    it('should initialize the `SplitFactory` client with `options`', () => {
+      expect(SplitFactory).toHaveBeenCalledWith({
         ...options,
         core: {
           authorizationKey,
@@ -129,8 +129,8 @@ describe('when configuring', () => {
       });
     });
 
-    it('should initialize the `splitio` client with `core` options in `core` property', () => {
-      expect(splitio).toHaveBeenCalledWith({
+    it('should initialize the `SplitFactory` client with `core` options in `core` property', () => {
+      expect(SplitFactory).toHaveBeenCalledWith({
         core: {
           ...coreOptions,
           authorizationKey,
@@ -165,7 +165,7 @@ describe('when configuring', () => {
         })),
       };
 
-      splitio.mockReturnValue(factory);
+      SplitFactory.mockReturnValue(factory);
 
       return adapter.configure({
         authorizationKey,
@@ -223,7 +223,7 @@ describe('when configuring', () => {
           })),
         };
 
-        splitio.mockReturnValue(factory);
+        SplitFactory.mockReturnValue(factory);
 
         return adapter
           .configure({

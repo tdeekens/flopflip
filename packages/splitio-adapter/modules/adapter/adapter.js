@@ -8,7 +8,7 @@ import type {
   OnFlagsStateChangeCallback,
   OnStatusStateChangeCallback,
 } from '@flopflip/types';
-import splitio from '@splitsoftware/splitio';
+import { SplitFactory } from '@splitsoftware/splitio';
 import camelCase from 'lodash.camelcase';
 
 type Client = {
@@ -122,7 +122,7 @@ const initializeClient = (
   key: string,
   options: ClientInitializationOptions = {}
 ): { client: Client, manager: Manager } => {
-  const factory = splitio({
+  const sdk = SplitFactory({
     ...omit(options, ['core']),
     core: {
       authorizationKey,
@@ -132,8 +132,8 @@ const initializeClient = (
   });
 
   return {
-    client: factory.client(),
-    manager: factory.manager(),
+    client: sdk.client(),
+    manager: sdk.manager(),
   };
 };
 
