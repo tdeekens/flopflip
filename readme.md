@@ -192,7 +192,7 @@ It takes the `props`:
 
 Whenever you do not want to have the state of all flags persisted in redux the
 minimal configuration for a setup with `@flopflip/react-broadcast` and
-LaunchDarkly would be nothing more than
+LaunchDarkly would be nothing more than:
 
 ```js
 import { ConfigureFlopFlip } from '@flopflip/react-redux';
@@ -267,6 +267,8 @@ share common logic.
   the status of a passed feature flag
 * `SwitchFeature` a component that renders its first <ToggleFeature> child based
   on the status of a passed feature flag
+  
+_Note:_ that all passed ˋflagNamesˋ passed as ˋflagˋ are a string. Depending on the adapter used _these are normalized_ to be camel cased. This means that whenever a ˋfoo-flag-nameˋ is configured in e.g. LaunchDarkly or splitio it will have to be specified as ˋfooFlagNameˋ. The same applies for a ˋfoo_flag_nameˋ. This is meant to help using flags in an adapter agnostic way. Whenever a flag is otherwise passed in the non-normalized form it is likely to default to ˋfalseˋ which is unintended in most cases.
 
 #### `ToggleFeature`
 
