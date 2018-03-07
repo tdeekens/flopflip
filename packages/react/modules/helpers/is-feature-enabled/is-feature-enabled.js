@@ -1,3 +1,5 @@
+import camelCase from 'lodash.camelcase';
+import warning from 'warning';
 import { DEFAULT_FLAG_PROP_KEY } from '../../constants';
 
 /**
@@ -12,6 +14,13 @@ import { DEFAULT_FLAG_PROP_KEY } from '../../constants';
 const isFeatureEnabled = (
   flagName = DEFAULT_FLAG_PROP_KEY,
   flagVariation = true
-) => props => props[flagName] === flagVariation;
+) => {
+  warning(
+    flagName === camelCase(flagName),
+    '@flopflip/react: passed flag name does not seem to be normalized which may result in unexpected toggling. Please refer to our readme for more information: https://github.com/tdeekens/flopflip#flag-normalization'
+  );
+
+  return props => props[flagName] === flagVariation;
+};
 
 export default isFeatureEnabled;
