@@ -1,4 +1,7 @@
+import warning from 'warning';
 import isFeatureEnabled from './is-feature-enabled';
+
+jest.mock('warning');
 
 describe('with existing flag', () => {
   describe('with flag variation', () => {
@@ -23,6 +26,20 @@ describe('with existing flag', () => {
       const props = { fooFlag: false };
       expect(isFeatureEnabled('fooFlag')(props)).toBe(false);
     });
+  });
+});
+
+describe('with non normalized flag', () => {
+  it('should indicate feature being disabled', () => {
+    const props = { fooFlag: true };
+    expect(isFeatureEnabled('foo-flag')(props)).toBe(false);
+  });
+
+  it('should invoke `warning`', () => {
+    const props = { fooFlag: false };
+    isFeatureEnabled('fooFlag')(props);
+
+    expect(warning).toHaveBeenCalled();
   });
 });
 
