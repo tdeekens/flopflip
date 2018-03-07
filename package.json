@@ -68,7 +68,7 @@
     "flow-bin": "0.66.0",
     "husky": "0.14.3",
     "jest": "22.4.2",
-    "jest-enzyme": "5.0.0",
+    "jest-enzyme": "5.0.1",
     "jest-localstorage-mock": "2.2.0",
     "jest-runner-eslint": "0.4.0",
     "lerna": "2.9.0",
