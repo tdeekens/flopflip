@@ -49,9 +49,9 @@
     "react-dom": "^15.6.0 || ^16.0.0"
   },
   "dependencies": {
-    "@flopflip/react": "^5.0.12",
-    "create-react-context": "^0.2.0",
-    "recompose": "^0.26.0"
+    "@flopflip/react": "5.0.12",
+    "create-react-context": "0.2.1",
+    "recompose": "0.26.0"
   },
   "keywords": [
     "react",

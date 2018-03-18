@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@flopflip/types": "^1.0.1",
+    "@flopflip/types": "1.0.1",
     "cpx": "1.5.0",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
@@ -46,9 +46,9 @@
     "redux": "3.7.2"
   },
   "dependencies": {
-    "@flopflip/react": "^5.0.12",
-    "lodash.isnil": "^4.0.0",
-    "recompose": "^0.26.0"
+    "@flopflip/react": "5.0.12",
+    "lodash.isnil": "4.0.0",
+    "recompose": "0.26.0"
   },
   "peerDependencies": {
     "react": "^15.6.0 || ^16.0.0",

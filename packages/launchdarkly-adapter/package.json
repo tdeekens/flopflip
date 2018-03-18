@@ -30,14 +30,14 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@flopflip/types": "^1.0.1",
+    "@flopflip/types": "1.0.1",
     "enzyme": "3.3.0",
     "enzyme-to-json": "3.3.3"
   },
   "dependencies": {
-    "ldclient-js": "^1.3.1",
-    "lodash.camelcase": "^4.3.0",
-    "warning": "^3.0.0"
+    "ldclient-js": "1.5.1",
+    "lodash.camelcase": "4.3.0",
+    "warning": "3.0.0"
   },
   "keywords": [
     "feature-flags",
