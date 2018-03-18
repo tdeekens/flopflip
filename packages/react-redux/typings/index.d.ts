@@ -2,24 +2,18 @@
 // TypeScript Version: 2.x
 
 declare module '@flopflip/react-redux' {
-  import { Flag, FlagName, Flags } from '@flopflip/types';
+  import {
+    FlagName,
+    FlagVariation,
+    Flags,
+    ToggleComponentCommonProps,
+  } from '@flopflip/types';
 
   export * from '@flopflip/types';
 
-  /**
-   * NOTE:
-   *   We do not extend `ToggleCOmponentProps` from `types`
-   *   as we do not want the `isFeatureEnabled` property
-   *   showing up.
-   *   Extending `Flag` however will add `flag` and `variation`.
-   */
-  export interface ToggleComponentProps extends Flag {
-    toggledComponent?: React.ComponentType<any>;
-    untoggledComponent?: React.ComponentType<any>;
-    render?: () => React.ReactNode;
-    children?:
-      | (({ isFeatureEnabled: boolean }) => React.ReactNode)
-      | React.ReactNode;
+  export interface ToggleComponentProps extends ToggleComponentCommonProps {
+    flag: FlagName;
+    variation?: FlagVariation;
   }
 
   export class ToggleFeature extends React.Component<

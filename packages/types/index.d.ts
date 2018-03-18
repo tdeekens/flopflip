@@ -33,13 +33,16 @@ declare module '@flopflip/types' {
     reconfigure: (adapterArgs: AdapterArgs) => Promise<any>;
   };
 
-  export interface ToggleComponentProps {
+  export interface ToggleComponentCommonProps {
     toggledComponent?: React.ComponentType<any>;
     untoggledComponent?: React.ComponentType<any>;
     render?: () => React.ReactNode;
     children?:
       | (({ isFeatureEnabled: boolean }) => React.ReactNode)
       | React.ReactNode;
+    isFeatureEnabled: boolean;
+  }
+  export interface ToggleComponentProps extends ToggleComponentCommonProps {
     isFeatureEnabled: boolean;
   }
   export interface ConfigureComponentProps {
