@@ -1,4 +1,5 @@
 import ldClient from 'ldclient-js';
+import warning from 'warning';
 import adapter, { camelCaseFlags, createAnonymousUserKey } from './adapter';
 
 const clientSideId = '123-abc';
@@ -16,6 +17,7 @@ const createClient = jest.fn(apiOverwrites => ({
 }));
 
 jest.mock('ldclient-js');
+jest.mock('warning');
 
 describe('when configuring', () => {
   let onStatusStateChange;
@@ -33,6 +35,24 @@ describe('when configuring', () => {
       return expect(adapter.reconfigure({ user: userWithKey })).rejects.toEqual(
         expect.any(Error)
       );
+    });
+  });
+
+  describe('when changing user context before configured', () => {
+    const updatedUserProps = {
+      bar: 'baz',
+      foo: 'far',
+    };
+    let updatingOfUserContext;
+
+    beforeEach(() => {
+      updatingOfUserContext = adapter.updateUserContext(updatedUserProps);
+
+      return updatingOfUserContext.catch(() => {});
+    });
+
+    it('should reject `updateUserContext`', () => {
+      expect(updatingOfUserContext).rejects.toEqual(expect.any(Error));
     });
   });
 

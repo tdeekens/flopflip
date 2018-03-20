@@ -84,10 +84,17 @@ const changeUserContext = (nextUser: User): Promise<any> =>
         new Error('Can not change user context: client not yet initialized.')
       );
 const updateUserContext = (updatedUserProps: User): Promise<any> => {
+  const isAdapterReady = adapterState.isConfigured && adapterState.isReady;
+
   warning(
-    adapterState.isConfigured && adapterState.isReady,
+    isAdapterReady,
     '@flopflip/launchdarkly-adapter: adapter not ready and configured. User context can not be updated before.'
   );
+
+  if (!isAdapterReady)
+    return Promise.reject(
+      new Error('Can not update user context: adapter not yet ready.')
+    );
 
   return changeUserContext({ ...adapterState.user, ...updatedUserProps });
 };
