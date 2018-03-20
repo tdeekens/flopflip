@@ -32,17 +32,19 @@ const adapterState: AdapterState = {
   client: null,
 };
 
-const normalizeFlag = (flagName: FlagName, flagValue?: FlagVariation): Flag => [
-  camelCase(flagName),
+const normalizeFlagName = (flagName: FlagName): FlagName => camelCase(flagName);
+
+const normalizeFlagValue = (flagValue?: FlagVariation): FlagVariation =>
   // Multi variate flags contain a string or `null` - `false` seems more natural.
-  flagValue === null || flagValue === undefined ? false : flagValue,
-];
+  flagValue === null || flagValue === undefined ? false : flagValue;
 
 const subscribeToFlagsChanges = ({
   rawFlags,
+  skipFlagNormalization,
   onFlagsStateChange,
 }: {
   rawFlags: Flags,
+  skipFlagNormalization: boolean,
   onFlagsStateChange: OnFlagsStateChangeCallback,
 }) => {
   for (const flagName in rawFlags) {
@@ -52,8 +54,12 @@ const subscribeToFlagsChanges = ({
       adapterState.client
     ) {
       adapterState.client.on(`change:${flagName}`, flagValue => {
-        const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
-          flagName,
+        const normalizedFlagName: FlagName = !skipFlagNormalization
+          ? normalizeFlagName(flagName)
+          : flagName;
+        // NOTE: We still normalize the flagValue as it's otherwise
+        // breaking for all consuming components.
+        const normalizedFlagValue: FlagVariation = normalizeFlagValue(
           flagValue
         );
 
@@ -102,10 +108,8 @@ const updateUserContext = (updatedUserProps: User): Promise<any> => {
 // NOTE: Exported for testing only
 export const camelCaseFlags = (rawFlags: Flags): Flags =>
   Object.entries(rawFlags).reduce((camelCasedFlags, [flagName, flagValue]) => {
-    const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
-      flagName,
-      flagValue
-    );
+    const normalizedFlagName: FlagName = normalizeFlagName(flagName);
+    const normalizedFlagValue: FlagVariation = normalizeFlagValue(flagValue);
     // Can't return expression as it is the assigned value
     camelCasedFlags[normalizedFlagName] = normalizedFlagValue;
 
@@ -115,9 +119,11 @@ export const camelCaseFlags = (rawFlags: Flags): Flags =>
 const subscribe = ({
   onFlagsStateChange,
   onStatusStateChange,
+  skipFlagNormalization,
 }: {
   onFlagsStateChange: OnFlagsStateChangeCallback,
   onStatusStateChange: OnStatusStateChangeCallback,
+  skipFlagNormalization: boolean,
 }): Promise<any> => {
   if (adapterState.client) {
     return adapterState.client.waitUntilReady().then(() => {
@@ -130,10 +136,13 @@ const subscribe = ({
       onStatusStateChange({ isReady: true });
       if (rawFlags) {
         // ...and flush initial state of flags
-        onFlagsStateChange(camelCaseFlags(rawFlags));
+        onFlagsStateChange(
+          !skipFlagNormalization ? camelCaseFlags(rawFlags) : rawFlags
+        );
         // ...to finally subscribe to later changes.
         subscribeToFlagsChanges({
           rawFlags,
+          skipFlagNormalization,
           onFlagsStateChange,
         });
       }
@@ -150,11 +159,13 @@ const configure = ({
   user,
   onFlagsStateChange,
   onStatusStateChange,
+  skipFlagNormalization,
 }: {
   clientSideId: string,
   user: User,
   onFlagsStateChange: OnFlagsStateChangeCallback,
   onStatusStateChange: OnStatusStateChangeCallback,
+  skipFlagNormalization: boolean,
 }): Promise<any> => {
   adapterState.user = ensureUser(user);
   adapterState.client = initializeClient(clientSideId, adapterState.user);
@@ -162,6 +173,7 @@ const configure = ({
   return subscribe({
     onFlagsStateChange,
     onStatusStateChange,
+    skipFlagNormalization,
   }).then(() => {
     adapterState.isConfigured = true;
 
@@ -172,13 +184,9 @@ const configure = ({
 const reconfigure = ({
   clientSideId,
   user,
-  onFlagsStateChange,
-  onStatusStateChange,
 }: {
   clientSideId: string,
   user: User,
-  onFlagsStateChange: OnFlagsStateChangeCallback,
-  onStatusStateChange: OnStatusStateChangeCallback,
 }): Promise<any> => {
   if (!adapterState.isReady || !adapterState.isConfigured || !adapterState.user)
     return Promise.reject(

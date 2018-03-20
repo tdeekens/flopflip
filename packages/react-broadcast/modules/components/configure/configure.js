@@ -15,6 +15,7 @@ import { ConfigureAdapter } from '@flopflip/react';
 type Props = {
   children: Node,
   shouldDeferAdapterConfiguration?: boolean,
+  skipFlagNormalization?: boolean,
   defaultFlags?: Flags,
   adapterArgs: AdapterArgs,
   adapter: Adapter,
@@ -32,6 +33,7 @@ export default class Configure extends PureComponent<Props, State> {
     children: null,
     defaultFlags: {},
     shouldDeferAdapterConfiguration: false,
+    skipFlagNormalization: false,
   };
 
   state: { flags: Flags } = {
@@ -56,6 +58,7 @@ export default class Configure extends PureComponent<Props, State> {
         adapter={this.props.adapter}
         adapterArgs={{
           ...this.props.adapterArgs,
+          skipFlagNormalization: this.props.skipFlagNormalization,
           onStatusStateChange: this.handleUpdateStatus,
           onFlagsStateChange: this.handleUpdateFlags,
         }}
