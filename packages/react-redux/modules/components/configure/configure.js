@@ -15,6 +15,7 @@ import { updateStatus, updateFlags } from './../../ducks';
 type Props = {
   children?: Node,
   shouldDeferAdapterConfiguration?: boolean,
+  skipFlagNormalization?: boolean,
   defaultFlags?: Flags,
   adapterArgs: AdapterArgs,
   adapter: mixed,
@@ -34,6 +35,7 @@ export class Configure extends PureComponent<Props & ConnectedProps, State> {
     children: null,
     defaultFlags: {},
     shouldDeferAdapterConfiguration: false,
+    skipFlagNormalization: false,
   };
 
   render(): Node {
@@ -42,6 +44,7 @@ export class Configure extends PureComponent<Props & ConnectedProps, State> {
         adapter={this.props.adapter}
         adapterArgs={{
           ...this.props.adapterArgs,
+          skipFlagNormalization: this.props.skipFlagNormalization,
           onStatusStateChange: this.props.handleUpdateStatus,
           onFlagsStateChange: this.props.handleUpdateFlags,
         }}
