@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@flopflip/react": "^5.0.13",
-    "create-react-context": "0.2.1",
+    "create-react-context": "0.1.6",
     "recompose": "0.26.0"
   },
   "keywords": [
