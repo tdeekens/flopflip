@@ -9,6 +9,7 @@ import type {
   OnStatusStateChangeCallback,
 } from '@flopflip/types';
 import warning from 'warning';
+import isEqual from 'lodash.isequal';
 import { initialize } from 'ldclient-js';
 import camelCase from 'lodash.camelcase';
 
@@ -171,7 +172,7 @@ const configure = ({
 
 const reconfigure = ({
   clientSideId,
-  user,
+  user: nextUser,
   onFlagsStateChange,
   onStatusStateChange,
 }: {
@@ -187,8 +188,8 @@ const reconfigure = ({
       )
     );
 
-  if (adapterState.user && adapterState.user.key !== user.key) {
-    adapterState.user = ensureUser(user);
+  if (adapterState.user && !isEqual(adapterState.user, nextUser)) {
+    adapterState.user = ensureUser(nextUser);
 
     return changeUserContext(adapterState.user);
   }
