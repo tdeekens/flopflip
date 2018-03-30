@@ -127,31 +127,31 @@
   "bundlesize": [
     {
       "path": "./packages/launchdarkly-adapter/dist/@flopflip-launchdarkly-adapter.es.js",
-      "threshold": "4Kb"
+      "threshold": "2.5Kb"
     },
     {
-      "path": "./packages/launchdarkly-adapter/dist/@flopflip-localstorage-adapter.es.js",
-      "threshold": "4Kb"
+      "path": "./packages/localstorage-adapter/dist/@flopflip-localstorage-adapter.es.js",
+      "threshold": "900B"
     },
     {
-      "path": "./packages/launchdarkly-adapter/dist/@flopflip-memory-adapter.es.js",
-      "threshold": "4Kb"
+      "path": "./packages/memory-adapter/dist/@flopflip-memory-adapter.es.js",
+      "threshold": "600B"
     },
     {
-      "path": "./packages/launchdarkly-adapter/dist/@flopflip-splitio-adapter.es.js",
-      "threshold": "4Kb"
+      "path": "./packages/splitio-adapter/dist/@flopflip-splitio-adapter.es.js",
+      "threshold": "95Kb"
     },
     {
-      "path": "./packages/launchdarkly-adapter/dist/@flopflip-react.es.js",
-      "threshold": "4Kb"
+      "path": "./packages/react/dist/@flopflip-react.es.js",
+      "threshold": "4.5Kb"
     },
     {
-      "path": "./packages/launchdarkly-adapter/dist/@flopflip-react-broadcast.umd.min.js",
-      "threshold": "4Kb"
+      "path": "./packages/react-broadcast/dist/@flopflip-react-broadcast.umd.min.js",
+      "threshold": "3.75Kb"
     },
     {
-      "path": "./packages/launchdarkly-adapter/dist/@flopflip-react-redux.umd.min.js",
-      "threshold": "4Kb"
+      "path": "./packages/react-redux/dist/@flopflip-react-redux.umd.min.js",
+      "threshold": "3.75Kb"
     }
   ]
 }
