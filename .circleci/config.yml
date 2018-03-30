@@ -27,7 +27,7 @@ aliases:
 
   - &bundlesize
     name: Checking bundle sizes
-    command: yarn test:bundlesize
+    command: yarn test:sizes
 
   - &build
     name: Building
