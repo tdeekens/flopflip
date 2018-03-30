@@ -51,7 +51,7 @@
     "babel-preset-flow": "6.23.0",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "6.24.1",
-    "bundlesize": "^0.17.0",
+    "bundlesize": "0.17.0",
     "check-node-version": "3.2.0",
     "codecov": "3.0.0",
     "cross-env": "5.1.4",
