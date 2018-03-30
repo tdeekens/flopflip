@@ -40,7 +40,6 @@
     "lodash.camelcase": "4.3.0",
     "react": "16.2.0",
     "react-dom": "16.2.0",
-    "react-test-renderer": "16.2.0",
     "warning": "3.0.0"
   },
   "peerDependencies": {
