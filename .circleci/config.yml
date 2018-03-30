@@ -61,7 +61,7 @@ jobs:
       - run: *install
       - restore-cache: *restore_yarn_cache
       - run: *build
-  bundlesize:
+  bundlesize_check:
     <<: *node8Environment
     steps:
       - checkout
@@ -107,7 +107,7 @@ workflows:
   build_and_test:
     jobs:
       - lint
-      - type_check:
+      - type_check
       - build_test_unit_node_6:
           requires:
             - lint
