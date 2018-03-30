@@ -25,6 +25,10 @@ aliases:
     name: Type checking
     command: yarn flow
 
+  - &bundlesize
+    name: Checking bundle sizes
+    command: yarn test:bundlesize
+
   - &build
     name: Building
     command: yarn build
@@ -57,6 +61,14 @@ jobs:
       - run: *install
       - restore-cache: *restore_yarn_cache
       - run: *build
+  bundlesize:
+    <<: *node8Environment
+    steps:
+      - checkout
+      - restore-cache: *restore_yarn_cache
+      - run: *install
+      - run: *build
+      - run: *bundlesize
   lint:
     <<: *node8Environment
     steps:
