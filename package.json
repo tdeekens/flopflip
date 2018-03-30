@@ -122,5 +122,35 @@
       "npm run format:md",
       "git add"
     ]
-  }
+  },
+  "bundlesize": [
+    {
+      "path": "./packages/launchdarkly-adapter/dist/@flopflip-launchdarkly-adapter.es.js",
+      "threshold": "4Kb"
+    },
+    {
+      "path": "./packages/launchdarkly-adapter/dist/@flopflip-localstorage-adapter.es.js",
+      "threshold": "4Kb"
+    },
+    {
+      "path": "./packages/launchdarkly-adapter/dist/@flopflip-memory-adapter.es.js",
+      "threshold": "4Kb"
+    },
+    {
+      "path": "./packages/launchdarkly-adapter/dist/@flopflip-splitio-adapter.es.js",
+      "threshold": "4Kb"
+    },
+    {
+      "path": "./packages/launchdarkly-adapter/dist/@flopflip-react.es.js",
+      "threshold": "4Kb"
+    },
+    {
+      "path": "./packages/launchdarkly-adapter/dist/@flopflip-react-broadcast.umd.min.js",
+      "threshold": "4Kb"
+    },
+    {
+      "path": "./packages/launchdarkly-adapter/dist/@flopflip-react-redux.umd.min.js",
+      "threshold": "4Kb"
+    }
+  ]
 }
