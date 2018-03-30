@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/react-broadcast",
-  "version": "5.1.10",
+  "version": "5.1.11",
   "description": "A feature toggle wrapper to use LaunchDarkly with React",
   "main": "dist/@flopflip-react-broadcast.cjs.js",
   "module": "dist/@flopflip-react-broadcast.es.js",
@@ -39,16 +39,16 @@
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
     "enzyme-to-json": "3.3.3",
-    "redux-mock-store": "1.5.1",
     "react": "16.3.0",
-    "react-dom": "16.3.0"
+    "react-dom": "16.3.0",
+    "redux-mock-store": "1.5.1"
   },
   "peerDependencies": {
     "react": "^15.6 || ^16.0",
     "react-dom": "^15.6 || ^16.0"
   },
   "dependencies": {
-    "@flopflip/react": "^5.0.13",
+    "@flopflip/react": "^5.0.14",
     "create-react-context": "0.1.6",
     "recompose": "0.26.0"
   },
