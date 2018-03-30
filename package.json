@@ -13,6 +13,7 @@
     "format:ts": "prettier --parser typescript --write '*.ts'",
     "fix:eslint": "eslint --fix --format=node_modules/eslint-formatter-pretty",
     "test": "cross-env NODE_ENV=test jest --config .jestrc.test.json",
+    "test:size": "bundlesize",
     "test:ci": "cross-env NODE_ENV=test npm test -- --no-watchman",
     "test:ci:coverage": "cross-env NODE_ENV=test npm test -- --no-watchman --coverage && codecov",
     "test:watch": "cross-env NODE_ENV=test npm test -- --watch",
