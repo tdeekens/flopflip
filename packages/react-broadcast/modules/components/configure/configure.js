@@ -9,6 +9,7 @@ import type {
 } from '@flopflip/types';
 
 import React, { PureComponent, type ComponentType, type Node } from 'react';
+import memoize from 'lodash.memoize';
 import createReactContext, { type Context } from 'create-react-context';
 import { ConfigureAdapter } from '@flopflip/react';
 
@@ -24,6 +25,14 @@ type State = {
 };
 
 export const FlagsContext: Context<Flags> = createReactContext({});
+
+const createAdapterArgs = memoize(
+  (adapterArgs, handleUpdateStatus, handleUpdateFlags) => ({
+    ...adapterArgs,
+    onStatusStateChange: handleUpdateStatus,
+    onFlagsStateChange: handleUpdateFlags,
+  })
+);
 
 export default class Configure extends PureComponent<Props, State> {
   static displayName = 'ConfigureFlopflip';
@@ -54,11 +63,11 @@ export default class Configure extends PureComponent<Props, State> {
     return (
       <ConfigureAdapter
         adapter={this.props.adapter}
-        adapterArgs={{
-          ...this.props.adapterArgs,
-          onStatusStateChange: this.handleUpdateStatus,
-          onFlagsStateChange: this.handleUpdateFlags,
-        }}
+        adapterArgs={createAdapterArgs(
+          this.props.adapterArgs,
+          this.handleUpdateStatus,
+          this.handleUpdateFlags
+        )}
         defaultFlags={this.props.defaultFlags}
         shouldDeferAdapterConfiguration={
           this.props.shouldDeferAdapterConfiguration
