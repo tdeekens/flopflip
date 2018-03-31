@@ -47,6 +47,7 @@
   "dependencies": {
     "@flopflip/react": "^5.0.14",
     "lodash.isnil": "4.0.0",
+    "lodash.memoize": "4.1.2",
     "recompose": "0.26.0"
   },
   "peerDependencies": {
