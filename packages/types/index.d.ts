@@ -20,11 +20,12 @@ declare module '@flopflip/types' {
     flag: FlagName;
     variation?: FlagVariation;
   }
+  export type User = {
+    key?: string;
+  };
   export type Flags = { [flagName: string]: FlagVariation };
   export type AdapterArgs = {
-    user: {
-      key?: string;
-    };
+    user: User;
     onFlagsStateChange: () => void;
     onStatusStateChange: () => void;
   };
@@ -52,7 +53,11 @@ declare module '@flopflip/types' {
     adapter: Adapter;
     children: React.ReactNode;
   }
-  export interface SwitcComponenthProps {
+  export interface ReconfigureComponentProps {
+    exact?: boolean;
+    user: User;
+  }
+  export interface SwitchComponenthProps {
     children?: React.ReactNode;
   }
 
@@ -72,7 +77,7 @@ declare module '@flopflip/types' {
   ): ComponentEnhancerWithProps<{ [propKey: string]: Flags }, {}>;
 
   export class SwitchFeature extends React.Component<
-    SwitcComponenthProps,
+    SwitchComponenthProps,
     any
   > {}
 
@@ -83,6 +88,11 @@ declare module '@flopflip/types' {
 
   export class ConfigureFlopflip extends React.Component<
     ConfigureComponentProps,
+    any
+  > {}
+
+  export class ReconfigureFlopflip extends React.Component<
+    ReconfigureComponentProps,
     any
   > {}
 }
