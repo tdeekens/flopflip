@@ -9,28 +9,23 @@ import { FlagsContext } from '../configure';
 type RequiredProps = {};
 type ProvidedProps = {};
 
-const withFlagSubscription = (propKey: string) => (
-  WrappedComponent: ComponentType<RequiredProps>
+const withFlags = (propKey: string) => (
+  Component: ComponentType<RequiredProps>
 ) => {
-  class WithFlagSubscription extends PureComponent<
+  class EnhancedComponent extends PureComponent<
     $Diff<RequiredProps, ProvidedProps>
   > {
-    static displayName = wrapDisplayName(
-      WrappedComponent,
-      'withFlagSubscription'
-    );
+    static displayName = wrapDisplayName(Component, 'withFlags');
     render(): Node {
       return (
         <FlagsContext.Consumer>
-          {flags => (
-            <WrappedComponent {...{ [propKey]: flags }} {...this.props} />
-          )}
+          {flags => <Component {...{ [propKey]: flags }} {...this.props} />}
         </FlagsContext.Consumer>
       );
     }
   }
 
-  return WithFlagSubscription;
+  return EnhancedComponent;
 };
 
-export default withFlagSubscription;
+export default withFlags;
