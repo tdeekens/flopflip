@@ -51,35 +51,39 @@ exports[`without \`propKey\` when feature is disabled should match snapshot 1`] 
         defaultFlags={Object {}}
         shouldDeferAdapterConfiguration={false}
       >
-        <Container>
-          <injectFeatureToggle(FeatureComponent)>
-            <withProps(omitProps(FeatureComponent))
-              @flopflip/flags={
-                Object {
-                  "flag1": false,
-                }
-              }
-              dispatch={[Function]}
-            >
-              <omitProps(FeatureComponent)
+        <Provider
+          value={[Function]}
+        >
+          <Container>
+            <injectFeatureToggle(FeatureComponent)>
+              <withProps(omitProps(FeatureComponent))
                 @flopflip/flags={
                   Object {
                     "flag1": false,
                   }
                 }
                 dispatch={[Function]}
-                isFeatureEnabled={false}
               >
-                <FeatureComponent
+                <omitProps(FeatureComponent)
+                  @flopflip/flags={
+                    Object {
+                      "flag1": false,
+                    }
+                  }
                   dispatch={[Function]}
                   isFeatureEnabled={false}
                 >
-                  <div />
-                </FeatureComponent>
-              </omitProps(FeatureComponent)>
-            </withProps(omitProps(FeatureComponent))>
-          </injectFeatureToggle(FeatureComponent)>
-        </Container>
+                  <FeatureComponent
+                    dispatch={[Function]}
+                    isFeatureEnabled={false}
+                  >
+                    <div />
+                  </FeatureComponent>
+                </omitProps(FeatureComponent)>
+              </withProps(omitProps(FeatureComponent))>
+            </injectFeatureToggle(FeatureComponent)>
+          </Container>
+        </Provider>
       </ConfigureAdapter>
     </ConfigureFlopflip>
   </Connect(ConfigureFlopflip)>
@@ -137,35 +141,39 @@ exports[`without \`propKey\` when feature is disabled when enabling feature shou
         defaultFlags={Object {}}
         shouldDeferAdapterConfiguration={false}
       >
-        <Container>
-          <injectFeatureToggle(FeatureComponent)>
-            <withProps(omitProps(FeatureComponent))
-              @flopflip/flags={
-                Object {
-                  "flag1": true,
-                }
-              }
-              dispatch={[Function]}
-            >
-              <omitProps(FeatureComponent)
+        <Provider
+          value={[Function]}
+        >
+          <Container>
+            <injectFeatureToggle(FeatureComponent)>
+              <withProps(omitProps(FeatureComponent))
                 @flopflip/flags={
                   Object {
                     "flag1": true,
                   }
                 }
                 dispatch={[Function]}
-                isFeatureEnabled={true}
               >
-                <FeatureComponent
+                <omitProps(FeatureComponent)
+                  @flopflip/flags={
+                    Object {
+                      "flag1": true,
+                    }
+                  }
                   dispatch={[Function]}
                   isFeatureEnabled={true}
                 >
-                  <div />
-                </FeatureComponent>
-              </omitProps(FeatureComponent)>
-            </withProps(omitProps(FeatureComponent))>
-          </injectFeatureToggle(FeatureComponent)>
-        </Container>
+                  <FeatureComponent
+                    dispatch={[Function]}
+                    isFeatureEnabled={true}
+                  >
+                    <div />
+                  </FeatureComponent>
+                </omitProps(FeatureComponent)>
+              </withProps(omitProps(FeatureComponent))>
+            </injectFeatureToggle(FeatureComponent)>
+          </Container>
+        </Provider>
       </ConfigureAdapter>
     </ConfigureFlopflip>
   </Connect(ConfigureFlopflip)>

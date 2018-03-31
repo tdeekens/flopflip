@@ -39,27 +39,21 @@ exports[`when feature is disabled should match snapshot 1`] = `
     shouldDeferAdapterConfiguration={false}
   >
     <Provider
-      value={
-        Object {
-          "flag1": false,
-          "flag2": false,
-        }
-      }
+      value={[Function]}
     >
-      <ToggleFeature
-        flag="flag1"
+      <Provider
+        value={
+          Object {
+            "flag1": false,
+            "flag2": false,
+          }
+        }
       >
-        <Consumer>
-          <withProps(ToggleFeature)
-            @flopflip/flags={
-              Object {
-                "flag1": false,
-                "flag2": false,
-              }
-            }
-            flag="flag1"
-          >
-            <ToggleFeature
+        <ToggleFeature
+          flag="flag1"
+        >
+          <Consumer>
+            <withProps(ToggleFeature)
               @flopflip/flags={
                 Object {
                   "flag1": false,
@@ -67,14 +61,24 @@ exports[`when feature is disabled should match snapshot 1`] = `
                 }
               }
               flag="flag1"
-              isFeatureEnabled={false}
-              render={null}
-              toggledComponent={null}
-              untoggledComponent={null}
-            />
-          </withProps(ToggleFeature)>
-        </Consumer>
-      </ToggleFeature>
+            >
+              <ToggleFeature
+                @flopflip/flags={
+                  Object {
+                    "flag1": false,
+                    "flag2": false,
+                  }
+                }
+                flag="flag1"
+                isFeatureEnabled={false}
+                render={null}
+                toggledComponent={null}
+                untoggledComponent={null}
+              />
+            </withProps(ToggleFeature)>
+          </Consumer>
+        </ToggleFeature>
+      </Provider>
     </Provider>
   </ConfigureAdapter>
 </ConfigureFlopflip>
@@ -119,27 +123,21 @@ exports[`when feature is disabled when enabling feature should match snapshot 1`
     shouldDeferAdapterConfiguration={false}
   >
     <Provider
-      value={
-        Object {
-          "flag1": true,
-          "flag2": false,
-        }
-      }
+      value={[Function]}
     >
-      <ToggleFeature
-        flag="flag1"
+      <Provider
+        value={
+          Object {
+            "flag1": true,
+            "flag2": false,
+          }
+        }
       >
-        <Consumer>
-          <withProps(ToggleFeature)
-            @flopflip/flags={
-              Object {
-                "flag1": true,
-                "flag2": false,
-              }
-            }
-            flag="flag1"
-          >
-            <ToggleFeature
+        <ToggleFeature
+          flag="flag1"
+        >
+          <Consumer>
+            <withProps(ToggleFeature)
               @flopflip/flags={
                 Object {
                   "flag1": true,
@@ -147,18 +145,28 @@ exports[`when feature is disabled when enabling feature should match snapshot 1`
                 }
               }
               flag="flag1"
-              isFeatureEnabled={true}
-              render={null}
-              toggledComponent={null}
-              untoggledComponent={null}
             >
-              <FeatureComponent>
-                <div />
-              </FeatureComponent>
-            </ToggleFeature>
-          </withProps(ToggleFeature)>
-        </Consumer>
-      </ToggleFeature>
+              <ToggleFeature
+                @flopflip/flags={
+                  Object {
+                    "flag1": true,
+                    "flag2": false,
+                  }
+                }
+                flag="flag1"
+                isFeatureEnabled={true}
+                render={null}
+                toggledComponent={null}
+                untoggledComponent={null}
+              >
+                <FeatureComponent>
+                  <div />
+                </FeatureComponent>
+              </ToggleFeature>
+            </withProps(ToggleFeature)>
+          </Consumer>
+        </ToggleFeature>
+      </Provider>
     </Provider>
   </ConfigureAdapter>
 </ConfigureFlopflip>

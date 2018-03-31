@@ -29,32 +29,36 @@ exports[`with \`propKey\` should match snapshot 1`] = `
     shouldDeferAdapterConfiguration={false}
   >
     <Provider
-      value={Object {}}
+      value={[Function]}
     >
-      <Container>
-        <injectFeatureToggles(FeatureComponent)>
-          <Consumer>
-            <withProps(omitProps(shouldUpdate(FeatureComponent)))
-              @flopflip/flags={Object {}}
-            >
-              <omitProps(shouldUpdate(FeatureComponent))
+      <Provider
+        value={Object {}}
+      >
+        <Container>
+          <injectFeatureToggles(FeatureComponent)>
+            <Consumer>
+              <withProps(omitProps(shouldUpdate(FeatureComponent)))
                 @flopflip/flags={Object {}}
-                fooBar={Object {}}
               >
-                <shouldUpdate(FeatureComponent)
+                <omitProps(shouldUpdate(FeatureComponent))
+                  @flopflip/flags={Object {}}
                   fooBar={Object {}}
                 >
-                  <FeatureComponent
+                  <shouldUpdate(FeatureComponent)
                     fooBar={Object {}}
                   >
-                    <div />
-                  </FeatureComponent>
-                </shouldUpdate(FeatureComponent)>
-              </omitProps(shouldUpdate(FeatureComponent))>
-            </withProps(omitProps(shouldUpdate(FeatureComponent)))>
-          </Consumer>
-        </injectFeatureToggles(FeatureComponent)>
-      </Container>
+                    <FeatureComponent
+                      fooBar={Object {}}
+                    >
+                      <div />
+                    </FeatureComponent>
+                  </shouldUpdate(FeatureComponent)>
+                </omitProps(shouldUpdate(FeatureComponent))>
+              </withProps(omitProps(shouldUpdate(FeatureComponent)))>
+            </Consumer>
+          </injectFeatureToggles(FeatureComponent)>
+        </Container>
+      </Provider>
     </Provider>
   </ConfigureAdapter>
 </ConfigureFlopflip>
@@ -99,39 +103,34 @@ exports[`without \`propKey\` when feature is disabled should match snapshot 1`] 
     shouldDeferAdapterConfiguration={false}
   >
     <Provider
-      value={
-        Object {
-          "flag1": false,
-          "flag2": false,
-        }
-      }
+      value={[Function]}
     >
-      <Container>
-        <injectFeatureToggles(FeatureComponent)>
-          <Consumer>
-            <withProps(omitProps(shouldUpdate(FeatureComponent)))
-              @flopflip/flags={
-                Object {
-                  "flag1": false,
-                  "flag2": false,
-                }
-              }
-            >
-              <omitProps(shouldUpdate(FeatureComponent))
+      <Provider
+        value={
+          Object {
+            "flag1": false,
+            "flag2": false,
+          }
+        }
+      >
+        <Container>
+          <injectFeatureToggles(FeatureComponent)>
+            <Consumer>
+              <withProps(omitProps(shouldUpdate(FeatureComponent)))
                 @flopflip/flags={
                   Object {
                     "flag1": false,
                     "flag2": false,
                   }
                 }
-                featureToggles={
-                  Object {
-                    "flag1": false,
-                    "flag2": false,
-                  }
-                }
               >
-                <shouldUpdate(FeatureComponent)
+                <omitProps(shouldUpdate(FeatureComponent))
+                  @flopflip/flags={
+                    Object {
+                      "flag1": false,
+                      "flag2": false,
+                    }
+                  }
                   featureToggles={
                     Object {
                       "flag1": false,
@@ -139,7 +138,7 @@ exports[`without \`propKey\` when feature is disabled should match snapshot 1`] 
                     }
                   }
                 >
-                  <FeatureComponent
+                  <shouldUpdate(FeatureComponent)
                     featureToggles={
                       Object {
                         "flag1": false,
@@ -147,14 +146,23 @@ exports[`without \`propKey\` when feature is disabled should match snapshot 1`] 
                       }
                     }
                   >
-                    <div />
-                  </FeatureComponent>
-                </shouldUpdate(FeatureComponent)>
-              </omitProps(shouldUpdate(FeatureComponent))>
-            </withProps(omitProps(shouldUpdate(FeatureComponent)))>
-          </Consumer>
-        </injectFeatureToggles(FeatureComponent)>
-      </Container>
+                    <FeatureComponent
+                      featureToggles={
+                        Object {
+                          "flag1": false,
+                          "flag2": false,
+                        }
+                      }
+                    >
+                      <div />
+                    </FeatureComponent>
+                  </shouldUpdate(FeatureComponent)>
+                </omitProps(shouldUpdate(FeatureComponent))>
+              </withProps(omitProps(shouldUpdate(FeatureComponent)))>
+            </Consumer>
+          </injectFeatureToggles(FeatureComponent)>
+        </Container>
+      </Provider>
     </Provider>
   </ConfigureAdapter>
 </ConfigureFlopflip>
@@ -199,39 +207,34 @@ exports[`without \`propKey\` when feature is disabled when enabling feature shou
     shouldDeferAdapterConfiguration={false}
   >
     <Provider
-      value={
-        Object {
-          "flag1": true,
-          "flag2": false,
-        }
-      }
+      value={[Function]}
     >
-      <Container>
-        <injectFeatureToggles(FeatureComponent)>
-          <Consumer>
-            <withProps(omitProps(shouldUpdate(FeatureComponent)))
-              @flopflip/flags={
-                Object {
-                  "flag1": true,
-                  "flag2": false,
-                }
-              }
-            >
-              <omitProps(shouldUpdate(FeatureComponent))
+      <Provider
+        value={
+          Object {
+            "flag1": true,
+            "flag2": false,
+          }
+        }
+      >
+        <Container>
+          <injectFeatureToggles(FeatureComponent)>
+            <Consumer>
+              <withProps(omitProps(shouldUpdate(FeatureComponent)))
                 @flopflip/flags={
                   Object {
                     "flag1": true,
                     "flag2": false,
                   }
                 }
-                featureToggles={
-                  Object {
-                    "flag1": true,
-                    "flag2": false,
-                  }
-                }
               >
-                <shouldUpdate(FeatureComponent)
+                <omitProps(shouldUpdate(FeatureComponent))
+                  @flopflip/flags={
+                    Object {
+                      "flag1": true,
+                      "flag2": false,
+                    }
+                  }
                   featureToggles={
                     Object {
                       "flag1": true,
@@ -239,7 +242,7 @@ exports[`without \`propKey\` when feature is disabled when enabling feature shou
                     }
                   }
                 >
-                  <FeatureComponent
+                  <shouldUpdate(FeatureComponent)
                     featureToggles={
                       Object {
                         "flag1": true,
@@ -247,14 +250,23 @@ exports[`without \`propKey\` when feature is disabled when enabling feature shou
                       }
                     }
                   >
-                    <div />
-                  </FeatureComponent>
-                </shouldUpdate(FeatureComponent)>
-              </omitProps(shouldUpdate(FeatureComponent))>
-            </withProps(omitProps(shouldUpdate(FeatureComponent)))>
-          </Consumer>
-        </injectFeatureToggles(FeatureComponent)>
-      </Container>
+                    <FeatureComponent
+                      featureToggles={
+                        Object {
+                          "flag1": true,
+                          "flag2": false,
+                        }
+                      }
+                    >
+                      <div />
+                    </FeatureComponent>
+                  </shouldUpdate(FeatureComponent)>
+                </omitProps(shouldUpdate(FeatureComponent))>
+              </withProps(omitProps(shouldUpdate(FeatureComponent)))>
+            </Consumer>
+          </injectFeatureToggles(FeatureComponent)>
+        </Container>
+      </Provider>
     </Provider>
   </ConfigureAdapter>
 </ConfigureFlopflip>
