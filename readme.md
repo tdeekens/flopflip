@@ -147,6 +147,8 @@ without Redux.
 
 * `ConfigureFlopFlip` a component to configure flopflip with an adapter
   (alternative to the store enhancer)
+* `ReconfigureFlopFlip` a component to reconfigure flopflip with new user properties
+  either merged or overwritting old properties (`exact` prop)
 * `branchOnFeatureToggle` a Higher-Order Component (HoC) to conditionally render
   components depending on feature toggle state
 * `injectFeatureToggle` a HoC to inject a feature toggle onto the `props` of a
