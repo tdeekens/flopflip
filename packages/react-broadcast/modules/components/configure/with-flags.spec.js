@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import withFlagSubscription from './with-flag-subscription';
+import withFlags from './with-flags';
 
 const TestComponent = () => <div />;
 
@@ -8,7 +8,7 @@ describe('rendering', () => {
   let wrapper;
 
   beforeEach(() => {
-    const Component = withFlagSubscription('foo-prop-key')(TestComponent);
+    const Component = withFlags('foo-prop-key')(TestComponent);
     wrapper = shallow(<Component />);
   });
 
@@ -24,12 +24,10 @@ describe('rendering', () => {
 describe('statics', () => {
   let Component;
   beforeEach(() => {
-    Component = withFlagSubscription('foo-prop-key')(TestComponent);
+    Component = withFlags('foo-prop-key')(TestComponent);
   });
 
   it('should set the `displayName`', () => {
-    expect(Component.displayName).toEqual(
-      'withFlagSubscription(TestComponent)'
-    );
+    expect(Component.displayName).toEqual('withFlags(TestComponent)');
   });
 });
