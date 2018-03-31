@@ -2,10 +2,11 @@ export type FlagName = string;
 export type FlagVariation = boolean | string;
 export type Flag = [FlagName, FlagVariation];
 export type Flags = { [FlagName]: FlagVariation };
+export type User = {
+  key?: string,
+};
 export type AdapterArgs = {
-  user: {
-    key?: string,
-  },
+  user: User,
   onFlagsStateChange: () => void,
   onStatusStateChange: () => void,
   remainingArgs: {
