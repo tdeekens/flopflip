@@ -1,6 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import ConfigureAdapter, { AdapterStates } from './configure-adapter';
+import ConfigureAdapter, {
+  AdapterStates,
+  mergeAdapterArgs,
+} from './configure-adapter';
 
 const ChildComponent = () => <div />;
 const createTestProps = props => ({
@@ -349,6 +352,26 @@ describe('interacting', () => {
   };
 
   describe('setAdapterArgs', () => {
+    describe('when configured', () => {
+      beforeEach(() => {
+        props = createTestProps();
+        wrapper = shallow(
+          <ConfigureAdapter {...props}>
+            <ChildComponent />
+          </ConfigureAdapter>
+        );
+
+        wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
+        wrapper.instance().setAdapterArgs(nextAdapterArgs, { exact: false });
+      });
+
+      it('should update the `state` of `adapterArgs`', () => {
+        expect(wrapper).toHaveState('adapterArgs', nextAdapterArgs);
+      });
+    });
+  });
+
+  describe('setPendingAdapterArgs', () => {
     beforeEach(() => {
       props = createTestProps();
       wrapper = shallow(
@@ -357,86 +380,203 @@ describe('interacting', () => {
         </ConfigureAdapter>
       );
 
-      wrapper.instance().setAdapterArgs(nextAdapterArgs);
+      wrapper.instance().setPendingAdapterArgs({
+        adapterArgs: nextAdapterArgs,
+        options: { exact: false },
+      });
     });
 
-    it('should update the `state` of `adapterArgs`', () => {
-      expect(wrapper).toHaveState('adapterArgs', nextAdapterArgs);
-    });
-  });
-
-  describe('reconfigure', () => {
-    beforeEach(() => {
-      props = createTestProps();
-      wrapper = shallow(
-        <ConfigureAdapter {...props}>
-          <ChildComponent />
-        </ConfigureAdapter>
+    it('should set `pendingAdapterArgs`', () => {
+      expect(wrapper.instance().pendingAdapterArgs).toEqual(
+        expect.objectContaining(nextAdapterArgs)
       );
     });
+  });
 
-    describe('without `exact`', () => {
-      const nextUser = {
-        'some-prop': 'is-added',
-      };
-
+  describe('unsetPendingAdapterArgs', () => {
+    describe('with `pendingAdapterArgs`', () => {
       beforeEach(() => {
-        wrapper.instance().reconfigure({ user: nextUser });
+        props = createTestProps();
+        wrapper = shallow(
+          <ConfigureAdapter {...props}>
+            <ChildComponent />
+          </ConfigureAdapter>
+        );
+
+        jest.spyOn(wrapper.instance(), 'setAdapterArgs');
+
+        wrapper.instance().setPendingAdapterArgs({
+          adapterArgs: nextAdapterArgs,
+          options: { exact: false },
+        });
+
+        wrapper.instance().unsetPendingAdapterArgs();
       });
 
-      it('should merge the next `user` properties', () => {
-        expect(wrapper).toHaveState(
-          'adapterArgs',
-          expect.objectContaining({
-            user: expect.objectContaining(nextUser),
-          })
+      it('should invoke `setAdapterArgs`', () => {
+        expect(wrapper.instance().setAdapterArgs).toHaveBeenCalled();
+      });
+
+      it('should invoke `setAdapterArgs` with `pendingAdapterArgs`', () => {
+        expect(wrapper.instance().setAdapterArgs).toHaveBeenCalledWith(
+          expect.objectContaining(nextAdapterArgs)
         );
       });
 
-      it('should keep the previous `user` properties', () => {
-        expect(wrapper).toHaveState(
-          'adapterArgs',
-          expect.objectContaining({
-            user: expect.objectContaining(props.adapterArgs.user),
-          })
-        );
+      it('should unset `pendingAdapterArgs`', () => {
+        expect(wrapper.instance().pendingAdapterArgs).toBeNull();
       });
     });
 
-    describe('with `exact`', () => {
-      const nextUser = {
-        'some-prop': 'is-added',
-      };
-
+    describe('without `pendingReconfiguration`', () => {
       beforeEach(() => {
-        wrapper.instance().reconfigure({ user: nextUser }, { exact: true });
+        props = createTestProps();
+        wrapper = shallow(
+          <ConfigureAdapter {...props}>
+            <ChildComponent />
+          </ConfigureAdapter>
+        );
+
+        jest.spyOn(wrapper.instance(), 'setAdapterArgs');
+
+        wrapper.instance().unsetPendingAdapterArgs();
       });
 
-      it('should overwrite the next `user` properties', () => {
-        expect(wrapper).toHaveState(
-          'adapterArgs',
-          expect.objectContaining({
-            user: expect.objectContaining(nextUser),
-          })
-        );
+      it('should not invoke `setAdapterArgs`', () => {
+        expect(wrapper.instance().setAdapterArgs).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('reconfigureOrQueue', () => {
+      describe('when adapter is configured', () => {
+        beforeEach(() => {
+          props = createTestProps();
+          wrapper = shallow(
+            <ConfigureAdapter {...props}>
+              <ChildComponent />
+            </ConfigureAdapter>
+          );
+
+          jest.spyOn(wrapper.instance(), 'setAdapterArgs');
+
+          wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
+
+          wrapper
+            .instance()
+            .reconfigureOrQueue(nextAdapterArgs, { exact: false });
+        });
+
+        it('should invoke `setAdapterArgs`', () => {
+          expect(wrapper.instance().setAdapterArgs).toHaveBeenCalled();
+        });
+
+        it('should invoke `setAdapterArgs` with `nextAdapterArgs`', () => {
+          expect(wrapper.instance().setAdapterArgs).toHaveBeenCalledWith(
+            expect.objectContaining(nextAdapterArgs)
+          );
+        });
       });
 
-      it('should remove the previous `user` properties', () => {
-        expect(wrapper).not.toHaveState(
-          'adapterArgs',
-          expect.objectContaining({
-            user: expect.objectContaining(props.adapterArgs.user),
-          })
-        );
+      describe('when adapter is configuring', () => {
+        beforeEach(() => {
+          props = createTestProps();
+          wrapper = shallow(
+            <ConfigureAdapter {...props}>
+              <ChildComponent />
+            </ConfigureAdapter>
+          );
+
+          jest.spyOn(wrapper.instance(), 'setPendingAdapterArgs');
+
+          wrapper.instance().setAdapterState(AdapterStates.CONFIGURING);
+
+          wrapper
+            .instance()
+            .reconfigureOrQueue(nextAdapterArgs, { exact: false });
+        });
+
+        it('should invoke `setPendingAdapterArgs`', () => {
+          expect(wrapper.instance().setPendingAdapterArgs).toHaveBeenCalled();
+        });
+
+        it('should invoke `setPendingAdapterArgs` with `nextAdapterArgs`', () => {
+          expect(wrapper.instance().setPendingAdapterArgs).toHaveBeenCalledWith(
+            expect.objectContaining({ adapterArgs: nextAdapterArgs })
+          );
+        });
+
+        it('should invoke `setPendingAdapterArgs` with `options`', () => {
+          expect(wrapper.instance().setPendingAdapterArgs).toHaveBeenCalledWith(
+            expect.objectContaining({ options: { exact: false } })
+          );
+        });
       });
     });
   });
-});
 
-describe('statics', () => {
-  describe('defaultProps', () => {
-    it('should default `defaultFlags` to an empty object', () => {
-      expect(ConfigureAdapter.defaultProps.defaultFlags).toEqual({});
+  describe('statics', () => {
+    describe('defaultProps', () => {
+      it('should default `defaultFlags` to an empty object', () => {
+        expect(ConfigureAdapter.defaultProps.defaultFlags).toEqual({});
+      });
+    });
+  });
+
+  describe('helpers', () => {
+    describe('mergeAdapterArgs', () => {
+      describe('when not `exact`', () => {
+        const previousAdapterArgs = {
+          'some-prop': 'was-present',
+        };
+        const nextAdapterArgs = {
+          'another-prop': 'is-added',
+        };
+
+        it('should merge the next properties', () => {
+          expect(
+            mergeAdapterArgs(previousAdapterArgs, {
+              adapterArgs: nextAdapterArgs,
+              options: { exact: false },
+            })
+          ).toEqual(expect.objectContaining(nextAdapterArgs));
+        });
+
+        it('should keep the previous properties', () => {
+          expect(
+            mergeAdapterArgs(previousAdapterArgs, {
+              adapterArgs: nextAdapterArgs,
+              options: { exact: false },
+            })
+          ).toEqual(expect.objectContaining(previousAdapterArgs));
+        });
+      });
+
+      describe('when `exact`', () => {
+        const previousAdapterArgs = {
+          'some-prop': 'was-present',
+        };
+        const nextAdapterArgs = {
+          'another-prop': 'is-added',
+        };
+
+        it('should merge the next properties', () => {
+          expect(
+            mergeAdapterArgs(previousAdapterArgs, {
+              adapterArgs: nextAdapterArgs,
+              options: { exact: true },
+            })
+          ).toEqual(expect.objectContaining(nextAdapterArgs));
+        });
+
+        it('should not keep the previous properties', () => {
+          expect(
+            mergeAdapterArgs(previousAdapterArgs, {
+              adapterArgs: nextAdapterArgs,
+              options: { exact: true },
+            })
+          ).not.toEqual(expect.objectContaining(previousAdapterArgs));
+        });
+      });
     });
   });
 });
