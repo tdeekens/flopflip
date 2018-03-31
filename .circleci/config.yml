@@ -56,14 +56,6 @@ node8Environment: &node8Environment
 
 version: 2
 jobs:
-  build:
-    <<: *node8Environment
-    steps:
-      - checkout
-      - restore_cache: *restore_yarn_cache
-      - run: *install
-      - run: *build
-      - save_cache: *save_yarn_cache
   lint:
     <<: *node8Environment
     steps:
@@ -94,6 +86,7 @@ jobs:
       - checkout
       - restore_cache: *restore_yarn_cache
       - run: *install
+      - save_cache: *save_yarn_cache
       - run: *build
       - run: *unit_test
   build_test_unit_node_8:
@@ -102,6 +95,7 @@ jobs:
       - checkout
       - restore_cache: *restore_yarn_cache
       - run: *install
+      - save_cache: *save_yarn_cache
       - run: *build
       - run: *unit_test_with_coverage
 
