@@ -33,6 +33,7 @@
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
     "@flopflip/types": "1.0.1",
+    "create-react-context": "0.2.1",
     "cpx": "1.5.0",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
