@@ -1,13 +1,6 @@
 // @flow
 
-import type {
-  FlagName,
-  FlagVariation,
-  Flags,
-  Adapter,
-  AdapterArgs,
-  User,
-} from '@flopflip/types';
+import type { Flags, Adapter, AdapterArgs, User } from '@flopflip/types';
 
 import React, { PureComponent, type Node } from 'react';
 import createReactContext, { type Context } from 'create-react-context';
@@ -33,14 +26,29 @@ type State = {
   adapterArgs: AdapterArgs,
 };
 type AdapterState = $Values<typeof AdapterStates>;
-type AdapterReconfiguration = (
+type AdapterReconfigurationOptions = {
+  exact?: boolean,
+};
+type AdapterReconfiguration = {
+  adapterArgs: AdapterArgs,
+  options: AdapterReconfigurationOptions,
+};
+type ReconfigureAdapter = (
   adapterArgs: AdapterArgs,
   { exact?: boolean }
 ) => void;
 
-export const AdapterContext: Context<
-  AdapterReconfiguration
-> = createReactContext(() => {});
+export const AdapterContext: Context<ReconfigureAdapter> = createReactContext(
+  () => {}
+);
+
+export const mergeAdapterArgs = (
+  previousAdapterArgs: AdapterArgs,
+  { adapterArgs: nextAdapterArgs, options }: AdapterReconfiguration
+): AdapterArgs =>
+  options.exact
+    ? nextAdapterArgs
+    : { ...previousAdapterArgs, ...nextAdapterArgs };
 
 export default class ConfigureAdapter extends PureComponent<Props, State> {
   static defaultProps = {
@@ -50,9 +58,12 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
   };
 
   adapterState: AdapterState = AdapterStates.UNCONFIGURED;
+  pendingAdapterArgs: ?AdapterArgs = null;
+
   state: { adapterArgs: AdapterArgs } = {
     adapterArgs: this.props.adapterArgs,
   };
+
   setAdapterState = (
     nextAdapterState: AdapterState,
     exact: boolean = false
@@ -65,18 +76,44 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
       adapterArgs: nextAdapterArgs,
     }));
 
-  reconfigure = (
-    { user: nextUser }: { user: User },
-    { exact = false }: { exact?: boolean } = {}
+  /**
+   * NOTE:
+   *   This is passed through the React context (it's a public API).
+   *   Internally this component has a `ReconfigureAdapter` type;
+   *   this function has two arguments for clarify.
+   */
+  reconfigureOrQueue = (
+    nextAdapterArgs: AdapterArgs,
+    options: AdapterReconfigurationOptions = {}
   ): void =>
-    this.setAdapterArgs({
-      ...this.props.adapterArgs,
-      ...{
-        user: exact
-          ? nextUser
-          : { ...this.props.adapterArgs.user, ...nextUser },
-      },
-    });
+    this.adapterState === AdapterStates.CONFIGURED &&
+    this.adapterState !== AdapterStates.CONFIGURING
+      ? this.setAdapterArgs(
+          mergeAdapterArgs(this.state.adapterArgs, {
+            adapterArgs: nextAdapterArgs,
+            options,
+          })
+        )
+      : this.setPendingAdapterArgs({ adapterArgs: nextAdapterArgs, options });
+
+  setPendingAdapterArgs = (
+    nextReconfiguration: AdapterReconfiguration
+  ): void => {
+    /**
+     * NOTE:
+     *    The next reconfiguration is merged into the previous
+     *    one instead of maintaining a queue.
+     */
+    this.pendingAdapterArgs = mergeAdapterArgs(
+      this.state.adapterArgs,
+      nextReconfiguration
+    );
+  };
+  unsetPendingAdapterArgs = (): void => {
+    if (this.pendingAdapterArgs) this.setAdapterArgs(this.pendingAdapterArgs);
+
+    this.pendingAdapterArgs = null;
+  };
 
   handleDefaultFlags = (defaultFlags: Flags): void => {
     if (Object.keys(defaultFlags).length > 0) {
@@ -92,6 +129,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
 
       return this.props.adapter.configure(this.state.adapterArgs).then(() => {
         this.setAdapterState(AdapterStates.CONFIGURED);
+        this.unsetPendingAdapterArgs();
       });
     }
   }
@@ -120,13 +158,14 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
 
       return this.props.adapter.reconfigure(this.state.adapterArgs).then(() => {
         this.setAdapterState(AdapterStates.CONFIGURED);
+        this.unsetPendingAdapterArgs();
       });
     }
   }
 
   render(): Node {
     return (
-      <AdapterContext.Provider value={this.reconfigure}>
+      <AdapterContext.Provider value={this.reconfigureOrQueue}>
         {this.props.children ? React.Children.only(this.props.children) : null}
       </AdapterContext.Provider>
     );
