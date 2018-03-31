@@ -6,11 +6,11 @@ import {
   isFeatureEnabled,
   ALL_FLAGS_PROP_KEY,
 } from '@flopflip/react';
-import withFlagSubscription from '../with-flag-subscription/';
+import { withFlags } from '../configure';
 
 export default compose(
   setDisplayName(ToggleFeature.displayName),
-  withFlagSubscription(ALL_FLAGS_PROP_KEY),
+  withFlags(ALL_FLAGS_PROP_KEY),
   withProps(props => ({
     isFeatureEnabled: isFeatureEnabled(props.flag, props.variation)(
       props[ALL_FLAGS_PROP_KEY]
