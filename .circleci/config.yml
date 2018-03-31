@@ -62,6 +62,7 @@ jobs:
       - checkout
       - restore_cache: *restore_yarn_cache
       - run: *install
+      - save_cache: *save_yarn_cache
       - run: *build
       - run: *lint
   type_check:
@@ -86,7 +87,6 @@ jobs:
       - checkout
       - restore_cache: *restore_yarn_cache
       - run: *install
-      - save_cache: *save_yarn_cache
       - run: *build
       - run: *unit_test
   build_test_unit_node_8:
@@ -95,7 +95,6 @@ jobs:
       - checkout
       - restore_cache: *restore_yarn_cache
       - run: *install
-      - save_cache: *save_yarn_cache
       - run: *build
       - run: *unit_test_with_coverage
 
@@ -104,14 +103,14 @@ workflows:
   build_and_test:
     jobs:
       - lint
-      - type_check
-      - build_test_unit_node_6:
+      - type_check:
           requires:
             - lint
+      - build_test_unit_node_6:
+          requires:
             - type_check
       - build_test_unit_node_8:
           requires:
-            - lint
             - type_check
       - bundlesize_check:
           requires:
