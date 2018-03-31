@@ -170,17 +170,7 @@ const configure = ({
   });
 };
 
-const reconfigure = ({
-  clientSideId,
-  user: nextUser,
-  onFlagsStateChange,
-  onStatusStateChange,
-}: {
-  clientSideId: string,
-  user: User,
-  onFlagsStateChange: OnFlagsStateChangeCallback,
-  onStatusStateChange: OnStatusStateChangeCallback,
-}): Promise<any> => {
+const reconfigure = ({ user: nextUser }: { user: User }): Promise<any> => {
   if (!adapterState.isReady || !adapterState.isConfigured || !adapterState.user)
     return Promise.reject(
       new Error(
