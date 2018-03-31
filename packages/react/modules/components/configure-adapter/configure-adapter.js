@@ -33,14 +33,14 @@ type State = {
   adapterArgs: AdapterArgs,
 };
 type AdapterState = $Values<typeof AdapterStates>;
-type AdapterContextType = (
+type AdapterReconfiguration = (
   adapterArgs: AdapterArgs,
   { exact?: boolean }
 ) => void;
 
-export const AdapterContext: Context<AdapterContextType> = createReactContext(
-  () => {}
-);
+export const AdapterContext: Context<
+  AdapterReconfiguration
+> = createReactContext(() => {});
 
 export default class ConfigureAdapter extends PureComponent<Props, State> {
   static defaultProps = {
