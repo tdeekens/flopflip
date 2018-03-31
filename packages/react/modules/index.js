@@ -5,6 +5,7 @@ export {
   ToggleFeature,
   SwitchFeature,
   ConfigureAdapter,
+  ReconfigureAdapter,
 } from './components';
 
 export { default as isFeatureEnabled } from './helpers/is-feature-enabled';
