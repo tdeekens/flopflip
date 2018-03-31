@@ -6,9 +6,11 @@ import type {
   Flags,
   Adapter,
   AdapterArgs,
+  User,
 } from '@flopflip/types';
 
 import React, { PureComponent, type Node } from 'react';
+import createReactContext, { type Context } from 'create-react-context';
 
 export const AdapterStates: {
   UNCONFIGURED: string,
@@ -27,9 +29,20 @@ type Props = {
   defaultFlags?: Flags,
   children: React.Component<any>,
 };
+type State = {
+  adapterArgs: AdapterArgs,
+};
 type AdapterState = $Values<typeof AdapterStates>;
+type AdapterContextType = (
+  adapterArgs: AdapterArgs,
+  { exact?: boolean }
+) => void;
 
-export default class ConfigureAdapter extends PureComponent<Props> {
+export const AdapterContext: Context<AdapterContextType> = createReactContext(
+  () => {}
+);
+
+export default class ConfigureAdapter extends PureComponent<Props, State> {
   static defaultProps = {
     shouldDeferAdapterConfiguration: false,
     children: null,
@@ -37,9 +50,33 @@ export default class ConfigureAdapter extends PureComponent<Props> {
   };
 
   adapterState: AdapterState = AdapterStates.UNCONFIGURED;
-  setAdapterState = (nextAdapterState: AdapterState): void => {
+  state: { adapterArgs: AdapterArgs } = {
+    adapterArgs: this.props.adapterArgs,
+  };
+  setAdapterState = (
+    nextAdapterState: AdapterState,
+    exact: boolean = false
+  ): void => {
     this.adapterState = nextAdapterState;
   };
+  setAdapterArgs = (nextAdapterArgs: AdapterArgs): void =>
+    this.setState(prevState => ({
+      ...prevState,
+      adapterArgs: nextAdapterArgs,
+    }));
+
+  reconfigure = (
+    { user: nextUser }: { user: User },
+    { exact = false }: { exact?: boolean } = {}
+  ): void =>
+    this.setAdapterArgs({
+      ...this.props.adapterArgs,
+      ...{
+        user: exact
+          ? nextUser
+          : { ...this.props.adapterArgs.user, ...nextUser },
+      },
+    });
 
   handleDefaultFlags = (defaultFlags: Flags): void => {
     if (Object.keys(defaultFlags).length > 0) {
@@ -52,14 +89,19 @@ export default class ConfigureAdapter extends PureComponent<Props> {
 
     if (!this.props.shouldDeferAdapterConfiguration) {
       this.setAdapterState(AdapterStates.CONFIGURING);
-      return this.props.adapter.configure(this.props.adapterArgs).then(() => {
+
+      return this.props.adapter.configure(this.state.adapterArgs).then(() => {
         this.setAdapterState(AdapterStates.CONFIGURED);
       });
     }
   }
 
   componentDidUpdate(): Promise<any> | void {
-    // NOTE: We have to be careful here to not double configure from `componentDidMount`.
+    /**
+     * NOTE:
+     *    Be careful here to not double configure from `componentDidMount`.
+     */
+
     if (
       !this.props.shouldDeferAdapterConfiguration &&
       this.adapterState !== AdapterStates.CONFIGURED &&
@@ -67,7 +109,7 @@ export default class ConfigureAdapter extends PureComponent<Props> {
     ) {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
-      return this.props.adapter.configure(this.props.adapterArgs).then(() => {
+      return this.props.adapter.configure(this.state.adapterArgs).then(() => {
         this.setAdapterState(AdapterStates.CONFIGURED);
       });
     } else if (
@@ -76,13 +118,17 @@ export default class ConfigureAdapter extends PureComponent<Props> {
     ) {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
-      return this.props.adapter.reconfigure(this.props.adapterArgs).then(() => {
+      return this.props.adapter.reconfigure(this.state.adapterArgs).then(() => {
         this.setAdapterState(AdapterStates.CONFIGURED);
       });
     }
   }
 
   render(): Node {
-    return React.Children.only(this.props.children);
+    return (
+      <AdapterContext.Provider value={this.reconfigure}>
+        {React.Children.only(this.props.children)}
+      </AdapterContext.Provider>
+    );
   }
 }

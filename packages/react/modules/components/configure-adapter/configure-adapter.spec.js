@@ -41,6 +41,10 @@ describe('rendering', () => {
   it('should render `children`', () => {
     expect(wrapper).toRender('ChildComponent');
   });
+
+  it('should store `adapterArgs` onto `state`', () => {
+    expect(wrapper).toHaveState('adapterArgs', props.adapterArgs);
+  });
 });
 
 describe('lifecycle', () => {
@@ -78,7 +82,10 @@ describe('lifecycle', () => {
           });
 
           beforeEach(() => {
-            wrapper.instance().componentDidMount();
+            wrapper
+              .instance()
+              .componentDidMount()
+              .catch(() => {});
           });
 
           it('should set the state to configuring', () => {
@@ -182,7 +189,10 @@ describe('lifecycle', () => {
           });
 
           beforeEach(() => {
-            wrapper.instance().componentDidMount();
+            wrapper
+              .instance()
+              .componentDidMount()
+              .catch(() => {});
           });
 
           it('should set the state to configuring', () => {
@@ -261,7 +271,10 @@ describe('lifecycle', () => {
           });
 
           beforeEach(() => {
-            wrapper.instance().componentDidUpdate();
+            wrapper
+              .instance()
+              .componentDidUpdate()
+              .catch(() => {});
           });
 
           it('should set the state configuring', () => {
@@ -323,6 +336,98 @@ describe('lifecycle', () => {
 
       it('should not invoke `configure` on `adapter`', () => {
         expect(props.adapter.configure).not.toHaveBeenCalled();
+      });
+    });
+  });
+});
+
+describe('interacting', () => {
+  let props;
+  let wrapper;
+  const nextAdapterArgs = {
+    user: 'next-user',
+  };
+
+  describe('setAdapterArgs', () => {
+    beforeEach(() => {
+      props = createTestProps();
+      wrapper = shallow(
+        <ConfigureAdapter {...props}>
+          <ChildComponent />
+        </ConfigureAdapter>
+      );
+
+      wrapper.instance().setAdapterArgs(nextAdapterArgs);
+    });
+
+    it('should update the `state` of `adapterArgs`', () => {
+      expect(wrapper).toHaveState('adapterArgs', nextAdapterArgs);
+    });
+  });
+
+  describe('reconfigure', () => {
+    beforeEach(() => {
+      props = createTestProps();
+      wrapper = shallow(
+        <ConfigureAdapter {...props}>
+          <ChildComponent />
+        </ConfigureAdapter>
+      );
+    });
+
+    describe('without `exact`', () => {
+      const nextUser = {
+        'some-prop': 'is-added',
+      };
+
+      beforeEach(() => {
+        wrapper.instance().reconfigure({ user: nextUser });
+      });
+
+      it('should merge the next `user` properties', () => {
+        expect(wrapper).toHaveState(
+          'adapterArgs',
+          expect.objectContaining({
+            user: expect.objectContaining(nextUser),
+          })
+        );
+      });
+
+      it('should keep the previous `user` properties', () => {
+        expect(wrapper).toHaveState(
+          'adapterArgs',
+          expect.objectContaining({
+            user: expect.objectContaining(props.adapterArgs.user),
+          })
+        );
+      });
+    });
+
+    describe('with `exact`', () => {
+      const nextUser = {
+        'some-prop': 'is-added',
+      };
+
+      beforeEach(() => {
+        wrapper.instance().reconfigure({ user: nextUser }, { exact: true });
+      });
+
+      it('should overwrite the next `user` properties', () => {
+        expect(wrapper).toHaveState(
+          'adapterArgs',
+          expect.objectContaining({
+            user: expect.objectContaining(nextUser),
+          })
+        );
+      });
+
+      it('should remove the previous `user` properties', () => {
+        expect(wrapper).not.toHaveState(
+          'adapterArgs',
+          expect.objectContaining({
+            user: expect.objectContaining(props.adapterArgs.user),
+          })
+        );
       });
     });
   });

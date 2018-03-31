@@ -1,3 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`rendering should match snapshot 1`] = `<ChildComponent />`;
+exports[`rendering should match snapshot 1`] = `
+<[object Object]
+  value={[Function]}
+>
+  <ChildComponent />
+</[object Object]>
+`;
