@@ -127,7 +127,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
   render(): Node {
     return (
       <AdapterContext.Provider value={this.reconfigure}>
-        {React.Children.only(this.props.children)}
+        {this.props.children ? React.Children.only(this.props.children) : null}
       </AdapterContext.Provider>
     );
   }
