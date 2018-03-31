@@ -44,7 +44,9 @@ export class ReconfigureAdapter extends PureComponent<Props> {
   }
 
   render(): Node {
-    return React.Children.only(this.props.children);
+    return this.props.children
+      ? React.Children.only(this.props.children)
+      : null;
   }
 }
 
