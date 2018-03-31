@@ -3,11 +3,11 @@ aliases:
 
   - &restore_yarn_cache
     keys:
-      - v1-yarn-cache-{{ checksum "yarn.lock" }}
-      - v1-yarn-cache
+      - v2-yarn-cache-{{ checksum "yarn.lock" }}
+      - v2-yarn-cache
 
   - &save_yarn_cache
-    key: v1-yarn-cache-{{ checksum "yarn.lock" }}
+    key: v2-yarn-cache-{{ checksum "yarn.lock" }}
     paths:
       - node_modules
 
@@ -58,22 +58,15 @@ jobs:
     <<: *node8Environment
     steps:
       - checkout
-      - run: *install
-      - restore-cache: *restore_yarn_cache
-      - run: *build
-  bundlesize_check:
-    <<: *node8Environment
-    steps:
-      - checkout
-      - restore-cache: *restore_yarn_cache
+      - restore_cache: *restore_yarn_cache
       - run: *install
       - run: *build
-      - run: *bundlesize
+      - save_cache: *save_yarn_cache
   lint:
     <<: *node8Environment
     steps:
       - checkout
-      - restore-cache: *restore_yarn_cache
+      - restore_cache: *restore_yarn_cache
       - run: *install
       - run: *build
       - run: *lint
@@ -81,15 +74,23 @@ jobs:
     <<: *node8Environment
     steps:
       - checkout
-      - restore-cache: *restore_yarn_cache
+      - restore_cache: *restore_yarn_cache
       - run: *install
       - run: *build
       - run: *type_check
+  bundlesize_check:
+    <<: *node8Environment
+    steps:
+      - checkout
+      - restore_cache: *restore_yarn_cache
+      - run: *install
+      - run: *build
+      - run: *bundlesize
   build_test_unit_node_6:
     <<: *node6Environment
     steps:
       - checkout
-      - restore-cache: *restore_yarn_cache
+      - restore_cache: *restore_yarn_cache
       - run: *install
       - run: *build
       - run: *unit_test
@@ -97,7 +98,7 @@ jobs:
     <<: *node8Environment
     steps:
       - checkout
-      - restore-cache: *restore_yarn_cache
+      - restore_cache: *restore_yarn_cache
       - run: *install
       - run: *build
       - run: *unit_test_with_coverage
