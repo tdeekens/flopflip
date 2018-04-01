@@ -21,7 +21,7 @@ export class ReconfigureAdapter extends PureComponent<Props> {
     children: null,
   };
 
-  componentDidMount(): Promise<any> | void {
+  componentDidMount(): void {
     return this.props.reconfigure(
       {
         user: this.props.user,
@@ -32,7 +32,7 @@ export class ReconfigureAdapter extends PureComponent<Props> {
     );
   }
 
-  componentDidUpdate(): Promise<any> | void {
+  componentDidUpdate(): void {
     return this.props.reconfigure(
       {
         user: this.props.user,
