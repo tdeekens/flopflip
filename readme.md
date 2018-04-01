@@ -265,12 +265,13 @@ Imagine having `ConfigureFlopflip` above a given component wrapped by a `Route`:
   <React.Fragment>
     <SomeOtherAppComponent />
     <Route
-      shouldOverwrite={false}
+      exact={false}
       path="/:projectKey"
       render={routerProps => (
         <React.Fragment>
           <MyRouteComponent />
           <ReconfigureFlopflip
+            // Note: This is the default - feel free to omit unless you want to set it to `true`.
             shouldOverwrite={false}
             // Note: this should be memoised to not trigger wasteful `reconfiguration`s.
             user={{ projectKey: routerProps.projectKey }}
