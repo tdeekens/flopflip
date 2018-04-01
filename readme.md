@@ -254,9 +254,9 @@ import adapter from '@flopflip/launchdarkly-adapter';
 Whenever your application "gains" certain information (e.g. with `react-router`) only further
 down the tree but that information should be used for user targeting (through `adapterArgs.user`) you
 can use `ReconfigureFlopflip`. `ReconfigureFlopflip` itself communicates with `ConfigureFlopflip`
-to reconfigure a given adapter for more fine grained targeting. You also do not have to worry
-about rendering `ReconfigureFlopflip` before the adapter initialized (e.g. LaunchDarkly) as
-requested reconfigurations will be queued and processed once the adapter is ready.
+to reconfigure the given adapter for more fine grained targeting with the pased `user`.
+You also do not have to worry about rendering any number of `ReconfigureFlopflip`s before the adapter is
+initialized (e.g. LaunchDarkly). Requested reconfigurations will be queued and processed once the adapter is ready.
 
 Imagine having `ConfigureFlopflip` above a given component wrapped by a `Route`:
 
@@ -269,6 +269,7 @@ Imagine having `ConfigureFlopflip` above a given component wrapped by a `Route`:
       <MyRouteComponent />
       <ReconfigureFlopflip
         exact={false}
+        // Note: this should be memoised to not trigger wasteful `reconfiguration`s.
         user={{ projectKey: routerProps.projectKey }}
       />
     </React.Fragment>
@@ -276,11 +277,11 @@ Imagine having `ConfigureFlopflip` above a given component wrapped by a `Route`:
 />
 ```
 
-The passed `projectKey` will be passed to the adapter from `ConfigureFlopflip` automatically
-triggering potentially newly targeted flags to be flushed.
+The passed `projectKey` will be passed to the adapter from `ReconfigureFlopflip` up to `ConfigureFlopflip` automatically
+triggering potentially new flags to be flushed from the underlying adapter.
 
-_Note:_ Whenever `exact` is `true` the existing user configuration will be overwritten
-not merged.
+_Note:_ Whenever `exact` is `true` the existing user configuration will be overwritten not merged. Use with care as any
+subsequent `exact={true}` will overwrite any previously passed `user` with `exact={false}` (default).
 
 ### `@flopflip/react-broadcast` `@flopflip/react-redux` API
 
