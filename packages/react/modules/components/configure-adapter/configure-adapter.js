@@ -66,7 +66,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
   setAdapterState = (nextAdapterState: AdapterState): void => {
     this.adapterState = nextAdapterState;
   };
-  setAdapterArgs = (nextAdapterArgs: AdapterArgs): void =>
+  applyAdapterArgs = (nextAdapterArgs: AdapterArgs): void =>
     this.setState(prevState => ({
       ...prevState,
       appliedAdapterArgs: nextAdapterArgs,
@@ -84,7 +84,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
   ): void =>
     this.adapterState === AdapterStates.CONFIGURED &&
     this.adapterState !== AdapterStates.CONFIGURING
-      ? this.setAdapterArgs(
+      ? this.applyAdapterArgs(
           mergeAdapterArgs(this.state.appliedAdapterArgs, {
             adapterArgs: nextAdapterArgs,
             options,
@@ -106,7 +106,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
     );
   };
   unsetPendingAdapterArgs = (): void => {
-    if (this.pendingAdapterArgs) this.setAdapterArgs(this.pendingAdapterArgs);
+    if (this.pendingAdapterArgs) this.applyAdapterArgs(this.pendingAdapterArgs);
 
     this.pendingAdapterArgs = null;
   };
