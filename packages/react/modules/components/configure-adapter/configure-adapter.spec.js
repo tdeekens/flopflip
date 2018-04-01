@@ -46,7 +46,7 @@ describe('rendering', () => {
   });
 
   it('should store `adapterArgs` onto `state`', () => {
-    expect(wrapper).toHaveState('adapterArgs', props.adapterArgs);
+    expect(wrapper).toHaveState('appliedAdapterArgs', props.adapterArgs);
   });
 });
 
@@ -381,8 +381,8 @@ describe('interacting', () => {
         wrapper.instance().setAdapterArgs(nextAdapterArgs, { exact: false });
       });
 
-      it('should update the `state` of `adapterArgs`', () => {
-        expect(wrapper).toHaveState('adapterArgs', nextAdapterArgs);
+      it('should update the `state` of `appliedAdapterArgs`', () => {
+        expect(wrapper).toHaveState('appliedAdapterArgs', nextAdapterArgs);
       });
     });
   });

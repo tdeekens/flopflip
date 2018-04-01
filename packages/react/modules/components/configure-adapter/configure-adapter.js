@@ -24,7 +24,7 @@ type Props = {
   children: React.Component<any>,
 };
 type State = {
-  adapterArgs: AdapterArgs,
+  appliedAdapterArgs: AdapterArgs,
 };
 type AdapterState = $Values<typeof AdapterStates>;
 type AdapterReconfigurationOptions = {
@@ -59,8 +59,8 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
   adapterState: AdapterState = AdapterStates.UNCONFIGURED;
   pendingAdapterArgs: ?AdapterArgs = null;
 
-  state: { adapterArgs: AdapterArgs } = {
-    adapterArgs: this.props.adapterArgs,
+  state: { appliedAdapterArgs: AdapterArgs } = {
+    appliedAdapterArgs: this.props.adapterArgs,
   };
 
   setAdapterState = (nextAdapterState: AdapterState): void => {
@@ -69,7 +69,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
   setAdapterArgs = (nextAdapterArgs: AdapterArgs): void =>
     this.setState(prevState => ({
       ...prevState,
-      adapterArgs: nextAdapterArgs,
+      appliedAdapterArgs: nextAdapterArgs,
     }));
 
   /**
@@ -85,7 +85,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
     this.adapterState === AdapterStates.CONFIGURED &&
     this.adapterState !== AdapterStates.CONFIGURING
       ? this.setAdapterArgs(
-          mergeAdapterArgs(this.state.adapterArgs, {
+          mergeAdapterArgs(this.state.appliedAdapterArgs, {
             adapterArgs: nextAdapterArgs,
             options,
           })
@@ -101,7 +101,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
      *    one instead of maintaining a queue.
      */
     this.pendingAdapterArgs = mergeAdapterArgs(
-      this.pendingAdapterArgs || this.state.adapterArgs,
+      this.pendingAdapterArgs || this.state.appliedAdapterArgs,
       nextReconfiguration
     );
   };
@@ -123,10 +123,12 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
     if (!this.props.shouldDeferAdapterConfiguration) {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
-      return this.props.adapter.configure(this.state.adapterArgs).then(() => {
-        this.setAdapterState(AdapterStates.CONFIGURED);
-        this.unsetPendingAdapterArgs();
-      });
+      return this.props.adapter
+        .configure(this.state.appliedAdapterArgs)
+        .then(() => {
+          this.setAdapterState(AdapterStates.CONFIGURED);
+          this.unsetPendingAdapterArgs();
+        });
     }
   }
 
@@ -143,19 +145,23 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
     ) {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
-      return this.props.adapter.configure(this.state.adapterArgs).then(() => {
-        this.setAdapterState(AdapterStates.CONFIGURED);
-      });
+      return this.props.adapter
+        .configure(this.state.appliedAdapterArgs)
+        .then(() => {
+          this.setAdapterState(AdapterStates.CONFIGURED);
+        });
     } else if (
       this.adapterState === AdapterStates.CONFIGURED &&
       this.adapterState !== AdapterStates.CONFIGURING
     ) {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
-      return this.props.adapter.reconfigure(this.state.adapterArgs).then(() => {
-        this.setAdapterState(AdapterStates.CONFIGURED);
-        this.unsetPendingAdapterArgs();
-      });
+      return this.props.adapter
+        .reconfigure(this.state.appliedAdapterArgs)
+        .then(() => {
+          this.setAdapterState(AdapterStates.CONFIGURED);
+          this.unsetPendingAdapterArgs();
+        });
     }
   }
 
