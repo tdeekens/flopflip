@@ -20,7 +20,7 @@ const withFlags = (propKey: string = ALL_FLAGS_PROP_KEY) => (
     render(): Node {
       return (
         <FlagsContext.Consumer>
-          {flags => <Component {...{ [propKey]: flags }} {...this.props} />}
+          {flags => <Component {...this.props} {...{ [propKey]: flags }} />}
         </FlagsContext.Consumer>
       );
     }
