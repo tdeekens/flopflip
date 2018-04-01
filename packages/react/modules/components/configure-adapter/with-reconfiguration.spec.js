@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import withReconfigure from './with-reconfigure';
+import withReconfiguration from './with-reconfiguration';
 
 const TestComponent = () => <div />;
 TestComponent.displayName = 'TestComponent';
@@ -9,7 +9,7 @@ describe('rendering', () => {
   let wrapper;
 
   beforeEach(() => {
-    const Component = withReconfigure('foo-prop-key')(TestComponent);
+    const Component = withReconfiguration('foo-prop-key')(TestComponent);
     wrapper = shallow(<Component />);
   });
 
@@ -26,10 +26,10 @@ describe('statics', () => {
   let Component;
 
   beforeEach(() => {
-    Component = withReconfigure('foo-prop-key')(TestComponent);
+    Component = withReconfiguration('foo-prop-key')(TestComponent);
   });
 
   it('should set the `displayName`', () => {
-    expect(Component.displayName).toEqual('withReconfigure(TestComponent)');
+    expect(Component.displayName).toEqual('withReconfiguration(TestComponent)');
   });
 });

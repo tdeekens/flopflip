@@ -9,13 +9,13 @@ import { AdapterContext } from './configure-adapter';
 type RequiredProps = {};
 type ProvidedProps = {};
 
-const withReconfigure = (propKey: string = 'reconfigure') => (
+const withReconfiguration = (propKey: string = 'reconfigure') => (
   Component: ComponentType<RequiredProps>
 ) => {
   class EnhancedComponent extends PureComponent<
     $Diff<RequiredProps, ProvidedProps>
   > {
-    static displayName = wrapDisplayName(Component, 'withReconfigure');
+    static displayName = wrapDisplayName(Component, 'withReconfiguration');
     render(): Node {
       return (
         <AdapterContext.Consumer>
@@ -30,4 +30,4 @@ const withReconfigure = (propKey: string = 'reconfigure') => (
   return EnhancedComponent;
 };
 
-export default withReconfigure;
+export default withReconfiguration;
