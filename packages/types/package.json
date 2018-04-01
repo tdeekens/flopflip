@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/types",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Type definitions for flipflop",
   "scripts": {},
   "publishConfig": {
