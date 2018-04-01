@@ -63,10 +63,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
     adapterArgs: this.props.adapterArgs,
   };
 
-  setAdapterState = (
-    nextAdapterState: AdapterState,
-    exact: boolean = false
-  ): void => {
+  setAdapterState = (nextAdapterState: AdapterState): void => {
     this.adapterState = nextAdapterState;
   };
   setAdapterArgs = (nextAdapterArgs: AdapterArgs): void =>
