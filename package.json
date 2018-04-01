@@ -73,6 +73,7 @@
     "jest-enzyme": "6.0.0",
     "jest-localstorage-mock": "2.2.0",
     "jest-runner-eslint": "0.4.0",
+    "jest-runner-flowtype": "0.2.0",
     "lerna": "2.9.1",
     "lint-staged": "7.0.2",
     "prettier": "1.11.1",
