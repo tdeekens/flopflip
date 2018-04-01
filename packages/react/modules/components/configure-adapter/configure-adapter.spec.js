@@ -83,7 +83,7 @@ describe('lifecycle', () => {
               </ConfigureAdapter>
             );
 
-            wrapper
+            return wrapper
               .instance()
               .componentDidMount()
               .catch(() => {});
@@ -164,7 +164,7 @@ describe('lifecycle', () => {
           </ConfigureAdapter>
         );
 
-        wrapper.instance().componentDidMount();
+        return wrapper.instance().componentDidMount();
       });
 
       it('should invoke `onFlagsStateChange` on `adapterArgs` with `defaultFlags`', () => {
@@ -338,10 +338,8 @@ describe('lifecycle', () => {
             );
 
             wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
-          });
 
-          beforeEach(() => {
-            wrapper
+            return wrapper
               .instance()
               .componentDidUpdate()
               .catch(() => {});
