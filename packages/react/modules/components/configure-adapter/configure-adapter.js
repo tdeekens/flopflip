@@ -35,7 +35,7 @@ type AdapterReconfiguration = {
 };
 type ReconfigureAdapter = (
   adapterArgs: AdapterArgs,
-  { exact?: boolean }
+  options: AdapterReconfigurationOptions
 ) => void;
 
 export const AdapterContext: Context<ReconfigureAdapter> = createReactContext(
