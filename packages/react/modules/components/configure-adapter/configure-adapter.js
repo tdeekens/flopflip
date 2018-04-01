@@ -4,6 +4,7 @@ import type { Flags, Adapter, AdapterArgs, User } from '@flopflip/types';
 
 import React, { PureComponent, type Node } from 'react';
 import createReactContext, { type Context } from 'create-react-context';
+import merge from 'deepmerge';
 
 export const AdapterStates: {
   UNCONFIGURED: string,
@@ -46,9 +47,7 @@ export const mergeAdapterArgs = (
   previousAdapterArgs: AdapterArgs,
   { adapterArgs: nextAdapterArgs, options }: AdapterReconfiguration
 ): AdapterArgs =>
-  options.exact
-    ? nextAdapterArgs
-    : { ...previousAdapterArgs, ...nextAdapterArgs };
+  options.exact ? nextAdapterArgs : merge(previousAdapterArgs, nextAdapterArgs);
 
 export default class ConfigureAdapter extends PureComponent<Props, State> {
   static defaultProps = {
@@ -105,7 +104,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
      *    one instead of maintaining a queue.
      */
     this.pendingAdapterArgs = mergeAdapterArgs(
-      this.state.adapterArgs,
+      this.pendingAdapterArgs || this.state.adapterArgs,
       nextReconfiguration
     );
   };
