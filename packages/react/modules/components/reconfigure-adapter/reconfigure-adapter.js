@@ -4,7 +4,7 @@ import type { User, AdapterArgs } from '@flopflip/types';
 
 import React, { PureComponent, type Node } from 'react';
 
-import { withReconfigure } from '../configure-adapter';
+import { withReconfiguration } from '../configure-adapter';
 
 type Props = {
   exact?: boolean,
@@ -50,4 +50,4 @@ export class ReconfigureAdapter extends PureComponent<Props> {
   }
 }
 
-export default withReconfigure()(ReconfigureAdapter);
+export default withReconfiguration()(ReconfigureAdapter);
