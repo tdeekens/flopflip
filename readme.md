@@ -251,6 +251,37 @@ import adapter from '@flopflip/launchdarkly-adapter';
 </ConfigureFlopFlip>;
 ```
 
+Whenever your application "gains" certain information (e.g. with `react-router`) only further
+down the tree but that information should be used for user targeting (through `adapterArgs.user`) you
+can use `ReconfigureFlopflip`. `ReconfigureFlopflip` itself communicates with `ConfigureFlopflip`
+to reconfigure a given adapter for more fine grained targeting. You also do not have to worry
+about rendering `ReconfigureFlopflip` before the adapter initialized (e.g. LaunchDarkly) as
+requested reconfigurations will be queued and processed once the adapter is ready.
+
+Imagine having `ConfigureFlopflip` above a given component wrapped by a `Route`:
+
+```jsx
+<Route
+  exact={false}
+  path="/:projectKey"
+  render={routerProps => (
+    <React.Fragment>
+      <MyRouteComponent />
+      <ReconfigureFlopflip
+        exact={false}
+        user={{ projectKey: routerProps.projectKey }}
+      />
+    </React.Fragment>
+  )}
+/>
+```
+
+The passed `projectKey` will be passed to the adapter from `ConfigureFlopflip` automatically
+triggering potentially newly targeted flags to be flushed.
+
+_Note:_ Whenever `exact` is `true` the existing user configuration will be overwritten
+not merged.
+
 ### `@flopflip/react-broadcast` `@flopflip/react-redux` API
 
 Apart from `ConfigureFlopFlip` both packages `@flopflip/react-broadcast` and
