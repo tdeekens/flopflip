@@ -105,7 +105,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
       nextReconfiguration
     );
   };
-  unsetPendingAdapterArgs = (): void => {
+  applyPendingAdapterArgs = (): void => {
     if (this.pendingAdapterArgs) this.applyAdapterArgs(this.pendingAdapterArgs);
 
     this.pendingAdapterArgs = null;
@@ -133,7 +133,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
         .configure(this.state.appliedAdapterArgs)
         .then(() => {
           this.setAdapterState(AdapterStates.CONFIGURED);
-          this.unsetPendingAdapterArgs();
+          this.applyPendingAdapterArgs();
         });
     }
   }
@@ -166,7 +166,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
         .reconfigure(this.state.appliedAdapterArgs)
         .then(() => {
           this.setAdapterState(AdapterStates.CONFIGURED);
-          this.unsetPendingAdapterArgs();
+          this.applyPendingAdapterArgs();
         });
     }
   }
