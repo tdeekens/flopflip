@@ -424,7 +424,7 @@ describe('interacting', () => {
     user: 'next-user',
   };
 
-  describe('setAdapterArgs', () => {
+  describe('applyAdapterArgs', () => {
     describe('when configured', () => {
       beforeEach(() => {
         props = createTestProps();
@@ -435,7 +435,7 @@ describe('interacting', () => {
         );
 
         wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
-        wrapper.instance().setAdapterArgs(nextAdapterArgs, { exact: false });
+        wrapper.instance().applyAdapterArgs(nextAdapterArgs, { exact: false });
       });
 
       it('should update the `state` of `appliedAdapterArgs`', () => {
@@ -506,7 +506,7 @@ describe('interacting', () => {
           </ConfigureAdapter>
         );
 
-        jest.spyOn(wrapper.instance(), 'setAdapterArgs');
+        jest.spyOn(wrapper.instance(), 'applyAdapterArgs');
 
         wrapper.instance().setPendingAdapterArgs({
           adapterArgs: nextAdapterArgs,
@@ -516,12 +516,12 @@ describe('interacting', () => {
         wrapper.instance().unsetPendingAdapterArgs();
       });
 
-      it('should invoke `setAdapterArgs`', () => {
-        expect(wrapper.instance().setAdapterArgs).toHaveBeenCalled();
+      it('should invoke `applyAdapterArgs`', () => {
+        expect(wrapper.instance().applyAdapterArgs).toHaveBeenCalled();
       });
 
-      it('should invoke `setAdapterArgs` with `pendingAdapterArgs`', () => {
-        expect(wrapper.instance().setAdapterArgs).toHaveBeenCalledWith(
+      it('should invoke `applyAdapterArgs` with `pendingAdapterArgs`', () => {
+        expect(wrapper.instance().applyAdapterArgs).toHaveBeenCalledWith(
           expect.objectContaining(nextAdapterArgs)
         );
       });
@@ -540,13 +540,13 @@ describe('interacting', () => {
           </ConfigureAdapter>
         );
 
-        jest.spyOn(wrapper.instance(), 'setAdapterArgs');
+        jest.spyOn(wrapper.instance(), 'applyAdapterArgs');
 
         wrapper.instance().unsetPendingAdapterArgs();
       });
 
-      it('should not invoke `setAdapterArgs`', () => {
-        expect(wrapper.instance().setAdapterArgs).not.toHaveBeenCalled();
+      it('should not invoke `applyAdapterArgs`', () => {
+        expect(wrapper.instance().applyAdapterArgs).not.toHaveBeenCalled();
       });
     });
 
@@ -560,7 +560,7 @@ describe('interacting', () => {
             </ConfigureAdapter>
           );
 
-          jest.spyOn(wrapper.instance(), 'setAdapterArgs');
+          jest.spyOn(wrapper.instance(), 'applyAdapterArgs');
 
           wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
 
@@ -569,12 +569,12 @@ describe('interacting', () => {
             .reconfigureOrQueue(nextAdapterArgs, { exact: false });
         });
 
-        it('should invoke `setAdapterArgs`', () => {
-          expect(wrapper.instance().setAdapterArgs).toHaveBeenCalled();
+        it('should invoke `applyAdapterArgs`', () => {
+          expect(wrapper.instance().applyAdapterArgs).toHaveBeenCalled();
         });
 
-        it('should invoke `setAdapterArgs` with `nextAdapterArgs`', () => {
-          expect(wrapper.instance().setAdapterArgs).toHaveBeenCalledWith(
+        it('should invoke `applyAdapterArgs` with `nextAdapterArgs`', () => {
+          expect(wrapper.instance().applyAdapterArgs).toHaveBeenCalledWith(
             expect.objectContaining(nextAdapterArgs)
           );
         });
