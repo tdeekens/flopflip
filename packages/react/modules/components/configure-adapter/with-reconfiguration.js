@@ -20,7 +20,7 @@ const withReconfiguration = (propKey: string = 'reconfigure') => (
       return (
         <AdapterContext.Consumer>
           {reconfigure => (
-            <Component {...{ [propKey]: reconfigure }} {...this.props} />
+            <Component {...this.props} {...{ [propKey]: reconfigure }} />
           )}
         </AdapterContext.Consumer>
       );
