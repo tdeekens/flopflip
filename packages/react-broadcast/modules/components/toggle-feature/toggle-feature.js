@@ -10,7 +10,7 @@ import { withFlags } from '../configure';
 
 export default compose(
   setDisplayName(ToggleFeature.displayName),
-  withFlags(ALL_FLAGS_PROP_KEY),
+  withFlags(),
   withProps(props => ({
     isFeatureEnabled: isFeatureEnabled(props.flag, props.variation)(
       props[ALL_FLAGS_PROP_KEY]
