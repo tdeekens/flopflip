@@ -54,7 +54,7 @@ declare module '@flopflip/types' {
     children: React.ReactNode;
   }
   export interface ReconfigureComponentProps {
-    exact?: boolean;
+    shouldOverwrite?: boolean;
     user: User;
   }
   export interface SwitchComponenthProps {

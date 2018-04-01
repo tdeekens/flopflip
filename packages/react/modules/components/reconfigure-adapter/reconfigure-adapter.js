@@ -9,7 +9,10 @@ import { withReconfiguration } from '../configure-adapter';
 type Props = {
   shouldOverwrite?: boolean,
   user: User,
-  reconfigure: (adapterArgs: AdapterArgs, { exact?: boolean }) => void,
+  reconfigure: (
+    adapterArgs: AdapterArgs,
+    { shouldOverwrite?: boolean }
+  ) => void,
   children: React.Component<any>,
 };
 
