@@ -1,0 +1,5 @@
+{
+  "runner": "jest-runner-flowtype",
+  "displayName": "flow",
+  "testMatch": ["<rootDir>/packages/**/*.js"]
+}

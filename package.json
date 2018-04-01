@@ -6,7 +6,7 @@
     "postinstall": "check-node-version --package --print",
     "develop": "jest --projects .jestrc.*.json --watch",
     "lint": "jest --config .jestrc.lint.json",
-    "flow": "flow",
+    "flow": "jest --config .jestrc.flow.json",
     "format": "npm run format:md && npm run format:js",
     "format:md": "prettier --parser markdown --write '*.md'",
     "format:js": "prettier --write '**/modules/**/*.js' '**/demo/**/*.js'",
