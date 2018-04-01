@@ -82,9 +82,7 @@ describe('lifecycle', () => {
                 <ChildComponent />
               </ConfigureAdapter>
             );
-          });
 
-          beforeEach(() => {
             wrapper
               .instance()
               .componentDidMount()
@@ -99,7 +97,11 @@ describe('lifecycle', () => {
         });
 
         describe('when the adapter configures', () => {
-          beforeEach(() => wrapper.instance().componentDidMount());
+          beforeEach(() => {
+            jest.spyOn(wrapper.instance(), 'unsetPendingAdapterArgs');
+
+            return wrapper.instance().componentDidMount();
+          });
 
           it('should invoke `configure` on `adapter`', () => {
             expect(props.adapter.configure).toHaveBeenCalled();
@@ -115,6 +117,12 @@ describe('lifecycle', () => {
             expect(wrapper.instance().adapterState).toEqual(
               AdapterStates.CONFIGURED
             );
+          });
+
+          it('should `unsetPendingAdapterArgs`', () => {
+            expect(
+              wrapper.instance().unsetPendingAdapterArgs
+            ).toHaveBeenCalled();
           });
         });
       });
@@ -298,6 +306,8 @@ describe('lifecycle', () => {
 
             wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
 
+            jest.spyOn(wrapper.instance(), 'unsetPendingAdapterArgs');
+
             return wrapper.instance().componentDidUpdate();
           });
 
@@ -316,6 +326,12 @@ describe('lifecycle', () => {
               expect(wrapper.instance().adapterState).toEqual(
                 AdapterStates.CONFIGURED
               );
+            });
+
+            it('should `unsetPendingAdapterArgs`', () => {
+              expect(
+                wrapper.instance().unsetPendingAdapterArgs
+              ).toHaveBeenCalled();
             });
           });
         });
@@ -379,17 +395,47 @@ describe('interacting', () => {
           <ChildComponent />
         </ConfigureAdapter>
       );
+    });
 
-      wrapper.instance().setPendingAdapterArgs({
-        adapterArgs: nextAdapterArgs,
-        options: { exact: false },
+    describe('without `pendingAdapterArgs`', () => {
+      beforeEach(() => {
+        wrapper.instance().setPendingAdapterArgs({
+          adapterArgs: nextAdapterArgs,
+          options: { exact: false },
+        });
+      });
+
+      it('should set `pendingAdapterArgs` to `nextAdapterArgs', () => {
+        expect(wrapper.instance().pendingAdapterArgs).toEqual(
+          expect.objectContaining(nextAdapterArgs)
+        );
       });
     });
 
-    it('should set `pendingAdapterArgs`', () => {
-      expect(wrapper.instance().pendingAdapterArgs).toEqual(
-        expect.objectContaining(nextAdapterArgs)
-      );
+    describe('with `pendingAdapterArgs`', () => {
+      const nextNextAdapterArgs = {
+        firstName: 'user-first-name',
+      };
+      beforeEach(() => {
+        wrapper.instance().setPendingAdapterArgs({
+          adapterArgs: nextAdapterArgs,
+          options: { exact: false },
+        });
+        wrapper.instance().setPendingAdapterArgs({
+          adapterArgs: nextNextAdapterArgs,
+          options: { exact: false },
+        });
+      });
+
+      it('should set `pendingAdapterArgs` merged with `pendingAdapterArgs', () => {
+        expect(wrapper.instance().pendingAdapterArgs).toEqual(
+          expect.objectContaining(nextAdapterArgs)
+        );
+
+        expect(wrapper.instance().pendingAdapterArgs).toEqual(
+          expect.objectContaining(nextNextAdapterArgs)
+        );
+      });
     });
   });
 
