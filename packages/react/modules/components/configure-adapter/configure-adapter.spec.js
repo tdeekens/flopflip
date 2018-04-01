@@ -98,7 +98,7 @@ describe('lifecycle', () => {
 
         describe('when the adapter configures', () => {
           beforeEach(() => {
-            jest.spyOn(wrapper.instance(), 'unsetPendingAdapterArgs');
+            jest.spyOn(wrapper.instance(), 'applyPendingAdapterArgs');
 
             return wrapper.instance().componentDidMount();
           });
@@ -119,9 +119,9 @@ describe('lifecycle', () => {
             );
           });
 
-          it('should `unsetPendingAdapterArgs`', () => {
+          it('should `applyPendingAdapterArgs`', () => {
             expect(
-              wrapper.instance().unsetPendingAdapterArgs
+              wrapper.instance().applyPendingAdapterArgs
             ).toHaveBeenCalled();
           });
         });
@@ -363,7 +363,7 @@ describe('lifecycle', () => {
 
             wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
 
-            jest.spyOn(wrapper.instance(), 'unsetPendingAdapterArgs');
+            jest.spyOn(wrapper.instance(), 'applyPendingAdapterArgs');
 
             return wrapper.instance().componentDidUpdate();
           });
@@ -385,9 +385,9 @@ describe('lifecycle', () => {
               );
             });
 
-            it('should `unsetPendingAdapterArgs`', () => {
+            it('should `applyPendingAdapterArgs`', () => {
               expect(
-                wrapper.instance().unsetPendingAdapterArgs
+                wrapper.instance().applyPendingAdapterArgs
               ).toHaveBeenCalled();
             });
           });
@@ -496,7 +496,7 @@ describe('interacting', () => {
     });
   });
 
-  describe('unsetPendingAdapterArgs', () => {
+  describe('applyPendingAdapterArgs', () => {
     describe('with `pendingAdapterArgs`', () => {
       beforeEach(() => {
         props = createTestProps();
@@ -513,7 +513,7 @@ describe('interacting', () => {
           options: { exact: false },
         });
 
-        wrapper.instance().unsetPendingAdapterArgs();
+        wrapper.instance().applyPendingAdapterArgs();
       });
 
       it('should invoke `applyAdapterArgs`', () => {
@@ -542,7 +542,7 @@ describe('interacting', () => {
 
         jest.spyOn(wrapper.instance(), 'applyAdapterArgs');
 
-        wrapper.instance().unsetPendingAdapterArgs();
+        wrapper.instance().applyPendingAdapterArgs();
       });
 
       it('should not invoke `applyAdapterArgs`', () => {
