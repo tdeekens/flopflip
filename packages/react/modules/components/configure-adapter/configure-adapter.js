@@ -117,6 +117,12 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
     }
   };
 
+  componentWillReceiveProps(nextProps: Props): void {
+    if (nextProps.adapterArgs !== this.props.adapterArgs) {
+      this.reconfigureOrQueue(nextProps.adapterArgs, { exact: true });
+    }
+  }
+
   componentDidMount(): Promise<any> | void {
     this.handleDefaultFlags(this.props.defaultFlags);
 

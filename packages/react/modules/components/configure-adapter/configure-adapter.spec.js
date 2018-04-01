@@ -175,6 +175,65 @@ describe('lifecycle', () => {
     });
   });
 
+  describe('componentWillReceiveProps', () => {
+    let wrapper;
+    let props;
+    let nextProps;
+
+    beforeEach(() => {
+      props = createTestProps();
+      wrapper = shallow(
+        <ConfigureAdapter {...props}>
+          <ChildComponent />
+        </ConfigureAdapter>
+      );
+    });
+
+    describe('with changed `adapterArgs`', () => {
+      beforeEach(() => {
+        nextProps = createTestProps({
+          adapterArgs: {
+            user: 'changed-user',
+          },
+        });
+
+        jest.spyOn(wrapper.instance(), 'reconfigureOrQueue');
+
+        wrapper.instance().componentWillReceiveProps(nextProps);
+      });
+
+      it('should invoke `recongiureOrQueue`', () => {
+        expect(wrapper.instance().reconfigureOrQueue).toHaveBeenCalled();
+      });
+
+      it('should invoke `recongiureOrQueue` with the `nextProps.adapterArgs`', () => {
+        expect(wrapper.instance().reconfigureOrQueue).toHaveBeenCalledWith(
+          nextProps.adapterArgs,
+          expect.any(Object)
+        );
+      });
+
+      it('should invoke `recongiureOrQueue` with `exact`', () => {
+        expect(wrapper.instance().reconfigureOrQueue).toHaveBeenCalledWith(
+          expect.any(Object),
+          { exact: true }
+        );
+      });
+    });
+
+    describe('without changed `adapterArgs`', () => {
+      beforeEach(() => {
+        jest.spyOn(wrapper.instance(), 'reconfigureOrQueue');
+
+        wrapper.instance().componentWillReceiveProps(props);
+      });
+
+      it('should invoke not `recongiureOrQueue`', () => {
+        expect(wrapper.instance().reconfigureOrQueue).not.toHaveBeenCalled();
+      });
+    });
+  });
+
   describe('componentDidUpdate', () => {
     describe('when `shouldDeferAdapterConfiguration` is `false`', () => {
       let props;
