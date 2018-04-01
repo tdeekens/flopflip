@@ -148,7 +148,7 @@ without Redux.
 * `ConfigureFlopFlip` a component to configure flopflip with an adapter
   (alternative to the store enhancer)
 * `ReconfigureFlopFlip` a component to reconfigure flopflip with new user properties
-  either merged or overwritting old properties (`exact` prop)
+  either merged or overwritting old properties (`shouldOverwrite` prop)
 * `branchOnFeatureToggle` a Higher-Order Component (HoC) to conditionally render
   components depending on feature toggle state
 * `injectFeatureToggle` a HoC to inject a feature toggle onto the `props` of a
@@ -265,13 +265,13 @@ Imagine having `ConfigureFlopflip` above a given component wrapped by a `Route`:
   <React.Fragment>
     <SomeOtherAppComponent />
     <Route
-      exact={false}
+      shouldOverwrite={false}
       path="/:projectKey"
       render={routerProps => (
         <React.Fragment>
           <MyRouteComponent />
           <ReconfigureFlopflip
-            exact={false}
+            shouldOverwrite={false}
             // Note: this should be memoised to not trigger wasteful `reconfiguration`s.
             user={{ projectKey: routerProps.projectKey }}
           />
@@ -284,8 +284,8 @@ Imagine having `ConfigureFlopflip` above a given component wrapped by a `Route`:
 
 Internally, `ReconfigureFlopFlip` will pass the `projectKey` to `ConfigureFlopFlip`, causing the adapter to automatically update the user context and therefore to flush new flags from the adapter (given they are provided by e.g. LaunchDarkly).
 
-_Note:_ Whenever `exact` is `true` the existing user configuration will be overwritten not merged. Use with care as any
-subsequent `exact={true}` will overwrite any previously passed `user` with `exact={false}` (default).
+_Note:_ Whenever `shouldOverwrite` is `true` the existing user configuration will be overwritten not merged. Use with care as any
+subsequent `shouldOverwrite={true}` will overwrite any previously passed `user` with `shouldOverwrite={false}` (default).
 
 ### `@flopflip/react-broadcast` `@flopflip/react-redux` API
 

@@ -7,7 +7,7 @@ import React, { PureComponent, type Node } from 'react';
 import { withReconfiguration } from '../configure-adapter';
 
 type Props = {
-  exact?: boolean,
+  shouldOverwrite?: boolean,
   user: User,
   reconfigure: (adapterArgs: AdapterArgs, { exact?: boolean }) => void,
   children: React.Component<any>,
@@ -17,7 +17,7 @@ export class ReconfigureAdapter extends PureComponent<Props> {
   static displayName = 'ReconfigureAdapter';
 
   static defaultProps = {
-    exact: false,
+    shouldOverwrite: false,
     children: null,
   };
 
@@ -27,7 +27,7 @@ export class ReconfigureAdapter extends PureComponent<Props> {
         user: this.props.user,
       },
       {
-        exact: this.props.exact,
+        shouldOverwrite: this.props.shouldOverwrite,
       }
     );
   }
@@ -38,7 +38,7 @@ export class ReconfigureAdapter extends PureComponent<Props> {
         user: this.props.user,
       },
       {
-        exact: this.props.exact,
+        shouldOverwrite: this.props.shouldOverwrite,
       }
     );
   }

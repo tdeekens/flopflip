@@ -9,7 +9,7 @@ const createTestProps = props => ({
   user: {
     key: 'foo-user-key',
   },
-  exact: false,
+  shouldOverwrite: false,
   reconfigure: jest.fn(),
   children: ChildComponent,
 
@@ -67,11 +67,11 @@ describe('lifecycle', () => {
       );
     });
 
-    it('should invoke `reconfigure` with `exact`', () => {
+    it('should invoke `reconfigure` with `shouldOverwrite`', () => {
       expect(props.reconfigure).toHaveBeenCalledWith(
         expect.any(Object),
         expect.objectContaining({
-          exact: props.exact,
+          shouldOverwrite: props.shouldOverwrite,
         })
       );
     });
@@ -103,11 +103,11 @@ describe('lifecycle', () => {
       );
     });
 
-    it('should invoke `reconfigure` with `exact`', () => {
+    it('should invoke `reconfigure` with `shouldOverwrite`', () => {
       expect(props.reconfigure).toHaveBeenCalledWith(
         expect.any(Object),
         expect.objectContaining({
-          exact: props.exact,
+          shouldOverwrite: props.shouldOverwrite,
         })
       );
     });
@@ -116,8 +116,8 @@ describe('lifecycle', () => {
 
 describe('statics', () => {
   describe('defaultProps', () => {
-    it('should default `exact` to `false`', () => {
-      expect(ReconfigureAdapter.defaultProps.exact).toBe(false);
+    it('should default `shouldOverwrite` to `false`', () => {
+      expect(ReconfigureAdapter.defaultProps.shouldOverwrite).toBe(false);
     });
 
     it('should default `children` to `null`', () => {
