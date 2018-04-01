@@ -28,7 +28,7 @@ type State = {
 };
 type AdapterState = $Values<typeof AdapterStates>;
 type AdapterReconfigurationOptions = {
-  exact?: boolean,
+  shouldOverwrite?: boolean,
 };
 type AdapterReconfiguration = {
   adapterArgs: AdapterArgs,
@@ -47,7 +47,9 @@ export const mergeAdapterArgs = (
   previousAdapterArgs: AdapterArgs,
   { adapterArgs: nextAdapterArgs, options = {} }: AdapterReconfiguration
 ): AdapterArgs =>
-  options.exact ? nextAdapterArgs : merge(previousAdapterArgs, nextAdapterArgs);
+  options.shouldOverwrite
+    ? nextAdapterArgs
+    : merge(previousAdapterArgs, nextAdapterArgs);
 
 export default class ConfigureAdapter extends PureComponent<Props, State> {
   static defaultProps = {
@@ -119,7 +121,16 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
 
   componentWillReceiveProps(nextProps: Props): void {
     if (nextProps.adapterArgs !== this.props.adapterArgs) {
-      this.reconfigureOrQueue(nextProps.adapterArgs, { exact: true });
+      /**
+       * NOTE:
+       *   To keep the component controlled changes to the `props.adapterArgs`
+       *   will always overwrite existing `adapterArgs`. Even when changs occured
+       *   from `ReconfigureFlopflip`. This aims to reduce confusion. Please open
+       *   an issue unless it does not. Maybe `adapterArgs` on this component will
+       *   become `defaultAdapterArgs` in the future and changes to them always
+       *   have to be carried out through `ReconfigureFlopflip`.
+       */
+      this.reconfigureOrQueue(nextProps.adapterArgs, { shouldOverwrite: true });
     }
   }
 

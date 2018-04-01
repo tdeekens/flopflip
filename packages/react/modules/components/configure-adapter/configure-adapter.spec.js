@@ -213,10 +213,10 @@ describe('lifecycle', () => {
         );
       });
 
-      it('should invoke `recongiureOrQueue` with `exact`', () => {
+      it('should invoke `recongiureOrQueue` with `shouldOverwrite`', () => {
         expect(wrapper.instance().reconfigureOrQueue).toHaveBeenCalledWith(
           expect.any(Object),
-          { exact: true }
+          { shouldOverwrite: true }
         );
       });
     });
@@ -435,7 +435,9 @@ describe('interacting', () => {
         );
 
         wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
-        wrapper.instance().applyAdapterArgs(nextAdapterArgs, { exact: false });
+        wrapper
+          .instance()
+          .applyAdapterArgs(nextAdapterArgs, { shouldOverwrite: false });
       });
 
       it('should update the `state` of `appliedAdapterArgs`', () => {
@@ -458,7 +460,7 @@ describe('interacting', () => {
       beforeEach(() => {
         wrapper.instance().setPendingAdapterArgs({
           adapterArgs: nextAdapterArgs,
-          options: { exact: false },
+          options: { exashouldOverwritect: false },
         });
       });
 
@@ -476,11 +478,11 @@ describe('interacting', () => {
       beforeEach(() => {
         wrapper.instance().setPendingAdapterArgs({
           adapterArgs: nextAdapterArgs,
-          options: { exact: false },
+          options: { shouldOverwrite: false },
         });
         wrapper.instance().setPendingAdapterArgs({
           adapterArgs: nextNextAdapterArgs,
-          options: { exact: false },
+          options: { shouldOverwrite: false },
         });
       });
 
@@ -510,7 +512,7 @@ describe('interacting', () => {
 
         wrapper.instance().setPendingAdapterArgs({
           adapterArgs: nextAdapterArgs,
-          options: { exact: false },
+          options: { shouldOverwrite: false },
         });
 
         wrapper.instance().applyPendingAdapterArgs();
@@ -566,7 +568,7 @@ describe('interacting', () => {
 
           wrapper
             .instance()
-            .reconfigureOrQueue(nextAdapterArgs, { exact: false });
+            .reconfigureOrQueue(nextAdapterArgs, { shouldOverwrite: false });
         });
 
         it('should invoke `applyAdapterArgs`', () => {
@@ -595,7 +597,7 @@ describe('interacting', () => {
 
           wrapper
             .instance()
-            .reconfigureOrQueue(nextAdapterArgs, { exact: false });
+            .reconfigureOrQueue(nextAdapterArgs, { shouldOverwrite: false });
         });
 
         it('should invoke `setPendingAdapterArgs`', () => {
@@ -610,7 +612,7 @@ describe('interacting', () => {
 
         it('should invoke `setPendingAdapterArgs` with `options`', () => {
           expect(wrapper.instance().setPendingAdapterArgs).toHaveBeenCalledWith(
-            expect.objectContaining({ options: { exact: false } })
+            expect.objectContaining({ options: { shouldOverwrite: false } })
           );
         });
       });
@@ -627,7 +629,7 @@ describe('interacting', () => {
 
   describe('helpers', () => {
     describe('mergeAdapterArgs', () => {
-      describe('when not `exact`', () => {
+      describe('when not `shouldOverwrite`', () => {
         const previousAdapterArgs = {
           'some-prop': 'was-present',
         };
@@ -639,7 +641,7 @@ describe('interacting', () => {
           expect(
             mergeAdapterArgs(previousAdapterArgs, {
               adapterArgs: nextAdapterArgs,
-              options: { exact: false },
+              options: { shouldOverwrite: false },
             })
           ).toEqual(expect.objectContaining(nextAdapterArgs));
         });
@@ -648,13 +650,13 @@ describe('interacting', () => {
           expect(
             mergeAdapterArgs(previousAdapterArgs, {
               adapterArgs: nextAdapterArgs,
-              options: { exact: false },
+              options: { shouldOverwrite: false },
             })
           ).toEqual(expect.objectContaining(previousAdapterArgs));
         });
       });
 
-      describe('when `exact`', () => {
+      describe('when `shouldOverwrite`', () => {
         const previousAdapterArgs = {
           'some-prop': 'was-present',
         };
@@ -666,7 +668,7 @@ describe('interacting', () => {
           expect(
             mergeAdapterArgs(previousAdapterArgs, {
               adapterArgs: nextAdapterArgs,
-              options: { exact: true },
+              options: { shouldOverwrite: true },
             })
           ).toEqual(expect.objectContaining(nextAdapterArgs));
         });
@@ -675,7 +677,7 @@ describe('interacting', () => {
           expect(
             mergeAdapterArgs(previousAdapterArgs, {
               adapterArgs: nextAdapterArgs,
-              options: { exact: true },
+              options: { shouldOverwrite: true },
             })
           ).not.toEqual(expect.objectContaining(previousAdapterArgs));
         });
