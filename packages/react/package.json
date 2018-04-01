@@ -51,6 +51,7 @@
     "lodash.intersection": "4.4.0",
     "lodash.isnil": "4.0.0",
     "lodash.omit": "4.5.0",
+    "deepmerge": "2.1.0",
     "recompose": "0.26.0",
     "warning": "3.0.0"
   },
