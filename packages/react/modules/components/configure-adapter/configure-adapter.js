@@ -45,7 +45,7 @@ export const AdapterContext: Context<ReconfigureAdapter> = createReactContext(
 
 export const mergeAdapterArgs = (
   previousAdapterArgs: AdapterArgs,
-  { adapterArgs: nextAdapterArgs, options }: AdapterReconfiguration = {}
+  { adapterArgs: nextAdapterArgs, options = {} }: AdapterReconfiguration
 ): AdapterArgs =>
   options.exact ? nextAdapterArgs : merge(previousAdapterArgs, nextAdapterArgs);
 
