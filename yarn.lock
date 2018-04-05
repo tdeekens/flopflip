@@ -4662,9 +4662,9 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-ldclient-js@1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-1.6.1.tgz#85c03795defed8e453fa7579972be4158b7e3c4c"
+ldclient-js@1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-1.6.2.tgz#fb47ae3f138ddc24c564bc26289d4418f4d7dc4c"
   dependencies:
     Base64 "1.0.0"
     escape-string-regexp "1.0.5"
