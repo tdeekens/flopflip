@@ -113,6 +113,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
+      - dependencies_check
       - lint
       - type_check:
           requires:
