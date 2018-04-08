@@ -35,6 +35,10 @@ aliases:
     name: Building
     command: yarn build
 
+  - &fossa
+    name: Running Fossa dependency checking
+    command: license-cli scan
+
   - &unit_test
     name: Unit testing
     # Limiting the workers of Jest to 10
@@ -56,6 +60,13 @@ node8Environment: &node8Environment
 
 version: 2
 jobs:
+  dependencies_check:
+    <<: *node8Environment
+    steps:
+      - checkout
+      - restore_cache: *restore_yarn_cache
+      - run: *install
+      - run: *fossa
   lint:
     <<: *node8Environment
     steps:
