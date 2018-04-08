@@ -134,8 +134,5 @@
       "path": "./packages/react-redux/dist/@flopflip-react-redux.umd.min.js",
       "threshold": "3.75Kb"
     }
-  ],
-  "dependencies": {
-    "license-cli": "^1.1.6"
-  }
+  ]
 }

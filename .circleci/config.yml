@@ -37,7 +37,9 @@ aliases:
 
   - &fossa
     name: Running Fossa dependency checking
-    command: license-cli scan
+    command: |
+      curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
+      fossa test
 
   - &unit_test
     name: Unit testing
@@ -64,8 +66,6 @@ jobs:
     <<: *node8Environment
     steps:
       - checkout
-      - restore_cache: *restore_yarn_cache
-      - run: *install
       - run: *fossa
   lint:
     <<: *node8Environment
