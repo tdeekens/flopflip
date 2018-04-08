@@ -35,6 +35,12 @@ aliases:
     name: Building
     command: yarn build
 
+  - &fossa
+    name: Running Fossa dependency checking
+    command: |
+      curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
+      fossa test
+
   - &unit_test
     name: Unit testing
     # Limiting the workers of Jest to 10
@@ -56,6 +62,11 @@ node8Environment: &node8Environment
 
 version: 2
 jobs:
+  dependencies_check:
+    <<: *node8Environment
+    steps:
+      - checkout
+      - run: *fossa
   lint:
     <<: *node8Environment
     steps:
@@ -102,6 +113,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
+      - dependencies_check
       - lint
       - type_check:
           requires:

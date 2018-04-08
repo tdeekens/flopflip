@@ -5167,7 +5167,6 @@ log-update@^1.0.2:
 
 "logplease@github:NicoZelaya/logplease#1.3.0":
   version "1.3.0"
-  uid b4ca204f892080a2011fe3b3f3b2b1c8c72bb29c
   resolved "https://codeload.github.com/NicoZelaya/logplease/tar.gz/b4ca204f892080a2011fe3b3f3b2b1c8c72bb29c"
 
 longest@^1.0.1:
