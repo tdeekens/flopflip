@@ -33,6 +33,7 @@
   <a href="https://codecov.io/gh/tdeekens/flopflip">
     <img alt="Codecov Coverage Status" src="https://img.shields.io/codecov/c/github/tdeekens/flopflip.svg?style=flat-square">
   </a>
+<a href="https://app.fossa.io/projects/git%2Bgithub.com%2Ftdeekens%2Fflopflip?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftdeekens%2Fflopflip.svg?type=shield"/></a>
   <img alt="Made with Coffee" src="https://img.shields.io/badge/made%20with-%E2%98%95%EF%B8%8F%20coffee-yellow.svg">
   <br /><br />
   <a href="https://techblog.commercetools.com/embracing-real-time-feature-toggling-in-your-react-application-a5e6052716a9">
@@ -670,3 +671,7 @@ Also feel free to use
 [unpkg.com](https://unpkg.com/@flopflip/react-redux@latest/dist/@flopflip-react-redux.umd.min.js)
 as a CDN to the [dist](https://unpkg.com/@flopflip/react-redux@latest/dist/)
 files.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftdeekens%2Fflopflip.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftdeekens%2Fflopflip?ref=badge_large)
