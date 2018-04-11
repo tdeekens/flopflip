@@ -51,7 +51,7 @@ node6Environment: &node6Environment
   working_directory: *working_directory
 node8Environment: &node8Environment
   docker:
-    - image: circleci/node:8@sha256:9988ad9238ddb0b5cf9eade9ad00720af0f53bec04ee156974f03b07529e0e90
+    - image: circleci/node:8@sha256:26795ce4671c335e1ab6d71d4586182adf4f66fab694e403a9b80e101ac112ad
   working_directory: *working_directory
 
 version: 2
