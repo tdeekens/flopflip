@@ -256,7 +256,7 @@ LaunchDarkly
 ```js
 import adapter from '@flopflip/launchdarkly-adapter';
 
-<ConfigureFlopFlip adapter={adapter} adapterArgs={(clientSideId, user)}>
+<ConfigureFlopFlip adapter={adapter} adapterArgs={{ clientSideId, user }}>
   <App />
 </ConfigureFlopFlip>;
 ```
@@ -271,7 +271,7 @@ initialized (e.g. LaunchDarkly). Requested reconfigurations will be queued and p
 Imagine having `ConfigureFlopflip` above a given component wrapped by a `Route`:
 
 ```jsx
-<ConfigureFlopFlip adapter={adapter} adapterArgs={(clientSideId, user)}>
+<ConfigureFlopFlip adapter={adapter} adapterArgs={{ clientSideId, user }}>
   <React.Fragment>
     <SomeOtherAppComponent />
     <Route
