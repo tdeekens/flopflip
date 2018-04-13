@@ -65,8 +65,7 @@ describe('when configuring', () => {
         user: userWithoutKey,
         onStatusStateChange,
         onFlagsStateChange,
-      })
-    );
+      }));
 
     it('should initialize the `SplitFactory` with `authorizationKey` and random `user` `key`', () => {
       expect(SplitFactory).toHaveBeenCalledWith({
