@@ -81,8 +81,7 @@ describe('when configuring', () => {
         user: userWithoutKey,
         onStatusStateChange,
         onFlagsStateChange,
-      })
-    );
+      }));
 
     it('should initialize the `ld-client` with `clientSideId` and random `user` `key`', () => {
       expect(ldClient.initialize).toHaveBeenCalledWith(clientSideId, {

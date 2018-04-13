@@ -673,6 +673,6 @@ Also feel free to use
 as a CDN to the [dist](https://unpkg.com/@flopflip/react-redux@latest/dist/)
 files.
 
-
 ## License
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftdeekens%2Fflopflip.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftdeekens%2Fflopflip?ref=badge_large)
