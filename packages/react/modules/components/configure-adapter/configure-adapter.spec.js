@@ -98,8 +98,6 @@ describe('lifecycle', () => {
 
         describe('when the adapter configures', () => {
           beforeEach(() => {
-            jest.spyOn(wrapper.instance(), 'applyPendingAdapterArgs');
-
             return wrapper.instance().componentDidMount();
           });
 
@@ -117,12 +115,6 @@ describe('lifecycle', () => {
             expect(wrapper.instance().adapterState).toEqual(
               AdapterStates.CONFIGURED
             );
-          });
-
-          it('should `applyPendingAdapterArgs`', () => {
-            expect(
-              wrapper.instance().applyPendingAdapterArgs
-            ).toHaveBeenCalled();
           });
         });
       });
@@ -363,8 +355,6 @@ describe('lifecycle', () => {
 
             wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
 
-            jest.spyOn(wrapper.instance(), 'applyPendingAdapterArgs');
-
             return wrapper.instance().componentDidUpdate();
           });
 
@@ -383,12 +373,6 @@ describe('lifecycle', () => {
               expect(wrapper.instance().adapterState).toEqual(
                 AdapterStates.CONFIGURED
               );
-            });
-
-            it('should `applyPendingAdapterArgs`', () => {
-              expect(
-                wrapper.instance().applyPendingAdapterArgs
-              ).toHaveBeenCalled();
             });
           });
         });
@@ -498,7 +482,9 @@ describe('interacting', () => {
     });
   });
 
-  describe('applyPendingAdapterArgs', () => {
+  describe('getAdapterArgsForConfiguration', () => {
+    let adapterArgsForConfiguration;
+
     describe('with `pendingAdapterArgs`', () => {
       beforeEach(() => {
         props = createTestProps();
@@ -508,27 +494,23 @@ describe('interacting', () => {
           </ConfigureAdapter>
         );
 
-        jest.spyOn(wrapper.instance(), 'applyAdapterArgs');
-
         wrapper.instance().setPendingAdapterArgs({
           adapterArgs: nextAdapterArgs,
           options: { shouldOverwrite: false },
         });
 
-        wrapper.instance().applyPendingAdapterArgs();
+        adapterArgsForConfiguration = wrapper
+          .instance()
+          .getAdapterArgsForConfiguration();
       });
 
-      it('should invoke `applyAdapterArgs`', () => {
-        expect(wrapper.instance().applyAdapterArgs).toHaveBeenCalled();
-      });
-
-      it('should invoke `applyAdapterArgs` with `pendingAdapterArgs`', () => {
-        expect(wrapper.instance().applyAdapterArgs).toHaveBeenCalledWith(
+      it('should return the `pendingAdapterArgs`', () => {
+        expect(adapterArgsForConfiguration).toEqual(
           expect.objectContaining(nextAdapterArgs)
         );
       });
 
-      it('should unset `pendingAdapterArgs`', () => {
+      it('should unset the `pendingAdapterArgs`', () => {
         expect(wrapper.instance().pendingAdapterArgs).toBeNull();
       });
     });
@@ -542,145 +524,147 @@ describe('interacting', () => {
           </ConfigureAdapter>
         );
 
+        adapterArgsForConfiguration = wrapper
+          .instance()
+          .getAdapterArgsForConfiguration();
+      });
+
+      it('should return `appliedAdapterArgs`', () => {
+        expect(adapterArgsForConfiguration).toEqual(
+          wrapper.state('appliedAdapterArgs')
+        );
+      });
+    });
+  });
+
+  describe('reconfigureOrQueue', () => {
+    describe('when adapter is configured', () => {
+      beforeEach(() => {
+        props = createTestProps();
+        wrapper = shallow(
+          <ConfigureAdapter {...props}>
+            <ChildComponent />
+          </ConfigureAdapter>
+        );
+
         jest.spyOn(wrapper.instance(), 'applyAdapterArgs');
 
-        wrapper.instance().applyPendingAdapterArgs();
+        wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
+
+        wrapper
+          .instance()
+          .reconfigureOrQueue(nextAdapterArgs, { shouldOverwrite: false });
       });
 
-      it('should not invoke `applyAdapterArgs`', () => {
-        expect(wrapper.instance().applyAdapterArgs).not.toHaveBeenCalled();
+      it('should invoke `applyAdapterArgs`', () => {
+        expect(wrapper.instance().applyAdapterArgs).toHaveBeenCalled();
+      });
+
+      it('should invoke `applyAdapterArgs` with `nextAdapterArgs`', () => {
+        expect(wrapper.instance().applyAdapterArgs).toHaveBeenCalledWith(
+          expect.objectContaining(nextAdapterArgs)
+        );
       });
     });
 
-    describe('reconfigureOrQueue', () => {
-      describe('when adapter is configured', () => {
-        beforeEach(() => {
-          props = createTestProps();
-          wrapper = shallow(
-            <ConfigureAdapter {...props}>
-              <ChildComponent />
-            </ConfigureAdapter>
-          );
+    describe('when adapter is configuring', () => {
+      beforeEach(() => {
+        props = createTestProps();
+        wrapper = shallow(
+          <ConfigureAdapter {...props}>
+            <ChildComponent />
+          </ConfigureAdapter>
+        );
 
-          jest.spyOn(wrapper.instance(), 'applyAdapterArgs');
+        jest.spyOn(wrapper.instance(), 'setPendingAdapterArgs');
 
-          wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
+        wrapper.instance().setAdapterState(AdapterStates.CONFIGURING);
 
-          wrapper
-            .instance()
-            .reconfigureOrQueue(nextAdapterArgs, { shouldOverwrite: false });
-        });
-
-        it('should invoke `applyAdapterArgs`', () => {
-          expect(wrapper.instance().applyAdapterArgs).toHaveBeenCalled();
-        });
-
-        it('should invoke `applyAdapterArgs` with `nextAdapterArgs`', () => {
-          expect(wrapper.instance().applyAdapterArgs).toHaveBeenCalledWith(
-            expect.objectContaining(nextAdapterArgs)
-          );
-        });
+        wrapper
+          .instance()
+          .reconfigureOrQueue(nextAdapterArgs, { shouldOverwrite: false });
       });
 
-      describe('when adapter is configuring', () => {
-        beforeEach(() => {
-          props = createTestProps();
-          wrapper = shallow(
-            <ConfigureAdapter {...props}>
-              <ChildComponent />
-            </ConfigureAdapter>
-          );
+      it('should invoke `setPendingAdapterArgs`', () => {
+        expect(wrapper.instance().setPendingAdapterArgs).toHaveBeenCalled();
+      });
 
-          jest.spyOn(wrapper.instance(), 'setPendingAdapterArgs');
+      it('should invoke `setPendingAdapterArgs` with `nextAdapterArgs`', () => {
+        expect(wrapper.instance().setPendingAdapterArgs).toHaveBeenCalledWith(
+          expect.objectContaining({ adapterArgs: nextAdapterArgs })
+        );
+      });
 
-          wrapper.instance().setAdapterState(AdapterStates.CONFIGURING);
-
-          wrapper
-            .instance()
-            .reconfigureOrQueue(nextAdapterArgs, { shouldOverwrite: false });
-        });
-
-        it('should invoke `setPendingAdapterArgs`', () => {
-          expect(wrapper.instance().setPendingAdapterArgs).toHaveBeenCalled();
-        });
-
-        it('should invoke `setPendingAdapterArgs` with `nextAdapterArgs`', () => {
-          expect(wrapper.instance().setPendingAdapterArgs).toHaveBeenCalledWith(
-            expect.objectContaining({ adapterArgs: nextAdapterArgs })
-          );
-        });
-
-        it('should invoke `setPendingAdapterArgs` with `options`', () => {
-          expect(wrapper.instance().setPendingAdapterArgs).toHaveBeenCalledWith(
-            expect.objectContaining({ options: { shouldOverwrite: false } })
-          );
-        });
+      it('should invoke `setPendingAdapterArgs` with `options`', () => {
+        expect(wrapper.instance().setPendingAdapterArgs).toHaveBeenCalledWith(
+          expect.objectContaining({ options: { shouldOverwrite: false } })
+        );
       });
     });
   });
+});
 
-  describe('statics', () => {
-    describe('defaultProps', () => {
-      it('should default `defaultFlags` to an empty object', () => {
-        expect(ConfigureAdapter.defaultProps.defaultFlags).toEqual({});
-      });
+describe('statics', () => {
+  describe('defaultProps', () => {
+    it('should default `defaultFlags` to an empty object', () => {
+      expect(ConfigureAdapter.defaultProps.defaultFlags).toEqual({});
     });
   });
+});
 
-  describe('helpers', () => {
-    describe('mergeAdapterArgs', () => {
-      describe('when not `shouldOverwrite`', () => {
-        const previousAdapterArgs = {
-          'some-prop': 'was-present',
-        };
-        const nextAdapterArgs = {
-          'another-prop': 'is-added',
-        };
+describe('helpers', () => {
+  describe('mergeAdapterArgs', () => {
+    describe('when not `shouldOverwrite`', () => {
+      const previousAdapterArgs = {
+        'some-prop': 'was-present',
+      };
+      const nextAdapterArgs = {
+        'another-prop': 'is-added',
+      };
 
-        it('should merge the next properties', () => {
-          expect(
-            mergeAdapterArgs(previousAdapterArgs, {
-              adapterArgs: nextAdapterArgs,
-              options: { shouldOverwrite: false },
-            })
-          ).toEqual(expect.objectContaining(nextAdapterArgs));
-        });
-
-        it('should keep the previous properties', () => {
-          expect(
-            mergeAdapterArgs(previousAdapterArgs, {
-              adapterArgs: nextAdapterArgs,
-              options: { shouldOverwrite: false },
-            })
-          ).toEqual(expect.objectContaining(previousAdapterArgs));
-        });
+      it('should merge the next properties', () => {
+        expect(
+          mergeAdapterArgs(previousAdapterArgs, {
+            adapterArgs: nextAdapterArgs,
+            options: { shouldOverwrite: false },
+          })
+        ).toEqual(expect.objectContaining(nextAdapterArgs));
       });
 
-      describe('when `shouldOverwrite`', () => {
-        const previousAdapterArgs = {
-          'some-prop': 'was-present',
-        };
-        const nextAdapterArgs = {
-          'another-prop': 'is-added',
-        };
+      it('should keep the previous properties', () => {
+        expect(
+          mergeAdapterArgs(previousAdapterArgs, {
+            adapterArgs: nextAdapterArgs,
+            options: { shouldOverwrite: false },
+          })
+        ).toEqual(expect.objectContaining(previousAdapterArgs));
+      });
+    });
 
-        it('should merge the next properties', () => {
-          expect(
-            mergeAdapterArgs(previousAdapterArgs, {
-              adapterArgs: nextAdapterArgs,
-              options: { shouldOverwrite: true },
-            })
-          ).toEqual(expect.objectContaining(nextAdapterArgs));
-        });
+    describe('when `shouldOverwrite`', () => {
+      const previousAdapterArgs = {
+        'some-prop': 'was-present',
+      };
+      const nextAdapterArgs = {
+        'another-prop': 'is-added',
+      };
 
-        it('should not keep the previous properties', () => {
-          expect(
-            mergeAdapterArgs(previousAdapterArgs, {
-              adapterArgs: nextAdapterArgs,
-              options: { shouldOverwrite: true },
-            })
-          ).not.toEqual(expect.objectContaining(previousAdapterArgs));
-        });
+      it('should merge the next properties', () => {
+        expect(
+          mergeAdapterArgs(previousAdapterArgs, {
+            adapterArgs: nextAdapterArgs,
+            options: { shouldOverwrite: true },
+          })
+        ).toEqual(expect.objectContaining(nextAdapterArgs));
+      });
+
+      it('should not keep the previous properties', () => {
+        expect(
+          mergeAdapterArgs(previousAdapterArgs, {
+            adapterArgs: nextAdapterArgs,
+            options: { shouldOverwrite: true },
+          })
+        ).not.toEqual(expect.objectContaining(previousAdapterArgs));
       });
     });
   });

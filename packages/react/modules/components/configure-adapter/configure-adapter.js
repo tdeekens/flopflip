@@ -101,16 +101,33 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
      * NOTE:
      *    The next reconfiguration is merged into the previous
      *    one instead of maintaining a queue.
+     *
+     *    The first merge with merge with `appliedAdapter` args
+     *    to contain the initial state (through property initializer).
      */
     this.pendingAdapterArgs = mergeAdapterArgs(
       this.pendingAdapterArgs || this.state.appliedAdapterArgs,
       nextReconfiguration
     );
   };
-  applyPendingAdapterArgs = (): void => {
-    if (this.pendingAdapterArgs) this.applyAdapterArgs(this.pendingAdapterArgs);
+  /**
+   * NOTE:
+   *    Whenever the adapter delays configuration pending adapterArgs will
+   *    be kept on `pendingAdapterArgs`. These can either be populated
+   *    from calls to `componentWillReceiveProps` or through `ReconfigureFlopflip`.
+   *    Both cases go through `reconfigureOrQueue`.
+   *
+   *    In any case, when the adapter should be configured it should either
+   *    be passed pending or applied adapterArgs.
+   *
+   */
+  getAdapterArgsForConfiguration = (): void => {
+    const adapterArgsForConfiguration =
+      this.pendingAdapterArgs || this.state.appliedAdapterArgs;
 
     this.pendingAdapterArgs = null;
+
+    return adapterArgsForConfiguration;
   };
 
   handleDefaultFlags = (defaultFlags: Flags): void => {
@@ -141,10 +158,9 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
       return this.props.adapter
-        .configure(this.state.appliedAdapterArgs)
+        .configure(this.getAdapterArgsForConfiguration())
         .then(() => {
           this.setAdapterState(AdapterStates.CONFIGURED);
-          this.applyPendingAdapterArgs();
         });
     }
   }
@@ -153,6 +169,8 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
     /**
      * NOTE:
      *    Be careful here to not double configure from `componentDidMount`.
+     *    Moreover, cDU will also be invoked from `setState` to `appliedAdapterArgs`.
+     *    Hence, avoid calling `setState` within cDU.
      */
 
     if (
@@ -163,7 +181,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
       return this.props.adapter
-        .configure(this.state.appliedAdapterArgs)
+        .configure(this.getAdapterArgsForConfiguration())
         .then(() => {
           this.setAdapterState(AdapterStates.CONFIGURED);
         });
@@ -174,10 +192,9 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
       return this.props.adapter
-        .reconfigure(this.state.appliedAdapterArgs)
+        .reconfigure(this.getAdapterArgsForConfiguration())
         .then(() => {
           this.setAdapterState(AdapterStates.CONFIGURED);
-          this.applyPendingAdapterArgs();
         });
     }
   }
