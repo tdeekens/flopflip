@@ -11,7 +11,7 @@ aliases:
     name: Saving cache
     key: v2-yarn-cache-{{ checksum "yarn.lock" }}
     paths:
-      - node_modules
+      - ~/.cache/yarn
 
   - &install
     name: Installing
