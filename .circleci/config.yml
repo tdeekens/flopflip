@@ -47,7 +47,7 @@ aliases:
 
 node6Environment: &node6Environment
   docker:
-    - image: circleci/node:6@sha256:a566258f618a06af0e8a3df362c788530675e54bb342e2b0c6183d80366f9343
+    - image: circleci/node:6@sha256:6e7a8a0777044358e46442083c48b077c8232aafe5881617a0d3cea0d9592b5b
   working_directory: *working_directory
 node8Environment: &node8Environment
   docker:
