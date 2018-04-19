@@ -8,7 +8,7 @@
     "react-dom": "16.3.2",
     "react-redux": "5.0.7",
     "react-scripts": "1.1.4",
-    "recompose": "0.26.0",
+    "recompose": "0.27.0",
     "redux": "4.0.0",
     "redux-logger": "3.0.6",
     "redux-thunk": "2.2.0",
