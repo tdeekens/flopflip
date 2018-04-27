@@ -69,20 +69,21 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
     this.adapterState = nextAdapterState;
   };
   applyAdapterArgs = (nextAdapterArgs: AdapterArgs): void =>
-    this.setState(prevState => {
-      /**
-       * NOTE:
-       *   We can only unset `pendingAdapterArgs` after be actually perform
-       *   a batched `setState` otherwise outdated `adapterArgs` may be
-       *   applied as the `setState` is actually performed later.
-       */
-      this.pendingAdapterArgs = null;
-
-      return {
+    /**
+     * NOTE:
+     *   We can only unset `pendingAdapterArgs` after be actually perform
+     *   a batched `setState` otherwise outdated `adapterArgs` as we loose
+     *   the `pendingAdapterArgs` as we unset them too early.
+     */
+    this.setState(
+      prevState => ({
         ...prevState,
         appliedAdapterArgs: nextAdapterArgs,
-      };
-    });
+      }),
+      () => {
+        this.pendingAdapterArgs = null;
+      }
+    );
 
   /**
    * NOTE:
