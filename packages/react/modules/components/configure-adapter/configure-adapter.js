@@ -69,10 +69,20 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
     this.adapterState = nextAdapterState;
   };
   applyAdapterArgs = (nextAdapterArgs: AdapterArgs): void =>
-    this.setState(prevState => ({
-      ...prevState,
-      appliedAdapterArgs: nextAdapterArgs,
-    }));
+    this.setState(prevState => {
+      /**
+       * NOTE:
+       *   We can only unset `pendingAdapterArgs` after be actually perform
+       *   a batched `setState` otherwise outdated `adapterArgs` may be
+       *   applied as the `setState` is actually performed later.
+       */
+      this.pendingAdapterArgs = null;
+
+      return {
+        ...prevState,
+        appliedAdapterArgs: nextAdapterArgs,
+      };
+    });
 
   /**
    * NOTE:
@@ -121,14 +131,8 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
    *    be passed pending or applied adapterArgs.
    *
    */
-  getAdapterArgsForConfiguration = (): void => {
-    const adapterArgsForConfiguration =
-      this.pendingAdapterArgs || this.state.appliedAdapterArgs;
-
-    this.pendingAdapterArgs = null;
-
-    return adapterArgsForConfiguration;
-  };
+  getAdapterArgsForConfiguration = (): void =>
+    this.pendingAdapterArgs || this.state.appliedAdapterArgs;
 
   handleDefaultFlags = (defaultFlags: Flags): void => {
     if (Object.keys(defaultFlags).length > 0) {

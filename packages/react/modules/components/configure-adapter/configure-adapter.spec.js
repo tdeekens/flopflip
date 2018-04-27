@@ -427,6 +427,26 @@ describe('interacting', () => {
       it('should update the `state` of `appliedAdapterArgs`', () => {
         expect(wrapper).toHaveState('appliedAdapterArgs', nextAdapterArgs);
       });
+
+      describe('with `pendingAdapterArgs`', () => {
+        const pendingAdapterArgs = {
+          group: 'next-group',
+        };
+
+        beforeEach(() => {
+          wrapper.instance().setPendingAdapterArgs({
+            adapterArgs: pendingAdapterArgs,
+            options: { shouldOverwrite: false },
+          });
+          wrapper
+            .instance()
+            .applyAdapterArgs(nextAdapterArgs, { shouldOverwrite: false });
+        });
+
+        it('should unset the `pendingAdapterArgs` to `null`', () => {
+          expect(wrapper.instance().pendingAdapterArgs).toBeNull();
+        });
+      });
     });
   });
 
@@ -444,7 +464,7 @@ describe('interacting', () => {
       beforeEach(() => {
         wrapper.instance().setPendingAdapterArgs({
           adapterArgs: nextAdapterArgs,
-          options: { exashouldOverwritect: false },
+          options: { shouldOverwrite: false },
         });
       });
 
@@ -508,10 +528,6 @@ describe('interacting', () => {
         expect(adapterArgsForConfiguration).toEqual(
           expect.objectContaining(nextAdapterArgs)
         );
-      });
-
-      it('should unset the `pendingAdapterArgs`', () => {
-        expect(wrapper.instance().pendingAdapterArgs).toBeNull();
       });
     });
 
