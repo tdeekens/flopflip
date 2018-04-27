@@ -241,9 +241,9 @@
   version "9.4.7"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-9.4.7.tgz#57d81cd98719df2c9de118f2d5f3b1120dcd7275"
 
-Base64@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/Base64/-/Base64-1.0.0.tgz#b6b73ee342ce64bf66d6003a4536683bf8a349b5"
+Base64@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/Base64/-/Base64-1.0.1.tgz#def45cc50c961bcc9bf2321d0f52bcbfec1f1bb1"
 
 JSONStream@^1.0.4:
   version "1.3.2"
@@ -4612,11 +4612,11 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-ldclient-js@1.6.2:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-1.6.2.tgz#fb47ae3f138ddc24c564bc26289d4418f4d7dc4c"
+ldclient-js@1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-1.7.0.tgz#88c870b40fec67c3ff6bbff84795ac7e8ce1c340"
   dependencies:
-    Base64 "1.0.0"
+    Base64 "1.0.1"
     escape-string-regexp "1.0.5"
 
 left-pad@^1.2.0:
