@@ -2,6 +2,9 @@ import ldClient from 'ldclient-js';
 import warning from 'warning';
 import adapter, { camelCaseFlags, createAnonymousUserKey } from './adapter';
 
+jest.mock('ldclient-js');
+jest.mock('warning');
+
 const clientSideId = '123-abc';
 const userWithKey = { key: 'foo-user' };
 const userWithoutKey = {
@@ -15,9 +18,6 @@ const createClient = jest.fn(apiOverwrites => ({
 
   ...apiOverwrites,
 }));
-
-jest.mock('ldclient-js');
-jest.mock('warning');
 
 describe('when configuring', () => {
   let onStatusStateChange;

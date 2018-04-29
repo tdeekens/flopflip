@@ -10,7 +10,7 @@ import type {
 } from '@flopflip/types';
 import warning from 'warning';
 import isEqual from 'lodash.isequal';
-import { initialize } from 'ldclient-js';
+import ldClient from 'ldclient-js';
 import camelCase from 'lodash.camelcase';
 
 type Client = {
@@ -77,7 +77,7 @@ const ensureUser = (user: User): User => ({
   ...user,
 });
 const initializeClient = (clientSideId: string, user: User): Client =>
-  initialize(clientSideId, user);
+  ldClient.initialize(clientSideId, user);
 const changeUserContext = (nextUser: User): Promise<any> =>
   adapterState.client && adapterState.client.identify
     ? adapterState.client.identify(nextUser)
