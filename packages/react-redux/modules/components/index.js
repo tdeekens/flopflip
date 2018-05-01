@@ -1,4 +1,3 @@
-export { default as FeatureToggled } from './feature-toggled';
 export { default as ToggleFeature } from './toggle-feature';
 export { default as SwitchFeature } from './switch-feature';
 export { default as injectFeatureToggle } from './inject-feature-toggle';

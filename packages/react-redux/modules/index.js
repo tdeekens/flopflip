@@ -8,7 +8,6 @@ export {
   selectFlag as selectFeatureFlag,
 } from './ducks';
 export {
-  FeatureToggled,
   ToggleFeature,
   injectFeatureToggle,
   injectFeatureToggles,
