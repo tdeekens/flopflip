@@ -1,5 +1,4 @@
 export {
-  FeatureToggled,
   ToggleFeature,
   injectFeatureToggle,
   injectFeatureToggles,
