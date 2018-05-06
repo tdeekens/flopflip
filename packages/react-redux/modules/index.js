@@ -3,6 +3,7 @@ export {
   STATE_SLICE as FLOPFLIP_STATE_SLICE,
 } from './store';
 export {
+  createFlopflipReducer,
   flopflipReducer,
   selectFlags as selectFeatureFlags,
   selectFlag as selectFeatureFlag,
