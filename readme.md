@@ -249,9 +249,33 @@ const store = createStore(
 )
 ```
 
-Whereas you would still wrap most or all of your application's tree in
-`ConfigureFlopFlip` to identify a user and setup the integration with
-LaunchDarkly
+Note that `@flopflip/react-redux` also exports a `createFlopflipReducer(preloadedState: Flags)`. By using a
+
+```js
+const defaultFlags = { flagA: true, flagB: false };
+
+combineReducers({
+  appReducer,
+  [FLOPFLIP_STATE_SLICE]: createFlopflipReducer(defaultFlags),
+});
+```
+
+you can pass `defaultFlags` as the `preloadedState` directly into the `flopflipReducer` and do not need to
+keep track of it in your applications's `initialState` as in
+
+```js
+const initialState = {
+  [FLOPFLIP_STATE_SLICE]: { flagA: true, flagB: false },
+};
+const store = createStore(
+  // ...as before
+  initialState
+  // ...as before
+);
+```
+
+In addition to initiating `flopflip` when creating your store, you would still wrap most or all of your application's tree in
+`ConfigureFlopFlip` to identify a user and setup the integration with LaunchDarkly or any other flag provider or adapter
 
 ```js
 import adapter from '@flopflip/launchdarkly-adapter';

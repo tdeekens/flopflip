@@ -10,10 +10,7 @@ export const UPDATE_STATUS: string = '@flopflip/status/update';
 const initialState: State = { isReady: false };
 
 // Reducer
-export default function reducer(
-  state: State = initialState,
-  action: Action = {}
-): State {
+const reducer = (state: State = initialState, action: Action = {}): State => {
   switch (action.type) {
     case UPDATE_STATUS:
       return {
@@ -24,7 +21,8 @@ export default function reducer(
     default:
       return state;
   }
-}
+};
+export default reducer;
 
 // Action Creators
 export const updateStatus = (status: AdapterStatus): UpdateStatusAction => ({
