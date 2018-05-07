@@ -2701,9 +2701,9 @@ eslint-config-xo-react@0.16.0:
   version "0.16.0"
   resolved "https://registry.yarnpkg.com/eslint-config-xo-react/-/eslint-config-xo-react-0.16.0.tgz#39bc63630de9940c59026cace6c272ce5a7d9897"
 
-eslint-config-xo@0.22.0:
-  version "0.22.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-xo/-/eslint-config-xo-0.22.0.tgz#d55bff484e751dfe6c0750cd3617bc8c53994059"
+eslint-config-xo@0.22.1:
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-xo/-/eslint-config-xo-0.22.1.tgz#0ac580bdb757f33e108726f58e330101b8e17c47"
 
 eslint-formatter-pretty@1.3.0:
   version "1.3.0"
