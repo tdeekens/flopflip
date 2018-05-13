@@ -1845,9 +1845,9 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-codecov@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/codecov/-/codecov-3.0.1.tgz#cc4c5cd1955c6be47f6dda2f8c55bcc43c732dca"
+codecov@3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/codecov/-/codecov-3.0.2.tgz#aea43843a5cd2fb6b7e488b2eff25d367ab70b12"
   dependencies:
     argv "0.0.2"
     request "^2.81.0"
@@ -4358,9 +4358,9 @@ jest-runner-eslint@0.5.0:
     eslint "^4.5.0"
     find-up "^2.1.0"
 
-jest-runner-flowtype@0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/jest-runner-flowtype/-/jest-runner-flowtype-0.0.3.tgz#2d5699d6a773148665df856f826a488a8ce78b2d"
+jest-runner-flowtype@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/jest-runner-flowtype/-/jest-runner-flowtype-0.0.4.tgz#171449100cc1ff185940e402032922b38bae72c8"
   dependencies:
     create-jest-runner "^0.1.1"
     flow-bin "^0.63.1"
