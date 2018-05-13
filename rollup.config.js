@@ -37,15 +37,15 @@ const config = {
       preferBuiltins: true,
       modulesOnly: true,
     }),
+    babel({
+      exclude: ['node_modules/**'],
+      babelrc: true,
+    }),
     commonjs({
       ignoreGlobal: true,
       exclude: ['packages/**'],
     }),
     flow({ all: true }),
-    babel({
-      exclude: ['node_modules/**'],
-      babelrc: true,
-    }),
     filesize(),
   ],
 };
