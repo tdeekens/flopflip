@@ -11,10 +11,10 @@ import type {
 import React, { PureComponent, type ComponentType, type Node } from 'react';
 
 type Props = {
-  untoggledComponent: ComponentType<any>,
-  toggledComponent: ComponentType<any>,
-  render: () => Node,
-  children: ({ isFeatureEnabled: boolean }) => Node,
+  untoggledComponent?: ComponentType<any>,
+  toggledComponent?: ComponentType<any>,
+  render?: () => Node,
+  children?: ({ isFeatureEnabled: boolean }) => Node,
   isFeatureEnabled: boolean,
 };
 

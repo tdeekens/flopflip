@@ -21,7 +21,7 @@ type Props = {
   adapter: Adapter,
   adapterArgs: AdapterArgs,
   defaultFlags?: Flags,
-  children: React.Component<any>,
+  children?: React.Component<any>,
 };
 type State = {
   appliedAdapterArgs: AdapterArgs,
@@ -141,6 +141,16 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
     }
   };
 
+  /**
+   * NOTE:
+   *   This should be UNSAFE_componentWillReceiveProps.
+   *   However to maintain compatibility with older and newer versions of React
+   *   this can not be prefixed with UNSAFE_.
+   *
+   *   For the future this should likely happen in cDU however as `reconfigureOrQueue`
+   *   may trigger a `setState` it might have unexpected side-effects (setState-loop).
+   *   Maybe some more substancial refactor would be needed.
+   */
   componentWillReceiveProps(nextProps: Props): void {
     if (nextProps.adapterArgs !== this.props.adapterArgs) {
       /**

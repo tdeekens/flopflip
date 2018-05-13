@@ -3,7 +3,7 @@ parser: babel-eslint
 parserOptions:
   sourceType: module
   ecmaVersion: 6
-  ecmaFeatures: 
+  ecmaFeatures:
     jsx: true
     modules: true
     experimentalObjectRestSpread: true
@@ -29,6 +29,7 @@ rules:
   jest/no-identical-title: error
   jest/valid-expect: error
   react/destructuring-assignment: false
+  react/no-deprecated: false
   max-nested-callbacks:
   - error
   - 20
