@@ -1,5 +1,5 @@
 [version]
-0.71.0
+0.72.0
 
 [include]
 packages/*/modules
