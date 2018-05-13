@@ -14,7 +14,7 @@ import createReactContext, { type Context } from 'create-react-context';
 import { ConfigureAdapter } from '@flopflip/react';
 
 type Props = {
-  children: Node,
+  children?: Node,
   shouldDeferAdapterConfiguration?: boolean,
   defaultFlags?: Flags,
   adapterArgs: AdapterArgs,

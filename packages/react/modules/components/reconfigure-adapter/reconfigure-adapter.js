@@ -13,7 +13,7 @@ type Props = {
     adapterArgs: AdapterArgs,
     { shouldOverwrite?: boolean }
   ) => void,
-  children: React.Component<any>,
+  children?: React.Component<any>,
 };
 
 export class ReconfigureAdapter extends PureComponent<Props> {
