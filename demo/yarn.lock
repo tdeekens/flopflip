@@ -18,13 +18,14 @@
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-1.0.5.tgz#095db39a0caf48a4f62eb1798625155aa2ffdb0b"
 
-"@flopflip/react-broadcast@5.1.5":
-  version "5.1.5"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-5.1.5.tgz#611def4ceb83a2251c5a48df9737a75583a2fe39"
+"@flopflip/react-broadcast@5.2.3":
+  version "5.2.3"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-5.2.3.tgz#71c56d04b4d94fbf3f4451faea197e8627e39111"
   dependencies:
-    "@flopflip/react" "^5.0.10"
-    create-react-context "^0.1.6"
-    recompose "^0.26.0"
+    "@flopflip/react" "^5.1.3"
+    create-react-context "0.1.6"
+    lodash.memoize "4.1.2"
+    recompose "0.27.0"
 
 "@flopflip/react-redux@5.1.6":
   version "5.1.6"
@@ -34,7 +35,7 @@
     lodash.isnil "^4.0.0"
     recompose "^0.26.0"
 
-"@flopflip/react@^5.0.10":
+"@flopflip/react@^5.0.10", "@flopflip/react@^5.1.3":
   version "5.1.3"
   resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-5.1.3.tgz#544fd4ea5e80fc2f1dc04f6d84c4576c8ea512b4"
   dependencies:
@@ -1762,7 +1763,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-context@0.1.6, create-react-context@^0.1.6:
+create-react-context@0.1.6:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/create-react-context/-/create-react-context-0.1.6.tgz#0f425931d907741127acc6e31acb4f9015dd9fdc"
 
@@ -4326,7 +4327,7 @@ lodash.isnil@4.0.0, lodash.isnil@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/lodash.isnil/-/lodash.isnil-4.0.0.tgz#49e28cd559013458c814c5479d3c663a21bfaa6c"
 
-lodash.memoize@^4.1.2:
+lodash.memoize@4.1.2, lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
 
