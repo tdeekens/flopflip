@@ -229,9 +229,9 @@
     mkdirp "^0.5.1"
     rimraf "^2.5.2"
 
-"@splitsoftware/splitio@10.2.0":
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/@splitsoftware/splitio/-/splitio-10.2.0.tgz#d089c385ae9086a10a034ac6d4390c4b90bcf16f"
+"@splitsoftware/splitio@10.3.0":
+  version "10.3.0"
+  resolved "https://registry.yarnpkg.com/@splitsoftware/splitio/-/splitio-10.3.0.tgz#3f3b0082cd76fe200a7625d8fbf3369a4891dfee"
   dependencies:
     "@types/node" "9.4.7"
     axios "0.18.0"
