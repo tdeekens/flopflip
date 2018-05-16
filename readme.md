@@ -178,8 +178,8 @@ without Redux.
 
 You can setup flopflip to work in two ways.
 
-1. Using `ConfigureFlopFlip` for simpler use cases, or...
-2. With a Redux `store enhancer`.
+1. Using [`ConfigureFlopFlip`](#setup-using-components) for simpler use cases, or...
+2. With a Redux [`store enhancer`](#setup-through-a-redux-store-enhancer).
 
 If you only need to toggle some React components you can get by without using the Redux store. If you need to use some feature flags directly (e.g. some side effects in redux-thunks, redux-sagas or other places) it might make more sense to expose these flags through Redux with the store enhancer.
 
