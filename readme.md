@@ -174,7 +174,18 @@ without Redux.
 * `createFlopFlipEnhancer` a redux store enhancer to configure flipflip and add
   feature toggle state to your redux store
 
-#### Configuration
+### Configuration
+
+You can setup flopflip to work in two ways.
+
+1. Using `ConfigureFlopFlip` for simpler use cases, or...
+2. With a Redux `store enhancer`.
+
+If you only need to toggle some React components you can get by without using the Redux store. If you need to use some feature flags directly (e.g. some side effects in redux-thunks, redux-sagas or other places) it might make more sense to expose these flags through Redux with the store enhancer.
+
+It is possible to use flopflip decoupled from LaunchDarkly. The easiest way to get started is to use the memory-adapter, which resets the feature flag state on every page load.
+
+#### Setup using Components
 
 Setup is easiest using `ConfigureFlopFlip` which is available in both
 `@flopflip/react-broadcast` and `@flopflip/react-redux`. Feel free to skip this
@@ -249,7 +260,59 @@ const store = createStore(
 )
 ```
 
-Note that `@flopflip/react-redux` also exports a `createFlopflipReducer(preloadedState: Flags)`. By using a
+
+#### Setup through a Redux store enhancer
+
+#### `reducer` & `STATE_SLICE`
+
+Another way to configure `flopflip` is using a store enhancer. For this a
+`flopflip` reducer should be wired up with a `combineReducers` within your
+application in coordination with the `STATE_SLICE` which is used internally too
+to manage the location of the feature toggle states. This setup eliminates the
+need to use `ConfigureFlopFlip` somewhere else in your application's component
+tree.
+
+In context this configuration could look like
+
+```js
+import { createStore, compose, applyMiddleware } from 'redux';
+import {
+  createFlopFlipEnhancer,
+  flopflipReducer,
+
+  // We refer to this state slice in the `injectFeatureToggles`
+  // HoC and currently do not support a custom state slice.
+  FLOPFLIP_STATE_SLICE
+} from '@flopflip/react-redux';
+import adapter from '@flopflip/launchdarkly-adapter';
+
+// Maintained somewhere within your application
+import user from './user';
+import appReducer from './reducer';
+
+const store = createStore(
+  combineReducers({
+    appReducer,
+    [FLOPFLIP_STATE_SLICE]: flopflipReducer,
+  }),
+  initialState,
+  compose(
+    applyMiddleware(...),
+    createFlopFlipEnhancer(
+      adapter,
+      {
+        clientSideId: window.application.env.LD_CLIENT_ID,
+        user
+      }
+    )
+  )
+)
+```
+
+
+Note that `@flopflip/react-redux` also exports a `createFlopflipReducer(preloadedState: Flags)`. This is useful when you want to populate the redux store with initial values for your flags.
+
+Example:
 
 ```js
 const defaultFlags = { flagA: true, flagB: false };
@@ -260,8 +323,7 @@ combineReducers({
 });
 ```
 
-you can pass `defaultFlags` as the `preloadedState` directly into the `flopflipReducer` and do not need to
-keep track of it in your applications's `initialState` as in
+This way you can pass `defaultFlags` as the `preloadedState` directly into the `flopflipReducer`. This means you do not need to keep track of it in your applications's `initialState` as in the following anti-pattern example:
 
 ```js
 const initialState = {
@@ -274,8 +336,12 @@ const store = createStore(
 );
 ```
 
-In addition to initiating `flopflip` when creating your store, you would still wrap most or all of your application's tree in
-`ConfigureFlopFlip` to identify a user and setup the integration with LaunchDarkly or any other flag provider or adapter
+#### Syncing the store reducer with adapters
+
+In addition to initiating `flopflip` when creating your store, you could still wrap most or all of your application's tree in
+`ConfigureFlopFlip`. This is needed when you want to identify as a user and setup the integration with LaunchDarkly or any other flag provider or adapter.
+
+Note: This is not needed when using the memory-adapter.
 
 ```js
 import adapter from '@flopflip/launchdarkly-adapter';
@@ -622,51 +688,6 @@ Requires arguments of `clientSideId:string`, `user:object`.
   * Often with the before mentioned user object `user` object which often needs
     at least a `key` attribute
 
-#### `reducer` & `STATE_SLICE`
-
-Another way to configure `flopflip` is using a store enhancer. For this a
-`flopflip` reducer should be wired up with a `combineReducers` within your
-application in coordination with the `STATE_SLICE` which is used internally too
-to manage the location of the feature toggle states. This setup eliminates the
-need to use `ConfigureFlopFlip` somewhere else in your application's component
-tree.
-
-In context this configuration could look like
-
-```js
-import { createStore, compose, applyMiddleware } from 'redux';
-import {
-  createFlopFlipEnhancer,
-  flopflipReducer,
-
-  // We refer to this state slice in the `injectFeatureToggles`
-  // HoC and currently do not support a custom state slice.
-  FLOPFLIP_STATE_SLICE
-} from '@flopflip/react-redux';
-import adapter from '@flopflip/launchdarkly-adapter';
-
-// Maintained somewhere within your application
-import user from './user';
-import appReducer from './reducer';
-
-const store = createStore(
-  combineReducers({
-    appReducer,
-    [FLOPFLIP_STATE_SLICE]: flopflipReducer,
-  }),
-  initialState,
-  compose(
-    applyMiddleware(...),
-    createFlopFlipEnhancer(
-      adapter,
-      {
-        clientSideId: window.application.env.LD_CLIENT_ID,
-        user
-      }
-    )
-  )
-)
-```
 
 ### Module formats
 
