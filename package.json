@@ -57,7 +57,7 @@
     "cross-env": "5.1.5",
     "enzyme": "3.3.0",
     "enzyme-matchers": "6.0.0",
-    "enzyme-to-json": "3.3.3",
+    "enzyme-to-json": "3.3.4",
     "eslint": "4.19.1",
     "eslint-config-prettier": "2.9.0",
     "eslint-config-xo": "0.22.1",
