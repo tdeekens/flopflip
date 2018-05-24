@@ -12,6 +12,7 @@ exports[`when creating enhancer with enhanced store when invoking  \`onFlagsStat
       },
     ],
   ],
+  "results": undefined,
 }
 `;
 
@@ -27,5 +28,6 @@ exports[`when creating enhancer with enhanced store when invoking  \`onStatusSta
       },
     ],
   ],
+  "results": undefined,
 }
 `;
