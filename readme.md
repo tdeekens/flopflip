@@ -176,14 +176,19 @@ without Redux.
 
 ### Configuration
 
-You can setup flopflip to work in two ways.
+You can setup flopflip to work in two ways:
 
-1. Using [`ConfigureFlopFlip`](#setup-using-components) for simpler use cases, or...
-2. With a Redux [`store enhancer`](#setup-through-a-redux-store-enhancer).
+1.  Use React's Context (hidden for you) via `@flopflip/react-broadcast`
+2.  Integrate with Redux via `@flopflip/react-redux`
 
-If you only need to toggle some React components you can get by without using the Redux store. If you need to use some feature flags directly (e.g. some side effects in redux-thunks, redux-sagas or other places) it might make more sense to expose these flags through Redux with the store enhancer.
+Often using `@flopflip/react-broadcast` will be the easiest way to get started. You would just need to pick an adapter which can be any of the privided. Either just a `memory-adapter` or an integration with LaunchDarkly via `launchdarkly-adapter` will work. More on how to use [`ConfigureFlopFlip`](#setup-using-components) below.
 
-It is possible to use flopflip decoupled from LaunchDarkly. The easiest way to get started is to use the memory-adapter, which resets the feature flag state on every page load.
+Whenever you want the flag state to live in Redux you can use `@flopflip/react-redux` which can be setup in two variations itself
+
+1.  Again using [`ConfigureFlopFlip`](#setup-using-components) for simpler use cases, or...
+2.  or with a Redux [`store enhancer`](#setup-through-a-redux-store-enhancer).
+
+The store enhancer replaces `ConfigureFlopflip` for setup and gives the ability to pass in a `preloadedState` as default flags. For `ConfigureFlopflip` the default flags would be passed as a `defaultFlags`-prop.
 
 #### Setup using Components
 
@@ -231,10 +236,10 @@ import adapter from '@flopflip/launchdarkly-adapter';
 This variant of the `ConfigureFlopFlip` component form
 `@flopflip/react-broadcast` will use the context and a broadcasting system to
 reliably communicate with children toggling features (you do not have to worry
-about any component returning `false` from `shouldComponentUpdate`).
+about any component returning `false` from `shouldComponentUpdate`). If you're using `@flopflip/react-broadcast` you're done already.
 
 Given your preference is to have the feature flag's state persisted in redux you
-would simply add a reducer when creating your store
+would simply add a reducer when creating your store.
 
 ```js
 import { createStore, compose, applyMiddleware } from 'redux';
@@ -260,10 +265,7 @@ const store = createStore(
 )
 ```
 
-
 #### Setup through a Redux store enhancer
-
-#### `reducer` & `STATE_SLICE`
 
 Another way to configure `flopflip` is using a store enhancer. For this a
 `flopflip` reducer should be wired up with a `combineReducers` within your
@@ -308,7 +310,6 @@ const store = createStore(
   )
 )
 ```
-
 
 Note that `@flopflip/react-redux` also exports a `createFlopflipReducer(preloadedState: Flags)`. This is useful when you want to populate the redux store with initial values for your flags.
 
@@ -687,7 +688,6 @@ Requires arguments of `clientSideId:string`, `user:object`.
 * The `adapterArgs` object
   * Often with the before mentioned user object `user` object which often needs
     at least a `key` attribute
-
 
 ### Module formats
 
