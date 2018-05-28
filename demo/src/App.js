@@ -103,7 +103,10 @@ const mapDispatchToProps = {
   decrementAsync,
 };
 
-const ConnectedCounter = connect(mapStateToProps, mapDispatchToProps)(Counter);
+const ConnectedCounter = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Counter);
 
 const defaultFlags = { 'aDefault-Flag': true };
 const adapterArgs = {
