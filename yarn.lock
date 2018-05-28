@@ -2738,9 +2738,9 @@ eslint-plugin-flowtype-errors@3.6.0:
     babel-runtime "^6.26.0"
     slash "^2.0.0"
 
-eslint-plugin-jest@21.15.2:
-  version "21.15.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.15.2.tgz#d55898636291d97e0c0a5dbe205bef0235157a34"
+eslint-plugin-jest@21.17.0:
+  version "21.17.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.17.0.tgz#fdb00e2f9ff16987d6ebcf2c75c7add105760bbb"
 
 eslint-plugin-prettier@2.6.0:
   version "2.6.0"
