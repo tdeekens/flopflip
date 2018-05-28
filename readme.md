@@ -155,23 +155,23 @@ without Redux.
 
 ### `@flopflip/react-redux` & `@flopflip/react-broadcast` API
 
-* `ConfigureFlopFlip` a component to configure flopflip with an adapter
+- `ConfigureFlopFlip` a component to configure flopflip with an adapter
   (alternative to the store enhancer)
-* `ReconfigureFlopFlip` a component to reconfigure flopflip with new user properties
+- `ReconfigureFlopFlip` a component to reconfigure flopflip with new user properties
   either merged or overwritting old properties (`shouldOverwrite` prop)
-* `branchOnFeatureToggle` a Higher-Order Component (HoC) to conditionally render
+- `branchOnFeatureToggle` a Higher-Order Component (HoC) to conditionally render
   components depending on feature toggle state
-* `injectFeatureToggle` a HoC to inject a feature toggle onto the `props` of a
+- `injectFeatureToggle` a HoC to inject a feature toggle onto the `props` of a
   component
-* `injectFeatureToggles` a HoC to inject requested feature toggles from existing
+- `injectFeatureToggles` a HoC to inject requested feature toggles from existing
   feature toggles onto the `props` of a component
-* `ToggleFeature` a component conditionally rendering its `children` based on
+- `ToggleFeature` a component conditionally rendering its `children` based on
   the status of a passed feature flag
-* `SwitchFeature` a component conditionally rendering the first
+- `SwitchFeature` a component conditionally rendering the first
   `<ToggleFeature>` child based on the status of its passed feature flag
-* `reducer` and `STATE_SLICE` a reducer and the state slice for the feature
+- `reducer` and `STATE_SLICE` a reducer and the state slice for the feature
   toggle state
-* `createFlopFlipEnhancer` a redux store enhancer to configure flipflip and add
+- `createFlopFlipEnhancer` a redux store enhancer to configure flipflip and add
   feature toggle state to your redux store
 
 ### Configuration
@@ -198,23 +198,23 @@ section whenever setup using a store enhancer (in a redux context) is preferred.
 
 It takes the `props`:
 
-* The `adapter` which can be e.g. `launchdarkly-adapter`
-  * An `adapter` should implement the following methods: `configure` and
+- The `adapter` which can be e.g. `launchdarkly-adapter`
+  - An `adapter` should implement the following methods: `configure` and
     `reconfigure` which both must return a `Promise` as configuration can be an
     asynchronous task
-* The `adapterArgs` containing whatever the underlying `adapter` accepts
-  * The `user` object is often the basis to identify an user to toggle features.
+- The `adapterArgs` containing whatever the underlying `adapter` accepts
+  - The `user` object is often the basis to identify an user to toggle features.
     The user object can contain any additional data.
-  * The `adapter` will receive `onFlagsStateChange` and `onStatusStateChange`
+  - The `adapter` will receive `onFlagsStateChange` and `onStatusStateChange`
     will should be invoked accordingly to notify `react-broadcast` and
     `react-redux` about flag and status changes
-* The `shouldDeferAdapterConfiguration` prop can be used to defer the initial
+- The `shouldDeferAdapterConfiguration` prop can be used to defer the initial
   configuration the `adapter`. This might be helpful for cases in which you want
   to wait for e.g. the `key` to be present within your root component and you do
   not want `flopflip` to generate a `uuid` for you automatically.
-* The `defaultFlags` prop object can be used to specify default flag values
+- The `defaultFlags` prop object can be used to specify default flag values
   until an `adapter` responds or in case flags were removed
-* The `localstorage-adapter` and `memory-adapter` expose a named `updateFlags`
+- The `localstorage-adapter` and `memory-adapter` expose a named `updateFlags`
   export which eases updating flags and flushes them to all components via
   `react-broadcast` or `react-redux`
 
@@ -397,15 +397,15 @@ features. Only the import changes depending on if you chose to integrate with
 redux or without. Again, behind the scenes the build on `@flopflip/react` to
 share common logic.
 
-* `branchOnFeatureToggle` a Higher-Order Component (HoC) to conditionally render
+- `branchOnFeatureToggle` a Higher-Order Component (HoC) to conditionally render
   components depending on feature toggle state
-* `injectFeatureToggle` a HoC to inject a feature toggle onto the `props` of a
+- `injectFeatureToggle` a HoC to inject a feature toggle onto the `props` of a
   component
-* `injectFeatureToggles` a HoC to inject requested feature toggles from existing
+- `injectFeatureToggles` a HoC to inject requested feature toggles from existing
   feature toggles onto the `props` of a component
-* `ToggleFeature` a component conditionally rendering its `children` based on
+- `ToggleFeature` a component conditionally rendering its `children` based on
   the status of a passed feature flag
-* `SwitchFeature` a component that renders its first <ToggleFeature> child based
+- `SwitchFeature` a component that renders its first <ToggleFeature> child based
   on the status of a passed feature flag
 
 [Note:](#flag-normalization) that all passed `flagNames` passed as `flag` are a string. Depending on the adapter used _these are normalized_ to be camel cased. This means that whenever a `foo-flag-name` is configured in e.g. LaunchDarkly or splitio it will have to be specified as `fooFlagName`. The same applies for a `foo_flag_name`. This is meant to help using flags in an adapter agnostic way. Whenever a flag is otherwise passed in the non-normalized form it is likely to default to `false` which is unintended in most cases. Lastly, `flopflip` will show a warning message in the console in development mode whenever a non normalized flag name is passed.
@@ -684,9 +684,9 @@ The same example above applies for `selectFeatureFlags`.
 
 Requires arguments of `clientSideId:string`, `user:object`.
 
-* The `adapter`
-* The `adapterArgs` object
-  * Often with the before mentioned user object `user` object which often needs
+- The `adapter`
+- The `adapterArgs` object
+  - Often with the before mentioned user object `user` object which often needs
     at least a `key` attribute
 
 ### Module formats
@@ -702,11 +702,11 @@ a module loader to be integrated.
 The `package.json` files contain a `main` and `module` entry to point to a
 CommonJS and ESM build.
 
-* ...ESM just import the `dist/@flopflip/<package>.es.js` within your app.
-  * ...it's a transpiled version accessible via the `pkg.module`
-* ...CommonJS use the `dist/@flopflip/<package>.cjsjs`
-* ...AMD use the `dist/@flopflip/<package>.umd.js`
-* ...`<script />` link it to `dist/@flopflip/<package>.umd.js` or
+- ...ESM just import the `dist/@flopflip/<package>.es.js` within your app.
+  - ...it's a transpiled version accessible via the `pkg.module`
+- ...CommonJS use the `dist/@flopflip/<package>.cjsjs`
+- ...AMD use the `dist/@flopflip/<package>.umd.js`
+- ...`<script />` link it to `dist/@flopflip/<package>.umd.js` or
   `dist/@flopflip/<package>.umd.min.js`
 
 All build files are part of the npm distribution using the
