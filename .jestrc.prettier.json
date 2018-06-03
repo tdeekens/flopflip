@@ -1,0 +1,11 @@
+{
+  "runner": "jest-runner-prettier",
+  "displayName": "prettier",
+  "moduleFileExtensions": ["js", "ts", "md"],
+  "testMatch": [
+    "<rootDir>/**/modules/**/*.js",
+    "<rootDir>/**/demo/**/*.js",
+    "<rootDir>/**.ts",
+    "<rootDir>/**.md"
+  ]
+}
