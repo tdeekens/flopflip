@@ -12,7 +12,12 @@ exports[`when creating enhancer with enhanced store when invoking  \`onFlagsStat
       },
     ],
   ],
-  "results": undefined,
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
 }
 `;
 
@@ -28,6 +33,11 @@ exports[`when creating enhancer with enhanced store when invoking  \`onStatusSta
       },
     ],
   ],
-  "results": undefined,
+  "results": Array [
+    Object {
+      "isThrow": false,
+      "value": undefined,
+    },
+  ],
 }
 `;
