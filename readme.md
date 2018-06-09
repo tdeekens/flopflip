@@ -52,6 +52,31 @@
   <br /><br />
 </details>
 
+## ❯ Why would you want this?
+
+In summary feature toggling simplifies and speeds up your development processes. You can ship software more often, release to specified target audiences and test features with users (not only internal staff) before releasing them to everyone.
+
+With `flopflip` you get many options and ways to toggle features. More elaborate examples below. For now imagine you have a new feature which is not finished developing. However, UX and QA already need access to it. It's hidden by a `<Link>` component redirecting. To toggle it all you need is:
+
+```jsx
+<ToggleFeature flag="featureFlagName">
+  <Link to="url/to/new/feature" />
+</ToggleFeature>
+```
+
+Having `flopflip` setup up you can now target users by whatever you decide to send to e.g. LaunchDarkly. This could be location, hashed E-Mails or any user groups (please respect your user's privicy).
+
+Another example would be to show a `<button>` but disable it for users who should not have access to the feature yet:
+
+```jsx
+<ToggleFeature
+  flag="featureFlagName"
+  render={({ isFeatureEnabled }) => <button disabled={!isFeatureEnabled} />}
+/>
+```
+
+In both examples flags will update in realtime (depending on the adapter and provider) and the User Interface will update accordingly. If this sounds interesting to you, keep reading.
+
 ## ❯ Browser support
 
 | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png" alt="IE / Edge" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png" alt="Firefox" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png" alt="Chrome" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png" alt="Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/opera.png" alt="Opera" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Opera | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari-ios.png" alt="iOS Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>iOS Safari | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome-android.png" alt="Chrome for Android" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome for Android |
