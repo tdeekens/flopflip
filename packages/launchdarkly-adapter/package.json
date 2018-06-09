@@ -32,13 +32,13 @@
   "devDependencies": {
     "@flopflip/types": "^1.1.1",
     "enzyme": "3.3.0",
-    "enzyme-to-json": "3.3.3"
+    "enzyme-to-json": "3.3.4"
   },
   "dependencies": {
-    "ldclient-js": "1.7.0",
+    "ldclient-js": "2.1.2",
     "lodash.camelcase": "4.3.0",
     "lodash.isequal": "4.5.0",
-    "warning": "3.0.0"
+    "warning": "4.0.1"
   },
   "keywords": [
     "feature-flags",
