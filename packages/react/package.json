@@ -36,7 +36,7 @@
     "cpx": "1.5.0",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
-    "enzyme-to-json": "3.3.3",
+    "enzyme-to-json": "3.3.4",
     "lodash.camelcase": "4.3.0",
     "react": "16.4.0",
     "react-dom": "16.4.0",
@@ -48,12 +48,12 @@
   },
   "dependencies": {
     "create-react-context": "0.1.6",
-    "deepmerge": "2.1.0",
+    "deepmerge": "2.1.1",
     "lodash.intersection": "4.4.0",
     "lodash.isnil": "4.0.0",
     "lodash.omit": "4.5.0",
-    "recompose": "0.27.0",
-    "warning": "3.0.0"
+    "recompose": "0.27.1",
+    "warning": "4.0.1"
   },
   "keywords": [
     "react",
