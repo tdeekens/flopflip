@@ -53,6 +53,10 @@ node8Environment: &node8Environment
   docker:
     - image: circleci/node:8@sha256:9249d0ba00986d50bcab7380edcf8e20a0c76a6cb2e936588061f1c4f27cb350
   working_directory: *working_directory
+node10Environment: &node10Environment
+  docker:
+    - image: circleci/node:10
+  working_directory: *working_directory
 
 version: 2
 jobs:
@@ -97,6 +101,14 @@ jobs:
       - run: *install
       - run: *build
       - run: *unit_test_with_coverage
+  build_test_unit_node_10:
+    <<: *node10Environment
+    steps:
+      - checkout
+      - restore_cache: *restore_yarn_cache
+      - run: *install
+      - run: *build
+      - run: *unit_test_with_coverage
 
 workflows:
   version: 2
@@ -112,7 +124,11 @@ workflows:
       - build_test_unit_node_8:
           requires:
             - type_check
+      - build_test_unit_node_10:
+          requires:
+            - type_check
       - bundlesize_check:
           requires:
             - build_test_unit_node_6
             - build_test_unit_node_8
+            - build_test_unit_node_10
