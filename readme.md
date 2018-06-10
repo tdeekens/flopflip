@@ -71,7 +71,7 @@ Another example would be to show a `<button>` but disable it for users who shoul
 ```jsx
 <ToggleFeature
   flag="featureFlagName"
-  render={({ isFeatureEnabled }) => <button disabled={!isFeatureEnabled} />}
+  render={({ isFeatureEnabled }) => <button disabled={!isFeatureEnabled} onClick={this.handleClick}>Try out feature</button>}
 />
 ```
 
