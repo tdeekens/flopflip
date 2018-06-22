@@ -138,6 +138,12 @@ describe('when configuring', () => {
           expect.any(Function)
         );
       });
+
+      describe('`getFlag`', () => {
+        it('should return the flag', () => {
+          expect(adapter.getFlag('someFlag1')).toBe(false);
+        });
+      });
     });
 
     describe('with flag updates', () => {
@@ -161,6 +167,12 @@ describe('when configuring', () => {
         });
         expect(onFlagsStateChange).toHaveBeenCalledWith({
           someFlag2: false,
+        });
+      });
+
+      describe('`getFlag`', () => {
+        it('should return the flag', () => {
+          expect(adapter.getFlag('someFlag2')).toBe(false);
         });
       });
     });
@@ -249,7 +261,7 @@ describe('when configuring', () => {
   });
 });
 
-describe('camelCasedFlags', () => {
+describe('`camelCasedFlags`', () => {
   describe('with dashes', () => {
     const rawFlags = {
       'a-flag': true,
@@ -273,7 +285,7 @@ describe('camelCasedFlags', () => {
   });
 });
 
-describe('create anonymous user', () => {
+describe('`createAnonymousUser`', () => {
   it('should create user with uuid in key property', () => {
     expect(createAnonymousUserKey()).toBeDefined();
   });

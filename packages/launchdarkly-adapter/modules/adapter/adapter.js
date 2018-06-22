@@ -24,6 +24,7 @@ type AdapterState = {
   isConfigured: boolean,
   user: ?User,
   client: ?Client,
+  flags: ?Flags,
 };
 
 const adapterState: AdapterState = {
@@ -31,7 +32,18 @@ const adapterState: AdapterState = {
   isConfigured: false,
   user: null,
   client: null,
+  flags: null,
 };
+
+const setFlags = (updatedFlags: Flags): void => {
+  adapterState.flags = {
+    ...adapterState.flags,
+    ...updatedFlags,
+  };
+};
+
+const getFlag = (flagName: FlagName): ?Flag =>
+  adapterState.flags && adapterState.flags[flagName];
 
 const normalizeFlag = (flagName: FlagName, flagValue?: FlagVariation): Flag => [
   camelCase(flagName),
@@ -58,9 +70,12 @@ const subscribeToFlagsChanges = ({
           flagValue
         );
 
-        onFlagsStateChange({
+        const flag: Flag = {
           [normalizedFlagName]: normalizedFlagValue,
-        });
+        };
+
+        setFlags(flag);
+        onFlagsStateChange(flag);
       });
     }
   }
@@ -130,8 +145,10 @@ const subscribe = ({
       // ...to then signal that the adapter is ready
       onStatusStateChange({ isReady: true });
       if (rawFlags) {
+        const flags: Flags = camelCaseFlags(rawFlags);
+        setFlags(flags);
         // ...and flush initial state of flags
-        onFlagsStateChange(camelCaseFlags(rawFlags));
+        onFlagsStateChange(flags);
         // ...to finally subscribe to later changes.
         subscribeToFlagsChanges({
           rawFlags,
@@ -190,5 +207,6 @@ const reconfigure = ({ user: nextUser }: { user: User }): Promise<any> => {
 export default {
   configure,
   reconfigure,
+  getFlag,
   updateUserContext,
 };
