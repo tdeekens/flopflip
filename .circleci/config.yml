@@ -106,9 +106,6 @@ workflows:
       - type_check:
           requires:
             - lint
-      - build_test_unit_node_6:
-          requires:
-            - type_check
       - build_test_unit_node_8:
           requires:
             - type_check
