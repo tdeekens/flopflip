@@ -38,9 +38,9 @@
     "enzyme-adapter-react-16": "1.1.1",
     "enzyme-to-json": "3.3.4",
     "lodash.camelcase": "4.3.0",
-    "react": "16.4.0",
-    "react-dom": "16.4.0",
-    "warning": "3.0.0"
+    "react": "16.4.1",
+    "react-dom": "16.4.1",
+    "warning": "4.0.1"
   },
   "peerDependencies": {
     "react": "^15.6 || ^16.0",
