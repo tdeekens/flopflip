@@ -114,6 +114,5 @@ workflows:
             - type_check
       - bundlesize_check:
           requires:
-            - build_test_unit_node_6
             - build_test_unit_node_8
             - build_test_unit_node_10
