@@ -4465,7 +4465,7 @@ jest-runner-flowtype@0.0.5:
     flow-bin "^0.63.1"
     strip-ansi "^4.0.0"
 
-jest-runner-prettier@^0.2.3:
+jest-runner-prettier@0.2.6:
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/jest-runner-prettier/-/jest-runner-prettier-0.2.6.tgz#b99e7b12e1279de089236cae73330b98e987af36"
   dependencies:
