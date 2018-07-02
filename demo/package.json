@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "classnames": "2.2.5",
+    "classnames": "2.2.6",
     "react": "16.4.0",
     "react-dom": "16.4.0",
     "react-redux": "5.0.7",
