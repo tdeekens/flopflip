@@ -249,9 +249,9 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@splitsoftware/splitio@10.3.1":
-  version "10.3.1"
-  resolved "https://registry.yarnpkg.com/@splitsoftware/splitio/-/splitio-10.3.1.tgz#2e6093fb88073e579bd611bfed7bdb144fb8b97f"
+"@splitsoftware/splitio@10.3.2":
+  version "10.3.2"
+  resolved "https://registry.yarnpkg.com/@splitsoftware/splitio/-/splitio-10.3.2.tgz#494741ba19102564fa7a31bb6844176ef15b1731"
   dependencies:
     "@types/node" "9.4.7"
     axios "0.18.0"
