@@ -21,6 +21,11 @@ declare module '@flopflip/react-redux' {
     any
   > {}
 
-  export function selectFlags(state: {}): Flags;
-  export function selectFlag(flagName: FlagName): (state: {}) => Flags;
+  export function createFlopFlipEnhancer(adapter: any, adapterArgs?: any): (next) => () => void;
+  export function flopflipReducer(state: {}, action: {}): any;
+  export function selectFeatureFlag(flagName: FlagName): (state: {}) => Flags;
+  export function selectFeatureFlags(state: {}): Flags;
+
+  export const FLOPFLIP_STATE_SLICE: string;
+  export const version: string;
 }
