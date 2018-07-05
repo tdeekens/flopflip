@@ -12,6 +12,7 @@ export {
 } from './ducks';
 export {
   ToggleFeature,
+  SwitchFeature,
   injectFeatureToggle,
   injectFeatureToggles,
   branchOnFeatureToggle,
