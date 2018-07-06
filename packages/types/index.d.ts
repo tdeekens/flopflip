@@ -76,11 +76,6 @@ declare module '@flopflip/types' {
     propKey?: string
   ): ComponentEnhancerWithProps<{ [propKey: string]: Flags }, {}>;
 
-  export class SwitchFeature extends React.Component<
-    SwitchComponenthProps,
-    any
-  > {}
-
   export class ToggleFeature extends React.Component<
     ToggleComponentProps,
     any
