@@ -1,6 +1,5 @@
 export {
   ToggleFeature,
-  SwitchFeature,
   injectFeatureToggle,
   injectFeatureToggles,
   branchOnFeatureToggle,
