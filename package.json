@@ -62,7 +62,7 @@
     "eslint-formatter-pretty": "1.3.0",
     "eslint-plugin-flowtype-errors": "3.6.0",
     "eslint-plugin-jest": "21.17.0",
-    "eslint-plugin-prettier": "2.6.1",
+    "eslint-plugin-prettier": "2.6.2",
     "eslint-plugin-react": "7.10.0",
     "flow-bin": "0.75.0",
     "husky": "0.14.3",
