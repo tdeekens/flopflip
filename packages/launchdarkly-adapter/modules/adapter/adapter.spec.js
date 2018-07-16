@@ -2,7 +2,9 @@ import ldClient from 'ldclient-js';
 import warning from 'warning';
 import adapter, { camelCaseFlags, createAnonymousUserKey } from './adapter';
 
-jest.mock('ldclient-js');
+jest.mock('ldclient-js', () => ({
+  initialize: jest.fn(),
+}));
 jest.mock('warning');
 
 const clientSideId = '123-abc';
