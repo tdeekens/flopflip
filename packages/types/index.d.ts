@@ -81,12 +81,12 @@ declare module '@flopflip/types' {
     any
   > {}
 
-  export class ConfigureFlopflip extends React.Component<
+  export class ConfigureFlopFlip extends React.Component<
     ConfigureComponentProps,
     any
   > {}
 
-  export class ReconfigureFlopflip extends React.Component<
+  export class ReconfigureFlopFlip extends React.Component<
     ReconfigureComponentProps,
     any
   > {}
