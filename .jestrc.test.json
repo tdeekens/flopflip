@@ -5,6 +5,7 @@
   "snapshotSerializers": ["enzyme-to-json/serializer"],
   "testRegex": "\\.spec\\.js$",
   "testEnvironment": "jsdom",
+  "testURL": "http://localhost",
   "watchPlugins": ["jest-plugin-filename"],
   "testPathIgnorePatterns": [
     "/node_modules/",
