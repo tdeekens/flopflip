@@ -1,4 +1,3 @@
----
 parser: babel-eslint
 parserOptions:
   sourceType: module
@@ -21,9 +20,9 @@ plugins:
   - flowtype-errors
 rules:
   prettier/prettier:
-  - error
-  - trailingComma: es5
-    singleQuote: true
+    - error
+    - trailingComma: es5
+      singleQuote: true
   jest/no-disabled-tests: warn
   jest/no-focused-tests: error
   jest/no-identical-title: error
@@ -31,13 +30,13 @@ rules:
   react/destructuring-assignment: false
   react/no-deprecated: false
   max-nested-callbacks:
-  - error
-  - 20
+    - error
+    - 20
   flowtype-errors/show-errors: 2
 globals:
   VERSION: true
 overrides:
-- files:
-  - "*.spec.js"
-  rules:
-    react/prop-types: 0
+  - files:
+      - '*.spec.js'
+    rules:
+      react/prop-types: 0
