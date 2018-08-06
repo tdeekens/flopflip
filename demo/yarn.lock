@@ -40,8 +40,8 @@
     recompose "0.27.1"
 
 "@flopflip/react@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-6.0.0.tgz#7f0441604833127c955c08b1e343b78c30f4bd5f"
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-6.0.1.tgz#1a346138c0a6860ac971ec2e85080bad06c6b2f1"
   dependencies:
     create-react-context "0.1.6"
     deepmerge "2.1.1"
@@ -52,8 +52,8 @@
     warning "4.0.1"
 
 "@flopflip/types@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@flopflip/types/-/types-1.2.0.tgz#fa263418ab377222dc9cabf76e1744fcdab61e54"
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@flopflip/types/-/types-1.2.1.tgz#3e4b980e4af4b5629bd1ab733c3197f38d13db0d"
 
 Base64@1.0.1:
   version "1.0.1"
@@ -6973,8 +6973,8 @@ uuid@^3.1.0:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
 
 validate-npm-package-license@^3.0.1:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/validate-npm-package-license/-/validate-npm-package-license-3.0.3.tgz#81643bcbef1bdfecd4623793dc4648948ba98338"
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/validate-npm-package-license/-/validate-npm-package-license-3.0.4.tgz#fc91f6b9c7ba15c857f4cb2c5defeec39d4f410a"
   dependencies:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
