@@ -19,15 +19,15 @@
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-1.0.5.tgz#095db39a0caf48a4f62eb1798625155aa2ffdb0b"
 
-"@flopflip/react-broadcast@7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-7.0.0.tgz#76ddcf338eca1dda4d1505630ea8144100fd8f69"
+"@flopflip/react-broadcast@7.0.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-7.0.1.tgz#e332a935b5fb8995b3cb64b2ed4f32b4365fca99"
   dependencies:
-    "@flopflip/react" "^6.0.0"
-    "@flopflip/types" "^1.2.0"
+    "@flopflip/react" "^6.0.1"
+    "@flopflip/types" "^1.2.1"
     create-react-context "0.1.6"
     lodash.memoize "4.1.2"
-    recompose "0.27.0"
+    recompose "0.27.1"
 
 "@flopflip/react-redux@7.0.0":
   version "7.0.0"
@@ -51,9 +51,25 @@
     recompose "0.27.1"
     warning "4.0.1"
 
+"@flopflip/react@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-6.0.1.tgz#1a346138c0a6860ac971ec2e85080bad06c6b2f1"
+  dependencies:
+    create-react-context "0.1.6"
+    deepmerge "2.1.1"
+    lodash.intersection "4.4.0"
+    lodash.isnil "4.0.0"
+    lodash.omit "4.5.0"
+    recompose "0.27.1"
+    warning "4.0.1"
+
 "@flopflip/types@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@flopflip/types/-/types-1.2.0.tgz#fa263418ab377222dc9cabf76e1744fcdab61e54"
+
+"@flopflip/types@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@flopflip/types/-/types-1.2.1.tgz#3e4b980e4af4b5629bd1ab733c3197f38d13db0d"
 
 Base64@1.0.1:
   version "1.0.1"
@@ -5792,17 +5808,6 @@ readdirp@^2.0.0:
     minimatch "^3.0.2"
     readable-stream "^2.0.2"
     set-immediate-shim "^1.0.1"
-
-recompose@0.27.0:
-  version "0.27.0"
-  resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.27.0.tgz#8230ebd651bf1159097006f79083fe224b1501cf"
-  dependencies:
-    babel-runtime "^6.26.0"
-    change-emitter "^0.1.2"
-    fbjs "^0.8.1"
-    hoist-non-react-statics "^2.3.1"
-    react-lifecycles-compat "^3.0.2"
-    symbol-observable "^1.0.4"
 
 recompose@0.27.1:
   version "0.27.1"
