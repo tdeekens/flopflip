@@ -39,18 +39,6 @@
     lodash.memoize "4.1.2"
     recompose "0.27.1"
 
-"@flopflip/react@^6.0.0":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-6.0.1.tgz#1a346138c0a6860ac971ec2e85080bad06c6b2f1"
-  dependencies:
-    create-react-context "0.1.6"
-    deepmerge "2.1.1"
-    lodash.intersection "4.4.0"
-    lodash.isnil "4.0.0"
-    lodash.omit "4.5.0"
-    recompose "0.27.1"
-    warning "4.0.1"
-
 "@flopflip/react@^6.0.1":
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-6.0.1.tgz#1a346138c0a6860ac971ec2e85080bad06c6b2f1"
@@ -62,26 +50,6 @@
     lodash.omit "4.5.0"
     recompose "0.27.1"
     warning "4.0.1"
-
-"@flopflip/react@^6.0.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-6.0.1.tgz#1a346138c0a6860ac971ec2e85080bad06c6b2f1"
-  dependencies:
-    create-react-context "0.1.6"
-    deepmerge "2.1.1"
-    lodash.intersection "4.4.0"
-    lodash.isnil "4.0.0"
-    lodash.omit "4.5.0"
-    recompose "0.27.1"
-    warning "4.0.1"
-
-"@flopflip/types@^1.2.0":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@flopflip/types/-/types-1.2.1.tgz#3e4b980e4af4b5629bd1ab733c3197f38d13db0d"
-
-"@flopflip/types@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@flopflip/types/-/types-1.2.1.tgz#3e4b980e4af4b5629bd1ab733c3197f38d13db0d"
 
 "@flopflip/types@^1.2.1":
   version "1.2.1"
@@ -5104,8 +5072,8 @@ path-key@^2.0.0:
   resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
 
 path-parse@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.5.tgz#3c1adf871ea9cd6c9431b6ea2bd74a0ff055c4c1"
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
 
 path-to-regexp@0.1.7:
   version "0.1.7"
