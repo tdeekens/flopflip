@@ -6249,8 +6249,8 @@ path-key@^2.0.0, path-key@^2.0.1:
   resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
 
 path-parse@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.5.tgz#3c1adf871ea9cd6c9431b6ea2bd74a0ff055c4c1"
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
 
 path-type@^1.0.0:
   version "1.1.0"
@@ -7125,8 +7125,8 @@ rollup-pluginutils@^1.5.0, rollup-pluginutils@^1.5.1, rollup-pluginutils@^1.5.2:
     minimatch "^3.0.2"
 
 rollup-pluginutils@^2.0.1, rollup-pluginutils@^2.2.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.3.0.tgz#478ace04bd7f6da2e724356ca798214884738fc4"
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.3.1.tgz#760d185ccc237dedc12d7ae48c6bcd127b4892d0"
   dependencies:
     estree-walker "^0.5.2"
     micromatch "^2.3.11"
