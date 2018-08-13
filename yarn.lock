@@ -733,9 +733,9 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@splitsoftware/splitio@10.3.2":
-  version "10.3.2"
-  resolved "https://registry.yarnpkg.com/@splitsoftware/splitio/-/splitio-10.3.2.tgz#494741ba19102564fa7a31bb6844176ef15b1731"
+"@splitsoftware/splitio@10.3.3":
+  version "10.3.3"
+  resolved "https://registry.yarnpkg.com/@splitsoftware/splitio/-/splitio-10.3.3.tgz#bc09b46e47ce7b6955524d191220fd1d9c50e818"
   dependencies:
     "@types/node" "9.4.7"
     axios "0.18.0"
@@ -743,7 +743,7 @@
     events "3.0.0"
     ip "1.1.5"
     lodash "4.17.5"
-    logplease "github:NicoZelaya/logplease#1.3.0"
+    logplease-es5 "0.5.0"
     utfx "1.0.1"
   optionalDependencies:
     ioredis "3.2.2"
@@ -5942,9 +5942,9 @@ log-update@^1.0.2:
     ansi-escapes "^1.0.0"
     cli-cursor "^1.0.2"
 
-"logplease@github:NicoZelaya/logplease#1.3.0":
-  version "1.3.0"
-  resolved "https://codeload.github.com/NicoZelaya/logplease/tar.gz/b4ca204f892080a2011fe3b3f3b2b1c8c72bb29c"
+logplease-es5@0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/logplease-es5/-/logplease-es5-0.5.0.tgz#533b273d615b3c25b7ce4a38bab775048e4a8129"
 
 longest@^1.0.1:
   version "1.0.1"

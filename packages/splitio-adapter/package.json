@@ -35,7 +35,7 @@
     "enzyme-to-json": "3.3.4"
   },
   "dependencies": {
-    "@splitsoftware/splitio": "10.3.2",
+    "@splitsoftware/splitio": "10.3.3",
     "lodash.camelcase": "4.3.0"
   },
   "keywords": [
