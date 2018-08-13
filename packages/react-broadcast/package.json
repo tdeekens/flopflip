@@ -51,7 +51,7 @@
     "@flopflip/types": "^1.2.1",
     "create-react-context": "0.1.6",
     "lodash.memoize": "4.1.2",
-    "recompose": "0.27.1"
+    "recompose": "0.28.2"
   },
   "keywords": [
     "react",
