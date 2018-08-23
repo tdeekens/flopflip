@@ -58,7 +58,7 @@
     "enzyme": "3.4.1",
     "enzyme-matchers": "6.0.3",
     "enzyme-to-json": "3.3.4",
-    "eslint": "5.3.0",
+    "eslint": "5.4.0",
     "eslint-config-prettier": "2.9.0",
     "eslint-config-xo": "0.24.1",
     "eslint-config-xo-react": "0.17.0",
