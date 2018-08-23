@@ -3313,9 +3313,9 @@ eslint-visitor-keys@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
 
-eslint@5.3.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-5.3.0.tgz#53695aca5213968aacdf970ccb231e42a2b285f8"
+eslint@5.4.0:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-5.4.0.tgz#d068ec03006bb9e06b429dc85f7e46c1b69fac62"
   dependencies:
     ajv "^6.5.0"
     babel-code-frame "^6.26.0"
@@ -3351,7 +3351,6 @@ eslint@5.3.0:
     regexpp "^2.0.0"
     require-uncached "^1.0.3"
     semver "^5.5.0"
-    string.prototype.matchall "^2.0.0"
     strip-ansi "^4.0.0"
     strip-json-comments "^2.0.1"
     table "^4.0.3"
@@ -6887,7 +6886,6 @@ prompts@^0.1.9:
 
 "prompts@git://github.com/terkelg/prompts.git#792824f8e5bfe3d632da0e48be23ab718b8f6646":
   version "0.1.4"
-  uid "792824f8e5bfe3d632da0e48be23ab718b8f6646"
   resolved "git://github.com/terkelg/prompts.git#792824f8e5bfe3d632da0e48be23ab718b8f6646"
   dependencies:
     clorox "^1.0.1"
@@ -7275,12 +7273,6 @@ regex-not@^1.0.0, regex-not@^1.0.2:
   dependencies:
     extend-shallow "^3.0.2"
     safe-regex "^1.1.0"
-
-regexp.prototype.flags@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/regexp.prototype.flags/-/regexp.prototype.flags-1.2.0.tgz#6b30724e306a27833eeb171b66ac8890ba37e41c"
-  dependencies:
-    define-properties "^1.1.2"
 
 regexpp@^1.0.1:
   version "1.1.0"
@@ -7967,16 +7959,6 @@ string-width@^1.0.1:
   dependencies:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^4.0.0"
-
-string.prototype.matchall@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/string.prototype.matchall/-/string.prototype.matchall-2.0.0.tgz#2af8fe3d2d6dc53ca2a59bd376b089c3c152b3c8"
-  dependencies:
-    define-properties "^1.1.2"
-    es-abstract "^1.10.0"
-    function-bind "^1.1.1"
-    has-symbols "^1.0.0"
-    regexp.prototype.flags "^1.2.0"
 
 string_decoder@~0.10.x:
   version "0.10.31"
