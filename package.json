@@ -55,7 +55,7 @@
     "check-node-version": "3.2.0",
     "codecov": "3.0.4",
     "cross-env": "5.2.0",
-    "enzyme": "3.4.1",
+    "enzyme": "3.5.0",
     "enzyme-matchers": "6.0.3",
     "enzyme-to-json": "3.3.4",
     "eslint": "5.4.0",
