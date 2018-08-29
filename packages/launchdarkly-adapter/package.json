@@ -35,10 +35,10 @@
     "enzyme-to-json": "3.3.4"
   },
   "dependencies": {
-    "ldclient-js": "2.4.0",
+    "ldclient-js": "2.5.0",
     "lodash.camelcase": "4.3.0",
     "lodash.isequal": "4.5.0",
-    "warning": "4.0.1"
+    "warning": "4.0.2"
   },
   "keywords": [
     "feature-flags",

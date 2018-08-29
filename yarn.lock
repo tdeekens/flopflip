@@ -5496,9 +5496,9 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-ldclient-js@2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-2.4.0.tgz#bf441391c3d90e83584ec16a7170c9cfbed0388a"
+ldclient-js@2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-2.5.0.tgz#56ed4096aac914d93d92b18614d3255f96f4216f"
   dependencies:
     Base64 "1.0.1"
     escape-string-regexp "1.0.5"
@@ -7120,7 +7120,6 @@ prompts@^0.1.9:
 
 "prompts@git://github.com/terkelg/prompts.git#792824f8e5bfe3d632da0e48be23ab718b8f6646":
   version "0.1.4"
-  uid "792824f8e5bfe3d632da0e48be23ab718b8f6646"
   resolved "git://github.com/terkelg/prompts.git#792824f8e5bfe3d632da0e48be23ab718b8f6646"
   dependencies:
     clorox "^1.0.1"
@@ -8735,9 +8734,9 @@ walker@~1.0.5:
   dependencies:
     makeerror "1.0.x"
 
-warning@4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.1.tgz#66ce376b7fbfe8a887c22bdf0e7349d73d397745"
+warning@4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.2.tgz#aa6876480872116fa3e11d434b0d0d8d91e44607"
   dependencies:
     loose-envify "^1.0.0"
 
