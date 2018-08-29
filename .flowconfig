@@ -5,6 +5,7 @@
 packages/*/modules
 
 [ignore]
+node_modules
 packages/*/dist
 
 [libs]
