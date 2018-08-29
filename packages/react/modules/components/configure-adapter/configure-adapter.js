@@ -177,7 +177,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
         .then(() => {
           this.setAdapterState(AdapterStates.CONFIGURED);
           if (this.pendingAdapterArgs) {
-            this.applyAdapterArgs(this.pendingAdapterArgs)
+            this.applyAdapterArgs(this.pendingAdapterArgs);
           }
         });
     }
