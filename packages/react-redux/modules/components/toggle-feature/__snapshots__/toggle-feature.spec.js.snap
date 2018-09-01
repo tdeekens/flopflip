@@ -51,22 +51,18 @@ exports[`<ToggleFeature> when feature is disabled should match snapshot 1`] = `
         defaultFlags={Object {}}
         shouldDeferAdapterConfiguration={false}
       >
-        <Provider
-          value={[Function]}
+        <ToggleFeature
+          flag="flag1"
         >
           <ToggleFeature
+            dispatch={[Function]}
             flag="flag1"
-          >
-            <ToggleFeature
-              dispatch={[Function]}
-              flag="flag1"
-              isFeatureEnabled={false}
-              render={null}
-              toggledComponent={null}
-              untoggledComponent={null}
-            />
-          </ToggleFeature>
-        </Provider>
+            isFeatureEnabled={false}
+            render={null}
+            toggledComponent={null}
+            untoggledComponent={null}
+          />
+        </ToggleFeature>
       </ConfigureAdapter>
     </ConfigureFlopflip>
   </Connect(ConfigureFlopflip)>
@@ -124,26 +120,22 @@ exports[`<ToggleFeature> when feature is disabled when enabling feature should m
         defaultFlags={Object {}}
         shouldDeferAdapterConfiguration={false}
       >
-        <Provider
-          value={[Function]}
+        <ToggleFeature
+          flag="flag1"
         >
           <ToggleFeature
+            dispatch={[Function]}
             flag="flag1"
+            isFeatureEnabled={true}
+            render={null}
+            toggledComponent={null}
+            untoggledComponent={null}
           >
-            <ToggleFeature
-              dispatch={[Function]}
-              flag="flag1"
-              isFeatureEnabled={true}
-              render={null}
-              toggledComponent={null}
-              untoggledComponent={null}
-            >
-              <FeatureComponent>
-                <div />
-              </FeatureComponent>
-            </ToggleFeature>
+            <FeatureComponent>
+              <div />
+            </FeatureComponent>
           </ToggleFeature>
-        </Provider>
+        </ToggleFeature>
       </ConfigureAdapter>
     </ConfigureFlopflip>
   </Connect(ConfigureFlopflip)>
