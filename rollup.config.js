@@ -39,7 +39,6 @@ const config = {
     }),
     babel({
       exclude: ['node_modules/**'],
-      babelrc: true,
     }),
     commonjs({
       ignoreGlobal: true,
