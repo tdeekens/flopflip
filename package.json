@@ -12,7 +12,7 @@
     "format:md": "prettier --parser markdown --write '**/*.md'",
     "format:yaml": "prettier --parser yaml --write '**/*.{yml,yaml}'",
     "fix:eslint": "eslint --fix --format=node_modules/eslint-formatter-pretty",
-    "test": "cross-env NODE_ENV=test jest --config .jestrc.test.json",
+    "test": "cross-env NODE_ENV=test jest --config .jestrc.test.json --no-cache",
     "test:sizes": "bundlesize",
     "test:ci": "cross-env NODE_ENV=test npm test -- --no-watchman",
     "test:ci:coverage": "cross-env NODE_ENV=test npm test -- --no-watchman --coverage && codecov",

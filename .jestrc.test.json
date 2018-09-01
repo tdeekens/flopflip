@@ -7,6 +7,9 @@
   "testEnvironment": "jsdom",
   "testURL": "http://localhost",
   "watchPlugins": ["jest-plugin-filename"],
+  "transform": {
+    "^.+\\.js$": "<rootDir>/jest.transform.js"
+  },
   "testPathIgnorePatterns": [
     "/node_modules/",
     "/packages/.*/node_modules",
