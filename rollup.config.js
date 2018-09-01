@@ -8,6 +8,7 @@ const builtins = require('rollup-plugin-node-builtins');
 const globals = require('rollup-plugin-node-globals');
 const flow = require('rollup-plugin-flow');
 const filesize = require('rollup-plugin-filesize');
+const babelOptions = require('./babel.config');
 
 const env = process.env.NODE_ENV;
 const name = process.env.npm_package_name;
@@ -38,7 +39,9 @@ const config = {
       modulesOnly: true,
     }),
     babel({
-      exclude: ['node_modules/**'],
+      exclude: '**/node_modules/**',
+      runtimeHelpers: true,
+      ...babelOptions,
     }),
     commonjs({
       ignoreGlobal: true,
