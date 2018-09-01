@@ -1,4 +1,4 @@
-import 'babel-polyfill';
+import '@babel/polyfill';
 import 'jest-enzyme';
 import * as commercetoolsEnzymeMatchers from '@commercetools/jest-enzyme-matchers';
 import Enzyme from 'enzyme';
