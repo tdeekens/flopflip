@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { ConfigureAdapter } from '@flopflip/react';
 import { Configure } from './configure';
 
 const ChildComponent = () => <div />;
@@ -32,8 +33,8 @@ describe('rendering', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render a `ConfigureAdapter`', () => {
-    expect(wrapper).toRender('ConfigureAdapter');
+  it('should render a `<ConfigureAdapter>`', () => {
+    expect(wrapper).toRender(ConfigureAdapter);
   });
 
   describe('with `children`', () => {
@@ -58,7 +59,7 @@ describe('rendering', () => {
     let configureAdapterWrapper;
 
     beforeEach(() => {
-      configureAdapterWrapper = wrapper.find('ConfigureAdapter');
+      configureAdapterWrapper = wrapper.find(ConfigureAdapter);
     });
 
     it('should receive `adapterArgs`', () => {

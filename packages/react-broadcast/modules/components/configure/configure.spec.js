@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Configure from './configure';
+import { ConfigureAdapter } from '@flopflip/react';
+import Configure, { FlagsContext } from './configure';
 
 const ChildComponent = () => <div />;
 
@@ -33,12 +34,12 @@ describe('rendering', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render a `ConfigureAdapter`', () => {
-    expect(wrapper).toRender('ConfigureAdapter');
+  it('should render a `<ConfigureAdapter>`', () => {
+    expect(wrapper).toRender(ConfigureAdapter);
   });
 
   it('should render a `<FlagContext.Provider>`', () => {
-    expect(wrapper).toRender('Provider');
+    expect(wrapper).toRender(FlagContext.Provider);
   });
 
   describe('with `children`', () => {
@@ -63,7 +64,7 @@ describe('rendering', () => {
     let configureAdapterWrapper;
 
     beforeEach(() => {
-      configureAdapterWrapper = wrapper.find('ConfigureAdapter');
+      configureAdapterWrapper = wrapper.find(ConfigureAdapter);
     });
 
     it('should receive `adapterArgs`', () => {
@@ -136,7 +137,7 @@ describe('state', () => {
 
   describe('of `<FlagsContext.Provider />`', () => {
     it('should receive `flags` as `value`', () => {
-      expect(wrapper.find('Provider')).toHaveProp(
+      expect(wrapper.find(FlagsContext.Provider)).toHaveProp(
         'value',
         wrapper.state('flags')
       );

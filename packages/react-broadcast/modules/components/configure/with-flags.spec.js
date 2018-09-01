@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { FlagsContext } from '../configure';
 import withFlags from './with-flags';
 
 const TestComponent = () => <div />;
@@ -17,7 +18,7 @@ describe('rendering', () => {
   });
 
   it('should render a `<FlagsContext.Consumer>`', () => {
-    expect(wrapper).toRender('Consumer');
+    expect(wrapper).toRender(FlagsContext.Consumer);
   });
 });
 
