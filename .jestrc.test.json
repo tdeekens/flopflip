@@ -1,5 +1,6 @@
 {
   "displayName": "test",
+  "verbose": true,
   "setupFiles": ["raf/polyfill", "jest-localstorage-mock"],
   "setupTestFrameworkScriptFile": "./jest-runner-test.config.js",
   "snapshotSerializers": ["enzyme-to-json/serializer"],
