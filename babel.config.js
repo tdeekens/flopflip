@@ -4,17 +4,26 @@ module.exports = {
   presets: [
     [
       '@babel/env',
-      {
-        targets: {
-          browsers: ['last 2 versions', 'ie >= 11'],
-        },
-        modules: isEnv('test') ? 'auto' : false,
-      },
+      isEnv('test')
+        ? {
+            targets: {
+              browsers: ['last 1 versions'],
+              node: '8',
+            },
+          }
+        : {
+            targets: {
+              browsers: ['last 2 versions', 'ie >= 11'],
+            },
+            modules: false,
+            useBuiltIns: 'entry',
+            include: ['transform-classes'],
+          },
     ],
     [
       '@babel/preset-react',
       {
-        development: isEnv('production') ? true : false,
+        development: isEnv('test'),
         useBuiltIns: true,
       },
     ],
@@ -39,7 +48,19 @@ module.exports = {
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-transform-destructuring',
     '@babel/plugin-transform-react-constant-elements',
-    '@babel/plugin-transform-regenerator',
     '@babel/plugin-transform-runtime',
-  ],
+    isEnv('test') && [
+      '@babel/plugin-transform-regenerator',
+      {
+        async: false,
+      },
+    ],
+    isEnv('test') && 'babel-plugin-transform-dynamic-import',
+    isEnv('production') && [
+      'babel-plugin-transform-react-remove-prop-types',
+      {
+        removeImport: true,
+      },
+    ],
+  ].filter(Boolean),
 };
