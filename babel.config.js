@@ -10,6 +10,7 @@ module.exports = {
               browsers: ['last 1 versions'],
               node: '8',
             },
+            modules: 'commonjs',
           }
         : {
             targets: {
@@ -56,6 +57,7 @@ module.exports = {
       },
     ],
     isEnv('test') && 'babel-plugin-transform-dynamic-import',
+    isEnv('test') && '@babel/plugin-transform-modules-commonjs',
     isEnv('production') && [
       'babel-plugin-transform-react-remove-prop-types',
       {
