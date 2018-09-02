@@ -34,7 +34,7 @@ describe('rendering', () => {
   });
 
   it('should render `children`', () => {
-    expect(wrapper).toRender('ChildComponent');
+    expect(wrapper).toRender(ChildComponent);
   });
 });
 

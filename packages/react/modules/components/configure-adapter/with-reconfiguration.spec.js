@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { AdapterContext } from './configure-adapter';
 import withReconfiguration from './with-reconfiguration';
 
 const TestComponent = () => <div />;
@@ -18,7 +19,7 @@ describe('rendering', () => {
   });
 
   it('should render a `<AdapterContext.Consumer>`', () => {
-    expect(wrapper).toRender('Consumer');
+    expect(wrapper).toRender(AdapterContext.Consumer);
   });
 });
 

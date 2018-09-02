@@ -6,6 +6,8 @@ import ConfigureAdapter, {
 } from './configure-adapter';
 
 const ChildComponent = () => <div />;
+ChildComponent.displayName = 'ChildComponent';
+
 const createTestProps = props => ({
   adapterArgs: {
     clientSideId: 'foo-clientSideId',
@@ -42,7 +44,7 @@ describe('rendering', () => {
   });
 
   it('should render `children`', () => {
-    expect(wrapper).toRender('ChildComponent');
+    expect(wrapper).toRender(ChildComponent);
   });
 
   it('should store `adapterArgs` onto `state`', () => {

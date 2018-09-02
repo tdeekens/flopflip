@@ -18,10 +18,10 @@ exports[`rendering should match snapshot 1`] = `
   defaultFlags={Object {}}
   shouldDeferAdapterConfiguration={false}
 >
-  <Provider
+  <ContextProvider
     value={Object {}}
   >
     <ChildComponent />
-  </Provider>
+  </ContextProvider>
 </ConfigureAdapter>
 `;

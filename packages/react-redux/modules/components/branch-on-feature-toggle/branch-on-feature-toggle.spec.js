@@ -20,13 +20,11 @@ const createTestProps = custom => ({
 const createMockStore = configureStore();
 
 describe('without `untoggledComponent', () => {
-  const BranchedComponent = branchOnFeatureToggle({ flag: 'flag1' })(
+  const EnhancedComponent = branchOnFeatureToggle({ flag: 'flag1' })(
     ToggledComponent
   );
   let props;
   let wrapper;
-
-  let Container;
 
   describe('when feature is disabled', () => {
     beforeEach(() => {
@@ -34,11 +32,10 @@ describe('without `untoggledComponent', () => {
         [STATE_SLICE]: { flags: { flag1: false } },
       });
       props = createTestProps();
-      Container = () => <BranchedComponent />;
       wrapper = mount(
         <Provider store={store}>
           <Configure {...props} adapter={memoryAdapter}>
-            <Container />
+            <EnhancedComponent />
           </Configure>
         </Provider>
       );
@@ -58,11 +55,10 @@ describe('without `untoggledComponent', () => {
           [STATE_SLICE]: { flags: { flag1: true } },
         });
         props = createTestProps();
-        Container = () => <BranchedComponent />;
         wrapper = mount(
           <Provider store={store}>
             <Configure {...props} adapter={memoryAdapter}>
-              <Container />
+              <EnhancedComponent />
             </Configure>
           </Provider>
         );
@@ -80,14 +76,12 @@ describe('without `untoggledComponent', () => {
 });
 
 describe('with `untoggledComponent', () => {
-  const BranchedComponent = branchOnFeatureToggle(
+  const EnhancedComponent = branchOnFeatureToggle(
     { flag: 'flag1' },
     UntoggledComponent
   )(ToggledComponent);
   let props;
   let wrapper;
-
-  let Container;
 
   describe('when feature is disabled', () => {
     beforeEach(() => {
@@ -95,11 +89,10 @@ describe('with `untoggledComponent', () => {
       const store = createMockStore({
         [STATE_SLICE]: { flags: { flag1: false } },
       });
-      Container = () => <BranchedComponent />;
       wrapper = mount(
         <Provider store={store}>
           <Configure {...props} adapter={memoryAdapter}>
-            <Container />
+            <EnhancedComponent />
           </Configure>
         </Provider>
       );
@@ -123,11 +116,10 @@ describe('with `untoggledComponent', () => {
         const store = createMockStore({
           [STATE_SLICE]: { flags: { flag1: true } },
         });
-        Container = () => <BranchedComponent />;
         wrapper = mount(
           <Provider store={store}>
             <Configure {...props} adapter={memoryAdapter}>
-              <Container />
+              <EnhancedComponent />
             </Configure>
           </Provider>
         );

@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`rendering should match snapshot 1`] = `
-<Provider
+<ContextProvider
   value={[Function]}
 >
   <ChildComponent />
-</Provider>
+</ContextProvider>
 `;

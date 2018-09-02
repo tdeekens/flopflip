@@ -16,21 +16,18 @@ const createTestProps = custom => ({
 });
 
 describe('without `untoggledComponent', () => {
-  const BranchedComponent = branchOnFeatureToggle({ flag: 'flag1' })(
+  const EnhancedComponent = branchOnFeatureToggle({ flag: 'flag1' })(
     ToggledComponent
   );
   let props;
   let wrapper;
 
-  let Container;
-
   describe('when feature is disabled', () => {
     beforeEach(() => {
       props = createTestProps();
-      Container = () => <BranchedComponent />;
       wrapper = mount(
         <Configure {...props} adapter={memoryAdapter}>
-          <Container />
+          <EnhancedComponent />
         </Configure>
       );
     });
@@ -61,22 +58,19 @@ describe('without `untoggledComponent', () => {
 });
 
 describe('with `untoggledComponent', () => {
-  const BranchedComponent = branchOnFeatureToggle(
+  const EnhancedComponent = branchOnFeatureToggle(
     { flag: 'flag1' },
     UntoggledComponent
   )(ToggledComponent);
   let props;
   let wrapper;
 
-  let Container;
-
   describe('when feature is disabled', () => {
     beforeEach(() => {
       props = createTestProps();
-      Container = () => <BranchedComponent />;
       wrapper = mount(
         <Configure {...props} adapter={memoryAdapter}>
-          <Container />
+          <EnhancedComponent />
         </Configure>
       );
     });

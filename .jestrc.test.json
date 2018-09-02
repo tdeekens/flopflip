@@ -1,5 +1,6 @@
 {
   "displayName": "test",
+  "verbose": true,
   "setupFiles": ["raf/polyfill", "jest-localstorage-mock"],
   "setupTestFrameworkScriptFile": "./jest-runner-test.config.js",
   "snapshotSerializers": ["enzyme-to-json/serializer"],
@@ -7,6 +8,9 @@
   "testEnvironment": "jsdom",
   "testURL": "http://localhost",
   "watchPlugins": ["jest-plugin-filename"],
+  "transform": {
+    "^.+\\.js$": "<rootDir>/jest.transform.js"
+  },
   "testPathIgnorePatterns": [
     "/node_modules/",
     "/packages/.*/node_modules",

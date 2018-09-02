@@ -5,39 +5,39 @@ jest.mock('warning');
 
 describe('with existing flag', () => {
   describe('with flag variation', () => {
-    const props = { fooFlag: 'foo-variation' };
+    const args = { fooFlag: 'foo-variation' };
 
     it('should indicate feature being enabled', () => {
-      expect(isFeatureEnabled('fooFlag', 'foo-variation')(props)).toBe(true);
+      expect(isFeatureEnabled('fooFlag', 'foo-variation')(args)).toBe(true);
     });
 
     it('should indicate feature being disabled', () => {
-      expect(isFeatureEnabled('fooFlag', 'foo-variation-1')(props)).toBe(false);
+      expect(isFeatureEnabled('fooFlag', 'foo-variation-1')(args)).toBe(false);
     });
   });
 
   describe('without flag variation', () => {
     it('should indicate feature being enabled', () => {
-      const props = { fooFlag: true };
-      expect(isFeatureEnabled('fooFlag')(props)).toBe(true);
+      const args = { fooFlag: true };
+      expect(isFeatureEnabled('fooFlag')(args)).toBe(true);
     });
 
     it('should indicate feature being disabled', () => {
-      const props = { fooFlag: false };
-      expect(isFeatureEnabled('fooFlag')(props)).toBe(false);
+      const args = { fooFlag: false };
+      expect(isFeatureEnabled('fooFlag')(args)).toBe(false);
     });
   });
 });
 
 describe('with non normalized flag', () => {
   it('should indicate feature being disabled', () => {
-    const props = { fooFlag: true };
-    expect(isFeatureEnabled('foo-flag')(props)).toBe(false);
+    const args = { fooFlag: true };
+    expect(isFeatureEnabled('foo-flag')(args)).toBe(false);
   });
 
   it('should invoke `warning`', () => {
-    const props = { fooFlag: false };
-    isFeatureEnabled('fooFlag')(props);
+    const args = { fooFlag: false };
+    isFeatureEnabled('fooFlag')(args);
 
     expect(warning).toHaveBeenCalled();
   });
@@ -45,7 +45,7 @@ describe('with non normalized flag', () => {
 
 describe('with non existing flag', () => {
   it('should indicate feature being disabled', () => {
-    const props = { fooFlag: true };
-    expect(isFeatureEnabled('fooFlag2')(props)).toBe(false);
+    const args = { fooFlag: true };
+    expect(isFeatureEnabled('fooFlag2')(args)).toBe(false);
   });
 });
