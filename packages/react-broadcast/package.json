@@ -6,7 +6,6 @@
   "module": "dist/@flopflip-react-broadcast.es.js",
   "browser": "dist/@flopflip-react-broadcast.umd.js",
   "scripts": {
-    "preversion": "npm run build",
     "prebuild": "rimraf dist/** && cpx typings/* dist/typings",
     "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs",
     "build:watch": "cross-env npm run build:es -- -w",

@@ -5,7 +5,6 @@
   "main": "dist/@flopflip-memory-adapter.cjs.js",
   "module": "dist/@flopflip-memory-adapter.es.js",
   "scripts": {
-    "preversion": "npm run build",
     "prebuild": "rimraf dist/**",
     "build": "cross-env npm run build:es && npm run build:cjs",
     "build:watch": "cross-env npm run build:es -- -w",
