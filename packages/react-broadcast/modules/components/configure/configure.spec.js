@@ -38,8 +38,8 @@ describe('rendering', () => {
     expect(wrapper).toRender(ConfigureAdapter);
   });
 
-  it('should render a `<FlagContext.Provider>`', () => {
-    expect(wrapper).toRender(FlagContext.Provider);
+  it('should render a `<FlagsContext.Provider>`', () => {
+    expect(wrapper).toRender(FlagsContext.Provider);
   });
 
   describe('with `children`', () => {
