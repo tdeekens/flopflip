@@ -51,39 +51,33 @@ exports[`without \`propKey\` when feature is disabled should match snapshot 1`] 
         defaultFlags={Object {}}
         shouldDeferAdapterConfiguration={false}
       >
-        <Provider
-          value={[Function]}
-        >
-          <Container>
-            <injectFeatureToggle(FeatureComponent)>
-              <withProps(omitProps(FeatureComponent))
-                @flopflip/flags={
-                  Object {
-                    "flag1": false,
-                  }
+        <injectFeatureToggle(FeatureComponent)>
+          <withProps(omitProps(FeatureComponent))
+            @flopflip/flags={
+              Object {
+                "flag1": false,
+              }
+            }
+            dispatch={[Function]}
+          >
+            <omitProps(FeatureComponent)
+              @flopflip/flags={
+                Object {
+                  "flag1": false,
                 }
+              }
+              dispatch={[Function]}
+              isFeatureEnabled={false}
+            >
+              <FeatureComponent
                 dispatch={[Function]}
+                isFeatureEnabled={false}
               >
-                <omitProps(FeatureComponent)
-                  @flopflip/flags={
-                    Object {
-                      "flag1": false,
-                    }
-                  }
-                  dispatch={[Function]}
-                  isFeatureEnabled={false}
-                >
-                  <FeatureComponent
-                    dispatch={[Function]}
-                    isFeatureEnabled={false}
-                  >
-                    <div />
-                  </FeatureComponent>
-                </omitProps(FeatureComponent)>
-              </withProps(omitProps(FeatureComponent))>
-            </injectFeatureToggle(FeatureComponent)>
-          </Container>
-        </Provider>
+                <div />
+              </FeatureComponent>
+            </omitProps(FeatureComponent)>
+          </withProps(omitProps(FeatureComponent))>
+        </injectFeatureToggle(FeatureComponent)>
       </ConfigureAdapter>
     </ConfigureFlopflip>
   </Connect(ConfigureFlopflip)>
@@ -141,39 +135,33 @@ exports[`without \`propKey\` when feature is disabled when enabling feature shou
         defaultFlags={Object {}}
         shouldDeferAdapterConfiguration={false}
       >
-        <Provider
-          value={[Function]}
-        >
-          <Container>
-            <injectFeatureToggle(FeatureComponent)>
-              <withProps(omitProps(FeatureComponent))
-                @flopflip/flags={
-                  Object {
-                    "flag1": true,
-                  }
+        <injectFeatureToggle(FeatureComponent)>
+          <withProps(omitProps(FeatureComponent))
+            @flopflip/flags={
+              Object {
+                "flag1": true,
+              }
+            }
+            dispatch={[Function]}
+          >
+            <omitProps(FeatureComponent)
+              @flopflip/flags={
+                Object {
+                  "flag1": true,
                 }
+              }
+              dispatch={[Function]}
+              isFeatureEnabled={true}
+            >
+              <FeatureComponent
                 dispatch={[Function]}
+                isFeatureEnabled={true}
               >
-                <omitProps(FeatureComponent)
-                  @flopflip/flags={
-                    Object {
-                      "flag1": true,
-                    }
-                  }
-                  dispatch={[Function]}
-                  isFeatureEnabled={true}
-                >
-                  <FeatureComponent
-                    dispatch={[Function]}
-                    isFeatureEnabled={true}
-                  >
-                    <div />
-                  </FeatureComponent>
-                </omitProps(FeatureComponent)>
-              </withProps(omitProps(FeatureComponent))>
-            </injectFeatureToggle(FeatureComponent)>
-          </Container>
-        </Provider>
+                <div />
+              </FeatureComponent>
+            </omitProps(FeatureComponent)>
+          </withProps(omitProps(FeatureComponent))>
+        </injectFeatureToggle(FeatureComponent)>
       </ConfigureAdapter>
     </ConfigureFlopflip>
   </Connect(ConfigureFlopflip)>

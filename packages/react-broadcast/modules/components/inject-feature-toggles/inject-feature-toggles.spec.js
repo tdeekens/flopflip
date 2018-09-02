@@ -14,20 +14,18 @@ const createTestProps = custom => ({
 });
 
 describe('without `propKey`', () => {
-  const InjectedComponent = injectFeatureToggles(['flag1', 'flag2'])(
+  const EnhancedComponent = injectFeatureToggles(['flag1', 'flag2'])(
     FeatureComponent
   );
   let props;
   let wrapper;
 
-  let Container;
   describe('when feature is disabled', () => {
     beforeEach(() => {
       props = createTestProps({ defaultFlags: { flag1: false, flag2: false } });
-      Container = () => <InjectedComponent />;
       wrapper = mount(
         <Configure {...props} adapter={memoryAdapter}>
-          <Container />
+          <EnhancedComponent />
         </Configure>
       );
     });
@@ -71,19 +69,17 @@ describe('without `propKey`', () => {
 });
 
 describe('with `propKey`', () => {
-  const InjectedComponent = injectFeatureToggles(['flag1'], 'fooBar')(
+  const EnhancedComponent = injectFeatureToggles(['flag1'], 'fooBar')(
     FeatureComponent
   );
   let props;
   let wrapper;
 
-  let Container;
   beforeEach(() => {
     props = createTestProps();
-    Container = () => <InjectedComponent />;
     wrapper = mount(
       <Configure {...props} adapter={memoryAdapter}>
-        <Container />
+        <EnhancedComponent />
       </Configure>
     );
   });

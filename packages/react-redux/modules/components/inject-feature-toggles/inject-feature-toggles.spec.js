@@ -52,24 +52,22 @@ const createMockStore = configureStore();
 
 describe('injectFeatureToggles', () => {
   describe('without `propKey`', () => {
-    const InjectedComponent = injectFeatureToggles(['flag1', 'flag2'])(
+    const EnhancedComponent = injectFeatureToggles(['flag1', 'flag2'])(
       FeatureComponent
     );
     let props;
     let wrapper;
 
-    let Container;
     describe('when feature is disabled', () => {
       beforeEach(() => {
         const store = createMockStore({
           [STATE_SLICE]: { flags: { flag1: false, flag2: false } },
         });
         props = createTestProps();
-        Container = () => <InjectedComponent />;
         wrapper = mount(
           <Provider store={store}>
             <Configure {...props} adapter={memoryAdapter}>
-              <Container />
+              <EnhancedComponent />
             </Configure>
           </Provider>
         );
@@ -99,11 +97,10 @@ describe('injectFeatureToggles', () => {
             [STATE_SLICE]: { flags: { flag1: true } },
           });
           props = createTestProps();
-          Container = () => <InjectedComponent />;
           wrapper = mount(
             <Provider store={store}>
               <Configure {...props} adapter={memoryAdapter}>
-                <Container />
+                <EnhancedComponent />
               </Configure>
             </Provider>
           );
@@ -124,23 +121,21 @@ describe('injectFeatureToggles', () => {
   });
 
   describe('with `propKey`', () => {
-    const InjectedComponent = injectFeatureToggles(['flag1'], 'fooBar')(
+    const EnhancedComponent = injectFeatureToggles(['flag1'], 'fooBar')(
       FeatureComponent
     );
     let props;
     let wrapper;
 
-    let Container;
     beforeEach(() => {
       const store = createMockStore({
         [STATE_SLICE]: { flags: { flag1: false } },
       });
       props = createTestProps();
-      Container = () => <InjectedComponent />;
       wrapper = mount(
         <Provider store={store}>
           <Configure {...props} adapter={memoryAdapter}>
-            <Container />
+            <EnhancedComponent />
           </Configure>
         </Provider>
       );

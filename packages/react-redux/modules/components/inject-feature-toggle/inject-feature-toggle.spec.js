@@ -18,22 +18,20 @@ const createTestProps = custom => ({
 const createMockStore = configureStore();
 
 describe('without `propKey`', () => {
-  const InjectedComponent = injectFeatureToggle('flag1')(FeatureComponent);
+  const EnhancedComponent = injectFeatureToggle('flag1')(FeatureComponent);
   let props;
   let wrapper;
 
-  let Container;
   describe('when feature is disabled', () => {
     beforeEach(() => {
       const store = createMockStore({
         [STATE_SLICE]: { flags: { flag1: false } },
       });
       props = createTestProps();
-      Container = () => <InjectedComponent />;
       wrapper = mount(
         <Provider store={store}>
           <Configure {...props} adapter={memoryAdapter}>
-            <Container />
+            <EnhancedComponent />
           </Configure>
         </Provider>
       );
@@ -56,11 +54,10 @@ describe('without `propKey`', () => {
           [STATE_SLICE]: { flags: { flag1: true } },
         });
         props = createTestProps();
-        Container = () => <InjectedComponent />;
         wrapper = mount(
           <Provider store={store}>
             <Configure {...props} adapter={memoryAdapter}>
-              <Container />
+              <EnhancedComponent />
             </Configure>
           </Provider>
         );
