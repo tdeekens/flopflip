@@ -35,15 +35,15 @@
     lodash.memoize "4.1.2"
     recompose "0.28.2"
 
-"@flopflip/react-redux@7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-7.0.1.tgz#8b905c294acd1f73bf4d6e851a14a3e4cb0a61fa"
+"@flopflip/react-redux@7.0.2":
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-7.0.2.tgz#a7878f27e2aaaaa491618984147a337a52dd894d"
   dependencies:
-    "@flopflip/react" "^6.0.1"
+    "@flopflip/react" "^6.0.2"
     "@flopflip/types" "^1.2.1"
     lodash.isnil "4.0.0"
     lodash.memoize "4.1.2"
-    recompose "0.27.1"
+    recompose "0.28.2"
 
 "@flopflip/react@^6.0.1":
   version "6.0.1"
