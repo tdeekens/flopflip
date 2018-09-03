@@ -25,15 +25,15 @@
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-1.0.5.tgz#095db39a0caf48a4f62eb1798625155aa2ffdb0b"
 
-"@flopflip/react-broadcast@7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-7.0.1.tgz#e332a935b5fb8995b3cb64b2ed4f32b4365fca99"
+"@flopflip/react-broadcast@7.0.2":
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-7.0.2.tgz#eecadd7a429346763ea82e140ba83e2f68d46e2f"
   dependencies:
-    "@flopflip/react" "^6.0.1"
+    "@flopflip/react" "^6.0.2"
     "@flopflip/types" "^1.2.1"
     create-react-context "0.1.6"
     lodash.memoize "4.1.2"
-    recompose "0.27.1"
+    recompose "0.28.2"
 
 "@flopflip/react-redux@7.0.1":
   version "7.0.1"
@@ -56,6 +56,18 @@
     lodash.omit "4.5.0"
     recompose "0.27.1"
     warning "4.0.1"
+
+"@flopflip/react@^6.0.2":
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-6.0.2.tgz#61d57faddf7784ca8368131519736b3a45737add"
+  dependencies:
+    create-react-context "0.1.6"
+    deepmerge "2.1.1"
+    lodash.intersection "4.4.0"
+    lodash.isnil "4.0.0"
+    lodash.omit "4.5.0"
+    recompose "0.28.2"
+    warning "4.0.2"
 
 "@flopflip/types@^1.2.1":
   version "1.2.1"
@@ -6992,6 +7004,12 @@ walker@~1.0.5:
 warning@4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.1.tgz#66ce376b7fbfe8a887c22bdf0e7349d73d397745"
+  dependencies:
+    loose-envify "^1.0.0"
+
+warning@4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.2.tgz#aa6876480872116fa3e11d434b0d0d8d91e44607"
   dependencies:
     loose-envify "^1.0.0"
 
