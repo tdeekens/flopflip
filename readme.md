@@ -255,6 +255,24 @@ import adapter from '@flopflip/launchdarkly-adapter';
 </ConfigureFlopFlip>;
 ```
 
+You can also pass `render` or `children` as a function to act differently based on the underlying adapter's ready state:
+
+```jsx
+<ConfigureFlopFlip adapter={adapter} adapterArgs={{ clientSideId, user }}>
+  {{isAdapterReady} => isAdapterReady ? <App /> : <LoadingSpinner />}
+</ConfigureFlopFlip>;
+```
+
+```jsx
+<ConfigureFlopFlip
+  adapter={adapter}
+  adapterArgs={{ clientSideId, user }}
+  render={() => <App />}
+/>
+```
+
+Note that `children` will be called with a loading state prop while `render` will only be called when the adapter is ready. This behaviour mirrors the workings of `<ToggleFeature>`.
+
 This variant of the `ConfigureFlopFlip` component form
 `@flopflip/react-broadcast` will use the context and a broadcasting system to
 reliably communicate with children toggling features (you do not have to worry
