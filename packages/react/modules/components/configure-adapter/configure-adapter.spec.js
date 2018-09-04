@@ -8,6 +8,14 @@ import ConfigureAdapter, {
 const ChildComponent = () => <div />;
 ChildComponent.displayName = 'ChildComponent';
 
+const createAdapter = custom => ({
+  getIsReady: jest.fn(() => false),
+  configure: jest.fn(() => Promise.resolve()),
+  reconfigure: jest.fn(() => Promise.resolve()),
+
+  ...custom,
+});
+
 const createTestProps = props => ({
   adapterArgs: {
     clientSideId: 'foo-clientSideId',
@@ -17,10 +25,7 @@ const createTestProps = props => ({
     onFlagsStateChange: jest.fn(),
     onStatusStateChange: jest.fn(),
   },
-  adapter: {
-    configure: jest.fn(() => Promise.resolve()),
-    reconfigure: jest.fn(() => Promise.resolve()),
-  },
+  adapter: createAdapter(),
   children: ChildComponent,
 
   ...props,
@@ -39,12 +44,86 @@ describe('rendering', () => {
     );
   });
 
-  it('should match snapshot', () => {
-    expect(wrapper).toMatchSnapshot();
+  describe('when children are a node', () => {
+    it('should invoke `getIsReady` on `adapter`', () => {
+      expect(props.adapter.getIsReady).toHaveBeenCalled();
+    });
+
+    it('should match snapshot', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should render `children`', () => {
+      expect(wrapper).toRender(ChildComponent);
+    });
   });
 
-  it('should render `children`', () => {
-    expect(wrapper).toRender(ChildComponent);
+  describe('when `children` is a function', () => {
+    beforeEach(() => {
+      props = createTestProps({
+        children: jest.fn(() => <ChildComponent />),
+      });
+      wrapper = shallow(<ConfigureAdapter {...props} />);
+    });
+
+    it('should invoke `getIsReady` on `adapter`', () => {
+      expect(props.adapter.getIsReady).toHaveBeenCalled();
+    });
+
+    it('should match snapshot', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it('should invoke `children`', () => {
+      expect(props.children).toHaveBeenCalled();
+    });
+
+    it('should render `children`', () => {
+      expect(wrapper).toRender(ChildComponent);
+    });
+  });
+
+  describe('when `render` is a function', () => {
+    describe('when adapter is not ready', () => {
+      beforeEach(() => {
+        props = createTestProps({
+          render: jest.fn(() => <ChildComponent />),
+        });
+        wrapper = shallow(<ConfigureAdapter {...props} />);
+      });
+
+      it('should invoke `getIsReady` on `adapter`', () => {
+        expect(props.adapter.getIsReady).toHaveBeenCalled();
+      });
+
+      it('should not not invoke `render`', () => {
+        expect(props.render).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('when adapter is ready', () => {
+      beforeEach(() => {
+        props = createTestProps({
+          render: jest.fn(() => <ChildComponent />),
+          adapter: createAdapter({
+            getIsReady: jest.fn(() => true),
+          }),
+        });
+        wrapper = shallow(<ConfigureAdapter {...props} />);
+      });
+
+      it('should invoke `getIsReady` on `adapter`', () => {
+        expect(props.adapter.getIsReady).toHaveBeenCalled();
+      });
+
+      it('should invoke `render`', () => {
+        expect(props.render).toHaveBeenCalled();
+      });
+
+      it('should match snapshot', () => {
+        expect(wrapper).toMatchSnapshot();
+      });
+    });
   });
 
   it('should store `adapterArgs` onto `state`', () => {
@@ -75,9 +154,9 @@ describe('lifecycle', () => {
           beforeEach(() => {
             props = createTestProps({
               // NOTE: Rejecting to not enter `then`.
-              adapter: {
+              adapter: createAdapter({
                 configure: jest.fn(() => Promise.reject()),
-              },
+              }),
             });
             wrapper = shallow(
               <ConfigureAdapter {...props}>
@@ -111,6 +190,26 @@ describe('lifecycle', () => {
             expect(props.adapter.configure).toHaveBeenCalledWith(
               props.adapterArgs
             );
+          });
+
+          describe('when `children` is a function', () => {
+            beforeEach(() => {
+              props = createTestProps({
+                children: jest.fn(() => <ChildComponent />),
+              });
+              wrapper = shallow(<ConfigureAdapter {...props} />);
+
+              return wrapper
+                .instance()
+                .componentDidMount()
+                .catch(() => {});
+            });
+
+            it('should invoke `children` with not `isAdapterReady`', () => {
+              expect(props.children).toHaveBeenCalledWith({
+                isAdapterReady: false,
+              });
+            });
           });
 
           describe('when the adapter has configured', () => {
@@ -278,9 +377,9 @@ describe('lifecycle', () => {
           beforeEach(() => {
             props = createTestProps({
               // NOTE: Rejecting to not enter `then`.
-              adapter: {
+              adapter: createAdapter({
                 configure: jest.fn(() => Promise.reject()),
-              },
+              }),
             });
             wrapper = shallow(
               <ConfigureAdapter {...props}>
@@ -358,9 +457,9 @@ describe('lifecycle', () => {
           beforeEach(() => {
             props = createTestProps({
               // NOTE: Rejecting to not enter `then`.
-              adapter: {
+              adapter: createAdapter({
                 reconfigure: jest.fn(() => Promise.reject()),
-              },
+              }),
             });
             wrapper = shallow(
               <ConfigureAdapter {...props}>

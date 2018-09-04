@@ -1,6 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`rendering should match snapshot 1`] = `
+exports[`rendering when \`children\` is a function should match snapshot 1`] = `
+<ContextProvider
+  value={[Function]}
+>
+  <ChildComponent />
+</ContextProvider>
+`;
+
+exports[`rendering when \`render\` is a function when adapter is ready should match snapshot 1`] = `
+<ContextProvider
+  value={[Function]}
+>
+  <ChildComponent />
+</ContextProvider>
+`;
+
+exports[`rendering when children are a node should match snapshot 1`] = `
 <ContextProvider
   value={[Function]}
 >

@@ -21,7 +21,8 @@ type Props = {
   adapter: Adapter,
   adapterArgs: AdapterArgs,
   defaultFlags?: Flags,
-  children?: React.Component<any>,
+  render?: () => Node,
+  children?: ({ isAdapterReady: boolean }) => Node,
 };
 type State = {
   appliedAdapterArgs: AdapterArgs,
@@ -43,6 +44,9 @@ export const AdapterContext: Context<ReconfigureAdapter> = createReactContext(
   () => {}
 );
 
+const isEmptyChildren = (children: Node): boolean =>
+  React.Children.count(children) === 0;
+
 export const mergeAdapterArgs = (
   previousAdapterArgs: AdapterArgs,
   { adapterArgs: nextAdapterArgs, options = {} }: AdapterReconfiguration
@@ -55,6 +59,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
   static defaultProps = {
     shouldDeferAdapterConfiguration: false,
     children: null,
+    render: null,
     defaultFlags: {},
   };
 
@@ -220,7 +225,22 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
   render(): Node {
     return (
       <AdapterContext.Provider value={this.reconfigureOrQueue}>
-        {this.props.children ? React.Children.only(this.props.children) : null}
+        {(() => {
+          const isAdapterReady = this.props.adapter.getIsReady();
+
+          if (isAdapterReady) {
+            if (typeof this.props.render === 'function')
+              return this.props.render();
+          }
+
+          if (typeof this.props.children === 'function')
+            return this.props.children({
+              isAdapterReady,
+            });
+
+          if (this.props.children && !isEmptyChildren(this.props.children))
+            return React.Children.only(this.props.children);
+        })()}
       </AdapterContext.Provider>
     );
   }
