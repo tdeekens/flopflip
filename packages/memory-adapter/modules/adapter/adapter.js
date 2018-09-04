@@ -17,6 +17,7 @@ const adapterState: AdapterState = {
 
 const configure = ({
   user,
+  defaultFlags = {},
   onFlagsStateChange,
   onStatusStateChange,
 }: AdapterArgs): Promise<any> => {
@@ -39,13 +40,18 @@ const configure = ({
 const reconfigure = ({ user }: { user: User }): Promise<any> => {
   updateUser(user);
 
-  adapterState.flags = {};
-  adapterState.onFlagsStateChange({});
+  adapterState.flags = adapterState.defaultFlags;
+  adapterState.onFlagsStateChange(adapterState.defaultFlags);
 
   return Promise.resolve();
 };
 
 const getIsReady = (): boolean => adapterState.isReady;
+
+const reset = (): void => {
+  adapterState.flags = adapterState.defaultFlags;
+  adapterState.onFlagsStateChange(adapterState.defaultFlags);
+};
 
 const updateUser = (user: User): User => {
   adapterState.user = user;
@@ -64,6 +70,7 @@ export const getUser = (): User => adapterState.user;
 
 export default {
   getIsReady,
+  reset,
   configure,
   reconfigure,
 };
