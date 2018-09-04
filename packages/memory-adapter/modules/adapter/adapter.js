@@ -10,6 +10,7 @@ import type {
 } from '@flopflip/types';
 
 const adapterState: AdapterState = {
+  isReady: false,
   flags: {},
   user: {},
 };
@@ -42,6 +43,8 @@ const reconfigure = ({ user }: { user: User }): Promise<any> => {
   return Promise.resolve();
 };
 
+const getIsReady = (): boolean => adapterState.isReady;
+
 const updateUser = (user: User): User => {
   adapterState.user = user;
 };
@@ -58,6 +61,7 @@ export const updateFlags = (flags: Flags): void => {
 export const getUser = (): User => adapterState.user;
 
 export default {
+  getIsReady,
   configure,
   reconfigure,
 };

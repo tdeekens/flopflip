@@ -32,6 +32,10 @@ describe('when configuring', () => {
     ldClient.initialize.mockReturnValue(createClient());
   });
 
+  it('should indicate that the adapter is not ready', () => {
+    expect(adapter.getIsReady()).toBe(false);
+  });
+
   describe('when reconfiguring before configured', () => {
     it('should reject reconfiguration', () => {
       return expect(adapter.reconfigure({ user: userWithKey })).rejects.toEqual(
@@ -116,6 +120,12 @@ describe('when configuring', () => {
     });
 
     describe('when `ldClient` is ready', () => {
+      describe('when determining if adapter is ready', () => {
+        it('should indicate that the adapter is ready', () => {
+          expect(adapter.getIsReady()).toBe(true);
+        });
+      });
+
       it('should `dispatch` `onUpdateStatus` action with `isReady`', () => {
         expect(onStatusStateChange).toHaveBeenCalledWith({
           isReady: true,

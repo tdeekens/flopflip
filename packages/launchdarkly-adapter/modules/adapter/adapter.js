@@ -45,6 +45,8 @@ const setFlags = (updatedFlags: Flags): void => {
 const getFlag = (flagName: FlagName): ?Flag =>
   adapterState.flags && adapterState.flags[flagName];
 
+const getIsReady = (): boolean => adapterState.isReady;
+
 const normalizeFlag = (flagName: FlagName, flagValue?: FlagVariation): Flag => [
   camelCase(flagName),
   // Multi variate flags contain a string or `null` - `false` seems more natural.
@@ -208,5 +210,6 @@ export default {
   configure,
   reconfigure,
   getFlag,
+  getIsReady,
   updateUserContext,
 };

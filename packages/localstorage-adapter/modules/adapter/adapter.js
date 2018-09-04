@@ -14,7 +14,9 @@ type Storage = {
   unset: (key: string) => void,
 };
 
-const adapterState: AdapterState = {};
+const adapterState: AdapterState = {
+  isReady: false,
+};
 
 export const STORAGE_SLICE: string = '@flopflip';
 
@@ -81,7 +83,10 @@ const reconfigure = ({ user }: { user: User }): Promise<any> => {
   return Promise.resolve();
 };
 
+const getIsReady = (): boolean => adapterState.isReady;
+
 export default {
   configure,
+  getIsReady,
   reconfigure,
 };
