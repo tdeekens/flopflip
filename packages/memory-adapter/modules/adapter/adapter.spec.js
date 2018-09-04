@@ -3,6 +3,7 @@ import adapter, { getUser, updateFlags } from './adapter';
 
 const createAdapterArgs = (customArgs = {}) => ({
   user: { id: 'foo' },
+  defaultFlags: { defaultFlag: true },
   onFlagsStateChange: jest.fn(),
   onStatusStateChange: jest.fn(),
 
@@ -71,7 +72,31 @@ describe('when configuring', () => {
     });
 
     it('should invoke `onFlagsStateChange` with `updatedFlags`', () => {
-      expect(adapterArgs.onFlagsStateChange).toHaveBeenCalledWith(updatedFlags);
+      expect(adapterArgs.onFlagsStateChange).toHaveBeenCalledWith(
+        expect.objectContaining(updatedFlags)
+      );
+    });
+
+    it('should invoke `onFlagsStateChange` with `defaultFlags`', () => {
+      expect(adapterArgs.onFlagsStateChange).toHaveBeenCalledWith(
+        expect.objectContaining(adapterArgs.defaultFlags)
+      );
+    });
+
+    describe('when resetting', () => {
+      beforeEach(() => {
+        adapterArgs.onFlagsStateChange.mockClear();
+
+        adapter.reset();
+
+        updateFlags(updatedFlags);
+      });
+
+      it('should invoke `onFlagsStateChange` with `defaultFlags`', () => {
+        expect(adapterArgs.onFlagsStateChange).toHaveBeenCalledWith(
+          adapterArgs.defaultFlags
+        );
+      });
     });
   });
 });
