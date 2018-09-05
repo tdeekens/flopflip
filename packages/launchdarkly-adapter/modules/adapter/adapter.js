@@ -35,7 +35,7 @@ const adapterState: AdapterState = {
   flags: null,
 };
 
-const setFlags = (updatedFlags: Flags): void => {
+const updateFlagsInAdapterState = (updatedFlags: Flags): void => {
   adapterState.flags = {
     ...adapterState.flags,
     ...updatedFlags,
@@ -54,16 +54,16 @@ const normalizeFlag = (flagName: FlagName, flagValue?: FlagVariation): Flag => [
 ];
 
 const subscribeToFlagsChanges = ({
-  rawFlags,
+  flagsFromSdk,
   onFlagsStateChange,
 }: {
-  rawFlags: Flags,
+  flagsFromSdk: Flags,
   onFlagsStateChange: OnFlagsStateChangeCallback,
 }) => {
-  for (const flagName in rawFlags) {
+  for (const flagName in flagsFromSdk) {
     // Dispatch whenever a configured flag value changes
     if (
-      Object.prototype.hasOwnProperty.call(rawFlags, flagName) &&
+      Object.prototype.hasOwnProperty.call(flagsFromSdk, flagName) &&
       adapterState.client
     ) {
       adapterState.client.on(`change:${flagName}`, flagValue => {
@@ -76,7 +76,7 @@ const subscribeToFlagsChanges = ({
           [normalizedFlagName]: normalizedFlagValue,
         };
 
-        setFlags(flag);
+        updateFlagsInAdapterState(flag);
         onFlagsStateChange(flag);
       });
     }
@@ -130,7 +130,7 @@ export const camelCaseFlags = (rawFlags: Flags): Flags =>
     return camelCasedFlags;
   }, {});
 
-const subscribe = ({
+const getInitialFlags = ({
   onFlagsStateChange,
   onStatusStateChange,
 }: {
@@ -139,23 +139,20 @@ const subscribe = ({
 }): Promise<any> => {
   if (adapterState.client) {
     return adapterState.client.waitUntilReady().then(() => {
-      const rawFlags = adapterState.client
+      const flagsFromSdk = adapterState.client
         ? adapterState.client.allFlags()
         : null;
       // First update internal state
       adapterState.isReady = true;
       // ...to then signal that the adapter is ready
       onStatusStateChange({ isReady: true });
-      if (rawFlags) {
-        const flags: Flags = camelCaseFlags(rawFlags);
-        setFlags(flags);
+      if (flagsFromSdk) {
+        const flags: Flags = camelCaseFlags(flagsFromSdk);
+        updateFlagsInAdapterState(flags);
         // ...and flush initial state of flags
         onFlagsStateChange(flags);
-        // ...to finally subscribe to later changes.
-        subscribeToFlagsChanges({
-          rawFlags,
-          onFlagsStateChange,
-        });
+
+        return Promise.resolve({ flagsFromSdk });
       }
     });
   } else {
@@ -170,20 +167,28 @@ const configure = ({
   user,
   onFlagsStateChange,
   onStatusStateChange,
+  shouldSubscribeToFlagChanges = true,
 }: {
   clientSideId: string,
   user: User,
   onFlagsStateChange: OnFlagsStateChangeCallback,
   onStatusStateChange: OnStatusStateChangeCallback,
+  shouldSubscribeToFlagChanges: boolean,
 }): Promise<any> => {
   adapterState.user = ensureUser(user);
   adapterState.client = initializeClient(clientSideId, adapterState.user);
 
-  return subscribe({
+  return getInitialFlags({
     onFlagsStateChange,
     onStatusStateChange,
-  }).then(() => {
+  }).then(({ flagsFromSdk }) => {
     adapterState.isConfigured = true;
+
+    if (shouldSubscribeToFlagChanges)
+      subscribeToFlagsChanges({
+        flagsFromSdk,
+        onFlagsStateChange,
+      });
 
     return adapterState.client;
   });

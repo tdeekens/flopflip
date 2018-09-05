@@ -159,33 +159,35 @@ describe('when configuring', () => {
     });
 
     describe('with flag updates', () => {
-      beforeEach(() => {
-        // Reset due to preivous dispatches
-        onFlagsStateChange.mockClear();
+      describe('when `shouldSubscribeToFlagChanges`', () => {
+        beforeEach(() => {
+          // Reset due to preivous dispatches
+          onFlagsStateChange.mockClear();
 
-        // Checking for change:* callbacks and settings all flags to false.
-        client.on.mock.calls.forEach(([event, cb]) => {
-          if (event.startsWith('change:')) cb(false);
+          // Checking for change:* callbacks and settings all flags to false.
+          client.on.mock.calls.forEach(([event, cb]) => {
+            if (event.startsWith('change:')) cb(false);
+          });
+        });
+
+        it('should `dispatch` `onFlagsStateChange` action', () => {
+          expect(onFlagsStateChange).toHaveBeenCalled();
+        });
+
+        it('should `dispatch` `onFlagsStateChange` action with camel cased `flags`', () => {
+          expect(onFlagsStateChange).toHaveBeenCalledWith({
+            someFlag1: false,
+          });
+          expect(onFlagsStateChange).toHaveBeenCalledWith({
+            someFlag2: false,
+          });
         });
       });
+    });
 
-      it('should `dispatch` `onFlagsStateChange` action', () => {
-        expect(onFlagsStateChange).toHaveBeenCalled();
-      });
-
-      it('should `dispatch` `onFlagsStateChange` action with camel cased `flags`', () => {
-        expect(onFlagsStateChange).toHaveBeenCalledWith({
-          someFlag1: false,
-        });
-        expect(onFlagsStateChange).toHaveBeenCalledWith({
-          someFlag2: false,
-        });
-      });
-
-      describe('`getFlag`', () => {
-        it('should return the flag', () => {
-          expect(adapter.getFlag('someFlag2')).toBe(false);
-        });
+    describe('`getFlag`', () => {
+      it('should return the flag', () => {
+        expect(adapter.getFlag('someFlag2')).toBe(false);
       });
     });
 
