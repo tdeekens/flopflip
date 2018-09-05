@@ -25,6 +25,8 @@ const configure = ({
   return Promise.resolve().then(() => {
     adapterState.isConfigured = true;
     adapterState.isReady = true;
+    adapterState.flags = {};
+    updateUser(user);
 
     adapterState.onFlagsStateChange = onFlagsStateChange;
     adapterState.onStatusStateChange = onStatusStateChange;
