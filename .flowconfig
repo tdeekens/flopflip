@@ -6,6 +6,7 @@ packages/*/modules
 
 [ignore]
 **/node_modules/**
+.*/node_modules/config-chain/test/broken.json
 packages/*/dist
 
 [libs]
