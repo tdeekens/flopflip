@@ -177,6 +177,8 @@ const subscribe = ({
     } else reject();
   });
 
+const getIsReady = (): boolean => adapterState.isReady;
+
 const configure = ({
   authorizationKey,
   user,
@@ -247,6 +249,7 @@ const reconfigure = ({
   });
 
 export default {
+  getIsReady,
   configure,
   reconfigure,
 };

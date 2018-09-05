@@ -38,6 +38,10 @@ describe('when configuring', () => {
     onFlagsStateChange = jest.fn();
   });
 
+  it('should indicate that the adapter is not ready', () => {
+    expect(adapter.getIsReady()).toBe(false);
+  });
+
   describe('with user key', () => {
     beforeEach(() => {
       return adapter.configure({
@@ -175,6 +179,10 @@ describe('when configuring', () => {
     });
 
     describe('when `splitio` is ready', () => {
+      it('should indicate that the adapter is ready', () => {
+        expect(adapter.getIsReady()).toBe(true);
+      });
+
       it('should `dispatch` `onUpdateStatus` action with `isReady`', () => {
         expect(onStatusStateChange).toHaveBeenCalledWith({
           isReady: true,

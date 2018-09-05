@@ -8,10 +8,20 @@ const createAdapterArgs = (customArgs = {}) => ({
   ...customArgs,
 });
 
+describe('when not configured', () => {
+  it('should indicate that the adapter is not ready', () => {
+    expect(adapter.getIsReady()).toBe(false);
+  });
+});
+
 describe('when configuring', () => {
   let adapterArgs = createAdapterArgs();
 
   beforeEach(() => adapter.configure(adapterArgs));
+
+  it('should indicate that the adapter is ready', () => {
+    expect(adapter.getIsReady()).toBe(true);
+  });
 
   it('should invoke `onStatusStateChange`', () => {
     expect(adapterArgs.onStatusStateChange).toHaveBeenCalled();

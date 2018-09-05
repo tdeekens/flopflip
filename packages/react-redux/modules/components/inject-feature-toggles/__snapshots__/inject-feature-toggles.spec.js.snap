@@ -17,6 +17,7 @@ exports[`injectFeatureToggles with \`propKey\` should match snapshot 1`] = `
     adapter={
       Object {
         "configure": [Function],
+        "getIsReady": [Function],
         "reconfigure": [Function],
       }
     }
@@ -26,6 +27,7 @@ exports[`injectFeatureToggles with \`propKey\` should match snapshot 1`] = `
       adapter={
         Object {
           "configure": [Function],
+          "getIsReady": [Function],
           "reconfigure": [Function],
         }
       }
@@ -39,6 +41,7 @@ exports[`injectFeatureToggles with \`propKey\` should match snapshot 1`] = `
         adapter={
           Object {
             "configure": [Function],
+            "getIsReady": [Function],
             "reconfigure": [Function],
           }
         }
@@ -49,6 +52,7 @@ exports[`injectFeatureToggles with \`propKey\` should match snapshot 1`] = `
           }
         }
         defaultFlags={Object {}}
+        render={null}
         shouldDeferAdapterConfiguration={false}
       >
         <injectFeatureToggles(FeatureComponent)>
@@ -118,6 +122,7 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled shoul
     adapter={
       Object {
         "configure": [Function],
+        "getIsReady": [Function],
         "reconfigure": [Function],
       }
     }
@@ -127,6 +132,7 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled shoul
       adapter={
         Object {
           "configure": [Function],
+          "getIsReady": [Function],
           "reconfigure": [Function],
         }
       }
@@ -140,6 +146,7 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled shoul
         adapter={
           Object {
             "configure": [Function],
+            "getIsReady": [Function],
             "reconfigure": [Function],
           }
         }
@@ -150,6 +157,7 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled shoul
           }
         }
         defaultFlags={Object {}}
+        render={null}
         shouldDeferAdapterConfiguration={false}
       >
         <injectFeatureToggles(FeatureComponent)>
@@ -224,6 +232,7 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled when 
     adapter={
       Object {
         "configure": [Function],
+        "getIsReady": [Function],
         "reconfigure": [Function],
       }
     }
@@ -233,6 +242,7 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled when 
       adapter={
         Object {
           "configure": [Function],
+          "getIsReady": [Function],
           "reconfigure": [Function],
         }
       }
@@ -246,6 +256,7 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled when 
         adapter={
           Object {
             "configure": [Function],
+            "getIsReady": [Function],
             "reconfigure": [Function],
           }
         }
@@ -256,6 +267,7 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled when 
           }
         }
         defaultFlags={Object {}}
+        render={null}
         shouldDeferAdapterConfiguration={false}
       >
         <injectFeatureToggles(FeatureComponent)>

@@ -5,6 +5,7 @@ exports[`with \`propKey\` should match snapshot 1`] = `
   adapter={
     Object {
       "configure": [Function],
+      "getIsReady": [Function],
       "reconfigure": [Function],
     }
   }
@@ -16,6 +17,7 @@ exports[`with \`propKey\` should match snapshot 1`] = `
     adapter={
       Object {
         "configure": [Function],
+        "getIsReady": [Function],
         "reconfigure": [Function],
       }
     }
@@ -26,6 +28,7 @@ exports[`with \`propKey\` should match snapshot 1`] = `
       }
     }
     defaultFlags={Object {}}
+    render={null}
     shouldDeferAdapterConfiguration={false}
   >
     <injectFeatureToggles(FeatureComponent)>
@@ -57,6 +60,7 @@ exports[`without \`propKey\` when feature is disabled should match snapshot 1`] 
   adapter={
     Object {
       "configure": [Function],
+      "getIsReady": [Function],
       "reconfigure": [Function],
     }
   }
@@ -73,6 +77,7 @@ exports[`without \`propKey\` when feature is disabled should match snapshot 1`] 
     adapter={
       Object {
         "configure": [Function],
+        "getIsReady": [Function],
         "reconfigure": [Function],
       }
     }
@@ -88,6 +93,7 @@ exports[`without \`propKey\` when feature is disabled should match snapshot 1`] 
         "flag2": false,
       }
     }
+    render={null}
     shouldDeferAdapterConfiguration={false}
   >
     <injectFeatureToggles(FeatureComponent)>
@@ -144,6 +150,7 @@ exports[`without \`propKey\` when feature is disabled when enabling feature shou
   adapter={
     Object {
       "configure": [Function],
+      "getIsReady": [Function],
       "reconfigure": [Function],
     }
   }
@@ -160,6 +167,7 @@ exports[`without \`propKey\` when feature is disabled when enabling feature shou
     adapter={
       Object {
         "configure": [Function],
+        "getIsReady": [Function],
         "reconfigure": [Function],
       }
     }
@@ -175,6 +183,7 @@ exports[`without \`propKey\` when feature is disabled when enabling feature shou
         "flag2": false,
       }
     }
+    render={null}
     shouldDeferAdapterConfiguration={false}
   >
     <injectFeatureToggles(FeatureComponent)>

@@ -16,6 +16,7 @@ exports[`rendering should match snapshot 1`] = `
     }
   }
   defaultFlags={Object {}}
+  render={null}
   shouldDeferAdapterConfiguration={false}
 >
   <ContextProvider

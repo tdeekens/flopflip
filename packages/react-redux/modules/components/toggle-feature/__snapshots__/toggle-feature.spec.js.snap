@@ -17,6 +17,7 @@ exports[`<ToggleFeature> when feature is disabled should match snapshot 1`] = `
     adapter={
       Object {
         "configure": [Function],
+        "getIsReady": [Function],
         "reconfigure": [Function],
       }
     }
@@ -26,6 +27,7 @@ exports[`<ToggleFeature> when feature is disabled should match snapshot 1`] = `
       adapter={
         Object {
           "configure": [Function],
+          "getIsReady": [Function],
           "reconfigure": [Function],
         }
       }
@@ -39,6 +41,7 @@ exports[`<ToggleFeature> when feature is disabled should match snapshot 1`] = `
         adapter={
           Object {
             "configure": [Function],
+            "getIsReady": [Function],
             "reconfigure": [Function],
           }
         }
@@ -49,6 +52,7 @@ exports[`<ToggleFeature> when feature is disabled should match snapshot 1`] = `
           }
         }
         defaultFlags={Object {}}
+        render={null}
         shouldDeferAdapterConfiguration={false}
       >
         <ToggleFeature
@@ -86,6 +90,7 @@ exports[`<ToggleFeature> when feature is disabled when enabling feature should m
     adapter={
       Object {
         "configure": [Function],
+        "getIsReady": [Function],
         "reconfigure": [Function],
       }
     }
@@ -95,6 +100,7 @@ exports[`<ToggleFeature> when feature is disabled when enabling feature should m
       adapter={
         Object {
           "configure": [Function],
+          "getIsReady": [Function],
           "reconfigure": [Function],
         }
       }
@@ -108,6 +114,7 @@ exports[`<ToggleFeature> when feature is disabled when enabling feature should m
         adapter={
           Object {
             "configure": [Function],
+            "getIsReady": [Function],
             "reconfigure": [Function],
           }
         }
@@ -118,6 +125,7 @@ exports[`<ToggleFeature> when feature is disabled when enabling feature should m
           }
         }
         defaultFlags={Object {}}
+        render={null}
         shouldDeferAdapterConfiguration={false}
       >
         <ToggleFeature
