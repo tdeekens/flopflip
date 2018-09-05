@@ -779,28 +779,28 @@
     common-tags "1.4.0"
     react-display-name "0.2.0"
 
-"@commitlint/cli@7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-7.1.1.tgz#3d2d1f71cd2598fc85474ff1bc59a124cf1f4b97"
+"@commitlint/cli@7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-7.1.2.tgz#9ad1b4703679e18e3b1972c4abf0441255219e78"
   dependencies:
-    "@commitlint/format" "^7.1.1"
-    "@commitlint/lint" "^7.1.1"
-    "@commitlint/load" "^7.1.1"
-    "@commitlint/read" "^7.1.1"
+    "@commitlint/format" "^7.1.2"
+    "@commitlint/lint" "^7.1.2"
+    "@commitlint/load" "^7.1.2"
+    "@commitlint/read" "^7.1.2"
     babel-polyfill "6.26.0"
     chalk "2.3.1"
     get-stdin "5.0.1"
     lodash.merge "4.6.1"
     lodash.pick "4.4.0"
-    meow "^5.0.0"
+    meow "5.0.0"
 
-"@commitlint/config-conventional@7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-7.1.1.tgz#c4ea308f9167738bd4896dac3763a29ac94a7f8b"
+"@commitlint/config-conventional@7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-7.1.2.tgz#5b5e45924c9abd8f9a8d83eb1f66e24e5f66916f"
 
-"@commitlint/ensure@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/ensure/-/ensure-7.1.1.tgz#cc202010173b1fbbfbd6a367a6f9f6469ba7502b"
+"@commitlint/ensure@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/ensure/-/ensure-7.1.2.tgz#30d74bf0062ac6d917037f20dbf27bb63a4ae7c1"
   dependencies:
     lodash.camelcase "4.3.0"
     lodash.kebabcase "4.1.1"
@@ -808,41 +808,41 @@
     lodash.startcase "4.4.0"
     lodash.upperfirst "4.3.1"
 
-"@commitlint/execute-rule@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/execute-rule/-/execute-rule-7.1.1.tgz#c1c792a6b43dde3529ac15d9aba35cc42cc3f882"
+"@commitlint/execute-rule@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/execute-rule/-/execute-rule-7.1.2.tgz#b504e800c5f7c0fbfa24a261b04c549aa2726254"
   dependencies:
     babel-runtime "6.26.0"
 
-"@commitlint/format@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/format/-/format-7.1.1.tgz#2be40514005284f264995802de16180b3535b6dc"
+"@commitlint/format@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/format/-/format-7.1.2.tgz#0f601d572d97d7cca59ef6f3da0cde0d10de3de2"
   dependencies:
     babel-runtime "^6.23.0"
     chalk "^2.0.1"
 
-"@commitlint/is-ignored@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/is-ignored/-/is-ignored-7.1.1.tgz#6753ff45fe67c4e636af31a7ed2e04598674c537"
+"@commitlint/is-ignored@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/is-ignored/-/is-ignored-7.1.2.tgz#1168ef48883e86446dd2930f23300ec0e038dddc"
   dependencies:
     semver "5.5.0"
 
-"@commitlint/lint@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/lint/-/lint-7.1.1.tgz#84b3237a15b3a4cf5bc11a29f645f53c4b91de52"
+"@commitlint/lint@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/lint/-/lint-7.1.2.tgz#7166a9ba71e75c2f981f531a2386739ef28b21a3"
   dependencies:
-    "@commitlint/is-ignored" "^7.1.1"
-    "@commitlint/parse" "^7.1.1"
-    "@commitlint/rules" "^7.1.1"
+    "@commitlint/is-ignored" "^7.1.2"
+    "@commitlint/parse" "^7.1.2"
+    "@commitlint/rules" "^7.1.2"
     babel-runtime "^6.23.0"
     lodash.topairs "4.3.0"
 
-"@commitlint/load@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/load/-/load-7.1.1.tgz#c84a888ed1e3ad9a9d16329607274081437a4295"
+"@commitlint/load@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/load/-/load-7.1.2.tgz#91fc756f63477d19299cd1ed79be2d36aaa8c33d"
   dependencies:
-    "@commitlint/execute-rule" "^7.1.1"
-    "@commitlint/resolve-extends" "^7.1.1"
+    "@commitlint/execute-rule" "^7.1.2"
+    "@commitlint/resolve-extends" "^7.1.2"
     babel-runtime "^6.23.0"
     cosmiconfig "^4.0.0"
     lodash.merge "4.6.1"
@@ -851,29 +851,29 @@
     lodash.topairs "4.3.0"
     resolve-from "4.0.0"
 
-"@commitlint/message@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/message/-/message-7.1.1.tgz#5e7f0692fb847e5e1acaf690b322919828acb812"
+"@commitlint/message@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/message/-/message-7.1.2.tgz#b8e7ed3914896f8490b5897c4f6b8923105b55fd"
 
-"@commitlint/parse@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/parse/-/parse-7.1.1.tgz#51e00246f1a885fce5ff1d39bd4f1c1d1c53d0f0"
+"@commitlint/parse@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/parse/-/parse-7.1.2.tgz#d63b246cebd5a2cf326b0356421f9ec5f227a2d4"
   dependencies:
     conventional-changelog-angular "^1.3.3"
     conventional-commits-parser "^2.1.0"
 
-"@commitlint/read@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/read/-/read-7.1.1.tgz#c2fca5c1ea6de7fbc431566536f32f2fb502e4ca"
+"@commitlint/read@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/read/-/read-7.1.2.tgz#6a1fcb192e54e311eee280e5070627981d8d7bf3"
   dependencies:
-    "@commitlint/top-level" "^7.1.1"
+    "@commitlint/top-level" "^7.1.2"
     "@marionebl/sander" "^0.6.0"
     babel-runtime "^6.23.0"
     git-raw-commits "^1.3.0"
 
-"@commitlint/resolve-extends@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/resolve-extends/-/resolve-extends-7.1.1.tgz#80043d1031ba8eb836aa74d673ab43ab041cc179"
+"@commitlint/resolve-extends@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/resolve-extends/-/resolve-extends-7.1.2.tgz#886f589f1c2ce87c42f2786696b68fac7e356978"
   dependencies:
     babel-runtime "6.26.0"
     lodash.merge "4.6.1"
@@ -882,22 +882,22 @@
     resolve-from "^4.0.0"
     resolve-global "^0.1.0"
 
-"@commitlint/rules@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/rules/-/rules-7.1.1.tgz#0881297b960eb91c92be06406fd13f88afc283ab"
+"@commitlint/rules@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/rules/-/rules-7.1.2.tgz#ba241dc3dbb6c05ce4a186a7cdf85c170345778c"
   dependencies:
-    "@commitlint/ensure" "^7.1.1"
-    "@commitlint/message" "^7.1.1"
-    "@commitlint/to-lines" "^7.1.1"
+    "@commitlint/ensure" "^7.1.2"
+    "@commitlint/message" "^7.1.2"
+    "@commitlint/to-lines" "^7.1.2"
     babel-runtime "^6.23.0"
 
-"@commitlint/to-lines@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/to-lines/-/to-lines-7.1.1.tgz#2633e4bbe0c2ff92b90e848f74ae9aa3c7b95714"
+"@commitlint/to-lines@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/to-lines/-/to-lines-7.1.2.tgz#2277347e50eac2a8d38ab6ab2c70f01b84c5f115"
 
-"@commitlint/top-level@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/top-level/-/top-level-7.1.1.tgz#cee257085362f2f3be01c6bb5a34f90b584eca2c"
+"@commitlint/top-level@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/top-level/-/top-level-7.1.2.tgz#58f78043546bce0c1bfba36291bc4a812b6426b3"
   dependencies:
     find-up "^2.1.0"
 
@@ -1823,9 +1823,33 @@ babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
     esutils "^2.0.2"
     js-tokens "^3.0.2"
 
-babel-core@7.0.0-bridge.0, babel-core@^6.0.0, babel-core@^6.26.0:
+babel-core@7.0.0-bridge.0:
   version "7.0.0-bridge.0"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-7.0.0-bridge.0.tgz#95a492ddd90f9b4e9a4a1da14eb335b87b634ece"
+
+babel-core@^6.0.0, babel-core@^6.26.0:
+  version "6.26.3"
+  resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.26.3.tgz#b2e2f09e342d0f0c88e2f02e067794125e75c207"
+  dependencies:
+    babel-code-frame "^6.26.0"
+    babel-generator "^6.26.0"
+    babel-helpers "^6.24.1"
+    babel-messages "^6.23.0"
+    babel-register "^6.26.0"
+    babel-runtime "^6.26.0"
+    babel-template "^6.26.0"
+    babel-traverse "^6.26.0"
+    babel-types "^6.26.0"
+    babylon "^6.18.0"
+    convert-source-map "^1.5.1"
+    debug "^2.6.9"
+    json5 "^0.5.1"
+    lodash "^4.17.4"
+    minimatch "^3.0.4"
+    path-is-absolute "^1.0.1"
+    private "^0.1.8"
+    slash "^1.0.0"
+    source-map "^0.5.7"
 
 babel-eslint@9.0.0:
   version "9.0.0"
@@ -1838,7 +1862,7 @@ babel-eslint@9.0.0:
     eslint-scope "3.7.1"
     eslint-visitor-keys "^1.0.0"
 
-babel-generator@^6.18.0:
+babel-generator@^6.18.0, babel-generator@^6.26.0:
   version "6.26.1"
   resolved "https://registry.yarnpkg.com/babel-generator/-/babel-generator-6.26.1.tgz#1844408d3b8f0d35a404ea7ac180f087a601bd90"
   dependencies:
@@ -1850,6 +1874,13 @@ babel-generator@^6.18.0:
     lodash "^4.17.4"
     source-map "^0.5.7"
     trim-right "^1.0.1"
+
+babel-helpers@^6.24.1:
+  version "6.24.1"
+  resolved "https://registry.yarnpkg.com/babel-helpers/-/babel-helpers-6.24.1.tgz#3471de9caec388e5c850e597e58a26ddf37602b2"
+  dependencies:
+    babel-runtime "^6.22.0"
+    babel-template "^6.24.1"
 
 babel-jest@23.4.2, babel-jest@^23.4.2:
   version "23.4.2"
@@ -1914,7 +1945,7 @@ babel-preset-jest@^23.2.0:
     babel-plugin-jest-hoist "^23.2.0"
     babel-plugin-syntax-object-rest-spread "^6.13.0"
 
-babel-register@6.26.0:
+babel-register@6.26.0, babel-register@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-register/-/babel-register-6.26.0.tgz#6ed021173e2fcb486d7acb45c6009a856f647071"
   dependencies:
@@ -1933,7 +1964,7 @@ babel-runtime@6.26.0, babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtim
     core-js "^2.4.0"
     regenerator-runtime "^0.11.0"
 
-babel-template@^6.16.0:
+babel-template@^6.16.0, babel-template@^6.24.1, babel-template@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-template/-/babel-template-6.26.0.tgz#de03e2d16396b069f46dd9fff8521fb1a0e35e02"
   dependencies:
@@ -2558,12 +2589,13 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-codecov@3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/codecov/-/codecov-3.0.4.tgz#37f2bf9ed71086923aac7496d982e32e5899dfd8"
+codecov@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/codecov/-/codecov-3.1.0.tgz#340bd968d361f256976b5af782dd8ba9f82bc849"
   dependencies:
     argv "^0.0.2"
     ignore-walk "^3.0.1"
+    js-yaml "^3.12.0"
     request "^2.87.0"
     urlgrey "^0.4.4"
 
@@ -2739,6 +2771,12 @@ conventional-recommended-bump@^2.0.6:
 convert-source-map@^1.1.0, convert-source-map@^1.4.0:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.5.1.tgz#b8278097b9bc229365de5c62cf5fcaed8b5599e5"
+
+convert-source-map@^1.5.1:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.6.0.tgz#51b537a8c43e0f04dec1993bffcdd504e758ac20"
+  dependencies:
+    safe-buffer "~5.1.1"
 
 copy-concurrently@^1.0.0:
   version "1.0.5"
@@ -3297,9 +3335,9 @@ entities@^1.1.1, entities@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
 
-enzyme-adapter-react-16@1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.3.1.tgz#a0f04273aee62c47521da7a2f6c7134182bd7f73"
+enzyme-adapter-react-16@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.4.0.tgz#c70aa6d085c5a6708b032406f5c73280d3f6a34b"
   dependencies:
     enzyme-adapter-utils "^1.6.0"
     function.prototype.name "^1.1.0"
@@ -3330,9 +3368,9 @@ enzyme-to-json@3.3.4, enzyme-to-json@^3.3.0:
   dependencies:
     lodash "^4.17.4"
 
-enzyme@3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/enzyme/-/enzyme-3.5.0.tgz#fd452a698fd1352c737b641dd3a64e079f42d9d5"
+enzyme@3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/enzyme/-/enzyme-3.6.0.tgz#d213f280a258f61e901bc663d4cc2d6fd9a9dec8"
   dependencies:
     array.prototype.flat "^1.2.1"
     cheerio "^1.0.0-rc.2"
@@ -3352,6 +3390,7 @@ enzyme@3.5.0:
     object.values "^1.0.4"
     raf "^3.4.0"
     rst-selector-parser "^2.2.3"
+    string.prototype.trim "^1.1.2"
 
 err-code@^1.0.0:
   version "1.1.2"
@@ -3369,7 +3408,7 @@ error-ex@^1.2.0, error-ex@^1.3.1:
   dependencies:
     is-arrayish "^0.2.1"
 
-es-abstract@^1.10.0, es-abstract@^1.5.1, es-abstract@^1.6.1, es-abstract@^1.7.0:
+es-abstract@^1.10.0, es-abstract@^1.5.0, es-abstract@^1.5.1, es-abstract@^1.6.1, es-abstract@^1.7.0:
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/es-abstract/-/es-abstract-1.12.0.tgz#9dbbdd27c6856f0001421ca18782d786bf8a6165"
   dependencies:
@@ -3422,9 +3461,9 @@ eslint-config-xo-react@0.17.0:
   version "0.17.0"
   resolved "https://registry.yarnpkg.com/eslint-config-xo-react/-/eslint-config-xo-react-0.17.0.tgz#c6ab39b1212f9cfb2d3f97f486290997d90080cb"
 
-eslint-config-xo@0.24.2:
-  version "0.24.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-xo/-/eslint-config-xo-0.24.2.tgz#f61b8ce692e9f9519bdb6edc4ed7ebcd5be48f48"
+eslint-config-xo@0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-xo/-/eslint-config-xo-0.25.0.tgz#8e8bbdee06e3d75b47aeba03fb28d4a43cc8092f"
 
 eslint-formatter-pretty@1.3.0:
   version "1.3.0"
@@ -4060,7 +4099,7 @@ fstream@^1.0.0, fstream@^1.0.2:
     mkdirp ">=0.5 0"
     rimraf "2"
 
-function-bind@^1.1.0, function-bind@^1.1.1:
+function-bind@^1.0.2, function-bind@^1.1.0, function-bind@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
 
@@ -5584,7 +5623,7 @@ json3@3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/json3/-/json3-3.3.2.tgz#3c0434743df93e2f5c42aee7b19bcb483575f4e1"
 
-json5@^0.5.0:
+json5@^0.5.0, json5@^0.5.1:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
 
@@ -6234,6 +6273,20 @@ mem@^1.1.0:
   dependencies:
     mimic-fn "^1.0.0"
 
+meow@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/meow/-/meow-5.0.0.tgz#dfc73d63a9afc714a5e371760eb5c88b91078aa4"
+  dependencies:
+    camelcase-keys "^4.0.0"
+    decamelize-keys "^1.0.0"
+    loud-rejection "^1.0.0"
+    minimist-options "^3.0.1"
+    normalize-package-data "^2.3.4"
+    read-pkg-up "^3.0.0"
+    redent "^2.0.0"
+    trim-newlines "^2.0.0"
+    yargs-parser "^10.0.0"
+
 meow@^3.3.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/meow/-/meow-3.7.0.tgz#72cb668b425228290abbfa856892587308a801fb"
@@ -6262,20 +6315,6 @@ meow@^4.0.0:
     read-pkg-up "^3.0.0"
     redent "^2.0.0"
     trim-newlines "^2.0.0"
-
-meow@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/meow/-/meow-5.0.0.tgz#dfc73d63a9afc714a5e371760eb5c88b91078aa4"
-  dependencies:
-    camelcase-keys "^4.0.0"
-    decamelize-keys "^1.0.0"
-    loud-rejection "^1.0.0"
-    minimist-options "^3.0.1"
-    normalize-package-data "^2.3.4"
-    read-pkg-up "^3.0.0"
-    redent "^2.0.0"
-    trim-newlines "^2.0.0"
-    yargs-parser "^10.0.0"
 
 merge-stream@^1.0.1:
   version "1.0.1"
@@ -7089,7 +7128,7 @@ path-exists@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/path-exists/-/path-exists-3.0.0.tgz#ce0ebeaa5f78cb18925ea7d810d7b59b010fd515"
 
-path-is-absolute@^1.0.0:
+path-is-absolute@^1.0.0, path-is-absolute@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
 
@@ -7253,7 +7292,7 @@ prettycli@^1.4.3:
   dependencies:
     chalk "2.1.0"
 
-private@^0.1.6:
+private@^0.1.6, private@^0.1.8:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/private/-/private-0.1.8.tgz#2381edb3689f7a53d653190060fcf822d2f368ff"
 
@@ -7295,7 +7334,6 @@ prompts@^0.1.9:
 
 "prompts@git://github.com/terkelg/prompts.git#792824f8e5bfe3d632da0e48be23ab718b8f6646":
   version "0.1.4"
-  uid "792824f8e5bfe3d632da0e48be23ab718b8f6646"
   resolved "git://github.com/terkelg/prompts.git#792824f8e5bfe3d632da0e48be23ab718b8f6646"
   dependencies:
     clorox "^1.0.1"
@@ -7888,9 +7926,9 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
-rollup-plugin-babel@4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-babel/-/rollup-plugin-babel-4.0.2.tgz#c073eeb0cc246324e6f6feaedbb90093841a138c"
+rollup-plugin-babel@4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-babel/-/rollup-plugin-babel-4.0.3.tgz#8282b0e22233160d679e9c7631342e848422fb02"
   dependencies:
     "@babel/helper-module-imports" "^7.0.0"
     rollup-pluginutils "^2.3.0"
@@ -7942,9 +7980,9 @@ rollup-plugin-node-builtins@2.1.2:
     crypto-browserify "^3.11.0"
     process-es6 "^0.11.2"
 
-rollup-plugin-node-globals@1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-node-globals/-/rollup-plugin-node-globals-1.2.1.tgz#2bd8309c19a0390b54cfac19a3bc13eabf3e5541"
+rollup-plugin-node-globals@1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-node-globals/-/rollup-plugin-node-globals-1.3.0.tgz#ee277271d199f3c2d73b80c46b0e53a07463db99"
   dependencies:
     acorn "^5.5.0"
     buffer-es6 "^4.9.3"
@@ -7953,9 +7991,9 @@ rollup-plugin-node-globals@1.2.1:
     process-es6 "^0.11.6"
     rollup-pluginutils "^2.0.1"
 
-rollup-plugin-node-resolve@3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-node-resolve/-/rollup-plugin-node-resolve-3.3.0.tgz#c26d110a36812cbefa7ce117cadcd3439aa1c713"
+rollup-plugin-node-resolve@3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-node-resolve/-/rollup-plugin-node-resolve-3.4.0.tgz#908585eda12e393caac7498715a01e08606abc89"
   dependencies:
     builtin-modules "^2.0.0"
     is-module "^1.0.0"
@@ -7999,9 +8037,9 @@ rollup-watch@4.3.1:
     require-relative "0.8.7"
     rollup-pluginutils "^2.0.1"
 
-rollup@0.65.0:
-  version "0.65.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.65.0.tgz#280db1252169b68fc3043028346b337dde453fba"
+rollup@0.65.1:
+  version "0.65.1"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.65.1.tgz#583ea5dc4c6e4d2d1ed9adc60bfaf2178afe9ea9"
   dependencies:
     "@types/estree" "0.0.39"
     "@types/node" "*"
@@ -8426,6 +8464,14 @@ string-width@^1.0.1:
   dependencies:
     is-fullwidth-code-point "^2.0.0"
     strip-ansi "^4.0.0"
+
+string.prototype.trim@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/string.prototype.trim/-/string.prototype.trim-1.1.2.tgz#d04de2c89e137f4d7d206f086b5ed2fae6be8cea"
+  dependencies:
+    define-properties "^1.1.2"
+    es-abstract "^1.5.0"
+    function-bind "^1.0.2"
 
 string_decoder@~0.10.x:
   version "0.10.31"
