@@ -17,6 +17,7 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
     adapter={
       Object {
         "configure": [Function],
+        "getIsReady": [Function],
         "reconfigure": [Function],
       }
     }
@@ -26,6 +27,7 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
       adapter={
         Object {
           "configure": [Function],
+          "getIsReady": [Function],
           "reconfigure": [Function],
         }
       }
@@ -39,6 +41,7 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
         adapter={
           Object {
             "configure": [Function],
+            "getIsReady": [Function],
             "reconfigure": [Function],
           }
         }
@@ -49,6 +52,7 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
           }
         }
         defaultFlags={Object {}}
+        render={null}
         shouldDeferAdapterConfiguration={false}
       >
         <branchOnFeatureToggle(ToggledComponent)>
@@ -111,6 +115,7 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
     adapter={
       Object {
         "configure": [Function],
+        "getIsReady": [Function],
         "reconfigure": [Function],
       }
     }
@@ -120,6 +125,7 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
       adapter={
         Object {
           "configure": [Function],
+          "getIsReady": [Function],
           "reconfigure": [Function],
         }
       }
@@ -133,6 +139,7 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
         adapter={
           Object {
             "configure": [Function],
+            "getIsReady": [Function],
             "reconfigure": [Function],
           }
         }
@@ -143,6 +150,7 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
           }
         }
         defaultFlags={Object {}}
+        render={null}
         shouldDeferAdapterConfiguration={false}
       >
         <branchOnFeatureToggle(ToggledComponent)>
@@ -200,6 +208,7 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
     adapter={
       Object {
         "configure": [Function],
+        "getIsReady": [Function],
         "reconfigure": [Function],
       }
     }
@@ -209,6 +218,7 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
       adapter={
         Object {
           "configure": [Function],
+          "getIsReady": [Function],
           "reconfigure": [Function],
         }
       }
@@ -222,6 +232,7 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
         adapter={
           Object {
             "configure": [Function],
+            "getIsReady": [Function],
             "reconfigure": [Function],
           }
         }
@@ -232,6 +243,7 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
           }
         }
         defaultFlags={Object {}}
+        render={null}
         shouldDeferAdapterConfiguration={false}
       >
         <branchOnFeatureToggle(ToggledComponent)>
@@ -287,6 +299,7 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
     adapter={
       Object {
         "configure": [Function],
+        "getIsReady": [Function],
         "reconfigure": [Function],
       }
     }
@@ -296,6 +309,7 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
       adapter={
         Object {
           "configure": [Function],
+          "getIsReady": [Function],
           "reconfigure": [Function],
         }
       }
@@ -309,6 +323,7 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
         adapter={
           Object {
             "configure": [Function],
+            "getIsReady": [Function],
             "reconfigure": [Function],
           }
         }
@@ -319,6 +334,7 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
           }
         }
         defaultFlags={Object {}}
+        render={null}
         shouldDeferAdapterConfiguration={false}
       >
         <branchOnFeatureToggle(ToggledComponent)>
