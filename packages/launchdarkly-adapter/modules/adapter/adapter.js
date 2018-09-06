@@ -53,7 +53,7 @@ const normalizeFlag = (flagName: FlagName, flagValue?: FlagVariation): Flag => [
   flagValue === null || flagValue === undefined ? false : flagValue,
 ];
 
-const subscribeToFlagsChanges = ({
+const setupFlagSubcription = ({
   flagsFromSdk,
   onFlagsStateChange,
 }: {
@@ -167,13 +167,13 @@ const configure = ({
   user,
   onFlagsStateChange,
   onStatusStateChange,
-  shouldSubscribeToFlagChanges = true,
+  subscribeToFlagChanges = true,
 }: {
   clientSideId: string,
   user: User,
   onFlagsStateChange: OnFlagsStateChangeCallback,
   onStatusStateChange: OnStatusStateChangeCallback,
-  shouldSubscribeToFlagChanges: boolean,
+  subscribeToFlagChanges: boolean,
 }): Promise<any> => {
   adapterState.user = ensureUser(user);
   adapterState.client = initializeClient(clientSideId, adapterState.user);
@@ -184,8 +184,8 @@ const configure = ({
   }).then(({ flagsFromSdk }) => {
     adapterState.isConfigured = true;
 
-    if (shouldSubscribeToFlagChanges)
-      subscribeToFlagsChanges({
+    if (subscribeToFlagChanges)
+      setupFlagSubcription({
         flagsFromSdk,
         onFlagsStateChange,
       });
