@@ -3,7 +3,7 @@
   "name": "flopflip",
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
-    "postinstall": "check-node-version --package --print",
+    "postinstall": "check-node-version --package --print && yarn build",
     "develop": "jest --projects .jestrc.*.json --watch",
     "lint": "jest --config .jestrc.lint.json",
     "flow": "jest --config .jestrc.flow.json",
