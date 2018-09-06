@@ -159,33 +159,69 @@ describe('when configuring', () => {
     });
 
     describe('with flag updates', () => {
-      beforeEach(() => {
-        // Reset due to preivous dispatches
-        onFlagsStateChange.mockClear();
+      describe('when `subscribeToFlagChanges`', () => {
+        beforeEach(() => {
+          // Reset due to preivous dispatches
+          onFlagsStateChange.mockClear();
 
-        // Checking for change:* callbacks and settings all flags to false.
-        client.on.mock.calls.forEach(([event, cb]) => {
-          if (event.startsWith('change:')) cb(false);
+          // Checking for change:* callbacks and settings all flags to false.
+          client.on.mock.calls.forEach(([event, cb]) => {
+            if (event.startsWith('change:')) cb(false);
+          });
+        });
+
+        it('should `dispatch` `onFlagsStateChange` action', () => {
+          expect(onFlagsStateChange).toHaveBeenCalled();
+        });
+
+        it('should `dispatch` `onFlagsStateChange` action with camel cased `flags`', () => {
+          expect(onFlagsStateChange).toHaveBeenCalledWith({
+            someFlag1: false,
+          });
+          expect(onFlagsStateChange).toHaveBeenCalledWith({
+            someFlag2: false,
+          });
         });
       });
 
-      it('should `dispatch` `onFlagsStateChange` action', () => {
-        expect(onFlagsStateChange).toHaveBeenCalled();
-      });
+      describe('when not `subscribeToFlagChanges`', () => {
+        beforeEach(async () => {
+          // Reset due to preivous dispatches
+          onFlagsStateChange.mockClear();
+          client.on.mockClear();
 
-      it('should `dispatch` `onFlagsStateChange` action with camel cased `flags`', () => {
-        expect(onFlagsStateChange).toHaveBeenCalledWith({
-          someFlag1: false,
+          onStatusStateChange = jest.fn();
+          onFlagsStateChange = jest.fn();
+          client = createClient({
+            allFlags: jest.fn(() => flags),
+          });
+
+          ldClient.initialize.mockReturnValue(client);
+
+          await adapter.configure({
+            subscribeToFlagChanges: false,
+            clientSideId,
+            user: userWithKey,
+            onStatusStateChange,
+            onFlagsStateChange,
+          });
+
+          onFlagsStateChange.mockClear();
+          // Checking for change:* callbacks and settings all flags to false.
+          client.on.mock.calls.forEach(([event, cb]) => {
+            if (event.startsWith('change:')) cb(false);
+          });
         });
-        expect(onFlagsStateChange).toHaveBeenCalledWith({
-          someFlag2: false,
+
+        it('should not `dispatch` `onFlagsStateChange` action', () => {
+          expect(onFlagsStateChange).not.toHaveBeenCalled();
         });
       });
+    });
 
-      describe('`getFlag`', () => {
-        it('should return the flag', () => {
-          expect(adapter.getFlag('someFlag2')).toBe(false);
-        });
+    describe('`getFlag`', () => {
+      it('should return the flag', () => {
+        expect(adapter.getFlag('someFlag2')).toBe(false);
       });
     });
 
