@@ -17,8 +17,10 @@ exports[`<ToggleFeature> when feature is disabled should match snapshot 1`] = `
     adapter={
       Object {
         "configure": [Function],
+        "getFlag": [Function],
         "getIsReady": [Function],
         "reconfigure": [Function],
+        "reset": [Function],
       }
     }
     adapterArgs={Object {}}
@@ -27,8 +29,10 @@ exports[`<ToggleFeature> when feature is disabled should match snapshot 1`] = `
       adapter={
         Object {
           "configure": [Function],
+          "getFlag": [Function],
           "getIsReady": [Function],
           "reconfigure": [Function],
+          "reset": [Function],
         }
       }
       adapterArgs={Object {}}
@@ -41,8 +45,10 @@ exports[`<ToggleFeature> when feature is disabled should match snapshot 1`] = `
         adapter={
           Object {
             "configure": [Function],
+            "getFlag": [Function],
             "getIsReady": [Function],
             "reconfigure": [Function],
+            "reset": [Function],
           }
         }
         adapterArgs={
@@ -90,8 +96,10 @@ exports[`<ToggleFeature> when feature is disabled when enabling feature should m
     adapter={
       Object {
         "configure": [Function],
+        "getFlag": [Function],
         "getIsReady": [Function],
         "reconfigure": [Function],
+        "reset": [Function],
       }
     }
     adapterArgs={Object {}}
@@ -100,8 +108,10 @@ exports[`<ToggleFeature> when feature is disabled when enabling feature should m
       adapter={
         Object {
           "configure": [Function],
+          "getFlag": [Function],
           "getIsReady": [Function],
           "reconfigure": [Function],
+          "reset": [Function],
         }
       }
       adapterArgs={Object {}}
@@ -114,8 +124,10 @@ exports[`<ToggleFeature> when feature is disabled when enabling feature should m
         adapter={
           Object {
             "configure": [Function],
+            "getFlag": [Function],
             "getIsReady": [Function],
             "reconfigure": [Function],
+            "reset": [Function],
           }
         }
         adapterArgs={
