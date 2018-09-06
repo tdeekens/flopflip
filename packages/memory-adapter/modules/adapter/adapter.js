@@ -24,7 +24,6 @@ let adapterState: AdapterState = {
 
 const configure = ({
   user,
-  defaultFlags = {},
   onFlagsStateChange,
   onStatusStateChange,
 }: AdapterArgs): Promise<any> => {
@@ -48,8 +47,8 @@ const configure = ({
 const reconfigure = ({ user }: { user: User }): Promise<any> => {
   updateUser(user);
 
-  adapterState.flags = adapterState.defaultFlags;
-  adapterState.onFlagsStateChange(adapterState.defaultFlags);
+  adapterState.flags = {};
+  adapterState.onFlagsStateChange(adapterState.flags);
 
   return Promise.resolve();
 };

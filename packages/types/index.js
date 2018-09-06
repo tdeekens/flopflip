@@ -9,7 +9,6 @@ export type AdapterArgs = {
   user: User,
   onFlagsStateChange: () => void,
   onStatusStateChange: () => void,
-  defaultFlags: Flags,
   remainingArgs: {
     pollingInteral: number,
   },
