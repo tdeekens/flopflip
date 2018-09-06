@@ -40,3 +40,5 @@ overrides:
       - '*.spec.js'
     rules:
       react/prop-types: 0
+settings:
+  version: '^16.0'
