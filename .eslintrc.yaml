@@ -41,4 +41,5 @@ overrides:
     rules:
       react/prop-types: 0
 settings:
-  version: '^16.0'
+  react:
+      version: '^16.0'
