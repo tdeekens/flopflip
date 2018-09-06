@@ -35,10 +35,10 @@
   "devDependencies": {
     "cpx": "1.5.0",
     "enzyme": "3.6.0",
-    "enzyme-adapter-react-16": "1.4.0",
+    "enzyme-adapter-react-16": "1.5.0",
     "enzyme-to-json": "3.3.4",
-    "react": "16.4.2",
-    "react-dom": "16.4.2",
+    "react": "16.5.0",
+    "react-dom": "16.5.0",
     "redux-mock-store": "1.5.3"
   },
   "peerDependencies": {

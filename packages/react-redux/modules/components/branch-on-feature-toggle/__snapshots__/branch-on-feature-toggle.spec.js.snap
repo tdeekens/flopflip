@@ -17,8 +17,10 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
     adapter={
       Object {
         "configure": [Function],
+        "getFlag": [Function],
         "getIsReady": [Function],
         "reconfigure": [Function],
+        "reset": [Function],
       }
     }
     adapterArgs={Object {}}
@@ -27,8 +29,10 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
       adapter={
         Object {
           "configure": [Function],
+          "getFlag": [Function],
           "getIsReady": [Function],
           "reconfigure": [Function],
+          "reset": [Function],
         }
       }
       adapterArgs={Object {}}
@@ -41,8 +45,10 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
         adapter={
           Object {
             "configure": [Function],
+            "getFlag": [Function],
             "getIsReady": [Function],
             "reconfigure": [Function],
+            "reset": [Function],
           }
         }
         adapterArgs={
@@ -115,8 +121,10 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
     adapter={
       Object {
         "configure": [Function],
+        "getFlag": [Function],
         "getIsReady": [Function],
         "reconfigure": [Function],
+        "reset": [Function],
       }
     }
     adapterArgs={Object {}}
@@ -125,8 +133,10 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
       adapter={
         Object {
           "configure": [Function],
+          "getFlag": [Function],
           "getIsReady": [Function],
           "reconfigure": [Function],
+          "reset": [Function],
         }
       }
       adapterArgs={Object {}}
@@ -139,8 +149,10 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
         adapter={
           Object {
             "configure": [Function],
+            "getFlag": [Function],
             "getIsReady": [Function],
             "reconfigure": [Function],
+            "reset": [Function],
           }
         }
         adapterArgs={
@@ -208,8 +220,10 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
     adapter={
       Object {
         "configure": [Function],
+        "getFlag": [Function],
         "getIsReady": [Function],
         "reconfigure": [Function],
+        "reset": [Function],
       }
     }
     adapterArgs={Object {}}
@@ -218,8 +232,10 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
       adapter={
         Object {
           "configure": [Function],
+          "getFlag": [Function],
           "getIsReady": [Function],
           "reconfigure": [Function],
+          "reset": [Function],
         }
       }
       adapterArgs={Object {}}
@@ -232,8 +248,10 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
         adapter={
           Object {
             "configure": [Function],
+            "getFlag": [Function],
             "getIsReady": [Function],
             "reconfigure": [Function],
+            "reset": [Function],
           }
         }
         adapterArgs={
@@ -299,8 +317,10 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
     adapter={
       Object {
         "configure": [Function],
+        "getFlag": [Function],
         "getIsReady": [Function],
         "reconfigure": [Function],
+        "reset": [Function],
       }
     }
     adapterArgs={Object {}}
@@ -309,8 +329,10 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
       adapter={
         Object {
           "configure": [Function],
+          "getFlag": [Function],
           "getIsReady": [Function],
           "reconfigure": [Function],
+          "reset": [Function],
         }
       }
       adapterArgs={Object {}}
@@ -323,8 +345,10 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
         adapter={
           Object {
             "configure": [Function],
+            "getFlag": [Function],
             "getIsReady": [Function],
             "reconfigure": [Function],
+            "reset": [Function],
           }
         }
         adapterArgs={

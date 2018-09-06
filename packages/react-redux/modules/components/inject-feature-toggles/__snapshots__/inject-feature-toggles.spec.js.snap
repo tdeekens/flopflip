@@ -17,8 +17,10 @@ exports[`injectFeatureToggles with \`propKey\` should match snapshot 1`] = `
     adapter={
       Object {
         "configure": [Function],
+        "getFlag": [Function],
         "getIsReady": [Function],
         "reconfigure": [Function],
+        "reset": [Function],
       }
     }
     adapterArgs={Object {}}
@@ -27,8 +29,10 @@ exports[`injectFeatureToggles with \`propKey\` should match snapshot 1`] = `
       adapter={
         Object {
           "configure": [Function],
+          "getFlag": [Function],
           "getIsReady": [Function],
           "reconfigure": [Function],
+          "reset": [Function],
         }
       }
       adapterArgs={Object {}}
@@ -41,8 +45,10 @@ exports[`injectFeatureToggles with \`propKey\` should match snapshot 1`] = `
         adapter={
           Object {
             "configure": [Function],
+            "getFlag": [Function],
             "getIsReady": [Function],
             "reconfigure": [Function],
+            "reset": [Function],
           }
         }
         adapterArgs={
@@ -122,8 +128,10 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled shoul
     adapter={
       Object {
         "configure": [Function],
+        "getFlag": [Function],
         "getIsReady": [Function],
         "reconfigure": [Function],
+        "reset": [Function],
       }
     }
     adapterArgs={Object {}}
@@ -132,8 +140,10 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled shoul
       adapter={
         Object {
           "configure": [Function],
+          "getFlag": [Function],
           "getIsReady": [Function],
           "reconfigure": [Function],
+          "reset": [Function],
         }
       }
       adapterArgs={Object {}}
@@ -146,8 +156,10 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled shoul
         adapter={
           Object {
             "configure": [Function],
+            "getFlag": [Function],
             "getIsReady": [Function],
             "reconfigure": [Function],
+            "reset": [Function],
           }
         }
         adapterArgs={
@@ -232,8 +244,10 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled when 
     adapter={
       Object {
         "configure": [Function],
+        "getFlag": [Function],
         "getIsReady": [Function],
         "reconfigure": [Function],
+        "reset": [Function],
       }
     }
     adapterArgs={Object {}}
@@ -242,8 +256,10 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled when 
       adapter={
         Object {
           "configure": [Function],
+          "getFlag": [Function],
           "getIsReady": [Function],
           "reconfigure": [Function],
+          "reset": [Function],
         }
       }
       adapterArgs={Object {}}
@@ -256,8 +272,10 @@ exports[`injectFeatureToggles without \`propKey\` when feature is disabled when 
         adapter={
           Object {
             "configure": [Function],
+            "getFlag": [Function],
             "getIsReady": [Function],
             "reconfigure": [Function],
+            "reset": [Function],
           }
         }
         adapterArgs={

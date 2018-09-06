@@ -137,7 +137,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
    *    be passed pending or applied adapterArgs.
    *
    */
-  getAdapterArgsForConfiguration = (): void =>
+  getAdapterArgsForConfiguration = (): AdapterArgs =>
     this.pendingAdapterArgs || this.state.appliedAdapterArgs;
 
   handleDefaultFlags = (defaultFlags: Flags): void => {
