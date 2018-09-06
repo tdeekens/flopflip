@@ -33,5 +33,8 @@
     "feature-toggles",
     "memory",
     "client"
-  ]
+  ],
+  "dependencies": {
+    "invariant": "2.2.4"
+  }
 }
