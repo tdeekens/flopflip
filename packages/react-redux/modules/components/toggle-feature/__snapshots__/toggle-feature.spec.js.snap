@@ -21,6 +21,7 @@ exports[`<ToggleFeature> when feature is disabled should match snapshot 1`] = `
         "getIsReady": [Function],
         "reconfigure": [Function],
         "reset": [Function],
+        "waitUntilConfigured": [Function],
       }
     }
     adapterArgs={Object {}}
@@ -33,6 +34,7 @@ exports[`<ToggleFeature> when feature is disabled should match snapshot 1`] = `
           "getIsReady": [Function],
           "reconfigure": [Function],
           "reset": [Function],
+          "waitUntilConfigured": [Function],
         }
       }
       adapterArgs={Object {}}
@@ -49,6 +51,7 @@ exports[`<ToggleFeature> when feature is disabled should match snapshot 1`] = `
             "getIsReady": [Function],
             "reconfigure": [Function],
             "reset": [Function],
+            "waitUntilConfigured": [Function],
           }
         }
         adapterArgs={
@@ -100,6 +103,7 @@ exports[`<ToggleFeature> when feature is disabled when enabling feature should m
         "getIsReady": [Function],
         "reconfigure": [Function],
         "reset": [Function],
+        "waitUntilConfigured": [Function],
       }
     }
     adapterArgs={Object {}}
@@ -112,6 +116,7 @@ exports[`<ToggleFeature> when feature is disabled when enabling feature should m
           "getIsReady": [Function],
           "reconfigure": [Function],
           "reset": [Function],
+          "waitUntilConfigured": [Function],
         }
       }
       adapterArgs={Object {}}
@@ -128,6 +133,7 @@ exports[`<ToggleFeature> when feature is disabled when enabling feature should m
             "getIsReady": [Function],
             "reconfigure": [Function],
             "reset": [Function],
+            "waitUntilConfigured": [Function],
           }
         }
         adapterArgs={

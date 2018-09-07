@@ -46,6 +46,10 @@ describe('when configuring', () => {
       expect(adapterArgs.onStatusStateChange).toHaveBeenCalled();
     });
 
+    it('should resolve `waitUntilConfigured`', async () => {
+      await expect(adapter.waitUntilConfigured()).resolves.not.toBeDefined();
+    });
+
     it('should invoke `onStatusStateChange` with `isReady`', () => {
       expect(adapterArgs.onStatusStateChange).toHaveBeenCalledWith({
         isReady: true,

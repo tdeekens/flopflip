@@ -9,6 +9,7 @@ exports[`with \`propKey\` should match snapshot 1`] = `
       "getIsReady": [Function],
       "reconfigure": [Function],
       "reset": [Function],
+      "waitUntilConfigured": [Function],
     }
   }
   adapterArgs={Object {}}
@@ -23,6 +24,7 @@ exports[`with \`propKey\` should match snapshot 1`] = `
         "getIsReady": [Function],
         "reconfigure": [Function],
         "reset": [Function],
+        "waitUntilConfigured": [Function],
       }
     }
     adapterArgs={
@@ -68,6 +70,7 @@ exports[`without \`propKey\` when feature is disabled should match snapshot 1`] 
       "getIsReady": [Function],
       "reconfigure": [Function],
       "reset": [Function],
+      "waitUntilConfigured": [Function],
     }
   }
   adapterArgs={Object {}}
@@ -87,6 +90,7 @@ exports[`without \`propKey\` when feature is disabled should match snapshot 1`] 
         "getIsReady": [Function],
         "reconfigure": [Function],
         "reset": [Function],
+        "waitUntilConfigured": [Function],
       }
     }
     adapterArgs={
@@ -162,6 +166,7 @@ exports[`without \`propKey\` when feature is disabled when enabling feature shou
       "getIsReady": [Function],
       "reconfigure": [Function],
       "reset": [Function],
+      "waitUntilConfigured": [Function],
     }
   }
   adapterArgs={Object {}}
@@ -181,6 +186,7 @@ exports[`without \`propKey\` when feature is disabled when enabling feature shou
         "getIsReady": [Function],
         "reconfigure": [Function],
         "reset": [Function],
+        "waitUntilConfigured": [Function],
       }
     }
     adapterArgs={
