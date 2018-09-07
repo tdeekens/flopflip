@@ -1,5 +1,6 @@
 // @flow
 import invariant from 'invariant';
+import mitt from 'mitt';
 
 import type {
   User,
@@ -16,7 +17,7 @@ const intialAdapterState: AdapterState = {
   isReady: false,
   flags: {},
   user: {},
-  waitUntilConfiguredCb: () => {},
+  emitter: mitt(),
 };
 
 let adapterState: AdapterState = {
@@ -37,13 +38,15 @@ const configure = ({
 
     updateUser(user);
 
-    adapterState.onFlagsStateChange = onFlagsStateChange;
-    adapterState.onStatusStateChange = onStatusStateChange;
+    adapterState.emitter.on('flagsStateChange', onFlagsStateChange);
+    adapterState.emitter.on('statusStateChange', onStatusStateChange);
 
-    onStatusStateChange({ isReady: adapterState.isReady });
-    onFlagsStateChange(adapterState.flags);
+    adapterState.emitter.emit('flagsStateChange', adapterState.flags);
+    adapterState.emitter.emit('statusStateChange', {
+      isReady: adapterState.isReady,
+    });
 
-    adapterState.waitUntilConfiguredCb();
+    adapterState.emitter.emit('readyStateChange');
   });
 };
 
@@ -51,7 +54,7 @@ const reconfigure = ({ user }: { user: User }): Promise<any> => {
   updateUser(user);
 
   adapterState.flags = {};
-  adapterState.onFlagsStateChange(adapterState.flags);
+  adapterState.emitter.emit('flagsStateChange', adapterState.flags);
 
   return Promise.resolve();
 };
@@ -85,14 +88,14 @@ export const updateFlags = (flags: Flags): void => {
     ...flags,
   };
 
-  adapterState.onFlagsStateChange(adapterState.flags);
+  adapterState.emitter.emit('flagsStateChange', adapterState.flags);
 };
 
 export const getUser = (): User => adapterState.user;
 const waitUntilConfigured = (): Promise<any> =>
   new Promise(resolve => {
     if (adapterState.isConfigured) resolve();
-    else adapterState.waitUntilConfiguredCb = resolve;
+    else adapterState.emitter.on('readyStateChange', resolve);
   });
 
 const getFlag = (flagName: FlagName): ?Flag =>
