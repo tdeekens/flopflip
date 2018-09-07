@@ -42,6 +42,8 @@ const configure = ({
 
     onStatusStateChange({ isReady: adapterState.isReady });
     onFlagsStateChange(adapterState.flags);
+
+    adapterState.waitUntilConfiguredCb();
   });
 };
 
@@ -50,8 +52,6 @@ const reconfigure = ({ user }: { user: User }): Promise<any> => {
 
   adapterState.flags = {};
   adapterState.onFlagsStateChange(adapterState.flags);
-
-  adapterState.waitUntilConfiguredCb();
 
   return Promise.resolve();
 };
