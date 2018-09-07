@@ -58,9 +58,15 @@ export const updateFlags = (flags: Flags): void => {
 
   if (!isAdapterReady) return;
 
-  storage.set('flags', flags);
+  const previousFlags: Flags = storage.get('flags');
+  const nextFlags: Flags = {
+    ...previousFlags,
+    ...flags,
+  };
 
-  adapterState.emitter.emit('flagsStateChange', flags);
+  storage.set('flags', nextFlags);
+
+  adapterState.emitter.emit('flagsStateChange', nextFlags);
 };
 
 const subscribeToFlagsChanges = ({
