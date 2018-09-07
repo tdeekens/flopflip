@@ -36,7 +36,6 @@
     "enzyme": "3.6.0",
     "enzyme-adapter-react-16": "1.5.0",
     "enzyme-to-json": "3.3.4",
-    "lodash.camelcase": "4.3.0",
     "react": "16.5.0",
     "react-dom": "16.5.0",
     "warning": "4.0.2"
@@ -48,6 +47,7 @@
   "dependencies": {
     "create-react-context": "0.2.3",
     "deepmerge": "2.1.1",
+    "lodash.camelcase": "4.3.0",
     "lodash.intersection": "4.4.0",
     "lodash.isnil": "4.0.0",
     "lodash.omit": "4.5.0",
