@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/splitio-adapter",
-  "version": "1.3.0-beta.2",
+  "version": "1.3.0-beta.3",
   "description": "A adapter around the split.io client for flipflop",
   "main": "dist/@flopflip-splitio-adapter.cjs.js",
   "module": "dist/@flopflip-splitio-adapter.es.js",
