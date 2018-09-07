@@ -9,7 +9,6 @@ import type {
 } from '@flopflip/types';
 
 import React, { PureComponent, type ComponentType, type Node } from 'react';
-import memoize from 'lodash.memoize';
 import createReactContext, { type Context } from 'create-react-context';
 import { ConfigureAdapter } from '@flopflip/react';
 
@@ -26,13 +25,22 @@ type State = {
 
 export const FlagsContext: Context<Flags> = createReactContext({});
 
-const createAdapterArgs = memoize(
-  (adapterArgs, handleUpdateStatus, handleUpdateFlags) => ({
-    ...adapterArgs,
-    onStatusStateChange: handleUpdateStatus,
-    onFlagsStateChange: handleUpdateFlags,
-  })
-);
+/**
+ * NOTE:
+ *    This function can not be memoized otherwise it will
+ *    rewrire different `ConfigureFlopflip`s to the same change
+ *    handlers as these functions seem to be referentially equal even
+ *    across different instances of React components due to hoisting.
+ */
+const createAdapterArgs = (
+  adapterArgs,
+  handleUpdateStatus,
+  handleUpdateFlags
+) => ({
+  ...adapterArgs,
+  onStatusStateChange: handleUpdateStatus,
+  onFlagsStateChange: handleUpdateFlags,
+});
 
 export default class Configure extends PureComponent<Props, State> {
   static displayName = 'ConfigureFlopflip';
