@@ -1,4 +1,7 @@
 // @flow
+import invariant from 'invariant';
+import mitt from 'mitt';
+
 import type {
   User,
   AdapterState,
@@ -14,8 +17,15 @@ type Storage = {
   unset: (key: string) => void,
 };
 
-const adapterState: AdapterState = {
+const intialAdapterState: AdapterState = {
   isReady: false,
+  flags: {},
+  user: {},
+  emitter: mitt(),
+};
+
+let adapterState: AdapterState = {
+  ...intialAdapterState,
 };
 
 export const STORAGE_SLICE: string = '@flopflip';
@@ -37,9 +47,26 @@ const storage: Storage = {
   unset: key => localStorage.removeItem(`${STORAGE_SLICE}__${key}`),
 };
 export const updateFlags = (flags: Flags): void => {
-  storage.set('flags', flags);
+  const isAdapterReady = Boolean(
+    adapterState.isConfigured && adapterState.isReady
+  );
 
-  adapterState.onFlagsStateChange(flags);
+  invariant(
+    isAdapterReady,
+    '@flopflip/localstorage-adapter: adapter not ready and configured. Flags can not be updated before.'
+  );
+
+  if (!isAdapterReady) return;
+
+  const previousFlags: Flags = storage.get('flags');
+  const nextFlags: Flags = {
+    ...previousFlags,
+    ...flags,
+  };
+
+  storage.set('flags', nextFlags);
+
+  adapterState.emitter.emit('flagsStateChange', nextFlags);
 };
 
 const subscribeToFlagsChanges = ({
@@ -65,11 +92,15 @@ const configure = ({
     adapterState.isConfigured = true;
     adapterState.isReady = true;
 
-    adapterState.onFlagsStateChange = onFlagsStateChange;
-    adapterState.onStatusStateChange = onStatusStateChange;
+    adapterState.emitter.on('flagsStateChange', onFlagsStateChange);
+    adapterState.emitter.on('statusStateChange', onStatusStateChange);
 
-    onStatusStateChange({ isReady: adapterState.isReady });
-    onFlagsStateChange(storage.get('flags'));
+    adapterState.emitter.emit('flagsStateChange', storage.get('flags'));
+    adapterState.emitter.emit('statusStateChange', {
+      isReady: adapterState.isReady,
+    });
+
+    adapterState.emitter.emit('readyStateChange');
 
     subscribeToFlagsChanges({ pollingInteral: remainingArgs.pollingInteral });
   });
@@ -78,15 +109,21 @@ const configure = ({
 const reconfigure = ({ user }: { user: User }): Promise<any> => {
   storage.unset('flags');
 
-  adapterState['onFlagsStateChange']({});
+  adapterState.emitter.emit('flagsStateChange', {});
 
   return Promise.resolve();
 };
 
+const waitUntilConfigured = (): Promise<any> =>
+  new Promise(resolve => {
+    if (adapterState.isConfigured) resolve();
+    else adapterState.emitter.on('readyStateChange', resolve);
+  });
 const getIsReady = (): boolean => adapterState.isReady;
 
 export default {
   configure,
+  waitUntilConfigured,
   getIsReady,
   reconfigure,
 };
