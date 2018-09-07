@@ -78,7 +78,7 @@ export const updateFlags = (flags: Flags): void => {
 
   invariant(
     isAdapterReady,
-    '@flopflip/launchdarkly-memory: adapter not ready and configured. Flags can not be updated before.'
+    '@flopflip/memory-adapter: adapter not ready and configured. Flags can not be updated before.'
   );
 
   if (!isAdapterReady) return;
