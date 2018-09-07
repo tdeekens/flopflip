@@ -16,6 +16,7 @@ const intialAdapterState: AdapterState = {
   isReady: false,
   flags: {},
   user: {},
+  waitUntilConfiguredCb: () => {},
 };
 
 let adapterState: AdapterState = {
@@ -49,6 +50,8 @@ const reconfigure = ({ user }: { user: User }): Promise<any> => {
 
   adapterState.flags = {};
   adapterState.onFlagsStateChange(adapterState.flags);
+
+  adapterState.waitUntilConfiguredCb();
 
   return Promise.resolve();
 };
@@ -86,12 +89,18 @@ export const updateFlags = (flags: Flags): void => {
 };
 
 export const getUser = (): User => adapterState.user;
+const waitUntilConfigured = (): Promise<any> =>
+  new Promise(resolve => {
+    if (adapterState.isConfigured) resolve();
+    else adapterState.waitUntilConfiguredCb = resolve;
+  });
 
 const getFlag = (flagName: FlagName): ?Flag =>
   adapterState.flags && adapterState.flags[flagName];
 
 export default {
   getIsReady,
+  waitUntilConfigured,
   getFlag,
   reset,
   configure,
