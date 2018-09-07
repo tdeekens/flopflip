@@ -55,17 +55,30 @@ export default class Configure extends PureComponent<Props, State> {
     flags: {},
   };
 
+  isUnmounted: boolean;
+
+  componentDidMount() {
+    this.isUnmounted = false;
+  }
+
+  componentWillUnmount() {
+    this.isUnmounted = true;
+  }
+
   handleUpdateFlags = (flags: Flags): void => {
-    this.setState(prevState => ({
-      flags: {
-        ...prevState.flags,
-        ...flags,
-      },
-    }));
+    !this.isUnmounted &&
+      this.setState(prevState => ({
+        flags: {
+          ...prevState.flags,
+          ...flags,
+        },
+      }));
   };
 
-  handleUpdateStatus = (status: AdapterStatus): void =>
-    this.setState(prevState => ({ ...prevState, ...status }));
+  handleUpdateStatus = (status: AdapterStatus): void => {
+    !this.isUnmounted &&
+      this.setState(prevState => ({ ...prevState, ...status }));
+  };
 
   render(): Node {
     return (
