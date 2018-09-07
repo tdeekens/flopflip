@@ -9,7 +9,6 @@ import type {
 
 import React, { PureComponent, type ComponentType, type Node } from 'react';
 import { connect } from 'react-redux';
-import memoize from 'lodash.memoize';
 import { ConfigureAdapter } from '@flopflip/react';
 import { updateStatus, updateFlags } from './../../ducks';
 
@@ -28,13 +27,22 @@ type State = {
   flags: Flags,
 };
 
-const createAdapterArgs = memoize(
-  (adapterArgs, handleUpdateStatus, handleUpdateFlags) => ({
-    ...adapterArgs,
-    onStatusStateChange: handleUpdateStatus,
-    onFlagsStateChange: handleUpdateFlags,
-  })
-);
+/**
+ * NOTE:
+ *    This function can not be memoized otherwise it will
+ *    rewrire different `ConfigureFlopflip`s to the same change
+ *    handlers as these functions seem to be referentially equal even
+ *    across different instances of React components due to hoisting.
+ */
+const createAdapterArgs = (
+  adapterArgs,
+  handleUpdateStatus,
+  handleUpdateFlags
+) => ({
+  ...adapterArgs,
+  onStatusStateChange: handleUpdateStatus,
+  onFlagsStateChange: handleUpdateFlags,
+});
 
 export class Configure extends PureComponent<Props & ConnectedProps, State> {
   static displayName = 'ConfigureFlopflip';
