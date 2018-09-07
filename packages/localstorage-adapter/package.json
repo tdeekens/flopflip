@@ -33,5 +33,9 @@
     "feature-toggles",
     "localstorage",
     "client"
-  ]
+  ],
+  "dependencies": {
+    "invariant": "2.2.4",
+    "mitt": "1.1.3"
+  }
 }
