@@ -35,6 +35,7 @@
     "client"
   ],
   "dependencies": {
-    "invariant": "2.2.4"
+    "invariant": "2.2.4",
+    "mitt": "1.1.3"
   }
 }
