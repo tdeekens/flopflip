@@ -241,6 +241,13 @@
     "@babel/helper-replace-supers" "^7.0.0"
     "@babel/plugin-syntax-class-properties" "^7.0.0"
 
+"@babel/plugin-proposal-do-expressions@7.0.0":
+  version "7.0.0"
+  resolved "https://registry.npmjs.org/@babel/plugin-proposal-do-expressions/-/plugin-proposal-do-expressions-7.0.0.tgz#4fe2f29c56a4b18d292caab0dfcb8119c89cc8d8"
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.0.0"
+    "@babel/plugin-syntax-do-expressions" "^7.0.0"
+
 "@babel/plugin-proposal-export-default-from@7.0.0":
   version "7.0.0"
   resolved "https://registry.npmjs.org/@babel/plugin-proposal-export-default-from/-/plugin-proposal-export-default-from-7.0.0.tgz#a057bbfd4649facfe39f33a537e18554bdd2b5da"
@@ -293,6 +300,12 @@
 "@babel/plugin-syntax-class-properties@^7.0.0":
   version "7.0.0"
   resolved "https://registry.npmjs.org/@babel/plugin-syntax-class-properties/-/plugin-syntax-class-properties-7.0.0.tgz#e051af5d300cbfbcec4a7476e37a803489881634"
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.0.0"
+
+"@babel/plugin-syntax-do-expressions@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.npmjs.org/@babel/plugin-syntax-do-expressions/-/plugin-syntax-do-expressions-7.0.0.tgz#069119d1d2fd2c13a3203b172619af5f95b6f696"
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
 

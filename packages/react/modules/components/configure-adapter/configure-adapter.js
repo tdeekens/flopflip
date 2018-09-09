@@ -225,22 +225,22 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
   render(): Node {
     return (
       <AdapterContext.Provider value={this.reconfigureOrQueue}>
-        {(() => {
+        {do {
           const isAdapterReady = this.props.adapter.getIsReady();
 
-          if (isAdapterReady) {
-            if (typeof this.props.render === 'function')
-              return this.props.render();
-          }
-
-          if (typeof this.props.children === 'function')
-            return this.props.children({
+          if (isAdapterReady && typeof this.props.render === 'function') {
+            this.props.render();
+          } else if (typeof this.props.children === 'function')
+            this.props.children({
               isAdapterReady,
             });
-
-          if (this.props.children && !isEmptyChildren(this.props.children))
-            return React.Children.only(this.props.children);
-        })()}
+          else if (
+            this.props.children &&
+            !isEmptyChildren(this.props.children)
+          ) {
+            React.Children.only(this.props.children);
+          } else null;
+        }}
       </AdapterContext.Provider>
     );
   }

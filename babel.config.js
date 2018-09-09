@@ -40,6 +40,7 @@ module.exports = {
     ],
     '@babel/plugin-proposal-export-default-from',
     '@babel/plugin-proposal-export-namespace-from',
+    '@babel/plugin-proposal-do-expressions',
     [
       '@babel/plugin-proposal-object-rest-spread',
       {
