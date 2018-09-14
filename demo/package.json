@@ -16,7 +16,7 @@
     "@flopflip/react-broadcast": "7.0.2",
     "@flopflip/react-redux": "7.0.2",
     "@flopflip/memory-adapter": "1.0.5",
-    "@flopflip/localstorage-adapter": "1.0.5"
+    "@flopflip/localstorage-adapter": "1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
