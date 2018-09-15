@@ -94,9 +94,9 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@flopflip/launchdarkly-adapter@2.3.4":
-  version "2.3.4"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.3.4.tgz#9ddd6996dd1844d9b908a2cc74ad3b35ebe62d69"
+"@flopflip/launchdarkly-adapter@2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.4.0.tgz#b14a5cd48e4cf7692e96e4dd62f3973c320b586a"
   dependencies:
     ldclient-js "2.5.0"
     lodash.camelcase "4.3.0"
