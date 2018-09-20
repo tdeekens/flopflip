@@ -346,7 +346,7 @@ describe('lifecycle', () => {
       it('should invoke `recongiureOrQueue` with `shouldOverwrite`', () => {
         expect(wrapper.instance().reconfigureOrQueue).toHaveBeenCalledWith(
           expect.any(Object),
-          { shouldOverwrite: true }
+          { shouldOverwrite: false }
         );
       });
     });

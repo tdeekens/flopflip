@@ -160,14 +160,18 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
     if (nextProps.adapterArgs !== this.props.adapterArgs) {
       /**
        * NOTE:
-       *   To keep the component controlled changes to the `props.adapterArgs`
-       *   will always overwrite existing `adapterArgs`. Even when changs occured
-       *   from `ReconfigureFlopflip`. This aims to reduce confusion. Please open
-       *   an issue unless it does not. Maybe `adapterArgs` on this component will
-       *   become `defaultAdapterArgs` in the future and changes to them always
-       *   have to be carried out through `ReconfigureFlopflip`.
+       *   The component might receive `adapterArgs` from `ReconfigureFlopflip`
+       *   before it managed to configure. If that occurs the next `adapterArgs`
+       *   passed in will overwrite what `ReconfigureFlopflip` passed in before
+       *   yieling a loss in configuration.
+       *
+       *   Whenever however the adapter has configured we want to component to
+       *   act in a controleld manner. So that overwriting will occur when the
+       *   passed `adapterArgs` change.
        */
-      this.reconfigureOrQueue(nextProps.adapterArgs, { shouldOverwrite: true });
+      this.reconfigureOrQueue(nextProps.adapterArgs, {
+        shouldOverwrite: this.adapterState === AdapterStates.CONFIGURED,
+      });
     }
   }
 
