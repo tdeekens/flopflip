@@ -491,6 +491,8 @@ describe('lifecycle', () => {
               </ConfigureAdapter>
             );
 
+            jest.spyOn(wrapper.instance(), 'applyAdapterArgs');
+
             wrapper.instance().setAdapterState(AdapterStates.CONFIGURED);
 
             return wrapper.instance().componentDidUpdate();
@@ -511,6 +513,28 @@ describe('lifecycle', () => {
               expect(wrapper.instance().adapterState).toEqual(
                 AdapterStates.CONFIGURED
               );
+            });
+          });
+
+          describe('with `pendingAdapterArgs`', () => {
+            beforeEach(() => {
+              wrapper.instance().pendingAdapterArgs = {
+                custom: { pending: 'arg' },
+              };
+              return wrapper
+                .instance()
+                .componentDidMount()
+                .catch(() => {});
+            });
+
+            it('should set the `adapterState` to configured', () => {
+              expect(wrapper.instance().adapterState).toEqual(
+                AdapterStates.CONFIGURED
+              );
+            });
+
+            it('should apply the `pendingAdapterArgs`', () => {
+              expect(wrapper.instance().applyAdapterArgs).toHaveBeenCalled();
             });
           });
         });
