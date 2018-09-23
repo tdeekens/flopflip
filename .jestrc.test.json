@@ -6,7 +6,7 @@
   "testRegex": "\\.spec\\.js$",
   "testEnvironment": "jsdom",
   "testURL": "http://localhost",
-  "watchPlugins": ["jest-plugin-filename"],
+  "watchPlugins": ["jest-plugin-filename", "jest-watch-yarn-workspaces"],
   "transform": {
     "^.+\\.js$": "<rootDir>/jest.transform.js"
   },
