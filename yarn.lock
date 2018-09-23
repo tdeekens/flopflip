@@ -4593,9 +4593,9 @@ inquirer@^6.1.0, inquirer@^6.2.0:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
-install@^0.12.1:
+install@0.12.1:
   version "0.12.1"
-  resolved "https://registry.npmjs.org/install/-/install-0.12.1.tgz#38b2dd4489330e9af3eeaba93b9e3fc77dee7872"
+  resolved "https://registry.yarnpkg.com/install/-/install-0.12.1.tgz#38b2dd4489330e9af3eeaba93b9e3fc77dee7872"
 
 invariant@2.2.4, invariant@^2.0.0, invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
@@ -5409,9 +5409,9 @@ jest-watch-directories@1.0.1:
     is-path-inside "^2.0.0"
     prompts "^1.1.1"
 
-jest-watch-yarn-workspaces@^1.0.1:
+jest-watch-yarn-workspaces@1.0.1:
   version "1.0.1"
-  resolved "https://registry.npmjs.org/jest-watch-yarn-workspaces/-/jest-watch-yarn-workspaces-1.0.1.tgz#f05baa3ee2af37b83ecc735d43a681fda2cb13fd"
+  resolved "https://registry.yarnpkg.com/jest-watch-yarn-workspaces/-/jest-watch-yarn-workspaces-1.0.1.tgz#f05baa3ee2af37b83ecc735d43a681fda2cb13fd"
   dependencies:
     jest-watch-directories "1.0.1"
 
