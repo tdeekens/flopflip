@@ -82,7 +82,6 @@
     "eslint-plugin-react": "7.11.1",
     "flow-bin": "0.81.0",
     "husky": "0.14.3",
-    "install": "0.12.1",
     "jest": "23.6.0",
     "jest-enzyme": "6.1.2",
     "jest-localstorage-mock": "2.2.0",
