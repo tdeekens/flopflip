@@ -12,15 +12,9 @@
     "redux": "4.0.0",
     "redux-logger": "3.0.6",
     "redux-thunk": "2.3.0",
-<<<<<<< HEAD
     "@flopflip/launchdarkly-adapter": "2.4.1",
-    "@flopflip/react-broadcast": "7.0.2",
     "@flopflip/react-redux": "7.1.2",
-=======
-    "@flopflip/launchdarkly-adapter": "2.4.0",
     "@flopflip/react-broadcast": "7.1.2",
-    "@flopflip/react-redux": "7.0.2",
->>>>>>> d8c8b59... fix(deps): update dependency @flopflip/react-broadcast to v7.1.2
     "@flopflip/memory-adapter": "1.1.0",
     "@flopflip/localstorage-adapter": "1.1.0"
   },
