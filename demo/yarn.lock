@@ -14,11 +14,11 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@flopflip/launchdarkly-adapter@2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.4.0.tgz#b14a5cd48e4cf7692e96e4dd62f3973c320b586a"
+"@flopflip/launchdarkly-adapter@2.4.1":
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.4.1.tgz#7596cde628bbe59edf76e60f6ce15b0a51ec5e5b"
   dependencies:
-    ldclient-js "2.5.0"
+    ldclient-js "2.6.0"
     lodash.camelcase "4.3.0"
     lodash.isequal "4.5.0"
     warning "4.0.2"
@@ -4253,9 +4253,9 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-ldclient-js@2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-2.5.0.tgz#56ed4096aac914d93d92b18614d3255f96f4216f"
+ldclient-js@2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-2.6.0.tgz#39875ae1b05fda2b4ffee4d53c103cabc2602bba"
   dependencies:
     Base64 "1.0.1"
     escape-string-regexp "1.0.5"
