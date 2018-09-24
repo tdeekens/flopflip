@@ -47,19 +47,32 @@
     lodash.memoize "4.1.2"
     recompose "0.28.2"
 
-"@flopflip/react-redux@7.0.2":
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-7.0.2.tgz#a7878f27e2aaaaa491618984147a337a52dd894d"
+"@flopflip/react-redux@7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-7.1.2.tgz#4c6c2eef3a40eb23a6497c8e008eaa9ad65d21a0"
   dependencies:
-    "@flopflip/react" "^6.0.2"
+    "@flopflip/react" "^6.1.2"
     "@flopflip/types" "^1.2.1"
     lodash.isnil "4.0.0"
     lodash.memoize "4.1.2"
-    recompose "0.28.2"
+    recompose "0.30.0"
 
 "@flopflip/react@^6.0.2":
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-6.1.0.tgz#becb26a7720220bf828f344e4b7048d515bf49bb"
+  dependencies:
+    create-react-context "0.2.3"
+    deepmerge "2.1.1"
+    lodash.camelcase "4.3.0"
+    lodash.intersection "4.4.0"
+    lodash.isnil "4.0.0"
+    lodash.omit "4.5.0"
+    recompose "0.30.0"
+    warning "4.0.2"
+
+"@flopflip/react@^6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-6.1.2.tgz#9160e91fcfafcf38e9bcae17702b8d617619484b"
   dependencies:
     create-react-context "0.2.3"
     deepmerge "2.1.1"
