@@ -7,5 +7,9 @@
   "lockFileMaintenance": {
     "enabled": true
   },
-  "circleci": { "enabled": false }
+  "circleci": { "enabled": false },
+  "automerge": true,
+  "major": {
+    "automerge": false
+  }
 }
