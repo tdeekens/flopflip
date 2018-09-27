@@ -1,0 +1,12 @@
+minApprovals:
+  OWNER: 1
+maxRequestedChanges:
+  OWNER: 2
+blockingLabels:
+  - WIP
+  - Blocked
+deleteBranchAfterMerge: true
+mergeMethod: rebase
+rules:
+  - requiredLabels:
+      - Ready to Merge
