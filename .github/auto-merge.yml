@@ -7,6 +7,3 @@ blockingLabels:
   - Blocked
 deleteBranchAfterMerge: true
 mergeMethod: rebase
-rules:
-  - requiredLabels:
-      - Ready to Merge
