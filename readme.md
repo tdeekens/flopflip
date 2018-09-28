@@ -51,7 +51,7 @@
   <br /><br />
 </details>
 
-## ❯ Why would you want this?
+## ❯ Why you might use this.
 
 In summary feature toggling simplifies and speeds up your development processes. You can ship software more often, release to specified target audiences and test features with users (not only internal staff) before releasing them to everyone.
 
