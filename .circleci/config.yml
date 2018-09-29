@@ -42,7 +42,7 @@ commands:
     description: "Running type checkers"
     steps:
       - run: yarn flow
-  check_artefacts_bundlesize:
+  check_artefacts_bundlesizes:
     description: "Running bundlesize check"
     steps:
       - run: yarn test:sizes
@@ -82,7 +82,7 @@ jobs:
       - restore_cache: *restore_yarn_cache
       - install_dependencies
       - build_artefacts
-      - check_artefacts_bundlesize
+      - check_artefacts_bundlesizes
   build_test_unit_node_8:
     executor: node_8
     steps:
