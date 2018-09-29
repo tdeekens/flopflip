@@ -55,7 +55,7 @@ commands:
   unit_test_with_coverage:
     description: "Running unit tests with covereage report"
     steps:
-      - run: yarn test:ci:coverage --maxWorkers=10
+      - run: yarn test:ci:coverage
 
 jobs:
   lint:
