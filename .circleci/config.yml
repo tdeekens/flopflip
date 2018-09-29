@@ -1,16 +1,8 @@
 version: 2.1
 
-executors:
-  node_8:
-    docker:
-      - image: circleci/node:8
-    working_directory: ~/flopflip
-  node_10:
-    docker:
-      - image: circleci/node:10
-    working_directory: ~/flopflip
-
 aliases:
+  - &working_directory ~/flopflip
+
   - &restore_yarn_cache
     name: "Restoring yarn cache"
     keys:
@@ -22,6 +14,16 @@ aliases:
     key: v3-yarn-cache-{{ checksum "yarn.lock" }}
     paths:
       - ~/.cache/yarn
+
+executors:
+  node_8:
+    docker:
+      - image: circleci/node:8
+    working_directory: *working_directory
+  node_10:
+    docker:
+      - image: circleci/node:10
+    working_directory: *working_directory
 
 commands:
   install_dependencies:
