@@ -1,102 +1,102 @@
-aliases:
-  - &working_directory ~/flopflip
+version: 2.1
 
+executors:
+  node_8:
+    docker:
+      - image: circleci/node:8
+    working_directory: ~/flopflip
+  node_10:
+    docker:
+      - image: circleci/node:10
+    working_directory: ~/flopflip
+
+aliases:
   - &restore_yarn_cache
-    name: Restoring cache
+    name: "Restoring yarn cache"
     keys:
       - v3-yarn-cache-{{ checksum "yarn.lock" }}
       - v3-yarn-cache
 
   - &save_yarn_cache
-    name: Saving cache
+    name: "Saving yarn cache"
     key: v3-yarn-cache-{{ checksum "yarn.lock" }}
     paths:
       - ~/.cache/yarn
 
-  - &install
-    name: Installing
-    # Ignoring scripts (e.g. post-install) to gain more control
-    # in the jobs to only e.g. build when explicitely needed.
-    command: yarn install --pure-lockfile
+commands:
+  install_dependencies:
+    description: "Installing dependencies"
+    steps:
+      - run: yarn install --pure-lockfile
+  build_artefacts:
+    description: "Building artefacts"
+    steps:
+      - run: yarn build
+  lint_code:
+    description: "Running linters"
+    steps:
+      - run: yarn lint
+  type_check:
+    description: "Running type checkers"
+    steps:
+      - run: yarn flow
+  check_artefacts_bundlesize:
+    description: "Running bundlesize check"
+    steps:
+      - run: yarn test:sizes
+  unit_test:
+    description: "Running unit tests without covereage"
+    steps:
+      # Limiting the workers of Jest to 10
+      # as the build otherwise dies due to resouce restrictions.
+      - run: yarn test:ci --maxWorkers=10
+  unit_test_with_coverage:
+    description: "Running unit tests with covereage report"
+    steps:
+      - run: yarn test:ci:coverage --maxWorkers=10
 
-  - &lint
-    name: Linting
-    command: yarn lint
-
-  - &type_check
-    name: Type checking
-    command: yarn flow
-
-  - &bundlesize
-    name: Checking bundle sizes
-    command: yarn test:sizes
-
-  - &build
-    name: Building
-    command: yarn build
-
-  - &unit_test
-    name: Unit testing
-    # Limiting the workers of Jest to 10
-    # as the build otherwise dies due to resouce restrictions.
-    command: yarn test:ci --maxWorkers=10
-
-  - &unit_test_with_coverage
-    name: Unit testing (with coverage report)
-    command: yarn test:ci:coverage
-
-node8Environment: &node8Environment
-  docker:
-    - image: circleci/node:8@sha256:9249d0ba00986d50bcab7380edcf8e20a0c76a6cb2e936588061f1c4f27cb350
-  working_directory: *working_directory
-node10Environment: &node10Environment
-  docker:
-    - image: circleci/node:10
-  working_directory: *working_directory
-
-version: 2
 jobs:
   lint:
-    <<: *node8Environment
+    executor: node_10
     steps:
       - checkout
       - restore_cache: *restore_yarn_cache
-      - run: *install
+      - install_dependencies
       - save_cache: *save_yarn_cache
-      - run: *build
-      - run: *lint
+      - build_artefacts
+      - lint_code
   type_check:
-    <<: *node8Environment
+    executor: node_10
     steps:
       - checkout
       - restore_cache: *restore_yarn_cache
-      - run: *install
-      - run: *build
-      - run: *type_check
+      - install_dependencies
+      - build_artefacts
+      - type_check
   bundlesize_check:
-    <<: *node8Environment
+    executor: node_10
     steps:
       - checkout
       - restore_cache: *restore_yarn_cache
-      - run: *install
-      - run: *build
-      - run: *bundlesize
+      - install_dependencies
+      - build_artefacts
+      - check_artefacts_bundlesize
   build_test_unit_node_8:
-    <<: *node8Environment
+    executor: node_8
     steps:
       - checkout
       - restore_cache: *restore_yarn_cache
-      - run: *install
-      - run: *build
-      - run: *unit_test_with_coverage
+      - install_dependencies
+      - build_artefacts
+      - unit_test_with_coverage
   build_test_unit_node_10:
-    <<: *node10Environment
+    executor: node_10
     steps:
       - checkout
       - restore_cache: *restore_yarn_cache
-      - run: *install
-      - run: *build
-      - run: *unit_test_with_coverage
+      - install_dependencies
+      - build_artefacts
+      - unit_test_with_coverage
 
 workflows:
   version: 2
