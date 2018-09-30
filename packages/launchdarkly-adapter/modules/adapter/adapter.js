@@ -19,6 +19,9 @@ type Client = {
   on: (eventName: string, (flagName: FlagName) => void) => void,
   allFlags: () => Flags | null,
 };
+type ClientOptions = {
+  fetchGoals?: boolean,
+};
 type AdapterState = {
   isReady: boolean,
   isConfigured: boolean,
@@ -93,8 +96,11 @@ const ensureUser = (user: User): User => ({
   key: user && user.key ? user.key : createAnonymousUserKey(),
   ...user,
 });
-const initializeClient = (clientSideId: string, user: User): Client =>
-  initializeLaunchDarklyClient(clientSideId, user);
+const initializeClient = (
+  clientSideId: string,
+  user: User,
+  clientOptions: ClientOptions
+): Client => initializeLaunchDarklyClient(clientSideId, user);
 const changeUserContext = (nextUser: User): Promise<any> =>
   adapterState.client && adapterState.client.identify
     ? adapterState.client.identify(nextUser)
@@ -165,18 +171,24 @@ const getInitialFlags = ({
 const configure = ({
   clientSideId,
   user,
+  clientOptions = {},
   onFlagsStateChange,
   onStatusStateChange,
   subscribeToFlagChanges = true,
 }: {
   clientSideId: string,
   user: User,
+  clientOptions: ClientOptions,
   onFlagsStateChange: OnFlagsStateChangeCallback,
   onStatusStateChange: OnStatusStateChangeCallback,
   subscribeToFlagChanges: boolean,
 }): Promise<any> => {
   adapterState.user = ensureUser(user);
-  adapterState.client = initializeClient(clientSideId, adapterState.user);
+  adapterState.client = initializeClient(
+    clientSideId,
+    adapterState.user,
+    clientOptions
+  );
 
   return getInitialFlags({
     onFlagsStateChange,
