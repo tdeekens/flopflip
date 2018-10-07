@@ -30,11 +30,11 @@
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
     "@flopflip/types": "^1.2.1",
-    "enzyme": "3.6.0",
+    "enzyme": "3.7.0",
     "enzyme-to-json": "3.3.4"
   },
   "dependencies": {
-    "@splitsoftware/splitio": "10.3.3",
+    "@splitsoftware/splitio": "10.4.0",
     "lodash.camelcase": "4.3.0"
   },
   "keywords": [
