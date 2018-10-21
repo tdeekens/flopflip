@@ -1,0 +1,27 @@
+repository:
+  name: flopflip
+  description: 🎚Flip or flop features in your React application in real-time backed by flag provider of your choice 🚦
+  homepage: https://techblog.commercetools.com/embracing-real-time-feature-toggling-in-your-react-application-a5e6052716a9
+  private: false
+  has_issues: true
+  has_wiki: false
+  has_downloads: true
+  default_branch: master
+  allow_squash_merge: true
+  allow_merge_commit: true
+  allow_rebase_merge: true
+labels:
+  - name: Automerge
+    color: cfdb62
+  - name: Bug
+    color: ee0701
+  - name: Documentation
+    color: d4c5f9
+  - name: ✨ Feature
+    color: 84b6eb
+  - name: ❓ Question
+    color: cc317c
+  - name: ❤️ Refactoring
+    color: fbca04
+  - name: Wontfix
+    color: ffffff
