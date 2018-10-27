@@ -1,4 +1,5 @@
-const path = require('path');
+const fs = require('fs');
+const readPkgUp = require('read-pkg-up');
 const resolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const babel = require('rollup-plugin-babel');
@@ -10,7 +11,9 @@ const globals = require('rollup-plugin-node-globals');
 const flow = require('rollup-plugin-flow');
 const filesize = require('rollup-plugin-filesize');
 const babelOptions = require('./babel.config');
-const pkg = require(path.join(process.env.INIT_CWD, 'package.json'));
+const { pkg } = readPkgUp.sync({
+  cwd: fs.realpathSync(process.cwd()),
+});
 
 const env = process.env.NODE_ENV;
 const name = process.env.npm_package_name;
