@@ -78,7 +78,7 @@
     "eslint-plugin-jest": "21.26.2",
     "eslint-plugin-prettier": "3.0.0",
     "eslint-plugin-react": "7.11.1",
-    "flow-bin": "0.80.0",
+    "flow-bin": "0.84.0",
     "husky": "1.1.2",
     "jest": "23.6.0",
     "jest-enzyme": "7.0.0",
