@@ -839,12 +839,12 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@flopflip/launchdarkly-adapter@2.4.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.4.1.tgz#7596cde628bbe59edf76e60f6ce15b0a51ec5e5b"
-  integrity sha512-HYELX7ALnfHgNPFka+61ZU54mdXGjzA4BCynByJSAfqMN3TjdWi1aNdI8I/ySTc+UNIUjs8A8dXkrX0IZ4uP7A==
+"@flopflip/launchdarkly-adapter@2.4.2":
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.4.2.tgz#b876a80c45552c5e71cdbc5451f48076085e4060"
+  integrity sha512-4Pz5EBNJrrwxiGs5b5ZOldnWwgY8R0YBzNArCv/XdiOU8Io+F0OnMTC+nWs8rgL+9vgdAkHqUSx/jA/ySC+5FQ==
   dependencies:
-    ldclient-js "2.6.0"
+    ldclient-js "2.7.2"
     lodash.camelcase "4.3.0"
     lodash.isequal "4.5.0"
     warning "4.0.2"
@@ -5844,10 +5844,10 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
-ldclient-js@2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-2.6.0.tgz#39875ae1b05fda2b4ffee4d53c103cabc2602bba"
-  integrity sha512-7qdoxGkdUlxxEsGv95ZPHvNzpB/3kis0k6Na/4VJOvWJAKK5gy2pqqYcX6ZO4ZC/K2w1Iiytxdq3tYVfDXifgQ==
+ldclient-js@2.7.2:
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-2.7.2.tgz#c850f66c8b1d178bd6c2e800f5247b13e614eb3b"
+  integrity sha512-OjnSmQdrF1E+TJDVAIRMbjeKnskDfQEXxCq7r2lWOkXoxo+eJfVQS52s1qpYdUmGChPJjJOB+M1sRMgZk29+UQ==
   dependencies:
     Base64 "1.0.1"
     escape-string-regexp "1.0.5"
