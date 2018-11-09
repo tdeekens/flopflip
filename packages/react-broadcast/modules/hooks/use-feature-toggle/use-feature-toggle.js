@@ -10,7 +10,7 @@ import { FlagsContext } from '../../components/configure';
 
 export default function useFeatureToggle(
   flagName: FlagName,
-  flagVariation: FlagVariation = true
+  flagVariation?: FlagVariation = true
 ) {
   warning(
     flagName === camelCase(flagName),

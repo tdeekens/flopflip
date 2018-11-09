@@ -9,11 +9,11 @@ minApprovals:
 maxRequestedChanges:
   COLLABORATOR: 0
 blockingLabels:
-- WIP
-- Blocked
+  - WIP
+  - Blocked
 
 rules:
-- minApprovals:
-    OWNER: 1
-- requiredLabels:
-  - Automerge
+  - minApprovals:
+      OWNER: 1
+  - requiredLabels:
+      - Automerge

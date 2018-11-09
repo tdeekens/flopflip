@@ -76,6 +76,11 @@ declare module '@flopflip/types' {
     propKey?: string
   ): ComponentEnhancerWithProps<{ [propKey: string]: Flags }, {}>;
 
+  export function useFeatureToggle(
+    flagName: Flag,
+    flagVariation?: FlagVariation
+  ): boolean;
+
   export class ToggleFeature extends React.Component<
     ToggleComponentProps,
     any
