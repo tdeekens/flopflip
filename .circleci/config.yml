@@ -4,13 +4,13 @@ aliases:
   - &working_directory ~/flopflip
 
   - &restore_yarn_cache
-    name: "Restoring yarn cache"
+    name: 'Restoring yarn cache'
     keys:
       - v3-yarn-cache-{{ checksum "yarn.lock" }}
       - v3-yarn-cache
 
   - &save_yarn_cache
-    name: "Saving yarn cache"
+    name: 'Saving yarn cache'
     key: v3-yarn-cache-{{ checksum "yarn.lock" }}
     paths:
       - ~/.cache/yarn
@@ -27,33 +27,33 @@ executors:
 
 commands:
   install_dependencies:
-    description: "Installing dependencies"
+    description: 'Installing dependencies'
     steps:
       - run: yarn install --pure-lockfile
   build_artefacts:
-    description: "Building artefacts"
+    description: 'Building artefacts'
     steps:
       - run: yarn build
   lint_code:
-    description: "Running linters"
+    description: 'Running linters'
     steps:
       - run: yarn lint
   type_check:
-    description: "Running type checkers"
+    description: 'Running type checkers'
     steps:
       - run: yarn flow
   check_artefacts_bundlesizes:
-    description: "Running bundlesize check"
+    description: 'Running bundlesize check'
     steps:
       - run: yarn test:sizes
   unit_test:
-    description: "Running unit tests without covereage"
+    description: 'Running unit tests without covereage'
     steps:
       # Limiting the workers of Jest to 10
       # as the build otherwise dies due to resouce restrictions.
       - run: yarn test:ci --maxWorkers=10
   unit_test_with_coverage:
-    description: "Running unit tests with covereage report"
+    description: 'Running unit tests with covereage report'
     steps:
       - run: yarn test:ci:coverage
 
