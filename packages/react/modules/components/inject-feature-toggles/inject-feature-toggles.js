@@ -54,11 +54,10 @@ const injectFeatureToggles = (
       [propKey]: filterFeatureToggles(props[ALL_FLAGS_PROP_KEY], flagNames),
     })),
     omitProps(ALL_FLAGS_PROP_KEY),
-    shouldUpdate(
-      (props: ProvidedProps, nextProps: ProvidedProps) =>
-        typeof areOwnPropsEqual === 'function'
-          ? !areOwnPropsEqual(props, nextProps, propKey)
-          : true
+    shouldUpdate((props: ProvidedProps, nextProps: ProvidedProps) =>
+      typeof areOwnPropsEqual === 'function'
+        ? !areOwnPropsEqual(props, nextProps, propKey)
+        : true
     )
   );
 
