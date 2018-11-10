@@ -1,9 +1,16 @@
-import React, { createElement } from 'react';
+// @flow
+import React, { createElement, type ComponentType } from 'react';
+
 import { wrapDisplayName } from '../wrap-display-name';
 import { setDisplayName } from '../set-display-name';
 
-const withProps = mapProps => BaseComponent => {
-  const WithProps = ownProps => {
+type WithProps = {};
+type ProvidedProps = {};
+
+const withProps = (
+  mapProps: WithProps | ((ownProps: ProvidedProps) => WithProps)
+) => (BaseComponent: ComponentType<ProvidedProps & WithProps>) => {
+  const WithProps = (ownProps: ProvidedProps): ProvidedProps & WithProps => {
     const enhancedProps =
       typeof mapProps === 'function'
         ? { ...ownProps, ...mapProps(ownProps) }

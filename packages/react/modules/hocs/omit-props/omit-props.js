@@ -1,9 +1,18 @@
-import { createElement } from 'react';
+// @flow
+
+import { createElement, type ComponentType } from 'react';
 import { wrapDisplayName } from '../wrap-display-name';
 import { setDisplayName } from '../set-display-name';
 import omit from 'lodash.omit';
 
-const omitProps = (...propsToOmit) => BaseComponent => {
+type ProvidedProps = {};
+type OmitProps = {
+  [key: string]: any,
+};
+
+const omitProps = (...propsToOmit: Array<$Keys<OmitProps>>) => (
+  BaseComponent: ComponentType<ProvidedProps>
+): ComponentType<$Diff<ProvidedProps, OmitProps>> => {
   const OmitProps = props =>
     createElement(BaseComponent, omit(props, propsToOmit));
 
