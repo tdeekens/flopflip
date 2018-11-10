@@ -13,5 +13,6 @@ export {
   DEFAULT_FLAGS_PROP_KEY,
   ALL_FLAGS_PROP_KEY,
 } from './constants';
+export { omitProps, setDisplayName, wrapDisplayName, withProps } from './hocs';
 
 export { version } from '../package.json';

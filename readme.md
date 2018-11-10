@@ -12,7 +12,6 @@
   ❤️
   React
   · Redux
-  · Recompose
   · Jest
   · Prettier
   · Flow

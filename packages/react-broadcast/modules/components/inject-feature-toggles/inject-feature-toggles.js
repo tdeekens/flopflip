@@ -3,8 +3,12 @@
 import type { FlagName } from '@flopflip/types';
 
 import React, { type ComponentType } from 'react';
-import { compose, setDisplayName, wrapDisplayName } from 'recompose';
-import { injectFeatureToggles } from '@flopflip/react';
+import flowRight from 'lodash.flowright';
+import {
+  injectFeatureToggles,
+  wrapDisplayName,
+  setDisplayName,
+} from '@flopflip/react';
 import { withFlags } from '../configure';
 
 type RequiredProps = {};
@@ -19,7 +23,7 @@ export default <RequiredProps, ProvidedProps>(
     propKey: string
   ) => boolean
 ) => (WrappedComponent: ComponentType<$Diff<RequiredProps, ProvidedProps>>) =>
-  compose(
+  flowRight(
     setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggles')),
     withFlags(),
     injectFeatureToggles(flagNames, propKey, areOwnPropsEqual)

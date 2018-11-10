@@ -2,19 +2,30 @@
 
 import type { FlagName, FlagVariation } from '@flopflip/types';
 
-import React, { type ComponentType } from 'react';
-import { branch, renderNothing, renderComponent } from 'recompose';
+import React, { Component, createElement, type ComponentType } from 'react';
 import isFeatureEnabled from '../../helpers/is-feature-enabled';
 import { DEFAULT_FLAG_PROP_KEY } from '../../constants';
 
+class DefaultUntoggledComponent extends Component<{}> {
+  render() {
+    return null;
+  }
+}
+
 const branchOnFeatureToggle = (
-  UntoggledComponent: ComponentType<any>,
+  UntoggledComponent: ComponentType<any> = DefaultUntoggledComponent,
   flagName: FlagName = DEFAULT_FLAG_PROP_KEY,
   flagVariation: FlagVariation = true
-): ComponentType<any> =>
-  branch(
-    props => !isFeatureEnabled(flagName, flagVariation)(props),
-    UntoggledComponent ? renderComponent(UntoggledComponent) : renderNothing
-  );
+) => (ToggledComponent: ComponentType<any>): ComponentType<any> => {
+  const BranchOnFeatureToggle: ComponentType<any> = (props: Object) => {
+    if (isFeatureEnabled(flagName, flagVariation)(props)) {
+      return createElement(ToggledComponent);
+    } else {
+      return createElement(UntoggledComponent);
+    }
+  };
+
+  return BranchOnFeatureToggle;
+};
 
 export default branchOnFeatureToggle;

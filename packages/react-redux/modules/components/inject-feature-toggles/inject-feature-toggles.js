@@ -4,9 +4,14 @@ import type { FlagName } from '@flopflip/types';
 
 import React, { type ComponentType } from 'react';
 import { connect } from 'react-redux';
-import { compose, setDisplayName, wrapDisplayName } from 'recompose';
+import flowRight from 'lodash.flowright';
 import { selectFlags } from '../../ducks';
-import { injectFeatureToggles, ALL_FLAGS_PROP_KEY } from '@flopflip/react';
+import {
+  injectFeatureToggles,
+  wrapDisplayName,
+  setDisplayName,
+  ALL_FLAGS_PROP_KEY,
+} from '@flopflip/react';
 import { STATE_SLICE } from './../../store';
 
 type RequiredProps = {};
@@ -26,7 +31,7 @@ export default (
   ) => boolean
 ) => (WrappedComponent: ComponentType<$Diff<RequiredProps, ProvidedProps>>) =>
   /* istanbul ignore next */
-  compose(
+  flowRight(
     setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggles')),
     connect(mapStateToProps),
     injectFeatureToggles(flagNames, propKey, areOwnPropsEqual)

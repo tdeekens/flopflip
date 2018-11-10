@@ -3,7 +3,8 @@
 import type { FlagName, FlagValue } from '@flopflip/types';
 
 import React, { type ComponentType } from 'react';
-import { compose, withProps } from 'recompose';
+import flowRight from 'lodash.flowright';
+import { withProps } from '../../hocs';
 import isNil from 'lodash.isnil';
 import { omitProps } from '../../hocs';
 import { DEFAULT_FLAG_PROP_KEY, ALL_FLAGS_PROP_KEY } from '../../constants';
@@ -15,9 +16,9 @@ const injectFeatureToggle = (
   flagName: FlagName,
   propKey: string = DEFAULT_FLAG_PROP_KEY
 ): ComponentType<$Diff<RequiredProps, ProvidedProps>> =>
-  compose(
-    withProps((props: RequiredProps) => {
-      const flagValue: FlagValue = props[ALL_FLAGS_PROP_KEY][flagName];
+  flowRight(
+    withProps((ownProps: RequiredProps) => {
+      const flagValue: FlagValue = ownProps[ALL_FLAGS_PROP_KEY][flagName];
 
       return { [propKey]: isNil(flagValue) ? false : flagValue };
     }),

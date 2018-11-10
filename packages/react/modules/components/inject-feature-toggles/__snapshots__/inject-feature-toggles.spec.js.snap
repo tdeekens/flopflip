@@ -1,16 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`injecting with single feature toggle should match snapshot 1`] = `
-<omitProps(shouldUpdate(TestComponent))
+<withProps(omitProps(TestComponent))
   @flopflip/flags={
     Object {
       "aFeatureToggle": true,
     }
   }
-  featureToggles={
-    Object {
-      "aFeatureToggle": true,
+>
+  <omitProps(TestComponent)
+    @flopflip/flags={
+      Object {
+        "aFeatureToggle": true,
+      }
     }
-  }
-/>
+    featureToggles={
+      Object {
+        "aFeatureToggle": true,
+      }
+    }
+  >
+    <TestComponent
+      featureToggles={
+        Object {
+          "aFeatureToggle": true,
+        }
+      }
+    >
+      <TestComponent
+        featureToggles={
+          Object {
+            "aFeatureToggle": true,
+          }
+        }
+      >
+        Test
+      </TestComponent>
+    </TestComponent>
+  </omitProps(TestComponent)>
+</withProps(omitProps(TestComponent))>
 `;

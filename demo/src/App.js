@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { compose } from 'recompose';
+import flowRight from 'lodash.flowright';
 import { Provider, connect } from 'react-redux';
 import classNames from 'classnames';
 //import adapter from '@flopflip/launchdarkly-adapter';
@@ -38,7 +38,7 @@ IncrementAsyncButton.propTypes = {
   incrementAsync: PropTypes.func.isRequired,
   isIncrementing: PropTypes.bool.isRequired,
 };
-const FeatureToggledIncrementAsyncButton = compose(
+const FeatureToggledIncrementAsyncButton = flowRight(
   branchOnFeatureToggle(
     { flag: flags.INCREMENT_ASYNC_BUTTON },
     UntoggledFeature

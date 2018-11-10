@@ -2,9 +2,13 @@
 
 import type { FlagName, FlagVariation, Flags, State } from '@flopflip/types';
 
-import { compose, setDisplayName } from 'recompose';
+import flowRight from 'lodash.flowright';
 import { connect } from 'react-redux';
-import { ToggleFeature, isFeatureEnabled } from '@flopflip/react';
+import {
+  ToggleFeature,
+  setDisplayName,
+  isFeatureEnabled,
+} from '@flopflip/react';
 import { STATE_SLICE } from './../../store';
 
 type OwnProps = {
@@ -18,7 +22,7 @@ export const mapStateToProps = (state: State, ownProps: OwnProps) => ({
 });
 
 /* istanbul ignore next */
-export default compose(
+export default flowRight(
   setDisplayName(ToggleFeature.displayName),
   connect(mapStateToProps)
 )(ToggleFeature);

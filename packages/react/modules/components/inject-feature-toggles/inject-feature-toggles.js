@@ -2,9 +2,11 @@
 
 import type { FlagName, Flags, Flag } from '@flopflip/types';
 
-import React, { type ComponentType } from 'react';
+import React, { createElement, Component, type ComponentType } from 'react';
 
-import { compose, withProps, shouldUpdate, shallowEqual } from 'recompose';
+import { withProps } from '../../hocs';
+import isEqual from 'react-fast-compare';
+import flowRight from 'lodash.flowright';
 import intersection from 'lodash.intersection';
 import omit from 'lodash.omit';
 import { omitProps } from '../../hocs';
@@ -35,8 +37,8 @@ export const areOwnPropsEqual = (
   ]);
 
   return (
-    shallowEqual(featureFlagProps, nextFeatureFlagProps) &&
-    shallowEqual(remainingProps, nextRemainingProps)
+    isEqual(featureFlagProps, nextFeatureFlagProps) &&
+    isEqual(remainingProps, nextRemainingProps)
   );
 };
 
@@ -49,16 +51,25 @@ const injectFeatureToggles = (
     propKey: string
   ) => boolean = areOwnPropsEqual
 ): ComponentType<$Diff<RequiredProps, ProvidedProps>> =>
-  compose(
+  flowRight(
     withProps((props: RequiredProps) => ({
       [propKey]: filterFeatureToggles(props[ALL_FLAGS_PROP_KEY], flagNames),
     })),
     omitProps(ALL_FLAGS_PROP_KEY),
-    shouldUpdate((props: ProvidedProps, nextProps: ProvidedProps) =>
-      typeof areOwnPropsEqual === 'function'
-        ? !areOwnPropsEqual(props, nextProps, propKey)
-        : true
-    )
+    (BaseComponent: ComponentType<ProvidedProps>) =>
+      class ShouldUpdate extends Component<{}> {
+        static displayName = BaseComponent.displayName;
+
+        shouldComponentUpdate(nextProps: ProvidedProps) {
+          return typeof areOwnPropsEqual === 'function'
+            ? !areOwnPropsEqual(this.props, nextProps, propKey)
+            : true;
+        }
+
+        render() {
+          return <BaseComponent {...this.props} />;
+        }
+      }
   );
 
 export default injectFeatureToggles;
