@@ -2,12 +2,12 @@ import { createElement } from 'react';
 import { wrapDisplayName } from '../wrap-display-name';
 import omit from 'lodash.omit';
 
-const omitProps = (...propsToOmit) => WrappedComponent => {
+const omitProps = (...propsToOmit) => BaseComponent => {
   const WithPropsOmitted = props =>
-    createElement(WrappedComponent, omit(props, propsToOmit));
+    createElement(BaseComponent, omit(props, propsToOmit));
 
   if (process.env.NODE_ENV !== 'production') {
-    return wrapDisplayName('omitProps', WrappedComponent)(WithPropsOmitted);
+    return wrapDisplayName('omitProps', BaseComponent)(WithPropsOmitted);
   }
 
   return WithPropsOmitted;

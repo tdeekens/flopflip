@@ -13,15 +13,16 @@ const createTestProps = (custom = {}) => ({
 });
 
 describe('rendering', () => {
-  let EnhancedTarget;
+  let EnhancedComponent;
   let props;
   let wrapper;
 
   describe('with multiple props', () => {
     beforeEach(() => {
-      EnhancedTarget = omitProps('a', 'b')(WrappedComponent);
+      EnhancedComponent = omitProps('a', 'b')(WrappedComponent);
       props = createTestProps();
-      wrapper = shallow(<EnhancedTarget {...props} />);
+
+      wrapper = shallow(<EnhancedComponent {...props} />);
     });
 
     it('should omit multiple props', () => {
@@ -31,8 +32,8 @@ describe('rendering', () => {
 
   describe('without any props', () => {
     beforeEach(() => {
-      EnhancedTarget = omitProps()(WrappedComponent);
-      wrapper = shallow(<EnhancedTarget {...props} />);
+      EnhancedComponent = omitProps()(WrappedComponent);
+      wrapper = shallow(<EnhancedComponent {...props} />);
     });
 
     it('should do nothing', () => {
