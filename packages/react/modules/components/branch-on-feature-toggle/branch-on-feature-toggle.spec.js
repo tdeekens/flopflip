@@ -53,7 +53,7 @@ describe('with `flagName`', () => {
       });
 
       it('should not render the `UntoggledComponent`', () => {
-        expect(wrapper).not.toRender(UntoggledComponent.displayName);
+        expect(wrapper).not.toRender(UntoggledComponent);
       });
 
       it('should render the `FeatureComponent`', () => {
@@ -80,7 +80,7 @@ describe('with `flagName`', () => {
       });
 
       it('should render the `UntoggledComponent`', () => {
-        expect(wrapper).toRender(UntoggledComponent.displayName);
+        expect(wrapper).toRender(UntoggledComponent);
       });
     });
 
@@ -151,7 +151,7 @@ describe('with `flagName` and `flagVariation`', () => {
       });
 
       it('should not render the `UntoggledComponent`', () => {
-        expect(wrapper).not.toRender(UntoggledComponent.displayName);
+        expect(wrapper).not.toRender(UntoggledComponent);
       });
 
       it('should render the `FeatureComponent`', () => {
@@ -181,7 +181,7 @@ describe('with `flagName` and `flagVariation`', () => {
       });
 
       it('should render the `UntoggledComponent`', () => {
-        expect(wrapper).toRender(UntoggledComponent.displayName);
+        expect(wrapper).toRender(UntoggledComponent);
       });
     });
 
@@ -243,7 +243,7 @@ describe('without `flagName`', () => {
       });
 
       it('should not render the `UntoggledComponent`', () => {
-        expect(wrapper).not.toRender(UntoggledComponent.displayName);
+        expect(wrapper).not.toRender(UntoggledComponent);
       });
 
       it('should render the `FeatureComponent`', () => {
@@ -268,7 +268,7 @@ describe('without `flagName`', () => {
       });
 
       it('should render the `UntoggledComponent`', () => {
-        expect(wrapper).toRender(UntoggledComponent.displayName);
+        expect(wrapper).toRender(UntoggledComponent);
       });
     });
 
