@@ -1,6 +1,7 @@
 // @flow
 
-import { compose, withProps } from 'recompose';
+import { withProps } from 'recompose';
+import flowRight from 'lodash.flowright';
 import {
   ToggleFeature,
   isFeatureEnabled,
@@ -9,7 +10,7 @@ import {
 } from '@flopflip/react';
 import { withFlags } from '../configure';
 
-export default compose(
+export default flowRight(
   setDisplayName(ToggleFeature.displayName),
   withFlags(),
   withProps(props => ({

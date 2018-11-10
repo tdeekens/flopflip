@@ -4,7 +4,7 @@ import type { FlagName } from '@flopflip/types';
 
 import React, { type ComponentType } from 'react';
 import { connect } from 'react-redux';
-import { compose } from 'recompose';
+import flowRight from 'lodash.flowright';
 import { selectFlags } from '../../ducks';
 import {
   injectFeatureToggle,
@@ -24,7 +24,7 @@ export default (flagName: FlagName, propKey?: string) => (
   WrappedComponent: ComponentType<$Diff<RequiredProps, ProvidedProps>>
 ) =>
   /* istanbul ignore next */
-  compose(
+  flowRight(
     wrapDisplayName('injectFeatureToggle'),
     connect(mapStateToProps),
     injectFeatureToggle(flagName, propKey)

@@ -4,7 +4,8 @@ import type { FlagName, Flags, Flag } from '@flopflip/types';
 
 import React, { type ComponentType } from 'react';
 
-import { compose, withProps, shouldUpdate, shallowEqual } from 'recompose';
+import { withProps, shouldUpdate, shallowEqual } from 'recompose';
+import flowRight from 'lodash.flowright';
 import intersection from 'lodash.intersection';
 import omit from 'lodash.omit';
 import { omitProps } from '../../hocs';
@@ -49,7 +50,7 @@ const injectFeatureToggles = (
     propKey: string
   ) => boolean = areOwnPropsEqual
 ): ComponentType<$Diff<RequiredProps, ProvidedProps>> =>
-  compose(
+  flowRight(
     withProps((props: RequiredProps) => ({
       [propKey]: filterFeatureToggles(props[ALL_FLAGS_PROP_KEY], flagNames),
     })),

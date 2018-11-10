@@ -51,6 +51,7 @@
     "lodash.intersection": "4.4.0",
     "lodash.isnil": "4.0.0",
     "lodash.omit": "4.5.0",
+    "lodash.flowright": "3.5.0",
     "recompose": "0.30.0",
     "warning": "4.0.2"
   },
