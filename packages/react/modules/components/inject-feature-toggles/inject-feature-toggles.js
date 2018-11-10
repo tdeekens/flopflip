@@ -4,8 +4,9 @@ import type { FlagName, Flags, Flag } from '@flopflip/types';
 
 import React, { type ComponentType } from 'react';
 
-import { withProps, shouldUpdate } from 'recompose';
-const isEqual = require('react-fast-compare');
+import { shouldUpdate } from 'recompose';
+import { withProps } from '../../hocs';
+import isEqual from 'react-fast-compare';
 import flowRight from 'lodash.flowright';
 import intersection from 'lodash.intersection';
 import omit from 'lodash.omit';
