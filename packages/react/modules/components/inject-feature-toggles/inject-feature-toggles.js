@@ -2,7 +2,7 @@
 
 import type { FlagName, Flags, Flag } from '@flopflip/types';
 
-import React, { type ComponentType } from 'react';
+import React, { createElement, Component, type ComponentType } from 'react';
 
 import { shouldUpdate } from 'recompose';
 import { withProps } from '../../hocs';
@@ -57,11 +57,21 @@ const injectFeatureToggles = (
       [propKey]: filterFeatureToggles(props[ALL_FLAGS_PROP_KEY], flagNames),
     })),
     omitProps(ALL_FLAGS_PROP_KEY),
-    shouldUpdate((props: ProvidedProps, nextProps: ProvidedProps) =>
-      typeof areOwnPropsEqual === 'function'
-        ? !areOwnPropsEqual(props, nextProps, propKey)
-        : true
-    )
+    (props: ProvidedProps) => (BaseComponent: ComponentType<any>) => {
+      class ShouldUpdate extends Component<{}> {
+        shouldComponentUpdate(nextProps: ProvidedProps) {
+          return typeof areOwnPropsEqual === 'function'
+            ? !areOwnPropsEqual(props, nextProps, propKey)
+            : true;
+        }
+
+        render() {
+          return createElement(BaseComponent, this.props);
+        }
+      }
+
+      return ShouldUpdate;
+    }
   );
 
 export default injectFeatureToggles;
