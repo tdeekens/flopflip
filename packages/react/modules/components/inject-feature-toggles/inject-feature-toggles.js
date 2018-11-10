@@ -4,7 +4,6 @@ import type { FlagName, Flags, Flag } from '@flopflip/types';
 
 import React, { createElement, Component, type ComponentType } from 'react';
 
-import { shouldUpdate } from 'recompose';
 import { withProps } from '../../hocs';
 import isEqual from 'react-fast-compare';
 import flowRight from 'lodash.flowright';

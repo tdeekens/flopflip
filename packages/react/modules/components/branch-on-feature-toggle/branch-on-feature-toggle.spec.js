@@ -6,9 +6,6 @@ const UntoggledComponent = () => (
   <React.Fragment>UntoggledComponent</React.Fragment>
 );
 UntoggledComponent.displayName = 'UntoggledComponent';
-// This is a shortcut for test expectations on the display name as recompose
-// wraps it for us.
-UntoggledComponent.wrappedDisplayName = 'renderComponent(UntoggledComponent)';
 const FeatureComponent = () => (
   <React.Fragment>FeatureComponent</React.Fragment>
 );
@@ -56,7 +53,7 @@ describe('with `flagName`', () => {
       });
 
       it('should not render the `UntoggledComponent`', () => {
-        expect(wrapper).not.toRender(UntoggledComponent.wrappedDisplayName);
+        expect(wrapper).not.toRender(UntoggledComponent.displayName);
       });
 
       it('should render the `FeatureComponent`', () => {
@@ -83,7 +80,7 @@ describe('with `flagName`', () => {
       });
 
       it('should render the `UntoggledComponent`', () => {
-        expect(wrapper).toRender(UntoggledComponent.wrappedDisplayName);
+        expect(wrapper).toRender(UntoggledComponent.displayName);
       });
     });
 
@@ -154,7 +151,7 @@ describe('with `flagName` and `flagVariation`', () => {
       });
 
       it('should not render the `UntoggledComponent`', () => {
-        expect(wrapper).not.toRender(UntoggledComponent.wrappedDisplayName);
+        expect(wrapper).not.toRender(UntoggledComponent.displayName);
       });
 
       it('should render the `FeatureComponent`', () => {
@@ -184,7 +181,7 @@ describe('with `flagName` and `flagVariation`', () => {
       });
 
       it('should render the `UntoggledComponent`', () => {
-        expect(wrapper).toRender(UntoggledComponent.wrappedDisplayName);
+        expect(wrapper).toRender(UntoggledComponent.displayName);
       });
     });
 
@@ -246,7 +243,7 @@ describe('without `flagName`', () => {
       });
 
       it('should not render the `UntoggledComponent`', () => {
-        expect(wrapper).not.toRender(UntoggledComponent.wrappedDisplayName);
+        expect(wrapper).not.toRender(UntoggledComponent.displayName);
       });
 
       it('should render the `FeatureComponent`', () => {
@@ -271,7 +268,7 @@ describe('without `flagName`', () => {
       });
 
       it('should render the `UntoggledComponent`', () => {
-        expect(wrapper).toRender(UntoggledComponent.wrappedDisplayName);
+        expect(wrapper).toRender(UntoggledComponent.displayName);
       });
     });
 
