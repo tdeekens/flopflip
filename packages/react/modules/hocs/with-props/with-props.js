@@ -1,9 +1,15 @@
 import React, { createElement } from 'react';
 import { wrapDisplayName } from '../wrap-display-name';
 
-const withProps = baseProps => BaseComponent => {
-  const WithProps = enhancedProps =>
-    createElement(BaseComponent, { ...baseProps, ...enhancedProps });
+const withProps = mapProps => BaseComponent => {
+  const WithProps = ownProps => {
+    const enhancedProps =
+      typeof mapProps === 'function'
+        ? { ...ownProps, ...mapProps(ownProps) }
+        : { ...ownProps, ...mapProps };
+
+    return createElement(BaseComponent, enhancedProps);
+  };
 
   if (process.env.NODE_ENV !== 'production') {
     return wrapDisplayName('withProps', BaseComponent)(WithProps);

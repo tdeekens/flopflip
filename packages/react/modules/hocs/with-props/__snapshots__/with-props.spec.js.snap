@@ -1,6 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`rendering should match snapshot 1`] = `
+exports[`rendering with \`mapProps\` being function should match snapshot 1`] = `
+<withProps(WithProps)
+  a={1}
+>
+  <BaseComponent
+    a={1}
+    b="b"
+  />
+</withProps(WithProps)>
+`;
+
+exports[`rendering with \`mapProps\` being object should match snapshot 1`] = `
 <withProps(WithProps)
   a={1}
 >
