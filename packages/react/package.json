@@ -52,6 +52,7 @@
     "lodash.isnil": "4.0.0",
     "lodash.omit": "4.5.0",
     "lodash.flowright": "3.5.0",
+    "react-fast-compare": "2.0.3",
     "recompose": "0.30.0",
     "warning": "4.0.2"
   },

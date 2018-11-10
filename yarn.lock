@@ -8539,6 +8539,11 @@ react-dom@16.6.1:
     prop-types "^15.6.2"
     scheduler "^0.11.0"
 
+react-fast-compare@2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.3.tgz#f7c8f3867986dd6d9ad512299a3fc2231fb60c6f"
+  integrity sha512-zUaPHxoOZZYYf42Jm3tZklY19YVGr7Z7buvKw1MSzy0S1r/DVnuR/EfYPQmwh5UkMrAfAH4gbBz2pcDqec7Bhw==
+
 react-is@^16.3.2, react-is@^16.6.0:
   version "16.6.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.6.0.tgz#456645144581a6e99f6816ae2bd24ee94bdd0c01"

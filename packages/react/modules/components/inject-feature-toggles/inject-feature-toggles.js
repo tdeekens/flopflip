@@ -4,7 +4,8 @@ import type { FlagName, Flags, Flag } from '@flopflip/types';
 
 import React, { type ComponentType } from 'react';
 
-import { withProps, shouldUpdate, shallowEqual } from 'recompose';
+import { withProps, shouldUpdate } from 'recompose';
+const isEqual = require('react-fast-compare');
 import flowRight from 'lodash.flowright';
 import intersection from 'lodash.intersection';
 import omit from 'lodash.omit';
@@ -36,8 +37,8 @@ export const areOwnPropsEqual = (
   ]);
 
   return (
-    shallowEqual(featureFlagProps, nextFeatureFlagProps) &&
-    shallowEqual(remainingProps, nextRemainingProps)
+    isEqual(featureFlagProps, nextFeatureFlagProps) &&
+    isEqual(remainingProps, nextRemainingProps)
   );
 };
 
