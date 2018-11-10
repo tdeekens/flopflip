@@ -1,11 +1,11 @@
 // @flow
 
-import { withProps } from 'recompose';
 import flowRight from 'lodash.flowright';
 import {
   ToggleFeature,
   isFeatureEnabled,
   setDisplayName,
+  withProps,
   ALL_FLAGS_PROP_KEY,
 } from '@flopflip/react';
 import { withFlags } from '../configure';
