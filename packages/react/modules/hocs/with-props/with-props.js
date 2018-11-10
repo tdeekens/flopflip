@@ -1,5 +1,6 @@
 import React, { createElement } from 'react';
 import { wrapDisplayName } from '../wrap-display-name';
+import { setDisplayName } from '../set-display-name';
 
 const withProps = mapProps => BaseComponent => {
   const WithProps = ownProps => {
@@ -12,7 +13,9 @@ const withProps = mapProps => BaseComponent => {
   };
 
   if (process.env.NODE_ENV !== 'production') {
-    return wrapDisplayName('withProps', BaseComponent)(WithProps);
+    return setDisplayName(wrapDisplayName(BaseComponent, 'withProps'))(
+      WithProps
+    );
   }
 
   return WithProps;

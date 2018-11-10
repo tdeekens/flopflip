@@ -99,8 +99,8 @@ describe('with `flagName`', () => {
         expect(wrapper).toMatchSnapshot();
       });
 
-      it('should render `Nothing`', () => {
-        expect(wrapper).toRender('Nothing');
+      it('should render `DefaultUntoggledComponent`', () => {
+        expect(wrapper).toRender('DefaultUntoggledComponent');
       });
     });
   });
@@ -200,8 +200,8 @@ describe('with `flagName` and `flagVariation`', () => {
         expect(wrapper).toMatchSnapshot();
       });
 
-      it('should render `Nothing`', () => {
-        expect(wrapper).toRender('Nothing');
+      it('should render `DefaultUntoggledComponent`', () => {
+        expect(wrapper).toRender('DefaultUntoggledComponent');
       });
     });
   });
@@ -285,8 +285,8 @@ describe('without `flagName`', () => {
         expect(wrapper).toMatchSnapshot();
       });
 
-      it('should render `Nothing`', () => {
-        expect(wrapper).toRender('Nothing');
+      it('should render `DefaultUntoggledComponent`', () => {
+        expect(wrapper).toRender('DefaultUntoggledComponent');
       });
     });
   });

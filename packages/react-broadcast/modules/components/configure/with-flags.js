@@ -15,7 +15,7 @@ const withFlags = (propKey: string = ALL_FLAGS_PROP_KEY) => (
   class EnhancedComponent extends PureComponent<
     $Diff<RequiredProps, ProvidedProps>
   > {
-    static displayName = wrapDisplayName('withFlags', Component);
+    static displayName = wrapDisplayName(Component, 'withFlags');
     render(): Node {
       return (
         <FlagsContext.Consumer>

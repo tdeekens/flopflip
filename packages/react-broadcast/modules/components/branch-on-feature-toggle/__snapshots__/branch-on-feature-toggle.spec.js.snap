@@ -38,28 +38,22 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
     shouldDeferAdapterConfiguration={false}
   >
     <branchOnFeatureToggle(ToggledComponent)>
-      <withProps(omitProps(branch(ToggledComponent)))
+      <withProps(omitProps(BranchOnFeatureToggle))
         @flopflip/flags={Object {}}
       >
-        <omitProps(branch(ToggledComponent))
+        <omitProps(BranchOnFeatureToggle)
           @flopflip/flags={Object {}}
           isFeatureEnabled={false}
         >
-          <branch(ToggledComponent)
+          <BranchOnFeatureToggle
             isFeatureEnabled={false}
           >
-            <renderComponent(UntoggledComponent)
-              isFeatureEnabled={false}
-            >
-              <UntoggledComponent
-                isFeatureEnabled={false}
-              >
-                <div />
-              </UntoggledComponent>
-            </renderComponent(UntoggledComponent)>
-          </branch(ToggledComponent)>
-        </omitProps(branch(ToggledComponent))>
-      </withProps(omitProps(branch(ToggledComponent)))>
+            <UntoggledComponent>
+              <div />
+            </UntoggledComponent>
+          </BranchOnFeatureToggle>
+        </omitProps(BranchOnFeatureToggle)>
+      </withProps(omitProps(BranchOnFeatureToggle))>
     </branchOnFeatureToggle(ToggledComponent)>
   </ConfigureAdapter>
 </ConfigureFlopflip>
@@ -103,14 +97,14 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
     shouldDeferAdapterConfiguration={false}
   >
     <branchOnFeatureToggle(ToggledComponent)>
-      <withProps(omitProps(branch(ToggledComponent)))
+      <withProps(omitProps(BranchOnFeatureToggle))
         @flopflip/flags={
           Object {
             "flag1": true,
           }
         }
       >
-        <omitProps(branch(ToggledComponent))
+        <omitProps(BranchOnFeatureToggle)
           @flopflip/flags={
             Object {
               "flag1": true,
@@ -118,17 +112,15 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
           }
           isFeatureEnabled={true}
         >
-          <branch(ToggledComponent)
+          <BranchOnFeatureToggle
             isFeatureEnabled={true}
           >
-            <ToggledComponent
-              isFeatureEnabled={true}
-            >
+            <ToggledComponent>
               <div />
             </ToggledComponent>
-          </branch(ToggledComponent)>
-        </omitProps(branch(ToggledComponent))>
-      </withProps(omitProps(branch(ToggledComponent)))>
+          </BranchOnFeatureToggle>
+        </omitProps(BranchOnFeatureToggle)>
+      </withProps(omitProps(BranchOnFeatureToggle))>
     </branchOnFeatureToggle(ToggledComponent)>
   </ConfigureAdapter>
 </ConfigureFlopflip>
@@ -172,22 +164,20 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
     shouldDeferAdapterConfiguration={false}
   >
     <branchOnFeatureToggle(ToggledComponent)>
-      <withProps(omitProps(branch(ToggledComponent)))
+      <withProps(omitProps(BranchOnFeatureToggle))
         @flopflip/flags={Object {}}
       >
-        <omitProps(branch(ToggledComponent))
+        <omitProps(BranchOnFeatureToggle)
           @flopflip/flags={Object {}}
           isFeatureEnabled={false}
         >
-          <branch(ToggledComponent)
+          <BranchOnFeatureToggle
             isFeatureEnabled={false}
           >
-            <Nothing
-              isFeatureEnabled={false}
-            />
-          </branch(ToggledComponent)>
-        </omitProps(branch(ToggledComponent))>
-      </withProps(omitProps(branch(ToggledComponent)))>
+            <DefaultUntoggledComponent />
+          </BranchOnFeatureToggle>
+        </omitProps(BranchOnFeatureToggle)>
+      </withProps(omitProps(BranchOnFeatureToggle))>
     </branchOnFeatureToggle(ToggledComponent)>
   </ConfigureAdapter>
 </ConfigureFlopflip>
@@ -231,14 +221,14 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
     shouldDeferAdapterConfiguration={false}
   >
     <branchOnFeatureToggle(ToggledComponent)>
-      <withProps(omitProps(branch(ToggledComponent)))
+      <withProps(omitProps(BranchOnFeatureToggle))
         @flopflip/flags={
           Object {
             "flag1": true,
           }
         }
       >
-        <omitProps(branch(ToggledComponent))
+        <omitProps(BranchOnFeatureToggle)
           @flopflip/flags={
             Object {
               "flag1": true,
@@ -246,17 +236,15 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
           }
           isFeatureEnabled={true}
         >
-          <branch(ToggledComponent)
+          <BranchOnFeatureToggle
             isFeatureEnabled={true}
           >
-            <ToggledComponent
-              isFeatureEnabled={true}
-            >
+            <ToggledComponent>
               <div />
             </ToggledComponent>
-          </branch(ToggledComponent)>
-        </omitProps(branch(ToggledComponent))>
-      </withProps(omitProps(branch(ToggledComponent)))>
+          </BranchOnFeatureToggle>
+        </omitProps(BranchOnFeatureToggle)>
+      </withProps(omitProps(BranchOnFeatureToggle))>
     </branchOnFeatureToggle(ToggledComponent)>
   </ConfigureAdapter>
 </ConfigureFlopflip>

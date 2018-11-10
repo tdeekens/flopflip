@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { ALL_FLAGS_PROP_KEY, DEFAULT_FLAGS_PROP_KEY } from '../../constants';
 import injectFeatureToggles, {
   areOwnPropsEqual,
@@ -25,7 +25,7 @@ describe('injecting', () => {
       props = createTestProps();
 
       Component = injectFeatureToggles([featureToggle])(TestComponent);
-      wrapper = shallow(<Component {...props} />);
+      wrapper = mount(<Component {...props} />);
     });
 
     it('should match snapshot', () => {
@@ -33,14 +33,14 @@ describe('injecting', () => {
     });
 
     it('should pass all requested feature toggles as a `prop`', () => {
-      expect(wrapper).toHaveProp(
+      expect(wrapper.find(TestComponent)).toHaveProp(
         DEFAULT_FLAGS_PROP_KEY,
         props[ALL_FLAGS_PROP_KEY]
       );
     });
 
     it("should pass the feature toggle's state as a `prop`", () => {
-      expect(wrapper).toHaveProp(DEFAULT_FLAGS_PROP_KEY, {
+      expect(wrapper.find(TestComponent)).toHaveProp(DEFAULT_FLAGS_PROP_KEY, {
         [featureToggle]: props[ALL_FLAGS_PROP_KEY][featureToggle],
       });
     });
@@ -64,11 +64,11 @@ describe('injecting', () => {
         Component = injectFeatureToggles([featureToggle, featureToggle2])(
           TestComponent
         );
-        wrapper = shallow(<Component {...props} />);
+        wrapper = mount(<Component {...props} />);
       });
 
       it('should pass all requested feature toggles as a `prop`', () => {
-        expect(wrapper).toHaveProp(
+        expect(wrapper.find(TestComponent)).toHaveProp(
           DEFAULT_FLAGS_PROP_KEY,
           props[ALL_FLAGS_PROP_KEY]
         );
@@ -87,25 +87,28 @@ describe('injecting', () => {
           featureToggle,
           nonExistingFeatureToggle,
         ])(TestComponent);
-        wrapper = shallow(<Component {...props} />);
+        wrapper = mount(<Component {...props} />);
       });
 
       it('should pass requested feature toggles as a `prop`', () => {
-        expect(wrapper).toHaveProp(DEFAULT_FLAGS_PROP_KEY, {
+        expect(wrapper.find(TestComponent)).toHaveProp(DEFAULT_FLAGS_PROP_KEY, {
           [featureToggle]: expect.any(Boolean),
         });
       });
 
       it("should pass the feature toggle's state as a `prop`", () => {
-        expect(wrapper).toHaveProp(DEFAULT_FLAGS_PROP_KEY, {
+        expect(wrapper.find(TestComponent)).toHaveProp(DEFAULT_FLAGS_PROP_KEY, {
           [featureToggle]: props[ALL_FLAGS_PROP_KEY][featureToggle],
         });
       });
 
       it('should omit requested but non existent feature toggles from `props`', () => {
-        expect(wrapper).not.toHaveProp(DEFAULT_FLAGS_PROP_KEY, {
-          [nonExistingFeatureToggle]: expect.any(Boolean),
-        });
+        expect(wrapper.find(TestComponent)).not.toHaveProp(
+          DEFAULT_FLAGS_PROP_KEY,
+          {
+            [nonExistingFeatureToggle]: expect.any(Boolean),
+          }
+        );
       });
     });
 
@@ -122,11 +125,14 @@ describe('injecting', () => {
           [featureToggle, featureToggle2],
           'fooPropKey'
         )(TestComponent);
-        wrapper = shallow(<Component {...props} />);
+        wrapper = mount(<Component {...props} />);
       });
 
       it('should map all feature toggles', () => {
-        expect(wrapper).toHaveProp('fooPropKey', props[ALL_FLAGS_PROP_KEY]);
+        expect(wrapper.find(TestComponent)).toHaveProp(
+          'fooPropKey',
+          props[ALL_FLAGS_PROP_KEY]
+        );
       });
     });
   });

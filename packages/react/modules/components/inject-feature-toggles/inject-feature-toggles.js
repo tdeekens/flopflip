@@ -56,21 +56,20 @@ const injectFeatureToggles = (
       [propKey]: filterFeatureToggles(props[ALL_FLAGS_PROP_KEY], flagNames),
     })),
     omitProps(ALL_FLAGS_PROP_KEY),
-    (props: ProvidedProps) => (BaseComponent: ComponentType<any>) => {
+    (BaseComponent: ComponentType<ProvidedProps>) =>
       class ShouldUpdate extends Component<{}> {
+        static displayName = BaseComponent.displayName;
+
         shouldComponentUpdate(nextProps: ProvidedProps) {
           return typeof areOwnPropsEqual === 'function'
-            ? !areOwnPropsEqual(props, nextProps, propKey)
+            ? !areOwnPropsEqual(this.props, nextProps, propKey)
             : true;
         }
 
         render() {
-          return createElement(BaseComponent, this.props);
+          return <BaseComponent {...this.props} />;
         }
       }
-
-      return ShouldUpdate;
-    }
   );
 
 export default injectFeatureToggles;

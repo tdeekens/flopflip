@@ -1,7 +1,5 @@
-export default hocName => BaseComponent => {
+export default (BaseComponent, hocName) => {
   const previousDisplayName = BaseComponent.displayName || BaseComponent.name;
 
-  BaseComponent['displayName'] = `${hocName}(${previousDisplayName})`;
-
-  return BaseComponent;
+  return `${hocName}(${previousDisplayName})`;
 };

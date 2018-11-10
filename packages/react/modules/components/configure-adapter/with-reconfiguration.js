@@ -3,7 +3,6 @@
 import type { Adapter } from '@flopflip/types';
 
 import React, { PureComponent, type ComponentType, type Node } from 'react';
-import { wrapDisplayName } from '../../hocs/wrap-display-name';
 import { AdapterContext } from './configure-adapter';
 
 type RequiredProps = {};
@@ -15,7 +14,8 @@ const withReconfiguration = (propKey: string = 'reconfigure') => (
   class EnhancedComponent extends PureComponent<
     $Diff<RequiredProps, ProvidedProps>
   > {
-    static displayName = wrapDisplayName('withReconfiguration', Component);
+    static displayName = `withReconfiguration(${Component.displayName ||
+      Component.name})`;
     render(): Node {
       return (
         <AdapterContext.Consumer>

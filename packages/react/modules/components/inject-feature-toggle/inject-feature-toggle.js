@@ -17,8 +17,8 @@ const injectFeatureToggle = (
   propKey: string = DEFAULT_FLAG_PROP_KEY
 ): ComponentType<$Diff<RequiredProps, ProvidedProps>> =>
   flowRight(
-    withProps((props: RequiredProps) => {
-      const flagValue: FlagValue = props[ALL_FLAGS_PROP_KEY][flagName];
+    withProps((ownProps: RequiredProps) => {
+      const flagValue: FlagValue = ownProps[ALL_FLAGS_PROP_KEY][flagName];
 
       return { [propKey]: isNil(flagValue) ? false : flagValue };
     }),

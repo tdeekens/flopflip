@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { ALL_FLAGS_PROP_KEY } from '../../constants';
 import injectFeatureToggle from './inject-feature-toggle';
 
@@ -25,7 +25,7 @@ describe('injecting', () => {
       props = createTestProps();
 
       Component = injectFeatureToggle(flagName, propKey)(TestComponent);
-      wrapper = shallow(<Component {...props} />);
+      wrapper = mount(<Component {...props} />);
     });
 
     it('should match snapshot', () => {
@@ -33,7 +33,10 @@ describe('injecting', () => {
     });
 
     it("should pass the feature toggle's state as a `prop` of `propKey`", () => {
-      expect(wrapper).toHaveProp(propKey, props[ALL_FLAGS_PROP_KEY][flagName]);
+      expect(wrapper.find(TestComponent)).toHaveProp(
+        propKey,
+        props[ALL_FLAGS_PROP_KEY][flagName]
+      );
     });
   });
 
@@ -44,7 +47,7 @@ describe('injecting', () => {
       props = createTestProps();
 
       Component = injectFeatureToggle(flagName)(TestComponent);
-      wrapper = shallow(<Component {...props} />);
+      wrapper = mount(<Component {...props} />);
     });
 
     it('should match snapshot', () => {
@@ -52,7 +55,7 @@ describe('injecting', () => {
     });
 
     it("should pass the feature toggle's state as a `prop` of `isFeatureEnabled`", () => {
-      expect(wrapper).toHaveProp('isFeatureEnabled', true);
+      expect(wrapper.find(TestComponent)).toHaveProp('isFeatureEnabled', true);
     });
   });
 
@@ -64,11 +67,11 @@ describe('injecting', () => {
       props = createTestProps();
 
       Component = injectFeatureToggle(anotherFlagName)(TestComponent);
-      wrapper = shallow(<Component {...props} />);
+      wrapper = mount(<Component {...props} />);
     });
 
     it("should pass the feature toggle's state as `false`", () => {
-      expect(wrapper).toHaveProp('isFeatureEnabled', false);
+      expect(wrapper.find(TestComponent)).toHaveProp('isFeatureEnabled', false);
     });
   });
 
@@ -79,11 +82,11 @@ describe('injecting', () => {
       props = createTestProps({ [flagName]: 'blue' });
 
       Component = injectFeatureToggle(flagName)(TestComponent);
-      wrapper = shallow(<Component {...props} />);
+      wrapper = mount(<Component {...props} />);
     });
 
     it("should pass the feature toggle's state as the value", () => {
-      expect(wrapper).toHaveProp(flagName, 'blue');
+      expect(wrapper.find(TestComponent)).toHaveProp(flagName, 'blue');
     });
   });
 });

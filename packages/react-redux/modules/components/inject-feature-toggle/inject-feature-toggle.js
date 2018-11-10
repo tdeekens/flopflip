@@ -9,6 +9,7 @@ import { selectFlags } from '../../ducks';
 import {
   injectFeatureToggle,
   wrapDisplayName,
+  setDisplayName,
   ALL_FLAGS_PROP_KEY,
 } from '@flopflip/react';
 import { STATE_SLICE } from './../../store';
@@ -25,7 +26,7 @@ export default (flagName: FlagName, propKey?: string) => (
 ) =>
   /* istanbul ignore next */
   flowRight(
-    wrapDisplayName('injectFeatureToggle'),
+    setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggle')),
     connect(mapStateToProps),
     injectFeatureToggle(flagName, propKey)
   )(WrappedComponent);

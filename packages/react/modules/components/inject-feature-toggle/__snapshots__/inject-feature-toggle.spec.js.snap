@@ -1,23 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`injecting with \`propKey\` should match snapshot 1`] = `
-<omitProps(TestComponent)
+<withProps(omitProps(TestComponent))
   @flopflip/flags={
     Object {
       "aFeatureToggle": true,
     }
   }
-  fooFlagPropName={true}
-/>
+>
+  <omitProps(TestComponent)
+    @flopflip/flags={
+      Object {
+        "aFeatureToggle": true,
+      }
+    }
+    fooFlagPropName={true}
+  >
+    <TestComponent
+      fooFlagPropName={true}
+    >
+      Test
+    </TestComponent>
+  </omitProps(TestComponent)>
+</withProps(omitProps(TestComponent))>
 `;
 
 exports[`injecting without \`propKey\` should match snapshot 1`] = `
-<omitProps(TestComponent)
+<withProps(omitProps(TestComponent))
   @flopflip/flags={
     Object {
       "aFeatureToggle": true,
     }
   }
-  isFeatureEnabled={true}
-/>
+>
+  <omitProps(TestComponent)
+    @flopflip/flags={
+      Object {
+        "aFeatureToggle": true,
+      }
+    }
+    isFeatureEnabled={true}
+  >
+    <TestComponent
+      isFeatureEnabled={true}
+    >
+      Test
+    </TestComponent>
+  </omitProps(TestComponent)>
+</withProps(omitProps(TestComponent))>
 `;

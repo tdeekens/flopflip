@@ -9,14 +9,14 @@ BaseComponent.displayName = 'BaseComponent';
 
 describe('rendering', () => {
   const hocName = 'testHoc';
-  let EnhancedComponent;
+  let wrappedDisplayName;
   let wrapper;
 
   beforeEach(() => {
-    EnhancedComponent = wrapDisplayName(hocName)(BaseComponent);
+    wrappedDisplayName = wrapDisplayName(BaseComponent, hocName);
   });
 
   it('should include `hocName` in wrapped display name', () => {
-    expect(EnhancedComponent.displayName).toContain(hocName);
+    expect(wrappedDisplayName).toContain(hocName);
   });
 });

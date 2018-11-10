@@ -8,6 +8,7 @@ import {
   branchOnFeatureToggle,
   DEFAULT_FLAG_PROP_KEY,
   wrapDisplayName,
+  setDisplayName,
 } from '@flopflip/react';
 import injectFeatureToggle from './../inject-feature-toggle';
 
@@ -19,7 +20,7 @@ export default <RequiredProps, ProvidedProps>(
   UntoggledComponent?: ComponentType<any>
 ) => (WrappedComponent: ComponentType<$Diff<RequiredProps, ProvidedProps>>) =>
   flowRight(
-    wrapDisplayName('branchOnFeatureToggle'),
+    setDisplayName(wrapDisplayName(WrappedComponent, 'branchOnFeatureToggle')),
     injectFeatureToggle(flag),
     branchOnFeatureToggle(UntoggledComponent, DEFAULT_FLAG_PROP_KEY, variation)
   )(WrappedComponent);
