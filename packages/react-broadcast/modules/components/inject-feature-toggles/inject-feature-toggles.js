@@ -3,8 +3,8 @@
 import type { FlagName } from '@flopflip/types';
 
 import React, { type ComponentType } from 'react';
-import { compose, setDisplayName, wrapDisplayName } from 'recompose';
-import { injectFeatureToggles } from '@flopflip/react';
+import { compose } from 'recompose';
+import { injectFeatureToggles, wrapDisplayName } from '@flopflip/react';
 import { withFlags } from '../configure';
 
 type RequiredProps = {};
@@ -20,7 +20,7 @@ export default <RequiredProps, ProvidedProps>(
   ) => boolean
 ) => (WrappedComponent: ComponentType<$Diff<RequiredProps, ProvidedProps>>) =>
   compose(
-    setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggles')),
+    wrapDisplayName('injectFeatureToggles'),
     withFlags(),
     injectFeatureToggles(flagNames, propKey, areOwnPropsEqual)
   )(WrappedComponent);

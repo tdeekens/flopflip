@@ -1,9 +1,10 @@
 // @flow
 
-import { compose, withProps, setDisplayName } from 'recompose';
+import { compose, withProps } from 'recompose';
 import {
   ToggleFeature,
   isFeatureEnabled,
+  setDisplayName,
   ALL_FLAGS_PROP_KEY,
 } from '@flopflip/react';
 import { withFlags } from '../configure';
