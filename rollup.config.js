@@ -70,6 +70,9 @@ const config = {
     commonjs({
       ignoreGlobal: true,
       exclude: ['packages/**'],
+      namedExports: {
+        'node_modules/react-is/index.js': ['isValidElementType'],
+      },
     }),
     flow({ all: true }),
     filesize(),

@@ -8394,7 +8394,7 @@ promzard@^0.3.0:
   dependencies:
     read "1"
 
-prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@15.6.2, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   integrity sha512-3pboPvLiWD7dkI3qf3KbUe6hKFKa52w+AE0VCqECtf+QHAKgOL37tTaNCnuX1nAAQ4ZhyP+kYVKf8rLmJ/feDQ==
@@ -8577,6 +8577,11 @@ react-fast-compare@2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.3.tgz#f7c8f3867986dd6d9ad512299a3fc2231fb60c6f"
   integrity sha512-zUaPHxoOZZYYf42Jm3tZklY19YVGr7Z7buvKw1MSzy0S1r/DVnuR/EfYPQmwh5UkMrAfAH4gbBz2pcDqec7Bhw==
+
+react-is@16.5.2:
+  version "16.5.2"
+  resolved "https://registry.npmjs.org/react-is/-/react-is-16.5.2.tgz#e2a7b7c3f5d48062eb769fcb123505eb928722e3"
+  integrity sha512-hSl7E6l25GTjNEZATqZIuWOgSnpXb3kD0DVCujmg46K5zLxsbiKaaT6VO9slkSBDPZfYs30lwfJwbOFOnoEnKQ==
 
 react-is@^16.3.2, react-is@^16.6.0:
   version "16.6.0"

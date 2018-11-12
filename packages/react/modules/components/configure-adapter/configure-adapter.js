@@ -3,6 +3,7 @@
 import type { Flags, Adapter, AdapterArgs, User } from '@flopflip/types';
 
 import React, { PureComponent, type Node } from 'react';
+import PropTypes from 'prop-types';
 import createReactContext, { type Context } from 'create-react-context';
 import merge from 'deepmerge';
 
@@ -58,9 +59,16 @@ export const mergeAdapterArgs = (
 export default class ConfigureAdapter extends PureComponent<Props, State> {
   static defaultProps = {
     shouldDeferAdapterConfiguration: false,
+    defaultFlags: {},
     children: null,
     render: null,
-    defaultFlags: {},
+  };
+
+  static propTypes = {
+    shouldDeferAdapterConfiguration: PropTypes.bool,
+    defaultFlags: PropTypes.object,
+    children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    render: PropTypes.func,
   };
 
   adapterState: AdapterState = AdapterStates.UNCONFIGURED;

@@ -26,7 +26,7 @@ const createTestProps = props => ({
     onStatusStateChange: jest.fn(),
   },
   adapter: createAdapter(),
-  children: ChildComponent,
+  children: <ChildComponent />,
 
   ...props,
 });

@@ -9,6 +9,8 @@ import type {
 } from '@flopflip/types';
 
 import React, { PureComponent, type ComponentType, type Node } from 'react';
+import PropTypes from 'prop-types';
+import { isValidElementType } from 'react-is';
 
 type Props = {
   untoggledComponent?: ComponentType<any>,
@@ -29,6 +31,25 @@ export default class ToggleFeature extends PureComponent<Props> {
     toggledComponent: null,
     render: null,
     children: null,
+  };
+
+  static propTypes = {
+    untoggledComponent: (props: Props, propName: string) => {
+      if (props[propName] && !isValidElementType(props[propName])) {
+        return new Error(
+          `Invalid prop 'untoggledComponent' supplied to 'Route': the prop is not a valid React component`
+        );
+      }
+    },
+    toggledComponent: (props: Props, propName: string) => {
+      if (props[propName] && !isValidElementType(props[propName])) {
+        return new Error(
+          `Invalid prop 'toggledComponent' supplied to 'Route': the prop is not a valid React component`
+        );
+      }
+    },
+    render: PropTypes.func,
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   };
 
   render(): Node {

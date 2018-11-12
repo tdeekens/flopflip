@@ -3,6 +3,7 @@
 import type { User, AdapterArgs } from '@flopflip/types';
 
 import React, { PureComponent, type Node } from 'react';
+import PropTypes from 'prop-types';
 
 import { withReconfiguration } from '../configure-adapter';
 
@@ -22,6 +23,11 @@ export class ReconfigureAdapter extends PureComponent<Props> {
   static defaultProps = {
     shouldOverwrite: false,
     children: null,
+  };
+
+  static propTypes = {
+    shouldOverwrite: PropTypes.bool,
+    children: PropTypes.node,
   };
 
   componentDidMount(): void {

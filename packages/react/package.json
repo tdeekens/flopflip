@@ -51,8 +51,10 @@
     "lodash.intersection": "4.4.0",
     "lodash.isnil": "4.0.0",
     "lodash.omit": "4.5.0",
+    "prop-types": "15.6.2",
     "react-fast-compare": "2.0.3",
-    "tiny-warning": "1.0.0"
+    "tiny-warning": "1.0.0",
+    "react-is": "16.5.2"
   },
   "keywords": [
     "react",
