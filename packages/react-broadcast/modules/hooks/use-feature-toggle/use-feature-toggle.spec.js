@@ -1,7 +1,7 @@
 import useFeatureToggle from './use-feature-toggle';
 import React from 'react';
 
-jest.mock('warning');
+jest.mock('tiny-warning');
 
 const flagName = 'testFlagName';
 

@@ -1,7 +1,7 @@
-import warning from 'warning';
+import warning from 'tiny-warning';
 import isFeatureEnabled from './is-feature-enabled';
 
-jest.mock('warning');
+jest.mock('tiny-warning');
 
 describe('with existing flag', () => {
   describe('with flag variation', () => {
