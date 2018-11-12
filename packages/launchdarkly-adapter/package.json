@@ -37,7 +37,7 @@
     "ldclient-js": "2.7.2",
     "lodash.camelcase": "4.3.0",
     "lodash.isequal": "4.5.0",
-    "warning": "4.0.2"
+    "tiny-warning": "1.0.0"
   },
   "keywords": [
     "feature-flags",

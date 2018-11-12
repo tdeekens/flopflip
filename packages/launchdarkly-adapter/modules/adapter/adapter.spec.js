@@ -1,11 +1,11 @@
 import ldClient from 'ldclient-js';
-import warning from 'warning';
+import warning from 'tiny-warning';
 import adapter, { camelCaseFlags, createAnonymousUserKey } from './adapter';
 
 jest.mock('ldclient-js', () => ({
   initialize: jest.fn(),
 }));
-jest.mock('warning');
+jest.mock('tiny-warning');
 
 const clientSideId = '123-abc';
 const userWithKey = { key: 'foo-user' };
@@ -87,8 +87,7 @@ describe('when configuring', () => {
         user: userWithoutKey,
         onStatusStateChange,
         onFlagsStateChange,
-      })
-    );
+      }));
 
     it('should initialize the `ld-client` with `clientSideId` and random `user` `key`', () => {
       expect(ldClient.initialize).toHaveBeenCalledWith(clientSideId, {

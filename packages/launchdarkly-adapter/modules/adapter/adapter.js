@@ -8,7 +8,7 @@ import type {
   OnFlagsStateChangeCallback,
   OnStatusStateChangeCallback,
 } from '@flopflip/types';
-import warning from 'warning';
+import warning from 'tiny-warning';
 import isEqual from 'lodash.isequal';
 import { initialize as initializeLaunchDarklyClient } from 'ldclient-js';
 import camelCase from 'lodash.camelcase';
