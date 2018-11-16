@@ -9,6 +9,7 @@ import type {
 } from '@flopflip/types';
 
 import React, { PureComponent, type ComponentType, type Node } from 'react';
+import PropTypes from 'prop-types';
 import createReactContext, { type Context } from 'create-react-context';
 import { ConfigureAdapter } from '@flopflip/react';
 
@@ -49,6 +50,12 @@ export default class Configure extends PureComponent<Props, State> {
     children: null,
     defaultFlags: {},
     shouldDeferAdapterConfiguration: false,
+  };
+
+  static propTypes = {
+    children: PropTypes.element,
+    defaultFlags: PropTypes.object,
+    shouldDeferAdapterConfiguration: PropTypes.bool,
   };
 
   state: { flags: Flags } = {
