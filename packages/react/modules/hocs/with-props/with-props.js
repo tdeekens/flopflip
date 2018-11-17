@@ -6,11 +6,12 @@ import { setDisplayName } from '../set-display-name';
 
 type WithProps = {};
 type ProvidedProps = {};
+type InjectedProps = WithProps & ProvidedProps;
 
 const withProps = (
   mapProps: WithProps | ((ownProps: ProvidedProps) => WithProps)
 ) => (BaseComponent: ComponentType<ProvidedProps & WithProps>) => {
-  const WithProps = (ownProps: ProvidedProps): ProvidedProps & WithProps => {
+  const WithProps = (ownProps: ProvidedProps): InjectedProps => {
     const enhancedProps =
       typeof mapProps === 'function'
         ? { ...ownProps, ...mapProps(ownProps) }
