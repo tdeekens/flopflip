@@ -6,12 +6,12 @@ aliases:
   - &restore_yarn_cache
     name: 'Restoring yarn cache'
     keys:
-      - v3-yarn-cache-{{ checksum "yarn.lock" }}
-      - v3-yarn-cache
+      - v4-yarn-cache-{{ checksum "yarn.lock" }}
+      - v4-yarn-cache
 
   - &save_yarn_cache
     name: 'Saving yarn cache'
-    key: v3-yarn-cache-{{ checksum "yarn.lock" }}
+    key: v4-yarn-cache-{{ checksum "yarn.lock" }}
     paths:
       - ~/.cache/yarn
 
