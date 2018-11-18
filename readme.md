@@ -428,7 +428,7 @@ Internally, `ReconfigureFlopFlip` will pass the `projectKey` to `ConfigureFlopFl
 _Note:_ Whenever `shouldOverwrite` is `true` the existing user configuration will be overwritten not merged. Use with care as any
 subsequent `shouldOverwrite={true}` will overwrite any previously passed `user` with `shouldOverwrite={false}` (default).
 
-### `@flopflip/react-broadcast` `@flopflip/react-redux` API
+### `@flopflip/react-broadcast` & `@flopflip/react-redux` API
 
 Apart from `ConfigureFlopFlip` both packages `@flopflip/react-broadcast` and
 `@flopflip/react-redux` export the same set of components to toggle based on
@@ -687,6 +687,32 @@ Requires arguments of `clientSideId:string`, `user:object`.
 - The `adapterArgs` object
   - Often with the before mentioned user object `user` object which often needs
     at least a `key` attribute
+
+### Additional `@flopflip/react-broadcast` API
+
+Given that the `@flopflip/react-broadcast` uses the React's context it may offer
+slightly different APIs. Generally we aim to have the same API for both packages.
+
+#### `useFeatureToggle(flagName: string, flagVariation: FlagVariation): boolean`
+
+A likely forward compatible implementation [React hook](https://reactjs.org/docs/hooks-reference.html). Given the installed version of React supports hooks (they are currently experimental and in alpha phase) you can use a functional component and toggle as follows:
+
+```js
+import { useFeatureToggle } from '@flopflip/react-broadcast';
+
+function ComponentWithFeatureToggle(props) {
+   const isFeatureEnabled = useFeatureToggle('myFeatureToggle');
+
+   return (
+     <h3>{props.title}<h3>
+     <p>
+       The feature is {isFeatureEnabled ? 'enabled' : 'disabled'}
+     </p>
+   );
+}
+```
+
+Please note that given the React version _does not_ support hooks using `useFeatureToggle` will throw an error.
 
 ### Module formats
 
