@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { AdapterContext } from './configure-adapter';
+import { AdapterContext } from '../adapter-context';
 import withReconfiguration from './with-reconfiguration';
 
 const TestComponent = () => <div />;

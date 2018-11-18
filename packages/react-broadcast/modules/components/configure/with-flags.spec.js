@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { FlagsContext } from '../configure';
+import { FlagsContext } from '../flags-context';
 import withFlags from './with-flags';
 
 const TestComponent = () => <div />;

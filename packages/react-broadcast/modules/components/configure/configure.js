@@ -10,8 +10,8 @@ import type {
 
 import React, { PureComponent, type ComponentType, type Node } from 'react';
 import PropTypes from 'prop-types';
-import createReactContext, { type Context } from 'create-react-context';
 import { ConfigureAdapter } from '@flopflip/react';
+import { FlagsContext } from '../flags-context';
 
 type Props = {
   children?: Node,
@@ -23,8 +23,6 @@ type Props = {
 type State = {
   flags: Flags,
 };
-
-export const FlagsContext: Context<Flags> = createReactContext({});
 
 /**
  * NOTE:

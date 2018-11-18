@@ -6,7 +6,7 @@ import React from 'react';
 import camelCase from 'lodash.camelcase';
 import warning from 'tiny-warning';
 import { isFeatureEnabled } from '@flopflip/react';
-import { FlagsContext } from '../../components/configure';
+import { FlagsContext } from '../../components/flags-context';
 
 export default function useFeatureToggle(
   flagName: FlagName,

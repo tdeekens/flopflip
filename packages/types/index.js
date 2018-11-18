@@ -23,3 +23,15 @@ export type Adapter = {
 };
 export type OnFlagsStateChangeCallback = Flags => void;
 export type OnStatusStateChangeCallback = ({ [string]: boolean }) => void;
+
+export type AdapterReconfigurationOptions = {
+  shouldOverwrite?: boolean,
+};
+export type AdapterReconfiguration = {
+  adapterArgs: AdapterArgs,
+  options: AdapterReconfigurationOptions,
+};
+export type ReconfigureAdapter = (
+  adapterArgs: AdapterArgs,
+  options: AdapterReconfigurationOptions
+) => void;

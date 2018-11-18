@@ -3,7 +3,7 @@
 import type { Adapter } from '@flopflip/types';
 
 import React, { PureComponent, type ComponentType, type Node } from 'react';
-import { AdapterContext } from './configure-adapter';
+import { AdapterContext } from '../adapter-context';
 
 type RequiredProps = {};
 type ProvidedProps = {};

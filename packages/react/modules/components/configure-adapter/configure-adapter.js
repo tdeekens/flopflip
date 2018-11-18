@@ -1,11 +1,18 @@
 // @flow
 
-import type { Flags, Adapter, AdapterArgs, User } from '@flopflip/types';
+import type {
+  Flags,
+  Adapter,
+  AdapterArgs,
+  AdapterReconfiguration,
+  AdapterReconfigurationOptions,
+  User,
+} from '@flopflip/types';
 
 import React, { PureComponent, type Node } from 'react';
 import PropTypes from 'prop-types';
-import createReactContext, { type Context } from 'create-react-context';
 import merge from 'deepmerge';
+import { AdapterContext } from '../adapter-context';
 
 export const AdapterStates: {
   UNCONFIGURED: string,
@@ -29,21 +36,6 @@ type State = {
   appliedAdapterArgs: AdapterArgs,
 };
 type AdapterState = $Values<typeof AdapterStates>;
-type AdapterReconfigurationOptions = {
-  shouldOverwrite?: boolean,
-};
-type AdapterReconfiguration = {
-  adapterArgs: AdapterArgs,
-  options: AdapterReconfigurationOptions,
-};
-type ReconfigureAdapter = (
-  adapterArgs: AdapterArgs,
-  options: AdapterReconfigurationOptions
-) => void;
-
-export const AdapterContext: Context<ReconfigureAdapter> = createReactContext(
-  () => {}
-);
 
 const isEmptyChildren = (children: Node): boolean =>
   React.Children.count(children) === 0;

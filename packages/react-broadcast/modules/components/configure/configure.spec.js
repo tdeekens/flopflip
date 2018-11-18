@@ -1,7 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { ConfigureAdapter } from '@flopflip/react';
-import Configure, { FlagsContext } from './configure';
+import { FlagsContext } from '../flags-context';
+import Configure from './configure';
 
 const ChildComponent = () => <div />;
 

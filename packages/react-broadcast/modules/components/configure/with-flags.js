@@ -4,7 +4,7 @@ import type { FlagName, FlagVariation } from '@flopflip/types';
 
 import React, { PureComponent, type ComponentType, type Node } from 'react';
 import { ALL_FLAGS_PROP_KEY, wrapDisplayName } from '@flopflip/react';
-import { FlagsContext } from '../configure';
+import { FlagsContext } from '../flags-context';
 
 type RequiredProps = {};
 type ProvidedProps = {};
