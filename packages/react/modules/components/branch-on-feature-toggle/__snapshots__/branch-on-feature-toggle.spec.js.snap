@@ -1,25 +1,81 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`with \`flagName\` and \`flagVariation\` when feature is disabled with untoggled component should match snapshot 1`] = `<UntoggledComponent />`;
+exports[`with \`flagName\` and \`flagVariation\` when feature is disabled with untoggled component should match snapshot 1`] = `
+<UntoggledComponent
+  flagName="fooFlagName"
+  fooFlagName="flagVariation2"
+/>
+`;
 
-exports[`with \`flagName\` and \`flagVariation\` when feature is disabled without untoggled component should match snapshot 1`] = `<DefaultUntoggledComponent />`;
+exports[`with \`flagName\` and \`flagVariation\` when feature is disabled without untoggled component should match snapshot 1`] = `
+<DefaultUntoggledComponent
+  flagName="fooFlagName"
+  fooFlagName="flagVariation2"
+/>
+`;
 
-exports[`with \`flagName\` and \`flagVariation\` when feature is enabled with untoggled component should match snapshot 1`] = `<FeatureComponent />`;
+exports[`with \`flagName\` and \`flagVariation\` when feature is enabled with untoggled component should match snapshot 1`] = `
+<FeatureComponent
+  flagName="fooFlagName"
+  fooFlagName="fooflagVariation"
+/>
+`;
 
-exports[`with \`flagName\` and \`flagVariation\` when feature is enabled without untoggled component should match snapshot 1`] = `<FeatureComponent />`;
+exports[`with \`flagName\` and \`flagVariation\` when feature is enabled without untoggled component should match snapshot 1`] = `
+<FeatureComponent
+  flagName="fooFlagName"
+  fooFlagName="fooflagVariation"
+/>
+`;
 
-exports[`with \`flagName\` when feature is disabled with untoggled component should match snapshot 1`] = `<UntoggledComponent />`;
+exports[`with \`flagName\` when feature is disabled with untoggled component should match snapshot 1`] = `
+<UntoggledComponent
+  flagName="fooFlagName"
+  fooFlagName={false}
+/>
+`;
 
-exports[`with \`flagName\` when feature is disabled without untoggled component should match snapshot 1`] = `<DefaultUntoggledComponent />`;
+exports[`with \`flagName\` when feature is disabled without untoggled component should match snapshot 1`] = `
+<DefaultUntoggledComponent
+  flagName="fooFlagName"
+  fooFlagName={false}
+/>
+`;
 
-exports[`with \`flagName\` when feature is enabled with untoggled component should match snapshot 1`] = `<FeatureComponent />`;
+exports[`with \`flagName\` when feature is enabled with untoggled component should match snapshot 1`] = `
+<FeatureComponent
+  flagName="fooFlagName"
+  fooFlagName={true}
+/>
+`;
 
-exports[`with \`flagName\` when feature is enabled without untoggled component should match snapshot 1`] = `<FeatureComponent />`;
+exports[`with \`flagName\` when feature is enabled without untoggled component should match snapshot 1`] = `
+<FeatureComponent
+  flagName="fooFlagName"
+  fooFlagName={true}
+/>
+`;
 
-exports[`without \`flagName\` when feature is disabled with untoggled component should match snapshot 1`] = `<UntoggledComponent />`;
+exports[`without \`flagName\` when feature is disabled with untoggled component should match snapshot 1`] = `
+<UntoggledComponent
+  isFeatureEnabled={false}
+/>
+`;
 
-exports[`without \`flagName\` when feature is disabled without untoggled component should match snapshot 1`] = `<DefaultUntoggledComponent />`;
+exports[`without \`flagName\` when feature is disabled without untoggled component should match snapshot 1`] = `
+<DefaultUntoggledComponent
+  isFeatureEnabled={false}
+/>
+`;
 
-exports[`without \`flagName\` when feature is enabled with untoggled component should match snapshot 1`] = `<FeatureComponent />`;
+exports[`without \`flagName\` when feature is enabled with untoggled component should match snapshot 1`] = `
+<FeatureComponent
+  isFeatureEnabled={true}
+/>
+`;
 
-exports[`without \`flagName\` when feature is enabled without untoggled component should match snapshot 1`] = `<FeatureComponent />`;
+exports[`without \`flagName\` when feature is enabled without untoggled component should match snapshot 1`] = `
+<FeatureComponent
+  isFeatureEnabled={true}
+/>
+`;

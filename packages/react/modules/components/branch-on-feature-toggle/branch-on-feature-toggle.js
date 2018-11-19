@@ -19,9 +19,9 @@ const branchOnFeatureToggle = (
 ) => (ToggledComponent: ComponentType<any>): ComponentType<any> => {
   const BranchOnFeatureToggle: ComponentType<any> = (props: Object) => {
     if (isFeatureEnabled(flagName, flagVariation)(props)) {
-      return createElement(ToggledComponent);
+      return createElement(ToggledComponent, props);
     } else {
-      return createElement(UntoggledComponent);
+      return createElement(UntoggledComponent, props);
     }
   };
 
