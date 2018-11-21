@@ -89,7 +89,7 @@
     "jest-runner-prettier": "0.2.6",
     "jest-watch-yarn-workspaces": "1.1.0",
     "lerna": "3.4.3",
-    "lint-staged": "8.0.4",
+    "lint-staged": "8.1.0",
     "prettier": "1.15.2",
     "raf": "3.4.1",
     "read-pkg-up": "4.0.0",
