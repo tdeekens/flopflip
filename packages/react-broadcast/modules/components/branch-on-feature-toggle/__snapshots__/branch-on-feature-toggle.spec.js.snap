@@ -48,7 +48,9 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
           <BranchOnFeatureToggle
             isFeatureEnabled={false}
           >
-            <UntoggledComponent>
+            <UntoggledComponent
+              isFeatureEnabled={false}
+            >
               <div />
             </UntoggledComponent>
           </BranchOnFeatureToggle>
@@ -115,7 +117,9 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
           <BranchOnFeatureToggle
             isFeatureEnabled={true}
           >
-            <ToggledComponent>
+            <ToggledComponent
+              isFeatureEnabled={true}
+            >
               <div />
             </ToggledComponent>
           </BranchOnFeatureToggle>
@@ -174,7 +178,9 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
           <BranchOnFeatureToggle
             isFeatureEnabled={false}
           >
-            <DefaultUntoggledComponent />
+            <DefaultUntoggledComponent
+              isFeatureEnabled={false}
+            />
           </BranchOnFeatureToggle>
         </omitProps(BranchOnFeatureToggle)>
       </withProps(omitProps(BranchOnFeatureToggle))>
@@ -239,7 +245,9 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
           <BranchOnFeatureToggle
             isFeatureEnabled={true}
           >
-            <ToggledComponent>
+            <ToggledComponent
+              isFeatureEnabled={true}
+            >
               <div />
             </ToggledComponent>
           </BranchOnFeatureToggle>

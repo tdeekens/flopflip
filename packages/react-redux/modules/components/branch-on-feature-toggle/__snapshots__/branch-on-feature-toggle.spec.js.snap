@@ -86,7 +86,10 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
                 dispatch={[Function]}
                 isFeatureEnabled={false}
               >
-                <UntoggledComponent>
+                <UntoggledComponent
+                  dispatch={[Function]}
+                  isFeatureEnabled={false}
+                >
                   <div />
                 </UntoggledComponent>
               </BranchOnFeatureToggle>
@@ -185,7 +188,10 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
                 dispatch={[Function]}
                 isFeatureEnabled={true}
               >
-                <ToggledComponent>
+                <ToggledComponent
+                  dispatch={[Function]}
+                  isFeatureEnabled={true}
+                >
                   <div />
                 </ToggledComponent>
               </BranchOnFeatureToggle>
@@ -284,7 +290,10 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
                 dispatch={[Function]}
                 isFeatureEnabled={false}
               >
-                <DefaultUntoggledComponent />
+                <DefaultUntoggledComponent
+                  dispatch={[Function]}
+                  isFeatureEnabled={false}
+                />
               </BranchOnFeatureToggle>
             </omitProps(BranchOnFeatureToggle)>
           </withProps(omitProps(BranchOnFeatureToggle))>
@@ -381,7 +390,10 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
                 dispatch={[Function]}
                 isFeatureEnabled={true}
               >
-                <ToggledComponent>
+                <ToggledComponent
+                  dispatch={[Function]}
+                  isFeatureEnabled={true}
+                >
                   <div />
                 </ToggledComponent>
               </BranchOnFeatureToggle>
