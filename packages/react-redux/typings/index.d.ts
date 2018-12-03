@@ -19,9 +19,9 @@ declare module '@flopflip/react-redux' {
   export class ToggleFeature extends React.Component<
     ToggleComponentProps,
     any
-  > {}
+    > { }
 
-  export function createFlopFlipEnhancer(adapter: any, adapterArgs?: any): (next) => () => void;
+  export function createFlopFlipEnhancer(adapter: any, adapterArgs?: any): (next: any) => () => void;
   export function flopflipReducer(state: {}, action: {}): any;
   export function selectFeatureFlag(flagName: FlagName): (state: {}) => Flags;
   export function selectFeatureFlags(state: {}): Flags;
