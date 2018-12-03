@@ -801,15 +801,15 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@flopflip/launchdarkly-adapter@2.4.2":
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.4.2.tgz#b876a80c45552c5e71cdbc5451f48076085e4060"
-  integrity sha512-4Pz5EBNJrrwxiGs5b5ZOldnWwgY8R0YBzNArCv/XdiOU8Io+F0OnMTC+nWs8rgL+9vgdAkHqUSx/jA/ySC+5FQ==
+"@flopflip/launchdarkly-adapter@2.4.4":
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.4.4.tgz#482b2872be0d84ebc3be6b6a874dfd8def20ec1a"
+  integrity sha512-/zz7TzidzLzYyE+tbTW0nyu3xWrcu1DjarRkeALJ77Zu13X953AYYjPdvu36WmObw1EzghHYYUADViNG6n9mew==
   dependencies:
-    ldclient-js "2.7.2"
+    ldclient-js "2.7.3"
     lodash.camelcase "4.3.0"
     lodash.isequal "4.5.0"
-    warning "4.0.2"
+    tiny-warning "1.0.0"
 
 "@flopflip/localstorage-adapter@1.1.0":
   version "1.1.0"
@@ -5848,10 +5848,10 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
-ldclient-js@2.7.2:
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-2.7.2.tgz#c850f66c8b1d178bd6c2e800f5247b13e614eb3b"
-  integrity sha512-OjnSmQdrF1E+TJDVAIRMbjeKnskDfQEXxCq7r2lWOkXoxo+eJfVQS52s1qpYdUmGChPJjJOB+M1sRMgZk29+UQ==
+ldclient-js@2.7.3:
+  version "2.7.3"
+  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-2.7.3.tgz#1ebb80500725a3124a11dd327911cb12e669b045"
+  integrity sha512-Z2bwTFz4BOa2hlnY2vuf3c3/MAuSlUkb3ZXd+B+aYV2M1GyGbEGSHanS0OEFfKlV/w8N5PtZBU42EL5KSkFkbw==
   dependencies:
     Base64 "1.0.1"
     escape-string-regexp "1.0.5"
@@ -9872,13 +9872,6 @@ walker@~1.0.5:
   integrity sha1-L3+bj9ENZ3JisYqITijRlhjgKPs=
   dependencies:
     makeerror "1.0.x"
-
-warning@4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/warning/-/warning-4.0.2.tgz#aa6876480872116fa3e11d434b0d0d8d91e44607"
-  integrity sha512-wbTp09q/9C+jJn4KKJfJfoS6VleK/Dti0yqWSm6KMvJ4MRCXFQNapHuJXutJIrWV0Cf4AhTdeIe4qdKHR1+Hug==
-  dependencies:
-    loose-envify "^1.0.0"
 
 watch@~0.18.0:
   version "0.18.0"
