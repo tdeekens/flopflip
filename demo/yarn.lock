@@ -827,16 +827,16 @@
     invariant "2.2.4"
     mitt "1.1.3"
 
-"@flopflip/react-broadcast@7.1.2":
-  version "7.1.2"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-7.1.2.tgz#87104fe9eda5b31d1c63e6407ab4273e215fe790"
-  integrity sha512-NgNWhefiLk9mZx8zeJ/B4rTp+QCkMkwbEHSH1alSZebfaqtJr4hB2L10uyPztl8G+2RC6HiSKS0kHJVfghrEHg==
+"@flopflip/react-broadcast@7.2.3":
+  version "7.2.3"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-7.2.3.tgz#4ab5ada50e1f375403149bbe6317700ec5a13874"
+  integrity sha512-EAAV+rP3kSImoMnJ4UcqRLWTUjrhdw2GS52LWTmC48e1o9/4LLExf8m9JZYptxL4Xinwcp6SUpzQX/IuR+00Zg==
   dependencies:
-    "@flopflip/react" "^6.1.2"
-    "@flopflip/types" "^1.2.1"
+    "@flopflip/react" "^6.2.1"
+    "@flopflip/types" "^1.4.0"
     create-react-context "0.2.3"
+    lodash.flowright "3.5.0"
     lodash.memoize "4.1.2"
-    recompose "0.30.0"
 
 "@flopflip/react-redux@7.1.2":
   version "7.1.2"
@@ -849,7 +849,7 @@
     lodash.memoize "4.1.2"
     recompose "0.30.0"
 
-"@flopflip/react@^6.1.2":
+"@flopflip/react@^6.1.2", "@flopflip/react@^6.2.1":
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-6.2.1.tgz#1abe28449e472b069f9175052e68a00c121d8145"
   integrity sha512-6nRnKsBKH9mHzmu7mpodLgJqxaHPKlX9zP0HDkQ8W42Iqd3DXv56JRYtqXI56B9ae203AhlIrSPrEGWwEKCYZQ==
@@ -866,7 +866,7 @@
     react-is "16.6.3"
     tiny-warning "1.0.0"
 
-"@flopflip/types@^1.2.1":
+"@flopflip/types@^1.2.1", "@flopflip/types@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@flopflip/types/-/types-1.4.0.tgz#03536b70db830fef65ffd01cfcd4c3b9d56f8b9c"
   integrity sha512-DzM4dhan7tOSezf9l2PM16Ft9GiBeHHluJvEqS0Mlsk6UqejlLU7p0QRmyRVJvIJ7I5pTOv75qvS/p1w8wvamQ==
