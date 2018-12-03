@@ -6,7 +6,8 @@ declare module '@flopflip/types' {
 
   export type Diff<T extends string, U extends string> = ({ [P in T]: P } &
     { [P in U]: never } & { [x: string]: never })[T];
-  export type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
+  export type Omit<T, K extends keyof T> = Pick<T,
+    ({ [P in keyof T]-?: P } & { [P in K]: never })[keyof T]>;
 
   export interface ComponentEnhancerWithProps<ProvidedProps, RerquiredProps> {
     <P extends ProvidedProps>(
@@ -39,8 +40,8 @@ declare module '@flopflip/types' {
     untoggledComponent?: React.ComponentType<any>;
     render?: () => React.ReactNode;
     children?:
-      | (({ isFeatureEnabled: boolean }) => React.ReactNode)
-      | React.ReactNode;
+    | (({ isFeatureEnabled }: { isFeatureEnabled: boolean }) => React.ReactNode)
+    | React.ReactNode;
     isFeatureEnabled: boolean;
   }
   export interface ToggleComponentProps extends ToggleComponentCommonProps {
@@ -84,15 +85,15 @@ declare module '@flopflip/types' {
   export class ToggleFeature extends React.Component<
     ToggleComponentProps,
     any
-  > {}
+    > { }
 
   export class ConfigureFlopFlip extends React.Component<
     ConfigureComponentProps,
     any
-  > {}
+    > { }
 
   export class ReconfigureFlopFlip extends React.Component<
     ReconfigureComponentProps,
     any
-  > {}
+    > { }
 }
