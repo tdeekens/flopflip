@@ -31,10 +31,10 @@
   "devDependencies": {
     "@flopflip/types": "^1.4.0",
     "enzyme": "3.7.0",
-    "enzyme-to-json": "3.3.4"
+    "enzyme-to-json": "3.3.5"
   },
   "dependencies": {
-    "ldclient-js": "2.7.5",
+    "ldclient-js": "2.8.0",
     "lodash.camelcase": "4.3.0",
     "lodash.isequal": "4.5.0",
     "tiny-warning": "1.0.0"

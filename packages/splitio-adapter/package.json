@@ -31,7 +31,7 @@
   "devDependencies": {
     "@flopflip/types": "^1.4.0",
     "enzyme": "3.7.0",
-    "enzyme-to-json": "3.3.4"
+    "enzyme-to-json": "3.3.5"
   },
   "dependencies": {
     "@splitsoftware/splitio": "10.5.0",
