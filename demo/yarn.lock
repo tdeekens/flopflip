@@ -801,12 +801,12 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@flopflip/launchdarkly-adapter@2.4.4":
-  version "2.4.4"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.4.4.tgz#482b2872be0d84ebc3be6b6a874dfd8def20ec1a"
-  integrity sha512-/zz7TzidzLzYyE+tbTW0nyu3xWrcu1DjarRkeALJ77Zu13X953AYYjPdvu36WmObw1EzghHYYUADViNG6n9mew==
+"@flopflip/launchdarkly-adapter@2.4.5":
+  version "2.4.5"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.4.5.tgz#7e8987938d86fee3da2ecb63da90e63572b6de05"
+  integrity sha512-zadU2p6nICVMfup8HH4B/J7kwyEPxLWRZABxKJ4pI2hnKDfFdEauyMdGyAOLKnXpHHVoiW9T7IfGbs4RxfweAQ==
   dependencies:
-    ldclient-js "2.7.3"
+    ldclient-js "2.8.0"
     lodash.camelcase "4.3.0"
     lodash.isequal "4.5.0"
     tiny-warning "1.0.0"
@@ -1070,11 +1070,6 @@
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.1.tgz#5c85d662f76fa1d34575766c5dcd6615abcd30d8"
   integrity sha512-FZdkNBDqBRHKQ2MEbSC17xnPFOhZxeJ2YGSfr2BKf3sujG49Qe3bB+rGCwQfIaA7WHnGeGkSijX4FuBCdrzW/g==
-
-Base64@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/Base64/-/Base64-1.0.1.tgz#def45cc50c961bcc9bf2321d0f52bcbfec1f1bb1"
-  integrity sha1-3vRcxQyWG8yb8jIdD1K8v+wfG7E=
 
 abab@^2.0.0:
   version "2.0.0"
@@ -1693,7 +1688,7 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
 
-base64-js@^1.0.2:
+base64-js@1.3.0, base64-js@^1.0.2:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.3.0.tgz#cab1e6118f051095e58b5281aea8c1cd22bfc0e3"
   integrity sha512-ccav/yGvoa80BQDljCxsmmQ3Xvx60/UpBIij5QN21W3wBi/hhIC9OoO+KLpu9IJTS9j4DRVJ3aDDF9cMSoa2lw==
@@ -3753,7 +3748,7 @@ extsprintf@^1.2.0:
   resolved "https://registry.yarnpkg.com/extsprintf/-/extsprintf-1.4.0.tgz#e2689f8f356fad62cca65a3a91c5df5f9551692f"
   integrity sha1-4mifjzVvrWLMplo6kcXfX5VRaS8=
 
-fast-deep-equal@^2.0.1:
+fast-deep-equal@2.0.1, fast-deep-equal@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-2.0.1.tgz#7b05218ddf9667bf7f370bf7fdb2cb15fdd0aa49"
   integrity sha1-ewUhjd+WZ79/Nwv3/bLLFf3Qqkk=
@@ -5872,13 +5867,14 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
-ldclient-js@2.7.3:
-  version "2.7.3"
-  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-2.7.3.tgz#1ebb80500725a3124a11dd327911cb12e669b045"
-  integrity sha512-Z2bwTFz4BOa2hlnY2vuf3c3/MAuSlUkb3ZXd+B+aYV2M1GyGbEGSHanS0OEFfKlV/w8N5PtZBU42EL5KSkFkbw==
+ldclient-js@2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-2.8.0.tgz#ed1a1bc6999cb3aa2cb6dd5d6e11e2b5b0f031cb"
+  integrity sha512-PaWEUlWMMn0vH9or6b6TrBLuyVuvQpMBAGB158j7RBK8FC+HvymQpKLIYWUh/GvbktA0OLBD4xXc9If0um7E8Q==
   dependencies:
-    Base64 "1.0.1"
+    base64-js "1.3.0"
     escape-string-regexp "1.0.5"
+    fast-deep-equal "2.0.1"
 
 left-pad@^1.3.0:
   version "1.3.0"
