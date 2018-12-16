@@ -756,13 +756,6 @@
   dependencies:
     regenerator-runtime "^0.12.0"
 
-"@babel/runtime@^7.0.0":
-  version "7.1.5"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.1.5.tgz#4170907641cf1f61508f563ece3725150cc6fe39"
-  integrity sha512-xKnPpXG/pvK1B90JkwwxSGii90rQGKtzcMt2gI5G6+M0REXaq6rOHsGC2ay6/d0Uje7zzvSzjEzfR3ENhFlrfA==
-  dependencies:
-    regenerator-runtime "^0.12.0"
-
 "@babel/runtime@^7.1.2":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.2.0.tgz#b03e42eeddf5898e00646e4c840fa07ba8dcad7f"
@@ -845,33 +838,16 @@
     lodash.flowright "3.5.0"
     lodash.memoize "4.1.2"
 
-"@flopflip/react-redux@7.1.2":
-  version "7.1.2"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-7.1.2.tgz#4c6c2eef3a40eb23a6497c8e008eaa9ad65d21a0"
-  integrity sha512-2g4If+Z/6xZYaNxSsPEpTNyIXuzWLvgiPl1yFXqFOv8wwKYJWEN8+bHzmj7BUYmOEMpVlj2kqzDz5lTfaCtf2A==
+"@flopflip/react-redux@7.1.9":
+  version "7.1.9"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-7.1.9.tgz#7fd9f878a8663a6298d4ebcb12df877dceb681e4"
+  integrity sha512-I06nZR5EDquN1JhIQDx0xbFtb5obb31lrfJKCnOXhD1s7p4Zk2ohBXm0x4d6gIMo5/MYG3kth9PmtFUAOdoB+A==
   dependencies:
-    "@flopflip/react" "^6.1.2"
-    "@flopflip/types" "^1.2.1"
+    "@flopflip/react" "^6.2.2"
+    "@flopflip/types" "^1.4.1"
+    lodash.flowright "3.5.0"
     lodash.isnil "4.0.0"
     lodash.memoize "4.1.2"
-    recompose "0.30.0"
-
-"@flopflip/react@^6.1.2":
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-6.2.1.tgz#1abe28449e472b069f9175052e68a00c121d8145"
-  integrity sha512-6nRnKsBKH9mHzmu7mpodLgJqxaHPKlX9zP0HDkQ8W42Iqd3DXv56JRYtqXI56B9ae203AhlIrSPrEGWwEKCYZQ==
-  dependencies:
-    create-react-context "0.2.3"
-    deepmerge "2.2.1"
-    lodash.camelcase "4.3.0"
-    lodash.flowright "3.5.0"
-    lodash.intersection "4.4.0"
-    lodash.isnil "4.0.0"
-    lodash.omit "4.5.0"
-    prop-types "15.6.2"
-    react-fast-compare "2.0.4"
-    react-is "16.6.3"
-    tiny-warning "1.0.0"
 
 "@flopflip/react@^6.2.2":
   version "6.2.2"
@@ -889,11 +865,6 @@
     react-fast-compare "2.0.4"
     react-is "16.6.3"
     tiny-warning "1.0.0"
-
-"@flopflip/types@^1.2.1":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@flopflip/types/-/types-1.4.0.tgz#03536b70db830fef65ffd01cfcd4c3b9d56f8b9c"
-  integrity sha512-DzM4dhan7tOSezf9l2PM16Ft9GiBeHHluJvEqS0Mlsk6UqejlLU7p0QRmyRVJvIJ7I5pTOv75qvS/p1w8wvamQ==
 
 "@flopflip/types@^1.4.1":
   version "1.4.1"
@@ -2173,11 +2144,6 @@ chalk@^1.1.3:
     has-ansi "^2.0.0"
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
-
-change-emitter@^0.1.2:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/change-emitter/-/change-emitter-0.1.6.tgz#e8b2fe3d7f1ab7d69a32199aff91ea6931409515"
-  integrity sha1-6LL+PX8at9aaMhma/5HqaTFAlRU=
 
 chardet@^0.7.0:
   version "0.7.0"
@@ -3830,7 +3796,7 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
-fbjs@^0.8.0, fbjs@^0.8.1:
+fbjs@^0.8.0:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   integrity sha1-xNWY6taUkRJlPWWIsBpc3Nn5D90=
@@ -4481,11 +4447,6 @@ hmac-drbg@^1.0.0:
     hash.js "^1.0.3"
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
-
-hoist-non-react-statics@^2.3.1:
-  version "2.5.5"
-  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
-  integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
 
 hoist-non-react-statics@^3.1.0:
   version "3.2.1"
@@ -8133,7 +8094,7 @@ react-is@16.6.3, react-is@^16.3.2, react-is@^16.6.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.6.3.tgz#d2d7462fcfcbe6ec0da56ad69047e47e56e7eac0"
   integrity sha512-u7FDWtthB4rWibG/+mFbVd5FvdI20yde86qKGx4lVUTWmPlSWQ4QxbBIrrs+HnXGbxOUlUzTAP/VDmvCwaP2yA==
 
-react-lifecycles-compat@^3.0.0, react-lifecycles-compat@^3.0.2:
+react-lifecycles-compat@^3.0.0:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
@@ -8287,18 +8248,6 @@ realpath-native@^1.0.0:
   integrity sha512-+S3zTvVt9yTntFrBpm7TQmQ3tzpCrnA1a/y+3cUHAc9ZR6aIjG0WNLR+Rj79QpJktY+VeW/TQtFlQ1bzsehI8g==
   dependencies:
     util.promisify "^1.0.0"
-
-recompose@0.30.0:
-  version "0.30.0"
-  resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.30.0.tgz#82773641b3927e8c7d24a0d87d65aeeba18aabd0"
-  integrity sha512-ZTrzzUDa9AqUIhRk4KmVFihH0rapdCSMFXjhHbNrjAWxBuUD/guYlyysMnuHjlZC/KRiOKRtB4jf96yYSkKE8w==
-  dependencies:
-    "@babel/runtime" "^7.0.0"
-    change-emitter "^0.1.2"
-    fbjs "^0.8.1"
-    hoist-non-react-statics "^2.3.1"
-    react-lifecycles-compat "^3.0.2"
-    symbol-observable "^1.0.4"
 
 recursive-readdir@2.2.2:
   version "2.2.2"
@@ -9369,7 +9318,7 @@ sw-toolbox@^3.4.0:
     path-to-regexp "^1.0.1"
     serviceworker-cache-polyfill "^4.0.0"
 
-symbol-observable@^1.0.4, symbol-observable@^1.2.0:
+symbol-observable@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
   integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
