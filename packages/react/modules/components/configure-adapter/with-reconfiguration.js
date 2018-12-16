@@ -15,7 +15,8 @@ const withReconfiguration = (propKey: string = 'reconfigure') => (
     $Diff<RequiredProps, ProvidedProps>
   > {
     static displayName = `withReconfiguration(${Component.displayName ||
-      Component.name})`;
+      Component.name ||
+      'Component'})`;
     render(): Node {
       return (
         <AdapterContext.Consumer>
