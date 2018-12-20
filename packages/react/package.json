@@ -36,8 +36,8 @@
     "enzyme": "3.8.0",
     "enzyme-adapter-react-16": "1.7.1",
     "enzyme-to-json": "3.3.5",
-    "react": "16.6.3",
-    "react-dom": "16.6.3"
+    "react": "16.7.0",
+    "react-dom": "16.7.0"
   },
   "peerDependencies": {
     "react": "^15.6 || ^16.0",
@@ -53,8 +53,8 @@
     "lodash.omit": "4.5.0",
     "prop-types": "15.6.2",
     "react-fast-compare": "2.0.4",
-    "react-is": "16.6.3",
-    "tiny-warning": "1.0.0"
+    "react-is": "16.7.0",
+    "tiny-warning": "1.0.2"
   },
   "keywords": [
     "react",
