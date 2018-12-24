@@ -1590,10 +1590,10 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@splitsoftware/splitio@10.5.0":
-  version "10.5.0"
-  resolved "https://registry.yarnpkg.com/@splitsoftware/splitio/-/splitio-10.5.0.tgz#1895429f480211ae8892dc287700ea38432e4f17"
-  integrity sha512-OkgDGZL6cTxgbPkSUnw27vdaOTAesmJRDx59ENzAqHsPbL9rVnHnJZFsW5yVQH/QqM011I80egttrkBbAMdZeA==
+"@splitsoftware/splitio@10.5.1":
+  version "10.5.1"
+  resolved "https://registry.yarnpkg.com/@splitsoftware/splitio/-/splitio-10.5.1.tgz#d77894b843692118ee4f19c3e45b10c5ea6d9dbb"
+  integrity sha512-U34EpBbZm8n5js8e7hg0wCK0IAkNwS5PCx/bdN6ecYD6iB667KRgby1BT5a8pyKg2B4NmzlClIRVtHM6Acz2Rw==
   dependencies:
     "@types/node" "10.9.4"
     axios "0.18.0"
