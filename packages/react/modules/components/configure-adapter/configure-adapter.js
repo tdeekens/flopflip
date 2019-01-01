@@ -60,6 +60,11 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
     shouldDeferAdapterConfiguration: PropTypes.bool,
     defaultFlags: PropTypes.object,
     children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+    adapter: PropTypes.shape({
+      configure: PropTypes.func.isRequired,
+      reconfigure: PropTypes.func.isRequired,
+      getIsReady: PropTypes.func.isRequired,
+    }).isRequired,
     render: PropTypes.func,
   };
 
@@ -207,26 +212,34 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
     ) {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
-      return this.props.adapter
-        .configure(this.getAdapterArgsForConfiguration())
-        .then(() => {
-          this.setAdapterState(AdapterStates.CONFIGURED);
+      return (
+        this.props.adapter
+          // NOTE: ESLint otherwise fails for unknown reasons
+          // eslint-disable-next-line
+          .configure(this.getAdapterArgsForConfiguration())
+          .then(() => {
+            this.setAdapterState(AdapterStates.CONFIGURED);
 
-          if (this.pendingAdapterArgs) {
-            this.applyAdapterArgs(this.pendingAdapterArgs);
-          }
-        });
+            if (this.pendingAdapterArgs) {
+              this.applyAdapterArgs(this.pendingAdapterArgs);
+            }
+          })
+      );
     } else if (
       this.adapterState === AdapterStates.CONFIGURED &&
       this.adapterState !== AdapterStates.CONFIGURING
     ) {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
-      return this.props.adapter
-        .reconfigure(this.getAdapterArgsForConfiguration())
-        .then(() => {
-          this.setAdapterState(AdapterStates.CONFIGURED);
-        });
+      return (
+        this.props.adapter
+          // NOTE: ESLint otherwise fails for unknown reasons
+          // eslint-disable-next-line
+          .reconfigure(this.getAdapterArgsForConfiguration())
+          .then(() => {
+            this.setAdapterState(AdapterStates.CONFIGURED);
+          })
+      );
     }
   }
 

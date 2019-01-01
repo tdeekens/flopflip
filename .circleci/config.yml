@@ -26,7 +26,7 @@ executors:
     working_directory: *working_directory
   node_11:
     docker:
-      - image: circleci/node:11
+      - image: circleci/node:11.5
     working_directory: *working_directory
 
 commands:
