@@ -34,6 +34,7 @@ commands:
     description: 'Installing dependencies'
     steps:
       - run: yarn install --pure-lockfile
+      - run: npm install -g npm@latest
   build_artefacts:
     description: 'Building artefacts'
     steps:
