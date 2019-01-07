@@ -88,7 +88,7 @@
     "jest-runner-flowtype": "0.0.7",
     "jest-runner-prettier": "0.2.6",
     "jest-watch-yarn-workspaces": "1.1.0",
-    "lerna": "3.8.1",
+    "lerna": "3.8.5",
     "lint-staged": "8.1.0",
     "prettier": "1.15.3",
     "raf": "3.4.1",
