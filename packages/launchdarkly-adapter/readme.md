@@ -5,7 +5,7 @@
 
 <p align="center">
   <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/logo.png" /><br /><br />
-  <i>Toggle features with their state being maintained in a Redux state slice or a broadcasting system (through the context) being accessible through a set of Higher-Order Components in React.</i><br />
+  <b>Toggle (flip or flop) features being stored in Redux or in a broadcasting system (through the context) via a set of React components or HoCs.</b>
 </p>
 
 ### `@flopflip/launchdarkly-adapter`
