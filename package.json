@@ -20,7 +20,10 @@
     "test:coverage": "cross-env NODE_ENV=test npm test -- --coverage",
     "build": "NODE_ENV=production lerna run build",
     "build:watch": "NODE_ENV=development lerna run --parallel build:watch",
-    "release": "NODE_ENV=production npm run build && lerna publish --registry=https://registry.npmjs.org/"
+    "release": "NODE_ENV=production npm run build && lerna publish --registry=https://registry.npmjs.org/",
+    "release:latest": "npm run release -- --dist-tag latest",
+    "release:next": "npm run release -- --dist-tag next --exact --canary --preid next --yes",
+    "release:mv": "lerna exec --no-bail --no-private --no-sort --stream -- '[ -n \"$(npm v . dist-tags.next)\" ] && npm dist-tag add ${LERNA_PACKAGE_NAME}@$(npm v . dist-tags.next) latest'"
   },
   "repository": {
     "type": "git",

@@ -67,6 +67,21 @@ commands:
     steps:
       - install_and_build
       - run: yarn test:ci --maxWorkers=10
+  publish_to_next:
+    parameters:
+      working_directory:
+        type: string
+        default: *working_directory
+    steps:
+      - checkout
+      - restore_cache: *restore_yarn_cache
+      - install_dependencies
+      - run:
+          name: Authenticating with npm registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > << parameters.working_directory >>/.npmrc
+      - run:
+          name: Publishing to next dist-tag
+          command: yarn release:next
 
 jobs:
   lint:
@@ -96,6 +111,10 @@ jobs:
     executor: node_11
     steps:
       - unit_test_with_coverage
+  publish:
+    executor: node_11
+    steps:
+      - publish_to_next
 
 workflows:
   version: 2
@@ -119,3 +138,10 @@ workflows:
             - build_test_node_8
             - build_test_node_10
             - build_test_node_11
+      - publish:
+          requires:
+            - bundlesize_check
+          filters:
+            branches:
+              only:
+                - master
