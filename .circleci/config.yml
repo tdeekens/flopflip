@@ -78,7 +78,7 @@ commands:
       - install_dependencies
       - run:
           name: Authenticating with npm registry
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/<< parameters.working_directory >>/.npmrc
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > << parameters.working_directory >>/.npmrc
       - run:
           name: Publishing to next dist-tag
           command: yarn release:next
