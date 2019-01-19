@@ -42,4 +42,4 @@ overrides:
       react/prop-types: 0
 settings:
   react:
-    version: '^16.0'
+    version: 'detect'

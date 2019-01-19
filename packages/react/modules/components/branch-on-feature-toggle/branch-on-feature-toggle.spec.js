@@ -2,13 +2,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import branchOnFeatureToggle from './branch-on-feature-toggle';
 
-const UntoggledComponent = () => (
-  <React.Fragment>UntoggledComponent</React.Fragment>
-);
+const UntoggledComponent = () => <>UntoggledComponent</>;
 UntoggledComponent.displayName = 'UntoggledComponent';
-const FeatureComponent = () => (
-  <React.Fragment>FeatureComponent</React.Fragment>
-);
+const FeatureComponent = () => <>FeatureComponent</>;
 FeatureComponent.displayName = 'FeatureComponent';
 
 describe('with `flagName`', () => {

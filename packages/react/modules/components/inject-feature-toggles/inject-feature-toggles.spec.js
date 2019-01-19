@@ -6,7 +6,7 @@ import injectFeatureToggles, {
 } from './inject-feature-toggles';
 
 describe('injecting', () => {
-  const TestComponent = () => <React.Fragment>Test</React.Fragment>;
+  const TestComponent = () => <>Test</>;
   TestComponent.displayName = 'TestComponent';
   TestComponent.propTypes = {};
 

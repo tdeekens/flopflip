@@ -2,17 +2,11 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import ToggleFeature from './toggle-feature';
 
-const UntoggledComponent = () => (
-  <React.Fragment>UntoggledComponent</React.Fragment>
-);
+const UntoggledComponent = () => <>UntoggledComponent</>;
 UntoggledComponent.displayName = 'UntoggledComponent';
-const ToggledComponent = () => (
-  <React.Fragment>ToggledComponent</React.Fragment>
-);
+const ToggledComponent = () => <>ToggledComponent</>;
 ToggledComponent.displayName = 'ToggledComponent';
-const FeatureComponent = () => (
-  <React.Fragment>FeatureComponent</React.Fragment>
-);
+const FeatureComponent = () => <>FeatureComponent</>;
 FeatureComponent.displayName = 'FeatureComponent';
 
 describe('when feature disabled', () => {

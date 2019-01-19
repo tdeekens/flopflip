@@ -402,13 +402,13 @@ Imagine having `ConfigureFlopflip` above a given component wrapped by a `Route`:
 
 ```jsx
 <ConfigureFlopFlip adapter={adapter} adapterArgs={{ clientSideId, user }}>
-  <React.Fragment>
+  <>
     <SomeOtherAppComponent />
     <Route
       exact={false}
       path="/:projectKey"
       render={routerProps => (
-        <React.Fragment>
+        <>
           <MyRouteComponent />
           <ReconfigureFlopflip
             // Note: This is the default - feel free to omit unless you want to set it to `true`.
@@ -416,10 +416,10 @@ Imagine having `ConfigureFlopflip` above a given component wrapped by a `Route`:
             // Note: this should be memoised to not trigger wasteful `reconfiguration`s.
             user={{ projectKey: routerProps.projectKey }}
           />
-        </React.Fragment>
+        </>
       )}
     />
-  </React.Fragment>
+  </>
 </ConfigureFlopFlip>
 ```
 
