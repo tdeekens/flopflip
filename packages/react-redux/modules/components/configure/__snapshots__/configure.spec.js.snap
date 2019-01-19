@@ -5,6 +5,7 @@ exports[`rendering should match snapshot 1`] = `
   adapter={
     Object {
       "configure": [MockFunction],
+      "getIsReady": [MockFunction],
       "reconfigure": [MockFunction],
     }
   }

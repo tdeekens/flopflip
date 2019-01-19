@@ -8,6 +8,7 @@ const createTestProps = custom => ({
   adapter: {
     configure: jest.fn(),
     reconfigure: jest.fn(),
+    getIsReady: jest.fn(),
   },
   adapterArgs: {
     fooId: 'foo-id',
