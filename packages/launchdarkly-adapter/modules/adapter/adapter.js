@@ -189,13 +189,12 @@ const configure = ({
     adapterState.user,
     clientOptions
   );
+  adapterState.isConfigured = true;
 
   return getInitialFlags({
     onFlagsStateChange,
     onStatusStateChange,
   }).then(({ flagsFromSdk }) => {
-    adapterState.isConfigured = true;
-
     if (subscribeToFlagChanges)
       setupFlagSubcription({
         flagsFromSdk,
@@ -207,14 +206,14 @@ const configure = ({
 };
 
 const reconfigure = ({ user: nextUser }: { user: User }): Promise<any> => {
-  if (!adapterState.isReady || !adapterState.isConfigured || !adapterState.user)
+  if (!adapterState.isConfigured)
     return Promise.reject(
       new Error(
         '@flopflip/launchdarkly-adapter: please configure adapter before reconfiguring.'
       )
     );
 
-  if (adapterState.user && !isEqual(adapterState.user, nextUser)) {
+  if (!isEqual(adapterState.user, nextUser)) {
     adapterState.user = ensureUser(nextUser);
 
     return changeUserContext(adapterState.user);
