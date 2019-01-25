@@ -14,7 +14,7 @@ exports[`when creating enhancer with enhanced store when invoking  \`onFlagsStat
   ],
   "results": Array [
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": undefined,
     },
   ],
@@ -35,7 +35,7 @@ exports[`when creating enhancer with enhanced store when invoking  \`onStatusSta
   ],
   "results": Array [
     Object {
-      "isThrow": false,
+      "type": "return",
       "value": undefined,
     },
   ],
