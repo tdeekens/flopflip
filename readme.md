@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/logo.png" /><br /><br />
+  <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/logo.png" width="250" /><br /><br />
 </p>
 
 <h2 align="center">🎚 flopflip - Feature Toggling 🚦</h2>
