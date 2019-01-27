@@ -18,6 +18,7 @@ const { pkg } = readPkgUp.sync({
 const env = process.env.NODE_ENV;
 const name = process.env.npm_package_name;
 const format = process.env.npm_lifecycle_event.split(':')[1];
+const extensions = ['.js', '.ts', '.tsx', '.es', '.mjs'];
 
 const pkgDependencies = Object.keys(pkg.dependencies || {});
 const pkgPeerDependencies = Object.keys(pkg.peerDependencies || {});
@@ -56,6 +57,7 @@ const config = {
     builtins(),
     json(),
     resolve({
+      extensions,
       module: true,
       jsnext: true,
       main: true,
@@ -64,6 +66,7 @@ const config = {
     }),
     babel({
       exclude: '**/node_modules/**',
+      extensions,
       runtimeHelpers: true,
       ...babelOptions,
     }),
