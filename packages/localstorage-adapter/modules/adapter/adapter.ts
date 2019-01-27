@@ -1,30 +1,35 @@
 // @flow
 import invariant from 'invariant';
-import mitt from 'mitt';
+import mitt, { Emitter } from 'mitt';
 
-import type {
+import {
   User,
-  AdapterState,
+  AdapterStatus,
   AdapterArgs,
   Flags,
-  OnStatusStateChangeCallback,
-  OnFlagsStateChangeCallback,
 } from '@flopflip/types';
 
 type Storage = {
-  get: (key: string) => ?string,
-  set: (key: string, value: mixed) => boolean,
+  get: (key: string) => string,
+  set: (key: string, value: any) => boolean,
   unset: (key: string) => void,
 };
 
-const intialAdapterState: AdapterState = {
+type LocalstorageAdapterState = {
+  flags: Flags,
+  user?: User,
+  emitter: Emitter,
+}
+const intialAdapterState: AdapterStatus & LocalstorageAdapterState = {
   isReady: false,
   flags: {},
   user: {},
+  // Typings are incorrect and state that mitt is not callable.
+  // @ts-ignore
   emitter: mitt(),
 };
 
-let adapterState: AdapterState = {
+let adapterState: AdapterStatus & LocalstorageAdapterState = {
   ...intialAdapterState,
 };
 
@@ -75,7 +80,7 @@ const subscribeToFlagsChanges = ({
   pollingInteral: number,
 }) => {
   setInterval(() => {
-    adapterState.onFlagsStateChange(storage.get('flags'));
+    adapterState.emitter.emit('flagsStateChange', storage.get('flags'));
   }, pollingInteral);
 };
 
@@ -83,8 +88,7 @@ const configure = ({
   user,
   onFlagsStateChange,
   onStatusStateChange,
-
-  ...remainingArgs
+  adapterConfiguration
 }: AdapterArgs): Promise<any> => {
   adapterState.user = user;
 
@@ -102,12 +106,13 @@ const configure = ({
 
     adapterState.emitter.emit('readyStateChange');
 
-    subscribeToFlagsChanges({ pollingInteral: remainingArgs.pollingInteral });
+    subscribeToFlagsChanges({ pollingInteral: adapterConfiguration.pollingInteral });
   });
 };
 
-const reconfigure = ({ user }: { user: User }): Promise<any> => {
+const reconfigure = ({ user: nextUser }: { user: User }): Promise<any> => {
   storage.unset('flags');
+  adapterState.user = nextUser;
 
   adapterState.emitter.emit('flagsStateChange', {});
 
@@ -119,7 +124,7 @@ const waitUntilConfigured = (): Promise<any> =>
     if (adapterState.isConfigured) resolve();
     else adapterState.emitter.on('readyStateChange', resolve);
   });
-const getIsReady = (): boolean => adapterState.isReady;
+const getIsReady = (): boolean => Boolean(adapterState.isReady);
 
 export default {
   configure,
