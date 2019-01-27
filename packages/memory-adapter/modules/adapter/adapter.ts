@@ -1,26 +1,32 @@
 // @flow
 import invariant from 'invariant';
-import mitt from 'mitt';
+import mitt, { Emitter } from 'mitt';
 
-import type {
+import {
   User,
-  AdapterState,
+  AdapterStatus,
   AdapterArgs,
   FlagName,
   Flag,
   Flags,
-  OnStatusStateChangeCallback,
-  OnFlagsStateChangeCallback,
 } from '@flopflip/types';
 
-const intialAdapterState: AdapterState = {
+type MemoryAdapterState = {
+  flags: Flags,
+  user?: User,
+  emitter: Emitter,
+}
+
+const intialAdapterState: AdapterStatus & MemoryAdapterState = {
   isReady: false,
   flags: {},
   user: {},
+  // Typings are incorrect and state that mitt is not callable.
+  // @ts-ignore
   emitter: mitt(),
 };
 
-let adapterState: AdapterState = {
+let adapterState: AdapterStatus & MemoryAdapterState = {
   ...intialAdapterState,
 };
 
@@ -59,7 +65,7 @@ const reconfigure = ({ user }: { user: User }): Promise<any> => {
   return Promise.resolve();
 };
 
-const getIsReady = (): boolean => adapterState.isReady;
+const getIsReady = (): boolean => Boolean(adapterState.isReady);
 
 const reset = (): void => {
   adapterState = {
@@ -67,7 +73,7 @@ const reset = (): void => {
   };
 };
 
-const updateUser = (user: User): User => {
+const updateUser = (user: User): void => {
   adapterState.user = user;
 };
 
@@ -91,14 +97,14 @@ export const updateFlags = (flags: Flags): void => {
   adapterState.emitter.emit('flagsStateChange', adapterState.flags);
 };
 
-export const getUser = (): User => adapterState.user;
+export const getUser = (): User | undefined => adapterState.user;
 const waitUntilConfigured = (): Promise<any> =>
   new Promise(resolve => {
     if (adapterState.isConfigured) resolve();
     else adapterState.emitter.on('readyStateChange', resolve);
   });
 
-const getFlag = (flagName: FlagName): ?Flag =>
+const getFlag = (flagName: FlagName): Flag | undefined =>
   adapterState.flags && adapterState.flags[flagName];
 
 export default {

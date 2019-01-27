@@ -15,12 +15,12 @@ type Storage = {
   unset: (key: string) => void,
 };
 
-type LocalstorageAdapterState = {
+type LocalStorageAdapterState = {
   flags: Flags,
   user?: User,
   emitter: Emitter,
 }
-const intialAdapterState: AdapterStatus & LocalstorageAdapterState = {
+const intialAdapterState: AdapterStatus & LocalStorageAdapterState = {
   isReady: false,
   flags: {},
   user: {},
@@ -29,7 +29,7 @@ const intialAdapterState: AdapterStatus & LocalstorageAdapterState = {
   emitter: mitt(),
 };
 
-let adapterState: AdapterStatus & LocalstorageAdapterState = {
+let adapterState: AdapterStatus & LocalStorageAdapterState = {
   ...intialAdapterState,
 };
 
