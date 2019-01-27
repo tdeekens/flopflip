@@ -1,4 +1,3 @@
-parser: babel-eslint
 parserOptions:
   sourceType: module
   ecmaVersion: 6
@@ -7,6 +6,8 @@ parserOptions:
     modules: true
     experimentalObjectRestSpread: true
 extends:
+  - xo
+  - xo-typescript
   - xo-react
   - prettier
   - plugin:jest/recommended
