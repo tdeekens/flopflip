@@ -1,7 +1,7 @@
 export type FlagName = string;
 export type FlagVariation = boolean | string;
 export type Flag = [FlagName, FlagVariation];
-export type Flags = { [FlagName]: FlagVariation };
+export type Flags = { [key: FlagName]: FlagVariation };
 export type User = {
   key?: string,
 };
@@ -22,8 +22,9 @@ export type Adapter = {
   reconfigure: (adapterArgs: AdapterArgs) => Promise<any>,
   getIsReady: () => boolean,
 };
-export type OnFlagsStateChangeCallback = Flags => void;
-export type OnStatusStateChangeCallback = ({ [string]: boolean }) => void;
+export type AdapterStatusChange = { [key: string]: boolean }
+export type OnFlagsStateChangeCallback = (flags: Flags) => void;
+export type OnStatusStateChangeCallback = (statusChange: AdapterStatusChange) => void;
 
 export type AdapterReconfigurationOptions = {
   shouldOverwrite?: boolean,

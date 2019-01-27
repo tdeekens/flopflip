@@ -1,5 +1,5 @@
 // @flow
-import type {
+import {
   FlagName,
   FlagVariation,
   User,
@@ -10,32 +10,26 @@ import type {
 } from '@flopflip/types';
 import warning from 'tiny-warning';
 import isEqual from 'lodash.isequal';
-import { initialize as initializeLaunchDarklyClient } from 'ldclient-js';
+import { initialize as initializeLaunchDarklyClient, LDUser, LDClient } from 'ldclient-js';
 import camelCase from 'lodash.camelcase';
 
-type Client = {
-  identify: (nextUser: User) => Promise<Object>,
-  waitUntilReady: () => Promise<any>,
-  on: (eventName: string, (flagName: FlagName) => void) => void,
-  allFlags: () => Flags | null,
-};
 type ClientOptions = {
   fetchGoals?: boolean,
 };
 type AdapterState = {
   isReady: boolean,
   isConfigured: boolean,
-  user: ?User,
-  client: ?Client,
-  flags: ?Flags,
+  user?: User,
+  client?: LDClient,
+  flags?: Flags,
 };
 
 const adapterState: AdapterState = {
   isReady: false,
   isConfigured: false,
-  user: null,
-  client: null,
-  flags: null,
+  user: undefined,
+  client: undefined,
+  flags: undefined,
 };
 
 const updateFlagsInAdapterState = (updatedFlags: Flags): void => {
@@ -45,7 +39,7 @@ const updateFlagsInAdapterState = (updatedFlags: Flags): void => {
   };
 };
 
-const getFlag = (flagName: FlagName): ?Flag =>
+const getFlag = (flagName: FlagName): Flag =>
   adapterState.flags && adapterState.flags[flagName];
 
 const getIsReady = (): boolean => adapterState.isReady;
@@ -75,12 +69,12 @@ const setupFlagSubcription = ({
           flagValue
         );
 
-        const flag: Flag = {
+        const flags: Flags = {
           [normalizedFlagName]: normalizedFlagValue,
         };
 
-        updateFlagsInAdapterState(flag);
-        onFlagsStateChange(flag);
+        updateFlagsInAdapterState(flags);
+        onFlagsStateChange(flags);
       });
     }
   }
@@ -100,10 +94,10 @@ const initializeClient = (
   clientSideId: string,
   user: User,
   clientOptions: ClientOptions
-): Client => initializeLaunchDarklyClient(clientSideId, user);
+): LDClient => initializeLaunchDarklyClient(clientSideId, user as LDUser, clientOptions);
 const changeUserContext = (nextUser: User): Promise<any> =>
   adapterState.client && adapterState.client.identify
-    ? adapterState.client.identify(nextUser)
+    ? adapterState.client.identify(nextUser as LDUser)
     : Promise.reject(
         new Error('Can not change user context: client not yet initialized.')
       );
@@ -125,10 +119,10 @@ const updateUserContext = (updatedUserProps: User): Promise<any> => {
 
 // NOTE: Exported for testing only
 export const camelCaseFlags = (rawFlags: Flags): Flags =>
-  Object.entries(rawFlags).reduce((camelCasedFlags, [flagName, flagValue]) => {
+  Object.entries(rawFlags).reduce<Flags>((camelCasedFlags: Flags, [flagName, flagValue]) => {
     const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
       flagName,
-      flagValue
+      flagValue as FlagVariation
     );
     // Can't return expression as it is the assigned value
     camelCasedFlags[normalizedFlagName] = normalizedFlagValue;
@@ -142,30 +136,33 @@ const getInitialFlags = ({
 }: {
   onFlagsStateChange: OnFlagsStateChangeCallback,
   onStatusStateChange: OnStatusStateChangeCallback,
-}): Promise<any> => {
-  if (adapterState.client) {
-    return adapterState.client.waitUntilReady().then(() => {
-      const flagsFromSdk = adapterState.client
-        ? adapterState.client.allFlags()
-        : null;
-      // First update internal state
-      adapterState.isReady = true;
-      // ...to then signal that the adapter is ready
-      onStatusStateChange({ isReady: true });
-      if (flagsFromSdk) {
-        const flags: Flags = camelCaseFlags(flagsFromSdk);
-        updateFlagsInAdapterState(flags);
-        // ...and flush initial state of flags
-        onFlagsStateChange(flags);
+}): Promise<{flagsFromSdk: Flags}> => {
+  return new Promise((resolve, reject) => {
+    if (adapterState.client) {
+      return adapterState.client.waitUntilReady().then(() => {
+        const flagsFromSdk = adapterState.client
+          ? adapterState.client.allFlags()
+          : null;
+        // First update internal state
+        adapterState.isReady = true;
+        // ...to then signal that the adapter is ready
+        onStatusStateChange({ isReady: true });
+        if (flagsFromSdk) {
+          const flags: Flags = camelCaseFlags(flagsFromSdk);
+          updateFlagsInAdapterState(flags);
+          // ...and flush initial state of flags
+          onFlagsStateChange(flags);
 
-        return Promise.resolve({ flagsFromSdk });
-      }
-    });
-  } else {
-    return Promise.reject(
-      new Error('Can not subscribte with non initialized client.')
-    );
-  }
+          return resolve({ flagsFromSdk });
+        }
+      })
+    } else {
+      return reject(
+        new Error('Can not subscribte with non initialized client.')
+      );
+    }
+  })
+
 };
 
 const configure = ({

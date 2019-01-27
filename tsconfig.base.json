@@ -8,12 +8,13 @@
     "esModuleInterop": true,
     "importHelpers": true,
     "jsx": "react",
-    "lib": ["es2015", "dom"],
+    "lib": ["esnext"],
     "module": "esnext",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noImplicitReturns": true,
+    "resolveJsonModule": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -26,6 +27,6 @@
     "stripInternal": true,
     "target": "es5"
   },
-  "include": ["**/modules/**/*", "**/types/**/*"],
+  "include": ["**/modules/**/*", "packages/types"],
   "exclude": ["node_modules", "**/dist/**/*"]
 }
