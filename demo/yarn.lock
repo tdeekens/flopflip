@@ -888,10 +888,10 @@
     invariant "2.2.4"
     mitt "1.1.3"
 
-"@flopflip/memory-adapter@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-1.1.0.tgz#2ac3afebc9987785bc52c72659c0f93f8dc00fd3"
-  integrity sha512-Q+HQpvTydjEV7KnUN5VRGIua+3V8BR7fydoFVvvs5bIfJZpXOopKzSi3GRuR6Mi3qGfdDMXzJN00uTc2ktEsgw==
+"@flopflip/memory-adapter@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-1.1.1.tgz#63e5d8f9711f12ce1173277157ec6d41a69f4adc"
+  integrity sha512-c/eksJRb3Uj8YYDdZJGhHd7jVOCGVMH4z99KqePbqcn6flwmUVKXC+5VrmX194RxLSXjOkpM01mSENQk/6qm6Q==
   dependencies:
     invariant "2.2.4"
     mitt "1.1.3"
