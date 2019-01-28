@@ -15,7 +15,7 @@
     "@flopflip/launchdarkly-adapter": "2.4.6",
     "@flopflip/react-redux": "7.1.9",
     "@flopflip/react-broadcast": "7.2.4",
-    "@flopflip/memory-adapter": "1.1.0",
+    "@flopflip/memory-adapter": "1.1.1",
     "@flopflip/localstorage-adapter": "1.1.1"
   },
   "scripts": {
