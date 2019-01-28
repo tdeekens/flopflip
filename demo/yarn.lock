@@ -880,10 +880,10 @@
     lodash.isequal "4.5.0"
     tiny-warning "1.0.2"
 
-"@flopflip/localstorage-adapter@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-1.1.0.tgz#42f2d24695da5be3a3ef09097b03546296bbac82"
-  integrity sha512-14FwMQhFTyWy3XGMlAypwB0AfR7gqcUkLLvg7FxVYGZ91IBd4AWO/f5mUQcxvAdrpgWJ4+uehR5iN4ISWUfzSA==
+"@flopflip/localstorage-adapter@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-1.1.1.tgz#717ed8269265dc3f20ee0c710382ed7146ed2e3e"
+  integrity sha512-9L2ePc28J3z4se8OoNxUEDQvR6bpFpSNinWKDorzqVdI7Az3441OPHs3gqOWcCwqdyd+hNjx7GCDGWThH+vHpg==
   dependencies:
     invariant "2.2.4"
     mitt "1.1.3"
