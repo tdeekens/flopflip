@@ -870,15 +870,15 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@flopflip/launchdarkly-adapter@2.4.5":
-  version "2.4.5"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.4.5.tgz#7e8987938d86fee3da2ecb63da90e63572b6de05"
-  integrity sha512-zadU2p6nICVMfup8HH4B/J7kwyEPxLWRZABxKJ4pI2hnKDfFdEauyMdGyAOLKnXpHHVoiW9T7IfGbs4RxfweAQ==
+"@flopflip/launchdarkly-adapter@2.4.6":
+  version "2.4.6"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.4.6.tgz#005226c96626400ff018ce3b5a5f3cd0682cad85"
+  integrity sha512-/j4lIYH0VbNTN+BpQKpOftMT9shsYTFNsgzHXdqPPn4V6n6fynUhN6sQ6AmafzPSNcPhPpbEsAa9dUmF0c8prg==
   dependencies:
     ldclient-js "2.8.0"
     lodash.camelcase "4.3.0"
     lodash.isequal "4.5.0"
-    tiny-warning "1.0.0"
+    tiny-warning "1.0.2"
 
 "@flopflip/localstorage-adapter@1.1.0":
   version "1.1.0"
@@ -9471,6 +9471,11 @@ tiny-warning@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/tiny-warning/-/tiny-warning-1.0.0.tgz#70fba262ea3645e10506fe8673aeb133d959fc93"
   integrity sha512-6CrF/DMLSoYakJ7f6+1bz6nHJY6Tj6sEj8/9hjTzGi94MeuAZprPE+3jykGMUgoswnmuPA9NlKlYLNJaFVYHIw==
+
+tiny-warning@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/tiny-warning/-/tiny-warning-1.0.2.tgz#1dfae771ee1a04396bdfde27a3adcebc6b648b28"
+  integrity sha512-rru86D9CpQRLvsFG5XFdy0KdLAvjdQDyZCsRcuu60WtzFylDM3eAWSxEVz5kzL2Gp544XiUvPbVKtOA/txLi9Q==
 
 tmp@^0.0.33:
   version "0.0.33"
