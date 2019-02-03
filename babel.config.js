@@ -28,7 +28,6 @@ module.exports = {
         useBuiltIns: true,
       },
     ],
-    '@babel/preset-flow',
     '@babel/preset-typescript',
   ],
   plugins: [

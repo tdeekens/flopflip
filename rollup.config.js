@@ -8,7 +8,6 @@ const { terser } = require('rollup-plugin-terser');
 const json = require('rollup-plugin-json');
 const builtins = require('rollup-plugin-node-builtins');
 const globals = require('rollup-plugin-node-globals');
-const flow = require('rollup-plugin-flow');
 const filesize = require('rollup-plugin-filesize');
 const babelOptions = require('./babel.config');
 const { pkg } = readPkgUp.sync({
@@ -77,7 +76,6 @@ const config = {
         'node_modules/react-is/index.js': ['isValidElementType'],
       },
     }),
-    flow({ all: true }),
     filesize(),
   ],
 };
