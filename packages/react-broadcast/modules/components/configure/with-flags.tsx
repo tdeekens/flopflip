@@ -4,12 +4,13 @@ import { FlagsContext } from '../flags-context';
 
 type RequiredProps = {};
 type ProvidedProps = {};
+type Diff<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
 
 const withFlags = (propKey: string = ALL_FLAGS_PROP_KEY) => (
-  Component: ComponentType<RequiredProps>
+  Component: React.ComponentType<RequiredProps>
 ) => {
   class EnhancedComponent extends React.PureComponent<
-    $Diff<RequiredProps, ProvidedProps>
+    Diff<RequiredProps, ProvidedProps>
   > {
     static displayName = wrapDisplayName(Component, 'withFlags');
 

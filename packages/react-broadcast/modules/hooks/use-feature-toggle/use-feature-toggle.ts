@@ -8,7 +8,7 @@ import { FlagsContext } from '../../components/flags-context';
 
 export default function useFeatureToggle(
   flagName: FlagName,
-  flagVariation?: FlagVariation = true
+  flagVariation: FlagVariation = true
 ): () => Error | FlagVariation {
   warning(
     flagName === camelCase(flagName),

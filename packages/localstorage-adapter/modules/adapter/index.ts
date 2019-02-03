@@ -1,4 +1,4 @@
 const version = process.env.npm_package_version;
 
 export { version };
-export { updateFlags, STORAGE_SLICE } from './adapter';
+export { default, updateFlags, STORAGE_SLICE } from './adapter';

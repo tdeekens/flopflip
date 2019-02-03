@@ -57,7 +57,7 @@ export const updateFlags = (flags: Flags): void => {
 
   if (!isAdapterReady) return;
 
-  const previousFlags: Flags | null = (storage.get('flags') as Flags);
+  const previousFlags: Flags | null = storage.get('flags') as Flags;
   const nextFlags: Flags = {
     ...previousFlags,
     ...flags,
