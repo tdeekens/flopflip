@@ -5,7 +5,7 @@ import configureStore from 'redux-mock-store';
 import { STATE_SLICE } from '../../store';
 import branchOnFeatureToggle from './branch-on-feature-toggle';
 import Configure from '../configure';
-import memoryAdapter, { updateFlags } from '@flopflip/memory-adapter';
+import memoryAdapter from '@flopflip/memory-adapter';
 
 const ToggledComponent = () => <div />;
 ToggledComponent.displayName = 'ToggledComponent';

@@ -50,7 +50,7 @@ export const normalizeFlag = (
   return [camelCase(flagName), normalizeFlagValue];
 };
 
-export const camelCaseFlags = (flags: Flags) =>
+export const camelCaseFlags = (flags: Flags): Flags =>
   Object.entries(flags).reduce<Flags>(
     (camelCasedFlags: Flags, [flagName, flaValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
@@ -69,9 +69,9 @@ const subscribeToFlagsChanges = ({
   flagNames,
   onFlagsStateChange,
 }: {
-  flagNames: Array<FlagName>;
+  flagNames: FlagName[];
   onFlagsStateChange: OnFlagsStateChangeCallback;
-}) => {
+}): void => {
   if (adapterState.client) {
     adapterState.client.on(adapterState.client.Event.SDK_UPDATE, () => {
       if (adapterState.client) {
@@ -97,7 +97,7 @@ const ensureUser = (user: User): User => ({
 
 // NOTE: Little helper to omit properties from an object.
 // `lodash.omit` is too heavy in bundle size to add as a dependency.
-const omit = (obj: {}, keys: Array<any>): {} =>
+const omit = (obj: {}, keys: any[]): {} =>
   Object.entries(obj)
     .filter(([key]) => !keys.includes(key))
     .reduce(
@@ -138,7 +138,7 @@ const subscribe = ({
   new Promise((resolve, reject) => {
     if (adapterState.client) {
       adapterState.client.on(adapterState.client.Event.SDK_READY, () => {
-        let flagNames: Array<FlagName>;
+        let flagNames: FlagName[];
         let flags: Flags;
 
         if (adapterState.client && adapterState.manager) {
@@ -219,7 +219,7 @@ const reconfigure = ({
         )
       );
     if (adapterState.user && adapterState.user.key !== user.key) {
-      let flagNames: Array<FlagName>;
+      let flagNames: FlagName[];
       let flags: Flags;
 
       adapterState.user = ensureUser(user);

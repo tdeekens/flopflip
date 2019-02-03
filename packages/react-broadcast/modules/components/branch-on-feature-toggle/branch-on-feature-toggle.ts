@@ -1,4 +1,4 @@
-import { FlagName, FlagVariation } from '@flopflip/types';
+import { FlagName, FlagVariation, Diff } from '@flopflip/types';
 
 import React from 'react';
 import flowRight from 'lodash.flowright';
@@ -12,7 +12,6 @@ import injectFeatureToggle from './../inject-feature-toggle';
 
 type RequiredProps = {};
 type ProvidedProps = {};
-type Diff<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
 
 export default <P extends RequiredProps>(
   { flag, variation }: { flag: FlagName; variation?: FlagVariation },

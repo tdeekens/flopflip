@@ -4,9 +4,10 @@ import { UpdateFlagsAction } from './types.js';
 
 import isNil from 'lodash.isnil';
 import { STATE_SLICE } from '../../store';
+import { Reducer } from 'redux';
 
 // Actions
-export const UPDATE_FLAGS: string = '@flopflip/flags/update';
+export const UPDATE_FLAGS = '@flopflip/flags/update';
 
 const initialState: State = {};
 
@@ -26,12 +27,13 @@ const reducer = (
       return state;
   }
 };
+
 export default reducer;
 
-export const createReducer = (preloadedState: State = initialState) => (
-  state: State = preloadedState,
-  action: UpdateFlagsAction
-) => reducer(state, action);
+export const createReducer = <S = State, T = Action<UpdateFlagsAction>>(
+  preloadedState: State = initialState
+): Reducer<S, T> => (state: S = preloadedState, action: T) =>
+  reducer(state, action);
 
 // Action Creators
 export const updateFlags = (flags: Flags): UpdateFlagsAction => ({

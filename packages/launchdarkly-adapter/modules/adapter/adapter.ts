@@ -59,7 +59,7 @@ const setupFlagSubcription = ({
 }: {
   flagsFromSdk: Flags;
   onFlagsStateChange: OnFlagsStateChangeCallback;
-}) => {
+}): void => {
   for (const flagName in flagsFromSdk) {
     // Dispatch whenever a configured flag value changes
     if (
@@ -163,11 +163,9 @@ const getInitialFlags = ({
           return resolve({ flagsFromSdk });
         }
       });
-    } else {
-      return reject(
-        new Error('Can not subscribte with non initialized client.')
-      );
     }
+
+    return reject(new Error('Can not subscribte with non initialized client.'));
   });
 };
 

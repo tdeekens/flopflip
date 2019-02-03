@@ -1,4 +1,4 @@
-import { FlagName } from '@flopflip/types';
+import { FlagName, Diff } from '@flopflip/types';
 
 import React from 'react';
 import flowRight from 'lodash.flowright';
@@ -11,10 +11,9 @@ import { withFlags } from '../configure';
 
 type RequiredProps = {};
 type ProvidedProps = {};
-type Diff<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
 
 export default <P extends RequiredProps>(
-  flagNames: Array<FlagName>,
+  flagNames: FlagName[],
   propKey?: string,
   areOwnPropsEqual?: (
     nextOwnProps: ProvidedProps,

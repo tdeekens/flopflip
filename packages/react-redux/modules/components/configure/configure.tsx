@@ -50,7 +50,7 @@ export class Configure extends React.PureComponent<
     shouldDeferAdapterConfiguration: false,
   };
 
-  render() {
+  render(): React.ReactNode {
     return (
       <ConfigureAdapter
         adapter={this.props.adapter}

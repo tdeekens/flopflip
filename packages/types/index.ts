@@ -39,3 +39,8 @@ export type ReconfigureAdapter = (
   adapterArgs: AdapterArgs,
   options: AdapterReconfigurationOptions
 ) => void;
+
+export type Diff<ExcludedFrom, ToExclude> = Pick<
+  ExcludedFrom,
+  Exclude<keyof ExcludedFrom, keyof ToExclude>
+>;

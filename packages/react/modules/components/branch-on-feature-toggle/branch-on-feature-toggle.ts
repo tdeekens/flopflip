@@ -5,7 +5,7 @@ import isFeatureEnabled from '../../helpers/is-feature-enabled';
 import { DEFAULT_FLAG_PROP_KEY } from '../../constants';
 
 class DefaultUntoggledComponent extends React.Component<{}> {
-  render() {
+  render(): React.ReactNode {
     return null;
   }
 }
@@ -18,9 +18,9 @@ const branchOnFeatureToggle = (
   const BranchOnFeatureToggle: React.ComponentType<any> = (props: Flags) => {
     if (isFeatureEnabled(flagName, flagVariation)(props)) {
       return React.createElement(ToggledComponent, props);
-    } else {
-      return React.createElement(UntoggledComponent, props);
     }
+
+    return React.createElement(UntoggledComponent, props);
   };
 
   return BranchOnFeatureToggle;

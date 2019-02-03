@@ -1,5 +1,4 @@
 import ldClient from 'ldclient-js';
-import warning from 'tiny-warning';
 import adapter, { camelCaseFlags, createAnonymousUserKey } from './adapter';
 
 jest.mock('ldclient-js', () => ({

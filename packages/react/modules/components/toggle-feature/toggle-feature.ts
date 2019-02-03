@@ -23,7 +23,7 @@ export default class ToggleFeature extends React.PureComponent<Props> {
     children: null,
   };
 
-  render() {
+  render(): React.ReactNode {
     if (this.props.untoggledComponent)
       warning(
         isValidElementType(this.props.untoggledComponent),

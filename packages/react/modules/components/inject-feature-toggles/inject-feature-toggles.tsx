@@ -1,4 +1,4 @@
-import { FlagName, Flags } from '@flopflip/types';
+import { FlagName, Flags, Diff } from '@flopflip/types';
 
 import React from 'react';
 
@@ -13,9 +13,10 @@ import { ALL_FLAGS_PROP_KEY, DEFAULT_FLAGS_PROP_KEY } from '../../constants';
 type RequiredProps = {};
 type ProvidedProps = {};
 
-type Diff<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
-
-const filterFeatureToggles = (allFlags: Flags, demandedFlags: Array<FlagName>) =>
+const filterFeatureToggles = (
+  allFlags: Flags,
+  demandedFlags: Array<FlagName>
+) =>
   intersection(Object.keys(allFlags), demandedFlags).reduce(
     (featureToggles: Flags, featureToggle: FlagName) => ({
       ...featureToggles,
@@ -67,7 +68,7 @@ const injectFeatureToggles = (
             : true;
         }
 
-        render() {
+        render(): React.ReactNode {
           return <BaseComponent {...this.props} />;
         }
       }

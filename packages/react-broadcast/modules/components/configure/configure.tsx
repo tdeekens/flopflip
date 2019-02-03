@@ -70,7 +70,7 @@ export default class Configure extends React.PureComponent<Props, State> {
       this.setState(prevState => ({ ...prevState, ...status }));
   };
 
-  render() {
+  render(): React.ReactNode {
     return (
       <ConfigureAdapter
         adapter={this.props.adapter}
