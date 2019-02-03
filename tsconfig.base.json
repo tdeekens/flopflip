@@ -19,6 +19,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "compiled",
+    "noEmit": true,
     "pretty": true,
     "removeComments": true,
     "sourceMap": true,

@@ -17,7 +17,7 @@ const withReconfiguration = (propKey: string = 'reconfigure') => (
   > {
     static displayName = wrapDisplayName(Component, 'withReconfiguration');
 
-    render(): React.Node {
+    render() {
       return (
         <AdapterContext.Consumer>
           {reconfigure => (

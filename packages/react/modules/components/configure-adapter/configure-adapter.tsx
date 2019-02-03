@@ -247,7 +247,7 @@ export default class ConfigureAdapter extends React.PureComponent<
     }
   }
 
-  render(): React.Node {
+  render() {
     return (
       <AdapterContext.Provider value={this.reconfigureOrQueue}>
         {(() => {

@@ -12,7 +12,8 @@ const withFlags = (propKey: string = ALL_FLAGS_PROP_KEY) => (
     $Diff<RequiredProps, ProvidedProps>
   > {
     static displayName = wrapDisplayName(Component, 'withFlags');
-    render(): React.Node {
+
+    render() {
       return (
         <FlagsContext.Consumer>
           {flags => <Component {...this.props} {...{ [propKey]: flags }} />}

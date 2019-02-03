@@ -1,16 +1,22 @@
 import { Flags, Adapter, AdapterArgs, AdapterStatus } from '@flopflip/types';
+import { UpdateFlagsAction, UpdateStatusAction } from '../../types';
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { ConfigureAdapter } from '@flopflip/react';
-import { FlagsContext } from '../flags-context';
+import { updateStatus, updateFlags } from './../../ducks';
 
 type Props = {
-  children?: Node;
+  children?: React.Node;
   shouldDeferAdapterConfiguration?: boolean;
   defaultFlags?: Flags;
   adapterArgs: AdapterArgs;
   adapter: Adapter;
+};
+type ConnectedProps = {
+  handleUpdateStatus: (status: AdapterStatus) => UpdateStatusAction;
+  handleUpdateFlags: (flags: Flags) => UpdateFlagsAction;
 };
 type State = {
   flags: Flags;
@@ -25,15 +31,18 @@ type State = {
  */
 const createAdapterArgs = (
   adapterArgs: AdapterArgs,
-  handleUpdateStatus: (status: AdapterStatus) => void,
-  handleUpdateFlags: (flags: Flags) => void
+  handleUpdateStatus: (status: AdapterStatus) => UpdateStatusAction,
+  handleUpdateFlags: (flags: Flags) => UpdateFlagsAction
 ): AdapterArgs => ({
   ...adapterArgs,
   onStatusStateChange: handleUpdateStatus,
   onFlagsStateChange: handleUpdateFlags,
 });
 
-export default class Configure extends React.PureComponent<Props, State> {
+export class Configure extends React.PureComponent<
+  Props & ConnectedProps,
+  State
+> {
   static displayName = 'ConfigureFlopflip';
 
   static defaultProps = {
@@ -48,55 +57,33 @@ export default class Configure extends React.PureComponent<Props, State> {
     shouldDeferAdapterConfiguration: PropTypes.bool,
   };
 
-  state: { flags: Flags } = {
-    flags: {},
-  };
-
-  isUnmounted: boolean = false;
-
-  componentDidMount() {
-    this.isUnmounted = false;
-  }
-
-  componentWillUnmount() {
-    this.isUnmounted = true;
-  }
-
-  handleUpdateFlags = (flags: Flags): void => {
-    !this.isUnmounted &&
-      this.setState(prevState => ({
-        flags: {
-          ...prevState.flags,
-          ...flags,
-        },
-      }));
-  };
-
-  handleUpdateStatus = (status: AdapterStatus): void => {
-    !this.isUnmounted &&
-      this.setState(prevState => ({ ...prevState, ...status }));
-  };
-
-  render(): React.Node {
+  render() {
     return (
       <ConfigureAdapter
         adapter={this.props.adapter}
         adapterArgs={createAdapterArgs(
           this.props.adapterArgs,
-          this.handleUpdateStatus,
-          this.handleUpdateFlags
+          this.props.handleUpdateStatus,
+          this.props.handleUpdateFlags
         )}
         defaultFlags={this.props.defaultFlags}
         shouldDeferAdapterConfiguration={
           this.props.shouldDeferAdapterConfiguration
         }
       >
-        <FlagsContext.Provider value={this.state.flags}>
-          {this.props.children
-            ? React.Children.only(this.props.children)
-            : null}
-        </FlagsContext.Provider>
+        {this.props.children ? React.Children.only(this.props.children) : null}
       </ConfigureAdapter>
     );
   }
 }
+
+const mapDispatchToProps: ConnectedProps = {
+  handleUpdateStatus: updateStatus,
+  handleUpdateFlags: updateFlags,
+};
+
+/* istanbul ignore next */
+export default connect(
+  null,
+  mapDispatchToProps
+)(Configure);
