@@ -1,4 +1,4 @@
-import { FlagName, FlagVarition } from '@flopflip/types';
+import { FlagName, FlagVariation } from '@flopflip/types';
 
 import React from 'react';
 import flowRight from 'lodash.flowright';
@@ -18,7 +18,7 @@ const injectFeatureToggle = (
 ): React.ComponentType<Diff<RequiredProps, ProvidedProps>> =>
   flowRight(
     withProps((ownProps: RequiredProps) => {
-      const flagVariation: FlagVarition =
+      const flagVariation: FlagVariation =
         ownProps[ALL_FLAGS_PROP_KEY][flagName];
 
       return { [propKey]: isNil(flagVariation) ? false : flagVariation };
