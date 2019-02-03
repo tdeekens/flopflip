@@ -1,8 +1,8 @@
 // @flow
 
-import type { FlagName } from '@flopflip/types';
+import { FlagName } from '@flopflip/types';
 
-import React, { type ComponentType } from 'react';
+import React from 'react';
 import flowRight from 'lodash.flowright';
 import {
   injectFeatureToggle,
@@ -13,11 +13,12 @@ import { withFlags } from '../configure';
 
 type RequiredProps = {};
 type ProvidedProps = {};
+type Diff<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
 
-export default <RequiredProps, ProvidedProps>(
+export default <P extends RequiredProps>(
   flagName: FlagName,
   propKey?: string
-) => (WrappedComponent: ComponentType<$Diff<RequiredProps, ProvidedProps>>) =>
+) => (WrappedComponent: React.ComponentType<Diff<RequiredProps, ProvidedProps>>): React.ComponentType<ProvidedProps & P> =>
   flowRight(
     setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggle')),
     withFlags(),

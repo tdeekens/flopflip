@@ -1,14 +1,13 @@
 // @flow
 
-import type {
+import {
   Flags,
   Adapter,
   AdapterArgs,
-  AdapterState,
   AdapterStatus,
 } from '@flopflip/types';
 
-import React, { PureComponent, type ComponentType, type Node } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { ConfigureAdapter } from '@flopflip/react';
 import { FlagsContext } from '../flags-context';
@@ -32,16 +31,16 @@ type State = {
  *    across different instances of React components due to hoisting.
  */
 const createAdapterArgs = (
-  adapterArgs,
-  handleUpdateStatus,
-  handleUpdateFlags
-) => ({
+  adapterArgs: AdapterArgs,
+  handleUpdateStatus: (status: AdapterStatus) => void,
+  handleUpdateFlags: (flags: Flags) => void
+): AdapterArgs => ({
   ...adapterArgs,
   onStatusStateChange: handleUpdateStatus,
   onFlagsStateChange: handleUpdateFlags,
 });
 
-export default class Configure extends PureComponent<Props, State> {
+export default class Configure extends React.PureComponent<Props, State> {
   static displayName = 'ConfigureFlopflip';
 
   static defaultProps = {
@@ -60,7 +59,7 @@ export default class Configure extends PureComponent<Props, State> {
     flags: {},
   };
 
-  isUnmounted: boolean;
+  isUnmounted: boolean = false;
 
   componentDidMount() {
     this.isUnmounted = false;
@@ -85,7 +84,7 @@ export default class Configure extends PureComponent<Props, State> {
       this.setState(prevState => ({ ...prevState, ...status }));
   };
 
-  render(): Node {
+  render(): React.Node {
     return (
       <ConfigureAdapter
         adapter={this.props.adapter}
