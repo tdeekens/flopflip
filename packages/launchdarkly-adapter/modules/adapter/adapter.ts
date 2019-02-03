@@ -42,7 +42,7 @@ const updateFlagsInAdapterState = (updatedFlags: Flags): void => {
   };
 };
 
-const getFlag = (flagName: FlagName): Flag =>
+const getFlag = (flagName: FlagName): FlagVariation | undefined =>
   adapterState.flags && adapterState.flags[flagName];
 
 const getIsReady = (): boolean => adapterState.isReady;

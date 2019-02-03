@@ -1,7 +1,7 @@
 export type FlagName = string;
 export type FlagVariation = boolean | string;
 export type Flag = [FlagName, FlagVariation];
-export type Flags = { [key: FlagName]: FlagVariation };
+export type Flags = { [key: string]: FlagVariation };
 export type User = {
   key?: string;
 };

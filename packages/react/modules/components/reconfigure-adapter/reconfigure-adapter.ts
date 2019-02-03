@@ -13,7 +13,7 @@ type Props = {
   shouldOverwrite?: boolean;
   user: User;
   reconfigure: (
-    adapterArgs: AdapterArgs,
+    adapterArgs: Partial<AdapterArgs>,
     options?: AdapterReconfigurationOptions
   ) => void;
   children?: React.Component<any>;
@@ -54,7 +54,7 @@ export class ReconfigureAdapter extends React.PureComponent<Props> {
     );
   }
 
-  render(): Node {
+  render() {
     return this.props.children
       ? React.Children.only(this.props.children)
       : null;

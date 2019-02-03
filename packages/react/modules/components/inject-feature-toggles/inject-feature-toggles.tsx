@@ -15,7 +15,7 @@ type ProvidedProps = {};
 
 type Diff<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
 
-const filterFeatureToggles = (allFlags: Flags, demandedFlags: Flags) =>
+const filterFeatureToggles = (allFlags: Flags, demandedFlags: Array<FlagName>) =>
   intersection(Object.keys(allFlags), demandedFlags).reduce(
     (featureToggles: Flags, featureToggle: FlagName) => ({
       ...featureToggles,

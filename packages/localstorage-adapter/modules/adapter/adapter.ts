@@ -4,7 +4,7 @@ import mitt, { Emitter } from 'mitt';
 import { User, AdapterStatus, AdapterArgs, Flags } from '@flopflip/types';
 
 type Storage = {
-  get: (key: string) => string;
+  get: (key: string) => any;
   set: (key: string, value: any) => boolean;
   unset: (key: string) => void;
 };
@@ -57,7 +57,7 @@ export const updateFlags = (flags: Flags): void => {
 
   if (!isAdapterReady) return;
 
-  const previousFlags: Flags = storage.get('flags');
+  const previousFlags: Flags | null = (storage.get('flags') as Flags);
   const nextFlags: Flags = {
     ...previousFlags,
     ...flags,

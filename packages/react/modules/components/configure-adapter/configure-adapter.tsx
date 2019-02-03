@@ -4,7 +4,6 @@ import {
   AdapterArgs,
   AdapterReconfiguration,
   AdapterReconfigurationOptions,
-  User,
 } from '@flopflip/types';
 
 import React from 'react';
@@ -30,7 +29,7 @@ type Props = {
   adapter: Adapter;
   adapterArgs: AdapterArgs;
   defaultFlags?: Flags;
-  render?: () => React.Node;
+  render?: () => React.ReactNode;
   children?: ({ isAdapterReady: boolean }) => Node;
 };
 type State = {
@@ -38,7 +37,7 @@ type State = {
 };
 type AdapterState = valueof<AdapterStates>;
 
-const isEmptyChildren = (children: Node): boolean =>
+const isEmptyChildren = (children: React.ReactNode): boolean =>
   React.Children.count(children) === 0;
 
 export const mergeAdapterArgs = (
@@ -185,7 +184,7 @@ export default class ConfigureAdapter extends React.PureComponent<
   }
 
   componentDidMount(): Promise<any> | void {
-    this.handleDefaultFlags(this.props.defaultFlags);
+    if (this.props.defaultFlags) this.handleDefaultFlags(this.props.defaultFlags);
 
     if (!this.props.shouldDeferAdapterConfiguration) {
       this.setAdapterState(AdapterStates.CONFIGURING);
@@ -265,6 +264,8 @@ export default class ConfigureAdapter extends React.PureComponent<
 
           if (this.props.children && !isEmptyChildren(this.props.children))
             return React.Children.only(this.props.children);
+
+          return null
         })()}
       </AdapterContext.Provider>
     );

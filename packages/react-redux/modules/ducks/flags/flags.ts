@@ -1,4 +1,4 @@
-import { FlagName, FlagVariation, Flag, Flags } from '@flopflip/types';
+import { FlagName, FlagVariation, Flags } from '@flopflip/types';
 import { State } from '../../types';
 import { UpdateFlagsAction } from './types.js';
 

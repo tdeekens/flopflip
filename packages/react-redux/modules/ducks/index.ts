@@ -1,4 +1,4 @@
-import { FlagName, FlagVariation, Flag, Flags } from '@flopflip/types';
+import { Flags } from '@flopflip/types';
 
 import { combineReducers } from 'redux';
 import { flagsReducer, createFlagsReducer } from './flags';

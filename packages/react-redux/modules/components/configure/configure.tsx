@@ -8,7 +8,7 @@ import { ConfigureAdapter } from '@flopflip/react';
 import { updateStatus, updateFlags } from './../../ducks';
 
 type Props = {
-  children?: React.Node;
+  children?: React.ReactNode;
   shouldDeferAdapterConfiguration?: boolean;
   defaultFlags?: Flags;
   adapterArgs: AdapterArgs;

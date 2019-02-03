@@ -1,11 +1,3 @@
-import {
-  FlagName,
-  FlagVariation,
-  Flags,
-  Adapter,
-  AdapterArgs,
-} from '@flopflip/types';
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isValidElementType } from 'react-is';
@@ -14,11 +6,11 @@ type Props = {
   untoggledComponent?: React.ComponentType<any>;
   toggledComponent?: React.ComponentType<any>;
   render?: () => Node;
-  children?: ({ isFeatureEnabled: boolean }) => React.Node;
+  children?: ({ isFeatureEnabled: boolean }) => React.ReactNode;
   isFeatureEnabled: boolean;
 };
 
-const isEmptyChildren = (children: React.Node): boolean =>
+const isEmptyChildren = (children: React.ReactNode): boolean =>
   React.Children.count(children) === 0;
 
 export default class ToggleFeature extends React.PureComponent<Props> {

@@ -6,7 +6,7 @@ import {
   AdapterStatus,
   AdapterArgs,
   FlagName,
-  Flag,
+  FlagVariation,
   Flags,
 } from '@flopflip/types';
 
@@ -103,7 +103,7 @@ const waitUntilConfigured = (): Promise<any> =>
     else adapterState.emitter.on('readyStateChange', resolve);
   });
 
-const getFlag = (flagName: FlagName): Flag | undefined =>
+const getFlag = (flagName: FlagName): FlagVariation | undefined =>
   adapterState.flags && adapterState.flags[flagName];
 
 export default {
