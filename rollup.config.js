@@ -31,11 +31,11 @@ const pkgOptionalDependencies = Object.keys(pkg.optionalDependencies || {});
  *   resolved by Node.js.
  */
 const externalDependencies =
-  format !== 'umd'
-    ? pkgDependencies
+  format === 'umd'
+    ? pkgPeerDependencies
+    : pkgDependencies
         .concat(pkgPeerDependencies)
-        .concat(pkgOptionalDependencies)
-    : pkgPeerDependencies;
+        .concat(pkgOptionalDependencies);
 
 const config = {
   output: {
