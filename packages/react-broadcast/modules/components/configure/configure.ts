@@ -1,9 +1,4 @@
-import {
-  Flags,
-  Adapter,
-  AdapterArgs,
-  AdapterStatus,
-} from '@flopflip/types';
+import { Flags, Adapter, AdapterArgs, AdapterStatus } from '@flopflip/types';
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -11,14 +6,14 @@ import { ConfigureAdapter } from '@flopflip/react';
 import { FlagsContext } from '../flags-context';
 
 type Props = {
-  children?: Node,
-  shouldDeferAdapterConfiguration?: boolean,
-  defaultFlags?: Flags,
-  adapterArgs: AdapterArgs,
-  adapter: Adapter,
+  children?: Node;
+  shouldDeferAdapterConfiguration?: boolean;
+  defaultFlags?: Flags;
+  adapterArgs: AdapterArgs;
+  adapter: Adapter;
 };
 type State = {
-  flags: Flags,
+  flags: Flags;
 };
 
 /**

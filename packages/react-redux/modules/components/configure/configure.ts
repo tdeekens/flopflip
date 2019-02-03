@@ -1,10 +1,5 @@
-import {
-  Flags,
-  Adapter,
-  AdapterArgs,
-  AdapterStatus,
-} from '@flopflip/types';
-import { UpdateFlagsAction, UpdateStatusAction } from '../../types'
+import { Flags, Adapter, AdapterArgs, AdapterStatus } from '@flopflip/types';
+import { UpdateFlagsAction, UpdateStatusAction } from '../../types';
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -13,18 +8,18 @@ import { ConfigureAdapter } from '@flopflip/react';
 import { updateStatus, updateFlags } from './../../ducks';
 
 type Props = {
-  children?: React.Node,
-  shouldDeferAdapterConfiguration?: boolean,
-  defaultFlags?: Flags,
-  adapterArgs: AdapterArgs,
-  adapter: Adapter,
+  children?: React.Node;
+  shouldDeferAdapterConfiguration?: boolean;
+  defaultFlags?: Flags;
+  adapterArgs: AdapterArgs;
+  adapter: Adapter;
 };
 type ConnectedProps = {
-  handleUpdateStatus: (status: AdapterStatus) => UpdateStatusAction,
-  handleUpdateFlags: (flags: Flags) => UpdateFlagsAction,
+  handleUpdateStatus: (status: AdapterStatus) => UpdateStatusAction;
+  handleUpdateFlags: (flags: Flags) => UpdateFlagsAction;
 };
 type State = {
-  flags: Flags,
+  flags: Flags;
 };
 
 /**
@@ -44,7 +39,10 @@ const createAdapterArgs = (
   onFlagsStateChange: handleUpdateFlags,
 });
 
-export class Configure extends React.PureComponent<Props & ConnectedProps, State> {
+export class Configure extends React.PureComponent<
+  Props & ConnectedProps,
+  State
+> {
   static displayName = 'ConfigureFlopflip';
 
   static defaultProps = {

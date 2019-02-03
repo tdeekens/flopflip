@@ -1,24 +1,19 @@
 import invariant from 'invariant';
 import mitt, { Emitter } from 'mitt';
 
-import {
-  User,
-  AdapterStatus,
-  AdapterArgs,
-  Flags,
-} from '@flopflip/types';
+import { User, AdapterStatus, AdapterArgs, Flags } from '@flopflip/types';
 
 type Storage = {
-  get: (key: string) => string,
-  set: (key: string, value: any) => boolean,
-  unset: (key: string) => void,
+  get: (key: string) => string;
+  set: (key: string, value: any) => boolean;
+  unset: (key: string) => void;
 };
 
 type LocalStorageAdapterState = {
-  flags: Flags,
-  user?: User,
-  emitter: Emitter,
-}
+  flags: Flags;
+  user?: User;
+  emitter: Emitter;
+};
 const intialAdapterState: AdapterStatus & LocalStorageAdapterState = {
   isReady: false,
   flags: {},
@@ -76,7 +71,7 @@ export const updateFlags = (flags: Flags): void => {
 const subscribeToFlagsChanges = ({
   pollingInteral = 1000 * 60,
 }: {
-  pollingInteral: number,
+  pollingInteral: number;
 }) => {
   setInterval(() => {
     adapterState.emitter.emit('flagsStateChange', storage.get('flags'));
@@ -87,7 +82,7 @@ const configure = ({
   user,
   onFlagsStateChange,
   onStatusStateChange,
-  adapterConfiguration
+  adapterConfiguration,
 }: AdapterArgs): Promise<any> => {
   adapterState.user = user;
 
@@ -105,7 +100,9 @@ const configure = ({
 
     adapterState.emitter.emit('readyStateChange');
 
-    subscribeToFlagsChanges({ pollingInteral: adapterConfiguration.pollingInteral });
+    subscribeToFlagsChanges({
+      pollingInteral: adapterConfiguration.pollingInteral,
+    });
   });
 };
 

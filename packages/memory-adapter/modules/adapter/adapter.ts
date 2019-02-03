@@ -11,10 +11,10 @@ import {
 } from '@flopflip/types';
 
 type MemoryAdapterState = {
-  flags: Flags,
-  user?: User,
-  emitter: Emitter,
-}
+  flags: Flags;
+  user?: User;
+  emitter: Emitter;
+};
 
 const intialAdapterState: AdapterStatus & MemoryAdapterState = {
   isReady: false,

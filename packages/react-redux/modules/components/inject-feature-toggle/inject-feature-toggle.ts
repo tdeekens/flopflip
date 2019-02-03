@@ -19,7 +19,10 @@ export const mapStateToProps = (state: State) => ({
   [ALL_FLAGS_PROP_KEY]: selectFlags(state),
 });
 
-export default <P extends RequiredProps>(flagName: FlagName, propKey?: string) => (
+export default <P extends RequiredProps>(
+  flagName: FlagName,
+  propKey?: string
+) => (
   WrappedComponent: React.ComponentType<P>
 ): React.ComponentType<ProvidedProps & P> =>
   /* istanbul ignore next */

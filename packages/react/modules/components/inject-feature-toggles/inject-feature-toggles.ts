@@ -41,7 +41,7 @@ const defaultAreOwnPropsEqual = (
     isEqual(remainingProps, nextRemainingProps)
   );
 };
-export { defaultAreOwnPropsEqual as areOwnPropsEqual }
+export { defaultAreOwnPropsEqual as areOwnPropsEqual };
 
 const injectFeatureToggles = (
   flagNames: Array<FlagName>,

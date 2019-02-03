@@ -11,11 +11,11 @@ import PropTypes from 'prop-types';
 import { isValidElementType } from 'react-is';
 
 type Props = {
-  untoggledComponent?: React.ComponentType<any>,
-  toggledComponent?: React.ComponentType<any>,
-  render?: () => Node,
-  children?: ({ isFeatureEnabled: boolean }) => React.Node,
-  isFeatureEnabled: boolean,
+  untoggledComponent?: React.ComponentType<any>;
+  toggledComponent?: React.ComponentType<any>;
+  render?: () => Node;
+  children?: ({ isFeatureEnabled: boolean }) => React.Node;
+  isFeatureEnabled: boolean;
 };
 
 const isEmptyChildren = (children: React.Node): boolean =>

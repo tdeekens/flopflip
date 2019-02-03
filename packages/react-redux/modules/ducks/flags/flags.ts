@@ -1,6 +1,6 @@
-import{ FlagName, FlagVariation, Flag, Flags } from '@flopflip/types';
-import{ State } from '../../types';
-import{ UpdateFlagsAction } from './types.js';
+import { FlagName, FlagVariation, Flag, Flags } from '@flopflip/types';
+import { State } from '../../types';
+import { UpdateFlagsAction } from './types.js';
 
 import isNil from 'lodash.isnil';
 import { STATE_SLICE } from '../../store';
@@ -11,12 +11,15 @@ export const UPDATE_FLAGS: string = '@flopflip/flags/update';
 const initialState: State = {};
 
 // Reducer
-const reducer = (state: State = initialState, action: UpdateFlagsAction): State => {
+const reducer = (
+  state: State = initialState,
+  action: UpdateFlagsAction
+): State => {
   switch (action.type) {
     case UPDATE_FLAGS:
       return {
         ...state,
-        flags: action.payload.flags
+        flags: action.payload.flags,
       };
 
     default:
@@ -38,7 +41,9 @@ export const updateFlags = (flags: Flags): UpdateFlagsAction => ({
 
 // Selectors
 export const selectFlags = (state: State): Flags => state[STATE_SLICE].flags;
-export const selectFlag = (flagName: FlagName) => (state: State): FlagVariation => {
+export const selectFlag = (flagName: FlagName) => (
+  state: State
+): FlagVariation => {
   const allFlags: Flags = selectFlags(state);
   const flagValue: FlagVariation = allFlags[flagName];
 

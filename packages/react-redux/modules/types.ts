@@ -3,8 +3,8 @@ import { UpdateStatusAction } from './ducks/status/types';
 import { UpdateFlagsAction } from './ducks/flags/types';
 
 export type State = {
-  flags?: Flags,
-  status?: AdapterStatus,
+  flags?: Flags;
+  status?: AdapterStatus;
 };
 
 export type UpdateFlagsAction = UpdateFlagsAction;

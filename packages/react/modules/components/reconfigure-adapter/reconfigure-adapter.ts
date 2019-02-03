@@ -1,4 +1,8 @@
-import { User, AdapterArgs, AdapterReconfigurationOptions } from '@flopflip/types';
+import {
+  User,
+  AdapterArgs,
+  AdapterReconfigurationOptions,
+} from '@flopflip/types';
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -6,13 +10,13 @@ import PropTypes from 'prop-types';
 import { withReconfiguration } from '../configure-adapter';
 
 type Props = {
-  shouldOverwrite?: boolean,
-  user: User,
+  shouldOverwrite?: boolean;
+  user: User;
   reconfigure: (
     adapterArgs: AdapterArgs,
     options?: AdapterReconfigurationOptions
-  ) => void,
-  children?: React.Component<any>,
+  ) => void;
+  children?: React.Component<any>;
 };
 
 export class ReconfigureAdapter extends React.PureComponent<Props> {

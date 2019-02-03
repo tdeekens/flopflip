@@ -11,8 +11,8 @@ import {
 import { STATE_SLICE } from './../../store';
 
 type OwnProps = {
-  flag: FlagName,
-  variation: FlagVariation,
+  flag: FlagName;
+  variation: FlagVariation;
 };
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => ({

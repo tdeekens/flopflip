@@ -14,7 +14,7 @@ type RequiredProps = {};
 type ProvidedProps = {};
 
 export default <P extends RequiredProps>(
-  { flag, variation }: { flag: FlagName, variation: FlagVariation },
+  { flag, variation }: { flag: FlagName; variation: FlagVariation },
   UntoggledComponent: React.ComponentType<RequiredProps>
 ) => (WrappedComponent: React.ComponentType<P & ProvidedProps>) =>
   flowRight(

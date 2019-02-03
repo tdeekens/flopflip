@@ -11,17 +11,17 @@ import { SplitFactory } from '@splitsoftware/splitio';
 import camelCase from 'lodash.camelcase';
 
 type AdapterState = {
-  isReady: boolean,
-  isConfigured: boolean,
-  user?: User,
-  client?: SplitIO.IClient,
-  manager?: SplitIO.IManager,
+  isReady: boolean;
+  isConfigured: boolean;
+  user?: User;
+  client?: SplitIO.IClient;
+  manager?: SplitIO.IManager;
 };
 type ClientInitializationOptions = {
-  [key: string]: any,
+  [key: string]: any;
   core?: {
-    [key: string]: string,
-  },
+    [key: string]: string;
+  };
 };
 
 const adapterState: AdapterState = {
@@ -51,23 +51,26 @@ export const normalizeFlag = (
 };
 
 export const camelCaseFlags = (flags: Flags) =>
-  Object.entries(flags).reduce<Flags>((camelCasedFlags: Flags, [flagName, flaValue]) => {
-    const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
-      flagName,
-      flaValue as FlagVariation
-    );
+  Object.entries(flags).reduce<Flags>(
+    (camelCasedFlags: Flags, [flagName, flaValue]) => {
+      const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
+        flagName,
+        flaValue as FlagVariation
+      );
 
-    camelCasedFlags[normalizedFlagName] = normalizedFlagValue;
+      camelCasedFlags[normalizedFlagName] = normalizedFlagValue;
 
-    return camelCasedFlags;
-  }, {});
+      return camelCasedFlags;
+    },
+    {}
+  );
 
 const subscribeToFlagsChanges = ({
   flagNames,
   onFlagsStateChange,
 }: {
-  flagNames: Array<FlagName>,
-  onFlagsStateChange: OnFlagsStateChangeCallback,
+  flagNames: Array<FlagName>;
+  onFlagsStateChange: OnFlagsStateChangeCallback;
 }) => {
   if (adapterState.client) {
     adapterState.client.on(adapterState.client.Event.SDK_UPDATE, () => {
@@ -109,7 +112,7 @@ const initializeClient = (
   authorizationKey: string,
   key: string,
   options: ClientInitializationOptions = {}
-): { client: SplitIO.IClient, manager: SplitIO.IManager } => {
+): { client: SplitIO.IClient; manager: SplitIO.IManager } => {
   const sdk = SplitFactory({
     ...omit(options, ['core']),
     core: {
@@ -129,8 +132,8 @@ const subscribe = ({
   onFlagsStateChange,
   onStatusStateChange,
 }: {
-  onFlagsStateChange: OnFlagsStateChangeCallback,
-  onStatusStateChange: OnStatusStateChangeCallback,
+  onFlagsStateChange: OnFlagsStateChangeCallback;
+  onStatusStateChange: OnStatusStateChangeCallback;
 }): Promise<any> =>
   new Promise((resolve, reject) => {
     if (adapterState.client) {
@@ -172,11 +175,11 @@ const configure = ({
   onFlagsStateChange,
   onStatusStateChange,
 }: {
-  authorizationKey: string,
-  user: User,
-  options: ClientInitializationOptions,
-  onFlagsStateChange: OnFlagsStateChangeCallback,
-  onStatusStateChange: OnStatusStateChangeCallback,
+  authorizationKey: string;
+  user: User;
+  options: ClientInitializationOptions;
+  onFlagsStateChange: OnFlagsStateChangeCallback;
+  onStatusStateChange: OnStatusStateChangeCallback;
 }): Promise<any> => {
   adapterState.user = ensureUser(user);
   const { client, manager } = initializeClient(
@@ -201,8 +204,8 @@ const reconfigure = ({
   user,
   onFlagsStateChange,
 }: {
-  user: User,
-  onFlagsStateChange: OnFlagsStateChangeCallback,
+  user: User;
+  onFlagsStateChange: OnFlagsStateChangeCallback;
 }): Promise<any> =>
   new Promise((resolve, reject) => {
     if (
@@ -223,11 +226,13 @@ const reconfigure = ({
 
       if (adapterState.manager && adapterState.client) {
         flagNames = adapterState.manager.names();
-        flags = adapterState.client.getTreatments(flagNames, adapterState.user as SplitIO.Attributes);
+        flags = adapterState.client.getTreatments(
+          flagNames,
+          adapterState.user as SplitIO.Attributes
+        );
 
         onFlagsStateChange(camelCaseFlags(flags));
       }
-
     }
 
     return resolve();

@@ -12,12 +12,12 @@ import PropTypes from 'prop-types';
 import merge from 'deepmerge';
 import { AdapterContext } from '../adapter-context';
 
-type valueof<T> = T[keyof T]
+type valueof<T> = T[keyof T];
 
 type AdapterStates = {
-  UNCONFIGURED: string,
-  CONFIGURING: string,
-  CONFIGURED: string,
+  UNCONFIGURED: string;
+  CONFIGURING: string;
+  CONFIGURED: string;
 };
 export const AdapterStates: AdapterStates = {
   UNCONFIGURED: 'unconfigured',
@@ -26,15 +26,15 @@ export const AdapterStates: AdapterStates = {
 };
 
 type Props = {
-  shouldDeferAdapterConfiguration?: boolean,
-  adapter: Adapter,
-  adapterArgs: AdapterArgs,
-  defaultFlags?: Flags,
-  render?: () => React.Node,
-  children?: ({ isAdapterReady: boolean }) => Node,
+  shouldDeferAdapterConfiguration?: boolean;
+  adapter: Adapter;
+  adapterArgs: AdapterArgs;
+  defaultFlags?: Flags;
+  render?: () => React.Node;
+  children?: ({ isAdapterReady: boolean }) => Node;
 };
 type State = {
-  appliedAdapterArgs: AdapterArgs,
+  appliedAdapterArgs: AdapterArgs;
 };
 type AdapterState = valueof<AdapterStates>;
 
@@ -49,7 +49,10 @@ export const mergeAdapterArgs = (
     ? nextAdapterArgs
     : merge(previousAdapterArgs, nextAdapterArgs);
 
-export default class ConfigureAdapter extends React.PureComponent<Props, State> {
+export default class ConfigureAdapter extends React.PureComponent<
+  Props,
+  State
+> {
   static defaultProps = {
     shouldDeferAdapterConfiguration: false,
     defaultFlags: {},
@@ -70,7 +73,7 @@ export default class ConfigureAdapter extends React.PureComponent<Props, State> 
   };
 
   adapterState: AdapterState = AdapterStates.UNCONFIGURED;
-  pendingAdapterArgs: ?AdapterArgs = null;
+  pendingAdapterArgs?: AdapterArgs | null = null;
 
   state: { appliedAdapterArgs: AdapterArgs } = {
     appliedAdapterArgs: this.props.adapterArgs,

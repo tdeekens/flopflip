@@ -3,7 +3,7 @@ import { wrapDisplayName } from '../wrap-display-name';
 import { setDisplayName } from '../set-display-name';
 import omit from 'lodash.omit';
 
-type RequiredProps = {}
+type RequiredProps = {};
 type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 const omitProps = <P extends RequiredProps, K>(propsToOmit: K) => (

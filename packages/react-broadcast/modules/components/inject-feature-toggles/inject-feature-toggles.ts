@@ -21,7 +21,9 @@ export default <P extends RequiredProps>(
     ownProps: ProvidedProps,
     propKey: string
   ) => boolean
-) => (WrappedComponent: React.ComponentType<Diff<RequiredProps, ProvidedProps>>): React.ComponentType<ProvidedProps & P> =>
+) => (
+  WrappedComponent: React.ComponentType<Diff<RequiredProps, ProvidedProps>>
+): React.ComponentType<ProvidedProps & P> =>
   flowRight(
     setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggles')),
     withFlags(),

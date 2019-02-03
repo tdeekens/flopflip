@@ -18,7 +18,8 @@ const injectFeatureToggle = (
 ): React.ComponentType<Diff<RequiredProps, ProvidedProps>> =>
   flowRight(
     withProps((ownProps: RequiredProps) => {
-      const flagVariation: FlagVarition = ownProps[ALL_FLAGS_PROP_KEY][flagName];
+      const flagVariation: FlagVarition =
+        ownProps[ALL_FLAGS_PROP_KEY][flagName];
 
       return { [propKey]: isNil(flagVariation) ? false : flagVariation };
     }),

@@ -15,9 +15,11 @@ type ProvidedProps = {};
 type Diff<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
 
 export default <P extends RequiredProps>(
-  { flag, variation }: { flag: FlagName, variation?: FlagVariation },
+  { flag, variation }: { flag: FlagName; variation?: FlagVariation },
   UntoggledComponent?: React.ComponentType<any>
-) => (WrappedComponent: React.ComponentType<Diff<RequiredProps, ProvidedProps>>): React.ComponentType<ProvidedProps & P> =>
+) => (
+  WrappedComponent: React.ComponentType<Diff<RequiredProps, ProvidedProps>>
+): React.ComponentType<ProvidedProps & P> =>
   flowRight(
     setDisplayName(wrapDisplayName(WrappedComponent, 'branchOnFeatureToggle')),
     injectFeatureToggle(flag),

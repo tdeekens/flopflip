@@ -16,7 +16,9 @@ type Diff<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
 export default <P extends RequiredProps>(
   flagName: FlagName,
   propKey?: string
-) => (WrappedComponent: React.ComponentType<Diff<RequiredProps, ProvidedProps>>): React.ComponentType<ProvidedProps & P> =>
+) => (
+  WrappedComponent: React.ComponentType<Diff<RequiredProps, ProvidedProps>>
+): React.ComponentType<ProvidedProps & P> =>
   flowRight(
     setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggle')),
     withFlags(),

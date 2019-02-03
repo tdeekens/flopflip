@@ -9,18 +9,22 @@ import {
 } from '@flopflip/types';
 import warning from 'tiny-warning';
 import isEqual from 'lodash.isequal';
-import { initialize as initializeLaunchDarklyClient, LDUser, LDClient } from 'ldclient-js';
+import {
+  initialize as initializeLaunchDarklyClient,
+  LDUser,
+  LDClient,
+} from 'ldclient-js';
 import camelCase from 'lodash.camelcase';
 
 type ClientOptions = {
-  fetchGoals?: boolean,
+  fetchGoals?: boolean;
 };
 type AdapterState = {
-  isReady: boolean,
-  isConfigured: boolean,
-  user?: User,
-  client?: LDClient,
-  flags?: Flags,
+  isReady: boolean;
+  isConfigured: boolean;
+  user?: User;
+  client?: LDClient;
+  flags?: Flags;
 };
 
 const adapterState: AdapterState = {
@@ -53,8 +57,8 @@ const setupFlagSubcription = ({
   flagsFromSdk,
   onFlagsStateChange,
 }: {
-  flagsFromSdk: Flags,
-  onFlagsStateChange: OnFlagsStateChangeCallback,
+  flagsFromSdk: Flags;
+  onFlagsStateChange: OnFlagsStateChangeCallback;
 }) => {
   for (const flagName in flagsFromSdk) {
     // Dispatch whenever a configured flag value changes
@@ -93,7 +97,8 @@ const initializeClient = (
   clientSideId: string,
   user: User,
   clientOptions: ClientOptions
-): LDClient => initializeLaunchDarklyClient(clientSideId, user as LDUser, clientOptions);
+): LDClient =>
+  initializeLaunchDarklyClient(clientSideId, user as LDUser, clientOptions);
 const changeUserContext = (nextUser: User): Promise<any> =>
   adapterState.client && adapterState.client.identify
     ? adapterState.client.identify(nextUser as LDUser)
@@ -118,24 +123,27 @@ const updateUserContext = (updatedUserProps: User): Promise<any> => {
 
 // NOTE: Exported for testing only
 export const camelCaseFlags = (rawFlags: Flags): Flags =>
-  Object.entries(rawFlags).reduce<Flags>((camelCasedFlags: Flags, [flagName, flagValue]) => {
-    const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
-      flagName,
-      flagValue as FlagVariation
-    );
-    // Can't return expression as it is the assigned value
-    camelCasedFlags[normalizedFlagName] = normalizedFlagValue;
+  Object.entries(rawFlags).reduce<Flags>(
+    (camelCasedFlags: Flags, [flagName, flagValue]) => {
+      const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
+        flagName,
+        flagValue as FlagVariation
+      );
+      // Can't return expression as it is the assigned value
+      camelCasedFlags[normalizedFlagName] = normalizedFlagValue;
 
-    return camelCasedFlags;
-  }, {});
+      return camelCasedFlags;
+    },
+    {}
+  );
 
 const getInitialFlags = ({
   onFlagsStateChange,
   onStatusStateChange,
 }: {
-  onFlagsStateChange: OnFlagsStateChangeCallback,
-  onStatusStateChange: OnStatusStateChangeCallback,
-}): Promise<{flagsFromSdk: Flags}> => {
+  onFlagsStateChange: OnFlagsStateChangeCallback;
+  onStatusStateChange: OnStatusStateChangeCallback;
+}): Promise<{ flagsFromSdk: Flags }> => {
   return new Promise((resolve, reject) => {
     if (adapterState.client) {
       return adapterState.client.waitUntilReady().then(() => {
@@ -154,14 +162,13 @@ const getInitialFlags = ({
 
           return resolve({ flagsFromSdk });
         }
-      })
+      });
     } else {
       return reject(
         new Error('Can not subscribte with non initialized client.')
       );
     }
-  })
-
+  });
 };
 
 const configure = ({
@@ -172,12 +179,12 @@ const configure = ({
   onStatusStateChange,
   subscribeToFlagChanges = true,
 }: {
-  clientSideId: string,
-  user: User,
-  clientOptions: ClientOptions,
-  onFlagsStateChange: OnFlagsStateChangeCallback,
-  onStatusStateChange: OnStatusStateChangeCallback,
-  subscribeToFlagChanges: boolean,
+  clientSideId: string;
+  user: User;
+  clientOptions: ClientOptions;
+  onFlagsStateChange: OnFlagsStateChangeCallback;
+  onStatusStateChange: OnStatusStateChangeCallback;
+  subscribeToFlagChanges: boolean;
 }): Promise<any> => {
   adapterState.user = ensureUser(user);
   adapterState.client = initializeClient(

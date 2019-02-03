@@ -5,10 +5,13 @@ import { UpdateStatusAction } from './types';
 // Actions
 export const UPDATE_STATUS: string = '@flopflip/status/update';
 
-const initialState: State = { status: { isReady: false} };
+const initialState: State = { status: { isReady: false } };
 
 // Reducer
-const reducer = (state: State = initialState, action: UpdateStatusAction): State => {
+const reducer = (
+  state: State = initialState,
+  action: UpdateStatusAction
+): State => {
   switch (action.type) {
     case UPDATE_STATUS:
       return {
@@ -16,7 +19,7 @@ const reducer = (state: State = initialState, action: UpdateStatusAction): State
         status: {
           ...state.status,
           isReady: action.payload.status.isReady,
-        }
+        },
       };
 
     default:
