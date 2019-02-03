@@ -1,6 +1,4 @@
-import type { FlagName, FlagVariation } from '@flopflip/types';
-
-import React, { PureComponent, type ComponentType, type Node } from 'react';
+import React from 'react';
 import { ALL_FLAGS_PROP_KEY, wrapDisplayName } from '@flopflip/react';
 import { FlagsContext } from '../flags-context';
 
@@ -10,11 +8,11 @@ type ProvidedProps = {};
 const withFlags = (propKey: string = ALL_FLAGS_PROP_KEY) => (
   Component: ComponentType<RequiredProps>
 ) => {
-  class EnhancedComponent extends PureComponent<
+  class EnhancedComponent extends React.PureComponent<
     $Diff<RequiredProps, ProvidedProps>
   > {
     static displayName = wrapDisplayName(Component, 'withFlags');
-    render(): Node {
+    render(): React.Node {
       return (
         <FlagsContext.Consumer>
           {flags => <Component {...this.props} {...{ [propKey]: flags }} />}
