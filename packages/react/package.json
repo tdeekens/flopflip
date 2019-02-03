@@ -6,7 +6,7 @@
   "module": "dist/@flopflip-react.es.js",
   "browser": "dist/@flopflip-react.umd.js",
   "scripts": {
-    "prebuild": "rimraf dist/** && cpx typings/* dist/typings",
+    "prebuild": "rimraf dist/**",
     "build": "cross-env npm run build:es && npm run build:cjs",
     "build:watch": "cross-env npm run build:es -- -w",
     "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.js -o dist/@flopflip-react.es.js",

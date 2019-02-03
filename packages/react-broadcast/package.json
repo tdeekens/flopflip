@@ -6,7 +6,7 @@
   "module": "dist/@flopflip-react-broadcast.es.js",
   "browser": "dist/@flopflip-react-broadcast.umd.js",
   "scripts": {
-    "prebuild": "rimraf dist/** && cpx typings/* dist/typings",
+    "prebuild": "rimraf dist/**",
     "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs",
     "build:watch": "cross-env npm run build:es -- -w",
     "build:umd": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f umd -i modules/index.js -o dist/@flopflip-react-broadcast.umd.js",
@@ -36,7 +36,6 @@
     "@types/prop-types": "15.5.8",
     "@types/react": "16.8.1",
     "@types/react-dom": "16.0.11",
-    "cpx": "1.5.0",
     "enzyme": "3.8.0",
     "enzyme-adapter-react-16": "1.8.0",
     "enzyme-to-json": "3.3.5",
