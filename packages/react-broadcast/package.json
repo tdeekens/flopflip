@@ -33,6 +33,9 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
+    "@types/prop-types": "15.5.8",
+    "@types/react": "16.8.1",
+    "@types/react-dom": "16.0.11",
     "cpx": "1.5.0",
     "enzyme": "3.8.0",
     "enzyme-adapter-react-16": "1.8.0",
