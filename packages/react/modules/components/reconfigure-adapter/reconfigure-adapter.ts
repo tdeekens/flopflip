@@ -1,8 +1,8 @@
 // @flow
 
-import type { User, AdapterArgs } from '@flopflip/types';
+import { User, AdapterArgs, AdapterReconfigurationOptions } from '@flopflip/types';
 
-import React, { PureComponent, type Node } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { withReconfiguration } from '../configure-adapter';
@@ -12,12 +12,12 @@ type Props = {
   user: User,
   reconfigure: (
     adapterArgs: AdapterArgs,
-    { shouldOverwrite?: boolean }
+    options?: AdapterReconfigurationOptions
   ) => void,
   children?: React.Component<any>,
 };
 
-export class ReconfigureAdapter extends PureComponent<Props> {
+export class ReconfigureAdapter extends React.PureComponent<Props> {
   static displayName = 'ReconfigureAdapter';
 
   static defaultProps = {

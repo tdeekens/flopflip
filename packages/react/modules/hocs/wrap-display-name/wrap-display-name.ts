@@ -1,10 +1,8 @@
 // @flow
 
-import { type ComponentType } from 'react';
+import React from 'react';
 
-type ProvidedProps = {};
-
-export default (BaseComponent: ComponentType<any>, hocName: string): string => {
+export default (BaseComponent: React.ComponentType<any>, hocName: string): string => {
   const previousDisplayName = BaseComponent.displayName || BaseComponent.name;
 
   return `${hocName}(${previousDisplayName || 'Component'})`;

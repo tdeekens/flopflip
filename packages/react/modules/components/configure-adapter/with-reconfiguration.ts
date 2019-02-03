@@ -1,23 +1,25 @@
 // @flow
 
-import type { Adapter } from '@flopflip/types';
+import { Adapter } from '@flopflip/types';
 
-import React, { PureComponent, type ComponentType, type Node } from 'react';
+import React from 'react';
+import { wrapDisplayName } from '../../hocs';
 import { AdapterContext } from '../adapter-context';
 
 type RequiredProps = {};
 type ProvidedProps = {};
 
+type Diff<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
+
 const withReconfiguration = (propKey: string = 'reconfigure') => (
-  Component: ComponentType<RequiredProps>
+  Component: React.ComponentType<RequiredProps>
 ) => {
-  class EnhancedComponent extends PureComponent<
-    $Diff<RequiredProps, ProvidedProps>
+  class EnhancedComponent extends React.PureComponent<
+    Diff<RequiredProps, ProvidedProps>
   > {
-    static displayName = `withReconfiguration(${Component.displayName ||
-      Component.name ||
-      'Component'})`;
-    render(): Node {
+    static displayName = wrapDisplayName(Component, 'withReconfiguration');
+
+    render(): React.Node {
       return (
         <AdapterContext.Consumer>
           {reconfigure => (

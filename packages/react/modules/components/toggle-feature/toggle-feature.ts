@@ -1,6 +1,6 @@
 // @flow
 
-import type {
+import {
   FlagName,
   FlagVariation,
   Flags,
@@ -8,22 +8,22 @@ import type {
   AdapterArgs,
 } from '@flopflip/types';
 
-import React, { PureComponent, type ComponentType, type Node } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { isValidElementType } from 'react-is';
 
 type Props = {
-  untoggledComponent?: ComponentType<any>,
-  toggledComponent?: ComponentType<any>,
+  untoggledComponent?: React.ComponentType<any>,
+  toggledComponent?: React.ComponentType<any>,
   render?: () => Node,
-  children?: ({ isFeatureEnabled: boolean }) => Node,
+  children?: ({ isFeatureEnabled: boolean }) => React.Node,
   isFeatureEnabled: boolean,
 };
 
-const isEmptyChildren = (children: Node): boolean =>
+const isEmptyChildren = (children: React.Node): boolean =>
   React.Children.count(children) === 0;
 
-export default class ToggleFeature extends PureComponent<Props> {
+export default class ToggleFeature extends React.PureComponent<Props> {
   static displayName = 'ToggleFeature';
 
   static defaultProps = {
@@ -34,17 +34,17 @@ export default class ToggleFeature extends PureComponent<Props> {
   };
 
   static propTypes = {
-    untoggledComponent: (props: Props, propName: string) => {
+    untoggledComponent: (props: Props, propName: string): Error | void => {
       if (props[propName] && !isValidElementType(props[propName])) {
         return new Error(
-          `Invalid prop 'untoggledComponent' supplied to 'Route': the prop is not a valid React component`
+          `Invalid prop 'untoggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`
         );
       }
     },
-    toggledComponent: (props: Props, propName: string) => {
+    toggledComponent: (props: Props, propName: string): Error | void => {
       if (props[propName] && !isValidElementType(props[propName])) {
         return new Error(
-          `Invalid prop 'toggledComponent' supplied to 'Route': the prop is not a valid React component`
+          `Invalid prop 'toggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`
         );
       }
     },
@@ -52,7 +52,7 @@ export default class ToggleFeature extends PureComponent<Props> {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   };
 
-  render(): Node {
+  render(): React.Node {
     if (this.props.isFeatureEnabled) {
       if (this.props.toggledComponent)
         return React.createElement(this.props.toggledComponent);

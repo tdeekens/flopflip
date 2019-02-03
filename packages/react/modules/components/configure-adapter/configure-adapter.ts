@@ -1,6 +1,6 @@
 // @flow
 
-import type {
+import {
   Flags,
   Adapter,
   AdapterArgs,
@@ -9,16 +9,19 @@ import type {
   User,
 } from '@flopflip/types';
 
-import React, { PureComponent, type Node } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import merge from 'deepmerge';
 import { AdapterContext } from '../adapter-context';
 
-export const AdapterStates: {
+type valueof<T> = T[keyof T]
+
+type AdapterStates = {
   UNCONFIGURED: string,
   CONFIGURING: string,
   CONFIGURED: string,
-} = {
+};
+export const AdapterStates: AdapterStates = {
   UNCONFIGURED: 'unconfigured',
   CONFIGURING: 'configuring',
   CONFIGURED: 'configured',
@@ -29,13 +32,13 @@ type Props = {
   adapter: Adapter,
   adapterArgs: AdapterArgs,
   defaultFlags?: Flags,
-  render?: () => Node,
+  render?: () => React.Node,
   children?: ({ isAdapterReady: boolean }) => Node,
 };
 type State = {
   appliedAdapterArgs: AdapterArgs,
 };
-type AdapterState = $Values<typeof AdapterStates>;
+type AdapterState = valueof<AdapterStates>;
 
 const isEmptyChildren = (children: Node): boolean =>
   React.Children.count(children) === 0;
@@ -48,7 +51,7 @@ export const mergeAdapterArgs = (
     ? nextAdapterArgs
     : merge(previousAdapterArgs, nextAdapterArgs);
 
-export default class ConfigureAdapter extends PureComponent<Props, State> {
+export default class ConfigureAdapter extends React.PureComponent<Props, State> {
   static defaultProps = {
     shouldDeferAdapterConfiguration: false,
     defaultFlags: {},
@@ -243,7 +246,7 @@ export default class ConfigureAdapter extends PureComponent<Props, State> {
     }
   }
 
-  render(): Node {
+  render(): React.Node {
     return (
       <AdapterContext.Provider value={this.reconfigureOrQueue}>
         {(() => {

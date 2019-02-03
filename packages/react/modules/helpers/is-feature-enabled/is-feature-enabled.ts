@@ -1,6 +1,6 @@
 // @flow
 
-import type { FlagName, FlagVariation, Flags } from '@flopflip/types';
+import { FlagName, FlagVariation, Flags } from '@flopflip/types';
 import camelCase from 'lodash.camelcase';
 import warning from 'tiny-warning';
 import { DEFAULT_FLAG_PROP_KEY } from '../../constants';
