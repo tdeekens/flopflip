@@ -1,1 +1,1 @@
-export default from './use-feature-toggle';
+export { default } from './use-feature-toggle';

@@ -1,1 +1,1 @@
-export default from './adapter';
+export { default } from './adapter';
