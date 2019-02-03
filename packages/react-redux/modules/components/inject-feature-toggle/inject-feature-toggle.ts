@@ -1,8 +1,9 @@
 // @flow
 
-import type { FlagName } from '@flopflip/types';
+import { FlagName } from '@flopflip/types';
+import { State } from '../../types';
 
-import React, { type ComponentType } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import flowRight from 'lodash.flowright';
 import { selectFlags } from '../../ducks';
@@ -12,18 +13,17 @@ import {
   setDisplayName,
   ALL_FLAGS_PROP_KEY,
 } from '@flopflip/react';
-import { STATE_SLICE } from './../../store';
 
 type RequiredProps = {};
 type ProvidedProps = {};
 
-export const mapStateToProps = (state: mixed) => ({
+export const mapStateToProps = (state: State) => ({
   [ALL_FLAGS_PROP_KEY]: selectFlags(state),
 });
 
-export default (flagName: FlagName, propKey?: string) => (
-  WrappedComponent: ComponentType<$Diff<RequiredProps, ProvidedProps>>
-) =>
+export default <P extends RequiredProps>(flagName: FlagName, propKey?: string) => (
+  WrappedComponent: React.ComponentType<P>
+): React.ComponentType<ProvidedProps & P> =>
   /* istanbul ignore next */
   flowRight(
     setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggle')),

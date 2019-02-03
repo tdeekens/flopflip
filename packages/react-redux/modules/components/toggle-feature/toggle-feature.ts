@@ -1,6 +1,7 @@
 // @flow
 
-import type { FlagName, FlagVariation, Flags, State } from '@flopflip/types';
+import { FlagName, FlagVariation } from '@flopflip/types';
+import { State } from '../../types';
 
 import flowRight from 'lodash.flowright';
 import { connect } from 'react-redux';
@@ -12,7 +13,8 @@ import {
 import { STATE_SLICE } from './../../store';
 
 type OwnProps = {
-  [FlagName]: FlagVariation,
+  flag: FlagName,
+  variation: FlagVariation,
 };
 
 export const mapStateToProps = (state: State, ownProps: OwnProps) => ({

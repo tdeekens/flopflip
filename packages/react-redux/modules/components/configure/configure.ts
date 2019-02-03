@@ -1,28 +1,29 @@
 // @flow
 
-import type {
+import {
   Flags,
+  Adapter,
   AdapterArgs,
-  AdapterState,
   AdapterStatus,
 } from '@flopflip/types';
+import { UpdateFlagsAction, UpdateStatusAction } from '../../types'
 
-import React, { PureComponent, type ComponentType, type Node } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ConfigureAdapter } from '@flopflip/react';
 import { updateStatus, updateFlags } from './../../ducks';
 
 type Props = {
-  children?: Node,
+  children?: React.Node,
   shouldDeferAdapterConfiguration?: boolean,
   defaultFlags?: Flags,
   adapterArgs: AdapterArgs,
-  adapter: mixed,
+  adapter: Adapter,
 };
 type ConnectedProps = {
-  handleUpdateStatus: () => void,
-  handleUpdateFlags: () => void,
+  handleUpdateStatus: (status: AdapterStatus) => UpdateStatusAction,
+  handleUpdateFlags: (flags: Flags) => UpdateFlagsAction,
 };
 type State = {
   flags: Flags,
@@ -36,16 +37,16 @@ type State = {
  *    across different instances of React components due to hoisting.
  */
 const createAdapterArgs = (
-  adapterArgs,
-  handleUpdateStatus,
-  handleUpdateFlags
-) => ({
+  adapterArgs: AdapterArgs,
+  handleUpdateStatus: (status: AdapterStatus) => UpdateStatusAction,
+  handleUpdateFlags: (flags: Flags) => UpdateFlagsAction
+): AdapterArgs => ({
   ...adapterArgs,
   onStatusStateChange: handleUpdateStatus,
   onFlagsStateChange: handleUpdateFlags,
 });
 
-export class Configure extends PureComponent<Props & ConnectedProps, State> {
+export class Configure extends React.PureComponent<Props & ConnectedProps, State> {
   static displayName = 'ConfigureFlopflip';
 
   static defaultProps = {
@@ -60,7 +61,7 @@ export class Configure extends PureComponent<Props & ConnectedProps, State> {
     shouldDeferAdapterConfiguration: PropTypes.bool,
   };
 
-  render(): Node {
+  render(): React.Node {
     return (
       <ConfigureAdapter
         adapter={this.props.adapter}

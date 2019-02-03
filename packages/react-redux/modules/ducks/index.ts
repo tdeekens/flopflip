@@ -1,6 +1,6 @@
 // @flow
 
-import type { FlagName, FlagVariation, Flag, Flags } from '@flopflip/types';
+import { FlagName, FlagVariation, Flag, Flags } from '@flopflip/types';
 
 import { combineReducers } from 'redux';
 import { flagsReducer, createFlagsReducer } from './flags';

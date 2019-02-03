@@ -7,8 +7,8 @@ export type User = {
 };
 export type AdapterArgs = {
   user: User,
-  onFlagsStateChange: () => void,
-  onStatusStateChange: () => void,
+  onFlagsStateChange: (flags: Flags) => void,
+  onStatusStateChange: (status: AdapterStatus) => void,
   adapterConfiguration: {
     pollingInteral: number,
   },
