@@ -1,4 +1,3 @@
-// @flow
 import invariant from 'invariant';
 import mitt, { Emitter } from 'mitt';
 

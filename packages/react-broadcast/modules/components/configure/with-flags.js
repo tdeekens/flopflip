@@ -1,5 +1,3 @@
-// @flow
-
 import type { FlagName, FlagVariation } from '@flopflip/types';
 
 import React, { PureComponent, type ComponentType, type Node } from 'react';

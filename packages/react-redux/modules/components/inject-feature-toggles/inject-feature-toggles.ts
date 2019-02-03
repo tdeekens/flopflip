@@ -1,5 +1,3 @@
-// @flow
-
 import { State } from '../../types';
 import { FlagName } from '@flopflip/types';
 

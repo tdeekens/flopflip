@@ -1,5 +1,3 @@
-// @flow
-
 import { Store, StoreEnhancerStoreCreator, Reducer, DeepPartial, AnyAction } from 'redux';
 import { Adapter, AdapterArgs, AdapterStatus, Flags } from '@flopflip/types';
 import { State } from '../../types';

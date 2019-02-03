@@ -1,5 +1,3 @@
-// @flow
-
 import createReactContext, { Context } from 'create-react-context';
 import { ReconfigureAdapter } from '@flopflip/types';
 

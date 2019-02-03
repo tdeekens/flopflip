@@ -1,5 +1,3 @@
-// @flow
-
 import { FlagName, FlagVariation, Flags } from '@flopflip/types';
 import camelCase from 'lodash.camelcase';
 import warning from 'tiny-warning';

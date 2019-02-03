@@ -1,5 +1,3 @@
-// @flow
-
 import { FlagName, FlagVariation } from '@flopflip/types';
 
 import React from 'react';

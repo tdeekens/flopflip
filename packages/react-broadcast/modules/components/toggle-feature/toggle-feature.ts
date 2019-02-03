@@ -1,5 +1,3 @@
-// @flow
-
 import flowRight from 'lodash.flowright';
 import {
   ToggleFeature,

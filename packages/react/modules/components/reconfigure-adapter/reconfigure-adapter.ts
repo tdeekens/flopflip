@@ -1,5 +1,3 @@
-// @flow
-
 import { User, AdapterArgs, AdapterReconfigurationOptions } from '@flopflip/types';
 
 import React from 'react';

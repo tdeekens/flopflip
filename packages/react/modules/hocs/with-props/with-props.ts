@@ -1,4 +1,3 @@
-// @flow
 import React from 'react';
 
 import { wrapDisplayName } from '../wrap-display-name';

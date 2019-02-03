@@ -1,5 +1,3 @@
-// @flow
-
 import { AdapterStatus } from '@flopflip/types';
 import { State } from '../../types';
 import { UpdateStatusAction } from './types';

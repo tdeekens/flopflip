@@ -1,5 +1,3 @@
-// @flow
-
 import { Adapter } from '@flopflip/types';
 
 import React from 'react';

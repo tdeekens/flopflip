@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 
 export default (BaseComponent: React.ComponentType<any>, hocName: string): string => {
