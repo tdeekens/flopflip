@@ -5,8 +5,6 @@ import {
 } from '@flopflip/types';
 
 import React from 'react';
-import PropTypes from 'prop-types';
-
 import { withReconfiguration } from '../configure-adapter';
 
 type Props = {
@@ -25,11 +23,6 @@ export class ReconfigureAdapter extends React.PureComponent<Props> {
   static defaultProps = {
     shouldOverwrite: false,
     children: null,
-  };
-
-  static propTypes = {
-    shouldOverwrite: PropTypes.bool,
-    children: PropTypes.node,
   };
 
   componentDidMount(): void {

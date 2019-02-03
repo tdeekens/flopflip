@@ -16,6 +16,8 @@ export default function useFeatureToggle(
   );
 
   if (typeof React.useContext === 'function') {
+    // NOTE: Breaks type checks as React version is not installed in deveopment.
+    // @ts-ignore
     const flags: Flags = React.useContext(FlagsContext);
 
     return isFeatureEnabled(flagName, flagVariation)(flags);

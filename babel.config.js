@@ -58,11 +58,5 @@ module.exports = {
     ],
     isEnv('test') && 'babel-plugin-transform-dynamic-import',
     isEnv('test') && '@babel/plugin-transform-modules-commonjs',
-    isEnv('production') && [
-      'babel-plugin-transform-react-remove-prop-types',
-      {
-        removeImport: true,
-      },
-    ],
   ].filter(Boolean),
 };

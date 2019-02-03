@@ -2,7 +2,6 @@ import { Flags, Adapter, AdapterArgs, AdapterStatus } from '@flopflip/types';
 import { UpdateFlagsAction, UpdateStatusAction } from '../../types';
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ConfigureAdapter } from '@flopflip/react';
 import { updateStatus, updateFlags } from './../../ducks';
@@ -49,12 +48,6 @@ export class Configure extends React.PureComponent<
     children: null,
     defaultFlags: {},
     shouldDeferAdapterConfiguration: false,
-  };
-
-  static propTypes = {
-    children: PropTypes.element,
-    defaultFlags: PropTypes.object,
-    shouldDeferAdapterConfiguration: PropTypes.bool,
   };
 
   render() {

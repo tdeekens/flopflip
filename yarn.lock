@@ -1611,12 +1611,7 @@
   resolved "https://registry.npmjs.org/@types/lodash/-/lodash-4.14.120.tgz#cf265d06f6c7a710db087ed07523ab8c1a24047b"
   integrity sha512-jQ21kQ120mo+IrDs1nFNVm/AsdFxIx2+vZ347DbogHJPd/JzKNMOqU6HCYin1W6v8l5R9XSO2/e9cxmn7HAnVw==
 
-"@types/node@*":
-  version "10.12.21"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.21.tgz#7e8a0c34cf29f4e17a36e9bd0ea72d45ba03908e"
-  integrity sha512-CBgLNk4o3XMnqMc0rhb6lc77IwShMEglz05deDcn2lQxyXEZivfwgYJu7SMha9V5XcrP6qZuevTHV/QrN2vjKQ==
-
-"@types/node@10.12.21":
+"@types/node@*", "@types/node@10.12.21":
   version "10.12.21"
   resolved "https://registry.npmjs.org/@types/node/-/node-10.12.21.tgz#7e8a0c34cf29f4e17a36e9bd0ea72d45ba03908e"
   integrity sha512-CBgLNk4o3XMnqMc0rhb6lc77IwShMEglz05deDcn2lQxyXEZivfwgYJu7SMha9V5XcrP6qZuevTHV/QrN2vjKQ==
@@ -1626,7 +1621,7 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.9.4.tgz#0f4cb2dc7c1de6096055357f70179043c33e9897"
   integrity sha512-fCHV45gS+m3hH17zgkgADUSi2RR1Vht6wOZ0jyHP8rjiQra9f+mIcgwPQHllmDocYOstIEbKlxbFDYlgrTPYqw==
 
-"@types/prop-types@*", "@types/prop-types@15.5.8":
+"@types/prop-types@*":
   version "15.5.8"
   resolved "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.5.8.tgz#8ae4e0ea205fe95c3901a5a1df7f66495e3a56ce"
   integrity sha512-3AQoUxQcQtLHsK25wtTWIoIpgYjH3vSDroZOUr7PpCHw/jLY1RB9z9E8dBT/OSmwStVgkRNvdh+ZHNiomRieaw==
@@ -2091,11 +2086,6 @@ babel-plugin-transform-dynamic-import@2.1.0:
   integrity sha512-ja4NWc37+7bV6/uJKCERJEGHEyK1DXgXp8teHvjKC4Jsj3Ib484dJdamFIBtSb40JFniyWZo6ML46usVvfdsSg==
   dependencies:
     "@babel/plugin-syntax-dynamic-import" "^7.0.0"
-
-babel-plugin-transform-react-remove-prop-types@0.4.24:
-  version "0.4.24"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-react-remove-prop-types/-/babel-plugin-transform-react-remove-prop-types-0.4.24.tgz#f2edaf9b4c6a5fbe5c1d678bfb531078c1555f3a"
-  integrity sha512-eqj0hVcJUR57/Ug2zE1Yswsw4LhuqqHhD+8v120T1cl3kjg76QwtyBrdIk4WVwK+lAhBJVYCd/v+4nc4y+8JsA==
 
 babel-polyfill@6.26.0:
   version "6.26.0"
@@ -8360,7 +8350,7 @@ promzard@^0.3.0:
   dependencies:
     read "1"
 
-prop-types@15.6.2, prop-types@^15.6.2:
+prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   integrity sha512-3pboPvLiWD7dkI3qf3KbUe6hKFKa52w+AE0VCqECtf+QHAKgOL37tTaNCnuX1nAAQ4ZhyP+kYVKf8rLmJ/feDQ==

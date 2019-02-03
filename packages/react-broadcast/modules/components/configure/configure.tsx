@@ -1,7 +1,6 @@
 import { Flags, Adapter, AdapterArgs, AdapterStatus } from '@flopflip/types';
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { ConfigureAdapter } from '@flopflip/react';
 import { FlagsContext } from '../flags-context';
 
@@ -40,12 +39,6 @@ export default class Configure extends React.PureComponent<Props, State> {
     children: null,
     defaultFlags: {},
     shouldDeferAdapterConfiguration: false,
-  };
-
-  static propTypes = {
-    children: PropTypes.element,
-    defaultFlags: PropTypes.object,
-    shouldDeferAdapterConfiguration: PropTypes.bool,
   };
 
   state: { flags: Flags } = {

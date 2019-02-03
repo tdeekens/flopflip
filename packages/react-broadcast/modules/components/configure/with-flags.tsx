@@ -8,7 +8,7 @@ type Diff<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
 
 const withFlags = (propKey: string = ALL_FLAGS_PROP_KEY) => (
   Component: React.ComponentType<RequiredProps>
-) => {
+): React.ComponentType<any> => {
   class EnhancedComponent extends React.PureComponent<
     Diff<RequiredProps, ProvidedProps>
   > {

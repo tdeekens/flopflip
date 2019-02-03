@@ -7,7 +7,6 @@ import {
 } from '@flopflip/types';
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import merge from 'deepmerge';
 import { AdapterContext } from '../adapter-context';
 
@@ -30,7 +29,7 @@ type Props = {
   adapterArgs: AdapterArgs;
   defaultFlags?: Flags;
   render?: () => React.ReactNode;
-  children?: ({ isAdapterReady: boolean }) => Node;
+  children?: ({ isAdapterReady: boolean }) => React.ReactNode;
 };
 type State = {
   appliedAdapterArgs: AdapterArgs;
@@ -58,19 +57,6 @@ export default class ConfigureAdapter extends React.PureComponent<
     children: null,
     render: null,
   };
-
-  static propTypes = {
-    shouldDeferAdapterConfiguration: PropTypes.bool,
-    defaultFlags: PropTypes.object,
-    children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-    adapter: PropTypes.shape({
-      configure: PropTypes.func.isRequired,
-      reconfigure: PropTypes.func.isRequired,
-      getIsReady: PropTypes.func.isRequired,
-    }).isRequired,
-    render: PropTypes.func,
-  };
-
   adapterState: AdapterState = AdapterStates.UNCONFIGURED;
   pendingAdapterArgs?: AdapterArgs | null = null;
 
@@ -184,7 +170,8 @@ export default class ConfigureAdapter extends React.PureComponent<
   }
 
   componentDidMount(): Promise<any> | void {
-    if (this.props.defaultFlags) this.handleDefaultFlags(this.props.defaultFlags);
+    if (this.props.defaultFlags)
+      this.handleDefaultFlags(this.props.defaultFlags);
 
     if (!this.props.shouldDeferAdapterConfiguration) {
       this.setAdapterState(AdapterStates.CONFIGURING);
@@ -265,7 +252,7 @@ export default class ConfigureAdapter extends React.PureComponent<
           if (this.props.children && !isEmptyChildren(this.props.children))
             return React.Children.only(this.props.children);
 
-          return null
+          return null;
         })()}
       </AdapterContext.Provider>
     );

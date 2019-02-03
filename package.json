@@ -66,7 +66,6 @@
     "babel-eslint": "10.0.1",
     "babel-jest": "24.0.0",
     "babel-plugin-transform-dynamic-import": "2.1.0",
-    "babel-plugin-transform-react-remove-prop-types": "0.4.24",
     "bundlesize": "0.17.1",
     "check-node-version": "3.2.0",
     "codecov": "3.1.0",
