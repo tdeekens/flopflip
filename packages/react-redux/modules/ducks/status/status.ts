@@ -3,7 +3,7 @@ import { State } from '../../types';
 import { UpdateStatusAction } from './types';
 
 // Actions
-export const UPDATE_STATUS: string = '@flopflip/status/update';
+export const UPDATE_STATUS = '@flopflip/status/update';
 
 const initialState: State = { status: { isReady: false } };
 
@@ -26,6 +26,7 @@ const reducer = (
       return state;
   }
 };
+
 export default reducer;
 
 // Action Creators

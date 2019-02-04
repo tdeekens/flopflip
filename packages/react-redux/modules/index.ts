@@ -1,22 +1,22 @@
 export {
-createFlopFlipEnhancer,
-STATE_SLICE as FLOPFLIP_STATE_SLICE,
+  createFlopFlipEnhancer,
+  STATE_SLICE as FLOPFLIP_STATE_SLICE,
 } from './store';
 export {
-createFlopflipReducer,
-flopflipReducer,
-selectFlags as selectFeatureFlags,
-selectFlag as selectFeatureFlag,
-UPDATE_STATUS,
-UPDATE_FLAGS,
+  createFlopflipReducer,
+  flopflipReducer,
+  selectFlags as selectFeatureFlags,
+  selectFlag as selectFeatureFlag,
+  UPDATE_STATUS,
+  UPDATE_FLAGS,
 } from './ducks';
 export {
-ToggleFeature,
-injectFeatureToggle,
-injectFeatureToggles,
-branchOnFeatureToggle,
-ConfigureFlopFlip,
-ReconfigureFlopFlip,
+  ToggleFeature,
+  injectFeatureToggle,
+  injectFeatureToggles,
+  branchOnFeatureToggle,
+  ConfigureFlopFlip,
+  ReconfigureFlopFlip,
 } from './components';
 
 export { version } from '../package.json';

@@ -1,10 +1,9 @@
 parserOptions:
   sourceType: module
-  ecmaVersion: 6
+  ecmaVersion: 7
   ecmaFeatures:
     jsx: true
     modules: true
-    experimentalObjectRestSpread: true
 extends:
   - xo
   - xo-typescript
@@ -16,6 +15,7 @@ extends:
 env:
   es6: true
   jest: true
+  browser: true
 plugins:
   - prettier
   - jest

@@ -15,7 +15,7 @@ type OwnProps = {
   variation: FlagVariation;
 };
 
-export const mapStateToProps = (state: State, ownProps: OwnProps) => ({
+export const mapStateToProps = (state: State, ownProps: OwnProps): object => ({
   isFeatureEnabled: isFeatureEnabled(ownProps.flag, ownProps.variation)(
     state[STATE_SLICE].flags
   ),

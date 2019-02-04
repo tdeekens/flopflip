@@ -113,6 +113,7 @@ const initializeClient = (
   key: string,
   options: ClientInitializationOptions = {}
 ): { client: SplitIO.IClient; manager: SplitIO.IManager } => {
+  // eslint-disable-next-line new-cap
   const sdk = SplitFactory({
     ...omit(options, ['core']),
     core: {

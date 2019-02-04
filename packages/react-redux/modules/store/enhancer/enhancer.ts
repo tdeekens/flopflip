@@ -13,21 +13,19 @@ import { updateFlags, updateStatus } from '../../ducks';
 export default function createFlopFlipEnhancer(
   adapter: Adapter,
   adapterArgs: AdapterArgs
-): <S extends State>(
-  next: StoreEnhancerStoreCreator<S>
+): <StoreState extends State>(
+  next: StoreEnhancerStoreCreator<StoreState>
 ) => (
-  reducer: Reducer<S, AnyAction>,
-  preloadedState?: DeepPartial<S>
+  reducer: Reducer<StoreState, AnyAction>,
+  preloadedState?: DeepPartial<StoreState>
 ) => Store {
   return next => (...args) => {
     const store: Store = next(...args);
 
     adapter.configure({
       ...adapterArgs,
-      /**
-       * NOTE: This is like `bindActionCreators` but the bound action
-       * creators are renamed to fit the adapter API and conventions.
-       */
+      // NOTE: This is like `bindActionCreators` but the bound action
+      // creators are renamed to fit the adapter API and conventions.
       onFlagsStateChange: (flags: Flags) => {
         store.dispatch(updateFlags(flags));
       },

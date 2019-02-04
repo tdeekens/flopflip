@@ -14,8 +14,12 @@ const branchOnFeatureToggle = (
   UntoggledComponent: React.ComponentType<any> = DefaultUntoggledComponent,
   flagName: FlagName = DEFAULT_FLAG_PROP_KEY,
   flagVariation: FlagVariation = true
-) => (ToggledComponent: React.ComponentType<any>): React.ComponentType<any> => {
-  const BranchOnFeatureToggle: React.ComponentType<any> = (props: Flags) => {
+): ((
+  ToggledComponent: React.ComponentType<any>
+) => React.ComponentType<any>) => ToggledComponent => {
+  const BranchOnFeatureToggle: React.ComponentType<any> = (
+    props: Flags
+  ): React.ComponentType<any> => {
     if (isFeatureEnabled(flagName, flagVariation)(props)) {
       return React.createElement(ToggledComponent, props);
     }

@@ -27,7 +27,7 @@ let adapterState: AdapterStatus & LocalStorageAdapterState = {
   ...intialAdapterState,
 };
 
-export const STORAGE_SLICE: string = '@flopflip';
+export const STORAGE_SLICE = '@flopflip';
 
 const storage: Storage = {
   get: key => {
@@ -39,6 +39,7 @@ const storage: Storage = {
     try {
       localStorage.setItem(`${STORAGE_SLICE}__${key}`, JSON.stringify(value));
       return true;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
       return false;
     }
@@ -72,7 +73,7 @@ const subscribeToFlagsChanges = ({
   pollingInteral = 1000 * 60,
 }: {
   pollingInteral: number;
-}) => {
+}): void => {
   setInterval(() => {
     adapterState.emitter.emit('flagsStateChange', storage.get('flags'));
   }, pollingInteral);

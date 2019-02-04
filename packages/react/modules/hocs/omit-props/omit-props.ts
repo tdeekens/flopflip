@@ -4,12 +4,16 @@ import { setDisplayName } from '../set-display-name';
 import omit from 'lodash.omit';
 
 type RequiredProps = {};
-type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
+type Omit<Props, PropsToOmit> = Pick<Props, Exclude<keyof Props, PropsToOmit>>;
 
-const omitProps = <P extends RequiredProps, K>(propsToOmit: K) => (
-  BaseComponent: React.ComponentType<P>
-): React.ComponentType<Omit<P, K>> => {
-  const OmitProps = props =>
+const omitProps = <Props extends RequiredProps, PropsToOmit>(
+  propsToOmit: PropsToOmit
+): ((
+  BaseComponent: React.ComponentType<Props>
+) => React.ComponentType<Omit<Props, PropsToOmit>>) => BaseComponent => {
+  const OmitProps = (
+    props: Props
+  ): React.ComponentType<Omit<Props, PropsToOmit>> =>
     React.createElement(BaseComponent, omit(props, propsToOmit));
 
   if (process.env.NODE_ENV !== 'production') {

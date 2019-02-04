@@ -12,12 +12,12 @@ import { withFlags } from '../configure';
 type RequiredProps = {};
 type ProvidedProps = {};
 
-export default <P extends RequiredProps>(
+export default <Props extends RequiredProps>(
   flagName: FlagName,
   propKey?: string
 ) => (
   WrappedComponent: React.ComponentType<Diff<RequiredProps, ProvidedProps>>
-): React.ComponentType<ProvidedProps & P> =>
+): React.ComponentType<ProvidedProps & Props> =>
   flowRight(
     setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggle')),
     withFlags(),

@@ -15,21 +15,21 @@ import {
 type RequiredProps = {};
 type ProvidedProps = {};
 
-export const mapStateToProps = (state: State) => ({
+export const mapStateToProps = (state: State): object => ({
   [ALL_FLAGS_PROP_KEY]: selectFlags(state),
 });
 
 export default (
-  flagNames: Array<FlagName>,
+  flagNames: FlagName[],
   propKey?: string,
   areOwnPropsEqual?: (
     nextOwnProps: ProvidedProps,
     ownProps: ProvidedProps,
     propKey: string
   ) => boolean
-) => <P extends RequiredProps>(
-  WrappedComponent: React.ComponentType<P>
-): React.ComponentType<ProvidedProps & P> =>
+) => <Props extends RequiredProps>(
+  WrappedComponent: React.ComponentType<Props>
+): React.ComponentType<ProvidedProps & Props> =>
   /* istanbul ignore next */
   flowRight(
     setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggles')),

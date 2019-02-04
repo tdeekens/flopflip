@@ -30,9 +30,9 @@ const reducer = (
 
 export default reducer;
 
-export const createReducer = <S = State, T = Action<UpdateFlagsAction>>(
+export const createReducer = (
   preloadedState: State = initialState
-): Reducer<S, T> => (state: S = preloadedState, action: T) =>
+): Reducer<State, UpdateFlagsAction> => (state = preloadedState, action) =>
   reducer(state, action);
 
 // Action Creators
@@ -43,9 +43,9 @@ export const updateFlags = (flags: Flags): UpdateFlagsAction => ({
 
 // Selectors
 export const selectFlags = (state: State): Flags => state[STATE_SLICE].flags;
-export const selectFlag = (flagName: FlagName) => (
-  state: State
-): FlagVariation => {
+export const selectFlag = (
+  flagName: FlagName
+): ((state: Flags) => FlagVariation) => state => {
   const allFlags: Flags = selectFlags(state);
   const flagValue: FlagVariation = allFlags[flagName];
 
