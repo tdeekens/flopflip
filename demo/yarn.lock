@@ -916,18 +916,18 @@
     lodash.flowright "3.5.0"
     lodash.memoize "4.1.2"
 
-"@flopflip/react-redux@7.1.9":
-  version "7.1.9"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-7.1.9.tgz#7fd9f878a8663a6298d4ebcb12df877dceb681e4"
-  integrity sha512-I06nZR5EDquN1JhIQDx0xbFtb5obb31lrfJKCnOXhD1s7p4Zk2ohBXm0x4d6gIMo5/MYG3kth9PmtFUAOdoB+A==
+"@flopflip/react-redux@7.1.10":
+  version "7.1.10"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-7.1.10.tgz#8925665041d3a2856e7244468bf0ba2f23bc85aa"
+  integrity sha512-OpAnq6tMXNQfVcDrkiWszNiQH53wR4MN/TokfJrcyW7QyDHx1kY4aXyiWuab9IhXsEZMCc4lp6KI1BfkDAXOMA==
   dependencies:
-    "@flopflip/react" "^6.2.2"
-    "@flopflip/types" "^1.4.1"
+    "@flopflip/react" "^6.2.3"
+    "@flopflip/types" "^1.4.2"
     lodash.flowright "3.5.0"
     lodash.isnil "4.0.0"
     lodash.memoize "4.1.2"
 
-"@flopflip/react@^6.2.2", "@flopflip/react@^6.2.3":
+"@flopflip/react@^6.2.3":
   version "6.2.3"
   resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-6.2.3.tgz#ba715cc9cbe813b2404d8ecf97ec2434126974d3"
   integrity sha512-yJehbOqQA69WM1MdvVoziPNv3vWqGi4tfkjJENiZVWaku827S/OOXCMdvFI/eoONy0g6IJXeldBhoqQvwacbPw==
@@ -944,7 +944,7 @@
     react-is "16.7.0"
     tiny-warning "1.0.2"
 
-"@flopflip/types@^1.4.1", "@flopflip/types@^1.4.2":
+"@flopflip/types@^1.4.2":
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/@flopflip/types/-/types-1.4.2.tgz#cbd5a5b833eb0677b66193372f837c8d1ca470e4"
   integrity sha512-o6m0DTCXiZKUAH7RyI50UMaaiPqpba8OwyauT/26Sq8O3NDJ+CAr5KyMjif5npe6tznV9Cf6NtIOpoXqyRAVtA==
