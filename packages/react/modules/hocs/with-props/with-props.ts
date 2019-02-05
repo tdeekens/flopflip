@@ -3,25 +3,26 @@ import React from 'react';
 import { wrapDisplayName } from '../wrap-display-name';
 import { setDisplayName } from '../set-display-name';
 
-type MapProps<OwnProps, InjectedProps> = (ownProps: OwnProps) => InjectedProps;
-type WithProps<InjectedProps> = InjectedProps;
+type PropsMapper<OwnProps, MappedProps> = (ownProps: OwnProps) => MappedProps;
 
-function isPropsMapper<OwnProps, InjectedProps>(
-  mapProps: WithProps<OwnProps> | MapProps<OwnProps, InjectedProps>
-): mapProps is MapProps<OwnProps, InjectedProps> {
+function isPropsMapper<OwnProps, MappedProps>(
+  mapProps: MappedProps | PropsMapper<OwnProps, MappedProps>
+): mapProps is PropsMapper<OwnProps, MappedProps> {
   return typeof mapProps === 'function';
 }
 
-const withProps = <OwnProps, InjectedProps>(
-  mapProps: WithProps<OwnProps> | MapProps<OwnProps, InjectedProps>
+const withProps = <
+  OwnProps,
+  MappedProps,
+  MapProps = MappedProps | PropsMapper<OwnProps, MappedProps>
+>(
+  mapProps: MapProps
 ): ((
   BaseComponent: React.ComponentType<any>
-) => React.ComponentType<OwnProps & WithProps<InjectedProps>>) => (
-  BaseComponent: React.ComponentType<OwnProps & WithProps<InjectedProps>>
-) => {
-  const EnhancedWithProps: React.FC<OwnProps> = (
+) => React.ComponentType<OwnProps & MapProps>) => BaseComponent => {
+  const EnhancedWithProps: React.FC<OwnProps & MapProps> = (
     ownProps: OwnProps
-  ): React.ComponentType<OwnProps & WithProps<InjectedProps>> => {
+  ) => {
     const enhancedProps = isPropsMapper(mapProps)
       ? { ...ownProps, ...mapProps(ownProps) }
       : { ...ownProps, ...mapProps };

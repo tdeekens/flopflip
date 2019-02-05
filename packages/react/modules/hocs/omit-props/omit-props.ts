@@ -6,14 +6,16 @@ import omit from 'lodash.omit';
 type RequiredProps = {};
 type Omit<Props, PropsToOmit> = Pick<Props, Exclude<keyof Props, PropsToOmit>>;
 
-const omitProps = <Props extends RequiredProps, PropsToOmit>(
+const omitProps = <
+  Props extends RequiredProps,
+  PropsToOmit,
+  OmittedProps = Omit<Props, PropsToOmit>
+>(
   propsToOmit: PropsToOmit
 ): ((
   BaseComponent: React.ComponentType<Props>
-) => React.ComponentType<Omit<Props, PropsToOmit>>) => BaseComponent => {
-  const OmitProps = (
-    props: Props
-  ): React.ComponentType<Omit<Props, PropsToOmit>> =>
+) => React.ComponentType<OmittedProps>) => BaseComponent => {
+  const OmitProps: React.ComponentType<OmittedProps> = (props: OmittedProps) =>
     React.createElement(BaseComponent, omit(props, propsToOmit));
 
   if (process.env.NODE_ENV !== 'production') {

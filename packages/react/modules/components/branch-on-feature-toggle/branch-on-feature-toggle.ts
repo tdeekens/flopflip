@@ -1,4 +1,4 @@
-import { FlagName, FlagVariation, Flags } from '@flopflip/types';
+import { FlagName, FlagVariation } from '@flopflip/types';
 
 import React from 'react';
 import isFeatureEnabled from '../../helpers/is-feature-enabled';
@@ -17,9 +17,7 @@ const branchOnFeatureToggle = (
 ): ((
   ToggledComponent: React.ComponentType<any>
 ) => React.ComponentType<any>) => ToggledComponent => {
-  const BranchOnFeatureToggle: React.ComponentType<any> = (
-    props: Flags
-  ): React.ComponentType<any> => {
+  const BranchOnFeatureToggle: React.FC<any> = (props: any) => {
     if (isFeatureEnabled(flagName, flagVariation)(props)) {
       return React.createElement(ToggledComponent, props);
     }
