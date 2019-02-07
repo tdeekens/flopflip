@@ -22,7 +22,7 @@ const withProps = <
 ) => React.ComponentType<OwnProps & MapProps>) => BaseComponent => {
   const EnhancedWithProps: React.FC<OwnProps & MapProps> = (
     ownProps: OwnProps
-  ) => {
+  ): React.ReactElement<OwnProps & MapProps> => {
     const enhancedProps = isPropsMapper(mapProps)
       ? { ...ownProps, ...mapProps(ownProps) }
       : { ...ownProps, ...mapProps };

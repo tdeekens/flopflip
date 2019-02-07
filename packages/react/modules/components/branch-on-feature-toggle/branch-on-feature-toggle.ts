@@ -17,7 +17,9 @@ const branchOnFeatureToggle = (
 ): ((
   ToggledComponent: React.ComponentType<any>
 ) => React.ComponentType<any>) => ToggledComponent => {
-  const BranchOnFeatureToggle: React.FC<any> = (props: any) => {
+  const BranchOnFeatureToggle: React.FC<any> = (
+    props: any
+  ): React.ReactElement<any> => {
     if (isFeatureEnabled(flagName, flagVariation)(props)) {
       return React.createElement(ToggledComponent, props);
     }

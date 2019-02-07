@@ -15,7 +15,9 @@ const omitProps = <
 ): ((
   BaseComponent: React.ComponentType<Props>
 ) => React.ComponentType<OmittedProps>) => BaseComponent => {
-  const OmitProps: React.ComponentType<OmittedProps> = (props: OmittedProps) =>
+  const OmitProps: React.ComponentType<OmittedProps> = (
+    props: OmittedProps
+  ): React.ReactElement<any> =>
     React.createElement(BaseComponent, omit(props, propsToOmit));
 
   if (process.env.NODE_ENV !== 'production') {
