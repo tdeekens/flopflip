@@ -9,7 +9,7 @@
   "testURL": "http://localhost",
   "watchPlugins": ["jest-plugin-filename", "jest-watch-yarn-workspaces"],
   "transform": {
-    "^.+\\.js$": "<rootDir>/jest.transform.js"
+    "^.+\\.(js|ts|tsx)$": "<rootDir>/jest.transform.js"
   },
   "testPathIgnorePatterns": [
     "/node_modules/",
