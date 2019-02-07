@@ -55,7 +55,7 @@ export const camelCaseFlags = (flags: Flags): Flags =>
     (camelCasedFlags: Flags, [flagName, flaValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
         flagName,
-        flaValue as FlagVariation
+        flaValue
       );
 
       camelCasedFlags[normalizedFlagName] = normalizedFlagValue;

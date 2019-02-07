@@ -127,7 +127,7 @@ export const camelCaseFlags = (rawFlags: Flags): Flags =>
     (camelCasedFlags: Flags, [flagName, flagValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
         flagName,
-        flagValue as FlagVariation
+        flagValue
       );
       // Can't return expression as it is the assigned value
       camelCasedFlags[normalizedFlagName] = normalizedFlagValue;
