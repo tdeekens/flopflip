@@ -25,7 +25,8 @@
     "strict": true,
     "strictNullChecks": true,
     "stripInternal": true,
-    "target": "es5"
+    "target": "es5",
+    "allowJs": true,
   },
   "include": ["**/modules/**/*", "packages/types"],
   "exclude": ["node_modules", "**/dist/**/*"]
