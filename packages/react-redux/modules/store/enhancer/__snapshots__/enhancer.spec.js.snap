@@ -6,7 +6,9 @@ exports[`when creating enhancer with enhanced store when invoking  \`onFlagsStat
     Array [
       Object {
         "payload": Object {
-          "foo": true,
+          "flags": Object {
+            "foo": true,
+          },
         },
         "type": "@flopflip/flags/update",
       },
@@ -27,7 +29,9 @@ exports[`when creating enhancer with enhanced store when invoking  \`onStatusSta
     Array [
       Object {
         "payload": Object {
-          "isReady": true,
+          "status": Object {
+            "isReady": true,
+          },
         },
         "type": "@flopflip/status/update",
       },

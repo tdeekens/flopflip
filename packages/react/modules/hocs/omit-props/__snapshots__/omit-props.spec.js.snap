@@ -2,6 +2,7 @@
 
 exports[`rendering with multiple props should omit multiple props 1`] = `
 <WrappedComponent
+  b={2}
   c={3}
 />
 `;
