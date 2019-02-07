@@ -18,7 +18,7 @@ describe('action creators', () => {
     it('should return passed `isReady` status', () => {
       expect(updateStatus({ isReady: true })).toEqual({
         type: expect.any(String),
-        payload: { isReady: true },
+        payload: { status: { isReady: true } },
       });
     });
   });
@@ -30,13 +30,13 @@ describe('reducers', () => {
       let payload;
       beforeEach(() => {
         payload = {
-          isReady: true,
+          status: { isReady: true },
         };
       });
 
       it('should set the new status', () => {
         expect(reducer(undefined, { type: UPDATE_STATUS, payload })).toEqual({
-          isReady: payload.isReady,
+          status: { isReady: payload.status.isReady },
         });
       });
     });
@@ -45,15 +45,18 @@ describe('reducers', () => {
       let payload;
       beforeEach(() => {
         payload = {
-          isReady: false,
+          status: { isReady: false },
         };
       });
 
       it('should set the new status', () => {
         expect(
-          reducer({ isReady: true }, { type: UPDATE_STATUS, payload })
+          reducer(
+            { status: { isReady: true } },
+            { type: UPDATE_STATUS, payload }
+          )
         ).toEqual({
-          isReady: payload.isReady,
+          status: { isReady: payload.status.isReady },
         });
       });
     });

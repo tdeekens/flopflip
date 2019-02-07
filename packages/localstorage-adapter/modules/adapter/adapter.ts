@@ -102,7 +102,8 @@ const configure = ({
     adapterState.emitter.emit('readyStateChange');
 
     subscribeToFlagsChanges({
-      pollingInteral: adapterConfiguration.pollingInteral,
+      pollingInteral:
+        adapterConfiguration && adapterConfiguration.pollingInteral,
     });
   });
 };

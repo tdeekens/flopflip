@@ -74,7 +74,8 @@ describe('when configuring', () => {
     it('should initialize the `ld-client` with `clientSideId` and given `user`', () => {
       expect(ldClient.initialize).toHaveBeenCalledWith(
         clientSideId,
-        userWithKey
+        userWithKey,
+        expect.any(Object)
       );
     });
   });
@@ -90,10 +91,14 @@ describe('when configuring', () => {
     );
 
     it('should initialize the `ld-client` with `clientSideId` and random `user` `key`', () => {
-      expect(ldClient.initialize).toHaveBeenCalledWith(clientSideId, {
-        key: expect.any(String),
-        group: 'foo-group',
-      });
+      expect(ldClient.initialize).toHaveBeenCalledWith(
+        clientSideId,
+        {
+          key: expect.any(String),
+          group: 'foo-group',
+        },
+        expect.any(Object)
+      );
     });
   });
 
