@@ -8,7 +8,7 @@ import {
   OnStatusStateChangeCallback,
 } from '@flopflip/types';
 import { SplitFactory } from '@splitsoftware/splitio';
-import camelCase from 'lodash/camelcase';
+import camelCase from 'lodash/camelCase';
 import omit from 'lodash/omit';
 
 type AdapterState = {

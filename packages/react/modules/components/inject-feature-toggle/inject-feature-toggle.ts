@@ -1,9 +1,9 @@
 import { FlagName, FlagVariation, Diff } from '@flopflip/types';
 
 import React from 'react';
-import flowRight from 'lodash/flowright';
+import flowRight from 'lodash/flowRight';
 import { withProps } from '../../hocs';
-import isNil from 'lodash/isnil';
+import isNil from 'lodash/isNil';
 import { omitProps } from '../../hocs';
 import { DEFAULT_FLAG_PROP_KEY, ALL_FLAGS_PROP_KEY } from '../../constants';
 

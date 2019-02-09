@@ -1,5 +1,5 @@
 import { FlagName, FlagVariation, Flags } from '@flopflip/types';
-import camelCase from 'lodash/camelcase';
+import camelCase from 'lodash/camelCase';
 import warning from 'tiny-warning';
 import { DEFAULT_FLAG_PROP_KEY } from '../../constants';
 

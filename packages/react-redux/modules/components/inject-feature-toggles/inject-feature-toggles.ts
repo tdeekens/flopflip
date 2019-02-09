@@ -3,7 +3,7 @@ import { FlagName } from '@flopflip/types';
 
 import React from 'react';
 import { connect } from 'react-redux';
-import flowRight from 'lodash/flowright';
+import flowRight from 'lodash/flowRight';
 import { selectFlags } from '../../ducks';
 import {
   injectFeatureToggles,

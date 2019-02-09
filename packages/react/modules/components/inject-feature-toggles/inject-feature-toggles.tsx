@@ -4,7 +4,7 @@ import React from 'react';
 
 import { withProps } from '../../hocs';
 import isEqual from 'react-fast-compare';
-import flowRight from 'lodash/flowright';
+import flowRight from 'lodash/flowRight';
 import intersection from 'lodash/intersection';
 import omit from 'lodash/omit';
 import { omitProps } from '../../hocs';

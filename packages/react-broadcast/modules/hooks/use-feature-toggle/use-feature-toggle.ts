@@ -1,7 +1,7 @@
 import { FlagName, Flags, FlagVariation } from '@flopflip/types';
 
 import React from 'react';
-import camelCase from 'lodash/camelcase';
+import camelCase from 'lodash/camelCase';
 import warning from 'tiny-warning';
 import { isFeatureEnabled } from '@flopflip/react';
 import { FlagsContext } from '../../components/flags-context';

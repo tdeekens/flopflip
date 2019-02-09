@@ -1,7 +1,7 @@
 import { FlagName, Diff } from '@flopflip/types';
 
 import React from 'react';
-import flowRight from 'lodash/flowright';
+import flowRight from 'lodash/flowRight';
 import {
   injectFeatureToggle,
   wrapDisplayName,

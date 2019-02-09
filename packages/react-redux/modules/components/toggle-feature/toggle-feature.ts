@@ -1,7 +1,7 @@
 import { FlagName, FlagVariation } from '@flopflip/types';
 import { State } from '../../types';
 
-import flowRight from 'lodash/flowright';
+import flowRight from 'lodash/flowRight';
 import { connect } from 'react-redux';
 import {
   ToggleFeature,

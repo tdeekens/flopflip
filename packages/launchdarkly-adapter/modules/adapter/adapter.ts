@@ -8,13 +8,13 @@ import {
   OnStatusStateChangeCallback,
 } from '@flopflip/types';
 import warning from 'tiny-warning';
-import isEqual from 'lodash/isequal';
+import isEqual from 'lodash/isEqual';
 import {
   initialize as initializeLaunchDarklyClient,
   LDUser,
   LDClient,
 } from 'ldclient-js';
-import camelCase from 'lodash/camelcase';
+import camelCase from 'lodash/camelCase';
 
 type ClientOptions = {
   fetchGoals?: boolean;
