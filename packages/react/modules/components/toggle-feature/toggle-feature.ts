@@ -1,6 +1,6 @@
 import React from 'react';
 import warning from 'tiny-warning';
-import reactIs from 'react-is';
+import { isValidElementType } from 'react-is';
 
 type Props = {
   untoggledComponent?: React.ComponentType<any>;
@@ -26,13 +26,13 @@ export default class ToggleFeature extends React.PureComponent<Props> {
   render(): React.ReactNode {
     if (this.props.untoggledComponent)
       warning(
-        reactIs.isValidElementType(this.props.untoggledComponent),
+        isValidElementType(this.props.untoggledComponent),
         `Invalid prop 'untoggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`
       );
 
     if (this.props.toggledComponent)
       warning(
-        reactIs.isValidElementType(this.props.toggledComponent),
+        isValidElementType(this.props.toggledComponent),
         `Invalid prop 'toggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`
       );
 

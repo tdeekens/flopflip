@@ -73,6 +73,9 @@ const config = {
       extensions,
       ignoreGlobal: true,
       exclude: ['packages/**'],
+      namedExports: {
+        'node_modules/react-is/index.js': ['isValidElementType'],
+      },
     }),
     filesize(),
   ],
