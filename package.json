@@ -7,7 +7,7 @@
     "develop": "jest --projects .jestrc.*.json --watch",
     "lint": "jest --config .jestrc.lint.json --maxWorkers 5",
     "type-check": "tsc --noEmit",
-    "format": "yarn run format:ts && yarn run format:md && yarn run format:yaml",
+    "format": "npm run format:ts && npm run format:md && npm run format:yaml",
     "format:ts": "jest --config .jestrc.prettier.json",
     "format:md": "prettier --parser markdown --write '**/*.md'",
     "format:yaml": "prettier --parser yaml --write '**/*.{yml,yaml}'",
@@ -20,9 +20,9 @@
     "test:coverage": "cross-env NODE_ENV=test yarn test --coverage",
     "build": "NODE_ENV=production lerna run build",
     "build:watch": "NODE_ENV=development lerna run --parallel build:watch",
-    "release": "NODE_ENV=production yarn run build && lerna publish --registry=https://registry.npmjs.org/",
-    "release:latest": "yarn run release --dist-tag latest",
-    "release:next": "yarn run release --dist-tag next --exact --canary --preid next --yes",
+    "release": "NODE_ENV=production npm run build && lerna publish --registry=https://registry.npmjs.org/",
+    "release:latest": "npm run release -- --dist-tag latest",
+    "release:next": "npm run release -- --dist-tag next --exact --canary --preid next --yes",
     "release:mv": "lerna exec --no-bail --no-private --no-sort --stream -- '[ -n \"$(npm v . dist-tags.next)\" ] && npm dist-tag add ${LERNA_PACKAGE_NAME}@$(npm v . dist-tags.next) latest'"
   },
   "repository": {
