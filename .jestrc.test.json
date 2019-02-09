@@ -1,6 +1,6 @@
 {
   "displayName": "test",
-  "preset": "ts-jest/presets/js-with-ts",
+  "preset": "ts-jest/presets/js-with-babel",
   "setupFiles": ["raf/polyfill", "jest-localstorage-mock"],
   "setupFilesAfterEnv": ["./jest-runner-test.config.js"],
   "moduleFileExtensions": ["ts", "tsx", "js", "json"],

@@ -6,7 +6,7 @@
     "postinstall": "check-node-version --package --print",
     "develop": "jest --projects .jestrc.*.json --watch",
     "lint": "jest --config .jestrc.lint.json --maxWorkers 5",
-    "type-check": "tsc",
+    "type-check": "tsc --noEmit",
     "format": "yarn run format:ts && yarn run format:md && yarn run format:yaml",
     "format:ts": "jest --config .jestrc.prettier.json",
     "format:md": "prettier --parser markdown --write '**/*.md'",

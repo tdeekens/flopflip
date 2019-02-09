@@ -17,8 +17,6 @@
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "compiled",
-    "noEmit": true,
     "pretty": true,
     "removeComments": true,
     "sourceMap": true,
@@ -26,7 +24,7 @@
     "strictNullChecks": true,
     "stripInternal": true,
     "target": "es5",
-    "allowJs": true,
+    "allowJs": false,
   },
   "include": ["**/modules/**/*", "packages/types"],
   "exclude": ["node_modules", "**/dist/**/*"]
