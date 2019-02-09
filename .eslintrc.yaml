@@ -20,16 +20,10 @@ plugins:
   - prettier
   - jest
 rules:
-  prettier/prettier:
-    - error
-    - trailingComma: es5
-      singleQuote: true
   jest/no-disabled-tests: warn
   jest/no-focused-tests: error
   jest/no-identical-title: error
   jest/valid-expect: error
-  react/destructuring-assignment: false
-  react/no-deprecated: false
   max-nested-callbacks:
     - error
     - 20
