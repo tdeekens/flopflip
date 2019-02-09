@@ -28,6 +28,7 @@ module.exports = {
         useBuiltIns: true,
       },
     ],
+    '@babel/preset-typescript',
   ],
   plugins: [
     '@babel/plugin-external-helpers',
