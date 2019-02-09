@@ -4,9 +4,9 @@ import React from 'react';
 
 import { withProps } from '../../hocs';
 import isEqual from 'react-fast-compare';
-import flowRight from 'lodash.flowright';
-import intersection from 'lodash.intersection';
-import omit from 'lodash.omit';
+import flowRight from 'lodash/flowright';
+import intersection from 'lodash/intersection';
+import omit from 'lodash/omit';
 import { omitProps } from '../../hocs';
 import { ALL_FLAGS_PROP_KEY, DEFAULT_FLAGS_PROP_KEY } from '../../constants';
 

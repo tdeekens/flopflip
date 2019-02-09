@@ -3,7 +3,7 @@ import { State } from '../../types';
 
 import React from 'react';
 import { connect } from 'react-redux';
-import flowRight from 'lodash.flowright';
+import flowRight from 'lodash/flowright';
 import { selectFlags } from '../../ducks';
 import {
   injectFeatureToggle,

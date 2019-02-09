@@ -1,7 +1,7 @@
 import React from 'react';
 import { wrapDisplayName } from '../wrap-display-name';
 import { setDisplayName } from '../set-display-name';
-import omit from 'lodash.omit';
+import omit from 'lodash/omit';
 
 type RequiredProps = {};
 type Omit<Props, PropsToOmit> = Pick<Props, Exclude<keyof Props, PropsToOmit>>;

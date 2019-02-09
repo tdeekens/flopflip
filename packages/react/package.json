@@ -47,11 +47,7 @@
   "dependencies": {
     "create-react-context": "0.2.3",
     "deepmerge": "3.1.0",
-    "lodash.camelcase": "4.3.0",
-    "lodash.flowright": "3.5.0",
-    "lodash.intersection": "4.4.0",
-    "lodash.isnil": "4.0.0",
-    "lodash.omit": "4.5.0",
+    "lodash": "4.17.11",
     "react-fast-compare": "2.0.4",
     "react-is": "16.8.1",
     "tiny-warning": "1.0.2"

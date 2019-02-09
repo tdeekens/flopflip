@@ -8,14 +8,15 @@ import {
   OnStatusStateChangeCallback,
 } from '@flopflip/types';
 import { SplitFactory } from '@splitsoftware/splitio';
-import camelCase from 'lodash.camelcase';
+import camelCase from 'lodash/camelcase';
+import omit from 'lodash/omit';
 
 type AdapterState = {
   isReady: boolean;
   isConfigured: boolean;
   user?: User;
-  client?: SplitIO.IClient;
-  manager?: SplitIO.IManager;
+  client?: SplitIO.IAsyncClient;
+  manager?: SplitIO.IAsyncManager;
 };
 type ClientInitializationOptions = {
   [key: string]: any;
@@ -75,11 +76,11 @@ const subscribeToFlagsChanges = ({
   if (adapterState.client) {
     adapterState.client.on(adapterState.client.Event.SDK_UPDATE, () => {
       if (adapterState.client) {
-        const flags = adapterState.client.getTreatments(
-          flagNames,
-          adapterState.user as SplitIO.Attributes
-        );
-        onFlagsStateChange(camelCaseFlags(flags));
+        adapterState.client
+          .getTreatments(flagNames, adapterState.user as SplitIO.Attributes)
+          .then(flags => {
+            onFlagsStateChange(camelCaseFlags(flags));
+          });
       }
     });
   }
@@ -95,24 +96,11 @@ const ensureUser = (user: User): User => ({
   ...user,
 });
 
-// NOTE: Little helper to omit properties from an object.
-// `lodash.omit` is too heavy in bundle size to add as a dependency.
-const omit = (obj: {}, keys: any[]): {} =>
-  Object.entries(obj)
-    .filter(([key]) => !keys.includes(key))
-    .reduce(
-      (acc, [key, value]) => ({
-        ...acc,
-        [key]: value,
-      }),
-      {}
-    );
-
 const initializeClient = (
   authorizationKey: string,
   key: string,
   options: ClientInitializationOptions = {}
-): { client: SplitIO.IClient; manager: SplitIO.IManager } => {
+): { client: SplitIO.IAsyncClient; manager: SplitIO.IAsyncManager } => {
   // eslint-disable-next-line new-cap
   const sdk = SplitFactory({
     ...omit(options, ['core']),
@@ -140,28 +128,26 @@ const subscribe = ({
     if (adapterState.client) {
       adapterState.client.on(adapterState.client.Event.SDK_READY, () => {
         let flagNames: FlagName[];
-        let flags: Flags;
-
         if (adapterState.client && adapterState.manager) {
-          flagNames = adapterState.manager.names();
-          flags = adapterState.client.getTreatments(
-            flagNames,
-            adapterState.user as SplitIO.Attributes
-          );
-
           // First update internal state
           adapterState.isReady = true;
           // ...to then signal that the adapter is ready
           onStatusStateChange({ isReady: true });
-          // ...and flush initial state of flags
-          onFlagsStateChange(camelCaseFlags(flags));
-          // ...to finally subscribe to later changes.
-          subscribeToFlagsChanges({
-            flagNames,
-            onFlagsStateChange,
-          });
 
-          return resolve();
+          flagNames = adapterState.manager.names();
+          adapterState.client
+            .getTreatments(flagNames, adapterState.user as SplitIO.Attributes)
+            .then(flags => {
+              // ...and flush initial state of flags
+              onFlagsStateChange(camelCaseFlags(flags));
+              // ...to finally subscribe to later changes.
+              subscribeToFlagsChanges({
+                flagNames,
+                onFlagsStateChange,
+              });
+
+              return resolve();
+            });
         }
       });
     } else reject();
@@ -221,18 +207,16 @@ const reconfigure = ({
       );
     if (adapterState.user && adapterState.user.key !== user.key) {
       let flagNames: FlagName[];
-      let flags: Flags;
 
       adapterState.user = ensureUser(user);
 
       if (adapterState.manager && adapterState.client) {
         flagNames = adapterState.manager.names();
-        flags = adapterState.client.getTreatments(
-          flagNames,
-          adapterState.user as SplitIO.Attributes
-        );
-
-        onFlagsStateChange(camelCaseFlags(flags));
+        adapterState.client
+          .getTreatments(flagNames, adapterState.user as SplitIO.Attributes)
+          .then(flags => {
+            onFlagsStateChange(camelCaseFlags(flags));
+          });
       }
     }
 

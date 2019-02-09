@@ -46,9 +46,7 @@
     "@flopflip/react": "^6.2.3",
     "@flopflip/types": "^1.4.2",
     "@types/react-redux": "7.0.1",
-    "lodash.flowright": "3.5.0",
-    "lodash.isnil": "4.0.0",
-    "lodash.memoize": "4.1.2"
+    "lodash": "4.17.11"
   },
   "peerDependencies": {
     "react": "^15.6 || ^16.0",

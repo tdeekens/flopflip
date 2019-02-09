@@ -1,4 +1,4 @@
-import flowRight from 'lodash.flowright';
+import flowRight from 'lodash/flowright';
 import {
   ToggleFeature,
   isFeatureEnabled,

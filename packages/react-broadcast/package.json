@@ -50,8 +50,7 @@
     "@flopflip/react": "^6.2.3",
     "@flopflip/types": "^1.4.2",
     "create-react-context": "0.2.3",
-    "lodash.flowright": "3.5.0",
-    "lodash.memoize": "4.1.2"
+    "lodash": "4.17.11"
   },
   "keywords": [
     "react",
