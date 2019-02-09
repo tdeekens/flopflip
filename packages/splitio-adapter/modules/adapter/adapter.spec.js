@@ -9,7 +9,7 @@ jest.mock('@splitsoftware/splitio', () => ({
   SplitFactory: jest.fn(() => ({
     client: jest.fn(() => ({
       on: jest.fn((_, cb) => cb()),
-      getTreatments: jest.fn(() => ({})),
+      getTreatments: jest.fn(() => Promise.resolve({})),
       Event: {
         SDK_READY: 'SDK_READY',
         SDK_UPDATE: 'SDK_UPDATE',
@@ -40,6 +40,14 @@ describe('when configuring', () => {
 
   it('should indicate that the adapter is not ready', () => {
     expect(adapter.getIsReady()).toBe(false);
+  });
+
+  describe('when reconfiguring before configured', () => {
+    it('should reject reconfiguration', () => {
+      return expect(
+        adapter.reconfigure({ user: userWithKey, onFlagsStateChange })
+      ).rejects.toEqual(expect.any(Error));
+    });
   });
 
   describe('with user key', () => {
@@ -79,14 +87,6 @@ describe('when configuring', () => {
           key: expect.any(String),
         },
       });
-    });
-  });
-
-  describe('when reconfiguring before configured', () => {
-    it('should reject reconfiguration', () => {
-      return expect(adapter.reconfigure({ user: userWithKey })).rejects.toEqual(
-        expect.any(Error)
-      );
     });
   });
 
@@ -158,7 +158,7 @@ describe('when configuring', () => {
       factory = {
         client: jest.fn(() => ({
           on: onStub,
-          getTreatments: jest.fn(() => flags),
+          getTreatments: jest.fn(() => Promise.resolve(flags)),
           Event: {
             SDK_READY: 'SDK_READY',
             SDK_UPDATE: 'SDK_UPDATE',
@@ -215,7 +215,7 @@ describe('when configuring', () => {
         onStatusStateChange = jest.fn();
         onFlagsStateChange = jest.fn();
         namesStub = jest.fn(() => names);
-        getTreatmentsStub = jest.fn(() => flags);
+        getTreatmentsStub = jest.fn(() => Promise.resolve(flags));
 
         factory = {
           client: jest.fn(() => ({
