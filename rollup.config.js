@@ -2,14 +2,13 @@ const fs = require('fs');
 const readPkgUp = require('read-pkg-up');
 const resolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
-const babel = require('rollup-plugin-babel');
+const typescript = require('rollup-plugin-typescript');
 const replace = require('rollup-plugin-replace');
 const { terser } = require('rollup-plugin-terser');
 const json = require('rollup-plugin-json');
 const builtins = require('rollup-plugin-node-builtins');
 const globals = require('rollup-plugin-node-globals');
 const filesize = require('rollup-plugin-filesize');
-const babelOptions = require('./babel.config');
 const { pkg } = readPkgUp.sync({
   cwd: fs.realpathSync(process.cwd()),
 });
@@ -63,13 +62,9 @@ const config = {
       preferBuiltins: true,
       modulesOnly: true,
     }),
-    babel({
-      exclude: '**/node_modules/**',
-      extensions,
-      runtimeHelpers: true,
-      ...babelOptions,
-    }),
+    typescript(),
     commonjs({
+      extensions,
       ignoreGlobal: true,
       exclude: ['packages/**'],
       namedExports: {
