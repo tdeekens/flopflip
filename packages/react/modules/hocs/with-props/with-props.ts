@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { wrapDisplayName } from '../wrap-display-name';
 import { setDisplayName } from '../set-display-name';
 

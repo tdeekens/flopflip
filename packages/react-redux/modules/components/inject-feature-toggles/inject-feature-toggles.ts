@@ -1,9 +1,8 @@
-import { FlagName, Flags } from '@flopflip/types';
-import { State } from '../../types';
-
 import React from 'react';
 import { connect } from 'react-redux';
 import flowRight from 'lodash/flowRight';
+import { FlagName, Flags } from '@flopflip/types';
+import { State } from '../../types';
 import { selectFlags } from '../../ducks';
 import {
   injectFeatureToggles,

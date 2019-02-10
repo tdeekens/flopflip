@@ -1,3 +1,5 @@
+import React from 'react';
+import merge from 'deepmerge';
 import {
   Flags,
   Adapter,
@@ -6,9 +8,6 @@ import {
   AdapterReconfigurationOptions,
   ConfigureAdapterChildren,
 } from '@flopflip/types';
-
-import React from 'react';
-import merge from 'deepmerge';
 import { AdapterContext } from '../adapter-context';
 
 type valueof<T> = T[keyof T];

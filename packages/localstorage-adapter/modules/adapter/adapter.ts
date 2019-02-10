@@ -1,6 +1,5 @@
 import invariant from 'invariant';
 import mitt, { Emitter } from 'mitt';
-
 import { User, AdapterStatus, AdapterArgs, Flags } from '@flopflip/types';
 
 type Storage = {

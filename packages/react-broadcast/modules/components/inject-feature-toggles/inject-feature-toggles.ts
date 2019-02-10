@@ -1,5 +1,3 @@
-import { FlagName } from '@flopflip/types';
-
 import React from 'react';
 import flowRight from 'lodash/flowRight';
 import {
@@ -7,6 +5,7 @@ import {
   wrapDisplayName,
   setDisplayName,
 } from '@flopflip/react';
+import { FlagName } from '@flopflip/types';
 import { withFlags } from '../configure';
 
 export default <Props extends object>(

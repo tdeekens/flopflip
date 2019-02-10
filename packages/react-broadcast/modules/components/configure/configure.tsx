@@ -1,3 +1,5 @@
+import React from 'react';
+import { ConfigureAdapter } from '@flopflip/react';
 import {
   Flags,
   Adapter,
@@ -5,9 +7,6 @@ import {
   AdapterStatus,
   ConfigureAdapterChildren,
 } from '@flopflip/types';
-
-import React from 'react';
-import { ConfigureAdapter } from '@flopflip/react';
 import { FlagsContext } from '../flags-context';
 
 type Props = {
