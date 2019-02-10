@@ -4,12 +4,14 @@
   "description": "A adapter around the LaunchDarkly client for flipflop",
   "main": "dist/@flopflip-launchdarkly-adapter.cjs.js",
   "module": "dist/@flopflip-launchdarkly-adapter.es.js",
+  "typings": "dist/typings/index.d.ts",
   "scripts": {
     "prebuild": "rimraf dist/**",
-    "build": "cross-env npm run build:es && npm run build:cjs",
+    "build": "cross-env npm run build:es && npm run build:cjs && npm run build:typings",
+    "build:typings": "cross-env tsc -p tsconfig.json --emitDeclarationOnly --declarationDir dist/typings",
     "build:watch": "cross-env npm run build:es -- -w",
-    "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.js -o dist/@flopflip-launchdarkly-adapter.es.js",
-    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.js -o dist/@flopflip-launchdarkly-adapter.cjs.js"
+    "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.ts -o dist/@flopflip-launchdarkly-adapter.es.js",
+    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-launchdarkly-adapter.cjs.js"
   },
   "files": [
     "readme.md",
@@ -31,12 +33,12 @@
   "devDependencies": {
     "@flopflip/types": "^1.4.2",
     "enzyme": "3.8.0",
-    "enzyme-to-json": "3.3.5"
+    "enzyme-to-json": "3.3.5",
+    "@types/lodash": "4.14.120"
   },
   "dependencies": {
-    "ldclient-js": "2.9.0",
-    "lodash.camelcase": "4.3.0",
-    "lodash.isequal": "4.5.0",
+    "ldclient-js": "2.9.1",
+    "lodash": "4.17.11",
     "tiny-warning": "1.0.2"
   },
   "keywords": [

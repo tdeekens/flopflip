@@ -1,38 +1,35 @@
-parser: babel-eslint
 parserOptions:
   sourceType: module
-  ecmaVersion: 6
+  ecmaVersion: 7
   ecmaFeatures:
     jsx: true
     modules: true
-    experimentalObjectRestSpread: true
 extends:
+  - xo
+  - xo-typescript
   - xo-react
   - prettier
-  - plugin:jest/recommended
+  - prettier/@typescript-eslint
   - prettier/react
+  - plugin:jest/recommended
 env:
   es6: true
   jest: true
+  browser: true
 plugins:
   - prettier
   - jest
-  - flowtype-errors
 rules:
-  prettier/prettier:
-    - error
-    - trailingComma: es5
-      singleQuote: true
   jest/no-disabled-tests: warn
   jest/no-focused-tests: error
   jest/no-identical-title: error
   jest/valid-expect: error
-  react/destructuring-assignment: false
-  react/no-deprecated: false
   max-nested-callbacks:
     - error
     - 20
-  flowtype-errors/show-errors: 2
+  '@typescript-eslint/no-var-requires': false
+  '@typescript-eslint/explicit-function-return-type': false
+  '@typescript-eslint/promise-function-async': false
 globals:
   VERSION: true
 overrides:

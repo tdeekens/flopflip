@@ -8,7 +8,6 @@ const { terser } = require('rollup-plugin-terser');
 const json = require('rollup-plugin-json');
 const builtins = require('rollup-plugin-node-builtins');
 const globals = require('rollup-plugin-node-globals');
-const flow = require('rollup-plugin-flow');
 const filesize = require('rollup-plugin-filesize');
 const babelOptions = require('./babel.config');
 const { pkg } = readPkgUp.sync({
@@ -18,6 +17,7 @@ const { pkg } = readPkgUp.sync({
 const env = process.env.NODE_ENV;
 const name = process.env.npm_package_name;
 const format = process.env.npm_lifecycle_event.split(':')[1];
+const extensions = ['.js', '.ts', '.tsx', '.es', '.mjs'];
 
 const pkgDependencies = Object.keys(pkg.dependencies || {});
 const pkgPeerDependencies = Object.keys(pkg.peerDependencies || {});
@@ -31,11 +31,11 @@ const pkgOptionalDependencies = Object.keys(pkg.optionalDependencies || {});
  *   resolved by Node.js.
  */
 const externalDependencies =
-  format !== 'umd'
-    ? pkgDependencies
+  format === 'umd'
+    ? pkgPeerDependencies
+    : pkgDependencies
         .concat(pkgPeerDependencies)
-        .concat(pkgOptionalDependencies)
-    : pkgPeerDependencies;
+        .concat(pkgOptionalDependencies);
 
 const config = {
   output: {
@@ -56,6 +56,7 @@ const config = {
     builtins(),
     json(),
     resolve({
+      extensions,
       module: true,
       jsnext: true,
       main: true,
@@ -64,17 +65,18 @@ const config = {
     }),
     babel({
       exclude: '**/node_modules/**',
+      extensions,
       runtimeHelpers: true,
       ...babelOptions,
     }),
     commonjs({
+      extensions,
       ignoreGlobal: true,
       exclude: ['packages/**'],
       namedExports: {
         'node_modules/react-is/index.js': ['isValidElementType'],
       },
     }),
-    flow({ all: true }),
     filesize(),
   ],
 };

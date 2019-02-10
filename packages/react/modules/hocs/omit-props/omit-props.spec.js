@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 
 import omitProps from './omit-props';
 
-const WrappedComponent = () => null;
+const Component = () => null;
 const createTestProps = (custom = {}) => ({
   a: 1,
   b: 2,
@@ -19,25 +19,25 @@ describe('rendering', () => {
 
   describe('with multiple props', () => {
     beforeEach(() => {
-      EnhancedComponent = omitProps('a', 'b')(WrappedComponent);
+      EnhancedComponent = omitProps('a', 'b')(Component);
       props = createTestProps();
 
       wrapper = shallow(<EnhancedComponent {...props} />);
     });
 
     it('should omit multiple props', () => {
-      expect(wrapper.find(WrappedComponent)).toMatchSnapshot();
+      expect(wrapper.find(Component)).toMatchSnapshot();
     });
   });
 
   describe('without any props', () => {
     beforeEach(() => {
-      EnhancedComponent = omitProps()(WrappedComponent);
+      EnhancedComponent = omitProps()(Component);
       wrapper = shallow(<EnhancedComponent {...props} />);
     });
 
     it('should do nothing', () => {
-      expect(wrapper.find(WrappedComponent)).toMatchSnapshot();
+      expect(wrapper.find(Component)).toMatchSnapshot();
     });
   });
 });

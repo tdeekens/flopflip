@@ -28,7 +28,7 @@ module.exports = {
         useBuiltIns: true,
       },
     ],
-    '@babel/preset-flow',
+    '@babel/preset-typescript',
   ],
   plugins: [
     '@babel/plugin-external-helpers',
@@ -58,11 +58,5 @@ module.exports = {
     ],
     isEnv('test') && 'babel-plugin-transform-dynamic-import',
     isEnv('test') && '@babel/plugin-transform-modules-commonjs',
-    isEnv('production') && [
-      'babel-plugin-transform-react-remove-prop-types',
-      {
-        removeImport: true,
-      },
-    ],
   ].filter(Boolean),
 };

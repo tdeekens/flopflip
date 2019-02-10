@@ -1,29 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`rendering should match snapshot 1`] = `
-<ConfigureAdapter
-  adapter={
-    Object {
-      "configure": [MockFunction],
-      "getIsReady": [MockFunction],
-      "reconfigure": [MockFunction],
-    }
-  }
-  adapterArgs={
-    Object {
-      "fooId": "foo-id",
-      "onFlagsStateChange": [Function],
-      "onStatusStateChange": [Function],
-    }
-  }
-  defaultFlags={Object {}}
-  render={null}
-  shouldDeferAdapterConfiguration={false}
+<ContextProvider
+  value={Object {}}
 >
-  <ContextProvider
-    value={Object {}}
+  <ConfigureAdapter
+    adapter={
+      Object {
+        "configure": [MockFunction],
+        "getIsReady": [MockFunction],
+        "reconfigure": [MockFunction],
+      }
+    }
+    adapterArgs={
+      Object {
+        "fooId": "foo-id",
+        "onFlagsStateChange": [Function],
+        "onStatusStateChange": [Function],
+      }
+    }
+    defaultFlags={Object {}}
+    render={null}
+    shouldDeferAdapterConfiguration={false}
   >
     <ChildComponent />
-  </ContextProvider>
-</ConfigureAdapter>
+  </ConfigureAdapter>
+</ContextProvider>
 `;

@@ -1,4 +1,3 @@
-import ldClient from 'ldclient-js';
 import invariant from 'invariant';
 import adapter, { getUser, updateFlags } from './adapter';
 

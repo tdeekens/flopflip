@@ -28,13 +28,16 @@ describe('action creators', () => {
     it('should return passed `flags`', () => {
       expect(updateFlags(flags)).toEqual({
         type: expect.any(String),
-        payload: flags,
+        payload: { flags },
       });
     });
   });
 });
 
 describe('reducers', () => {
+  const preloadedState = {
+    flags: undefined,
+  };
   describe('when updating flags', () => {
     describe('without previous flags', () => {
       let payload;
@@ -47,7 +50,7 @@ describe('reducers', () => {
 
       it('should set the new flags', () => {
         expect(reducer(undefined, { type: UPDATE_FLAGS, payload })).toEqual({
-          ...payload,
+          ...preloadedState,
         });
       });
     });
@@ -56,13 +59,16 @@ describe('reducers', () => {
       let payload;
       beforeEach(() => {
         payload = {
-          a: true,
-          b: false,
+          flags: {
+            a: true,
+            b: false,
+          },
         };
       });
 
       it('should merge with new flags', () => {
         expect(reducer({ c: true }, { type: UPDATE_FLAGS, payload })).toEqual({
+          ...preloadedState,
           ...payload,
           c: true,
         });

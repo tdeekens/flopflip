@@ -4,6 +4,7 @@
   "moduleFileExtensions": ["js", "ts", "md"],
   "testMatch": [
     "<rootDir>/**/modules/**/*.js",
+    "<rootDir>/**/modules/**/*.ts",
     "<rootDir>/**/demo/**/*.js"
   ]
 }

@@ -14,7 +14,7 @@
   · Redux
   · Jest
   · Prettier
-  · Flow
+  · TypeScript
   · Enzyme
   · ESLint
   · Babel

@@ -1,9 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { ALL_FLAGS_PROP_KEY, DEFAULT_FLAGS_PROP_KEY } from '../../constants';
-import injectFeatureToggles, {
-  areOwnPropsEqual,
-} from './inject-feature-toggles';
+import injectFeatureToggles from './inject-feature-toggles';
+import { defaultAreOwnPropsEqual as areOwnPropsEqual } from './utils';
 
 describe('injecting', () => {
   const TestComponent = () => <>Test</>;

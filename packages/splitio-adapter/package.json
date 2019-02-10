@@ -4,12 +4,14 @@
   "description": "A adapter around the split.io client for flipflop",
   "main": "dist/@flopflip-splitio-adapter.cjs.js",
   "module": "dist/@flopflip-splitio-adapter.es.js",
+  "typings": "dist/typings/index.d.ts",
   "scripts": {
     "prebuild": "rimraf dist/**",
-    "build": "cross-env npm run build:es && npm run build:cjs",
+    "build": "cross-env npm run build:es && npm run build:cjs && npm run build:typings",
+    "build:typings": "cross-env tsc -p tsconfig.json --emitDeclarationOnly --declarationDir dist/typings",
     "build:watch": "cross-env npm run build:es -- -w",
-    "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.js -o dist/@flopflip-splitio-adapter.es.js",
-    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.js -o dist/@flopflip-splitio-adapter.cjs.js"
+    "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.ts -o dist/@flopflip-splitio-adapter.es.js",
+    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-splitio-adapter.cjs.js"
   },
   "files": [
     "readme.md",
@@ -30,12 +32,13 @@
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
     "@flopflip/types": "^1.4.2",
+    "@types/lodash": "4.14.120",
     "enzyme": "3.8.0",
     "enzyme-to-json": "3.3.5"
   },
   "dependencies": {
     "@splitsoftware/splitio": "10.5.1",
-    "lodash.camelcase": "4.3.0"
+    "lodash": "4.17.11"
   },
   "keywords": [
     "feature-flags",

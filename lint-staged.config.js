@@ -1,8 +1,10 @@
 module.exports = {
-  'demo/**/*.js': ['npm run fix:eslint', 'npm run format', 'git add'],
-  'packages/**/*.js': ['npm run fix:eslint', 'npm run format', 'git add'],
-  'packages/**/*.js': ['flow focus-check'],
-  'packages/**/*.ts': ['npm run format', 'git add'],
-  '*.md': ['npm run format:md', 'git add'],
-  '*.yaml': ['npm run format:yaml', 'git add'],
+  'demo/**/*.js': ['npm run fix:eslint', 'npm run format:ts', 'git add -u'],
+  'packages/**/*.{js,ts}': [
+    'npm run fix:eslint',
+    'npm run format:ts',
+    'git add -u',
+  ],
+  '*.md': ['npm run format:md', 'git add -u'],
+  '*.yaml': ['npm run format:yaml', 'git add -u'],
 };

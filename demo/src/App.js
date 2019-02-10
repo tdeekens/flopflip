@@ -156,7 +156,7 @@ const adapterArgs = {
 };
 
 class App extends Component {
-  render() {
+  render(): React.ReactNode {
     return (
       <Provider store={store}>
         <ConfigureFlopFlip adapter={adapter} adapterArgs={adapterArgs}>
