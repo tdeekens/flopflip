@@ -29,6 +29,7 @@ rules:
     - 20
   '@typescript-eslint/no-var-requires': false
   '@typescript-eslint/explicit-function-return-type': false
+  '@typescript-eslint/promise-function-async': false
 globals:
   VERSION: true
 overrides:
