@@ -89,7 +89,7 @@ describe('rendering', () => {
     it('should receive `defaultFlags`', () => {
       expect(configureAdapterWrapper).toHaveProp(
         'defaultFlags',
-        wrapper.prop('defaultFlags')
+        Configure.defaultProps.defaultFlags
       );
     });
   });
@@ -157,10 +157,6 @@ describe('statics', () => {
   describe('defaultProps', () => {
     it('should default `defaultFlags` to an empty object', () => {
       expect(Configure.defaultProps.defaultFlags).toEqual({});
-    });
-
-    it('should default `children` to `null`', () => {
-      expect(Configure.defaultProps.children).toBe(null);
     });
 
     it('should default `shouldDeferAdapterConfiguration` to `true`', () => {

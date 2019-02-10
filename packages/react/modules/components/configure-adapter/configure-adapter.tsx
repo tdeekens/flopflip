@@ -4,6 +4,7 @@ import {
   AdapterArgs,
   AdapterReconfiguration,
   AdapterReconfigurationOptions,
+  ConfigureAdapterChildren,
 } from '@flopflip/types';
 
 import React from 'react';
@@ -29,7 +30,7 @@ type Props = {
   adapterArgs: AdapterArgs;
   defaultFlags?: Flags;
   render?: () => React.ReactNode;
-  children?: ({ isAdapterReady: boolean }) => React.ReactNode;
+  children?: ConfigureAdapterChildren;
 };
 type State = {
   appliedAdapterArgs: AdapterArgs;
@@ -237,7 +238,7 @@ export default class ConfigureAdapter extends React.PureComponent<
     return (
       <AdapterContext.Provider value={this.reconfigureOrQueue}>
         {(() => {
-          const isAdapterReady = this.props.adapter.getIsReady();
+          const isAdapterReady: boolean = this.props.adapter.getIsReady();
 
           if (isAdapterReady) {
             if (typeof this.props.render === 'function')

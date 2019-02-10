@@ -1,4 +1,10 @@
-import { Flags, Adapter, AdapterArgs, AdapterStatus } from '@flopflip/types';
+import {
+  Flags,
+  Adapter,
+  AdapterArgs,
+  AdapterStatus,
+  ConfigureAdapterChildren,
+} from '@flopflip/types';
 import { UpdateFlagsAction, UpdateStatusAction } from '../../types';
 
 import React from 'react';
@@ -7,7 +13,7 @@ import { ConfigureAdapter } from '@flopflip/react';
 import { updateStatus, updateFlags } from './../../ducks';
 
 type Props = {
-  children?: React.ReactNode;
+  children?: ConfigureAdapterChildren;
   shouldDeferAdapterConfiguration?: boolean;
   defaultFlags?: Flags;
   adapterArgs: AdapterArgs;
@@ -45,7 +51,6 @@ export class Configure extends React.PureComponent<
   static displayName = 'ConfigureFlopflip';
 
   static defaultProps = {
-    children: null,
     defaultFlags: {},
     shouldDeferAdapterConfiguration: false,
   };
@@ -64,7 +69,7 @@ export class Configure extends React.PureComponent<
           this.props.shouldDeferAdapterConfiguration
         }
       >
-        {this.props.children ? React.Children.only(this.props.children) : null}
+        {this.props.children}
       </ConfigureAdapter>
     );
   }

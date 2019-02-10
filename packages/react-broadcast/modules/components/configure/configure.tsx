@@ -1,11 +1,17 @@
-import { Flags, Adapter, AdapterArgs, AdapterStatus } from '@flopflip/types';
+import {
+  Flags,
+  Adapter,
+  AdapterArgs,
+  AdapterStatus,
+  ConfigureAdapterChildren,
+} from '@flopflip/types';
 
 import React from 'react';
 import { ConfigureAdapter } from '@flopflip/react';
 import { FlagsContext } from '../flags-context';
 
 type Props = {
-  children?: Node;
+  children?: ConfigureAdapterChildren;
   shouldDeferAdapterConfiguration?: boolean;
   defaultFlags?: Flags;
   adapterArgs: AdapterArgs;
@@ -36,7 +42,6 @@ export default class Configure extends React.PureComponent<Props, State> {
   static displayName = 'ConfigureFlopflip';
 
   static defaultProps = {
-    children: null,
     defaultFlags: {},
     shouldDeferAdapterConfiguration: false,
   };
@@ -72,24 +77,22 @@ export default class Configure extends React.PureComponent<Props, State> {
 
   render(): React.ReactNode {
     return (
-      <ConfigureAdapter
-        adapter={this.props.adapter}
-        adapterArgs={createAdapterArgs(
-          this.props.adapterArgs,
-          this.handleUpdateStatus,
-          this.handleUpdateFlags
-        )}
-        defaultFlags={this.props.defaultFlags}
-        shouldDeferAdapterConfiguration={
-          this.props.shouldDeferAdapterConfiguration
-        }
-      >
-        <FlagsContext.Provider value={this.state.flags}>
-          {this.props.children
-            ? React.Children.only(this.props.children)
-            : null}
-        </FlagsContext.Provider>
-      </ConfigureAdapter>
+      <FlagsContext.Provider value={this.state.flags}>
+        <ConfigureAdapter
+          adapter={this.props.adapter}
+          adapterArgs={createAdapterArgs(
+            this.props.adapterArgs,
+            this.handleUpdateStatus,
+            this.handleUpdateFlags
+          )}
+          defaultFlags={this.props.defaultFlags}
+          shouldDeferAdapterConfiguration={
+            this.props.shouldDeferAdapterConfiguration
+          }
+        >
+          {this.props.children}
+        </ConfigureAdapter>
+      </FlagsContext.Provider>
     );
   }
 }

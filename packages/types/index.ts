@@ -35,6 +35,9 @@ export type AdapterReconfiguration = {
   adapterArgs: AdapterArgs;
   options: AdapterReconfigurationOptions;
 };
+export type ConfigureAdapterChildren = ({
+  isAdapterReady: boolean,
+}) => React.ReactNode | React.ReactNode | null;
 export type ReconfigureAdapter = (
   adapterArgs: AdapterArgs,
   options: AdapterReconfigurationOptions
