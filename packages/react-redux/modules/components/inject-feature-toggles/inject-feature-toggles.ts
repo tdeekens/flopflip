@@ -26,9 +26,7 @@ export default <Props extends object>(
     ownProps: Props,
     propKey: string
   ) => boolean
-) => (
-  Component: React.ComponentType<Props>
-): React.ComponentType<Props> =>
+) => (Component: React.ComponentType<Props>): React.ComponentType<Props> =>
   /* istanbul ignore next */
   flowRight(
     setDisplayName(wrapDisplayName(Component, 'injectFeatureToggles')),
