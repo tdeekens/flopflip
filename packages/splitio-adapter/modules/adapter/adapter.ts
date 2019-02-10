@@ -15,8 +15,8 @@ type AdapterState = {
   isReady: boolean;
   isConfigured: boolean;
   user?: User;
-  client?: SplitIO.IAsyncClient;
-  manager?: SplitIO.IAsyncManager;
+  client?: SplitIO.IClient;
+  manager?: SplitIO.IManager;
 };
 type ClientInitializationOptions = {
   [key: string]: any;
@@ -76,11 +76,12 @@ const subscribeToFlagsChanges = ({
   if (adapterState.client) {
     adapterState.client.on(adapterState.client.Event.SDK_UPDATE, () => {
       if (adapterState.client) {
-        adapterState.client
-          .getTreatments(flagNames, adapterState.user as SplitIO.Attributes)
-          .then(flags => {
-            onFlagsStateChange(camelCaseFlags(flags));
-          });
+        const flags = adapterState.client.getTreatments(
+          flagNames,
+          adapterState.user as SplitIO.Attributes
+        );
+
+        onFlagsStateChange(camelCaseFlags(flags));
       }
     });
   }
@@ -100,7 +101,7 @@ const initializeClient = (
   authorizationKey: string,
   key: string,
   options: ClientInitializationOptions = {}
-): { client: SplitIO.IAsyncClient; manager: SplitIO.IAsyncManager } => {
+): { client: SplitIO.IClient; manager: SplitIO.IManager } => {
   // eslint-disable-next-line new-cap
   const sdk = SplitFactory({
     ...omit(options, ['core']),
@@ -128,6 +129,8 @@ const subscribe = ({
     if (adapterState.client) {
       adapterState.client.on(adapterState.client.Event.SDK_READY, () => {
         let flagNames: FlagName[];
+        let flags: Flags;
+
         if (adapterState.client && adapterState.manager) {
           // First update internal state
           adapterState.isReady = true;
@@ -135,19 +138,19 @@ const subscribe = ({
           onStatusStateChange({ isReady: true });
 
           flagNames = adapterState.manager.names();
-          adapterState.client
-            .getTreatments(flagNames, adapterState.user as SplitIO.Attributes)
-            .then(flags => {
-              // ...and flush initial state of flags
-              onFlagsStateChange(camelCaseFlags(flags));
-              // ...to finally subscribe to later changes.
-              subscribeToFlagsChanges({
-                flagNames,
-                onFlagsStateChange,
-              });
+          flags = adapterState.client.getTreatments(
+            flagNames,
+            adapterState.user as SplitIO.Attributes
+          );
 
-              return resolve();
-            });
+          onFlagsStateChange(camelCaseFlags(flags));
+          // ...to finally subscribe to later changes.
+          subscribeToFlagsChanges({
+            flagNames,
+            onFlagsStateChange,
+          });
+
+          return resolve();
         }
       });
     } else reject();
@@ -207,16 +210,18 @@ const reconfigure = ({
       );
     if (adapterState.user && adapterState.user.key !== user.key) {
       let flagNames: FlagName[];
+      let flags: Flags;
 
       adapterState.user = ensureUser(user);
 
       if (adapterState.manager && adapterState.client) {
         flagNames = adapterState.manager.names();
-        adapterState.client
-          .getTreatments(flagNames, adapterState.user as SplitIO.Attributes)
-          .then(flags => {
-            onFlagsStateChange(camelCaseFlags(flags));
-          });
+        flags = adapterState.client.getTreatments(
+          flagNames,
+          adapterState.user as SplitIO.Attributes
+        );
+
+        onFlagsStateChange(camelCaseFlags(flags));
       }
     }
 

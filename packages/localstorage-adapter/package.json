@@ -4,7 +4,7 @@
   "description": "An localstorage adapter for flipflop",
   "main": "dist/@flopflip-localstorage-adapter.cjs.js",
   "module": "dist/@flopflip-localstorage-adapter.es.js",
-  "typings": "dist/typings/modules/index.d.ts",
+  "typings": "dist/typings/index.d.ts",
   "scripts": {
     "prebuild": "rimraf dist/**",
     "build": "cross-env npm run build:es && npm run build:cjs && npm run build:ts-declarations",

@@ -9,7 +9,7 @@ jest.mock('@splitsoftware/splitio', () => ({
   SplitFactory: jest.fn(() => ({
     client: jest.fn(() => ({
       on: jest.fn((_, cb) => cb()),
-      getTreatments: jest.fn(() => Promise.resolve({})),
+      getTreatments: jest.fn(() => ({})),
       Event: {
         SDK_READY: 'SDK_READY',
         SDK_UPDATE: 'SDK_UPDATE',
@@ -158,7 +158,7 @@ describe('when configuring', () => {
       factory = {
         client: jest.fn(() => ({
           on: onStub,
-          getTreatments: jest.fn(() => Promise.resolve(flags)),
+          getTreatments: jest.fn(() => flags),
           Event: {
             SDK_READY: 'SDK_READY',
             SDK_UPDATE: 'SDK_UPDATE',
@@ -215,7 +215,7 @@ describe('when configuring', () => {
         onStatusStateChange = jest.fn();
         onFlagsStateChange = jest.fn();
         namesStub = jest.fn(() => names);
-        getTreatmentsStub = jest.fn(() => Promise.resolve(flags));
+        getTreatmentsStub = jest.fn(() => flags);
 
         factory = {
           client: jest.fn(() => ({

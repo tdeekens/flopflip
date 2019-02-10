@@ -3,8 +3,8 @@ import warning from 'tiny-warning';
 import { isValidElementType } from 'react-is';
 
 type Props = {
-  untoggledComponent?: React.ComponentType<any>;
-  toggledComponent?: React.ComponentType<any>;
+  untoggledComponent?: React.ComponentType;
+  toggledComponent?: React.ComponentType;
   render?: () => Node;
   children?: ({ isFeatureEnabled: boolean }) => React.ReactNode;
   isFeatureEnabled: boolean;

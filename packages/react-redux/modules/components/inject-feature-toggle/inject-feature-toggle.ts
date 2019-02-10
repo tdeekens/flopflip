@@ -1,4 +1,4 @@
-import { FlagName } from '@flopflip/types';
+import { FlagName, Flags } from '@flopflip/types';
 import { State } from '../../types';
 
 import React from 'react';
@@ -12,22 +12,20 @@ import {
   ALL_FLAGS_PROP_KEY,
 } from '@flopflip/react';
 
-type RequiredProps = {};
-type ProvidedProps = {};
-
-export const mapStateToProps = (state: State): object => ({
+interface StateToProps {
+  '@flopflip/flags': Flags;
+}
+export const mapStateToProps = (state: State): StateToProps => ({
   [ALL_FLAGS_PROP_KEY]: selectFlags(state),
 });
 
-export default <Props extends RequiredProps>(
-  flagName: FlagName,
-  propKey?: string
-): ((
-  WrappedComponent: React.ComponentType<Props>
-) => React.ComponentType<ProvidedProps & Props>) => WrappedComponent =>
+export default <Props extends object>(flagName: FlagName, propKey?: string) => (
+  Component: React.ComponentType<Props>
+): React.ComponentType<Props & Flags> =>
   /* istanbul ignore next */
   flowRight(
-    setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggle')),
+    setDisplayName(wrapDisplayName(Component, 'injectFeatureToggle')),
+    // @ts-ignore
     connect(mapStateToProps),
     injectFeatureToggle(flagName, propKey)
-  )(WrappedComponent);
+  )(Component);

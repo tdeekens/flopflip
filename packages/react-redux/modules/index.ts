@@ -1,3 +1,5 @@
+const version = process.env.npm_package_version;
+
 export {
   createFlopFlipEnhancer,
   STATE_SLICE as FLOPFLIP_STATE_SLICE,
@@ -19,4 +21,4 @@ export {
   ReconfigureFlopFlip,
 } from './components';
 
-export { version } from '../package.json';
+export { version };

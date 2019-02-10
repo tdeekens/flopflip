@@ -1,3 +1,5 @@
+const version = process.env.npm_package_version;
+
 export {
   injectFeatureToggle,
   injectFeatureToggles,
@@ -15,4 +17,4 @@ export {
 } from './constants';
 export { omitProps, setDisplayName, wrapDisplayName, withProps } from './hocs';
 
-export { version } from '../package.json';
+export { version };

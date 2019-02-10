@@ -1,3 +1,4 @@
+const version = process.env.npm_package_version;
 export {
   ToggleFeature,
   injectFeatureToggle,
@@ -7,4 +8,4 @@ export {
   ReconfigureFlopFlip,
 } from './components';
 export { useFeatureToggle } from './hooks';
-export { version } from '../package.json';
+export { version };

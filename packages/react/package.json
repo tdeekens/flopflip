@@ -5,7 +5,7 @@
   "main": "dist/@flopflip-react.cjs.js",
   "module": "dist/@flopflip-react.es.js",
   "browser": "dist/@flopflip-react.umd.js",
-  "typings": "dist/typings/modules/index.d.ts",
+  "typings": "dist/typings/index.d.ts",
   "scripts": {
     "prebuild": "rimraf dist/**",
     "build": "cross-env npm run build:es && npm run build:cjs && npm run build:ts-declarations",
@@ -36,6 +36,7 @@
     "@flopflip/types": "^1.4.2",
     "@types/react": "16.8.2",
     "@types/react-dom": "16.8.0",
+    "@types/lodash": "4.14.120",
     "enzyme": "3.8.0",
     "enzyme-adapter-react-16": "1.9.1",
     "enzyme-to-json": "3.3.5",

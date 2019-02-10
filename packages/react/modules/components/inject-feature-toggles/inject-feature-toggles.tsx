@@ -1,70 +1,31 @@
-import { FlagName, Flags, Diff } from '@flopflip/types';
-
-import React from 'react';
-
-import { withProps } from '../../hocs';
-import isEqual from 'react-fast-compare';
+import { FlagName } from '@flopflip/types';
 import flowRight from 'lodash/flowRight';
-import intersection from 'lodash/intersection';
-import omit from 'lodash/omit';
-import { omitProps } from '../../hocs';
+import React from 'react';
+import { defaultAreOwnPropsEqual, filterFeatureToggles } from './utils';
+import { withProps, omitProps } from '../../hocs';
 import { ALL_FLAGS_PROP_KEY, DEFAULT_FLAGS_PROP_KEY } from '../../constants';
 
-type RequiredProps = {};
-type ProvidedProps = {};
-
-const filterFeatureToggles = (
-  allFlags: Flags,
-  demandedFlags: Array<FlagName>
-) =>
-  intersection(Object.keys(allFlags), demandedFlags).reduce(
-    (featureToggles: Flags, featureToggle: FlagName) => ({
-      ...featureToggles,
-      [featureToggle]: allFlags[featureToggle],
-    }),
-    {}
-  );
-
-const defaultAreOwnPropsEqual = (
-  nextOwnProps: ProvidedProps,
-  ownProps: ProvidedProps,
-  propKey: string
-): boolean => {
-  const featureFlagProps: Flags = ownProps[propKey];
-  const remainingProps: Diff<ProvidedProps, Flags> = omit(ownProps, [propKey]);
-  const nextFeatureFlagProps: Flags = nextOwnProps[propKey];
-  const nextRemainingProps: Diff<ProvidedProps, Flags> = omit(nextOwnProps, [
-    propKey,
-  ]);
-
-  return (
-    isEqual(featureFlagProps, nextFeatureFlagProps) &&
-    isEqual(remainingProps, nextRemainingProps)
-  );
-};
-export { defaultAreOwnPropsEqual as areOwnPropsEqual };
-
-const injectFeatureToggles = (
+const injectFeatureToggles = <Props extends object>(
   flagNames: Array<FlagName>,
   propKey: string = DEFAULT_FLAGS_PROP_KEY,
   areOwnPropsEqual: (
-    nextOwnProps: ProvidedProps,
-    ownProps: ProvidedProps,
+    nextOwnProps: Props,
+    ownProps: Props,
     propKey: string
   ) => boolean = defaultAreOwnPropsEqual
-): React.ComponentType<Diff<RequiredProps, ProvidedProps>> =>
+) => (Component: React.ComponentType<Props>) =>
   flowRight(
-    withProps((props: RequiredProps) => ({
+    withProps((props: Props) => ({
       [propKey]: filterFeatureToggles(props[ALL_FLAGS_PROP_KEY], flagNames),
     })),
-    omitProps(ALL_FLAGS_PROP_KEY),
-    (BaseComponent: React.ComponentType<ProvidedProps>) =>
+    omitProps([ALL_FLAGS_PROP_KEY]),
+    (BaseComponent: React.ComponentType<any>) =>
       class ShouldUpdate extends React.Component<{}> {
         static displayName = BaseComponent.displayName;
 
-        shouldComponentUpdate(nextProps: ProvidedProps) {
+        shouldComponentUpdate(nextProps: Props) {
           return typeof areOwnPropsEqual === 'function'
-            ? !areOwnPropsEqual(this.props, nextProps, propKey)
+            ? !areOwnPropsEqual(this.props as Props, nextProps, propKey)
             : true;
         }
 
@@ -72,6 +33,6 @@ const injectFeatureToggles = (
           return <BaseComponent {...this.props} />;
         }
       }
-  );
+  )(Component);
 
 export default injectFeatureToggles;

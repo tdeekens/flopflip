@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default (nextDisplayName: string) => (
-  BaseComponent: React.ComponentType<any>
-): React.ComponentType<any> => {
+export default <T extends React.ComponentType<any>>(
+  nextDisplayName: string
+) => (BaseComponent: T): T => {
   BaseComponent.displayName = nextDisplayName;
 
   return BaseComponent;

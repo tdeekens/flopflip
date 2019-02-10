@@ -1,4 +1,4 @@
-import { FlagName, FlagVariation, Diff } from '@flopflip/types';
+import { FlagName, FlagVariation } from '@flopflip/types';
 
 import React from 'react';
 import flowRight from 'lodash/flowRight';
@@ -10,17 +10,12 @@ import {
 } from '@flopflip/react';
 import injectFeatureToggle from './../inject-feature-toggle';
 
-type RequiredProps = {};
-type ProvidedProps = {};
-
-export default <Props extends RequiredProps>(
+export default <Props extends object>(
   { flag, variation }: { flag: FlagName; variation?: FlagVariation },
-  UntoggledComponent?: React.ComponentType<any>
-) => (
-  WrappedComponent: React.ComponentType<Diff<RequiredProps, ProvidedProps>>
-): React.ComponentType<ProvidedProps & Props> =>
+  UntoggledComponent?: React.ComponentType
+) => (ToggledComponent: React.ComponentType): React.ComponentType<Props> =>
   flowRight(
-    setDisplayName(wrapDisplayName(WrappedComponent, 'branchOnFeatureToggle')),
+    setDisplayName(wrapDisplayName(ToggledComponent, 'branchOnFeatureToggle')),
     injectFeatureToggle(flag),
     branchOnFeatureToggle(UntoggledComponent, DEFAULT_FLAG_PROP_KEY, variation)
-  )(WrappedComponent);
+  )(ToggledComponent);

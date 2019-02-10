@@ -3,27 +3,19 @@ import { wrapDisplayName } from '../wrap-display-name';
 import { setDisplayName } from '../set-display-name';
 import omit from 'lodash/omit';
 
-type RequiredProps = {};
-type Omit<Props, PropsToOmit> = Pick<Props, Exclude<keyof Props, PropsToOmit>>;
+const omitProps = <Props extends object>(propsToOmit: string | string[]) => (
+  Component: React.ComponentType<any>
+): React.ComponentType<Partial<Props>> => {
+  const OmitProps: React.FC<Partial<Props>> = (
+    props: any
+  ): React.ReactElement<Partial<Props>> => {
+    const withoutOmittedProps = omit<Props>(props, propsToOmit);
 
-const omitProps = <
-  Props extends RequiredProps,
-  PropsToOmit,
-  OmittedProps = Omit<Props, PropsToOmit>
->(
-  propsToOmit: PropsToOmit
-): ((
-  BaseComponent: React.ComponentType<Props>
-) => React.ComponentType<OmittedProps>) => BaseComponent => {
-  const OmitProps: React.ComponentType<OmittedProps> = (
-    props: OmittedProps
-  ): React.ReactElement<any> =>
-    React.createElement(BaseComponent, omit(props, propsToOmit));
+    return React.createElement(Component, withoutOmittedProps);
+  };
 
   if (process.env.NODE_ENV !== 'production') {
-    return setDisplayName(wrapDisplayName(BaseComponent, 'omitProps'))(
-      OmitProps
-    );
+    return setDisplayName(wrapDisplayName(Component, 'omitProps'))(OmitProps);
   }
 
   return OmitProps;

@@ -12,14 +12,14 @@ function isPropsMapper<OwnProps, MappedProps>(
 }
 
 const withProps = <
-  OwnProps,
-  MappedProps,
+  OwnProps extends object,
+  MappedProps extends object,
   MapProps = MappedProps | PropsMapper<OwnProps, MappedProps>
 >(
   mapProps: MapProps
-): ((
-  BaseComponent: React.ComponentType<any>
-) => React.ComponentType<OwnProps & MapProps>) => BaseComponent => {
+) => (
+  Component: React.ComponentType<any>
+): React.ComponentType<OwnProps & MapProps> => {
   const EnhancedWithProps: React.FC<OwnProps & MapProps> = (
     ownProps: OwnProps
   ): React.ReactElement<OwnProps & MapProps> => {
@@ -27,11 +27,11 @@ const withProps = <
       ? { ...ownProps, ...mapProps(ownProps) }
       : { ...ownProps, ...mapProps };
 
-    return React.createElement(BaseComponent, enhancedProps);
+    return React.createElement(Component, enhancedProps);
   };
 
   if (process.env.NODE_ENV !== 'production') {
-    return setDisplayName(wrapDisplayName(BaseComponent, 'withProps'))(
+    return setDisplayName(wrapDisplayName(Component, 'withProps'))(
       EnhancedWithProps
     );
   }

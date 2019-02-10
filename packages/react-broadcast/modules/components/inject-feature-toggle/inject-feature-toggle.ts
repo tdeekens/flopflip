@@ -1,4 +1,4 @@
-import { FlagName, Diff } from '@flopflip/types';
+import { FlagName, Flags } from '@flopflip/types';
 
 import React from 'react';
 import flowRight from 'lodash/flowRight';
@@ -9,17 +9,13 @@ import {
 } from '@flopflip/react';
 import { withFlags } from '../configure';
 
-type RequiredProps = {};
-type ProvidedProps = {};
-
-export default <Props extends RequiredProps>(
-  flagName: FlagName,
-  propKey?: string
-) => (
-  WrappedComponent: React.ComponentType<Diff<RequiredProps, ProvidedProps>>
-): React.ComponentType<ProvidedProps & Props> =>
+export default <Props extends object>(flagName: FlagName, propKey?: string) => (
+  Component: React.ComponentType<Props>
+): React.ComponentType<Props & Flags> =>
   flowRight(
-    setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggle')),
+    setDisplayName(wrapDisplayName(Component, 'injectFeatureToggle')),
     withFlags(),
+    // @ts-ignore
     injectFeatureToggle(flagName, propKey)
-  )(WrappedComponent);
+    // @ts-ignore
+  )(Component);
