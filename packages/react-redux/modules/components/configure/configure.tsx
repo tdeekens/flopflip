@@ -1,3 +1,6 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import { ConfigureAdapter } from '@flopflip/react';
 import {
   Flags,
   Adapter,
@@ -6,10 +9,6 @@ import {
   ConfigureAdapterChildren,
 } from '@flopflip/types';
 import { UpdateFlagsAction, UpdateStatusAction } from '../../types';
-
-import React from 'react';
-import { connect } from 'react-redux';
-import { ConfigureAdapter } from '@flopflip/react';
 import { updateStatus, updateFlags } from './../../ducks';
 
 type Props = {

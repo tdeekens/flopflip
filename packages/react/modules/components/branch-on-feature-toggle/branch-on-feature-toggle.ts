@@ -1,6 +1,5 @@
-import { FlagName, Flags, FlagVariation } from '@flopflip/types';
-
 import React from 'react';
+import { FlagName, Flags, FlagVariation } from '@flopflip/types';
 import isFeatureEnabled from '../../helpers/is-feature-enabled';
 import { DEFAULT_FLAG_PROP_KEY } from '../../constants';
 

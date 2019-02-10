@@ -1,5 +1,3 @@
-import { FlagName, FlagVariation } from '@flopflip/types';
-
 import React from 'react';
 import flowRight from 'lodash/flowRight';
 import {
@@ -8,6 +6,7 @@ import {
   setDisplayName,
   DEFAULT_FLAG_PROP_KEY,
 } from '@flopflip/react';
+import { FlagName, FlagVariation } from '@flopflip/types';
 import injectFeatureToggle from './../inject-feature-toggle';
 
 export default <Props extends object>(

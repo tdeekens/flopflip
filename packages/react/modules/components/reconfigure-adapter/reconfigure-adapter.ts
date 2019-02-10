@@ -1,10 +1,9 @@
+import React from 'react';
 import {
   User,
   AdapterArgs,
   AdapterReconfigurationOptions,
 } from '@flopflip/types';
-
-import React from 'react';
 import { withReconfiguration } from '../configure-adapter';
 
 type Props = {

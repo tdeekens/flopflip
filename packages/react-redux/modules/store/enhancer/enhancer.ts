@@ -7,7 +7,6 @@ import {
 } from 'redux';
 import { Adapter, AdapterArgs, AdapterStatus, Flags } from '@flopflip/types';
 import { State } from '../../types';
-
 import { updateFlags, updateStatus } from '../../ducks';
 
 export default function createFlopFlipEnhancer(

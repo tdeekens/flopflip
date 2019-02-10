@@ -1,9 +1,8 @@
-import { Flags } from '@flopflip/types';
 import { Reducer } from 'redux';
+import { combineReducers } from 'redux';
+import { Flags } from '@flopflip/types';
 import { UpdateFlagsAction } from './flags/types';
 import { UpdateStatusAction } from './status/types';
-
-import { combineReducers } from 'redux';
 import { flagsReducer, createFlagsReducer } from './flags';
 import { statusReducer } from './status';
 
