@@ -8,8 +8,8 @@
   "typings": "dist/typings/index.d.ts",
   "scripts": {
     "prebuild": "rimraf dist/**",
-    "build": "cross-env npm run build:es && npm run build:cjs && npm run build:ts-declarations",
-    "build:ts-declarations": "cross-env tsc -p tsconfig.json --emitDeclarationOnly --declarationDir dist/typings",
+    "build": "cross-env npm run build:es && npm run build:cjs && npm run build:typings",
+    "build:typings": "cross-env tsc -p tsconfig.json --emitDeclarationOnly --declarationDir dist/typings",
     "build:watch": "cross-env npm run build:es -- -w",
     "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.ts -o dist/@flopflip-react.es.js",
     "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-react.cjs.js"
