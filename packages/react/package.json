@@ -34,14 +34,14 @@
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
     "@flopflip/types": "^1.4.2",
-    "@types/react": "16.8.2",
-    "@types/react-dom": "16.8.0",
-    "@types/lodash": "4.14.120",
+    "@types/lodash": "4.14.121",
+    "@types/react": "16.8.3",
+    "@types/react-dom": "16.8.1",
     "enzyme": "3.8.0",
     "enzyme-adapter-react-16": "1.9.1",
     "enzyme-to-json": "3.3.5",
-    "react": "16.8.1",
-    "react-dom": "16.8.1"
+    "react": "16.8.2",
+    "react-dom": "16.8.2"
   },
   "peerDependencies": {
     "react": "^15.6 || ^16.0",
@@ -52,7 +52,7 @@
     "deepmerge": "3.1.0",
     "lodash": "4.17.11",
     "react-fast-compare": "2.0.4",
-    "react-is": "16.8.1",
+    "react-is": "16.8.2",
     "tiny-warning": "1.0.2"
   },
   "keywords": [
