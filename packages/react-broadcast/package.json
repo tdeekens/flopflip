@@ -34,14 +34,14 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
+    "@types/lodash": "4.14.121",
     "@types/react": "16.8.2",
     "@types/react-dom": "16.8.0",
-    "@types/lodash": "4.14.120",
     "enzyme": "3.8.0",
     "enzyme-adapter-react-16": "1.9.1",
     "enzyme-to-json": "3.3.5",
-    "react": "16.8.1",
-    "react-dom": "16.8.1",
+    "react": "16.8.2",
+    "react-dom": "16.8.2",
     "redux-mock-store": "1.5.3"
   },
   "peerDependencies": {

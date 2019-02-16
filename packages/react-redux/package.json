@@ -37,16 +37,16 @@
     "enzyme": "3.8.0",
     "enzyme-adapter-react-16": "1.9.1",
     "enzyme-to-json": "3.3.5",
-    "react": "16.8.1",
-    "react-dom": "16.8.1",
+    "react": "16.8.2",
+    "react-dom": "16.8.2",
     "react-redux": "6.0.0",
     "redux": "4.0.1"
   },
   "dependencies": {
     "@flopflip/react": "^6.2.3",
     "@flopflip/types": "^1.4.2",
+    "@types/lodash": "4.14.121",
     "@types/react-redux": "7.0.1",
-    "@types/lodash": "4.14.120",
     "lodash": "4.17.11"
   },
   "peerDependencies": {
