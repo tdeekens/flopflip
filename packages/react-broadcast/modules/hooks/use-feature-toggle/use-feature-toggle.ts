@@ -15,9 +15,12 @@ export default function useFeatureToggle(
   );
 
   if (typeof React.useContext === 'function') {
-    // NOTE: Breaks type checks as React version is not installed in deveopment.
-    // @ts-ignore
-    const flags: Flags = React.useContext(FlagsContext);
+    /**
+     * NODE: `createReactContext` and `React.Context` return incomptaible types which
+     * can not be interchanged. Until `createReactContext` is in use this
+     * has to remain.
+     */
+    const flags: Flags = React.useContext(FlagsContext as any);
 
     return isFeatureEnabled(flagName, flagVariation)(flags);
   }

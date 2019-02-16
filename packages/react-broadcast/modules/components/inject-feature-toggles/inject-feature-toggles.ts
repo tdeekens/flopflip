@@ -8,7 +8,11 @@ import {
 import { FlagName } from '@flopflip/types';
 import { withFlags } from '../configure';
 
-export default <Props extends object>(
+type Props = {
+  [propKey: string]: boolean;
+};
+
+export default (
   flagNames: FlagName[],
   propKey?: string,
   areOwnPropsEqual?: (
@@ -16,10 +20,9 @@ export default <Props extends object>(
     ownProps: Props,
     propKey: string
   ) => boolean
-) => (Component: React.ComponentType<Props>): React.ComponentType<Props> =>
+) => (Component: React.ComponentType): React.ComponentType<Props> =>
   flowRight(
     setDisplayName(wrapDisplayName(Component, 'injectFeatureToggles')),
     withFlags(),
-    // @ts-ignore
     injectFeatureToggles(flagNames, propKey, areOwnPropsEqual)
   )(Component);
