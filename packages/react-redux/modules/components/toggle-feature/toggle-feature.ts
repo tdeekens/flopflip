@@ -20,7 +20,6 @@ export const mapStateToProps = (state: State, ownProps: OwnProps): object => ({
   ),
 });
 
-/* istanbul ignore next */
 export default flowRight(
   setDisplayName(ToggleFeature.displayName),
   connect(mapStateToProps)

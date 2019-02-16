@@ -11,17 +11,21 @@ import {
   ALL_FLAGS_PROP_KEY,
 } from '@flopflip/react';
 
-interface StateToProps {
+type StateToProps = {
   '@flopflip/flags': Flags;
-}
+};
+
 export const mapStateToProps = (state: State): StateToProps => ({
   [ALL_FLAGS_PROP_KEY]: selectFlags(state),
 });
 
-export default <Props extends object>(flagName: FlagName, propKey?: string) => (
-  Component: React.ComponentType<Props>
-): React.ComponentType<Props & Flags> =>
-  /* istanbul ignore next */
+type Props = {
+  [propKey: string]: boolean;
+};
+
+export default (flagName: FlagName, propKey?: string) => (
+  Component: React.ComponentType
+): React.ComponentType<Props> =>
   flowRight(
     setDisplayName(wrapDisplayName(Component, 'injectFeatureToggle')),
     // @ts-ignore

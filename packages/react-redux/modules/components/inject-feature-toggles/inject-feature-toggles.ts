@@ -18,7 +18,11 @@ export const mapStateToProps = (state: State): StateToProps => ({
   [ALL_FLAGS_PROP_KEY]: selectFlags(state),
 });
 
-export default <Props extends object>(
+type Props = {
+  [propKey: string]: Flags;
+};
+
+export default (
   flagNames: FlagName[],
   propKey?: string,
   areOwnPropsEqual?: (
@@ -26,8 +30,7 @@ export default <Props extends object>(
     ownProps: Props,
     propKey: string
   ) => boolean
-) => (Component: React.ComponentType<Props>): React.ComponentType<Props> =>
-  /* istanbul ignore next */
+) => (Component: React.ComponentType): React.ComponentType<Props> =>
   flowRight(
     setDisplayName(wrapDisplayName(Component, 'injectFeatureToggles')),
     // @ts-ignore

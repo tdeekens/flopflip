@@ -9,10 +9,10 @@ import {
 import { FlagName, FlagVariation } from '@flopflip/types';
 import injectFeatureToggle from './../inject-feature-toggle';
 
-export default <Props extends object>(
+export default (
   { flag, variation }: { flag: FlagName; variation: FlagVariation },
-  UntoggledComponent: React.ComponentType<Props>
-) => (Component: React.ComponentType<Props>) =>
+  UntoggledComponent: React.ComponentType
+) => (Component: React.ComponentType) =>
   flowRight(
     setDisplayName(wrapDisplayName(Component, 'branchOnFeatureToggle')),
     injectFeatureToggle(flag),

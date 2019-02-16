@@ -18,6 +18,7 @@ const intialAdapterState: AdapterStatus & LocalStorageAdapterState = {
   flags: {},
   user: {},
   // Typings are incorrect and state that mitt is not callable.
+  // Value of type 'MittStatic' is not callable. Did you mean to include 'new'
   // @ts-ignore
   emitter: mitt(),
 };
