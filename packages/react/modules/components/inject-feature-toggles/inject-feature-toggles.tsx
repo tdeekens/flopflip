@@ -1,9 +1,13 @@
-import { FlagName } from '@flopflip/types';
+import { FlagName, Flags } from '@flopflip/types';
 import flowRight from 'lodash/flowRight';
 import React from 'react';
 import { defaultAreOwnPropsEqual, filterFeatureToggles } from './utils';
 import { withProps, omitProps } from '../../hocs';
 import { ALL_FLAGS_PROP_KEY, DEFAULT_FLAGS_PROP_KEY } from '../../constants';
+
+type InjectedProps = {
+  [propKey: string]: Flags;
+};
 
 const injectFeatureToggles = <Props extends object>(
   flagNames: Array<FlagName>,
@@ -13,7 +17,9 @@ const injectFeatureToggles = <Props extends object>(
     ownProps: Props,
     propKey: string
   ) => boolean = defaultAreOwnPropsEqual
-) => (Component: React.ComponentType<Props>) =>
+) => (
+  Component: React.ComponentType<Props>
+): React.ComponentType<Props & InjectedProps> =>
   flowRight(
     withProps((props: Props) => ({
       [propKey]: filterFeatureToggles(props[ALL_FLAGS_PROP_KEY], flagNames),

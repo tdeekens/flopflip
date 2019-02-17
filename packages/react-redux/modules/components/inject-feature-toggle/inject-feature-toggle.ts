@@ -19,16 +19,16 @@ export const mapStateToProps = (state: State): StateToProps => ({
   [ALL_FLAGS_PROP_KEY]: selectFlags(state),
 });
 
-type Props = {
+type InjectedProps = {
   [propKey: string]: boolean;
 };
 
-export default (flagName: FlagName, propKey?: string) => (
+export default <Props extends object>(flagName: FlagName, propKey?: string) => (
   Component: React.ComponentType
-): React.ComponentType<Props> =>
+): React.ComponentType<Props & InjectedProps> =>
   flowRight(
     setDisplayName(wrapDisplayName(Component, 'injectFeatureToggle')),
     // @ts-ignore
     connect(mapStateToProps),
-    injectFeatureToggle(flagName, propKey)
+    injectFeatureToggle<Props>(flagName, propKey)
   )(Component);
