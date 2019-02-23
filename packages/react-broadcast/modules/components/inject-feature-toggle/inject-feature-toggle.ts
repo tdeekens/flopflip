@@ -13,7 +13,7 @@ type InjectedProps = {
 };
 
 export default <Props extends object>(flagName: FlagName, propKey?: string) => (
-  Component: React.ComponentType<Props>
+  Component: React.ComponentType<any>
 ): React.ComponentType<Props & InjectedProps> =>
   flowRight(
     setDisplayName(wrapDisplayName(Component, 'injectFeatureToggle')),

@@ -10,7 +10,7 @@ class DefaultUntoggledComponent extends React.Component<any> {
 }
 
 const branchOnFeatureToggle = <Props extends object>(
-  UntoggledComponent: React.ComponentType<Props> = DefaultUntoggledComponent,
+  UntoggledComponent: React.ComponentType<any> = DefaultUntoggledComponent,
   flagName: FlagName = DEFAULT_FLAG_PROP_KEY,
   flagVariation: FlagVariation = true
 ) => (

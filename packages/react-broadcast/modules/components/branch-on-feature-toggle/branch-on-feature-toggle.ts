@@ -12,9 +12,15 @@ import injectFeatureToggle from './../inject-feature-toggle';
 export default <Props extends object>(
   { flag, variation }: { flag: FlagName; variation?: FlagVariation },
   UntoggledComponent?: React.ComponentType
-) => (ToggledComponent: React.ComponentType): React.ComponentType<Props> =>
+) => (
+  ToggledComponent: React.ComponentType<Props>
+): React.ComponentType<Props> =>
   flowRight(
     setDisplayName(wrapDisplayName(ToggledComponent, 'branchOnFeatureToggle')),
-    injectFeatureToggle(flag),
-    branchOnFeatureToggle(UntoggledComponent, DEFAULT_FLAG_PROP_KEY, variation)
+    injectFeatureToggle<Props>(flag),
+    branchOnFeatureToggle<Props>(
+      UntoggledComponent,
+      DEFAULT_FLAG_PROP_KEY,
+      variation
+    )
   )(ToggledComponent);

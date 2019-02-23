@@ -14,7 +14,7 @@ const injectFeatureToggle = <Props extends object>(
   flagName: FlagName,
   propKey: string = DEFAULT_FLAG_PROP_KEY
 ) => (
-  Component: React.ComponentType<Props>
+  Component: React.ComponentType<any>
 ): React.ComponentType<Props & InjectedProps> =>
   // @ts-ignore
   flowRight(
