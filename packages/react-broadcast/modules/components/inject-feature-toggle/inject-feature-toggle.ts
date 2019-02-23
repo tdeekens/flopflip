@@ -5,11 +5,11 @@ import {
   wrapDisplayName,
   setDisplayName,
 } from '@flopflip/react';
-import { FlagName } from '@flopflip/types';
+import { FlagName, FlagVariation } from '@flopflip/types';
 import { withFlags } from '../configure';
 
 type InjectedProps = {
-  [propKey: string]: boolean;
+  [propKey: string]: FlagVariation;
 };
 
 export default <Props extends object>(flagName: FlagName, propKey?: string) => (
@@ -18,5 +18,6 @@ export default <Props extends object>(flagName: FlagName, propKey?: string) => (
   flowRight(
     setDisplayName(wrapDisplayName(Component, 'injectFeatureToggle')),
     withFlags<Props>(),
+    // @ts-ignore
     injectFeatureToggle<Props>(flagName, propKey)
   )(Component);

@@ -26,5 +26,6 @@ export default <Props extends object>(
   flowRight(
     setDisplayName(wrapDisplayName(Component, 'injectFeatureToggles')),
     withFlags<Props>(),
+    // @ts-ignore
     injectFeatureToggles<Props>(flagNames, propKey, areOwnPropsEqual)
   )(Component);

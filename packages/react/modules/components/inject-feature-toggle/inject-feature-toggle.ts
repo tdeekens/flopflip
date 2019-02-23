@@ -7,7 +7,7 @@ import { omitProps } from '../../hocs';
 import { DEFAULT_FLAG_PROP_KEY, ALL_FLAGS_PROP_KEY } from '../../constants';
 
 type InjectedProps = {
-  [propKey: string]: boolean;
+  [propKey: string]: FlagVariation;
 };
 
 const injectFeatureToggle = <Props extends object>(
@@ -16,14 +16,15 @@ const injectFeatureToggle = <Props extends object>(
 ) => (
   Component: React.ComponentType<Props>
 ): React.ComponentType<Props & InjectedProps> =>
+  // @ts-ignore
   flowRight(
-    withProps((ownProps: Props) => {
+    withProps<Props, InjectedProps>((ownProps: Props) => {
       const flagVariation: FlagVariation =
         ownProps[ALL_FLAGS_PROP_KEY][flagName];
 
       return { [propKey]: isNil(flagVariation) ? false : flagVariation };
     }),
-    omitProps([ALL_FLAGS_PROP_KEY])
+    omitProps<Props>([ALL_FLAGS_PROP_KEY])
   )(Component);
 
 export default injectFeatureToggle;

@@ -43,6 +43,7 @@ const injectFeatureToggles = <Props extends object>(
 ) => (
   Component: React.ComponentType<any>
 ): React.ComponentType<Props & InjectedProps> =>
+  // @ts-ignore
   flowRight(
     withProps<Props, InjectedProps>((props: Props) => ({
       [propKey]: filterFeatureToggles(props[ALL_FLAGS_PROP_KEY], flagNames),
