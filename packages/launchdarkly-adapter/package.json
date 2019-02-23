@@ -37,7 +37,7 @@
     "enzyme-to-json": "3.3.5"
   },
   "dependencies": {
-    "ldclient-js": "2.9.3",
+    "ldclient-js": "2.9.4",
     "lodash": "4.17.11",
     "tiny-warning": "1.0.2"
   },

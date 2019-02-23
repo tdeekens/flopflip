@@ -40,8 +40,8 @@
     "enzyme": "3.9.0",
     "enzyme-adapter-react-16": "1.9.1",
     "enzyme-to-json": "3.3.5",
-    "react": "16.8.2",
-    "react-dom": "16.8.2"
+    "react": "16.8.3",
+    "react-dom": "16.8.3"
   },
   "peerDependencies": {
     "react": "^15.6 || ^16.0",
@@ -52,7 +52,7 @@
     "deepmerge": "3.2.0",
     "lodash": "4.17.11",
     "react-fast-compare": "2.0.4",
-    "react-is": "16.8.2",
+    "react-is": "16.8.3",
     "tiny-warning": "1.0.2"
   },
   "keywords": [
