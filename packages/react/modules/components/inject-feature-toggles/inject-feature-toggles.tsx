@@ -8,6 +8,29 @@ import { ALL_FLAGS_PROP_KEY, DEFAULT_FLAGS_PROP_KEY } from '../../constants';
 type InjectedProps = {
   [propKey: string]: Flags;
 };
+type AreOwnPropsEqual<Props> = (
+  props: Props,
+  nextProps: Props,
+  propKey: string
+) => boolean;
+
+const shouldUpdate = <Props extends object>(
+  areOwnPropsEqual: AreOwnPropsEqual<Props>,
+  propKey: string
+) => (Component: React.ComponentType<any>) =>
+  class ShouldUpdate extends React.Component<any> {
+    static displayName = Component.displayName;
+
+    shouldComponentUpdate(nextProps: Props) {
+      return typeof areOwnPropsEqual === 'function'
+        ? !areOwnPropsEqual(this.props as Props, nextProps, propKey)
+        : true;
+    }
+
+    render(): React.ReactNode {
+      return <Component {...this.props} />;
+    }
+  };
 
 const injectFeatureToggles = <Props extends object>(
   flagNames: Array<FlagName>,
@@ -18,27 +41,14 @@ const injectFeatureToggles = <Props extends object>(
     propKey: string
   ) => boolean = defaultAreOwnPropsEqual
 ) => (
-  Component: React.ComponentType<Props>
+  Component: React.ComponentType<any>
 ): React.ComponentType<Props & InjectedProps> =>
   flowRight(
-    withProps((props: Props) => ({
+    withProps<Props, InjectedProps>((props: Props) => ({
       [propKey]: filterFeatureToggles(props[ALL_FLAGS_PROP_KEY], flagNames),
     })),
-    omitProps([ALL_FLAGS_PROP_KEY]),
-    (BaseComponent: React.ComponentType<any>) =>
-      class ShouldUpdate extends React.Component<{}> {
-        static displayName = BaseComponent.displayName;
-
-        shouldComponentUpdate(nextProps: Props) {
-          return typeof areOwnPropsEqual === 'function'
-            ? !areOwnPropsEqual(this.props as Props, nextProps, propKey)
-            : true;
-        }
-
-        render(): React.ReactNode {
-          return <BaseComponent {...this.props} />;
-        }
-      }
+    omitProps<Props>([ALL_FLAGS_PROP_KEY]),
+    shouldUpdate<Props>(areOwnPropsEqual, propKey)
   )(Component);
 
 export default injectFeatureToggles;
