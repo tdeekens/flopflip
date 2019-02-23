@@ -5,14 +5,14 @@ import {
   wrapDisplayName,
   setDisplayName,
 } from '@flopflip/react';
-import { FlagName } from '@flopflip/types';
+import { FlagName, Flags } from '@flopflip/types';
 import { withFlags } from '../configure';
 
-type Props = {
-  [propKey: string]: boolean;
+type InjectedProps = {
+  [propKey: string]: Flags;
 };
 
-export default (
+export default <Props extends object>(
   flagNames: FlagName[],
   propKey?: string,
   areOwnPropsEqual?: (
@@ -20,9 +20,12 @@ export default (
     ownProps: Props,
     propKey: string
   ) => boolean
-) => (Component: React.ComponentType): React.ComponentType<Props> =>
+) => (
+  Component: React.ComponentType
+): React.ComponentType<Props & InjectedProps> =>
   flowRight(
     setDisplayName(wrapDisplayName(Component, 'injectFeatureToggles')),
-    withFlags(),
-    injectFeatureToggles(flagNames, propKey, areOwnPropsEqual)
+    withFlags<Props>(),
+    // @ts-ignore
+    injectFeatureToggles<Props>(flagNames, propKey, areOwnPropsEqual)
   )(Component);
