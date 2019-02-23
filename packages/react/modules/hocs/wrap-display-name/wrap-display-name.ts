@@ -1,7 +1,7 @@
 import React from 'react';
 
-export default <Props extends object>(
-  BaseComponent: React.ComponentType<Props>,
+export default (
+  BaseComponent: React.ComponentType<any>,
   hocName: string
 ): string => {
   const previousDisplayName = BaseComponent.displayName || BaseComponent.name;
