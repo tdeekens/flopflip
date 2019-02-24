@@ -695,7 +695,7 @@ slightly different APIs. Generally we aim to have the same API for both packages
 
 #### `useFeatureToggle(flagName: string, flagVariation: FlagVariation): boolean`
 
-A likely forward compatible implementation [React hook](https://reactjs.org/docs/hooks-reference.html). Given the installed version of React supports hooks (they are currently experimental and in alpha phase) you can use a functional component and toggle as follows:
+A likely forward compatible implementation [React hook](https://reactjs.org/docs/hooks-reference.html). Given the installed version of React supports hooks you can use a functional component and toggle as follows:
 
 ```js
 import { useFeatureToggle } from '@flopflip/react-broadcast';
