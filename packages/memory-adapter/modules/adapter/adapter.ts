@@ -65,6 +65,13 @@ const reconfigure = ({ user }: { user: User }): Promise<any> => {
 };
 
 const getIsReady = (): boolean => Boolean(adapterState.isReady);
+const setIsReady = (nextIsReady: { isReady: boolean }): void => {
+  adapterState.isReady = nextIsReady.isReady;
+
+  adapterState.emitter.emit('statusStateChange', {
+    isReady: adapterState.isReady,
+  });
+};
 
 const reset = (): void => {
   adapterState = {
@@ -108,6 +115,7 @@ const getFlag = (flagName: FlagName): FlagVariation | undefined =>
 
 export default {
   getIsReady,
+  setIsReady,
   waitUntilConfigured,
   getFlag,
   reset,

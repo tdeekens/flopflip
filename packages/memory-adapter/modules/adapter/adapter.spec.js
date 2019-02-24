@@ -118,5 +118,23 @@ describe('when configuring', () => {
         expect(adapter.getFlag(updatedFlags.barFlag)).not.toBeDefined();
       });
     });
+
+    describe('when setting ready state', () => {
+      beforeEach(() => {
+        adapterArgs.onStatusStateChange.mockClear();
+
+        adapter.setIsReady({ isReady: false });
+      });
+
+      it('should indicate that the adapter is not ready', () => {
+        expect(adapter.getIsReady()).toBe(false);
+      });
+
+      it('should invoke `onStatusStateChange` with `isReady`', () => {
+        expect(adapterArgs.onStatusStateChange).toHaveBeenCalledWith({
+          isReady: false,
+        });
+      });
+    });
   });
 });
