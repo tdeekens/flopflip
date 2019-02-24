@@ -21,6 +21,7 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
         "getIsReady": [Function],
         "reconfigure": [Function],
         "reset": [Function],
+        "setIsReady": [Function],
         "waitUntilConfigured": [Function],
       }
     }
@@ -34,6 +35,7 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
           "getIsReady": [Function],
           "reconfigure": [Function],
           "reset": [Function],
+          "setIsReady": [Function],
           "waitUntilConfigured": [Function],
         }
       }
@@ -51,6 +53,7 @@ exports[`with \`untoggledComponent when feature is disabled should match snapsho
             "getIsReady": [Function],
             "reconfigure": [Function],
             "reset": [Function],
+            "setIsReady": [Function],
             "waitUntilConfigured": [Function],
           }
         }
@@ -123,6 +126,7 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
         "getIsReady": [Function],
         "reconfigure": [Function],
         "reset": [Function],
+        "setIsReady": [Function],
         "waitUntilConfigured": [Function],
       }
     }
@@ -136,6 +140,7 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
           "getIsReady": [Function],
           "reconfigure": [Function],
           "reset": [Function],
+          "setIsReady": [Function],
           "waitUntilConfigured": [Function],
         }
       }
@@ -153,6 +158,7 @@ exports[`with \`untoggledComponent when feature is disabled when enabling featur
             "getIsReady": [Function],
             "reconfigure": [Function],
             "reset": [Function],
+            "setIsReady": [Function],
             "waitUntilConfigured": [Function],
           }
         }
@@ -225,6 +231,7 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
         "getIsReady": [Function],
         "reconfigure": [Function],
         "reset": [Function],
+        "setIsReady": [Function],
         "waitUntilConfigured": [Function],
       }
     }
@@ -238,6 +245,7 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
           "getIsReady": [Function],
           "reconfigure": [Function],
           "reset": [Function],
+          "setIsReady": [Function],
           "waitUntilConfigured": [Function],
         }
       }
@@ -255,6 +263,7 @@ exports[`without \`untoggledComponent when feature is disabled should match snap
             "getIsReady": [Function],
             "reconfigure": [Function],
             "reset": [Function],
+            "setIsReady": [Function],
             "waitUntilConfigured": [Function],
           }
         }
@@ -325,6 +334,7 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
         "getIsReady": [Function],
         "reconfigure": [Function],
         "reset": [Function],
+        "setIsReady": [Function],
         "waitUntilConfigured": [Function],
       }
     }
@@ -338,6 +348,7 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
           "getIsReady": [Function],
           "reconfigure": [Function],
           "reset": [Function],
+          "setIsReady": [Function],
           "waitUntilConfigured": [Function],
         }
       }
@@ -355,6 +366,7 @@ exports[`without \`untoggledComponent when feature is disabled when enabling fea
             "getIsReady": [Function],
             "reconfigure": [Function],
             "reset": [Function],
+            "setIsReady": [Function],
             "waitUntilConfigured": [Function],
           }
         }
