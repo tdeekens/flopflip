@@ -40,7 +40,7 @@ const getComponentInstance = node => {
 
 const PropsToComponent = props => (
   <>
-    {Object.entries(props.key ? props[props.key] : props).map(
+    {Object.entries(props.propKey ? props[props.propKey] : props).map(
       ([key, value]) => (
         <div key={key} data-testid={key}>
           {String(value)}
