@@ -1,85 +1,55 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { renderWithAdapter } from '@flopflip/test-utils';
 import injectFeatureToggle from './inject-feature-toggle';
 import Configure from '../configure';
-import memoryAdapter, { updateFlags } from '@flopflip/memory-adapter';
 
-const FeatureComponent = () => <div />;
-FeatureComponent.displayName = 'FeatureComponent';
-
-const createTestProps = custom => ({
-  adapterArgs: {},
-
-  ...custom,
-});
+const Component = props => (
+  <>
+    {Object.entries(props).map(([key, value]) => (
+      <div key={key} data-testid={key}>
+        {String(value)}
+      </div>
+    ))}
+  </>
+);
+const render = TestComponent =>
+  renderWithAdapter(TestComponent, {
+    components: { ConfigureFlopFlip: Configure },
+  });
 
 describe('without `propKey`', () => {
-  const EnhancedComponent = injectFeatureToggle('flag1')(FeatureComponent);
-  let props;
-  let wrapper;
-
   describe('when feature is disabled', () => {
-    beforeEach(() => {
-      props = createTestProps();
-      wrapper = mount(
-        <Configure {...props} adapter={memoryAdapter}>
-          <EnhancedComponent />
-        </Configure>
-      );
+    const TestComponent = injectFeatureToggle('disabledFeature')(Component);
+
+    it('should render receive the flag value is `false`', () => {
+      const { queryByTestId } = render(<TestComponent />);
+
+      expect(queryByTestId('isFeatureEnabled')).toHaveTextContent('false');
     });
+  });
 
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
+  describe('when feature is enabled', () => {
+    const TestComponent = injectFeatureToggle('enabledFeature')(Component);
 
-    it('should have feature disabling prop', () => {
-      expect(wrapper.find(FeatureComponent)).toHaveProp(
-        'isFeatureEnabled',
-        false
-      );
-    });
+    it('should render receive the flag value is `true`', () => {
+      const { queryByTestId } = render(<TestComponent />);
 
-    describe('when enabling feature', () => {
-      beforeEach(() => {
-        updateFlags({ flag1: true });
-        wrapper.update();
-      });
-
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-      });
-
-      it('should have feature enabling prop', () => {
-        expect(wrapper.find(FeatureComponent)).toHaveProp(
-          'isFeatureEnabled',
-          true
-        );
-      });
+      expect(queryByTestId('isFeatureEnabled')).toHaveTextContent('true');
     });
   });
 });
 
 describe('with `propKey`', () => {
-  const EnhancedComponent = injectFeatureToggle('flag1', 'fooBar')(
-    FeatureComponent
-  );
-  let props;
-  let wrapper;
+  describe('when feature is disabled', () => {
+    const TestComponent = injectFeatureToggle(
+      'disabledFeature',
+      'customPropKey'
+    )(Component);
 
-  beforeEach(() => {
-    props = createTestProps();
-    wrapper = mount(
-      <Configure {...props} adapter={memoryAdapter}>
-        <EnhancedComponent />
-      </Configure>
-    );
-  });
+    it('should render receive the flag value is `false`', () => {
+      const { queryByTestId } = render(<TestComponent />);
 
-  it('should match snapshot', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should have feature disabling `propKey`', () => {
-    expect(wrapper.find(FeatureComponent)).toHaveProp('fooBar', false);
+      expect(queryByTestId('customPropKey')).toHaveTextContent('false');
+    });
   });
 });
