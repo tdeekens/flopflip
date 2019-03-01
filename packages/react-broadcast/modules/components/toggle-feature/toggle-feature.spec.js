@@ -1,52 +1,38 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { renderWithAdapter } from '@flopflip/test-utils';
 import ToggleFeature from './toggle-feature';
 import Configure from '../configure';
-import memoryAdapter, { updateFlags } from '@flopflip/memory-adapter';
 
-const FeatureComponent = () => <div />;
+const FeatureComponent = () => <div>Feature is enabled</div>;
 FeatureComponent.displayName = 'FeatureComponent';
 
-const createTestProps = custom => ({
-  adapterArgs: {},
-
-  ...custom,
-});
+const render = TestComponent =>
+  renderWithAdapter(TestComponent, {
+    components: { ConfigureFlopFlip: Configure },
+  });
 
 describe('when feature is disabled', () => {
-  let props;
-  let wrapper;
-  beforeEach(() => {
-    props = createTestProps({ defaultFlags: { flag1: false, flag2: false } });
-    wrapper = mount(
-      <Configure {...props} adapter={memoryAdapter}>
-        <ToggleFeature flag="flag1">
-          <FeatureComponent />
-        </ToggleFeature>
-      </Configure>
-    );
-  });
-
-  it('should match snapshot', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
-
+  const TestComponent = () => (
+    <ToggleFeature flag="disabledFeature">
+      <FeatureComponent />
+    </ToggleFeature>
+  );
   it('should not render the `FeatureComponent`', () => {
-    expect(wrapper).not.toRender(FeatureComponent);
+    const { queryByText } = render(<TestComponent />);
+
+    expect(queryByText('Feature is enabled')).not.toBeInTheDocument();
   });
+});
 
-  describe('when enabling feature', () => {
-    beforeEach(() => {
-      updateFlags({ flag1: true });
-      wrapper.update();
-    });
+describe('when feature is enabled', () => {
+  const TestComponent = () => (
+    <ToggleFeature flag="enabledFeature">
+      <FeatureComponent />
+    </ToggleFeature>
+  );
+  it('should not render the `FeatureComponent`', () => {
+    const { queryByText } = render(<TestComponent />);
 
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
-
-    it('should not render the `FeatureComponent`', () => {
-      expect(wrapper).toRender(FeatureComponent);
-    });
+    expect(queryByText('Feature is enabled')).toBeInTheDocument();
   });
 });
