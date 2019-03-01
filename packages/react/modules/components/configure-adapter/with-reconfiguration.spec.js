@@ -6,13 +6,8 @@ const Component = () => <div>Child component</div>;
 Component.displayName = 'TestComponent';
 
 describe('rendering', () => {
-  let TestComponent;
-
-  beforeEach(() => {
-    TestComponent = withReconfiguration('foo-prop-key')(Component);
-  });
-
   it('should render children', () => {
+    const TestComponent = withReconfiguration('foo-prop-key')(Component);
     const { queryByText } = render(<TestComponent />);
 
     expect(queryByText('Child component')).toBeInTheDocument();
