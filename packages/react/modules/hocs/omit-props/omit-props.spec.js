@@ -1,16 +1,7 @@
 import React from 'react';
-import { render } from '@flopflip/test-utils';
+import { render, PropsToComponent } from '@flopflip/test-utils';
 import omitProps from './omit-props';
 
-const Component = props => (
-  <>
-    {Object.entries(props).map(([key, value]) => (
-      <div key={key} data-testid={key}>
-        {String(value)}
-      </div>
-    ))}
-  </>
-);
 const createTestProps = (custom = {}) => ({
   a: 1,
   b: 2,
@@ -25,7 +16,7 @@ describe('rendering', () => {
 
   describe('with multiple props', () => {
     beforeEach(() => {
-      TestComponent = omitProps(['a', 'b'])(Component);
+      TestComponent = omitProps(['a', 'b'])(PropsToComponent);
       props = createTestProps();
     });
 
@@ -44,7 +35,7 @@ describe('rendering', () => {
 
   describe('without any props', () => {
     beforeEach(() => {
-      TestComponent = omitProps()(Component);
+      TestComponent = omitProps()(PropsToComponent);
     });
 
     it('should do nothing', () => {

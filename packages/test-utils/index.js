@@ -38,5 +38,21 @@ const getComponentInstance = node => {
   return wrapper.instance();
 };
 
+const PropsToComponent = props => (
+  <>
+    {Object.entries(props).map(([key, value]) => (
+      <div key={key} data-testid={key}>
+        {String(value)}
+      </div>
+    ))}
+  </>
+);
+
 export * from 'react-testing-library';
-export { renderWithAdapter, getComponentInstance, adapter, updateFlags };
+export {
+  renderWithAdapter,
+  getComponentInstance,
+  adapter,
+  updateFlags,
+  PropsToComponent,
+};

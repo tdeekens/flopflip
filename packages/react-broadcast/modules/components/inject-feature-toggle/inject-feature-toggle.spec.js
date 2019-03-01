@@ -1,17 +1,8 @@
 import React from 'react';
-import { renderWithAdapter } from '@flopflip/test-utils';
+import { renderWithAdapter, PropsToComponent } from '@flopflip/test-utils';
 import injectFeatureToggle from './inject-feature-toggle';
 import Configure from '../configure';
 
-const Component = props => (
-  <>
-    {Object.entries(props).map(([key, value]) => (
-      <div key={key} data-testid={key}>
-        {String(value)}
-      </div>
-    ))}
-  </>
-);
 const render = TestComponent =>
   renderWithAdapter(TestComponent, {
     components: { ConfigureFlopFlip: Configure },
@@ -19,7 +10,9 @@ const render = TestComponent =>
 
 describe('without `propKey`', () => {
   describe('when feature is disabled', () => {
-    const TestComponent = injectFeatureToggle('disabledFeature')(Component);
+    const TestComponent = injectFeatureToggle('disabledFeature')(
+      PropsToComponent
+    );
 
     it('should render receive the flag value is `false`', () => {
       const { queryByTestId } = render(<TestComponent />);
@@ -29,7 +22,9 @@ describe('without `propKey`', () => {
   });
 
   describe('when feature is enabled', () => {
-    const TestComponent = injectFeatureToggle('enabledFeature')(Component);
+    const TestComponent = injectFeatureToggle('enabledFeature')(
+      PropsToComponent
+    );
 
     it('should render receive the flag value is `true`', () => {
       const { queryByTestId } = render(<TestComponent />);
@@ -44,7 +39,7 @@ describe('with `propKey`', () => {
     const TestComponent = injectFeatureToggle(
       'disabledFeature',
       'customPropKey'
-    )(Component);
+    )(PropsToComponent);
 
     it('should render receive the flag value is `false`', () => {
       const { queryByTestId } = render(<TestComponent />);

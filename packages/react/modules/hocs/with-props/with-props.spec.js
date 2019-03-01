@@ -1,16 +1,7 @@
 import React from 'react';
-import { render } from '@flopflip/test-utils';
+import { render, PropsToComponent } from '@flopflip/test-utils';
 import withProps from './with-props';
 
-const Component = props => (
-  <>
-    {Object.entries(props).map(([key, value]) => (
-      <div key={key} data-testid={key}>
-        {String(value)}
-      </div>
-    ))}
-  </>
-);
 const createTestProps = (custom = {}) => ({
   a: 1,
 
@@ -27,7 +18,7 @@ describe('rendering', () => {
     };
     beforeEach(() => {
       props = createTestProps();
-      TestComponent = withProps(enhancedProps)(Component);
+      TestComponent = withProps(enhancedProps)(PropsToComponent);
     });
 
     it('should have base props', () => {
@@ -49,7 +40,7 @@ describe('rendering', () => {
     };
     beforeEach(() => {
       props = createTestProps();
-      TestComponent = withProps(() => enhancedProps)(Component);
+      TestComponent = withProps(() => enhancedProps)(PropsToComponent);
     });
 
     it('should have enhanced props', () => {
