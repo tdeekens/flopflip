@@ -1,0 +1,28 @@
+{
+  "name": "@flopflip/test-utils",
+  "version": "1.0.0",
+  "description": "Test utils for flipflop",
+  "scripts": {},
+  "publishConfig": {
+    "access": "private"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdeekens/flopflip.git"
+  },
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
+  },
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "keywords": [
+    "feature-flags",
+    "feature-toggles",
+    "types"
+  ],
+  "dependencies": {
+    "jest-dom": "3.1.2",
+    "react-testing-library": "6.0.0"
+  }
+}
