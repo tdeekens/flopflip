@@ -1,109 +1,80 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { renderWithAdapter } from '@flopflip/test-utils';
 import branchOnFeatureToggle from './branch-on-feature-toggle';
 import Configure from '../configure';
-import memoryAdapter, { updateFlags } from '@flopflip/memory-adapter';
 
-const ToggledComponent = () => <div />;
+const ToggledComponent = () => <div>Feature is toggled</div>;
 ToggledComponent.displayName = 'ToggledComponent';
-const UntoggledComponent = () => <div />;
+const UntoggledComponent = () => <div>Feature is untoggled</div>;
 UntoggledComponent.displayName = 'UntoggledComponent';
 
-const createTestProps = custom => ({
-  adapterArgs: {},
-
-  ...custom,
-});
+const render = TestComponent =>
+  renderWithAdapter(TestComponent, {
+    components: { ConfigureFlopFlip: Configure },
+  });
 
 describe('without `untoggledComponent', () => {
-  const EnhancedComponent = branchOnFeatureToggle({ flag: 'flag1' })(
-    ToggledComponent
-  );
-  let props;
-  let wrapper;
-
   describe('when feature is disabled', () => {
-    beforeEach(() => {
-      props = createTestProps();
-      wrapper = mount(
-        <Configure {...props} adapter={memoryAdapter}>
-          <EnhancedComponent />
-        </Configure>
-      );
-    });
-
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
+    const TestComponent = branchOnFeatureToggle({ flag: 'disabledFeature' })(
+      ToggledComponent
+    );
 
     it('should not render the `ToggledComponent', () => {
-      expect(wrapper).not.toRender(ToggledComponent);
+      const { queryByText } = render(<TestComponent />);
+
+      expect(queryByText('Feature is toggled')).not.toBeInTheDocument();
     });
+  });
 
-    describe('when enabling feature', () => {
-      beforeEach(() => {
-        updateFlags({ flag1: true });
-        wrapper.update();
-      });
+  describe('when feature is enabled', () => {
+    const TestComponent = branchOnFeatureToggle({ flag: 'enabledFeature' })(
+      ToggledComponent
+    );
 
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-      });
+    it('should render the `ToggledComponent', () => {
+      const { queryByText } = render(<TestComponent />);
 
-      it('should render the `ToggledComponent', () => {
-        expect(wrapper).toRender(ToggledComponent);
-      });
+      expect(queryByText('Feature is toggled')).toBeInTheDocument();
     });
   });
 });
 
 describe('with `untoggledComponent', () => {
-  const EnhancedComponent = branchOnFeatureToggle(
-    { flag: 'flag1' },
-    UntoggledComponent
-  )(ToggledComponent);
-  let props;
-  let wrapper;
-
   describe('when feature is disabled', () => {
-    beforeEach(() => {
-      props = createTestProps();
-      wrapper = mount(
-        <Configure {...props} adapter={memoryAdapter}>
-          <EnhancedComponent />
-        </Configure>
-      );
-    });
-
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
+    const TestComponent = branchOnFeatureToggle(
+      { flag: 'disabledFeature' },
+      UntoggledComponent
+    )(ToggledComponent);
 
     it('should not render the `ToggledComponent', () => {
-      expect(wrapper).not.toRender(ToggledComponent);
+      const { queryByText } = render(<TestComponent />);
+
+      expect(queryByText('Feature is toggled')).not.toBeInTheDocument();
     });
 
     it('should render the `UntoggledComponent', () => {
-      expect(wrapper).toRender(UntoggledComponent);
+      const { queryByText } = render(<TestComponent />);
+
+      expect(queryByText('Feature is untoggled')).toBeInTheDocument();
+    });
+  });
+
+  describe('when feature is enabled', () => {
+    const TestComponent = branchOnFeatureToggle(
+      { flag: 'enabledFeature' },
+      UntoggledComponent
+    )(ToggledComponent);
+
+    it('should render the `ToggledComponent', () => {
+      const { queryByText } = render(<TestComponent />);
+
+      expect(queryByText('Feature is toggled')).toBeInTheDocument();
     });
 
-    describe('when enabling feature', () => {
-      beforeEach(() => {
-        updateFlags({ flag1: true });
-        wrapper.update();
-      });
+    it('should not render the `UntoggledComponent', () => {
+      const { queryByText } = render(<TestComponent />);
 
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-      });
-
-      it('should render the `ToggledComponent', () => {
-        expect(wrapper).toRender(ToggledComponent);
-      });
-
-      it('should not render the `UntoggledComponent', () => {
-        expect(wrapper).not.toRender(UntoggledComponent);
-      });
+      expect(queryByText('Feature is untoggled')).not.toBeInTheDocument();
     });
   });
 });

@@ -1,27 +1,30 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import adapter from '@flopflip/memory-adapter';
+import adapter, { updateFlags } from '@flopflip/memory-adapter';
 import { render } from 'react-testing-library';
 
 const mergeOptional = (defaultValue, value) =>
   value === null ? undefined : { ...defaultValue, ...value };
 
 const defaultFlags = { enabledFeature: true, disabledFeature: false };
-
 const defaultAdapterArgs = {
   user: { key: 'nerd@tdeekens.name' },
-  defaultFlags,
 };
 
 const renderWithAdapter = (
   node,
-  { components: { ConfigureFlopFlip }, adapterArgs, ...rtlOptions }
+  { components: { ConfigureFlopFlip }, adapterArgs, flags, ...rtlOptions }
 ) => {
   const defaultedAdapterArgs = mergeOptional(defaultAdapterArgs, adapterArgs);
+  const defaultedFlags = mergeOptional(defaultFlags, flags);
 
   return {
     ...render(
-      <ConfigureFlopFlip adapter={adapter} adapterArgs={defaultedAdapterArgs}>
+      <ConfigureFlopFlip
+        adapter={adapter}
+        adapterArgs={defaultedAdapterArgs}
+        defaultFlags={defaultedFlags}
+      >
         {node}
       </ConfigureFlopFlip>,
       rtlOptions
@@ -36,4 +39,4 @@ const getComponentInstance = node => {
 };
 
 export * from 'react-testing-library';
-export { renderWithAdapter, getComponentInstance, adapter };
+export { renderWithAdapter, getComponentInstance, adapter, updateFlags };
