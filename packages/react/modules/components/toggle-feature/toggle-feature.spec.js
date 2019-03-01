@@ -1,89 +1,72 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@flopflip/test-utils';
 import ToggleFeature from './toggle-feature';
 
-const UntoggledComponent = () => <>UntoggledComponent</>;
+const UntoggledComponent = () => <>Feature is untoggled</>;
 UntoggledComponent.displayName = 'UntoggledComponent';
-const ToggledComponent = () => <>ToggledComponent</>;
+const ToggledComponent = () => <>Feature is toggled</>;
 ToggledComponent.displayName = 'ToggledComponent';
-const FeatureComponent = () => <>FeatureComponent</>;
+const FeatureComponent = () => <>Feature is enabled</>;
 FeatureComponent.displayName = 'FeatureComponent';
 
 describe('when feature disabled', () => {
   describe('with untoggled component', () => {
-    let wrapper;
-
-    beforeEach(() => {
-      wrapper = shallow(
-        <ToggleFeature
-          isFeatureEnabled={false}
-          untoggledComponent={UntoggledComponent}
-        >
-          <FeatureComponent />
-        </ToggleFeature>
-      );
-    });
-
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
+    const TestComponent = () => (
+      <ToggleFeature
+        isFeatureEnabled={false}
+        untoggledComponent={UntoggledComponent}
+      >
+        <FeatureComponent />
+      </ToggleFeature>
+    );
 
     it('should render the `UntoggledComponent`', () => {
-      expect(wrapper).toRender(UntoggledComponent);
+      const { queryByText } = render(<TestComponent />);
+
+      expect(queryByText('Feature is untoggled')).toBeInTheDocument();
     });
 
     it('should not render the `FeatureComponent`', () => {
-      expect(wrapper).not.toRender(FeatureComponent);
+      const { queryByText } = render(<TestComponent />);
+
+      expect(queryByText('Feature is enabled')).not.toBeInTheDocument();
     });
   });
 
   describe('without untoggled component', () => {
-    let wrapper;
-
-    beforeEach(() => {
-      wrapper = shallow(
-        <ToggleFeature isFeatureEnabled={false}>
-          <FeatureComponent />
-        </ToggleFeature>
-      );
-    });
-
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
+    const TestComponent = () => (
+      <ToggleFeature isFeatureEnabled={false}>
+        <FeatureComponent />
+      </ToggleFeature>
+    );
 
     it('should not render the `FeatureComponent`', () => {
-      expect(wrapper).not.toRender(FeatureComponent);
+      const { queryByText } = render(<TestComponent />);
+
+      expect(queryByText('Feature is enabled')).not.toBeInTheDocument();
     });
   });
 });
 
 describe('when feature enabled', () => {
-  let wrapper;
-
   describe('with `children`', () => {
     describe('being a `node`', () => {
-      beforeEach(() => {
-        wrapper = shallow(
-          <ToggleFeature
-            isFeatureEnabled
-            untoggledComponent={UntoggledComponent}
-          >
-            <FeatureComponent />
-          </ToggleFeature>
-        );
-      });
-
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-      });
+      const TestComponent = () => (
+        <ToggleFeature isFeatureEnabled untoggledComponent={UntoggledComponent}>
+          <FeatureComponent />
+        </ToggleFeature>
+      );
 
       it('should not render the `UntoggledComponent`', () => {
-        expect(wrapper).not.toRender(UntoggledComponent);
+        const { queryByText } = render(<TestComponent />);
+
+        expect(queryByText('Feature is untoggled')).not.toBeInTheDocument();
       });
 
       it('should render the `FeatureComponent`', () => {
-        expect(wrapper).toRender(FeatureComponent);
+        const { queryByText } = render(<TestComponent />);
+
+        expect(queryByText('Feature is enabled')).toBeInTheDocument();
       });
     });
 
@@ -95,19 +78,17 @@ describe('when feature enabled', () => {
           untoggledComponent: UntoggledComponent,
           children: jest.fn(() => <div>FeatureComponent</div>),
         };
-
-        wrapper = shallow(<ToggleFeature {...props} />);
-      });
-
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
       });
 
       it('should invoke `children`', () => {
+        render(<ToggleFeature {...props} />);
+
         expect(props.children).toHaveBeenCalled();
       });
 
       it('should invoke `children` with `isFeatureEnabled`', () => {
+        render(<ToggleFeature {...props} />);
+
         expect(props.children).toHaveBeenCalledWith({
           isFeatureEnabled: props.isFeatureEnabled,
         });
@@ -116,26 +97,24 @@ describe('when feature enabled', () => {
   });
 
   describe('with `toggledComponent`', () => {
-    beforeEach(() => {
-      wrapper = shallow(
-        <ToggleFeature
-          isFeatureEnabled
-          untoggledComponent={UntoggledComponent}
-          toggledComponent={FeatureComponent}
-        />
-      );
-    });
-
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
+    const TestComponent = () => (
+      <ToggleFeature
+        isFeatureEnabled
+        untoggledComponent={UntoggledComponent}
+        toggledComponent={FeatureComponent}
+      />
+    );
 
     it('should not render the `UntoggledComponent`', () => {
-      expect(wrapper).not.toRender(UntoggledComponent);
+      const { queryByText } = render(<TestComponent />);
+
+      expect(queryByText('Feature is untoggled')).not.toBeInTheDocument();
     });
 
     it('should render the `FeatureComponent`', () => {
-      expect(wrapper).toRender(FeatureComponent);
+      const { queryByText } = render(<TestComponent />);
+
+      expect(queryByText('Feature is enabled')).toBeInTheDocument();
     });
   });
 
@@ -145,18 +124,20 @@ describe('when feature enabled', () => {
       props = {
         isFeatureEnabled: true,
         untoggledComponent: UntoggledComponent,
-        render: jest.fn(() => <div>FeatureComponent</div>),
+        render: jest.fn(() => <FeatureComponent />),
       };
-
-      wrapper = shallow(<ToggleFeature {...props} />);
-    });
-
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
     });
 
     it('should invoke `render`', () => {
+      render(<ToggleFeature {...props} />);
+
       expect(props.render).toHaveBeenCalled();
+    });
+
+    it('should `render` the `FeatureComponent`', () => {
+      const { queryByText } = render(<ToggleFeature {...props} />);
+
+      expect(queryByText('Feature is enabled')).toBeInTheDocument();
     });
   });
 });

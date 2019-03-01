@@ -1,8 +1,8 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { getComponentInstance, render } from '@flopflip/test-utils';
 import { ReconfigureAdapter } from './reconfigure-adapter';
 
-const ChildComponent = () => <div />;
+const ChildComponent = () => <div>Child component</div>;
 ChildComponent.displayName = 'ChildComponent';
 
 const createTestProps = props => ({
@@ -17,41 +17,37 @@ const createTestProps = props => ({
 });
 
 describe('rendering', () => {
-  let wrapper;
   let props;
 
   beforeEach(() => {
     props = createTestProps();
-    wrapper = shallow(
+  });
+
+  it('should render `children`', () => {
+    const { queryByText } = render(
       <ReconfigureAdapter {...props}>
         <ChildComponent />
       </ReconfigureAdapter>
     );
-  });
 
-  it('should match snapshot', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render `children`', () => {
-    expect(wrapper).toRender(ChildComponent);
+    expect(queryByText('Child component')).toBeInTheDocument();
   });
 });
 
 describe('lifecycle', () => {
   let props;
-  let wrapper;
+  let componentInstance;
 
   describe('componentDidMount', () => {
     beforeEach(() => {
       props = createTestProps();
-      wrapper = shallow(
+      componentInstance = getComponentInstance(
         <ReconfigureAdapter {...props}>
           <ChildComponent />
         </ReconfigureAdapter>
       );
 
-      wrapper.instance().componentDidMount();
+      componentInstance.componentDidMount();
     });
 
     it('should invoke `reconfigure`', () => {
@@ -79,7 +75,7 @@ describe('lifecycle', () => {
   describe('componentDidUpdate', () => {
     beforeEach(() => {
       props = createTestProps();
-      wrapper = shallow(
+      componentInstance = getComponentInstance(
         <ReconfigureAdapter {...props}>
           <ChildComponent />
         </ReconfigureAdapter>
@@ -87,7 +83,7 @@ describe('lifecycle', () => {
 
       props.reconfigure.mockClear();
 
-      wrapper.instance().componentDidUpdate();
+      componentInstance.componentDidUpdate();
     });
 
     it('should invoke `reconfigure`', () => {

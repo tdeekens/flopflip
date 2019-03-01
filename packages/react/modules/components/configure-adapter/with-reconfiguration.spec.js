@@ -1,36 +1,34 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { AdapterContext } from '../adapter-context';
+import { render } from '@flopflip/test-utils';
 import withReconfiguration from './with-reconfiguration';
 
-const TestComponent = () => <div />;
-TestComponent.displayName = 'TestComponent';
+const Component = () => <div>Child component</div>;
+Component.displayName = 'TestComponent';
 
 describe('rendering', () => {
-  let wrapper;
+  let TestComponent;
 
   beforeEach(() => {
-    const Component = withReconfiguration('foo-prop-key')(TestComponent);
-    wrapper = shallow(<Component />);
+    TestComponent = withReconfiguration('foo-prop-key')(Component);
   });
 
-  it('should match snapshot', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
+  it('should render children', () => {
+    const { queryByText } = render(<TestComponent />);
 
-  it('should render a `<AdapterContext.Consumer>`', () => {
-    expect(wrapper).toRender(AdapterContext.Consumer);
+    expect(queryByText('Child component')).toBeInTheDocument();
   });
 });
 
 describe('statics', () => {
-  let Component;
+  let TestComponent;
 
   beforeEach(() => {
-    Component = withReconfiguration('foo-prop-key')(TestComponent);
+    TestComponent = withReconfiguration('foo-prop-key')(Component);
   });
 
   it('should set the `displayName`', () => {
-    expect(Component.displayName).toEqual('withReconfiguration(TestComponent)');
+    expect(TestComponent.displayName).toEqual(
+      'withReconfiguration(TestComponent)'
+    );
   });
 });

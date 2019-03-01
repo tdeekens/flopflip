@@ -1,13 +1,9 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render } from '@flopflip/test-utils';
 import { ALL_FLAGS_PROP_KEY } from '../../constants';
 import injectFeatureToggle from './inject-feature-toggle';
 
 describe('injecting', () => {
-  const TestComponent = () => <>Test</>;
-  TestComponent.displayName = 'TestComponent';
-  TestComponent.propTypes = {};
-
   const flagName = 'aFeatureToggle';
   const createTestProps = custom => ({
     [ALL_FLAGS_PROP_KEY]: { [flagName]: true },
@@ -15,78 +11,82 @@ describe('injecting', () => {
   });
 
   let Component;
-  let wrapper;
 
   describe('with `propKey`', () => {
     let props;
     const propKey = 'fooFlagPropName';
+    const TestComponent = props => (
+      <div data-testid={propKey}>{String(props[propKey])}</div>
+    );
 
     beforeEach(() => {
       props = createTestProps();
 
       Component = injectFeatureToggle(flagName, propKey)(TestComponent);
-      wrapper = mount(<Component {...props} />);
-    });
-
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
     });
 
     it("should pass the feature toggle's state as a `prop` of `propKey`", () => {
-      expect(wrapper.find(TestComponent)).toHaveProp(
-        propKey,
-        props[ALL_FLAGS_PROP_KEY][flagName]
-      );
+      const { getByTestId } = render(<Component {...props} />);
+
+      expect(getByTestId(propKey)).toHaveTextContent('true');
     });
   });
 
   describe('without `propKey`', () => {
     let props;
+    const TestComponent = props => (
+      <div data-testid="isFeatureEnabled">{String(props.isFeatureEnabled)}</div>
+    );
 
     beforeEach(() => {
       props = createTestProps();
 
       Component = injectFeatureToggle(flagName)(TestComponent);
-      wrapper = mount(<Component {...props} />);
-    });
-
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
     });
 
     it("should pass the feature toggle's state as a `prop` of `isFeatureEnabled`", () => {
-      expect(wrapper.find(TestComponent)).toHaveProp('isFeatureEnabled', true);
+      const { getByTestId } = render(<Component {...props} />);
+
+      expect(getByTestId('isFeatureEnabled')).toHaveTextContent('true');
     });
   });
 
   describe('with non defined flagName', () => {
     let props;
+    const TestComponent = props => (
+      <div data-testid="isFeatureEnabled">{String(props.isFeatureEnabled)}</div>
+    );
 
     beforeEach(() => {
       const anotherFlagName = 'anotherFeatureToggle';
       props = createTestProps();
 
       Component = injectFeatureToggle(anotherFlagName)(TestComponent);
-      wrapper = mount(<Component {...props} />);
     });
 
     it("should pass the feature toggle's state as `false`", () => {
-      expect(wrapper.find(TestComponent)).toHaveProp('isFeatureEnabled', false);
+      const { getByTestId } = render(<Component {...props} />);
+
+      expect(getByTestId('isFeatureEnabled')).toHaveTextContent('false');
     });
   });
 
   describe('with multi variate flag', () => {
     let props;
+    const TestComponent = props => (
+      <div data-testid={flagName}>{String(props[flagName])}</div>
+    );
 
     beforeEach(() => {
       props = createTestProps({ [flagName]: 'blue' });
 
       Component = injectFeatureToggle(flagName)(TestComponent);
-      wrapper = mount(<Component {...props} />);
     });
 
     it("should pass the feature toggle's state as the value", () => {
-      expect(wrapper.find(TestComponent)).toHaveProp(flagName, 'blue');
+      const { getByTestId } = render(<Component {...props} />);
+
+      expect(getByTestId(flagName)).toHaveTextContent('blue');
     });
   });
 });

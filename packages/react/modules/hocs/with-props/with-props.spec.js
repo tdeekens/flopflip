@@ -1,8 +1,16 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render } from '@flopflip/test-utils';
 import withProps from './with-props';
 
-const BaseComponent = () => null;
+const Component = props => (
+  <>
+    {Object.entries(props).map(([key, value]) => (
+      <div key={key} data-testid={key}>
+        {String(value)}
+      </div>
+    ))}
+  </>
+);
 const createTestProps = (custom = {}) => ({
   a: 1,
 
@@ -10,9 +18,8 @@ const createTestProps = (custom = {}) => ({
 });
 
 describe('rendering', () => {
-  let EnhancedComponent;
+  let TestComponent;
   let props;
-  let wrapper;
 
   describe('with `mapProps` being object', () => {
     const enhancedProps = {
@@ -20,20 +27,19 @@ describe('rendering', () => {
     };
     beforeEach(() => {
       props = createTestProps();
-      EnhancedComponent = withProps(enhancedProps)(BaseComponent);
-      wrapper = mount(<EnhancedComponent {...props} />);
-    });
-
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
+      TestComponent = withProps(enhancedProps)(Component);
     });
 
     it('should have base props', () => {
-      expect(wrapper).toHaveProp('a', 1);
+      const { queryByTestId } = render(<TestComponent {...props} />);
+
+      expect(queryByTestId('a')).toBeInTheDocument();
     });
 
     it('should have enhanced props', () => {
-      expect(wrapper.find(BaseComponent)).toHaveProp('b', 'b');
+      const { queryByTestId } = render(<TestComponent {...props} />);
+
+      expect(queryByTestId('b')).toBeInTheDocument();
     });
   });
 
@@ -43,16 +49,13 @@ describe('rendering', () => {
     };
     beforeEach(() => {
       props = createTestProps();
-      EnhancedComponent = withProps(() => enhancedProps)(BaseComponent);
-      wrapper = mount(<EnhancedComponent {...props} />);
-    });
-
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
+      TestComponent = withProps(() => enhancedProps)(Component);
     });
 
     it('should have enhanced props', () => {
-      expect(wrapper.find(BaseComponent)).toHaveProp('b', 'b');
+      const { queryByTestId } = render(<TestComponent {...props} />);
+
+      expect(queryByTestId('a')).toBeInTheDocument();
     });
   });
 });
