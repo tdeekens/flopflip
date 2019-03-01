@@ -35,6 +35,7 @@ globals:
 overrides:
   - files:
       - '*.spec.js'
+      - 'packages/test-utils/*.js'
     rules:
       react/prop-types: 0
 settings:
