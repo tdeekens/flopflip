@@ -1,12 +1,7 @@
 import React from 'react';
-import { renderWithAdapter } from '@flopflip/test-utils';
+import { renderWithAdapter, components } from '@flopflip/test-utils';
 import branchOnFeatureToggle from './branch-on-feature-toggle';
 import Configure from '../configure';
-
-const ToggledComponent = () => <div>Feature is toggled</div>;
-ToggledComponent.displayName = 'ToggledComponent';
-const UntoggledComponent = () => <div>Feature is untoggled</div>;
-UntoggledComponent.displayName = 'UntoggledComponent';
 
 const render = TestComponent =>
   renderWithAdapter(TestComponent, {
@@ -16,25 +11,28 @@ const render = TestComponent =>
 describe('without `untoggledComponent', () => {
   describe('when feature is disabled', () => {
     const TestComponent = branchOnFeatureToggle({ flag: 'disabledFeature' })(
-      ToggledComponent
+      components.ToggledComponent
     );
 
-    it('should not render the `ToggledComponent', () => {
-      const { queryByText } = render(<TestComponent />);
+    it('should render neither the component representing an disabled or enabled feature', () => {
+      const { queryByFlagName } = render(<TestComponent />);
 
-      expect(queryByText('Feature is toggled')).not.toBeInTheDocument();
+      expect(queryByFlagName('isFeatureEnabled')).not.toBeInTheDocument();
     });
   });
 
   describe('when feature is enabled', () => {
     const TestComponent = branchOnFeatureToggle({ flag: 'enabledFeature' })(
-      ToggledComponent
+      components.ToggledComponent
     );
 
-    it('should render the `ToggledComponent', () => {
-      const { queryByText } = render(<TestComponent />);
+    it('should render the component representing an enabled feature', () => {
+      const { queryByFlagName } = render(<TestComponent />);
 
-      expect(queryByText('Feature is toggled')).toBeInTheDocument();
+      expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
+        'data-flag-status',
+        'enabled'
+      );
     });
   });
 });
@@ -43,38 +41,50 @@ describe('with `untoggledComponent', () => {
   describe('when feature is disabled', () => {
     const TestComponent = branchOnFeatureToggle(
       { flag: 'disabledFeature' },
-      UntoggledComponent
-    )(ToggledComponent);
+      components.UntoggledComponent
+    )(components.ToggledComponent);
 
-    it('should not render the `ToggledComponent', () => {
-      const { queryByText } = render(<TestComponent />);
+    it('should not render the component representing a enabled feature', () => {
+      const { queryByFlagName } = render(<TestComponent />);
 
-      expect(queryByText('Feature is toggled')).not.toBeInTheDocument();
+      expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
+        'data-flag-status',
+        'enabled'
+      );
     });
 
-    it('should render the `UntoggledComponent', () => {
-      const { queryByText } = render(<TestComponent />);
+    it('should render the component representing a disabled feature', () => {
+      const { queryByFlagName } = render(<TestComponent />);
 
-      expect(queryByText('Feature is untoggled')).toBeInTheDocument();
+      expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
+        'data-flag-status',
+        'disabled'
+      );
     });
   });
 
   describe('when feature is enabled', () => {
     const TestComponent = branchOnFeatureToggle(
       { flag: 'enabledFeature' },
-      UntoggledComponent
-    )(ToggledComponent);
+      components.UntoggledComponent
+    )(components.ToggledComponent);
 
-    it('should render the `ToggledComponent', () => {
-      const { queryByText } = render(<TestComponent />);
+    it('should render the component representing a enabled feature', () => {
+      const { queryByFlagName } = render(<TestComponent />);
 
-      expect(queryByText('Feature is toggled')).toBeInTheDocument();
+      expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
+        'data-flag-status',
+        'enabled'
+      );
     });
 
-    it('should not render the `UntoggledComponent', () => {
-      const { queryByText } = render(<TestComponent />);
+    it('should not render the component representing a disabled feature', () => {
+      const { queryByFlagName } = render(<TestComponent />);
 
-      expect(queryByText('Feature is untoggled')).not.toBeInTheDocument();
+      expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
+        'data-flag-status',
+        'disabled'
+      );
     });
   });
 });

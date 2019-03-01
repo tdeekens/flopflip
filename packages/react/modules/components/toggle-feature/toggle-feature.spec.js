@@ -1,49 +1,48 @@
 import React from 'react';
-import { render } from '@flopflip/test-utils';
+import { render, components } from '@flopflip/test-utils';
 import ToggleFeature from './toggle-feature';
-
-const UntoggledComponent = () => <>Feature is untoggled</>;
-UntoggledComponent.displayName = 'UntoggledComponent';
-const ToggledComponent = () => <>Feature is toggled</>;
-ToggledComponent.displayName = 'ToggledComponent';
-const FeatureComponent = () => <>Feature is enabled</>;
-FeatureComponent.displayName = 'FeatureComponent';
 
 describe('when feature disabled', () => {
   describe('with untoggled component', () => {
     const TestComponent = () => (
       <ToggleFeature
         isFeatureEnabled={false}
-        untoggledComponent={UntoggledComponent}
+        untoggledComponent={components.UntoggledComponent}
       >
-        <FeatureComponent />
+        <components.ToggledComponent />
       </ToggleFeature>
     );
 
-    it('should render the `UntoggledComponent`', () => {
-      const { queryByText } = render(<TestComponent />);
+    it('should render the component representing a disabled feature', () => {
+      const { queryByFlagName } = render(<TestComponent />);
 
-      expect(queryByText('Feature is untoggled')).toBeInTheDocument();
+      expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
+        'data-flag-status',
+        'disabled'
+      );
     });
 
-    it('should not render the `FeatureComponent`', () => {
-      const { queryByText } = render(<TestComponent />);
+    it('should not render the component representing am enabled feature', () => {
+      const { queryByFlagName } = render(<TestComponent />);
 
-      expect(queryByText('Feature is enabled')).not.toBeInTheDocument();
+      expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
+        'data-flag-status',
+        'enabled'
+      );
     });
   });
 
   describe('without untoggled component', () => {
     const TestComponent = () => (
       <ToggleFeature isFeatureEnabled={false}>
-        <FeatureComponent />
+        <components.ToggledComponent />
       </ToggleFeature>
     );
 
-    it('should not render the `FeatureComponent`', () => {
-      const { queryByText } = render(<TestComponent />);
+    it('should render neither the component representing an disabled or enabled feature', () => {
+      const { queryByFlagName } = render(<TestComponent />);
 
-      expect(queryByText('Feature is enabled')).not.toBeInTheDocument();
+      expect(queryByFlagName('isFeatureEnabled')).not.toBeInTheDocument();
     });
   });
 });
@@ -52,21 +51,30 @@ describe('when feature enabled', () => {
   describe('with `children`', () => {
     describe('being a `node`', () => {
       const TestComponent = () => (
-        <ToggleFeature isFeatureEnabled untoggledComponent={UntoggledComponent}>
-          <FeatureComponent />
+        <ToggleFeature
+          isFeatureEnabled
+          untoggledComponent={components.UntoggledComponent}
+        >
+          <components.ToggledComponent />
         </ToggleFeature>
       );
 
-      it('should not render the `UntoggledComponent`', () => {
-        const { queryByText } = render(<TestComponent />);
+      it('should not render the component representing a disabled feature', () => {
+        const { queryByFlagName } = render(<TestComponent />);
 
-        expect(queryByText('Feature is untoggled')).not.toBeInTheDocument();
+        expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
+          'data-flag-status',
+          'disabled'
+        );
       });
 
-      it('should render the `FeatureComponent`', () => {
-        const { queryByText } = render(<TestComponent />);
+      it('should render the component representing a enabled feature', () => {
+        const { queryByFlagName } = render(<TestComponent />);
 
-        expect(queryByText('Feature is enabled')).toBeInTheDocument();
+        expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
+          'data-flag-status',
+          'enabled'
+        );
       });
     });
 
@@ -75,7 +83,7 @@ describe('when feature enabled', () => {
       beforeEach(() => {
         props = {
           isFeatureEnabled: true,
-          untoggledComponent: UntoggledComponent,
+          untoggledComponent: components.UntoggledComponent,
           children: jest.fn(() => <div>FeatureComponent</div>),
         };
       });
@@ -100,21 +108,27 @@ describe('when feature enabled', () => {
     const TestComponent = () => (
       <ToggleFeature
         isFeatureEnabled
-        untoggledComponent={UntoggledComponent}
-        toggledComponent={FeatureComponent}
+        untoggledComponent={components.UntoggledComponent}
+        toggledComponent={components.ToggledComponent}
       />
     );
 
-    it('should not render the `UntoggledComponent`', () => {
-      const { queryByText } = render(<TestComponent />);
+    it('should not render the component representing a disabled feature', () => {
+      const { queryByFlagName } = render(<TestComponent />);
 
-      expect(queryByText('Feature is untoggled')).not.toBeInTheDocument();
+      expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
+        'data-flag-status',
+        'disabled'
+      );
     });
 
-    it('should render the `FeatureComponent`', () => {
-      const { queryByText } = render(<TestComponent />);
+    it('should render the component representing a enabled feature', () => {
+      const { queryByFlagName } = render(<TestComponent />);
 
-      expect(queryByText('Feature is enabled')).toBeInTheDocument();
+      expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
+        'data-flag-status',
+        'enabled'
+      );
     });
   });
 
@@ -123,8 +137,8 @@ describe('when feature enabled', () => {
     beforeEach(() => {
       props = {
         isFeatureEnabled: true,
-        untoggledComponent: UntoggledComponent,
-        render: jest.fn(() => <FeatureComponent />),
+        untoggledComponent: components.UntoggledComponent,
+        render: jest.fn(() => <components.ToggledComponent />),
       };
     });
 
@@ -134,10 +148,13 @@ describe('when feature enabled', () => {
       expect(props.render).toHaveBeenCalled();
     });
 
-    it('should `render` the `FeatureComponent`', () => {
-      const { queryByText } = render(<ToggleFeature {...props} />);
+    it('should render the component representing a enabled feature', () => {
+      const { queryByFlagName } = render(<ToggleFeature {...props} />);
 
-      expect(queryByText('Feature is enabled')).toBeInTheDocument();
+      expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
+        'data-flag-status',
+        'enabled'
+      );
     });
   });
 });

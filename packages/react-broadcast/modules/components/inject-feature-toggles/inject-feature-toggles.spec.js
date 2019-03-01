@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithAdapter, PropsToComponent } from '@flopflip/test-utils';
+import { renderWithAdapter, components } from '@flopflip/test-utils';
 import injectFeatureToggles from './inject-feature-toggles';
 import Configure from '../configure';
 
@@ -10,7 +10,7 @@ const render = TestComponent =>
 
 describe('without `propKey`', () => {
   const FlagsToComponent = props => (
-    <PropsToComponent {...props} propKey="featureToggles" />
+    <components.FlagsToComponent {...props} propKey="featureToggles" />
   );
   const TestComponent = injectFeatureToggles([
     'disabledFeature',
@@ -18,21 +18,21 @@ describe('without `propKey`', () => {
   ])(FlagsToComponent);
 
   it('should have feature enabling prop for `enabledFeature`', () => {
-    const { queryByTestId } = render(<TestComponent />);
+    const { queryByFlagName } = render(<TestComponent />);
 
-    expect(queryByTestId('enabledFeature')).toHaveTextContent('true');
+    expect(queryByFlagName('enabledFeature')).toHaveTextContent('true');
   });
 
   it('should have feature disabling prop for `disabledFeature`', () => {
-    const { queryByTestId } = render(<TestComponent />);
+    const { queryByFlagName } = render(<TestComponent />);
 
-    expect(queryByTestId('disabledFeature')).toHaveTextContent('false');
+    expect(queryByFlagName('disabledFeature')).toHaveTextContent('false');
   });
 });
 
 describe('with `propKey`', () => {
   const FlagsToComponent = props => (
-    <PropsToComponent {...props} propKey="onOffs" />
+    <components.FlagsToComponent {...props} propKey="onOffs" />
   );
   const TestComponent = injectFeatureToggles(
     ['disabledFeature', 'enabledFeature'],
@@ -40,14 +40,14 @@ describe('with `propKey`', () => {
   )(FlagsToComponent);
 
   it('should have feature enabling prop for `enabledFeature`', () => {
-    const { queryByTestId } = render(<TestComponent />);
+    const { queryByFlagName } = render(<TestComponent />);
 
-    expect(queryByTestId('enabledFeature')).toHaveTextContent('true');
+    expect(queryByFlagName('enabledFeature')).toHaveTextContent('true');
   });
 
   it('should have feature disabling prop for `disabledFeature`', () => {
-    const { queryByTestId } = render(<TestComponent />);
+    const { queryByFlagName } = render(<TestComponent />);
 
-    expect(queryByTestId('disabledFeature')).toHaveTextContent('false');
+    expect(queryByFlagName('disabledFeature')).toHaveTextContent('false');
   });
 });

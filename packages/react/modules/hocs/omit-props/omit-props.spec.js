@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, PropsToComponent } from '@flopflip/test-utils';
+import { render, components } from '@flopflip/test-utils';
 import omitProps from './omit-props';
 
 const createTestProps = (custom = {}) => ({
@@ -16,34 +16,34 @@ describe('rendering', () => {
 
   describe('with multiple props', () => {
     beforeEach(() => {
-      TestComponent = omitProps(['a', 'b'])(PropsToComponent);
+      TestComponent = omitProps(['a', 'b'])(components.FlagsToComponent);
       props = createTestProps();
     });
 
     it('should omit multiple props', () => {
-      const { queryByTestId } = render(<TestComponent {...props} />);
-      expect(queryByTestId('a')).not.toBeInTheDocument();
-      expect(queryByTestId('b')).not.toBeInTheDocument();
+      const { queryByFlagName } = render(<TestComponent {...props} />);
+      expect(queryByFlagName('a')).not.toBeInTheDocument();
+      expect(queryByFlagName('b')).not.toBeInTheDocument();
     });
 
     it('should keep not omitted props', () => {
-      const { queryByTestId } = render(<TestComponent {...props} />);
+      const { queryByFlagName } = render(<TestComponent {...props} />);
 
-      expect(queryByTestId('c')).toBeInTheDocument();
+      expect(queryByFlagName('c')).toBeInTheDocument();
     });
   });
 
   describe('without any props', () => {
     beforeEach(() => {
-      TestComponent = omitProps()(PropsToComponent);
+      TestComponent = omitProps()(components.FlagsToComponent);
     });
 
     it('should do nothing', () => {
-      const { queryByTestId } = render(<TestComponent {...props} />);
+      const { queryByFlagName } = render(<TestComponent {...props} />);
 
-      expect(queryByTestId('a')).toBeInTheDocument();
-      expect(queryByTestId('b')).toBeInTheDocument();
-      expect(queryByTestId('c')).toBeInTheDocument();
+      expect(queryByFlagName('a')).toBeInTheDocument();
+      expect(queryByFlagName('b')).toBeInTheDocument();
+      expect(queryByFlagName('c')).toBeInTheDocument();
     });
   });
 });

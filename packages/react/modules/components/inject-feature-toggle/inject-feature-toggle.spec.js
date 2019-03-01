@@ -16,7 +16,7 @@ describe('injecting', () => {
     let props;
     const propKey = 'fooFlagPropName';
     const TestComponent = props => (
-      <div data-testid={propKey}>{String(props[propKey])}</div>
+      <div data-flag-name={propKey}>{String(props[propKey])}</div>
     );
 
     beforeEach(() => {
@@ -26,16 +26,18 @@ describe('injecting', () => {
     });
 
     it("should pass the feature toggle's state as a `prop` of `propKey`", () => {
-      const { getByTestId } = render(<Component {...props} />);
+      const { queryByFlagName } = render(<Component {...props} />);
 
-      expect(getByTestId(propKey)).toHaveTextContent('true');
+      expect(queryByFlagName(propKey)).toHaveTextContent('true');
     });
   });
 
   describe('without `propKey`', () => {
     let props;
     const TestComponent = props => (
-      <div data-testid="isFeatureEnabled">{String(props.isFeatureEnabled)}</div>
+      <div data-flag-name="isFeatureEnabled">
+        {String(props.isFeatureEnabled)}
+      </div>
     );
 
     beforeEach(() => {
@@ -45,16 +47,18 @@ describe('injecting', () => {
     });
 
     it("should pass the feature toggle's state as a `prop` of `isFeatureEnabled`", () => {
-      const { getByTestId } = render(<Component {...props} />);
+      const { queryByFlagName } = render(<Component {...props} />);
 
-      expect(getByTestId('isFeatureEnabled')).toHaveTextContent('true');
+      expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('true');
     });
   });
 
   describe('with non defined flagName', () => {
     let props;
     const TestComponent = props => (
-      <div data-testid="isFeatureEnabled">{String(props.isFeatureEnabled)}</div>
+      <div data-flag-name="isFeatureEnabled">
+        {String(props.isFeatureEnabled)}
+      </div>
     );
 
     beforeEach(() => {
@@ -65,16 +69,16 @@ describe('injecting', () => {
     });
 
     it("should pass the feature toggle's state as `false`", () => {
-      const { getByTestId } = render(<Component {...props} />);
+      const { queryByFlagName } = render(<Component {...props} />);
 
-      expect(getByTestId('isFeatureEnabled')).toHaveTextContent('false');
+      expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('false');
     });
   });
 
   describe('with multi variate flag', () => {
     let props;
     const TestComponent = props => (
-      <div data-testid={flagName}>{String(props[flagName])}</div>
+      <div data-flag-name={flagName}>{String(props[flagName])}</div>
     );
 
     beforeEach(() => {
@@ -84,9 +88,9 @@ describe('injecting', () => {
     });
 
     it("should pass the feature toggle's state as the value", () => {
-      const { getByTestId } = render(<Component {...props} />);
+      const { queryByFlagName } = render(<Component {...props} />);
 
-      expect(getByTestId(flagName)).toHaveTextContent('blue');
+      expect(queryByFlagName(flagName)).toHaveTextContent('blue');
     });
   });
 });

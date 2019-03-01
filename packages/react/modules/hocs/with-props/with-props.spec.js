@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, PropsToComponent } from '@flopflip/test-utils';
+import { render, components } from '@flopflip/test-utils';
 import withProps from './with-props';
 
 const createTestProps = (custom = {}) => ({
@@ -18,19 +18,19 @@ describe('rendering', () => {
     };
     beforeEach(() => {
       props = createTestProps();
-      TestComponent = withProps(enhancedProps)(PropsToComponent);
+      TestComponent = withProps(enhancedProps)(components.FlagsToComponent);
     });
 
     it('should have base props', () => {
-      const { queryByTestId } = render(<TestComponent {...props} />);
+      const { queryByFlagName } = render(<TestComponent {...props} />);
 
-      expect(queryByTestId('a')).toBeInTheDocument();
+      expect(queryByFlagName('a')).toBeInTheDocument();
     });
 
     it('should have enhanced props', () => {
-      const { queryByTestId } = render(<TestComponent {...props} />);
+      const { queryByFlagName } = render(<TestComponent {...props} />);
 
-      expect(queryByTestId('b')).toBeInTheDocument();
+      expect(queryByFlagName('b')).toBeInTheDocument();
     });
   });
 
@@ -40,13 +40,15 @@ describe('rendering', () => {
     };
     beforeEach(() => {
       props = createTestProps();
-      TestComponent = withProps(() => enhancedProps)(PropsToComponent);
+      TestComponent = withProps(() => enhancedProps)(
+        components.FlagsToComponent
+      );
     });
 
     it('should have enhanced props', () => {
-      const { queryByTestId } = render(<TestComponent {...props} />);
+      const { queryByFlagName } = render(<TestComponent {...props} />);
 
-      expect(queryByTestId('a')).toBeInTheDocument();
+      expect(queryByFlagName('a')).toBeInTheDocument();
     });
   });
 });
