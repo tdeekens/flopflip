@@ -1,11 +1,10 @@
 {
+  "private": true,
   "name": "@flopflip/test-utils",
   "version": "1.0.0",
   "description": "Test utils for flipflop",
   "scripts": {},
-  "publishConfig": {
-    "access": "private"
-  },
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tdeekens/flopflip.git"
