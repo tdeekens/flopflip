@@ -109,6 +109,7 @@ const components = {
 export * from 'react-testing-library';
 export {
   defaultRender as render,
+  shallow as renderShallowly,
   renderWithAdapter,
   getComponentInstance,
   adapter,
