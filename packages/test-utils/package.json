@@ -3,7 +3,9 @@
   "name": "@flopflip/test-utils",
   "version": "1.0.0",
   "description": "Test utils for flipflop",
-  "scripts": {},
+  "scripts": {
+    "build": "exit 0"
+  },
   "main": "index.js",
   "repository": {
     "type": "git",
