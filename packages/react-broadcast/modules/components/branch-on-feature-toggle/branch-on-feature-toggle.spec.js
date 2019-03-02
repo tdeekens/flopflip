@@ -19,6 +19,20 @@ describe('without `untoggledComponent', () => {
 
       expect(queryByFlagName('isFeatureEnabled')).not.toBeInTheDocument();
     });
+
+    describe('when enabling feature', () => {
+      it('should render the component representing a enabled feature', async () => {
+        const { queryByFlagName, waitUntilReady, changeFlagVariation } = render(
+          <TestComponent />
+        );
+
+        await waitUntilReady();
+
+        changeFlagVariation('disabledFeature', true);
+
+        expect(queryByFlagName('isFeatureEnabled')).toBeInTheDocument();
+      });
+    });
   });
 
   describe('when feature is enabled', () => {

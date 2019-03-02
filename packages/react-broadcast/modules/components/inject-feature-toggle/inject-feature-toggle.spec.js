@@ -19,6 +19,20 @@ describe('without `propKey`', () => {
 
       expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('false');
     });
+
+    describe('when enabling feature', () => {
+      it('should render the component representing a enabled feature', async () => {
+        const { queryByFlagName, waitUntilReady, changeFlagVariation } = render(
+          <TestComponent />
+        );
+
+        await waitUntilReady();
+
+        changeFlagVariation('disabledFeature', true);
+
+        expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('true');
+      });
+    });
   });
 
   describe('when feature is enabled', () => {

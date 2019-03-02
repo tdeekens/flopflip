@@ -19,6 +19,20 @@ describe('when feature is disabled', () => {
 
     expect(queryByFlagName('disabledFeature')).not.toBeInTheDocument();
   });
+
+  describe('when enabling feature', () => {
+    it('should render the component representing a enabled feature', async () => {
+      const { queryByFlagName, waitUntilReady, changeFlagVariation } = render(
+        <TestComponent />
+      );
+
+      await waitUntilReady();
+
+      changeFlagVariation('disabledFeature', true);
+
+      expect(queryByFlagName('disabledFeature')).toBeInTheDocument();
+    });
+  });
 });
 
 describe('when feature is enabled', () => {

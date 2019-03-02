@@ -59,12 +59,12 @@ export default class Configure extends React.PureComponent<Props, State> {
     this.isUnmounted = true;
   }
 
-  handleUpdateFlags = (flags: Flags): void => {
+  handleUpdateFlags = (nextFlags: Flags): void => {
     !this.isUnmounted &&
       this.setState(prevState => ({
         flags: {
           ...prevState.flags,
-          ...flags,
+          ...nextFlags,
         },
       }));
   };

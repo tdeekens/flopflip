@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import adapter, { updateFlags } from '@flopflip/memory-adapter';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 
 const mergeOptional = (defaultValue, value) =>
   value === null ? undefined : { ...defaultValue, ...value };
@@ -21,6 +21,11 @@ const queryByFlagName = (flagName, container) => {
   return firstElement;
 };
 
+const changeFlagVariation = (rendered, flagName, flagVariation) =>
+  fireEvent.change(rendered.getByTestId('change-flag-variation'), {
+    target: { value: `${flagName}:${flagVariation}` },
+  });
+
 const defaultRender = (ui, { ...rtlOptions }) => {
   const rendered = render(ui, rtlOptions);
 
@@ -29,6 +34,25 @@ const defaultRender = (ui, { ...rtlOptions }) => {
     ...rendered,
   };
 };
+
+const fromEventString = string => {
+  if (string === 'true') return true;
+  if (string === 'false') return false;
+
+  return string;
+};
+
+const ChangeFlagVariation = () => (
+  <input
+    data-testid="change-flag-variation"
+    type="text"
+    onChange={event => {
+      const [flagName, flagVariation] = event.target.value.split(':');
+
+      updateFlags({ [flagName]: fromEventString(flagVariation) });
+    }}
+  />
+);
 
 const renderWithAdapter = (
   ui,
@@ -52,13 +76,19 @@ const renderWithAdapter = (
         adapterArgs={defaultedAdapterArgs}
         defaultFlags={defaultedFlags}
       >
-        {ui}
+        <>
+          <ChangeFlagVariation />
+          {ui}
+        </>
       </ConfigureFlopFlip>
     ),
     rtlOptions
   );
   return {
     queryByFlagName: flagName => queryByFlagName(flagName, rendered.container),
+    changeFlagVariation: (flagName, flagVariation) =>
+      changeFlagVariation(rendered, flagName, flagVariation),
+    waitUntilReady: async () => rendered.getByTestId('change-flag-variation'),
     ...rendered,
   };
 };
