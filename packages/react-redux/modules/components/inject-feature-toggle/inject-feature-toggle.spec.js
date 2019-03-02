@@ -1,78 +1,79 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { renderWithAdapter, components } from '@flopflip/test-utils';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { STATE_SLICE } from '../../store';
 import injectFeatureToggle from './inject-feature-toggle';
 import Configure from '../configure';
-import memoryAdapter from '@flopflip/memory-adapter';
 
-const FeatureComponent = () => <div />;
-FeatureComponent.displayName = 'FeatureComponent';
+const render = (store, TestComponent) =>
+  renderWithAdapter(TestComponent, {
+    components: {
+      ConfigureFlopFlip: Configure,
+      Wrapper: <Provider store={store} />,
+    },
+  });
 
-const createTestProps = custom => ({
-  adapterArgs: {},
-
-  ...custom,
-});
 const createMockStore = configureStore();
 
 describe('without `propKey`', () => {
-  const EnhancedComponent = injectFeatureToggle('flag1')(FeatureComponent);
-  let props;
-  let wrapper;
-
   describe('when feature is disabled', () => {
+    let store;
+    const TestComponent = injectFeatureToggle('disabledFeature')(
+      components.FlagsToComponent
+    );
+
     beforeEach(() => {
-      const store = createMockStore({
-        [STATE_SLICE]: { flags: { flag1: false } },
+      store = createMockStore({
+        [STATE_SLICE]: { flags: { disabledFeature: false } },
       });
-      props = createTestProps();
-      wrapper = mount(
-        <Provider store={store}>
-          <Configure {...props} adapter={memoryAdapter}>
-            <EnhancedComponent />
-          </Configure>
-        </Provider>
-      );
     });
 
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
+    it('should render receive the flag value as `false`', () => {
+      const { queryByFlagName } = render(store, <TestComponent />);
+
+      expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('false');
+    });
+  });
+
+  describe('when feature is enabled', () => {
+    let store;
+    const TestComponent = injectFeatureToggle('enabledFeature')(
+      components.FlagsToComponent
+    );
+
+    beforeEach(() => {
+      store = createMockStore({
+        [STATE_SLICE]: { flags: { enabledFeature: true } },
+      });
     });
 
-    it('should have feature disabling prop', () => {
-      expect(wrapper.find(FeatureComponent)).toHaveProp(
-        'isFeatureEnabled',
-        false
-      );
+    it('should render receive the flag value as `true`', () => {
+      const { queryByFlagName } = render(store, <TestComponent />);
+
+      expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('true');
+    });
+  });
+});
+
+describe('with `propKey`', () => {
+  describe('when feature is disabled', () => {
+    let store;
+    const TestComponent = injectFeatureToggle(
+      'disabledFeature',
+      'customPropKey'
+    )(components.FlagsToComponent);
+
+    beforeEach(() => {
+      store = createMockStore({
+        [STATE_SLICE]: { flags: { disabledFeature: false } },
+      });
     });
 
-    describe('when enabling feature', () => {
-      beforeEach(() => {
-        const store = createMockStore({
-          [STATE_SLICE]: { flags: { flag1: true } },
-        });
-        props = createTestProps();
-        wrapper = mount(
-          <Provider store={store}>
-            <Configure {...props} adapter={memoryAdapter}>
-              <EnhancedComponent />
-            </Configure>
-          </Provider>
-        );
-      });
+    it('should render receive the flag value as `false`', () => {
+      const { queryByFlagName } = render(store, <TestComponent />);
 
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-      });
-
-      it('should have feature enabling prop', () => {
-        expect(wrapper.find(FeatureComponent)).toHaveProp(
-          'isFeatureEnabled',
-          true
-        );
-      });
+      expect(queryByFlagName('customPropKey')).toHaveTextContent('false');
     });
   });
 });

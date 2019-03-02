@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { renderShallowly } from '@flopflip/test-utils';
 import { FlagsContext } from '../flags-context';
 import withFlags from './with-flags';
 
@@ -10,11 +10,7 @@ describe('rendering', () => {
 
   beforeEach(() => {
     const Component = withFlags('foo-prop-key')(TestComponent);
-    wrapper = shallow(<Component />);
-  });
-
-  it('should match snapshot', () => {
-    expect(wrapper).toMatchSnapshot();
+    wrapper = renderShallowly(<Component />);
   });
 
   it('should render a `<FlagsContext.Consumer>`', () => {

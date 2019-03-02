@@ -1,8 +1,7 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, components } from '@flopflip/test-utils';
 import omitProps from './omit-props';
 
-const Component = () => null;
 const createTestProps = (custom = {}) => ({
   a: 1,
   b: 2,
@@ -12,31 +11,39 @@ const createTestProps = (custom = {}) => ({
 });
 
 describe('rendering', () => {
-  let EnhancedComponent;
+  let TestComponent;
   let props;
-  let wrapper;
 
   describe('with multiple props', () => {
     beforeEach(() => {
-      EnhancedComponent = omitProps('a', 'b')(Component);
+      TestComponent = omitProps(['a', 'b'])(components.FlagsToComponent);
       props = createTestProps();
-
-      wrapper = shallow(<EnhancedComponent {...props} />);
     });
 
     it('should omit multiple props', () => {
-      expect(wrapper.find(Component)).toMatchSnapshot();
+      const { queryByFlagName } = render(<TestComponent {...props} />);
+      expect(queryByFlagName('a')).not.toBeInTheDocument();
+      expect(queryByFlagName('b')).not.toBeInTheDocument();
+    });
+
+    it('should keep not omitted props', () => {
+      const { queryByFlagName } = render(<TestComponent {...props} />);
+
+      expect(queryByFlagName('c')).toBeInTheDocument();
     });
   });
 
   describe('without any props', () => {
     beforeEach(() => {
-      EnhancedComponent = omitProps()(Component);
-      wrapper = shallow(<EnhancedComponent {...props} />);
+      TestComponent = omitProps()(components.FlagsToComponent);
     });
 
     it('should do nothing', () => {
-      expect(wrapper.find(Component)).toMatchSnapshot();
+      const { queryByFlagName } = render(<TestComponent {...props} />);
+
+      expect(queryByFlagName('a')).toBeInTheDocument();
+      expect(queryByFlagName('b')).toBeInTheDocument();
+      expect(queryByFlagName('c')).toBeInTheDocument();
     });
   });
 });

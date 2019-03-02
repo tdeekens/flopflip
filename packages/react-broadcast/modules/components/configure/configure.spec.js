@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { renderShallowly } from '@flopflip/test-utils';
 import { ConfigureAdapter } from '@flopflip/react';
 import { FlagsContext } from '../flags-context';
 import Configure from './configure';
@@ -25,15 +25,11 @@ describe('rendering', () => {
 
   beforeEach(() => {
     props = createTestProps();
-    wrapper = shallow(
+    wrapper = renderShallowly(
       <Configure {...props}>
         <ChildComponent />
       </Configure>
     );
-  });
-
-  it('should match snapshot', () => {
-    expect(wrapper).toMatchSnapshot();
   });
 
   it('should render a `<ConfigureAdapter>`', () => {
@@ -50,7 +46,7 @@ describe('rendering', () => {
     beforeEach(() => {
       props = createTestProps();
 
-      wrapper = shallow(
+      wrapper = renderShallowly(
         <Configure {...props}>
           <ChildComponent />
         </Configure>
@@ -104,7 +100,7 @@ describe('state', () => {
 
     beforeEach(() => {
       props = createTestProps();
-      wrapper = shallow(
+      wrapper = renderShallowly(
         <Configure {...props}>
           <ChildComponent />
         </Configure>
@@ -123,7 +119,7 @@ describe('state', () => {
 
     beforeEach(() => {
       props = createTestProps();
-      wrapper = shallow(
+      wrapper = renderShallowly(
         <Configure {...props}>
           <ChildComponent />
         </Configure>

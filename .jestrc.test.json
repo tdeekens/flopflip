@@ -4,7 +4,6 @@
   "setupFiles": ["raf/polyfill", "jest-localstorage-mock"],
   "setupFilesAfterEnv": ["./jest-runner-test.config.js"],
   "moduleFileExtensions": ["ts", "tsx", "js", "json"],
-  "snapshotSerializers": ["enzyme-to-json/serializer"],
   "testEnvironment": "jsdom",
   "testURL": "http://localhost",
   "watchPlugins": ["jest-plugin-filename", "jest-watch-yarn-workspaces"],

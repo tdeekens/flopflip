@@ -1,102 +1,106 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, components } from '@flopflip/test-utils';
 import branchOnFeatureToggle from './branch-on-feature-toggle';
-
-const UntoggledComponent = () => <>UntoggledComponent</>;
-UntoggledComponent.displayName = 'UntoggledComponent';
-const FeatureComponent = () => <>FeatureComponent</>;
-FeatureComponent.displayName = 'FeatureComponent';
 
 describe('with `flagName`', () => {
   const flagName = 'fooFlagName';
 
   describe('when feature is enabled', () => {
-    const featureFlag = { [flagName]: true };
+    const featureFlags = { [flagName]: true };
 
     describe('without untoggled component', () => {
       let Component;
-      let wrapper;
 
       beforeEach(() => {
         Component = branchOnFeatureToggle(undefined, flagName)(
-          FeatureComponent
+          components.ToggledComponent
         );
-        wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
       });
 
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-      });
+      it('should render the component representing an enabled feature', () => {
+        const { queryByFlagName } = render(
+          <Component flagName={flagName} {...featureFlags} />
+        );
 
-      it('should render the `FeatureComponent`', () => {
-        expect(wrapper).toRender(FeatureComponent);
+        expect(queryByFlagName(flagName)).toHaveAttribute(
+          'data-flag-status',
+          'enabled'
+        );
       });
     });
 
     describe('with untoggled component', () => {
       let Component;
-      let wrapper;
 
       beforeEach(() => {
-        Component = branchOnFeatureToggle(UntoggledComponent, flagName)(
-          FeatureComponent
+        Component = branchOnFeatureToggle(
+          components.UntoggledComponent,
+          flagName
+        )(components.ToggledComponent);
+      });
+
+      it('should not render the component representing an disabled feature', () => {
+        const { queryByFlagName } = render(
+          <Component flagName={flagName} {...featureFlags} />
         );
-        wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
+
+        expect(queryByFlagName(flagName)).not.toHaveAttribute(
+          'data-flag-status',
+          'disabled'
+        );
       });
 
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-      });
+      it('should render the component representing an enabled feature', () => {
+        const { queryByFlagName } = render(
+          <Component flagName={flagName} {...featureFlags} />
+        );
 
-      it('should not render the `UntoggledComponent`', () => {
-        expect(wrapper).not.toRender(UntoggledComponent);
-      });
-
-      it('should render the `FeatureComponent`', () => {
-        expect(wrapper).toRender(FeatureComponent);
+        expect(queryByFlagName(flagName)).toHaveAttribute(
+          'data-flag-status',
+          'enabled'
+        );
       });
     });
   });
   describe('when feature is disabled', () => {
-    const featureFlag = { [flagName]: false };
+    const featureFlags = { [flagName]: false };
 
     describe('with untoggled component', () => {
       let Component;
-      let wrapper;
 
       beforeEach(() => {
-        Component = branchOnFeatureToggle(UntoggledComponent, flagName)(
-          FeatureComponent
+        Component = branchOnFeatureToggle(
+          components.UntoggledComponent,
+          flagName
+        )(components.ToggledComponent);
+      });
+
+      it('should render the component representing an disabled feature', () => {
+        const { queryByFlagName } = render(
+          <Component flagName={flagName} {...featureFlags} />
         );
-        wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
-      });
-
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-      });
-
-      it('should render the `UntoggledComponent`', () => {
-        expect(wrapper).toRender(UntoggledComponent);
+        expect(queryByFlagName(flagName)).toHaveAttribute(
+          'data-flag-status',
+          'disabled'
+        );
       });
     });
 
     describe('without untoggled component', () => {
       let Component;
-      let wrapper;
 
       beforeEach(() => {
         Component = branchOnFeatureToggle(undefined, flagName)(
-          FeatureComponent
+          components.ToggledComponent
         );
-        wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
       });
 
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-      });
+      it('should render neither the component representing an disabled or enabled feature', () => {
+        const { queryByFlagName } = render(
+          <Component flagName={flagName} {...featureFlags} />
+        );
 
-      it('should render `DefaultUntoggledComponent`', () => {
-        expect(wrapper).toRender('DefaultUntoggledComponent');
+        expect(queryByFlagName(flagName)).not.toBeInTheDocument();
       });
     });
   });
@@ -107,97 +111,105 @@ describe('with `flagName` and `flagVariation`', () => {
   const flagVariation = 'fooflagVariation';
 
   describe('when feature is enabled', () => {
-    const featureFlag = { [flagName]: flagVariation };
+    const featureFlags = { [flagName]: flagVariation };
 
     describe('without untoggled component', () => {
       let Component;
-      let wrapper;
 
       beforeEach(() => {
         Component = branchOnFeatureToggle(undefined, flagName, flagVariation)(
-          FeatureComponent
+          components.ToggledComponent
         );
-        wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
       });
 
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-      });
+      it('should render the component representing an enabled feature', () => {
+        const { queryByFlagName } = render(
+          <Component flagName={flagName} {...featureFlags} />
+        );
 
-      it('should render the `FeatureComponent`', () => {
-        expect(wrapper).toRender(FeatureComponent);
+        expect(queryByFlagName(flagName)).toHaveAttribute(
+          'data-flag-status',
+          'enabled'
+        );
       });
     });
 
     describe('with untoggled component', () => {
       let Component;
-      let wrapper;
 
       beforeEach(() => {
         Component = branchOnFeatureToggle(
-          UntoggledComponent,
+          components.UntoggledComponent,
           flagName,
           flagVariation
-        )(FeatureComponent);
-        wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
+        )(components.ToggledComponent);
       });
 
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
+      it('should not render the component representing an disabled feature', () => {
+        const { queryByFlagName } = render(
+          <Component flagName={flagName} {...featureFlags} />
+        );
+
+        expect(queryByFlagName(flagName)).not.toHaveAttribute(
+          'data-flag-status',
+          'disabled'
+        );
       });
 
-      it('should not render the `UntoggledComponent`', () => {
-        expect(wrapper).not.toRender(UntoggledComponent);
-      });
+      it('should render the component representing an enabled feature', () => {
+        const { queryByFlagName } = render(
+          <Component flagName={flagName} {...featureFlags} />
+        );
 
-      it('should render the `FeatureComponent`', () => {
-        expect(wrapper).toRender(FeatureComponent);
+        expect(queryByFlagName(flagName)).toHaveAttribute(
+          'data-flag-status',
+          'enabled'
+        );
       });
     });
   });
 
   describe('when feature is disabled', () => {
-    const featureFlag = { [flagName]: 'flagVariation2' };
+    const featureFlags = { [flagName]: 'flagVariation2' };
 
     describe('with untoggled component', () => {
       let Component;
-      let wrapper;
 
       beforeEach(() => {
         Component = branchOnFeatureToggle(
-          UntoggledComponent,
+          components.UntoggledComponent,
           flagName,
           flagVariation
-        )(FeatureComponent);
-        wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
+        )(components.ToggledComponent);
       });
 
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-      });
+      it('should render the component representing an disabled feature', () => {
+        const { queryByFlagName } = render(
+          <Component flagName={flagName} {...featureFlags} />
+        );
 
-      it('should render the `UntoggledComponent`', () => {
-        expect(wrapper).toRender(UntoggledComponent);
+        expect(queryByFlagName(flagName)).toHaveAttribute(
+          'data-flag-status',
+          'disabled'
+        );
       });
     });
 
     describe('without untoggled component', () => {
       let Component;
-      let wrapper;
 
       beforeEach(() => {
         Component = branchOnFeatureToggle(undefined, flagName, flagVariation)(
-          FeatureComponent
+          components.ToggledComponent
         );
-        wrapper = shallow(<Component flagName={flagName} {...featureFlag} />);
       });
 
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-      });
+      it('should render neither the component representing an disabled or enabled feature', () => {
+        const { queryByFlagName } = render(
+          <Component flagName={flagName} {...featureFlags} />
+        );
 
-      it('should render `DefaultUntoggledComponent`', () => {
-        expect(wrapper).toRender('DefaultUntoggledComponent');
+        expect(queryByFlagName(flagName)).not.toBeInTheDocument();
       });
     });
   });
@@ -205,84 +217,98 @@ describe('with `flagName` and `flagVariation`', () => {
 
 describe('without `flagName`', () => {
   describe('when feature is enabled', () => {
-    const featureFlag = { isFeatureEnabled: true };
+    const flagName = 'isFeatureEnabled';
+    const featureFlags = { [flagName]: true };
 
     describe('without untoggled component', () => {
       let Component;
-      let wrapper;
 
       beforeEach(() => {
-        Component = branchOnFeatureToggle()(FeatureComponent);
-        wrapper = shallow(<Component {...featureFlag} />);
+        Component = branchOnFeatureToggle()(components.ToggledComponent);
       });
 
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-      });
+      it('should render the component representing an enabled feature', () => {
+        const { queryByFlagName } = render(
+          <Component flagName={flagName} {...featureFlags} />
+        );
 
-      it('should render the `FeatureComponent`', () => {
-        expect(wrapper).toRender(FeatureComponent);
+        expect(queryByFlagName(flagName)).toHaveAttribute(
+          'data-flag-status',
+          'enabled'
+        );
       });
     });
 
     describe('with untoggled component', () => {
       let Component;
-      let wrapper;
 
       beforeEach(() => {
-        Component = branchOnFeatureToggle(UntoggledComponent)(FeatureComponent);
-        wrapper = shallow(<Component {...featureFlag} />);
+        Component = branchOnFeatureToggle(components.UntoggledComponent)(
+          components.ToggledComponent
+        );
       });
 
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
+      it('should not render the component representing an disabled feature', () => {
+        const { queryByFlagName } = render(
+          <Component flagName={flagName} {...featureFlags} />
+        );
+
+        expect(queryByFlagName(flagName)).not.toHaveAttribute(
+          'data-flag-status',
+          'disabled'
+        );
       });
 
-      it('should not render the `UntoggledComponent`', () => {
-        expect(wrapper).not.toRender(UntoggledComponent);
-      });
+      it('should render the component representing an enabled feature', () => {
+        const { queryByFlagName } = render(
+          <Component flagName={flagName} {...featureFlags} />
+        );
 
-      it('should render the `FeatureComponent`', () => {
-        expect(wrapper).toRender(FeatureComponent);
+        expect(queryByFlagName(flagName)).toHaveAttribute(
+          'data-flag-status',
+          'enabled'
+        );
       });
     });
   });
   describe('when feature is disabled', () => {
-    const featureFlag = { isFeatureEnabled: false };
+    const flagName = 'isFeatureEnabled';
+    const featureFlags = { [flagName]: false };
 
     describe('with untoggled component', () => {
       let Component;
-      let wrapper;
 
       beforeEach(() => {
-        Component = branchOnFeatureToggle(UntoggledComponent)(FeatureComponent);
-        wrapper = shallow(<Component {...featureFlag} />);
+        Component = branchOnFeatureToggle(components.UntoggledComponent)(
+          components.ToggledComponent
+        );
       });
 
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-      });
+      it('should render the component representing an disabled feature', () => {
+        const { queryByFlagName } = render(
+          <Component flagName={flagName} {...featureFlags} />
+        );
 
-      it('should render the `UntoggledComponent`', () => {
-        expect(wrapper).toRender(UntoggledComponent);
+        expect(queryByFlagName(flagName)).toHaveAttribute(
+          'data-flag-status',
+          'disabled'
+        );
       });
     });
 
     describe('without untoggled component', () => {
       let Component;
-      let wrapper;
 
       beforeEach(() => {
-        Component = branchOnFeatureToggle()(FeatureComponent);
-        wrapper = shallow(<Component {...featureFlag} />);
+        Component = branchOnFeatureToggle()(components.ToggledComponent);
       });
 
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-      });
+      it('should render neither the component representing an disabled or enabled feature', () => {
+        const { queryByFlagName } = render(
+          <Component flagName={flagName} {...featureFlags} />
+        );
 
-      it('should render `DefaultUntoggledComponent`', () => {
-        expect(wrapper).toRender('DefaultUntoggledComponent');
+        expect(queryByFlagName(flagName)).not.toBeInTheDocument();
       });
     });
   });

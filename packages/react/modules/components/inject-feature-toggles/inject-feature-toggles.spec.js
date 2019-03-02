@@ -1,137 +1,123 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, components } from '@flopflip/test-utils';
 import { ALL_FLAGS_PROP_KEY, DEFAULT_FLAGS_PROP_KEY } from '../../constants';
 import injectFeatureToggles from './inject-feature-toggles';
 import { defaultAreOwnPropsEqual as areOwnPropsEqual } from './utils';
 
 describe('injecting', () => {
-  const TestComponent = () => <>Test</>;
-  TestComponent.displayName = 'TestComponent';
-  TestComponent.propTypes = {};
-
-  const featureToggle = 'aFeatureToggle';
+  const firstFlagName = 'aFeatureToggle';
   const createTestProps = custom => ({
-    [ALL_FLAGS_PROP_KEY]: { [featureToggle]: true },
+    [ALL_FLAGS_PROP_KEY]: { [firstFlagName]: true },
     ...custom,
   });
 
   describe('with single feature toggle', () => {
     let props;
-    let Component;
-    let wrapper;
+    let TestComponent;
+    const FlagsToComponent = props => (
+      <components.FlagsToComponent
+        {...props}
+        propKey={DEFAULT_FLAGS_PROP_KEY}
+      />
+    );
 
     beforeEach(() => {
       props = createTestProps();
 
-      Component = injectFeatureToggles([featureToggle])(TestComponent);
-      wrapper = mount(<Component {...props} />);
+      TestComponent = injectFeatureToggles([firstFlagName])(FlagsToComponent);
     });
 
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
+    it('should pass all requested feature toggles', () => {
+      const { queryByFlagName } = render(<TestComponent {...props} />);
 
-    it('should pass all requested feature toggles as a `prop`', () => {
-      expect(wrapper.find(TestComponent)).toHaveProp(
-        DEFAULT_FLAGS_PROP_KEY,
-        props[ALL_FLAGS_PROP_KEY]
-      );
-    });
-
-    it("should pass the feature toggle's state as a `prop`", () => {
-      expect(wrapper.find(TestComponent)).toHaveProp(DEFAULT_FLAGS_PROP_KEY, {
-        [featureToggle]: props[ALL_FLAGS_PROP_KEY][featureToggle],
-      });
+      expect(queryByFlagName(firstFlagName)).toBeInTheDocument();
     });
   });
 
   describe('with multiple feature toggles', () => {
-    const featureToggle2 = 'aFeatureToggle2';
-    let Component;
+    const secondFlagName = 'aFeatureToggle2';
+    let TestComponent;
+    const FlagsToComponent = props => (
+      <components.FlagsToComponent
+        {...props}
+        propKey={DEFAULT_FLAGS_PROP_KEY}
+      />
+    );
     let props;
-    let wrapper;
 
     describe('with all toggles defined', () => {
       beforeEach(() => {
         props = createTestProps({
           [ALL_FLAGS_PROP_KEY]: {
-            [featureToggle]: true,
-            [featureToggle2]: false,
+            [firstFlagName]: true,
+            [secondFlagName]: false,
           },
         });
 
-        Component = injectFeatureToggles([featureToggle, featureToggle2])(
-          TestComponent
+        TestComponent = injectFeatureToggles([firstFlagName, secondFlagName])(
+          FlagsToComponent
         );
-        wrapper = mount(<Component {...props} />);
       });
 
-      it('should pass all requested feature toggles as a `prop`', () => {
-        expect(wrapper.find(TestComponent)).toHaveProp(
-          DEFAULT_FLAGS_PROP_KEY,
-          props[ALL_FLAGS_PROP_KEY]
-        );
+      it('should pass all requested feature toggles', () => {
+        const { queryByFlagName } = render(<TestComponent {...props} />);
+
+        expect(queryByFlagName(firstFlagName)).toBeInTheDocument();
+        expect(queryByFlagName(secondFlagName)).toBeInTheDocument();
       });
     });
 
     describe('without all toggles defined', () => {
-      let nonExistingFeatureToggle;
+      let nonExistingFlagName;
       let props;
 
       beforeEach(() => {
         props = createTestProps();
-        nonExistingFeatureToggle = 'anotherToggle';
+        nonExistingFlagName = 'anotherToggle';
 
-        Component = injectFeatureToggles([
-          featureToggle,
-          nonExistingFeatureToggle,
-        ])(TestComponent);
-        wrapper = mount(<Component {...props} />);
+        TestComponent = injectFeatureToggles([
+          firstFlagName,
+          nonExistingFlagName,
+        ])(FlagsToComponent);
       });
 
-      it('should pass requested feature toggles as a `prop`', () => {
-        expect(wrapper.find(TestComponent)).toHaveProp(DEFAULT_FLAGS_PROP_KEY, {
-          [featureToggle]: expect.any(Boolean),
-        });
-      });
+      it('should pass all requested feature toggles', () => {
+        const { queryByFlagName } = render(<TestComponent {...props} />);
 
-      it("should pass the feature toggle's state as a `prop`", () => {
-        expect(wrapper.find(TestComponent)).toHaveProp(DEFAULT_FLAGS_PROP_KEY, {
-          [featureToggle]: props[ALL_FLAGS_PROP_KEY][featureToggle],
-        });
+        expect(queryByFlagName(firstFlagName)).toBeInTheDocument();
       });
 
       it('should omit requested but non existent feature toggles from `props`', () => {
-        expect(wrapper.find(TestComponent)).not.toHaveProp(
-          DEFAULT_FLAGS_PROP_KEY,
-          {
-            [nonExistingFeatureToggle]: expect.any(Boolean),
-          }
-        );
+        const { queryByFlagName } = render(<TestComponent {...props} />);
+
+        expect(queryByFlagName(nonExistingFlagName)).not.toBeInTheDocument();
       });
     });
 
     describe('with `propKey`', () => {
       beforeEach(() => {
+        const FlagsToComponent = props => (
+          <components.FlagsToComponent {...props} propKey="fooPropKey" />
+        );
+
         props = createTestProps({
           [ALL_FLAGS_PROP_KEY]: {
-            [featureToggle]: true,
-            [featureToggle2]: false,
+            [firstFlagName]: true,
+            [secondFlagName]: false,
           },
         });
 
-        Component = injectFeatureToggles(
-          [featureToggle, featureToggle2],
+        TestComponent = injectFeatureToggles(
+          [firstFlagName, secondFlagName],
           'fooPropKey'
-        )(TestComponent);
-        wrapper = mount(<Component {...props} />);
+        )(FlagsToComponent);
       });
 
-      it('should map all feature toggles', () => {
-        expect(wrapper.find(TestComponent)).toHaveProp(
-          'fooPropKey',
-          props[ALL_FLAGS_PROP_KEY]
-        );
+      it('should pass all requested feature toggles', () => {
+        const { queryByFlagName } = render(<TestComponent {...props} />);
+
+        expect(queryByFlagName(firstFlagName)).toBeInTheDocument();
+        expect(queryByFlagName(secondFlagName)).toBeInTheDocument();
       });
     });
   });

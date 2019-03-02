@@ -68,10 +68,6 @@ describe('when creating enhancer', () => {
         onFlagsStateChange(nextFlags);
       });
 
-      it('should match snapshot', () => {
-        expect(dispatch).toMatchSnapshot();
-      });
-
       it('should invoke `dispatch`', () => {
         expect(dispatch).toHaveBeenCalled();
       });
@@ -92,10 +88,6 @@ describe('when creating enhancer', () => {
         ][0];
 
         onStatusStateChange(nextStatus);
-      });
-
-      it('should match snapshot', () => {
-        expect(dispatch).toMatchSnapshot();
       });
 
       it('should invoke `dispatch`', () => {

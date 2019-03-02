@@ -1,52 +1,52 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { renderWithAdapter, components } from '@flopflip/test-utils';
 import ToggleFeature from './toggle-feature';
 import Configure from '../configure';
-import memoryAdapter, { updateFlags } from '@flopflip/memory-adapter';
 
-const FeatureComponent = () => <div />;
-FeatureComponent.displayName = 'FeatureComponent';
-
-const createTestProps = custom => ({
-  adapterArgs: {},
-
-  ...custom,
-});
+const render = TestComponent =>
+  renderWithAdapter(TestComponent, {
+    components: { ConfigureFlopFlip: Configure },
+  });
 
 describe('when feature is disabled', () => {
-  let props;
-  let wrapper;
-  beforeEach(() => {
-    props = createTestProps({ defaultFlags: { flag1: false, flag2: false } });
-    wrapper = mount(
-      <Configure {...props} adapter={memoryAdapter}>
-        <ToggleFeature flag="flag1">
-          <FeatureComponent />
-        </ToggleFeature>
-      </Configure>
-    );
-  });
+  const TestComponent = () => (
+    <ToggleFeature flag="disabledFeature">
+      <components.ToggledComponent flagName="disabledFeature" />
+    </ToggleFeature>
+  );
+  it('should not render the component representing a enabled feature', () => {
+    const { queryByFlagName } = render(<TestComponent />);
 
-  it('should match snapshot', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should not render the `FeatureComponent`', () => {
-    expect(wrapper).not.toRender(FeatureComponent);
+    expect(queryByFlagName('disabledFeature')).not.toBeInTheDocument();
   });
 
   describe('when enabling feature', () => {
-    beforeEach(() => {
-      updateFlags({ flag1: true });
-      wrapper.update();
-    });
+    it('should render the component representing a enabled feature', async () => {
+      const { queryByFlagName, waitUntilReady, changeFlagVariation } = render(
+        <TestComponent />
+      );
 
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
+      await waitUntilReady();
 
-    it('should not render the `FeatureComponent`', () => {
-      expect(wrapper).toRender(FeatureComponent);
+      changeFlagVariation('disabledFeature', true);
+
+      expect(queryByFlagName('disabledFeature')).toBeInTheDocument();
     });
+  });
+});
+
+describe('when feature is enabled', () => {
+  const TestComponent = () => (
+    <ToggleFeature flag="enabledFeature">
+      <components.ToggledComponent flagName="enabledFeature" />
+    </ToggleFeature>
+  );
+  it('should render the component representing a enabled feature', () => {
+    const { queryByFlagName } = render(<TestComponent />);
+
+    expect(queryByFlagName('enabledFeature')).toHaveAttribute(
+      'data-flag-status',
+      'enabled'
+    );
   });
 });

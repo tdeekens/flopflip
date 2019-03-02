@@ -1,8 +1,7 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, components } from '@flopflip/test-utils';
 import withProps from './with-props';
 
-const BaseComponent = () => null;
 const createTestProps = (custom = {}) => ({
   a: 1,
 
@@ -10,9 +9,8 @@ const createTestProps = (custom = {}) => ({
 });
 
 describe('rendering', () => {
-  let EnhancedComponent;
+  let TestComponent;
   let props;
-  let wrapper;
 
   describe('with `mapProps` being object', () => {
     const enhancedProps = {
@@ -20,20 +18,19 @@ describe('rendering', () => {
     };
     beforeEach(() => {
       props = createTestProps();
-      EnhancedComponent = withProps(enhancedProps)(BaseComponent);
-      wrapper = mount(<EnhancedComponent {...props} />);
-    });
-
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
+      TestComponent = withProps(enhancedProps)(components.FlagsToComponent);
     });
 
     it('should have base props', () => {
-      expect(wrapper).toHaveProp('a', 1);
+      const { queryByFlagName } = render(<TestComponent {...props} />);
+
+      expect(queryByFlagName('a')).toBeInTheDocument();
     });
 
     it('should have enhanced props', () => {
-      expect(wrapper.find(BaseComponent)).toHaveProp('b', 'b');
+      const { queryByFlagName } = render(<TestComponent {...props} />);
+
+      expect(queryByFlagName('b')).toBeInTheDocument();
     });
   });
 
@@ -43,16 +40,15 @@ describe('rendering', () => {
     };
     beforeEach(() => {
       props = createTestProps();
-      EnhancedComponent = withProps(() => enhancedProps)(BaseComponent);
-      wrapper = mount(<EnhancedComponent {...props} />);
-    });
-
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
+      TestComponent = withProps(() => enhancedProps)(
+        components.FlagsToComponent
+      );
     });
 
     it('should have enhanced props', () => {
-      expect(wrapper.find(BaseComponent)).toHaveProp('b', 'b');
+      const { queryByFlagName } = render(<TestComponent {...props} />);
+
+      expect(queryByFlagName('a')).toBeInTheDocument();
     });
   });
 });
