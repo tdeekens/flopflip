@@ -1,141 +1,123 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { renderWithAdapter, components } from '@flopflip/test-utils';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { STATE_SLICE } from '../../store';
 import branchOnFeatureToggle from './branch-on-feature-toggle';
 import Configure from '../configure';
-import memoryAdapter from '@flopflip/memory-adapter';
 
-const ToggledComponent = () => <div />;
-ToggledComponent.displayName = 'ToggledComponent';
-const UntoggledComponent = () => <div />;
-UntoggledComponent.displayName = 'UntoggledComponent';
-
-const createTestProps = custom => ({
-  adapterArgs: {},
-
-  ...custom,
-});
+const render = (store, TestComponent) =>
+  renderWithAdapter(TestComponent, {
+    components: {
+      ConfigureFlopFlip: Configure,
+      Wrapper: <Provider store={store} />,
+    },
+  });
 const createMockStore = configureStore();
 
 describe('without `untoggledComponent', () => {
-  const EnhancedComponent = branchOnFeatureToggle({ flag: 'flag1' })(
-    ToggledComponent
-  );
-  let props;
-  let wrapper;
-
   describe('when feature is disabled', () => {
+    let store;
+    const TestComponent = branchOnFeatureToggle({ flag: 'disabledFeature' })(
+      components.ToggledComponent
+    );
     beforeEach(() => {
-      const store = createMockStore({
-        [STATE_SLICE]: { flags: { flag1: false } },
+      store = createMockStore({
+        [STATE_SLICE]: { flags: { disabledFeature: false } },
       });
-      props = createTestProps();
-      wrapper = mount(
-        <Provider store={store}>
-          <Configure {...props} adapter={memoryAdapter}>
-            <EnhancedComponent />
-          </Configure>
-        </Provider>
+    });
+
+    it('should render neither the component representing an disabled or enabled feature', () => {
+      const { queryByFlagName } = render(store, <TestComponent />);
+
+      expect(queryByFlagName('isFeatureEnabled')).not.toBeInTheDocument();
+    });
+  });
+
+  describe('when feature is enabled', () => {
+    let store;
+    const TestComponent = branchOnFeatureToggle({ flag: 'enabledFeature' })(
+      components.ToggledComponent
+    );
+    beforeEach(() => {
+      store = createMockStore({
+        [STATE_SLICE]: { flags: { enabledFeature: true } },
+      });
+    });
+
+    it('should render the component representing an enabled feature', () => {
+      const { queryByFlagName } = render(store, <TestComponent />);
+
+      expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
+        'data-flag-status',
+        'enabled'
       );
-    });
-
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
-
-    it('should not render the `ToggledComponent', () => {
-      expect(wrapper).not.toRender(ToggledComponent);
-    });
-
-    describe('when enabling feature', () => {
-      beforeEach(() => {
-        const store = createMockStore({
-          [STATE_SLICE]: { flags: { flag1: true } },
-        });
-        props = createTestProps();
-        wrapper = mount(
-          <Provider store={store}>
-            <Configure {...props} adapter={memoryAdapter}>
-              <EnhancedComponent />
-            </Configure>
-          </Provider>
-        );
-      });
-
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-      });
-
-      it('should render the `ToggledComponent', () => {
-        expect(wrapper).toRender(ToggledComponent);
-      });
     });
   });
 });
 
 describe('with `untoggledComponent', () => {
-  const EnhancedComponent = branchOnFeatureToggle(
-    { flag: 'flag1' },
-    UntoggledComponent
-  )(ToggledComponent);
-  let props;
-  let wrapper;
-
   describe('when feature is disabled', () => {
+    let store;
+    const TestComponent = branchOnFeatureToggle(
+      { flag: 'disabledFeature' },
+      components.UntoggledComponent
+    )(components.ToggledComponent);
+
     beforeEach(() => {
-      props = createTestProps();
-      const store = createMockStore({
-        [STATE_SLICE]: { flags: { flag1: false } },
+      store = createMockStore({
+        [STATE_SLICE]: { flags: { disabledFeature: false } },
       });
-      wrapper = mount(
-        <Provider store={store}>
-          <Configure {...props} adapter={memoryAdapter}>
-            <EnhancedComponent />
-          </Configure>
-        </Provider>
+    });
+
+    it('should not render the component representing a enabled feature', () => {
+      const { queryByFlagName } = render(store, <TestComponent />);
+
+      expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
+        'data-flag-status',
+        'enabled'
       );
     });
 
-    it('should match snapshot', () => {
-      expect(wrapper).toMatchSnapshot();
+    it('should render the component representing a disabled feature', () => {
+      const { queryByFlagName } = render(store, <TestComponent />);
+
+      expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
+        'data-flag-status',
+        'disabled'
+      );
+    });
+  });
+
+  describe('when feature is enabled', () => {
+    let store;
+    const TestComponent = branchOnFeatureToggle(
+      { flag: 'enabledFeature' },
+      components.UntoggledComponent
+    )(components.ToggledComponent);
+
+    beforeEach(() => {
+      store = createMockStore({
+        [STATE_SLICE]: { flags: { enabledFeature: true } },
+      });
     });
 
-    it('should not render the `ToggledComponent', () => {
-      expect(wrapper).not.toRender(ToggledComponent);
+    it('should render the component representing a enabled feature', () => {
+      const { queryByFlagName } = render(store, <TestComponent />);
+
+      expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
+        'data-flag-status',
+        'enabled'
+      );
     });
 
-    it('should render the `UntoggledComponent', () => {
-      expect(wrapper).toRender(UntoggledComponent);
-    });
+    it('should not render the component representing a disabled feature', () => {
+      const { queryByFlagName } = render(store, <TestComponent />);
 
-    describe('when enabling feature', () => {
-      beforeEach(() => {
-        props = createTestProps();
-        const store = createMockStore({
-          [STATE_SLICE]: { flags: { flag1: true } },
-        });
-        wrapper = mount(
-          <Provider store={store}>
-            <Configure {...props} adapter={memoryAdapter}>
-              <EnhancedComponent />
-            </Configure>
-          </Provider>
-        );
-      });
-
-      it('should match snapshot', () => {
-        expect(wrapper).toMatchSnapshot();
-      });
-
-      it('should render the `ToggledComponent', () => {
-        expect(wrapper).toRender(ToggledComponent);
-      });
-
-      it('should not render the `UntoggledComponent', () => {
-        expect(wrapper).not.toRender(UntoggledComponent);
-      });
+      expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
+        'data-flag-status',
+        'disabled'
+      );
     });
   });
 });

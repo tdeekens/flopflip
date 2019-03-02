@@ -21,8 +21,8 @@ const queryByFlagName = (flagName, container) => {
   return firstElement;
 };
 
-const defaultRender = (node, { ...rtlOptions }) => {
-  const rendered = render(node, rtlOptions);
+const defaultRender = (ui, { ...rtlOptions }) => {
+  const rendered = render(ui, rtlOptions);
 
   return {
     queryByFlagName: flagName => queryByFlagName(flagName, rendered.container),
@@ -31,19 +31,30 @@ const defaultRender = (node, { ...rtlOptions }) => {
 };
 
 const renderWithAdapter = (
-  node,
-  { components: { ConfigureFlopFlip }, adapterArgs, flags, ...rtlOptions }
+  ui,
+  {
+    components: { ConfigureFlopFlip, Wrapper = null },
+    adapterArgs,
+    flags,
+    ...rtlOptions
+  }
 ) => {
   const defaultedAdapterArgs = mergeOptional(defaultAdapterArgs, adapterArgs);
   const defaultedFlags = mergeOptional(defaultFlags, flags);
+
+  const wrapUiIfNeeded = innerElement =>
+    Wrapper ? React.cloneElement(Wrapper, null, innerElement) : innerElement;
+
   const rendered = render(
-    <ConfigureFlopFlip
-      adapter={adapter}
-      adapterArgs={defaultedAdapterArgs}
-      defaultFlags={defaultedFlags}
-    >
-      {node}
-    </ConfigureFlopFlip>,
+    wrapUiIfNeeded(
+      <ConfigureFlopFlip
+        adapter={adapter}
+        adapterArgs={defaultedAdapterArgs}
+        defaultFlags={defaultedFlags}
+      >
+        {ui}
+      </ConfigureFlopFlip>
+    ),
     rtlOptions
   );
   return {

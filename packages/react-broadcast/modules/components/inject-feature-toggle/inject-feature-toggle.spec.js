@@ -14,7 +14,7 @@ describe('without `propKey`', () => {
       components.FlagsToComponent
     );
 
-    it('should render receive the flag value is `false`', () => {
+    it('should render receive the flag value as `false`', () => {
       const { queryByFlagName } = render(<TestComponent />);
 
       expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('false');
@@ -26,7 +26,7 @@ describe('without `propKey`', () => {
       components.FlagsToComponent
     );
 
-    it('should render receive the flag value is `true`', () => {
+    it('should render receive the flag value as `true`', () => {
       const { queryByFlagName } = render(<TestComponent />);
 
       expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('true');
@@ -41,7 +41,7 @@ describe('with `propKey`', () => {
       'customPropKey'
     )(components.FlagsToComponent);
 
-    it('should render receive the flag value is `false`', () => {
+    it('should render receive the flag value as `false`', () => {
       const { queryByFlagName } = render(<TestComponent />);
 
       expect(queryByFlagName('customPropKey')).toHaveTextContent('false');
