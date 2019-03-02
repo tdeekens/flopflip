@@ -30,10 +30,6 @@ describe('rendering', () => {
     wrapper = shallow(<Configure {...props} />);
   });
 
-  it('should match snapshot', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('should render a `<ConfigureAdapter>`', () => {
     expect(wrapper).toRender(ConfigureAdapter);
   });

@@ -13,10 +13,6 @@ describe('rendering', () => {
     wrapper = shallow(<Component />);
   });
 
-  it('should match snapshot', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('should render a `<FlagsContext.Consumer>`', () => {
     expect(wrapper).toRender(FlagsContext.Consumer);
   });
