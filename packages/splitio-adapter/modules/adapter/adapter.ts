@@ -19,10 +19,10 @@ type AdapterState = {
   manager?: SplitIO.IManager;
 };
 type ClientInitializationOptions = {
-  [key: string]: any;
   core?: {
     [key: string]: string;
   };
+  [key: string]: any;
 };
 
 const adapterState: AdapterState = {
