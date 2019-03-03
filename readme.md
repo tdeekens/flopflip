@@ -82,54 +82,70 @@ In both examples flags will update in realtime (depending on the adapter and pro
 
 ## ❯ Package Status
 
-| Package                                                  | Version                                                                                    | Dependencies                                                                                                             | Downloads                                                                                           |
-| -------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
-| [`react`](/packages/react)                               | [![react Version][react-icon]][react-version]                                              | [![react Dependencies Status][react-dependencies-icon]][react-dependencies]                                              | [![react Downloads][react-downloads]][react-downloads]                                              |
-| [`react-broadcast`](/packages/react-broadcast)           | [![react-broadcast Version][react-broadcast-icon]][react-broadcast-version]                | [![react-broadcast Dependencies Status][react-broadcast-dependencies-icon]][react-broadcast-dependencies]                | [![react-broadcast Downloads][react-broadcast-downloads]][react-broadcast-downloads]                |
-| [`react-redux`](/packages/react-redux)                   | [![react-redux Version][react-redux-icon]][react-redux-version]                            | [![react-redux Dependencies Status][react-redux-dependencies-icon]][react-redux-dependencies]                            | [![react-redux Downloads][react-redux-downloads]][react-redux-downloads]                            |
-| [`launchdarkly-adapter`](/packages/launchdarkly-adapter) | [![launchdarkly-adapter Version][launchdarkly-adapter-icon]][launchdarkly-adapter-version] | [![launchdarkly-adapter Dependencies Status][launchdarkly-adapter-dependencies-icon]][launchdarkly-adapter-dependencies] | [![launchdarkly-adapter Downloads][launchdarkly-adapter-downloads]][launchdarkly-adapter-downloads] |
-| [`splitio-adapter`](/packages/splitio-adapter)           | [![splitio-adapter Version][splitio-adapter-icon]][splitio-adapter-version]                | [![splitio-adapter Dependencies Status][splitio-adapter-dependencies-icon]][splitio-adapter-dependencies]                | [![splitio-adapter Downloads][splitio-adapter-downloads]][splitio-adapter-downloads]                |
-| [`memory-adapter`](/packages/memory-adapter)             | [![memory-adapter Version][memory-adapter-icon]][memory-adapter-version]                   | [![memory-adapter Dependencies Status][memory-adapter-dependencies-icon]][memory-adapter-dependencies]                   | [![memory-adapter Downloads][memory-adapter-downloads]][memory-adapter-downloads]                   |
-| [`localstorage-adapter`](/packages/localstorage-adapter) | [![localstorage-adapter Version][localstorage-adapter-icon]][localstorage-adapter-version] | [![localstorage-adapter Dependencies Status][localstorage-adapter-dependencies-icon]][localstorage-adapter-dependencies] | [![localstorage-adapter Downloads][localstorage-adapter-downloads]][localstorage-adapter-downloads] |
-| [`types`](/packages/types)                               | [![types Version][types-icon]][types-version]                                              | [![types Dependencies Status][types-dependencies-icon]][types-dependencies]                                              | [![types Downloads][types-downloads]][types-downloads]                                              |
+| Package                                                  | Version                                                                                                                                                                                                       | Dependencies                                                                                                             | Downloads                                                                                           |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| [`react`](/packages/react)                               | [![react Version][react-latest-icon]][react-latest-version] [![react Version][react-next-icon]][react-next-version]                                                                                           | [![react Dependencies Status][react-dependencies-icon]][react-dependencies]                                              | [![react Downloads][react-downloads]][react-downloads]                                              |
+| [`react-broadcast`](/packages/react-broadcast)           | [![react-broadcast Version][react-broadcast-latest-icon]][react-broadcast-latest-version] [![react-broadcast Version][react-broadcast-next-icon]][react-broadcast-next-version]                               | [![react-broadcast Dependencies Status][react-broadcast-dependencies-icon]][react-broadcast-dependencies]                | [![react-broadcast Downloads][react-broadcast-downloads]][react-broadcast-downloads]                |
+| [`react-redux`](/packages/react-redux)                   | [![react-redux Version][react-redux-latest-icon]][react-redux-latest-version] [![react-redux Version][react-redux-next-icon]][react-redux-next-version]                                                       | [![react-redux Dependencies Status][react-redux-dependencies-icon]][react-redux-dependencies]                            | [![react-redux Downloads][react-redux-downloads]][react-redux-downloads]                            |
+| [`launchdarkly-adapter`](/packages/launchdarkly-adapter) | [![launchdarkly-adapter Version][launchdarkly-adapter-latest-icon]][launchdarkly-adapter-latest-version] [![launchdarkly-adapter Version][launchdarkly-adapter-next-icon]][launchdarkly-adapter-next-version] | [![launchdarkly-adapter Dependencies Status][launchdarkly-adapter-dependencies-icon]][launchdarkly-adapter-dependencies] | [![launchdarkly-adapter Downloads][launchdarkly-adapter-downloads]][launchdarkly-adapter-downloads] |
+| [`splitio-adapter`](/packages/splitio-adapter)           | [![splitio-adapter Version][splitio-adapter-latest-icon]][splitio-adapter-latest-version] [![splitio-adapter Version][splitio-adapter-next-icon]][splitio-adapter-next-version]                               | [![splitio-adapter Dependencies Status][splitio-adapter-dependencies-icon]][splitio-adapter-dependencies]                | [![splitio-adapter Downloads][splitio-adapter-downloads]][splitio-adapter-downloads]                |
+| [`memory-adapter`](/packages/memory-adapter)             | [![memory-adapter Version][memory-adapter-latest-icon]][memory-adapter-latest-version] [![memory-adapter Version][memory-adapter-next-icon]][memory-adapter-next-version]                                     | [![memory-adapter Dependencies Status][memory-adapter-dependencies-icon]][memory-adapter-dependencies]                   | [![memory-adapter Downloads][memory-adapter-downloads]][memory-adapter-downloads]                   |
+| [`localstorage-adapter`](/packages/localstorage-adapter) | [![localstorage-adapter Version][localstorage-adapter-latest-icon]][localstorage-adapter-latest-version] [![localstorage-adapter Version][localstorage-adapter-next-icon]][localstorage-adapter-next-version] | [![localstorage-adapter Dependencies Status][localstorage-adapter-dependencies-icon]][localstorage-adapter-dependencies] | [![localstorage-adapter Downloads][localstorage-adapter-downloads]][localstorage-adapter-downloads] |
+| [`types`](/packages/types)                               | [![types Version][types-latest-icon]][types-latest-version] [![types Version][types-next-icon]][types-next-version]                                                                                           | [![types Dependencies Status][types-dependencies-icon]][types-dependencies]                                              | [![types Downloads][types-downloads]][types-downloads]                                              |
 
-[types-version]: https://www.npmjs.com/package/@flopflip/types
-[types-icon]: https://img.shields.io/npm/v/@flopflip/types.svg?style=flat-square
+[types-latest-version]: https://badgen.net/npm/v/@flopflip/types
+[types-next-version]: https://badgen.net/npm/v/@flopflip/types
+[types-latest-icon]: https://badgen.net/npm/v/@flopflip/types
+[types-next-icon]: https://badgen.net/npm/v/@flopflip/types/next
 [types-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/types
 [types-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&
 [types-downloads]: https://img.shields.io/npm/dm/@flopflip/types.svg
-[splitio-adapter-version]: https://www.npmjs.com/package/@flopflip/splitio-adapter
-[splitio-adapter-icon]: https://img.shields.io/npm/v/@flopflip/splitio-adapter.svg?style=flat-square
+[splitio-adapter-latest-version]: https://badgen.net/npm/v/@flopflip/splitio-adapter
+[splitio-adapter-next-version]: https://badgen.net/npm/v/@flopflip/splitio-adapter
+[splitio-adapter-latest-icon]: https://badgen.net/npm/v/@flopflip/splitio-adapter
+[splitio-adapter-next-icon]: https://badgen.net/npm/v/@flopflip/splitio-adapter/next
 [splitio-adapter-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/splitio-adapter
 [splitio-adapter-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/splitio-adapter
 [splitio-adapter-downloads]: https://img.shields.io/npm/dm/@flopflip/splitio-adapters.svg
-[launchdarkly-adapter-version]: https://www.npmjs.com/package/@flopflip/launchdarkly-adapter
-[launchdarkly-adapter-icon]: https://img.shields.io/npm/v/@flopflip/launchdarkly-adapter.svg?style=flat-square
+[launchdarkly-adapter-latest-version]: https://badgen.net/npm/v/@flopflip/launchdarkly-adapter
+[launchdarkly-adapter-next-version]: https://badgen.net/npm/v/@flopflip/launchdarkly-adapter
+[launchdarkly-adapter-latest-icon]: https://badgen.net/npm/v/@flopflip/launchdarkly-adapter
+[launchdarkly-adapter-next-icon]: https://badgen.net/npm/v/@flopflip/launchdarkly-adapter/next
 [launchdarkly-adapter-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/launchdarkly-adapter
 [launchdarkly-adapter-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/launchdarkly-adapter
 [launchdarkly-adapter-downloads]: https://img.shields.io/npm/dm/@flopflip/launchdarkly-adapter.svg
-[memory-adapter-version]: https://www.npmjs.com/package/@flopflip/memory-adapter
-[memory-adapter-icon]: https://img.shields.io/npm/v/@flopflip/memory-adapter.svg?style=flat-square
+[memory-adapter-latest-version]: https://badgen.net/npm/v/@flopflip/memory-adapter
+[memory-adapter-next-version]: https://badgen.net/npm/v/@flopflip/memory-adapter
+[memory-adapter-latest-icon]: https://badgen.net/npm/v/@flopflip/memory-adapter
+[memory-adapter-next-icon]: https://badgen.net/npm/v/@flopflip/memory-adapter/next
 [memory-adapter-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/memory-adapter
 [memory-adapter-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/memory-adapter
 [memory-adapter-downloads]: https://img.shields.io/npm/dm/@flopflip/memory-adapter.svg
-[localstorage-adapter-version]: https://www.npmjs.com/package/@flopflip/localstorage-adapter
-[localstorage-adapter-icon]: https://img.shields.io/npm/v/@flopflip/localstorage-adapter.svg?style=flat-square
+[localstorage-adapter-latest-version]: https://badgen.net/npm/v/@flopflip/localstorage-adapter
+[localstorage-adapter-next-version]: https://badgen.net/npm/v/@flopflip/localstorage-adapter
+[localstorage-adapter-latest-icon]: https://badgen.net/npm/v/@flopflip/localstorage-adapter
+[localstorage-adapter-next-icon]: https://badgen.net/npm/v/@flopflip/localstorage-adapter/next
 [localstorage-adapter-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/localstorage-adapter
 [localstorage-adapter-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/localstorage-adapter
 [localstorage-adapter-downloads]: https://img.shields.io/npm/dm/@flopflip/localstorage-adapter.svg
-[react-version]: https://www.npmjs.com/package/@flopflip/react
-[react-icon]: https://img.shields.io/npm/v/@flopflip/react.svg?style=flat-square
+[react-latest-version]: https://badgen.net/npm/v/@flopflip/react
+[react-next-version]: https://badgen.net/npm/v/@flopflip/react
+[react-latest-icon]: https://badgen.net/npm/v/@flopflip/react
+[react-next-icon]: https://badgen.net/npm/v/@flopflip/react/next
 [react-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/react
 [react-downloads]: https://img.shields.io/npm/dm/@flopflip/react.svg
 [react-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/react
-[react-broadcast-version]: https://www.npmjs.com/package/@flopflip/react-broadcast
-[react-broadcast-icon]: https://img.shields.io/npm/v/@flopflip/react-broadcast.svg?style=flat-square
+[react-broadcast-latest-version]: https://badgen.net/npm/v/@flopflip/react-broadcast
+[react-broadcast-next-version]: https://badgen.net/npm/v/@flopflip/react-broadcast
+[react-broadcast-latest-icon]: https://badgen.net/npm/v/@flopflip/react-broadcast
+[react-broadcast-next-icon]: https://badgen.net/npm/v/@flopflip/react-broadcast/next
 [react-broadcast-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/react-broadcast
 [react-broadcast-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/react-broadcast
 [react-broadcast-downloads]: https://img.shields.io/npm/dm/@flopflip/react-broadcast.svg
-[react-redux-version]: https://www.npmjs.com/package/@flopflip/react-redux
-[react-redux-icon]: https://img.shields.io/npm/v/@flopflip/react-redux.svg?style=flat-square
+[react-redux-latest-version]: https://badgen.net/npm/v/@flopflip/react-redux
+[react-redux-next-version]: https://badgen.net/npm/v/@flopflip/react-redux
+[react-redux-latest-icon]: https://badgen.net/npm/v/@flopflip/react-redux
+[react-redux-next-icon]: https://badgen.net/npm/v/@flopflip/react-redux/next
 [react-redux-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/react-redux
 [react-redux-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/react-redux
 [react-redux-downloads]: https://img.shields.io/npm/dm/@flopflip/react-redux.svg
