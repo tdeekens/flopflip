@@ -760,28 +760,27 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@flopflip/launchdarkly-adapter@2.4.6":
-  version "2.4.6"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.4.6.tgz#005226c96626400ff018ce3b5a5f3cd0682cad85"
-  integrity sha512-/j4lIYH0VbNTN+BpQKpOftMT9shsYTFNsgzHXdqPPn4V6n6fynUhN6sQ6AmafzPSNcPhPpbEsAa9dUmF0c8prg==
+"@flopflip/launchdarkly-adapter@2.4.7":
+  version "2.4.7"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.4.7.tgz#bd0b8df92f1b99727d3ef7a0dc9691382be5dea7"
+  integrity sha512-UWYjIrHGUt7Qi10HCssAkOrK06QavcX25SUb9S0YvraxA8uxD5EMm/Wd4WFLvWXr2GFUl+XFKI8VrfpuU3MpOg==
   dependencies:
-    ldclient-js "2.8.0"
-    lodash.camelcase "4.3.0"
-    lodash.isequal "4.5.0"
+    ldclient-js "2.9.4"
+    lodash "4.17.11"
     tiny-warning "1.0.2"
 
-"@flopflip/localstorage-adapter@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-1.1.1.tgz#717ed8269265dc3f20ee0c710382ed7146ed2e3e"
-  integrity sha512-9L2ePc28J3z4se8OoNxUEDQvR6bpFpSNinWKDorzqVdI7Az3441OPHs3gqOWcCwqdyd+hNjx7GCDGWThH+vHpg==
+"@flopflip/localstorage-adapter@1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-1.1.2.tgz#5b5a9da75883c4a2f1b917e00e02772862148eb5"
+  integrity sha512-xrPoDrgP93tkG1dtb0LQbJkwndkCgDbiji7FvJaOF7JiBTW/pXgTlc4QGQgGiYlHcR2IjfuCmYhqo3cnt7XOEA==
   dependencies:
     invariant "2.2.4"
     mitt "1.1.3"
 
-"@flopflip/memory-adapter@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-1.1.1.tgz#63e5d8f9711f12ce1173277157ec6d41a69f4adc"
-  integrity sha512-c/eksJRb3Uj8YYDdZJGhHd7jVOCGVMH4z99KqePbqcn6flwmUVKXC+5VrmX194RxLSXjOkpM01mSENQk/6qm6Q==
+"@flopflip/memory-adapter@1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-1.2.0.tgz#0058102a42c8f29db69e3759a3a0b3ee20821c72"
+  integrity sha512-Vk7IxpZQ7RNBXM9u6cEPiS/zw4OQXpKJVVfl0gdQ866ddjPgrFx3UaiSTsYRRw4BQpBrsj2UA2tR8gfv0Veg5Q==
   dependencies:
     invariant "2.2.4"
     mitt "1.1.3"
@@ -5842,14 +5841,21 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
-ldclient-js@2.8.0:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-2.8.0.tgz#ed1a1bc6999cb3aa2cb6dd5d6e11e2b5b0f031cb"
-  integrity sha512-PaWEUlWMMn0vH9or6b6TrBLuyVuvQpMBAGB158j7RBK8FC+HvymQpKLIYWUh/GvbktA0OLBD4xXc9If0um7E8Q==
+ldclient-js-common@^2.9.4:
+  version "2.9.4"
+  resolved "https://registry.yarnpkg.com/ldclient-js-common/-/ldclient-js-common-2.9.4.tgz#5e52615e57efd6f37f24ac3b01091817f07129b9"
+  integrity sha512-ys8z2DCfThRsLm0Q3DJY4MIixzN/O/Mmsiobi2WSo0V7XTd/ZtYEMv5Tfq/ta+ZwxoXmWKq0uRZoBS2btK1Ifw==
   dependencies:
     base64-js "1.3.0"
-    escape-string-regexp "1.0.5"
     fast-deep-equal "2.0.1"
+
+ldclient-js@2.9.4:
+  version "2.9.4"
+  resolved "https://registry.yarnpkg.com/ldclient-js/-/ldclient-js-2.9.4.tgz#38965d52520eb678f4dfccbb73c1b0babab534af"
+  integrity sha512-BobLN6DJiZQaLjTuXKGU7IkxjaM8ib5ng1ulXZq0Hp2Lu5jwlbR8/UJWPP1KW1oYgQLmmzpy9qMhuUMV+K9OUw==
+  dependencies:
+    escape-string-regexp "1.0.5"
+    ldclient-js-common "^2.9.4"
 
 left-pad@^1.3.0:
   version "1.3.0"
@@ -5948,11 +5954,6 @@ lodash.intersection@4.4.0:
   resolved "https://registry.yarnpkg.com/lodash.intersection/-/lodash.intersection-4.4.0.tgz#0a11ba631d0e95c23c7f2f4cbb9a692ed178e705"
   integrity sha1-ChG6Yx0OlcI8fy9Mu5ppLtF45wU=
 
-lodash.isequal@4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
-  integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
-
 lodash.isnil@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/lodash.isnil/-/lodash.isnil-4.0.0.tgz#49e28cd559013458c814c5479d3c663a21bfaa6c"
@@ -5998,7 +5999,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-"lodash@>=3.5 <5", lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.17.5:
+lodash@4.17.11, "lodash@>=3.5 <5", lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.17.5:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
