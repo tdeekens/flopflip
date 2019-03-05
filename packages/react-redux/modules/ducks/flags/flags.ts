@@ -14,15 +14,12 @@ const initialState: State = {};
 const reducer = (
   state: State = initialState,
   action: UpdateFlagsAction
-): State => {
+): State | Flags => {
   switch (action.type) {
     case UPDATE_FLAGS:
       return {
-        ...state,
-        flags: {
-          ...state.flags,
-          ...action.payload.flags,
-        },
+        ...state.flags,
+        ...action.payload.flags,
       };
 
     default:
