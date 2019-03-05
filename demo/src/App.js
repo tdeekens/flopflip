@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import flowRight from 'lodash.flowright';
 import { Provider, connect } from 'react-redux';
 import classNames from 'classnames';
-//import adapter from '@flopflip/launchdarkly-adapter';
-//import adapter, { updateFlags } from '@flopflip/memory-adapter';
+// Import adapter from '@flopflip/launchdarkly-adapter';
+// import adapter, { updateFlags } from '@flopflip/memory-adapter';
 import adapter, { updateFlags } from '@flopflip/localstorage-adapter';
 import {
   ConfigureFlopFlip,
@@ -11,7 +12,7 @@ import {
   injectFeatureToggle,
   ToggleFeature,
 } from '@flopflip/react-redux';
-// change to `from '@flopflip/react-broadcast'` and everything will just work wtihout redux
+// Change to `from '@flopflip/react-broadcast'` and everything will just work wtihout redux
 import {
   increment,
   incrementAsync,
@@ -28,8 +29,8 @@ const UntoggledFeature = () => <h6>Disabled Feature</h6>;
 const IncrementAsyncButton = props => (
   <button
     type="button"
-    onClick={props.incrementAsync}
     disabled={props.isIncrementing}
+    onClick={props.incrementAsync}
   >
     Increment Async
   </button>
@@ -58,8 +59,8 @@ const IncrementSyncButton = props => (
       'incrementSyncButton--blue': props.syncButtonStyle === 'blue',
       'incrementSyncButton--purple': props.syncButtonStyle === 'purple',
     })}
-    onClick={props.increment}
     disabled={props.isIncrementing}
+    onClick={props.increment}
   >
     Increment
   </button>
@@ -99,8 +100,8 @@ const Counter = props => (
     <div>
       <button
         type="button"
-        onClick={props.decrement}
         disabled={props.isDecrementing}
+        onClick={props.decrement}
       >
         Decrementing
       </button>
@@ -111,8 +112,8 @@ const Counter = props => (
       >
         <button
           type="button"
-          onClick={props.decrementAsync}
           disabled={props.isDecrementing}
+          onClick={props.decrementAsync}
         >
           Decrement Async
         </button>
