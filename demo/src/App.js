@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import flowRight from 'lodash.flowright';
 import { Provider, connect } from 'react-redux';
 import classNames from 'classnames';
-//import adapter from '@flopflip/launchdarkly-adapter';
-//import adapter, { updateFlags } from '@flopflip/memory-adapter';
+// Import adapter from '@flopflip/launchdarkly-adapter';
+// import adapter, { updateFlags } from '@flopflip/memory-adapter';
 import adapter, { updateFlags } from '@flopflip/localstorage-adapter';
 import {
   ConfigureFlopFlip,
@@ -11,7 +12,7 @@ import {
   injectFeatureToggle,
   ToggleFeature,
 } from '@flopflip/react-redux';
-// change to `from '@flopflip/react-broadcast'` and everything will just work wtihout redux
+// Change to `from '@flopflip/react-broadcast'` and everything will just work wtihout redux
 import {
   increment,
   incrementAsync,
@@ -28,8 +29,8 @@ const UntoggledFeature = () => <h6>Disabled Feature</h6>;
 const IncrementAsyncButton = props => (
   <button
     type="button"
-    onClick={props.incrementAsync}
     disabled={props.isIncrementing}
+    onClick={props.incrementAsync}
   >
     Increment Async
   </button>
@@ -58,8 +59,8 @@ const IncrementSyncButton = props => (
       'incrementSyncButton--blue': props.syncButtonStyle === 'blue',
       'incrementSyncButton--purple': props.syncButtonStyle === 'purple',
     })}
-    onClick={props.increment}
     disabled={props.isIncrementing}
+    onClick={props.increment}
   >
     Increment
   </button>
@@ -99,8 +100,8 @@ const Counter = props => (
     <div>
       <button
         type="button"
-        onClick={props.decrement}
         disabled={props.isDecrementing}
+        onClick={props.decrement}
       >
         Decrementing
       </button>
@@ -111,8 +112,8 @@ const Counter = props => (
       >
         <button
           type="button"
-          onClick={props.decrementAsync}
           disabled={props.isDecrementing}
+          onClick={props.decrementAsync}
         >
           Decrement Async
         </button>
@@ -152,14 +153,34 @@ const defaultFlags = { 'aDefault-Flag': true };
 const adapterArgs = {
   clientSideId: '596788417a20200c2b70c89e',
   user: { key: 'ld-2@tdeekens.name' },
-  defaultFlags,
 };
 
 class App extends Component {
-  render(): React.ReactNode {
+  state = {
+    hasError: false,
+  };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {
+    console.log(error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // You can render any custom fallback UI
+      return <h1>Something went wrong.</h1>;
+    }
+
     return (
       <Provider store={store}>
-        <ConfigureFlopFlip adapter={adapter} adapterArgs={adapterArgs}>
+        <ConfigureFlopFlip
+          adapter={adapter}
+          adapterArgs={adapterArgs}
+          defaultFlags={defaultFlags}
+        >
           <div className="App">
             <div className="App-header">
               <img src={logo} className="App-logo" alt="logo" />

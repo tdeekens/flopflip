@@ -35,27 +35,8 @@ describe('action creators', () => {
 });
 
 describe('reducers', () => {
-  const preloadedState = {
-    flags: undefined,
-  };
   describe('when updating flags', () => {
     describe('without previous flags', () => {
-      let payload;
-      beforeEach(() => {
-        payload = {
-          a: true,
-          b: false,
-        };
-      });
-
-      it('should set the new flags', () => {
-        expect(reducer(undefined, { type: UPDATE_FLAGS, payload })).toEqual({
-          ...preloadedState,
-        });
-      });
-    });
-
-    describe('with previous flags', () => {
       let payload;
       beforeEach(() => {
         payload = {
@@ -66,12 +47,65 @@ describe('reducers', () => {
         };
       });
 
-      it('should merge with new flags', () => {
-        expect(reducer({ c: true }, { type: UPDATE_FLAGS, payload })).toEqual({
-          ...preloadedState,
-          ...payload,
+      it('should set the new flags', () => {
+        const reduced = reducer(undefined, { type: UPDATE_FLAGS, payload });
+
+        expect(reduced).toHaveProperty('flags.a', payload.flags.a);
+        expect(reduced).toHaveProperty('flags.b', payload.flags.b);
+      });
+    });
+
+    describe('with previous state', () => {
+      let payload;
+      let state;
+      beforeEach(() => {
+        state = {
           c: true,
-        });
+        };
+        payload = {
+          flags: {
+            a: true,
+            b: false,
+          },
+        };
+      });
+
+      it('should merge with new flags', () => {
+        const reduced = reducer(state, { type: UPDATE_FLAGS, payload });
+
+        expect(reduced).toHaveProperty('flags.a', payload.flags.a);
+        expect(reduced).toHaveProperty('flags.b', payload.flags.b);
+
+        expect(reduced).toHaveProperty('c', state.c);
+      });
+    });
+
+    describe('with previous flags', () => {
+      let payload;
+      let state;
+      beforeEach(() => {
+        state = {
+          c: true,
+          flags: {
+            d: false,
+          },
+        };
+        payload = {
+          flags: {
+            a: true,
+            b: false,
+          },
+        };
+      });
+
+      it('should merge with new flags', () => {
+        const reduced = reducer(state, { type: UPDATE_FLAGS, payload });
+
+        expect(reduced).toHaveProperty('flags.a', payload.flags.a);
+        expect(reduced).toHaveProperty('flags.b', payload.flags.b);
+
+        expect(reduced).toHaveProperty('c', state.c);
+        expect(reduced).toHaveProperty('flags.d', state.flags.d);
       });
     });
   });
