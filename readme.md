@@ -107,8 +107,8 @@ In both examples flags will update in realtime (depending on the adapter and pro
 [splitio-adapter-next-icon]: https://flat.badgen.net/npm/v/@flopflip/splitio-adapter/next
 [splitio-adapter-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/splitio-adapter
 [splitio-adapter-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/splitio-adapter
-[splitio-adapter-downloads]: https://flat.badgen.net/npm/dm/@flopflip/splitio-adapters
-[splitio-adapter-size]: https://flat.badgen.net/bundlephobia/minzip/@flopflip/splitio-adapters
+[splitio-adapter-downloads]: https://flat.badgen.net/npm/dm/@flopflip/splitio-adapter
+[splitio-adapter-size]: https://flat.badgen.net/bundlephobia/minzip/@flopflip/splitio-adapter
 [launchdarkly-adapter-latest-version]: https://flat.badgen.net/npm/v/@flopflip/launchdarkly-adapter
 [launchdarkly-adapter-next-version]: https://flat.badgen.net/npm/v/@flopflip/launchdarkly-adapter
 [launchdarkly-adapter-latest-icon]: https://flat.badgen.net/npm/v/@flopflip/launchdarkly-adapter
