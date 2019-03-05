@@ -11,15 +11,12 @@ const initialState: State = { status: { isReady: false } };
 const reducer = (
   state: State = initialState,
   action: UpdateStatusAction
-): State => {
+): State | AdapterStatus => {
   switch (action.type) {
     case UPDATE_STATUS:
       return {
-        ...state,
-        status: {
-          ...state.status,
-          isReady: action.payload.status.isReady,
-        },
+        ...state.status,
+        ...action.payload.status,
       };
 
     default:
