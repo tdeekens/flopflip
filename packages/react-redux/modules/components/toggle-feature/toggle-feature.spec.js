@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux';
 import { renderWithAdapter, components } from '@flopflip/test-utils';
 import React from 'react';
-import configureStore from 'redux-mock-store';
+import { createStore } from '../../../test-utils';
 import Configure from '../configure';
 import { STATE_SLICE } from './../../store';
 import ToggleFeature, { mapStateToProps } from './toggle-feature';
@@ -78,7 +78,6 @@ describe('mapStateToProps', () => {
   });
 });
 
-const createMockStore = configureStore();
 const render = (store, TestComponent) =>
   renderWithAdapter(TestComponent, {
     components: {
@@ -97,7 +96,7 @@ describe('<ToggleFeature>', () => {
     );
 
     beforeEach(() => {
-      store = createMockStore({
+      store = createStore({
         [STATE_SLICE]: { flags: { disabledFeature: false } },
       });
     });
@@ -106,6 +105,21 @@ describe('<ToggleFeature>', () => {
       const { queryByFlagName } = render(store, <TestComponent />);
 
       expect(queryByFlagName('disabledFeature')).not.toBeInTheDocument();
+    });
+
+    describe('when enabling feature', () => {
+      it('should render the component representing a enabled feature', async () => {
+        const { queryByFlagName, waitUntilReady, changeFlagVariation } = render(
+          store,
+          <TestComponent />
+        );
+
+        await waitUntilReady();
+
+        changeFlagVariation('disabledFeature', true);
+
+        expect(queryByFlagName('disabledFeature')).toBeInTheDocument();
+      });
     });
   });
 
@@ -118,7 +132,7 @@ describe('<ToggleFeature>', () => {
     );
 
     beforeEach(() => {
-      store = createMockStore({
+      store = createStore({
         [STATE_SLICE]: { flags: { enabledFeature: true } },
       });
     });
