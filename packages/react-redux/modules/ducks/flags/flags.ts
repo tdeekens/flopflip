@@ -19,7 +19,10 @@ const reducer = (
     case UPDATE_FLAGS:
       return {
         ...state,
-        flags: action.payload.flags,
+        flags: {
+          ...state.flags,
+          ...action.payload.flags,
+        },
       };
 
     default:
