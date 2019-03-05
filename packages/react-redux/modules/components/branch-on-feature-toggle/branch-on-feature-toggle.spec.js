@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderWithAdapter, components } from '@flopflip/test-utils';
 import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
+import { createStore } from '../../../test-utils';
 import { STATE_SLICE } from '../../store';
 import branchOnFeatureToggle from './branch-on-feature-toggle';
 import Configure from '../configure';
@@ -13,7 +13,6 @@ const render = (store, TestComponent) =>
       Wrapper: <Provider store={store} />,
     },
   });
-const createMockStore = configureStore();
 
 describe('without `untoggledComponent', () => {
   describe('when feature is disabled', () => {
@@ -22,7 +21,7 @@ describe('without `untoggledComponent', () => {
       components.ToggledComponent
     );
     beforeEach(() => {
-      store = createMockStore({
+      store = createStore({
         [STATE_SLICE]: { flags: { disabledFeature: false } },
       });
     });
@@ -32,6 +31,21 @@ describe('without `untoggledComponent', () => {
 
       expect(queryByFlagName('isFeatureEnabled')).not.toBeInTheDocument();
     });
+
+    describe('when enabling feature', () => {
+      it('should render the component representing a enabled feature', async () => {
+        const { queryByFlagName, waitUntilReady, changeFlagVariation } = render(
+          store,
+          <TestComponent />
+        );
+
+        await waitUntilReady();
+
+        changeFlagVariation('disabledFeature', true);
+
+        expect(queryByFlagName('isFeatureEnabled')).toBeInTheDocument();
+      });
+    });
   });
 
   describe('when feature is enabled', () => {
@@ -40,7 +54,7 @@ describe('without `untoggledComponent', () => {
       components.ToggledComponent
     );
     beforeEach(() => {
-      store = createMockStore({
+      store = createStore({
         [STATE_SLICE]: { flags: { enabledFeature: true } },
       });
     });
@@ -65,7 +79,7 @@ describe('with `untoggledComponent', () => {
     )(components.ToggledComponent);
 
     beforeEach(() => {
-      store = createMockStore({
+      store = createStore({
         [STATE_SLICE]: { flags: { disabledFeature: false } },
       });
     });
@@ -97,7 +111,7 @@ describe('with `untoggledComponent', () => {
     )(components.ToggledComponent);
 
     beforeEach(() => {
-      store = createMockStore({
+      store = createStore({
         [STATE_SLICE]: { flags: { enabledFeature: true } },
       });
     });

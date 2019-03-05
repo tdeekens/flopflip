@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderWithAdapter, components } from '@flopflip/test-utils';
 import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
+import { createStore } from '../../../test-utils';
 import { STATE_SLICE } from '../../store';
 import injectFeatureToggle from './inject-feature-toggle';
 import Configure from '../configure';
@@ -14,8 +14,6 @@ const render = (store, TestComponent) =>
     },
   });
 
-const createMockStore = configureStore();
-
 describe('without `propKey`', () => {
   describe('when feature is disabled', () => {
     let store;
@@ -24,7 +22,7 @@ describe('without `propKey`', () => {
     );
 
     beforeEach(() => {
-      store = createMockStore({
+      store = createStore({
         [STATE_SLICE]: { flags: { disabledFeature: false } },
       });
     });
@@ -33,6 +31,21 @@ describe('without `propKey`', () => {
       const { queryByFlagName } = render(store, <TestComponent />);
 
       expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('false');
+    });
+
+    describe('when enabling feature', () => {
+      it('should render the component representing a enabled feature', async () => {
+        const { queryByFlagName, waitUntilReady, changeFlagVariation } = render(
+          store,
+          <TestComponent />
+        );
+
+        await waitUntilReady();
+
+        changeFlagVariation('disabledFeature', true);
+
+        expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('true');
+      });
     });
   });
 
@@ -43,7 +56,7 @@ describe('without `propKey`', () => {
     );
 
     beforeEach(() => {
-      store = createMockStore({
+      store = createStore({
         [STATE_SLICE]: { flags: { enabledFeature: true } },
       });
     });
@@ -65,7 +78,7 @@ describe('with `propKey`', () => {
     )(components.FlagsToComponent);
 
     beforeEach(() => {
-      store = createMockStore({
+      store = createStore({
         [STATE_SLICE]: { flags: { disabledFeature: false } },
       });
     });
