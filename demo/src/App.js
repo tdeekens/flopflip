@@ -153,14 +153,34 @@ const defaultFlags = { 'aDefault-Flag': true };
 const adapterArgs = {
   clientSideId: '596788417a20200c2b70c89e',
   user: { key: 'ld-2@tdeekens.name' },
-  defaultFlags,
 };
 
 class App extends Component {
-  render(): React.ReactNode {
+  state = {
+    hasError: false,
+  };
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, info) {
+    console.log(error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // You can render any custom fallback UI
+      return <h1>Something went wrong.</h1>;
+    }
+
     return (
       <Provider store={store}>
-        <ConfigureFlopFlip adapter={adapter} adapterArgs={adapterArgs}>
+        <ConfigureFlopFlip
+          adapter={adapter}
+          adapterArgs={adapterArgs}
+          defaultFlags={defaultFlags}
+        >
           <div className="App">
             <div className="App-header">
               <img src={logo} className="App-logo" alt="logo" />
