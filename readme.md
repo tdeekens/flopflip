@@ -68,8 +68,12 @@ Another example would be to show a `<button>` but disable it for users who shoul
 
 ```jsx
 <ToggleFeature flag="featureFlagName">
-  {({ isFeatureEnabled }) => <button disabled={!isFeatureEnabled} onClick={this.handleClick}>Try out feature</button>}
-<ToggleFeature/>
+  {({ isFeatureEnabled }) => (
+    <button disabled={!isFeatureEnabled} onClick={this.handleClick}>
+      Try out feature
+    </button>
+  )}
+</ToggleFeature>
 ```
 
 In both examples flags will update in realtime (depending on the adapter and provider) and the User Interface will update accordingly. If this sounds interesting to you, keep reading.
