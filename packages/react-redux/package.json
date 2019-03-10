@@ -44,7 +44,7 @@
     "@flopflip/react": "^7.0.1",
     "@flopflip/types": "^2.0.0",
     "@types/lodash": "4.14.122",
-    "@types/react-redux": "7.0.1",
+    "@types/react-redux": "7.0.3",
     "lodash": "4.17.11"
   },
   "peerDependencies": {
