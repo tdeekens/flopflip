@@ -1,21 +1,20 @@
 import { AdapterStatus } from '@flopflip/types';
-import { State } from '../../types';
 import { UpdateStatusAction } from './types';
 
 // Actions
 export const UPDATE_STATUS = '@flopflip/status/update';
 
-const initialState: State = { status: { isReady: false } };
+const initialState: AdapterStatus = { isReady: false };
 
 // Reducer
 const reducer = (
-  state: State = initialState,
+  state: AdapterStatus = initialState,
   action: UpdateStatusAction
-): State | AdapterStatus => {
+): AdapterStatus => {
   switch (action.type) {
     case UPDATE_STATUS:
       return {
-        ...state.status,
+        ...state,
         ...action.payload.status,
       };
 
