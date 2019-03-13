@@ -18,7 +18,7 @@ const reducer = (
   switch (action.type) {
     case UPDATE_FLAGS:
       return {
-        ...state.flags,
+        ...state,
         ...action.payload.flags,
       };
 
