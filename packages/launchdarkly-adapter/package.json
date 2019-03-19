@@ -35,8 +35,8 @@
     "@types/lodash": "4.14.123"
   },
   "dependencies": {
-    "@babel/runtime": "7.3.4",
-    "ldclient-js": "2.9.4",
+    "@babel/runtime": "7.4.0",
+    "ldclient-js": "2.9.5",
     "lodash": "4.17.11",
     "tiny-warning": "1.0.2"
   },
