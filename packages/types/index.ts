@@ -7,20 +7,20 @@ export type User = {
 };
 export type AdapterArgs = {
   user: User;
-  onFlagsStateChange: (flags: Flags) => void;
-  onStatusStateChange: (status: AdapterStatus) => void;
   adapterConfiguration: {
     pollingInteral: number;
   };
+  onFlagsStateChange(flags: Flags): void;
+  onStatusStateChange(status: AdapterStatus): void;
 };
 export type AdapterStatus = {
   isReady?: boolean;
   isConfigured?: boolean;
 };
 export type Adapter = {
-  configure: (adapterArgs: AdapterArgs) => Promise<any>;
-  reconfigure: (adapterArgs: AdapterArgs) => Promise<any>;
-  getIsReady: () => boolean;
+  configure(adapterArgs: AdapterArgs): Promise<any>;
+  reconfigure(adapterArgs: AdapterArgs): Promise<any>;
+  getIsReady(): boolean;
 };
 export type AdapterStatusChange = { [key: string]: boolean };
 export type OnFlagsStateChangeCallback = (flags: Flags) => void;
@@ -36,7 +36,9 @@ export type AdapterReconfiguration = {
   options: AdapterReconfigurationOptions;
 };
 export type ConfigureAdapterChildren = ({
-  isAdapterReady: boolean,
+  isAdapterReady,
+}: {
+  isAdapterReady: boolean;
 }) => React.ReactNode | React.ReactNode | null;
 export type ReconfigureAdapter = (
   adapterArgs: AdapterArgs,
