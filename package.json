@@ -54,7 +54,7 @@
     "@babel/plugin-transform-regenerator": "7.4.0",
     "@babel/plugin-transform-runtime": "7.4.0",
     "@babel/polyfill": "7.4.0",
-    "@babel/preset-env": "7.4.0",
+    "@babel/preset-env": "7.4.2",
     "@babel/preset-react": "7.0.0",
     "@babel/preset-typescript": "7.3.3",
     "@commercetools/jest-enzyme-matchers": "1.1.2",
