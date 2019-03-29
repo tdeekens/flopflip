@@ -35,6 +35,6 @@
     "jest-runner-eslint": "0.7.3",
     "jest-runner-prettier": "0.2.6",
     "jest-watch-yarn-workspaces": "1.1.0",
-    "react-testing-library": "6.0.1"
+    "react-testing-library": "6.0.3"
   }
 }
