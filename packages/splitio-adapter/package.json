@@ -37,7 +37,8 @@
   "dependencies": {
     "@babel/runtime": "7.4.2",
     "@splitsoftware/splitio": "10.6.1",
-    "lodash": "4.17.11"
+    "lodash": "4.17.11",
+    "deepmerge": "3.2.0"
   },
   "keywords": [
     "feature-flags",

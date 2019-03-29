@@ -7,6 +7,7 @@ import {
   OnFlagsStateChangeCallback,
   OnStatusStateChangeCallback,
 } from '@flopflip/types';
+import merge from 'deepmerge';
 import { SplitFactory } from '@splitsoftware/splitio';
 import camelCase from 'lodash/camelCase';
 import omit from 'lodash/omit';
@@ -92,10 +93,8 @@ export const createAnonymousUserKey = (): string =>
     .toString(36)
     .substring(2);
 
-const ensureUser = (user: User): User => ({
-  ...user,
-  key: user && user.key ? user.key : createAnonymousUserKey(),
-});
+const ensureUser = (user: User): User =>
+  merge(user, { key: user && user.key ? user.key : createAnonymousUserKey() });
 
 const initializeClient = (
   authorizationKey: string,

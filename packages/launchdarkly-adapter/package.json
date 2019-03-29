@@ -38,7 +38,8 @@
     "@babel/runtime": "7.4.2",
     "ldclient-js": "2.9.5",
     "lodash": "4.17.11",
-    "tiny-warning": "1.0.2"
+    "tiny-warning": "1.0.2",
+    "deepmerge": "3.2.0"
   },
   "keywords": [
     "feature-flags",
