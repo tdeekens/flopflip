@@ -93,8 +93,8 @@ export const createAnonymousUserKey = (): string =>
     .substring(2);
 
 const ensureUser = (user: User): User => ({
-  key: user && user.key ? user.key : createAnonymousUserKey(),
   ...user,
+  key: user && user.key ? user.key : createAnonymousUserKey(),
 });
 
 const initializeClient = (
