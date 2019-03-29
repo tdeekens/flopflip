@@ -7,6 +7,7 @@ import {
   OnFlagsStateChangeCallback,
   OnStatusStateChangeCallback,
 } from '@flopflip/types';
+import merge from 'deepmerge';
 import warning from 'tiny-warning';
 import isEqual from 'lodash/isEqual';
 import {
@@ -89,10 +90,8 @@ export const createAnonymousUserKey = (): string =>
     .toString(36)
     .substring(2);
 
-const ensureUser = (user: User): User => ({
-  ...user,
-  key: user && user.key ? user.key : createAnonymousUserKey(),
-});
+const ensureUser = (user: User): User =>
+  merge(user, { key: user && user.key ? user.key : createAnonymousUserKey() });
 const initializeClient = (
   clientSideId: string,
   user: User,
