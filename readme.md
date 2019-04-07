@@ -76,7 +76,21 @@ Another example would be to show a `<button>` but disable it for users who shoul
 </ToggleFeature>
 ```
 
-In both examples flags will update in realtime (depending on the adapter and provider) and the User Interface will update accordingly. If this sounds interesting to you, keep reading.
+...or given you are using a React version with hooks available you can:
+
+```jsx
+const MyFunctionComponent = () => {
+  const isFeatureEnabled = useFeatureToggle('featureFlagName');
+
+  return (
+    <button disabled={!isFeatureEnabled} onClick={this.handleClick}>
+      Try out feature
+    </button>
+  );
+};
+```
+
+In all examples flags will update in realtime (depending on the adapter and provider) and the User Interface will update accordingly. If this sounds interesting to you, keep reading.
 
 ## ❯ Browser support
 
