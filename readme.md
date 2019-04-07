@@ -81,9 +81,10 @@ Another example would be to show a `<button>` but disable it for users who shoul
 ```jsx
 const MyFunctionComponent = () => {
   const isFeatureEnabled = useFeatureToggle('featureFlagName');
+  const handleClick = () => console.log('🦄');
 
   return (
-    <button disabled={!isFeatureEnabled} onClick={this.handleClick}>
+    <button disabled={!isFeatureEnabled} onClick={handleClick}>
       Try out feature
     </button>
   );
