@@ -15,6 +15,7 @@ export default <Props extends object>(
 ) => (
   ToggledComponent: React.ComponentType<Props>
 ): React.ComponentType<Props> =>
+  // @ts-ignore
   flowRight(
     setDisplayName(wrapDisplayName(ToggledComponent, 'branchOnFeatureToggle')),
     injectFeatureToggle<Props>(flag),

@@ -36,7 +36,7 @@
   "devDependencies": {
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "react-redux": "6.0.1",
+    "react-redux": "7.0.1",
     "redux": "4.0.1"
   },
   "dependencies": {
@@ -44,7 +44,7 @@
     "@flopflip/react": "^7.0.3",
     "@flopflip/types": "^2.0.1",
     "@types/lodash": "4.14.123",
-    "@types/react-redux": "7.0.5",
+    "@types/react-redux": "7.0.6",
     "lodash": "4.17.11"
   },
   "peerDependencies": {
