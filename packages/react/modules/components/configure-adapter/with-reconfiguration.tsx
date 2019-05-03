@@ -1,7 +1,7 @@
 import React from 'react';
 import { ReconfigureAdapter } from '@flopflip/types';
 import { wrapDisplayName } from '../../hocs';
-import { AdapterContext } from '../adapter-context';
+import AdapterContext from '../adapter-context';
 
 type ProvidedProps = {
   reconfigure: ReconfigureAdapter;

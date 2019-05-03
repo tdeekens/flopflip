@@ -1,1 +1,2 @@
-export { default as AdapterContext } from './adapter-context';
+export { default } from './adapter-context';
+export { createAdapterContext } from './adapter-context';

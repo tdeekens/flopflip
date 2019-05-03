@@ -18,6 +18,7 @@ type Props = {
 };
 type State = {
   flags: Flags;
+  status: AdapterStatus
 };
 
 /**
@@ -45,8 +46,12 @@ export default class Configure extends React.PureComponent<Props, State> {
     shouldDeferAdapterConfiguration: false,
   };
 
-  state: { flags: Flags } = {
+  state: { flags: Flags, status: AdapterStatus } = {
     flags: {},
+    status: {
+      isReady: false,
+      isConfigured: false,
+    }
   };
 
   isUnmounted: boolean = false;
@@ -71,7 +76,7 @@ export default class Configure extends React.PureComponent<Props, State> {
 
   handleUpdateStatus = (status: AdapterStatus): void => {
     !this.isUnmounted &&
-      this.setState(prevState => ({ ...prevState, ...status }));
+      this.setState({ status });
   };
 
   render(): React.ReactNode {
@@ -84,6 +89,7 @@ export default class Configure extends React.PureComponent<Props, State> {
             this.handleUpdateStatus,
             this.handleUpdateFlags
           )}
+          adapterStatus={this.state.status}
           defaultFlags={this.props.defaultFlags}
           shouldDeferAdapterConfiguration={
             this.props.shouldDeferAdapterConfiguration

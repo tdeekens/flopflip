@@ -129,7 +129,7 @@ describe('state', () => {
     });
 
     it('should update the state', () => {
-      expect(wrapper).toHaveState('isReady', newStatus.isReady);
+      expect(wrapper).toHaveState('status', { isReady: newStatus.isReady });
     });
   });
 
