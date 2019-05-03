@@ -50,9 +50,19 @@ describe('when configuring', () => {
     });
 
     it('should invoke `onStatusStateChange` with `isReady`', () => {
-      expect(adapterArgs.onStatusStateChange).toHaveBeenCalledWith({
-        isReady: true,
-      });
+      expect(adapterArgs.onStatusStateChange).toHaveBeenCalledWith(
+        expect.objectContaining({
+          isReady: true,
+        })
+      );
+    });
+
+    it('should invoke `onStatusStateChange` with `isConfigured`', () => {
+      expect(adapterArgs.onStatusStateChange).toHaveBeenCalledWith(
+        expect.objectContaining({
+          isConfigured: true,
+        })
+      );
     });
 
     it('should invoke `onFlagsStateChange`', () => {
@@ -131,9 +141,11 @@ describe('when configuring', () => {
       });
 
       it('should invoke `onStatusStateChange` with `isReady`', () => {
-        expect(adapterArgs.onStatusStateChange).toHaveBeenCalledWith({
-          isReady: false,
-        });
+        expect(adapterArgs.onStatusStateChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            isReady: false,
+          })
+        );
       });
     });
   });

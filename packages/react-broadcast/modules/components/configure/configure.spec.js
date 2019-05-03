@@ -129,7 +129,10 @@ describe('state', () => {
     });
 
     it('should update the state', () => {
-      expect(wrapper).toHaveState('status', { isReady: newStatus.isReady });
+      expect(wrapper).toHaveState(
+        'status',
+        expect.objectContaining({ isReady: newStatus.isReady })
+      );
     });
   });
 
