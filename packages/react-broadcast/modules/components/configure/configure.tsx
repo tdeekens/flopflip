@@ -75,8 +75,14 @@ export default class Configure extends React.PureComponent<Props, State> {
   };
 
   handleUpdateStatus = (status: AdapterStatus): void => {
+    console.log(status)
     !this.isUnmounted &&
-      this.setState({ status });
+      this.setState(prevState => ({
+        status: {
+          ...prevState.status,
+          ...status
+        }
+      }));
   };
 
   render(): React.ReactNode {
