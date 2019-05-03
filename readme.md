@@ -224,6 +224,8 @@ without Redux.
   (alternative to the store enhancer)
 - `ReconfigureFlopFlip` a component to reconfigure flopflip with new user properties
   either merged or overwritting old properties (`shouldOverwrite` prop)
+  - `useAdapterReconfiguration` a hook to reconfigure flopflip with new user properties
+    either merged or overwritting old properties (`shouldOverwrite` prop)
 - `branchOnFeatureToggle` a Higher-Order Component (HoC) to conditionally render
   components depending on feature toggle state
 - `injectFeatureToggle` a HoC to inject a feature toggle onto the `props` of a
@@ -763,13 +765,13 @@ A forward compatible implementation [React hook](https://reactjs.org/docs/hooks-
 import { useAdapterStatus } from '@flopflip/react-broadcast';
 
 const ComponentWithFeatureToggle = () => {
-   const isFeatureEnabled = useFeatureToggle('myFeatureToggle');
-   const { isReady } = useAdapterStatus();
+  const isFeatureEnabled = useFeatureToggle('myFeatureToggle');
+  const { isReady } = useAdapterStatus();
 
-   if (!isReady) return <LoadingSpinner />
-   else if (!isFeatureEnabled) <PageNotFound />
-   else return <FeatureComponent />
-}
+  if (!isReady) return <LoadingSpinner />;
+  else if (!isFeatureEnabled) <PageNotFound />;
+  else return <FeatureComponent />;
+};
 ```
 
 Please note that given the React version _does not_ support hooks using `useFeatureToggle` will throw an error.

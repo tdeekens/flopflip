@@ -20,5 +20,6 @@ export {
   ConfigureFlopFlip,
   ReconfigureFlopFlip,
 } from './components';
+export { useAdapterReconfiguration } from './hooks';
 
 export { version };
