@@ -49,6 +49,7 @@ const configure = ({
     adapterState.emitter.emit('flagsStateChange', adapterState.flags);
     adapterState.emitter.emit('statusStateChange', {
       isReady: adapterState.isReady,
+      isConfigured: adapterState.isConfigured,
     });
 
     adapterState.emitter.emit('readyStateChange');
@@ -60,6 +61,9 @@ const reconfigure = ({ user }: { user: User }): Promise<any> => {
 
   adapterState.flags = {};
   adapterState.emitter.emit('flagsStateChange', adapterState.flags);
+  adapterState.emitter.emit('statusStateChange', {
+    isConfigured: adapterState.isConfigured,
+  });
 
   return Promise.resolve();
 };
