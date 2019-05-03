@@ -57,9 +57,7 @@ const config = {
     json(),
     resolve({
       extensions,
-      module: true,
-      jsnext: true,
-      main: true,
+      mainFields: ['module', 'main', 'jsnext'],
       preferBuiltins: true,
       modulesOnly: true,
     }),
