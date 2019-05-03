@@ -1,73 +1,42 @@
-import useFeatureToggle from './use-feature-toggle';
 import React from 'react';
+import useFeatureToggle from './use-feature-toggle';
+import { renderWithAdapter } from '@flopflip/test-utils';
+import Configure from '../../components/configure';
 
 jest.mock('tiny-warning');
 
-const flagName = 'testFlagName';
-
-describe('when React hooks (`useContext`) is available', () => {
-  describe('with default variation', () => {
-    describe('when flag is enabled', () => {
-      let flagValue;
-      beforeEach(() => {
-        React.useContext = jest.fn(() => ({
-          [flagName]: true,
-        }));
-
-        flagValue = useFeatureToggle(flagName);
-      });
-
-      it('should return true', () => {
-        expect(flagValue).toBe(true);
-      });
-    });
-
-    describe('when flag is disabled', () => {
-      let flagValue;
-      beforeEach(() => {
-        React.useContext = jest.fn(() => ({
-          [flagName]: false,
-        }));
-
-        flagValue = useFeatureToggle(flagName);
-      });
-
-      it('should return false', () => {
-        expect(flagValue).toBe(false);
-      });
-    });
+const render = TestComponent =>
+  renderWithAdapter(TestComponent, {
+    components: { ConfigureFlopFlip: Configure },
   });
 
-  describe('with custom variation', () => {
-    describe('when variation matches', () => {
-      let flagValue;
-      beforeEach(() => {
-        React.useContext = jest.fn(() => ({
-          [flagName]: 'variation-a',
-        }));
+const TestComponent = () => {
+  const isEnabledFeatureEnabled = useFeatureToggle('enabledFeature');
+  const isDisabledFeatureDisabled = useFeatureToggle('disabledFeature');
 
-        flagValue = useFeatureToggle(flagName, 'variation-a');
-      });
+  return (
+    <ul>
+      <li>Is enabled: {isEnabledFeatureEnabled ? 'Yes' : 'No'}</li>
+      <li>Is disabled: {isDisabledFeatureDisabled ? 'No' : 'Yes'}</li>
+    </ul>
+  );
+};
 
-      it('should return true', () => {
-        expect(flagValue).toBe(true);
-      });
-    });
+describe('when React hooks (`useContext`) is available', () => {
+  it('should indicate a feature being disabled', async () => {
+    const { getByText, waitUntilReady } = render(<TestComponent />);
 
-    describe('when variation does not match', () => {
-      let flagValue;
-      beforeEach(() => {
-        React.useContext = jest.fn(() => ({
-          [flagName]: 'variation-b',
-        }));
+    await waitUntilReady();
 
-        flagValue = useFeatureToggle(flagName, 'variation-a');
-      });
+    expect(getByText('Is disabled: Yes')).toBeInTheDocument();
+  });
 
-      it('should return false', () => {
-        expect(flagValue).toBe(false);
-      });
-    });
+  it('should indicate a feature being enabled', async () => {
+    const { getByText, waitUntilReady } = render(<TestComponent />);
+
+    await waitUntilReady();
+
+    expect(getByText('Is enabled: Yes')).toBeInTheDocument();
   });
 });
 
@@ -78,7 +47,7 @@ describe('when React hooks (`useContext`) are not available', () => {
     });
 
     it('should throw', () => {
-      expect(() => useFeatureToggle(flagName)).toThrow();
+      expect(() => useFeatureToggle('foo')).toThrow();
     });
   });
 });

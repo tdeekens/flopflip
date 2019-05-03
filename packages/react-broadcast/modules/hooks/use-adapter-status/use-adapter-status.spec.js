@@ -1,39 +1,47 @@
-import useAdapterStatus from './use-adapter-status';
 import React from 'react';
+import { renderWithAdapter } from '@flopflip/test-utils';
+import useAdapterStatus from './use-adapter-status';
+import Configure from '../../components/configure';
 
 jest.mock('tiny-warning');
 
+const render = TestComponent =>
+  renderWithAdapter(TestComponent, {
+    components: { ConfigureFlopFlip: Configure },
+  });
+
+const TestComponent = () => {
+  const { isReady, isConfigured } = useAdapterStatus();
+
+  return (
+    <ul>
+      <li>Is ready: {isReady ? 'Yes' : 'No'}</li>
+      <li>Is configured: {isConfigured ? 'Yes' : 'No'}</li>
+    </ul>
+  );
+};
+
 describe('when React hooks (`useContext`) is available', () => {
-  describe('with default variation', () => {
-    describe('when flag is enabled', () => {
-      let adapterStatus;
-      beforeEach(() => {
-        React.useContext = jest.fn(() => ({
-          status: { isReady: true },
-        }));
+  it('should indicate the adapter not being ready', async () => {
+    const { getByText } = render(<TestComponent />);
 
-        adapterStatus = useAdapterStatus();
-      });
+    expect(getByText('Is ready: No')).toBeInTheDocument();
+  });
 
-      it('should return true', () => {
-        expect(adapterStatus).toHaveProperty('isReady', true);
-      });
-    });
+  it('should indicate the adapter being ready', async () => {
+    const { getByText, waitUntilReady } = render(<TestComponent />);
 
-    describe('when flag is disabled', () => {
-      let adapterStatus;
-      beforeEach(() => {
-        React.useContext = jest.fn(() => ({
-          status: { isConfigured: false },
-        }));
+    await waitUntilReady();
 
-        adapterStatus = useAdapterStatus();
-      });
+    expect(getByText('Is ready: Yes')).toBeInTheDocument();
+  });
 
-      it('should return false', () => {
-        expect(adapterStatus).toHaveProperty('isConfigured', false);
-      });
-    });
+  it('should indicate the adapter being configured', async () => {
+    const { getByText, waitUntilReady } = render(<TestComponent />);
+
+    await waitUntilReady();
+
+    expect(getByText('Is configured: Yes')).toBeInTheDocument();
   });
 });
 
