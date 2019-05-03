@@ -738,7 +738,7 @@ slightly different APIs. Generally we aim to have the same API for both packages
 
 #### `useFeatureToggle(flagName: string, flagVariation: FlagVariation): boolean`
 
-A likely forward compatible implementation [React hook](https://reactjs.org/docs/hooks-reference.html). Given the installed version of React supports hooks you can use a functional component and toggle as follows:
+A forward compatible implementation [React hook](https://reactjs.org/docs/hooks-reference.html). Given the installed version of React supports hooks you can use a functional component and toggle as follows:
 
 ```js
 import { useFeatureToggle } from '@flopflip/react-broadcast';
@@ -752,6 +752,23 @@ function ComponentWithFeatureToggle(props) {
        The feature is {isFeatureEnabled ? 'enabled' : 'disabled'}
      </p>
    );
+}
+```
+
+#### `useAdapterStatus(): AdapterStatus`
+
+A forward compatible implementation [React hook](https://reactjs.org/docs/hooks-reference.html). Given the installed version of React supports hooks you can use a functional component and toggle as follows:
+
+```js
+import { useAdapterStatus } from '@flopflip/react-broadcast';
+
+function ComponentWithFeatureToggle(props) {
+   const isFeatureEnabled = useFeatureToggle('myFeatureToggle');
+   const { isReady } = useAdapterStatus();
+
+   if (!isReady) return <LoadingSpinner />
+   else if !(isFeatureEnabled) <PageNotFound />
+   else return <FeatureComponent />
 }
 ```
 
