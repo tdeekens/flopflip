@@ -18,7 +18,7 @@ const withReconfiguration = <Props extends {}>(
     render(): React.ReactNode {
       return (
         <AdapterContext.Consumer>
-          {reconfigure => (
+          {({ reconfigure }) => (
             <Component {...this.props} {...{ [propKey]: reconfigure }} />
           )}
         </AdapterContext.Consumer>
