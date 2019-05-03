@@ -743,7 +743,7 @@ A forward compatible implementation [React hook](https://reactjs.org/docs/hooks-
 ```js
 import { useFeatureToggle } from '@flopflip/react-broadcast';
 
-function ComponentWithFeatureToggle(props) {
+const ComponentWithFeatureToggle = props => {
    const isFeatureEnabled = useFeatureToggle('myFeatureToggle');
 
    return (
@@ -762,12 +762,12 @@ A forward compatible implementation [React hook](https://reactjs.org/docs/hooks-
 ```js
 import { useAdapterStatus } from '@flopflip/react-broadcast';
 
-function ComponentWithFeatureToggle(props) {
+const ComponentWithFeatureToggle = () => {
    const isFeatureEnabled = useFeatureToggle('myFeatureToggle');
    const { isReady } = useAdapterStatus();
 
    if (!isReady) return <LoadingSpinner />
-   else if !(isFeatureEnabled) <PageNotFound />
+   else if (!isFeatureEnabled) <PageNotFound />
    else return <FeatureComponent />
 }
 ```
