@@ -1,1 +1,3 @@
-export { useAdapterReconfiguration } from '@flopflip/react';
+export {
+  default as useAdapterReconfiguration,
+} from './use-adapter-reconfiguration';
