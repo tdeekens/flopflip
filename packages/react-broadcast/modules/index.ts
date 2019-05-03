@@ -7,5 +7,5 @@ export {
   ConfigureFlopFlip,
   ReconfigureFlopFlip,
 } from './components';
-export { useFeatureToggle } from './hooks';
+export { useFeatureToggle, useAdapterStatus } from './hooks';
 export { version };

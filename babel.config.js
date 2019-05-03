@@ -4,22 +4,26 @@ module.exports = {
   presets: [
     [
       '@babel/env',
-      isEnv('test')
-        ? {
-            targets: {
-              browsers: ['last 1 versions'],
-              node: '8',
-            },
-            modules: 'commonjs',
-          }
-        : {
-            targets: {
-              browsers: ['last 2 versions', 'ie >= 11'],
-            },
-            modules: false,
-            useBuiltIns: 'entry',
-            include: ['transform-classes'],
-          },
+      {
+        useBuiltIns: 'usage',
+        corejs: 3,
+        ...(isEnv('test')
+          ? {
+              targets: {
+                browsers: ['last 1 versions'],
+                node: '8',
+              },
+              modules: 'commonjs',
+            }
+          : {
+              targets: {
+                browsers: ['last 2 versions', 'ie >= 11'],
+              },
+              modules: false,
+              useBuiltIns: 'entry',
+              include: ['transform-classes'],
+            }),
+      },
     ],
     [
       '@babel/preset-react',

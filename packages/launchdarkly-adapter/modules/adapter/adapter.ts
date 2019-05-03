@@ -84,14 +84,17 @@ const setupFlagSubcription = ({
   }
 };
 
-// NOTE: Exported for testing only
-export const createAnonymousUserKey = (): string =>
-  Math.random()
-    .toString(36)
-    .substring(2);
+const getIsAnonymousUser = (user: User): boolean => !(user && user.key);
+const ensureUser = (user: User): User => {
+  const isAnonymousUser = getIsAnonymousUser(user);
 
-const ensureUser = (user: User): User =>
-  merge(user, { key: user && user.key ? user.key : createAnonymousUserKey() });
+  // NOTE: When marked `anonymous` the SDK will generate a unique key and cache it in local storage
+  return merge(user, {
+    key: isAnonymousUser ? undefined : user.key,
+    anonymous: isAnonymousUser,
+  });
+};
+
 const initializeClient = (
   clientSideId: string,
   user: User,

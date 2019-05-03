@@ -1,5 +1,5 @@
 import ldClient from 'ldclient-js';
-import adapter, { camelCaseFlags, createAnonymousUserKey } from './adapter';
+import adapter, { camelCaseFlags } from './adapter';
 
 jest.mock('ldclient-js', () => ({
   initialize: jest.fn(),
@@ -74,8 +74,16 @@ describe('when configuring', () => {
     it('should initialize the `ld-client` with `clientSideId` and given `user`', () => {
       expect(ldClient.initialize).toHaveBeenCalledWith(
         clientSideId,
-        userWithKey,
+        expect.objectContaining(userWithKey),
         expect.any(Object)
+      );
+    });
+
+    it('should initialize the `ld-client` marking the `user` as not anonymous', () => {
+      expect(ldClient.initialize).toHaveBeenCalledWith(
+        expect.anything(),
+        expect.objectContaining({ anonymous: false }),
+        expect.anything()
       );
     });
   });
@@ -90,14 +98,22 @@ describe('when configuring', () => {
       })
     );
 
-    it('should initialize the `ld-client` with `clientSideId` and random `user` `key`', () => {
+    it('should initialize the `ld-client` with `clientSideId` and no `user` `key`', () => {
       expect(ldClient.initialize).toHaveBeenCalledWith(
         clientSideId,
-        {
-          key: expect.any(String),
+        expect.objectContaining({
+          key: undefined,
           group: 'foo-group',
-        },
+        }),
         expect.any(Object)
+      );
+    });
+
+    it('should initialize the `ld-client` marking the `user` as anonymous', () => {
+      expect(ldClient.initialize).toHaveBeenCalledWith(
+        expect.anything(),
+        expect.objectContaining({ anonymous: true }),
+        expect.anything()
       );
     });
   });
@@ -252,7 +268,14 @@ describe('when configuring', () => {
       });
 
       it('should invoke `identify` on the `client` with the `user`', () => {
-        expect(client.identify).toHaveBeenCalledWith(nextUser);
+        expect(client.identify).toHaveBeenCalledWith(
+          expect.objectContaining(nextUser)
+        );
+      });
+      it('should invoke `identify` on the `client` marking the user as not anonymous', () => {
+        expect(client.identify).toHaveBeenCalledWith(
+          expect.objectContaining({ anonymous: false })
+        );
       });
     });
 
@@ -304,10 +327,18 @@ describe('when configuring', () => {
         });
 
         it('should invoke `identify` on the client with the full props', () => {
-          expect(client.identify).toHaveBeenCalledWith({
-            ...userWithKey,
-            ...updatedUserProps,
-          });
+          expect(client.identify).toHaveBeenCalledWith(
+            expect.objectContaining({
+              ...userWithKey,
+              ...updatedUserProps,
+            })
+          );
+        });
+
+        it('should invoke `identify` the `ld-client` marking the `user` as not anonymous', () => {
+          expect(client.identify).toHaveBeenCalledWith(
+            expect.objectContaining({ anonymous: false })
+          );
         });
       });
     });
@@ -335,15 +366,5 @@ describe('`camelCasedFlags`', () => {
     it('should camel case to uppercased flag names', () => {
       expect(camelCaseFlags(rawFlags)).toEqual({ aFlag: true, flagBC: false });
     });
-  });
-});
-
-describe('`createAnonymousUser`', () => {
-  it('should create user with uuid in key property', () => {
-    expect(createAnonymousUserKey()).toBeDefined();
-  });
-
-  it('should create uuid of length `foo-random-id`', () => {
-    expect(createAnonymousUserKey().length).toBeGreaterThan(0);
   });
 });

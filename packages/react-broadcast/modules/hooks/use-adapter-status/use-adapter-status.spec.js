@@ -1,6 +1,6 @@
 import React from 'react';
-import useFeatureToggle from './use-feature-toggle';
 import { renderWithAdapter } from '@flopflip/test-utils';
+import useAdapterStatus from './use-adapter-status';
 import Configure from '../../components/configure';
 
 jest.mock('tiny-warning');
@@ -11,32 +11,37 @@ const render = TestComponent =>
   });
 
 const TestComponent = () => {
-  const isEnabledFeatureEnabled = useFeatureToggle('enabledFeature');
-  const isDisabledFeatureDisabled = useFeatureToggle('disabledFeature');
+  const { isReady, isConfigured } = useAdapterStatus();
 
   return (
     <ul>
-      <li>Is enabled: {isEnabledFeatureEnabled ? 'Yes' : 'No'}</li>
-      <li>Is disabled: {isDisabledFeatureDisabled ? 'No' : 'Yes'}</li>
+      <li>Is ready: {isReady ? 'Yes' : 'No'}</li>
+      <li>Is configured: {isConfigured ? 'Yes' : 'No'}</li>
     </ul>
   );
 };
 
 describe('when React hooks (`useContext`) is available', () => {
-  it('should indicate a feature being disabled', async () => {
-    const { getByText, waitUntilReady } = render(<TestComponent />);
+  it('should indicate the adapter not being ready', async () => {
+    const { getByText } = render(<TestComponent />);
 
-    await waitUntilReady();
-
-    expect(getByText('Is disabled: Yes')).toBeInTheDocument();
+    expect(getByText('Is ready: No')).toBeInTheDocument();
   });
 
-  it('should indicate a feature being enabled', async () => {
+  it('should indicate the adapter being ready', async () => {
     const { getByText, waitUntilReady } = render(<TestComponent />);
 
     await waitUntilReady();
 
-    expect(getByText('Is enabled: Yes')).toBeInTheDocument();
+    expect(getByText('Is ready: Yes')).toBeInTheDocument();
+  });
+
+  it('should indicate the adapter being configured', async () => {
+    const { getByText, waitUntilReady } = render(<TestComponent />);
+
+    await waitUntilReady();
+
+    expect(getByText('Is configured: Yes')).toBeInTheDocument();
   });
 });
 
@@ -47,7 +52,7 @@ describe('when React hooks (`useContext`) are not available', () => {
     });
 
     it('should throw', () => {
-      expect(() => useFeatureToggle('foo')).toThrow();
+      expect(() => useAdapterStatus()).toThrow();
     });
   });
 });

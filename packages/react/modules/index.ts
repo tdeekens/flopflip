@@ -4,6 +4,8 @@ export {
   injectFeatureToggle,
   injectFeatureToggles,
   branchOnFeatureToggle,
+  AdapterContext,
+  createAdapterContext,
   ToggleFeature,
   ConfigureAdapter,
   ReconfigureAdapter,
