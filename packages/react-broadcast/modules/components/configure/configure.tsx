@@ -18,7 +18,7 @@ type Props = {
 };
 type State = {
   flags: Flags;
-  status: AdapterStatus
+  status: AdapterStatus;
 };
 
 /**
@@ -46,12 +46,12 @@ export default class Configure extends React.PureComponent<Props, State> {
     shouldDeferAdapterConfiguration: false,
   };
 
-  state: { flags: Flags, status: AdapterStatus } = {
+  state: { flags: Flags; status: AdapterStatus } = {
     flags: {},
     status: {
       isReady: false,
       isConfigured: false,
-    }
+    },
   };
 
   isUnmounted: boolean = false;
@@ -79,8 +79,8 @@ export default class Configure extends React.PureComponent<Props, State> {
       this.setState(prevState => ({
         status: {
           ...prevState.status,
-          ...status
-        }
+          ...status,
+        },
       }));
   };
 

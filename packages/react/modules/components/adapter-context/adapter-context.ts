@@ -15,7 +15,7 @@ const createAdapterContext = (
   status?: AdapterStatusType
 ): AdapterContextType => ({
   reconfigure: reconfigure || initialReconfigureAdapter,
-  status: status || initialAdapterStatus
+  status: status || initialAdapterStatus,
 });
 
 const AdapterContext: Context<AdapterContextType> = createReactContext(

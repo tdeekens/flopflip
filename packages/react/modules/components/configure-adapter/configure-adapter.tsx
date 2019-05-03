@@ -237,7 +237,12 @@ export default class ConfigureAdapter extends React.PureComponent<
 
   render(): React.ReactNode {
     return (
-      <AdapterContext.Provider value={createAdapterContext(this.reconfigureOrQueue, this.props.adapterStatus)}>
+      <AdapterContext.Provider
+        value={createAdapterContext(
+          this.reconfigureOrQueue,
+          this.props.adapterStatus
+        )}
+      >
         {(() => {
           const isAdapterReady: boolean = this.props.adapter.getIsReady();
 
