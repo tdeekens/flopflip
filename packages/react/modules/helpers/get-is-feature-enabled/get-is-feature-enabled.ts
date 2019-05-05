@@ -12,7 +12,7 @@ import { DEFAULT_FLAG_PROP_KEY } from '../../constants';
  * @param  {Boolean}   [flagVariation=true]       The variation of the flag defaulting to `true`
  * @return {Boolean}                              Indicator if the flag should be toggled
  */
-const isFeatureEnabled = (
+const getIsFeatureEnabled = (
   flagName: FlagName = DEFAULT_FLAG_PROP_KEY,
   flagVariation: FlagVariation = true
 ): ((flags: Flags) => boolean) => {
@@ -24,4 +24,4 @@ const isFeatureEnabled = (
   return flags => flags[flagName] === flagVariation;
 };
 
-export default isFeatureEnabled;
+export default getIsFeatureEnabled;

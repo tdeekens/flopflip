@@ -5,7 +5,7 @@ import { State } from '../../types';
 import {
   ToggleFeature,
   setDisplayName,
-  isFeatureEnabled,
+  getIsFeatureEnabled,
 } from '@flopflip/react';
 import { STATE_SLICE } from './../../store';
 
@@ -15,7 +15,7 @@ type OwnProps = {
 };
 
 export const mapStateToProps = (state: State, ownProps: OwnProps): object => ({
-  isFeatureEnabled: isFeatureEnabled(ownProps.flag, ownProps.variation)(
+  isFeatureEnabled: getIsFeatureEnabled(ownProps.flag, ownProps.variation)(
     state[STATE_SLICE].flags
   ),
 });

@@ -1,5 +1,5 @@
 import warning from 'tiny-warning';
-import isFeatureEnabled from './is-feature-enabled';
+import getIsFeatureEnabled from './get-is-feature-enabled';
 
 jest.mock('tiny-warning');
 
@@ -8,23 +8,25 @@ describe('with existing flag', () => {
     const args = { fooFlag: 'foo-variation' };
 
     it('should indicate feature being enabled', () => {
-      expect(isFeatureEnabled('fooFlag', 'foo-variation')(args)).toBe(true);
+      expect(getIsFeatureEnabled('fooFlag', 'foo-variation')(args)).toBe(true);
     });
 
     it('should indicate feature being disabled', () => {
-      expect(isFeatureEnabled('fooFlag', 'foo-variation-1')(args)).toBe(false);
+      expect(getIsFeatureEnabled('fooFlag', 'foo-variation-1')(args)).toBe(
+        false
+      );
     });
   });
 
   describe('without flag variation', () => {
     it('should indicate feature being enabled', () => {
       const args = { fooFlag: true };
-      expect(isFeatureEnabled('fooFlag')(args)).toBe(true);
+      expect(getIsFeatureEnabled('fooFlag')(args)).toBe(true);
     });
 
     it('should indicate feature being disabled', () => {
       const args = { fooFlag: false };
-      expect(isFeatureEnabled('fooFlag')(args)).toBe(false);
+      expect(getIsFeatureEnabled('fooFlag')(args)).toBe(false);
     });
   });
 });
@@ -32,12 +34,12 @@ describe('with existing flag', () => {
 describe('with non normalized flag', () => {
   it('should indicate feature being disabled', () => {
     const args = { fooFlag: true };
-    expect(isFeatureEnabled('foo-flag')(args)).toBe(false);
+    expect(getIsFeatureEnabled('foo-flag')(args)).toBe(false);
   });
 
   it('should invoke `warning`', () => {
     const args = { fooFlag: false };
-    isFeatureEnabled('fooFlag')(args);
+    getIsFeatureEnabled('fooFlag')(args);
 
     expect(warning).toHaveBeenCalled();
   });
@@ -46,6 +48,6 @@ describe('with non normalized flag', () => {
 describe('with non existing flag', () => {
   it('should indicate feature being disabled', () => {
     const args = { fooFlag: true };
-    expect(isFeatureEnabled('fooFlag2')(args)).toBe(false);
+    expect(getIsFeatureEnabled('fooFlag2')(args)).toBe(false);
   });
 });

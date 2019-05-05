@@ -11,7 +11,7 @@ export {
   ReconfigureAdapter,
 } from './components';
 
-export { default as isFeatureEnabled } from './helpers/is-feature-enabled';
+export { getIsFeatureEnabled } from './helpers';
 
 export {
   DEFAULT_FLAG_PROP_KEY,
