@@ -1,7 +1,7 @@
 import flowRight from 'lodash/flowRight';
 import {
   ToggleFeature,
-  isFeatureEnabled,
+  getIsFeatureEnabled,
   setDisplayName,
   withProps,
   ALL_FLAGS_PROP_KEY,
@@ -12,7 +12,7 @@ export default flowRight(
   setDisplayName(ToggleFeature.displayName),
   withFlags(),
   withProps(props => ({
-    isFeatureEnabled: isFeatureEnabled(props.flag, props.variation)(
+    isFeatureEnabled: getIsFeatureEnabled(props.flag, props.variation)(
       props[ALL_FLAGS_PROP_KEY]
     ),
   }))

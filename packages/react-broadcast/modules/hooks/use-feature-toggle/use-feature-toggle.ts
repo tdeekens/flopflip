@@ -1,7 +1,7 @@
 import React from 'react';
 import camelCase from 'lodash/camelCase';
 import warning from 'tiny-warning';
-import { isFeatureEnabled } from '@flopflip/react';
+import { getIsFeatureEnabled } from '@flopflip/react';
 import { FlagName, Flags, FlagVariation } from '@flopflip/types';
 import { FlagsContext } from '../../components/flags-context';
 
@@ -21,8 +21,18 @@ export default function useFeatureToggle(
      * has to remain.
      */
     const flags: Flags = React.useContext(FlagsContext as any);
+    const isFeatureEnabled: boolean = getIsFeatureEnabled(
+      flagName,
+      flagVariation
+    )(flags);
 
-    return isFeatureEnabled(flagName, flagVariation)(flags);
+    React.useDebugValue({
+      flagName,
+      flagVariation,
+      isEnabled: isFeatureEnabled,
+    });
+
+    return isFeatureEnabled;
   }
 
   throw new Error(

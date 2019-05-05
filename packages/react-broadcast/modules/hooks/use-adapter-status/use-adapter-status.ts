@@ -16,6 +16,8 @@ export default function useAdapterStatus(): Error | AdapterStatusType {
       AdapterContext as any
     );
 
+    React.useDebugValue(adapterContext.status);
+
     return adapterContext.status;
   }
 

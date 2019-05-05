@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlagName, Flags, FlagVariation } from '@flopflip/types';
-import isFeatureEnabled from '../../helpers/is-feature-enabled';
+import getIsFeatureEnabled from '../../helpers/get-is-feature-enabled';
 import { DEFAULT_FLAG_PROP_KEY } from '../../constants';
 
 class DefaultUntoggledComponent extends React.Component<any> {
@@ -19,7 +19,7 @@ const branchOnFeatureToggle = <Props extends object>(
   const BranchOnFeatureToggle: React.FC<Props> = (
     props: Props
   ): React.ReactElement<Props> => {
-    if (isFeatureEnabled(flagName, flagVariation)(props as Flags)) {
+    if (getIsFeatureEnabled(flagName, flagVariation)(props as Flags)) {
       return React.createElement(ToggledComponent, props);
     }
 
