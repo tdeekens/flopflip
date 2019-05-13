@@ -67,7 +67,7 @@
     "babel-jest": "24.8.0",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "bundlesize": "0.17.1",
-    "check-node-version": "3.3.0",
+    "check-node-version": "4.0.1",
     "core-js": "3.0.1",
     "cross-env": "5.2.0",
     "eslint": "5.16.0",

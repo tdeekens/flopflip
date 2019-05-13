@@ -3081,18 +3081,17 @@ chardet@^0.7.0:
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
   integrity sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
 
-check-node-version@3.3.0:
-  version "3.3.0"
-  resolved "https://registry.npmjs.org/check-node-version/-/check-node-version-3.3.0.tgz#a53d0be9c24e7fd22e029de032863d020362fe32"
-  integrity sha512-OAtp7prQf+8YYKn2UB/fK1Ppb9OT+apW56atoKYUvucYLPq69VozOY0B295okBwCKymk2cictrS3qsdcZwyfzw==
+check-node-version@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/check-node-version/-/check-node-version-4.0.1.tgz#ae35200e5434c1aae3712c8d9f63b9a2144a10bd"
+  integrity sha512-pWV+uuJJoOGbODDC6+DPUYeprv1CUg/jr1SGKpgkANstGN22f9T0Vn40mdv6hvRZ25KMH/IjkVc0LZH5ms+qEg==
   dependencies:
     chalk "^2.3.0"
     map-values "^1.0.1"
     minimist "^1.2.0"
     object-filter "^1.0.2"
-    object.assign "^4.0.4"
     run-parallel "^1.1.4"
-    semver "^5.0.3"
+    semver "^5.7.0"
 
 cheerio@^1.0.0-rc.2:
   version "1.0.0-rc.2"
@@ -8269,7 +8268,7 @@ object-visit@^1.0.0:
   dependencies:
     isobject "^3.0.0"
 
-object.assign@^4.0.4, object.assign@^4.1.0:
+object.assign@^4.1.0:
   version "4.1.0"
   resolved "https://registry.npmjs.org/object.assign/-/object.assign-4.1.0.tgz#968bf1100d7956bb3ca086f006f846b3bc4008da"
   integrity sha512-exHJeq6kBKj58mqGyTQ9DFvrZC/eR6OwxzoM9YRoGBqrXYonaFyGiFMuc9VZrXf7DarreEwMpurG3dd+CNyW5w==
@@ -9958,9 +9957,9 @@ semver@6.0.0:
   resolved "https://registry.yarnpkg.com/semver/-/semver-6.0.0.tgz#05e359ee571e5ad7ed641a6eec1e547ba52dea65"
   integrity sha512-0UewU+9rFapKFnlbirLi3byoOuhrSsli/z/ihNnvM24vgF+8sNBiI1LZPBSH9wJKUwaUbw+s3hToDLCXkrghrQ==
 
-semver@^5.0.3:
+semver@^5.7.0:
   version "5.7.0"
-  resolved "https://registry.npmjs.org/semver/-/semver-5.7.0.tgz#790a7cf6fea5459bac96110b29b60412dc8ff96b"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-5.7.0.tgz#790a7cf6fea5459bac96110b29b60412dc8ff96b"
   integrity sha512-Ya52jSX2u7QKghxeoFGpLwCtGlt7j0oY9DYb5apt9nPlJ42ID+ulTXESnt/qAQcoSERyZ5sl3LDIOw0nAn/5DA==
 
 semver@~2.3.1:
