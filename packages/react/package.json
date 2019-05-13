@@ -35,7 +35,7 @@
   "devDependencies": {
     "@flopflip/types": "^2.1.0",
     "@types/lodash": "4.14.126",
-    "@types/react": "16.8.2",
+    "@types/react": "16.8.17",
     "@types/react-dom": "16.8.0",
     "react": "16.8.6",
     "react-dom": "16.8.6"
