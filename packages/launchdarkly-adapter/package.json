@@ -32,7 +32,7 @@
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
     "@flopflip/types": "^2.1.0",
-    "@types/lodash": "4.14.126"
+    "@types/lodash": "4.14.127"
   },
   "dependencies": {
     "@babel/runtime": "7.4.4",

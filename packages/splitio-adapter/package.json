@@ -32,11 +32,11 @@
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
     "@flopflip/types": "^2.1.0",
-    "@types/lodash": "4.14.126"
+    "@types/lodash": "4.14.127"
   },
   "dependencies": {
     "@babel/runtime": "7.4.4",
-    "@splitsoftware/splitio": "10.7.0",
+    "@splitsoftware/splitio": "10.7.1",
     "deepmerge": "3.2.0",
     "lodash": "4.17.11"
   },
