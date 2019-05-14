@@ -10,7 +10,7 @@ const builtins = require('rollup-plugin-node-builtins');
 const globals = require('rollup-plugin-node-globals');
 const filesize = require('rollup-plugin-filesize');
 const babelOptions = require('./babel.config');
-const { pkg } = readPkgUp.sync({
+const { package: pkg } = readPkgUp.sync({
   cwd: fs.realpathSync(process.cwd()),
 });
 
