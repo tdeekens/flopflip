@@ -148,26 +148,39 @@ const getInitialFlags = ({
 }): Promise<{ flagsFromSdk: Flags }> => {
   return new Promise((resolve, reject) => {
     if (adapterState.client) {
-      return adapterState.client.waitUntilReady().then(() => {
-        const flagsFromSdk = adapterState.client
-          ? adapterState.client.allFlags()
-          : null;
-        // First update internal state
-        adapterState.isReady = true;
-        // ...to then signal that the adapter is ready
-        onStatusStateChange({ isReady: true });
-        if (flagsFromSdk) {
-          const flags: Flags = camelCaseFlags(flagsFromSdk);
-          updateFlagsInAdapterState(flags);
-          // ...and flush initial state of flags
-          onFlagsStateChange(flags);
+      return adapterState.client
+        .waitForInitialization()
+        .then(() => {
+          const flagsFromSdk = adapterState.client
+            ? adapterState.client.allFlags()
+            : null;
+          // First update internal state
+          adapterState.isReady = true;
+          // ...to then signal that the adapter is ready
+          onStatusStateChange({ isReady: true });
+          if (flagsFromSdk) {
+            const flags: Flags = camelCaseFlags(flagsFromSdk);
+            updateFlagsInAdapterState(flags);
+            // ...and flush initial state of flags
+            onFlagsStateChange(flags);
 
-          return resolve({ flagsFromSdk });
-        }
-      });
+            return resolve({ flagsFromSdk });
+          }
+        })
+        .catch(() => {
+          return reject(
+            new Error(
+              '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
+            )
+          );
+        });
     }
 
-    return reject(new Error('Can not subscribte with non initialized client.'));
+    return reject(
+      new Error(
+        '@flopflip/launchdarkly-adapter: can not subscribe with non initialized client.'
+      )
+    );
   });
 };
 

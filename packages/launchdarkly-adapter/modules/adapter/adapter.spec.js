@@ -13,7 +13,7 @@ const userWithoutKey = {
 };
 const flags = { 'some-flag-1': true, 'some-flag-2': false };
 const createClient = jest.fn(apiOverwrites => ({
-  waitUntilReady: jest.fn(() => Promise.resolve()),
+  waitForInitialization: jest.fn(() => Promise.resolve()),
   on: jest.fn((_, cb) => cb()),
   allFlags: jest.fn(() => ({})),
 
