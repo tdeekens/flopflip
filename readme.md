@@ -76,7 +76,7 @@ Another example would be to show a `<button>` but disable it for users who shoul
 </ToggleFeature>
 ```
 
-...or given you are using a React version with hooks available you can:
+...or given you are using a React version with hooks and `@flopflip/react-broadcast` you can:
 
 ```jsx
 const MyFunctionComponent = () => {
@@ -274,6 +274,10 @@ It takes the `props`:
   - The `adapter` will receive `onFlagsStateChange` and `onStatusStateChange`
     will should be invoked accordingly to notify `react-broadcast` and
     `react-redux` about flag and status changes
+  - Different adapters allow for different configurations. The `@flopflip/launchdarkly-adapter` accepts:
+    - `clientOptions`: additional options to be passed to the unterlying SDK
+    - `subscribeToFlagChanges`: defaulting to `true` to disable real-time updates to flags once initially fetched
+    - `throwOnInitializationFailure`: defaulting to `false` to indicate if the adapter just rethrow an error during initialization
 - The `shouldDeferAdapterConfiguration` prop can be used to defer the initial
   configuration the `adapter`. This might be helpful for cases in which you want
   to wait for e.g. the `key` to be present within your root component and you do
