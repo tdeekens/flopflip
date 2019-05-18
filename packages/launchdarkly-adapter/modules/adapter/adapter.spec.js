@@ -13,7 +13,7 @@ const userWithoutKey = {
 };
 const flags = { 'some-flag-1': true, 'some-flag-2': false };
 const createClient = jest.fn(apiOverwrites => ({
-  waitUntilReady: jest.fn(() => Promise.resolve()),
+  waitForInitialization: jest.fn(() => Promise.resolve()),
   on: jest.fn((_, cb) => cb()),
   allFlags: jest.fn(() => ({})),
 
@@ -175,6 +175,57 @@ describe('when configuring', () => {
       describe('`getFlag`', () => {
         it('should return the flag', () => {
           expect(adapter.getFlag('someFlag1')).toBe(false);
+        });
+      });
+    });
+
+    describe('when `waitForInitialization` throws', () => {
+      describe('when it should `throwOnInitializationFailure`', () => {
+        beforeEach(() => {
+          onStatusStateChange = jest.fn();
+          onFlagsStateChange = jest.fn();
+          client = createClient({
+            waitForInitialization: jest.fn(() => Promise.reject()),
+          });
+
+          ldClient.initialize.mockReturnValue(client);
+        });
+
+        it('should reject the configuration with an error', async () => {
+          await expect(
+            adapter.configure({
+              clientSideId,
+              user: userWithKey,
+              onStatusStateChange,
+              onFlagsStateChange,
+              throwOnInitializationFailure: true,
+            })
+          ).rejects.toThrow(
+            '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
+          );
+        });
+      });
+      describe('when it should not `throwOnInitializationFailure`', () => {
+        beforeEach(() => {
+          onStatusStateChange = jest.fn();
+          onFlagsStateChange = jest.fn();
+          client = createClient({
+            waitForInitialization: jest.fn(() => Promise.reject()),
+          });
+
+          ldClient.initialize.mockReturnValue(client);
+        });
+
+        it('should resolve the configuration', async () => {
+          await expect(
+            adapter.configure({
+              clientSideId,
+              user: userWithKey,
+              onStatusStateChange,
+              onFlagsStateChange,
+              throwOnInitializationFailure: false,
+            })
+          ).resolves.toEqual(expect.anything());
         });
       });
     });

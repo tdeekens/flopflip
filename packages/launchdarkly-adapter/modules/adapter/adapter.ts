@@ -142,32 +142,51 @@ export const camelCaseFlags = (rawFlags: Flags): Flags =>
 const getInitialFlags = ({
   onFlagsStateChange,
   onStatusStateChange,
+  throwOnInitializationFailure,
 }: {
   onFlagsStateChange: OnFlagsStateChangeCallback;
   onStatusStateChange: OnStatusStateChangeCallback;
-}): Promise<{ flagsFromSdk: Flags }> => {
+  throwOnInitializationFailure: boolean;
+}): Promise<{ flagsFromSdk: Flags | null }> => {
   return new Promise((resolve, reject) => {
     if (adapterState.client) {
-      return adapterState.client.waitUntilReady().then(() => {
-        const flagsFromSdk = adapterState.client
-          ? adapterState.client.allFlags()
-          : null;
-        // First update internal state
-        adapterState.isReady = true;
-        // ...to then signal that the adapter is ready
-        onStatusStateChange({ isReady: true });
-        if (flagsFromSdk) {
-          const flags: Flags = camelCaseFlags(flagsFromSdk);
-          updateFlagsInAdapterState(flags);
-          // ...and flush initial state of flags
-          onFlagsStateChange(flags);
+      return adapterState.client
+        .waitForInitialization()
+        .then(() => {
+          const flagsFromSdk = adapterState.client
+            ? adapterState.client.allFlags()
+            : null;
+          // First update internal state
+          adapterState.isReady = true;
+          // ...to then signal that the adapter is ready
+          onStatusStateChange({ isReady: true });
+          if (flagsFromSdk) {
+            const flags: Flags = camelCaseFlags(flagsFromSdk);
+            updateFlagsInAdapterState(flags);
+            // ...and flush initial state of flags
+            onFlagsStateChange(flags);
 
-          return resolve({ flagsFromSdk });
-        }
-      });
+            return resolve({ flagsFromSdk });
+          }
+
+          resolve({ flagsFromSdk: null });
+        })
+        .catch(() => {
+          if (throwOnInitializationFailure)
+            return reject(
+              new Error(
+                '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
+              )
+            );
+          resolve({ flagsFromSdk: null });
+        });
     }
 
-    return reject(new Error('Can not subscribte with non initialized client.'));
+    return reject(
+      new Error(
+        '@flopflip/launchdarkly-adapter: can not subscribe with non initialized client.'
+      )
+    );
   });
 };
 
@@ -178,6 +197,7 @@ const configure = ({
   onFlagsStateChange,
   onStatusStateChange,
   subscribeToFlagChanges = true,
+  throwOnInitializationFailure = false,
 }: {
   clientSideId: string;
   user: User;
@@ -185,6 +205,7 @@ const configure = ({
   onFlagsStateChange: OnFlagsStateChangeCallback;
   onStatusStateChange: OnStatusStateChangeCallback;
   subscribeToFlagChanges: boolean;
+  throwOnInitializationFailure: boolean;
 }): Promise<any> => {
   adapterState.user = ensureUser(user);
   adapterState.client = initializeClient(
@@ -197,8 +218,9 @@ const configure = ({
   return getInitialFlags({
     onFlagsStateChange,
     onStatusStateChange,
+    throwOnInitializationFailure,
   }).then(({ flagsFromSdk }) => {
-    if (subscribeToFlagChanges)
+    if (subscribeToFlagChanges && flagsFromSdk)
       setupFlagSubcription({
         flagsFromSdk,
         onFlagsStateChange,
