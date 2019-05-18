@@ -142,10 +142,12 @@ export const camelCaseFlags = (rawFlags: Flags): Flags =>
 const getInitialFlags = ({
   onFlagsStateChange,
   onStatusStateChange,
+  throwOnInitializationFailure,
 }: {
   onFlagsStateChange: OnFlagsStateChangeCallback;
   onStatusStateChange: OnStatusStateChangeCallback;
-}): Promise<{ flagsFromSdk: Flags }> => {
+  throwOnInitializationFailure: boolean;
+}): Promise<{ flagsFromSdk: Flags | null }> => {
   return new Promise((resolve, reject) => {
     if (adapterState.client) {
       return adapterState.client
@@ -166,13 +168,17 @@ const getInitialFlags = ({
 
             return resolve({ flagsFromSdk });
           }
+
+          resolve({ flagsFromSdk: null });
         })
         .catch(() => {
-          return reject(
-            new Error(
-              '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
-            )
-          );
+          if (throwOnInitializationFailure)
+            return reject(
+              new Error(
+                '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
+              )
+            );
+          resolve({ flagsFromSdk: null });
         });
     }
 
@@ -191,6 +197,7 @@ const configure = ({
   onFlagsStateChange,
   onStatusStateChange,
   subscribeToFlagChanges = true,
+  throwOnInitializationFailure = false,
 }: {
   clientSideId: string;
   user: User;
@@ -198,6 +205,7 @@ const configure = ({
   onFlagsStateChange: OnFlagsStateChangeCallback;
   onStatusStateChange: OnStatusStateChangeCallback;
   subscribeToFlagChanges: boolean;
+  throwOnInitializationFailure: boolean;
 }): Promise<any> => {
   adapterState.user = ensureUser(user);
   adapterState.client = initializeClient(
@@ -210,8 +218,9 @@ const configure = ({
   return getInitialFlags({
     onFlagsStateChange,
     onStatusStateChange,
+    throwOnInitializationFailure,
   }).then(({ flagsFromSdk }) => {
-    if (subscribeToFlagChanges)
+    if (subscribeToFlagChanges && flagsFromSdk)
       setupFlagSubcription({
         flagsFromSdk,
         onFlagsStateChange,
