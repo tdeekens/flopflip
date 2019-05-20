@@ -25,7 +25,7 @@
   "dependencies": {
     "codecov": "3.5.0",
     "enzyme": "3.9.0",
-    "enzyme-adapter-react-16": "1.13.0",
+    "enzyme-adapter-react-16": "1.13.1",
     "enzyme-matchers": "7.0.2",
     "jest": "24.8.0",
     "jest-dom": "3.2.2",
