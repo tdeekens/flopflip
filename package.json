@@ -88,7 +88,7 @@
     "read-pkg-up": "6.0.0",
     "regenerator-runtime": "0.13.2",
     "rimraf": "2.6.3",
-    "rollup": "1.12.2",
+    "rollup": "1.12.3",
     "rollup-plugin-babel": "4.3.2",
     "rollup-plugin-commonjs": "10.0.0",
     "rollup-plugin-filesize": "6.0.1",
