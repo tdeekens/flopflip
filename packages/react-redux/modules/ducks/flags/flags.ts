@@ -44,7 +44,7 @@ export const updateFlags = (flags: Flags): UpdateFlagsAction => ({
 export const selectFlags = (state: State): Flags => state[STATE_SLICE].flags;
 export const selectFlag = (
   flagName: FlagName
-): ((state: Flags) => FlagVariation) => state => {
+): ((state: State) => FlagVariation) => state => {
   const allFlags: Flags = selectFlags(state);
   const flagValue: FlagVariation = allFlags[flagName];
 
