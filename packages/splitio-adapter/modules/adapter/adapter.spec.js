@@ -44,9 +44,9 @@ describe('when configuring', () => {
 
   describe('when reconfiguring before configured', () => {
     it('should reject reconfiguration', () => {
-      return expect(
-        adapter.reconfigure({ user: userWithKey, onFlagsStateChange })
-      ).rejects.toEqual(expect.any(Error));
+      return expect(adapter.reconfigure({ user: userWithKey })).rejects.toEqual(
+        expect.any(Error)
+      );
     });
   });
 
@@ -252,17 +252,6 @@ describe('when configuring', () => {
               onFlagsStateChange,
             });
           });
-      });
-
-      it('should invoke `names` after getting a new `manager`', () => {
-        expect(factory.manager().names).toHaveBeenCalled();
-      });
-
-      it('should invoke `getTreatments` on the `client` with the new `user`', () => {
-        expect(factory.client().getTreatments).toHaveBeenCalledWith(
-          names,
-          nextUser
-        );
       });
     });
   });

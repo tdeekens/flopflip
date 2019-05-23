@@ -18,7 +18,13 @@ type AdapterState = {
   user?: User;
   client?: SplitIO.IClient;
   manager?: SplitIO.IManager;
+  configuredCallbacks: {
+    onFlagsStateChange: OnFlagsStateChangeCallback;
+    onStatusStateChange: OnStatusStateChangeCallback;
+  };
+  splitioSettings?: SplitIO.IBrowserSettings;
 };
+
 type ClientInitializationOptions = {
   core?: {
     [key: string]: string;
@@ -32,6 +38,11 @@ const adapterState: AdapterState = {
   user: undefined,
   client: undefined,
   manager: undefined,
+  configuredCallbacks: {
+    onFlagsStateChange: () => undefined,
+    onStatusStateChange: () => undefined,
+  },
+  splitioSettings: undefined,
 };
 
 export const normalizeFlag = (
@@ -96,20 +107,18 @@ export const createAnonymousUserKey = (): string =>
 const ensureUser = (user: User): User =>
   merge(user, { key: user && user.key ? user.key : createAnonymousUserKey() });
 
-const initializeClient = (
-  authorizationKey: string,
-  key: string,
-  options: ClientInitializationOptions = {}
-): { client: SplitIO.IClient; manager: SplitIO.IManager } => {
+const initializeClient = (): {
+  client: SplitIO.IClient;
+  manager: SplitIO.IManager;
+} => {
   // eslint-disable-next-line new-cap
-  const sdk = SplitFactory({
-    ...omit(options, ['core']),
-    core: {
-      authorizationKey,
-      key,
-      ...options.core,
-    },
-  });
+  if (!adapterState.splitioSettings) {
+    throw Error(
+      'cannot initialize SplitIo without configured settings, call configure() first'
+    );
+  }
+
+  const sdk = SplitFactory(adapterState.splitioSettings); // eslint-disable-line new-cap
 
   return {
     client: sdk.client(),
@@ -157,10 +166,23 @@ const subscribe = ({
 
 const getIsReady = (): boolean => Boolean(adapterState.isReady);
 
+const configureSplitio = () => {
+  const { client, manager } = initializeClient();
+  adapterState.client = client;
+  adapterState.manager = manager;
+  return subscribe({
+    onFlagsStateChange: adapterState.configuredCallbacks.onFlagsStateChange,
+    onStatusStateChange: adapterState.configuredCallbacks.onStatusStateChange,
+  }).then(() => {
+    adapterState.isConfigured = true;
+    return adapterState.client;
+  });
+};
+
 const configure = ({
   authorizationKey,
   user,
-  options,
+  options = {},
   onFlagsStateChange,
   onStatusStateChange,
 }: {
@@ -171,57 +193,41 @@ const configure = ({
   onStatusStateChange: OnStatusStateChangeCallback;
 }): Promise<any> => {
   adapterState.user = ensureUser(user);
-  const { client, manager } = initializeClient(
-    authorizationKey,
-    adapterState.user.key || createAnonymousUserKey(),
-    options
-  );
-  adapterState.client = client;
-  adapterState.manager = manager;
-
-  return subscribe({
-    onFlagsStateChange,
-    onStatusStateChange,
-  }).then(() => {
-    adapterState.isConfigured = true;
-
-    return adapterState.client;
-  });
+  adapterState.configuredCallbacks.onFlagsStateChange = onFlagsStateChange;
+  adapterState.configuredCallbacks.onStatusStateChange = onStatusStateChange;
+  adapterState.splitioSettings = {
+    ...omit(options, ['core']),
+    core: {
+      authorizationKey,
+      key: adapterState.user.key || createAnonymousUserKey(),
+      ...options.core,
+    },
+  };
+  return configureSplitio();
 };
 
-const reconfigure = ({
-  user,
-  onFlagsStateChange,
-}: {
-  user: User;
-  onFlagsStateChange: OnFlagsStateChangeCallback;
-}): Promise<any> =>
+const reconfigure = ({ user }: { user: User }): Promise<any> =>
   new Promise((resolve, reject) => {
     if (
       !adapterState.isReady ||
       !adapterState.isConfigured ||
       !adapterState.user
-    )
+    ) {
       return reject(
         new Error(
           '@flopflip/splitio-adapter: please configure adapter before reconfiguring.'
         )
       );
-    if (adapterState.user && adapterState.user.key !== user.key) {
-      let flagNames: FlagName[];
-      let flags: Flags;
+    }
 
+    if (adapterState.user && adapterState.user.key !== user.key) {
       adapterState.user = ensureUser(user);
 
       if (adapterState.manager && adapterState.client) {
-        flagNames = adapterState.manager.names();
-        flags = adapterState.client.getTreatments(
-          flagNames,
-          adapterState.user as SplitIO.Attributes
-        );
-
-        onFlagsStateChange(camelCaseFlags(flags));
+        adapterState.client.destroy();
       }
+
+      configureSplitio();
     }
 
     return resolve();
