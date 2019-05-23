@@ -8,13 +8,13 @@ import { Reducer } from 'redux';
 // Actions
 export const UPDATE_FLAGS = '@flopflip/flags/update';
 
-const initialState: State = {};
+const initialState: Flags = {};
 
 // Reducer
 const reducer = (
-  state: State = initialState,
+  state: Flags = initialState,
   action: UpdateFlagsAction
-): State | Flags => {
+): Flags => {
   switch (action.type) {
     case UPDATE_FLAGS:
       return {
@@ -30,8 +30,8 @@ const reducer = (
 export default reducer;
 
 export const createReducer = (
-  preloadedState: State = initialState
-): Reducer<State, UpdateFlagsAction> => (state = preloadedState, action) =>
+  preloadedState: Flags = initialState
+): Reducer<Flags, UpdateFlagsAction> => (state = preloadedState, action) =>
   reducer(state, action);
 
 // Action Creators
@@ -41,7 +41,8 @@ export const updateFlags = (flags: Flags): UpdateFlagsAction => ({
 });
 
 // Selectors
-export const selectFlags = (state: State): Flags => state[STATE_SLICE].flags;
+export const selectFlags = (state: State): Flags =>
+  state[STATE_SLICE].flags || {};
 export const selectFlag = (
   flagName: FlagName
 ): ((state: State) => FlagVariation) => state => {

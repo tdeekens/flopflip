@@ -12,7 +12,7 @@ import {
 } from '@flopflip/react';
 
 type StateToProps = {
-  '@flopflip/flags': Flags;
+  [ALL_FLAGS_PROP_KEY]: Flags;
 };
 
 export const mapStateToProps = (state: State): StateToProps => ({
