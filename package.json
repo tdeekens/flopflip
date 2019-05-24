@@ -68,7 +68,7 @@
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "bundlesize": "0.17.2",
     "check-node-version": "4.0.1",
-    "core-js": "3.1.0",
+    "core-js": "3.1.2",
     "cross-env": "5.2.0",
     "eslint": "5.16.0",
     "eslint-config-prettier": "4.3.0",
@@ -98,7 +98,7 @@
     "rollup-plugin-node-globals": "1.4.0",
     "rollup-plugin-node-resolve": "5.0.0",
     "rollup-plugin-replace": "2.2.0",
-    "rollup-plugin-terser": "4.0.4",
+    "rollup-plugin-terser": "5.0.0",
     "rollup-watch": "4.3.1",
     "ts-jest": "24.0.2",
     "typescript": "3.4.5"
