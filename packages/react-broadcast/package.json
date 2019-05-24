@@ -45,7 +45,7 @@
     "react-dom": "^15.6 || ^16.0 || ^17.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.4.4",
+    "@babel/runtime": "7.4.5",
     "@flopflip/react": "^7.2.2",
     "@flopflip/types": "^2.1.0",
     "create-react-context": "0.2.3",

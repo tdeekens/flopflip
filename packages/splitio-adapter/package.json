@@ -35,8 +35,8 @@
     "@types/lodash": "4.14.129"
   },
   "dependencies": {
-    "@babel/runtime": "7.4.4",
-    "@splitsoftware/splitio": "10.7.2",
+    "@babel/runtime": "7.4.5",
+    "@splitsoftware/splitio": "10.8.0",
     "deepmerge": "3.2.0",
     "lodash": "4.17.11"
   },
