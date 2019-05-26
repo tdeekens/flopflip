@@ -24,9 +24,9 @@ executors:
     docker:
       - image: circleci/node:10
     working_directory: *working_directory
-  node_11:
+  node_12:
     docker:
-      - image: circleci/node:11.5
+      - image: circleci/node:12.3
     working_directory: *working_directory
 
 commands:
@@ -107,12 +107,12 @@ jobs:
     executor: node_10
     steps:
       - unit_test_without_coverage
-  build_test_node_11:
-    executor: node_11
+  build_test_node_12:
+    executor: node_12
     steps:
       - unit_test_with_coverage
   publish:
-    executor: node_11
+    executor: node_12
     steps:
       - publish_to_next
 
@@ -130,14 +130,14 @@ workflows:
       - build_test_node_10:
           requires:
             - type_check
-      - build_test_node_11:
+      - build_test_node_12:
           requires:
             - type_check
       - bundlesize_check:
           requires:
             - build_test_node_8
             - build_test_node_10
-            - build_test_node_11
+            - build_test_node_12
       - publish:
           requires:
             - bundlesize_check
