@@ -910,10 +910,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-9.0.1.tgz#c27b391d8457d1e893f1eddeaf5e5412d12ffbb5"
   integrity sha512-6It2EVfGskxZCQhuykrfnALg7oVeiI6KclWSmGDqB0AiInVrTGB9Jp9i4/Ad21u9Jde/voVQz6eFX/eSg/UsPA==
 
-"@flopflip/launchdarkly-adapter@2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.5.0.tgz#44fe73dae9acf745c5bcf244ab596df41e6c820e"
-  integrity sha512-ftUY34Q9ya3Q+hj9ketoxDJI/K5BHwt/Ibv/vRiI4eXXWb3YAujGweJmI9ObaKztDZHqhErHOjC1x3msHV0X+A==
+"@flopflip/launchdarkly-adapter@2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.6.0.tgz#4cc0a92ff234a83d49ea79a0c613f56adb4d5da8"
+  integrity sha512-syl/kcy7jhfhRKRCIyELLVm1P8ig9HPslvo0L9eMScx/wfjMtKrZFIOwPozGINR9ceUMcEHvJI/kOcFGHD1M2A==
   dependencies:
     "@babel/runtime" "7.4.4"
     deepmerge "3.2.0"
@@ -939,30 +939,30 @@
     invariant "2.2.4"
     mitt "1.1.3"
 
-"@flopflip/react-broadcast@8.2.1":
-  version "8.2.1"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-8.2.1.tgz#1fe880a95e117dad51566fca16839cde0995c770"
-  integrity sha512-PF/Kz83DVCyu83hEy06yASNn3RWwH7HYD8AXX1pXc6qnrvaVZfjLdORl3sz+clUv623MCCgRLjQoW6nDQjuHRQ==
+"@flopflip/react-broadcast@8.2.2":
+  version "8.2.2"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-8.2.2.tgz#aac022655b10ab00ed78057b1d5df2e6b0dcf431"
+  integrity sha512-rzEI4JLdcdiqmQ3Jmh7CevegViBY7byH/ZLW/MpqOrl486J9sn9MeAoyB4ZBsh7F4kyiPZr3CnQgDGlqD5JAow==
   dependencies:
     "@babel/runtime" "7.4.4"
-    "@flopflip/react" "^7.2.1"
+    "@flopflip/react" "^7.2.2"
     "@flopflip/types" "^2.1.0"
     create-react-context "0.2.3"
     lodash "4.17.11"
 
-"@flopflip/react-redux@8.1.1":
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-8.1.1.tgz#038d613e10c3604f148ed9e001e3561e54d69974"
-  integrity sha512-n0Cf1MitzKK3443HOqdEf7vZEV9yE6vfBLkBZLT4cTsal7mwRg6MxMYYOCm46zRe1C5aPRjisOknKQUKMVhMSA==
+"@flopflip/react-redux@8.1.3":
+  version "8.1.3"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-8.1.3.tgz#d1b7ed0ed4c2114fa68eefb65322a8615045c1bf"
+  integrity sha512-ftbtnnDDWxopjBGdKTROqfpiiETzFpxItjM9WNKwvq3GllvVGww8Ip/rezcdpqX3QGSEFXCPDkb8p8CqjNbNdQ==
   dependencies:
     "@babel/runtime" "7.4.4"
-    "@flopflip/react" "^7.2.1"
+    "@flopflip/react" "^7.2.2"
     "@flopflip/types" "^2.1.0"
-    "@types/lodash" "4.14.123"
-    "@types/react-redux" "7.0.8"
+    "@types/lodash" "4.14.129"
+    "@types/react-redux" "7.0.9"
     lodash "4.17.11"
 
-"@flopflip/react@^7.2.1":
+"@flopflip/react@^7.2.2":
   version "7.2.2"
   resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-7.2.2.tgz#33759064468cd77685d368dbb8c1a0702c7aaf18"
   integrity sha512-u49FmSL/B49jGEPqo3aejiMNP7Zv3YaAnFvNbMJh4POqDKFoMyayFTqEhfSRAIL5d7z8keNADzkH46V4pDzBuA==
@@ -1331,10 +1331,10 @@
     "@types/istanbul-lib-coverage" "*"
     "@types/istanbul-lib-report" "*"
 
-"@types/lodash@4.14.123":
-  version "4.14.123"
-  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.123.tgz#39be5d211478c8dd3bdae98ee75bb7efe4abfe4d"
-  integrity sha512-pQvPkc4Nltyx7G1Ww45OjVqUsJP4UsZm+GWJpigXgkikZqJgRm4c48g027o6tdgubWHwFRF15iFd+Y4Pmqv6+Q==
+"@types/lodash@4.14.129":
+  version "4.14.129"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.129.tgz#9aaca391db126802482655c48dd79a814488202f"
+  integrity sha512-oYaV0eSlnOacOr7i4X1FFdH8ttSlb57gu3I9MuStIv2CYkISEY84dNHYsC3bF6sNH7qYcu1BtVrCtQ8Q4KPTfQ==
 
 "@types/node@*":
   version "12.0.2"
@@ -1351,13 +1351,14 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
-"@types/react-redux@7.0.8":
-  version "7.0.8"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.0.8.tgz#c928863058e334d41031c6bedd0f113bc514e234"
-  integrity sha512-vIBC15E84ehN6RzdGwRVa41whp9e4CkfPm+WfD0r6y6vqBf4tQPKZeKEBfLLM8k79uSwQC7rh3rH/MFaN1IESQ==
+"@types/react-redux@7.0.9":
+  version "7.0.9"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.0.9.tgz#4825ee2872c44768916304b6bb8df5b46d443b88"
+  integrity sha512-fMVX9SneWWw68d/JoeNUh6hj42kx2G30YhPdCYJTOv3xqbJ1xzIz6tEM/xzi7nBvpNbwZkSa9TMsV06kWOFIIg==
   dependencies:
     "@types/hoist-non-react-statics" "^3.3.0"
     "@types/react" "*"
+    hoist-non-react-statics "^3.3.0"
     redux "^4.0.0"
 
 "@types/react@*":
