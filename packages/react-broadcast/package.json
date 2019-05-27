@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@types/lodash": "4.14.129",
+    "@types/lodash": "4.14.132",
     "@types/react": "16.8.17",
     "@types/react-dom": "16.8.4",
     "react": "16.8.6",
