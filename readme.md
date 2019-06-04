@@ -15,7 +15,7 @@
   · Jest
   · Prettier
   · TypeScript
-  · react-testing-library
+  · @testing-library/react
   · ESLint
   · Babel
   · Lodash

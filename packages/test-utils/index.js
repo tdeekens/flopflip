@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import adapter, { updateFlags } from '@flopflip/memory-adapter';
-import { render, fireEvent } from 'react-testing-library';
+import { render, fireEvent } from '@testing-library/react';
 
 const mergeOptional = (defaultValue, value) =>
   value === null ? undefined : { ...defaultValue, ...value };
@@ -136,7 +136,7 @@ const components = {
   ToggledComponent,
 };
 
-export * from 'react-testing-library';
+export * from '@testing-library/react';
 export {
   defaultRender as render,
   shallow as renderShallowly,
