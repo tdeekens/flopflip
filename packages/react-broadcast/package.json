@@ -8,6 +8,9 @@
   "typings": "dist/typings/index.d.ts",
   "scripts": {
     "prebuild": "rimraf dist/**",
+    "preversion": "echo preversion-react-broadcast-1",
+    "version": "echo version-react-broadcast-1",
+    "postversion": "echo postversion-react-broadcast-1",
     "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs && npm run build:typings",
     "build:typings": "cross-env tsc -p tsconfig.json --emitDeclarationOnly --declarationDir dist/typings",
     "build:watch": "cross-env npm run build:es -- -w",
