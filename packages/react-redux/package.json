@@ -7,6 +7,7 @@
   "browser": "dist/@flopflip-react-redux.umd.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
+    "prepare": "./../../bin/version.js amend",
     "prebuild": "rimraf dist/**",
     "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs && npm run build:typings",
     "build:typings": "cross-env tsc -p tsconfig.json --emitDeclarationOnly --declarationDir dist/typings",
