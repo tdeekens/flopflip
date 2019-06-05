@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@flopflip/test-utils",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Test utils for flipflop",
   "scripts": {
     "build": "exit 0"
@@ -23,6 +23,7 @@
     "types"
   ],
   "dependencies": {
+    "@testing-library/react": "8.0.1",
     "codecov": "3.5.0",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
@@ -34,7 +35,6 @@
     "jest-plugin-filename": "0.0.1",
     "jest-runner-eslint": "0.7.3",
     "jest-runner-prettier": "0.2.6",
-    "jest-watch-yarn-workspaces": "1.1.0",
-    "@testing-library/react": "8.0.1"
+    "jest-watch-yarn-workspaces": "1.1.0"
   }
 }
