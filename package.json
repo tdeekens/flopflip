@@ -144,5 +144,8 @@
       "path": "./packages/react-redux/dist/@flopflip-react-redux.umd.min.js",
       "threshold": "3.75Kb"
     }
-  ]
+  ],
+  "resolutions": {
+    "@types/react": "16.8.2"
+  }
 }
