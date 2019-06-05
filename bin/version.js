@@ -38,6 +38,7 @@ switch (command) {
       replacement: version,
       paths,
       recursive: true,
+      silent: true,
     });
 
     console.log(`Amended for ${package} for release ${version}`);
