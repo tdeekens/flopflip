@@ -7,7 +7,7 @@ const replace = require('replace');
 
 const version = process.env.npm_package_version;
 const package = process.env.npm_package_name;
-const cwd = process.env.CWD;
+const pwd = process.env.PWD;
 
 const flags = mri(process.argv.slice(2), { alias: { help: ['h'] } });
 const commands = flags._;
@@ -30,11 +30,11 @@ switch (command) {
     break;
   }
   case 'amend': {
-    const distFolder = path.join(cwd, 'dist');
+    const distFolder = path.join(pwd, 'dist');
     const paths = [distFolder];
 
     replace({
-      regex: '__VERSION_OF_RELEASE__',
+      regex: '__@FLOPFLIP/VERSION_OF_RELEASE__',
       replacement: version,
       paths,
       recursive: true,
