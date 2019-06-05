@@ -1,4 +1,5 @@
-const version = process.env.npm_package_version;
+const version = '__VERSION_OF_RELEASE__';
+
 export {
   ToggleFeature,
   injectFeatureToggle,
