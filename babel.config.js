@@ -35,6 +35,7 @@ module.exports = {
     '@babel/preset-typescript',
   ],
   plugins: [
+    'babel-plugin-typescript-to-proptypes',
     '@babel/plugin-external-helpers',
     [
       '@babel/plugin-proposal-class-properties',
