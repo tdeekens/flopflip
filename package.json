@@ -83,7 +83,7 @@
     "eslint-plugin-react-hooks": "1.6.0",
     "husky": "2.4.1",
     "lerna": "3.15.0",
-    "lint-staged": "8.1.7",
+    "lint-staged": "8.2.1",
     "mri": "1.1.4",
     "prettier": "1.17.1",
     "raf": "3.4.1",
