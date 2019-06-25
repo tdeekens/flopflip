@@ -47,8 +47,8 @@
   },
   "dependencies": {
     "@babel/runtime": "7.4.5",
-    "create-react-context": "0.2.3",
-    "deepmerge": "3.2.0",
+    "create-react-context": "0.3.0",
+    "deepmerge": "3.3.0",
     "lodash": "4.17.11",
     "react-fast-compare": "2.0.4",
     "react-is": "16.8.6",

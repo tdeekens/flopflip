@@ -5,7 +5,7 @@ module.exports = {
     [
       '@babel/env',
       {
-        useBuiltIns: 'usage',
+        useBuiltIns: 'entry',
         corejs: 3,
         ...(isEnv('test')
           ? {

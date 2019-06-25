@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.4.5",
-    "deepmerge": "3.2.0",
+    "deepmerge": "3.3.0",
     "ldclient-js": "2.10.2",
     "lodash": "4.17.11",
     "tiny-warning": "1.0.2"
