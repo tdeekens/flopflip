@@ -12,7 +12,9 @@
     "build:typings": "cross-env tsc -p tsconfig.json --emitDeclarationOnly --declarationDir dist/typings",
     "build:watch": "cross-env npm run build:es -- -w",
     "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.ts -o dist/@flopflip-splitio-adapter.es.js",
-    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-splitio-adapter.cjs.js"
+    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-splitio-adapter.cjs.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "files": [
     "readme.md",
@@ -39,12 +41,14 @@
     "@babel/runtime": "7.4.5",
     "@splitsoftware/splitio": "10.8.1",
     "deepmerge": "3.3.0",
-    "lodash": "4.17.11"
+    "lodash": "4.17.11",
+    "snyk": "^1.189.0"
   },
   "keywords": [
     "feature-flags",
     "feature-toggles",
     "split.io",
     "client"
-  ]
+  ],
+  "snyk": true
 }
