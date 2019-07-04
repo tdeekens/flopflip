@@ -12,7 +12,9 @@
     "build:typings": "cross-env tsc -p tsconfig.json --emitDeclarationOnly --declarationDir dist/typings",
     "build:watch": "cross-env npm run build:es -- -w",
     "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.ts -o dist/@flopflip-launchdarkly-adapter.es.js",
-    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-launchdarkly-adapter.cjs.js"
+    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-launchdarkly-adapter.cjs.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "files": [
     "readme.md",
@@ -40,12 +42,14 @@
     "deepmerge": "3.3.0",
     "ldclient-js": "2.10.2",
     "lodash": "4.17.11",
-    "tiny-warning": "1.0.2"
+    "tiny-warning": "1.0.2",
+    "snyk": "^1.189.0"
   },
   "keywords": [
     "feature-flags",
     "feature-toggles",
     "LaunchDarkly",
     "client"
-  ]
+  ],
+  "snyk": true
 }
