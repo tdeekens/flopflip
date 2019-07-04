@@ -15,7 +15,9 @@
     "build:umd": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f umd -i modules/index.ts -o dist/@flopflip-react-broadcast.umd.js",
     "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -i modules/index.ts -o dist/@flopflip-react-broadcast.umd.min.js",
     "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.ts -o dist/@flopflip-react-broadcast.es.js",
-    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-react-broadcast.cjs.js"
+    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-react-broadcast.cjs.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "files": [
     "readme.md",
@@ -50,7 +52,8 @@
     "@flopflip/react": "^7.3.0",
     "@flopflip/types": "^2.1.0",
     "create-react-context": "0.3.0",
-    "lodash": "4.17.11"
+    "lodash": "4.17.11",
+    "snyk": "^1.189.0"
   },
   "keywords": [
     "react",
@@ -58,5 +61,6 @@
     "feature-toggles",
     "LaunchDarkly",
     "client"
-  ]
+  ],
+  "snyk": true
 }
