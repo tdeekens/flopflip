@@ -15,7 +15,9 @@
     "build:umd": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f umd -i modules/index.ts -o dist/@flopflip-react-redux.umd.js",
     "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -i modules/index.ts -o dist/@flopflip-react-redux.umd.min.js",
     "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.ts -o dist/@flopflip-react-redux.es.js",
-    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-react-redux.cjs.js"
+    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-react-redux.cjs.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "files": [
     "readme.md",
@@ -46,7 +48,8 @@
     "@flopflip/types": "^2.1.0",
     "@types/lodash": "4.14.135",
     "@types/react-redux": "7.0.9",
-    "lodash": "4.17.11"
+    "lodash": "4.17.11",
+    "snyk": "^1.189.0"
   },
   "peerDependencies": {
     "react": "^15.6 || ^16.0",
@@ -59,5 +62,6 @@
     "feature-toggles",
     "LaunchDarkly",
     "client"
-  ]
+  ],
+  "snyk": true
 }
