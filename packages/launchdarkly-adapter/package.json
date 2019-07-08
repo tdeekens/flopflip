@@ -36,7 +36,7 @@
     "@types/lodash": "4.14.135"
   },
   "dependencies": {
-    "@babel/runtime": "7.4.5",
+    "@babel/runtime": "7.5.1",
     "deepmerge": "3.3.0",
     "ldclient-js": "2.10.2",
     "lodash": "4.17.11",
