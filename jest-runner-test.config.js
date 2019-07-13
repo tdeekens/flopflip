@@ -1,5 +1,5 @@
 require('jest-enzyme');
-require('jest-dom/extend-expect');
+require('@testing-library/jest-dom/extend-expect');
 require('@testing-library/react/cleanup-after-each');
 
 const commercetoolsEnzymeMatchers = require('@commercetools/jest-enzyme-matchers');
