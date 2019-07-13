@@ -33,13 +33,13 @@
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
     "@flopflip/types": "^2.1.0",
-    "@types/lodash": "4.14.135"
+    "@types/lodash": "4.14.136"
   },
   "dependencies": {
     "@babel/runtime": "7.5.4",
     "@splitsoftware/splitio": "10.8.1",
     "deepmerge": "4.0.0",
-    "lodash": "4.17.11"
+    "lodash": "4.17.14"
   },
   "keywords": [
     "feature-flags",
