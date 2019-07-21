@@ -140,11 +140,6 @@ const subscribe = ({
         let flags: Flags;
 
         if (adapterState.client && adapterState.manager) {
-          // First update internal state
-          adapterState.isReady = true;
-          // ...to then signal that the adapter is ready
-          onStatusStateChange({ isReady: true });
-
           flagNames = adapterState.manager.names();
           flags = adapterState.client.getTreatments(
             flagNames,
@@ -152,6 +147,12 @@ const subscribe = ({
           );
 
           onFlagsStateChange(camelCaseFlags(flags));
+
+          // First update internal state
+          adapterState.isReady = true;
+          // ...to then signal that the adapter is ready
+          onStatusStateChange({ isReady: true });
+
           // ...to finally subscribe to later changes.
           subscribeToFlagsChanges({
             flagNames,
