@@ -156,20 +156,20 @@ const getInitialFlags = ({
           const flagsFromSdk = adapterState.client
             ? adapterState.client.allFlags()
             : null;
-          // First update internal state
-          adapterState.isReady = true;
-          // ...to then signal that the adapter is ready
-          onStatusStateChange({ isReady: true });
+
           if (flagsFromSdk) {
             const flags: Flags = camelCaseFlags(flagsFromSdk);
             updateFlagsInAdapterState(flags);
             // ...and flush initial state of flags
             onFlagsStateChange(flags);
-
-            return resolve({ flagsFromSdk });
           }
 
-          resolve({ flagsFromSdk: null });
+          // First update internal state
+          adapterState.isReady = true;
+          // ...to then signal that the adapter is ready
+          onStatusStateChange({ isReady: true });
+
+          resolve({ flagsFromSdk });
         })
         .catch(() => {
           if (throwOnInitializationFailure)
