@@ -56,9 +56,8 @@ describe('when configuring', () => {
       return updatingOfUserContext.catch(() => {});
     });
 
-    it('should reject `updateUserContext`', () => {
-      expect(updatingOfUserContext).rejects.toEqual(expect.any(Error));
-    });
+    it('should reject `updateUserContext`', () =>
+      expect(updatingOfUserContext).rejects.toEqual(expect.any(Error)));
   });
 
   describe('with user key', () => {

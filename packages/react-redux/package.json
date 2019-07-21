@@ -41,12 +41,12 @@
     "redux": "4.0.4"
   },
   "dependencies": {
-    "@babel/runtime": "7.5.4",
+    "@babel/runtime": "7.5.5",
     "@flopflip/react": "^7.3.0",
     "@flopflip/types": "^2.1.0",
     "@types/lodash": "4.14.136",
     "@types/react-redux": "7.1.1",
-    "lodash": "4.17.14"
+    "lodash": "4.17.15"
   },
   "peerDependencies": {
     "react": "^15.6 || ^16.0",
