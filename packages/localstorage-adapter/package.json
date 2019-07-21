@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/localstorage-adapter",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "An localstorage adapter for flipflop",
   "main": "dist/@flopflip-localstorage-adapter.cjs.js",
   "module": "dist/@flopflip-localstorage-adapter.es.js",
