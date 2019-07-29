@@ -14,7 +14,7 @@ import {
   initialize as initializeLaunchDarklyClient,
   LDUser,
   LDClient,
-} from 'ldclient-js';
+} from 'launchdarkly-js-client-sdk';
 import camelCase from 'lodash/camelCase';
 
 type ClientOptions = {

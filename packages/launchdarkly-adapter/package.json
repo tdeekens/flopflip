@@ -38,7 +38,7 @@
   "dependencies": {
     "@babel/runtime": "7.5.5",
     "deepmerge": "4.0.0",
-    "ldclient-js": "2.10.2",
+    "launchdarkly-js-client-sdk": "2.12.4",
     "lodash": "4.17.15",
     "tiny-warning": "1.0.3"
   },
