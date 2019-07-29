@@ -1,7 +1,7 @@
-import ldClient from 'ldclient-js';
+import ldClient from 'launchdarkly-js-client-sdk';
 import adapter, { camelCaseFlags } from './adapter';
 
-jest.mock('ldclient-js', () => ({
+jest.mock('launchdarkly-js-client-sdk', () => ({
   initialize: jest.fn(),
 }));
 jest.mock('tiny-warning');
