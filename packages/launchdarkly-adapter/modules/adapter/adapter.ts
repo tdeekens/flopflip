@@ -85,11 +85,10 @@ const setupFlagSubcription = ({
           onFlagsStateChange(flags);
         };
 
-        if (flagsUpdateDelayMs) {
-          debounce(updateFlags, { wait: flagsUpdateDelayMs });
-        } else {
-          updateFlags();
-        }
+        debounce(updateFlags, {
+          wait: flagsUpdateDelayMs,
+          immediate: !flagsUpdateDelayMs,
+        })();
       });
     }
   }

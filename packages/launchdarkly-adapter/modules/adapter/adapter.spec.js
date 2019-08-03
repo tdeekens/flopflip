@@ -20,6 +20,11 @@ const createClient = jest.fn(apiOverwrites => ({
   ...apiOverwrites,
 }));
 
+const triggerFlagValueChange = (client, flagValue = false) =>
+  client.on.mock.calls.forEach(([event, cb]) => {
+    if (event.startsWith('change:')) cb(flagValue);
+  });
+
 describe('when configuring', () => {
   let onStatusStateChange;
   let onFlagsStateChange;
@@ -235,10 +240,7 @@ describe('when configuring', () => {
           // Reset due to preivous dispatches
           onFlagsStateChange.mockClear();
 
-          // Checking for change:* callbacks and settings all flags to false.
-          client.on.mock.calls.forEach(([event, cb]) => {
-            if (event.startsWith('change:')) cb(false);
-          });
+          triggerFlagValueChange(client);
         });
 
         it('should `dispatch` `onFlagsStateChange` action', () => {
@@ -278,14 +280,60 @@ describe('when configuring', () => {
           });
 
           onFlagsStateChange.mockClear();
-          // Checking for change:* callbacks and settings all flags to false.
-          client.on.mock.calls.forEach(([event, cb]) => {
-            if (event.startsWith('change:')) cb(false);
-          });
+
+          triggerFlagValueChange(client);
         });
 
         it('should not `dispatch` `onFlagsStateChange` action', () => {
           expect(onFlagsStateChange).not.toHaveBeenCalled();
+        });
+      });
+
+      describe('with `flagsUpdateDelayMs`', () => {
+        const flagsUpdateDelayMs = 1000;
+
+        beforeEach(() => {
+          jest.useFakeTimers();
+
+          // Reset due to preivous dispatches
+          onFlagsStateChange.mockClear();
+          client.on.mockClear();
+
+          onStatusStateChange = jest.fn();
+          onFlagsStateChange = jest.fn();
+          client = createClient({
+            allFlags: jest.fn(() => flags),
+          });
+
+          ldClient.initialize.mockReturnValue(client);
+
+          return adapter.configure({
+            flagsUpdateDelayMs,
+            clientSideId,
+            user: userWithKey,
+            onStatusStateChange,
+            onFlagsStateChange,
+          });
+        });
+
+        it('should `dispatch` `onFlagsStateChange` action once', () => {
+          expect(onFlagsStateChange).toHaveBeenCalledTimes(1);
+        });
+
+        describe('when flag update occurs', () => {
+          beforeEach(() => {
+            triggerFlagValueChange(client);
+          });
+
+          it('should not `dispatch` `onFlagsStateChange` action immidiately', () => {
+            expect(onFlagsStateChange).toHaveBeenCalledTimes(1);
+          });
+
+          it('should `dispatch` `onFlagsStateChange` action after the delay passed', () => {
+            jest.advanceTimersByTime(flagsUpdateDelayMs);
+
+            expect(onFlagsStateChange).toHaveBeenCalledTimes(5);
+          });
         });
       });
     });
