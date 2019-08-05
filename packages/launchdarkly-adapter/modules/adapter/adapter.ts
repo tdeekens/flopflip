@@ -10,6 +10,7 @@ import {
 import merge from 'deepmerge';
 import warning from 'tiny-warning';
 import isEqual from 'lodash/isEqual';
+import debounce from 'debounce-fn';
 import {
   initialize as initializeLaunchDarklyClient,
   LDUser,
@@ -57,9 +58,11 @@ const normalizeFlag = (flagName: FlagName, flagValue?: FlagVariation): Flag => [
 const setupFlagSubcription = ({
   flagsFromSdk,
   onFlagsStateChange,
+  flagsUpdateDelayMs,
 }: {
   flagsFromSdk: Flags;
   onFlagsStateChange: OnFlagsStateChangeCallback;
+  flagsUpdateDelayMs?: number;
 }): void => {
   for (const flagName in flagsFromSdk) {
     // Dispatch whenever a configured flag value changes
@@ -77,8 +80,15 @@ const setupFlagSubcription = ({
           [normalizedFlagName]: normalizedFlagValue,
         };
 
-        updateFlagsInAdapterState(flags);
-        onFlagsStateChange(flags);
+        const updateFlags = () => {
+          updateFlagsInAdapterState(flags);
+          onFlagsStateChange(flags);
+        };
+
+        debounce(updateFlags, {
+          wait: flagsUpdateDelayMs,
+          immediate: !flagsUpdateDelayMs,
+        })();
       });
     }
   }
@@ -198,6 +208,7 @@ const configure = ({
   onStatusStateChange,
   subscribeToFlagChanges = true,
   throwOnInitializationFailure = false,
+  flagsUpdateDelayMs,
 }: {
   clientSideId: string;
   user: User;
@@ -206,6 +217,7 @@ const configure = ({
   onStatusStateChange: OnStatusStateChangeCallback;
   subscribeToFlagChanges: boolean;
   throwOnInitializationFailure: boolean;
+  flagsUpdateDelayMs?: number;
 }): Promise<any> => {
   adapterState.user = ensureUser(user);
   adapterState.client = initializeClient(
@@ -223,6 +235,7 @@ const configure = ({
     if (subscribeToFlagChanges && flagsFromSdk)
       setupFlagSubcription({
         flagsFromSdk,
+        flagsUpdateDelayMs,
         onFlagsStateChange,
       });
 
