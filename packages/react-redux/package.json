@@ -49,8 +49,8 @@
     "lodash": "4.17.15"
   },
   "peerDependencies": {
-    "react": "^15.6 || ^16.0",
-    "react-dom": "^15.6 || ^16.0",
+    "react": "^16.3",
+    "react-dom": "^16.3",
     "react-redux": "^5.0 || ^7.0.0",
     "redux": "^3.7 || ^4.0"
   },

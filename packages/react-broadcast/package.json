@@ -42,8 +42,8 @@
     "react-dom": "16.8.6"
   },
   "peerDependencies": {
-    "react": "^15.6 || ^16.0 || ^17.0",
-    "react-dom": "^15.6 || ^16.0 || ^17.0"
+    "react": "^16.3 || ^17.0",
+    "react-dom": "^16.3 || ^17.0"
   },
   "dependencies": {
     "@babel/runtime": "7.5.5",

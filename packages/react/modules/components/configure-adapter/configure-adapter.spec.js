@@ -317,7 +317,7 @@ describe('lifecycle', () => {
     });
   });
 
-  describe('componentWillReceiveProps', () => {
+  describe('UNSAFE_componentWillReceiveProps', () => {
     let componentInstance;
     let props;
     let nextProps;
@@ -341,7 +341,8 @@ describe('lifecycle', () => {
 
         jest.spyOn(componentInstance, 'reconfigureOrQueue');
 
-        componentInstance.componentWillReceiveProps(nextProps);
+        // eslint-disable-next-line new-cap
+        componentInstance.UNSAFE_componentWillReceiveProps(nextProps);
       });
 
       it('should invoke `recongiureOrQueue`', () => {
@@ -367,7 +368,8 @@ describe('lifecycle', () => {
       beforeEach(() => {
         jest.spyOn(componentInstance, 'reconfigureOrQueue');
 
-        componentInstance.componentWillReceiveProps(props);
+        // eslint-disable-next-line new-cap
+        componentInstance.UNSAFE_componentWillReceiveProps(props);
       });
 
       it('should invoke not `recongiureOrQueue`', () => {
