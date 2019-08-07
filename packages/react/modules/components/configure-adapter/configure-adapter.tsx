@@ -126,7 +126,7 @@ export default class ConfigureAdapter extends React.PureComponent<
    * NOTE:
    *    Whenever the adapter delays configuration pending adapterArgs will
    *    be kept on `pendingAdapterArgs`. These can either be populated
-   *    from calls to `componentWillReceiveProps` or through `ReconfigureFlopflip`.
+   *    from calls to `UNSAFE_componentWillReceiveProps` or through `ReconfigureFlopflip`.
    *    Both cases go through `reconfigureOrQueue`.
    *
    *    In any case, when the adapter should be configured it should either
@@ -152,7 +152,7 @@ export default class ConfigureAdapter extends React.PureComponent<
    *   may trigger a `setState` it might have unexpected side-effects (setState-loop).
    *   Maybe some more substancial refactor would be needed.
    */
-  componentWillReceiveProps(nextProps: Props): void {
+  UNSAFE_componentWillReceiveProps(nextProps: Props): void {
     if (nextProps.adapterArgs !== this.props.adapterArgs) {
       /**
        * NOTE:
