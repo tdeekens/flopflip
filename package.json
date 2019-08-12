@@ -60,7 +60,7 @@
     "@commercetools/jest-enzyme-matchers": "1.1.2",
     "@commitlint/cli": "8.1.0",
     "@commitlint/config-conventional": "8.1.0",
-    "@types/jest": "24.0.16",
+    "@types/jest": "24.0.17",
     "@types/node": "12.6.9",
     "@typescript-eslint/eslint-plugin": "1.9.0",
     "babel-eslint": "10.0.2",
