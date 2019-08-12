@@ -248,12 +248,16 @@ describe('when configuring', () => {
         });
 
         it('should `dispatch` `onFlagsStateChange` action with camel cased `flags`', () => {
-          expect(onFlagsStateChange).toHaveBeenCalledWith({
-            someFlag1: false,
-          });
-          expect(onFlagsStateChange).toHaveBeenCalledWith({
-            someFlag2: false,
-          });
+          expect(onFlagsStateChange).toHaveBeenCalledWith(
+            expect.objectContaining({
+              someFlag1: false,
+            })
+          );
+          expect(onFlagsStateChange).toHaveBeenCalledWith(
+            expect.objectContaining({
+              someFlag2: false,
+            })
+          );
         });
       });
 
