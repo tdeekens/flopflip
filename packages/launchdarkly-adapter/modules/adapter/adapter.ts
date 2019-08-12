@@ -26,7 +26,7 @@ type AdapterState = {
   isConfigured: boolean;
   user?: User;
   client?: LDClient;
-  flags?: Flags;
+  flags: Flags;
 };
 
 const adapterState: AdapterState = {
@@ -34,7 +34,7 @@ const adapterState: AdapterState = {
   isConfigured: false,
   user: undefined,
   client: undefined,
-  flags: undefined,
+  flags: {},
 };
 
 const updateFlagsInAdapterState = (updatedFlags: Flags): void => {
@@ -45,7 +45,7 @@ const updateFlagsInAdapterState = (updatedFlags: Flags): void => {
 };
 
 const getFlag = (flagName: FlagName): FlagVariation | undefined =>
-  adapterState.flags && adapterState.flags[flagName];
+  adapterState.flags[flagName];
 
 const getIsReady = (): boolean => adapterState.isReady;
 
@@ -76,13 +76,13 @@ const setupFlagSubcription = ({
           flagValue
         );
 
-        const flags: Flags = {
+        const changedFlags: Flags = {
           [normalizedFlagName]: normalizedFlagValue,
         };
 
         const updateFlags = () => {
-          updateFlagsInAdapterState(flags);
-          onFlagsStateChange(flags);
+          updateFlagsInAdapterState(changedFlags);
+          onFlagsStateChange(adapterState.flags);
         };
 
         debounce(updateFlags, {
