@@ -39,7 +39,7 @@
     "@babel/runtime": "7.5.5",
     "debounce-fn": "3.0.1",
     "deepmerge": "4.0.0",
-    "launchdarkly-js-client-sdk": "2.12.4",
+    "launchdarkly-js-client-sdk": "2.13.0",
     "lodash": "4.17.15",
     "tiny-warning": "1.0.3"
   },
