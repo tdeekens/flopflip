@@ -35,8 +35,8 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "react": "16.8.6",
-    "react-dom": "16.8.6",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
     "react-redux": "7.1.0",
     "redux": "4.0.4"
   },
@@ -45,7 +45,7 @@
     "@flopflip/react": "^8.0.1",
     "@flopflip/types": "^2.1.1",
     "@types/lodash": "4.14.137",
-    "@types/react-redux": "7.1.1",
+    "@types/react-redux": "7.1.2",
     "lodash": "4.17.15"
   },
   "peerDependencies": {
