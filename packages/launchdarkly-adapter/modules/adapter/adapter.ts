@@ -76,12 +76,15 @@ const setupFlagSubcription = ({
           flagValue
         );
 
-        const changedFlags: Flags = {
+        const updatedFlags: Flags = {
           [normalizedFlagName]: normalizedFlagValue,
         };
 
+        // NOTE: Adapter state needs to be updated outside of debounced-fn
+        // so that no flag updates are lost.
+        updateFlagsInAdapterState(updatedFlags);
+
         const updateFlags = () => {
-          updateFlagsInAdapterState(changedFlags);
           onFlagsStateChange(adapterState.flags);
         };
 
