@@ -9,7 +9,7 @@ describe('when React hooks (`useContext`) is available', () => {
     React.useContext = jest.fn(() => ({ reconfigure }));
   });
 
-  it('should return a function', async () => {
+  it('should return a function', () => {
     expect(useAdapterReconfiguration()).toBe(reconfigure);
   });
 });

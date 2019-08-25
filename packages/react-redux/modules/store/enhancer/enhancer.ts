@@ -1,10 +1,4 @@
-import {
-  Store,
-  StoreEnhancerStoreCreator,
-  Reducer,
-  DeepPartial,
-  AnyAction,
-} from 'redux';
+import { Store, StoreEnhancerStoreCreator, Reducer, DeepPartial } from 'redux';
 import { Adapter, AdapterArgs, AdapterStatus, Flags } from '@flopflip/types';
 import { State } from '../../types';
 import { updateFlags, updateStatus } from '../../ducks';
@@ -15,7 +9,7 @@ export default function createFlopFlipEnhancer(
 ): <StoreState extends State>(
   next: StoreEnhancerStoreCreator<StoreState>
 ) => (
-  reducer: Reducer<StoreState, AnyAction>,
+  reducer: Reducer<StoreState>,
   preloadedState?: DeepPartial<StoreState>
 ) => Store {
   return next => (...args) => {

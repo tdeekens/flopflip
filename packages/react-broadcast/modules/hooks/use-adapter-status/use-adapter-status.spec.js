@@ -22,7 +22,7 @@ const TestComponent = () => {
 };
 
 describe('when React hooks (`useContext`) is available', () => {
-  it('should indicate the adapter not being ready', async () => {
+  it('should indicate the adapter not being ready', () => {
     const { getByText } = render(<TestComponent />);
 
     expect(getByText('Is ready: No')).toBeInTheDocument();

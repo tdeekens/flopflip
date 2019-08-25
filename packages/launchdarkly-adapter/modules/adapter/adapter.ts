@@ -161,46 +161,44 @@ const getInitialFlags = ({
   onStatusStateChange: OnStatusStateChangeCallback;
   throwOnInitializationFailure: boolean;
 }): Promise<{ flagsFromSdk: Flags | null }> => {
-  return new Promise((resolve, reject) => {
-    if (adapterState.client) {
-      return adapterState.client
-        .waitForInitialization()
-        .then(() => {
-          const flagsFromSdk = adapterState.client
-            ? adapterState.client.allFlags()
-            : null;
+  if (adapterState.client) {
+    return adapterState.client
+      .waitForInitialization()
+      .then(() => {
+        const flagsFromSdk = adapterState.client
+          ? adapterState.client.allFlags()
+          : null;
 
-          if (flagsFromSdk) {
-            const flags: Flags = camelCaseFlags(flagsFromSdk);
-            updateFlagsInAdapterState(flags);
-            // ...and flush initial state of flags
-            onFlagsStateChange(flags);
-          }
+        if (flagsFromSdk) {
+          const flags: Flags = camelCaseFlags(flagsFromSdk);
+          updateFlagsInAdapterState(flags);
+          // ...and flush initial state of flags
+          onFlagsStateChange(flags);
+        }
 
-          // First update internal state
-          adapterState.isReady = true;
-          // ...to then signal that the adapter is ready
-          onStatusStateChange({ isReady: true });
+        // First update internal state
+        adapterState.isReady = true;
+        // ...to then signal that the adapter is ready
+        onStatusStateChange({ isReady: true });
 
-          resolve({ flagsFromSdk });
-        })
-        .catch(() => {
-          if (throwOnInitializationFailure)
-            return reject(
-              new Error(
-                '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
-              )
-            );
-          resolve({ flagsFromSdk: null });
-        });
-    }
+        return Promise.resolve({ flagsFromSdk });
+      })
+      .catch(() => {
+        if (throwOnInitializationFailure)
+          return Promise.reject(
+            new Error(
+              '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
+            )
+          );
+        return Promise.resolve({ flagsFromSdk: null });
+      });
+  }
 
-    return reject(
-      new Error(
-        '@flopflip/launchdarkly-adapter: can not subscribe with non initialized client.'
-      )
-    );
-  });
+  return Promise.reject(
+    new Error(
+      '@flopflip/launchdarkly-adapter: can not subscribe with non initialized client.'
+    )
+  );
 };
 
 const configure = ({
