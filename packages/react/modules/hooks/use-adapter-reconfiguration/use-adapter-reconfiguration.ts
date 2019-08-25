@@ -9,14 +9,7 @@ export default function useAdapterReconfiguration():
   | Error
   | ReconfigureAdapterType {
   if (typeof React.useContext === 'function') {
-    /**
-     * NODE: `createReactContext` and `React.Context` return incomptaible types which
-     * can not be interchanged. Until `createReactContext` is in use this
-     * has to remain.
-     */
-    const adapterContext: AdapterContextType = React.useContext(
-      AdapterContext as any
-    );
+    const adapterContext: AdapterContextType = React.useContext(AdapterContext);
 
     return adapterContext.reconfigure;
   }

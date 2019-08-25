@@ -1,4 +1,4 @@
-import createReactContext, { Context } from 'create-react-context';
+import React from 'react';
 import {
   AdapterContext as AdapterContextType,
   AdapterStatus as AdapterStatusType,
@@ -18,9 +18,8 @@ const createAdapterContext = (
   status: status || initialAdapterStatus,
 });
 
-const AdapterContext: Context<AdapterContextType> = createReactContext(
-  createAdapterContext()
-);
+const initialAdapterContext = createAdapterContext();
+const AdapterContext = React.createContext(initialAdapterContext);
 
 export default AdapterContext;
 export { createAdapterContext };
