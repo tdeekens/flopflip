@@ -49,7 +49,6 @@
     "@babel/runtime": "7.5.5",
     "@flopflip/react": "^8.0.1",
     "@flopflip/types": "^2.1.1",
-    "create-react-context": "0.3.0",
     "lodash": "4.17.15"
   },
   "keywords": [
