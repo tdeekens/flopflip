@@ -15,12 +15,7 @@ export default function useFeatureToggle(
   );
 
   if (typeof React.useContext === 'function') {
-    /**
-     * NODE: `createReactContext` and `React.Context` return incomptaible types which
-     * can not be interchanged. Until `createReactContext` is in use this
-     * has to remain.
-     */
-    const flags: Flags = React.useContext(FlagsContext as any);
+    const flags: Flags = React.useContext(FlagsContext);
     const isFeatureEnabled: boolean = getIsFeatureEnabled(
       flagName,
       flagVariation
