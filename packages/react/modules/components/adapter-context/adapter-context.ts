@@ -18,9 +18,8 @@ const createAdapterContext = (
   status: status || initialAdapterStatus,
 });
 
-const AdapterContext:  React.createContext<AdapterContextType>(
-  createAdapterContext()
-);
+const initialAdapterContext = createAdapterContext();
+const AdapterContext = React.createContext(initialAdapterContext);
 
 export default AdapterContext;
 export { createAdapterContext };
