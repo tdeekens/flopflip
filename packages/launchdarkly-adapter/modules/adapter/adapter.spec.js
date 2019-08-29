@@ -240,7 +240,7 @@ describe('when configuring', () => {
           // Reset due to preivous dispatches
           onFlagsStateChange.mockClear();
 
-          triggerFlagValueChange(client);
+          triggerFlagValueChange(client, true);
         });
 
         it('should `dispatch` `onFlagsStateChange` action', () => {
@@ -250,7 +250,7 @@ describe('when configuring', () => {
         it('should `dispatch` `onFlagsStateChange` action with camel cased `flags`', () => {
           expect(onFlagsStateChange).toHaveBeenCalledWith(
             expect.objectContaining({
-              someFlag1: false,
+              someFlag1: true,
             })
           );
           expect(onFlagsStateChange).toHaveBeenCalledWith(
@@ -326,7 +326,7 @@ describe('when configuring', () => {
 
         describe('when flag update occurs', () => {
           beforeEach(() => {
-            triggerFlagValueChange(client);
+            triggerFlagValueChange(client, true);
           });
 
           it('should not `dispatch` `onFlagsStateChange` action immidiately', () => {
@@ -336,7 +336,7 @@ describe('when configuring', () => {
           it('should `dispatch` `onFlagsStateChange` action after the delay passed', () => {
             jest.advanceTimersByTime(flagsUpdateDelayMs);
 
-            expect(onFlagsStateChange).toHaveBeenCalledTimes(5);
+            expect(onFlagsStateChange).toHaveBeenCalledTimes(4);
           });
         });
       });

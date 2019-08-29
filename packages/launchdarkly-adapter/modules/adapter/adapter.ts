@@ -47,6 +47,14 @@ const updateFlagsInAdapterState = (updatedFlags: Flags): void => {
 const getFlag = (flagName: FlagName): FlagVariation | undefined =>
   adapterState.flags[flagName];
 
+const didFlagChange = (flagName: FlagName, nextFlagValue: FlagVariation) => {
+  const previousFlagValue = getFlag(flagName);
+
+  if (previousFlagValue === undefined) return true;
+
+  return previousFlagValue !== nextFlagValue;
+};
+
 const getIsReady = (): boolean => adapterState.isReady;
 
 const normalizeFlag = (flagName: FlagName, flagValue?: FlagVariation): Flag => [
@@ -75,6 +83,9 @@ const setupFlagSubcription = ({
           flagName,
           flagValue
         );
+
+        // Sometimes the SDK flushes flag changes without a value having changed.
+        if (!didFlagChange(normalizedFlagName, normalizedFlagValue)) return;
 
         const updatedFlags: Flags = {
           [normalizedFlagName]: normalizedFlagValue,
