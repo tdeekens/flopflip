@@ -247,7 +247,7 @@ You can setup flopflip to work in two ways:
 1.  Use React's Context (hidden for you) via `@flopflip/react-broadcast`
 2.  Integrate with Redux via `@flopflip/react-redux`
 
-Often using `@flopflip/react-broadcast` will be the easiest way to get started. You would just need to pick an adapter which can be any of the privided. Either just a `memory-adapter` or an integration with LaunchDarkly via `launchdarkly-adapter` will work. More on how to use [`ConfigureFlopFlip`](#setup-using-components) below.
+Often using `@flopflip/react-broadcast` will be the easiest way to get started. You would just need to pick an adapter which can be any of the provided. Either just a `memory-adapter` or an integration with LaunchDarkly via `launchdarkly-adapter` will work. More on how to use [`ConfigureFlopFlip`](#setup-using-components) below.
 
 Whenever you want the flag state to live in Redux you can use `@flopflip/react-redux` which can be setup in two variations itself
 
