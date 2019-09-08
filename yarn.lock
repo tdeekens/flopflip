@@ -6580,10 +6580,10 @@ jest-runner-eslint@0.7.4:
     create-jest-runner "^0.5.3"
     eslint "^5.6.0"
 
-jest-runner-prettier@0.2.8:
-  version "0.2.8"
-  resolved "https://registry.yarnpkg.com/jest-runner-prettier/-/jest-runner-prettier-0.2.8.tgz#7c6014b3ede7519d577a9a97fe0df5b5913dddeb"
-  integrity sha512-pn2xDoYcnEEzS5mJ6C4wZST3jDf46y4Y3avg5ooUCPFQLKl7WeGKiuF9lJzCA7UDBY/LZo4uuOn/6VMsKhg9iA==
+jest-runner-prettier@0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/jest-runner-prettier/-/jest-runner-prettier-0.3.1.tgz#ec4489069d41594bcdc812db8f3bc2958c9b5af4"
+  integrity sha512-c2RB4YlWwdfgeVkMsN7Zj8pLgmxX+7+QXE/+X2J1UvjRuNCLOHtHd8FMXZJrn6ed+Fl0+x3LXdhmGieAPqDWRg==
   dependencies:
     cli-highlight "^2.1.1"
     create-jest-runner "^0.5.3"
