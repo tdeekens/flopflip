@@ -28,13 +28,13 @@
     "codecov": "3.5.0",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.14.0",
-    "enzyme-matchers": "7.1.0",
+    "enzyme-matchers": "7.1.1",
     "jest": "24.9.0",
-    "jest-enzyme": "7.1.0",
+    "jest-enzyme": "7.1.1",
     "jest-localstorage-mock": "2.4.0",
     "jest-plugin-filename": "0.0.1",
     "jest-runner-eslint": "0.7.4",
-    "jest-runner-prettier": "0.2.8",
+    "jest-runner-prettier": "0.3.1",
     "jest-watch-yarn-workspaces": "1.1.0"
   }
 }
