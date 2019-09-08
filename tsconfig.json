@@ -24,7 +24,7 @@
     "strictNullChecks": true,
     "stripInternal": true,
     "target": "es5",
-    "allowJs": true,
+    "allowJs": false
   },
   "include": [
     "packages/**/modules/**/*.ts",
