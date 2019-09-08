@@ -4,14 +4,14 @@ aliases:
   - &working_directory ~/flopflip
 
   - &restore_yarn_cache
-    name: 'Restoring yarn cache'
+    name: "Restoring yarn cache"
     keys:
-      - v4-yarn-cache-{{ checksum "yarn.lock" }}
-      - v4-yarn-cache
+      - v5-yarn-cache-{{ checksum "yarn.lock" }}
+      - v5-yarn-cache
 
   - &save_yarn_cache
-    name: 'Saving yarn cache'
-    key: v4-yarn-cache-{{ checksum "yarn.lock" }}
+    name: "Saving yarn cache"
+    key: v5-yarn-cache-{{ checksum "yarn.lock" }}
     paths:
       - ~/.cache/yarn
 
@@ -31,39 +31,39 @@ executors:
 
 commands:
   install_dependencies:
-    description: 'Installing dependencies'
+    description: "Installing dependencies"
     steps:
       - run: yarn install --pure-lockfile
   build_artefacts:
-    description: 'Building artefacts'
+    description: "Building artefacts"
     steps:
       - run: yarn build
   lint_code:
-    description: 'Running linters'
+    description: "Running linters"
     steps:
       - run: yarn lint
   type_check:
-    description: 'Running type checkers'
+    description: "Running type checkers"
     steps:
       - run: yarn type-check
   check_artefacts_bundlesizes:
-    description: 'Running bundlesize check'
+    description: "Running bundlesize check"
     steps:
       - run: yarn test:sizes
   install_and_build:
-    description: 'Installing and building'
+    description: "Installing and building"
     steps:
       - checkout
       - restore_cache: *restore_yarn_cache
       - install_dependencies
       - build_artefacts
   unit_test_with_coverage:
-    description: 'Running unit tests with covereage report'
+    description: "Running unit tests with covereage report"
     steps:
       - install_and_build
       - run: yarn test:ci:coverage
   unit_test_without_coverage:
-    description: 'Running unit tests without covereage report'
+    description: "Running unit tests without covereage report"
     steps:
       - install_and_build
       - run: yarn test:ci --maxWorkers=10
@@ -85,17 +85,17 @@ commands:
 
 jobs:
   lint:
-    executor: node_10
+    executor: node_12
     steps:
       - install_and_build
       - lint_code
   type_check:
-    executor: node_10
+    executor: node_12
     steps:
       - install_and_build
       - type_check
   bundlesize_check:
-    executor: node_10
+    executor: node_12
     steps:
       - install_and_build
       - check_artefacts_bundlesizes

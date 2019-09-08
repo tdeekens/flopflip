@@ -24,8 +24,18 @@
     "strictNullChecks": true,
     "stripInternal": true,
     "target": "es5",
-    "allowJs": false,
+    "allowJs": false
   },
-  "include": ["**/modules/**/*", "packages/types"],
-  "exclude": ["**/node_modules", "**/dist/**/*"]
+  "include": [
+    "packages/**/modules/**/*.ts",
+    "packages/**/modules/**/*.tsx",
+    "packages/**/modules/**/*.js",
+    "packages/**/@types/**/*.d.ts",
+    "packages/test-utils/*.js"
+  ],
+  "exclude": [
+    "packages/**/node_modules/*.d.ts",
+    "node_modules/*.d.ts",
+    "**/dist/**/*"
+  ]
 }

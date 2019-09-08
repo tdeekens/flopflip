@@ -4,6 +4,7 @@ parserOptions:
   ecmaFeatures:
     jsx: true
     modules: true
+  project: './tsconfig.json'
 extends:
   - xo
   - xo-typescript
@@ -27,9 +28,10 @@ rules:
   max-nested-callbacks:
     - error
     - 20
-  '@typescript-eslint/no-var-requires': false
-  '@typescript-eslint/explicit-function-return-type': false
-  '@typescript-eslint/promise-function-async': false
+  '@typescript-eslint/no-var-requires': 0
+  '@typescript-eslint/explicit-function-return-type': 0
+  '@typescript-eslint/promise-function-async': 0
+  '@typescript-eslint/no-explicit-any': 0
 globals:
   VERSION: true
 overrides:
