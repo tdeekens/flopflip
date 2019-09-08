@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import adapter, { updateFlags } from '@flopflip/memory-adapter';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, waitForElement } from '@testing-library/react';
 
 const mergeOptional = (defaultValue, value) =>
   value === null ? undefined : { ...defaultValue, ...value };
@@ -88,7 +88,8 @@ const renderWithAdapter = (
     queryByFlagName: flagName => queryByFlagName(flagName, rendered.container),
     changeFlagVariation: (flagName, flagVariation) =>
       changeFlagVariation(rendered, flagName, flagVariation),
-    waitUntilReady: async () => rendered.getByTestId('change-flag-variation'),
+    waitUntilReady: async () =>
+      waitForElement(() => rendered.getByTestId('change-flag-variation')),
     ...rendered,
   };
 };
