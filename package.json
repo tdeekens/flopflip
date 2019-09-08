@@ -103,7 +103,7 @@
     "rollup-plugin-terser": "5.1.1",
     "rollup-watch": "4.3.1",
     "ts-jest": "24.0.2",
-    "typescript": "3.5.3"
+    "typescript": "3.6.2"
   },
   "keywords": [
     "react",
