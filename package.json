@@ -71,7 +71,7 @@
     "check-node-version": "4.0.1",
     "core-js": "3.2.1",
     "cross-env": "5.2.1",
-    "eslint": "6.3.0",
+    "eslint": "6.4.0",
     "eslint-config-prettier": "6.2.0",
     "eslint-config-xo": "0.26.0",
     "eslint-config-xo-react": "0.20.0",
