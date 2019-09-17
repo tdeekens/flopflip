@@ -11,6 +11,7 @@ import merge from 'deepmerge';
 import { SplitFactory } from '@splitsoftware/splitio';
 import camelCase from 'lodash/camelCase';
 import omit from 'lodash/omit';
+import isEqual from 'lodash/isEqual';
 
 type AdapterState = {
   isReady: boolean;
@@ -207,32 +208,31 @@ const configure = ({
   return configureSplitio();
 };
 
-const reconfigure = ({ user }: { user: User }): Promise<any> =>
-  new Promise((resolve, reject) => {
-    if (
-      !adapterState.isReady ||
-      !adapterState.isConfigured ||
-      !adapterState.user
-    ) {
-      return reject(
-        new Error(
-          '@flopflip/splitio-adapter: please configure adapter before reconfiguring.'
-        )
-      );
+const reconfigure = ({ user }: { user: User }): Promise<any> => {
+  if (
+    !adapterState.isReady ||
+    !adapterState.isConfigured ||
+    !adapterState.user
+  ) {
+    return Promise.reject(
+      new Error(
+        '@flopflip/splitio-adapter: please configure adapter before reconfiguring.'
+      )
+    );
+  }
+
+  if (!isEqual(adapterState.user, user)) {
+    adapterState.user = ensureUser(user);
+
+    if (adapterState.manager && adapterState.client) {
+      adapterState.client.destroy();
     }
 
-    if (adapterState.user && adapterState.user.key !== user.key) {
-      adapterState.user = ensureUser(user);
+    return configureSplitio();
+  }
 
-      if (adapterState.manager && adapterState.client) {
-        adapterState.client.destroy();
-      }
-
-      configureSplitio();
-    }
-
-    return resolve();
-  });
+  return Promise.resolve();
+};
 
 export default {
   getIsReady,
