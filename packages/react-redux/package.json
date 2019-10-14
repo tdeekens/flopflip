@@ -41,7 +41,7 @@
     "redux": "4.0.4"
   },
   "dependencies": {
-    "@babel/runtime": "7.6.2",
+    "@babel/runtime": "7.6.3",
     "@flopflip/react": "^8.0.4",
     "@flopflip/types": "^2.1.1",
     "@types/lodash": "4.14.141",
