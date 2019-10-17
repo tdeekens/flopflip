@@ -16,6 +16,7 @@ const createClient = jest.fn(apiOverwrites => ({
   waitForInitialization: jest.fn(() => Promise.resolve()),
   on: jest.fn((_, cb) => cb()),
   allFlags: jest.fn(() => ({})),
+  variation: jest.fn(() => true),
 
   ...apiOverwrites,
 }));
@@ -132,6 +133,7 @@ describe('when configuring', () => {
       onFlagsStateChange = jest.fn();
       client = createClient({
         allFlags: jest.fn(() => flags),
+        variation: jest.fn(() => true),
       });
 
       ldClient.initialize.mockReturnValue(client);
@@ -271,6 +273,7 @@ describe('when configuring', () => {
           onFlagsStateChange = jest.fn();
           client = createClient({
             allFlags: jest.fn(() => flags),
+            variation: jest.fn(() => true),
           });
 
           ldClient.initialize.mockReturnValue(client);
@@ -307,6 +310,7 @@ describe('when configuring', () => {
           onFlagsStateChange = jest.fn();
           client = createClient({
             allFlags: jest.fn(() => flags),
+            variation: jest.fn(() => true),
           });
 
           ldClient.initialize.mockReturnValue(client);

@@ -166,19 +166,33 @@ export const camelCaseFlags = (rawFlags: Flags): Flags =>
 const getInitialFlags = ({
   onFlagsStateChange,
   onStatusStateChange,
+  requestedFlags,
   throwOnInitializationFailure,
 }: {
   onFlagsStateChange: OnFlagsStateChangeCallback;
   onStatusStateChange: OnStatusStateChangeCallback;
+  requestedFlags: Flags;
   throwOnInitializationFailure: boolean;
 }): Promise<{ flagsFromSdk: Flags | null }> => {
   if (adapterState.client) {
     return adapterState.client
       .waitForInitialization()
       .then(() => {
-        const flagsFromSdk = adapterState.client
-          ? adapterState.client.allFlags()
-          : null;
+        let flagsFromSdk: null | Flags = null;
+
+        if (adapterState.client && !requestedFlags) {
+          flagsFromSdk = adapterState.client.allFlags();
+        } else if (adapterState.client && requestedFlags) {
+          flagsFromSdk = {};
+          for (let [requestedFlagName, defaultFlagValue] of Object.entries(
+            requestedFlags
+          )) {
+            flagsFromSdk[requestedFlagName] = adapterState.client.variation(
+              requestedFlagName,
+              defaultFlagValue
+            );
+          }
+        }
 
         if (flagsFromSdk) {
           const flags: Flags = camelCaseFlags(flagsFromSdk);
@@ -218,6 +232,7 @@ const configure = ({
   clientOptions = {},
   onFlagsStateChange,
   onStatusStateChange,
+  requestedFlags,
   subscribeToFlagChanges = true,
   throwOnInitializationFailure = false,
   flagsUpdateDelayMs,
@@ -227,6 +242,7 @@ const configure = ({
   clientOptions: ClientOptions;
   onFlagsStateChange: OnFlagsStateChangeCallback;
   onStatusStateChange: OnStatusStateChangeCallback;
+  requestedFlags: Flags;
   subscribeToFlagChanges: boolean;
   throwOnInitializationFailure: boolean;
   flagsUpdateDelayMs?: number;
@@ -242,6 +258,7 @@ const configure = ({
   return getInitialFlags({
     onFlagsStateChange,
     onStatusStateChange,
+    requestedFlags,
     throwOnInitializationFailure,
   }).then(({ flagsFromSdk }) => {
     if (subscribeToFlagChanges && flagsFromSdk)
