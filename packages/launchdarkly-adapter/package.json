@@ -38,8 +38,8 @@
   "dependencies": {
     "@babel/runtime": "7.6.3",
     "debounce-fn": "3.0.1",
-    "deepmerge": "4.0.0",
-    "launchdarkly-js-client-sdk": "2.13.0",
+    "deepmerge": "4.1.1",
+    "launchdarkly-js-client-sdk": "2.14.0",
     "lodash": "4.17.15",
     "tiny-warning": "1.0.3"
   },

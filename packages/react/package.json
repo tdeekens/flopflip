@@ -47,10 +47,10 @@
   },
   "dependencies": {
     "@babel/runtime": "7.6.3",
-    "deepmerge": "4.0.0",
+    "deepmerge": "4.1.1",
     "lodash": "4.17.15",
     "react-fast-compare": "2.0.4",
-    "react-is": "16.9.0",
+    "react-is": "16.10.2",
     "tiny-warning": "1.0.3"
   },
   "keywords": [
