@@ -10,6 +10,7 @@ export type AdapterArgs = {
   adapterConfiguration: {
     pollingInteral: number;
   };
+  requestFlags: Flags;
   onFlagsStateChange(flags: Flags): void;
   onStatusStateChange(status: AdapterStatus): void;
 };
