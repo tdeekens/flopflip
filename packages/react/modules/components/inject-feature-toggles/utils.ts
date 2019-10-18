@@ -2,6 +2,7 @@ import { FlagName, Flags } from '@flopflip/types';
 import omit from 'lodash/omit';
 import intersection from 'lodash/intersection';
 import isEqual from 'react-fast-compare';
+import getNormalizedFlagName from '../utils/get-normalized-flag-name';
 
 const defaultAreOwnPropsEqual = <Props extends object>(
   nextOwnProps: Props,
@@ -21,9 +22,11 @@ const defaultAreOwnPropsEqual = <Props extends object>(
 
 const filterFeatureToggles = (allFlags: Flags, demandedFlags: FlagName[]) =>
   intersection(Object.keys(allFlags), demandedFlags).reduce(
-    (featureToggles: Flags, featureToggle: FlagName) => ({
+    (featureToggles: Flags, flagName: FlagName) => ({
       ...featureToggles,
-      [featureToggle]: allFlags[featureToggle],
+      [getNormalizedFlagName(flagName)]: allFlags[
+        getNormalizedFlagName(flagName)
+      ],
     }),
     {}
   );
