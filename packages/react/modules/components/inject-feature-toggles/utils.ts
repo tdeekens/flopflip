@@ -2,7 +2,7 @@ import { FlagName, Flags } from '@flopflip/types';
 import omit from 'lodash/omit';
 import intersection from 'lodash/intersection';
 import isEqual from 'react-fast-compare';
-import getNormalizedFlagName from '../utils/get-normalized-flag-name';
+import { getNormalizedFlagName } from '../../helpers';
 
 const defaultAreOwnPropsEqual = <Props extends object>(
   nextOwnProps: Props,
