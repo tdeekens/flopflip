@@ -17,6 +17,7 @@ import {
   LDClient,
 } from 'launchdarkly-js-client-sdk';
 import camelCase from 'lodash/camelCase';
+import kebabCase from 'lodash/kebabCase';
 
 type ClientOptions = {
   fetchGoals?: boolean;
@@ -166,12 +167,12 @@ export const camelCaseFlags = (rawFlags: Flags): Flags =>
 const getInitialFlags = ({
   onFlagsStateChange,
   onStatusStateChange,
-  requestedFlags,
+  requestFlags,
   throwOnInitializationFailure,
 }: {
   onFlagsStateChange: OnFlagsStateChangeCallback;
   onStatusStateChange: OnStatusStateChangeCallback;
-  requestedFlags: Flags;
+  requestFlags: Flags;
   throwOnInitializationFailure: boolean;
 }): Promise<{ flagsFromSdk: Flags | null }> => {
   if (adapterState.client) {
@@ -180,15 +181,15 @@ const getInitialFlags = ({
       .then(() => {
         let flagsFromSdk: null | Flags = null;
 
-        if (adapterState.client && !requestedFlags) {
+        if (adapterState.client && !requestFlags) {
           flagsFromSdk = adapterState.client.allFlags();
-        } else if (adapterState.client && requestedFlags) {
+        } else if (adapterState.client && requestFlags) {
           flagsFromSdk = {};
           for (let [requestedFlagName, defaultFlagValue] of Object.entries(
-            requestedFlags
+            requestFlags
           )) {
             flagsFromSdk[requestedFlagName] = adapterState.client.variation(
-              requestedFlagName,
+              kebabCase(requestedFlagName),
               defaultFlagValue
             );
           }
@@ -232,7 +233,7 @@ const configure = ({
   clientOptions = {},
   onFlagsStateChange,
   onStatusStateChange,
-  requestedFlags,
+  requestFlags,
   subscribeToFlagChanges = true,
   throwOnInitializationFailure = false,
   flagsUpdateDelayMs,
@@ -242,7 +243,7 @@ const configure = ({
   clientOptions: ClientOptions;
   onFlagsStateChange: OnFlagsStateChangeCallback;
   onStatusStateChange: OnStatusStateChangeCallback;
-  requestedFlags: Flags;
+  requestFlags: Flags;
   subscribeToFlagChanges: boolean;
   throwOnInitializationFailure: boolean;
   flagsUpdateDelayMs?: number;
@@ -258,7 +259,7 @@ const configure = ({
   return getInitialFlags({
     onFlagsStateChange,
     onStatusStateChange,
-    requestedFlags,
+    requestFlags,
     throwOnInitializationFailure,
   }).then(({ flagsFromSdk }) => {
     if (subscribeToFlagChanges && flagsFromSdk)

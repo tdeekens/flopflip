@@ -234,6 +234,48 @@ describe('when configuring', () => {
           ).resolves.toEqual(expect.anything());
         });
       });
+
+      describe('when `requestFlags` is passed', () => {
+        beforeEach(() => {
+          onStatusStateChange = jest.fn();
+          onFlagsStateChange = jest.fn();
+          client = createClient({
+            allFlags: jest.fn(),
+            variation: jest.fn(
+              (flagName, defaultFlagValue) => defaultFlagValue
+            ),
+          });
+
+          ldClient.initialize.mockReturnValue(client);
+
+          return adapter.configure({
+            clientSideId,
+            user: userWithKey,
+            onStatusStateChange,
+            requestFlags: flags,
+            onFlagsStateChange,
+          });
+        });
+
+        it('should `dispatch` `onUpdateStatus` action with `isReady`', () => {
+          expect(onStatusStateChange).toHaveBeenCalledWith({
+            isReady: true,
+          });
+        });
+
+        it('should `dispatch` `onStatusStateChange`', () => {
+          expect(onFlagsStateChange).toHaveBeenCalledWith({
+            someFlag1: true,
+            someFlag2: false,
+          });
+        });
+
+        it('should load flags not from `allFlags` but `variation`', () => {
+          expect(client.allFlags).not.toHaveBeenCalled();
+          expect(client.variation).toHaveBeenCalledWith('some-flag-1', true);
+          expect(client.variation).toHaveBeenCalledWith('some-flag-2', false);
+        });
+      });
     });
 
     describe('with flag updates', () => {
