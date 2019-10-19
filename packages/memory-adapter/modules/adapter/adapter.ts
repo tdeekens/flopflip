@@ -96,15 +96,15 @@ const normalizeFlag = (flagName: FlagName, flagValue?: FlagVariation): Flag => [
 ];
 export const normalizeFlags = (rawFlags: Flags): Flags =>
   Object.entries(rawFlags).reduce<Flags>(
-    (camelCasedFlags: Flags, [flagName, flagValue]) => {
+    (normalizedFlags: Flags, [flagName, flagValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
         flagName,
         flagValue
       );
       // Can't return expression as it is the assigned value
-      camelCasedFlags[normalizedFlagName] = normalizedFlagValue;
+      normalizedFlags[normalizedFlagName] = normalizedFlagValue;
 
-      return camelCasedFlags;
+      return normalizedFlags;
     },
     {}
   );

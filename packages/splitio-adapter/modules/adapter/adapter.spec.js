@@ -1,6 +1,6 @@
 import { SplitFactory } from '@splitsoftware/splitio';
 import adapter, {
-  camelCaseFlags,
+  normalizeFlags,
   createAnonymousUserKey,
   normalizeFlag,
 } from './adapter';
@@ -257,7 +257,7 @@ describe('when configuring', () => {
   });
 });
 
-describe('camelCasedFlags', () => {
+describe('normalizeFlags', () => {
   describe('with dashes', () => {
     const rawFlags = {
       'a-flag': true,
@@ -265,7 +265,7 @@ describe('camelCasedFlags', () => {
     };
 
     it('should camel case to uppercased flag names', () => {
-      expect(camelCaseFlags(rawFlags)).toEqual({ aFlag: true, flagBC: false });
+      expect(normalizeFlags(rawFlags)).toEqual({ aFlag: true, flagBC: false });
     });
   });
 
@@ -276,7 +276,7 @@ describe('camelCasedFlags', () => {
     };
 
     it('should camel case to uppercased flag names', () => {
-      expect(camelCaseFlags(rawFlags)).toEqual({ aFlag: true, flagBC: false });
+      expect(normalizeFlags(rawFlags)).toEqual({ aFlag: true, flagBC: false });
     });
   });
 });
