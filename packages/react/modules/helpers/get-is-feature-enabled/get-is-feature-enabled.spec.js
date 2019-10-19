@@ -32,9 +32,9 @@ describe('with existing flag', () => {
 });
 
 describe('with non normalized flag', () => {
-  it('should indicate feature being disabled', () => {
+  it('should indicate feature being enabled', () => {
     const args = { fooFlag: true };
-    expect(getIsFeatureEnabled('foo-flag')(args)).toBe(false);
+    expect(getIsFeatureEnabled('foo-flag')(args)).toBe(true);
   });
 
   it('should invoke `warning`', () => {
