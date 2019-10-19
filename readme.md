@@ -494,7 +494,7 @@ share common logic.
 - `ToggleFeature` a component conditionally rendering its `children` based on
   the status of a passed feature flag
 
-[Note:](#flag-normalization) that all passed `flagNames` passed as `flag` are a string. Depending on the adapter used _these are normalized_ to be camel cased. This means that whenever a `foo-flag-name` is configured in e.g. LaunchDarkly or splitio it will have to be specified as `fooFlagName`. The same applies for a `foo_flag_name`. This is meant to help using flags in an adapter agnostic way. Whenever a flag is otherwise passed in the non-normalized form it is likely to default to `false` which is unintended in most cases. Lastly, `flopflip` will show a warning message in the console in development mode whenever a non normalized flag name is passed.
+[Note:](#flag-normalization) that all passed `flagNames` passed as `flag` are a string. Depending on the adapter used _these are normalized_ to be camel cased. This means that whenever a `foo-flag-name` is received in e.g. LaunchDarkly or splitio it will be converted to `fooFlagName`. The same applies for a `foo_flag_name`. This is meant to help using flags in an adapter agnostic way. Whenever a flag is passed in the non-normalized form it is also normalized again. Lastly, `flopflip` will show a warning message in the console in development mode whenever a non normalized flag name is passed.
 
 #### `ToggleFeature`
 

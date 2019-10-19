@@ -149,17 +149,17 @@ const updateUserContext = (updatedUserProps: User): Promise<any> => {
 };
 
 // NOTE: Exported for testing only
-export const camelCaseFlags = (rawFlags: Flags): Flags =>
+export const normalizeFlags = (rawFlags: Flags): Flags =>
   Object.entries(rawFlags).reduce<Flags>(
-    (camelCasedFlags: Flags, [flagName, flagValue]) => {
+    (normalizedFlags: Flags, [flagName, flagValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
         flagName,
         flagValue
       );
       // Can't return expression as it is the assigned value
-      camelCasedFlags[normalizedFlagName] = normalizedFlagValue;
+      normalizedFlags[normalizedFlagName] = normalizedFlagValue;
 
-      return camelCasedFlags;
+      return normalizedFlags;
     },
     {}
   );
@@ -196,7 +196,7 @@ const getInitialFlags = ({
         }
 
         if (flagsFromSdk) {
-          const flags: Flags = camelCaseFlags(flagsFromSdk);
+          const flags: Flags = normalizeFlags(flagsFromSdk);
           updateFlagsInAdapterState(flags);
           // ...and flush initial state of flags
           onFlagsStateChange(flags);

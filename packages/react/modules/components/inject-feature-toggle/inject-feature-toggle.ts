@@ -4,6 +4,7 @@ import { FlagName, FlagVariation } from '@flopflip/types';
 import { withProps } from '../../hocs';
 import isNil from 'lodash/isNil';
 import { omitProps } from '../../hocs';
+import { getNormalizedFlagName } from '../../helpers';
 import { DEFAULT_FLAG_PROP_KEY, ALL_FLAGS_PROP_KEY } from '../../constants';
 
 type InjectedProps = {
@@ -20,7 +21,7 @@ const injectFeatureToggle = <Props extends object>(
   flowRight(
     withProps<Props, InjectedProps>((ownProps: Props) => {
       const flagVariation: FlagVariation =
-        ownProps[ALL_FLAGS_PROP_KEY][flagName];
+        ownProps[ALL_FLAGS_PROP_KEY][getNormalizedFlagName(flagName)];
 
       return { [propKey]: isNil(flagVariation) ? false : flagVariation };
     }),

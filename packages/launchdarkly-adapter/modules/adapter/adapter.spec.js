@@ -1,5 +1,5 @@
 import ldClient from 'launchdarkly-js-client-sdk';
-import adapter, { camelCaseFlags } from './adapter';
+import adapter, { normalizeFlags } from './adapter';
 
 jest.mock('launchdarkly-js-client-sdk', () => ({
   initialize: jest.fn(),
@@ -493,7 +493,7 @@ describe('when configuring', () => {
   });
 });
 
-describe('`camelCasedFlags`', () => {
+describe('`normalizeFlags`', () => {
   describe('with dashes', () => {
     const rawFlags = {
       'a-flag': true,
@@ -501,7 +501,7 @@ describe('`camelCasedFlags`', () => {
     };
 
     it('should camel case to uppercased flag names', () => {
-      expect(camelCaseFlags(rawFlags)).toEqual({ aFlag: true, flagBC: false });
+      expect(normalizeFlags(rawFlags)).toEqual({ aFlag: true, flagBC: false });
     });
   });
 
@@ -512,7 +512,7 @@ describe('`camelCasedFlags`', () => {
     };
 
     it('should camel case to uppercased flag names', () => {
-      expect(camelCaseFlags(rawFlags)).toEqual({ aFlag: true, flagBC: false });
+      expect(normalizeFlags(rawFlags)).toEqual({ aFlag: true, flagBC: false });
     });
   });
 });

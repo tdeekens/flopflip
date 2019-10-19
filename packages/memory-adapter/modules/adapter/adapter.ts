@@ -6,8 +6,10 @@ import {
   AdapterArgs,
   FlagName,
   FlagVariation,
+  Flag,
   Flags,
 } from '@flopflip/types';
+import camelCase from 'lodash/camelCase';
 
 type MemoryAdapterState = {
   flags: Flags;
@@ -87,6 +89,25 @@ const updateUser = (user: User): void => {
   adapterState.user = user;
 };
 
+const normalizeFlag = (flagName: FlagName, flagValue?: FlagVariation): Flag => [
+  camelCase(flagName),
+  // Multi variate flags contain a string or `null` - `false` seems more natural.
+  flagValue === null || flagValue === undefined ? false : flagValue,
+];
+export const normalizeFlags = (rawFlags: Flags): Flags =>
+  Object.entries(rawFlags).reduce<Flags>(
+    (normalizedFlags: Flags, [flagName, flagValue]) => {
+      const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
+        flagName,
+        flagValue
+      );
+      // Can't return expression as it is the assigned value
+      normalizedFlags[normalizedFlagName] = normalizedFlagValue;
+
+      return normalizedFlags;
+    },
+    {}
+  );
 export const updateFlags = (flags: Flags): void => {
   const isAdapterReady = Boolean(
     adapterState.isConfigured && adapterState.isReady
@@ -101,7 +122,7 @@ export const updateFlags = (flags: Flags): void => {
 
   adapterState.flags = {
     ...adapterState.flags,
-    ...flags,
+    ...normalizeFlags(flags),
   };
 
   adapterState.emitter.emit('flagsStateChange', adapterState.flags);

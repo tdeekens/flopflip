@@ -64,17 +64,17 @@ export const normalizeFlag = (
   return [camelCase(flagName), normalizeFlagValue];
 };
 
-export const camelCaseFlags = (flags: Flags): Flags =>
+export const normalizeFlags = (flags: Flags): Flags =>
   Object.entries(flags).reduce<Flags>(
-    (camelCasedFlags: Flags, [flagName, flaValue]) => {
+    (normalizedFlags: Flags, [flagName, flaValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
         flagName,
         flaValue
       );
 
-      camelCasedFlags[normalizedFlagName] = normalizedFlagValue;
+      normalizedFlags[normalizedFlagName] = normalizedFlagValue;
 
-      return camelCasedFlags;
+      return normalizedFlags;
     },
     {}
   );
@@ -94,7 +94,7 @@ const subscribeToFlagsChanges = ({
           adapterState.user as SplitIO.Attributes
         );
 
-        onFlagsStateChange(camelCaseFlags(flags));
+        onFlagsStateChange(normalizeFlags(flags));
       }
     });
   }
@@ -147,7 +147,7 @@ const subscribe = ({
             adapterState.user as SplitIO.Attributes
           );
 
-          onFlagsStateChange(camelCaseFlags(flags));
+          onFlagsStateChange(normalizeFlags(flags));
 
           // First update internal state
           adapterState.isReady = true;
