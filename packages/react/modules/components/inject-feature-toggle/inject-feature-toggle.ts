@@ -4,7 +4,7 @@ import { FlagName, FlagVariation } from '@flopflip/types';
 import { withProps } from '../../hocs';
 import isNil from 'lodash/isNil';
 import { omitProps } from '../../hocs';
-import getNormalizedFlagName from '../utils/get-normalized-flag-name';
+import { getNormalizedFlagName } from '../../helpers';
 import { DEFAULT_FLAG_PROP_KEY, ALL_FLAGS_PROP_KEY } from '../../constants';
 
 type InjectedProps = {
