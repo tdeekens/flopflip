@@ -77,6 +77,29 @@ describe('when configuring', () => {
           updatedFlags
         );
       });
+
+      describe('when flags are not normalized', () => {
+        const nonNormalizedUpdatedFlags = {
+          'flag-a-1': false,
+          // eslint-disable-next-line @typescript-eslint/camelcase
+          flag_b: null,
+        };
+        beforeEach(() => {
+          // From `configure`
+          adapterArgs.onFlagsStateChange.mockClear();
+
+          updateFlags(nonNormalizedUpdatedFlags);
+        });
+
+        it('should invoke `onFlagsStateChange`', () => {
+          expect(adapterArgs.onFlagsStateChange).toHaveBeenCalledWith(
+            expect.objectContaining({
+              flagA1: false,
+              flagB: false,
+            })
+          );
+        });
+      });
     });
 
     describe('when reconfiguring', () => {

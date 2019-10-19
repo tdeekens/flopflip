@@ -1,6 +1,15 @@
 import invariant from 'invariant';
 import mitt, { Emitter } from 'mitt';
-import { User, AdapterStatus, AdapterArgs, Flags } from '@flopflip/types';
+import camelCase from 'lodash/camelCase';
+import {
+  User,
+  AdapterStatus,
+  AdapterArgs,
+  FlagName,
+  FlagVariation,
+  Flag,
+  Flags,
+} from '@flopflip/types';
 
 type Storage = {
   get: (key: string) => any;
@@ -28,6 +37,29 @@ let adapterState: AdapterStatus & LocalStorageAdapterState = {
 };
 
 export const STORAGE_SLICE = '@flopflip';
+
+const normalizeFlag = (flagName: FlagName, flagValue?: FlagVariation): Flag => [
+  camelCase(flagName),
+  // Multi variate flags contain a string or `null` - `false` seems more natural.
+  flagValue === null || flagValue === undefined ? false : flagValue,
+];
+export const normalizeFlags = (rawFlags: Flags): Flags => {
+  if (!rawFlags) return {};
+
+  return Object.entries(rawFlags).reduce<Flags>(
+    (normalizedFlags: Flags, [flagName, flagValue]) => {
+      const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
+        flagName,
+        flagValue
+      );
+      // Can't return expression as it is the assigned value
+      normalizedFlags[normalizedFlagName] = normalizedFlagValue;
+
+      return normalizedFlags;
+    },
+    {}
+  );
+};
 
 const storage: Storage = {
   get: key => {
@@ -59,10 +91,10 @@ export const updateFlags = (flags: Flags): void => {
   if (!isAdapterReady) return;
 
   const previousFlags: Flags | null = storage.get('flags') as Flags;
-  const nextFlags: Flags = {
+  const nextFlags: Flags = normalizeFlags({
     ...previousFlags,
     ...flags,
-  };
+  });
 
   storage.set('flags', nextFlags);
 
@@ -75,7 +107,10 @@ const subscribeToFlagsChanges = ({
   pollingInteral: number;
 }): void => {
   setInterval(() => {
-    adapterState.emitter.emit('flagsStateChange', storage.get('flags'));
+    adapterState.emitter.emit(
+      'flagsStateChange',
+      normalizeFlags(storage.get('flags'))
+    );
   }, pollingInteral);
 };
 
@@ -94,7 +129,10 @@ const configure = ({
     adapterState.emitter.on('flagsStateChange', onFlagsStateChange);
     adapterState.emitter.on('statusStateChange', onStatusStateChange);
 
-    adapterState.emitter.emit('flagsStateChange', storage.get('flags'));
+    adapterState.emitter.emit(
+      'flagsStateChange',
+      normalizeFlags(storage.get('flags'))
+    );
     adapterState.emitter.emit('statusStateChange', {
       isReady: adapterState.isReady,
     });
