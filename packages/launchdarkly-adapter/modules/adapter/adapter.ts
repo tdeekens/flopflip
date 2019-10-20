@@ -167,12 +167,12 @@ export const normalizeFlags = (rawFlags: Flags): Flags =>
 const getInitialFlags = ({
   onFlagsStateChange,
   onStatusStateChange,
-  requestFlags,
+  flags,
   throwOnInitializationFailure,
 }: {
   onFlagsStateChange: OnFlagsStateChangeCallback;
   onStatusStateChange: OnStatusStateChangeCallback;
-  requestFlags: Flags;
+  flags: Flags;
   throwOnInitializationFailure: boolean;
 }): Promise<{ flagsFromSdk: Flags | null }> => {
   if (adapterState.client) {
@@ -181,12 +181,12 @@ const getInitialFlags = ({
       .then(() => {
         let flagsFromSdk: null | Flags = null;
 
-        if (adapterState.client && !requestFlags) {
+        if (adapterState.client && !flags) {
           flagsFromSdk = adapterState.client.allFlags();
-        } else if (adapterState.client && requestFlags) {
+        } else if (adapterState.client && flags) {
           flagsFromSdk = {};
           for (let [requestedFlagName, defaultFlagValue] of Object.entries(
-            requestFlags
+            flags
           )) {
             flagsFromSdk[requestedFlagName] = adapterState.client.variation(
               kebabCase(requestedFlagName),
@@ -233,7 +233,7 @@ const configure = ({
   clientOptions = {},
   onFlagsStateChange,
   onStatusStateChange,
-  requestFlags,
+  flags,
   subscribeToFlagChanges = true,
   throwOnInitializationFailure = false,
   flagsUpdateDelayMs,
@@ -243,7 +243,7 @@ const configure = ({
   clientOptions: ClientOptions;
   onFlagsStateChange: OnFlagsStateChangeCallback;
   onStatusStateChange: OnStatusStateChangeCallback;
-  requestFlags: Flags;
+  flags: Flags;
   subscribeToFlagChanges: boolean;
   throwOnInitializationFailure: boolean;
   flagsUpdateDelayMs?: number;
@@ -259,7 +259,7 @@ const configure = ({
   return getInitialFlags({
     onFlagsStateChange,
     onStatusStateChange,
-    requestFlags,
+    flags,
     throwOnInitializationFailure,
   }).then(({ flagsFromSdk }) => {
     if (subscribeToFlagChanges && flagsFromSdk)
