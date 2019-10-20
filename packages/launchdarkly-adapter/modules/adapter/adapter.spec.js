@@ -235,7 +235,7 @@ describe('when configuring', () => {
         });
       });
 
-      describe('when `requestFlags` is passed', () => {
+      describe('when `flags` is passed', () => {
         beforeEach(() => {
           onStatusStateChange = jest.fn();
           onFlagsStateChange = jest.fn();
@@ -252,7 +252,7 @@ describe('when configuring', () => {
             clientSideId,
             user: userWithKey,
             onStatusStateChange,
-            requestFlags: flags,
+            flags: flags,
             onFlagsStateChange,
           });
         });
