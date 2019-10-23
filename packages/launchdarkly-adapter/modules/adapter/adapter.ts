@@ -63,6 +63,7 @@ const normalizeFlag = (flagName: FlagName, flagValue?: FlagVariation): Flag => [
   // Multi variate flags contain a string or `null` - `false` seems more natural.
   flagValue === null || flagValue === undefined ? false : flagValue,
 ];
+const denormalizeFlagName = (flagName: FlagName) => kebabCase(flagName);
 
 const setupFlagSubcription = ({
   flagsFromSdk,
@@ -185,11 +186,17 @@ const getInitialFlags = ({
           flagsFromSdk = adapterState.client.allFlags();
         } else if (adapterState.client && flags) {
           flagsFromSdk = {};
+
           for (let [requestedFlagName, defaultFlagValue] of Object.entries(
             flags
           )) {
-            flagsFromSdk[requestedFlagName] = adapterState.client.variation(
-              kebabCase(requestedFlagName),
+            const denormalizedRequestedFlagName = denormalizeFlagName(
+              requestedFlagName
+            );
+            flagsFromSdk[
+              denormalizedRequestedFlagName
+            ] = adapterState.client.variation(
+              denormalizedRequestedFlagName,
               defaultFlagValue
             );
           }
