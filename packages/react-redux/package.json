@@ -44,7 +44,7 @@
     "@babel/runtime": "7.7.2",
     "@flopflip/react": "^8.1.0",
     "@flopflip/types": "^2.2.0",
-    "@types/lodash": "4.14.144",
+    "@types/lodash": "4.14.146",
     "@types/react-redux": "7.1.4",
     "lodash": "4.17.15"
   },
