@@ -36,7 +36,7 @@
     "@types/lodash": "4.14.144"
   },
   "dependencies": {
-    "@babel/runtime": "7.6.3",
+    "@babel/runtime": "7.7.2",
     "debounce-fn": "3.0.1",
     "deepmerge": "4.1.1",
     "launchdarkly-js-client-sdk": "2.14.0",

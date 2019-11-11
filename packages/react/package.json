@@ -46,7 +46,7 @@
     "react-dom": "^16.3"
   },
   "dependencies": {
-    "@babel/runtime": "7.6.3",
+    "@babel/runtime": "7.7.2",
     "deepmerge": "4.1.1",
     "lodash": "4.17.15",
     "react-fast-compare": "2.0.4",
