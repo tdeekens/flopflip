@@ -278,6 +278,8 @@ It takes the `props`:
     - `clientOptions`: additional options to be passed to the unterlying SDK
     - `subscribeToFlagChanges`: defaulting to `true` to disable real-time updates to flags once initially fetched
     - `throwOnInitializationFailure`: defaulting to `false` to indicate if the adapter just rethrow an error during initialization
+    - `flagsUpdateDelayMs`: defaulting to `0` to debounce the flag update subscription
+    - `flags`: defaulting to `null` to subscribe only to specific flags. Helpful when not wanting to subscribe to all flags to utilise LaunchDarkly's automatic flag archiving functionality
 - The `shouldDeferAdapterConfiguration` prop can be used to defer the initial
   configuration the `adapter`. This might be helpful for cases in which you want
   to wait for e.g. the `key` to be present within your root component and you do
