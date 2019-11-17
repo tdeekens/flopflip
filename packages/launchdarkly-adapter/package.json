@@ -33,13 +33,13 @@
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
     "@flopflip/types": "^2.2.0",
-    "@types/lodash": "4.14.146"
+    "@types/lodash": "4.14.148"
   },
   "dependencies": {
     "@babel/runtime": "7.7.2",
     "debounce-fn": "3.0.1",
-    "deepmerge": "4.1.1",
-    "launchdarkly-js-client-sdk": "2.14.0",
+    "deepmerge": "4.2.2",
+    "launchdarkly-js-client-sdk": "2.15.2",
     "lodash": "4.17.15",
     "tiny-warning": "1.0.3"
   },
