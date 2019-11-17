@@ -12,9 +12,10 @@ describe('with `flagName`', () => {
       let Component;
 
       beforeEach(() => {
-        Component = branchOnFeatureToggle(undefined, flagName)(
-          components.ToggledComponent
-        );
+        Component = branchOnFeatureToggle(
+          undefined,
+          flagName
+        )(components.ToggledComponent);
       });
 
       it('should render the component representing an enabled feature', () => {
@@ -90,9 +91,10 @@ describe('with `flagName`', () => {
       let Component;
 
       beforeEach(() => {
-        Component = branchOnFeatureToggle(undefined, flagName)(
-          components.ToggledComponent
-        );
+        Component = branchOnFeatureToggle(
+          undefined,
+          flagName
+        )(components.ToggledComponent);
       });
 
       it('should render neither the component representing an disabled or enabled feature', () => {
@@ -117,9 +119,11 @@ describe('with `flagName` and `flagVariation`', () => {
       let Component;
 
       beforeEach(() => {
-        Component = branchOnFeatureToggle(undefined, flagName, flagVariation)(
-          components.ToggledComponent
-        );
+        Component = branchOnFeatureToggle(
+          undefined,
+          flagName,
+          flagVariation
+        )(components.ToggledComponent);
       });
 
       it('should render the component representing an enabled feature', () => {
@@ -199,9 +203,11 @@ describe('with `flagName` and `flagVariation`', () => {
       let Component;
 
       beforeEach(() => {
-        Component = branchOnFeatureToggle(undefined, flagName, flagVariation)(
-          components.ToggledComponent
-        );
+        Component = branchOnFeatureToggle(
+          undefined,
+          flagName,
+          flagVariation
+        )(components.ToggledComponent);
       });
 
       it('should render neither the component representing an disabled or enabled feature', () => {
