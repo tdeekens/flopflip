@@ -12,8 +12,9 @@ export default flowRight(
   setDisplayName(ToggleFeature.displayName),
   withFlags(),
   withProps(props => ({
-    isFeatureEnabled: getIsFeatureEnabled(props.flag, props.variation)(
-      props[ALL_FLAGS_PROP_KEY]
-    ),
+    isFeatureEnabled: getIsFeatureEnabled(
+      props.flag,
+      props.variation
+    )(props[ALL_FLAGS_PROP_KEY]),
   }))
 )(ToggleFeature);

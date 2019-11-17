@@ -357,10 +357,9 @@ describe('lifecycle', () => {
       });
 
       it('should invoke `recongiureOrQueue` with `shouldOverwrite`', () => {
-        expect(componentInstance.reconfigureOrQueue).toHaveBeenCalledWith(
-          expect.any(Object),
-          { shouldOverwrite: false }
-        );
+        expect(
+          componentInstance.reconfigureOrQueue
+        ).toHaveBeenCalledWith(expect.any(Object), { shouldOverwrite: false });
       });
     });
 

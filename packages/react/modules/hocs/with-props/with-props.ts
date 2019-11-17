@@ -18,9 +18,8 @@ const withProps = <OwnProps extends object, MappedProps extends object>(
 ) => (
   Component: React.ComponentType<any>
 ): React.ComponentType<OwnProps & MapProps<OwnProps, MappedProps>> => {
-  const EnhancedWithProps: React.FC<
-    OwnProps & MapProps<OwnProps, MappedProps>
-  > = (
+  const EnhancedWithProps: React.FC<OwnProps &
+    MapProps<OwnProps, MappedProps>> = (
     ownProps: OwnProps
   ): React.ReactElement<OwnProps & MapProps<OwnProps, MappedProps>> => {
     const enhancedProps = isPropsMapper(mapProps)
