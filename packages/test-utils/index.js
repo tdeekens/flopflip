@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import React from 'react';
 import { shallow } from 'enzyme';
 import adapter, { updateFlags } from '@flopflip/memory-adapter';
