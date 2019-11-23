@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import flowRight from 'lodash.flowright';
 import { Provider, connect } from 'react-redux';
 import classNames from 'classnames';
@@ -11,7 +10,7 @@ import {
   branchOnFeatureToggle,
   injectFeatureToggle,
   ToggleFeature,
-} from '@flopflip/react-redux';
+} from '@flopflip/react-broadcast';
 // Change to `from '@flopflip/react-broadcast'` and everything will just work wtihout redux
 import {
   increment,
@@ -22,7 +21,9 @@ import {
 import logo from './logo.svg';
 import store from './store';
 import './App.css';
-import * as flags from './flags';
+import allFlags, { INCREMENT_ASYNC_BUTTON,
+DECREMENT_ASYNC_BUTTON,
+INCREMENT_SYNC_BUTTON} from './flags';
 
 const UntoggledFeature = () => <h6>Disabled Feature</h6>;
 
@@ -34,21 +35,13 @@ const IncrementAsyncButton = props => (
   >
     Increment Async
   </button>
-);
-IncrementAsyncButton.propTypes = {
-  incrementAsync: PropTypes.func.isRequired,
-  isIncrementing: PropTypes.bool.isRequired,
-};
+);;
 const FeatureToggledIncrementAsyncButton = flowRight(
   branchOnFeatureToggle(
-    { flag: flags.INCREMENT_ASYNC_BUTTON },
+    { flag: INCREMENT_ASYNC_BUTTON },
     UntoggledFeature
   )
 )(IncrementAsyncButton);
-FeatureToggledIncrementAsyncButton.propTypes = {
-  incrementAsync: PropTypes.func.isRequired,
-  isIncrementing: PropTypes.bool.isRequired,
-};
 
 const IncrementSyncButton = props => (
   <button
@@ -65,20 +58,11 @@ const IncrementSyncButton = props => (
     Increment
   </button>
 );
-IncrementSyncButton.propTypes = {
-  increment: PropTypes.func.isRequired,
-  isIncrementing: PropTypes.bool.isRequired,
-  syncButtonStyle: PropTypes.oneOf([PropTypes.string, PropTypes.bool])
-    .isRequired,
-};
+
 const FeatureToggledIncrementSyncButton = injectFeatureToggle(
-  flags.INCREMENT_SYNC_BUTTON,
+  INCREMENT_SYNC_BUTTON,
   'syncButtonStyle'
 )(IncrementSyncButton);
-FeatureToggledIncrementSyncButton.propTypes = {
-  increment: PropTypes.func.isRequired,
-  disabled: PropTypes.bool.isRequired,
-};
 
 const Counter = props => (
   <div>
@@ -107,7 +91,7 @@ const Counter = props => (
       </button>
       <br />
       <ToggleFeature
-        flag={flags.DECREMENT_ASYNC_BUTTON}
+        flag={DECREMENT_ASYNC_BUTTON}
         untoggledComponent={UntoggledFeature}
       >
         <button
@@ -121,15 +105,6 @@ const Counter = props => (
     </div>
   </div>
 );
-Counter.propTypes = {
-  count: PropTypes.number.isRequired,
-  decrement: PropTypes.func.isRequired,
-  increment: PropTypes.func.isRequired,
-  decrementAsync: PropTypes.func.isRequired,
-  incrementAsync: PropTypes.func.isRequired,
-  isDecrementing: PropTypes.bool.isRequired,
-  isIncrementing: PropTypes.bool.isRequired,
-};
 
 const mapStateToProps = state => ({
   count: state.counter.count,
@@ -145,12 +120,6 @@ const mapDispatchToProps = {
 };
 
 const ConnectedCounter = connect(mapStateToProps, mapDispatchToProps)(Counter);
-
-const defaultFlags = { 'aDefault-Flag': true };
-const adapterArgs = {
-  clientSideId: '596788417a20200c2b70c89e',
-  user: { key: 'ld-2@tdeekens.name' },
-};
 
 class App extends Component {
   state = {
@@ -175,8 +144,7 @@ class App extends Component {
       <Provider store={store}>
         <ConfigureFlopFlip
           adapter={adapter}
-          adapterArgs={adapterArgs}
-          defaultFlags={defaultFlags}
+          defaultFlags={allFlags}
         >
           <div className="App">
             <div className="App-header">
