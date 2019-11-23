@@ -41,10 +41,10 @@
     "redux": "4.0.4"
   },
   "dependencies": {
-    "@babel/runtime": "7.7.2",
+    "@babel/runtime": "7.7.4",
     "@flopflip/react": "^8.1.1",
     "@flopflip/types": "^2.2.0",
-    "@types/lodash": "4.14.148",
+    "@types/lodash": "4.14.149",
     "@types/react-redux": "7.1.5",
     "lodash": "4.17.15"
   },
