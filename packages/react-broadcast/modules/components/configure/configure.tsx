@@ -1,5 +1,6 @@
 import React from 'react';
 import { ConfigureAdapter } from '@flopflip/react';
+import memoize from 'lodash/memoize';
 import {
   Flags,
   Adapter,
@@ -21,22 +22,17 @@ type State = {
   status: AdapterStatus;
 };
 
-/**
- * NOTE:
- *    This function can not be memoized otherwise it will
- *    rewrire different `ConfigureFlopflip`s to the same change
- *    handlers as these functions seem to be referentially equal even
- *    across different instances of React components due to hoisting.
- */
-const createAdapterArgs = (
-  adapterArgs: AdapterArgs,
-  handleUpdateStatus: (status: AdapterStatus) => void,
-  handleUpdateFlags: (flags: Flags) => void
-): AdapterArgs => ({
-  ...adapterArgs,
-  onStatusStateChange: handleUpdateStatus,
-  onFlagsStateChange: handleUpdateFlags,
-});
+const createAdapterArgs = memoize(
+  (
+    adapterArgs: AdapterArgs,
+    handleUpdateStatus: (status: AdapterStatus) => void,
+    handleUpdateFlags: (flags: Flags) => void
+  ): AdapterArgs => ({
+    ...adapterArgs,
+    onStatusStateChange: handleUpdateStatus,
+    onFlagsStateChange: handleUpdateFlags,
+  })
+);
 
 export default class Configure extends React.PureComponent<Props, State> {
   static displayName = 'ConfigureFlopflip';

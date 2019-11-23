@@ -6,4 +6,4 @@ export default {
   [INCREMENT_ASYNC_BUTTON]: false,
   [DECREMENT_ASYNC_BUTTON]: true,
   [INCREMENT_SYNC_BUTTON]: 'yellow',
-}
+};

@@ -4,7 +4,7 @@ import { Provider, connect } from 'react-redux';
 import classNames from 'classnames';
 // Import adapter from '@flopflip/launchdarkly-adapter';
 // import adapter, { updateFlags } from '@flopflip/memory-adapter';
-import adapter, { updateFlags } from '@flopflip/localstorage-adapter';
+import adapter, { updateFlags } from '@flopflip/memory-adapter';
 import {
   ConfigureFlopFlip,
   branchOnFeatureToggle,
@@ -21,9 +21,11 @@ import {
 import logo from './logo.svg';
 import store from './store';
 import './App.css';
-import allFlags, { INCREMENT_ASYNC_BUTTON,
-DECREMENT_ASYNC_BUTTON,
-INCREMENT_SYNC_BUTTON} from './flags';
+import allFlags, {
+  INCREMENT_ASYNC_BUTTON,
+  DECREMENT_ASYNC_BUTTON,
+  INCREMENT_SYNC_BUTTON,
+} from './flags';
 
 const UntoggledFeature = () => <h6>Disabled Feature</h6>;
 
@@ -35,12 +37,9 @@ const IncrementAsyncButton = props => (
   >
     Increment Async
   </button>
-);;
+);
 const FeatureToggledIncrementAsyncButton = flowRight(
-  branchOnFeatureToggle(
-    { flag: INCREMENT_ASYNC_BUTTON },
-    UntoggledFeature
-  )
+  branchOnFeatureToggle({ flag: INCREMENT_ASYNC_BUTTON }, UntoggledFeature)
 )(IncrementAsyncButton);
 
 const IncrementSyncButton = props => (
@@ -142,10 +141,7 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <ConfigureFlopFlip
-          adapter={adapter}
-          defaultFlags={allFlags}
-        >
+        <ConfigureFlopFlip adapter={adapter} defaultFlags={allFlags}>
           <div className="App">
             <div className="App-header">
               <img src={logo} className="App-logo" alt="logo" />
