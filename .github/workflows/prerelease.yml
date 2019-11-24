@@ -24,7 +24,6 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
           node-version: 12
           registry-url: https://registry.npmjs.org/
       - name: Publish to next dist-tag
