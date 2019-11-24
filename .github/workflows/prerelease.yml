@@ -1,4 +1,4 @@
-name: Node.js Package
+name: Prerelease
 
 on:
   push:
@@ -21,12 +21,11 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
       - name: Publish to next dist-tag
+        uses: actions/setup-node@v1
         run: yarn release:next
         with:
+          node-version: 12
           registry-url: https://registry.npmjs.org/
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
