@@ -28,22 +28,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install
-        uses: borales/actions-yarn@v2.1.0
-        with:
-          cmd: install
+        run: yarn install
       - name: Lint
-        uses: borales/actions-yarn@v2.1.0
-        with:
-          cmd: lint
+        run: yarn lint
       - name: Build
-        uses: borales/actions-yarn@v2.1.0
-        with:
-          cmd: build
+        run: yarn build
       - name: Type check
-        uses: borales/actions-yarn@v2.1.0
-        with:
-          cmd: type-check
+        run: yarn type-check
       - name: Bundle size check
-        uses: borales/actions-yarn@v2.1.0
-        with:
-          cmd: test:sizes
+        run: yarn test:sizes
+        env:
+          BUNDLESIZE_GITHUB_TOKEN: ${{ secrets.BUNDLESIZE_GITHUB_TOKEN }}

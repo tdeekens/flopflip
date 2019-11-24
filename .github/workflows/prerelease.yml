@@ -24,8 +24,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-          registry-url: https://registry.npmjs.org/
       - name: Publish to next dist-tag
-        uses: borales/actions-yarn@v2.1.0
+        run: yarn release:next
         with:
-          cmd: release:next
+          registry-url: https://registry.npmjs.org/
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
