@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name: Set up yarn cache
+      - name: yarn cache directory
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
       - name: Setup node_modules cache
@@ -28,8 +28,6 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Install
         run: yarn install
-      - name: Build
-        run: yarn build
       - name: Publish to next dist-tag
         run: yarn release:next
         env:
