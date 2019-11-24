@@ -29,6 +29,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install
         run: yarn install
+      - name: Build
+        run: yarn build
       - name: Lint
         run: yarn lint
       - name: Test
@@ -37,8 +39,6 @@ jobs:
       - name: Test (with coverage)
         if: startsWith(matrix.node-version, '12')
         run: yarn test:ci:coverage
-      - name: Build
-        run: yarn build
       - name: Type check
         run: yarn type-check
       - name: Bundle size check
