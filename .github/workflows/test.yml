@@ -18,22 +18,22 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install
-        uses: borales/actions-yarn@v2.0.0
+        uses: borales/actions-yarn@v2.1.0
         with:
-          cmd: install --pure-lockfile
+          cmd: install
       - name: Lint
-        uses: borales/actions-yarn@v2.0.0
+        uses: borales/actions-yarn@v2.1.0
         with:
           cmd: lint
       - name: Type check
-        uses: borales/actions-yarn@v2.0.0
+        uses: borales/actions-yarn@v2.1.0
         with:
           cmd: type-check
       - name: Build
-        uses: borales/actions-yarn@v2.0.0
+        uses: borales/actions-yarn@v2.1.0
         with:
           cmd: build
       - name: Bundle size check
-        uses: borales/actions-yarn@v2.0.0
+        uses: borales/actions-yarn@v2.1.0
         with:
           cmd: test:sizes
