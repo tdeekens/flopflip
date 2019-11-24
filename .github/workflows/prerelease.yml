@@ -26,6 +26,10 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
+      - name: Install
+        run: yarn install
+      - name: Build
+        run: yarn build
       - name: Publish to next dist-tag
         run: yarn release:next
         env:
