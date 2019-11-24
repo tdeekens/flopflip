@@ -21,11 +21,13 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-      - name: Publish to next dist-tag
+      - name: Setup Node.js
         uses: actions/setup-node@v1
-        run: yarn release:next
         with:
+          node-version: ${{ matrix.node-version }}
           node-version: 12
           registry-url: https://registry.npmjs.org/
+      - name: Publish to next dist-tag
+        run: yarn release:next
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
