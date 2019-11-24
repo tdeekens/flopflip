@@ -3,8 +3,7 @@ name: Test and Build
 on: [push]
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -25,15 +24,16 @@ jobs:
         uses: borales/actions-yarn@v2.1.0
         with:
           cmd: lint
-      - name: Type check
-        uses: borales/actions-yarn@v2.1.0
-        with:
-          cmd: type-check
       - name: Build
         uses: borales/actions-yarn@v2.1.0
         with:
           cmd: build
+      - name: Type check
+        uses: borales/actions-yarn@v2.1.0
+        with:
+          cmd: type-check
       - name: Bundle size check
         uses: borales/actions-yarn@v2.1.0
         with:
           cmd: test:sizes
+
