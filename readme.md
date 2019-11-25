@@ -26,8 +26,9 @@
 </p>
 
 <p align="center">
-  <a href="https://circleci.com/gh/tdeekens/flopflip">
-    <img alt="CircleCI Status" src="https://circleci.com/gh/tdeekens/flopflip.svg?style=shield&circle-token=63ee7a0e1c766b6b76da6f7ba4c7b9f2a7876191">
+  <a href="https://github.com/tdeekens/flopflip/actions?query=workflow%3A%22Test+and+Build%22">
+    <img alt="GitHub Action Status" src="https://github.com/tdeekens/flopflip/workflows/test/badge.svg
+">
   </a>
   <a href="https://codecov.io/gh/tdeekens/flopflip">
     <img alt="Codecov Coverage Status" src="https://img.shields.io/codecov/c/github/tdeekens/flopflip.svg?style=flat-square">
