@@ -5,7 +5,7 @@ import {
   ReconfigureAdapter as ReconfigureAdapterType,
 } from '@flopflip/types';
 
-const initialReconfigureAdapter: ReconfigureAdapterType = (): void => {};
+const initialReconfigureAdapter: ReconfigureAdapterType = (): void => undefined;
 const initialAdapterStatus: AdapterStatusType = {
   isReady: false,
   isConfigured: false,

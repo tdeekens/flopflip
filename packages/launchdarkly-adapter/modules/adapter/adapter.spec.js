@@ -59,7 +59,7 @@ describe('when configuring', () => {
     beforeEach(() => {
       updatingOfUserContext = adapter.updateUserContext(updatedUserProps);
 
-      return updatingOfUserContext.catch(() => {});
+      return updatingOfUserContext.catch(() => null);
     });
 
     it('should reject `updateUserContext`', () =>

@@ -183,7 +183,7 @@ describe('lifecycle', () => {
               </ConfigureAdapter>
             );
 
-            return componentInstance.componentDidMount().catch(() => {});
+            return componentInstance.componentDidMount().catch(() => null);
           });
 
           it('should set the state to configuring', () => {
@@ -217,7 +217,7 @@ describe('lifecycle', () => {
                 <ConfigureAdapter {...props} />
               );
 
-              return componentInstance.componentDidMount().catch(() => {});
+              return componentInstance.componentDidMount().catch(() => null);
             });
 
             it('should invoke `children` with not `isAdapterReady`', () => {
@@ -252,7 +252,7 @@ describe('lifecycle', () => {
                   custom: { pending: 'arg' },
                 };
 
-                return componentInstance.componentDidMount().catch(() => {});
+                return componentInstance.componentDidMount().catch(() => null);
               });
 
               it('should set the `adapterState` to configured', () => {
@@ -402,7 +402,7 @@ describe('lifecycle', () => {
           });
 
           beforeEach(() => {
-            componentInstance.componentDidMount().catch(() => {});
+            componentInstance.componentDidMount().catch(() => null);
           });
 
           it('should set the state to configuring', () => {
@@ -479,7 +479,7 @@ describe('lifecycle', () => {
 
             componentInstance.setAdapterState(AdapterStates.CONFIGURED);
 
-            return componentInstance.componentDidUpdate().catch(() => {});
+            return componentInstance.componentDidUpdate().catch(() => null);
           });
 
           it('should set the state configuring', () => {
@@ -528,7 +528,7 @@ describe('lifecycle', () => {
               componentInstance.pendingAdapterArgs = {
                 custom: { pending: 'arg' },
               };
-              return componentInstance.componentDidMount().catch(() => {});
+              return componentInstance.componentDidMount().catch(() => null);
             });
 
             it('should set the `adapterState` to configured', () => {

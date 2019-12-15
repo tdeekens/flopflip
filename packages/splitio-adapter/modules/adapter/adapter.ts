@@ -27,10 +27,10 @@ type AdapterState = {
 };
 
 type ClientInitializationOptions = {
+  [key: string]: any;
   core?: {
     [key: string]: string;
   };
-  [key: string]: any;
 };
 
 const adapterState: AdapterState = {
