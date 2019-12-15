@@ -43,6 +43,6 @@
     "mitt": "1.2.0"
   },
   "devDependencies": {
-    "read-pkg-up": "7.0.0"
+    "read-pkg-up": "7.0.1"
   }
 }

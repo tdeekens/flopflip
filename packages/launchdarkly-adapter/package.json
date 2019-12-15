@@ -34,7 +34,7 @@
   "devDependencies": {
     "@flopflip/types": "^2.2.0",
     "@types/lodash": "4.14.149",
-    "read-pkg-up": "7.0.0"
+    "read-pkg-up": "7.0.1"
   },
   "dependencies": {
     "@babel/runtime": "7.7.6",
