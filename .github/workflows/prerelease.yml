@@ -28,10 +28,10 @@ jobs:
           registry-url: https://registry.npmjs.org/
           scope: flopflip
       - name: Install
-        run: yarn install
+        run: yarn install --frozen-lockfile
       - name: Publish to next dist-tag
         run: |
-          echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" > .npmrc
+          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
           yarn release:next
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
