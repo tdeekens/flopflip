@@ -14,8 +14,8 @@ const createAdapterContext = (
   reconfigure?: ReconfigureAdapterType,
   status?: AdapterStatusType
 ): AdapterContextType => ({
-  reconfigure: reconfigure || initialReconfigureAdapter,
-  status: status || initialAdapterStatus,
+  reconfigure: reconfigure ?? initialReconfigureAdapter,
+  status: status ?? initialAdapterStatus,
 });
 
 const initialAdapterContext = createAdapterContext();

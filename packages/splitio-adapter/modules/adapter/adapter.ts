@@ -106,7 +106,7 @@ export const createAnonymousUserKey = (): string =>
     .substring(2);
 
 const ensureUser = (user: User): User =>
-  merge(user, { key: user && user.key ? user.key : createAnonymousUserKey() });
+  merge(user, { key: user?.key ?? createAnonymousUserKey() });
 
 const initializeClient = (): {
   client: SplitIO.IClient;
@@ -201,7 +201,7 @@ const configure = ({
     ...omit(options, ['core']),
     core: {
       authorizationKey,
-      key: adapterState.user.key || createAnonymousUserKey(),
+      key: adapterState.user.key ?? createAnonymousUserKey(),
       ...options.core,
     },
   };

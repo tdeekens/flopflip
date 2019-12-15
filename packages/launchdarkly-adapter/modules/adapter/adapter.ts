@@ -110,7 +110,7 @@ const setupFlagSubcription = ({
   }
 };
 
-const getIsAnonymousUser = (user: User): boolean => !(user && user.key);
+const getIsAnonymousUser = (user: User): boolean => !user?.key;
 const ensureUser = (user: User): User => {
   const isAnonymousUser = getIsAnonymousUser(user);
 

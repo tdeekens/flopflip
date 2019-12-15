@@ -54,6 +54,8 @@ module.exports = {
     '@babel/plugin-transform-destructuring',
     '@babel/plugin-transform-react-constant-elements',
     '@babel/plugin-transform-runtime',
+    '@babel/plugin-proposal-optional-chaining',
+    '@babel/plugin-proposal-nullish-coalescing-operator',
     isEnv('test') && [
       '@babel/plugin-transform-regenerator',
       {

@@ -18,7 +18,7 @@ export const mapStateToProps = (state: State, ownProps: OwnProps): object => ({
   isFeatureEnabled: getIsFeatureEnabled(
     ownProps.flag,
     ownProps.variation
-  )(state[STATE_SLICE].flags || {}),
+  )(state[STATE_SLICE].flags ?? {}),
 });
 
 export default flowRight(

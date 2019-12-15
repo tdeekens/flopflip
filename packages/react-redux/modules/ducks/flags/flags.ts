@@ -42,7 +42,7 @@ export const updateFlags = (flags: Flags): UpdateFlagsAction => ({
 
 // Selectors
 export const selectFlags = (state: State): Flags =>
-  state[STATE_SLICE].flags || {};
+  state[STATE_SLICE].flags ?? {};
 export const selectFlag = (
   flagName: FlagName
 ): ((state: State) => FlagVariation) => state => {
