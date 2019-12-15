@@ -43,10 +43,11 @@
   },
   "peerDependencies": {
     "react": "^16.3",
-    "react-dom": "^16.3"
+    "react-dom": "^16.3",
+    "read-pkg-up": "7.0.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.7.4",
+    "@babel/runtime": "7.7.6",
     "deepmerge": "4.2.2",
     "lodash": "4.17.15",
     "react-fast-compare": "2.0.4",

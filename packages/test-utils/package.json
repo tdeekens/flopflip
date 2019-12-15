@@ -35,5 +35,8 @@
     "jest-plugin-filename": "0.0.1",
     "jest-runner-eslint": "0.7.5",
     "jest-watch-yarn-workspaces": "1.1.0"
+  },
+  "devDependencies": {
+    "read-pkg-up": "7.0.0"
   }
 }

@@ -38,8 +38,11 @@
     "client"
   ],
   "dependencies": {
-    "@babel/runtime": "7.7.4",
+    "@babel/runtime": "7.7.6",
     "invariant": "2.2.4",
     "mitt": "1.2.0"
+  },
+  "devDependencies": {
+    "read-pkg-up": "7.0.0"
   }
 }
