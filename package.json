@@ -88,6 +88,7 @@
     "prettier": "1.19.1",
     "raf": "3.4.1",
     "read-pkg-up": "7.0.0",
+    "read-pkg": "5.2.0",
     "regenerator-runtime": "0.13.3",
     "replace": "1.1.1",
     "rimraf": "3.0.0",
