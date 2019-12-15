@@ -2,7 +2,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import adapter, { updateFlags } from '@flopflip/memory-adapter';
-import { render, fireEvent, waitForElement } from '@testing-library/react';
+import {
+  render,
+  screen,
+  queries,
+  fireEvent,
+  waitForElement,
+  queryHelpers,
+  buildQueries,
+} from '@testing-library/react';
 
 const mergeOptional = (defaultValue, value) =>
   value === null ? undefined : { ...defaultValue, ...value };
@@ -12,14 +20,31 @@ const defaultAdapterArgs = {
   user: { key: 'nerd@tdeekens.name' },
 };
 
-const queryByFlagName = (flagName, container) => {
-  const [firstElement] = container.querySelectorAll(
-    `[data-flag-name="${flagName}"]`
-  );
+const queryByAllByFlagName = (...args) =>
+  queryHelpers.queryAllByAttribute('data-flag-name', ...args);
+const getMultipleFlagNamesError = (c, flagName) =>
+  `Found multiple elements with the 'data-flag-name' attribute of: '${flagName}'.`;
+const getMissingFlagNameError = (c, flagName) =>
+  `Unable to find an element with the 'data-flag-name' attribute of: '${flagName}'.`;
 
-  if (!firstElement) return null;
+const [
+  queryByFlagName,
+  getAllByFlagName,
+  getByDataFlagName,
+  findAllByFlagName,
+  findByFlagName,
+] = buildQueries(
+  queryByAllByFlagName,
+  getMultipleFlagNamesError,
+  getMissingFlagNameError
+);
 
-  return firstElement;
+const flagNameQueries = {
+  queryByFlagName,
+  getAllByFlagName,
+  getByDataFlagName,
+  findAllByFlagName,
+  findByFlagName,
 };
 
 const changeFlagVariation = (rendered, flagName, flagVariation) =>
@@ -28,12 +53,15 @@ const changeFlagVariation = (rendered, flagName, flagVariation) =>
   });
 
 const defaultRender = (ui, { ...rtlOptions }) => {
-  const rendered = render(ui, rtlOptions);
+  const rendered = render(ui, {
+    ...rtlOptions,
+    queries: {
+      ...queries,
+      ...flagNameQueries,
+    },
+  });
 
-  return {
-    queryByFlagName: flagName => queryByFlagName(flagName, rendered.container),
-    ...rendered,
-  };
+  return rendered;
 };
 
 const fromEventString = string => {
@@ -83,10 +111,15 @@ const renderWithAdapter = (
         </>
       </ConfigureFlopFlip>
     ),
-    rtlOptions
+    {
+      ...rtlOptions,
+      queries: {
+        ...queries,
+        ...flagNameQueries,
+      },
+    }
   );
   return {
-    queryByFlagName: flagName => queryByFlagName(flagName, rendered.container),
     changeFlagVariation: (flagName, flagVariation) =>
       changeFlagVariation(rendered, flagName, flagVariation),
     waitUntilReady: async () =>
@@ -147,4 +180,5 @@ export {
   adapter,
   updateFlags,
   components,
+  screen,
 };
