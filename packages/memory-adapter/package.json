@@ -38,7 +38,7 @@
     "client"
   ],
   "dependencies": {
-    "@babel/runtime": "7.7.6",
+    "@babel/runtime": "7.7.7",
     "invariant": "2.2.4",
     "mitt": "1.2.0"
   },
