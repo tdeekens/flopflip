@@ -5,19 +5,22 @@ export type Flags = { [key: string]: FlagVariation };
 export type User = {
   key?: string;
 };
+export type AdapterStatus = {
+  isReady?: boolean;
+  isConfigured?: boolean;
+};
+export type AdapterEventHandlers = {
+  onFlagsStateChange: (flags: Flags) => void;
+  onStatusStateChange: (status: AdapterStatus) => void;
+};
 export type AdapterArgs = {
   user: User;
   adapterConfiguration: {
     pollingInteral: number;
   };
   flags: Flags;
-  onFlagsStateChange(flags: Flags): void;
-  onStatusStateChange(status: AdapterStatus): void;
 };
-export type AdapterStatus = {
-  isReady?: boolean;
-  isConfigured?: boolean;
-};
+export type AdapterArgsWithEventHandlers = AdapterArgs & AdapterEventHandlers;
 export type Adapter = {
   configure(adapterArgs: AdapterArgs): Promise<any>;
   reconfigure(adapterArgs: AdapterArgs): Promise<any>;
@@ -33,7 +36,7 @@ export type AdapterReconfigurationOptions = {
   shouldOverwrite?: boolean;
 };
 export type AdapterReconfiguration = {
-  adapterArgs: AdapterArgs;
+  adapterArgs: AdapterArgsWithEventHandlers;
   options: AdapterReconfigurationOptions;
 };
 export type ConfigureAdapterChildrenFnArgs = {
@@ -46,7 +49,7 @@ export type ConfigureAdapterChildren =
   | ConfigureAdapterChildrenFn
   | React.ReactNode;
 export type ReconfigureAdapter = (
-  adapterArgs: AdapterArgs,
+  adapterArgs: AdapterArgsWithEventHandlers,
   options: AdapterReconfigurationOptions
 ) => void;
 export type AdapterContext = {

@@ -5,6 +5,7 @@ import {
   Flags,
   Adapter,
   AdapterArgs,
+  AdapterEventHandlers,
   AdapterStatus,
   ConfigureAdapterChildren,
 } from '@flopflip/types';
@@ -23,14 +24,9 @@ type State = {
 };
 
 const createAdapterArgs = memoize(
-  (
-    adapterArgs: AdapterArgs,
-    handleUpdateStatus: (status: AdapterStatus) => void,
-    handleUpdateFlags: (flags: Flags) => void
-  ): AdapterArgs => ({
+  (adapterArgs: AdapterArgs, eventHandlers: AdapterEventHandlers) => ({
     ...adapterArgs,
-    onStatusStateChange: handleUpdateStatus,
-    onFlagsStateChange: handleUpdateFlags,
+    ...eventHandlers,
   })
 );
 
@@ -85,11 +81,10 @@ export default class Configure extends React.PureComponent<Props, State> {
       <FlagsContext.Provider value={this.state.flags}>
         <ConfigureAdapter
           adapter={this.props.adapter}
-          adapterArgs={createAdapterArgs(
-            this.props.adapterArgs,
-            this.handleUpdateStatus,
-            this.handleUpdateFlags
-          )}
+          adapterArgs={createAdapterArgs(this.props.adapterArgs, {
+            onFlagsStateChange: this.handleUpdateFlags,
+            onStatusStateChange: this.handleUpdateStatus,
+          })}
           adapterStatus={this.state.status}
           defaultFlags={this.props.defaultFlags}
           shouldDeferAdapterConfiguration={
