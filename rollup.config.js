@@ -41,6 +41,7 @@ const config = {
   output: {
     name,
     sourcemap: true,
+    exports: 'named',
     globals: {
       react: 'React',
       redux: 'redux',

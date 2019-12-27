@@ -22,8 +22,8 @@ export type AdapterArgs = {
 };
 export type AdapterArgsWithEventHandlers = AdapterArgs & AdapterEventHandlers;
 export type Adapter = {
-  configure(adapterArgs: AdapterArgs): Promise<any>;
-  reconfigure(adapterArgs: AdapterArgs): Promise<any>;
+  configure(adapterArgs: AdapterArgsWithEventHandlers): Promise<any>;
+  reconfigure(adapterArgs: AdapterArgsWithEventHandlers): Promise<any>;
   getIsReady(): boolean;
 };
 export type AdapterStatusChange = { [key: string]: boolean };

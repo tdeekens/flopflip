@@ -3,7 +3,7 @@ import mitt, { Emitter } from 'mitt';
 import {
   User,
   AdapterStatus,
-  AdapterArgs,
+  AdapterArgsWithEventHandlers,
   FlagName,
   FlagVariation,
   Flag,
@@ -35,7 +35,7 @@ const configure = ({
   user,
   onFlagsStateChange,
   onStatusStateChange,
-}: AdapterArgs): Promise<any> => {
+}: AdapterArgsWithEventHandlers): Promise<any> => {
   adapterState.user = user;
 
   return Promise.resolve().then(() => {
