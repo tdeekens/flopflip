@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/splitio-adapter",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "A adapter around the split.io client for flipflop",
   "main": "dist/@flopflip-splitio-adapter.cjs.js",
   "module": "dist/@flopflip-splitio-adapter.es.js",
@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@flopflip/types": "^2.2.0",
+    "@flopflip/types": "^2.2.1",
     "@types/lodash": "4.14.149",
     "read-pkg-up": "7.0.1"
   },
