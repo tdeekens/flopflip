@@ -8,6 +8,7 @@ import {
   AdapterReconfiguration,
   AdapterReconfigurationOptions,
   ConfigureAdapterChildren,
+  ConfigureAdapterChildrenFn,
 } from '@flopflip/types';
 import AdapterContext, { createAdapterContext } from '../adapter-context';
 
@@ -38,8 +39,12 @@ type State = {
 };
 type AdapterState = valueof<AdapterStates>;
 
-const isEmptyChildren = (children: React.ReactNode): boolean =>
-  React.Children.count(children) === 0;
+const isFunctionChildren = (
+  children: ConfigureAdapterChildren
+): children is ConfigureAdapterChildrenFn => typeof children === 'function';
+
+const isEmptyChildren = (children: ConfigureAdapterChildren): boolean =>
+  !isFunctionChildren(children) && React.Children.count(children) === 0;
 
 export const mergeAdapterArgs = (
   previousAdapterArgs: AdapterArgs,
@@ -244,20 +249,20 @@ export default class ConfigureAdapter extends React.PureComponent<
         )}
       >
         {(() => {
-          const isAdapterReady: boolean = this.props.adapter.getIsReady();
+          const isAdapterReady = this.props.adapter.getIsReady();
 
           if (isAdapterReady) {
             if (typeof this.props.render === 'function')
               return this.props.render();
           }
 
-          if (typeof this.props.children === 'function')
+          if (isFunctionChildren(this.props.children))
             return this.props.children({
               isAdapterReady,
             });
 
           if (this.props.children && !isEmptyChildren(this.props.children))
-            return React.Children.only(this.props.children);
+            return React.Children.only<React.ReactNode>(this.props.children);
 
           return null;
         })()}
