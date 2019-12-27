@@ -4,13 +4,18 @@ import {
   Reducer,
   PreloadedState,
 } from 'redux';
-import { Adapter, AdapterArgs, AdapterStatus, Flags } from '@flopflip/types';
+import {
+  Adapter,
+  AdapterArgsWithEventHandlers,
+  AdapterStatus,
+  Flags,
+} from '@flopflip/types';
 import { State } from '../../types';
 import { updateFlags, updateStatus } from '../../ducks';
 
 export default function createFlopFlipEnhancer(
   adapter: Adapter,
-  adapterArgs: AdapterArgs
+  adapterArgs: AdapterArgsWithEventHandlers
 ): <StoreState extends State>(
   next: StoreEnhancerStoreCreator<StoreState>
 ) => (

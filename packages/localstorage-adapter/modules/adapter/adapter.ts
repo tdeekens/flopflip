@@ -4,7 +4,7 @@ import camelCase from 'lodash/camelCase';
 import {
   User,
   AdapterStatus,
-  AdapterArgs,
+  AdapterArgsWithEventHandlers,
   FlagName,
   FlagVariation,
   Flag,
@@ -119,7 +119,7 @@ const configure = ({
   onFlagsStateChange,
   onStatusStateChange,
   adapterConfiguration,
-}: AdapterArgs): Promise<any> => {
+}: AdapterArgsWithEventHandlers): Promise<any> => {
   adapterState.user = user;
 
   return Promise.resolve().then(() => {

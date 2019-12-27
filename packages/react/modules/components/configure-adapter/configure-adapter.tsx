@@ -8,7 +8,7 @@ import {
   AdapterReconfiguration,
   AdapterReconfigurationOptions,
   ConfigureAdapterChildren,
-  ConfigureAdapterChildrenFn,
+  ConfigureAdapterChildrenAsFunction,
 } from '@flopflip/types';
 import AdapterContext, { createAdapterContext } from '../adapter-context';
 
@@ -41,7 +41,7 @@ type AdapterState = valueof<AdapterStates>;
 
 const isFunctionChildren = (
   children: ConfigureAdapterChildren
-): children is ConfigureAdapterChildrenFn => typeof children === 'function';
+): children is ConfigureAdapterChildrenAsFunction => typeof children === 'function';
 
 const isEmptyChildren = (children: ConfigureAdapterChildren): boolean =>
   !isFunctionChildren(children) && React.Children.count(children) === 0;
