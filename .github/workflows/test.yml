@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x]
+        node-version: [12.x, 13.x]
 
     steps:
       - name: Checkout
@@ -34,10 +34,10 @@ jobs:
       - name: Lint
         run: yarn lint
       - name: Test
-        if: startsWith(matrix.node-version, '10')
+        if: startsWith(matrix.node-version, '12')
         run: yarn test:ci
       - name: Test (with coverage)
-        if: startsWith(matrix.node-version, '12')
+        if: startsWith(matrix.node-version, '13')
         run: yarn test:ci:coverage
       - name: Type check
         run: yarn type-check
