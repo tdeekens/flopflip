@@ -3,7 +3,7 @@ import merge from 'deepmerge';
 import {
   Flags,
   Adapter,
-  AdapterArgs,
+  AdapterArgsWithEventHandlers,
   AdapterStatus,
   AdapterReconfiguration,
   AdapterReconfigurationOptions,
@@ -28,14 +28,14 @@ export const AdapterStates: AdapterStates = {
 type Props = {
   shouldDeferAdapterConfiguration?: boolean;
   adapter: Adapter;
-  adapterArgs: AdapterArgs;
+  adapterArgs: AdapterArgsWithEventHandlers;
   adapterStatus?: AdapterStatus;
   defaultFlags?: Flags;
   render?: () => React.ReactNode;
   children?: ConfigureAdapterChildren;
 };
 type State = {
-  appliedAdapterArgs: AdapterArgs;
+  appliedAdapterArgs: AdapterArgsWithEventHandlers;
 };
 type AdapterState = valueof<AdapterStates>;
 
@@ -47,9 +47,9 @@ const isEmptyChildren = (children: ConfigureAdapterChildren): boolean =>
   !isFunctionChildren(children) && React.Children.count(children) === 0;
 
 export const mergeAdapterArgs = (
-  previousAdapterArgs: AdapterArgs,
+  previousAdapterArgs: AdapterArgsWithEventHandlers,
   { adapterArgs: nextAdapterArgs, options = {} }: AdapterReconfiguration
-): AdapterArgs =>
+): AdapterArgsWithEventHandlers =>
   options.shouldOverwrite
     ? nextAdapterArgs
     : merge(previousAdapterArgs, nextAdapterArgs);
@@ -65,16 +65,16 @@ export default class ConfigureAdapter extends React.PureComponent<
     render: null,
   };
   adapterState: AdapterState = AdapterStates.UNCONFIGURED;
-  pendingAdapterArgs?: AdapterArgs | null = null;
+  pendingAdapterArgs?: AdapterArgsWithEventHandlers | null = null;
 
-  state: { appliedAdapterArgs: AdapterArgs } = {
+  state: { appliedAdapterArgs: AdapterArgsWithEventHandlers } = {
     appliedAdapterArgs: this.props.adapterArgs,
   };
 
   setAdapterState = (nextAdapterState: AdapterState): void => {
     this.adapterState = nextAdapterState;
   };
-  applyAdapterArgs = (nextAdapterArgs: AdapterArgs): void =>
+  applyAdapterArgs = (nextAdapterArgs: AdapterArgsWithEventHandlers): void =>
     /**
      * NOTE:
      *   We can only unset `pendingAdapterArgs` after be actually perform
@@ -98,7 +98,7 @@ export default class ConfigureAdapter extends React.PureComponent<
    *   this function has two arguments for clarify.
    */
   reconfigureOrQueue = (
-    nextAdapterArgs: AdapterArgs,
+    nextAdapterArgs: AdapterArgsWithEventHandlers,
     options: AdapterReconfigurationOptions
   ): void =>
     this.adapterState === AdapterStates.CONFIGURED &&
@@ -138,7 +138,7 @@ export default class ConfigureAdapter extends React.PureComponent<
    *    be passed pending or applied adapterArgs.
    *
    */
-  getAdapterArgsForConfiguration = (): AdapterArgs =>
+  getAdapterArgsForConfiguration = (): AdapterArgsWithEventHandlers =>
     this.pendingAdapterArgs || this.state.appliedAdapterArgs;
 
   handleDefaultFlags = (defaultFlags: Flags): void => {
