@@ -39,14 +39,14 @@ export type AdapterReconfiguration = {
   adapterArgs: AdapterArgsWithEventHandlers;
   options: AdapterReconfigurationOptions;
 };
-export type ConfigureAdapterChildrenFnArgs = {
+export type ConfigureAdapterChildrenAsFunctionArgs = {
   isAdapterReady: boolean;
 };
-export type ConfigureAdapterChildrenFn = (
-  args: ConfigureAdapterChildrenFnArgs
+export type ConfigureAdapterChildrenAsFunction = (
+  args: ConfigureAdapterChildrenAsFunctionArgs
 ) => React.ReactNode;
 export type ConfigureAdapterChildren =
-  | ConfigureAdapterChildrenFn
+  | ConfigureAdapterChildrenAsFunction
   | React.ReactNode;
 export type ReconfigureAdapter = (
   adapterArgs: AdapterArgsWithEventHandlers,
