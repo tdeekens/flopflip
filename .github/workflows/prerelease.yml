@@ -3,7 +3,7 @@ name: Prerelease
 on:
   push:
     branches:
-      - master
+      - 'tdeekens/master'
 
 jobs:
 
