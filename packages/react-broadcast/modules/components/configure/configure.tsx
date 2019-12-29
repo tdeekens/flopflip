@@ -1,5 +1,5 @@
 import React from 'react';
-import { ConfigureAdapter } from '@flopflip/react';
+import { ConfigureAdapter, createSequentialId } from '@flopflip/react';
 import memoize from 'lodash/memoize';
 import {
   Flags,
@@ -21,10 +21,17 @@ type Props = {
 type State = {
   flags: Flags;
   status: AdapterStatus;
+  configurationId?: string,
 };
 
+const getConfigurationId = createSequentialId('Configure');
+
 const createAdapterArgs = memoize(
-  (adapterArgs: AdapterArgs, eventHandlers: AdapterEventHandlers) => ({
+  (
+    adapterArgs: AdapterArgs,
+    eventHandlers: AdapterEventHandlers,
+    _configurationId?: string
+  ) => ({
     ...adapterArgs,
     ...eventHandlers,
   })
@@ -38,42 +45,49 @@ export default class Configure extends React.PureComponent<Props, State> {
     shouldDeferAdapterConfiguration: false,
   };
 
-  state: { flags: Flags; status: AdapterStatus } = {
+  state: State = {
     flags: {},
     status: {
       isReady: false,
       isConfigured: false,
     },
+    configurationId: undefined
   };
 
-  isUnmounted: boolean = false;
+  isUnmounted = false;
 
-  componentDidMount() {
+  static getDerivedStateFromProps = () => ({
+    configurationId: getConfigurationId(),
+  });
+
+  componentDidMount(): void {
     this.isUnmounted = false;
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     this.isUnmounted = true;
   }
 
   handleUpdateFlags = (nextFlags: Flags): void => {
-    !this.isUnmounted &&
+    if (!this.isUnmounted) {
       this.setState(prevState => ({
         flags: {
           ...prevState.flags,
           ...nextFlags,
         },
       }));
+    }
   };
 
   handleUpdateStatus = (status: AdapterStatus): void => {
-    !this.isUnmounted &&
+    if (!this.isUnmounted) {
       this.setState(prevState => ({
         status: {
           ...prevState.status,
           ...status,
         },
       }));
+    }
   };
 
   render(): React.ReactNode {
@@ -81,10 +95,14 @@ export default class Configure extends React.PureComponent<Props, State> {
       <FlagsContext.Provider value={this.state.flags}>
         <ConfigureAdapter
           adapter={this.props.adapter}
-          adapterArgs={createAdapterArgs(this.props.adapterArgs, {
-            onFlagsStateChange: this.handleUpdateFlags,
-            onStatusStateChange: this.handleUpdateStatus,
-          })}
+          adapterArgs={createAdapterArgs(
+            this.props.adapterArgs,
+            {
+              onFlagsStateChange: this.handleUpdateFlags,
+              onStatusStateChange: this.handleUpdateStatus,
+            },
+            this.state.configurationId
+          )}
           adapterStatus={this.state.status}
           defaultFlags={this.props.defaultFlags}
           shouldDeferAdapterConfiguration={
