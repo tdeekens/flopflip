@@ -1,6 +1,6 @@
 import React from 'react';
 import { ConfigureAdapter, createSequentialId } from '@flopflip/react';
-import memoize from 'lodash/memoize';
+import memoize from 'memoize-one';
 import {
   Flags,
   Adapter,
