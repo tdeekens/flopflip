@@ -921,7 +921,7 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.4":
+"@babel/runtime@7.7.7", "@babel/runtime@^7.0.0", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.4":
   version "7.7.7"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.7.tgz#194769ca8d6d7790ec23605af9ee3e42a0aa79cf"
   integrity sha512-uCnC2JEVAu8AKB5do1WRIsvrdJ0flYx/A/9f/6chdacnEZ7LmavjdsDXr5ksYBegxtuTPR5Va9/+13QF/kFkCA==
@@ -979,74 +979,75 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@flopflip/launchdarkly-adapter@2.9.3":
-  version "2.9.3"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.9.3.tgz#f23cc449c50630555d5439690e846e238356f1d6"
-  integrity sha512-viXrvRporQ5sg8yrQ9Mcv7DyG6EtdUWYGq0n6bPJsFxqN52AIQvOT1LMXEmcHkZUl8FrRL0jJIOBpHWmk1Ds7w==
+"@flopflip/launchdarkly-adapter@2.9.4":
+  version "2.9.4"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.9.4.tgz#ed508d076fdf784d7d52b704ae3152dc02bc5375"
+  integrity sha512-cPUyDACTieQZruzvqhoa2MLNkg8DAvTXowgFwwiyKzCUeW3sQ8cJS829UMdU58WUoIiCHS2HF/qRu2tte83ywg==
   dependencies:
-    "@babel/runtime" "7.7.4"
+    "@babel/runtime" "7.7.7"
     debounce-fn "3.0.1"
     deepmerge "4.2.2"
-    launchdarkly-js-client-sdk "2.15.2"
+    launchdarkly-js-client-sdk "2.16.0"
     lodash "4.17.15"
     tiny-warning "1.0.3"
 
-"@flopflip/localstorage-adapter@1.3.2":
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-1.3.2.tgz#3ba03f299fd81ef9ce03dddfd64161d3ee318ea5"
-  integrity sha512-yJtSYQTYEM23VeBzX/zeNX+dwFq5YA6NhqTMAoq8b7u47HoHsLn3GN9l8skJT9srq6vh86rlvldy/JZDzrbCiQ==
+"@flopflip/localstorage-adapter@1.3.3":
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-1.3.3.tgz#8b5f47091e729cc5652bf588a7b4a958cfc0cfd5"
+  integrity sha512-xyrMMcCZdnu2KdujPIqipkU01BKUMOhG+5gI//OX57O6U4irbZBITOLB2YQWPyfFQRDQpbm7sKHbTXw7vXKXIw==
   dependencies:
-    "@babel/runtime" "7.7.4"
+    "@babel/runtime" "7.7.7"
     invariant "2.2.4"
     mitt "1.2.0"
 
-"@flopflip/memory-adapter@1.4.2":
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-1.4.2.tgz#887a5e887256297fbcab2e79c2acd77a255dcd0a"
-  integrity sha512-DXHTPnAClrNLS57MUmPugFYU5ieoGaAdcR/ShDnyNI8eOFKJ3X5HHeUH5MfiBt4wFs6nJIbk9sN7DY7cwLL2xg==
+"@flopflip/memory-adapter@1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-1.4.3.tgz#08d001867698142ee451e4a606da2f7a6f4c9c69"
+  integrity sha512-Qwi2fovkU2iSBG+0yCcT0oxFi+yw27yvL3qUInt+gbEBCkoV/5mRraqxuJTe/qDCEaH3RS6yZpMee3YYMpM0pg==
   dependencies:
-    "@babel/runtime" "7.7.4"
+    "@babel/runtime" "7.7.7"
     invariant "2.2.4"
     mitt "1.2.0"
 
-"@flopflip/react-broadcast@9.1.2":
-  version "9.1.2"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-9.1.2.tgz#8a9635088ca272d289b954968d3e39056b86b22a"
-  integrity sha512-Bwew2V3NvSYRB3Zb4j4an3VydCCM9/ZKi7YKnt2qtuuvb53BxuvKBlOnFHFwBnnNfCcwJ9tERKPxjt8mcqrHoQ==
+"@flopflip/react-broadcast@9.1.5":
+  version "9.1.5"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-9.1.5.tgz#dde968b1547a91117dd30145f4f6e1d011b05983"
+  integrity sha512-kcuCjOgaQh+ZekzcdNFOwmIECLDxNs8cNKoChDmMu/yMfxPfCFy/a8rC+ndFDzI4JVpxT1wFtOmefuPtxKNwZA==
   dependencies:
-    "@babel/runtime" "7.7.4"
-    "@flopflip/react" "^8.1.2"
-    "@flopflip/types" "^2.2.0"
+    "@babel/runtime" "7.7.7"
+    "@flopflip/react" "^8.1.4"
+    "@flopflip/types" "^2.2.1"
     lodash "4.17.15"
+    memoize-one "5.1.1"
 
-"@flopflip/react-redux@9.1.2":
-  version "9.1.2"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-9.1.2.tgz#c7737d0ef9d30b959fb50ea52981739867ed562d"
-  integrity sha512-/2siamGxrFsDQWF5ixEtVGS5C3+9/DACpeAPRcDhSaaSrP+wYW8hVsTslb6YFC+8yvTAk5XV15OkB9gaRXt7bw==
+"@flopflip/react-redux@9.1.5":
+  version "9.1.5"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-9.1.5.tgz#9b6ce45122fa2f5a2ea369353b966c2ea87d290f"
+  integrity sha512-id7oCefblQ5/ZJ1YYoI9U2z5dw/AypPDYObsxUvCiFIgOx5C2pH/Ry+Y3k72sktYQ9os2hcLtwb+A5fst145QQ==
   dependencies:
-    "@babel/runtime" "7.7.4"
-    "@flopflip/react" "^8.1.2"
-    "@flopflip/types" "^2.2.0"
+    "@babel/runtime" "7.7.7"
+    "@flopflip/react" "^8.1.4"
+    "@flopflip/types" "^2.2.1"
     "@types/lodash" "4.14.149"
     "@types/react-redux" "7.1.5"
     lodash "4.17.15"
 
-"@flopflip/react@^8.1.2":
-  version "8.1.2"
-  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-8.1.2.tgz#36818f5e14d50d292e511b1e13725bb65aae1203"
-  integrity sha512-fr/tmga2Shn9oZecTiwZyDof6x6TdM4izaB3UdWmgxdFrzes8XADnLP13gAbHuPL6E/SNbnXoM6ZD0RjSHqcmg==
+"@flopflip/react@^8.1.4":
+  version "8.1.4"
+  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-8.1.4.tgz#42caaac9a8e6197d901b753965949264188ce71a"
+  integrity sha512-+PpqmopDeBqsPYSNALDtE0Rtc97HxrK6GbSXeE2yXyvSxgeNUT8qEMZ0ErVkukXzneZJX63zs8XLiRRMryxpCg==
   dependencies:
-    "@babel/runtime" "7.7.4"
+    "@babel/runtime" "7.7.7"
     deepmerge "4.2.2"
     lodash "4.17.15"
     react-fast-compare "2.0.4"
     react-is "16.12.0"
     tiny-warning "1.0.3"
 
-"@flopflip/types@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@flopflip/types/-/types-2.2.0.tgz#5bdb5f1a3e10d8aae914cf9778577c4d2bfee140"
-  integrity sha512-QI+kONuMKahrVNggQAm37rsNNt1IczBzIH9VAJZqVrktlW1q9RqBIM9OUOl7/YgUfoyweaJCQuuklhYUDDpX+g==
+"@flopflip/types@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@flopflip/types/-/types-2.2.1.tgz#725562dd4bf164386a4731d758bc8deb4270971a"
+  integrity sha512-oawyVBGgjKjoxiprGs70l9wTEIid7iQz8hNhsZwFWpbS2Mtn7eojUesU9GYrJ6F8FXbuxTAcgxIIhmztbsrccw==
 
 "@hapi/address@2.x.x":
   version "2.1.4"
@@ -6202,18 +6203,18 @@ last-call-webpack-plugin@^3.0.0:
     lodash "^4.17.5"
     webpack-sources "^1.1.0"
 
-launchdarkly-js-client-sdk@2.15.2:
-  version "2.15.2"
-  resolved "https://registry.yarnpkg.com/launchdarkly-js-client-sdk/-/launchdarkly-js-client-sdk-2.15.2.tgz#a52f9b2a345de891db4ba10049caaab415306c15"
-  integrity sha512-22L8uBGcVtIxygNxqcP7dSJK9LWoM3XbndczFUlrchQKjbHvYy4ED39iiQkoE11Ap+Rti/DZ9jNPhM8H72ZGQg==
+launchdarkly-js-client-sdk@2.16.0:
+  version "2.16.0"
+  resolved "https://registry.yarnpkg.com/launchdarkly-js-client-sdk/-/launchdarkly-js-client-sdk-2.16.0.tgz#aac4273a5499a69006a95ec0097fdd4d4c8023fd"
+  integrity sha512-nr8UAmWDw1UmhfC4u8TyRg/kjsuN/mja8iH5gQpNXbO9ot7AlZIfsd8bPRoMhAgNHMFeE6PnqpOhZuURE7OgdA==
   dependencies:
     escape-string-regexp "1.0.5"
-    launchdarkly-js-sdk-common "2.14.1"
+    launchdarkly-js-sdk-common "3.1.0"
 
-launchdarkly-js-sdk-common@2.14.1:
-  version "2.14.1"
-  resolved "https://registry.yarnpkg.com/launchdarkly-js-sdk-common/-/launchdarkly-js-sdk-common-2.14.1.tgz#d8fd9c28e346795096f0a2d2788113b907962ba0"
-  integrity sha512-uzecXPbmbwmed2LcTrnUu+dhQSCLdAU6+Fz7V136PKXR71TbfaxWsTcUTD0ZXTFXGYLFjXTtsEDUykJA/oGP5Q==
+launchdarkly-js-sdk-common@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/launchdarkly-js-sdk-common/-/launchdarkly-js-sdk-common-3.1.0.tgz#565e0fbe9af214d1b74f5a55011e2d47d407e277"
+  integrity sha512-htP7QkOnsXmcWlsJxLvrAjxYCSU0XjKBBbjvpHH/SBD+mmfInjN/P7S3Y89HAen/o8O+FHz3/FbBhqoZ+W4uyQ==
   dependencies:
     "@babel/polyfill" "7.6.0"
     base64-js "1.3.0"
@@ -6472,6 +6473,11 @@ mem@^4.0.0:
     map-age-cleaner "^0.1.1"
     mimic-fn "^2.0.0"
     p-is-promise "^2.0.0"
+
+memoize-one@5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.1.1.tgz#047b6e3199b508eaec03504de71229b8eb1d75c0"
+  integrity sha512-HKeeBpWvqiVJD57ZUAsJNm71eHTykffzcLZVYWiVfQeI1rJtuEaS7hQiEpWfVVk18donPwJEcFKIkCmPJNOhHA==
 
 memory-fs@^0.4.1:
   version "0.4.1"
