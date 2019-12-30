@@ -50,8 +50,7 @@
     "@babel/runtime": "7.7.7",
     "@flopflip/react": "^8.1.4",
     "@flopflip/types": "^2.2.1",
-    "lodash": "4.17.15",
-    "memoize-one": "5.1.1"
+    "lodash": "4.17.15"
   },
   "keywords": [
     "react",

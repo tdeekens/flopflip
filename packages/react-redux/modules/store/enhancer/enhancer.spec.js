@@ -29,18 +29,9 @@ describe('when creating enhancer', () => {
       enhancer(next)(args);
     });
 
-    it('should invoke `configure` on `adapter`', () => {
-      expect(adapter.configure).toHaveBeenCalled();
-    });
-
-    it('should invoke `configure` on `adapter` with `adapterArgs`', () => {
-      expect(adapter.configure).toHaveBeenCalledWith(
-        expect.objectContaining(adapterArgs)
-      );
-    });
-
     it('should invoke `configure` on `adapter` with `onFlagsStateChange`', () => {
       expect(adapter.configure).toHaveBeenCalledWith(
+        adapterArgs,
         expect.objectContaining({
           onFlagsStateChange: expect.any(Function),
         })
@@ -49,6 +40,7 @@ describe('when creating enhancer', () => {
 
     it('should invoke `configure` on `adapter` with `onStatusStateChange`', () => {
       expect(adapter.configure).toHaveBeenCalledWith(
+        adapterArgs,
         expect.objectContaining({
           onStatusStateChange: expect.any(Function),
         })
@@ -63,7 +55,7 @@ describe('when creating enhancer', () => {
       beforeEach(() => {
         const { onFlagsStateChange } = adapter.configure.mock.calls[
           adapter.configure.mock.calls.length - 1
-        ][0];
+        ][1];
 
         onFlagsStateChange(nextFlags);
       });
@@ -85,7 +77,7 @@ describe('when creating enhancer', () => {
       beforeEach(() => {
         const { onStatusStateChange } = adapter.configure.mock.calls[
           adapter.configure.mock.calls.length - 1
-        ][0];
+        ][1];
 
         onStatusStateChange(nextStatus);
       });

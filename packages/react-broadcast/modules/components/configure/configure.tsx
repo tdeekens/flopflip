@@ -1,11 +1,9 @@
 import React from 'react';
-import { ConfigureAdapter, createSequentialId } from '@flopflip/react';
-import memoize from 'memoize-one';
+import { ConfigureAdapter } from '@flopflip/react';
 import {
   Flags,
   Adapter,
   AdapterArgs,
-  AdapterEventHandlers,
   AdapterStatus,
   ConfigureAdapterChildren,
 } from '@flopflip/types';
@@ -21,21 +19,8 @@ type Props = {
 type State = {
   flags: Flags;
   status: AdapterStatus;
-  configurationId?: string,
+  configurationId?: string;
 };
-
-const getConfigurationId = createSequentialId('Configure');
-
-const createAdapterArgs = memoize(
-  (
-    adapterArgs: AdapterArgs,
-    eventHandlers: AdapterEventHandlers,
-    _configurationId?: string
-  ) => ({
-    ...adapterArgs,
-    ...eventHandlers,
-  })
-);
 
 export default class Configure extends React.PureComponent<Props, State> {
   static displayName = 'ConfigureFlopflip';
@@ -51,14 +36,9 @@ export default class Configure extends React.PureComponent<Props, State> {
       isReady: false,
       isConfigured: false,
     },
-    configurationId: undefined
   };
 
   isUnmounted = false;
-
-  static getDerivedStateFromProps = () => ({
-    configurationId: getConfigurationId(),
-  });
 
   componentDidMount(): void {
     this.isUnmounted = false;
@@ -68,7 +48,7 @@ export default class Configure extends React.PureComponent<Props, State> {
     this.isUnmounted = true;
   }
 
-  handleUpdateFlags = (nextFlags: Flags): void => {
+  handleUpdateFlags = (nextFlags: Flags) => {
     if (!this.isUnmounted) {
       this.setState(prevState => ({
         flags: {
@@ -79,7 +59,7 @@ export default class Configure extends React.PureComponent<Props, State> {
     }
   };
 
-  handleUpdateStatus = (status: AdapterStatus): void => {
+  handleUpdateStatus = (status: AdapterStatus) => {
     if (!this.isUnmounted) {
       this.setState(prevState => ({
         status: {
@@ -95,19 +75,14 @@ export default class Configure extends React.PureComponent<Props, State> {
       <FlagsContext.Provider value={this.state.flags}>
         <ConfigureAdapter
           adapter={this.props.adapter}
-          adapterArgs={createAdapterArgs(
-            this.props.adapterArgs,
-            {
-              onFlagsStateChange: this.handleUpdateFlags,
-              onStatusStateChange: this.handleUpdateStatus,
-            },
-            this.state.configurationId
-          )}
+          adapterArgs={this.props.adapterArgs}
           adapterStatus={this.state.status}
           defaultFlags={this.props.defaultFlags}
           shouldDeferAdapterConfiguration={
             this.props.shouldDeferAdapterConfiguration
           }
+          onFlagsStateChange={this.handleUpdateFlags}
+          onStatusStateChange={this.handleUpdateStatus}
         >
           {this.props.children}
         </ConfigureAdapter>

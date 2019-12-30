@@ -4,11 +4,15 @@ import camelCase from 'lodash/camelCase';
 import {
   User,
   AdapterStatus,
-  AdapterArgsWithEventHandlers,
+  AdapterArgs,
+  AdapterEventHandlers,
   FlagName,
   FlagVariation,
   Flag,
   Flags,
+  LocalStorageAdapterArgs,
+  LaunchDarklyAdapterArgs,
+  SplitioAdapterArgs,
 } from '@flopflip/types';
 
 type Storage = {
@@ -104,7 +108,7 @@ export const updateFlags = (flags: Flags): void => {
 const subscribeToFlagsChanges = ({
   pollingInteral = 1000 * 60,
 }: {
-  pollingInteral: number;
+  pollingInteral?: number;
 }): void => {
   setInterval(() => {
     adapterState.emitter.emit(
@@ -114,20 +118,36 @@ const subscribeToFlagsChanges = ({
   }, pollingInteral);
 };
 
-const configure = ({
-  user,
-  onFlagsStateChange,
-  onStatusStateChange,
-  adapterConfiguration,
-}: AdapterArgsWithEventHandlers): Promise<any> => {
+const isLocalStorageAdapterArgs = (
+  adapterArgs: AdapterArgs
+): adapterArgs is LocalStorageAdapterArgs =>
+  (adapterArgs as LaunchDarklyAdapterArgs).clientSideId === undefined &&
+  (adapterArgs as SplitioAdapterArgs).authorizationKey === undefined;
+
+const configure = (
+  adapterArgs: AdapterArgs,
+  adapterEventHandlers: AdapterEventHandlers
+): Promise<any> => {
+  if (!isLocalStorageAdapterArgs(adapterArgs)) {
+    throw new Error('Wrong adapter args for LocalStorage adapter');
+  }
+
+  const { user, adapterConfiguration } = adapterArgs;
+
   adapterState.user = user;
 
   return Promise.resolve().then(() => {
     adapterState.isConfigured = true;
     adapterState.isReady = true;
 
-    adapterState.emitter.on('flagsStateChange', onFlagsStateChange);
-    adapterState.emitter.on('statusStateChange', onStatusStateChange);
+    adapterState.emitter.on(
+      'flagsStateChange',
+      adapterEventHandlers.onFlagsStateChange
+    );
+    adapterState.emitter.on(
+      'statusStateChange',
+      adapterEventHandlers.onStatusStateChange
+    );
 
     adapterState.emitter.emit(
       'flagsStateChange',

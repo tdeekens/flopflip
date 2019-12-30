@@ -7,9 +7,7 @@ type ProvidedProps = {
   reconfigure: ReconfigureAdapter;
 };
 
-const withReconfiguration = <Props extends {}>(
-  propKey: string = 'reconfigure'
-) => (
+const withReconfiguration = <Props extends {}>(propKey = 'reconfigure') => (
   Component: React.ComponentType<any>
 ): React.ComponentType<ProvidedProps & Props> => {
   class EnhancedComponent extends React.PureComponent<ProvidedProps & Props> {

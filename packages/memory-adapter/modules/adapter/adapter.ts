@@ -3,11 +3,15 @@ import mitt, { Emitter } from 'mitt';
 import {
   User,
   AdapterStatus,
-  AdapterArgsWithEventHandlers,
   FlagName,
   FlagVariation,
   Flag,
   Flags,
+  AdapterArgs,
+  AdapterEventHandlers,
+  MemoryAdapterArgs,
+  LaunchDarklyAdapterArgs,
+  SplitioAdapterArgs,
 } from '@flopflip/types';
 import camelCase from 'lodash/camelCase';
 
@@ -31,11 +35,22 @@ let adapterState: AdapterStatus & MemoryAdapterState = {
   ...intialAdapterState,
 };
 
-const configure = ({
-  user,
-  onFlagsStateChange,
-  onStatusStateChange,
-}: AdapterArgsWithEventHandlers): Promise<any> => {
+const isMemoryAdapterArgs = (
+  adapterArgs: AdapterArgs
+): adapterArgs is MemoryAdapterArgs =>
+  (adapterArgs as LaunchDarklyAdapterArgs).clientSideId === undefined &&
+  (adapterArgs as SplitioAdapterArgs).authorizationKey === undefined;
+
+const configure = (
+  adapterArgs: AdapterArgs,
+  adapterEventHandlers: AdapterEventHandlers
+): Promise<any> => {
+  if (!isMemoryAdapterArgs(adapterArgs)) {
+    throw new Error('Wrong adapter args for Memory adapter');
+  }
+
+  const { user } = adapterArgs;
+
   adapterState.user = user;
 
   return Promise.resolve().then(() => {
@@ -45,8 +60,14 @@ const configure = ({
 
     updateUser(user);
 
-    adapterState.emitter.on('flagsStateChange', onFlagsStateChange);
-    adapterState.emitter.on('statusStateChange', onStatusStateChange);
+    adapterState.emitter.on(
+      'flagsStateChange',
+      adapterEventHandlers.onFlagsStateChange
+    );
+    adapterState.emitter.on(
+      'statusStateChange',
+      adapterEventHandlers.onStatusStateChange
+    );
 
     adapterState.emitter.emit('flagsStateChange', adapterState.flags);
     adapterState.emitter.emit('statusStateChange', {

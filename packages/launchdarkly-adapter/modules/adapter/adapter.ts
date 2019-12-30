@@ -4,8 +4,9 @@ import {
   User,
   Flag,
   Flags,
-  OnFlagsStateChangeCallback,
-  OnStatusStateChangeCallback,
+  AdapterArgs,
+  LaunchDarklyAdapterArgs,
+  AdapterEventHandlers,
 } from '@flopflip/types';
 import merge from 'deepmerge';
 import warning from 'tiny-warning';
@@ -19,9 +20,6 @@ import {
 import camelCase from 'lodash/camelCase';
 import kebabCase from 'lodash/kebabCase';
 
-type ClientOptions = {
-  fetchGoals?: boolean;
-};
 type AdapterState = {
   isReady: boolean;
   isConfigured: boolean;
@@ -65,15 +63,16 @@ const normalizeFlag = (flagName: FlagName, flagValue?: FlagVariation): Flag => [
 ];
 const denormalizeFlagName = (flagName: FlagName) => kebabCase(flagName);
 
-const setupFlagSubcription = ({
-  flagsFromSdk,
-  onFlagsStateChange,
-  flagsUpdateDelayMs,
-}: {
-  flagsFromSdk: Flags;
-  onFlagsStateChange: OnFlagsStateChangeCallback;
-  flagsUpdateDelayMs?: number;
-}): void => {
+const setupFlagSubcription = (
+  {
+    flagsFromSdk,
+    flagsUpdateDelayMs,
+  }: {
+    flagsFromSdk: Flags;
+    flagsUpdateDelayMs?: number;
+  },
+  adapterEventHandlers: AdapterEventHandlers
+): void => {
   for (const flagName in flagsFromSdk) {
     // Dispatch whenever a configured flag value changes
     if (
@@ -98,7 +97,7 @@ const setupFlagSubcription = ({
         updateFlagsInAdapterState(updatedFlags);
 
         const updateFlags = () => {
-          onFlagsStateChange(adapterState.flags);
+          adapterEventHandlers.onFlagsStateChange(adapterState.flags);
         };
 
         debounce(updateFlags, {
@@ -111,20 +110,20 @@ const setupFlagSubcription = ({
 };
 
 const getIsAnonymousUser = (user: User): boolean => !user?.key;
-const ensureUser = (user: User): User => {
+const ensureUser = (user: User) => {
   const isAnonymousUser = getIsAnonymousUser(user);
 
   // NOTE: When marked `anonymous` the SDK will generate a unique key and cache it in local storage
-  return merge(user, {
+  return merge<User, LDUser>(user, {
     key: isAnonymousUser ? undefined : user.key,
     anonymous: isAnonymousUser,
   });
 };
 
 const initializeClient = (
-  clientSideId: string,
+  clientSideId: LaunchDarklyAdapterArgs['clientSideId'],
   user: User,
-  clientOptions: ClientOptions
+  clientOptions: LaunchDarklyAdapterArgs['clientOptions']
 ): LDClient =>
   initializeLaunchDarklyClient(clientSideId, user as LDUser, clientOptions);
 const changeUserContext = (nextUser: User): Promise<any> =>
@@ -165,17 +164,13 @@ export const normalizeFlags = (rawFlags: Flags): Flags =>
     {}
   );
 
-const getInitialFlags = ({
-  onFlagsStateChange,
-  onStatusStateChange,
-  flags,
-  throwOnInitializationFailure,
-}: {
-  onFlagsStateChange: OnFlagsStateChangeCallback;
-  onStatusStateChange: OnStatusStateChangeCallback;
-  flags: Flags;
-  throwOnInitializationFailure: boolean;
-}): Promise<{ flagsFromSdk: Flags | null }> => {
+const getInitialFlags = (
+  {
+    flags,
+    throwOnInitializationFailure,
+  }: Pick<LaunchDarklyAdapterArgs, 'flags' | 'throwOnInitializationFailure'>,
+  adapterEventHandlers: AdapterEventHandlers
+): Promise<{ flagsFromSdk: Flags | null }> => {
   if (adapterState.client) {
     return adapterState.client
       .waitForInitialization()
@@ -206,13 +201,13 @@ const getInitialFlags = ({
           const flags: Flags = normalizeFlags(flagsFromSdk);
           updateFlagsInAdapterState(flags);
           // ...and flush initial state of flags
-          onFlagsStateChange(flags);
+          adapterEventHandlers.onFlagsStateChange(flags);
         }
 
         // First update internal state
         adapterState.isReady = true;
         // ...to then signal that the adapter is ready
-        onStatusStateChange({ isReady: true });
+        adapterEventHandlers.onStatusStateChange({ isReady: true });
 
         return Promise.resolve({ flagsFromSdk });
       })
@@ -234,27 +229,29 @@ const getInitialFlags = ({
   );
 };
 
-const configure = ({
-  clientSideId,
-  user,
-  clientOptions = {},
-  onFlagsStateChange,
-  onStatusStateChange,
-  flags,
-  subscribeToFlagChanges = true,
-  throwOnInitializationFailure = false,
-  flagsUpdateDelayMs,
-}: {
-  clientSideId: string;
-  user: User;
-  clientOptions: ClientOptions;
-  onFlagsStateChange: OnFlagsStateChangeCallback;
-  onStatusStateChange: OnStatusStateChangeCallback;
-  flags: Flags;
-  subscribeToFlagChanges: boolean;
-  throwOnInitializationFailure: boolean;
-  flagsUpdateDelayMs?: number;
-}): Promise<any> => {
+const isLaunchDarklyAdapterArgs = (
+  adapterArgs: AdapterArgs
+): adapterArgs is LaunchDarklyAdapterArgs =>
+  (adapterArgs as LaunchDarklyAdapterArgs).clientSideId !== undefined;
+
+const configure = (
+  adapterArgs: AdapterArgs,
+  adapterEventHandlers: AdapterEventHandlers
+): Promise<any> => {
+  if (!isLaunchDarklyAdapterArgs(adapterArgs)) {
+    throw new Error('Wrong adapter args for LaunchDarkly adapter');
+  }
+
+  const {
+    clientSideId,
+    user,
+    clientOptions = {},
+    flags,
+    subscribeToFlagChanges = true,
+    throwOnInitializationFailure = false,
+    flagsUpdateDelayMs,
+  } = adapterArgs;
+
   adapterState.user = ensureUser(user);
   adapterState.client = initializeClient(
     clientSideId,
@@ -263,18 +260,21 @@ const configure = ({
   );
   adapterState.isConfigured = true;
 
-  return getInitialFlags({
-    onFlagsStateChange,
-    onStatusStateChange,
-    flags,
-    throwOnInitializationFailure,
-  }).then(({ flagsFromSdk }) => {
+  return getInitialFlags(
+    {
+      flags,
+      throwOnInitializationFailure,
+    },
+    adapterEventHandlers
+  ).then(({ flagsFromSdk }) => {
     if (subscribeToFlagChanges && flagsFromSdk)
-      setupFlagSubcription({
-        flagsFromSdk,
-        flagsUpdateDelayMs,
-        onFlagsStateChange,
-      });
+      setupFlagSubcription(
+        {
+          flagsFromSdk,
+          flagsUpdateDelayMs,
+        },
+        adapterEventHandlers
+      );
 
     return adapterState.client;
   });

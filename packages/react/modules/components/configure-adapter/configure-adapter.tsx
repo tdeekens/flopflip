@@ -3,7 +3,7 @@ import merge from 'deepmerge';
 import {
   Flags,
   Adapter,
-  AdapterArgsWithEventHandlers,
+  AdapterArgs,
   AdapterStatus,
   AdapterReconfiguration,
   AdapterReconfigurationOptions,
@@ -28,32 +28,36 @@ export const AdapterStates: AdapterStates = {
 type Props = {
   shouldDeferAdapterConfiguration?: boolean;
   adapter: Adapter;
-  adapterArgs: AdapterArgsWithEventHandlers;
+  adapterArgs: AdapterArgs;
   adapterStatus?: AdapterStatus;
   defaultFlags?: Flags;
+  onFlagsStateChange: (flags: Flags) => void;
+  onStatusStateChange: (status: AdapterStatus) => void;
   render?: () => React.ReactNode;
   children?: ConfigureAdapterChildren;
 };
 type State = {
-  appliedAdapterArgs: AdapterArgsWithEventHandlers;
+  appliedAdapterArgs: AdapterArgs;
 };
 type AdapterState = valueof<AdapterStates>;
 
 const isFunctionChildren = (
   children: ConfigureAdapterChildren
-): children is ConfigureAdapterChildrenAsFunction => typeof children === 'function';
+): children is ConfigureAdapterChildrenAsFunction =>
+  typeof children === 'function';
 
 const isEmptyChildren = (children: ConfigureAdapterChildren): boolean =>
   !isFunctionChildren(children) && React.Children.count(children) === 0;
 
 export const mergeAdapterArgs = (
-  previousAdapterArgs: AdapterArgsWithEventHandlers,
+  previousAdapterArgs: AdapterArgs,
   { adapterArgs: nextAdapterArgs, options = {} }: AdapterReconfiguration
-): AdapterArgsWithEventHandlers =>
+): AdapterArgs =>
   options.shouldOverwrite
     ? nextAdapterArgs
     : merge(previousAdapterArgs, nextAdapterArgs);
 
+// eslint-disable-next-line react/no-unsafe
 export default class ConfigureAdapter extends React.PureComponent<
   Props,
   State
@@ -64,17 +68,19 @@ export default class ConfigureAdapter extends React.PureComponent<
     children: null,
     render: null,
   };
-  adapterState: AdapterState = AdapterStates.UNCONFIGURED;
-  pendingAdapterArgs?: AdapterArgsWithEventHandlers | null = null;
 
-  state: { appliedAdapterArgs: AdapterArgsWithEventHandlers } = {
+  adapterState: AdapterState = AdapterStates.UNCONFIGURED;
+  pendingAdapterArgs?: AdapterArgs | null = null;
+
+  state: { appliedAdapterArgs: AdapterArgs } = {
     appliedAdapterArgs: this.props.adapterArgs,
   };
 
   setAdapterState = (nextAdapterState: AdapterState): void => {
     this.adapterState = nextAdapterState;
   };
-  applyAdapterArgs = (nextAdapterArgs: AdapterArgsWithEventHandlers): void =>
+
+  applyAdapterArgs = (nextAdapterArgs: AdapterArgs): void =>
     /**
      * NOTE:
      *   We can only unset `pendingAdapterArgs` after be actually perform
@@ -98,7 +104,7 @@ export default class ConfigureAdapter extends React.PureComponent<
    *   this function has two arguments for clarify.
    */
   reconfigureOrQueue = (
-    nextAdapterArgs: AdapterArgsWithEventHandlers,
+    nextAdapterArgs: AdapterArgs,
     options: AdapterReconfigurationOptions
   ): void =>
     this.adapterState === AdapterStates.CONFIGURED &&
@@ -123,10 +129,11 @@ export default class ConfigureAdapter extends React.PureComponent<
      *    to contain the initial state (through property initializer).
      */
     this.pendingAdapterArgs = mergeAdapterArgs(
-      this.pendingAdapterArgs || this.state.appliedAdapterArgs,
+      this.pendingAdapterArgs ?? this.state.appliedAdapterArgs,
       nextReconfiguration
     );
   };
+
   /**
    * NOTE:
    *    Whenever the adapter delays configuration pending adapterArgs will
@@ -138,12 +145,12 @@ export default class ConfigureAdapter extends React.PureComponent<
    *    be passed pending or applied adapterArgs.
    *
    */
-  getAdapterArgsForConfiguration = (): AdapterArgsWithEventHandlers =>
-    this.pendingAdapterArgs || this.state.appliedAdapterArgs;
+  getAdapterArgsForConfiguration = (): AdapterArgs =>
+    this.pendingAdapterArgs ?? this.state.appliedAdapterArgs;
 
   handleDefaultFlags = (defaultFlags: Flags): void => {
     if (Object.keys(defaultFlags).length > 0) {
-      this.props.adapterArgs.onFlagsStateChange(defaultFlags);
+      this.props.onFlagsStateChange(defaultFlags);
     }
   };
 
@@ -184,7 +191,10 @@ export default class ConfigureAdapter extends React.PureComponent<
       this.setAdapterState(AdapterStates.CONFIGURING);
 
       return this.props.adapter
-        .configure(this.getAdapterArgsForConfiguration())
+        .configure(this.getAdapterArgsForConfiguration(), {
+          onFlagsStateChange: this.props.onFlagsStateChange,
+          onStatusStateChange: this.props.onStatusStateChange,
+        })
         .then(() => {
           this.setAdapterState(AdapterStates.CONFIGURED);
           if (this.pendingAdapterArgs) {
@@ -213,7 +223,10 @@ export default class ConfigureAdapter extends React.PureComponent<
         this.props.adapter
           // NOTE: ESLint otherwise fails for unknown reasons
           // eslint-disable-next-line
-          .configure(this.getAdapterArgsForConfiguration())
+          .configure(this.getAdapterArgsForConfiguration(), {
+            onFlagsStateChange: this.props.onFlagsStateChange,
+            onStatusStateChange: this.props.onStatusStateChange,
+          })
           .then(() => {
             this.setAdapterState(AdapterStates.CONFIGURED);
 
@@ -222,7 +235,9 @@ export default class ConfigureAdapter extends React.PureComponent<
             }
           })
       );
-    } else if (
+    }
+
+    if (
       this.adapterState === AdapterStates.CONFIGURED &&
       this.adapterState !== AdapterStates.CONFIGURING
     ) {
@@ -232,7 +247,10 @@ export default class ConfigureAdapter extends React.PureComponent<
         this.props.adapter
           // NOTE: ESLint otherwise fails for unknown reasons
           // eslint-disable-next-line
-          .reconfigure(this.getAdapterArgsForConfiguration())
+          .reconfigure(this.getAdapterArgsForConfiguration(), {
+            onFlagsStateChange: this.props.onFlagsStateChange,
+            onStatusStateChange: this.props.onStatusStateChange,
+          })
           .then(() => {
             this.setAdapterState(AdapterStates.CONFIGURED);
           })

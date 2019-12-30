@@ -72,13 +72,14 @@ describe('rendering', () => {
       );
     });
 
-    it('should receive `onStatusStateChange` and `onFlagsStateChange` in `adapterArgs`', () => {
+    it('should receive `onStatusStateChange` and `onFlagsStateChange`', () => {
       expect(configureAdapterWrapper).toHaveProp(
-        'adapterArgs',
-        expect.objectContaining({
-          onStatusStateChange: wrapper.instance().handleUpdateStatus,
-          onFlagsStateChange: wrapper.instance().handleUpdateFlags,
-        })
+        'onFlagsStateChange',
+        wrapper.instance().handleUpdateFlags
+      );
+      expect(configureAdapterWrapper).toHaveProp(
+        'onStatusStateChange',
+        wrapper.instance().handleUpdateStatus
       );
     });
 

@@ -6,6 +6,9 @@ import {
   Flags,
   OnFlagsStateChangeCallback,
   OnStatusStateChangeCallback,
+  AdapterArgs,
+  AdapterEventHandlers,
+  SplitioAdapterArgs,
 } from '@flopflip/types';
 import merge from 'deepmerge';
 import { SplitFactory } from '@splitsoftware/splitio';
@@ -24,13 +27,6 @@ type AdapterState = {
     onStatusStateChange: OnStatusStateChangeCallback;
   };
   splitioSettings?: SplitIO.IBrowserSettings;
-};
-
-type ClientInitializationOptions = {
-  [key: string]: any;
-  core?: {
-    [key: string]: string;
-  };
 };
 
 const adapterState: AdapterState = {
@@ -112,7 +108,6 @@ const initializeClient = (): {
   client: SplitIO.IClient;
   manager: SplitIO.IManager;
 } => {
-  // eslint-disable-next-line new-cap
   if (!adapterState.splitioSettings) {
     throw Error(
       'cannot initialize SplitIo without configured settings, call configure() first'
@@ -181,22 +176,26 @@ const configureSplitio = () => {
   });
 };
 
-const configure = ({
-  authorizationKey,
-  user,
-  options = {},
-  onFlagsStateChange,
-  onStatusStateChange,
-}: {
-  authorizationKey: string;
-  user: User;
-  options: ClientInitializationOptions;
-  onFlagsStateChange: OnFlagsStateChangeCallback;
-  onStatusStateChange: OnStatusStateChangeCallback;
-}): Promise<any> => {
+const isSplitioAdapterArgs = (
+  adapterArgs: AdapterArgs
+): adapterArgs is SplitioAdapterArgs =>
+  (adapterArgs as SplitioAdapterArgs).authorizationKey !== undefined;
+
+const configure = (
+  adapterArgs: AdapterArgs,
+  adapterEventHandlers: AdapterEventHandlers
+): Promise<any> => {
+  if (!isSplitioAdapterArgs(adapterArgs)) {
+    throw new Error('Wrong adapter args for Splitio adapter');
+  }
+
+  const { authorizationKey, user, options = {} } = adapterArgs;
+
   adapterState.user = ensureUser(user);
-  adapterState.configuredCallbacks.onFlagsStateChange = onFlagsStateChange;
-  adapterState.configuredCallbacks.onStatusStateChange = onStatusStateChange;
+  adapterState.configuredCallbacks.onFlagsStateChange =
+    adapterEventHandlers.onFlagsStateChange;
+  adapterState.configuredCallbacks.onStatusStateChange =
+    adapterEventHandlers.onStatusStateChange;
   adapterState.splitioSettings = {
     ...omit(options, ['core']),
     core: {

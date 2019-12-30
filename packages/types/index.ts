@@ -13,17 +13,46 @@ export type AdapterEventHandlers = {
   onFlagsStateChange: (flags: Flags) => void;
   onStatusStateChange: (status: AdapterStatus) => void;
 };
-export type AdapterArgs = {
+export type BaseAdapterArgs = {
   user: User;
-  adapterConfiguration: {
-    pollingInteral: number;
-  };
-  flags: Flags;
 };
-export type AdapterArgsWithEventHandlers = AdapterArgs & AdapterEventHandlers;
+export type LaunchDarklyAdapterArgs = BaseAdapterArgs & {
+  clientSideId: string;
+  flags: Flags;
+  clientOptions?: { fetchGoals?: boolean };
+  subscribeToFlagChanges?: boolean;
+  throwOnInitializationFailure?: boolean;
+  flagsUpdateDelayMs?: number;
+};
+export type LocalStorageAdapterArgs = BaseAdapterArgs & {
+  adapterConfiguration?: {
+    pollingInteral?: number;
+  };
+};
+export type MemoryAdapterArgs = BaseAdapterArgs;
+export type SplitioAdapterArgs = BaseAdapterArgs & {
+  authorizationKey: string;
+  options?: {
+    [key: string]: unknown;
+    core?: {
+      [key: string]: string;
+    };
+  };
+};
+export type AdapterArgs =
+  | LaunchDarklyAdapterArgs
+  | LocalStorageAdapterArgs
+  | MemoryAdapterArgs
+  | SplitioAdapterArgs;
 export type Adapter = {
-  configure(adapterArgs: AdapterArgsWithEventHandlers): Promise<any>;
-  reconfigure(adapterArgs: AdapterArgsWithEventHandlers): Promise<any>;
+  configure(
+    adapterArgs: AdapterArgs,
+    adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any>;
+  reconfigure(
+    adapterArgs: AdapterArgs,
+    adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any>;
   getIsReady(): boolean;
 };
 export type AdapterStatusChange = { [key: string]: boolean };
@@ -36,7 +65,7 @@ export type AdapterReconfigurationOptions = {
   shouldOverwrite?: boolean;
 };
 export type AdapterReconfiguration = {
-  adapterArgs: AdapterArgsWithEventHandlers;
+  adapterArgs: AdapterArgs;
   options: AdapterReconfigurationOptions;
 };
 export type ConfigureAdapterChildrenAsFunctionArgs = {
@@ -49,7 +78,7 @@ export type ConfigureAdapterChildren =
   | ConfigureAdapterChildrenAsFunction
   | React.ReactNode;
 export type ReconfigureAdapter = (
-  adapterArgs: AdapterArgsWithEventHandlers,
+  adapterArgs: AdapterArgs,
   options: AdapterReconfigurationOptions
 ) => void;
 export type AdapterContext = {

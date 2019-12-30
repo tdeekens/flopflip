@@ -52,12 +52,16 @@ describe('when configuring', () => {
 
   describe('with user key', () => {
     beforeEach(() => {
-      return adapter.configure({
-        authorizationKey,
-        user: userWithKey,
-        onStatusStateChange,
-        onFlagsStateChange,
-      });
+      return adapter.configure(
+        {
+          authorizationKey,
+          user: userWithKey,
+        },
+        {
+          onStatusStateChange,
+          onFlagsStateChange,
+        }
+      );
     });
 
     it('should initialize the `SplitFactory` client with `authorizationKey` and given `user`', () => {
@@ -72,12 +76,16 @@ describe('when configuring', () => {
 
   describe('without key', () => {
     beforeEach(() =>
-      adapter.configure({
-        authorizationKey,
-        user: userWithoutKey,
-        onStatusStateChange,
-        onFlagsStateChange,
-      })
+      adapter.configure(
+        {
+          authorizationKey,
+          user: userWithoutKey,
+        },
+        {
+          onStatusStateChange,
+          onFlagsStateChange,
+        }
+      )
     );
 
     it('should initialize the `SplitFactory` with `authorizationKey` and random `user` `key`', () => {
@@ -96,13 +104,17 @@ describe('when configuring', () => {
     };
 
     beforeEach(() => {
-      return adapter.configure({
-        authorizationKey,
-        user: userWithKey,
-        options,
-        onStatusStateChange,
-        onFlagsStateChange,
-      });
+      return adapter.configure(
+        {
+          authorizationKey,
+          user: userWithKey,
+          options,
+        },
+        {
+          onStatusStateChange,
+          onFlagsStateChange,
+        }
+      );
     });
 
     it('should initialize the `SplitFactory` client with `options`', () => {
@@ -122,15 +134,19 @@ describe('when configuring', () => {
     };
 
     beforeEach(() => {
-      return adapter.configure({
-        authorizationKey,
-        user: userWithKey,
-        options: {
-          core: coreOptions,
+      return adapter.configure(
+        {
+          authorizationKey,
+          user: userWithKey,
+          options: {
+            core: coreOptions,
+          },
         },
-        onStatusStateChange,
-        onFlagsStateChange,
-      });
+        {
+          onStatusStateChange,
+          onFlagsStateChange,
+        }
+      );
     });
 
     it('should initialize the `SplitFactory` client with `core` options in `core` property', () => {
@@ -171,12 +187,16 @@ describe('when configuring', () => {
 
       SplitFactory.mockReturnValue(factory);
 
-      return adapter.configure({
-        authorizationKey,
-        user: userWithKey,
-        onStatusStateChange,
-        onFlagsStateChange,
-      });
+      return adapter.configure(
+        {
+          authorizationKey,
+          user: userWithKey,
+        },
+        {
+          onStatusStateChange,
+          onFlagsStateChange,
+        }
+      );
     });
 
     describe('when `splitio` is ready', () => {
@@ -234,12 +254,16 @@ describe('when configuring', () => {
         SplitFactory.mockReturnValue(factory);
 
         return adapter
-          .configure({
-            authorizationKey,
-            user: userWithKey,
-            onStatusStateChange,
-            onFlagsStateChange,
-          })
+          .configure(
+            {
+              authorizationKey,
+              user: userWithKey,
+            },
+            {
+              onStatusStateChange,
+              onFlagsStateChange,
+            }
+          )
           .then(() => {
             // NOTE: Clearing stubs as they are invoked
             // first during `configure`.

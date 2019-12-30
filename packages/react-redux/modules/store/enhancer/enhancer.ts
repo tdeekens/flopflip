@@ -4,18 +4,13 @@ import {
   Reducer,
   PreloadedState,
 } from 'redux';
-import {
-  Adapter,
-  AdapterArgsWithEventHandlers,
-  AdapterStatus,
-  Flags,
-} from '@flopflip/types';
+import { Adapter, AdapterArgs, AdapterStatus, Flags } from '@flopflip/types';
 import { State } from '../../types';
 import { updateFlags, updateStatus } from '../../ducks';
 
 export default function createFlopFlipEnhancer(
   adapter: Adapter,
-  adapterArgs: AdapterArgsWithEventHandlers
+  adapterArgs: AdapterArgs
 ): <StoreState extends State>(
   next: StoreEnhancerStoreCreator<StoreState>
 ) => (
@@ -25,8 +20,7 @@ export default function createFlopFlipEnhancer(
   return next => (...args) => {
     const store: Store = next(...args);
 
-    adapter.configure({
-      ...adapterArgs,
+    adapter.configure(adapterArgs, {
       // NOTE: This is like `bindActionCreators` but the bound action
       // creators are renamed to fit the adapter API and conventions.
       onFlagsStateChange: (flags: Flags) => {
