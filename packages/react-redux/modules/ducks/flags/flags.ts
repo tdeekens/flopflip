@@ -2,7 +2,7 @@ import isNil from 'lodash/isNil';
 import { FlagName, FlagVariation, Flags } from '@flopflip/types';
 import { UpdateFlagsAction } from './types.js';
 import { State } from '../../types';
-import { STATE_SLICE } from '../../store';
+import { STATE_SLICE } from '../../store/constants';
 import { Reducer } from 'redux';
 
 // Actions

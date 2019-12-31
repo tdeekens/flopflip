@@ -3,6 +3,7 @@ import merge from 'deepmerge';
 import {
   Flags,
   Adapter,
+  AdapterInterface,
   AdapterArgs,
   AdapterStatus,
   AdapterReconfiguration,
@@ -190,7 +191,7 @@ export default class ConfigureAdapter extends React.PureComponent<
     if (!this.props.shouldDeferAdapterConfiguration) {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
-      return this.props.adapter
+      return (this.props.adapter as AdapterInterface<AdapterArgs>)
         .configure(this.getAdapterArgsForConfiguration(), {
           onFlagsStateChange: this.props.onFlagsStateChange,
           onStatusStateChange: this.props.onStatusStateChange,
@@ -219,22 +220,18 @@ export default class ConfigureAdapter extends React.PureComponent<
     ) {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
-      return (
-        this.props.adapter
-          // NOTE: ESLint otherwise fails for unknown reasons
-          // eslint-disable-next-line
-          .configure(this.getAdapterArgsForConfiguration(), {
-            onFlagsStateChange: this.props.onFlagsStateChange,
-            onStatusStateChange: this.props.onStatusStateChange,
-          })
-          .then(() => {
-            this.setAdapterState(AdapterStates.CONFIGURED);
+      return (this.props.adapter as AdapterInterface<AdapterArgs>)
+        .configure(this.getAdapterArgsForConfiguration(), {
+          onFlagsStateChange: this.props.onFlagsStateChange,
+          onStatusStateChange: this.props.onStatusStateChange,
+        })
+        .then(() => {
+          this.setAdapterState(AdapterStates.CONFIGURED);
 
-            if (this.pendingAdapterArgs) {
-              this.applyAdapterArgs(this.pendingAdapterArgs);
-            }
-          })
-      );
+          if (this.pendingAdapterArgs) {
+            this.applyAdapterArgs(this.pendingAdapterArgs);
+          }
+        });
     }
 
     if (
@@ -243,18 +240,14 @@ export default class ConfigureAdapter extends React.PureComponent<
     ) {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
-      return (
-        this.props.adapter
-          // NOTE: ESLint otherwise fails for unknown reasons
-          // eslint-disable-next-line
-          .reconfigure(this.getAdapterArgsForConfiguration(), {
-            onFlagsStateChange: this.props.onFlagsStateChange,
-            onStatusStateChange: this.props.onStatusStateChange,
-          })
-          .then(() => {
-            this.setAdapterState(AdapterStates.CONFIGURED);
-          })
-      );
+      return (this.props.adapter as AdapterInterface<AdapterArgs>)
+        .reconfigure(this.getAdapterArgsForConfiguration(), {
+          onFlagsStateChange: this.props.onFlagsStateChange,
+          onStatusStateChange: this.props.onStatusStateChange,
+        })
+        .then(() => {
+          this.setAdapterState(AdapterStates.CONFIGURED);
+        });
     }
   }
 

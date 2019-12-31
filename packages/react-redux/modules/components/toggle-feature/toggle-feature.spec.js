@@ -3,7 +3,7 @@ import { renderWithAdapter, components } from '@flopflip/test-utils';
 import React from 'react';
 import { createStore } from '../../../test-utils';
 import Configure from '../configure';
-import { STATE_SLICE } from './../../store';
+import { STATE_SLICE } from './../../store/constants';
 import ToggleFeature, { mapStateToProps } from './toggle-feature';
 
 describe('mapStateToProps', () => {

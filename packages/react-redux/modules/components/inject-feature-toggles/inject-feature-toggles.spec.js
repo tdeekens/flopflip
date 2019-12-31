@@ -4,7 +4,7 @@ import { renderWithAdapter, components } from '@flopflip/test-utils';
 import { ALL_FLAGS_PROP_KEY } from '@flopflip/react';
 import { createStore } from '../../../test-utils';
 import Configure from '../configure';
-import { STATE_SLICE } from './../../store';
+import { STATE_SLICE } from './../../store/constants';
 import { mapStateToProps } from './inject-feature-toggles';
 import injectFeatureToggles from './inject-feature-toggles';
 

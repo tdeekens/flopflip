@@ -44,16 +44,116 @@ export type AdapterArgs =
   | LocalStorageAdapterArgs
   | MemoryAdapterArgs
   | SplitioAdapterArgs;
-export type Adapter = {
+export const interfaceIdentifiers = {
+  launchdarkly: 'launchdarkly',
+  localstorage: 'localstorage',
+  memory: 'memory',
+  splitio: 'splitio',
+} as const;
+export type AdapterInterfaceIdentifiers = typeof interfaceIdentifiers[keyof typeof interfaceIdentifiers];
+export interface AdapterInterface<Args extends AdapterArgs> {
+  // Identifiers are used to uniquely identify an interface when performing a condition check.
+  id: AdapterInterfaceIdentifiers;
   configure(
-    adapterArgs: AdapterArgs,
+    adapterArgs: Args,
     adapterEventHandlers: AdapterEventHandlers
   ): Promise<any>;
   reconfigure(
-    adapterArgs: AdapterArgs,
+    adapterArgs: Args,
     adapterEventHandlers: AdapterEventHandlers
   ): Promise<any>;
   getIsReady(): boolean;
+  setIsReady?(nextStatus: AdapterStatus): void;
+  waitUntilConfigured?(): Promise<any>;
+  reset?(): void;
+  getFlag?(flagName: FlagName): FlagVariation | undefined;
+}
+export interface LaunchDarklyAdapterInterface
+  extends AdapterInterface<LaunchDarklyAdapterArgs> {
+  id: typeof interfaceIdentifiers.launchdarkly;
+  configure(
+    adapterArgs: LaunchDarklyAdapterArgs,
+    adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any>;
+  reconfigure(
+    adapterArgs: LaunchDarklyAdapterArgs,
+    adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any>;
+  getIsReady(): boolean;
+  getFlag(flagName: FlagName): FlagVariation | undefined;
+  updateUserContext(updatedUserProps: User): Promise<any>;
+}
+export interface LocalStorageAdapterInterface
+  extends AdapterInterface<LocalStorageAdapterArgs> {
+  id: typeof interfaceIdentifiers.localstorage;
+  configure(
+    adapterArgs: LocalStorageAdapterArgs,
+    adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any>;
+  reconfigure(
+    adapterArgs: LocalStorageAdapterArgs,
+    adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any>;
+  getIsReady(): boolean;
+  waitUntilConfigured(): Promise<any>;
+}
+export interface MemoryAdapterInterface
+  extends AdapterInterface<MemoryAdapterArgs> {
+  id: typeof interfaceIdentifiers.memory;
+  configure(
+    adapterArgs: MemoryAdapterArgs,
+    adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any>;
+  reconfigure(
+    adapterArgs: MemoryAdapterArgs,
+    adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any>;
+  getIsReady(): boolean;
+  setIsReady(nextStatus: AdapterStatus): void;
+  waitUntilConfigured(): Promise<any>;
+  reset(): void;
+  updateFlags(flags: Flags): void;
+}
+export interface SplitioAdapterInterface
+  extends AdapterInterface<SplitioAdapterArgs> {
+  id: typeof interfaceIdentifiers.splitio;
+  configure(
+    adapterArgs: SplitioAdapterArgs,
+    adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any>;
+  reconfigure(
+    adapterArgs: SplitioAdapterArgs,
+    adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any>;
+  getIsReady(): boolean;
+}
+export type Adapter =
+  | LaunchDarklyAdapterInterface
+  | LocalStorageAdapterInterface
+  | MemoryAdapterInterface
+  | SplitioAdapterInterface;
+export type ConfigureAdapterArgs<
+  AdapterInstance extends Adapter
+> = AdapterInstance extends LaunchDarklyAdapterInterface
+  ? LaunchDarklyAdapterArgs
+  : AdapterInstance extends LocalStorageAdapterInterface
+  ? LocalStorageAdapterArgs
+  : AdapterInstance extends MemoryAdapterInterface
+  ? MemoryAdapterArgs
+  : AdapterInstance extends SplitioAdapterInterface
+  ? SplitioAdapterArgs
+  : never;
+export type ConfigureAdapterProps<AdapterInstance extends Adapter> = {
+  adapter: AdapterInstance extends LaunchDarklyAdapterInterface
+    ? LaunchDarklyAdapterInterface
+    : AdapterInstance extends LocalStorageAdapterInterface
+    ? LocalStorageAdapterInterface
+    : AdapterInstance extends MemoryAdapterInterface
+    ? MemoryAdapterInterface
+    : AdapterInstance extends SplitioAdapterInterface
+    ? SplitioAdapterInterface
+    : never;
+  adapterArgs: ConfigureAdapterArgs<AdapterInstance>;
 };
 export type AdapterStatusChange = { [key: string]: boolean };
 export type OnFlagsStateChangeCallback = (flags: Flags) => void;

@@ -1,7 +1,7 @@
 import { Flags, AdapterStatus } from '@flopflip/types';
 import { UpdateStatusAction as TUpdateStatusAction } from './ducks/status/types';
 import { UpdateFlagsAction as TUpdateFlagsAction } from './ducks/flags/types';
-import { STATE_SLICE } from './store';
+import { STATE_SLICE } from './store/constants';
 
 export type State = {
   [STATE_SLICE]: {

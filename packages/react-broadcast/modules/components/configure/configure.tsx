@@ -3,26 +3,28 @@ import { ConfigureAdapter } from '@flopflip/react';
 import {
   Flags,
   Adapter,
-  AdapterArgs,
   AdapterStatus,
   ConfigureAdapterChildren,
+  ConfigureAdapterProps,
 } from '@flopflip/types';
 import { FlagsContext } from '../flags-context';
 
-type Props = {
+type BaseProps = {
   children?: ConfigureAdapterChildren;
   shouldDeferAdapterConfiguration?: boolean;
   defaultFlags?: Flags;
-  adapterArgs: AdapterArgs;
-  adapter: Adapter;
 };
+type Props<AdapterInstance extends Adapter> = BaseProps &
+  ConfigureAdapterProps<AdapterInstance>;
 type State = {
   flags: Flags;
   status: AdapterStatus;
   configurationId?: string;
 };
 
-export default class Configure extends React.PureComponent<Props, State> {
+export default class Configure<
+  AdapterInstance extends Adapter
+> extends React.PureComponent<Props<AdapterInstance>, State> {
   static displayName = 'ConfigureFlopflip';
 
   static defaultProps = {

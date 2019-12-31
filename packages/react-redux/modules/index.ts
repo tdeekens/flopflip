@@ -1,9 +1,8 @@
 const version = '__@FLOPFLIP/VERSION_OF_RELEASE__';
 
-export {
-  createFlopFlipEnhancer,
-  STATE_SLICE as FLOPFLIP_STATE_SLICE,
-} from './store';
+export { default as createFlopFlipEnhancer } from './store/enhancer';
+// Import this separately to avoid a circular dependency
+export { STATE_SLICE as FLOPFLIP_STATE_SLICE } from './store/constants';
 export {
   createFlopflipReducer,
   flopflipReducer,

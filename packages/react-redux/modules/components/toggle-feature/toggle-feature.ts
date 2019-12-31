@@ -7,7 +7,7 @@ import {
   setDisplayName,
   getIsFeatureEnabled,
 } from '@flopflip/react';
-import { STATE_SLICE } from './../../store';
+import { STATE_SLICE } from './../../store/constants';
 
 type OwnProps = {
   flag: FlagName;

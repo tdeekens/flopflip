@@ -4,15 +4,14 @@ import camelCase from 'lodash/camelCase';
 import {
   User,
   AdapterStatus,
-  AdapterArgs,
   AdapterEventHandlers,
+  LocalStorageAdapterInterface,
+  LocalStorageAdapterArgs,
   FlagName,
   FlagVariation,
   Flag,
   Flags,
-  LocalStorageAdapterArgs,
-  LaunchDarklyAdapterArgs,
-  SplitioAdapterArgs,
+  interfaceIdentifiers,
 } from '@flopflip/types';
 
 type Storage = {
@@ -118,72 +117,72 @@ const subscribeToFlagsChanges = ({
   }, pollingInteral);
 };
 
-const isLocalStorageAdapterArgs = (
-  adapterArgs: AdapterArgs
-): adapterArgs is LocalStorageAdapterArgs =>
-  (adapterArgs as LaunchDarklyAdapterArgs).clientSideId === undefined &&
-  (adapterArgs as SplitioAdapterArgs).authorizationKey === undefined;
+class LocalStorageAdapter implements LocalStorageAdapterInterface {
+  id: typeof interfaceIdentifiers.localstorage;
 
-const configure = (
-  adapterArgs: AdapterArgs,
-  adapterEventHandlers: AdapterEventHandlers
-): Promise<any> => {
-  if (!isLocalStorageAdapterArgs(adapterArgs)) {
-    throw new Error('Wrong adapter args for LocalStorage adapter');
+  constructor() {
+    this.id = interfaceIdentifiers.localstorage;
   }
 
-  const { user, adapterConfiguration } = adapterArgs;
+  configure(
+    adapterArgs: LocalStorageAdapterArgs,
+    adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any> {
+    const { user, adapterConfiguration } = adapterArgs;
 
-  adapterState.user = user;
+    adapterState.user = user;
 
-  return Promise.resolve().then(() => {
-    adapterState.isConfigured = true;
-    adapterState.isReady = true;
+    return Promise.resolve().then(() => {
+      adapterState.isConfigured = true;
+      adapterState.isReady = true;
 
-    adapterState.emitter.on(
-      'flagsStateChange',
-      adapterEventHandlers.onFlagsStateChange
-    );
-    adapterState.emitter.on(
-      'statusStateChange',
-      adapterEventHandlers.onStatusStateChange
-    );
+      adapterState.emitter.on(
+        'flagsStateChange',
+        adapterEventHandlers.onFlagsStateChange
+      );
+      adapterState.emitter.on(
+        'statusStateChange',
+        adapterEventHandlers.onStatusStateChange
+      );
 
-    adapterState.emitter.emit(
-      'flagsStateChange',
-      normalizeFlags(storage.get('flags'))
-    );
-    adapterState.emitter.emit('statusStateChange', {
-      isReady: adapterState.isReady,
+      adapterState.emitter.emit(
+        'flagsStateChange',
+        normalizeFlags(storage.get('flags'))
+      );
+      adapterState.emitter.emit('statusStateChange', {
+        isReady: adapterState.isReady,
+      });
+
+      adapterState.emitter.emit('readyStateChange');
+
+      subscribeToFlagsChanges({
+        pollingInteral: adapterConfiguration?.pollingInteral,
+      });
     });
+  }
 
-    adapterState.emitter.emit('readyStateChange');
+  reconfigure(
+    adapterArgs: LocalStorageAdapterArgs,
+    _adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any> {
+    storage.unset('flags');
+    const nextUser = adapterArgs.user;
+    adapterState.user = nextUser;
+    adapterState.emitter.emit('flagsStateChange', {});
+    return Promise.resolve();
+  }
 
-    subscribeToFlagsChanges({
-      pollingInteral: adapterConfiguration?.pollingInteral,
+  waitUntilConfigured(): Promise<any> {
+    return new Promise(resolve => {
+      if (adapterState.isConfigured) resolve();
+      else adapterState.emitter.on('readyStateChange', resolve);
     });
-  });
-};
+  }
 
-const reconfigure = ({ user: nextUser }: { user: User }): Promise<any> => {
-  storage.unset('flags');
-  adapterState.user = nextUser;
+  getIsReady(): boolean {
+    return Boolean(adapterState.isReady);
+  }
+}
 
-  adapterState.emitter.emit('flagsStateChange', {});
-
-  return Promise.resolve();
-};
-
-const waitUntilConfigured = (): Promise<any> =>
-  new Promise(resolve => {
-    if (adapterState.isConfigured) resolve();
-    else adapterState.emitter.on('readyStateChange', resolve);
-  });
-const getIsReady = (): boolean => Boolean(adapterState.isReady);
-
-export default {
-  configure,
-  waitUntilConfigured,
-  getIsReady,
-  reconfigure,
-};
+const adapter = new LocalStorageAdapter();
+export default adapter;

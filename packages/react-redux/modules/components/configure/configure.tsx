@@ -3,28 +3,30 @@ import { ConfigureAdapter } from '@flopflip/react';
 import {
   Flags,
   Adapter,
-  AdapterArgs,
+  ConfigureAdapterProps,
   ConfigureAdapterChildren,
 } from '@flopflip/types';
 import { useUpdateFlags, useUpdateStatus } from '../../hooks';
 
-type Props = {
+type BaseProps = {
   children?: ConfigureAdapterChildren;
   shouldDeferAdapterConfiguration?: boolean;
   defaultFlags?: Flags;
-  adapterArgs: AdapterArgs;
-  adapter: Adapter;
 };
+type Props<AdapterInstance extends Adapter> = BaseProps &
+  ConfigureAdapterProps<AdapterInstance>;
 
 const defaultProps: Pick<
-  Props,
+  BaseProps,
   'defaultFlags' | 'shouldDeferAdapterConfiguration'
 > = {
   defaultFlags: {},
   shouldDeferAdapterConfiguration: false,
 };
 
-const Configure = (props: Props) => {
+const Configure = <AdapterInstance extends Adapter>(
+  props: Props<AdapterInstance>
+) => {
   const handleUpdateFlags = useUpdateFlags();
   const handleUpdateStatus = useUpdateStatus();
 
