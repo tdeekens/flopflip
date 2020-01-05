@@ -1,4 +1,4 @@
-import { STATE_SLICE } from '../../store';
+import { STATE_SLICE } from '../../store/constants';
 import reducer, {
   UPDATE_FLAGS,
   updateFlags,

@@ -1,7 +1,9 @@
 import React from 'react';
 import { renderShallowly } from '@flopflip/test-utils';
 import { ConfigureAdapter } from '@flopflip/react';
-import { Configure } from './configure';
+import Configure from './configure';
+
+jest.mock('../../hooks');
 
 const ChildComponent = () => <div />;
 const createTestProps = custom => ({
@@ -13,10 +15,6 @@ const createTestProps = custom => ({
   adapterArgs: {
     fooId: 'foo-id',
   },
-
-  // HoC
-  handleUpdateFlags: jest.fn(),
-  handleUpdateStatus: jest.fn(),
 
   ...custom,
 });
@@ -66,14 +64,9 @@ describe('rendering', () => {
       );
     });
 
-    it('should receive `onStatusStateChange` and `onFlagsStateChange` in `adapterArgs`', () => {
-      expect(configureAdapterWrapper).toHaveProp(
-        'adapterArgs',
-        expect.objectContaining({
-          onStatusStateChange: props.handleUpdateStatus,
-          onFlagsStateChange: props.handleUpdateFlags,
-        })
-      );
+    it('should receive `onStatusStateChange` and `onFlagsStateChange`', () => {
+      expect(configureAdapterWrapper).toHaveProp('onStatusStateChange');
+      expect(configureAdapterWrapper).toHaveProp('onFlagsStateChange');
     });
 
     it('should receive `defaultFlags`', () => {

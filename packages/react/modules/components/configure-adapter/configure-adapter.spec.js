@@ -22,9 +22,9 @@ const createTestProps = props => ({
     user: {
       key: 'foo-user-key',
     },
-    onFlagsStateChange: jest.fn(),
-    onStatusStateChange: jest.fn(),
   },
+  onFlagsStateChange: jest.fn(),
+  onStatusStateChange: jest.fn(),
   adapter: createAdapter(),
   children: <ChildComponent />,
 
@@ -204,7 +204,11 @@ describe('lifecycle', () => {
 
           it('should invoke `configure` on `adapter` with `adapterArgs`', () => {
             expect(props.adapter.configure).toHaveBeenCalledWith(
-              props.adapterArgs
+              props.adapterArgs,
+              {
+                onFlagsStateChange: props.onFlagsStateChange,
+                onStatusStateChange: props.onStatusStateChange,
+              }
             );
           });
 
@@ -310,7 +314,7 @@ describe('lifecycle', () => {
       });
 
       it('should invoke `onFlagsStateChange` on `adapterArgs` with `defaultFlags`', () => {
-        expect(props.adapterArgs.onFlagsStateChange).toHaveBeenCalledWith(
+        expect(props.onFlagsStateChange).toHaveBeenCalledWith(
           props.defaultFlags
         );
       });
@@ -430,7 +434,11 @@ describe('lifecycle', () => {
 
           it('should invoke `configure` on `adapter` with `adapterArgs`', () => {
             expect(props.adapter.configure).toHaveBeenCalledWith(
-              props.adapterArgs
+              props.adapterArgs,
+              {
+                onFlagsStateChange: props.onFlagsStateChange,
+                onStatusStateChange: props.onStatusStateChange,
+              }
             );
           });
 
@@ -511,7 +519,11 @@ describe('lifecycle', () => {
 
           it('should invoke `reconfigure` on `adapter` with `adapterArgs`', () => {
             expect(props.adapter.reconfigure).toHaveBeenCalledWith(
-              props.adapterArgs
+              props.adapterArgs,
+              {
+                onFlagsStateChange: props.onFlagsStateChange,
+                onStatusStateChange: props.onStatusStateChange,
+              }
             );
           });
 

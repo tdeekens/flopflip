@@ -4,11 +4,14 @@ import camelCase from 'lodash/camelCase';
 import {
   User,
   AdapterStatus,
-  AdapterArgsWithEventHandlers,
+  AdapterEventHandlers,
+  LocalStorageAdapterInterface,
+  LocalStorageAdapterArgs,
   FlagName,
   FlagVariation,
   Flag,
   Flags,
+  interfaceIdentifiers,
 } from '@flopflip/types';
 
 type Storage = {
@@ -104,7 +107,7 @@ export const updateFlags = (flags: Flags): void => {
 const subscribeToFlagsChanges = ({
   pollingInteral = 1000 * 60,
 }: {
-  pollingInteral: number;
+  pollingInteral?: number;
 }): void => {
   setInterval(() => {
     adapterState.emitter.emit(
@@ -114,56 +117,72 @@ const subscribeToFlagsChanges = ({
   }, pollingInteral);
 };
 
-const configure = ({
-  user,
-  onFlagsStateChange,
-  onStatusStateChange,
-  adapterConfiguration,
-}: AdapterArgsWithEventHandlers): Promise<any> => {
-  adapterState.user = user;
+class LocalStorageAdapter implements LocalStorageAdapterInterface {
+  id: typeof interfaceIdentifiers.localstorage;
 
-  return Promise.resolve().then(() => {
-    adapterState.isConfigured = true;
-    adapterState.isReady = true;
+  constructor() {
+    this.id = interfaceIdentifiers.localstorage;
+  }
 
-    adapterState.emitter.on('flagsStateChange', onFlagsStateChange);
-    adapterState.emitter.on('statusStateChange', onStatusStateChange);
+  configure(
+    adapterArgs: LocalStorageAdapterArgs,
+    adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any> {
+    const { user, adapterConfiguration } = adapterArgs;
 
-    adapterState.emitter.emit(
-      'flagsStateChange',
-      normalizeFlags(storage.get('flags'))
-    );
-    adapterState.emitter.emit('statusStateChange', {
-      isReady: adapterState.isReady,
+    adapterState.user = user;
+
+    return Promise.resolve().then(() => {
+      adapterState.isConfigured = true;
+      adapterState.isReady = true;
+
+      adapterState.emitter.on(
+        'flagsStateChange',
+        adapterEventHandlers.onFlagsStateChange
+      );
+      adapterState.emitter.on(
+        'statusStateChange',
+        adapterEventHandlers.onStatusStateChange
+      );
+
+      adapterState.emitter.emit(
+        'flagsStateChange',
+        normalizeFlags(storage.get('flags'))
+      );
+      adapterState.emitter.emit('statusStateChange', {
+        isReady: adapterState.isReady,
+      });
+
+      adapterState.emitter.emit('readyStateChange');
+
+      subscribeToFlagsChanges({
+        pollingInteral: adapterConfiguration?.pollingInteral,
+      });
     });
+  }
 
-    adapterState.emitter.emit('readyStateChange');
+  reconfigure(
+    adapterArgs: LocalStorageAdapterArgs,
+    _adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any> {
+    storage.unset('flags');
+    const nextUser = adapterArgs.user;
+    adapterState.user = nextUser;
+    adapterState.emitter.emit('flagsStateChange', {});
+    return Promise.resolve();
+  }
 
-    subscribeToFlagsChanges({
-      pollingInteral: adapterConfiguration?.pollingInteral,
+  waitUntilConfigured(): Promise<any> {
+    return new Promise(resolve => {
+      if (adapterState.isConfigured) resolve();
+      else adapterState.emitter.on('readyStateChange', resolve);
     });
-  });
-};
+  }
 
-const reconfigure = ({ user: nextUser }: { user: User }): Promise<any> => {
-  storage.unset('flags');
-  adapterState.user = nextUser;
+  getIsReady(): boolean {
+    return Boolean(adapterState.isReady);
+  }
+}
 
-  adapterState.emitter.emit('flagsStateChange', {});
-
-  return Promise.resolve();
-};
-
-const waitUntilConfigured = (): Promise<any> =>
-  new Promise(resolve => {
-    if (adapterState.isConfigured) resolve();
-    else adapterState.emitter.on('readyStateChange', resolve);
-  });
-const getIsReady = (): boolean => Boolean(adapterState.isReady);
-
-export default {
-  configure,
-  waitUntilConfigured,
-  getIsReady,
-  reconfigure,
-};
+const adapter = new LocalStorageAdapter();
+export default adapter;

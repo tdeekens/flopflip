@@ -68,12 +68,16 @@ describe('when configuring', () => {
 
   describe('with user key', () => {
     beforeEach(() => {
-      return adapter.configure({
-        clientSideId,
-        user: userWithKey,
-        onStatusStateChange,
-        onFlagsStateChange,
-      });
+      return adapter.configure(
+        {
+          clientSideId,
+          user: userWithKey,
+        },
+        {
+          onStatusStateChange,
+          onFlagsStateChange,
+        }
+      );
     });
 
     it('should initialize the `ld-client` with `clientSideId` and given `user`', () => {
@@ -95,12 +99,16 @@ describe('when configuring', () => {
 
   describe('without key', () => {
     beforeEach(() =>
-      adapter.configure({
-        clientSideId,
-        user: userWithoutKey,
-        onStatusStateChange,
-        onFlagsStateChange,
-      })
+      adapter.configure(
+        {
+          clientSideId,
+          user: userWithoutKey,
+        },
+        {
+          onStatusStateChange,
+          onFlagsStateChange,
+        }
+      )
     );
 
     it('should initialize the `ld-client` with `clientSideId` and no `user` `key`', () => {
@@ -138,12 +146,16 @@ describe('when configuring', () => {
 
       ldClient.initialize.mockReturnValue(client);
 
-      return adapter.configure({
-        clientSideId,
-        user: userWithKey,
-        onStatusStateChange,
-        onFlagsStateChange,
-      });
+      return adapter.configure(
+        {
+          clientSideId,
+          user: userWithKey,
+        },
+        {
+          onStatusStateChange,
+          onFlagsStateChange,
+        }
+      );
     });
 
     describe('when `ldClient` is ready', () => {
@@ -199,13 +211,17 @@ describe('when configuring', () => {
 
         it('should reject the configuration with an error', async () => {
           await expect(
-            adapter.configure({
-              clientSideId,
-              user: userWithKey,
-              onStatusStateChange,
-              onFlagsStateChange,
-              throwOnInitializationFailure: true,
-            })
+            adapter.configure(
+              {
+                clientSideId,
+                user: userWithKey,
+                throwOnInitializationFailure: true,
+              },
+              {
+                onStatusStateChange,
+                onFlagsStateChange,
+              }
+            )
           ).rejects.toThrow(
             '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
           );
@@ -224,13 +240,17 @@ describe('when configuring', () => {
 
         it('should resolve the configuration', async () => {
           await expect(
-            adapter.configure({
-              clientSideId,
-              user: userWithKey,
-              onStatusStateChange,
-              onFlagsStateChange,
-              throwOnInitializationFailure: false,
-            })
+            adapter.configure(
+              {
+                clientSideId,
+                user: userWithKey,
+                throwOnInitializationFailure: false,
+              },
+              {
+                onStatusStateChange,
+                onFlagsStateChange,
+              }
+            )
           ).resolves.toEqual(expect.anything());
         });
       });
@@ -248,13 +268,17 @@ describe('when configuring', () => {
 
           ldClient.initialize.mockReturnValue(client);
 
-          return adapter.configure({
-            clientSideId,
-            user: userWithKey,
-            onStatusStateChange,
-            flags: flags,
-            onFlagsStateChange,
-          });
+          return adapter.configure(
+            {
+              clientSideId,
+              user: userWithKey,
+              flags: flags,
+            },
+            {
+              onStatusStateChange,
+              onFlagsStateChange,
+            }
+          );
         });
 
         it('should `dispatch` `onUpdateStatus` action with `isReady`', () => {
@@ -320,13 +344,17 @@ describe('when configuring', () => {
 
           ldClient.initialize.mockReturnValue(client);
 
-          await adapter.configure({
-            subscribeToFlagChanges: false,
-            clientSideId,
-            user: userWithKey,
-            onStatusStateChange,
-            onFlagsStateChange,
-          });
+          await adapter.configure(
+            {
+              subscribeToFlagChanges: false,
+              clientSideId,
+              user: userWithKey,
+            },
+            {
+              onStatusStateChange,
+              onFlagsStateChange,
+            }
+          );
 
           onFlagsStateChange.mockClear();
 
@@ -357,13 +385,17 @@ describe('when configuring', () => {
 
           ldClient.initialize.mockReturnValue(client);
 
-          return adapter.configure({
-            flagsUpdateDelayMs,
-            clientSideId,
-            user: userWithKey,
-            onStatusStateChange,
-            onFlagsStateChange,
-          });
+          return adapter.configure(
+            {
+              flagsUpdateDelayMs,
+              clientSideId,
+              user: userWithKey,
+            },
+            {
+              onStatusStateChange,
+              onFlagsStateChange,
+            }
+          );
         });
 
         it('should `dispatch` `onFlagsStateChange` action once', () => {
@@ -406,12 +438,16 @@ describe('when configuring', () => {
         ldClient.initialize.mockReturnValue(client);
 
         return adapter
-          .configure({
-            clientSideId,
-            user: userWithKey,
-            onStatusStateChange,
-            onFlagsStateChange,
-          })
+          .configure(
+            {
+              clientSideId,
+              user: userWithKey,
+            },
+            {
+              onStatusStateChange,
+              onFlagsStateChange,
+            }
+          )
           .then(() => adapter.reconfigure({ user: nextUser }));
       });
 
@@ -440,12 +476,16 @@ describe('when configuring', () => {
 
         ldClient.initialize.mockReturnValue(client);
 
-        return adapter.configure({
-          clientSideId,
-          user: userWithKey,
-          onStatusStateChange,
-          onFlagsStateChange,
-        });
+        return adapter.configure(
+          {
+            clientSideId,
+            user: userWithKey,
+          },
+          {
+            onStatusStateChange,
+            onFlagsStateChange,
+          }
+        );
       });
 
       describe('with partial prop update', () => {

@@ -6,6 +6,10 @@ import {
   Flags,
   OnFlagsStateChangeCallback,
   OnStatusStateChangeCallback,
+  AdapterEventHandlers,
+  SplitioAdapterInterface,
+  SplitioAdapterArgs,
+  interfaceIdentifiers,
 } from '@flopflip/types';
 import merge from 'deepmerge';
 import { SplitFactory } from '@splitsoftware/splitio';
@@ -24,13 +28,6 @@ type AdapterState = {
     onStatusStateChange: OnStatusStateChangeCallback;
   };
   splitioSettings?: SplitIO.IBrowserSettings;
-};
-
-type ClientInitializationOptions = {
-  [key: string]: any;
-  core?: {
-    [key: string]: string;
-  };
 };
 
 const adapterState: AdapterState = {
@@ -112,7 +109,6 @@ const initializeClient = (): {
   client: SplitIO.IClient;
   manager: SplitIO.IManager;
 } => {
-  // eslint-disable-next-line new-cap
   if (!adapterState.splitioSettings) {
     throw Error(
       'cannot initialize SplitIo without configured settings, call configure() first'
@@ -166,8 +162,6 @@ const subscribe = ({
     } else reject();
   });
 
-const getIsReady = (): boolean => Boolean(adapterState.isReady);
-
 const configureSplitio = () => {
   const { client, manager } = initializeClient();
   adapterState.client = client;
@@ -181,61 +175,68 @@ const configureSplitio = () => {
   });
 };
 
-const configure = ({
-  authorizationKey,
-  user,
-  options = {},
-  onFlagsStateChange,
-  onStatusStateChange,
-}: {
-  authorizationKey: string;
-  user: User;
-  options: ClientInitializationOptions;
-  onFlagsStateChange: OnFlagsStateChangeCallback;
-  onStatusStateChange: OnStatusStateChangeCallback;
-}): Promise<any> => {
-  adapterState.user = ensureUser(user);
-  adapterState.configuredCallbacks.onFlagsStateChange = onFlagsStateChange;
-  adapterState.configuredCallbacks.onStatusStateChange = onStatusStateChange;
-  adapterState.splitioSettings = {
-    ...omit(options, ['core']),
-    core: {
-      authorizationKey,
-      key: adapterState.user.key ?? createAnonymousUserKey(),
-      ...options.core,
-    },
-  };
-  return configureSplitio();
-};
+class SplitioAdapter implements SplitioAdapterInterface {
+  id: typeof interfaceIdentifiers.splitio;
 
-const reconfigure = ({ user }: { user: User }): Promise<any> => {
-  if (
-    !adapterState.isReady ||
-    !adapterState.isConfigured ||
-    !adapterState.user
-  ) {
-    return Promise.reject(
-      new Error(
-        '@flopflip/splitio-adapter: please configure adapter before reconfiguring.'
-      )
-    );
+  constructor() {
+    this.id = interfaceIdentifiers.splitio;
   }
 
-  if (!isEqual(adapterState.user, user)) {
+  configure(
+    adapterArgs: SplitioAdapterArgs,
+    adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any> {
+    const { authorizationKey, user, options = {} } = adapterArgs;
+
     adapterState.user = ensureUser(user);
-
-    if (adapterState.manager && adapterState.client) {
-      adapterState.client.destroy();
-    }
-
+    adapterState.configuredCallbacks.onFlagsStateChange =
+      adapterEventHandlers.onFlagsStateChange;
+    adapterState.configuredCallbacks.onStatusStateChange =
+      adapterEventHandlers.onStatusStateChange;
+    adapterState.splitioSettings = {
+      ...omit(options, ['core']),
+      core: {
+        authorizationKey,
+        key: adapterState.user.key ?? createAnonymousUserKey(),
+        ...options.core,
+      },
+    };
     return configureSplitio();
   }
 
-  return Promise.resolve();
-};
+  reconfigure(
+    adapterArgs: SplitioAdapterArgs,
+    _adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any> {
+    if (
+      !adapterState.isReady ||
+      !adapterState.isConfigured ||
+      !adapterState.user
+    ) {
+      return Promise.reject(
+        new Error(
+          '@flopflip/splitio-adapter: please configure adapter before reconfiguring.'
+        )
+      );
+    }
 
-export default {
-  getIsReady,
-  configure,
-  reconfigure,
-};
+    if (!isEqual(adapterState.user, adapterArgs.user)) {
+      adapterState.user = ensureUser(adapterArgs.user);
+
+      if (adapterState.manager && adapterState.client) {
+        adapterState.client.destroy();
+      }
+
+      return configureSplitio();
+    }
+
+    return Promise.resolve();
+  }
+
+  getIsReady(): boolean {
+    return Boolean(adapterState.isReady);
+  }
+}
+
+const adapter = new SplitioAdapter();
+export default adapter;

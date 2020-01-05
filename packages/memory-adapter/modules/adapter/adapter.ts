@@ -3,11 +3,14 @@ import mitt, { Emitter } from 'mitt';
 import {
   User,
   AdapterStatus,
-  AdapterArgsWithEventHandlers,
   FlagName,
   FlagVariation,
   Flag,
   Flags,
+  AdapterEventHandlers,
+  MemoryAdapterInterface,
+  MemoryAdapterArgs,
+  interfaceIdentifiers,
 } from '@flopflip/types';
 import camelCase from 'lodash/camelCase';
 
@@ -29,60 +32,6 @@ const intialAdapterState: AdapterStatus & MemoryAdapterState = {
 
 let adapterState: AdapterStatus & MemoryAdapterState = {
   ...intialAdapterState,
-};
-
-const configure = ({
-  user,
-  onFlagsStateChange,
-  onStatusStateChange,
-}: AdapterArgsWithEventHandlers): Promise<any> => {
-  adapterState.user = user;
-
-  return Promise.resolve().then(() => {
-    adapterState.isConfigured = true;
-    adapterState.isReady = true;
-    adapterState.flags = {};
-
-    updateUser(user);
-
-    adapterState.emitter.on('flagsStateChange', onFlagsStateChange);
-    adapterState.emitter.on('statusStateChange', onStatusStateChange);
-
-    adapterState.emitter.emit('flagsStateChange', adapterState.flags);
-    adapterState.emitter.emit('statusStateChange', {
-      isReady: adapterState.isReady,
-      isConfigured: adapterState.isConfigured,
-    });
-
-    adapterState.emitter.emit('readyStateChange');
-  });
-};
-
-const reconfigure = ({ user }: { user: User }): Promise<any> => {
-  updateUser(user);
-
-  adapterState.flags = {};
-  adapterState.emitter.emit('flagsStateChange', adapterState.flags);
-  adapterState.emitter.emit('statusStateChange', {
-    isConfigured: adapterState.isConfigured,
-  });
-
-  return Promise.resolve();
-};
-
-const getIsReady = (): boolean => Boolean(adapterState.isReady);
-const setIsReady = (nextIsReady: { isReady: boolean }): void => {
-  adapterState.isReady = nextIsReady.isReady;
-
-  adapterState.emitter.emit('statusStateChange', {
-    isReady: adapterState.isReady,
-  });
-};
-
-const reset = (): void => {
-  adapterState = {
-    ...intialAdapterState,
-  };
 };
 
 const updateUser = (user: User): void => {
@@ -108,7 +57,10 @@ export const normalizeFlags = (rawFlags: Flags): Flags =>
     },
     {}
   );
-export const updateFlags = (flags: Flags): void => {
+
+export const getUser = (): User | undefined => adapterState.user;
+
+export const updateFlags = (flags: Flags) => {
   const isAdapterReady = Boolean(
     adapterState.isConfigured && adapterState.isReady
   );
@@ -128,22 +80,96 @@ export const updateFlags = (flags: Flags): void => {
   adapterState.emitter.emit('flagsStateChange', adapterState.flags);
 };
 
-export const getUser = (): User | undefined => adapterState.user;
-const waitUntilConfigured = (): Promise<any> =>
-  new Promise(resolve => {
-    if (adapterState.isConfigured) resolve();
-    else adapterState.emitter.on('readyStateChange', resolve);
-  });
+class MemoryAdapter implements MemoryAdapterInterface {
+  id: typeof interfaceIdentifiers.memory;
 
-const getFlag = (flagName: FlagName): FlagVariation | undefined =>
-  adapterState.flags && adapterState.flags[flagName];
+  constructor() {
+    this.id = interfaceIdentifiers.memory;
+  }
 
-export default {
-  getIsReady,
-  setIsReady,
-  waitUntilConfigured,
-  getFlag,
-  reset,
-  configure,
-  reconfigure,
-};
+  configure(
+    adapterArgs: MemoryAdapterArgs,
+    adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any> {
+    const { user } = adapterArgs;
+
+    adapterState.user = user;
+
+    return Promise.resolve().then(() => {
+      adapterState.isConfigured = true;
+      adapterState.isReady = true;
+      adapterState.flags = {};
+
+      updateUser(user);
+
+      adapterState.emitter.on(
+        'flagsStateChange',
+        adapterEventHandlers.onFlagsStateChange
+      );
+      adapterState.emitter.on(
+        'statusStateChange',
+        adapterEventHandlers.onStatusStateChange
+      );
+
+      adapterState.emitter.emit('flagsStateChange', adapterState.flags);
+      adapterState.emitter.emit('statusStateChange', {
+        isReady: adapterState.isReady,
+        isConfigured: adapterState.isConfigured,
+      });
+
+      adapterState.emitter.emit('readyStateChange');
+    });
+  }
+
+  reconfigure(
+    adapterArgs: MemoryAdapterArgs,
+    _adapterEventHandlers: AdapterEventHandlers
+  ): Promise<any> {
+    updateUser(adapterArgs.user);
+
+    adapterState.flags = {};
+    adapterState.emitter.emit('flagsStateChange', adapterState.flags);
+    adapterState.emitter.emit('statusStateChange', {
+      isConfigured: adapterState.isConfigured,
+    });
+
+    return Promise.resolve();
+  }
+
+  getIsReady(): boolean {
+    return Boolean(adapterState.isReady);
+  }
+
+  setIsReady(nextState: AdapterStatus): void {
+    adapterState.isReady = nextState.isReady;
+
+    adapterState.emitter.emit('statusStateChange', {
+      isReady: adapterState.isReady,
+    });
+  }
+
+  reset = (): void => {
+    adapterState = {
+      ...intialAdapterState,
+    };
+  };
+
+  waitUntilConfigured(): Promise<any> {
+    return new Promise(resolve => {
+      if (adapterState.isConfigured) resolve();
+      else adapterState.emitter.on('readyStateChange', resolve);
+    });
+  }
+
+  getFlag(flagName: FlagName): FlagVariation | undefined {
+    return adapterState.flags && adapterState.flags[flagName];
+  }
+
+  // For convenience
+  updateFlags(flags: Flags): void {
+    return updateFlags(flags);
+  }
+}
+
+const adapter = new MemoryAdapter();
+export default adapter;

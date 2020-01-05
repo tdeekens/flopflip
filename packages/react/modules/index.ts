@@ -11,7 +11,7 @@ export {
   ReconfigureAdapter,
 } from './components';
 
-export { getIsFeatureEnabled, createSequentialId } from './helpers';
+export { getIsFeatureEnabled } from './helpers';
 
 export {
   DEFAULT_FLAG_PROP_KEY,

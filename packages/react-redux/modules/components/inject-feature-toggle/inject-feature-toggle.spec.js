@@ -2,7 +2,7 @@ import React from 'react';
 import { renderWithAdapter, components } from '@flopflip/test-utils';
 import { Provider } from 'react-redux';
 import { createStore } from '../../../test-utils';
-import { STATE_SLICE } from '../../store';
+import { STATE_SLICE } from '../../store/constants';
 import injectFeatureToggle from './inject-feature-toggle';
 import Configure from '../configure';
 

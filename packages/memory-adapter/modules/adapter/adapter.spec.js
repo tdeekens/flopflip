@@ -7,17 +7,23 @@ const createAdapterArgs = (customArgs = {}) => ({
   user: { id: 'foo' },
   onFlagsStateChange: jest.fn(),
   onStatusStateChange: jest.fn(),
-
   ...customArgs,
+});
+const createAdapterEventHandlers = (custom = {}) => ({
+  onFlagsStateChange: jest.fn(),
+  onStatusStateChange: jest.fn(),
+  ...custom,
 });
 
 describe('when configuring', () => {
   const updatedFlags = { fooFlag: true, barFlag: false };
   let adapterArgs;
+  let adapterEventHandlers;
 
   beforeEach(() => {
     invariant.mockClear();
     adapterArgs = createAdapterArgs();
+    adapterEventHandlers = createAdapterEventHandlers();
   });
 
   it('should indicate that the adapter is not ready', () => {
@@ -35,14 +41,14 @@ describe('when configuring', () => {
   });
 
   describe('when configured', () => {
-    beforeEach(() => adapter.configure(adapterArgs));
+    beforeEach(() => adapter.configure(adapterArgs, adapterEventHandlers));
 
     it('should indicate that the adapter is ready', () => {
       expect(adapter.getIsReady()).toBe(true);
     });
 
     it('should invoke `onStatusStateChange`', () => {
-      expect(adapterArgs.onStatusStateChange).toHaveBeenCalled();
+      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalled();
     });
 
     it('should resolve `waitUntilConfigured`', async () => {
@@ -50,7 +56,7 @@ describe('when configuring', () => {
     });
 
     it('should invoke `onStatusStateChange` with `isReady`', () => {
-      expect(adapterArgs.onStatusStateChange).toHaveBeenCalledWith(
+      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
         expect.objectContaining({
           isReady: true,
         })
@@ -58,7 +64,7 @@ describe('when configuring', () => {
     });
 
     it('should invoke `onStatusStateChange` with `isConfigured`', () => {
-      expect(adapterArgs.onStatusStateChange).toHaveBeenCalledWith(
+      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
         expect.objectContaining({
           isConfigured: true,
         })
@@ -66,13 +72,13 @@ describe('when configuring', () => {
     });
 
     it('should invoke `onFlagsStateChange`', () => {
-      expect(adapterArgs.onFlagsStateChange).toHaveBeenCalled();
+      expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalled();
     });
 
     describe('when updating flags', () => {
       beforeEach(() => {
         // From `configure`
-        adapterArgs.onFlagsStateChange.mockClear();
+        adapterEventHandlers.onFlagsStateChange.mockClear();
 
         updateFlags(updatedFlags);
       });
@@ -82,11 +88,11 @@ describe('when configuring', () => {
       });
 
       it('should invoke `onFlagsStateChange`', () => {
-        expect(adapterArgs.onFlagsStateChange).toHaveBeenCalled();
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalled();
       });
 
       it('should invoke `onFlagsStateChange` with `updatedFlags`', () => {
-        expect(adapterArgs.onFlagsStateChange).toHaveBeenCalledWith(
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith(
           expect.objectContaining(updatedFlags)
         );
       });
@@ -99,13 +105,13 @@ describe('when configuring', () => {
         };
         beforeEach(() => {
           // From `configure`
-          adapterArgs.onFlagsStateChange.mockClear();
+          adapterEventHandlers.onFlagsStateChange.mockClear();
 
           updateFlags(nonNormalizedUpdatedFlags);
         });
 
         it('should invoke `onFlagsStateChange`', () => {
-          expect(adapterArgs.onFlagsStateChange).toHaveBeenCalled();
+          expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalled();
         });
 
         it('should normalise all flag names and values', () => {
@@ -125,11 +131,13 @@ describe('when configuring', () => {
       });
 
       it('should invoke `onFlagsStateChange`', () => {
-        expect(adapterArgs.onFlagsStateChange).toHaveBeenCalled();
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalled();
       });
 
       it('should invoke `onFlagsStateChange` with empty flags', () => {
-        expect(adapterArgs.onFlagsStateChange).toHaveBeenCalledWith({});
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith(
+          {}
+        );
       });
     });
 
@@ -137,13 +145,13 @@ describe('when configuring', () => {
       beforeEach(() => {
         updateFlags(updatedFlags);
 
-        adapterArgs.onFlagsStateChange.mockClear();
+        adapterEventHandlers.onFlagsStateChange.mockClear();
 
         adapter.reset();
       });
 
       it('should invoke not `onFlagsStateChange`', () => {
-        expect(adapterArgs.onFlagsStateChange).not.toHaveBeenCalled();
+        expect(adapterEventHandlers.onFlagsStateChange).not.toHaveBeenCalled();
       });
 
       it('should reset the flags', () => {
@@ -154,7 +162,7 @@ describe('when configuring', () => {
 
     describe('when setting ready state', () => {
       beforeEach(() => {
-        adapterArgs.onStatusStateChange.mockClear();
+        adapterEventHandlers.onStatusStateChange.mockClear();
 
         adapter.setIsReady({ isReady: false });
       });
@@ -164,7 +172,7 @@ describe('when configuring', () => {
       });
 
       it('should invoke `onStatusStateChange` with `isReady`', () => {
-        expect(adapterArgs.onStatusStateChange).toHaveBeenCalledWith(
+        expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
           expect.objectContaining({
             isReady: false,
           })
