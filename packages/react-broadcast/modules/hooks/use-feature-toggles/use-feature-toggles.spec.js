@@ -44,15 +44,3 @@ describe('when React hooks (`useContext`) is available', () => {
     expect(getByText('Is enabled: Yes')).toBeInTheDocument();
   });
 });
-
-describe('when React hooks (`useContext`) are not available', () => {
-  describe('when flag is enabled', () => {
-    beforeEach(() => {
-      React.useContext = jest.fn(() => undefined);
-    });
-
-    it('should throw', () => {
-      expect(() => useFeatureToggles('foo')).toThrow();
-    });
-  });
-});

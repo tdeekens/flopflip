@@ -2,7 +2,7 @@ import React from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import { AdapterStatus } from '@flopflip/types';
-import { updateStatus } from '../ducks';
+import { updateStatus } from '../../ducks';
 
 const useUpdateStatus = () => {
   const dispatch = useDispatch<Dispatch<ReturnType<typeof updateStatus>>>();
@@ -12,4 +12,4 @@ const useUpdateStatus = () => {
   );
 };
 
-export default useUpdateStatus;
+export { useUpdateStatus };
