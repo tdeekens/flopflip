@@ -50,10 +50,10 @@
     "lodash": "4.17.15"
   },
   "peerDependencies": {
-    "react": "^16.3",
-    "react-dom": "^16.3",
-    "react-redux": "^5.0 || ^7.0.0",
-    "redux": "^3.7 || ^4.0"
+    "react": "^16.8 || ^17.0",
+    "react-dom": "^16.8 || ^17.0",
+    "react-redux": "^7.0.0",
+    "redux": "^4.0"
   },
   "keywords": [
     "feature-flags",
