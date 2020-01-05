@@ -764,6 +764,31 @@ const ComponentWithFeatureToggle = props => {
 }
 ```
 
+#### `useFeatureToggles({ [ flagName: string ]: FlagVariation } ): boolean[]`
+
+A forward compatible implementation [React hook](https://reactjs.org/docs/hooks-reference.html). Given the installed version of React supports hooks you can use a functional component and toggle as follows:
+
+```js
+import { useFeatureToggles } from '@flopflip/react-broadcast';
+
+const ComponentWithFeatureToggles = props => {
+   const [isFirstFeatureEnabled, isV2SignUpEnabled] = useFeatureToggles({
+     'myFeatureToggle': true,
+     'mySignUpVariation': 'signUpV2',
+   });
+
+   return (
+     <h3>{props.title}<h3>
+     <p>
+       The first feature is {isFirstFeatureEnabled ? 'enabled' : 'disabled'}
+     </p>
+     <p>
+       The v2 signup feature is {isV2SignUpEnabled ? 'enabled' : 'disabled'}
+     </p>
+   );
+}
+```
+
 #### `useAdapterStatus(): AdapterStatus`
 
 A forward compatible implementation [React hook](https://reactjs.org/docs/hooks-reference.html). Given the installed version of React supports hooks you can use a functional component and toggle as follows:
