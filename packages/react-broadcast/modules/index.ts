@@ -10,6 +10,7 @@ export {
 } from './components';
 export {
   useFeatureToggle,
+  useFeatureToggles,
   useAdapterStatus,
   useAdapterReconfiguration,
 } from './hooks';
