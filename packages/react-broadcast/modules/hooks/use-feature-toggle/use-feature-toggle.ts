@@ -6,24 +6,18 @@ import { FlagsContext } from '../../components/flags-context';
 export default function useFeatureToggle(
   flagName: FlagName,
   flagVariation: FlagVariation = true
-): Error | boolean {
-  if (typeof React.useContext === 'function') {
-    const flags: Flags = React.useContext(FlagsContext);
-    const isFeatureEnabled: boolean = getIsFeatureEnabled(
-      flagName,
-      flagVariation
-    )(flags);
+): boolean {
+  const flags: Flags = React.useContext(FlagsContext);
+  const isFeatureEnabled: boolean = getIsFeatureEnabled(
+    flagName,
+    flagVariation
+  )(flags);
 
-    React.useDebugValue({
-      flagName,
-      flagVariation,
-      isEnabled: isFeatureEnabled,
-    });
+  React.useDebugValue({
+    flagName,
+    flagVariation,
+    isEnabled: isFeatureEnabled,
+  });
 
-    return isFeatureEnabled;
-  }
-
-  throw new Error(
-    'React hooks are not available in your currently installed version of React.'
-  );
+  return isFeatureEnabled;
 }

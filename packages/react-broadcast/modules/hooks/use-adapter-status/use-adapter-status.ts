@@ -5,16 +5,10 @@ import {
   AdapterStatus as AdapterStatusType,
 } from '@flopflip/types';
 
-export default function useAdapterStatus(): Error | AdapterStatusType {
-  if (typeof React.useContext === 'function') {
-    const adapterContext: AdapterContextType = React.useContext(AdapterContext);
+export default function useAdapterStatus(): AdapterStatusType {
+  const adapterContext: AdapterContextType = React.useContext(AdapterContext);
 
-    React.useDebugValue(adapterContext.status);
+  React.useDebugValue(adapterContext.status);
 
-    return adapterContext.status;
-  }
-
-  throw new Error(
-    'React hooks are not available in your currently installed version of React.'
-  );
+  return adapterContext.status;
 }
