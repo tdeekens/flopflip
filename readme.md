@@ -488,6 +488,9 @@ features. Only the import changes depending on if you chose to integrate with
 redux or without. Again, behind the scenes the build on `@flopflip/react` to
 share common logic.
 
+- `useFeatureToggle` a React hook to read a single flag
+- `useFeatureToggles` a React hook to read multiple flags at once
+- `useAdapterStatus` a React hook to read the underlying adapter's status
 - `branchOnFeatureToggle` a Higher-Order Component (HoC) to conditionally render
   components depending on feature toggle state
 - `injectFeatureToggle` a HoC to inject a feature toggle onto the `props` of a
@@ -498,6 +501,67 @@ share common logic.
   the status of a passed feature flag
 
 [Note:](#flag-normalization) that all passed `flagNames` passed as `flag` are a string. Depending on the adapter used _these are normalized_ to be camel cased. This means that whenever a `foo-flag-name` is received in e.g. LaunchDarkly or splitio it will be converted to `fooFlagName`. The same applies for a `foo_flag_name`. This is meant to help using flags in an adapter agnostic way. Whenever a flag is passed in the non-normalized form it is also normalized again. Lastly, `flopflip` will show a warning message in the console in development mode whenever a non normalized flag name is passed.
+
+#### `useFeatureToggle(flagName: string, flagVariation: FlagVariation): boolean`
+
+Given you want to use React hooks within a functional component you can toggle as follows:
+
+```js
+import { useFeatureToggle } from '@flopflip/react-broadcast';
+
+const ComponentWithFeatureToggle = props => {
+   const isFeatureEnabled = useFeatureToggle('myFeatureToggle');
+
+   return (
+     <h3>{props.title}<h3>
+     <p>
+       The feature is {isFeatureEnabled ? 'enabled' : 'disabled'}
+     </p>
+   );
+}
+```
+
+#### `useFeatureToggles({ [ flagName: string ]: FlagVariation } ): boolean[]`
+
+Given you want to use React hooks within a functional component you can toggle multiple flags at once as follows:
+
+```js
+import { useFeatureToggles } from '@flopflip/react-broadcast';
+
+const ComponentWithFeatureToggles = props => {
+   const [isFirstFeatureEnabled, isV2SignUpEnabled] = useFeatureToggles({
+     'myFeatureToggle': true,
+     'mySignUpVariation': 'signUpV2',
+   });
+
+   return (
+     <h3>{props.title}<h3>
+     <p>
+       The first feature is {isFirstFeatureEnabled ? 'enabled' : 'disabled'}
+     </p>
+     <p>
+       The v2 signup feature is {isV2SignUpEnabled ? 'enabled' : 'disabled'}
+     </p>
+   );
+}
+```
+
+#### `useAdapterStatus(): AdapterStatus`
+
+Given you want to use React hooks within a functional component you can read the adapter status as follows:
+
+```js
+import { useAdapterStatus } from '@flopflip/react-broadcast';
+
+const ComponentWithFeatureToggle = () => {
+  const isFeatureEnabled = useFeatureToggle('myFeatureToggle');
+  const { isReady } = useAdapterStatus();
+
+  if (!isReady) return <LoadingSpinner />;
+  else if (!isFeatureEnabled) <PageNotFound />;
+  else return <FeatureComponent />;
+};
+```
 
 #### `ToggleFeature`
 
@@ -739,74 +803,6 @@ Requires arguments of `clientSideId:string`, `user:object`.
 - The `adapterArgs` object
   - Often with the before mentioned user object `user` object which often needs
     at least a `key` attribute
-
-### Additional `@flopflip/react-broadcast` API
-
-Given that the `@flopflip/react-broadcast` uses the React's context it may offer
-slightly different APIs. Generally we aim to have the same API for both packages.
-
-#### `useFeatureToggle(flagName: string, flagVariation: FlagVariation): boolean`
-
-A forward compatible implementation [React hook](https://reactjs.org/docs/hooks-reference.html). Given the installed version of React supports hooks you can use a functional component and toggle as follows:
-
-```js
-import { useFeatureToggle } from '@flopflip/react-broadcast';
-
-const ComponentWithFeatureToggle = props => {
-   const isFeatureEnabled = useFeatureToggle('myFeatureToggle');
-
-   return (
-     <h3>{props.title}<h3>
-     <p>
-       The feature is {isFeatureEnabled ? 'enabled' : 'disabled'}
-     </p>
-   );
-}
-```
-
-#### `useFeatureToggles({ [ flagName: string ]: FlagVariation } ): boolean[]`
-
-A forward compatible implementation [React hook](https://reactjs.org/docs/hooks-reference.html). Given the installed version of React supports hooks you can use a functional component and toggle as follows:
-
-```js
-import { useFeatureToggles } from '@flopflip/react-broadcast';
-
-const ComponentWithFeatureToggles = props => {
-   const [isFirstFeatureEnabled, isV2SignUpEnabled] = useFeatureToggles({
-     'myFeatureToggle': true,
-     'mySignUpVariation': 'signUpV2',
-   });
-
-   return (
-     <h3>{props.title}<h3>
-     <p>
-       The first feature is {isFirstFeatureEnabled ? 'enabled' : 'disabled'}
-     </p>
-     <p>
-       The v2 signup feature is {isV2SignUpEnabled ? 'enabled' : 'disabled'}
-     </p>
-   );
-}
-```
-
-#### `useAdapterStatus(): AdapterStatus`
-
-A forward compatible implementation [React hook](https://reactjs.org/docs/hooks-reference.html). Given the installed version of React supports hooks you can use a functional component and toggle as follows:
-
-```js
-import { useAdapterStatus } from '@flopflip/react-broadcast';
-
-const ComponentWithFeatureToggle = () => {
-  const isFeatureEnabled = useFeatureToggle('myFeatureToggle');
-  const { isReady } = useAdapterStatus();
-
-  if (!isReady) return <LoadingSpinner />;
-  else if (!isFeatureEnabled) <PageNotFound />;
-  else return <FeatureComponent />;
-};
-```
-
-Please note that given the React version _does not_ support hooks using `useFeatureToggle` will throw an error.
 
 ### Module formats
 
