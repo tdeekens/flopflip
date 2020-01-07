@@ -26,9 +26,9 @@ describe('injecting', () => {
     });
 
     it("should pass the feature toggle's state as a `prop` of `propKey`", () => {
-      const { queryByFlagName } = render(<Component {...props} />);
+      const rendered = render(<Component {...props} />);
 
-      expect(queryByFlagName(propKey)).toHaveTextContent('true');
+      expect(rendered.queryByFlagName(propKey)).toHaveTextContent('true');
     });
   });
 
@@ -47,9 +47,11 @@ describe('injecting', () => {
     });
 
     it("should pass the feature toggle's state as a `prop` of `isFeatureEnabled`", () => {
-      const { queryByFlagName } = render(<Component {...props} />);
+      const rendered = render(<Component {...props} />);
 
-      expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('true');
+      expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveTextContent(
+        'true'
+      );
     });
   });
 
@@ -69,9 +71,11 @@ describe('injecting', () => {
     });
 
     it("should pass the feature toggle's state as `false`", () => {
-      const { queryByFlagName } = render(<Component {...props} />);
+      const rendered = render(<Component {...props} />);
 
-      expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('false');
+      expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveTextContent(
+        'false'
+      );
     });
   });
 
@@ -88,9 +92,9 @@ describe('injecting', () => {
     });
 
     it("should pass the feature toggle's state as the value", () => {
-      const { queryByFlagName } = render(<Component {...props} />);
+      const rendered = render(<Component {...props} />);
 
-      expect(queryByFlagName(flagName)).toHaveTextContent('blue');
+      expect(rendered.queryByFlagName(flagName)).toHaveTextContent('blue');
     });
   });
 });

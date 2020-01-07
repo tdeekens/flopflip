@@ -21,15 +21,15 @@ describe('rendering', () => {
     });
 
     it('should omit multiple props', () => {
-      const { queryByFlagName } = render(<TestComponent {...props} />);
-      expect(queryByFlagName('a')).not.toBeInTheDocument();
-      expect(queryByFlagName('b')).not.toBeInTheDocument();
+      const rendered = render(<TestComponent {...props} />);
+      expect(rendered.queryByFlagName('a')).not.toBeInTheDocument();
+      expect(rendered.queryByFlagName('b')).not.toBeInTheDocument();
     });
 
     it('should keep not omitted props', () => {
-      const { queryByFlagName } = render(<TestComponent {...props} />);
+      const rendered = render(<TestComponent {...props} />);
 
-      expect(queryByFlagName('c')).toBeInTheDocument();
+      expect(rendered.queryByFlagName('c')).toBeInTheDocument();
     });
   });
 
@@ -39,11 +39,11 @@ describe('rendering', () => {
     });
 
     it('should do nothing', () => {
-      const { queryByFlagName } = render(<TestComponent {...props} />);
+      const rendered = render(<TestComponent {...props} />);
 
-      expect(queryByFlagName('a')).toBeInTheDocument();
-      expect(queryByFlagName('b')).toBeInTheDocument();
-      expect(queryByFlagName('c')).toBeInTheDocument();
+      expect(rendered.queryByFlagName('a')).toBeInTheDocument();
+      expect(rendered.queryByFlagName('b')).toBeInTheDocument();
+      expect(rendered.queryByFlagName('c')).toBeInTheDocument();
     });
   });
 });

@@ -28,23 +28,24 @@ describe('without `propKey`', () => {
     });
 
     it('should render receive the flag value as `false`', () => {
-      const { queryByFlagName } = render(store, <TestComponent />);
+      const rendered = render(store, <TestComponent />);
 
-      expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('false');
+      expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveTextContent(
+        'false'
+      );
     });
 
     describe('when enabling feature', () => {
       it('should render the component representing a enabled feature', async () => {
-        const { queryByFlagName, waitUntilReady, changeFlagVariation } = render(
-          store,
-          <TestComponent />
+        const rendered = render(store, <TestComponent />);
+
+        await rendered.waitUntilReady();
+
+        rendered.changeFlagVariation('disabledFeature', true);
+
+        expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveTextContent(
+          'true'
         );
-
-        await waitUntilReady();
-
-        changeFlagVariation('disabledFeature', true);
-
-        expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('true');
       });
     });
   });
@@ -62,9 +63,11 @@ describe('without `propKey`', () => {
     });
 
     it('should render receive the flag value as `true`', () => {
-      const { queryByFlagName } = render(store, <TestComponent />);
+      const rendered = render(store, <TestComponent />);
 
-      expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('true');
+      expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveTextContent(
+        'true'
+      );
     });
   });
 });
@@ -84,9 +87,11 @@ describe('with `propKey`', () => {
     });
 
     it('should render receive the flag value as `false`', () => {
-      const { queryByFlagName } = render(store, <TestComponent />);
+      const rendered = render(store, <TestComponent />);
 
-      expect(queryByFlagName('customPropKey')).toHaveTextContent('false');
+      expect(rendered.queryByFlagName('customPropKey')).toHaveTextContent(
+        'false'
+      );
     });
   });
 });

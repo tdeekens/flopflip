@@ -22,15 +22,15 @@ describe('rendering', () => {
     });
 
     it('should have base props', () => {
-      const { queryByFlagName } = render(<TestComponent {...props} />);
+      const rendered = render(<TestComponent {...props} />);
 
-      expect(queryByFlagName('a')).toBeInTheDocument();
+      expect(rendered.queryByFlagName('a')).toBeInTheDocument();
     });
 
     it('should have enhanced props', () => {
-      const { queryByFlagName } = render(<TestComponent {...props} />);
+      const rendered = render(<TestComponent {...props} />);
 
-      expect(queryByFlagName('b')).toBeInTheDocument();
+      expect(rendered.queryByFlagName('b')).toBeInTheDocument();
     });
   });
 
@@ -46,9 +46,9 @@ describe('rendering', () => {
     });
 
     it('should have enhanced props', () => {
-      const { queryByFlagName } = render(<TestComponent {...props} />);
+      const rendered = render(<TestComponent {...props} />);
 
-      expect(queryByFlagName('a')).toBeInTheDocument();
+      expect(rendered.queryByFlagName('a')).toBeInTheDocument();
     });
   });
 });

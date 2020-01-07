@@ -19,11 +19,11 @@ describe('with `flagName`', () => {
       });
 
       it('should render the component representing an enabled feature', () => {
-        const { queryByFlagName } = render(
+        const rendered = render(
           <Component flagName={flagName} {...featureFlags} />
         );
 
-        expect(queryByFlagName(flagName)).toHaveAttribute(
+        expect(rendered.queryByFlagName(flagName)).toHaveAttribute(
           'data-flag-status',
           'enabled'
         );
@@ -41,22 +41,22 @@ describe('with `flagName`', () => {
       });
 
       it('should not render the component representing an disabled feature', () => {
-        const { queryByFlagName } = render(
+        const rendered = render(
           <Component flagName={flagName} {...featureFlags} />
         );
 
-        expect(queryByFlagName(flagName)).not.toHaveAttribute(
+        expect(rendered.queryByFlagName(flagName)).not.toHaveAttribute(
           'data-flag-status',
           'disabled'
         );
       });
 
       it('should render the component representing an enabled feature', () => {
-        const { queryByFlagName } = render(
+        const rendered = render(
           <Component flagName={flagName} {...featureFlags} />
         );
 
-        expect(queryByFlagName(flagName)).toHaveAttribute(
+        expect(rendered.queryByFlagName(flagName)).toHaveAttribute(
           'data-flag-status',
           'enabled'
         );
@@ -77,10 +77,10 @@ describe('with `flagName`', () => {
       });
 
       it('should render the component representing an disabled feature', () => {
-        const { queryByFlagName } = render(
+        const rendered = render(
           <Component flagName={flagName} {...featureFlags} />
         );
-        expect(queryByFlagName(flagName)).toHaveAttribute(
+        expect(rendered.queryByFlagName(flagName)).toHaveAttribute(
           'data-flag-status',
           'disabled'
         );
@@ -98,11 +98,11 @@ describe('with `flagName`', () => {
       });
 
       it('should render neither the component representing an disabled or enabled feature', () => {
-        const { queryByFlagName } = render(
+        const rendered = render(
           <Component flagName={flagName} {...featureFlags} />
         );
 
-        expect(queryByFlagName(flagName)).not.toBeInTheDocument();
+        expect(rendered.queryByFlagName(flagName)).not.toBeInTheDocument();
       });
     });
   });
@@ -127,11 +127,11 @@ describe('with `flagName` and `flagVariation`', () => {
       });
 
       it('should render the component representing an enabled feature', () => {
-        const { queryByFlagName } = render(
+        const rendered = render(
           <Component flagName={flagName} {...featureFlags} />
         );
 
-        expect(queryByFlagName(flagName)).toHaveAttribute(
+        expect(rendered.queryByFlagName(flagName)).toHaveAttribute(
           'data-flag-status',
           'enabled'
         );
@@ -150,22 +150,22 @@ describe('with `flagName` and `flagVariation`', () => {
       });
 
       it('should not render the component representing an disabled feature', () => {
-        const { queryByFlagName } = render(
+        const rendered = render(
           <Component flagName={flagName} {...featureFlags} />
         );
 
-        expect(queryByFlagName(flagName)).not.toHaveAttribute(
+        expect(rendered.queryByFlagName(flagName)).not.toHaveAttribute(
           'data-flag-status',
           'disabled'
         );
       });
 
       it('should render the component representing an enabled feature', () => {
-        const { queryByFlagName } = render(
+        const rendered = render(
           <Component flagName={flagName} {...featureFlags} />
         );
 
-        expect(queryByFlagName(flagName)).toHaveAttribute(
+        expect(rendered.queryByFlagName(flagName)).toHaveAttribute(
           'data-flag-status',
           'enabled'
         );
@@ -188,11 +188,11 @@ describe('with `flagName` and `flagVariation`', () => {
       });
 
       it('should render the component representing an disabled feature', () => {
-        const { queryByFlagName } = render(
+        const rendered = render(
           <Component flagName={flagName} {...featureFlags} />
         );
 
-        expect(queryByFlagName(flagName)).toHaveAttribute(
+        expect(rendered.queryByFlagName(flagName)).toHaveAttribute(
           'data-flag-status',
           'disabled'
         );
@@ -211,11 +211,11 @@ describe('with `flagName` and `flagVariation`', () => {
       });
 
       it('should render neither the component representing an disabled or enabled feature', () => {
-        const { queryByFlagName } = render(
+        const rendered = render(
           <Component flagName={flagName} {...featureFlags} />
         );
 
-        expect(queryByFlagName(flagName)).not.toBeInTheDocument();
+        expect(rendered.queryByFlagName(flagName)).not.toBeInTheDocument();
       });
     });
   });
@@ -234,11 +234,11 @@ describe('without `flagName`', () => {
       });
 
       it('should render the component representing an enabled feature', () => {
-        const { queryByFlagName } = render(
+        const rendered = render(
           <Component flagName={flagName} {...featureFlags} />
         );
 
-        expect(queryByFlagName(flagName)).toHaveAttribute(
+        expect(rendered.queryByFlagName(flagName)).toHaveAttribute(
           'data-flag-status',
           'enabled'
         );
@@ -255,22 +255,22 @@ describe('without `flagName`', () => {
       });
 
       it('should not render the component representing an disabled feature', () => {
-        const { queryByFlagName } = render(
+        const rendered = render(
           <Component flagName={flagName} {...featureFlags} />
         );
 
-        expect(queryByFlagName(flagName)).not.toHaveAttribute(
+        expect(rendered.queryByFlagName(flagName)).not.toHaveAttribute(
           'data-flag-status',
           'disabled'
         );
       });
 
       it('should render the component representing an enabled feature', () => {
-        const { queryByFlagName } = render(
+        const rendered = render(
           <Component flagName={flagName} {...featureFlags} />
         );
 
-        expect(queryByFlagName(flagName)).toHaveAttribute(
+        expect(rendered.queryByFlagName(flagName)).toHaveAttribute(
           'data-flag-status',
           'enabled'
         );
@@ -291,11 +291,11 @@ describe('without `flagName`', () => {
       });
 
       it('should render the component representing an disabled feature', () => {
-        const { queryByFlagName } = render(
+        const rendered = render(
           <Component flagName={flagName} {...featureFlags} />
         );
 
-        expect(queryByFlagName(flagName)).toHaveAttribute(
+        expect(rendered.queryByFlagName(flagName)).toHaveAttribute(
           'data-flag-status',
           'disabled'
         );
@@ -310,11 +310,11 @@ describe('without `flagName`', () => {
       });
 
       it('should render neither the component representing an disabled or enabled feature', () => {
-        const { queryByFlagName } = render(
+        const rendered = render(
           <Component flagName={flagName} {...featureFlags} />
         );
 
-        expect(queryByFlagName(flagName)).not.toBeInTheDocument();
+        expect(rendered.queryByFlagName(flagName)).not.toBeInTheDocument();
       });
     });
   });
