@@ -28,9 +28,9 @@ describe('injecting', () => {
     });
 
     it('should pass all requested feature toggles', () => {
-      const { queryByFlagName } = render(<TestComponent {...props} />);
+      const rendered = render(<TestComponent {...props} />);
 
-      expect(queryByFlagName(firstFlagName)).toBeInTheDocument();
+      expect(rendered.queryByFlagName(firstFlagName)).toBeInTheDocument();
     });
   });
 
@@ -60,10 +60,10 @@ describe('injecting', () => {
       });
 
       it('should pass all requested feature toggles', () => {
-        const { queryByFlagName } = render(<TestComponent {...props} />);
+        const rendered = render(<TestComponent {...props} />);
 
-        expect(queryByFlagName(firstFlagName)).toBeInTheDocument();
-        expect(queryByFlagName(secondFlagName)).toBeInTheDocument();
+        expect(rendered.queryByFlagName(firstFlagName)).toBeInTheDocument();
+        expect(rendered.queryByFlagName(secondFlagName)).toBeInTheDocument();
       });
     });
 
@@ -82,15 +82,17 @@ describe('injecting', () => {
       });
 
       it('should pass all requested feature toggles', () => {
-        const { queryByFlagName } = render(<TestComponent {...props} />);
+        const rendered = render(<TestComponent {...props} />);
 
-        expect(queryByFlagName(firstFlagName)).toBeInTheDocument();
+        expect(rendered.queryByFlagName(firstFlagName)).toBeInTheDocument();
       });
 
       it('should omit requested but non existent feature toggles from `props`', () => {
-        const { queryByFlagName } = render(<TestComponent {...props} />);
+        const rendered = render(<TestComponent {...props} />);
 
-        expect(queryByFlagName(nonExistingFlagName)).not.toBeInTheDocument();
+        expect(
+          rendered.queryByFlagName(nonExistingFlagName)
+        ).not.toBeInTheDocument();
       });
     });
 
@@ -114,10 +116,10 @@ describe('injecting', () => {
       });
 
       it('should pass all requested feature toggles', () => {
-        const { queryByFlagName } = render(<TestComponent {...props} />);
+        const rendered = render(<TestComponent {...props} />);
 
-        expect(queryByFlagName(firstFlagName)).toBeInTheDocument();
-        expect(queryByFlagName(secondFlagName)).toBeInTheDocument();
+        expect(rendered.queryByFlagName(firstFlagName)).toBeInTheDocument();
+        expect(rendered.queryByFlagName(secondFlagName)).toBeInTheDocument();
       });
     });
   });

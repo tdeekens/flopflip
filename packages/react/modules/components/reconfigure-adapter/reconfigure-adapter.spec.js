@@ -24,13 +24,13 @@ describe('rendering', () => {
   });
 
   it('should render `children`', () => {
-    const { queryByText } = render(
+    const rendered = render(
       <ReconfigureAdapter {...props}>
         <ChildComponent />
       </ReconfigureAdapter>
     );
 
-    expect(queryByText('Child component')).toBeInTheDocument();
+    expect(rendered.queryByText('Child component')).toBeInTheDocument();
   });
 });
 

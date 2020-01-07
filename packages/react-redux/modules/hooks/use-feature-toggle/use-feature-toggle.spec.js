@@ -38,18 +38,18 @@ describe('when adapter is ready', () => {
   });
 
   it('should indicate a feature being disabled', async () => {
-    const { getByText, waitUntilReady } = render(store, <TestComponent />);
+    const rendered = render(store, <TestComponent />);
 
-    await waitUntilReady();
+    await rendered.waitUntilReady();
 
-    expect(getByText('Is disabled: Yes')).toBeInTheDocument();
+    expect(rendered.queryByText('Is disabled: Yes')).toBeInTheDocument();
   });
 
   it('should indicate a feature being enabled', async () => {
-    const { getByText, waitUntilReady } = render(store, <TestComponent />);
+    const rendered = render(store, <TestComponent />);
 
-    await waitUntilReady();
+    await rendered.waitUntilReady();
 
-    expect(getByText('Is enabled: Yes')).toBeInTheDocument();
+    expect(rendered.queryByText('Is enabled: Yes')).toBeInTheDocument();
   });
 });

@@ -8,9 +8,9 @@ Component.displayName = 'TestComponent';
 describe('rendering', () => {
   it('should render children', () => {
     const TestComponent = withReconfiguration('foo-prop-key')(Component);
-    const { queryByText } = render(<TestComponent />);
+    const rendered = render(<TestComponent />);
 
-    expect(queryByText('Child component')).toBeInTheDocument();
+    expect(rendered.queryByText('Child component')).toBeInTheDocument();
   });
 });
 

@@ -68,29 +68,32 @@ describe('injectFeatureToggles', () => {
     });
 
     it('should have feature enabling prop for `enabledFeature`', () => {
-      const { queryByFlagName } = render(store, <TestComponent />);
+      const rendered = render(store, <TestComponent />);
 
-      expect(queryByFlagName('enabledFeature')).toHaveTextContent('true');
+      expect(rendered.queryByFlagName('enabledFeature')).toHaveTextContent(
+        'true'
+      );
     });
 
     it('should have feature disabling prop for `disabledFeature`', () => {
-      const { queryByFlagName } = render(store, <TestComponent />);
+      const rendered = render(store, <TestComponent />);
 
-      expect(queryByFlagName('disabledFeature')).toHaveTextContent('false');
+      expect(rendered.queryByFlagName('disabledFeature')).toHaveTextContent(
+        'false'
+      );
     });
 
     describe('when enabling feature', () => {
       it('should render the component representing a enabled feature', async () => {
-        const { queryByFlagName, waitUntilReady, changeFlagVariation } = render(
-          store,
-          <TestComponent />
+        const rendered = render(store, <TestComponent />);
+
+        await rendered.waitUntilReady();
+
+        rendered.changeFlagVariation('disabledFeature', true);
+
+        expect(rendered.queryByFlagName('disabledFeature')).toHaveTextContent(
+          'true'
         );
-
-        await waitUntilReady();
-
-        changeFlagVariation('disabledFeature', true);
-
-        expect(queryByFlagName('disabledFeature')).toHaveTextContent('true');
       });
     });
   });
@@ -114,15 +117,19 @@ describe('injectFeatureToggles', () => {
     });
 
     it('should have feature enabling prop for `enabledFeature`', () => {
-      const { queryByFlagName } = render(store, <TestComponent />);
+      const rendered = render(store, <TestComponent />);
 
-      expect(queryByFlagName('enabledFeature')).toHaveTextContent('true');
+      expect(rendered.queryByFlagName('enabledFeature')).toHaveTextContent(
+        'true'
+      );
     });
 
     it('should have feature disabling prop for `disabledFeature`', () => {
-      const { queryByFlagName } = render(store, <TestComponent />);
+      const rendered = render(store, <TestComponent />);
 
-      expect(queryByFlagName('disabledFeature')).toHaveTextContent('false');
+      expect(rendered.queryByFlagName('disabledFeature')).toHaveTextContent(
+        'false'
+      );
     });
   });
 });

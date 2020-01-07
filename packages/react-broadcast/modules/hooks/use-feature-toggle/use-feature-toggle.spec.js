@@ -24,18 +24,18 @@ const TestComponent = () => {
 
 describe('when React hooks (`useContext`) is available', () => {
   it('should indicate a feature being disabled', async () => {
-    const { getByText, waitUntilReady } = render(<TestComponent />);
+    const rendered = render(<TestComponent />);
 
-    await waitUntilReady();
+    await rendered.waitUntilReady();
 
-    expect(getByText('Is disabled: Yes')).toBeInTheDocument();
+    expect(rendered.queryByText('Is disabled: Yes')).toBeInTheDocument();
   });
 
   it('should indicate a feature being enabled', async () => {
-    const { getByText, waitUntilReady } = render(<TestComponent />);
+    const rendered = render(<TestComponent />);
 
-    await waitUntilReady();
+    await rendered.waitUntilReady();
 
-    expect(getByText('Is enabled: Yes')).toBeInTheDocument();
+    expect(rendered.queryByText('Is enabled: Yes')).toBeInTheDocument();
   });
 });

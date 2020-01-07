@@ -49,13 +49,13 @@ describe('rendering', () => {
     });
 
     it('should render `children`', () => {
-      const { queryByText } = render(
+      const rendered = render(
         <ConfigureAdapter {...props}>
           <ChildComponent />
         </ConfigureAdapter>
       );
 
-      expect(queryByText('Child component')).toBeInTheDocument();
+      expect(rendered.queryByText('Child component')).toBeInTheDocument();
     });
   });
 
@@ -82,9 +82,9 @@ describe('rendering', () => {
     });
 
     it('should render `children`', () => {
-      const { queryByText } = render(<ConfigureAdapter {...props} />);
+      const rendered = render(<ConfigureAdapter {...props} />);
 
-      expect(queryByText('Child component')).toBeInTheDocument();
+      expect(rendered.queryByText('Child component')).toBeInTheDocument();
     });
   });
 

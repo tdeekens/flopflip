@@ -20,23 +20,23 @@ const TestComponent = () => {
 };
 
 it('should indicate the adapter not being ready', () => {
-  const { getByText } = render(<TestComponent />);
+  const rendered = render(<TestComponent />);
 
-  expect(getByText('Is ready: No')).toBeInTheDocument();
+  expect(rendered.queryByText('Is ready: No')).toBeInTheDocument();
 });
 
 it('should indicate the adapter being ready', async () => {
-  const { getByText, waitUntilReady } = render(<TestComponent />);
+  const rendered = render(<TestComponent />);
 
-  await waitUntilReady();
+  await rendered.waitUntilReady();
 
-  expect(getByText('Is ready: Yes')).toBeInTheDocument();
+  expect(rendered.queryByText('Is ready: Yes')).toBeInTheDocument();
 });
 
 it('should indicate the adapter being configured', async () => {
-  const { getByText, waitUntilReady } = render(<TestComponent />);
+  const rendered = render(<TestComponent />);
 
-  await waitUntilReady();
+  await rendered.waitUntilReady();
 
-  expect(getByText('Is configured: Yes')).toBeInTheDocument();
+  expect(rendered.queryByText('Is configured: Yes')).toBeInTheDocument();
 });
