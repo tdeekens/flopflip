@@ -1,4 +1,6 @@
 import { AdapterStatus } from '@flopflip/types';
+import { State } from '../../types';
+import { STATE_SLICE } from '../../store/constants';
 import { UpdateStatusAction } from './types';
 
 // Actions
@@ -30,3 +32,6 @@ export const updateStatus = (status: AdapterStatus): UpdateStatusAction => ({
   type: UPDATE_STATUS,
   payload: { status },
 });
+// Selectors
+export const selectStatus = (state: State): AdapterStatus =>
+  state[STATE_SLICE].status ?? {};

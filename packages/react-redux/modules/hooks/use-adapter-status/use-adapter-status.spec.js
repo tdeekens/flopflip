@@ -1,11 +1,17 @@
 import React from 'react';
 import { renderWithAdapter } from '@flopflip/test-utils';
-import useAdapterStatus from './';
+import { Provider } from 'react-redux';
+import { createStore } from '../../../test-utils';
+import { STATE_SLICE } from '../../store/constants';
+import useAdapterStatus from './use-adapter-status';
 import Configure from '../../components/configure';
 
-const render = TestComponent =>
+const render = (store, TestComponent) =>
   renderWithAdapter(TestComponent, {
-    components: { ConfigureFlopFlip: Configure },
+    components: {
+      ConfigureFlopFlip: Configure,
+      Wrapper: <Provider store={store} />,
+    },
   });
 
 const TestComponent = () => {
@@ -19,14 +25,18 @@ const TestComponent = () => {
   );
 };
 
+const store = createStore({
+  [STATE_SLICE]: { flags: { disabledFeature: false } },
+});
+
 it('should indicate the adapter not being ready', () => {
-  const { getByText } = render(<TestComponent />);
+  const { getByText } = render(store, <TestComponent />);
 
   expect(getByText('Is ready: No')).toBeInTheDocument();
 });
 
 it('should indicate the adapter being ready', async () => {
-  const { getByText, waitUntilReady } = render(<TestComponent />);
+  const { getByText, waitUntilReady } = render(store, <TestComponent />);
 
   await waitUntilReady();
 
@@ -34,7 +44,7 @@ it('should indicate the adapter being ready', async () => {
 });
 
 it('should indicate the adapter being configured', async () => {
-  const { getByText, waitUntilReady } = render(<TestComponent />);
+  const { getByText, waitUntilReady } = render(store, <TestComponent />);
 
   await waitUntilReady();
 
