@@ -6,8 +6,6 @@ import { createStore } from '../../../test-utils';
 import { STATE_SLICE } from '../../store/constants';
 import Configure from '../../components/configure';
 
-jest.mock('tiny-warning');
-
 const render = (store, TestComponent) =>
   renderWithAdapter(TestComponent, {
     components: {
@@ -33,7 +31,7 @@ const TestComponent = () => {
   );
 };
 
-describe('when React hooks (`useContext`) is available', () => {
+describe('when adapter is ready', () => {
   let store;
 
   beforeEach(() => {

@@ -3,8 +3,6 @@ import useFeatureToggle from './use-feature-toggle';
 import { renderWithAdapter } from '@flopflip/test-utils';
 import Configure from '../../components/configure';
 
-jest.mock('tiny-warning');
-
 const render = TestComponent =>
   renderWithAdapter(TestComponent, {
     components: { ConfigureFlopFlip: Configure },

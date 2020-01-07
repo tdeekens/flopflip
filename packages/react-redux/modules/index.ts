@@ -22,6 +22,11 @@ export {
   ReconfigureFlopFlip,
 } from './components';
 
-export { useAdapterReconfiguration, useAdapterStatus } from './hooks';
+export {
+  useAdapterReconfiguration,
+  useAdapterStatus,
+  useFeatureToggle,
+  useFeatureToggles,
+} from './hooks';
 
 export { version };

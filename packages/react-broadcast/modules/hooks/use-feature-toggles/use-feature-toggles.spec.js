@@ -3,8 +3,6 @@ import useFeatureToggles from './use-feature-toggles';
 import { renderWithAdapter } from '@flopflip/test-utils';
 import Configure from '../../components/configure';
 
-jest.mock('tiny-warning');
-
 const render = TestComponent =>
   renderWithAdapter(TestComponent, {
     components: { ConfigureFlopFlip: Configure },
@@ -27,20 +25,18 @@ const TestComponent = () => {
   );
 };
 
-describe('when React hooks (`useContext`) is available', () => {
-  it('should indicate a feature being disabled', async () => {
-    const rendered = render(<TestComponent />);
+it('should indicate a feature being disabled', async () => {
+  const rendered = render(<TestComponent />);
 
-    await rendered.waitUntilReady();
+  await rendered.waitUntilReady();
 
-    expect(rendered.queryByText('Is disabled: Yes')).toBeInTheDocument();
-  });
+  expect(rendered.queryByText('Is disabled: Yes')).toBeInTheDocument();
+});
 
-  it('should indicate a feature being enabled', async () => {
-    const rendered = render(<TestComponent />);
+it('should indicate a feature being enabled', async () => {
+  const rendered = render(<TestComponent />);
 
-    await rendered.waitUntilReady();
+  await rendered.waitUntilReady();
 
-    expect(rendered.queryByText('Is enabled: Yes')).toBeInTheDocument();
-  });
+  expect(rendered.queryByText('Is enabled: Yes')).toBeInTheDocument();
 });
