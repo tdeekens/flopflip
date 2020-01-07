@@ -1,4 +1,5 @@
-import reducer, { UPDATE_STATUS, updateStatus } from './status';
+import { STATE_SLICE } from '../../store/constants';
+import reducer, { UPDATE_STATUS, updateStatus, selectStatus } from './status';
 
 describe('constants', () => {
   it('should contain `UPDATE_STATUS`', () => {
@@ -56,6 +57,33 @@ describe('reducers', () => {
           isReady: payload.status.isReady,
         });
       });
+    });
+  });
+});
+
+describe('selectors', () => {
+  let status;
+  let state;
+
+  beforeEach(() => {
+    status = {
+      isReady: true,
+      isConfigured: false,
+    };
+    state = {
+      [STATE_SLICE]: {
+        status,
+      },
+    };
+  });
+
+  describe('selecting status', () => {
+    it('should return configuration and ready status', () => {
+      expect(selectStatus(state)).toEqual(
+        expect.objectContaining({
+          isReady: true,
+        })
+      );
     });
   });
 });
