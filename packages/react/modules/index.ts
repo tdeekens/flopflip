@@ -1,7 +1,6 @@
 const version = '__@FLOPFLIP/VERSION_OF_RELEASE__';
 
 export {
-  branchOnFeatureToggle,
   AdapterContext,
   createAdapterContext,
   ToggleFeature,
@@ -17,7 +16,7 @@ export {
   ALL_FLAGS_PROP_KEY,
 } from './constants';
 
-export { omitProps, setDisplayName, wrapDisplayName, withProps } from './hocs';
+export { setDisplayName, wrapDisplayName } from './hocs';
 
 export { useAdapterReconfiguration } from './hooks';
 
