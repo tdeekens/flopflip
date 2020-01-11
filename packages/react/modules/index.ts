@@ -1,7 +1,6 @@
 const version = '__@FLOPFLIP/VERSION_OF_RELEASE__';
 
 export {
-  branchOnFeatureToggle,
   AdapterContext,
   createAdapterContext,
   ToggleFeature,
