@@ -1,44 +1,10 @@
 import { Provider } from 'react-redux';
 import React from 'react';
 import { renderWithAdapter, components } from '@flopflip/test-utils';
-import { ALL_FLAGS_PROP_KEY } from '@flopflip/react';
 import { createStore } from '../../../test-utils';
 import Configure from '../configure';
 import { STATE_SLICE } from './../../store/constants';
-import { mapStateToProps } from './inject-feature-toggles';
 import injectFeatureToggles from './inject-feature-toggles';
-
-describe('mapStateToProps', () => {
-  describe('with `flags` ', () => {
-    const flags = { flag1: true };
-    let state;
-
-    beforeEach(() => {
-      state = {
-        [STATE_SLICE]: { flags },
-      };
-    });
-
-    it('should map `flags` as `ALL_FLAGS_PROP_KEY` onto `props`', () => {
-      expect(mapStateToProps(state)[ALL_FLAGS_PROP_KEY]).toEqual(flags);
-    });
-  });
-
-  describe('without `flags` ', () => {
-    const flags = {};
-    let state;
-
-    beforeEach(() => {
-      state = {
-        [STATE_SLICE]: { flags },
-      };
-    });
-
-    it('should map `flags` as `ALL_FLAGS_PROP_KEY` onto `props`', () => {
-      expect(mapStateToProps(state)[ALL_FLAGS_PROP_KEY]).toEqual(flags);
-    });
-  });
-});
 
 const render = (store, TestComponent) =>
   renderWithAdapter(TestComponent, {

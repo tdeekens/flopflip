@@ -1,8 +1,6 @@
 const version = '__@FLOPFLIP/VERSION_OF_RELEASE__';
 
 export {
-  injectFeatureToggle,
-  injectFeatureToggles,
   branchOnFeatureToggle,
   AdapterContext,
   createAdapterContext,
