@@ -15,7 +15,11 @@ import {
 const mergeOptional = (defaultValue, value) =>
   value === null ? undefined : { ...defaultValue, ...value };
 
-const defaultFlags = { enabledFeature: true, disabledFeature: false };
+const defaultFlags = {
+  enabledFeature: true,
+  disabledFeature: false,
+  variation: 'A',
+};
 const defaultAdapterArgs = {
   user: { key: 'nerd@tdeekens.name' },
 };

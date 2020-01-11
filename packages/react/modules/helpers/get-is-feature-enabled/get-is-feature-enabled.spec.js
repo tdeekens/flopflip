@@ -1,4 +1,3 @@
-import warning from 'tiny-warning';
 import getIsFeatureEnabled from './get-is-feature-enabled';
 
 jest.mock('tiny-warning');
@@ -28,20 +27,6 @@ describe('with existing flag', () => {
       const args = { fooFlag: false };
       expect(getIsFeatureEnabled('fooFlag')(args)).toBe(false);
     });
-  });
-});
-
-describe('with non normalized flag', () => {
-  it('should indicate feature being enabled', () => {
-    const args = { fooFlag: true };
-    expect(getIsFeatureEnabled('foo-flag')(args)).toBe(true);
-  });
-
-  it('should invoke `warning`', () => {
-    const args = { fooFlag: false };
-    getIsFeatureEnabled('fooFlag')(args);
-
-    expect(warning).toHaveBeenCalled();
   });
 });
 
