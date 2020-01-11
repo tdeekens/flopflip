@@ -30,6 +30,6 @@ describe('with non normalized flag variation', () => {
 describe('with non existing flag variation', () => {
   it('should indicate flag variation not existing', () => {
     const args = { fooFlag: true };
-    expect(getFlagVariation('fooFlag2')(args)).not.toBeDefined();
+    expect(getFlagVariation('fooFlag2')(args)).toBe(false);
   });
 });
