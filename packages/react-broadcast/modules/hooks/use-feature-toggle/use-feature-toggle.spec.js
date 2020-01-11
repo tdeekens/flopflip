@@ -11,29 +11,37 @@ const render = TestComponent =>
 const TestComponent = () => {
   const isEnabledFeatureEnabled = useFeatureToggle('enabledFeature');
   const isDisabledFeatureDisabled = useFeatureToggle('disabledFeature');
+  const flagVariation = useFeatureToggle('variation', null);
 
   return (
     <ul>
       <li>Is enabled: {isEnabledFeatureEnabled ? 'Yes' : 'No'}</li>
       <li>Is disabled: {isDisabledFeatureDisabled ? 'No' : 'Yes'}</li>
+      <li>Variation: {flagVariation}</li>
     </ul>
   );
 };
 
-describe('when React hooks (`useContext`) is available', () => {
-  it('should indicate a feature being disabled', async () => {
-    const rendered = render(<TestComponent />);
+it('should indicate a feature being disabled', async () => {
+  const rendered = render(<TestComponent />);
 
-    await rendered.waitUntilReady();
+  await rendered.waitUntilReady();
 
-    expect(rendered.queryByText('Is disabled: Yes')).toBeInTheDocument();
-  });
+  expect(rendered.queryByText('Is disabled: Yes')).toBeInTheDocument();
+});
 
-  it('should indicate a feature being enabled', async () => {
-    const rendered = render(<TestComponent />);
+it('should indicate a feature being enabled', async () => {
+  const rendered = render(<TestComponent />);
 
-    await rendered.waitUntilReady();
+  await rendered.waitUntilReady();
 
-    expect(rendered.queryByText('Is enabled: Yes')).toBeInTheDocument();
-  });
+  expect(rendered.queryByText('Is enabled: Yes')).toBeInTheDocument();
+});
+
+it('should indicate a flag variation', async () => {
+  const rendered = render(<TestComponent />);
+
+  await rendered.waitUntilReady();
+
+  expect(rendered.queryByText('Variation: A')).toBeInTheDocument();
 });
