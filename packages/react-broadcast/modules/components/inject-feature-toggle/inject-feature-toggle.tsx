@@ -18,8 +18,7 @@ export default <OwnProps extends object>(
   Component: React.ComponentType<any>
 ): React.ComponentType<OwnProps & InjectedProps> => {
   const WrappedComponent = (ownProps: OwnProps) => {
-    // NOTE: By passing `null` we get the actual flag variation not a boolean.
-    const flagVariation = useFlagVariations([flagName]);
+    const [flagVariation] = useFlagVariations([flagName]);
     const props = {
       ...ownProps,
       [propKey]: flagVariation,
