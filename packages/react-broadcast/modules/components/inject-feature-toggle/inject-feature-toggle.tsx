@@ -4,7 +4,7 @@ import {
   setDisplayName,
   DEFAULT_FLAG_PROP_KEY,
 } from '@flopflip/react';
-import { useFeatureToggle } from '../../hooks';
+import { useFlagVariations } from '../../hooks';
 import { FlagName, FlagVariation } from '@flopflip/types';
 
 type InjectedProps = {
@@ -19,7 +19,7 @@ export default <OwnProps extends object>(
 ): React.ComponentType<OwnProps & InjectedProps> => {
   const WrappedComponent = (ownProps: OwnProps) => {
     // NOTE: By passing `null` we get the actual flag variation not a boolean.
-    const flagVariation = useFeatureToggle(flagName, null);
+    const flagVariation = useFlagVariations([flagName]);
     const props = {
       ...ownProps,
       [propKey]: flagVariation,
