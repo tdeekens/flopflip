@@ -12,6 +12,7 @@ type Props = {
 const ToggleFeature = <OwnProps extends Props>(props: OwnProps) => {
   const isFeatureEnabled = useFeatureToggle(props.flag, props.variation);
 
+  // @ts-ignore
   return <SharedToggleFeature {...props} isFeatureEnabled={isFeatureEnabled} />;
 };
 

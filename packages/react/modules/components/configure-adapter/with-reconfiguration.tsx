@@ -7,24 +7,25 @@ type ProvidedProps = {
   reconfigure: ReconfigureAdapter;
 };
 
-const withReconfiguration = <Props extends {}>(propKey = 'reconfigure') => (
+const withReconfiguration = <OwnProps extends object>(
+  propKey = 'reconfigure'
+) => (
   Component: React.ComponentType<any>
-): React.ComponentType<ProvidedProps & Props> => {
-  class EnhancedComponent extends React.PureComponent<ProvidedProps & Props> {
-    static displayName = wrapDisplayName(Component, 'withReconfiguration');
+): React.ComponentType<ProvidedProps & OwnProps> => {
+  const WithReconfiguration = (props: OwnProps) => (
+    <AdapterContext.Consumer>
+      {({ reconfigure }) => (
+        <Component {...props} {...{ [propKey]: reconfigure }} />
+      )}
+    </AdapterContext.Consumer>
+  );
 
-    render(): React.ReactNode {
-      return (
-        <AdapterContext.Consumer>
-          {({ reconfigure }) => (
-            <Component {...this.props} {...{ [propKey]: reconfigure }} />
-          )}
-        </AdapterContext.Consumer>
-      );
-    }
-  }
+  WithReconfiguration.displayName = wrapDisplayName(
+    Component,
+    'withReconfiguration'
+  );
 
-  return EnhancedComponent;
+  return WithReconfiguration;
 };
 
 export default withReconfiguration;

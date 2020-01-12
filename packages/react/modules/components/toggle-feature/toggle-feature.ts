@@ -5,58 +5,51 @@ import { isValidElementType } from 'react-is';
 type Props = {
   untoggledComponent?: React.ComponentType;
   toggledComponent?: React.ComponentType;
-  render?: () => Node;
-  children?: ({
-    isFeatureEnabled: boolean,
-  }) => React.ReactNode | React.ReactNode;
+  render?: () => React.ReactNode;
+  children?:
+    | (({ isFeatureEnabled: boolean }) => React.ReactNode)
+    | React.ReactNode;
   isFeatureEnabled: boolean;
 };
 
 const isEmptyChildren = (children: React.ReactNode): boolean =>
   React.Children.count(children) === 0;
 
-export default class ToggleFeature extends React.PureComponent<Props> {
-  static displayName = 'ToggleFeature';
+const ToggleFeature = (props: Props): React.ReactElement | React.ReactNode => {
+  if (props.untoggledComponent)
+    warning(
+      isValidElementType(props.untoggledComponent),
+      `Invalid prop 'untoggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`
+    );
 
-  static defaultProps = {
-    untoggledComponent: null,
-    toggledComponent: null,
-    render: null,
-    children: null,
-  };
+  if (props.toggledComponent)
+    warning(
+      isValidElementType(props.toggledComponent),
+      `Invalid prop 'toggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`
+    );
 
-  render(): React.ReactNode {
-    if (this.props.untoggledComponent)
-      warning(
-        isValidElementType(this.props.untoggledComponent),
-        `Invalid prop 'untoggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`
-      );
+  if (props.isFeatureEnabled) {
+    if (props.toggledComponent)
+      return React.createElement(props.toggledComponent);
 
-    if (this.props.toggledComponent)
-      warning(
-        isValidElementType(this.props.toggledComponent),
-        `Invalid prop 'toggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`
-      );
+    if (props.children && !isEmptyChildren(props.children))
+      return React.Children.only(props.children);
 
-    if (this.props.isFeatureEnabled) {
-      if (this.props.toggledComponent)
-        return React.createElement(this.props.toggledComponent);
-
-      if (this.props.children && !isEmptyChildren(this.props.children))
-        return React.Children.only(this.props.children);
-
-      if (typeof this.props.render === 'function') return this.props.render();
-    }
-
-    if (typeof this.props.children === 'function')
-      return this.props.children({
-        isFeatureEnabled: this.props.isFeatureEnabled,
-      });
-
-    if (this.props.untoggledComponent) {
-      return React.createElement(this.props.untoggledComponent);
-    }
-
-    return null;
+    if (typeof props.render === 'function') return props.render();
   }
-}
+
+  if (typeof props.children === 'function')
+    return props.children({
+      isFeatureEnabled: props.isFeatureEnabled,
+    });
+
+  if (props.untoggledComponent) {
+    return React.createElement(props.untoggledComponent);
+  }
+
+  return null;
+};
+
+ToggleFeature.displayName = 'ToggleFeature';
+
+export default ToggleFeature;
