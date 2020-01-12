@@ -5,7 +5,7 @@ import AdapterContext from '../adapter-context';
 type Props = {
   shouldOverwrite?: boolean;
   user: User;
-  children?: React.Component<any>;
+  children?: React.ReactNode;
 };
 
 const ReconfigureAdapter = (props: Props) => {
