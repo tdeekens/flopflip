@@ -51,11 +51,5 @@ const ToggleFeature = (props: Props): React.ReactElement | React.ReactNode => {
 };
 
 ToggleFeature.displayName = 'ToggleFeature';
-ToggleFeature.defaultProps = {
-  untoggledComponent: null,
-  toggledComponent: null,
-  render: null,
-  children: null,
-};
 
 export default ToggleFeature;
