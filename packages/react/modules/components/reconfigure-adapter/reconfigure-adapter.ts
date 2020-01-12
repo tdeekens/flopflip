@@ -1,56 +1,34 @@
 import React from 'react';
-import {
-  User,
-  AdapterArgs,
-  AdapterReconfigurationOptions,
-} from '@flopflip/types';
-import { withReconfiguration } from '../configure-adapter';
+import { User } from '@flopflip/types';
+import AdapterContext from '../adapter-context';
 
 type Props = {
   shouldOverwrite?: boolean;
   user: User;
-  reconfigure: (
-    adapterArgs: Partial<AdapterArgs>,
-    options?: AdapterReconfigurationOptions
-  ) => void;
   children?: React.Component<any>;
 };
 
-export class ReconfigureAdapter extends React.PureComponent<Props> {
-  static displayName = 'ReconfigureAdapter';
+const ReconfigureAdapter = (props: Props) => {
+  const adapterContext = React.useContext(AdapterContext);
 
-  static defaultProps = {
-    shouldOverwrite: false,
-    children: null,
-  };
-
-  componentDidMount(): void {
-    return this.props.reconfigure(
+  React.useEffect(() => {
+    adapterContext.reconfigure(
       {
-        user: this.props.user,
+        user: props.user,
       },
       {
-        shouldOverwrite: this.props.shouldOverwrite,
+        shouldOverwrite: props.shouldOverwrite,
       }
     );
-  }
+  }, [props.user, props.shouldOverwrite, adapterContext]);
 
-  componentDidUpdate(): void {
-    return this.props.reconfigure(
-      {
-        user: this.props.user,
-      },
-      {
-        shouldOverwrite: this.props.shouldOverwrite,
-      }
-    );
-  }
+  return props.children ? React.Children.only(props.children) : null;
+};
 
-  render(): React.ReactNode {
-    return this.props.children
-      ? React.Children.only(this.props.children)
-      : null;
-  }
-}
+ReconfigureAdapter.displayName = 'ReconfigureAdapter';
+ReconfigureAdapter.defaultProps = {
+  shouldOverwrite: false,
+  children: null,
+};
 
-export default withReconfiguration()(ReconfigureAdapter);
+export default ReconfigureAdapter;

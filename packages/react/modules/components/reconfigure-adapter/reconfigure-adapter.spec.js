@@ -6,17 +6,29 @@ import ReconfigureAdapter from './reconfigure-adapter';
 
 const TestComponent = props => {
   const [count, setCount] = React.useState(0);
+  const [, setState] = React.useState(0);
   const increment = () => setCount(count + 1);
+
+  const user = React.useMemo(
+    () => ({
+      ...props.reconfiguration.user,
+      count,
+    }),
+    [count, props.reconfiguration.user]
+  );
 
   return (
     <AdapterContext.Provider value={props.adapterContext}>
       <ReconfigureAdapter
-        user={props.reconfiguration.user}
+        user={user}
         shouldOverwrite={props.reconfiguration.shouldOverwrite}
       >
         <>
           <button type="button" onClick={increment}>
-            Increment
+            Reconfigure with changes
+          </button>
+          <button type="button" onClick={setState}>
+            Reconfigure without changes
           </button>
           <p>Count is: {count}</p>
           <p>Children</p>
@@ -68,7 +80,7 @@ describe('when mounted', () => {
 
     expect(adapterContext.reconfigure).toHaveBeenCalledWith(
       {
-        user: reconfiguration.user,
+        user: expect.objectContaining(reconfiguration.user),
       },
       {
         shouldOverwrite: reconfiguration.shouldOverwrite,
@@ -78,30 +90,53 @@ describe('when mounted', () => {
 });
 
 describe('when updated', () => {
-  it('should reconfigure again with user and configuration', () => {
-    const adapterContext = createAdapterContext(
-      jest.fn(),
-      AdapterStates.UNCONFIGURED
-    );
-    const reconfiguration = createReconfiguration();
+  describe('without reconfiguration change', () => {
+    it('should not reconfigure again with user and configuration', () => {
+      const adapterContext = createAdapterContext(
+        jest.fn(),
+        AdapterStates.UNCONFIGURED
+      );
+      const reconfiguration = createReconfiguration();
 
-    const rendered = render(
-      <TestComponent
-        adapterContext={adapterContext}
-        reconfiguration={reconfiguration}
-      />
-    );
+      const rendered = render(
+        <TestComponent
+          adapterContext={adapterContext}
+          reconfiguration={reconfiguration}
+        />
+      );
 
-    fireEvent.click(rendered.queryByText('Increment'));
+      fireEvent.click(rendered.queryByText(/Reconfigure without changes/i));
 
-    expect(adapterContext.reconfigure).toHaveBeenNthCalledWith(
-      2,
-      {
-        user: reconfiguration.user,
-      },
-      {
-        shouldOverwrite: reconfiguration.shouldOverwrite,
-      }
-    );
+      expect(adapterContext.reconfigure).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('with reconfiguration change', () => {
+    it('should reconfigure again with user and configuration', () => {
+      const adapterContext = createAdapterContext(
+        jest.fn(),
+        AdapterStates.UNCONFIGURED
+      );
+      const reconfiguration = createReconfiguration();
+
+      const rendered = render(
+        <TestComponent
+          adapterContext={adapterContext}
+          reconfiguration={reconfiguration}
+        />
+      );
+
+      fireEvent.click(rendered.queryByText(/Reconfigure with changes/i));
+
+      expect(adapterContext.reconfigure).toHaveBeenNthCalledWith(
+        2,
+        {
+          user: expect.objectContaining(reconfiguration.user),
+        },
+        {
+          shouldOverwrite: reconfiguration.shouldOverwrite,
+        }
+      );
+    });
   });
 });
