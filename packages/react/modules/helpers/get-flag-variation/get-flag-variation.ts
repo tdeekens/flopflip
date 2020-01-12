@@ -2,8 +2,7 @@ import { FlagName, FlagVariation, Flags } from '@flopflip/types';
 import warning from 'tiny-warning';
 import { DEFAULT_FLAG_PROP_KEY } from '../../constants';
 import getNormalizedFlagName from '../get-normalized-flag-name';
-
-const isNil = (value: any): boolean => value === undefined || value === null;
+import isNil from '../is-nil';
 
 const getFlagVariation = (
   flagName: FlagName = DEFAULT_FLAG_PROP_KEY
