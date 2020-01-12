@@ -5,17 +5,17 @@ import { isValidElementType } from 'react-is';
 type Props = {
   untoggledComponent?: React.ComponentType;
   toggledComponent?: React.ComponentType;
-  render?: () => Node;
-  children?: ({
-    isFeatureEnabled: boolean,
-  }) => React.ReactNode | React.ReactNode;
+  render?: () => React.ReactNode;
+  children?:
+    | (({ isFeatureEnabled: boolean }) => React.ReactNode)
+    | React.ReactNode;
   isFeatureEnabled: boolean;
 };
 
 const isEmptyChildren = (children: React.ReactNode): boolean =>
   React.Children.count(children) === 0;
 
-const ToggleFeature = (props: Props) => {
+const ToggleFeature = (props: Props): React.ReactElement | React.ReactNode => {
   if (props.untoggledComponent)
     warning(
       isValidElementType(props.untoggledComponent),
