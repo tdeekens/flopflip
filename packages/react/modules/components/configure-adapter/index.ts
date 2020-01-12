@@ -1,2 +1,1 @@
-export { default } from './configure-adapter';
-export { default as withReconfiguration } from './with-reconfiguration';
+export { default, AdapterStates } from './configure-adapter';

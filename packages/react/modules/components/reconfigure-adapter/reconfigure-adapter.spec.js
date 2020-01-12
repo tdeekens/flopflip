@@ -1,123 +1,142 @@
 import React from 'react';
-import { getComponentInstance, render } from '@flopflip/test-utils';
-import { ReconfigureAdapter } from './reconfigure-adapter';
+import { render, fireEvent } from '@flopflip/test-utils';
+import { AdapterStates } from './../configure-adapter';
+import AdapterContext, { createAdapterContext } from './../adapter-context';
+import ReconfigureAdapter from './reconfigure-adapter';
 
-const ChildComponent = () => <div>Child component</div>;
-ChildComponent.displayName = 'ChildComponent';
+const TestComponent = props => {
+  const [count, setCount] = React.useState(0);
+  const [, setState] = React.useState(0);
+  const increment = () => setCount(count + 1);
 
-const createTestProps = props => ({
+  const user = React.useMemo(
+    () => ({
+      ...props.reconfiguration.user,
+      count,
+    }),
+    [count, props.reconfiguration.user]
+  );
+
+  return (
+    <AdapterContext.Provider value={props.adapterContext}>
+      <ReconfigureAdapter
+        user={user}
+        shouldOverwrite={props.reconfiguration.shouldOverwrite}
+      >
+        <>
+          <button type="button" onClick={increment}>
+            Reconfigure with changes
+          </button>
+          <button type="button" onClick={setState}>
+            Reconfigure without changes
+          </button>
+          <p>Count is: {count}</p>
+          <p>Children</p>
+        </>
+      </ReconfigureAdapter>
+    </AdapterContext.Provider>
+  );
+};
+
+const createReconfiguration = () => ({
   user: {
-    key: 'foo-user-key',
+    id: 'test-user-id',
   },
-  shouldOverwrite: false,
-  reconfigure: jest.fn(),
-  children: ChildComponent,
-
-  ...props,
+  shouldOverwrite: true,
 });
 
-describe('rendering', () => {
-  let props;
-
-  beforeEach(() => {
-    props = createTestProps();
-  });
-
-  it('should render `children`', () => {
+describe('with children', () => {
+  it('should render children', () => {
+    const adapterContext = createAdapterContext(
+      jest.fn(),
+      AdapterStates.UNCONFIGURED
+    );
+    const reconfiguration = createReconfiguration();
     const rendered = render(
-      <ReconfigureAdapter {...props}>
-        <ChildComponent />
-      </ReconfigureAdapter>
+      <TestComponent
+        adapterContext={adapterContext}
+        reconfiguration={reconfiguration}
+      />
     );
 
-    expect(rendered.queryByText('Child component')).toBeInTheDocument();
+    expect(rendered.queryByText('Children')).toBeInTheDocument();
   });
 });
 
-describe('lifecycle', () => {
-  let props;
-  let componentInstance;
+describe('when mounted', () => {
+  it('should reconfigure with user and configuration', () => {
+    const adapterContext = createAdapterContext(
+      jest.fn(),
+      AdapterStates.UNCONFIGURED
+    );
+    const reconfiguration = createReconfiguration();
 
-  describe('componentDidMount', () => {
-    beforeEach(() => {
-      props = createTestProps();
-      componentInstance = getComponentInstance(
-        <ReconfigureAdapter {...props}>
-          <ChildComponent />
-        </ReconfigureAdapter>
-      );
+    render(
+      <TestComponent
+        adapterContext={adapterContext}
+        reconfiguration={reconfiguration}
+      />
+    );
 
-      componentInstance.componentDidMount();
-    });
-
-    it('should invoke `reconfigure`', () => {
-      expect(props.reconfigure).toHaveBeenCalled();
-    });
-
-    it('should invoke `reconfigure` with `user`', () => {
-      expect(props.reconfigure).toHaveBeenCalledWith(
-        expect.objectContaining({
-          user: props.user,
-        }),
-        expect.any(Object)
-      );
-    });
-
-    it('should invoke `reconfigure` with `shouldOverwrite`', () => {
-      expect(props.reconfigure).toHaveBeenCalledWith(
-        expect.any(Object),
-        expect.objectContaining({
-          shouldOverwrite: props.shouldOverwrite,
-        })
-      );
-    });
-  });
-  describe('componentDidUpdate', () => {
-    beforeEach(() => {
-      props = createTestProps();
-      componentInstance = getComponentInstance(
-        <ReconfigureAdapter {...props}>
-          <ChildComponent />
-        </ReconfigureAdapter>
-      );
-
-      props.reconfigure.mockClear();
-
-      componentInstance.componentDidUpdate();
-    });
-
-    it('should invoke `reconfigure`', () => {
-      expect(props.reconfigure).toHaveBeenCalled();
-    });
-
-    it('should invoke `reconfigure` with `user`', () => {
-      expect(props.reconfigure).toHaveBeenCalledWith(
-        expect.objectContaining({
-          user: props.user,
-        }),
-        expect.any(Object)
-      );
-    });
-
-    it('should invoke `reconfigure` with `shouldOverwrite`', () => {
-      expect(props.reconfigure).toHaveBeenCalledWith(
-        expect.any(Object),
-        expect.objectContaining({
-          shouldOverwrite: props.shouldOverwrite,
-        })
-      );
-    });
+    expect(adapterContext.reconfigure).toHaveBeenCalledWith(
+      {
+        user: expect.objectContaining(reconfiguration.user),
+      },
+      {
+        shouldOverwrite: reconfiguration.shouldOverwrite,
+      }
+    );
   });
 });
 
-describe('statics', () => {
-  describe('defaultProps', () => {
-    it('should default `shouldOverwrite` to `false`', () => {
-      expect(ReconfigureAdapter.defaultProps.shouldOverwrite).toBe(false);
-    });
+describe('when updated', () => {
+  describe('without reconfiguration change', () => {
+    it('should not reconfigure again with user and configuration', () => {
+      const adapterContext = createAdapterContext(
+        jest.fn(),
+        AdapterStates.UNCONFIGURED
+      );
+      const reconfiguration = createReconfiguration();
 
-    it('should default `children` to `null`', () => {
-      expect(ReconfigureAdapter.defaultProps.children).toBe(null);
+      const rendered = render(
+        <TestComponent
+          adapterContext={adapterContext}
+          reconfiguration={reconfiguration}
+        />
+      );
+
+      fireEvent.click(rendered.queryByText(/Reconfigure without changes/i));
+
+      expect(adapterContext.reconfigure).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('with reconfiguration change', () => {
+    it('should reconfigure again with user and configuration', () => {
+      const adapterContext = createAdapterContext(
+        jest.fn(),
+        AdapterStates.UNCONFIGURED
+      );
+      const reconfiguration = createReconfiguration();
+
+      const rendered = render(
+        <TestComponent
+          adapterContext={adapterContext}
+          reconfiguration={reconfiguration}
+        />
+      );
+
+      fireEvent.click(rendered.queryByText(/Reconfigure with changes/i));
+
+      expect(adapterContext.reconfigure).toHaveBeenNthCalledWith(
+        2,
+        {
+          user: expect.objectContaining(reconfiguration.user),
+        },
+        {
+          shouldOverwrite: reconfiguration.shouldOverwrite,
+        }
+      );
     });
   });
 });
