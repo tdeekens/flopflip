@@ -8,7 +8,7 @@ export {
   ReconfigureAdapter,
 } from './components';
 
-export { getIsFeatureEnabled, getFlagVariation } from './helpers';
+export { getIsFeatureEnabled, getFlagVariation, isNil } from './helpers';
 
 export {
   DEFAULT_FLAG_PROP_KEY,
