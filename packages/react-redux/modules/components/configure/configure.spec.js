@@ -1,17 +1,43 @@
 import React from 'react';
-import { renderShallowly } from '@flopflip/test-utils';
-import { ConfigureAdapter } from '@flopflip/react';
+import { render as rtlRender } from '@flopflip/test-utils';
+import adapter, { updateFlags } from '@flopflip/memory-adapter';
+import { Provider } from 'react-redux';
+import { createStore } from '../../../test-utils';
+import { STATE_SLICE } from '../../store/constants';
+import { useFeatureToggle, useAdapterStatus } from '../../hooks';
 import Configure from './configure';
 
-jest.mock('../../hooks');
+const testFlagName = 'firstFlag';
+const TestComponent = () => {
+  const { isReady, isConfigured } = useAdapterStatus();
+  const isFeatureEnabled = useFeatureToggle(testFlagName);
 
-const ChildComponent = () => <div />;
+  return (
+    <ul>
+      <li>Is ready: {isReady ? 'Yes' : 'No'}</li>
+      <li>Is configured: {isConfigured ? 'Yes' : 'No'}</li>
+      <li>Feature enabled: {isFeatureEnabled ? 'Yes' : 'No'}</li>
+    </ul>
+  );
+};
+
+const render = () => {
+  const props = createTestProps();
+  const store = createStore({
+    [STATE_SLICE]: { flags: { disabledFeature: false } },
+  });
+
+  return rtlRender(
+    <Provider store={store}>
+      <Configure {...props}>
+        <TestComponent />
+      </Configure>
+    </Provider>
+  );
+};
+
 const createTestProps = custom => ({
-  adapter: {
-    configure: jest.fn(),
-    reconfigure: jest.fn(),
-    getIsReady: jest.fn(),
-  },
+  adapter,
   adapterArgs: {
     fooId: 'foo-id',
   },
@@ -19,62 +45,45 @@ const createTestProps = custom => ({
   ...custom,
 });
 
-describe('rendering', () => {
-  let props;
-  let wrapper;
+describe('when feature is disabled', () => {
+  it('should indicate the feature being disabled', () => {
+    const rendered = render();
 
-  beforeEach(() => {
-    props = createTestProps();
-    wrapper = renderShallowly(<Configure {...props} />);
+    expect(rendered.queryByText(/Feature enabled: No/i)).toBeInTheDocument();
   });
+});
 
-  it('should render a `<ConfigureAdapter>`', () => {
-    expect(wrapper).toRender(ConfigureAdapter);
+describe('when enabling feature is', () => {
+  it('should indicate the feature being enabled', async () => {
+    const rendered = render();
+
+    await adapter.waitUntilConfigured();
+
+    updateFlags({
+      [testFlagName]: true,
+    });
+
+    expect(rendered.queryByText(/Feature enabled: Yes/i)).toBeInTheDocument();
   });
+});
 
-  describe('with `children`', () => {
-    let props;
+describe('when not configured and not ready', () => {
+  it('should indicate through the adapter state', () => {
+    const rendered = render();
 
-    beforeEach(() => {
-      props = createTestProps();
-
-      wrapper = renderShallowly(
-        <Configure {...props}>
-          <ChildComponent />
-        </Configure>
-      );
-    });
-
-    it('should render `children`', () => {
-      expect(wrapper).toRender(ChildComponent);
-    });
+    expect(rendered.queryByText(/Is ready: No/i)).toBeInTheDocument();
+    expect(rendered.queryByText(/Is configured: No/i)).toBeInTheDocument();
   });
+});
 
-  describe('`of <ConfigureAdapter />`', () => {
-    let configureAdapterWrapper;
+describe('when configured and ready', () => {
+  it('should indicate through the adapter state', async () => {
+    const rendered = render();
 
-    beforeEach(() => {
-      configureAdapterWrapper = wrapper.find(ConfigureAdapter);
-    });
+    await adapter.waitUntilConfigured();
 
-    it('should receive `adapterArgs`', () => {
-      expect(configureAdapterWrapper).toHaveProp(
-        'adapterArgs',
-        expect.objectContaining({})
-      );
-    });
-
-    it('should receive `onStatusStateChange` and `onFlagsStateChange`', () => {
-      expect(configureAdapterWrapper).toHaveProp('onStatusStateChange');
-      expect(configureAdapterWrapper).toHaveProp('onFlagsStateChange');
-    });
-
-    it('should receive `defaultFlags`', () => {
-      expect(configureAdapterWrapper).toHaveProp(
-        'defaultFlags',
-        Configure.defaultProps.defaultFlags
-      );
-    });
+    expect(rendered.queryByText(/Is ready: Yes/i)).toBeInTheDocument();
+    expect(rendered.queryByText(/Is configured: Yes/i)).toBeInTheDocument();
   });
 });
 

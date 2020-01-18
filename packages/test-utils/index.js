@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import React from 'react';
-import { shallow } from 'enzyme';
 import adapter, { updateFlags } from '@flopflip/memory-adapter';
 import {
   render,
@@ -132,12 +131,6 @@ const renderWithAdapter = (
   };
 };
 
-const getComponentInstance = node => {
-  const wrapper = shallow(node);
-
-  return wrapper.instance();
-};
-
 const FlagsToComponent = props => (
   <>
     {Object.entries(props.propKey ? props[props.propKey] : props).map(
@@ -178,9 +171,7 @@ const components = {
 export * from '@testing-library/react';
 export {
   defaultRender as render,
-  shallow as renderShallowly,
   renderWithAdapter,
-  getComponentInstance,
   adapter,
   updateFlags,
   components,
