@@ -1,22 +1,17 @@
 import React from 'react';
-import { getComponentInstance } from '@flopflip/test-utils';
-import ConfigureAdapter, {
-  AdapterStates,
-  mergeAdapterArgs,
-} from './configure-adapter';
+import { render } from '@flopflip/test-utils';
+import ConfigureAdapter from './configure-adapter';
 
 const ChildComponent = () => <div>Child component</div>;
 ChildComponent.displayName = 'ChildComponent';
 
-const createAdapter = custom => ({
+const createAdapter = () => ({
   getIsReady: jest.fn(() => false),
   configure: jest.fn(() => Promise.resolve()),
   reconfigure: jest.fn(() => Promise.resolve()),
-
-  ...custom,
 });
 
-const createTestProps = props => ({
+const createProps = ({ adapter }) => ({
   adapterArgs: {
     clientSideId: 'foo-clientSideId',
     user: {
@@ -25,654 +20,225 @@ const createTestProps = props => ({
   },
   onFlagsStateChange: jest.fn(),
   onStatusStateChange: jest.fn(),
-  adapter: createAdapter(),
-  children: <ChildComponent />,
-
-  ...props,
+  adapter,
 });
 
-describe('lifecycle', () => {
-  describe('componentDidMount', () => {
-    let componentInstance;
-    let props;
+describe('rendering', () => {
+  describe('when providing render prop', () => {
+    describe('when adapter is ready', () => {
+      it('should invoke render prop', () => {
+        const adapter = createAdapter();
+        const props = createProps({ adapter });
 
-    beforeEach(() => {
-      props = createTestProps();
-      componentInstance = getComponentInstance(
-        <ConfigureAdapter {...props}>
-          <ChildComponent />
-        </ConfigureAdapter>
-      );
-    });
+        adapter.getIsReady.mockReturnValue(true);
+        const renderProp = jest.fn();
 
-    describe('when `shouldDeferAdapterConfiguration` is `false`', () => {
-      describe('when not initialized', () => {
-        describe('while configuring adapter', () => {
-          let props;
+        render(<ConfigureAdapter {...props} render={renderProp} />);
 
-          beforeEach(() => {
-            props = createTestProps({
-              // NOTE: Rejecting to not enter `then`.
-              adapter: createAdapter({
-                configure: jest.fn(() => Promise.reject()),
-              }),
-            });
-            componentInstance = getComponentInstance(
-              <ConfigureAdapter {...props}>
-                <ChildComponent />
-              </ConfigureAdapter>
-            );
-
-            return componentInstance.componentDidMount().catch(() => null);
-          });
-
-          it('should set the state to configuring', () => {
-            expect(componentInstance.adapterState).toEqual(
-              AdapterStates.CONFIGURING
-            );
-          });
-        });
-
-        describe('when the adapter configures', () => {
-          beforeEach(() => {
-            return componentInstance.componentDidMount();
-          });
-
-          it('should invoke `configure` on `adapter`', () => {
-            expect(props.adapter.configure).toHaveBeenCalled();
-          });
-
-          it('should invoke `configure` on `adapter` with `adapterArgs`', () => {
-            expect(props.adapter.configure).toHaveBeenCalledWith(
-              props.adapterArgs,
-              {
-                onFlagsStateChange: props.onFlagsStateChange,
-                onStatusStateChange: props.onStatusStateChange,
-              }
-            );
-          });
-
-          describe('when `children` is a function', () => {
-            beforeEach(() => {
-              props = createTestProps({
-                children: jest.fn(() => <ChildComponent />),
-              });
-              componentInstance = getComponentInstance(
-                <ConfigureAdapter {...props} />
-              );
-
-              return componentInstance.componentDidMount().catch(() => null);
-            });
-
-            it('should invoke `children` with not `isAdapterReady`', () => {
-              expect(props.children).toHaveBeenCalledWith({
-                isAdapterReady: false,
-              });
-            });
-          });
-
-          describe('when the adapter has configured', () => {
-            beforeEach(() => {
-              jest.spyOn(componentInstance, 'applyAdapterArgs');
-            });
-
-            describe('without pending adapter args', () => {
-              it('should set the state to configured', () => {
-                expect(componentInstance.adapterState).toEqual(
-                  AdapterStates.CONFIGURED
-                );
-              });
-
-              it('should not apply the `pendingAdapterArgs`', () => {
-                expect(
-                  componentInstance.applyAdapterArgs
-                ).not.toHaveBeenCalled();
-              });
-            });
-
-            describe('with `pendingAdapterArgs`', () => {
-              beforeEach(() => {
-                componentInstance.pendingAdapterArgs = {
-                  custom: { pending: 'arg' },
-                };
-
-                return componentInstance.componentDidMount().catch(() => null);
-              });
-
-              it('should set the `adapterState` to configured', () => {
-                expect(componentInstance.adapterState).toEqual(
-                  AdapterStates.CONFIGURED
-                );
-              });
-
-              it('should apply the `pendingAdapterArgs`', () => {
-                expect(componentInstance.applyAdapterArgs).toHaveBeenCalled();
-              });
-            });
-          });
-        });
+        expect(renderProp).toHaveBeenCalled();
       });
     });
 
-    describe('when `shouldDeferAdapterConfiguration` is `true`', () => {
-      beforeEach(() => {
-        props = createTestProps({ shouldDeferAdapterConfiguration: true });
-        componentInstance = getComponentInstance(
-          <ConfigureAdapter {...props}>
-            <ChildComponent />
-          </ConfigureAdapter>
-        );
+    describe('when adapter is not ready', () => {
+      it('should invoke render prop', () => {
+        const adapter = createAdapter();
+        const props = createProps({ adapter });
 
-        componentInstance.setAdapterState(AdapterStates.CONFIGURED);
+        const renderProp = jest.fn();
 
-        return componentInstance.componentDidMount();
-      });
+        render(<ConfigureAdapter {...props} render={renderProp} />);
 
-      it('should not invoke `configure` on `adapter`', () => {
-        expect(props.adapter.configure).not.toHaveBeenCalled();
+        expect(renderProp).not.toHaveBeenCalled();
       });
     });
+  });
 
-    describe('with `defaultFlags`', () => {
-      let wrapper;
-      let props;
+  describe('when providing function as a child', () => {
+    describe('when adapter is ready', () => {
+      it('should invoke children prop with ready state', () => {
+        const adapter = createAdapter();
+        const props = createProps({ adapter });
 
-      beforeEach(() => {
-        props = createTestProps({
-          defaultFlags: {
-            aFlag: true,
-          },
-        });
+        adapter.getIsReady.mockReturnValue(true);
+        const childrenProp = jest.fn();
 
-        wrapper = getComponentInstance(
-          <ConfigureAdapter {...props}>
-            <ChildComponent />
-          </ConfigureAdapter>
-        );
+        render(<ConfigureAdapter {...props}>{childrenProp}</ConfigureAdapter>);
 
-        return wrapper.componentDidMount();
-      });
-
-      it('should invoke `onFlagsStateChange` on `adapterArgs` with `defaultFlags`', () => {
-        expect(props.onFlagsStateChange).toHaveBeenCalledWith(
-          props.defaultFlags
+        expect(childrenProp).toHaveBeenCalledWith(
+          expect.objectContaining({ isAdapterReady: true })
         );
       });
     });
   });
 
-  describe('UNSAFE_componentWillReceiveProps', () => {
-    let componentInstance;
-    let props;
-    let nextProps;
+  describe('when providing React node as children', () => {
+    describe('when adapter is ready', () => {
+      it('should invoke render prop', () => {
+        const adapter = createAdapter();
+        const props = createProps({ adapter });
 
-    beforeEach(() => {
-      props = createTestProps();
-      componentInstance = getComponentInstance(
-        <ConfigureAdapter {...props}>
-          <ChildComponent />
-        </ConfigureAdapter>
-      );
-    });
+        adapter.getIsReady.mockReturnValue(true);
 
-    describe('with changed `adapterArgs`', () => {
-      beforeEach(() => {
-        nextProps = createTestProps({
-          adapterArgs: {
-            user: 'changed-user',
-          },
-        });
-
-        jest.spyOn(componentInstance, 'reconfigureOrQueue');
-
-        // eslint-disable-next-line new-cap
-        componentInstance.UNSAFE_componentWillReceiveProps(nextProps);
-      });
-
-      it('should invoke `recongiureOrQueue`', () => {
-        expect(componentInstance.reconfigureOrQueue).toHaveBeenCalled();
-      });
-
-      it('should invoke `recongiureOrQueue` with the `nextProps.adapterArgs`', () => {
-        expect(componentInstance.reconfigureOrQueue).toHaveBeenCalledWith(
-          nextProps.adapterArgs,
-          expect.any(Object)
-        );
-      });
-
-      it('should invoke `recongiureOrQueue` with `shouldOverwrite`', () => {
-        expect(
-          componentInstance.reconfigureOrQueue
-        ).toHaveBeenCalledWith(expect.any(Object), { shouldOverwrite: false });
-      });
-    });
-
-    describe('without changed `adapterArgs`', () => {
-      beforeEach(() => {
-        jest.spyOn(componentInstance, 'reconfigureOrQueue');
-
-        // eslint-disable-next-line new-cap
-        componentInstance.UNSAFE_componentWillReceiveProps(props);
-      });
-
-      it('should invoke not `recongiureOrQueue`', () => {
-        expect(componentInstance.reconfigureOrQueue).not.toHaveBeenCalled();
-      });
-    });
-  });
-
-  describe('componentDidUpdate', () => {
-    describe('when `shouldDeferAdapterConfiguration` is `false`', () => {
-      let props;
-      let componentInstance;
-
-      describe('when not configured', () => {
-        describe('while configuring adapter', () => {
-          let componentInstance;
-          let props;
-
-          beforeEach(() => {
-            props = createTestProps({
-              // NOTE: Rejecting to not enter `then`.
-              adapter: createAdapter({
-                configure: jest.fn(() => Promise.reject()),
-              }),
-            });
-            componentInstance = getComponentInstance(
-              <ConfigureAdapter {...props}>
-                <ChildComponent />
-              </ConfigureAdapter>
-            );
-          });
-
-          beforeEach(() => {
-            componentInstance.componentDidMount().catch(() => null);
-          });
-
-          it('should set the state to configuring', () => {
-            expect(componentInstance.adapterState).toEqual(
-              AdapterStates.CONFIGURING
-            );
-          });
-        });
-
-        describe('when the adapter configured', () => {
-          beforeEach(() => {
-            props = createTestProps();
-            componentInstance = getComponentInstance(
-              <ConfigureAdapter {...props}>
-                <ChildComponent />
-              </ConfigureAdapter>
-            );
-
-            return componentInstance.componentDidUpdate();
-          });
-
-          it('should invoke `configure` on `adapter`', () => {
-            expect(props.adapter.configure).toHaveBeenCalled();
-          });
-
-          it('should invoke `configure` on `adapter` with `adapterArgs`', () => {
-            expect(props.adapter.configure).toHaveBeenCalledWith(
-              props.adapterArgs,
-              {
-                onFlagsStateChange: props.onFlagsStateChange,
-                onStatusStateChange: props.onStatusStateChange,
-              }
-            );
-          });
-
-          it('should set the state configured', () => {
-            expect(componentInstance.adapterState).toEqual(
-              AdapterStates.CONFIGURED
-            );
-          });
-        });
-      });
-
-      describe('when already configured', () => {
-        beforeEach(() => {
-          props = createTestProps();
-          componentInstance = getComponentInstance(
-            <ConfigureAdapter {...props}>
-              <ChildComponent />
-            </ConfigureAdapter>
-          );
-
-          componentInstance.setAdapterState(AdapterStates.CONFIGURED);
-
-          // Comes from `componentDidMount`
-          props.adapter.configure.mockClear();
-
-          return componentInstance.componentDidUpdate();
-        });
-
-        it('should not invoke `configure` on `adapter` again', () => {
-          expect(props.adapter.configure).not.toHaveBeenCalled();
-        });
-
-        describe('while reconfiguring', () => {
-          beforeEach(() => {
-            props = createTestProps({
-              // NOTE: Rejecting to not enter `then`.
-              adapter: createAdapter({
-                reconfigure: jest.fn(() => Promise.reject()),
-              }),
-            });
-            componentInstance = getComponentInstance(
-              <ConfigureAdapter {...props}>
-                <ChildComponent />
-              </ConfigureAdapter>
-            );
-
-            componentInstance.setAdapterState(AdapterStates.CONFIGURED);
-
-            return componentInstance.componentDidUpdate().catch(() => null);
-          });
-
-          it('should set the state configuring', () => {
-            expect(componentInstance.adapterState).toEqual(
-              AdapterStates.CONFIGURING
-            );
-          });
-        });
-
-        describe('when reconfiguring', () => {
-          beforeEach(() => {
-            props = createTestProps();
-            componentInstance = getComponentInstance(
-              <ConfigureAdapter {...props}>
-                <ChildComponent />
-              </ConfigureAdapter>
-            );
-
-            jest.spyOn(componentInstance, 'applyAdapterArgs');
-
-            componentInstance.setAdapterState(AdapterStates.CONFIGURED);
-
-            return componentInstance.componentDidUpdate();
-          });
-
-          it('should invoke `reconfigure` on `adapter`', () => {
-            expect(props.adapter.reconfigure).toHaveBeenCalled();
-          });
-
-          it('should invoke `reconfigure` on `adapter` with `adapterArgs`', () => {
-            expect(props.adapter.reconfigure).toHaveBeenCalledWith(
-              props.adapterArgs,
-              {
-                onFlagsStateChange: props.onFlagsStateChange,
-                onStatusStateChange: props.onStatusStateChange,
-              }
-            );
-          });
-
-          describe('when the adapter configured', () => {
-            it('should set the state to configured', () => {
-              expect(componentInstance.adapterState).toEqual(
-                AdapterStates.CONFIGURED
-              );
-            });
-          });
-
-          describe('with `pendingAdapterArgs`', () => {
-            beforeEach(() => {
-              componentInstance.pendingAdapterArgs = {
-                custom: { pending: 'arg' },
-              };
-              return componentInstance.componentDidMount().catch(() => null);
-            });
-
-            it('should set the `adapterState` to configured', () => {
-              expect(componentInstance.adapterState).toEqual(
-                AdapterStates.CONFIGURED
-              );
-            });
-
-            it('should apply the `pendingAdapterArgs`', () => {
-              expect(componentInstance.applyAdapterArgs).toHaveBeenCalled();
-            });
-          });
-        });
-      });
-    });
-
-    describe('when `shouldDeferAdapterConfiguration` is `true`', () => {
-      let props;
-      let componentInstance;
-
-      beforeEach(() => {
-        props = createTestProps({ shouldDeferAdapterConfiguration: true });
-        componentInstance = getComponentInstance(
+        const rendered = render(
           <ConfigureAdapter {...props}>
             <ChildComponent />
           </ConfigureAdapter>
         );
 
-        return componentInstance.componentDidUpdate();
+        expect(rendered.queryByText('Child component')).toBeInTheDocument();
       });
+    });
 
-      it('should not invoke `configure` on `adapter`', () => {
-        expect(props.adapter.configure).not.toHaveBeenCalled();
+    describe('when adapter is not ready', () => {
+      it('should invoke render prop', () => {
+        const adapter = createAdapter();
+        const props = createProps({ adapter });
+
+        const rendered = render(
+          <ConfigureAdapter {...props}>
+            <ChildComponent />
+          </ConfigureAdapter>
+        );
+
+        expect(rendered.queryByText('Child component')).toBeInTheDocument();
       });
     });
   });
 });
 
-describe('interacting', () => {
-  let props;
-  let componentInstance;
+describe('when adapter configuration should be deferred', () => {
+  it('should not configure the adapter', () => {
+    const adapter = createAdapter();
+    const props = createProps({ adapter });
+
+    const childrenProp = jest.fn();
+
+    render(
+      <ConfigureAdapter {...props} shouldDeferAdapterConfiguration>
+        {childrenProp}
+      </ConfigureAdapter>
+    );
+
+    expect(adapter.configure).not.toHaveBeenCalled();
+  });
+});
+
+describe('when adapter configuration should not be deferred', () => {
+  it('should configure the adapter', () => {
+    const adapter = createAdapter();
+    const props = createProps({ adapter });
+
+    render(
+      <ConfigureAdapter {...props}>
+        <ChildComponent />
+      </ConfigureAdapter>
+    );
+
+    expect(adapter.configure).toHaveBeenCalledWith(props.adapterArgs, {
+      onFlagsStateChange: props.onFlagsStateChange,
+      onStatusStateChange: props.onStatusStateChange,
+    });
+  });
+});
+
+describe('when providing default flags', () => {
+  it('should notify parent about the default flag state', () => {
+    const adapter = createAdapter();
+    const defaultFlags = {
+      flagName: true,
+    };
+    const props = createProps({ adapter });
+
+    render(
+      <ConfigureAdapter {...props} defaultFlags={defaultFlags}>
+        <ChildComponent />
+      </ConfigureAdapter>
+    );
+
+    expect(props.onFlagsStateChange).toHaveBeenCalledWith(defaultFlags);
+  });
+});
+
+describe('when adapter args change before adapter was configured', () => {
+  const adapter = createAdapter();
+  const props = createProps({ adapter });
+
+  const rendered = render(
+    <ConfigureAdapter {...props} shouldDeferAdapterConfiguration>
+      <ChildComponent />
+    </ConfigureAdapter>
+  );
+
   const nextAdapterArgs = {
-    user: 'next-user',
+    nextValue: true,
   };
 
-  describe('applyAdapterArgs', () => {
-    describe('when configured', () => {
-      beforeEach(() => {
-        props = createTestProps();
-        componentInstance = getComponentInstance(
-          <ConfigureAdapter {...props}>
-            <ChildComponent />
-          </ConfigureAdapter>
-        );
+  rendered.rerender(
+    <ConfigureAdapter {...props} adapterArgs={nextAdapterArgs}>
+      <ChildComponent />
+    </ConfigureAdapter>
+  );
 
-        componentInstance.setAdapterState(AdapterStates.CONFIGURED);
-        componentInstance.applyAdapterArgs(nextAdapterArgs, {
-          shouldOverwrite: false,
-        });
-      });
-
-      it('should update the `state` of `appliedAdapterArgs`', () => {
-        expect(componentInstance.state).toEqual(
-          expect.objectContaining({ appliedAdapterArgs: nextAdapterArgs })
-        );
-      });
-
-      describe('with `pendingAdapterArgs`', () => {
-        const pendingAdapterArgs = {
-          group: 'next-group',
-        };
-
-        beforeEach(() => {
-          componentInstance.setPendingAdapterArgs({
-            adapterArgs: pendingAdapterArgs,
-            options: { shouldOverwrite: false },
-          });
-          componentInstance.applyAdapterArgs(nextAdapterArgs, {
-            shouldOverwrite: false,
-          });
-        });
-
-        it('should unset the `pendingAdapterArgs` to `null`', () => {
-          expect(componentInstance.pendingAdapterArgs).toBeNull();
-        });
-      });
-    });
+  it('should configure adapter with merged adapter args', () => {
+    expect(adapter.configure).toHaveBeenCalledWith(
+      { ...props.adapterArgs, ...nextAdapterArgs },
+      expect.anything()
+    );
   });
+});
 
-  describe('setPendingAdapterArgs', () => {
-    beforeEach(() => {
-      props = createTestProps();
-      componentInstance = getComponentInstance(
-        <ConfigureAdapter {...props}>
-          <ChildComponent />
-        </ConfigureAdapter>
-      );
-    });
+describe('when adapter args change after adapter was configured', () => {
+  const adapter = createAdapter();
+  const props = createProps({ adapter });
 
-    describe('without `pendingAdapterArgs`', () => {
-      beforeEach(() => {
-        componentInstance.setPendingAdapterArgs({
-          adapterArgs: nextAdapterArgs,
-          options: { shouldOverwrite: false },
-        });
-      });
+  const rendered = render(
+    <ConfigureAdapter {...props}>
+      <ChildComponent />
+    </ConfigureAdapter>
+  );
 
-      it('should set `pendingAdapterArgs` to `nextAdapterArgs', () => {
-        expect(componentInstance.pendingAdapterArgs).toEqual(
-          expect.objectContaining(nextAdapterArgs)
-        );
-      });
-    });
+  const nextAdapterArgs = {
+    ...props.adapterArgs,
+    nextValue: true,
+  };
 
-    describe('with `pendingAdapterArgs`', () => {
-      const nextNextAdapterArgs = {
-        firstName: 'user-first-name',
-      };
-      beforeEach(() => {
-        componentInstance.setPendingAdapterArgs({
-          adapterArgs: nextAdapterArgs,
-          options: { shouldOverwrite: false },
-        });
-        componentInstance.setPendingAdapterArgs({
-          adapterArgs: nextNextAdapterArgs,
-          options: { shouldOverwrite: false },
-        });
-      });
+  rendered.rerender(
+    <ConfigureAdapter {...props} adapterArgs={nextAdapterArgs}>
+      <ChildComponent />
+    </ConfigureAdapter>
+  );
 
-      it('should set `pendingAdapterArgs` merged with `pendingAdapterArgs', () => {
-        expect(componentInstance.pendingAdapterArgs).toEqual(
-          expect.objectContaining(nextAdapterArgs)
-        );
-
-        expect(componentInstance.pendingAdapterArgs).toEqual(
-          expect.objectContaining(nextNextAdapterArgs)
-        );
-      });
-    });
+  it('should reconfigure adapter with updated adapter args', () => {
+    expect(adapter.reconfigure).toHaveBeenCalledWith(
+      nextAdapterArgs,
+      expect.anything()
+    );
   });
+});
 
-  describe('getAdapterArgsForConfiguration', () => {
-    let adapterArgsForConfiguration;
+describe('when adapter was configured and component updates', () => {
+  const adapter = createAdapter();
+  const props = createProps({ adapter });
 
-    describe('with `pendingAdapterArgs`', () => {
-      beforeEach(() => {
-        props = createTestProps();
-        componentInstance = getComponentInstance(
-          <ConfigureAdapter {...props}>
-            <ChildComponent />
-          </ConfigureAdapter>
-        );
+  const rendered = render(
+    <ConfigureAdapter {...props}>
+      <ChildComponent />
+    </ConfigureAdapter>
+  );
 
-        componentInstance.setPendingAdapterArgs({
-          adapterArgs: nextAdapterArgs,
-          options: { shouldOverwrite: false },
-        });
+  const nextProps = {
+    ...props,
+    changedValue: true,
+  };
 
-        adapterArgsForConfiguration = componentInstance.getAdapterArgsForConfiguration();
-      });
+  rendered.rerender(
+    <ConfigureAdapter {...nextProps}>
+      <ChildComponent />
+    </ConfigureAdapter>
+  );
 
-      it('should return the `pendingAdapterArgs`', () => {
-        expect(adapterArgsForConfiguration).toEqual(
-          expect.objectContaining(nextAdapterArgs)
-        );
-      });
-    });
-
-    describe('without `pendingReconfiguration`', () => {
-      beforeEach(() => {
-        props = createTestProps();
-        componentInstance = getComponentInstance(
-          <ConfigureAdapter {...props}>
-            <ChildComponent />
-          </ConfigureAdapter>
-        );
-
-        adapterArgsForConfiguration = componentInstance.getAdapterArgsForConfiguration();
-      });
-
-      it('should return `appliedAdapterArgs`', () => {
-        expect(adapterArgsForConfiguration).toEqual(
-          componentInstance.state.appliedAdapterArgs
-        );
-      });
-    });
-  });
-
-  describe('reconfigureOrQueue', () => {
-    describe('when adapter is configured', () => {
-      beforeEach(() => {
-        props = createTestProps();
-        componentInstance = getComponentInstance(
-          <ConfigureAdapter {...props}>
-            <ChildComponent />
-          </ConfigureAdapter>
-        );
-
-        jest.spyOn(componentInstance, 'applyAdapterArgs');
-
-        componentInstance.setAdapterState(AdapterStates.CONFIGURED);
-
-        componentInstance.reconfigureOrQueue(nextAdapterArgs, {
-          shouldOverwrite: false,
-        });
-      });
-
-      it('should invoke `applyAdapterArgs`', () => {
-        expect(componentInstance.applyAdapterArgs).toHaveBeenCalled();
-      });
-
-      it('should invoke `applyAdapterArgs` with `nextAdapterArgs`', () => {
-        expect(componentInstance.applyAdapterArgs).toHaveBeenCalledWith(
-          expect.objectContaining(nextAdapterArgs)
-        );
-      });
-    });
-
-    describe('when adapter is configuring', () => {
-      beforeEach(() => {
-        props = createTestProps();
-        componentInstance = getComponentInstance(
-          <ConfigureAdapter {...props}>
-            <ChildComponent />
-          </ConfigureAdapter>
-        );
-
-        jest.spyOn(componentInstance, 'setPendingAdapterArgs');
-
-        componentInstance.setAdapterState(AdapterStates.CONFIGURING);
-
-        componentInstance.reconfigureOrQueue(nextAdapterArgs, {
-          shouldOverwrite: false,
-        });
-      });
-
-      it('should invoke `setPendingAdapterArgs`', () => {
-        expect(componentInstance.setPendingAdapterArgs).toHaveBeenCalled();
-      });
-
-      it('should invoke `setPendingAdapterArgs` with `nextAdapterArgs`', () => {
-        expect(componentInstance.setPendingAdapterArgs).toHaveBeenCalledWith(
-          expect.objectContaining({ adapterArgs: nextAdapterArgs })
-        );
-      });
-
-      it('should invoke `setPendingAdapterArgs` with `options`', () => {
-        expect(componentInstance.setPendingAdapterArgs).toHaveBeenCalledWith(
-          expect.objectContaining({ options: { shouldOverwrite: false } })
-        );
-      });
-    });
+  it('should not configure adapter multiple times', () => {
+    expect(adapter.configure).toHaveBeenCalledTimes(1);
   });
 });
 
@@ -680,64 +246,6 @@ describe('statics', () => {
   describe('defaultProps', () => {
     it('should default `defaultFlags` to an empty object', () => {
       expect(ConfigureAdapter.defaultProps.defaultFlags).toEqual({});
-    });
-  });
-});
-
-describe('helpers', () => {
-  describe('mergeAdapterArgs', () => {
-    describe('when not `shouldOverwrite`', () => {
-      const previousAdapterArgs = {
-        'some-prop': 'was-present',
-      };
-      const nextAdapterArgs = {
-        'another-prop': 'is-added',
-      };
-
-      it('should merge the next properties', () => {
-        expect(
-          mergeAdapterArgs(previousAdapterArgs, {
-            adapterArgs: nextAdapterArgs,
-            options: { shouldOverwrite: false },
-          })
-        ).toEqual(expect.objectContaining(nextAdapterArgs));
-      });
-
-      it('should keep the previous properties', () => {
-        expect(
-          mergeAdapterArgs(previousAdapterArgs, {
-            adapterArgs: nextAdapterArgs,
-            options: { shouldOverwrite: false },
-          })
-        ).toEqual(expect.objectContaining(previousAdapterArgs));
-      });
-    });
-
-    describe('when `shouldOverwrite`', () => {
-      const previousAdapterArgs = {
-        'some-prop': 'was-present',
-      };
-      const nextAdapterArgs = {
-        'another-prop': 'is-added',
-      };
-
-      it('should merge the next properties', () => {
-        expect(
-          mergeAdapterArgs(previousAdapterArgs, {
-            adapterArgs: nextAdapterArgs,
-            options: { shouldOverwrite: true },
-          })
-        ).toEqual(expect.objectContaining(nextAdapterArgs));
-      });
-
-      it('should not keep the previous properties', () => {
-        expect(
-          mergeAdapterArgs(previousAdapterArgs, {
-            adapterArgs: nextAdapterArgs,
-            options: { shouldOverwrite: true },
-          })
-        ).not.toEqual(expect.objectContaining(previousAdapterArgs));
-      });
     });
   });
 });

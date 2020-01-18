@@ -1,5 +1,4 @@
 import React from 'react';
-import merge from 'deepmerge';
 import {
   Flags,
   Adapter,
@@ -9,8 +8,12 @@ import {
   AdapterReconfiguration,
   AdapterReconfigurationOptions,
   ConfigureAdapterChildren,
-  ConfigureAdapterChildrenAsFunction,
 } from '@flopflip/types';
+import {
+  isFunctionChildren,
+  isEmptyChildren,
+  mergeAdapterArgs,
+} from './helpers';
 import AdapterContext, { createAdapterContext } from '../adapter-context';
 
 type valueof<T> = T[keyof T];
@@ -41,22 +44,6 @@ type State = {
   appliedAdapterArgs: AdapterArgs;
 };
 type AdapterState = valueof<AdapterStates>;
-
-const isFunctionChildren = (
-  children: ConfigureAdapterChildren
-): children is ConfigureAdapterChildrenAsFunction =>
-  typeof children === 'function';
-
-const isEmptyChildren = (children: ConfigureAdapterChildren): boolean =>
-  !isFunctionChildren(children) && React.Children.count(children) === 0;
-
-export const mergeAdapterArgs = (
-  previousAdapterArgs: AdapterArgs,
-  { adapterArgs: nextAdapterArgs, options = {} }: AdapterReconfiguration
-): AdapterArgs =>
-  options.shouldOverwrite
-    ? nextAdapterArgs
-    : merge(previousAdapterArgs, nextAdapterArgs);
 
 // eslint-disable-next-line react/no-unsafe
 export default class ConfigureAdapter extends React.PureComponent<
@@ -97,6 +84,14 @@ export default class ConfigureAdapter extends React.PureComponent<
       }
     );
 
+  getIsAdapterConfigured = () =>
+    this.adapterState === AdapterStates.CONFIGURED &&
+    this.adapterState !== AdapterStates.CONFIGURING;
+
+  getDoesAdapterNeedInitialConfiguration = () =>
+    this.adapterState !== AdapterStates.CONFIGURED &&
+    this.adapterState !== AdapterStates.CONFIGURING;
+
   /**
    * NOTE:
    *   This is passed through the React context (it's a public API).
@@ -107,8 +102,7 @@ export default class ConfigureAdapter extends React.PureComponent<
     nextAdapterArgs: AdapterArgs,
     options: AdapterReconfigurationOptions
   ): void =>
-    this.adapterState === AdapterStates.CONFIGURED &&
-    this.adapterState !== AdapterStates.CONFIGURING
+    this.getIsAdapterConfigured()
       ? this.applyAdapterArgs(
           mergeAdapterArgs(this.state.appliedAdapterArgs, {
             adapterArgs: nextAdapterArgs,
@@ -214,8 +208,7 @@ export default class ConfigureAdapter extends React.PureComponent<
 
     if (
       !this.props.shouldDeferAdapterConfiguration &&
-      this.adapterState !== AdapterStates.CONFIGURED &&
-      this.adapterState !== AdapterStates.CONFIGURING
+      this.getDoesAdapterNeedInitialConfiguration()
     ) {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
@@ -233,10 +226,7 @@ export default class ConfigureAdapter extends React.PureComponent<
         });
     }
 
-    if (
-      this.adapterState === AdapterStates.CONFIGURED &&
-      this.adapterState !== AdapterStates.CONFIGURING
-    ) {
+    if (this.getIsAdapterConfigured()) {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
       return (this.props.adapter as AdapterInterface<AdapterArgs>)
