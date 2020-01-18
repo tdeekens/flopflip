@@ -33,7 +33,6 @@ const intialAdapterState: AdapterStatus & MemoryAdapterState = {
 let adapterState: AdapterStatus & MemoryAdapterState = {
   ...intialAdapterState,
 };
-
 const updateUser = (user: User): void => {
   adapterState.user = user;
 };

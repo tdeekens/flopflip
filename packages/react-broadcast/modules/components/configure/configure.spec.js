@@ -1,17 +1,25 @@
 import React from 'react';
-import { renderShallowly } from '@flopflip/test-utils';
-import { ConfigureAdapter } from '@flopflip/react';
-import { FlagsContext } from '../flags-context';
+import { render as rtlRender } from '@flopflip/test-utils';
+import adapter, { updateFlags } from '@flopflip/memory-adapter';
+import { useFeatureToggle, useAdapterStatus } from '../../hooks';
 import Configure from './configure';
 
-const ChildComponent = () => <div />;
+const testFlagName = 'firstFlag';
+const TestComponent = () => {
+  const { isReady, isConfigured } = useAdapterStatus();
+  const isFeatureEnabled = useFeatureToggle(testFlagName);
+
+  return (
+    <ul>
+      <li>Is ready: {isReady ? 'Yes' : 'No'}</li>
+      <li>Is configured: {isConfigured ? 'Yes' : 'No'}</li>
+      <li>Feature enabled: {isFeatureEnabled ? 'Yes' : 'No'}</li>
+    </ul>
+  );
+};
 
 const createTestProps = custom => ({
-  adapter: {
-    configure: jest.fn(),
-    reconfigure: jest.fn(),
-    getIsReady: jest.fn(),
-  },
+  adapter,
   adapterArgs: {
     fooId: 'foo-id',
   },
@@ -19,131 +27,55 @@ const createTestProps = custom => ({
   ...custom,
 });
 
-describe('rendering', () => {
-  let props;
-  let wrapper;
+const render = () => {
+  const props = createTestProps();
 
-  beforeEach(() => {
-    props = createTestProps();
-    wrapper = renderShallowly(
-      <Configure {...props}>
-        <ChildComponent />
-      </Configure>
-    );
-  });
+  return rtlRender(
+    <Configure {...props}>
+      <TestComponent />
+    </Configure>
+  );
+};
 
-  it('should render a `<ConfigureAdapter>`', () => {
-    expect(wrapper).toRender(ConfigureAdapter);
-  });
+describe('when feature is disabled', () => {
+  it('should indicate the feature being disabled', () => {
+    const rendered = render();
 
-  it('should render a `<FlagsContext.Provider>`', () => {
-    expect(wrapper).toRender(FlagsContext.Provider);
-  });
-
-  describe('with `children`', () => {
-    let props;
-
-    beforeEach(() => {
-      props = createTestProps();
-
-      wrapper = renderShallowly(
-        <Configure {...props}>
-          <ChildComponent />
-        </Configure>
-      );
-    });
-
-    it('should render `children`', () => {
-      expect(wrapper).toRender(ChildComponent);
-    });
-  });
-
-  describe('`of <ConfigureAdapter />`', () => {
-    let configureAdapterWrapper;
-
-    beforeEach(() => {
-      configureAdapterWrapper = wrapper.find(ConfigureAdapter);
-    });
-
-    it('should receive `adapterArgs`', () => {
-      expect(configureAdapterWrapper).toHaveProp(
-        'adapterArgs',
-        expect.objectContaining({})
-      );
-    });
-
-    it('should receive `onStatusStateChange` and `onFlagsStateChange`', () => {
-      expect(configureAdapterWrapper).toHaveProp(
-        'onFlagsStateChange',
-        wrapper.instance().handleUpdateFlags
-      );
-      expect(configureAdapterWrapper).toHaveProp(
-        'onStatusStateChange',
-        wrapper.instance().handleUpdateStatus
-      );
-    });
-
-    it('should receive `defaultFlags`', () => {
-      expect(configureAdapterWrapper).toHaveProp(
-        'defaultFlags',
-        Configure.defaultProps.defaultFlags
-      );
-    });
+    expect(rendered.queryByText(/Feature enabled: No/i)).toBeInTheDocument();
   });
 });
 
-describe('state', () => {
-  let props;
-  let wrapper;
+describe('when enabling feature is', () => {
+  it('should indicate the feature being enabled', async () => {
+    const rendered = render();
 
-  describe('when updating flags', () => {
-    const newFlags = { flag1: true, flag2: false };
+    await adapter.waitUntilConfigured();
 
-    beforeEach(() => {
-      props = createTestProps();
-      wrapper = renderShallowly(
-        <Configure {...props}>
-          <ChildComponent />
-        </Configure>
-      );
-
-      wrapper.instance().handleUpdateFlags(newFlags);
+    updateFlags({
+      [testFlagName]: true,
     });
 
-    it('should update the state', () => {
-      expect(wrapper).toHaveState('flags', newFlags);
-    });
+    expect(rendered.queryByText(/Feature enabled: Yes/i)).toBeInTheDocument();
   });
+});
 
-  describe('handleUpdateStatus', () => {
-    const newStatus = { isReady: true };
+describe('when not configured and not ready', () => {
+  it('should indicate through the adapter state', () => {
+    const rendered = render();
 
-    beforeEach(() => {
-      props = createTestProps();
-      wrapper = renderShallowly(
-        <Configure {...props}>
-          <ChildComponent />
-        </Configure>
-      );
-
-      wrapper.instance().handleUpdateStatus(newStatus);
-    });
-
-    it('should update the state', () => {
-      expect(wrapper).toHaveState(
-        'status',
-        expect.objectContaining({ isReady: newStatus.isReady })
-      );
-    });
+    expect(rendered.queryByText(/Is ready: No/i)).toBeInTheDocument();
+    expect(rendered.queryByText(/Is configured: No/i)).toBeInTheDocument();
   });
+});
 
-  describe('of `<FlagsContext.Provider />`', () => {
-    it('should receive `flags` as `value`', () => {
-      expect(wrapper.find(FlagsContext.Provider)).toHaveProp(
-        'value',
-        wrapper.state('flags')
-      );
-    });
+describe('when configured and ready', () => {
+  it('should indicate through the adapter state', async () => {
+    const rendered = render();
+
+    await adapter.waitUntilConfigured();
+
+    expect(rendered.queryByText(/Is ready: Yes/i)).toBeInTheDocument();
+    expect(rendered.queryByText(/Is configured: Yes/i)).toBeInTheDocument();
   });
 });
 
