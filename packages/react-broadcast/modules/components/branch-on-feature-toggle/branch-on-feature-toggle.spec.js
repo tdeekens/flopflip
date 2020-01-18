@@ -14,8 +14,10 @@ describe('without `untoggledComponent', () => {
       components.ToggledComponent
     );
 
-    it('should render neither the component representing an disabled or enabled feature', () => {
+    it('should render neither the component representing an disabled or enabled feature', async () => {
       const rendered = render(<TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(
         rendered.queryByFlagName('isFeatureEnabled')
@@ -42,8 +44,10 @@ describe('without `untoggledComponent', () => {
       components.ToggledComponent
     );
 
-    it('should render the component representing an enabled feature', () => {
+    it('should render the component representing an enabled feature', async () => {
       const rendered = render(<TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
@@ -60,8 +64,10 @@ describe('with `untoggledComponent', () => {
       components.UntoggledComponent
     )(components.ToggledComponent);
 
-    it('should not render the component representing a enabled feature', () => {
+    it('should not render the component representing a enabled feature', async () => {
       const rendered = render(<TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
         'data-flag-status',
@@ -69,8 +75,10 @@ describe('with `untoggledComponent', () => {
       );
     });
 
-    it('should render the component representing a disabled feature', () => {
+    it('should render the component representing a disabled feature', async () => {
       const rendered = render(<TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
@@ -85,8 +93,10 @@ describe('with `untoggledComponent', () => {
       components.UntoggledComponent
     )(components.ToggledComponent);
 
-    it('should render the component representing a enabled feature', () => {
+    it('should render the component representing a enabled feature', async () => {
       const rendered = render(<TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
@@ -94,8 +104,10 @@ describe('with `untoggledComponent', () => {
       );
     });
 
-    it('should not render the component representing a disabled feature', () => {
+    it('should not render the component representing a disabled feature', async () => {
       const rendered = render(<TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
         'data-flag-status',

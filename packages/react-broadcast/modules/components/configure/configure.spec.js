@@ -4,18 +4,6 @@ import adapter, { updateFlags } from '@flopflip/memory-adapter';
 import { useFeatureToggle, useAdapterStatus } from '../../hooks';
 import Configure from './configure';
 
-/**
- * NOTE:
- *    The adapter under the hook triggers a set state which
- *    can not be wrapped in an act.
- */
-var error = console.error;
-console.error = jest.fn((message, ...remainingMessages) => {
-  if (message.includes('test was not wrapped in act')) return;
-
-  error(message, ...remainingMessages);
-});
-
 const testFlagName = 'firstFlag';
 const TestComponent = () => {
   const { isReady, isConfigured } = useAdapterStatus();
@@ -41,17 +29,21 @@ const createTestProps = custom => ({
 
 const render = () => {
   const props = createTestProps();
-
-  return rtlRender(
+  const rendered = rtlRender(
     <Configure {...props}>
       <TestComponent />
     </Configure>
   );
+  const waitUntilReady = () => rendered.findByText(/Is ready: Yes/i);
+
+  return { ...rendered, waitUntilReady };
 };
 
 describe('when feature is disabled', () => {
-  it('should indicate the feature being disabled', () => {
+  it('should indicate the feature being disabled', async () => {
     const rendered = render();
+
+    await rendered.waitUntilReady();
 
     expect(rendered.queryByText(/Feature enabled: No/i)).toBeInTheDocument();
   });
@@ -61,7 +53,7 @@ describe('when enabling feature is', () => {
   it('should indicate the feature being enabled', async () => {
     const rendered = render();
 
-    await adapter.waitUntilConfigured();
+    await rendered.waitUntilReady();
 
     act(() =>
       updateFlags({
@@ -74,11 +66,13 @@ describe('when enabling feature is', () => {
 });
 
 describe('when not configured and not ready', () => {
-  it('should indicate through the adapter state', () => {
+  it('should indicate through the adapter state', async () => {
     const rendered = render();
 
     expect(rendered.queryByText(/Is ready: No/i)).toBeInTheDocument();
     expect(rendered.queryByText(/Is configured: No/i)).toBeInTheDocument();
+
+    await rendered.waitUntilReady();
   });
 });
 
@@ -86,7 +80,7 @@ describe('when configured and ready', () => {
   it('should indicate through the adapter state', async () => {
     const rendered = render();
 
-    await adapter.waitUntilConfigured();
+    await rendered.waitUntilReady();
 
     expect(rendered.queryByText(/Is ready: Yes/i)).toBeInTheDocument();
     expect(rendered.queryByText(/Is configured: Yes/i)).toBeInTheDocument();

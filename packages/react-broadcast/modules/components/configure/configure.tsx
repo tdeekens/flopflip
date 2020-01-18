@@ -30,11 +30,11 @@ const Configure = <AdapterInstance extends Adapter>(
   const [status, setStatus] = React.useState<State['status']>({});
 
   const handleUpdateFlags = React.useCallback(
-    (nextFlags: Flags) => {
+    (flags: Flags) => {
       if (isMounted.current) {
         setFlags(prevFlags => ({
           ...prevFlags,
-          ...nextFlags,
+          ...flags,
         }));
       }
     },
