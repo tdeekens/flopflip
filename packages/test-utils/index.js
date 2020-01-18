@@ -132,17 +132,14 @@ const renderWithAdapter = (
   };
 };
 
-const FlagsToComponent = props => (
-  <>
-    {Object.entries(props.propKey ? props[props.propKey] : props).map(
-      ([flagName, flagVariation]) => (
-        <div key={flagName} data-flag-name={flagName}>
-          {String(flagVariation)}
-        </div>
-      )
-    )}
-  </>
-);
+const FlagsToComponent = props =>
+  Object.entries(props.propKey ? props[props.propKey] : props).map(
+    ([flagName, flagVariation]) => (
+      <div key={flagName} data-flag-name={flagName}>
+        {String(flagVariation)}
+      </div>
+    )
+  );
 
 const UntoggledComponent = props => (
   <span data-flag-name={props.flagName} data-flag-status="disabled">
