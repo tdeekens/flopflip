@@ -89,10 +89,9 @@ export default class ConfigureAdapter extends React.PureComponent<
      *   the `pendingAdapterArgs` as we unset them too early.
      */
     this.setState(
-      prevState => ({
-        ...prevState,
+      {
         appliedAdapterArgs: nextAdapterArgs,
-      }),
+      },
       () => {
         this.pendingAdapterArgs = null;
       }
