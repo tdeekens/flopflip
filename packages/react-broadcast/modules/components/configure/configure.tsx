@@ -1,5 +1,5 @@
 import React from 'react';
-import { ConfigureAdapter } from '@flopflip/react';
+import { ConfigureAdapter, useIsMounted } from '@flopflip/react';
 import {
   Flags,
   Adapter,
@@ -22,73 +22,58 @@ type State = {
   configurationId?: string;
 };
 
-export default class Configure<
-  AdapterInstance extends Adapter
-> extends React.PureComponent<Props<AdapterInstance>, State> {
-  static displayName = 'ConfigureFlopflip';
+const Configure = <AdapterInstance extends Adapter>(
+  props: Props<AdapterInstance>
+) => {
+  const isMounted = useIsMounted();
+  const [flags, setFlags] = React.useState<State['flags']>({});
+  const [status, setStatus] = React.useState<State['status']>({});
 
-  static defaultProps = {
-    defaultFlags: {},
-    shouldDeferAdapterConfiguration: false,
-  };
-
-  state: State = {
-    flags: {},
-    status: {
-      isReady: false,
-      isConfigured: false,
-    },
-  };
-
-  isUnmounted = false;
-
-  componentDidMount(): void {
-    this.isUnmounted = false;
-  }
-
-  componentWillUnmount(): void {
-    this.isUnmounted = true;
-  }
-
-  handleUpdateFlags = (nextFlags: Flags) => {
-    if (!this.isUnmounted) {
-      this.setState(prevState => ({
-        flags: {
-          ...prevState.flags,
+  const handleUpdateFlags = React.useCallback(
+    (nextFlags: Flags) => {
+      if (isMounted.current) {
+        setFlags(prevFlags => ({
+          ...prevFlags,
           ...nextFlags,
-        },
-      }));
-    }
-  };
+        }));
+      }
+    },
+    [isMounted, setFlags]
+  );
 
-  handleUpdateStatus = (status: AdapterStatus) => {
-    if (!this.isUnmounted) {
-      this.setState(prevState => ({
-        status: {
-          ...prevState.status,
+  const handleUpdateStatus = React.useCallback(
+    (status: AdapterStatus) => {
+      if (isMounted.current) {
+        setStatus(prevStatus => ({
+          ...prevStatus,
           ...status,
-        },
-      }));
-    }
-  };
+        }));
+      }
+    },
+    [isMounted, setStatus]
+  );
 
-  render(): React.ReactNode {
-    return (
-      <FlagsContext.Provider value={this.state.flags}>
-        <ConfigureAdapter
-          adapter={this.props.adapter}
-          adapterArgs={this.props.adapterArgs}
-          adapterStatus={this.state.status}
-          defaultFlags={this.props.defaultFlags}
-          shouldDeferAdapterConfiguration={
-            this.props.shouldDeferAdapterConfiguration
-          }
-          onFlagsStateChange={this.handleUpdateFlags}
-          onStatusStateChange={this.handleUpdateStatus}
-        >
-          {this.props.children}
-        </ConfigureAdapter>
-      </FlagsContext.Provider>
-    );
-  }
-}
+  return (
+    <FlagsContext.Provider value={flags}>
+      <ConfigureAdapter
+        adapter={props.adapter}
+        adapterArgs={props.adapterArgs}
+        adapterStatus={status}
+        defaultFlags={props.defaultFlags}
+        shouldDeferAdapterConfiguration={props.shouldDeferAdapterConfiguration}
+        onFlagsStateChange={handleUpdateFlags}
+        onStatusStateChange={handleUpdateStatus}
+      >
+        {props.children}
+      </ConfigureAdapter>
+    </FlagsContext.Provider>
+  );
+};
+
+Configure.displayName = 'ConfigureFlopflip';
+Configure.defaultProps = {
+  defaultFlags: {},
+  shouldDeferAdapterConfiguration: false,
+};
+
+export default Configure;

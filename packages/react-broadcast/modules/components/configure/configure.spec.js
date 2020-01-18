@@ -1,8 +1,20 @@
 import React from 'react';
-import { render as rtlRender } from '@flopflip/test-utils';
+import { render as rtlRender, act } from '@flopflip/test-utils';
 import adapter, { updateFlags } from '@flopflip/memory-adapter';
 import { useFeatureToggle, useAdapterStatus } from '../../hooks';
 import Configure from './configure';
+
+/**
+ * NOTE:
+ *    The adapter under the hook triggers a set state which
+ *    can not be wrapped in an act.
+ */
+var error = console.error;
+console.error = jest.fn((message, ...remainingMessages) => {
+  if (message.includes('test was not wrapped in act')) return;
+
+  error(message, ...remainingMessages);
+});
 
 const testFlagName = 'firstFlag';
 const TestComponent = () => {
@@ -51,9 +63,11 @@ describe('when enabling feature is', () => {
 
     await adapter.waitUntilConfigured();
 
-    updateFlags({
-      [testFlagName]: true,
-    });
+    act(() =>
+      updateFlags({
+        [testFlagName]: true,
+      })
+    );
 
     expect(rendered.queryByText(/Feature enabled: Yes/i)).toBeInTheDocument();
   });
