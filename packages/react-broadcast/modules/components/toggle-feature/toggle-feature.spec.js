@@ -14,10 +14,12 @@ describe('when feature is disabled', () => {
       <components.ToggledComponent flagName="disabledFeature" />
     </ToggleFeature>
   );
-  it('should not render the component representing a enabled feature', () => {
+  it('should not render the component representing a enabled feature', async () => {
     const rendered = render(<TestComponent />);
 
     expect(rendered.queryByFlagName('disabledFeature')).not.toBeInTheDocument();
+
+    await rendered.waitUntilReady();
   });
 
   describe('when enabling feature', () => {
@@ -39,8 +41,10 @@ describe('when feature is enabled', () => {
       <components.ToggledComponent flagName="enabledFeature" />
     </ToggleFeature>
   );
-  it('should render the component representing a enabled feature', () => {
+  it('should render the component representing a enabled feature', async () => {
     const rendered = render(<TestComponent />);
+
+    await rendered.waitUntilReady();
 
     expect(rendered.queryByFlagName('enabledFeature')).toHaveAttribute(
       'data-flag-status',

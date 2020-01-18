@@ -18,6 +18,6 @@ export {
 
 export { setDisplayName, wrapDisplayName } from './hocs';
 
-export { useAdapterReconfiguration } from './hooks';
+export { useAdapterReconfiguration, useIsMounted } from './hooks';
 
 export { version };

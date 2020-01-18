@@ -9,6 +9,7 @@ import {
   waitForElement,
   queryHelpers,
   buildQueries,
+  act,
 } from '@testing-library/react';
 
 const mergeOptional = (defaultValue, value) =>
@@ -176,4 +177,5 @@ export {
   updateFlags,
   components,
   screen,
+  act,
 };

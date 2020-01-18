@@ -1,5 +1,5 @@
 import React from 'react';
-import { render as rtlRender } from '@flopflip/test-utils';
+import { render as rtlRender, act } from '@flopflip/test-utils';
 import adapter, { updateFlags } from '@flopflip/memory-adapter';
 import { useFeatureToggle, useAdapterStatus } from '../../hooks';
 import Configure from './configure';
@@ -29,17 +29,21 @@ const createTestProps = custom => ({
 
 const render = () => {
   const props = createTestProps();
-
-  return rtlRender(
+  const rendered = rtlRender(
     <Configure {...props}>
       <TestComponent />
     </Configure>
   );
+  const waitUntilReady = () => rendered.findByText(/Is ready: Yes/i);
+
+  return { ...rendered, waitUntilReady };
 };
 
 describe('when feature is disabled', () => {
-  it('should indicate the feature being disabled', () => {
+  it('should indicate the feature being disabled', async () => {
     const rendered = render();
+
+    await rendered.waitUntilReady();
 
     expect(rendered.queryByText(/Feature enabled: No/i)).toBeInTheDocument();
   });
@@ -49,22 +53,26 @@ describe('when enabling feature is', () => {
   it('should indicate the feature being enabled', async () => {
     const rendered = render();
 
-    await adapter.waitUntilConfigured();
+    await rendered.waitUntilReady();
 
-    updateFlags({
-      [testFlagName]: true,
-    });
+    act(() =>
+      updateFlags({
+        [testFlagName]: true,
+      })
+    );
 
     expect(rendered.queryByText(/Feature enabled: Yes/i)).toBeInTheDocument();
   });
 });
 
 describe('when not configured and not ready', () => {
-  it('should indicate through the adapter state', () => {
+  it('should indicate through the adapter state', async () => {
     const rendered = render();
 
     expect(rendered.queryByText(/Is ready: No/i)).toBeInTheDocument();
     expect(rendered.queryByText(/Is configured: No/i)).toBeInTheDocument();
+
+    await rendered.waitUntilReady();
   });
 });
 
@@ -72,7 +80,7 @@ describe('when configured and ready', () => {
   it('should indicate through the adapter state', async () => {
     const rendered = render();
 
-    await adapter.waitUntilConfigured();
+    await rendered.waitUntilReady();
 
     expect(rendered.queryByText(/Is ready: Yes/i)).toBeInTheDocument();
     expect(rendered.queryByText(/Is configured: Yes/i)).toBeInTheDocument();

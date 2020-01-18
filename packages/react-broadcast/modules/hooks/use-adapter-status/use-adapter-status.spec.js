@@ -19,10 +19,12 @@ const TestComponent = () => {
   );
 };
 
-it('should indicate the adapter not being ready', () => {
+it('should indicate the adapter not being ready', async () => {
   const rendered = render(<TestComponent />);
 
   expect(rendered.queryByText('Is ready: No')).toBeInTheDocument();
+
+  await rendered.waitUntilReady();
 });
 
 it('should indicate the adapter being ready', async () => {
