@@ -1,5 +1,6 @@
 import React from 'react';
 import { render as rtlRender } from '@flopflip/test-utils';
+import AdapterContext from '../adapter-context';
 import ConfigureAdapter from './configure-adapter';
 
 const createAdapter = () => ({
@@ -20,14 +21,24 @@ const createTestProps = ({ adapter }) => ({
   adapter,
 });
 
-const TestComponent = () => <span>Test component</span>;
+const TestComponent = () => {
+  const adapterContext = React.useContext(AdapterContext);
+
+  return (
+    <ul>
+      <li>Is ready: {adapterContext.isReady ? 'Yes' : 'No'}</li>
+      <li>Is configured: {adapterContext.isConfigured ? 'Yes' : 'No'}</li>
+    </ul>
+  );
+};
 
 const render = ({ props, adapter }) => {
   const baseProps = createTestProps({ adapter });
   const mergedProps = { ...baseProps, ...props };
 
   const rendered = rtlRender(<ConfigureAdapter {...mergedProps} />);
-  const waitUntilReady = () => Promise.resolve();
+
+  const waitUntilReady = () => rendered.findByText(/Is configured: Yes/i);
 
   return { ...rendered, waitUntilReady, props: mergedProps };
 };
@@ -38,7 +49,7 @@ describe('rendering', () => {
       it('should invoke render prop', async () => {
         const adapter = createAdapter();
         adapter.getIsReady.mockReturnValue(true);
-        const props = { render: jest.fn() };
+        const props = { render: jest.fn(() => <TestComponent />) };
 
         const rendered = render({ props, adapter });
 
