@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@flopflip/test-utils';
+import { render as rtlRender } from '@flopflip/test-utils';
 import ConfigureAdapter from './configure-adapter';
 
 const ChildComponent = () => <div>Child component</div>;
@@ -11,7 +11,7 @@ const createAdapter = () => ({
   reconfigure: jest.fn(() => Promise.resolve()),
 });
 
-const createProps = ({ adapter }) => ({
+const createTestProps = ({ adapter }) => ({
   adapterArgs: {
     clientSideId: 'foo-clientSideId',
     user: {
@@ -23,192 +23,208 @@ const createProps = ({ adapter }) => ({
   adapter,
 });
 
+const render = ({ props, adapter }) => {
+  const baseProps = createTestProps({ adapter });
+  const mergedProps = { ...baseProps, ...props };
+
+  const rendered = rtlRender(<ConfigureAdapter {...mergedProps} />);
+  const waitUntilReady = () => Promise.resolve();
+
+  return { ...rendered, waitUntilReady, props: mergedProps };
+};
+
 describe('rendering', () => {
   describe('when providing render prop', () => {
     describe('when adapter is ready', () => {
-      it('should invoke render prop', () => {
+      it('should invoke render prop', async () => {
         const adapter = createAdapter();
-        const props = createProps({ adapter });
-
         adapter.getIsReady.mockReturnValue(true);
-        const renderProp = jest.fn();
+        const props = { render: jest.fn() };
 
-        render(<ConfigureAdapter {...props} render={renderProp} />);
+        const rendered = render({ props, adapter });
 
-        expect(renderProp).toHaveBeenCalled();
+        expect(props.render).toHaveBeenCalled();
+
+        await rendered.waitUntilReady();
       });
     });
 
     describe('when adapter is not ready', () => {
-      it('should invoke render prop', () => {
+      it('should invoke render prop', async () => {
         const adapter = createAdapter();
-        const props = createProps({ adapter });
 
-        const renderProp = jest.fn();
+        const props = { render: jest.fn() };
 
-        render(<ConfigureAdapter {...props} render={renderProp} />);
+        const rendered = render({ props, adapter });
 
-        expect(renderProp).not.toHaveBeenCalled();
+        expect(props.render).not.toHaveBeenCalled();
+
+        await rendered.waitUntilReady();
       });
     });
   });
 
   describe('when providing function as a child', () => {
     describe('when adapter is ready', () => {
-      it('should invoke children prop with ready state', () => {
+      it('should invoke children prop with ready state', async () => {
         const adapter = createAdapter();
-        const props = createProps({ adapter });
 
         adapter.getIsReady.mockReturnValue(true);
-        const childrenProp = jest.fn();
 
-        render(<ConfigureAdapter {...props}>{childrenProp}</ConfigureAdapter>);
+        const props = { children: jest.fn() };
 
-        expect(childrenProp).toHaveBeenCalledWith(
+        const rendered = render({ props, adapter });
+
+        expect(props.children).toHaveBeenCalledWith(
           expect.objectContaining({ isAdapterReady: true })
         );
+
+        await rendered.waitUntilReady();
       });
     });
   });
 
   describe('when providing React node as children', () => {
     describe('when adapter is ready', () => {
-      it('should invoke render prop', () => {
+      it('should invoke render prop', async () => {
         const adapter = createAdapter();
-        const props = createProps({ adapter });
 
         adapter.getIsReady.mockReturnValue(true);
 
-        const rendered = render(
-          <ConfigureAdapter {...props}>
-            <ChildComponent />
-          </ConfigureAdapter>
-        );
+        const props = { children: <ChildComponent /> };
+
+        const rendered = render({ props, adapter });
 
         expect(rendered.queryByText('Child component')).toBeInTheDocument();
+
+        await rendered.waitUntilReady();
       });
     });
 
     describe('when adapter is not ready', () => {
-      it('should invoke render prop', () => {
+      it('should invoke render prop', async () => {
         const adapter = createAdapter();
-        const props = createProps({ adapter });
+        const props = { children: <ChildComponent /> };
 
-        const rendered = render(
-          <ConfigureAdapter {...props}>
-            <ChildComponent />
-          </ConfigureAdapter>
-        );
+        const rendered = render({ props, adapter });
 
         expect(rendered.queryByText('Child component')).toBeInTheDocument();
+
+        await rendered.waitUntilReady();
       });
     });
   });
 });
 
 describe('when adapter configuration should be deferred', () => {
-  it('should not configure the adapter', () => {
+  it('should not configure the adapter', async () => {
     const adapter = createAdapter();
-    const props = createProps({ adapter });
 
-    const childrenProp = jest.fn();
+    const props = {
+      children: jest.fn(),
+      shouldDeferAdapterConfiguration: true,
+    };
 
-    render(
-      <ConfigureAdapter {...props} shouldDeferAdapterConfiguration>
-        {childrenProp}
-      </ConfigureAdapter>
-    );
+    const rendered = render({ props, adapter });
 
     expect(adapter.configure).not.toHaveBeenCalled();
+
+    await rendered.waitUntilReady();
   });
 });
 
 describe('when adapter configuration should not be deferred', () => {
-  it('should configure the adapter', () => {
+  it('should configure the adapter', async () => {
     const adapter = createAdapter();
-    const props = createProps({ adapter });
+    const props = { children: <ChildComponent /> };
 
-    render(
-      <ConfigureAdapter {...props}>
-        <ChildComponent />
-      </ConfigureAdapter>
-    );
+    const rendered = render({ props, adapter });
 
-    expect(adapter.configure).toHaveBeenCalledWith(props.adapterArgs, {
-      onFlagsStateChange: props.onFlagsStateChange,
-      onStatusStateChange: props.onStatusStateChange,
+    expect(adapter.configure).toHaveBeenCalledWith(rendered.props.adapterArgs, {
+      onFlagsStateChange: rendered.props.onFlagsStateChange,
+      onStatusStateChange: rendered.props.onStatusStateChange,
     });
+
+    await rendered.waitUntilReady();
   });
 });
 
 describe('when providing default flags', () => {
-  it('should notify parent about the default flag state', () => {
+  it('should notify parent about the default flag state', async () => {
     const adapter = createAdapter();
     const defaultFlags = {
       flagName: true,
     };
-    const props = createProps({ adapter });
+    const props = { children: <ChildComponent />, defaultFlags };
 
-    render(
-      <ConfigureAdapter {...props} defaultFlags={defaultFlags}>
-        <ChildComponent />
-      </ConfigureAdapter>
+    const rendered = render({ props, adapter });
+
+    expect(rendered.props.onFlagsStateChange).toHaveBeenCalledWith(
+      defaultFlags
     );
 
-    expect(props.onFlagsStateChange).toHaveBeenCalledWith(defaultFlags);
+    await rendered.waitUntilReady();
   });
 });
 
 describe('when adapter args change before adapter was configured', () => {
   const adapter = createAdapter();
-  const props = createProps({ adapter });
+  const props = {
+    children: <ChildComponent />,
+    shouldDeferAdapterConfiguration: true,
+  };
 
-  const rendered = render(
-    <ConfigureAdapter {...props} shouldDeferAdapterConfiguration>
-      <ChildComponent />
-    </ConfigureAdapter>
-  );
+  const rendered = render({
+    props,
+    adapter,
+  });
 
   const nextAdapterArgs = {
     nextValue: true,
   };
 
   rendered.rerender(
-    <ConfigureAdapter {...props} adapterArgs={nextAdapterArgs}>
+    <ConfigureAdapter
+      {...rendered.props}
+      shouldDeferAdapterConfiguration={false}
+      adapterArgs={nextAdapterArgs}
+    >
       <ChildComponent />
     </ConfigureAdapter>
   );
 
-  it('should configure adapter with merged adapter args', () => {
+  it('should configure adapter with merged adapter args', async () => {
     expect(adapter.configure).toHaveBeenCalledWith(
-      { ...props.adapterArgs, ...nextAdapterArgs },
+      { ...rendered.props.adapterArgs, ...nextAdapterArgs },
       expect.anything()
     );
+
+    await rendered.waitUntilReady();
   });
 });
 
 describe('when adapter args change after adapter was configured', () => {
   const adapter = createAdapter();
-  const props = createProps({ adapter });
+  const props = {
+    children: <ChildComponent />,
+  };
 
-  const rendered = render(
-    <ConfigureAdapter {...props}>
-      <ChildComponent />
-    </ConfigureAdapter>
-  );
+  const rendered = render({ props, adapter });
 
   const nextAdapterArgs = {
-    ...props.adapterArgs,
+    ...rendered.props.adapterArgs,
     nextValue: true,
   };
 
   rendered.rerender(
-    <ConfigureAdapter {...props} adapterArgs={nextAdapterArgs}>
+    <ConfigureAdapter {...rendered.props} adapterArgs={nextAdapterArgs}>
       <ChildComponent />
     </ConfigureAdapter>
   );
 
-  it('should reconfigure adapter with updated adapter args', () => {
+  it('should reconfigure adapter with updated adapter args', async () => {
+    await rendered.waitUntilReady();
+
     expect(adapter.reconfigure).toHaveBeenCalledWith(
       nextAdapterArgs,
       expect.anything()
@@ -218,16 +234,14 @@ describe('when adapter args change after adapter was configured', () => {
 
 describe('when adapter was configured and component updates', () => {
   const adapter = createAdapter();
-  const props = createProps({ adapter });
+  const props = {
+    children: <ChildComponent />,
+  };
 
-  const rendered = render(
-    <ConfigureAdapter {...props}>
-      <ChildComponent />
-    </ConfigureAdapter>
-  );
+  const rendered = render({ props, adapter });
 
   const nextProps = {
-    ...props,
+    ...rendered.props,
     changedValue: true,
   };
 
@@ -237,8 +251,10 @@ describe('when adapter was configured and component updates', () => {
     </ConfigureAdapter>
   );
 
-  it('should not configure adapter multiple times', () => {
+  it('should not configure adapter multiple times', async () => {
     expect(adapter.configure).toHaveBeenCalledTimes(1);
+
+    await rendered.waitUntilReady();
   });
 });
 
