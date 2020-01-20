@@ -1069,10 +1069,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@flopflip/launchdarkly-adapter@2.9.4":
-  version "2.9.4"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.9.4.tgz#ed508d076fdf784d7d52b704ae3152dc02bc5375"
-  integrity sha512-cPUyDACTieQZruzvqhoa2MLNkg8DAvTXowgFwwiyKzCUeW3sQ8cJS829UMdU58WUoIiCHS2HF/qRu2tte83ywg==
+"@flopflip/launchdarkly-adapter@2.10.0":
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.10.0.tgz#222d4c7ce1f2e7f89d5694b5b9ac8166985b7f7a"
+  integrity sha512-S6MiUcAbYwuwq3vVd3+lykYrWgYDdq7k6ZAopTNEBEA4avwf9tUOvrFUNKqSC1bnNi8OMQBt8xI433RNeuhegQ==
   dependencies:
     "@babel/runtime" "7.7.7"
     debounce-fn "3.0.1"
@@ -1081,19 +1081,19 @@
     lodash "4.17.15"
     tiny-warning "1.0.3"
 
-"@flopflip/localstorage-adapter@1.3.3":
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-1.3.3.tgz#8b5f47091e729cc5652bf588a7b4a958cfc0cfd5"
-  integrity sha512-xyrMMcCZdnu2KdujPIqipkU01BKUMOhG+5gI//OX57O6U4irbZBITOLB2YQWPyfFQRDQpbm7sKHbTXw7vXKXIw==
+"@flopflip/localstorage-adapter@1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-1.4.0.tgz#67f23f80769873f648df654717876d6e4da1f365"
+  integrity sha512-erV2dJuGQRh+O3UD5E/1PLOtn8RWwN6XQAID6sihnwKGaMw2WT2Kkd9BTWhiGJRuxr0JKi/ezw30D+ZgB7/LPg==
   dependencies:
     "@babel/runtime" "7.7.7"
     invariant "2.2.4"
     mitt "1.2.0"
 
-"@flopflip/memory-adapter@1.4.3":
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-1.4.3.tgz#08d001867698142ee451e4a606da2f7a6f4c9c69"
-  integrity sha512-Qwi2fovkU2iSBG+0yCcT0oxFi+yw27yvL3qUInt+gbEBCkoV/5mRraqxuJTe/qDCEaH3RS6yZpMee3YYMpM0pg==
+"@flopflip/memory-adapter@1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-1.5.0.tgz#391167b8d4311f1e9e169b033c1854151656cfa2"
+  integrity sha512-+oJLE18VvdlH3I99YHP2f0CBbEt+QMXVYUNe4YTsb9HK1Jjg3hMvB9gxh04M6HV5trW3Qh7TKybvHn/asmBKXw==
   dependencies:
     "@babel/runtime" "7.7.7"
     invariant "2.2.4"
