@@ -28,6 +28,7 @@ type AdapterState = {
     onStatusStateChange: OnStatusStateChangeCallback;
   };
   splitioSettings?: SplitIO.IBrowserSettings;
+  treatmentAttributes?: SplitIO.Attributes;
 };
 
 const adapterState: AdapterState = {
@@ -86,10 +87,10 @@ const subscribeToFlagsChanges = ({
   if (adapterState.client) {
     adapterState.client.on(adapterState.client.Event.SDK_UPDATE, () => {
       if (adapterState.client) {
-        const flags = adapterState.client.getTreatments(
-          flagNames,
-          adapterState.user as SplitIO.Attributes
-        );
+        const flags = adapterState.client.getTreatments(flagNames, {
+          ...adapterState.user,
+          ...adapterState.treatmentAttributes,
+        } as SplitIO.Attributes);
 
         onFlagsStateChange(normalizeFlags(flags));
       }
@@ -138,10 +139,10 @@ const subscribe = ({
 
         if (adapterState.client && adapterState.manager) {
           flagNames = adapterState.manager.names();
-          flags = adapterState.client.getTreatments(
-            flagNames,
-            adapterState.user as SplitIO.Attributes
-          );
+          flags = adapterState.client.getTreatments(flagNames, {
+            ...adapterState.user,
+            ...adapterState.treatmentAttributes,
+          } as SplitIO.Attributes);
 
           onFlagsStateChange(normalizeFlags(flags));
 
@@ -186,9 +187,16 @@ class SplitioAdapter implements SplitioAdapterInterface {
     adapterArgs: SplitioAdapterArgs,
     adapterEventHandlers: AdapterEventHandlers
   ): Promise<any> {
-    const { authorizationKey, user, options = {} } = adapterArgs;
+    const {
+      authorizationKey,
+      user,
+      options = {},
+      treatmentAttributes,
+    } = adapterArgs;
 
     adapterState.user = ensureUser(user);
+    adapterState.treatmentAttributes = treatmentAttributes;
+
     adapterState.configuredCallbacks.onFlagsStateChange =
       adapterEventHandlers.onFlagsStateChange;
     adapterState.configuredCallbacks.onStatusStateChange =
@@ -220,12 +228,26 @@ class SplitioAdapter implements SplitioAdapterInterface {
       );
     }
 
-    if (!isEqual(adapterState.user, adapterArgs.user)) {
-      adapterState.user = ensureUser(adapterArgs.user);
+    const hasUserChanged = !isEqual(adapterState.user, adapterArgs.user);
+    const hasTreatmentChanged = !isEqual(
+      adapterState.treatmentAttributes,
+      adapterArgs.treatmentAttributes
+    );
 
-      if (adapterState.manager && adapterState.client) {
-        adapterState.client.destroy();
-      }
+    if (hasUserChanged) {
+      adapterState.user = ensureUser(adapterArgs.user);
+    }
+
+    if (hasTreatmentChanged) {
+      adapterState.treatmentAttributes = adapterArgs.treatmentAttributes;
+    }
+
+    if (
+      (hasUserChanged || hasTreatmentChanged) &&
+      adapterState.manager &&
+      adapterState.client
+    ) {
+      adapterState.client.destroy();
 
       return configureSplitio();
     }
