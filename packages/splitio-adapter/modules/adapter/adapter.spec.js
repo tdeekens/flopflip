@@ -165,6 +165,7 @@ describe('when configuring', () => {
     let onStub;
     let onStatusStateChange;
     let onFlagsStateChange;
+    let treatmentStub = jest.fn(() => flags);
 
     beforeEach(() => {
       onStatusStateChange = jest.fn();
@@ -174,7 +175,7 @@ describe('when configuring', () => {
       factory = {
         client: jest.fn(() => ({
           on: onStub,
-          getTreatments: jest.fn(() => flags),
+          getTreatments: treatmentStub,
           Event: {
             SDK_READY: 'SDK_READY',
             SDK_UPDATE: 'SDK_UPDATE',
@@ -191,6 +192,9 @@ describe('when configuring', () => {
         {
           authorizationKey,
           user: userWithKey,
+          treatmentAttributes: {
+            platform: 'iOS',
+          },
         },
         {
           onStatusStateChange,
@@ -200,6 +204,13 @@ describe('when configuring', () => {
     });
 
     describe('when `splitio` is ready', () => {
+      it('should call getTreatments with attributes', () => {
+        expect(treatmentStub).toHaveBeenCalledWith(names, {
+          ...userWithKey,
+          platform: 'iOS',
+        });
+      });
+
       it('should indicate that the adapter is ready', () => {
         expect(adapter.getIsReady()).toBe(true);
       });
@@ -245,6 +256,7 @@ describe('when configuring', () => {
               SDK_READY: 'SDK_READY',
               SDK_UPDATE: 'SDK_UPDATE',
             },
+            destroy: jest.fn(),
           })),
           manager: jest.fn(() => ({
             names: namesStub,
@@ -258,6 +270,9 @@ describe('when configuring', () => {
             {
               authorizationKey,
               user: userWithKey,
+              treatmentAttributes: {
+                platform: 'iOS',
+              },
             },
             {
               onStatusStateChange,
@@ -274,8 +289,18 @@ describe('when configuring', () => {
               user: nextUser,
               onStatusStateChange,
               onFlagsStateChange,
+              treatmentAttributes: {
+                platform: 'android',
+              },
             });
           });
+      });
+
+      it('should call getTreatments with attributes', () => {
+        expect(getTreatmentsStub).toHaveBeenCalledWith(names, {
+          ...nextUser,
+          platform: 'android',
+        });
       });
     });
   });

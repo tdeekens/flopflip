@@ -38,6 +38,10 @@ export type SplitioAdapterArgs = BaseAdapterArgs & {
       [key: string]: string;
     };
   };
+  treatmentAttributes?: {
+    // Matches the signature of SplitIO.Attributes
+    [key: string]: string | number | boolean | Array<string | number>;
+  };
 };
 export type AdapterArgs =
   | LaunchDarklyAdapterArgs
