@@ -1099,33 +1099,32 @@
     invariant "2.2.4"
     mitt "1.2.0"
 
-"@flopflip/react-broadcast@9.1.5":
-  version "9.1.5"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-9.1.5.tgz#dde968b1547a91117dd30145f4f6e1d011b05983"
-  integrity sha512-kcuCjOgaQh+ZekzcdNFOwmIECLDxNs8cNKoChDmMu/yMfxPfCFy/a8rC+ndFDzI4JVpxT1wFtOmefuPtxKNwZA==
+"@flopflip/react-broadcast@10.1.0":
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-10.1.0.tgz#7401a44f3e6fe200299a61b7ea5f31a44661b301"
+  integrity sha512-8Wb5jlZR+GLNULCxiK6pBeaRcCu0PKvOL/8Ms0/owKsNtgr8ibQVMCigtylZK8dmHkfvQzag5eAObCLRYU2N5g==
   dependencies:
     "@babel/runtime" "7.7.7"
-    "@flopflip/react" "^8.1.4"
-    "@flopflip/types" "^2.2.1"
+    "@flopflip/react" "^9.1.0"
+    "@flopflip/types" "^2.3.0"
     lodash "4.17.15"
-    memoize-one "5.1.1"
 
-"@flopflip/react-redux@9.1.5":
-  version "9.1.5"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-9.1.5.tgz#9b6ce45122fa2f5a2ea369353b966c2ea87d290f"
-  integrity sha512-id7oCefblQ5/ZJ1YYoI9U2z5dw/AypPDYObsxUvCiFIgOx5C2pH/Ry+Y3k72sktYQ9os2hcLtwb+A5fst145QQ==
+"@flopflip/react-redux@10.1.0":
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-10.1.0.tgz#68475247c9890581ef7a353c8e0c30bf15c344f5"
+  integrity sha512-AFf4d4E3/ImGKB9x5AnCGVOSY97tnk8wpyt/1UMbXfsSMaQJOXy+hGCd0N9mhZ9nI2g0BOzXMh/MJPqsgR4BSg==
   dependencies:
     "@babel/runtime" "7.7.7"
-    "@flopflip/react" "^8.1.4"
-    "@flopflip/types" "^2.2.1"
+    "@flopflip/react" "^9.1.0"
+    "@flopflip/types" "^2.3.0"
     "@types/lodash" "4.14.149"
     "@types/react-redux" "7.1.5"
     lodash "4.17.15"
 
-"@flopflip/react@^8.1.4":
-  version "8.1.4"
-  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-8.1.4.tgz#42caaac9a8e6197d901b753965949264188ce71a"
-  integrity sha512-+PpqmopDeBqsPYSNALDtE0Rtc97HxrK6GbSXeE2yXyvSxgeNUT8qEMZ0ErVkukXzneZJX63zs8XLiRRMryxpCg==
+"@flopflip/react@^9.1.0":
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-9.1.0.tgz#64c28ace44d82cb446d1e444bbbabceea70f2014"
+  integrity sha512-J2+1ivHzG+ujRe2dthOVfmncBcULfaUr0JCHRhHsFwj24+nk8Nka31MUGpNBrka7DTNtMyl7lPhM+hIAIW9A4w==
   dependencies:
     "@babel/runtime" "7.7.7"
     deepmerge "4.2.2"
@@ -1134,7 +1133,7 @@
     react-is "16.12.0"
     tiny-warning "1.0.3"
 
-"@flopflip/types@^2.2.1":
+"@flopflip/types@^2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@flopflip/types/-/types-2.3.0.tgz#e48bbdc16057f157d862553989a0da8c38a79e85"
   integrity sha512-s4HOl88GzzT+wYzU3LBDdFMOKMBzU3PHwzH1yEIVIIxB5s67H4ji48b0+IYIkyzFcMZT7XbRuutuZ89Hap0CVA==
@@ -6564,11 +6563,6 @@ mem@^4.0.0:
     map-age-cleaner "^0.1.1"
     mimic-fn "^2.0.0"
     p-is-promise "^2.0.0"
-
-memoize-one@5.1.1:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.1.1.tgz#047b6e3199b508eaec03504de71229b8eb1d75c0"
-  integrity sha512-HKeeBpWvqiVJD57ZUAsJNm71eHTykffzcLZVYWiVfQeI1rJtuEaS7hQiEpWfVVk18donPwJEcFKIkCmPJNOhHA==
 
 memory-fs@^0.4.1:
   version "0.4.1"
