@@ -1,3 +1,5 @@
+import { LDClient } from 'launchdarkly-js-client-sdk';
+
 export type FlagName = string;
 export type FlagVariation = boolean | string;
 export type Flag = [FlagName, FlagVariation];
@@ -84,6 +86,7 @@ export interface LaunchDarklyAdapterInterface
     adapterEventHandlers: AdapterEventHandlers
   ): Promise<any>;
   getIsReady(): boolean;
+  getClient(): LDClient | undefined;
   getFlag(flagName: FlagName): FlagVariation | undefined;
   updateUserContext(updatedUserProps: User): Promise<any>;
 }

@@ -41,6 +41,10 @@ describe('when configuring', () => {
     expect(adapter.getIsReady()).toBe(false);
   });
 
+  it('should not return client', () => {
+    expect(adapter.getClient()).toBe(undefined);
+  });
+
   describe('when reconfiguring before configured', () => {
     it('should reject reconfiguration', () => {
       return expect(adapter.reconfigure({ user: userWithKey })).rejects.toEqual(
@@ -162,6 +166,17 @@ describe('when configuring', () => {
       describe('when determining if adapter is ready', () => {
         it('should indicate that the adapter is ready', () => {
           expect(adapter.getIsReady()).toBe(true);
+        });
+
+        it('should return client', () => {
+          expect(adapter.getClient()).toEqual(
+            expect.objectContaining({
+              allFlags: expect.any(Function),
+              on: expect.any(Function),
+              variation: expect.any(Function),
+              waitForInitialization: expect.any(Function),
+            })
+          );
         });
       });
 

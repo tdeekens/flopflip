@@ -231,6 +231,10 @@ class LaunchDarklyAdapter implements LaunchDarklyAdapterInterface {
     return adapterState.isReady;
   }
 
+  getClient(): LDClient | undefined {
+    return adapterState.client;
+  }
+
   getFlag(flagName: FlagName): FlagVariation | undefined {
     return adapterState.flags[flagName];
   }
