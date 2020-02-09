@@ -1,6 +1,6 @@
-import { AdapterStatus } from '@flopflip/types';
+import { TAdapterStatus } from '@flopflip/types';
 
-export type UpdateStatusAction = {
+export type TUpdateStatusAction = {
   type: string;
-  payload: { status: AdapterStatus };
+  payload: { status: TAdapterStatus };
 };

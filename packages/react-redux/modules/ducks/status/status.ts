@@ -1,18 +1,18 @@
-import { AdapterStatus } from '@flopflip/types';
-import { State } from '../../types';
+import { TAdapterStatus } from '@flopflip/types';
+import { TUpdateStatusAction } from './types';
+import { TState } from '../../types';
 import { STATE_SLICE } from '../../store/constants';
-import { UpdateStatusAction } from './types';
 
 // Actions
 export const UPDATE_STATUS = '@flopflip/status/update';
 
-const initialState: AdapterStatus = { isReady: false };
+const initialState: TAdapterStatus = { isReady: false };
 
 // Reducer
 const reducer = (
-  state: AdapterStatus = initialState,
-  action: UpdateStatusAction
-): AdapterStatus => {
+  state: TAdapterStatus = initialState,
+  action: TUpdateStatusAction
+): TAdapterStatus => {
   switch (action.type) {
     case UPDATE_STATUS:
       return {
@@ -28,10 +28,10 @@ const reducer = (
 export default reducer;
 
 // Action Creators
-export const updateStatus = (status: AdapterStatus): UpdateStatusAction => ({
+export const updateStatus = (status: TAdapterStatus): TUpdateStatusAction => ({
   type: UPDATE_STATUS,
   payload: { status },
 });
 // Selectors
-export const selectStatus = (state: State): AdapterStatus =>
+export const selectStatus = (state: TState): TAdapterStatus =>
   state[STATE_SLICE].status ?? {};

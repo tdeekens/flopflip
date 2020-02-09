@@ -1,26 +1,26 @@
 import invariant from 'invariant';
 import mitt, { Emitter } from 'mitt';
 import {
-  User,
-  AdapterStatus,
-  FlagName,
-  FlagVariation,
-  Flag,
-  Flags,
-  AdapterEventHandlers,
-  MemoryAdapterInterface,
-  MemoryAdapterArgs,
+  TUser,
+  TAdapterStatus,
+  TFlagName,
+  TFlagVariation,
+  TFlag,
+  TFlags,
+  TAdapterEventHandlers,
+  TMemoryAdapterInterface,
+  TMemoryAdapterArgs,
   interfaceIdentifiers,
 } from '@flopflip/types';
 import camelCase from 'lodash/camelCase';
 
 type MemoryAdapterState = {
-  flags: Flags;
-  user?: User;
+  flags: TFlags;
+  user?: TUser;
   emitter: Emitter;
 };
 
-const intialAdapterState: AdapterStatus & MemoryAdapterState = {
+const intialAdapterState: TAdapterStatus & MemoryAdapterState = {
   isReady: false,
   flags: {},
   user: {},
@@ -30,22 +30,25 @@ const intialAdapterState: AdapterStatus & MemoryAdapterState = {
   emitter: mitt(),
 };
 
-let adapterState: AdapterStatus & MemoryAdapterState = {
+let adapterState: TAdapterStatus & MemoryAdapterState = {
   ...intialAdapterState,
 };
-const updateUser = (user: User): void => {
+const updateUser = (user: TUser): void => {
   adapterState.user = user;
 };
 
-const normalizeFlag = (flagName: FlagName, flagValue?: FlagVariation): Flag => [
+const normalizeFlag = (
+  flagName: TFlagName,
+  flagValue?: TFlagVariation
+): TFlag => [
   camelCase(flagName),
   // Multi variate flags contain a string or `null` - `false` seems more natural.
   flagValue === null || flagValue === undefined ? false : flagValue,
 ];
-export const normalizeFlags = (rawFlags: Flags): Flags =>
-  Object.entries(rawFlags).reduce<Flags>(
-    (normalizedFlags: Flags, [flagName, flagValue]) => {
-      const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
+export const normalizeFlags = (rawFlags: TFlags): TFlags =>
+  Object.entries(rawFlags).reduce<TFlags>(
+    (normalizedFlags: TFlags, [flagName, flagValue]) => {
+      const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
         flagName,
         flagValue
       );
@@ -57,9 +60,9 @@ export const normalizeFlags = (rawFlags: Flags): Flags =>
     {}
   );
 
-export const getUser = (): User | undefined => adapterState.user;
+export const getUser = (): TUser | undefined => adapterState.user;
 
-export const updateFlags = (flags: Flags) => {
+export const updateFlags = (flags: TFlags) => {
   const isAdapterReady = Boolean(
     adapterState.isConfigured && adapterState.isReady
   );
@@ -79,7 +82,7 @@ export const updateFlags = (flags: Flags) => {
   adapterState.emitter.emit('flagsStateChange', adapterState.flags);
 };
 
-class MemoryAdapter implements MemoryAdapterInterface {
+class MemoryAdapter implements TMemoryAdapterInterface {
   id: typeof interfaceIdentifiers.memory;
 
   constructor() {
@@ -87,8 +90,8 @@ class MemoryAdapter implements MemoryAdapterInterface {
   }
 
   configure(
-    adapterArgs: MemoryAdapterArgs,
-    adapterEventHandlers: AdapterEventHandlers
+    adapterArgs: TMemoryAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any> {
     const { user } = adapterArgs;
 
@@ -121,8 +124,8 @@ class MemoryAdapter implements MemoryAdapterInterface {
   }
 
   reconfigure(
-    adapterArgs: MemoryAdapterArgs,
-    _adapterEventHandlers: AdapterEventHandlers
+    adapterArgs: TMemoryAdapterArgs,
+    _adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any> {
     updateUser(adapterArgs.user);
 
@@ -139,7 +142,7 @@ class MemoryAdapter implements MemoryAdapterInterface {
     return Boolean(adapterState.isReady);
   }
 
-  setIsReady(nextState: AdapterStatus): void {
+  setIsReady(nextState: TAdapterStatus): void {
     adapterState.isReady = nextState.isReady;
 
     adapterState.emitter.emit('statusStateChange', {
@@ -160,12 +163,12 @@ class MemoryAdapter implements MemoryAdapterInterface {
     });
   }
 
-  getFlag(flagName: FlagName): FlagVariation | undefined {
+  getFlag(flagName: TFlagName): TFlagVariation | undefined {
     return adapterState.flags && adapterState.flags[flagName];
   }
 
   // For convenience
-  updateFlags(flags: Flags): void {
+  updateFlags(flags: TFlags): void {
     return updateFlags(flags);
   }
 }

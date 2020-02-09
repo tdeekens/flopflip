@@ -1,7 +1,7 @@
 import React from 'react';
-import { Flags } from '@flopflip/types';
+import { TFlags } from '@flopflip/types';
 
 const intialFlagsContext = {};
-const FlagsContext = React.createContext<Flags>(intialFlagsContext);
+const FlagsContext = React.createContext<TFlags>(intialFlagsContext);
 
 export default FlagsContext;

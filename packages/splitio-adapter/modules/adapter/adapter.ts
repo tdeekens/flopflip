@@ -1,14 +1,14 @@
 import {
-  FlagName,
-  FlagVariation,
-  User,
-  Flag,
-  Flags,
-  OnFlagsStateChangeCallback,
-  OnStatusStateChangeCallback,
-  AdapterEventHandlers,
-  SplitioAdapterInterface,
-  SplitioAdapterArgs,
+  TFlagName,
+  TFlagVariation,
+  TUser,
+  TFlag,
+  TFlags,
+  TOnFlagsStateChangeCallback,
+  TOnStatusStateChangeCallback,
+  TAdapterEventHandlers,
+  TSplitioAdapterInterface,
+  TSplitioAdapterArgs,
   interfaceIdentifiers,
 } from '@flopflip/types';
 import merge from 'deepmerge';
@@ -20,12 +20,12 @@ import isEqual from 'lodash/isEqual';
 type AdapterState = {
   isReady: boolean;
   isConfigured: boolean;
-  user?: User;
+  user?: TUser;
   client?: SplitIO.IClient;
   manager?: SplitIO.IManager;
   configuredCallbacks: {
-    onFlagsStateChange: OnFlagsStateChangeCallback;
-    onStatusStateChange: OnStatusStateChangeCallback;
+    onFlagsStateChange: TOnFlagsStateChangeCallback;
+    onStatusStateChange: TOnStatusStateChangeCallback;
   };
   splitioSettings?: SplitIO.IBrowserSettings;
   treatmentAttributes?: SplitIO.Attributes;
@@ -45,9 +45,9 @@ const adapterState: AdapterState = {
 };
 
 export const normalizeFlag = (
-  flagName: FlagName,
-  flagValue: FlagVariation
-): Flag => {
+  flagName: TFlagName,
+  flagValue: TFlagVariation
+): TFlag => {
   let normalizeFlagValue;
   if (flagValue === null) {
     normalizeFlagValue = false;
@@ -62,10 +62,10 @@ export const normalizeFlag = (
   return [camelCase(flagName), normalizeFlagValue];
 };
 
-export const normalizeFlags = (flags: Flags): Flags =>
-  Object.entries(flags).reduce<Flags>(
-    (normalizedFlags: Flags, [flagName, flaValue]) => {
-      const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
+export const normalizeFlags = (flags: TFlags): TFlags =>
+  Object.entries(flags).reduce<TFlags>(
+    (normalizedFlags: TFlags, [flagName, flaValue]) => {
+      const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
         flagName,
         flaValue
       );
@@ -81,8 +81,8 @@ const subscribeToFlagsChanges = ({
   flagNames,
   onFlagsStateChange,
 }: {
-  flagNames: FlagName[];
-  onFlagsStateChange: OnFlagsStateChangeCallback;
+  flagNames: TFlagName[];
+  onFlagsStateChange: TOnFlagsStateChangeCallback;
 }): void => {
   if (adapterState.client) {
     adapterState.client.on(adapterState.client.Event.SDK_UPDATE, () => {
@@ -103,7 +103,7 @@ export const createAnonymousUserKey = (): string =>
     .toString(36)
     .substring(2);
 
-const ensureUser = (user: User): User =>
+const ensureUser = (user: TUser): TUser =>
   merge(user, { key: user?.key ?? createAnonymousUserKey() });
 
 const initializeClient = (): {
@@ -128,14 +128,14 @@ const subscribe = ({
   onFlagsStateChange,
   onStatusStateChange,
 }: {
-  onFlagsStateChange: OnFlagsStateChangeCallback;
-  onStatusStateChange: OnStatusStateChangeCallback;
+  onFlagsStateChange: TOnFlagsStateChangeCallback;
+  onStatusStateChange: TOnStatusStateChangeCallback;
 }): Promise<any> =>
   new Promise((resolve, reject) => {
     if (adapterState.client) {
       adapterState.client.on(adapterState.client.Event.SDK_READY, () => {
-        let flagNames: FlagName[];
-        let flags: Flags;
+        let flagNames: TFlagName[];
+        let flags: TFlags;
 
         if (adapterState.client && adapterState.manager) {
           flagNames = adapterState.manager.names();
@@ -176,7 +176,7 @@ const configureSplitio = () => {
   });
 };
 
-class SplitioAdapter implements SplitioAdapterInterface {
+class SplitioAdapter implements TSplitioAdapterInterface {
   id: typeof interfaceIdentifiers.splitio;
 
   constructor() {
@@ -184,8 +184,8 @@ class SplitioAdapter implements SplitioAdapterInterface {
   }
 
   configure(
-    adapterArgs: SplitioAdapterArgs,
-    adapterEventHandlers: AdapterEventHandlers
+    adapterArgs: TSplitioAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any> {
     const {
       authorizationKey,
@@ -213,8 +213,8 @@ class SplitioAdapter implements SplitioAdapterInterface {
   }
 
   reconfigure(
-    adapterArgs: SplitioAdapterArgs,
-    _adapterEventHandlers: AdapterEventHandlers
+    adapterArgs: TSplitioAdapterArgs,
+    _adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any> {
     if (
       !adapterState.isReady ||

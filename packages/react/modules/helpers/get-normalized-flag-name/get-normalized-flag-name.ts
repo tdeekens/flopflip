@@ -1,7 +1,7 @@
-import { FlagName } from '@flopflip/types';
+import { TFlagName } from '@flopflip/types';
 import camelCase from 'lodash/camelCase';
 
-const getNormalizedFlagName = (flagName: FlagName): FlagName => {
+const getNormalizedFlagName = (flagName: TFlagName): TFlagName => {
   return camelCase(flagName);
 };
 

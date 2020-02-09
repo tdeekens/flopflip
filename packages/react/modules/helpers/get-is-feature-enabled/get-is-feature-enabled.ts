@@ -1,11 +1,11 @@
-import { FlagName, FlagVariation, Flags } from '@flopflip/types';
+import { TFlagName, TFlagVariation, TFlags } from '@flopflip/types';
 import { DEFAULT_FLAG_PROP_KEY } from '../../constants';
 import getFlagVariation from '../get-flag-variation';
 
 const getIsFeatureEnabled = (
-  flagName: FlagName = DEFAULT_FLAG_PROP_KEY,
-  flagVariation: FlagVariation = true
-): ((flags: Flags) => boolean) => {
+  flagName: TFlagName = DEFAULT_FLAG_PROP_KEY,
+  flagVariation: TFlagVariation = true
+): ((flags: TFlags) => boolean) => {
   return flags => getFlagVariation(flagName)(flags) === flagVariation;
 };
 

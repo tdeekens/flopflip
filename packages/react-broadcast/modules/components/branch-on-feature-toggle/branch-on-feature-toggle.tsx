@@ -1,4 +1,4 @@
-import { FlagName, FlagVariation } from '@flopflip/types';
+import { TFlagName, TFlagVariation } from '@flopflip/types';
 
 import React from 'react';
 import { useFeatureToggle } from '../../hooks';
@@ -7,7 +7,7 @@ export default <OwnProps extends object>(
   {
     flag: flagName,
     variation: flagVariation,
-  }: { flag: FlagName; variation?: FlagVariation },
+  }: { flag: TFlagName; variation?: TFlagVariation },
   UntoggledComponent?: React.ComponentType
 ) => (
   ToggledComponent: React.ComponentType<OwnProps>

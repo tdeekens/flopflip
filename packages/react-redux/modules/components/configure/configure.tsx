@@ -1,20 +1,20 @@
 import React from 'react';
 import { ConfigureAdapter } from '@flopflip/react';
 import {
-  Flags,
-  Adapter,
-  ConfigureAdapterProps,
-  ConfigureAdapterChildren,
+  TFlags,
+  TAdapter,
+  TConfigureAdapterProps,
+  TConfigureAdapterChildren,
 } from '@flopflip/types';
 import { useUpdateFlags, useUpdateStatus } from '../../hooks';
 
 type BaseProps = {
-  children?: ConfigureAdapterChildren;
+  children?: TConfigureAdapterChildren;
   shouldDeferAdapterConfiguration?: boolean;
-  defaultFlags?: Flags;
+  defaultFlags?: TFlags;
 };
-type Props<AdapterInstance extends Adapter> = BaseProps &
-  ConfigureAdapterProps<AdapterInstance>;
+type Props<AdapterInstance extends TAdapter> = BaseProps &
+  TConfigureAdapterProps<AdapterInstance>;
 
 const defaultProps: Pick<
   BaseProps,
@@ -24,7 +24,7 @@ const defaultProps: Pick<
   shouldDeferAdapterConfiguration: false,
 };
 
-const Configure = <AdapterInstance extends Adapter>(
+const Configure = <AdapterInstance extends TAdapter>(
   props: Props<AdapterInstance>
 ) => {
   const handleUpdateFlags = useUpdateFlags();

@@ -1,38 +1,38 @@
-import { LDClient } from 'launchdarkly-js-client-sdk';
+import { LDClient as TLDClient } from 'launchdarkly-js-client-sdk';
 
-export type FlagName = string;
-export type FlagVariation = boolean | string;
-export type Flag = [FlagName, FlagVariation];
-export type Flags = { [key: string]: FlagVariation };
-export type User = {
+export type TFlagName = string;
+export type TFlagVariation = boolean | string;
+export type TFlag = [TFlagName, TFlagVariation];
+export type TFlags = { [key: string]: TFlagVariation };
+export type TUser = {
   key?: string;
 };
-export type AdapterStatus = {
+export type TAdapterStatus = {
   isReady?: boolean;
   isConfigured?: boolean;
 };
-export type AdapterEventHandlers = {
-  onFlagsStateChange: (flags: Flags) => void;
-  onStatusStateChange: (status: AdapterStatus) => void;
+export type TAdapterEventHandlers = {
+  onFlagsStateChange: (flags: TFlags) => void;
+  onStatusStateChange: (status: TAdapterStatus) => void;
 };
-export type BaseAdapterArgs = {
-  user: User;
+export type TBaseAdapterArgs = {
+  user: TUser;
 };
-export type LaunchDarklyAdapterArgs = BaseAdapterArgs & {
+export type TLaunchDarklyAdapterArgs = TBaseAdapterArgs & {
   clientSideId: string;
-  flags: Flags;
+  flags: TFlags;
   clientOptions?: { fetchGoals?: boolean };
   subscribeToFlagChanges?: boolean;
   throwOnInitializationFailure?: boolean;
   flagsUpdateDelayMs?: number;
 };
-export type LocalStorageAdapterArgs = BaseAdapterArgs & {
+export type TLocalStorageAdapterArgs = TBaseAdapterArgs & {
   adapterConfiguration?: {
     pollingInteral?: number;
   };
 };
-export type MemoryAdapterArgs = BaseAdapterArgs;
-export type SplitioAdapterArgs = BaseAdapterArgs & {
+export type TMemoryAdapterArgs = TBaseAdapterArgs;
+export type TSplitioAdapterArgs = TBaseAdapterArgs & {
   authorizationKey: string;
   options?: {
     [key: string]: unknown;
@@ -45,154 +45,154 @@ export type SplitioAdapterArgs = BaseAdapterArgs & {
     [key: string]: string | number | boolean | Array<string | number>;
   };
 };
-export type AdapterArgs =
-  | LaunchDarklyAdapterArgs
-  | LocalStorageAdapterArgs
-  | MemoryAdapterArgs
-  | SplitioAdapterArgs;
+export type TAdapterArgs =
+  | TLaunchDarklyAdapterArgs
+  | TLocalStorageAdapterArgs
+  | TMemoryAdapterArgs
+  | TSplitioAdapterArgs;
 export const interfaceIdentifiers = {
   launchdarkly: 'launchdarkly',
   localstorage: 'localstorage',
   memory: 'memory',
   splitio: 'splitio',
 } as const;
-export type AdapterInterfaceIdentifiers = typeof interfaceIdentifiers[keyof typeof interfaceIdentifiers];
-export interface AdapterInterface<Args extends AdapterArgs> {
+export type TAdapterInterfaceIdentifiers = typeof interfaceIdentifiers[keyof typeof interfaceIdentifiers];
+export interface TAdapterInterface<Args extends TAdapterArgs> {
   // Identifiers are used to uniquely identify an interface when performing a condition check.
-  id: AdapterInterfaceIdentifiers;
+  id: TAdapterInterfaceIdentifiers;
   configure(
     adapterArgs: Args,
-    adapterEventHandlers: AdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any>;
   reconfigure(
     adapterArgs: Args,
-    adapterEventHandlers: AdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any>;
   getIsReady(): boolean;
-  setIsReady?(nextStatus: AdapterStatus): void;
+  setIsReady?(nextStatus: TAdapterStatus): void;
   waitUntilConfigured?(): Promise<any>;
   reset?(): void;
-  getFlag?(flagName: FlagName): FlagVariation | undefined;
+  getFlag?(flagName: TFlagName): TFlagVariation | undefined;
 }
-export interface LaunchDarklyAdapterInterface
-  extends AdapterInterface<LaunchDarklyAdapterArgs> {
+export interface TLaunchDarklyAdapterInterface
+  extends TAdapterInterface<TLaunchDarklyAdapterArgs> {
   id: typeof interfaceIdentifiers.launchdarkly;
   configure(
-    adapterArgs: LaunchDarklyAdapterArgs,
-    adapterEventHandlers: AdapterEventHandlers
+    adapterArgs: TLaunchDarklyAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any>;
   reconfigure(
-    adapterArgs: LaunchDarklyAdapterArgs,
-    adapterEventHandlers: AdapterEventHandlers
+    adapterArgs: TLaunchDarklyAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any>;
   getIsReady(): boolean;
-  getClient(): LDClient | undefined;
-  getFlag(flagName: FlagName): FlagVariation | undefined;
-  updateUserContext(updatedUserProps: User): Promise<any>;
+  getClient(): TLDClient | undefined;
+  getFlag(flagName: TFlagName): TFlagVariation | undefined;
+  updateUserContext(updatedUserProps: TUser): Promise<any>;
 }
-export interface LocalStorageAdapterInterface
-  extends AdapterInterface<LocalStorageAdapterArgs> {
+export interface TLocalStorageAdapterInterface
+  extends TAdapterInterface<TLocalStorageAdapterArgs> {
   id: typeof interfaceIdentifiers.localstorage;
   configure(
-    adapterArgs: LocalStorageAdapterArgs,
-    adapterEventHandlers: AdapterEventHandlers
+    adapterArgs: TLocalStorageAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any>;
   reconfigure(
-    adapterArgs: LocalStorageAdapterArgs,
-    adapterEventHandlers: AdapterEventHandlers
+    adapterArgs: TLocalStorageAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any>;
   getIsReady(): boolean;
   waitUntilConfigured(): Promise<any>;
 }
-export interface MemoryAdapterInterface
-  extends AdapterInterface<MemoryAdapterArgs> {
+export interface TMemoryAdapterInterface
+  extends TAdapterInterface<TMemoryAdapterArgs> {
   id: typeof interfaceIdentifiers.memory;
   configure(
-    adapterArgs: MemoryAdapterArgs,
-    adapterEventHandlers: AdapterEventHandlers
+    adapterArgs: TMemoryAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any>;
   reconfigure(
-    adapterArgs: MemoryAdapterArgs,
-    adapterEventHandlers: AdapterEventHandlers
+    adapterArgs: TMemoryAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any>;
   getIsReady(): boolean;
-  setIsReady(nextStatus: AdapterStatus): void;
+  setIsReady(nextStatus: TAdapterStatus): void;
   waitUntilConfigured(): Promise<any>;
   reset(): void;
-  updateFlags(flags: Flags): void;
+  updateFlags(flags: TFlags): void;
 }
-export interface SplitioAdapterInterface
-  extends AdapterInterface<SplitioAdapterArgs> {
+export interface TSplitioAdapterInterface
+  extends TAdapterInterface<TSplitioAdapterArgs> {
   id: typeof interfaceIdentifiers.splitio;
   configure(
-    adapterArgs: SplitioAdapterArgs,
-    adapterEventHandlers: AdapterEventHandlers
+    adapterArgs: TSplitioAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any>;
   reconfigure(
-    adapterArgs: SplitioAdapterArgs,
-    adapterEventHandlers: AdapterEventHandlers
+    adapterArgs: TSplitioAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any>;
   getIsReady(): boolean;
 }
-export type Adapter =
-  | LaunchDarklyAdapterInterface
-  | LocalStorageAdapterInterface
-  | MemoryAdapterInterface
-  | SplitioAdapterInterface;
+export type TAdapter =
+  | TLaunchDarklyAdapterInterface
+  | TLocalStorageAdapterInterface
+  | TMemoryAdapterInterface
+  | TSplitioAdapterInterface;
 export type ConfigureAdapterArgs<
-  AdapterInstance extends Adapter
-> = AdapterInstance extends LaunchDarklyAdapterInterface
-  ? LaunchDarklyAdapterArgs
-  : AdapterInstance extends LocalStorageAdapterInterface
-  ? LocalStorageAdapterArgs
-  : AdapterInstance extends MemoryAdapterInterface
-  ? MemoryAdapterArgs
-  : AdapterInstance extends SplitioAdapterInterface
-  ? SplitioAdapterArgs
+  TAdapterInstance extends TAdapter
+> = TAdapterInstance extends TLaunchDarklyAdapterInterface
+  ? TLaunchDarklyAdapterArgs
+  : TAdapterInstance extends TLocalStorageAdapterInterface
+  ? TLocalStorageAdapterArgs
+  : TAdapterInstance extends TMemoryAdapterInterface
+  ? TMemoryAdapterArgs
+  : TAdapterInstance extends TSplitioAdapterInterface
+  ? TSplitioAdapterArgs
   : never;
-export type ConfigureAdapterProps<AdapterInstance extends Adapter> = {
-  adapter: AdapterInstance extends LaunchDarklyAdapterInterface
-    ? LaunchDarklyAdapterInterface
-    : AdapterInstance extends LocalStorageAdapterInterface
-    ? LocalStorageAdapterInterface
-    : AdapterInstance extends MemoryAdapterInterface
-    ? MemoryAdapterInterface
-    : AdapterInstance extends SplitioAdapterInterface
-    ? SplitioAdapterInterface
+export type TConfigureAdapterProps<TAdapterInstance extends TAdapter> = {
+  adapter: TAdapterInstance extends TLaunchDarklyAdapterInterface
+    ? TLaunchDarklyAdapterInterface
+    : TAdapterInstance extends TLocalStorageAdapterInterface
+    ? TLocalStorageAdapterInterface
+    : TAdapterInstance extends TMemoryAdapterInterface
+    ? TMemoryAdapterInterface
+    : TAdapterInstance extends TSplitioAdapterInterface
+    ? TSplitioAdapterInterface
     : never;
-  adapterArgs: ConfigureAdapterArgs<AdapterInstance>;
+  adapterArgs: ConfigureAdapterArgs<TAdapterInstance>;
 };
-export type AdapterStatusChange = { [key: string]: boolean };
-export type OnFlagsStateChangeCallback = (flags: Flags) => void;
-export type OnStatusStateChangeCallback = (
-  statusChange: AdapterStatusChange
+export type TAdapterStatusChange = { [key: string]: boolean };
+export type TOnFlagsStateChangeCallback = (flags: TFlags) => void;
+export type TOnStatusStateChangeCallback = (
+  statusChange: TAdapterStatusChange
 ) => void;
 
-export type AdapterReconfigurationOptions = {
+export type TAdapterReconfigurationOptions = {
   shouldOverwrite?: boolean;
 };
-export type AdapterReconfiguration = {
-  adapterArgs: AdapterArgs;
-  options: AdapterReconfigurationOptions;
+export type TAdapterReconfiguration = {
+  adapterArgs: TAdapterArgs;
+  options: TAdapterReconfigurationOptions;
 };
-export type ConfigureAdapterChildrenAsFunctionArgs = {
+export type TConfigureAdapterChildrenAsFunctionArgs = {
   isAdapterReady: boolean;
 };
-export type ConfigureAdapterChildrenAsFunction = (
-  args: ConfigureAdapterChildrenAsFunctionArgs
+export type TConfigureAdapterChildrenAsFunction = (
+  args: TConfigureAdapterChildrenAsFunctionArgs
 ) => React.ReactNode;
-export type ConfigureAdapterChildren =
-  | ConfigureAdapterChildrenAsFunction
+export type TConfigureAdapterChildren =
+  | TConfigureAdapterChildrenAsFunction
   | React.ReactNode;
-export type ReconfigureAdapter = (
-  adapterArgs: AdapterArgs,
-  options: AdapterReconfigurationOptions
+export type TReconfigureAdapter = (
+  adapterArgs: TAdapterArgs,
+  options: TAdapterReconfigurationOptions
 ) => void;
-export type AdapterContext = {
-  reconfigure: ReconfigureAdapter;
-  status: AdapterStatus;
+export type TAdapterContext = {
+  reconfigure: TReconfigureAdapter;
+  status: TAdapterStatus;
 };
-export type Diff<ExcludedFrom, ToExclude> = Pick<
+export type TDiff<ExcludedFrom, ToExclude> = Pick<
   ExcludedFrom,
   Exclude<keyof ExcludedFrom, keyof ToExclude>
 >;

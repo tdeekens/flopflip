@@ -1,12 +1,13 @@
-import { Flags, AdapterStatus } from '@flopflip/types';
-import { UpdateStatusAction as TUpdateStatusAction } from './ducks/status/types';
-import { UpdateFlagsAction as TUpdateFlagsAction } from './ducks/flags/types';
+import { TFlags, TAdapterStatus } from '@flopflip/types';
+import { TUpdateStatusAction } from './ducks/status/types';
+import { TUpdateFlagsAction } from './ducks/flags/types';
+
 import { STATE_SLICE } from './store/constants';
 
-export type State = {
+export type TState = {
   [STATE_SLICE]: {
-    flags?: Flags;
-    status?: AdapterStatus;
+    flags?: TFlags;
+    status?: TAdapterStatus;
   };
 };
 

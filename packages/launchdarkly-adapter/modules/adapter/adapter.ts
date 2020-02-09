@@ -1,12 +1,12 @@
 import {
-  FlagName,
-  FlagVariation,
-  User,
-  Flag,
-  Flags,
-  LaunchDarklyAdapterInterface,
-  LaunchDarklyAdapterArgs,
-  AdapterEventHandlers,
+  TFlagName,
+  TFlagVariation,
+  TUser,
+  TFlag,
+  TFlags,
+  TLaunchDarklyAdapterInterface,
+  TLaunchDarklyAdapterArgs,
+  TAdapterEventHandlers,
   interfaceIdentifiers,
 } from '@flopflip/types';
 import merge from 'deepmerge';
@@ -24,9 +24,9 @@ import kebabCase from 'lodash/kebabCase';
 type AdapterState = {
   isReady: boolean;
   isConfigured: boolean;
-  user?: User;
+  user?: TUser;
   client?: LDClient;
-  flags: Flags;
+  flags: TFlags;
 };
 
 const adapterState: AdapterState = {
@@ -37,40 +37,43 @@ const adapterState: AdapterState = {
   flags: {},
 };
 
-const updateFlagsInAdapterState = (updatedFlags: Flags): void => {
+const updateFlagsInAdapterState = (updatedFlags: TFlags): void => {
   adapterState.flags = {
     ...adapterState.flags,
     ...updatedFlags,
   };
 };
 
-const normalizeFlag = (flagName: FlagName, flagValue?: FlagVariation): Flag => [
+const normalizeFlag = (
+  flagName: TFlagName,
+  flagValue?: TFlagVariation
+): TFlag => [
   camelCase(flagName),
   // Multi variate flags contain a string or `null` - `false` seems more natural.
   flagValue === null || flagValue === undefined ? false : flagValue,
 ];
-const denormalizeFlagName = (flagName: FlagName) => kebabCase(flagName);
+const denormalizeFlagName = (flagName: TFlagName) => kebabCase(flagName);
 
-const getIsAnonymousUser = (user: User): boolean => !user?.key;
+const getIsAnonymousUser = (user: TUser): boolean => !user?.key;
 
-const ensureUser = (user: User) => {
+const ensureUser = (user: TUser) => {
   const isAnonymousUser = getIsAnonymousUser(user);
 
   // NOTE: When marked `anonymous` the SDK will generate a unique key and cache it in local storage
-  return merge<User, LDUser>(user, {
+  return merge<TUser, LDUser>(user, {
     key: isAnonymousUser ? undefined : user.key,
     anonymous: isAnonymousUser,
   });
 };
 
 const initializeClient = (
-  clientSideId: LaunchDarklyAdapterArgs['clientSideId'],
-  user: User,
-  clientOptions: LaunchDarklyAdapterArgs['clientOptions']
+  clientSideId: TLaunchDarklyAdapterArgs['clientSideId'],
+  user: TUser,
+  clientOptions: TLaunchDarklyAdapterArgs['clientOptions']
 ): LDClient =>
   initializeLaunchDarklyClient(clientSideId, user as LDUser, clientOptions);
 
-const changeUserContext = (nextUser: User): Promise<any> =>
+const changeUserContext = (nextUser: TUser): Promise<any> =>
   adapterState.client && adapterState.client.identify
     ? adapterState.client.identify(nextUser as LDUser)
     : Promise.reject(
@@ -78,10 +81,10 @@ const changeUserContext = (nextUser: User): Promise<any> =>
       );
 
 // NOTE: Exported for testing only
-export const normalizeFlags = (rawFlags: Flags): Flags =>
-  Object.entries(rawFlags).reduce<Flags>(
-    (normalizedFlags: Flags, [flagName, flagValue]) => {
-      const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
+export const normalizeFlags = (rawFlags: TFlags): TFlags =>
+  Object.entries(rawFlags).reduce<TFlags>(
+    (normalizedFlags: TFlags, [flagName, flagValue]) => {
+      const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
         flagName,
         flagValue
       );
@@ -97,14 +100,14 @@ const getInitialFlags = (
   {
     flags,
     throwOnInitializationFailure,
-  }: Pick<LaunchDarklyAdapterArgs, 'flags' | 'throwOnInitializationFailure'>,
-  adapterEventHandlers: AdapterEventHandlers
-): Promise<{ flagsFromSdk: Flags | null }> => {
+  }: Pick<TLaunchDarklyAdapterArgs, 'flags' | 'throwOnInitializationFailure'>,
+  adapterEventHandlers: TAdapterEventHandlers
+): Promise<{ flagsFromSdk: TFlags | null }> => {
   if (adapterState.client) {
     return adapterState.client
       .waitForInitialization()
       .then(() => {
-        let flagsFromSdk: null | Flags = null;
+        let flagsFromSdk: null | TFlags = null;
 
         if (adapterState.client && !flags) {
           flagsFromSdk = adapterState.client.allFlags();
@@ -127,7 +130,7 @@ const getInitialFlags = (
         }
 
         if (flagsFromSdk) {
-          const flags: Flags = normalizeFlags(flagsFromSdk);
+          const flags: TFlags = normalizeFlags(flagsFromSdk);
           updateFlagsInAdapterState(flags);
           // ...and flush initial state of flags
           adapterEventHandlers.onFlagsStateChange(flags);
@@ -158,7 +161,7 @@ const getInitialFlags = (
   );
 };
 
-class LaunchDarklyAdapter implements LaunchDarklyAdapterInterface {
+class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   id: typeof interfaceIdentifiers.launchdarkly;
 
   constructor() {
@@ -166,8 +169,8 @@ class LaunchDarklyAdapter implements LaunchDarklyAdapterInterface {
   }
 
   configure(
-    adapterArgs: LaunchDarklyAdapterArgs,
-    adapterEventHandlers: AdapterEventHandlers
+    adapterArgs: TLaunchDarklyAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any> {
     const {
       clientSideId,
@@ -208,8 +211,8 @@ class LaunchDarklyAdapter implements LaunchDarklyAdapterInterface {
   }
 
   reconfigure(
-    adapterArgs: LaunchDarklyAdapterArgs,
-    _adapterEventHandlers: AdapterEventHandlers
+    adapterArgs: TLaunchDarklyAdapterArgs,
+    _adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any> {
     if (!adapterState.isConfigured)
       return Promise.reject(
@@ -235,11 +238,11 @@ class LaunchDarklyAdapter implements LaunchDarklyAdapterInterface {
     return adapterState.client;
   }
 
-  getFlag(flagName: FlagName): FlagVariation | undefined {
+  getFlag(flagName: TFlagName): TFlagVariation | undefined {
     return adapterState.flags[flagName];
   }
 
-  updateUserContext(updatedUserProps: User): Promise<any> {
+  updateUserContext(updatedUserProps: TUser): Promise<any> {
     const isAdapterReady = adapterState.isConfigured && adapterState.isReady;
 
     warning(
@@ -255,7 +258,7 @@ class LaunchDarklyAdapter implements LaunchDarklyAdapterInterface {
     return changeUserContext({ ...adapterState.user, ...updatedUserProps });
   }
 
-  private _didFlagChange(flagName: FlagName, nextFlagValue: FlagVariation) {
+  private _didFlagChange(flagName: TFlagName, nextFlagValue: TFlagVariation) {
     const previousFlagValue = this.getFlag(flagName);
 
     if (previousFlagValue === undefined) return true;
@@ -268,10 +271,10 @@ class LaunchDarklyAdapter implements LaunchDarklyAdapterInterface {
       flagsFromSdk,
       flagsUpdateDelayMs,
     }: {
-      flagsFromSdk: Flags;
+      flagsFromSdk: TFlags;
       flagsUpdateDelayMs?: number;
     },
-    adapterEventHandlers: AdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers
   ): void {
     for (const flagName in flagsFromSdk) {
       // Dispatch whenever a configured flag value changes
@@ -289,7 +292,7 @@ class LaunchDarklyAdapter implements LaunchDarklyAdapterInterface {
           if (!this._didFlagChange(normalizedFlagName, normalizedFlagValue))
             return;
 
-          const updatedFlags: Flags = {
+          const updatedFlags: TFlags = {
             [normalizedFlagName]: normalizedFlagValue,
           };
 

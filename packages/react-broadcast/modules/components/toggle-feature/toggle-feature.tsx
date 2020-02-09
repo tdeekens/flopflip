@@ -1,12 +1,12 @@
-import { FlagName, FlagVariation } from '@flopflip/types';
+import { TFlagName, TFlagVariation } from '@flopflip/types';
 
 import React from 'react';
 import { ToggleFeature as SharedToggleFeature } from '@flopflip/react';
 import { useFeatureToggle } from '../../hooks/';
 
 type Props = {
-  flag: FlagName;
-  variation: FlagVariation;
+  flag: TFlagName;
+  variation: TFlagVariation;
 };
 
 const ToggleFeature = <OwnProps extends Props>(props: OwnProps) => {
