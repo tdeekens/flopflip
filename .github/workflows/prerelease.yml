@@ -6,11 +6,13 @@ on:
       - 'master'
 
 jobs:
-
   publish-npm:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Fetch all tags (for canary releases)
+        run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
       - name: yarn cache directory
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
