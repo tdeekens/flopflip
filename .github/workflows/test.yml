@@ -39,6 +39,8 @@ jobs:
       - name: Test (with coverage)
         if: startsWith(matrix.node-version, '13')
         run: yarn test:ci:coverage
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: Type check
         run: yarn type-check
       - name: Bundle size check
