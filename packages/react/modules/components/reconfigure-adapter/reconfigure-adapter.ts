@@ -1,10 +1,10 @@
 import React from 'react';
-import { User } from '@flopflip/types';
+import { TUser } from '@flopflip/types';
 import AdapterContext from '../adapter-context';
 
 type Props = {
   shouldOverwrite?: boolean;
-  user: User;
+  user: TUser;
   children?: React.ReactNode;
 };
 

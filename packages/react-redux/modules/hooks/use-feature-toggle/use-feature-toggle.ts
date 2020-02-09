@@ -1,4 +1,4 @@
-import { FlagName, FlagVariation } from '@flopflip/types';
+import { TFlagName, TFlagVariation } from '@flopflip/types';
 
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -6,8 +6,8 @@ import { getIsFeatureEnabled } from '@flopflip/react';
 import { selectFlags } from '../../ducks/flags';
 
 export default function useFeatureToggle(
-  flagName: FlagName,
-  flagVariation: FlagVariation = true
+  flagName: TFlagName,
+  flagVariation: TFlagVariation = true
 ): boolean {
   const flags = useSelector(selectFlags);
   const isFeatureEnabled: boolean = getIsFeatureEnabled(

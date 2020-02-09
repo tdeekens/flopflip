@@ -1,20 +1,20 @@
-import { FlagName, FlagVariation, Flags } from '@flopflip/types';
+import { TFlagName, TFlagVariation, TFlags } from '@flopflip/types';
 import { isNil } from '@flopflip/react';
-import { UpdateFlagsAction } from './types.js';
-import { State } from '../../types';
+import { TUpdateFlagsAction } from './types.js';
+import { TState } from '../../types';
 import { STATE_SLICE } from '../../store/constants';
 import { Reducer } from 'redux';
 
 // Actions
 export const UPDATE_FLAGS = '@flopflip/flags/update';
 
-const initialState: Flags = {};
+const initialState: TFlags = {};
 
 // Reducer
 const reducer = (
-  state: Flags = initialState,
-  action: UpdateFlagsAction
-): Flags => {
+  state: TFlags = initialState,
+  action: TUpdateFlagsAction
+): TFlags => {
   switch (action.type) {
     case UPDATE_FLAGS:
       return {
@@ -30,24 +30,24 @@ const reducer = (
 export default reducer;
 
 export const createReducer = (
-  preloadedState: Flags = initialState
-): Reducer<Flags, UpdateFlagsAction> => (state = preloadedState, action) =>
+  preloadedState: TFlags = initialState
+): Reducer<TFlags, TUpdateFlagsAction> => (state = preloadedState, action) =>
   reducer(state, action);
 
 // Action Creators
-export const updateFlags = (flags: Flags): UpdateFlagsAction => ({
+export const updateFlags = (flags: TFlags): TUpdateFlagsAction => ({
   type: UPDATE_FLAGS,
   payload: { flags },
 });
 
 // Selectors
-export const selectFlags = (state: State): Flags =>
+export const selectFlags = (state: TState): TFlags =>
   state[STATE_SLICE].flags ?? {};
 export const selectFlag = (
-  flagName: FlagName
-): ((state: State) => FlagVariation) => state => {
-  const allFlags: Flags = selectFlags(state);
-  const flagValue: FlagVariation = allFlags[flagName];
+  flagName: TFlagName
+): ((state: TState) => TFlagVariation) => state => {
+  const allFlags: TFlags = selectFlags(state);
+  const flagValue: TFlagVariation = allFlags[flagName];
 
   return isNil(flagValue) ? false : flagValue;
 };

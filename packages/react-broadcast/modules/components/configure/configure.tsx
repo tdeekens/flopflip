@@ -1,28 +1,28 @@
 import React from 'react';
 import { ConfigureAdapter, useIsMounted } from '@flopflip/react';
 import {
-  Flags,
-  Adapter,
-  AdapterStatus,
-  ConfigureAdapterChildren,
-  ConfigureAdapterProps,
+  TFlags,
+  TAdapter,
+  TAdapterStatus,
+  TConfigureAdapterChildren,
+  TConfigureAdapterProps,
 } from '@flopflip/types';
 import { FlagsContext } from '../flags-context';
 
 type BaseProps = {
-  children?: ConfigureAdapterChildren;
+  children?: TConfigureAdapterChildren;
   shouldDeferAdapterConfiguration?: boolean;
-  defaultFlags?: Flags;
+  defaultFlags?: TFlags;
 };
-type Props<AdapterInstance extends Adapter> = BaseProps &
-  ConfigureAdapterProps<AdapterInstance>;
+type Props<AdapterInstance extends TAdapter> = BaseProps &
+  TConfigureAdapterProps<AdapterInstance>;
 type State = {
-  flags: Flags;
-  status: AdapterStatus;
+  flags: TFlags;
+  status: TAdapterStatus;
   configurationId?: string;
 };
 
-const Configure = <AdapterInstance extends Adapter>(
+const Configure = <AdapterInstance extends TAdapter>(
   props: Props<AdapterInstance>
 ) => {
   const isMounted = useIsMounted();
@@ -30,7 +30,7 @@ const Configure = <AdapterInstance extends Adapter>(
   const [status, setStatus] = React.useState<State['status']>({});
 
   const handleUpdateFlags = React.useCallback(
-    (flags: Flags) => {
+    (flags: TFlags) => {
       if (isMounted.current) {
         setFlags(prevFlags => ({
           ...prevFlags,
@@ -42,7 +42,7 @@ const Configure = <AdapterInstance extends Adapter>(
   );
 
   const handleUpdateStatus = React.useCallback(
-    (status: AdapterStatus) => {
+    (status: TAdapterStatus) => {
       if (isMounted.current) {
         setStatus(prevStatus => ({
           ...prevStatus,

@@ -1,6 +1,6 @@
-import { Flags } from '@flopflip/types';
+import { TFlags } from '@flopflip/types';
 
-export type UpdateFlagsAction = {
+export type TUpdateFlagsAction = {
   type: string;
-  payload: { flags: Flags };
+  payload: { flags: TFlags };
 };

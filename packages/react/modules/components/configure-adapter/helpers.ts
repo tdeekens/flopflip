@@ -1,24 +1,24 @@
 import React from 'react';
 import merge from 'deepmerge';
 import {
-  AdapterArgs,
-  AdapterReconfiguration,
-  ConfigureAdapterChildren,
-  ConfigureAdapterChildrenAsFunction,
+  TAdapterArgs,
+  TAdapterReconfiguration,
+  TConfigureAdapterChildren,
+  TConfigureAdapterChildrenAsFunction,
 } from '@flopflip/types';
 
 const isFunctionChildren = (
-  children: ConfigureAdapterChildren
-): children is ConfigureAdapterChildrenAsFunction =>
+  children: TConfigureAdapterChildren
+): children is TConfigureAdapterChildrenAsFunction =>
   typeof children === 'function';
 
-const isEmptyChildren = (children: ConfigureAdapterChildren): boolean =>
+const isEmptyChildren = (children: TConfigureAdapterChildren): boolean =>
   !isFunctionChildren(children) && React.Children.count(children) === 0;
 
 const mergeAdapterArgs = (
-  previousAdapterArgs: AdapterArgs,
-  { adapterArgs: nextAdapterArgs, options = {} }: AdapterReconfiguration
-): AdapterArgs =>
+  previousAdapterArgs: TAdapterArgs,
+  { adapterArgs: nextAdapterArgs, options = {} }: TAdapterReconfiguration
+): TAdapterArgs =>
   options.shouldOverwrite
     ? nextAdapterArgs
     : merge(previousAdapterArgs, nextAdapterArgs);

@@ -1,13 +1,13 @@
 import React from 'react';
 import {
-  Flags,
-  Adapter,
-  AdapterInterface,
-  AdapterArgs,
-  AdapterStatus,
-  AdapterReconfiguration,
-  AdapterReconfigurationOptions,
-  ConfigureAdapterChildren,
+  TFlags,
+  TAdapter,
+  TAdapterInterface,
+  TAdapterArgs,
+  TAdapterStatus,
+  TAdapterReconfiguration,
+  TAdapterReconfigurationOptions,
+  TConfigureAdapterChildren,
 } from '@flopflip/types';
 import {
   isFunctionChildren,
@@ -31,17 +31,17 @@ export const AdapterStates: AdapterStates = {
 
 type Props = {
   shouldDeferAdapterConfiguration?: boolean;
-  adapter: Adapter;
-  adapterArgs: AdapterArgs;
-  adapterStatus?: AdapterStatus;
-  defaultFlags?: Flags;
-  onFlagsStateChange: (flags: Flags) => void;
-  onStatusStateChange: (status: AdapterStatus) => void;
+  adapter: TAdapter;
+  adapterArgs: TAdapterArgs;
+  adapterStatus?: TAdapterStatus;
+  defaultFlags?: TFlags;
+  onFlagsStateChange: (flags: TFlags) => void;
+  onStatusStateChange: (status: TAdapterStatus) => void;
   render?: () => React.ReactNode;
-  children?: ConfigureAdapterChildren;
+  children?: TConfigureAdapterChildren;
 };
 type State = {
-  appliedAdapterArgs: AdapterArgs;
+  appliedAdapterArgs: TAdapterArgs;
 };
 type AdapterState = valueof<AdapterStates>;
 
@@ -58,9 +58,9 @@ export default class ConfigureAdapter extends React.PureComponent<
   };
 
   adapterState: AdapterState = AdapterStates.UNCONFIGURED;
-  pendingAdapterArgs?: AdapterArgs | null = null;
+  pendingAdapterArgs?: TAdapterArgs | null = null;
 
-  state: { appliedAdapterArgs: AdapterArgs } = {
+  state: { appliedAdapterArgs: TAdapterArgs } = {
     appliedAdapterArgs: this.props.adapterArgs,
   };
 
@@ -68,7 +68,7 @@ export default class ConfigureAdapter extends React.PureComponent<
     this.adapterState = nextAdapterState;
   };
 
-  applyAdapterArgs = (nextAdapterArgs: AdapterArgs): void =>
+  applyAdapterArgs = (nextAdapterArgs: TAdapterArgs): void =>
     /**
      * NOTE:
      *   We can only unset `pendingAdapterArgs` after be actually perform
@@ -99,8 +99,8 @@ export default class ConfigureAdapter extends React.PureComponent<
    *   this function has two arguments for clarify.
    */
   reconfigureOrQueue = (
-    nextAdapterArgs: AdapterArgs,
-    options: AdapterReconfigurationOptions
+    nextAdapterArgs: TAdapterArgs,
+    options: TAdapterReconfigurationOptions
   ): void =>
     this.getIsAdapterConfigured()
       ? this.applyAdapterArgs(
@@ -112,7 +112,7 @@ export default class ConfigureAdapter extends React.PureComponent<
       : this.setPendingAdapterArgs({ adapterArgs: nextAdapterArgs, options });
 
   setPendingAdapterArgs = (
-    nextReconfiguration: AdapterReconfiguration
+    nextReconfiguration: TAdapterReconfiguration
   ): void => {
     /**
      * NOTE:
@@ -139,10 +139,10 @@ export default class ConfigureAdapter extends React.PureComponent<
    *    be passed pending or applied adapterArgs.
    *
    */
-  getAdapterArgsForConfiguration = (): AdapterArgs =>
+  getAdapterArgsForConfiguration = (): TAdapterArgs =>
     this.pendingAdapterArgs ?? this.state.appliedAdapterArgs;
 
-  handleDefaultFlags = (defaultFlags: Flags): void => {
+  handleDefaultFlags = (defaultFlags: TFlags): void => {
     if (Object.keys(defaultFlags).length > 0) {
       this.props.onFlagsStateChange(defaultFlags);
     }
@@ -184,7 +184,7 @@ export default class ConfigureAdapter extends React.PureComponent<
     if (!this.props.shouldDeferAdapterConfiguration) {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
-      return (this.props.adapter as AdapterInterface<AdapterArgs>)
+      return (this.props.adapter as TAdapterInterface<TAdapterArgs>)
         .configure(this.getAdapterArgsForConfiguration(), {
           onFlagsStateChange: this.props.onFlagsStateChange,
           onStatusStateChange: this.props.onStatusStateChange,
@@ -212,7 +212,7 @@ export default class ConfigureAdapter extends React.PureComponent<
     ) {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
-      return (this.props.adapter as AdapterInterface<AdapterArgs>)
+      return (this.props.adapter as TAdapterInterface<TAdapterArgs>)
         .configure(this.getAdapterArgsForConfiguration(), {
           onFlagsStateChange: this.props.onFlagsStateChange,
           onStatusStateChange: this.props.onStatusStateChange,
@@ -229,7 +229,7 @@ export default class ConfigureAdapter extends React.PureComponent<
     if (this.getIsAdapterConfigured()) {
       this.setAdapterState(AdapterStates.CONFIGURING);
 
-      return (this.props.adapter as AdapterInterface<AdapterArgs>)
+      return (this.props.adapter as TAdapterInterface<TAdapterArgs>)
         .reconfigure(this.getAdapterArgsForConfiguration(), {
           onFlagsStateChange: this.props.onFlagsStateChange,
           onStatusStateChange: this.props.onStatusStateChange,

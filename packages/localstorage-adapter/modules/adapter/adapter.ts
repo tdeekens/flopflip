@@ -2,15 +2,15 @@ import invariant from 'invariant';
 import mitt, { Emitter } from 'mitt';
 import camelCase from 'lodash/camelCase';
 import {
-  User,
-  AdapterStatus,
-  AdapterEventHandlers,
-  LocalStorageAdapterInterface,
-  LocalStorageAdapterArgs,
-  FlagName,
-  FlagVariation,
-  Flag,
-  Flags,
+  TUser,
+  TAdapterStatus,
+  TAdapterEventHandlers,
+  TLocalStorageAdapterInterface,
+  TLocalStorageAdapterArgs,
+  TFlagName,
+  TFlagVariation,
+  TFlag,
+  TFlags,
   interfaceIdentifiers,
 } from '@flopflip/types';
 
@@ -21,11 +21,11 @@ type Storage = {
 };
 
 type LocalStorageAdapterState = {
-  flags: Flags;
-  user?: User;
+  flags: TFlags;
+  user?: TUser;
   emitter: Emitter;
 };
-const intialAdapterState: AdapterStatus & LocalStorageAdapterState = {
+const intialAdapterState: TAdapterStatus & LocalStorageAdapterState = {
   isReady: false,
   flags: {},
   user: {},
@@ -35,23 +35,26 @@ const intialAdapterState: AdapterStatus & LocalStorageAdapterState = {
   emitter: mitt(),
 };
 
-let adapterState: AdapterStatus & LocalStorageAdapterState = {
+let adapterState: TAdapterStatus & LocalStorageAdapterState = {
   ...intialAdapterState,
 };
 
 export const STORAGE_SLICE = '@flopflip';
 
-const normalizeFlag = (flagName: FlagName, flagValue?: FlagVariation): Flag => [
+const normalizeFlag = (
+  flagName: TFlagName,
+  flagValue?: TFlagVariation
+): TFlag => [
   camelCase(flagName),
   // Multi variate flags contain a string or `null` - `false` seems more natural.
   flagValue === null || flagValue === undefined ? false : flagValue,
 ];
-export const normalizeFlags = (rawFlags: Flags): Flags => {
+export const normalizeFlags = (rawFlags: TFlags): TFlags => {
   if (!rawFlags) return {};
 
-  return Object.entries(rawFlags).reduce<Flags>(
-    (normalizedFlags: Flags, [flagName, flagValue]) => {
-      const [normalizedFlagName, normalizedFlagValue]: Flag = normalizeFlag(
+  return Object.entries(rawFlags).reduce<TFlags>(
+    (normalizedFlags: TFlags, [flagName, flagValue]) => {
+      const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
         flagName,
         flagValue
       );
@@ -81,7 +84,7 @@ const storage: Storage = {
   },
   unset: key => localStorage.removeItem(`${STORAGE_SLICE}__${key}`),
 };
-export const updateFlags = (flags: Flags): void => {
+export const updateFlags = (flags: TFlags): void => {
   const isAdapterReady = Boolean(
     adapterState.isConfigured && adapterState.isReady
   );
@@ -93,8 +96,8 @@ export const updateFlags = (flags: Flags): void => {
 
   if (!isAdapterReady) return;
 
-  const previousFlags: Flags | null = storage.get('flags') as Flags;
-  const nextFlags: Flags = normalizeFlags({
+  const previousFlags: TFlags | null = storage.get('flags') as TFlags;
+  const nextFlags: TFlags = normalizeFlags({
     ...previousFlags,
     ...flags,
   });
@@ -117,7 +120,7 @@ const subscribeToFlagsChanges = ({
   }, pollingInteral);
 };
 
-class LocalStorageAdapter implements LocalStorageAdapterInterface {
+class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   id: typeof interfaceIdentifiers.localstorage;
 
   constructor() {
@@ -125,8 +128,8 @@ class LocalStorageAdapter implements LocalStorageAdapterInterface {
   }
 
   configure(
-    adapterArgs: LocalStorageAdapterArgs,
-    adapterEventHandlers: AdapterEventHandlers
+    adapterArgs: TLocalStorageAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any> {
     const { user, adapterConfiguration } = adapterArgs;
 
@@ -162,8 +165,8 @@ class LocalStorageAdapter implements LocalStorageAdapterInterface {
   }
 
   reconfigure(
-    adapterArgs: LocalStorageAdapterArgs,
-    _adapterEventHandlers: AdapterEventHandlers
+    adapterArgs: TLocalStorageAdapterArgs,
+    _adapterEventHandlers: TAdapterEventHandlers
   ): Promise<any> {
     storage.unset('flags');
     const nextUser = adapterArgs.user;

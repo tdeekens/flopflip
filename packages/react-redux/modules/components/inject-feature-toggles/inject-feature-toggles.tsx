@@ -5,14 +5,14 @@ import {
   DEFAULT_FLAGS_PROP_KEY,
 } from '@flopflip/react';
 import { useFlagVariations } from '../../hooks';
-import { FlagName, Flags } from '@flopflip/types';
+import { TFlagName, TFlags } from '@flopflip/types';
 
 type InjectedProps = {
-  [propKey: string]: Flags;
+  [propKey: string]: TFlags;
 };
 
 export default <OwnProps extends object>(
-  flagNames: FlagName[],
+  flagNames: TFlagName[],
   propKey: string = DEFAULT_FLAGS_PROP_KEY
 ) => (
   Component: React.ComponentType

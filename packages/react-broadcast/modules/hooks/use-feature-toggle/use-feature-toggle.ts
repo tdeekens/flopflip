@@ -1,13 +1,13 @@
 import React from 'react';
 import { getIsFeatureEnabled } from '@flopflip/react';
-import { FlagName, Flags, FlagVariation } from '@flopflip/types';
+import { TFlagName, TFlags, TFlagVariation } from '@flopflip/types';
 import { FlagsContext } from '../../components/flags-context';
 
 export default function useFeatureToggle(
-  flagName: FlagName,
-  flagVariation: FlagVariation = true
+  flagName: TFlagName,
+  flagVariation: TFlagVariation = true
 ): boolean {
-  const flags: Flags = React.useContext(FlagsContext);
+  const flags: TFlags = React.useContext(FlagsContext);
   const isFeatureEnabled: boolean = getIsFeatureEnabled(
     flagName,
     flagVariation

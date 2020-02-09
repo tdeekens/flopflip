@@ -1,12 +1,12 @@
-import { FlagName, FlagVariation, Flags } from '@flopflip/types';
+import { TFlagName, TFlagVariation, TFlags } from '@flopflip/types';
 import warning from 'tiny-warning';
 import { DEFAULT_FLAG_PROP_KEY } from '../../constants';
 import getNormalizedFlagName from '../get-normalized-flag-name';
 import isNil from '../is-nil';
 
 const getFlagVariation = (
-  flagName: FlagName = DEFAULT_FLAG_PROP_KEY
-): ((flags: Flags) => FlagVariation) => {
+  flagName: TFlagName = DEFAULT_FLAG_PROP_KEY
+): ((flags: TFlags) => TFlagVariation) => {
   const normalizedFlagName = getNormalizedFlagName(flagName);
 
   warning(

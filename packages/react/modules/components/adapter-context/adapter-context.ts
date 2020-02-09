@@ -1,19 +1,19 @@
 import React from 'react';
 import {
-  AdapterContext as AdapterContextType,
-  AdapterStatus as AdapterStatusType,
-  ReconfigureAdapter as ReconfigureAdapterType,
+  TAdapterContext,
+  TAdapterStatus,
+  TReconfigureAdapter,
 } from '@flopflip/types';
 
-const initialReconfigureAdapter: ReconfigureAdapterType = (): void => undefined;
-const initialAdapterStatus: AdapterStatusType = {
+const initialReconfigureAdapter: TReconfigureAdapter = (): void => undefined;
+const initialAdapterStatus: TAdapterStatus = {
   isReady: false,
   isConfigured: false,
 };
 const createAdapterContext = (
-  reconfigure?: ReconfigureAdapterType,
-  status?: AdapterStatusType
-): AdapterContextType => ({
+  reconfigure?: TReconfigureAdapter,
+  status?: TAdapterStatus
+): TAdapterContext => ({
   reconfigure: reconfigure ?? initialReconfigureAdapter,
   status: status ?? initialAdapterStatus,
 });

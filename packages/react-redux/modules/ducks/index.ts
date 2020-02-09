@@ -1,12 +1,12 @@
 import { Reducer } from 'redux';
 import { combineReducers } from 'redux';
-import { Flags } from '@flopflip/types';
-import { UpdateFlagsAction } from './flags/types';
-import { UpdateStatusAction } from './status/types';
+import { TFlags } from '@flopflip/types';
+import { TUpdateFlagsAction } from './flags/types';
+import { TUpdateStatusAction } from './status/types';
 import { flagsReducer, createFlagsReducer } from './flags';
 import { statusReducer } from './status';
 
-type Actions = UpdateFlagsAction & UpdateStatusAction;
+type Actions = TUpdateFlagsAction & TUpdateStatusAction;
 
 export { updateStatus, UPDATE_STATUS } from './status';
 export { updateFlags, UPDATE_FLAGS, selectFlag, selectFlags } from './flags';
@@ -16,7 +16,7 @@ export const flopflipReducer = combineReducers<any, Actions>({
   status: statusReducer,
 });
 export const createFlopflipReducer = (
-  preloadedState: Flags = {}
+  preloadedState: TFlags = {}
 ): Reducer<any, Actions> =>
   combineReducers<any, Actions>({
     flags: createFlagsReducer(preloadedState),
