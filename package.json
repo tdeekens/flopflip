@@ -4,6 +4,7 @@
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
     "postinstall": "check-node-version --package --print",
+    "clean": "lerna exec 'rm -rf dist'",
     "develop": "jest --projects jest.*.config.js --watch",
     "lint": "jest --config jest.lint.config.js --maxWorkers 5",
     "type-check": "tsc --noEmit",
