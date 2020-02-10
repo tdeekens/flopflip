@@ -15,7 +15,7 @@ type Props = {
 const isEmptyChildren = (children: React.ReactNode): boolean =>
   React.Children.count(children) === 0;
 
-const ToggleFeature = (props: Props): React.ReactElement | React.ReactNode => {
+const ToggleFeature = (props: Props): React.ReactNode => {
   if (props.untoggledComponent)
     warning(
       isValidElementType(props.untoggledComponent),

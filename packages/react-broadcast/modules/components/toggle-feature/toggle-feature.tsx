@@ -9,7 +9,9 @@ type Props = {
   variation: TFlagVariation;
 };
 
-const ToggleFeature = <OwnProps extends Props>(props: OwnProps) => {
+const ToggleFeature = <OwnProps extends Props>(
+  props: OwnProps
+): React.ReactNode => {
   const isFeatureEnabled = useFeatureToggle(props.flag, props.variation);
 
   // @ts-ignore
