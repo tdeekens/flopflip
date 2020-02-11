@@ -1,15 +1,15 @@
 import React from 'react';
 
-const useIsMounted = () => {
-  const isMountedRef = React.useRef(true);
+function useIsMounted() {
+  const [isMounted, setIsMounted] = React.useState(false);
 
   React.useEffect(() => {
-    return () => {
-      isMountedRef.current = false;
-    };
+    setIsMounted(true);
+
+    return () => setIsMounted(false);
   }, []);
 
-  return isMountedRef;
-};
+  return isMounted;
+}
 
 export default useIsMounted;
