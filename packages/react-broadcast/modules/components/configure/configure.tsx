@@ -31,7 +31,7 @@ const Configure = <AdapterInstance extends TAdapter>(
 
   const handleUpdateFlags = React.useCallback(
     (flags: TFlags) => {
-      if (isMounted.current) {
+      if (isMounted()) {
         setFlags(prevFlags => ({
           ...prevFlags,
           ...flags,
@@ -43,7 +43,7 @@ const Configure = <AdapterInstance extends TAdapter>(
 
   const handleUpdateStatus = React.useCallback(
     (status: TAdapterStatus) => {
-      if (isMounted.current) {
+      if (isMounted()) {
         setStatus(prevStatus => ({
           ...prevStatus,
           ...status,

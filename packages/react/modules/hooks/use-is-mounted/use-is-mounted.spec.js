@@ -7,7 +7,7 @@ const TestComponent = () => {
 
   return (
     <ul>
-      <li>Is mounted: {isMounted.current ? 'Yes' : 'No'}</li>
+      <li>Is mounted: {isMounted ? 'Yes' : 'No'}</li>
     </ul>
   );
 };
