@@ -1,8 +1,8 @@
 import React from 'react';
 import { AdapterContext } from '@flopflip/react';
-import { TAdapterContext, TAdapterStatus } from '@flopflip/types';
+import { TAdapterContext } from '@flopflip/types';
 
-export default function useAdapterStatus(): TAdapterStatus {
+export default function useAdapterStatus() {
   const adapterContext: TAdapterContext = React.useContext(AdapterContext);
 
   React.useDebugValue(adapterContext.status);

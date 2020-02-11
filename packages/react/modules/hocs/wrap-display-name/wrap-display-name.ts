@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default (
+export default function wrapDisplayName(
   BaseComponent: React.ComponentType<any>,
   hocName: string
-): string => {
+) {
   const previousDisplayName = BaseComponent.displayName ?? BaseComponent.name;
 
   return `${hocName}(${previousDisplayName ?? 'Component'})`;
-};
+}

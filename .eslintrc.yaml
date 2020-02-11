@@ -4,7 +4,6 @@ parserOptions:
   ecmaFeatures:
     jsx: true
     modules: true
-  project: './tsconfig.json'
 extends:
   - xo
   - xo-typescript

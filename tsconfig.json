@@ -27,6 +27,7 @@
     "allowJs": false
   },
   "include": [
+    "packages/**/*.ts",
     "packages/**/modules/**/*.ts",
     "packages/**/modules/**/*.tsx",
     "packages/**/modules/**/*.js",

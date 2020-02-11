@@ -1,3 +1,7 @@
+import { TProps as ToggleFeatureProps } from './components/toggle-feature';
+
+export type TToggleFeatureProps = ToggleFeatureProps;
+
 const version = '__@FLOPFLIP/VERSION_OF_RELEASE__';
 
 export {

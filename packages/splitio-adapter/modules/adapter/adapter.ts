@@ -62,7 +62,7 @@ export const normalizeFlag = (
   return [camelCase(flagName), normalizeFlagValue];
 };
 
-export const normalizeFlags = (flags: TFlags): TFlags =>
+export const normalizeFlags = (flags: TFlags) =>
   Object.entries(flags).reduce<TFlags>(
     (normalizedFlags: TFlags, [flagName, flaValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
@@ -83,7 +83,7 @@ const subscribeToFlagsChanges = ({
 }: {
   flagNames: TFlagName[];
   onFlagsStateChange: TOnFlagsStateChangeCallback;
-}): void => {
+}) => {
   if (adapterState.client) {
     adapterState.client.on(adapterState.client.Event.SDK_UPDATE, () => {
       if (adapterState.client) {
@@ -98,7 +98,7 @@ const subscribeToFlagsChanges = ({
   }
 };
 
-export const createAnonymousUserKey = (): string =>
+export const createAnonymousUserKey = () =>
   Math.random()
     .toString(36)
     .substring(2);
@@ -106,10 +106,11 @@ export const createAnonymousUserKey = (): string =>
 const ensureUser = (user: TUser): TUser =>
   merge(user, { key: user?.key ?? createAnonymousUserKey() });
 
-const initializeClient = (): {
+type SplitIOClient = {
   client: SplitIO.IClient;
   manager: SplitIO.IManager;
-} => {
+};
+const initializeClient = (): SplitIOClient => {
   if (!adapterState.splitioSettings) {
     throw Error(
       'cannot initialize SplitIo without configured settings, call configure() first'
@@ -130,8 +131,8 @@ const subscribe = ({
 }: {
   onFlagsStateChange: TOnFlagsStateChangeCallback;
   onStatusStateChange: TOnStatusStateChangeCallback;
-}): Promise<any> =>
-  new Promise((resolve, reject) => {
+}) =>
+  new Promise<void>((resolve, reject) => {
     if (adapterState.client) {
       adapterState.client.on(adapterState.client.Event.SDK_READY, () => {
         let flagNames: TFlagName[];
@@ -186,7 +187,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
   configure(
     adapterArgs: TSplitioAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<any> {
+  ) {
     const {
       authorizationKey,
       user,
@@ -215,7 +216,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
   reconfigure(
     adapterArgs: TSplitioAdapterArgs,
     _adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<any> {
+  ) {
     if (
       !adapterState.isReady ||
       !adapterState.isConfigured ||
@@ -255,7 +256,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     return Promise.resolve();
   }
 
-  getIsReady(): boolean {
+  getIsReady() {
     return Boolean(adapterState.isReady);
   }
 }

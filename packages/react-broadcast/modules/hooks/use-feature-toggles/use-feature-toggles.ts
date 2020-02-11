@@ -3,7 +3,7 @@ import { getIsFeatureEnabled } from '@flopflip/react';
 import { TFlagName, TFlags, TFlagVariation } from '@flopflip/types';
 import { FlagsContext } from '../../components/flags-context';
 
-export default function useFeatureToggles(flags: TFlags): boolean[] {
+export default function useFeatureToggles(flags: TFlags) {
   const allFlags: TFlags = React.useContext(FlagsContext);
 
   const requestedFlags: boolean[] = Object.entries(flags).reduce<boolean[]>(

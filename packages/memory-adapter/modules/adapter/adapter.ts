@@ -33,7 +33,7 @@ const intialAdapterState: TAdapterStatus & MemoryAdapterState = {
 let adapterState: TAdapterStatus & MemoryAdapterState = {
   ...intialAdapterState,
 };
-const updateUser = (user: TUser): void => {
+const updateUser = (user: TUser) => {
   adapterState.user = user;
 };
 
@@ -45,7 +45,7 @@ const normalizeFlag = (
   // Multi variate flags contain a string or `null` - `false` seems more natural.
   flagValue === null || flagValue === undefined ? false : flagValue,
 ];
-export const normalizeFlags = (rawFlags: TFlags): TFlags =>
+export const normalizeFlags = (rawFlags: TFlags) =>
   Object.entries(rawFlags).reduce<TFlags>(
     (normalizedFlags: TFlags, [flagName, flagValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
@@ -60,7 +60,7 @@ export const normalizeFlags = (rawFlags: TFlags): TFlags =>
     {}
   );
 
-export const getUser = (): TUser | undefined => adapterState.user;
+export const getUser = () => adapterState.user;
 
 export const updateFlags = (flags: TFlags) => {
   const isAdapterReady = Boolean(
@@ -92,7 +92,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   configure(
     adapterArgs: TMemoryAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<any> {
+  ) {
     const { user } = adapterArgs;
 
     adapterState.user = user;
@@ -126,7 +126,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   reconfigure(
     adapterArgs: TMemoryAdapterArgs,
     _adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<any> {
+  ) {
     updateUser(adapterArgs.user);
 
     adapterState.flags = {};
@@ -138,11 +138,11 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     return Promise.resolve();
   }
 
-  getIsReady(): boolean {
+  getIsReady() {
     return Boolean(adapterState.isReady);
   }
 
-  setIsReady(nextState: TAdapterStatus): void {
+  setIsReady(nextState: TAdapterStatus) {
     adapterState.isReady = nextState.isReady;
 
     adapterState.emitter.emit('statusStateChange', {
@@ -150,25 +150,25 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     });
   }
 
-  reset = (): void => {
+  reset = () => {
     adapterState = {
       ...intialAdapterState,
     };
   };
 
-  waitUntilConfigured(): Promise<any> {
+  waitUntilConfigured() {
     return new Promise(resolve => {
       if (adapterState.isConfigured) resolve();
       else adapterState.emitter.on('readyStateChange', resolve);
     });
   }
 
-  getFlag(flagName: TFlagName): TFlagVariation | undefined {
+  getFlag(flagName: TFlagName) {
     return adapterState.flags && adapterState.flags[flagName];
   }
 
   // For convenience
-  updateFlags(flags: TFlags): void {
+  updateFlags(flags: TFlags) {
     return updateFlags(flags);
   }
 }
