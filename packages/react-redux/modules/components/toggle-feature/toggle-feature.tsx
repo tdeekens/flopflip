@@ -9,7 +9,7 @@ import { useFeatureToggle } from '../../hooks/';
 
 type Props = {
   flag: TFlagName;
-  variation: TFlagVariation;
+  variation?: TFlagVariation;
 } & Exclude<TToggleFeatureProps, 'isFeatureEnabled'>;
 
 const ToggleFeature = <OwnProps extends Props>(props: OwnProps) => {
