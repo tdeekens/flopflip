@@ -63,14 +63,14 @@ export interface TAdapterInterface<Args extends TAdapterArgs> {
   configure(
     adapterArgs: Args,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<any>;
+  ): Promise<unknown>;
   reconfigure(
     adapterArgs: Args,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<any>;
+  ): Promise<unknown>;
   getIsReady(): boolean;
   setIsReady?(nextStatus: TAdapterStatus): void;
-  waitUntilConfigured?(): Promise<any>;
+  waitUntilConfigured?(): Promise<unknown>;
   reset?(): void;
   getFlag?(flagName: TFlagName): TFlagVariation | undefined;
 }
@@ -80,15 +80,15 @@ export interface TLaunchDarklyAdapterInterface
   configure(
     adapterArgs: TLaunchDarklyAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<any>;
+  ): Promise<unknown>;
   reconfigure(
     adapterArgs: TLaunchDarklyAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<any>;
+  ): Promise<unknown>;
   getIsReady(): boolean;
   getClient(): TLDClient | undefined;
   getFlag(flagName: TFlagName): TFlagVariation | undefined;
-  updateUserContext(updatedUserProps: TUser): Promise<any>;
+  updateUserContext(updatedUserProps: TUser): Promise<unknown>;
 }
 export interface TLocalStorageAdapterInterface
   extends TAdapterInterface<TLocalStorageAdapterArgs> {
@@ -96,13 +96,13 @@ export interface TLocalStorageAdapterInterface
   configure(
     adapterArgs: TLocalStorageAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<any>;
+  ): Promise<unknown>;
   reconfigure(
     adapterArgs: TLocalStorageAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<any>;
+  ): Promise<unknown>;
   getIsReady(): boolean;
-  waitUntilConfigured(): Promise<any>;
+  waitUntilConfigured(): Promise<unknown>;
 }
 export interface TMemoryAdapterInterface
   extends TAdapterInterface<TMemoryAdapterArgs> {
@@ -110,14 +110,14 @@ export interface TMemoryAdapterInterface
   configure(
     adapterArgs: TMemoryAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<any>;
+  ): Promise<unknown>;
   reconfigure(
     adapterArgs: TMemoryAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<any>;
+  ): Promise<unknown>;
   getIsReady(): boolean;
   setIsReady(nextStatus: TAdapterStatus): void;
-  waitUntilConfigured(): Promise<any>;
+  waitUntilConfigured(): Promise<unknown>;
   reset(): void;
   updateFlags(flags: TFlags): void;
 }
@@ -127,11 +127,11 @@ export interface TSplitioAdapterInterface
   configure(
     adapterArgs: TSplitioAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<any>;
+  ): Promise<unknown>;
   reconfigure(
     adapterArgs: TSplitioAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<any>;
+  ): Promise<unknown>;
   getIsReady(): boolean;
 }
 export type TAdapter =

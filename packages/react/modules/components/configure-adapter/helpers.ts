@@ -12,7 +12,7 @@ const isFunctionChildren = (
 ): children is TConfigureAdapterChildrenAsFunction =>
   typeof children === 'function';
 
-const isEmptyChildren = (children: TConfigureAdapterChildren): boolean =>
+const isEmptyChildren = (children: TConfigureAdapterChildren) =>
   !isFunctionChildren(children) && React.Children.count(children) === 0;
 
 const mergeAdapterArgs = (

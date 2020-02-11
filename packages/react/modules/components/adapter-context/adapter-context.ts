@@ -5,7 +5,7 @@ import {
   TReconfigureAdapter,
 } from '@flopflip/types';
 
-const initialReconfigureAdapter: TReconfigureAdapter = (): void => undefined;
+const initialReconfigureAdapter: TReconfigureAdapter = () => undefined;
 const initialAdapterStatus: TAdapterStatus = {
   isReady: false,
   isConfigured: false,

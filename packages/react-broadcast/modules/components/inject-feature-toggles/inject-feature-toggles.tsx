@@ -11,29 +11,31 @@ type InjectedProps = {
   [propKey: string]: TFlags;
 };
 
-export default <OwnProps extends object>(
+export default function injectFeatureToggles<OwnProps extends object>(
   flagNames: TFlagName[],
   propKey: string = DEFAULT_FLAGS_PROP_KEY
-) => (
-  Component: React.ComponentType
-): React.ComponentType<OwnProps & InjectedProps> => {
-  const WrappedComponent = (ownProps: OwnProps) => {
-    const flagVariations = useFlagVariations(flagNames);
-    const flags = Object.fromEntries(
-      flagNames.map((flagName, indexOfFlagName) => [
-        flagName,
-        flagVariations[indexOfFlagName],
-      ])
-    );
-    const props = {
-      ...ownProps,
-      [propKey]: flags,
+) {
+  return (
+    Component: React.ComponentType
+  ): React.ComponentType<OwnProps & InjectedProps> => {
+    const WrappedComponent = (ownProps: OwnProps) => {
+      const flagVariations = useFlagVariations(flagNames);
+      const flags = Object.fromEntries(
+        flagNames.map((flagName, indexOfFlagName) => [
+          flagName,
+          flagVariations[indexOfFlagName],
+        ])
+      );
+      const props = {
+        ...ownProps,
+        [propKey]: flags,
+      };
+
+      return <Component {...props} />;
     };
 
-    return <Component {...props} />;
+    setDisplayName(wrapDisplayName(Component, 'injectFeatureToggles'));
+
+    return WrappedComponent;
   };
-
-  setDisplayName(wrapDisplayName(Component, 'injectFeatureToggles'));
-
-  return WrappedComponent;
-};
+}

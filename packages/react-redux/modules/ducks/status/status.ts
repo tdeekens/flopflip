@@ -33,5 +33,4 @@ export const updateStatus = (status: TAdapterStatus): TUpdateStatusAction => ({
   payload: { status },
 });
 // Selectors
-export const selectStatus = (state: TState): TAdapterStatus =>
-  state[STATE_SLICE].status ?? {};
+export const selectStatus = (state: TState) => state[STATE_SLICE].status ?? {};

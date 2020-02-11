@@ -1,20 +1,19 @@
 import { TFlagName, TFlagVariation } from '@flopflip/types';
 
 import React from 'react';
-import { ToggleFeature as SharedToggleFeature } from '@flopflip/react';
+import {
+  ToggleFeature as SharedToggleFeature,
+  TToggleFeatureProps,
+} from '@flopflip/react';
 import { useFeatureToggle } from '../../hooks/';
 
 type Props = {
   flag: TFlagName;
   variation: TFlagVariation;
-};
+} & Exclude<TToggleFeatureProps, 'isFeatureEnabled'>;
 
-const ToggleFeature = <OwnProps extends Props>(
-  props: OwnProps
-): React.ReactNode => {
+const ToggleFeature = <OwnProps extends Props>(props: OwnProps) => {
   const isFeatureEnabled = useFeatureToggle(props.flag, props.variation);
-
-  // @ts-ignore
   return <SharedToggleFeature {...props} isFeatureEnabled={isFeatureEnabled} />;
 };
 

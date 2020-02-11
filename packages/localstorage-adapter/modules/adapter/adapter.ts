@@ -49,7 +49,7 @@ const normalizeFlag = (
   // Multi variate flags contain a string or `null` - `false` seems more natural.
   flagValue === null || flagValue === undefined ? false : flagValue,
 ];
-export const normalizeFlags = (rawFlags: TFlags): TFlags => {
+export const normalizeFlags = (rawFlags: TFlags) => {
   if (!rawFlags) return {};
 
   return Object.entries(rawFlags).reduce<TFlags>(
@@ -84,7 +84,7 @@ const storage: Storage = {
   },
   unset: key => localStorage.removeItem(`${STORAGE_SLICE}__${key}`),
 };
-export const updateFlags = (flags: TFlags): void => {
+export const updateFlags = (flags: TFlags) => {
   const isAdapterReady = Boolean(
     adapterState.isConfigured && adapterState.isReady
   );
@@ -111,7 +111,7 @@ const subscribeToFlagsChanges = ({
   pollingInteral = 1000 * 60,
 }: {
   pollingInteral?: number;
-}): void => {
+}) => {
   setInterval(() => {
     adapterState.emitter.emit(
       'flagsStateChange',
@@ -130,7 +130,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   configure(
     adapterArgs: TLocalStorageAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<any> {
+  ) {
     const { user, adapterConfiguration } = adapterArgs;
 
     adapterState.user = user;
@@ -167,7 +167,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   reconfigure(
     adapterArgs: TLocalStorageAdapterArgs,
     _adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<any> {
+  ) {
     storage.unset('flags');
     const nextUser = adapterArgs.user;
     adapterState.user = nextUser;
@@ -175,14 +175,14 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     return Promise.resolve();
   }
 
-  waitUntilConfigured(): Promise<any> {
+  waitUntilConfigured() {
     return new Promise(resolve => {
       if (adapterState.isConfigured) resolve();
       else adapterState.emitter.on('readyStateChange', resolve);
     });
   }
 
-  getIsReady(): boolean {
+  getIsReady() {
     return Boolean(adapterState.isReady);
   }
 }

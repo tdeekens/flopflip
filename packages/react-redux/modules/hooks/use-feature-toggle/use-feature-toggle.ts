@@ -8,7 +8,7 @@ import { selectFlags } from '../../ducks/flags';
 export default function useFeatureToggle(
   flagName: TFlagName,
   flagVariation: TFlagVariation = true
-): boolean {
+) {
   const flags = useSelector(selectFlags);
   const isFeatureEnabled: boolean = getIsFeatureEnabled(
     flagName,

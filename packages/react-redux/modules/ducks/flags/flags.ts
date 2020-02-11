@@ -41,8 +41,7 @@ export const updateFlags = (flags: TFlags): TUpdateFlagsAction => ({
 });
 
 // Selectors
-export const selectFlags = (state: TState): TFlags =>
-  state[STATE_SLICE].flags ?? {};
+export const selectFlags = (state: TState) => state[STATE_SLICE].flags ?? {};
 export const selectFlag = (
   flagName: TFlagName
 ): ((state: TState) => TFlagVariation) => state => {

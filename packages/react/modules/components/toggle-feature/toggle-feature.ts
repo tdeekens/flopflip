@@ -2,20 +2,19 @@ import React from 'react';
 import warning from 'tiny-warning';
 import { isValidElementType } from 'react-is';
 
-type Props = {
+type RenderFnArgs = {
+  isFeatureEnabled: boolean;
+};
+type RenderFn = (args: RenderFnArgs) => React.ReactNode;
+export type Props = {
   untoggledComponent?: React.ComponentType;
   toggledComponent?: React.ComponentType;
   render?: () => React.ReactNode;
-  children?:
-    | (({ isFeatureEnabled: boolean }) => React.ReactNode)
-    | React.ReactNode;
+  children?: RenderFn | React.ReactNode;
   isFeatureEnabled: boolean;
 };
 
-const isEmptyChildren = (children: React.ReactNode): boolean =>
-  React.Children.count(children) === 0;
-
-const ToggleFeature = (props: Props): React.ReactNode => {
+const ToggleFeature = (props: Props) => {
   if (props.untoggledComponent)
     warning(
       isValidElementType(props.untoggledComponent),
@@ -32,8 +31,13 @@ const ToggleFeature = (props: Props): React.ReactNode => {
     if (props.toggledComponent)
       return React.createElement(props.toggledComponent);
 
-    if (props.children && !isEmptyChildren(props.children))
-      return React.Children.only(props.children);
+    if (props.children) {
+      if (typeof props.children === 'function')
+        return props.children({
+          isFeatureEnabled: props.isFeatureEnabled,
+        });
+      return React.Children.only<React.ReactNode>(props.children);
+    }
 
     if (typeof props.render === 'function') return props.render();
   }
