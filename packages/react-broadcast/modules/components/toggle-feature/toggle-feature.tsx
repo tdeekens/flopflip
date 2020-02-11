@@ -10,7 +10,8 @@ import { useFeatureToggle } from '../../hooks/';
 type Props = {
   flag: TFlagName;
   variation?: TFlagVariation;
-} & Exclude<TToggleFeatureProps, 'isFeatureEnabled'>;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+} & Omit<TToggleFeatureProps, 'isFeatureEnabled'>;
 
 const ToggleFeature = <OwnProps extends Props>(props: OwnProps) => {
   const isFeatureEnabled = useFeatureToggle(props.flag, props.variation);
