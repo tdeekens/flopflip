@@ -3,13 +3,16 @@ import React from 'react';
 
 function useAdapterSubscription(adapter: TAdapter) {
   React.useEffect(() => {
+    if (adapter.subscribe) {
+      adapter.subscribe();
+    }
+
     return () => {
       if (adapter.unsubscribe) {
         adapter.unsubscribe();
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [adapter]);
 }
 
 export default useAdapterSubscription;

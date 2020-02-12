@@ -36,6 +36,14 @@ const render = ({ adapter }) => {
 describe('rendering', () => {
   const adapter = createAdapter();
 
+  it('should unsubscribe the adapter when mounting', async () => {
+    const rendered = render({ adapter });
+
+    await rendered.waitUntilReady();
+
+    expect(rendered.props.adapter.subscribe).toHaveBeenCalled();
+  });
+
   it('should unsubscribe the adapter when unmounting', async () => {
     const rendered = render({ adapter });
 
