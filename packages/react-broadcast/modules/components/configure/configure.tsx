@@ -28,6 +28,10 @@ const Configure = <AdapterInstance extends TAdapter>(
   const [flags, setFlags] = React.useState<State['flags']>({});
   const [status, setStatus] = React.useState<State['status']>({});
 
+  // NOTE:
+  //   Using this prevents the callbacks being invoked
+  //   which would trigger a setState as a result on an unmounted
+  //   component.
   useAdapterSubscription(props.adapter);
 
   const handleUpdateFlags = React.useCallback(
