@@ -74,6 +74,8 @@ export interface TAdapterInterface<Args extends TAdapterArgs> {
   waitUntilConfigured?(): Promise<unknown>;
   reset?(): void;
   getFlag?(flagName: TFlagName): TFlagVariation | undefined;
+  unsubscribe(): void;
+  subscribe(): void;
 }
 export interface TLaunchDarklyAdapterInterface
   extends TAdapterInterface<TLaunchDarklyAdapterArgs> {
@@ -90,6 +92,8 @@ export interface TLaunchDarklyAdapterInterface
   getClient(): TLDClient | undefined;
   getFlag(flagName: TFlagName): TFlagVariation | undefined;
   updateUserContext(updatedUserProps: TUser): Promise<unknown>;
+  unsubscribe(): void;
+  subscribe(): void;
 }
 export interface TLocalStorageAdapterInterface
   extends TAdapterInterface<TLocalStorageAdapterArgs> {
@@ -104,6 +108,8 @@ export interface TLocalStorageAdapterInterface
   ): Promise<unknown>;
   getIsReady(): boolean;
   waitUntilConfigured(): Promise<unknown>;
+  unsubscribe(): void;
+  subscribe(): void;
 }
 export interface TMemoryAdapterInterface
   extends TAdapterInterface<TMemoryAdapterArgs> {
@@ -121,6 +127,8 @@ export interface TMemoryAdapterInterface
   waitUntilConfigured(): Promise<unknown>;
   reset(): void;
   updateFlags(flags: TFlags): void;
+  unsubscribe(): void;
+  subscribe(): void;
 }
 export interface TSplitioAdapterInterface
   extends TAdapterInterface<TSplitioAdapterArgs> {
@@ -134,6 +142,8 @@ export interface TSplitioAdapterInterface
     adapterEventHandlers: TAdapterEventHandlers
   ): Promise<unknown>;
   getIsReady(): boolean;
+  unsubscribe(): void;
+  subscribe(): void;
 }
 export type TAdapter =
   | TLaunchDarklyAdapterInterface
