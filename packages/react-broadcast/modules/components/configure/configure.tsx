@@ -1,5 +1,5 @@
 import React from 'react';
-import { ConfigureAdapter, useIsMounted } from '@flopflip/react';
+import { ConfigureAdapter } from '@flopflip/react';
 import {
   TFlags,
   TAdapter,
@@ -25,32 +25,27 @@ type State = {
 const Configure = <AdapterInstance extends TAdapter>(
   props: Props<AdapterInstance>
 ) => {
-  const isMounted = useIsMounted();
   const [flags, setFlags] = React.useState<State['flags']>({});
   const [status, setStatus] = React.useState<State['status']>({});
 
   const handleUpdateFlags = React.useCallback(
     (flags: TFlags) => {
-      if (isMounted.current) {
-        setFlags(prevFlags => ({
-          ...prevFlags,
-          ...flags,
-        }));
-      }
+      setFlags(prevFlags => ({
+        ...prevFlags,
+        ...flags,
+      }));
     },
-    [isMounted, setFlags]
+    [setFlags]
   );
 
   const handleUpdateStatus = React.useCallback(
     (status: TAdapterStatus) => {
-      if (isMounted.current) {
-        setStatus(prevStatus => ({
-          ...prevStatus,
-          ...status,
-        }));
-      }
+      setStatus(prevStatus => ({
+        ...prevStatus,
+        ...status,
+      }));
     },
-    [isMounted, setStatus]
+    [setStatus]
   );
 
   return (
