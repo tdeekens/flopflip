@@ -1,7 +1,7 @@
 import warning from 'tiny-warning';
 import adapter, { updateFlags, STORAGE_SLICE } from './adapter';
 
-jest.mock('warning');
+jest.mock('tiny-warning');
 
 const createAdapterEventHandlers = (custom = {}) => ({
   onFlagsStateChange: jest.fn(),

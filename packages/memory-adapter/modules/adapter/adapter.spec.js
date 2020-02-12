@@ -1,7 +1,7 @@
 import warning from 'tiny-warning';
 import adapter, { getUser, updateFlags } from './adapter';
 
-jest.mock('warning');
+jest.mock('tiny-warning');
 
 const createAdapterArgs = (customArgs = {}) => ({
   user: { id: 'foo' },
