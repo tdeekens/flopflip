@@ -6,8 +6,8 @@ const createAdapter = () => ({
   getIsReady: jest.fn(() => false),
   configure: jest.fn(() => Promise.resolve()),
   reconfigure: jest.fn(() => Promise.resolve()),
-  subscribe: jest.fn(() => Promise.resolve()),
-  unsubscribe: jest.fn(() => Promise.resolve()),
+  subscribe: jest.fn(),
+  unsubscribe: jest.fn(),
 });
 
 const TestComponent = props => {
