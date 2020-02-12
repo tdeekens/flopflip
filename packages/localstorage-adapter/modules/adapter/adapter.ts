@@ -196,24 +196,10 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   }
 
   unsubscribe() {
-    const isAdapterReady = adapterState.isConfigured && adapterState.isReady;
-
-    warning(
-      isAdapterReady,
-      '@flopflip/launchdarkly-adapter: adapter not ready and configured. Can not unsubscribe before.'
-    );
-
     adapterState.isUnsubscribed = true;
   }
 
   subscribe() {
-    const isAdapterReady = adapterState.isConfigured && adapterState.isReady;
-
-    warning(
-      isAdapterReady,
-      '@flopflip/launchdarkly-adapter: adapter not ready and configured. Can not subscribe before.'
-    );
-
     adapterState.isUnsubscribed = false;
   }
 }

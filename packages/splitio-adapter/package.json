@@ -38,7 +38,6 @@
   "dependencies": {
     "@babel/runtime": "7.8.4",
     "@splitsoftware/splitio": "10.10.0",
-    "tiny-warning": "1.0.3",
     "deepmerge": "4.2.2",
     "lodash": "4.17.15"
   },
