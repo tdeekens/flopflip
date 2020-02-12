@@ -196,6 +196,12 @@ export default class ConfigureAdapter extends React.PureComponent<
     }
   }
 
+  componentWillUnmount() {
+    if (this.props.adapter.unsubscribe) {
+      this.props.adapter.unsubscribe();
+    }
+  }
+
   componentDidUpdate() {
     /**
      * NOTE:
