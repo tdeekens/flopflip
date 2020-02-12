@@ -44,6 +44,8 @@ const updateFlagsInAdapterState = (updatedFlags: TFlags): void => {
   };
 };
 
+const getIsUnsubscribed = () => Boolean(adapterState.isUnsubscribed);
+
 const normalizeFlag = (
   flagName: TFlagName,
   flagValue?: TFlagVariation
@@ -132,7 +134,7 @@ const getInitialFlags = (
           const flags: TFlags = normalizeFlags(flagsFromSdk);
           updateFlagsInAdapterState(flags);
           // ...and flush initial state of flags
-          if (!adapterState.isUnsubscribed) {
+          if (!getIsUnsubscribed()) {
             adapterEventHandlers.onFlagsStateChange(flags);
           }
         }
@@ -140,7 +142,7 @@ const getInitialFlags = (
         // First update internal state
         adapterState.isReady = true;
         // ...to then signal that the adapter is ready
-        if (!adapterState.isUnsubscribed) {
+        if (!getIsUnsubscribed()) {
           adapterEventHandlers.onStatusStateChange({ isReady: true });
         }
 
@@ -312,7 +314,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
           updateFlagsInAdapterState(updatedFlags);
 
           const updateFlags = () => {
-            if (!adapterState.isUnsubscribed) {
+            if (!getIsUnsubscribed()) {
               adapterEventHandlers.onFlagsStateChange(adapterState.flags);
             }
           };

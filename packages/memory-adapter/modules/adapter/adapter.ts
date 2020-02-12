@@ -38,6 +38,8 @@ const updateUser = (user: TUser) => {
   adapterState.user = user;
 };
 
+const getIsUnsubscribed = () => Boolean(adapterState.isUnsubscribed);
+
 const normalizeFlag = (
   flagName: TFlagName,
   flagValue?: TFlagVariation
@@ -106,13 +108,13 @@ class MemoryAdapter implements TMemoryAdapterInterface {
       updateUser(user);
 
       const handleFlagsChange = (nextFlags: TFlags) => {
-        if (adapterState.isUnsubscribed) return;
+        if (getIsUnsubscribed()) return;
 
         adapterEventHandlers.onFlagsStateChange(nextFlags);
       };
 
       const handleStatusChange = (nextStatus: TAdapterStatus) => {
-        if (adapterState.isUnsubscribed) return;
+        if (getIsUnsubscribed()) return;
 
         adapterEventHandlers.onStatusStateChange(nextStatus);
       };

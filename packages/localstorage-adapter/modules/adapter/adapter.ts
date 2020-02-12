@@ -25,6 +25,7 @@ type LocalStorageAdapterState = {
   user?: TUser;
   emitter: Emitter;
 };
+
 const intialAdapterState: TAdapterStatus & LocalStorageAdapterState = {
   isReady: false,
   isUnsubscribed: false,
@@ -39,6 +40,8 @@ const intialAdapterState: TAdapterStatus & LocalStorageAdapterState = {
 let adapterState: TAdapterStatus & LocalStorageAdapterState = {
   ...intialAdapterState,
 };
+
+const getIsUnsubscribed = () => Boolean(adapterState.isUnsubscribed);
 
 export const STORAGE_SLICE = '@flopflip';
 
@@ -143,13 +146,13 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       adapterState.isReady = true;
 
       const handleFlagsChange = (nextFlags: TFlags) => {
-        if (adapterState.isUnsubscribed) return;
+        if (getIsUnsubscribed()) return;
 
         adapterEventHandlers.onFlagsStateChange(nextFlags);
       };
 
       const handleStatusChange = (nextStatus: TAdapterStatus) => {
-        if (adapterState.isUnsubscribed) return;
+        if (getIsUnsubscribed()) return;
 
         adapterEventHandlers.onStatusStateChange(nextStatus);
       };

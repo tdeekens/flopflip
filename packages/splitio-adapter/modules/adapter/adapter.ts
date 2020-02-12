@@ -44,6 +44,8 @@ const adapterState: TAdapterStatus & SplitIOAdapterState = {
   splitioSettings: undefined,
 };
 
+const getIsUnsubscribed = () => Boolean(adapterState.isUnsubscribed);
+
 export const normalizeFlag = (
   flagName: TFlagName,
   flagValue: TFlagVariation
@@ -92,7 +94,7 @@ const subscribeToFlagsChanges = ({
           ...adapterState.treatmentAttributes,
         } as SplitIO.Attributes);
 
-        if (!adapterState.isUnsubscribed) {
+        if (!getIsUnsubscribed()) {
           onFlagsStateChange(normalizeFlags(flags));
         }
       }
@@ -147,14 +149,14 @@ const subscribe = ({
             ...adapterState.treatmentAttributes,
           } as SplitIO.Attributes);
 
-          if (!adapterState.isUnsubscribed) {
+          if (!getIsUnsubscribed) {
             onFlagsStateChange(normalizeFlags(flags));
           }
 
           // First update internal state
           adapterState.isReady = true;
           // ...to then signal that the adapter is ready
-          if (!adapterState.isUnsubscribed) {
+          if (!getIsUnsubscribed) {
             onStatusStateChange({ isReady: true });
           }
 
