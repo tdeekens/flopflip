@@ -1,7 +1,7 @@
-import invariant from 'invariant';
+import warning from 'tiny-warning';
 import adapter, { updateFlags, STORAGE_SLICE } from './adapter';
 
-jest.mock('invariant');
+jest.mock('warning');
 
 const createAdapterEventHandlers = (custom = {}) => ({
   onFlagsStateChange: jest.fn(),
@@ -23,8 +23,8 @@ describe('when configuring', () => {
         updateFlags({ attempted: 'flagUpdate' });
       });
 
-      it('should invoke and trigger `invariant`', () => {
-        expect(invariant).toHaveBeenCalledWith(false, expect.any(String));
+      it('should invoke and trigger `warning`', () => {
+        expect(warning).toHaveBeenCalledWith(false, expect.any(String));
       });
     });
   });
@@ -64,8 +64,8 @@ describe('when configuring', () => {
         updateFlags(updatedFlags);
       });
 
-      it('should invoke but not trigger `invariant`', () => {
-        expect(invariant).toHaveBeenCalledWith(true, expect.any(String));
+      it('should invoke but not trigger `warning`', () => {
+        expect(warning).toHaveBeenCalledWith(true, expect.any(String));
       });
 
       it('should invoke `onFlagsStateChange`', () => {

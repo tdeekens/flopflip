@@ -10,6 +10,7 @@ export type TUser = {
 export type TAdapterStatus = {
   isReady?: boolean;
   isConfigured?: boolean;
+  isUnsubscribed?: boolean;
 };
 export type TAdapterEventHandlers = {
   onFlagsStateChange: (flags: TFlags) => void;

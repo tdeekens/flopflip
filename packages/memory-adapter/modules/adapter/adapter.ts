@@ -1,4 +1,4 @@
-import invariant from 'invariant';
+import warning from 'tiny-warning';
 import mitt, { Emitter } from 'mitt';
 import {
   TUser,
@@ -67,7 +67,7 @@ export const updateFlags = (flags: TFlags) => {
     adapterState.isConfigured && adapterState.isReady
   );
 
-  invariant(
+  warning(
     isAdapterReady,
     '@flopflip/memory-adapter: adapter not ready and configured. Flags can not be updated before.'
   );
@@ -113,13 +113,15 @@ class MemoryAdapter implements TMemoryAdapterInterface {
         adapterEventHandlers.onStatusStateChange
       );
 
-      adapterState.emitter.emit('flagsStateChange', adapterState.flags);
-      adapterState.emitter.emit('statusStateChange', {
-        isReady: adapterState.isReady,
-        isConfigured: adapterState.isConfigured,
-      });
+      if (!adapterState.isUnsubscribed) {
+        adapterState.emitter.emit('flagsStateChange', adapterState.flags);
+        adapterState.emitter.emit('statusStateChange', {
+          isReady: adapterState.isReady,
+          isConfigured: adapterState.isConfigured,
+        });
 
-      adapterState.emitter.emit('readyStateChange');
+        adapterState.emitter.emit('readyStateChange');
+      }
     });
   }
 
@@ -130,10 +132,13 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     updateUser(adapterArgs.user);
 
     adapterState.flags = {};
-    adapterState.emitter.emit('flagsStateChange', adapterState.flags);
-    adapterState.emitter.emit('statusStateChange', {
-      isConfigured: adapterState.isConfigured,
-    });
+
+    if (!adapterState.isUnsubscribed) {
+      adapterState.emitter.emit('flagsStateChange', adapterState.flags);
+      adapterState.emitter.emit('statusStateChange', {
+        isConfigured: adapterState.isConfigured,
+      });
+    }
 
     return Promise.resolve();
   }
@@ -145,9 +150,11 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   setIsReady(nextState: TAdapterStatus) {
     adapterState.isReady = nextState.isReady;
 
-    adapterState.emitter.emit('statusStateChange', {
-      isReady: adapterState.isReady,
-    });
+    if (!adapterState.isUnsubscribed) {
+      adapterState.emitter.emit('statusStateChange', {
+        isReady: adapterState.isReady,
+      });
+    }
   }
 
   reset = () => {
@@ -170,6 +177,28 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   // For convenience
   updateFlags(flags: TFlags) {
     return updateFlags(flags);
+  }
+
+  subscribe() {
+    const isAdapterReady = adapterState.isConfigured && adapterState.isReady;
+
+    warning(
+      isAdapterReady,
+      '@flopflip/launchdarkly-adapter: adapter not ready and configured. Can not subscribe before.'
+    );
+
+    adapterState.isUnsubscribed = false;
+  }
+
+  unsubscribe() {
+    const isAdapterReady = adapterState.isConfigured && adapterState.isReady;
+
+    warning(
+      isAdapterReady,
+      '@flopflip/launchdarkly-adapter: adapter not ready and configured. Can not unsubscribe before.'
+    );
+
+    adapterState.isUnsubscribed = true;
   }
 }
 

@@ -1,6 +1,8 @@
+import warning from 'tiny-warning';
 import {
   TFlagName,
   TFlagVariation,
+  TAdapterStatus,
   TUser,
   TFlag,
   TFlags,
@@ -17,9 +19,7 @@ import camelCase from 'lodash/camelCase';
 import omit from 'lodash/omit';
 import isEqual from 'lodash/isEqual';
 
-type AdapterState = {
-  isReady: boolean;
-  isConfigured: boolean;
+type SplitIOAdapterState = {
   user?: TUser;
   client?: SplitIO.IClient;
   manager?: SplitIO.IManager;
@@ -31,9 +31,10 @@ type AdapterState = {
   treatmentAttributes?: SplitIO.Attributes;
 };
 
-const adapterState: AdapterState = {
+const adapterState: TAdapterStatus & SplitIOAdapterState = {
   isReady: false,
   isConfigured: false,
+  isUnsubscribed: false,
   user: undefined,
   client: undefined,
   manager: undefined,
@@ -92,7 +93,9 @@ const subscribeToFlagsChanges = ({
           ...adapterState.treatmentAttributes,
         } as SplitIO.Attributes);
 
-        onFlagsStateChange(normalizeFlags(flags));
+        if (!adapterState.isUnsubscribed) {
+          onFlagsStateChange(normalizeFlags(flags));
+        }
       }
     });
   }
@@ -145,12 +148,16 @@ const subscribe = ({
             ...adapterState.treatmentAttributes,
           } as SplitIO.Attributes);
 
-          onFlagsStateChange(normalizeFlags(flags));
+          if (!adapterState.isUnsubscribed) {
+            onFlagsStateChange(normalizeFlags(flags));
+          }
 
           // First update internal state
           adapterState.isReady = true;
           // ...to then signal that the adapter is ready
-          onStatusStateChange({ isReady: true });
+          if (!adapterState.isUnsubscribed) {
+            onStatusStateChange({ isReady: true });
+          }
 
           // ...to finally subscribe to later changes.
           subscribeToFlagsChanges({
@@ -258,6 +265,28 @@ class SplitioAdapter implements TSplitioAdapterInterface {
 
   getIsReady() {
     return Boolean(adapterState.isReady);
+  }
+
+  unsubscribe() {
+    const isAdapterReady = adapterState.isConfigured && adapterState.isReady;
+
+    warning(
+      isAdapterReady,
+      '@flopflip/launchdarkly-adapter: adapter not ready and configured. Can not unsubscribe before.'
+    );
+
+    adapterState.isUnsubscribed = true;
+  }
+
+  subscribe() {
+    const isAdapterReady = adapterState.isConfigured && adapterState.isReady;
+
+    warning(
+      isAdapterReady,
+      '@flopflip/launchdarkly-adapter: adapter not ready and configured. Can not subscribe before.'
+    );
+
+    adapterState.isUnsubscribed = false;
   }
 }
 

@@ -1,6 +1,7 @@
 import {
   TFlagName,
   TFlagVariation,
+  TAdapterStatus,
   TUser,
   TFlag,
   TFlags,
@@ -21,17 +22,16 @@ import {
 import camelCase from 'lodash/camelCase';
 import kebabCase from 'lodash/kebabCase';
 
-type AdapterState = {
-  isReady: boolean;
-  isConfigured: boolean;
+type LaunchDarklyAdapterState = {
   user?: TUser;
   client?: LDClient;
   flags: TFlags;
 };
 
-const adapterState: AdapterState = {
+const adapterState: TAdapterStatus & LaunchDarklyAdapterState = {
   isReady: false,
   isConfigured: false,
+  isUnsubscribed: false,
   user: undefined,
   client: undefined,
   flags: {},
@@ -132,13 +132,17 @@ const getInitialFlags = (
           const flags: TFlags = normalizeFlags(flagsFromSdk);
           updateFlagsInAdapterState(flags);
           // ...and flush initial state of flags
-          adapterEventHandlers.onFlagsStateChange(flags);
+          if (!adapterState.isUnsubscribed) {
+            adapterEventHandlers.onFlagsStateChange(flags);
+          }
         }
 
         // First update internal state
         adapterState.isReady = true;
         // ...to then signal that the adapter is ready
-        adapterEventHandlers.onStatusStateChange({ isReady: true });
+        if (!adapterState.isUnsubscribed) {
+          adapterEventHandlers.onStatusStateChange({ isReady: true });
+        }
 
         return Promise.resolve({ flagsFromSdk });
       })
@@ -257,6 +261,28 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     return changeUserContext({ ...adapterState.user, ...updatedUserProps });
   }
 
+  unsubscribe() {
+    const isAdapterReady = adapterState.isConfigured && adapterState.isReady;
+
+    warning(
+      isAdapterReady,
+      '@flopflip/launchdarkly-adapter: adapter not ready and configured. Can not unsubscribe before.'
+    );
+
+    adapterState.isUnsubscribed = true;
+  }
+
+  subscribe() {
+    const isAdapterReady = adapterState.isConfigured && adapterState.isReady;
+
+    warning(
+      isAdapterReady,
+      '@flopflip/launchdarkly-adapter: adapter not ready and configured. Can not subscribe before.'
+    );
+
+    adapterState.isUnsubscribed = false;
+  }
+
   private _didFlagChange(flagName: TFlagName, nextFlagValue: TFlagVariation) {
     const previousFlagValue = this.getFlag(flagName);
 
@@ -300,7 +326,9 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
           updateFlagsInAdapterState(updatedFlags);
 
           const updateFlags = () => {
-            adapterEventHandlers.onFlagsStateChange(adapterState.flags);
+            if (!adapterState.isUnsubscribed) {
+              adapterEventHandlers.onFlagsStateChange(adapterState.flags);
+            }
           };
 
           debounce(updateFlags, {

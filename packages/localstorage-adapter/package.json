@@ -39,7 +39,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.8.4",
-    "invariant": "2.2.4",
+    "tiny-warning": "1.0.3",
     "mitt": "1.2.0"
   },
   "devDependencies": {
