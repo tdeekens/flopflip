@@ -22,35 +22,48 @@ type State = {
   configurationId?: string;
 };
 
+function useRefCachedState<S>(initialState: S): [S, (nextState: S) => void] {
+  const isMounted = useIsMounted();
+  const stateRef = React.useRef<S>();
+  const [state, setState] = React.useState<S>(initialState);
+
+  const setRefCachedState = (nextState: S) => {
+    if (isMounted()) {
+      setState(prevState => ({
+        ...prevState,
+        ...nextState,
+        ...stateRef.current,
+      }));
+      stateRef.current = undefined;
+    } else {
+      stateRef.current = {
+        ...stateRef.current,
+        ...nextState,
+      };
+    }
+  };
+
+  return [state, setRefCachedState];
+}
+
 const Configure = <AdapterInstance extends TAdapter>(
   props: Props<AdapterInstance>
 ) => {
-  const isMounted = useIsMounted();
-  const [flags, setFlags] = React.useState<State['flags']>({});
-  const [status, setStatus] = React.useState<State['status']>({});
+  const [flags, setFlags] = useRefCachedState<State['flags']>({});
+  const [status, setStatus] = useRefCachedState<State['status']>({});
 
   const handleUpdateFlags = React.useCallback(
     (flags: TFlags) => {
-      if (isMounted()) {
-        setFlags(prevFlags => ({
-          ...prevFlags,
-          ...flags,
-        }));
-      }
+      setFlags(flags);
     },
-    [isMounted, setFlags]
+    [setFlags]
   );
 
   const handleUpdateStatus = React.useCallback(
     (status: TAdapterStatus) => {
-      if (isMounted()) {
-        setStatus(prevStatus => ({
-          ...prevStatus,
-          ...status,
-        }));
-      }
+      setStatus(status);
     },
-    [isMounted, setStatus]
+    [setStatus]
   );
 
   return (

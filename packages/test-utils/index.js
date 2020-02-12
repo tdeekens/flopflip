@@ -6,7 +6,6 @@ import {
   screen,
   queries,
   fireEvent,
-  waitForElement,
   queryHelpers,
   buildQueries,
   act,
