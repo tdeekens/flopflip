@@ -149,14 +149,15 @@ const subscribe = ({
             ...adapterState.treatmentAttributes,
           } as SplitIO.Attributes);
 
-          if (!getIsUnsubscribed) {
+          if (!getIsUnsubscribed()) {
             onFlagsStateChange(normalizeFlags(flags));
           }
 
           // First update internal state
           adapterState.isReady = true;
           // ...to then signal that the adapter is ready
-          if (!getIsUnsubscribed) {
+
+          if (!getIsUnsubscribed()) {
             onStatusStateChange({ isReady: true });
           }
 
