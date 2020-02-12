@@ -1,5 +1,5 @@
 import React from 'react';
-import { ConfigureAdapter } from '@flopflip/react';
+import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
 import {
   TFlags,
   TAdapter,
@@ -27,6 +27,8 @@ const Configure = <AdapterInstance extends TAdapter>(
 ) => {
   const [flags, setFlags] = React.useState<State['flags']>({});
   const [status, setStatus] = React.useState<State['status']>({});
+
+  useAdapterSubscription(props.adapter);
 
   const handleUpdateFlags = React.useCallback(
     (flags: TFlags) => {

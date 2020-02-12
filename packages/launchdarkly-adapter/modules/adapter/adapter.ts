@@ -234,7 +234,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   }
 
   getIsReady() {
-    return adapterState.isReady;
+    return Boolean(adapterState.isReady);
   }
 
   getClient() {
