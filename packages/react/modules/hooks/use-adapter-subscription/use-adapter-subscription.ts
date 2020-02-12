@@ -2,17 +2,19 @@ import { TAdapter } from '@flopflip/types';
 import React from 'react';
 
 function useAdapterSubscription(adapter: TAdapter) {
+  const { subscribe, unsubscribe } = adapter;
+
   React.useEffect(() => {
-    if (adapter.subscribe) {
-      adapter.subscribe();
+    if (subscribe) {
+      subscribe();
     }
 
     return () => {
-      if (adapter.unsubscribe) {
-        adapter.unsubscribe();
+      if (unsubscribe) {
+        unsubscribe();
       }
     };
-  }, [adapter]);
+  }, [subscribe, unsubscribe]);
 }
 
 export default useAdapterSubscription;
