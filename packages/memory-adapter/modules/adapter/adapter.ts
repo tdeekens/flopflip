@@ -22,6 +22,7 @@ type MemoryAdapterState = {
 
 const intialAdapterState: TAdapterStatus & MemoryAdapterState = {
   isReady: false,
+  isUnsubscribed: false,
   flags: {},
   user: {},
   // Typings are incorrect and state that mitt is not callable.
@@ -104,24 +105,28 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
       updateUser(user);
 
-      adapterState.emitter.on(
-        'flagsStateChange',
-        adapterEventHandlers.onFlagsStateChange
-      );
-      adapterState.emitter.on(
-        'statusStateChange',
-        adapterEventHandlers.onStatusStateChange
-      );
+      const handleFlagsChange = (nextFlags: TFlags) => {
+        if (adapterState.isUnsubscribed) return;
 
-      if (!adapterState.isUnsubscribed) {
-        adapterState.emitter.emit('flagsStateChange', adapterState.flags);
-        adapterState.emitter.emit('statusStateChange', {
-          isReady: adapterState.isReady,
-          isConfigured: adapterState.isConfigured,
-        });
+        adapterEventHandlers.onFlagsStateChange(nextFlags);
+      };
 
-        adapterState.emitter.emit('readyStateChange');
-      }
+      const handleStatusChange = (nextStatus: TAdapterStatus) => {
+        if (adapterState.isUnsubscribed) return;
+
+        adapterEventHandlers.onStatusStateChange(nextStatus);
+      };
+
+      adapterState.emitter.on('flagsStateChange', handleFlagsChange);
+      adapterState.emitter.on('statusStateChange', handleStatusChange);
+
+      adapterState.emitter.emit('flagsStateChange', adapterState.flags);
+      adapterState.emitter.emit('statusStateChange', {
+        isReady: adapterState.isReady,
+        isConfigured: adapterState.isConfigured,
+      });
+
+      adapterState.emitter.emit('readyStateChange');
     });
   }
 
@@ -133,12 +138,10 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
     adapterState.flags = {};
 
-    if (!adapterState.isUnsubscribed) {
-      adapterState.emitter.emit('flagsStateChange', adapterState.flags);
-      adapterState.emitter.emit('statusStateChange', {
-        isConfigured: adapterState.isConfigured,
-      });
-    }
+    adapterState.emitter.emit('flagsStateChange', adapterState.flags);
+    adapterState.emitter.emit('statusStateChange', {
+      isConfigured: adapterState.isConfigured,
+    });
 
     return Promise.resolve();
   }
@@ -150,11 +153,9 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   setIsReady(nextState: TAdapterStatus) {
     adapterState.isReady = nextState.isReady;
 
-    if (!adapterState.isUnsubscribed) {
-      adapterState.emitter.emit('statusStateChange', {
-        isReady: adapterState.isReady,
-      });
-    }
+    adapterState.emitter.emit('statusStateChange', {
+      isReady: adapterState.isReady,
+    });
   }
 
   reset = () => {

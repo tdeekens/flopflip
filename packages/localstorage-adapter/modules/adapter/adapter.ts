@@ -142,25 +142,29 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       adapterState.isConfigured = true;
       adapterState.isReady = true;
 
-      adapterState.emitter.on(
-        'flagsStateChange',
-        adapterEventHandlers.onFlagsStateChange
-      );
-      adapterState.emitter.on(
-        'statusStateChange',
-        adapterEventHandlers.onStatusStateChange
-      );
+      const handleFlagsChange = (nextFlags: TFlags) => {
+        if (adapterState.isUnsubscribed) return;
 
-      if (!adapterState.isUnsubscribed) {
-        adapterState.emitter.emit(
-          'flagsStateChange',
-          normalizeFlags(storage.get('flags'))
-        );
-        adapterState.emitter.emit('statusStateChange', {
-          isReady: adapterState.isReady,
-        });
-        adapterState.emitter.emit('readyStateChange');
-      }
+        adapterEventHandlers.onFlagsStateChange(nextFlags);
+      };
+
+      const handleStatusChange = (nextStatus: TAdapterStatus) => {
+        if (adapterState.isUnsubscribed) return;
+
+        adapterEventHandlers.onStatusStateChange(nextStatus);
+      };
+
+      adapterState.emitter.on('flagsStateChange', handleFlagsChange);
+      adapterState.emitter.on('statusStateChange', handleStatusChange);
+
+      adapterState.emitter.emit(
+        'flagsStateChange',
+        normalizeFlags(storage.get('flags'))
+      );
+      adapterState.emitter.emit('statusStateChange', {
+        isReady: adapterState.isReady,
+      });
+      adapterState.emitter.emit('readyStateChange');
 
       subscribeToFlagsChanges({
         pollingInteral: adapterConfiguration?.pollingInteral,
@@ -177,9 +181,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     const nextUser = adapterArgs.user;
     adapterState.user = nextUser;
 
-    if (!adapterState.isUnsubscribed) {
-      adapterState.emitter.emit('flagsStateChange', {});
-    }
+    adapterState.emitter.emit('flagsStateChange', {});
 
     return Promise.resolve();
   }
