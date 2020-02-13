@@ -8,6 +8,8 @@ import {
   TAdapterReconfiguration,
   TAdapterReconfigurationOptions,
   TConfigureAdapterChildren,
+  TAdapterStatusChange,
+  TFlagsChange,
 } from '@flopflip/types';
 import {
   isFunctionChildren,
@@ -35,8 +37,8 @@ type Props = {
   adapterArgs: TAdapterArgs;
   adapterStatus?: TAdapterStatus;
   defaultFlags?: TFlags;
-  onFlagsStateChange: (flags: TFlags) => void;
-  onStatusStateChange: (status: TAdapterStatus) => void;
+  onFlagsStateChange: (flags: TFlagsChange) => void;
+  onStatusStateChange: (status: TAdapterStatusChange) => void;
   render?: () => React.ReactNode;
   children?: TConfigureAdapterChildren;
 };

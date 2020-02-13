@@ -1,3 +1,4 @@
+import { TAdapterSubscriptionStatus } from '@flopflip/types';
 import React from 'react';
 import { render as rtlRender } from '@flopflip/test-utils';
 import useAdapterSubscription from './use-adapter-subscription';
@@ -11,7 +12,7 @@ const createAdapter = () => ({
 });
 
 const TestComponent = props => {
-  useAdapterSubscription(props.adapter);
+  const getHasAdapterSubscriptionStatus = useAdapterSubscription(props.adapter);
 
   const isReady = props.adapter.getIsReady();
 
@@ -19,7 +20,23 @@ const TestComponent = props => {
     <>
       <h1>Test Component</h1>;
       <ul>
-        <li>Is ready: {isReady}</li>
+        <li>Is ready: {isReady ? 'Yes' : 'No'}</li>
+        <li>
+          Is subscribed:{' '}
+          {getHasAdapterSubscriptionStatus(
+            TAdapterSubscriptionStatus.Subscribed
+          )
+            ? 'Yes'
+            : 'No'}
+        </li>
+        <li>
+          Is unsubscribed:{' '}
+          {getHasAdapterSubscriptionStatus(
+            TAdapterSubscriptionStatus.Unsubscribed
+          )
+            ? 'Yes'
+            : 'No'}
+        </li>
       </ul>
     </>
   );
@@ -42,6 +59,15 @@ describe('rendering', () => {
     await rendered.waitUntilReady();
 
     expect(rendered.props.adapter.subscribe).toHaveBeenCalled();
+  });
+
+  it('should return adapter subscribtion status indicating being subscribed', async () => {
+    const rendered = render({ adapter });
+
+    await rendered.waitUntilReady();
+
+    expect(rendered.queryByText(/Is subscribed: Yes/i)).toBeInTheDocument();
+    expect(rendered.queryByText(/Is unsubscribed: No/i)).toBeInTheDocument();
   });
 
   it('should unsubscribe the adapter when unmounting', async () => {

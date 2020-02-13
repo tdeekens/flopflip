@@ -1,4 +1,8 @@
-import { TAdapterStatus } from '@flopflip/types';
+import {
+  TAdapterStatus,
+  TAdapterStatusChange,
+  TAdapterSubscriptionStatus,
+} from '@flopflip/types';
 import { TUpdateStatusAction } from './types';
 import { TState } from '../../types';
 import { STATE_SLICE } from '../../store/constants';
@@ -6,7 +10,10 @@ import { STATE_SLICE } from '../../store/constants';
 // Actions
 export const UPDATE_STATUS = '@flopflip/status/update';
 
-const initialState: TAdapterStatus = { isReady: false };
+const initialState: TAdapterStatus = {
+  isReady: false,
+  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
+};
 
 // Reducer
 const reducer = (
@@ -28,7 +35,9 @@ const reducer = (
 export default reducer;
 
 // Action Creators
-export const updateStatus = (status: TAdapterStatus): TUpdateStatusAction => ({
+export const updateStatus = (
+  status: TAdapterStatusChange
+): TUpdateStatusAction => ({
   type: UPDATE_STATUS,
   payload: { status },
 });

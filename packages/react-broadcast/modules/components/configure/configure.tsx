@@ -1,12 +1,15 @@
 import React from 'react';
-import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
 import {
-  TFlags,
   TAdapter,
+  TFlags,
   TAdapterStatus,
+  TFlagsChange,
+  TAdapterStatusChange,
   TConfigureAdapterChildren,
   TConfigureAdapterProps,
+  TAdapterSubscriptionStatus,
 } from '@flopflip/types';
+import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
 import { FlagsContext } from '../flags-context';
 
 type BaseProps = {
@@ -22,36 +25,56 @@ type State = {
   configurationId?: string;
 };
 
+const initialAdapterStatus: TAdapterStatus = {
+  isReady: false,
+  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
+};
+const initialFlags: TFlags = {};
+
 const Configure = <AdapterInstance extends TAdapter>(
   props: Props<AdapterInstance>
 ) => {
-  const [flags, setFlags] = React.useState<State['flags']>({});
-  const [status, setStatus] = React.useState<State['status']>({});
+  const [flags, setFlags] = React.useState<State['flags']>(initialFlags);
+  const [status, setStatus] = React.useState<State['status']>(
+    initialAdapterStatus
+  );
 
   // NOTE:
   //   Using this prevents the callbacks being invoked
   //   which would trigger a setState as a result on an unmounted
   //   component.
-  useAdapterSubscription(props.adapter);
+  const getHasAdapterSubscriptionStatus = useAdapterSubscription(props.adapter);
 
   const handleUpdateFlags = React.useCallback(
-    (flags: TFlags) => {
+    (flags: TFlagsChange) => {
+      if (
+        getHasAdapterSubscriptionStatus(TAdapterSubscriptionStatus.Unsubscribed)
+      ) {
+        return;
+      }
+
       setFlags(prevFlags => ({
         ...prevFlags,
         ...flags,
       }));
     },
-    [setFlags]
+    [setFlags, getHasAdapterSubscriptionStatus]
   );
 
   const handleUpdateStatus = React.useCallback(
-    (status: TAdapterStatus) => {
+    (status: TAdapterStatusChange) => {
+      if (
+        getHasAdapterSubscriptionStatus(TAdapterSubscriptionStatus.Unsubscribed)
+      ) {
+        return;
+      }
+
       setStatus(prevStatus => ({
         ...prevStatus,
         ...status,
       }));
     },
-    [setStatus]
+    [setStatus, getHasAdapterSubscriptionStatus]
   );
 
   return (

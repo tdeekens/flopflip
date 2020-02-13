@@ -10,6 +10,7 @@ import {
   TAdapterEventHandlers,
   TSplitioAdapterInterface,
   TSplitioAdapterArgs,
+  TAdapterSubscriptionStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
 import merge from 'deepmerge';
@@ -33,7 +34,7 @@ type SplitIOAdapterState = {
 const adapterState: TAdapterStatus & SplitIOAdapterState = {
   isReady: false,
   isConfigured: false,
-  isUnsubscribed: false,
+  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
   user: undefined,
   client: undefined,
   manager: undefined,
@@ -44,7 +45,8 @@ const adapterState: TAdapterStatus & SplitIOAdapterState = {
   splitioSettings: undefined,
 };
 
-const getIsUnsubscribed = () => Boolean(adapterState.isUnsubscribed);
+const getIsUnsubscribed = () =>
+  adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
 
 export const normalizeFlag = (
   flagName: TFlagName,
@@ -270,11 +272,11 @@ class SplitioAdapter implements TSplitioAdapterInterface {
   }
 
   unsubscribe() {
-    adapterState.isUnsubscribed = true;
+    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Unsubscribed;
   }
 
   subscribe() {
-    adapterState.isUnsubscribed = false;
+    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
   }
 }
 

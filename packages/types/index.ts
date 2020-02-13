@@ -7,14 +7,20 @@ export type TFlags = { [key: string]: TFlagVariation };
 export type TUser = {
   key?: string;
 };
+export enum TAdapterSubscriptionStatus {
+  Subscribed,
+  Unsubscribed,
+}
 export type TAdapterStatus = {
   isReady?: boolean;
   isConfigured?: boolean;
-  isUnsubscribed?: boolean;
+  subscriptionStatus: TAdapterSubscriptionStatus;
 };
+export type TAdapterStatusChange = Partial<TAdapterStatus>;
+export type TFlagsChange = TFlags;
 export type TAdapterEventHandlers = {
-  onFlagsStateChange: (flags: TFlags) => void;
-  onStatusStateChange: (status: TAdapterStatus) => void;
+  onFlagsStateChange: (flags: TFlagsChange) => void;
+  onStatusStateChange: (status: TAdapterStatusChange) => void;
 };
 export type TBaseAdapterArgs = {
   user: TUser;
@@ -173,7 +179,6 @@ export type TConfigureAdapterProps<TAdapterInstance extends TAdapter> = {
     : never;
   adapterArgs: ConfigureAdapterArgs<TAdapterInstance>;
 };
-export type TAdapterStatusChange = { [key: string]: boolean };
 export type TOnFlagsStateChangeCallback = (flags: TFlags) => void;
 export type TOnStatusStateChangeCallback = (
   statusChange: TAdapterStatusChange

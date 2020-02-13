@@ -9,6 +9,7 @@ import {
   TFlags,
   TAdapterEventHandlers,
   TMemoryAdapterInterface,
+  TAdapterSubscriptionStatus,
   TMemoryAdapterArgs,
   interfaceIdentifiers,
 } from '@flopflip/types';
@@ -22,7 +23,7 @@ type MemoryAdapterState = {
 
 const intialAdapterState: TAdapterStatus & MemoryAdapterState = {
   isReady: false,
-  isUnsubscribed: false,
+  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
   flags: {},
   user: {},
   // Typings are incorrect and state that mitt is not callable.
@@ -38,7 +39,8 @@ const updateUser = (user: TUser) => {
   adapterState.user = user;
 };
 
-const getIsUnsubscribed = () => Boolean(adapterState.isUnsubscribed);
+const getIsUnsubscribed = () =>
+  adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
 
 const normalizeFlag = (
   flagName: TFlagName,
@@ -183,11 +185,11 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   }
 
   unsubscribe() {
-    adapterState.isUnsubscribed = true;
+    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Unsubscribed;
   }
 
   subscribe() {
-    adapterState.isUnsubscribed = false;
+    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
   }
 }
 

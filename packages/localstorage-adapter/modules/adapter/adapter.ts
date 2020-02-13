@@ -11,6 +11,7 @@ import {
   TFlagVariation,
   TFlag,
   TFlags,
+  TAdapterSubscriptionStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
 
@@ -28,7 +29,7 @@ type LocalStorageAdapterState = {
 
 const intialAdapterState: TAdapterStatus & LocalStorageAdapterState = {
   isReady: false,
-  isUnsubscribed: false,
+  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
   flags: {},
   user: {},
   // Typings are incorrect and state that mitt is not callable.
@@ -41,7 +42,8 @@ let adapterState: TAdapterStatus & LocalStorageAdapterState = {
   ...intialAdapterState,
 };
 
-const getIsUnsubscribed = () => Boolean(adapterState.isUnsubscribed);
+const getIsUnsubscribed = () =>
+  adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
 
 export const STORAGE_SLICE = '@flopflip';
 
@@ -117,7 +119,7 @@ const subscribeToFlagsChanges = ({
   pollingInteral?: number;
 }) => {
   setInterval(() => {
-    if (!adapterState.isUnsubscribed) {
+    if (!getIsUnsubscribed()) {
       adapterState.emitter.emit(
         'flagsStateChange',
         normalizeFlags(storage.get('flags'))
@@ -201,11 +203,11 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   }
 
   unsubscribe() {
-    adapterState.isUnsubscribed = true;
+    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Unsubscribed;
   }
 
   subscribe() {
-    adapterState.isUnsubscribed = false;
+    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
   }
 }
 

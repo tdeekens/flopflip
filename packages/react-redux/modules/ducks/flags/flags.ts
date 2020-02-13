@@ -1,4 +1,9 @@
-import { TFlagName, TFlagVariation, TFlags } from '@flopflip/types';
+import {
+  TFlagName,
+  TFlagVariation,
+  TFlags,
+  TFlagsChange,
+} from '@flopflip/types';
 import { isNil } from '@flopflip/react';
 import { TUpdateFlagsAction } from './types.js';
 import { TState } from '../../types';
@@ -35,7 +40,7 @@ export const createReducer = (
   reducer(state, action);
 
 // Action Creators
-export const updateFlags = (flags: TFlags): TUpdateFlagsAction => ({
+export const updateFlags = (flags: TFlagsChange): TUpdateFlagsAction => ({
   type: UPDATE_FLAGS,
   payload: { flags },
 });

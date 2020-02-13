@@ -8,6 +8,7 @@ import {
   TLaunchDarklyAdapterInterface,
   TLaunchDarklyAdapterArgs,
   TAdapterEventHandlers,
+  TAdapterSubscriptionStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
 import merge from 'deepmerge';
@@ -31,7 +32,7 @@ type LaunchDarklyAdapterState = {
 const adapterState: TAdapterStatus & LaunchDarklyAdapterState = {
   isReady: false,
   isConfigured: false,
-  isUnsubscribed: false,
+  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
   user: undefined,
   client: undefined,
   flags: {},
@@ -44,7 +45,8 @@ const updateFlagsInAdapterState = (updatedFlags: TFlags): void => {
   };
 };
 
-const getIsUnsubscribed = () => Boolean(adapterState.isUnsubscribed);
+const getIsUnsubscribed = () =>
+  adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
 
 const normalizeFlag = (
   flagName: TFlagName,
@@ -264,11 +266,11 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   }
 
   unsubscribe() {
-    adapterState.isUnsubscribed = true;
+    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Unsubscribed;
   }
 
   subscribe() {
-    adapterState.isUnsubscribed = false;
+    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
   }
 
   private _didFlagChange(flagName: TFlagName, nextFlagValue: TFlagVariation) {
