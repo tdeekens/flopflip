@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/localstorage-adapter",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "An localstorage adapter for flipflop",
   "main": "dist/@flopflip-localstorage-adapter.cjs.js",
   "module": "dist/@flopflip-localstorage-adapter.es.js",
@@ -38,8 +38,8 @@
     "client"
   ],
   "dependencies": {
-    "@flopflip/types": "^2.3.4",
     "@babel/runtime": "7.8.4",
+    "@flopflip/types": "^2.3.5",
     "mitt": "1.2.0",
     "tiny-warning": "1.0.3"
   },
