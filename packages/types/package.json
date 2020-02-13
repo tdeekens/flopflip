@@ -2,6 +2,9 @@
   "name": "@flopflip/types",
   "version": "2.3.4",
   "description": "Type definitions for flipflop",
+  "main": "dist/@flopflip-types.cjs.js",
+  "module": "dist/@flopflip-types.es.js",
+  "typings": "dist/typings/index.d.ts",
   "scripts": {
     "prebuild": "rimraf dist/**",
     "build": "cross-env npm run build:es && npm run build:cjs && npm run build:typings",
