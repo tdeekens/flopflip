@@ -17,6 +17,7 @@ const initialState: TFlags = {};
 
 // Reducer
 const reducer = (
+  // eslint-disable-next-line @typescript-eslint/default-param-last
   state: TFlags = initialState,
   action: TUpdateFlagsAction
 ): TFlags => {
@@ -36,6 +37,7 @@ export default reducer;
 
 export const createReducer = (
   preloadedState: TFlags = initialState
+  // eslint-disable-next-line @typescript-eslint/default-param-last
 ): Reducer<TFlags, TUpdateFlagsAction> => (state = preloadedState, action) =>
   reducer(state, action);
 
