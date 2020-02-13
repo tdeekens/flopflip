@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/launchdarkly-adapter",
-  "version": "2.11.2",
+  "version": "2.11.3",
   "description": "A adapter around the LaunchDarkly client for flipflop",
   "main": "dist/@flopflip-launchdarkly-adapter.cjs.js",
   "module": "dist/@flopflip-launchdarkly-adapter.es.js",
@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@flopflip/types": "^2.3.3",
+    "@flopflip/types": "^2.3.4",
     "read-pkg-up": "7.0.1"
   },
   "dependencies": {
