@@ -2,7 +2,19 @@
   "name": "@flopflip/types",
   "version": "2.3.3",
   "description": "Type definitions for flipflop",
-  "scripts": {},
+  "scripts": {
+    "prebuild": "rimraf dist/**",
+    "build": "cross-env npm run build:es && npm run build:cjs && npm run build:typings",
+    "build:typings": "cross-env tsc -p tsconfig.json --emitDeclarationOnly --declarationDir dist/typings",
+    "build:watch": "cross-env npm run build:es -- -w",
+    "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i index.ts -o dist/@flopflip-types.es.js",
+    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i index.ts -o dist/@flopflip-types.cjs.js"
+  },
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
+  "types": "dist/typings/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
