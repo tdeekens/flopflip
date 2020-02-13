@@ -1,7 +1,7 @@
-import invariant from 'invariant';
+import warning from 'tiny-warning';
 import adapter, { getUser, updateFlags } from './adapter';
 
-jest.mock('invariant');
+jest.mock('tiny-warning');
 
 const createAdapterArgs = (customArgs = {}) => ({
   user: { id: 'foo' },
@@ -21,7 +21,7 @@ describe('when configuring', () => {
   let adapterEventHandlers;
 
   beforeEach(() => {
-    invariant.mockClear();
+    warning.mockClear();
     adapterArgs = createAdapterArgs();
     adapterEventHandlers = createAdapterEventHandlers();
   });
@@ -35,8 +35,8 @@ describe('when configuring', () => {
       updateFlags({ attempted: 'flagUpdate' });
     });
 
-    it('should invoke and trigger `invariant`', () => {
-      expect(invariant).toHaveBeenCalledWith(false, expect.any(String));
+    it('should invoke and trigger `warning`', () => {
+      expect(warning).toHaveBeenCalledWith(false, expect.any(String));
     });
   });
 
@@ -83,8 +83,8 @@ describe('when configuring', () => {
         updateFlags(updatedFlags);
       });
 
-      it('should invoke but not trigger `invariant`', () => {
-        expect(invariant).toHaveBeenCalledWith(true, expect.any(String));
+      it('should invoke but not trigger `warning`', () => {
+        expect(warning).toHaveBeenCalledWith(true, expect.any(String));
       });
 
       it('should invoke `onFlagsStateChange`', () => {

@@ -1,12 +1,14 @@
 import {
   TFlagName,
   TFlagVariation,
+  TAdapterStatus,
   TUser,
   TFlag,
   TFlags,
   TLaunchDarklyAdapterInterface,
   TLaunchDarklyAdapterArgs,
   TAdapterEventHandlers,
+  TAdapterSubscriptionStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
 import merge from 'deepmerge';
@@ -21,17 +23,16 @@ import {
 import camelCase from 'lodash/camelCase';
 import kebabCase from 'lodash/kebabCase';
 
-type AdapterState = {
-  isReady: boolean;
-  isConfigured: boolean;
+type LaunchDarklyAdapterState = {
   user?: TUser;
   client?: LDClient;
   flags: TFlags;
 };
 
-const adapterState: AdapterState = {
+const adapterState: TAdapterStatus & LaunchDarklyAdapterState = {
   isReady: false,
   isConfigured: false,
+  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
   user: undefined,
   client: undefined,
   flags: {},
@@ -43,6 +44,9 @@ const updateFlagsInAdapterState = (updatedFlags: TFlags): void => {
     ...updatedFlags,
   };
 };
+
+const getIsUnsubscribed = () =>
+  adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
 
 const normalizeFlag = (
   flagName: TFlagName,
@@ -132,13 +136,17 @@ const getInitialFlags = (
           const flags: TFlags = normalizeFlags(flagsFromSdk);
           updateFlagsInAdapterState(flags);
           // ...and flush initial state of flags
-          adapterEventHandlers.onFlagsStateChange(flags);
+          if (!getIsUnsubscribed()) {
+            adapterEventHandlers.onFlagsStateChange(flags);
+          }
         }
 
         // First update internal state
         adapterState.isReady = true;
         // ...to then signal that the adapter is ready
-        adapterEventHandlers.onStatusStateChange({ isReady: true });
+        if (!getIsUnsubscribed()) {
+          adapterEventHandlers.onStatusStateChange({ isReady: true });
+        }
 
         return Promise.resolve({ flagsFromSdk });
       })
@@ -230,7 +238,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   }
 
   getIsReady() {
-    return adapterState.isReady;
+    return Boolean(adapterState.isReady);
   }
 
   getClient() {
@@ -255,6 +263,14 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       );
 
     return changeUserContext({ ...adapterState.user, ...updatedUserProps });
+  }
+
+  unsubscribe() {
+    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Unsubscribed;
+  }
+
+  subscribe() {
+    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
   }
 
   private _didFlagChange(flagName: TFlagName, nextFlagValue: TFlagVariation) {
@@ -300,7 +316,9 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
           updateFlagsInAdapterState(updatedFlags);
 
           const updateFlags = () => {
-            adapterEventHandlers.onFlagsStateChange(adapterState.flags);
+            if (!getIsUnsubscribed()) {
+              adapterEventHandlers.onFlagsStateChange(adapterState.flags);
+            }
           };
 
           debounce(updateFlags, {

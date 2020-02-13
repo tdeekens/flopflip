@@ -22,6 +22,6 @@ export {
 
 export { setDisplayName, wrapDisplayName } from './hocs';
 
-export { useAdapterReconfiguration, useIsMounted } from './hooks';
+export { useAdapterReconfiguration, useAdapterSubscription } from './hooks';
 
 export { version };

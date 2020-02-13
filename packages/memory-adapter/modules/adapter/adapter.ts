@@ -1,4 +1,4 @@
-import invariant from 'invariant';
+import warning from 'tiny-warning';
 import mitt, { Emitter } from 'mitt';
 import {
   TUser,
@@ -9,6 +9,7 @@ import {
   TFlags,
   TAdapterEventHandlers,
   TMemoryAdapterInterface,
+  TAdapterSubscriptionStatus,
   TMemoryAdapterArgs,
   interfaceIdentifiers,
 } from '@flopflip/types';
@@ -22,6 +23,7 @@ type MemoryAdapterState = {
 
 const intialAdapterState: TAdapterStatus & MemoryAdapterState = {
   isReady: false,
+  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
   flags: {},
   user: {},
   // Typings are incorrect and state that mitt is not callable.
@@ -36,6 +38,9 @@ let adapterState: TAdapterStatus & MemoryAdapterState = {
 const updateUser = (user: TUser) => {
   adapterState.user = user;
 };
+
+const getIsUnsubscribed = () =>
+  adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
 
 const normalizeFlag = (
   flagName: TFlagName,
@@ -67,7 +72,7 @@ export const updateFlags = (flags: TFlags) => {
     adapterState.isConfigured && adapterState.isReady
   );
 
-  invariant(
+  warning(
     isAdapterReady,
     '@flopflip/memory-adapter: adapter not ready and configured. Flags can not be updated before.'
   );
@@ -104,14 +109,20 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
       updateUser(user);
 
-      adapterState.emitter.on(
-        'flagsStateChange',
-        adapterEventHandlers.onFlagsStateChange
-      );
-      adapterState.emitter.on(
-        'statusStateChange',
-        adapterEventHandlers.onStatusStateChange
-      );
+      const handleFlagsChange = (nextFlags: TFlags) => {
+        if (getIsUnsubscribed()) return;
+
+        adapterEventHandlers.onFlagsStateChange(nextFlags);
+      };
+
+      const handleStatusChange = (nextStatus: TAdapterStatus) => {
+        if (getIsUnsubscribed()) return;
+
+        adapterEventHandlers.onStatusStateChange(nextStatus);
+      };
+
+      adapterState.emitter.on('flagsStateChange', handleFlagsChange);
+      adapterState.emitter.on('statusStateChange', handleStatusChange);
 
       adapterState.emitter.emit('flagsStateChange', adapterState.flags);
       adapterState.emitter.emit('statusStateChange', {
@@ -130,6 +141,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     updateUser(adapterArgs.user);
 
     adapterState.flags = {};
+
     adapterState.emitter.emit('flagsStateChange', adapterState.flags);
     adapterState.emitter.emit('statusStateChange', {
       isConfigured: adapterState.isConfigured,
@@ -170,6 +182,14 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   // For convenience
   updateFlags(flags: TFlags) {
     return updateFlags(flags);
+  }
+
+  unsubscribe() {
+    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Unsubscribed;
+  }
+
+  subscribe() {
+    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
   }
 }
 

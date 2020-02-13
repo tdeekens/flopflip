@@ -1,2 +1,2 @@
 export { default as useAdapterReconfiguration } from './use-adapter-reconfiguration';
-export { default as useIsMounted } from './use-is-mounted';
+export { default as useAdapterSubscription } from './use-adapter-subscription';

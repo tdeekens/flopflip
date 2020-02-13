@@ -36,9 +36,11 @@ describe('reducers', () => {
       });
 
       it('should set the new status', () => {
-        expect(reducer(undefined, { type: UPDATE_STATUS, payload })).toEqual({
-          isReady: payload.status.isReady,
-        });
+        expect(reducer(undefined, { type: UPDATE_STATUS, payload })).toEqual(
+          expect.objectContaining({
+            isReady: payload.status.isReady,
+          })
+        );
       });
     });
 

@@ -7,13 +7,20 @@ export type TFlags = { [key: string]: TFlagVariation };
 export type TUser = {
   key?: string;
 };
+export enum TAdapterSubscriptionStatus {
+  Subscribed,
+  Unsubscribed,
+}
 export type TAdapterStatus = {
   isReady?: boolean;
   isConfigured?: boolean;
+  subscriptionStatus: TAdapterSubscriptionStatus;
 };
+export type TAdapterStatusChange = Partial<TAdapterStatus>;
+export type TFlagsChange = TFlags;
 export type TAdapterEventHandlers = {
-  onFlagsStateChange: (flags: TFlags) => void;
-  onStatusStateChange: (status: TAdapterStatus) => void;
+  onFlagsStateChange: (flags: TFlagsChange) => void;
+  onStatusStateChange: (status: TAdapterStatusChange) => void;
 };
 export type TBaseAdapterArgs = {
   user: TUser;
@@ -73,6 +80,8 @@ export interface TAdapterInterface<Args extends TAdapterArgs> {
   waitUntilConfigured?(): Promise<unknown>;
   reset?(): void;
   getFlag?(flagName: TFlagName): TFlagVariation | undefined;
+  unsubscribe(): void;
+  subscribe(): void;
 }
 export interface TLaunchDarklyAdapterInterface
   extends TAdapterInterface<TLaunchDarklyAdapterArgs> {
@@ -89,6 +98,8 @@ export interface TLaunchDarklyAdapterInterface
   getClient(): TLDClient | undefined;
   getFlag(flagName: TFlagName): TFlagVariation | undefined;
   updateUserContext(updatedUserProps: TUser): Promise<unknown>;
+  unsubscribe(): void;
+  subscribe(): void;
 }
 export interface TLocalStorageAdapterInterface
   extends TAdapterInterface<TLocalStorageAdapterArgs> {
@@ -103,6 +114,8 @@ export interface TLocalStorageAdapterInterface
   ): Promise<unknown>;
   getIsReady(): boolean;
   waitUntilConfigured(): Promise<unknown>;
+  unsubscribe(): void;
+  subscribe(): void;
 }
 export interface TMemoryAdapterInterface
   extends TAdapterInterface<TMemoryAdapterArgs> {
@@ -120,6 +133,8 @@ export interface TMemoryAdapterInterface
   waitUntilConfigured(): Promise<unknown>;
   reset(): void;
   updateFlags(flags: TFlags): void;
+  unsubscribe(): void;
+  subscribe(): void;
 }
 export interface TSplitioAdapterInterface
   extends TAdapterInterface<TSplitioAdapterArgs> {
@@ -133,6 +148,8 @@ export interface TSplitioAdapterInterface
     adapterEventHandlers: TAdapterEventHandlers
   ): Promise<unknown>;
   getIsReady(): boolean;
+  unsubscribe(): void;
+  subscribe(): void;
 }
 export type TAdapter =
   | TLaunchDarklyAdapterInterface
@@ -162,7 +179,6 @@ export type TConfigureAdapterProps<TAdapterInstance extends TAdapter> = {
     : never;
   adapterArgs: ConfigureAdapterArgs<TAdapterInstance>;
 };
-export type TAdapterStatusChange = { [key: string]: boolean };
 export type TOnFlagsStateChangeCallback = (flags: TFlags) => void;
 export type TOnStatusStateChangeCallback = (
   statusChange: TAdapterStatusChange

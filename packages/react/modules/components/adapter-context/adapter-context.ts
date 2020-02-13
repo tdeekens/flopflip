@@ -3,10 +3,12 @@ import {
   TAdapterContext,
   TAdapterStatus,
   TReconfigureAdapter,
+  TAdapterSubscriptionStatus,
 } from '@flopflip/types';
 
 const initialReconfigureAdapter: TReconfigureAdapter = () => undefined;
 const initialAdapterStatus: TAdapterStatus = {
+  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
   isReady: false,
   isConfigured: false,
 };

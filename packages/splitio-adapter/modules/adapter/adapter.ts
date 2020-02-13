@@ -1,6 +1,7 @@
 import {
   TFlagName,
   TFlagVariation,
+  TAdapterStatus,
   TUser,
   TFlag,
   TFlags,
@@ -9,6 +10,7 @@ import {
   TAdapterEventHandlers,
   TSplitioAdapterInterface,
   TSplitioAdapterArgs,
+  TAdapterSubscriptionStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
 import merge from 'deepmerge';
@@ -17,9 +19,7 @@ import camelCase from 'lodash/camelCase';
 import omit from 'lodash/omit';
 import isEqual from 'lodash/isEqual';
 
-type AdapterState = {
-  isReady: boolean;
-  isConfigured: boolean;
+type SplitIOAdapterState = {
   user?: TUser;
   client?: SplitIO.IClient;
   manager?: SplitIO.IManager;
@@ -31,9 +31,10 @@ type AdapterState = {
   treatmentAttributes?: SplitIO.Attributes;
 };
 
-const adapterState: AdapterState = {
+const adapterState: TAdapterStatus & SplitIOAdapterState = {
   isReady: false,
   isConfigured: false,
+  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
   user: undefined,
   client: undefined,
   manager: undefined,
@@ -43,6 +44,9 @@ const adapterState: AdapterState = {
   },
   splitioSettings: undefined,
 };
+
+const getIsUnsubscribed = () =>
+  adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
 
 export const normalizeFlag = (
   flagName: TFlagName,
@@ -92,7 +96,9 @@ const subscribeToFlagsChanges = ({
           ...adapterState.treatmentAttributes,
         } as SplitIO.Attributes);
 
-        onFlagsStateChange(normalizeFlags(flags));
+        if (!getIsUnsubscribed()) {
+          onFlagsStateChange(normalizeFlags(flags));
+        }
       }
     });
   }
@@ -145,12 +151,17 @@ const subscribe = ({
             ...adapterState.treatmentAttributes,
           } as SplitIO.Attributes);
 
-          onFlagsStateChange(normalizeFlags(flags));
+          if (!getIsUnsubscribed()) {
+            onFlagsStateChange(normalizeFlags(flags));
+          }
 
           // First update internal state
           adapterState.isReady = true;
           // ...to then signal that the adapter is ready
-          onStatusStateChange({ isReady: true });
+
+          if (!getIsUnsubscribed()) {
+            onStatusStateChange({ isReady: true });
+          }
 
           // ...to finally subscribe to later changes.
           subscribeToFlagsChanges({
@@ -258,6 +269,14 @@ class SplitioAdapter implements TSplitioAdapterInterface {
 
   getIsReady() {
     return Boolean(adapterState.isReady);
+  }
+
+  unsubscribe() {
+    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Unsubscribed;
+  }
+
+  subscribe() {
+    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
   }
 }
 

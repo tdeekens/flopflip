@@ -1,4 +1,4 @@
-import invariant from 'invariant';
+import warning from 'tiny-warning';
 import mitt, { Emitter } from 'mitt';
 import camelCase from 'lodash/camelCase';
 import {
@@ -11,6 +11,7 @@ import {
   TFlagVariation,
   TFlag,
   TFlags,
+  TAdapterSubscriptionStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
 
@@ -25,8 +26,10 @@ type LocalStorageAdapterState = {
   user?: TUser;
   emitter: Emitter;
 };
+
 const intialAdapterState: TAdapterStatus & LocalStorageAdapterState = {
   isReady: false,
+  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
   flags: {},
   user: {},
   // Typings are incorrect and state that mitt is not callable.
@@ -38,6 +41,9 @@ const intialAdapterState: TAdapterStatus & LocalStorageAdapterState = {
 let adapterState: TAdapterStatus & LocalStorageAdapterState = {
   ...intialAdapterState,
 };
+
+const getIsUnsubscribed = () =>
+  adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
 
 export const STORAGE_SLICE = '@flopflip';
 
@@ -89,7 +95,7 @@ export const updateFlags = (flags: TFlags) => {
     adapterState.isConfigured && adapterState.isReady
   );
 
-  invariant(
+  warning(
     isAdapterReady,
     '@flopflip/localstorage-adapter: adapter not ready and configured. Flags can not be updated before.'
   );
@@ -113,10 +119,12 @@ const subscribeToFlagsChanges = ({
   pollingInteral?: number;
 }) => {
   setInterval(() => {
-    adapterState.emitter.emit(
-      'flagsStateChange',
-      normalizeFlags(storage.get('flags'))
-    );
+    if (!getIsUnsubscribed()) {
+      adapterState.emitter.emit(
+        'flagsStateChange',
+        normalizeFlags(storage.get('flags'))
+      );
+    }
   }, pollingInteral);
 };
 
@@ -139,14 +147,20 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       adapterState.isConfigured = true;
       adapterState.isReady = true;
 
-      adapterState.emitter.on(
-        'flagsStateChange',
-        adapterEventHandlers.onFlagsStateChange
-      );
-      adapterState.emitter.on(
-        'statusStateChange',
-        adapterEventHandlers.onStatusStateChange
-      );
+      const handleFlagsChange = (nextFlags: TFlags) => {
+        if (getIsUnsubscribed()) return;
+
+        adapterEventHandlers.onFlagsStateChange(nextFlags);
+      };
+
+      const handleStatusChange = (nextStatus: TAdapterStatus) => {
+        if (getIsUnsubscribed()) return;
+
+        adapterEventHandlers.onStatusStateChange(nextStatus);
+      };
+
+      adapterState.emitter.on('flagsStateChange', handleFlagsChange);
+      adapterState.emitter.on('statusStateChange', handleStatusChange);
 
       adapterState.emitter.emit(
         'flagsStateChange',
@@ -155,7 +169,6 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       adapterState.emitter.emit('statusStateChange', {
         isReady: adapterState.isReady,
       });
-
       adapterState.emitter.emit('readyStateChange');
 
       subscribeToFlagsChanges({
@@ -169,9 +182,12 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
     storage.unset('flags');
+
     const nextUser = adapterArgs.user;
     adapterState.user = nextUser;
+
     adapterState.emitter.emit('flagsStateChange', {});
+
     return Promise.resolve();
   }
 
@@ -184,6 +200,14 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
   getIsReady() {
     return Boolean(adapterState.isReady);
+  }
+
+  unsubscribe() {
+    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Unsubscribed;
+  }
+
+  subscribe() {
+    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
   }
 }
 

@@ -7,8 +7,8 @@ import {
 import {
   TAdapter,
   TAdapterArgs,
-  TAdapterStatus,
-  TFlags,
+  TAdapterStatusChange,
+  TFlagsChange,
   TAdapterInterface,
 } from '@flopflip/types';
 import { TState } from '../../types';
@@ -29,10 +29,10 @@ export default function createFlopFlipEnhancer(
     (adapter as TAdapterInterface<TAdapterArgs>).configure(adapterArgs, {
       // NOTE: This is like `bindActionCreators` but the bound action
       // creators are renamed to fit the adapter API and conventions.
-      onFlagsStateChange: (flags: TFlags) => {
+      onFlagsStateChange: (flags: TFlagsChange) => {
         store.dispatch(updateFlags(flags));
       },
-      onStatusStateChange: (status: TAdapterStatus) => {
+      onStatusStateChange: (status: TAdapterStatusChange) => {
         store.dispatch(updateStatus(status));
       },
     });
