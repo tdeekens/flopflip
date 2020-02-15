@@ -36,6 +36,8 @@ jobs:
       - name: Test
         if: startsWith(matrix.node-version, '12')
         run: yarn test:ci
+        env:
+          CI: true
       - name: Test (with coverage)
         if: startsWith(matrix.node-version, '13')
         run: yarn test:ci:coverage

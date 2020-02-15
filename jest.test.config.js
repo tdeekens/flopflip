@@ -12,7 +12,11 @@ module.exports = {
       isolatedModules: true,
     },
   },
-  setupFiles: ['raf/polyfill', 'jest-localstorage-mock'],
+  setupFiles: [
+    'raf/polyfill',
+    'jest-localstorage-mock',
+    './throwing-console-patch.js',
+  ],
   setupFilesAfterEnv: ['./jest-runner-test.config.js'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
   testEnvironment: 'jsdom',
