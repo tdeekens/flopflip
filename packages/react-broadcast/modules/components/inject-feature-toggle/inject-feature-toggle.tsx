@@ -28,7 +28,7 @@ export default function injectFeatureToggle<OwnProps extends object>(
       return <Component {...props} />;
     };
 
-    setDisplayName(wrapDisplayName(Component, 'injectFeatureToggle'));
+    setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggle'));
 
     return WrappedComponent;
   };
