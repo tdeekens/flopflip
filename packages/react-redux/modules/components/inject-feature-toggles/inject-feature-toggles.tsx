@@ -33,7 +33,7 @@ export default <OwnProps extends object>(
     return <Component {...props} />;
   };
 
-  setDisplayName(wrapDisplayName(Component, 'injectFeatureToggles'));
+  setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggles'));
 
   return WrappedComponent;
 };
