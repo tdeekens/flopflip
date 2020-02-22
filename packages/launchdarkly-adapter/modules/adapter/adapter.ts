@@ -321,9 +321,14 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
             }
           };
 
+          const scheduleImmediately = { before: true, after: false };
+          const scheduleTrailingEdge = { before: false, after: true };
+
           debounce(updateFlags, {
             wait: flagsUpdateDelayMs,
-            immediate: !flagsUpdateDelayMs,
+            ...(flagsUpdateDelayMs
+              ? scheduleTrailingEdge
+              : scheduleImmediately),
           })();
         });
       }
