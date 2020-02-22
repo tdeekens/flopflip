@@ -11,8 +11,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Fetch all tags (for canary releases)
-        run: git fetch --depth=1000 origin +refs/tags/*:refs/tags/*
+        with:
+          ref: master
       - name: Read .nvmrc
         run: echo ::set-output name=NVMRC::$(cat .nvmrc)
         id: nvm
