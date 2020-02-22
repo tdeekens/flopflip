@@ -1,9 +1,8 @@
-name: Prerelease
+name: Release
 
 on:
-  push:
-    branches:
-      - "master"
+  release:
+    types: [published]
 
 jobs:
   publish-npm:
@@ -34,9 +33,12 @@ jobs:
           scope: flopflip
       - name: Install
         run: yarn install --frozen-lockfile
-      - name: Publish to next dist-tag
+      - name: Publish to latest dist-tag
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
-          yarn release:next
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
