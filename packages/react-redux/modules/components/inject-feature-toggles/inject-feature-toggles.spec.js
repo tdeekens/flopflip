@@ -22,7 +22,7 @@ const FlagsToComponentWithPropKey = props => (
 
 describe('injectFeatureToggles', () => {
   describe('without `propKey`', () => {
-    it('should have feature enabling prop for `enabledFeature`', () => {
+    it('should have feature enabling prop for `enabledFeature`', async () => {
       const store = createStore({
         [STATE_SLICE]: {
           flags: { enabledFeature: true, disabledFeature: false },
@@ -34,13 +34,15 @@ describe('injectFeatureToggles', () => {
       ])(FlagsToComponent);
 
       const rendered = render(store, <TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('enabledFeature')).toHaveTextContent(
         'true'
       );
     });
 
-    it('should have feature disabling prop for `disabledFeature`', () => {
+    it('should have feature disabling prop for `disabledFeature`', async () => {
       const store = createStore({
         [STATE_SLICE]: {
           flags: { enabledFeature: true, disabledFeature: false },
@@ -52,6 +54,8 @@ describe('injectFeatureToggles', () => {
       ])(FlagsToComponent);
 
       const rendered = render(store, <TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('disabledFeature')).toHaveTextContent(
         'false'
@@ -84,7 +88,7 @@ describe('injectFeatureToggles', () => {
   });
 
   describe('with `propKey`', () => {
-    it('should have feature enabling prop for `enabledFeature`', () => {
+    it('should have feature enabling prop for `enabledFeature`', async () => {
       const store = createStore({
         [STATE_SLICE]: {
           flags: { enabledFeature: true, disabledFeature: false },
@@ -96,13 +100,15 @@ describe('injectFeatureToggles', () => {
       )(FlagsToComponentWithPropKey);
 
       const rendered = render(store, <TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('enabledFeature')).toHaveTextContent(
         'true'
       );
     });
 
-    it('should have feature disabling prop for `disabledFeature`', () => {
+    it('should have feature disabling prop for `disabledFeature`', async () => {
       const store = createStore({
         [STATE_SLICE]: {
           flags: { enabledFeature: true, disabledFeature: false },
@@ -114,6 +120,8 @@ describe('injectFeatureToggles', () => {
       )(FlagsToComponentWithPropKey);
 
       const rendered = render(store, <TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('disabledFeature')).toHaveTextContent(
         'false'
