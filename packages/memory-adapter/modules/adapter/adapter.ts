@@ -10,6 +10,7 @@ import {
   TAdapterEventHandlers,
   TMemoryAdapterInterface,
   TAdapterSubscriptionStatus,
+  TAdapterConfigurationStatus,
   TMemoryAdapterArgs,
   interfaceIdentifiers,
 } from '@flopflip/types';
@@ -22,7 +23,7 @@ type MemoryAdapterState = {
 };
 
 const intialAdapterState: TAdapterStatus & MemoryAdapterState = {
-  isReady: false,
+  configurationStatus: TAdapterConfigurationStatus.Unconfigured,
   subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
   flags: {},
   user: {},
@@ -68,16 +69,15 @@ export const normalizeFlags = (rawFlags: TFlags) =>
 export const getUser = () => adapterState.user;
 
 export const updateFlags = (flags: TFlags) => {
-  const isAdapterReady = Boolean(
-    adapterState.isConfigured && adapterState.isReady
-  );
+  const isAdapterConfigured =
+    adapterState.configurationStatus === TAdapterConfigurationStatus.Configured;
 
   warning(
-    isAdapterReady,
-    '@flopflip/memory-adapter: adapter not ready and configured. Flags can not be updated before.'
+    isAdapterConfigured,
+    '@flopflip/memory-adapter: adapter is not configured. Flags can not be updated before.'
   );
 
-  if (!isAdapterReady) return;
+  if (!isAdapterConfigured) return;
 
   adapterState.flags = {
     ...adapterState.flags,
@@ -98,39 +98,46 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     adapterArgs: TMemoryAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) {
+    const handleFlagsChange = (nextFlags: TFlags) => {
+      if (getIsUnsubscribed()) return;
+
+      adapterEventHandlers.onFlagsStateChange(nextFlags);
+    };
+
+    const handleStatusChange = (nextStatus: TAdapterStatus) => {
+      if (getIsUnsubscribed()) return;
+
+      adapterEventHandlers.onStatusStateChange(nextStatus);
+    };
+
+    adapterState.emitter.on('flagsStateChange', handleFlagsChange);
+    adapterState.emitter.on('statusStateChange', handleStatusChange);
+
+    adapterState.configurationStatus = TAdapterConfigurationStatus.Configuring;
+
+    adapterState.emitter.emit('statusStateChange', {
+      status: adapterState.configurationStatus,
+    });
+
     const { user } = adapterArgs;
 
     adapterState.user = user;
 
     return Promise.resolve().then(() => {
-      adapterState.isConfigured = true;
-      adapterState.isReady = true;
+      adapterState.configurationStatus =
+        TAdapterConfigurationStatus.Configuring;
       adapterState.flags = {};
 
       updateUser(user);
 
-      const handleFlagsChange = (nextFlags: TFlags) => {
-        if (getIsUnsubscribed()) return;
-
-        adapterEventHandlers.onFlagsStateChange(nextFlags);
-      };
-
-      const handleStatusChange = (nextStatus: TAdapterStatus) => {
-        if (getIsUnsubscribed()) return;
-
-        adapterEventHandlers.onStatusStateChange(nextStatus);
-      };
-
-      adapterState.emitter.on('flagsStateChange', handleFlagsChange);
-      adapterState.emitter.on('statusStateChange', handleStatusChange);
+      adapterState.configurationStatus = TAdapterConfigurationStatus.Configured;
 
       adapterState.emitter.emit('flagsStateChange', adapterState.flags);
       adapterState.emitter.emit('statusStateChange', {
-        isReady: adapterState.isReady,
-        isConfigured: adapterState.isConfigured,
+        status: adapterState.configurationStatus,
       });
 
-      adapterState.emitter.emit('readyStateChange');
+      adapterState.emitter.emit('__internalConfiguredStatusChange__');
     });
   }
 
@@ -138,27 +145,31 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     adapterArgs: TMemoryAdapterArgs,
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
+    adapterState.configurationStatus = TAdapterConfigurationStatus.Configuring;
+
     updateUser(adapterArgs.user);
 
     adapterState.flags = {};
 
+    adapterState.configurationStatus = TAdapterConfigurationStatus.Configured;
+
     adapterState.emitter.emit('flagsStateChange', adapterState.flags);
     adapterState.emitter.emit('statusStateChange', {
-      isConfigured: adapterState.isConfigured,
+      status: adapterState.configurationStatus,
     });
 
     return Promise.resolve();
   }
 
-  getIsReady() {
-    return Boolean(adapterState.isReady);
+  getIsConfigurationStatus(configurationStatus: TAdapterConfigurationStatus) {
+    return adapterState.configurationStatus === configurationStatus;
   }
 
-  setIsReady(nextState: TAdapterStatus) {
-    adapterState.isReady = nextState.isReady;
+  setConfigurationStatus(nextConfigurationStatus: TAdapterConfigurationStatus) {
+    adapterState.configurationStatus = nextConfigurationStatus;
 
     adapterState.emitter.emit('statusStateChange', {
-      isReady: adapterState.isReady,
+      status: adapterState.configurationStatus,
     });
   }
 
@@ -170,8 +181,13 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
   waitUntilConfigured() {
     return new Promise(resolve => {
-      if (adapterState.isConfigured) resolve();
-      else adapterState.emitter.on('readyStateChange', resolve);
+      if (
+        adapterState.configurationStatus ===
+        TAdapterConfigurationStatus.Configured
+      )
+        resolve();
+      else
+        adapterState.emitter.on('__internalConfiguredStatusChange__', resolve);
     });
   }
 

@@ -14,6 +14,11 @@ const createAdapterEventHandlers = (custom = {}) => ({
   onStatusStateChange: jest.fn(),
   ...custom,
 });
+const AdapterStatus = {
+  Unconfigured: 0,
+  Configuring: 1,
+  Configured: 2,
+};
 
 describe('when configuring', () => {
   const updatedFlags = { fooFlag: true, barFlag: false };
@@ -26,8 +31,10 @@ describe('when configuring', () => {
     adapterEventHandlers = createAdapterEventHandlers();
   });
 
-  it('should indicate that the adapter is not ready', () => {
-    expect(adapter.getIsReady()).toBe(false);
+  it('should indicate that the adapter is not configured', () => {
+    expect(adapter.getIsConfigurationStatus(AdapterStatus.Configured)).toBe(
+      false
+    );
   });
 
   describe('updating flags', () => {
@@ -43,8 +50,10 @@ describe('when configuring', () => {
   describe('when configured', () => {
     beforeEach(() => adapter.configure(adapterArgs, adapterEventHandlers));
 
-    it('should indicate that the adapter is ready', () => {
-      expect(adapter.getIsReady()).toBe(true);
+    it('should indicate that the adapter is configured', () => {
+      expect(adapter.getIsConfigurationStatus(AdapterStatus.Configured)).toBe(
+        true
+      );
     });
 
     it('should invoke `onStatusStateChange`', () => {
@@ -55,18 +64,18 @@ describe('when configuring', () => {
       await expect(adapter.waitUntilConfigured()).resolves.not.toBeDefined();
     });
 
-    it('should invoke `onStatusStateChange` with `isReady`', () => {
+    it('should invoke `onStatusStateChange` with configuring', () => {
       expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
         expect.objectContaining({
-          isReady: true,
+          status: AdapterStatus.Configuring,
         })
       );
     });
 
-    it('should invoke `onStatusStateChange` with `isConfigured`', () => {
+    it('should invoke `onStatusStateChange` with configured', () => {
       expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
         expect.objectContaining({
-          isConfigured: true,
+          status: AdapterStatus.Configured,
         })
       );
     });
@@ -100,7 +109,6 @@ describe('when configuring', () => {
       describe('when flags are not normalized', () => {
         const nonNormalizedUpdatedFlags = {
           'flag-a-1': false,
-          // eslint-disable-next-line @typescript-eslint/camelcase
           flag_b: null,
         };
         beforeEach(() => {
@@ -160,21 +168,23 @@ describe('when configuring', () => {
       });
     });
 
-    describe('when setting ready state', () => {
+    describe('when setting configuration status to configuring', () => {
       beforeEach(() => {
         adapterEventHandlers.onStatusStateChange.mockClear();
 
-        adapter.setIsReady({ isReady: false });
+        adapter.setConfigurationStatus(AdapterStatus.Configuring);
       });
 
-      it('should indicate that the adapter is not ready', () => {
-        expect(adapter.getIsReady()).toBe(false);
+      it('should indicate that the adapter is not configured', () => {
+        expect(adapter.getIsConfigurationStatus(AdapterStatus.Configured)).toBe(
+          false
+        );
       });
 
-      it('should invoke `onStatusStateChange` with `isReady`', () => {
+      it('should invoke `onStatusStateChange` with configuring', () => {
         expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
           expect.objectContaining({
-            isReady: false,
+            status: AdapterStatus.Configuring,
           })
         );
       });
