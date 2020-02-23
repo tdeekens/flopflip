@@ -67,7 +67,7 @@ describe('when configuring', () => {
     it('should invoke `onStatusStateChange` with configuring', () => {
       expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
         expect.objectContaining({
-          status: AdapterStatus.Configuring,
+          configurationStatus: AdapterStatus.Configuring,
         })
       );
     });
@@ -75,7 +75,7 @@ describe('when configuring', () => {
     it('should invoke `onStatusStateChange` with configured', () => {
       expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
         expect.objectContaining({
-          status: AdapterStatus.Configured,
+          configurationStatus: AdapterStatus.Configured,
         })
       );
     });
@@ -184,7 +184,7 @@ describe('when configuring', () => {
       it('should invoke `onStatusStateChange` with configuring', () => {
         expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
           expect.objectContaining({
-            status: AdapterStatus.Configuring,
+            configurationStatus: AdapterStatus.Configuring,
           })
         );
       });

@@ -83,7 +83,7 @@ export interface TAdapterInterface<Args extends TAdapterArgs> {
   getIsConfigurationStatus(
     configurationStatus: TAdapterConfigurationStatus
   ): boolean;
-  setConfigurationStatus(
+  setConfigurationStatus?(
     nextConfigurationStatus: TAdapterConfigurationStatus
   ): void;
   waitUntilConfigured?(): Promise<unknown>;

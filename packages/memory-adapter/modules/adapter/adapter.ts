@@ -3,6 +3,7 @@ import mitt, { Emitter } from 'mitt';
 import {
   TUser,
   TAdapterStatus,
+  TAdapterStatusChange,
   TFlagName,
   TFlagVariation,
   TFlag,
@@ -104,7 +105,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
       adapterEventHandlers.onFlagsStateChange(nextFlags);
     };
 
-    const handleStatusChange = (nextStatus: TAdapterStatus) => {
+    const handleStatusChange = (nextStatus: TAdapterStatusChange) => {
       if (getIsUnsubscribed()) return;
 
       adapterEventHandlers.onStatusStateChange(nextStatus);
@@ -116,7 +117,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     adapterState.configurationStatus = TAdapterConfigurationStatus.Configuring;
 
     adapterState.emitter.emit('statusStateChange', {
-      status: adapterState.configurationStatus,
+      configurationStatus: adapterState.configurationStatus,
     });
 
     const { user } = adapterArgs;
@@ -134,7 +135,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
       adapterState.emitter.emit('flagsStateChange', adapterState.flags);
       adapterState.emitter.emit('statusStateChange', {
-        status: adapterState.configurationStatus,
+        configurationStatus: adapterState.configurationStatus,
       });
 
       adapterState.emitter.emit('__internalConfiguredStatusChange__');
@@ -155,7 +156,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
     adapterState.emitter.emit('flagsStateChange', adapterState.flags);
     adapterState.emitter.emit('statusStateChange', {
-      status: adapterState.configurationStatus,
+      configurationStatus: adapterState.configurationStatus,
     });
 
     return Promise.resolve();
@@ -169,7 +170,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     adapterState.configurationStatus = nextConfigurationStatus;
 
     adapterState.emitter.emit('statusStateChange', {
-      status: adapterState.configurationStatus,
+      configurationStatus: adapterState.configurationStatus,
     });
   }
 

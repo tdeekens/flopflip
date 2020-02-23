@@ -20,6 +20,11 @@ const createClient = jest.fn(apiOverwrites => ({
 
   ...apiOverwrites,
 }));
+const AdapterStatus = {
+  Unconfigured: 0,
+  Configuring: 1,
+  Configured: 2,
+};
 
 const triggerFlagValueChange = (client, flagValue = false) =>
   client.on.mock.calls.forEach(([event, cb]) => {
@@ -37,8 +42,10 @@ describe('when configuring', () => {
     ldClient.initialize.mockReturnValue(createClient());
   });
 
-  it('should indicate that the adapter is not ready', () => {
-    expect(adapter.getIsReady()).toBe(false);
+  it('should indicate that the adapter is not configured', () => {
+    expect(adapter.getIsConfigurationStatus(AdapterStatus.Configured)).toBe(
+      false
+    );
   });
 
   it('should not return client', () => {
@@ -164,8 +171,10 @@ describe('when configuring', () => {
 
     describe('when `ldClient` is ready', () => {
       describe('when determining if adapter is ready', () => {
-        it('should indicate that the adapter is ready', () => {
-          expect(adapter.getIsReady()).toBe(true);
+        it('should indicate that the adapter is configured', () => {
+          expect(
+            adapter.getIsConfigurationStatus(AdapterStatus.Configured)
+          ).toBe(true);
         });
 
         it('should return client', () => {
@@ -180,9 +189,9 @@ describe('when configuring', () => {
         });
       });
 
-      it('should `dispatch` `onUpdateStatus` action with `isReady`', () => {
+      it('should `dispatch` `onUpdateStatus` action with configured', () => {
         expect(onStatusStateChange).toHaveBeenCalledWith({
-          isReady: true,
+          configurationStatus: AdapterStatus.Configured,
         });
       });
 
@@ -296,9 +305,9 @@ describe('when configuring', () => {
           );
         });
 
-        it('should `dispatch` `onUpdateStatus` action with `isReady`', () => {
+        it('should `dispatch` `onUpdateStatus` action with configured', () => {
           expect(onStatusStateChange).toHaveBeenCalledWith({
-            isReady: true,
+            configurationStatus: AdapterStatus.Configured,
           });
         });
 
