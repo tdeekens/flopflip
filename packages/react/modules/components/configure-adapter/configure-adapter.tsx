@@ -18,20 +18,20 @@ import {
 } from './helpers';
 import AdapterContext, { createAdapterContext } from '../adapter-context';
 
-type valueof<T> = T[keyof T];
+type valueOf<T> = T[keyof T];
 
-type AdapterStates = {
+type TAdapterStates = {
   UNCONFIGURED: string;
   CONFIGURING: string;
   CONFIGURED: string;
 };
-export const AdapterStates: AdapterStates = {
+export const AdapterStates: TAdapterStates = {
   UNCONFIGURED: 'unconfigured',
   CONFIGURING: 'configuring',
   CONFIGURED: 'configured',
 };
 
-type Props = {
+type TProps = {
   shouldDeferAdapterConfiguration?: boolean;
   adapter: TAdapter;
   adapterArgs: TAdapterArgs;
@@ -42,17 +42,17 @@ type Props = {
   render?: () => React.ReactNode;
   children?: TConfigureAdapterChildren;
 };
-type AdapterState = valueof<AdapterStates>;
+type TAdapterState = valueOf<TAdapterStates>;
 
-const ConfigureAdapter = (props: Props) => {
+const ConfigureAdapter = (props: TProps) => {
   const [appliedAdapterArgs, setAppliedAdapterArgs] = React.useState<
     TAdapterArgs
   >(props.adapterArgs);
   const pendingAdapterArgs = React.useRef<TAdapterArgs | null>(null);
-  const adapterState = React.useRef<AdapterState>(AdapterStates.UNCONFIGURED);
+  const adapterState = React.useRef<TAdapterState>(AdapterStates.UNCONFIGURED);
 
   const setAdapterState = React.useCallback(
-    (nextAdapterState: AdapterState) => {
+    (nextAdapterState: TAdapterState) => {
       adapterState.current = nextAdapterState;
     },
     [adapterState]
