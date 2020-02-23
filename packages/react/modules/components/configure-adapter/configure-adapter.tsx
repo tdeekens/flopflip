@@ -58,10 +58,6 @@ const ConfigureAdapter = (props: TProps) => {
     [adapterState]
   );
 
-  React.useEffect(() => {
-    pendingAdapterArgs.current = null;
-  }, [appliedAdapterArgs]);
-
   const applyAdapterArgs = React.useCallback(
     (nextAdapterArgs: TAdapterArgs) => {
       /**
@@ -74,6 +70,15 @@ const ConfigureAdapter = (props: TProps) => {
     },
     []
   );
+
+  /**
+   * NOTE:
+   *   Clears the pending adapter args when applied adapter
+   *   args were set. Previously achived via `setState` callback.
+   */
+  React.useEffect(() => {
+    pendingAdapterArgs.current = null;
+  }, [appliedAdapterArgs]);
 
   const getIsAdapterConfigured = React.useCallback(
     () =>
@@ -160,6 +165,7 @@ const ConfigureAdapter = (props: TProps) => {
     [onFlagsStateChange]
   );
 
+  // NOTE: This should only happen once when component mounted
   React.useEffect(() => {
     if (props.defaultFlags) handleDefaultFlags(props.defaultFlags);
 
@@ -178,16 +184,11 @@ const ConfigureAdapter = (props: TProps) => {
           }
         });
     }
-    // NOTE: This should only happen once when component mounts
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /**
    * NOTE:
-   *   This should be UNSAFE_componentWillReceiveProps.
-   *   However to maintain compatibility with older and newer versions of React
-   *   this can not be prefixed with UNSAFE_.
-   *
    *   For the future this should likely happen in cDU however as `reconfigureOrQueue`
    *   may trigger a `setState` it might have unexpected side-effects (setState-loop).
    *   Maybe some more substancial refactor would be needed.
@@ -210,24 +211,22 @@ const ConfigureAdapter = (props: TProps) => {
     });
   }, [adapterArgs, reconfigureOrQueue]);
 
+  const {
+    adapter,
+    onStatusStateChange,
+    shouldDeferAdapterConfiguration,
+  } = props;
   React.useEffect(() => {
-    /**
-     * NOTE:
-     *   Be careful here to not double configure from `componentDidMount`.
-     *   Moreover, cDU will also be invoked from `setState` to `appliedAdapterArgs`.
-     *   Hence, avoid calling `setState` within cDU.
-     */
-
     if (
-      !props.shouldDeferAdapterConfiguration &&
+      !shouldDeferAdapterConfiguration &&
       getDoesAdapterNeedInitialConfiguration()
     ) {
       setAdapterState(AdapterStates.CONFIGURING);
 
-      (props.adapter as TAdapterInterface<TAdapterArgs>)
+      (adapter as TAdapterInterface<TAdapterArgs>)
         .configure(getAdapterArgsForConfiguration(), {
-          onFlagsStateChange: props.onFlagsStateChange,
-          onStatusStateChange: props.onStatusStateChange,
+          onFlagsStateChange,
+          onStatusStateChange,
         })
         .then(() => {
           setAdapterState(AdapterStates.CONFIGURED);
@@ -242,17 +241,27 @@ const ConfigureAdapter = (props: TProps) => {
     if (getIsAdapterConfigured()) {
       setAdapterState(AdapterStates.CONFIGURING);
 
-      (props.adapter as TAdapterInterface<TAdapterArgs>)
+      (adapter as TAdapterInterface<TAdapterArgs>)
         .reconfigure(getAdapterArgsForConfiguration(), {
-          onFlagsStateChange: props.onFlagsStateChange,
-          onStatusStateChange: props.onStatusStateChange,
+          onFlagsStateChange,
+          onStatusStateChange,
         })
         .then(() => {
           setAdapterState(AdapterStates.CONFIGURED);
         });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props]);
+  }, [
+    applyAdapterArgs,
+    getAdapterArgsForConfiguration,
+    getDoesAdapterNeedInitialConfiguration,
+    getIsAdapterConfigured,
+    setAdapterState,
+    // From props
+    adapter,
+    onFlagsStateChange,
+    onStatusStateChange,
+    shouldDeferAdapterConfiguration,
+  ]);
 
   return (
     <AdapterContext.Provider
