@@ -11,9 +11,13 @@ export enum TAdapterSubscriptionStatus {
   Subscribed,
   Unsubscribed,
 }
+export enum TAdapterConfigurationStatus {
+  Unconfigured,
+  Configuring,
+  Configured,
+}
 export type TAdapterStatus = {
-  isReady?: boolean;
-  isConfigured?: boolean;
+  configurationStatus: TAdapterConfigurationStatus;
   subscriptionStatus: TAdapterSubscriptionStatus;
 };
 export type TAdapterStatusChange = Partial<TAdapterStatus>;
@@ -64,6 +68,7 @@ export const interfaceIdentifiers = {
   splitio: 'splitio',
 } as const;
 export type TAdapterInterfaceIdentifiers = typeof interfaceIdentifiers[keyof typeof interfaceIdentifiers];
+
 export interface TAdapterInterface<Args extends TAdapterArgs> {
   // Identifiers are used to uniquely identify an interface when performing a condition check.
   id: TAdapterInterfaceIdentifiers;
@@ -75,8 +80,12 @@ export interface TAdapterInterface<Args extends TAdapterArgs> {
     adapterArgs: Args,
     adapterEventHandlers: TAdapterEventHandlers
   ): Promise<unknown>;
-  getIsReady(): boolean;
-  setIsReady?(nextStatus: TAdapterStatus): void;
+  getIsConfigurationStatus(
+    configurationStatus: TAdapterConfigurationStatus
+  ): boolean;
+  setConfigurationStatus(
+    nextConfigurationStatus: TAdapterConfigurationStatus
+  ): void;
   waitUntilConfigured?(): Promise<unknown>;
   reset?(): void;
   getFlag?(flagName: TFlagName): TFlagVariation | undefined;
@@ -94,7 +103,9 @@ export interface TLaunchDarklyAdapterInterface
     adapterArgs: TLaunchDarklyAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ): Promise<unknown>;
-  getIsReady(): boolean;
+  getIsConfigurationStatus(
+    adapterConfigurationStatus: TAdapterConfigurationStatus
+  ): boolean;
   getClient(): TLDClient | undefined;
   getFlag(flagName: TFlagName): TFlagVariation | undefined;
   updateUserContext(updatedUserProps: TUser): Promise<unknown>;
@@ -112,7 +123,9 @@ export interface TLocalStorageAdapterInterface
     adapterArgs: TLocalStorageAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ): Promise<unknown>;
-  getIsReady(): boolean;
+  getIsConfigurationStatus(
+    adapterConfigurationStatus: TAdapterConfigurationStatus
+  ): boolean;
   waitUntilConfigured(): Promise<unknown>;
   unsubscribe(): void;
   subscribe(): void;
@@ -128,8 +141,9 @@ export interface TMemoryAdapterInterface
     adapterArgs: TMemoryAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ): Promise<unknown>;
-  getIsReady(): boolean;
-  setIsReady(nextStatus: TAdapterStatus): void;
+  getIsConfigurationStatus(
+    adapterConfigurationStatus: TAdapterConfigurationStatus
+  ): boolean;
   waitUntilConfigured(): Promise<unknown>;
   reset(): void;
   updateFlags(flags: TFlags): void;
@@ -147,7 +161,9 @@ export interface TSplitioAdapterInterface
     adapterArgs: TSplitioAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ): Promise<unknown>;
-  getIsReady(): boolean;
+  getIsConfigurationStatus(
+    adapterConfigurationStatus: TAdapterConfigurationStatus
+  ): boolean;
   unsubscribe(): void;
   subscribe(): void;
 }
