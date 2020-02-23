@@ -16,7 +16,7 @@ const render = (store, TestComponent) =>
 
 describe('without `propKey`', () => {
   describe('when feature is disabled', () => {
-    it('should render receive the flag value as `false`', () => {
+    it('should render receive the flag value as `false`', async () => {
       const store = createStore({
         [STATE_SLICE]: { flags: { disabledFeature: false } },
       });
@@ -25,6 +25,8 @@ describe('without `propKey`', () => {
       );
 
       const rendered = render(store, <TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveTextContent(
         'false'
@@ -54,7 +56,7 @@ describe('without `propKey`', () => {
   });
 
   describe('when feature is enabled', () => {
-    it('should render receive the flag value as `true`', () => {
+    it('should render receive the flag value as `true`', async () => {
       const store = createStore({
         [STATE_SLICE]: { flags: { enabledFeature: true } },
       });
@@ -63,6 +65,8 @@ describe('without `propKey`', () => {
       );
 
       const rendered = render(store, <TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveTextContent(
         'true'
@@ -73,7 +77,7 @@ describe('without `propKey`', () => {
 
 describe('with `propKey`', () => {
   describe('when feature is disabled', () => {
-    it('should render receive the flag value as `false`', () => {
+    it('should render receive the flag value as `false`', async () => {
       const store = createStore({
         [STATE_SLICE]: { flags: { disabledFeature: false } },
       });
@@ -83,6 +87,8 @@ describe('with `propKey`', () => {
       )(components.FlagsToComponent);
 
       const rendered = render(store, <TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('customPropKey')).toHaveTextContent(
         'false'

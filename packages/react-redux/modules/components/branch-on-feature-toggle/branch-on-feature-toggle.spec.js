@@ -16,14 +16,17 @@ const render = (store, TestComponent) =>
 
 describe('without `untoggledComponent', () => {
   describe('when feature is disabled', () => {
-    it('should render neither the component representing an disabled or enabled feature', () => {
+    it('should render neither the component representing an disabled or enabled feature', async () => {
       const store = createStore({
         [STATE_SLICE]: { flags: { disabledFeature: false } },
       });
       const TestComponent = branchOnFeatureToggle({ flag: 'disabledFeature' })(
         components.ToggledComponent
       );
+
       const rendered = render(store, <TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(
         rendered.queryByFlagName('isFeatureEnabled')
@@ -53,7 +56,7 @@ describe('without `untoggledComponent', () => {
   });
 
   describe('when feature is enabled', () => {
-    it('should render the component representing an enabled feature', () => {
+    it('should render the component representing an enabled feature', async () => {
       const store = createStore({
         [STATE_SLICE]: { flags: { enabledFeature: true } },
       });
@@ -62,6 +65,8 @@ describe('without `untoggledComponent', () => {
       );
 
       const rendered = render(store, <TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
@@ -73,7 +78,7 @@ describe('without `untoggledComponent', () => {
 
 describe('with `untoggledComponent', () => {
   describe('when feature is disabled', () => {
-    it('should not render the component representing a enabled feature', () => {
+    it('should not render the component representing a enabled feature', async () => {
       const store = createStore({
         [STATE_SLICE]: { flags: { disabledFeature: false } },
       });
@@ -83,6 +88,8 @@ describe('with `untoggledComponent', () => {
       )(components.ToggledComponent);
 
       const rendered = render(store, <TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
         'data-flag-status',
@@ -90,7 +97,7 @@ describe('with `untoggledComponent', () => {
       );
     });
 
-    it('should render the component representing a disabled feature', () => {
+    it('should render the component representing a disabled feature', async () => {
       const store = createStore({
         [STATE_SLICE]: { flags: { disabledFeature: false } },
       });
@@ -100,6 +107,8 @@ describe('with `untoggledComponent', () => {
       )(components.ToggledComponent);
 
       const rendered = render(store, <TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
@@ -109,16 +118,17 @@ describe('with `untoggledComponent', () => {
   });
 
   describe('when feature is enabled', () => {
-    it('should render the component representing a enabled feature', () => {
+    it('should render the component representing a enabled feature', async () => {
       const store = createStore({
         [STATE_SLICE]: { flags: { enabledFeature: true } },
       });
-      const TestComponent = branchOnFeatureToggle(
-        { flag: 'enabledFeature' },
-        components.UntoggledComponent
-      )(components.ToggledComponent);
+      const TestComponent = branchOnFeatureToggle({ flag: 'enabledFeature' })(
+        components.ToggledComponent
+      );
 
       const rendered = render(store, <TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
@@ -126,16 +136,17 @@ describe('with `untoggledComponent', () => {
       );
     });
 
-    it('should not render the component representing a disabled feature', () => {
+    it('should not render the component representing a disabled feature', async () => {
       const store = createStore({
         [STATE_SLICE]: { flags: { enabledFeature: true } },
       });
-      const TestComponent = branchOnFeatureToggle(
-        { flag: 'enabledFeature' },
-        components.UntoggledComponent
-      )(components.ToggledComponent);
+      const TestComponent = branchOnFeatureToggle({ flag: 'enabledFeature' })(
+        components.ToggledComponent
+      );
 
       const rendered = render(store, <TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
         'data-flag-status',

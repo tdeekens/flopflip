@@ -27,13 +27,17 @@ const render = () => {
     [STATE_SLICE]: { flags: { disabledFeature: false } },
   });
 
-  return rtlRender(
+  const rtlRendered = rtlRender(
     <Provider store={store}>
       <Configure {...props}>
         <TestComponent />
       </Configure>
     </Provider>
   );
+
+  const waitUntilReady = () => rtlRendered.findByText(`Is ready: Yes`);
+
+  return { ...rtlRendered, waitUntilReady };
 };
 
 const createTestProps = custom => ({
@@ -46,8 +50,10 @@ const createTestProps = custom => ({
 });
 
 describe('when feature is disabled', () => {
-  it('should indicate the feature being disabled', () => {
+  it('should indicate the feature being disabled', async () => {
     const rendered = render();
+
+    await rendered.waitUntilReady();
 
     expect(rendered.queryByText(/Feature enabled: No/i)).toBeInTheDocument();
   });
@@ -63,16 +69,20 @@ describe('when enabling feature is', () => {
       [testFlagName]: true,
     });
 
+    await rendered.waitUntilReady();
+
     expect(rendered.queryByText(/Feature enabled: Yes/i)).toBeInTheDocument();
   });
 });
 
 describe('when not configured and not ready', () => {
-  it('should indicate through the adapter state', () => {
+  it('should indicate through the adapter state', async () => {
     const rendered = render();
 
     expect(rendered.queryByText(/Is ready: No/i)).toBeInTheDocument();
     expect(rendered.queryByText(/Is configured: No/i)).toBeInTheDocument();
+
+    await rendered.waitUntilReady();
   });
 });
 
@@ -80,6 +90,7 @@ describe('when configured and ready', () => {
   it('should indicate through the adapter state', async () => {
     const rendered = render();
 
+    await rendered.waitUntilReady();
     await adapter.waitUntilConfigured();
 
     expect(rendered.queryByText(/Is ready: Yes/i)).toBeInTheDocument();

@@ -16,17 +16,19 @@ const render = (store, TestComponent) =>
 
 describe('<ToggleFeature>', () => {
   describe('when feature is disabled', () => {
-    it('should not render the component representing a enabled feature', () => {
-      const store = createStore({
-        [STATE_SLICE]: { flags: { disabledFeature: false } },
-      });
+    it('should not render the component representing a enabled feature', async () => {
       const TestComponent = () => (
         <ToggleFeature flag="disabledFeature">
           <components.ToggledComponent flagName="disabledFeature" />
         </ToggleFeature>
       );
+      const store = createStore({
+        [STATE_SLICE]: { flags: { disabledFeature: false } },
+      });
 
       const rendered = render(store, <TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(
         rendered.queryByFlagName('disabledFeature')
@@ -35,14 +37,14 @@ describe('<ToggleFeature>', () => {
 
     describe('when enabling feature', () => {
       it('should render the component representing a enabled feature', async () => {
-        const store = createStore({
-          [STATE_SLICE]: { flags: { disabledFeature: false } },
-        });
         const TestComponent = () => (
           <ToggleFeature flag="disabledFeature">
             <components.ToggledComponent flagName="disabledFeature" />
           </ToggleFeature>
         );
+        const store = createStore({
+          [STATE_SLICE]: { flags: { disabledFeature: false } },
+        });
 
         const rendered = render(store, <TestComponent />);
 
@@ -56,7 +58,7 @@ describe('<ToggleFeature>', () => {
   });
 
   describe('when feature is enabled', () => {
-    it('should render the component representing a enabled feature', () => {
+    it('should render the component representing a enabled feature', async () => {
       const store = createStore({
         [STATE_SLICE]: { flags: { enabledFeature: true } },
       });
@@ -67,6 +69,8 @@ describe('<ToggleFeature>', () => {
       );
 
       const rendered = render(store, <TestComponent />);
+
+      await rendered.waitUntilReady();
 
       expect(rendered.queryByFlagName('enabledFeature')).toHaveAttribute(
         'data-flag-status',
