@@ -16,20 +16,16 @@ const render = (store, TestComponent) =>
 
 describe('<ToggleFeature>', () => {
   describe('when feature is disabled', () => {
-    let store;
-    const TestComponent = () => (
-      <ToggleFeature flag="disabledFeature">
-        <components.ToggledComponent flagName="disabledFeature" />
-      </ToggleFeature>
-    );
-
-    beforeEach(() => {
-      store = createStore({
+    it('should not render the component representing a enabled feature', () => {
+      const store = createStore({
         [STATE_SLICE]: { flags: { disabledFeature: false } },
       });
-    });
+      const TestComponent = () => (
+        <ToggleFeature flag="disabledFeature">
+          <components.ToggledComponent flagName="disabledFeature" />
+        </ToggleFeature>
+      );
 
-    it('should not render the component representing a enabled feature', () => {
       const rendered = render(store, <TestComponent />);
 
       expect(
@@ -39,6 +35,15 @@ describe('<ToggleFeature>', () => {
 
     describe('when enabling feature', () => {
       it('should render the component representing a enabled feature', async () => {
+        const store = createStore({
+          [STATE_SLICE]: { flags: { disabledFeature: false } },
+        });
+        const TestComponent = () => (
+          <ToggleFeature flag="disabledFeature">
+            <components.ToggledComponent flagName="disabledFeature" />
+          </ToggleFeature>
+        );
+
         const rendered = render(store, <TestComponent />);
 
         await rendered.waitUntilReady();
@@ -51,20 +56,16 @@ describe('<ToggleFeature>', () => {
   });
 
   describe('when feature is enabled', () => {
-    let store;
-    const TestComponent = () => (
-      <ToggleFeature flag="enabledFeature">
-        <components.ToggledComponent flagName="enabledFeature" />
-      </ToggleFeature>
-    );
-
-    beforeEach(() => {
-      store = createStore({
+    it('should render the component representing a enabled feature', () => {
+      const store = createStore({
         [STATE_SLICE]: { flags: { enabledFeature: true } },
       });
-    });
+      const TestComponent = () => (
+        <ToggleFeature flag="enabledFeature">
+          <components.ToggledComponent flagName="enabledFeature" />
+        </ToggleFeature>
+      );
 
-    it('should render the component representing a enabled feature', () => {
       const rendered = render(store, <TestComponent />);
 
       expect(rendered.queryByFlagName('enabledFeature')).toHaveAttribute(

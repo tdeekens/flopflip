@@ -8,13 +8,10 @@ BaseComponent.displayName = 'BaseComponent';
 
 describe('rendering', () => {
   const hocName = 'testHoc';
-  let wrappedDisplayName;
-
-  beforeEach(() => {
-    wrappedDisplayName = wrapDisplayName(BaseComponent, hocName);
-  });
 
   it('should include `hocName` in wrapped display name', () => {
+    const wrappedDisplayName = wrapDisplayName(BaseComponent, hocName);
+
     expect(wrappedDisplayName).toContain(hocName);
   });
 });

@@ -51,9 +51,9 @@ const render = ({ adapter }) => {
 };
 
 describe('rendering', () => {
-  const adapter = createAdapter();
-
   it('should unsubscribe the adapter when mounting', async () => {
+    const adapter = createAdapter();
+
     const rendered = render({ adapter });
 
     await rendered.waitUntilReady();
@@ -62,6 +62,8 @@ describe('rendering', () => {
   });
 
   it('should return adapter subscribtion status indicating being subscribed', async () => {
+    const adapter = createAdapter();
+
     const rendered = render({ adapter });
 
     await rendered.waitUntilReady();
@@ -71,6 +73,8 @@ describe('rendering', () => {
   });
 
   it('should unsubscribe the adapter when unmounting', async () => {
+    const adapter = createAdapter();
+
     const rendered = render({ adapter });
 
     await rendered.waitUntilReady();

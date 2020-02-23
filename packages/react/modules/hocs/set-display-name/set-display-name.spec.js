@@ -8,13 +8,10 @@ BaseComponent.displayName = 'BaseComponent';
 
 describe('rendering', () => {
   const nextDisplayName = 'RenamedBaseComponent';
-  let EnhancedComponent;
-
-  beforeEach(() => {
-    EnhancedComponent = setDisplayName(nextDisplayName)(BaseComponent);
-  });
 
   it('should overwrite the previous display name', () => {
+    const EnhancedComponent = setDisplayName(nextDisplayName)(BaseComponent);
+
     expect(EnhancedComponent.displayName).toEqual(nextDisplayName);
   });
 });

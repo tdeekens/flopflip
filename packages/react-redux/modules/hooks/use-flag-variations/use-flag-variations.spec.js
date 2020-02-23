@@ -31,10 +31,8 @@ const TestComponent = () => {
 };
 
 describe('when adaopter is ready', () => {
-  let store;
-
-  beforeEach(() => {
-    store = createStore({
+  it('should indicate a feature being disabled', async () => {
+    const store = createStore({
       [STATE_SLICE]: {
         flags: {
           enabledFeature: true,
@@ -43,9 +41,7 @@ describe('when adaopter is ready', () => {
         },
       },
     });
-  });
 
-  it('should indicate a feature being disabled', async () => {
     const rendered = render(store, <TestComponent />);
 
     await rendered.waitUntilReady();
@@ -54,6 +50,16 @@ describe('when adaopter is ready', () => {
   });
 
   it('should indicate a feature being enabled', async () => {
+    const store = createStore({
+      [STATE_SLICE]: {
+        flags: {
+          enabledFeature: true,
+          disabledFeature: false,
+          variation: 'A',
+        },
+      },
+    });
+
     const rendered = render(store, <TestComponent />);
 
     await rendered.waitUntilReady();
@@ -62,6 +68,16 @@ describe('when adaopter is ready', () => {
   });
 
   it('should indicate a flag variation', async () => {
+    const store = createStore({
+      [STATE_SLICE]: {
+        flags: {
+          enabledFeature: true,
+          disabledFeature: false,
+          variation: 'A',
+        },
+      },
+    });
+
     const rendered = render(store, <TestComponent />);
 
     await rendered.waitUntilReady();

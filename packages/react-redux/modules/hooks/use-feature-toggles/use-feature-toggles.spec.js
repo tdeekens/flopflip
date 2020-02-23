@@ -32,15 +32,11 @@ const TestComponent = () => {
 };
 
 describe('when adapter is ready', () => {
-  let store;
-
-  beforeEach(() => {
-    store = createStore({
+  it('should indicate a feature being disabled', async () => {
+    const store = createStore({
       [STATE_SLICE]: { flags: { disabledFeature: false } },
     });
-  });
 
-  it('should indicate a feature being disabled', async () => {
     const { getByText, waitUntilReady } = render(store, <TestComponent />);
 
     await waitUntilReady();
@@ -49,6 +45,10 @@ describe('when adapter is ready', () => {
   });
 
   it('should indicate a feature being enabled', async () => {
+    const store = createStore({
+      [STATE_SLICE]: { flags: { disabledFeature: false } },
+    });
+
     const { getByText, waitUntilReady } = render(store, <TestComponent />);
 
     await waitUntilReady();

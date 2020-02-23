@@ -16,18 +16,14 @@ const render = (store, TestComponent) =>
 
 describe('without `propKey`', () => {
   describe('when feature is disabled', () => {
-    let store;
-    const TestComponent = injectFeatureToggle('disabledFeature')(
-      components.FlagsToComponent
-    );
-
-    beforeEach(() => {
-      store = createStore({
+    it('should render receive the flag value as `false`', () => {
+      const store = createStore({
         [STATE_SLICE]: { flags: { disabledFeature: false } },
       });
-    });
+      const TestComponent = injectFeatureToggle('disabledFeature')(
+        components.FlagsToComponent
+      );
 
-    it('should render receive the flag value as `false`', () => {
       const rendered = render(store, <TestComponent />);
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveTextContent(
@@ -37,6 +33,13 @@ describe('without `propKey`', () => {
 
     describe('when enabling feature', () => {
       it('should render the component representing a enabled feature', async () => {
+        const store = createStore({
+          [STATE_SLICE]: { flags: { disabledFeature: false } },
+        });
+        const TestComponent = injectFeatureToggle('disabledFeature')(
+          components.FlagsToComponent
+        );
+
         const rendered = render(store, <TestComponent />);
 
         await rendered.waitUntilReady();
@@ -51,18 +54,14 @@ describe('without `propKey`', () => {
   });
 
   describe('when feature is enabled', () => {
-    let store;
-    const TestComponent = injectFeatureToggle('enabledFeature')(
-      components.FlagsToComponent
-    );
-
-    beforeEach(() => {
-      store = createStore({
+    it('should render receive the flag value as `true`', () => {
+      const store = createStore({
         [STATE_SLICE]: { flags: { enabledFeature: true } },
       });
-    });
+      const TestComponent = injectFeatureToggle('enabledFeature')(
+        components.FlagsToComponent
+      );
 
-    it('should render receive the flag value as `true`', () => {
       const rendered = render(store, <TestComponent />);
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveTextContent(
@@ -74,19 +73,15 @@ describe('without `propKey`', () => {
 
 describe('with `propKey`', () => {
   describe('when feature is disabled', () => {
-    let store;
-    const TestComponent = injectFeatureToggle(
-      'disabledFeature',
-      'customPropKey'
-    )(components.FlagsToComponent);
-
-    beforeEach(() => {
-      store = createStore({
+    it('should render receive the flag value as `false`', () => {
+      const store = createStore({
         [STATE_SLICE]: { flags: { disabledFeature: false } },
       });
-    });
+      const TestComponent = injectFeatureToggle(
+        'disabledFeature',
+        'customPropKey'
+      )(components.FlagsToComponent);
 
-    it('should render receive the flag value as `false`', () => {
       const rendered = render(store, <TestComponent />);
 
       expect(rendered.queryByFlagName('customPropKey')).toHaveTextContent(

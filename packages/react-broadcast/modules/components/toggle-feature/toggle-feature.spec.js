@@ -7,15 +7,20 @@ const render = TestComponent =>
   renderWithAdapter(TestComponent, {
     components: { ConfigureFlopFlip: Configure },
   });
+const TestEnabledComponent = () => (
+  <ToggleFeature flag="disabledFeature">
+    <components.ToggledComponent flagName="disabledFeature" />
+  </ToggleFeature>
+);
+const TestDisabledComponent = () => (
+  <ToggleFeature flag="enabledFeature">
+    <components.ToggledComponent flagName="enabledFeature" />
+  </ToggleFeature>
+);
 
 describe('when feature is disabled', () => {
-  const TestComponent = () => (
-    <ToggleFeature flag="disabledFeature">
-      <components.ToggledComponent flagName="disabledFeature" />
-    </ToggleFeature>
-  );
   it('should not render the component representing a enabled feature', async () => {
-    const rendered = render(<TestComponent />);
+    const rendered = render(<TestEnabledComponent />);
 
     expect(rendered.queryByFlagName('disabledFeature')).not.toBeInTheDocument();
 
@@ -24,7 +29,7 @@ describe('when feature is disabled', () => {
 
   describe('when enabling feature', () => {
     it('should render the component representing a enabled feature', async () => {
-      const rendered = render(<TestComponent />);
+      const rendered = render(<TestEnabledComponent />);
 
       await rendered.waitUntilReady();
 
@@ -36,13 +41,8 @@ describe('when feature is disabled', () => {
 });
 
 describe('when feature is enabled', () => {
-  const TestComponent = () => (
-    <ToggleFeature flag="enabledFeature">
-      <components.ToggledComponent flagName="enabledFeature" />
-    </ToggleFeature>
-  );
   it('should render the component representing a enabled feature', async () => {
-    const rendered = render(<TestComponent />);
+    const rendered = render(<TestDisabledComponent />);
 
     await rendered.waitUntilReady();
 

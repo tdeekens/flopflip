@@ -8,16 +8,20 @@ const render = TestComponent =>
     components: { ConfigureFlopFlip: Configure },
   });
 
-describe('without `propKey`', () => {
-  const FlagsToComponent = props => (
-    <components.FlagsToComponent {...props} propKey="featureToggles" />
-  );
-  const TestComponent = injectFeatureToggles([
-    'disabledFeature',
-    'enabledFeature',
-  ])(FlagsToComponent);
+const FlagsToComponent = props => (
+  <components.FlagsToComponent {...props} propKey="featureToggles" />
+);
+const FlagsToComponentWithPropKey = props => (
+  <components.FlagsToComponent {...props} propKey="onOffs" />
+);
 
+describe('without `propKey`', () => {
   it('should have feature enabling prop for `enabledFeature`', async () => {
+    const TestComponent = injectFeatureToggles([
+      'disabledFeature',
+      'enabledFeature',
+    ])(FlagsToComponent);
+
     const rendered = render(<TestComponent />);
 
     await rendered.waitUntilReady();
@@ -28,6 +32,11 @@ describe('without `propKey`', () => {
   });
 
   it('should have feature disabling prop for `disabledFeature`', async () => {
+    const TestComponent = injectFeatureToggles([
+      'disabledFeature',
+      'enabledFeature',
+    ])(FlagsToComponent);
+
     const rendered = render(<TestComponent />);
 
     await rendered.waitUntilReady();
@@ -39,6 +48,11 @@ describe('without `propKey`', () => {
 
   describe('when enabling feature', () => {
     it('should render the component representing a enabled feature', async () => {
+      const TestComponent = injectFeatureToggles([
+        'disabledFeature',
+        'enabledFeature',
+      ])(FlagsToComponent);
+
       const rendered = render(<TestComponent />);
 
       await rendered.waitUntilReady();
@@ -53,15 +67,12 @@ describe('without `propKey`', () => {
 });
 
 describe('with `propKey`', () => {
-  const FlagsToComponent = props => (
-    <components.FlagsToComponent {...props} propKey="onOffs" />
-  );
-  const TestComponent = injectFeatureToggles(
-    ['disabledFeature', 'enabledFeature'],
-    'onOffs'
-  )(FlagsToComponent);
-
   it('should have feature enabling prop for `enabledFeature`', async () => {
+    const TestComponent = injectFeatureToggles(
+      ['disabledFeature', 'enabledFeature'],
+      'onOffs'
+    )(FlagsToComponentWithPropKey);
+
     const rendered = render(<TestComponent />);
 
     await rendered.waitUntilReady();
@@ -72,6 +83,11 @@ describe('with `propKey`', () => {
   });
 
   it('should have feature disabling prop for `disabledFeature`', async () => {
+    const TestComponent = injectFeatureToggles(
+      ['disabledFeature', 'enabledFeature'],
+      'onOffs'
+    )(FlagsToComponentWithPropKey);
+
     const rendered = render(<TestComponent />);
 
     await rendered.waitUntilReady();
