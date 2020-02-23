@@ -287,6 +287,18 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
   }
 
+  // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
+  getIsReady() {
+    warning(
+      false,
+      '@flopflip/launchdarkly-adapter: `getIsReady` has been deprecated. Please use `getIsConfigurationStatus` instead.'
+    );
+
+    return this.getIsConfigurationStatus(
+      TAdapterConfigurationStatus.Configured
+    );
+  }
+
   private _didFlagChange(flagName: TFlagName, nextFlagValue: TFlagVariation) {
     const previousFlagValue = this.getFlag(flagName);
 

@@ -220,6 +220,18 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   subscribe() {
     adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
   }
+
+  // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
+  getIsReady() {
+    warning(
+      false,
+      '@flopflip/localstorage-adapter: `getIsReady` has been deprecated. Please use `getIsConfigurationStatus` instead.'
+    );
+
+    return this.getIsConfigurationStatus(
+      TAdapterConfigurationStatus.Configured
+    );
+  }
 }
 
 const adapter = new LocalStorageAdapter();

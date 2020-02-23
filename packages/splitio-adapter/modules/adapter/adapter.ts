@@ -15,6 +15,7 @@ import {
   interfaceIdentifiers,
 } from '@flopflip/types';
 import merge from 'deepmerge';
+import warning from 'tiny-warning';
 import { SplitFactory } from '@splitsoftware/splitio';
 import camelCase from 'lodash/camelCase';
 import omit from 'lodash/omit';
@@ -292,6 +293,18 @@ class SplitioAdapter implements TSplitioAdapterInterface {
 
   subscribe() {
     adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
+  }
+
+  // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
+  getIsReady() {
+    warning(
+      false,
+      '@flopflip/splitio-adapter: `getIsReady` has been deprecated. Please use `getIsConfigurationStatus` instead.'
+    );
+
+    return this.getIsConfigurationStatus(
+      TAdapterConfigurationStatus.Configured
+    );
   }
 }
 

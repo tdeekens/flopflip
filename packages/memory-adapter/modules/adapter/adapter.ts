@@ -206,6 +206,18 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   subscribe() {
     adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
   }
+
+  // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
+  getIsReady() {
+    warning(
+      false,
+      '@flopflip/memory-adapter: `getIsReady` has been deprecated. Please use `getIsConfigurationStatus` instead.'
+    );
+
+    return this.getIsConfigurationStatus(
+      TAdapterConfigurationStatus.Configured
+    );
+  }
 }
 
 const adapter = new MemoryAdapter();
