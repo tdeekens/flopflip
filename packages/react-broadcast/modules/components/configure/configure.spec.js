@@ -1,5 +1,5 @@
 import React from 'react';
-import { render as rtlRender, act } from '@flopflip/test-utils';
+import { render as rtlRender, act, waitForElement } from '@flopflip/test-utils';
 import adapter, { updateFlags } from '@flopflip/memory-adapter';
 import { useFeatureToggle, useAdapterStatus } from '../../hooks';
 import Configure from './configure';
@@ -67,12 +67,12 @@ describe('when enabling feature is', () => {
   });
 });
 
-describe('when unconfiguring', () => {
+describe('when unconfigured', () => {
   it('should indicate through the adapter state', async () => {
     const rendered = render();
-    rendered.debug();
 
-    expect(rendered.queryByText(/Is configuring: Yes/i)).toBeInTheDocument();
+    expect(rendered.queryByText(/Is unconfigured: Yes/i)).toBeInTheDocument();
+    expect(rendered.queryByText(/Is configuring: No/i)).toBeInTheDocument();
     expect(rendered.queryByText(/Is configured: No/i)).toBeInTheDocument();
 
     await rendered.waitUntilConfigured();

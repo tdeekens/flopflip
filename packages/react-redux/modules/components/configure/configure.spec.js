@@ -77,11 +77,12 @@ describe('when enabling feature is', () => {
   });
 });
 
-describe('when not configured and configuring', () => {
+describe('when unconfigured', () => {
   it('should indicate through the adapter state', async () => {
     const rendered = render();
 
-    expect(rendered.queryByText(/Is configuring: Yes/i)).toBeInTheDocument();
+    expect(rendered.queryByText(/Is unconfigured: Yes/i)).toBeInTheDocument();
+    expect(rendered.queryByText(/Is configuring: No/i)).toBeInTheDocument();
     expect(rendered.queryByText(/Is configured: No/i)).toBeInTheDocument();
 
     await rendered.waitUntilConfigured();
