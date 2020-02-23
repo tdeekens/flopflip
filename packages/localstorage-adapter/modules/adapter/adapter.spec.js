@@ -65,14 +65,6 @@ describe('when configuring', () => {
       expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalled();
     });
 
-    it('should invoke `onStatusStateChange` with configuring', () => {
-      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
-        expect.objectContaining({
-          configurationStatus: TAdapterConfigurationStatus.Configuring,
-        })
-      );
-    });
-
     it('should invoke `onFlagsStateChange`', () => {
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalled();
     });

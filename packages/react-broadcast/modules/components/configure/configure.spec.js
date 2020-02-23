@@ -1,5 +1,5 @@
 import React from 'react';
-import { render as rtlRender, act, waitForElement } from '@flopflip/test-utils';
+import { render as rtlRender, act } from '@flopflip/test-utils';
 import adapter, { updateFlags } from '@flopflip/memory-adapter';
 import { useFeatureToggle, useAdapterStatus } from '../../hooks';
 import Configure from './configure';
