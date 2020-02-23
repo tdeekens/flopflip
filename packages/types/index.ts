@@ -208,7 +208,8 @@ export type TAdapterReconfiguration = {
   options: TAdapterReconfigurationOptions;
 };
 export type TConfigureAdapterChildrenAsFunctionArgs = {
-  isAdapterReady: boolean;
+  isAdapterReady?: boolean;
+  isAdapterConfigured: boolean;
 };
 export type TConfigureAdapterChildrenAsFunction = (
   args: TConfigureAdapterChildrenAsFunctionArgs

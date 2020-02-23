@@ -1,10 +1,13 @@
+import { TAdapterConfigurationStatus } from '@flopflip/types';
 import React from 'react';
 import { render as rtlRender, wait } from '@flopflip/test-utils';
 import AdapterContext from '../adapter-context';
 import ConfigureAdapter, { AdapterStates } from './configure-adapter';
 
 const createAdapter = () => ({
-  getIsReady: jest.fn(() => false),
+  getIsConfigurationStatus: jest.fn(
+    () => TAdapterConfigurationStatus.Unconfigured
+  ),
   configure: jest.fn(() => Promise.resolve()),
   reconfigure: jest.fn(() => Promise.resolve()),
 });
@@ -61,11 +64,11 @@ const render = ({ props, adapter }) => {
 
 describe('rendering', () => {
   describe('when providing render prop', () => {
-    describe('when adapter is ready', () => {
+    describe('when adapter is configured', () => {
       it('should invoke render prop', async () => {
         const adapter = createAdapter();
-        adapter.getIsReady.mockReturnValue(true);
         const props = { render: jest.fn(() => <TestComponent />) };
+        adapter.getIsConfigurationStatus.mockReturnValue(true);
 
         const rendered = render({ props, adapter });
 
@@ -75,7 +78,7 @@ describe('rendering', () => {
       });
     });
 
-    describe('when adapter is not ready', () => {
+    describe('when adapter is not configured', () => {
       it('should invoke render prop', async () => {
         const adapter = createAdapter();
 
@@ -91,11 +94,13 @@ describe('rendering', () => {
   });
 
   describe('when providing function as a child', () => {
-    describe('when adapter is ready', () => {
+    describe('when adapter is configured', () => {
       it('should invoke children prop with ready state', async () => {
         const adapter = createAdapter();
 
-        adapter.getIsReady.mockReturnValue(true);
+        adapter.getIsConfigurationStatus.mockReturnValue(
+          TAdapterConfigurationStatus.Configured
+        );
 
         const props = { children: jest.fn(() => <TestComponent />) };
 
@@ -111,11 +116,13 @@ describe('rendering', () => {
   });
 
   describe('when providing React node as children', () => {
-    describe('when adapter is ready', () => {
+    describe('when adapter is configured', () => {
       it('should invoke render prop', async () => {
         const adapter = createAdapter();
 
-        adapter.getIsReady.mockReturnValue(true);
+        adapter.getIsConfigurationStatus.mockReturnValue(
+          TAdapterConfigurationStatus.Configured
+        );
 
         const props = {
           children: <TestComponent>Test component</TestComponent>,
@@ -129,7 +136,7 @@ describe('rendering', () => {
       });
     });
 
-    describe('when adapter is not ready', () => {
+    describe('when adapter is not configured', () => {
       it('should invoke render prop', async () => {
         const adapter = createAdapter();
         const props = {
