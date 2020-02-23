@@ -20,6 +20,11 @@ jest.mock('@splitsoftware/splitio', () => ({
     })),
   })),
 }));
+const AdapterStatus = {
+  Unconfigured: 0,
+  Configuring: 1,
+  Configured: 2,
+};
 
 const authorizationKey = '123-abc';
 const userWithKey = { key: 'foo-user' };
@@ -38,8 +43,10 @@ describe('when configuring', () => {
     onFlagsStateChange = jest.fn();
   });
 
-  it('should indicate that the adapter is not ready', () => {
-    expect(adapter.getIsReady()).toBe(false);
+  it('should indicate that the adapter is not configured', () => {
+    expect(adapter.getIsConfigurationStatus(AdapterStatus.Configured)).toBe(
+      false
+    );
   });
 
   describe('when reconfiguring before configured', () => {
@@ -203,6 +210,12 @@ describe('when configuring', () => {
       );
     });
 
+    it('should `dispatch` `onUpdateStatus` action with configured', () => {
+      expect(onStatusStateChange).toHaveBeenCalledWith({
+        configurationStatus: AdapterStatus.Configuring,
+      });
+    });
+
     describe('when `splitio` is ready', () => {
       it('should call getTreatments with attributes', () => {
         expect(treatmentStub).toHaveBeenCalledWith(names, {
@@ -211,13 +224,15 @@ describe('when configuring', () => {
         });
       });
 
-      it('should indicate that the adapter is ready', () => {
-        expect(adapter.getIsReady()).toBe(true);
+      it('should indicate that the adapter is not configured', () => {
+        expect(adapter.getIsConfigurationStatus(AdapterStatus.Configured)).toBe(
+          true
+        );
       });
 
-      it('should `dispatch` `onUpdateStatus` action with `isReady`', () => {
+      it('should `dispatch` `onUpdateStatus` action with configured', () => {
         expect(onStatusStateChange).toHaveBeenCalledWith({
-          isReady: true,
+          configurationStatus: AdapterStatus.Configured,
         });
       });
 
