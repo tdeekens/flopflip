@@ -1,7 +1,7 @@
 import React from 'react';
-import { render as rtlRender } from '@flopflip/test-utils';
+import { render as rtlRender, wait } from '@flopflip/test-utils';
 import AdapterContext from '../adapter-context';
-import ConfigureAdapter from './configure-adapter';
+import ConfigureAdapter, { AdapterStates } from './configure-adapter';
 
 const createAdapter = () => ({
   getIsReady: jest.fn(() => false),
@@ -16,19 +16,34 @@ const createTestProps = ({ adapter }) => ({
       key: 'foo-user-key',
     },
   },
+  adapterStatus: AdapterStates.CONFIGURED,
   onFlagsStateChange: jest.fn(),
   onStatusStateChange: jest.fn(),
   adapter,
 });
 
-const TestComponent = () => {
+const TestComponent = props => {
   const adapterContext = React.useContext(AdapterContext);
+  const isAdapterStatus = status => adapterContext.status === status;
 
   return (
-    <ul>
-      <li>Is ready: {adapterContext.isReady ? 'Yes' : 'No'}</li>
-      <li>Is configured: {adapterContext.isConfigured ? 'Yes' : 'No'}</li>
-    </ul>
+    <>
+      <ul>
+        <li>
+          Is configuring:{' '}
+          {isAdapterStatus(AdapterStates.CONFIGURING) ? 'Yes' : 'No'}
+        </li>
+        <li>
+          Is configured:{' '}
+          {isAdapterStatus(AdapterStates.CONFIGURED) ? 'Yes' : 'No'}
+        </li>
+        <li>
+          Is unconfigured:{' '}
+          {isAdapterStatus(AdapterStates.UNCONFIGURED) ? 'Yes' : 'No'}
+        </li>
+      </ul>
+      {props.children}
+    </>
   );
 };
 
@@ -38,9 +53,10 @@ const render = ({ props, adapter }) => {
 
   const rendered = rtlRender(<ConfigureAdapter {...mergedProps} />);
 
-  const waitUntilReady = () => rendered.findByText(/Is configured: Yes/i);
+  const waitUntilStatus = (status = AdapterStates.CONFIGURED) =>
+    rendered.findByText(`Is ${status}: Yes`);
 
-  return { ...rendered, waitUntilReady, props: mergedProps };
+  return { ...rendered, waitUntilStatus, props: mergedProps };
 };
 
 describe('rendering', () => {
@@ -55,7 +71,7 @@ describe('rendering', () => {
 
         expect(props.render).toHaveBeenCalled();
 
-        await rendered.waitUntilReady();
+        await rendered.waitUntilStatus();
       });
     });
 
@@ -63,13 +79,13 @@ describe('rendering', () => {
       it('should invoke render prop', async () => {
         const adapter = createAdapter();
 
-        const props = { render: jest.fn() };
+        const props = { render: jest.fn(() => <TestComponent />) };
 
-        const rendered = render({ props, adapter });
+        render({ props, adapter });
 
         expect(props.render).not.toHaveBeenCalled();
 
-        await rendered.waitUntilReady();
+        await wait(() => expect(adapter.getIsReady).toHaveBeenCalled());
       });
     });
   });
@@ -81,7 +97,7 @@ describe('rendering', () => {
 
         adapter.getIsReady.mockReturnValue(true);
 
-        const props = { children: jest.fn() };
+        const props = { children: jest.fn(() => <TestComponent />) };
 
         const rendered = render({ props, adapter });
 
@@ -89,7 +105,7 @@ describe('rendering', () => {
           expect.objectContaining({ isAdapterReady: true })
         );
 
-        await rendered.waitUntilReady();
+        await rendered.waitUntilStatus();
       });
     });
   });
@@ -101,26 +117,30 @@ describe('rendering', () => {
 
         adapter.getIsReady.mockReturnValue(true);
 
-        const props = { children: <TestComponent /> };
+        const props = {
+          children: <TestComponent>Test component</TestComponent>,
+        };
 
         const rendered = render({ props, adapter });
 
         expect(rendered.queryByText('Test component')).toBeInTheDocument();
 
-        await rendered.waitUntilReady();
+        await rendered.waitUntilStatus();
       });
     });
 
     describe('when adapter is not ready', () => {
       it('should invoke render prop', async () => {
         const adapter = createAdapter();
-        const props = { children: <TestComponent /> };
+        const props = {
+          children: <TestComponent>Test component</TestComponent>,
+        };
 
         const rendered = render({ props, adapter });
 
         expect(rendered.queryByText('Test component')).toBeInTheDocument();
 
-        await rendered.waitUntilReady();
+        await rendered.waitUntilStatus();
       });
     });
   });
@@ -131,7 +151,7 @@ describe('when adapter configuration should be deferred', () => {
     const adapter = createAdapter();
 
     const props = {
-      children: jest.fn(),
+      children: <TestComponent />,
       shouldDeferAdapterConfiguration: true,
     };
 
@@ -139,7 +159,7 @@ describe('when adapter configuration should be deferred', () => {
 
     expect(adapter.configure).not.toHaveBeenCalled();
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilStatus();
   });
 });
 
@@ -155,7 +175,7 @@ describe('when adapter configuration should not be deferred', () => {
       onStatusStateChange: rendered.props.onStatusStateChange,
     });
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilStatus();
   });
 });
 
@@ -173,7 +193,7 @@ describe('when providing default flags', () => {
       defaultFlags
     );
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilStatus();
   });
 });
 
@@ -208,7 +228,7 @@ describe('when adapter args change before adapter was configured', () => {
       expect.anything()
     );
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilStatus();
   });
 });
 
@@ -232,7 +252,7 @@ describe('when adapter args change after adapter was configured', () => {
       </ConfigureAdapter>
     );
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilStatus();
 
     expect(adapter.reconfigure).toHaveBeenCalledWith(
       nextAdapterArgs,
@@ -245,6 +265,7 @@ describe('when adapter was configured and component updates', () => {
   it('should not configure adapter multiple times', async () => {
     const adapter = createAdapter();
     const props = {
+      adapterStatus: AdapterStates.UNCONFIGURED,
       children: <TestComponent />,
     };
 
@@ -252,6 +273,7 @@ describe('when adapter was configured and component updates', () => {
 
     const nextProps = {
       ...rendered.props,
+      adapterStatus: AdapterStates.CONFIGURED,
       changedValue: true,
     };
 
@@ -263,7 +285,7 @@ describe('when adapter was configured and component updates', () => {
 
     expect(adapter.configure).toHaveBeenCalledTimes(1);
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilStatus();
   });
 });
 
