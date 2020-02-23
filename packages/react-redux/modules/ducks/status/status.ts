@@ -2,6 +2,7 @@ import {
   TAdapterStatus,
   TAdapterStatusChange,
   TAdapterSubscriptionStatus,
+  TAdapterConfigurationStatus,
 } from '@flopflip/types';
 import { TUpdateStatusAction } from './types';
 import { TState } from '../../types';
@@ -11,8 +12,8 @@ import { STATE_SLICE } from '../../store/constants';
 export const UPDATE_STATUS = '@flopflip/status/update';
 
 const initialState: TAdapterStatus = {
-  isReady: false,
   subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
+  configurationStatus: TAdapterConfigurationStatus.Unconfigured,
 };
 
 // Reducer
@@ -37,10 +38,23 @@ export default reducer;
 
 // Action Creators
 export const updateStatus = (
-  status: TAdapterStatusChange
+  nextStatus: TAdapterStatusChange
 ): TUpdateStatusAction => ({
   type: UPDATE_STATUS,
-  payload: { status },
+  payload: { status: nextStatus },
 });
 // Selectors
-export const selectStatus = (state: TState) => state[STATE_SLICE].status ?? {};
+export const selectStatus = (state: TState) => {
+  const { status } = state[STATE_SLICE];
+
+  return {
+    isReady:
+      status?.configurationStatus === TAdapterConfigurationStatus.Configured,
+    isUnconfigured:
+      status?.configurationStatus === TAdapterConfigurationStatus.Unconfigured,
+    isConfiguring:
+      status?.configurationStatus === TAdapterConfigurationStatus.Configuring,
+    isConfigured:
+      status?.configurationStatus === TAdapterConfigurationStatus.Configured,
+  };
+};

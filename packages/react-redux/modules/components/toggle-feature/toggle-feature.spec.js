@@ -28,7 +28,7 @@ describe('<ToggleFeature>', () => {
 
       const rendered = render(store, <TestComponent />);
 
-      await rendered.waitUntilReady();
+      await rendered.waitUntilConfigured();
 
       expect(
         rendered.queryByFlagName('disabledFeature')
@@ -48,7 +48,7 @@ describe('<ToggleFeature>', () => {
 
         const rendered = render(store, <TestComponent />);
 
-        await rendered.waitUntilReady();
+        await rendered.waitUntilConfigured();
 
         rendered.changeFlagVariation('disabledFeature', true);
 
@@ -70,7 +70,7 @@ describe('<ToggleFeature>', () => {
 
       const rendered = render(store, <TestComponent />);
 
-      await rendered.waitUntilReady();
+      await rendered.waitUntilConfigured();
 
       expect(rendered.queryByFlagName('enabledFeature')).toHaveAttribute(
         'data-flag-status',

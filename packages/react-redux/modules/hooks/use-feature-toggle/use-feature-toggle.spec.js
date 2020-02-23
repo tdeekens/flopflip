@@ -28,14 +28,14 @@ const TestComponent = () => {
   );
 };
 
-describe('when adapter is ready', () => {
+describe('when adapter is configured', () => {
   it('should indicate a feature being disabled', async () => {
     const store = createStore({
       [STATE_SLICE]: { flags: { disabledFeature: false } },
     });
     const rendered = render(store, <TestComponent />);
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilConfigured();
 
     expect(rendered.queryByText('Is disabled: Yes')).toBeInTheDocument();
   });
@@ -47,7 +47,7 @@ describe('when adapter is ready', () => {
 
     const rendered = render(store, <TestComponent />);
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilConfigured();
 
     expect(rendered.queryByText('Is enabled: Yes')).toBeInTheDocument();
   });

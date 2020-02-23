@@ -52,9 +52,9 @@ const TestComponent = props => {
 const render = ({ adapter }) => {
   const props = { adapter };
   const rendered = rtlRender(<TestComponent {...props} />);
-  const waitUntilReady = () => Promise.resolve();
+  const waitUntilConfigured = () => Promise.resolve();
 
-  return { ...rendered, waitUntilReady, props };
+  return { ...rendered, waitUntilConfigured, props };
 };
 
 describe('rendering', () => {
@@ -63,7 +63,7 @@ describe('rendering', () => {
 
     const rendered = render({ adapter });
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilConfigured();
 
     expect(rendered.props.adapter.subscribe).toHaveBeenCalled();
   });
@@ -73,7 +73,7 @@ describe('rendering', () => {
 
     const rendered = render({ adapter });
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilConfigured();
 
     expect(rendered.queryByText(/Is subscribed: Yes/i)).toBeInTheDocument();
     expect(rendered.queryByText(/Is unsubscribed: No/i)).toBeInTheDocument();
@@ -84,7 +84,7 @@ describe('rendering', () => {
 
     const rendered = render({ adapter });
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilConfigured();
 
     rendered.unmount();
 

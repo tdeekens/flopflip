@@ -1,13 +1,10 @@
-import { TAdapterConfigurationStatus } from '@flopflip/types';
 import React from 'react';
 import { render as rtlRender, wait } from '@flopflip/test-utils';
 import AdapterContext from '../adapter-context';
 import ConfigureAdapter, { AdapterStates } from './configure-adapter';
 
 const createAdapter = () => ({
-  getIsConfigurationStatus: jest.fn(
-    () => TAdapterConfigurationStatus.Unconfigured
-  ),
+  getIsConfigurationStatus: jest.fn(() => false),
   configure: jest.fn(() => Promise.resolve()),
   reconfigure: jest.fn(() => Promise.resolve()),
 });
@@ -88,7 +85,9 @@ describe('rendering', () => {
 
         expect(props.render).not.toHaveBeenCalled();
 
-        await wait(() => expect(adapter.getIsReady).toHaveBeenCalled());
+        await wait(() =>
+          expect(adapter.getIsConfigurationStatus).toHaveBeenCalled()
+        );
       });
     });
   });
@@ -98,9 +97,7 @@ describe('rendering', () => {
       it('should invoke children prop with ready state', async () => {
         const adapter = createAdapter();
 
-        adapter.getIsConfigurationStatus.mockReturnValue(
-          TAdapterConfigurationStatus.Configured
-        );
+        adapter.getIsConfigurationStatus.mockReturnValue(true);
 
         const props = { children: jest.fn(() => <TestComponent />) };
 
@@ -120,9 +117,7 @@ describe('rendering', () => {
       it('should invoke render prop', async () => {
         const adapter = createAdapter();
 
-        adapter.getIsConfigurationStatus.mockReturnValue(
-          TAdapterConfigurationStatus.Configured
-        );
+        adapter.getIsConfigurationStatus.mockReturnValue(true);
 
         const props = {
           children: <TestComponent>Test component</TestComponent>,

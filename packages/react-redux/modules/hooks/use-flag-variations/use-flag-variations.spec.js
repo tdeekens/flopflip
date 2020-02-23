@@ -30,7 +30,7 @@ const TestComponent = () => {
   );
 };
 
-describe('when adaopter is ready', () => {
+describe('when adaopter is configured', () => {
   it('should indicate a feature being disabled', async () => {
     const store = createStore({
       [STATE_SLICE]: {
@@ -44,7 +44,7 @@ describe('when adaopter is ready', () => {
 
     const rendered = render(store, <TestComponent />);
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilConfigured();
 
     expect(rendered.queryByText('Is disabled: Yes')).toBeInTheDocument();
   });
@@ -62,7 +62,7 @@ describe('when adaopter is ready', () => {
 
     const rendered = render(store, <TestComponent />);
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilConfigured();
 
     expect(rendered.queryByText('Is enabled: Yes')).toBeInTheDocument();
   });
@@ -80,7 +80,7 @@ describe('when adaopter is ready', () => {
 
     const rendered = render(store, <TestComponent />);
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilConfigured();
 
     expect(rendered.queryByText('Variation: A')).toBeInTheDocument();
   });

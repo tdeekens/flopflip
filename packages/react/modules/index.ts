@@ -7,6 +7,8 @@ const version = '__@FLOPFLIP/VERSION_OF_RELEASE__';
 export {
   AdapterContext,
   createAdapterContext,
+  useAdapterContext,
+  selectAdapterConfigurationStatus,
   ToggleFeature,
   ConfigureAdapter,
   ReconfigureAdapter,

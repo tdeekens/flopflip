@@ -21,7 +21,7 @@ describe('without `propKey`', () => {
         'false'
       );
 
-      await rendered.waitUntilReady();
+      await rendered.waitUntilConfigured();
     });
 
     describe('when enabling feature', () => {
@@ -32,7 +32,7 @@ describe('without `propKey`', () => {
 
         const rendered = render(<TestComponent />);
 
-        await rendered.waitUntilReady();
+        await rendered.waitUntilConfigured();
 
         rendered.changeFlagVariation('disabledFeature', true);
 
@@ -51,7 +51,7 @@ describe('without `propKey`', () => {
 
       const rendered = render(<TestComponent />);
 
-      await rendered.waitUntilReady();
+      await rendered.waitUntilConfigured();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveTextContent(
         'true'
@@ -69,7 +69,7 @@ describe('with `propKey`', () => {
       )(components.FlagsToComponent);
       const rendered = render(<TestComponent />);
 
-      await rendered.waitUntilReady();
+      await rendered.waitUntilConfigured();
 
       expect(rendered.queryByFlagName('customPropKey')).toHaveTextContent(
         'false'

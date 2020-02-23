@@ -165,8 +165,8 @@ describe('when configuring', () => {
       );
     });
 
-    describe('when `ldClient` is ready', () => {
-      describe('when determining if adapter is ready', () => {
+    describe('when `ldClient` is configured', () => {
+      describe('when determining if adapter is configured', () => {
         it('should indicate that the adapter is configured', () => {
           expect(
             adapter.getIsConfigurationStatus(

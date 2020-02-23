@@ -35,7 +35,7 @@ describe('injectFeatureToggles', () => {
 
       const rendered = render(store, <TestComponent />);
 
-      await rendered.waitUntilReady();
+      await rendered.waitUntilConfigured();
 
       expect(rendered.queryByFlagName('enabledFeature')).toHaveTextContent(
         'true'
@@ -55,7 +55,7 @@ describe('injectFeatureToggles', () => {
 
       const rendered = render(store, <TestComponent />);
 
-      await rendered.waitUntilReady();
+      await rendered.waitUntilConfigured();
 
       expect(rendered.queryByFlagName('disabledFeature')).toHaveTextContent(
         'false'
@@ -76,7 +76,7 @@ describe('injectFeatureToggles', () => {
 
         const rendered = render(store, <TestComponent />);
 
-        await rendered.waitUntilReady();
+        await rendered.waitUntilConfigured();
 
         rendered.changeFlagVariation('disabledFeature', true);
 
@@ -101,7 +101,7 @@ describe('injectFeatureToggles', () => {
 
       const rendered = render(store, <TestComponent />);
 
-      await rendered.waitUntilReady();
+      await rendered.waitUntilConfigured();
 
       expect(rendered.queryByFlagName('enabledFeature')).toHaveTextContent(
         'true'
@@ -121,7 +121,7 @@ describe('injectFeatureToggles', () => {
 
       const rendered = render(store, <TestComponent />);
 
-      await rendered.waitUntilReady();
+      await rendered.waitUntilConfigured();
 
       expect(rendered.queryByFlagName('disabledFeature')).toHaveTextContent(
         'false'

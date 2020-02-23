@@ -1,3 +1,4 @@
+import { TAdapterConfigurationStatus } from '@flopflip/types';
 import { STATE_SLICE } from '../../store/constants';
 import reducer, { UPDATE_STATUS, updateStatus, selectStatus } from './status';
 
@@ -16,10 +17,18 @@ describe('action creators', () => {
       });
     });
 
-    it('should return passed `isReady` status', () => {
-      expect(updateStatus({ isReady: true })).toEqual({
+    it('should return passed configuration status', () => {
+      expect(
+        updateStatus({
+          configurationStatus: TAdapterConfigurationStatus.Configured,
+        })
+      ).toEqual({
         type: expect.any(String),
-        payload: { status: { isReady: true } },
+        payload: {
+          status: {
+            configurationStatus: TAdapterConfigurationStatus.Configured,
+          },
+        },
       });
     });
   });
@@ -31,14 +40,16 @@ describe('reducers', () => {
       let payload;
       beforeEach(() => {
         payload = {
-          status: { isReady: true },
+          status: {
+            configurationStatus: TAdapterConfigurationStatus.Configuring,
+          },
         };
       });
 
       it('should set the new status', () => {
         expect(reducer(undefined, { type: UPDATE_STATUS, payload })).toEqual(
           expect.objectContaining({
-            isReady: payload.status.isReady,
+            configurationStatus: TAdapterConfigurationStatus.Configuring,
           })
         );
       });
@@ -48,15 +59,20 @@ describe('reducers', () => {
       let payload;
       beforeEach(() => {
         payload = {
-          status: { isReady: false },
+          status: {
+            configurationStatus: TAdapterConfigurationStatus.Configuring,
+          },
         };
       });
 
       it('should set the new status', () => {
         expect(
-          reducer({ isReady: true }, { type: UPDATE_STATUS, payload })
+          reducer(
+            { configurationStatus: TAdapterConfigurationStatus.Configured },
+            { type: UPDATE_STATUS, payload }
+          )
         ).toEqual({
-          isReady: payload.status.isReady,
+          configurationStatus: TAdapterConfigurationStatus.Configuring,
         });
       });
     });
@@ -69,8 +85,8 @@ describe('selectors', () => {
 
   beforeEach(() => {
     status = {
-      isReady: true,
-      isConfigured: false,
+      configurationStatus: TAdapterConfigurationStatus.Configuring,
+      subscriptionStatus: {},
     };
     state = {
       [STATE_SLICE]: {
@@ -83,7 +99,8 @@ describe('selectors', () => {
     it('should return configuration and ready status', () => {
       expect(selectStatus(state)).toEqual(
         expect.objectContaining({
-          isReady: true,
+          isConfiguring: true,
+          isConfigured: false,
         })
       );
     });

@@ -145,7 +145,7 @@ const getInitialFlags = (
         adapterState.configurationStatus =
           TAdapterConfigurationStatus.Configured;
 
-        // ...to then signal that the adapter is ready
+        // ...to then signal that the adapter is configured
         if (!getIsUnsubscribed()) {
           adapterEventHandlers.onStatusStateChange({
             configurationStatus: adapterState.configurationStatus,

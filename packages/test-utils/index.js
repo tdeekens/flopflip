@@ -126,7 +126,7 @@ const renderWithAdapter = (
   return {
     changeFlagVariation: (flagName, flagVariation) =>
       changeFlagVariation(rendered, flagName, flagVariation),
-    waitUntilReady: async () =>
+    waitUntilConfigured: async () =>
       waitForElement(() => rendered.getByTestId('change-flag-variation')),
     ...rendered,
   };

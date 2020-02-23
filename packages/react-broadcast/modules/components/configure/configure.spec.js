@@ -6,12 +6,14 @@ import Configure from './configure';
 
 const testFlagName = 'firstFlag';
 const TestComponent = () => {
-  const { isReady, isConfigured } = useAdapterStatus();
+  const { isUnconfigured, isConfiguring, isConfigured } = useAdapterStatus();
+
   const isFeatureEnabled = useFeatureToggle(testFlagName);
 
   return (
     <ul>
-      <li>Is ready: {isReady ? 'Yes' : 'No'}</li>
+      <li>Is unconfigured: {isUnconfigured ? 'Yes' : 'No'}</li>
+      <li>Is configuring: {isConfiguring ? 'Yes' : 'No'}</li>
       <li>Is configured: {isConfigured ? 'Yes' : 'No'}</li>
       <li>Feature enabled: {isFeatureEnabled ? 'Yes' : 'No'}</li>
     </ul>
@@ -34,16 +36,16 @@ const render = () => {
       <TestComponent />
     </Configure>
   );
-  const waitUntilReady = () => rendered.findByText(/Is ready: Yes/i);
+  const waitUntilConfigured = () => rendered.findByText(/Is configured: Yes/i);
 
-  return { ...rendered, waitUntilReady };
+  return { ...rendered, waitUntilConfigured };
 };
 
 describe('when feature is disabled', () => {
   it('should indicate the feature being disabled', async () => {
     const rendered = render();
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilConfigured();
 
     expect(rendered.queryByText(/Feature enabled: No/i)).toBeInTheDocument();
   });
@@ -53,7 +55,7 @@ describe('when enabling feature is', () => {
   it('should indicate the feature being enabled', async () => {
     const rendered = render();
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilConfigured();
 
     act(() =>
       updateFlags({
@@ -65,24 +67,25 @@ describe('when enabling feature is', () => {
   });
 });
 
-describe('when not configured and not ready', () => {
+describe('when unconfiguring', () => {
   it('should indicate through the adapter state', async () => {
     const rendered = render();
+    rendered.debug();
 
-    expect(rendered.queryByText(/Is ready: No/i)).toBeInTheDocument();
+    expect(rendered.queryByText(/Is configuring: Yes/i)).toBeInTheDocument();
     expect(rendered.queryByText(/Is configured: No/i)).toBeInTheDocument();
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilConfigured();
   });
 });
 
-describe('when configured and ready', () => {
+describe('when configured', () => {
   it('should indicate through the adapter state', async () => {
     const rendered = render();
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilConfigured();
 
-    expect(rendered.queryByText(/Is ready: Yes/i)).toBeInTheDocument();
+    expect(rendered.queryByText(/Is configuring: No/i)).toBeInTheDocument();
     expect(rendered.queryByText(/Is configured: Yes/i)).toBeInTheDocument();
   });
 });

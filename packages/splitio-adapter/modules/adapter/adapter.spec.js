@@ -212,7 +212,7 @@ describe('when configuring', () => {
       });
     });
 
-    describe('when `splitio` is ready', () => {
+    describe('when `splitio` is configured', () => {
       it('should call getTreatments with attributes', () => {
         expect(treatmentStub).toHaveBeenCalledWith(names, {
           ...userWithKey,

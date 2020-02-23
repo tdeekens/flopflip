@@ -166,7 +166,7 @@ const subscribe = ({
           // First update internal state
           adapterState.configurationStatus =
             TAdapterConfigurationStatus.Configured;
-          // ...to then signal that the adapter is ready
+          // ...to then signal that the adapter is configured
 
           if (!getIsUnsubscribed()) {
             onStatusStateChange({
