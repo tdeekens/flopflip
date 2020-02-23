@@ -20,6 +20,8 @@ const createTestProps = ({ adapter }) => ({
   adapter,
 });
 
+const TestComponent = () => <span>Test component</span>;
+
 const render = ({ props, adapter }) => {
   const baseProps = createTestProps({ adapter });
   const mergedProps = { ...baseProps, ...props };
@@ -92,7 +94,7 @@ describe('rendering', () => {
 
         const rendered = render({ props, adapter });
 
-        expect(rendered.queryByText('Child component')).toBeInTheDocument();
+        expect(rendered.queryByText('Test component')).toBeInTheDocument();
 
         await rendered.waitUntilReady();
       });
@@ -105,7 +107,7 @@ describe('rendering', () => {
 
         const rendered = render({ props, adapter });
 
-        expect(rendered.queryByText('Child component')).toBeInTheDocument();
+        expect(rendered.queryByText('Test component')).toBeInTheDocument();
 
         await rendered.waitUntilReady();
       });
