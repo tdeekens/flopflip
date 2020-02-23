@@ -1,3 +1,4 @@
+import { TAdapterConfigurationStatus } from '@flopflip/types';
 import warning from 'tiny-warning';
 import adapter, { updateFlags, STORAGE_SLICE } from './adapter';
 
@@ -8,11 +9,6 @@ const createAdapterEventHandlers = (custom = {}) => ({
   onStatusStateChange: jest.fn(),
   ...custom,
 });
-const AdapterStatus = {
-  Unconfigured: 0,
-  Configuring: 1,
-  Configured: 2,
-};
 
 describe('when configuring', () => {
   let adapterArgs = {};
@@ -20,9 +16,9 @@ describe('when configuring', () => {
 
   describe('when not configured', () => {
     it('should indicate that the adapter is not configured', () => {
-      expect(adapter.getIsConfigurationStatus(AdapterStatus.Configured)).toBe(
-        false
-      );
+      expect(
+        adapter.getIsConfigurationStatus(TAdapterConfigurationStatus.Configured)
+      ).toBe(false);
     });
 
     describe('updating flags', () => {
@@ -42,21 +38,21 @@ describe('when configuring', () => {
     it('should invoke `onStatusStateChange` with configuring', () => {
       expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
         expect.objectContaining({
-          configurationStatus: AdapterStatus.Configuring,
+          configurationStatus: TAdapterConfigurationStatus.Configuring,
         })
       );
     });
 
     it('should indicate that the adapter is configured', () => {
-      expect(adapter.getIsConfigurationStatus(AdapterStatus.Configured)).toBe(
-        true
-      );
+      expect(
+        adapter.getIsConfigurationStatus(TAdapterConfigurationStatus.Configured)
+      ).toBe(true);
     });
 
     it('should invoke `onStatusStateChange` with configured', () => {
       expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
         expect.objectContaining({
-          configurationStatus: AdapterStatus.Configured,
+          configurationStatus: TAdapterConfigurationStatus.Configured,
         })
       );
     });
@@ -72,7 +68,7 @@ describe('when configuring', () => {
     it('should invoke `onStatusStateChange` with configuring', () => {
       expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
         expect.objectContaining({
-          configurationStatus: AdapterStatus.Configuring,
+          configurationStatus: TAdapterConfigurationStatus.Configuring,
         })
       );
     });
@@ -154,7 +150,7 @@ describe('when configuring', () => {
       it('should invoke `onStatusStateChange` with configuring', () => {
         expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
           expect.objectContaining({
-            configurationStatus: AdapterStatus.Configuring,
+            configurationStatus: TAdapterConfigurationStatus.Configuring,
           })
         );
       });
@@ -162,7 +158,7 @@ describe('when configuring', () => {
       it('should invoke `onStatusStateChange` with configured', () => {
         expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
           expect.objectContaining({
-            configurationStatus: AdapterStatus.Configured,
+            configurationStatus: TAdapterConfigurationStatus.Configured,
           })
         );
       });

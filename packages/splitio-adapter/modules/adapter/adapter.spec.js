@@ -1,3 +1,4 @@
+import { TAdapterConfigurationStatus } from '@flopflip/types';
 import { SplitFactory } from '@splitsoftware/splitio';
 import adapter, {
   normalizeFlags,
@@ -20,11 +21,6 @@ jest.mock('@splitsoftware/splitio', () => ({
     })),
   })),
 }));
-const AdapterStatus = {
-  Unconfigured: 0,
-  Configuring: 1,
-  Configured: 2,
-};
 
 const authorizationKey = '123-abc';
 const userWithKey = { key: 'foo-user' };
@@ -44,9 +40,9 @@ describe('when configuring', () => {
   });
 
   it('should indicate that the adapter is not configured', () => {
-    expect(adapter.getIsConfigurationStatus(AdapterStatus.Configured)).toBe(
-      false
-    );
+    expect(
+      adapter.getIsConfigurationStatus(TAdapterConfigurationStatus.Configured)
+    ).toBe(false);
   });
 
   describe('when reconfiguring before configured', () => {
@@ -212,7 +208,7 @@ describe('when configuring', () => {
 
     it('should `dispatch` `onUpdateStatus` action with configured', () => {
       expect(onStatusStateChange).toHaveBeenCalledWith({
-        configurationStatus: AdapterStatus.Configuring,
+        configurationStatus: TAdapterConfigurationStatus.Configuring,
       });
     });
 
@@ -225,14 +221,16 @@ describe('when configuring', () => {
       });
 
       it('should indicate that the adapter is not configured', () => {
-        expect(adapter.getIsConfigurationStatus(AdapterStatus.Configured)).toBe(
-          true
-        );
+        expect(
+          adapter.getIsConfigurationStatus(
+            TAdapterConfigurationStatus.Configured
+          )
+        ).toBe(true);
       });
 
       it('should `dispatch` `onUpdateStatus` action with configured', () => {
         expect(onStatusStateChange).toHaveBeenCalledWith({
-          configurationStatus: AdapterStatus.Configured,
+          configurationStatus: TAdapterConfigurationStatus.Configured,
         });
       });
 

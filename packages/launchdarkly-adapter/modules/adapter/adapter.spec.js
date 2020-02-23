@@ -1,3 +1,4 @@
+import { TAdapterConfigurationStatus } from '@flopflip/types';
 import ldClient from 'launchdarkly-js-client-sdk';
 import adapter, { normalizeFlags } from './adapter';
 
@@ -20,11 +21,6 @@ const createClient = jest.fn(apiOverwrites => ({
 
   ...apiOverwrites,
 }));
-const AdapterStatus = {
-  Unconfigured: 0,
-  Configuring: 1,
-  Configured: 2,
-};
 
 const triggerFlagValueChange = (client, flagValue = false) =>
   client.on.mock.calls.forEach(([event, cb]) => {
@@ -43,9 +39,9 @@ describe('when configuring', () => {
   });
 
   it('should indicate that the adapter is not configured', () => {
-    expect(adapter.getIsConfigurationStatus(AdapterStatus.Configured)).toBe(
-      false
-    );
+    expect(
+      adapter.getIsConfigurationStatus(TAdapterConfigurationStatus.Configured)
+    ).toBe(false);
   });
 
   it('should not return client', () => {
@@ -173,7 +169,9 @@ describe('when configuring', () => {
       describe('when determining if adapter is ready', () => {
         it('should indicate that the adapter is configured', () => {
           expect(
-            adapter.getIsConfigurationStatus(AdapterStatus.Configured)
+            adapter.getIsConfigurationStatus(
+              TAdapterConfigurationStatus.Configured
+            )
           ).toBe(true);
         });
 
@@ -191,7 +189,7 @@ describe('when configuring', () => {
 
       it('should `dispatch` `onUpdateStatus` action with configured', () => {
         expect(onStatusStateChange).toHaveBeenCalledWith({
-          configurationStatus: AdapterStatus.Configured,
+          configurationStatus: TAdapterConfigurationStatus.Configured,
         });
       });
 
@@ -307,7 +305,7 @@ describe('when configuring', () => {
 
         it('should `dispatch` `onUpdateStatus` action with configured', () => {
           expect(onStatusStateChange).toHaveBeenCalledWith({
-            configurationStatus: AdapterStatus.Configured,
+            configurationStatus: TAdapterConfigurationStatus.Configured,
           });
         });
 
