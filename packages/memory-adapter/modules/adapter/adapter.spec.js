@@ -37,6 +37,14 @@ describe('when configuring', () => {
     );
   });
 
+  it('should invoke `onStatusStateChange` with configuring', () => {
+    expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        configurationStatus: AdapterStatus.Configuring,
+      })
+    );
+  });
+
   describe('updating flags', () => {
     beforeEach(() => {
       updateFlags({ attempted: 'flagUpdate' });
@@ -62,14 +70,6 @@ describe('when configuring', () => {
 
     it('should resolve `waitUntilConfigured`', async () => {
       await expect(adapter.waitUntilConfigured()).resolves.not.toBeDefined();
-    });
-
-    it('should invoke `onStatusStateChange` with configuring', () => {
-      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
-        expect.objectContaining({
-          configurationStatus: AdapterStatus.Configuring,
-        })
-      );
     });
 
     it('should invoke `onStatusStateChange` with configured', () => {
@@ -175,16 +175,24 @@ describe('when configuring', () => {
         adapter.setConfigurationStatus(AdapterStatus.Configuring);
       });
 
+      it('should invoke `onStatusStateChange` with configuring', () => {
+        expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
+          expect.objectContaining({
+            configurationStatus: AdapterStatus.Configuring,
+          })
+        );
+      });
+
       it('should indicate that the adapter is not configured', () => {
         expect(adapter.getIsConfigurationStatus(AdapterStatus.Configured)).toBe(
           false
         );
       });
 
-      it('should invoke `onStatusStateChange` with configuring', () => {
+      it('should invoke `onStatusStateChange` with configured', () => {
         expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
           expect.objectContaining({
-            configurationStatus: AdapterStatus.Configuring,
+            configurationStatus: AdapterStatus.Configured,
           })
         );
       });

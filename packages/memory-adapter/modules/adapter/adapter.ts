@@ -125,8 +125,6 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     adapterState.user = user;
 
     return Promise.resolve().then(() => {
-      adapterState.configurationStatus =
-        TAdapterConfigurationStatus.Configuring;
       adapterState.flags = {};
 
       updateUser(user);
