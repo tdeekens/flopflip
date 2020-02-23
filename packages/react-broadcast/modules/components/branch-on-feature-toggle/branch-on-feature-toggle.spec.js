@@ -10,11 +10,11 @@ const render = TestComponent =>
 
 describe('without `untoggledComponent', () => {
   describe('when feature is disabled', () => {
-    const TestComponent = branchOnFeatureToggle({ flag: 'disabledFeature' })(
-      components.ToggledComponent
-    );
-
     it('should render neither the component representing an disabled or enabled feature', async () => {
+      const TestComponent = branchOnFeatureToggle({ flag: 'disabledFeature' })(
+        components.ToggledComponent
+      );
+
       const rendered = render(<TestComponent />);
 
       await rendered.waitUntilReady();
@@ -26,6 +26,10 @@ describe('without `untoggledComponent', () => {
 
     describe('when enabling feature', () => {
       it('should render the component representing a enabled feature', async () => {
+        const TestComponent = branchOnFeatureToggle({
+          flag: 'disabledFeature',
+        })(components.ToggledComponent);
+
         const rendered = render(<TestComponent />);
 
         await rendered.waitUntilReady();
@@ -40,11 +44,11 @@ describe('without `untoggledComponent', () => {
   });
 
   describe('when feature is enabled', () => {
-    const TestComponent = branchOnFeatureToggle({ flag: 'enabledFeature' })(
-      components.ToggledComponent
-    );
-
     it('should render the component representing an enabled feature', async () => {
+      const TestComponent = branchOnFeatureToggle({ flag: 'enabledFeature' })(
+        components.ToggledComponent
+      );
+
       const rendered = render(<TestComponent />);
 
       await rendered.waitUntilReady();
@@ -59,12 +63,12 @@ describe('without `untoggledComponent', () => {
 
 describe('with `untoggledComponent', () => {
   describe('when feature is disabled', () => {
-    const TestComponent = branchOnFeatureToggle(
-      { flag: 'disabledFeature' },
-      components.UntoggledComponent
-    )(components.ToggledComponent);
-
     it('should not render the component representing a enabled feature', async () => {
+      const TestComponent = branchOnFeatureToggle(
+        { flag: 'disabledFeature' },
+        components.UntoggledComponent
+      )(components.ToggledComponent);
+
       const rendered = render(<TestComponent />);
 
       await rendered.waitUntilReady();
@@ -76,6 +80,11 @@ describe('with `untoggledComponent', () => {
     });
 
     it('should render the component representing a disabled feature', async () => {
+      const TestComponent = branchOnFeatureToggle(
+        { flag: 'disabledFeature' },
+        components.UntoggledComponent
+      )(components.ToggledComponent);
+
       const rendered = render(<TestComponent />);
 
       await rendered.waitUntilReady();
@@ -88,12 +97,12 @@ describe('with `untoggledComponent', () => {
   });
 
   describe('when feature is enabled', () => {
-    const TestComponent = branchOnFeatureToggle(
-      { flag: 'enabledFeature' },
-      components.UntoggledComponent
-    )(components.ToggledComponent);
-
     it('should render the component representing a enabled feature', async () => {
+      const TestComponent = branchOnFeatureToggle(
+        { flag: 'enabledFeature' },
+        components.UntoggledComponent
+      )(components.ToggledComponent);
+
       const rendered = render(<TestComponent />);
 
       await rendered.waitUntilReady();
@@ -105,6 +114,11 @@ describe('with `untoggledComponent', () => {
     });
 
     it('should not render the component representing a disabled feature', async () => {
+      const TestComponent = branchOnFeatureToggle(
+        { flag: 'enabledFeature' },
+        components.UntoggledComponent
+      )(components.ToggledComponent);
+
       const rendered = render(<TestComponent />);
 
       await rendered.waitUntilReady();

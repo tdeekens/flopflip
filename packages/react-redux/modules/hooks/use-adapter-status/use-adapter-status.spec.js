@@ -25,17 +25,21 @@ const TestComponent = () => {
   );
 };
 
-const store = createStore({
-  [STATE_SLICE]: { flags: { disabledFeature: false } },
-});
-
 it('should indicate the adapter not being ready', () => {
+  const store = createStore({
+    [STATE_SLICE]: { flags: { disabledFeature: false } },
+  });
+
   const rendered = render(store, <TestComponent />);
 
   expect(rendered.queryByText('Is ready: No')).toBeInTheDocument();
 });
 
 it('should indicate the adapter being ready', async () => {
+  const store = createStore({
+    [STATE_SLICE]: { flags: { disabledFeature: false } },
+  });
+
   const rendered = render(store, <TestComponent />);
 
   await rendered.waitUntilReady();
@@ -44,6 +48,10 @@ it('should indicate the adapter being ready', async () => {
 });
 
 it('should indicate the adapter being configured', async () => {
+  const store = createStore({
+    [STATE_SLICE]: { flags: { disabledFeature: false } },
+  });
+
   const rendered = render(store, <TestComponent />);
 
   await rendered.waitUntilReady();

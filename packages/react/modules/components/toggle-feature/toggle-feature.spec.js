@@ -4,16 +4,16 @@ import ToggleFeature from './toggle-feature';
 
 describe('when feature disabled', () => {
   describe('with untoggled component', () => {
-    const TestComponent = () => (
-      <ToggleFeature
-        isFeatureEnabled={false}
-        untoggledComponent={components.UntoggledComponent}
-      >
-        <components.ToggledComponent />
-      </ToggleFeature>
-    );
-
     it('should render the component representing a disabled feature', () => {
+      const TestComponent = () => (
+        <ToggleFeature
+          isFeatureEnabled={false}
+          untoggledComponent={components.UntoggledComponent}
+        >
+          <components.ToggledComponent />
+        </ToggleFeature>
+      );
+
       const rendered = render(<TestComponent />);
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
@@ -23,6 +23,15 @@ describe('when feature disabled', () => {
     });
 
     it('should not render the component representing am enabled feature', () => {
+      const TestComponent = () => (
+        <ToggleFeature
+          isFeatureEnabled={false}
+          untoggledComponent={components.UntoggledComponent}
+        >
+          <components.ToggledComponent />
+        </ToggleFeature>
+      );
+
       const rendered = render(<TestComponent />);
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
@@ -33,13 +42,13 @@ describe('when feature disabled', () => {
   });
 
   describe('without untoggled component', () => {
-    const TestComponent = () => (
-      <ToggleFeature isFeatureEnabled={false}>
-        <components.ToggledComponent />
-      </ToggleFeature>
-    );
-
     it('should render neither the component representing an disabled or enabled feature', () => {
+      const TestComponent = () => (
+        <ToggleFeature isFeatureEnabled={false}>
+          <components.ToggledComponent />
+        </ToggleFeature>
+      );
+
       const rendered = render(<TestComponent />);
 
       expect(
@@ -52,16 +61,16 @@ describe('when feature disabled', () => {
 describe('when feature enabled', () => {
   describe('with `children`', () => {
     describe('being a `node`', () => {
-      const TestComponent = () => (
-        <ToggleFeature
-          isFeatureEnabled
-          untoggledComponent={components.UntoggledComponent}
-        >
-          <components.ToggledComponent />
-        </ToggleFeature>
-      );
-
       it('should not render the component representing a disabled feature', () => {
+        const TestComponent = () => (
+          <ToggleFeature
+            isFeatureEnabled
+            untoggledComponent={components.UntoggledComponent}
+          >
+            <components.ToggledComponent />
+          </ToggleFeature>
+        );
+
         const rendered = render(<TestComponent />);
 
         expect(
@@ -70,6 +79,15 @@ describe('when feature enabled', () => {
       });
 
       it('should render the component representing a enabled feature', () => {
+        const TestComponent = () => (
+          <ToggleFeature
+            isFeatureEnabled
+            untoggledComponent={components.UntoggledComponent}
+          >
+            <components.ToggledComponent />
+          </ToggleFeature>
+        );
+
         const rendered = render(<TestComponent />);
 
         expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
@@ -80,22 +98,25 @@ describe('when feature enabled', () => {
     });
 
     describe('being a `function`', () => {
-      let props;
-      beforeEach(() => {
-        props = {
+      it('should invoke `children`', () => {
+        const props = {
           isFeatureEnabled: true,
           untoggledComponent: components.UntoggledComponent,
           children: jest.fn(() => <div>FeatureComponent</div>),
         };
-      });
 
-      it('should invoke `children`', () => {
         render(<ToggleFeature {...props} />);
 
         expect(props.children).toHaveBeenCalled();
       });
 
       it('should invoke `children` with `isFeatureEnabled`', () => {
+        const props = {
+          isFeatureEnabled: true,
+          untoggledComponent: components.UntoggledComponent,
+          children: jest.fn(() => <div>FeatureComponent</div>),
+        };
+
         render(<ToggleFeature {...props} />);
 
         expect(props.children).toHaveBeenCalledWith({
@@ -106,15 +127,15 @@ describe('when feature enabled', () => {
   });
 
   describe('with `toggledComponent`', () => {
-    const TestComponent = () => (
-      <ToggleFeature
-        isFeatureEnabled
-        untoggledComponent={components.UntoggledComponent}
-        toggledComponent={components.ToggledComponent}
-      />
-    );
-
     it('should not render the component representing a disabled feature', () => {
+      const TestComponent = () => (
+        <ToggleFeature
+          isFeatureEnabled
+          untoggledComponent={components.UntoggledComponent}
+          toggledComponent={components.ToggledComponent}
+        />
+      );
+
       const rendered = render(<TestComponent />);
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
@@ -124,6 +145,14 @@ describe('when feature enabled', () => {
     });
 
     it('should render the component representing a enabled feature', () => {
+      const TestComponent = () => (
+        <ToggleFeature
+          isFeatureEnabled
+          untoggledComponent={components.UntoggledComponent}
+          toggledComponent={components.ToggledComponent}
+        />
+      );
+
       const rendered = render(<TestComponent />);
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
@@ -134,22 +163,25 @@ describe('when feature enabled', () => {
   });
 
   describe('with `render`', () => {
-    let props;
-    beforeEach(() => {
-      props = {
+    it('should invoke `render`', () => {
+      const props = {
         isFeatureEnabled: true,
         untoggledComponent: components.UntoggledComponent,
         render: jest.fn(() => <components.ToggledComponent />),
       };
-    });
 
-    it('should invoke `render`', () => {
       render(<ToggleFeature {...props} />);
 
       expect(props.render).toHaveBeenCalled();
     });
 
     it('should render the component representing a enabled feature', () => {
+      const props = {
+        isFeatureEnabled: true,
+        untoggledComponent: components.UntoggledComponent,
+        render: jest.fn(() => <components.ToggledComponent />),
+      };
+
       const rendered = render(<ToggleFeature {...props} />);
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(

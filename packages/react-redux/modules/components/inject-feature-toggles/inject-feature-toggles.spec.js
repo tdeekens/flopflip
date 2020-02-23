@@ -13,27 +13,26 @@ const render = (store, TestComponent) =>
       Wrapper: <Provider store={store} />,
     },
   });
+const FlagsToComponent = props => (
+  <components.FlagsToComponent {...props} propKey="featureToggles" />
+);
+const FlagsToComponentWithPropKey = props => (
+  <components.FlagsToComponent {...props} propKey="onOffs" />
+);
 
 describe('injectFeatureToggles', () => {
   describe('without `propKey`', () => {
-    let store;
-    const FlagsToComponent = props => (
-      <components.FlagsToComponent {...props} propKey="featureToggles" />
-    );
-    const TestComponent = injectFeatureToggles([
-      'disabledFeature',
-      'enabledFeature',
-    ])(FlagsToComponent);
-
-    beforeEach(() => {
-      store = createStore({
+    it('should have feature enabling prop for `enabledFeature`', () => {
+      const store = createStore({
         [STATE_SLICE]: {
           flags: { enabledFeature: true, disabledFeature: false },
         },
       });
-    });
+      const TestComponent = injectFeatureToggles([
+        'disabledFeature',
+        'enabledFeature',
+      ])(FlagsToComponent);
 
-    it('should have feature enabling prop for `enabledFeature`', () => {
       const rendered = render(store, <TestComponent />);
 
       expect(rendered.queryByFlagName('enabledFeature')).toHaveTextContent(
@@ -42,6 +41,16 @@ describe('injectFeatureToggles', () => {
     });
 
     it('should have feature disabling prop for `disabledFeature`', () => {
+      const store = createStore({
+        [STATE_SLICE]: {
+          flags: { enabledFeature: true, disabledFeature: false },
+        },
+      });
+      const TestComponent = injectFeatureToggles([
+        'disabledFeature',
+        'enabledFeature',
+      ])(FlagsToComponent);
+
       const rendered = render(store, <TestComponent />);
 
       expect(rendered.queryByFlagName('disabledFeature')).toHaveTextContent(
@@ -51,6 +60,16 @@ describe('injectFeatureToggles', () => {
 
     describe('when enabling feature', () => {
       it('should render the component representing a enabled feature', async () => {
+        const TestComponent = injectFeatureToggles([
+          'disabledFeature',
+          'enabledFeature',
+        ])(FlagsToComponent);
+        const store = createStore({
+          [STATE_SLICE]: {
+            flags: { enabledFeature: true, disabledFeature: false },
+          },
+        });
+
         const rendered = render(store, <TestComponent />);
 
         await rendered.waitUntilReady();
@@ -65,24 +84,17 @@ describe('injectFeatureToggles', () => {
   });
 
   describe('with `propKey`', () => {
-    let store;
-    const FlagsToComponent = props => (
-      <components.FlagsToComponent {...props} propKey="onOffs" />
-    );
-    const TestComponent = injectFeatureToggles(
-      ['disabledFeature', 'enabledFeature'],
-      'onOffs'
-    )(FlagsToComponent);
-
-    beforeEach(() => {
-      store = createStore({
+    it('should have feature enabling prop for `enabledFeature`', () => {
+      const store = createStore({
         [STATE_SLICE]: {
           flags: { enabledFeature: true, disabledFeature: false },
         },
       });
-    });
+      const TestComponent = injectFeatureToggles(
+        ['disabledFeature', 'enabledFeature'],
+        'onOffs'
+      )(FlagsToComponentWithPropKey);
 
-    it('should have feature enabling prop for `enabledFeature`', () => {
       const rendered = render(store, <TestComponent />);
 
       expect(rendered.queryByFlagName('enabledFeature')).toHaveTextContent(
@@ -91,6 +103,16 @@ describe('injectFeatureToggles', () => {
     });
 
     it('should have feature disabling prop for `disabledFeature`', () => {
+      const store = createStore({
+        [STATE_SLICE]: {
+          flags: { enabledFeature: true, disabledFeature: false },
+        },
+      });
+      const TestComponent = injectFeatureToggles(
+        ['disabledFeature', 'enabledFeature'],
+        'onOffs'
+      )(FlagsToComponentWithPropKey);
+
       const rendered = render(store, <TestComponent />);
 
       expect(rendered.queryByFlagName('disabledFeature')).toHaveTextContent(
