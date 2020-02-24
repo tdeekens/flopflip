@@ -18,7 +18,7 @@ import {
 } from './helpers';
 import AdapterContext, { createAdapterContext } from '../adapter-context';
 
-type valueOf<T> = T[keyof T];
+type valueof<T> = T[keyof T];
 
 export const AdapterStates = {
   UNCONFIGURED: 'unconfigured',
@@ -38,7 +38,7 @@ type TProps = {
   render?: () => React.ReactNode;
   children?: TConfigureAdapterChildren;
 };
-type TAdapterState = valueOf<TAdapterStates>;
+type TAdapterState = valueof<TAdapterStates>;
 
 const ConfigureAdapter = (props: TProps) => {
   const [appliedAdapterArgs, setAppliedAdapterArgs] = React.useState<
@@ -77,9 +77,7 @@ const ConfigureAdapter = (props: TProps) => {
   }, [appliedAdapterArgs]);
 
   const getIsAdapterConfigured = React.useCallback(
-    () =>
-      adapterState.current === AdapterStates.CONFIGURED &&
-      adapterState.current !== AdapterStates.CONFIGURING,
+    () => adapterState.current === AdapterStates.CONFIGURED,
     [adapterState]
   );
 
