@@ -4,6 +4,7 @@ import {
   TAdapterSubscriptionStatus,
   TAdapterConfigurationStatus,
 } from '@flopflip/types';
+import { selectAdapterConfigurationStatus } from '@flopflip/react';
 import { TUpdateStatusAction } from './types';
 import { TState } from '../../types';
 import { STATE_SLICE } from '../../store/constants';
@@ -47,14 +48,5 @@ export const updateStatus = (
 export const selectStatus = (state: TState) => {
   const { status } = state[STATE_SLICE];
 
-  return {
-    isReady:
-      status?.configurationStatus === TAdapterConfigurationStatus.Configured,
-    isUnconfigured:
-      status?.configurationStatus === TAdapterConfigurationStatus.Unconfigured,
-    isConfiguring:
-      status?.configurationStatus === TAdapterConfigurationStatus.Configuring,
-    isConfigured:
-      status?.configurationStatus === TAdapterConfigurationStatus.Configured,
-  };
+  return selectAdapterConfigurationStatus(status?.configurationStatus);
 };

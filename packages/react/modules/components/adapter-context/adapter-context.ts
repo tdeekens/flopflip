@@ -24,7 +24,7 @@ const initialAdapterContext = createAdapterContext();
 const AdapterContext = React.createContext(initialAdapterContext);
 
 const selectAdapterConfigurationStatus = (
-  configurationStatus: TAdapterConfigurationStatus
+  configurationStatus?: TAdapterConfigurationStatus
 ) => ({
   isReady: configurationStatus === TAdapterConfigurationStatus.Configured,
   isUnconfigured:
