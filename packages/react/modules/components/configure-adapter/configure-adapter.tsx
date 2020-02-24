@@ -275,6 +275,9 @@ const ConfigureAdapter = (props: TProps) => {
             isAdapterConfigured,
           });
 
+        if (props.children && !isEmptyChildren(props.children))
+          return React.Children.only<React.ReactNode>(props.children);
+
         return null;
       })()}
     </AdapterContext.Provider>
