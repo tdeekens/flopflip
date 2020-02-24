@@ -62,7 +62,7 @@ const ConfigureAdapter = (props: TProps) => {
     (nextAdapterArgs: TAdapterArgs) => {
       /**
        * NOTE:
-       *   We can only unset `pendingAdapterArgs` after be actually perform
+       *   We can only unset `pendingAdapterArgs` after we actually perform
        *   a batched `setState` otherwise outdated `adapterArgs` as we loose
        *   the `pendingAdapterArgs` as we unset them too early.
        */
@@ -74,7 +74,7 @@ const ConfigureAdapter = (props: TProps) => {
   /**
    * NOTE:
    *   Clears the pending adapter args when applied adapter
-   *   args were set. Previously achived via `setState` callback.
+   *   args were set. Previously achieved via `setState` callback.
    */
   React.useEffect(() => {
     pendingAdapterArgs.current = null;
@@ -101,7 +101,7 @@ const ConfigureAdapter = (props: TProps) => {
        *    The next reconfiguration is merged into the previous
        *    one instead of maintaining a queue.
        *
-       *    The first merge with merge with `appliedAdapter` args
+       *    The first merge is merged with `appliedAdapter` args
        *    to contain the initial state (through property initializer).
        */
       pendingAdapterArgs.current = mergeAdapterArgs(
@@ -200,10 +200,10 @@ const ConfigureAdapter = (props: TProps) => {
      *   The component might receive `adapterArgs` from `ReconfigureFlopflip`
      *   before it managed to configure. If that occurs the next `adapterArgs`
      *   passed in will overwrite what `ReconfigureFlopflip` passed in before
-     *   yieling a loss in configuration.
+     *   yielding a loss in configuration.
      *
-     *   Whenever however the adapter has configured we want to component to
-     *   act in a controleld manner. So that overwriting will occur when the
+     *   However, when the adapter is configured we want the component to
+     *   act in a controlled manner so that overwriting will occur when the
      *   passed `adapterArgs` change.
      */
     reconfigureOrQueue(adapterArgs, {
