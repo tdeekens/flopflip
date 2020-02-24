@@ -899,16 +899,16 @@
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-10.1.0.tgz#f0950bba18819512d42f7197e56c518aa491cf18"
   integrity sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
 
-"@flopflip/launchdarkly-adapter@2.11.4":
-  version "2.11.4"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.11.4.tgz#cc5f3c00d73105b4fc602c682f619f10b634323f"
-  integrity sha512-mnhupGpp4ruMikGx7Yyf0GKNgQ/gExwhaJe9fbuN4R3zIR0vAdgNGfOR2NgNQxb7FrAjYUgXhpS9g9fPsjPJ2g==
+"@flopflip/launchdarkly-adapter@2.11.5":
+  version "2.11.5"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.11.5.tgz#392bdeb63a902f2c2fbecfd4d9e1fe26f3811833"
+  integrity sha512-AkjILd6kckoqjQtrDtkajQsFi4K8hzSk0Ol3nwmcCMRVxI0jTzWHY/Z4CIaZTH2Fv37bAgXEmimNENe9UE7qLQ==
   dependencies:
     "@babel/runtime" "7.8.4"
     "@flopflip/types" "^2.3.5"
-    debounce-fn "3.0.1"
+    debounce-fn "4.0.0"
     deepmerge "4.2.2"
-    launchdarkly-js-client-sdk "2.16.3"
+    launchdarkly-js-client-sdk "2.17.0"
     lodash "4.17.15"
     tiny-warning "1.0.3"
 
@@ -932,31 +932,31 @@
     mitt "1.2.0"
     tiny-warning "1.0.3"
 
-"@flopflip/react-broadcast@10.1.9":
-  version "10.1.9"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-10.1.9.tgz#3771b4cee73788113daf781a218db588273e5c67"
-  integrity sha512-j+SuZEY0H7sU9jwmwMPkWEkQL15tpvcZyOXlpf1xUYHbMNGj0p/nr/CsaqZd/XgTZj9AhHWD5JXg7TlHKT15bg==
+"@flopflip/react-broadcast@10.1.10":
+  version "10.1.10"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-10.1.10.tgz#b8b1acc1cd18393164b8980175b3002a5cfbdc43"
+  integrity sha512-W5/ygxlJF5p/Ze4i/po9gP4r5lUmXXipmJ3TGJXmm8jWDeu0DDMnzmvPQvebrKnEV0uItId8oNcH8QlI8v4vBQ==
   dependencies:
     "@babel/runtime" "7.8.4"
-    "@flopflip/react" "^9.1.6"
+    "@flopflip/react" "^9.1.7"
     "@flopflip/types" "^2.3.5"
     lodash "4.17.15"
 
-"@flopflip/react-redux@10.1.8":
-  version "10.1.8"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-10.1.8.tgz#d9343544750b18e3504a0c7a5536444552b745ae"
-  integrity sha512-5T8bdPqd/MFvWKpfggMjExYeT5homWpD1v7VLHahnhf6Zogt7DcK3RTdgbBkJkO3RNWZn0Ou+akw4BqS/eYB7g==
+"@flopflip/react-redux@10.1.9":
+  version "10.1.9"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-10.1.9.tgz#d306dcf52bad4471737ae4e08e6a3ed19ad20c3f"
+  integrity sha512-cfVxhDhViXUVW21axXSuaAR502zI2/v+Uzl3Ni8qReESZEx8WQRCZuu1AqHkrTyfG8OzmuAf6PN1X7BsRzxJhA==
   dependencies:
     "@babel/runtime" "7.8.4"
-    "@flopflip/react" "^9.1.6"
+    "@flopflip/react" "^9.1.7"
     "@flopflip/types" "^2.3.5"
     "@types/react-redux" "7.1.7"
     lodash "4.17.15"
 
-"@flopflip/react@^9.1.6":
-  version "9.1.6"
-  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-9.1.6.tgz#3c1382907c5b8473170b6a7f8e878a3f68f27d86"
-  integrity sha512-2viOf1Mf4jZCUQKfZElijVtrnS0uhQ90T8bX4kfo0aVR+UPkKGOPSPUMU+4hDEKPIxKkXsFLKSjg9qoAnKZVrQ==
+"@flopflip/react@^9.1.7":
+  version "9.1.7"
+  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-9.1.7.tgz#cb68f1c7a1835c75a41f4a7e2aaf38462db0b492"
+  integrity sha512-FAqNefvq5RACSOt6/CSLBY3+3f/tXL2g+RXJ1zQCp70ITKAA4iS40g+ERvSm9xDWDLzp24PCCf01JQJCMW6CBA==
   dependencies:
     "@babel/runtime" "7.8.4"
     deepmerge "4.2.2"
@@ -3290,12 +3290,12 @@ data-urls@^1.0.0, data-urls@^1.1.0:
     whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
 
-debounce-fn@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/debounce-fn/-/debounce-fn-3.0.1.tgz#034afe8b904d985d1ec1aa589cd15f388741d680"
-  integrity sha512-aBoJh5AhpqlRoHZjHmOzZlRx+wz2xVwGL9rjs+Kj0EWUrL4/h4K7OD176thl2Tdoqui/AaA4xhHrNArGLAaI3Q==
+debounce-fn@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/debounce-fn/-/debounce-fn-4.0.0.tgz#ed76d206d8a50e60de0dd66d494d82835ffe61c7"
+  integrity sha512-8pYCQiL9Xdcg0UPSD3d+0KMlOjp+KGU5EPwYddgzQ7DATsg4fuUDjQtsYLmWjnk2obnNHgV3vE2Y4jejSOJVBQ==
   dependencies:
-    mimic-fn "^2.1.0"
+    mimic-fn "^3.0.0"
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.9:
   version "2.6.9"
@@ -6159,18 +6159,18 @@ last-call-webpack-plugin@^3.0.0:
     lodash "^4.17.5"
     webpack-sources "^1.1.0"
 
-launchdarkly-js-client-sdk@2.16.3:
-  version "2.16.3"
-  resolved "https://registry.yarnpkg.com/launchdarkly-js-client-sdk/-/launchdarkly-js-client-sdk-2.16.3.tgz#c96d4635456e103d87c053c4ba8051847ecf344c"
-  integrity sha512-Ygc6Bckj1xEbTbGKLHlgvhY8Nruzs39KnZlsImtxblRBMj9MMLAjqO+Y+F/bFIlT677eJEbF5aqF7aNbbr6clw==
+launchdarkly-js-client-sdk@2.17.0:
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/launchdarkly-js-client-sdk/-/launchdarkly-js-client-sdk-2.17.0.tgz#7be9f1b12f7a0ea90ba9dfed73d076e97b78656a"
+  integrity sha512-KLKFtud5k9tH2BsaCf7dNyfqaHM4MITLQbriDpqi5zYDAhNYh6qZRIuriCTOohhw0/0GoA+oMHDhI4zDQ7nVww==
   dependencies:
     escape-string-regexp "^1.0.5"
-    launchdarkly-js-sdk-common "3.1.2"
+    launchdarkly-js-sdk-common "3.2.2"
 
-launchdarkly-js-sdk-common@3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/launchdarkly-js-sdk-common/-/launchdarkly-js-sdk-common-3.1.2.tgz#8382aabae3c0247c3f96dc44d6bf65823f74a2e4"
-  integrity sha512-R7OIP+io5cE3Q0lMzHFV5fc5+2ColJOzBPJOl/orUd5ip6Nla33UfZsTUV6xp58Lmgvx2XkXEe/Rn1uVEZ8i0w==
+launchdarkly-js-sdk-common@3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/launchdarkly-js-sdk-common/-/launchdarkly-js-sdk-common-3.2.2.tgz#26f8a8bcf8e3391e3bf6fdf72e5883d3cc8a9c7d"
+  integrity sha512-WBIMk3c1s3JGpSvDRZpDr0D4dDPsFkscDmcOoaoXnkW6PdacfUz9KKJ9bKTM+akNWE2DsZ3ttEz4rATEFeOnVA==
   dependencies:
     base64-js "^1.3.0"
     fast-deep-equal "^2.0.1"
@@ -6534,6 +6534,11 @@ mimic-fn@^2.0.0, mimic-fn@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-2.1.0.tgz#7ed2c2ccccaf84d3ffcb7a69b57711fc2083401b"
   integrity sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==
+
+mimic-fn@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-3.0.0.tgz#76044cfa8818bbf6999c5c9acadf2d3649b14b4b"
+  integrity sha512-PiVO95TKvhiwgSwg1IdLYlCTdul38yZxZMIcnDSFIBUm4BNZha2qpQ4GpJ++15bHoKDtrW2D69lMfFwdFYtNZQ==
 
 mini-css-extract-plugin@0.9.0:
   version "0.9.0"
