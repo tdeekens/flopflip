@@ -9,19 +9,20 @@ import {
   TLaunchDarklyAdapterArgs,
   TAdapterEventHandlers,
   TAdapterSubscriptionStatus,
+  TAdapterConfigurationStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
 import merge from 'deepmerge';
 import warning from 'tiny-warning';
 import isEqual from 'lodash/isEqual';
+import camelCase from 'lodash/camelCase';
+import kebabCase from 'lodash/kebabCase';
 import debounce from 'debounce-fn';
 import {
   initialize as initializeLaunchDarklyClient,
   LDUser,
   LDClient,
 } from 'launchdarkly-js-client-sdk';
-import camelCase from 'lodash/camelCase';
-import kebabCase from 'lodash/kebabCase';
 
 type LaunchDarklyAdapterState = {
   user?: TUser;
@@ -30,9 +31,8 @@ type LaunchDarklyAdapterState = {
 };
 
 const adapterState: TAdapterStatus & LaunchDarklyAdapterState = {
-  isReady: false,
-  isConfigured: false,
   subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
+  configurationStatus: TAdapterConfigurationStatus.Unconfigured,
   user: undefined,
   client: undefined,
   flags: {},
@@ -142,10 +142,14 @@ const getInitialFlags = (
         }
 
         // First update internal state
-        adapterState.isReady = true;
-        // ...to then signal that the adapter is ready
+        adapterState.configurationStatus =
+          TAdapterConfigurationStatus.Configured;
+
+        // ...to then signal that the adapter is configured
         if (!getIsUnsubscribed()) {
-          adapterEventHandlers.onStatusStateChange({ isReady: true });
+          adapterEventHandlers.onStatusStateChange({
+            configurationStatus: adapterState.configurationStatus,
+          });
         }
 
         return Promise.resolve({ flagsFromSdk });
@@ -179,6 +183,12 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     adapterArgs: TLaunchDarklyAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) {
+    adapterState.configurationStatus = TAdapterConfigurationStatus.Configuring;
+
+    adapterEventHandlers.onStatusStateChange({
+      configurationStatus: adapterState.configurationStatus,
+    });
+
     const {
       clientSideId,
       user,
@@ -195,7 +205,6 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       adapterState.user,
       clientOptions
     );
-    adapterState.isConfigured = true;
 
     return getInitialFlags(
       {
@@ -221,7 +230,10 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     adapterArgs: TLaunchDarklyAdapterArgs,
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
-    if (!adapterState.isConfigured)
+    if (
+      adapterState.configurationStatus !==
+      TAdapterConfigurationStatus.Configured
+    )
       return Promise.reject(
         new Error(
           '@flopflip/launchdarkly-adapter: please configure adapter before reconfiguring.'
@@ -237,8 +249,8 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     return Promise.resolve();
   }
 
-  getIsReady() {
-    return Boolean(adapterState.isReady);
+  getIsConfigurationStatus(configurationStatus: TAdapterConfigurationStatus) {
+    return adapterState.configurationStatus === configurationStatus;
   }
 
   getClient() {
@@ -250,16 +262,18 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   }
 
   updateUserContext(updatedUserProps: TUser) {
-    const isAdapterReady = adapterState.isConfigured && adapterState.isReady;
+    const isAdapterConfigured =
+      adapterState.configurationStatus ===
+      TAdapterConfigurationStatus.Configured;
 
     warning(
-      isAdapterReady,
-      '@flopflip/launchdarkly-adapter: adapter not ready and configured. User context can not be updated before.'
+      isAdapterConfigured,
+      '@flopflip/launchdarkly-adapter: adapter not configured. User context can not be updated before.'
     );
 
-    if (!isAdapterReady)
+    if (!isAdapterConfigured)
       return Promise.reject(
-        new Error('Can not update user context: adapter not yet ready.')
+        new Error('Can not update user context: adapter not yet configured.')
       );
 
     return changeUserContext({ ...adapterState.user, ...updatedUserProps });
@@ -271,6 +285,18 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
 
   subscribe() {
     adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
+  }
+
+  // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
+  getIsReady() {
+    warning(
+      false,
+      '@flopflip/launchdarkly-adapter: `getIsReady` has been deprecated. Please use `getIsConfigurationStatus` instead.'
+    );
+
+    return this.getIsConfigurationStatus(
+      TAdapterConfigurationStatus.Configured
+    );
   }
 
   private _didFlagChange(flagName: TFlagName, nextFlagValue: TFlagVariation) {

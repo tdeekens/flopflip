@@ -1,3 +1,4 @@
+import { TAdapterConfigurationStatus } from '@flopflip/types';
 import ldClient from 'launchdarkly-js-client-sdk';
 import adapter, { normalizeFlags } from './adapter';
 
@@ -37,8 +38,10 @@ describe('when configuring', () => {
     ldClient.initialize.mockReturnValue(createClient());
   });
 
-  it('should indicate that the adapter is not ready', () => {
-    expect(adapter.getIsReady()).toBe(false);
+  it('should indicate that the adapter is not configured', () => {
+    expect(
+      adapter.getIsConfigurationStatus(TAdapterConfigurationStatus.Configured)
+    ).toBe(false);
   });
 
   it('should not return client', () => {
@@ -162,10 +165,14 @@ describe('when configuring', () => {
       );
     });
 
-    describe('when `ldClient` is ready', () => {
-      describe('when determining if adapter is ready', () => {
-        it('should indicate that the adapter is ready', () => {
-          expect(adapter.getIsReady()).toBe(true);
+    describe('when `ldClient` is configured', () => {
+      describe('when determining if adapter is configured', () => {
+        it('should indicate that the adapter is configured', () => {
+          expect(
+            adapter.getIsConfigurationStatus(
+              TAdapterConfigurationStatus.Configured
+            )
+          ).toBe(true);
         });
 
         it('should return client', () => {
@@ -180,9 +187,9 @@ describe('when configuring', () => {
         });
       });
 
-      it('should `dispatch` `onUpdateStatus` action with `isReady`', () => {
+      it('should `dispatch` `onUpdateStatus` action with configured', () => {
         expect(onStatusStateChange).toHaveBeenCalledWith({
-          isReady: true,
+          configurationStatus: TAdapterConfigurationStatus.Configured,
         });
       });
 
@@ -296,9 +303,9 @@ describe('when configuring', () => {
           );
         });
 
-        it('should `dispatch` `onUpdateStatus` action with `isReady`', () => {
+        it('should `dispatch` `onUpdateStatus` action with configured', () => {
           expect(onStatusStateChange).toHaveBeenCalledWith({
-            isReady: true,
+            configurationStatus: TAdapterConfigurationStatus.Configured,
           });
         });
 

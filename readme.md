@@ -310,7 +310,7 @@ You can also pass `render` or `children` as a function to act differently based 
 
 ```jsx
 <ConfigureFlopFlip adapter={adapter} adapterArgs={{ clientSideId, user }}>
-  {{isAdapterReady} => isAdapterReady ? <App /> : <LoadingSpinner />}
+  {{isAdapterConfigured} => isAdapterConfigured ? <App /> : <LoadingSpinner />}
 </ConfigureFlopFlip>;
 ```
 
@@ -322,7 +322,7 @@ You can also pass `render` or `children` as a function to act differently based 
 />
 ```
 
-Note that `children` will be called with a loading state prop while `render` will only be called when the adapter is ready. This behaviour mirrors the workings of `<ToggleFeature>`.
+Note that `children` will be called with a loading state prop while `render` will only be called when the adapter is configured. This behaviour mirrors the workings of `<ToggleFeature>`.
 
 This variant of the `ConfigureFlopFlip` component form
 `@flopflip/react-broadcast` will use the context and a broadcasting system to
@@ -448,7 +448,7 @@ down the tree but that information should be used for user targeting (through `a
 can use `ReconfigureFlopflip`. `ReconfigureFlopflip` itself communicates with `ConfigureFlopflip`
 to reconfigure the given adapter for more fine grained targeting with the passed `user`.
 You also do not have to worry about rendering any number of `ReconfigureFlopflip`s before the adapter is
-initialized (e.g. LaunchDarkly). Requested reconfigurations will be queued and processed once the adapter is ready.
+initialized (e.g. LaunchDarkly). Requested reconfigurations will be queued and processed once the adapter is configured.
 
 Imagine having `ConfigureFlopflip` above a given component wrapped by a `Route`:
 
@@ -555,9 +555,9 @@ import { useAdapterStatus } from '@flopflip/react-broadcast';
 
 const ComponentWithFeatureToggle = () => {
   const isFeatureEnabled = useFeatureToggle('myFeatureToggle');
-  const { isReady } = useAdapterStatus();
+  const { isConfigured } = useAdapterStatus();
 
-  if (!isReady) return <LoadingSpinner />;
+  if (!isConfigured) return <LoadingSpinner />;
   else if (!isFeatureEnabled) <PageNotFound />;
   else return <FeatureComponent />;
 };

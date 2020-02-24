@@ -11,9 +11,11 @@ import {
   TSplitioAdapterInterface,
   TSplitioAdapterArgs,
   TAdapterSubscriptionStatus,
+  TAdapterConfigurationStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
 import merge from 'deepmerge';
+import warning from 'tiny-warning';
 import { SplitFactory } from '@splitsoftware/splitio';
 import camelCase from 'lodash/camelCase';
 import omit from 'lodash/omit';
@@ -32,9 +34,8 @@ type SplitIOAdapterState = {
 };
 
 const adapterState: TAdapterStatus & SplitIOAdapterState = {
-  isReady: false,
-  isConfigured: false,
   subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
+  configurationStatus: TAdapterConfigurationStatus.Unconfigured,
   user: undefined,
   client: undefined,
   manager: undefined,
@@ -140,6 +141,13 @@ const subscribe = ({
 }) =>
   new Promise<void>((resolve, reject) => {
     if (adapterState.client) {
+      adapterState.configurationStatus =
+        TAdapterConfigurationStatus.Configuring;
+
+      onStatusStateChange({
+        configurationStatus: adapterState.configurationStatus,
+      });
+
       adapterState.client.on(adapterState.client.Event.SDK_READY, () => {
         let flagNames: TFlagName[];
         let flags: TFlags;
@@ -156,11 +164,14 @@ const subscribe = ({
           }
 
           // First update internal state
-          adapterState.isReady = true;
-          // ...to then signal that the adapter is ready
+          adapterState.configurationStatus =
+            TAdapterConfigurationStatus.Configured;
+          // ...to then signal that the adapter is configured
 
           if (!getIsUnsubscribed()) {
-            onStatusStateChange({ isReady: true });
+            onStatusStateChange({
+              configurationStatus: adapterState.configurationStatus,
+            });
           }
 
           // ...to finally subscribe to later changes.
@@ -177,13 +188,14 @@ const subscribe = ({
 
 const configureSplitio = () => {
   const { client, manager } = initializeClient();
+
   adapterState.client = client;
   adapterState.manager = manager;
+
   return subscribe({
     onFlagsStateChange: adapterState.configuredCallbacks.onFlagsStateChange,
     onStatusStateChange: adapterState.configuredCallbacks.onStatusStateChange,
   }).then(() => {
-    adapterState.isConfigured = true;
     return adapterState.client;
   });
 };
@@ -206,6 +218,8 @@ class SplitioAdapter implements TSplitioAdapterInterface {
       treatmentAttributes,
     } = adapterArgs;
 
+    adapterState.configurationStatus = TAdapterConfigurationStatus.Configuring;
+
     adapterState.user = ensureUser(user);
     adapterState.treatmentAttributes = treatmentAttributes;
 
@@ -213,6 +227,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
       adapterEventHandlers.onFlagsStateChange;
     adapterState.configuredCallbacks.onStatusStateChange =
       adapterEventHandlers.onStatusStateChange;
+
     adapterState.splitioSettings = {
       ...omit(options, ['core']),
       core: {
@@ -221,6 +236,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
         ...options.core,
       },
     };
+
     return configureSplitio();
   }
 
@@ -229,8 +245,8 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
     if (
-      !adapterState.isReady ||
-      !adapterState.isConfigured ||
+      adapterState.configurationStatus !==
+        TAdapterConfigurationStatus.Configured ||
       !adapterState.user
     ) {
       return Promise.reject(
@@ -267,8 +283,8 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     return Promise.resolve();
   }
 
-  getIsReady() {
-    return Boolean(adapterState.isReady);
+  getIsConfigurationStatus(configurationStatus: TAdapterConfigurationStatus) {
+    return adapterState.configurationStatus === configurationStatus;
   }
 
   unsubscribe() {
@@ -277,6 +293,18 @@ class SplitioAdapter implements TSplitioAdapterInterface {
 
   subscribe() {
     adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
+  }
+
+  // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
+  getIsReady() {
+    warning(
+      false,
+      '@flopflip/splitio-adapter: `getIsReady` has been deprecated. Please use `getIsConfigurationStatus` instead.'
+    );
+
+    return this.getIsConfigurationStatus(
+      TAdapterConfigurationStatus.Configured
+    );
   }
 }
 

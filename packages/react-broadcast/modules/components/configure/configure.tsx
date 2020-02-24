@@ -7,6 +7,7 @@ import {
   TAdapterStatusChange,
   TConfigureAdapterChildren,
   TConfigureAdapterProps,
+  TAdapterConfigurationStatus,
   TAdapterSubscriptionStatus,
 } from '@flopflip/types';
 import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
@@ -26,8 +27,8 @@ type State = {
 };
 
 const initialAdapterStatus: State['status'] = {
-  isReady: false,
   subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
+  configurationStatus: TAdapterConfigurationStatus.Unconfigured,
 };
 const initialFlags: State['flags'] = {};
 

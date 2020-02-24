@@ -26,7 +26,7 @@ describe('without `untoggledComponent', () => {
 
       const rendered = render(store, <TestComponent />);
 
-      await rendered.waitUntilReady();
+      await rendered.waitUntilConfigured();
 
       expect(
         rendered.queryByFlagName('isFeatureEnabled')
@@ -44,7 +44,7 @@ describe('without `untoggledComponent', () => {
 
         const rendered = render(store, <TestComponent />);
 
-        await rendered.waitUntilReady();
+        await rendered.waitUntilConfigured();
 
         rendered.changeFlagVariation('disabledFeature', true);
 
@@ -66,7 +66,7 @@ describe('without `untoggledComponent', () => {
 
       const rendered = render(store, <TestComponent />);
 
-      await rendered.waitUntilReady();
+      await rendered.waitUntilConfigured();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
@@ -89,7 +89,7 @@ describe('with `untoggledComponent', () => {
 
       const rendered = render(store, <TestComponent />);
 
-      await rendered.waitUntilReady();
+      await rendered.waitUntilConfigured();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
         'data-flag-status',
@@ -108,7 +108,7 @@ describe('with `untoggledComponent', () => {
 
       const rendered = render(store, <TestComponent />);
 
-      await rendered.waitUntilReady();
+      await rendered.waitUntilConfigured();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
@@ -128,7 +128,7 @@ describe('with `untoggledComponent', () => {
 
       const rendered = render(store, <TestComponent />);
 
-      await rendered.waitUntilReady();
+      await rendered.waitUntilConfigured();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
@@ -146,7 +146,7 @@ describe('with `untoggledComponent', () => {
 
       const rendered = render(store, <TestComponent />);
 
-      await rendered.waitUntilReady();
+      await rendered.waitUntilConfigured();
 
       expect(rendered.queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
         'data-flag-status',

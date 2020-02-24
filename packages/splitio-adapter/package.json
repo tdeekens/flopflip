@@ -40,7 +40,8 @@
     "@flopflip/types": "^2.3.5",
     "@splitsoftware/splitio": "10.10.0",
     "deepmerge": "4.2.2",
-    "lodash": "4.17.15"
+    "lodash": "4.17.15",
+    "tiny-warning": "1.0.3"
   },
   "keywords": [
     "feature-flags",

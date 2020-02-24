@@ -27,7 +27,7 @@ const TestComponent = () => {
 it('should indicate a feature being disabled', async () => {
   const rendered = render(<TestComponent />);
 
-  await rendered.waitUntilReady();
+  await rendered.waitUntilConfigured();
 
   expect(rendered.queryByText('Is disabled: Yes')).toBeInTheDocument();
 });
@@ -35,7 +35,7 @@ it('should indicate a feature being disabled', async () => {
 it('should indicate a feature being enabled', async () => {
   const rendered = render(<TestComponent />);
 
-  await rendered.waitUntilReady();
+  await rendered.waitUntilConfigured();
 
   expect(rendered.queryByText('Is enabled: Yes')).toBeInTheDocument();
 });
@@ -43,7 +43,7 @@ it('should indicate a feature being enabled', async () => {
 it('should indicate a flag variation', async () => {
   const rendered = render(<TestComponent />);
 
-  await rendered.waitUntilReady();
+  await rendered.waitUntilConfigured();
 
   expect(rendered.queryByText('Variation: A')).toBeInTheDocument();
 });

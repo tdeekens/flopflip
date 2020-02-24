@@ -1,3 +1,4 @@
+import { TAdapterConfigurationStatus } from '@flopflip/types';
 import { SplitFactory } from '@splitsoftware/splitio';
 import adapter, {
   normalizeFlags,
@@ -38,8 +39,10 @@ describe('when configuring', () => {
     onFlagsStateChange = jest.fn();
   });
 
-  it('should indicate that the adapter is not ready', () => {
-    expect(adapter.getIsReady()).toBe(false);
+  it('should indicate that the adapter is not configured', () => {
+    expect(
+      adapter.getIsConfigurationStatus(TAdapterConfigurationStatus.Configured)
+    ).toBe(false);
   });
 
   describe('when reconfiguring before configured', () => {
@@ -203,7 +206,13 @@ describe('when configuring', () => {
       );
     });
 
-    describe('when `splitio` is ready', () => {
+    it('should `dispatch` `onUpdateStatus` action with configured', () => {
+      expect(onStatusStateChange).toHaveBeenCalledWith({
+        configurationStatus: TAdapterConfigurationStatus.Configuring,
+      });
+    });
+
+    describe('when `splitio` is configured', () => {
       it('should call getTreatments with attributes', () => {
         expect(treatmentStub).toHaveBeenCalledWith(names, {
           ...userWithKey,
@@ -211,13 +220,17 @@ describe('when configuring', () => {
         });
       });
 
-      it('should indicate that the adapter is ready', () => {
-        expect(adapter.getIsReady()).toBe(true);
+      it('should indicate that the adapter is not configured', () => {
+        expect(
+          adapter.getIsConfigurationStatus(
+            TAdapterConfigurationStatus.Configured
+          )
+        ).toBe(true);
       });
 
-      it('should `dispatch` `onUpdateStatus` action with `isReady`', () => {
+      it('should `dispatch` `onUpdateStatus` action with configured', () => {
         expect(onStatusStateChange).toHaveBeenCalledWith({
-          isReady: true,
+          configurationStatus: TAdapterConfigurationStatus.Configured,
         });
       });
 

@@ -1,10 +1,15 @@
-import { TAdapterSubscriptionStatus } from '@flopflip/types';
+import {
+  TAdapterSubscriptionStatus,
+  TAdapterConfigurationStatus,
+} from '@flopflip/types';
 import React from 'react';
 import { render as rtlRender } from '@flopflip/test-utils';
 import useAdapterSubscription from './use-adapter-subscription';
 
 const createAdapter = () => ({
-  getIsReady: jest.fn(() => false),
+  getIsConfigurationStatus: jest.fn(
+    () => TAdapterConfigurationStatus.Unconfigured
+  ),
   configure: jest.fn(() => Promise.resolve()),
   reconfigure: jest.fn(() => Promise.resolve()),
   subscribe: jest.fn(),
@@ -14,13 +19,15 @@ const createAdapter = () => ({
 const TestComponent = props => {
   const getHasAdapterSubscriptionStatus = useAdapterSubscription(props.adapter);
 
-  const isReady = props.adapter.getIsReady();
+  const isConfigured = props.adapter.getIsConfigurationStatus(
+    TAdapterConfigurationStatus.Configured
+  );
 
   return (
     <>
       <h1>Test Component</h1>;
       <ul>
-        <li>Is ready: {isReady ? 'Yes' : 'No'}</li>
+        <li>Is configured: {isConfigured ? 'Yes' : 'No'}</li>
         <li>
           Is subscribed:{' '}
           {getHasAdapterSubscriptionStatus(
@@ -45,9 +52,9 @@ const TestComponent = props => {
 const render = ({ adapter }) => {
   const props = { adapter };
   const rendered = rtlRender(<TestComponent {...props} />);
-  const waitUntilReady = () => Promise.resolve();
+  const waitUntilConfigured = () => Promise.resolve();
 
-  return { ...rendered, waitUntilReady, props };
+  return { ...rendered, waitUntilConfigured, props };
 };
 
 describe('rendering', () => {
@@ -56,7 +63,7 @@ describe('rendering', () => {
 
     const rendered = render({ adapter });
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilConfigured();
 
     expect(rendered.props.adapter.subscribe).toHaveBeenCalled();
   });
@@ -66,7 +73,7 @@ describe('rendering', () => {
 
     const rendered = render({ adapter });
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilConfigured();
 
     expect(rendered.queryByText(/Is subscribed: Yes/i)).toBeInTheDocument();
     expect(rendered.queryByText(/Is unsubscribed: No/i)).toBeInTheDocument();
@@ -77,7 +84,7 @@ describe('rendering', () => {
 
     const rendered = render({ adapter });
 
-    await rendered.waitUntilReady();
+    await rendered.waitUntilConfigured();
 
     rendered.unmount();
 

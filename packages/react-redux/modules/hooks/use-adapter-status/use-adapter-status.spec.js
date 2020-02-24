@@ -15,48 +15,38 @@ const render = (store, TestComponent) =>
   });
 
 const TestComponent = () => {
-  const { isReady, isConfigured } = useAdapterStatus();
+  const { isConfiguring, isConfigured } = useAdapterStatus();
 
   return (
     <ul>
-      <li>Is ready: {isReady ? 'Yes' : 'No'}</li>
+      <li>Is configuring: {isConfiguring ? 'Yes' : 'No'}</li>
       <li>Is configured: {isConfigured ? 'Yes' : 'No'}</li>
     </ul>
   );
 };
 
-it('should indicate the adapter not being ready', async () => {
+it('should indicate the adapter not configured yet', async () => {
   const store = createStore({
     [STATE_SLICE]: { flags: { disabledFeature: false } },
   });
 
   const rendered = render(store, <TestComponent />);
 
-  expect(rendered.queryByText('Is ready: No')).toBeInTheDocument();
+  expect(rendered.queryByText(/Is configured: No/i)).toBeInTheDocument();
+  expect(rendered.queryByText(/Is configuring: Yes/i)).toBeInTheDocument();
 
-  await rendered.waitUntilReady();
+  await rendered.waitUntilConfigured();
 });
 
-it('should indicate the adapter being ready', async () => {
+it('should indicate the adapter is configured and not configuring any longer', async () => {
   const store = createStore({
     [STATE_SLICE]: { flags: { disabledFeature: false } },
   });
 
   const rendered = render(store, <TestComponent />);
 
-  await rendered.waitUntilReady();
+  await rendered.waitUntilConfigured();
 
-  expect(rendered.queryByText('Is ready: Yes')).toBeInTheDocument();
-});
-
-it('should indicate the adapter being configured', async () => {
-  const store = createStore({
-    [STATE_SLICE]: { flags: { disabledFeature: false } },
-  });
-
-  const rendered = render(store, <TestComponent />);
-
-  await rendered.waitUntilReady();
-
-  expect(rendered.queryByText('Is configured: Yes')).toBeInTheDocument();
+  expect(rendered.queryByText(/Is configured: Yes/i)).toBeInTheDocument();
+  expect(rendered.queryByText(/Is configuring: No/i)).toBeInTheDocument();
 });

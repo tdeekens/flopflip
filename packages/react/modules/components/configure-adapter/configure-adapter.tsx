@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   TFlags,
   TAdapter,
@@ -6,11 +5,13 @@ import {
   TAdapterArgs,
   TAdapterStatus,
   TAdapterReconfiguration,
+  TAdapterConfigurationStatus,
   TAdapterReconfigurationOptions,
   TConfigureAdapterChildren,
   TAdapterStatusChange,
   TFlagsChange,
 } from '@flopflip/types';
+import React from 'react';
 import {
   isFunctionChildren,
   isEmptyChildren,
@@ -259,15 +260,19 @@ const ConfigureAdapter = (props: TProps) => {
       value={createAdapterContext(reconfigureOrQueue, props.adapterStatus)}
     >
       {(() => {
-        const isAdapterReady = props.adapter.getIsReady();
+        const isAdapterConfigured = props.adapter.getIsConfigurationStatus(
+          TAdapterConfigurationStatus.Configured
+        );
 
-        if (isAdapterReady) {
+        if (isAdapterConfigured) {
           if (typeof props.render === 'function') return props.render();
         }
 
         if (isFunctionChildren(props.children))
           return props.children({
-            isAdapterReady,
+            // NOTE: Deprecated, please use `isAdapterConfigured`.
+            isAdapterReady: isAdapterConfigured,
+            isAdapterConfigured,
           });
 
         if (props.children && !isEmptyChildren(props.children))
