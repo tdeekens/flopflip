@@ -18,20 +18,16 @@ import {
 } from './helpers';
 import AdapterContext, { createAdapterContext } from '../adapter-context';
 
-type valueof<T> = T[keyof T];
+type ValueOf<T> = T[keyof T];
 
-type AdapterStates = {
-  UNCONFIGURED: string;
-  CONFIGURING: string;
-  CONFIGURED: string;
-};
-export const AdapterStates: AdapterStates = {
+export const AdapterStates = {
   UNCONFIGURED: 'unconfigured',
   CONFIGURING: 'configuring',
   CONFIGURED: 'configured',
-};
+} as const;
+export type TAdapterStates = ValueOf<typeof AdapterStates>;
 
-type Props = {
+type TProps = {
   shouldDeferAdapterConfiguration?: boolean;
   adapter: TAdapter;
   adapterArgs: TAdapterArgs;
@@ -42,57 +38,72 @@ type Props = {
   render?: () => React.ReactNode;
   children?: TConfigureAdapterChildren;
 };
-type State = {
-  appliedAdapterArgs: TAdapterArgs;
-};
-type AdapterState = valueof<AdapterStates>;
 
-// eslint-disable-next-line react/no-unsafe
-export default class ConfigureAdapter extends React.PureComponent<
-  Props,
-  State
-> {
-  static defaultProps = {
-    shouldDeferAdapterConfiguration: false,
-    defaultFlags: {},
-    children: null,
-    render: null,
-  };
+const ConfigureAdapter = (props: TProps) => {
+  const [appliedAdapterArgs, setAppliedAdapterArgs] = React.useState<
+    TAdapterArgs
+  >(props.adapterArgs);
+  const pendingAdapterArgs = React.useRef<TAdapterArgs | null>(null);
+  const adapterState = React.useRef<TAdapterStates>(AdapterStates.UNCONFIGURED);
 
-  adapterState: AdapterState = AdapterStates.UNCONFIGURED;
-  pendingAdapterArgs?: TAdapterArgs | null = null;
+  const setAdapterState = React.useCallback(
+    (nextAdapterState: TAdapterStates) => {
+      adapterState.current = nextAdapterState;
+    },
+    [adapterState]
+  );
 
-  state: { appliedAdapterArgs: TAdapterArgs } = {
-    appliedAdapterArgs: this.props.adapterArgs,
-  };
+  const applyAdapterArgs = React.useCallback(
+    (nextAdapterArgs: TAdapterArgs) => {
+      /**
+       * NOTE:
+       *   We can only unset `pendingAdapterArgs` after we actually perform
+       *   a batched `setState` otherwise outdated `adapterArgs` as we loose
+       *   the `pendingAdapterArgs` as we unset them too early.
+       */
+      setAppliedAdapterArgs(nextAdapterArgs);
+    },
+    []
+  );
 
-  setAdapterState = (nextAdapterState: AdapterState) => {
-    this.adapterState = nextAdapterState;
-  };
+  /**
+   * NOTE:
+   *   Clears the pending adapter args when applied adapter
+   *   args were set. Previously achieved via `setState` callback.
+   */
+  React.useEffect(() => {
+    pendingAdapterArgs.current = null;
+  }, [appliedAdapterArgs]);
 
-  applyAdapterArgs = (nextAdapterArgs: TAdapterArgs) =>
-    /**
-     * NOTE:
-     *   We can only unset `pendingAdapterArgs` after be actually perform
-     *   a batched `setState` otherwise outdated `adapterArgs` as we loose
-     *   the `pendingAdapterArgs` as we unset them too early.
-     */
-    this.setState(
-      {
-        appliedAdapterArgs: nextAdapterArgs,
-      },
-      () => {
-        this.pendingAdapterArgs = null;
-      }
-    );
+  const getIsAdapterConfigured = React.useCallback(
+    () => adapterState.current === AdapterStates.CONFIGURED,
+    [adapterState]
+  );
 
-  getIsAdapterConfigured = () =>
-    this.adapterState === AdapterStates.CONFIGURED &&
-    this.adapterState !== AdapterStates.CONFIGURING;
+  const getDoesAdapterNeedInitialConfiguration = React.useCallback(
+    () =>
+      adapterState.current !== AdapterStates.CONFIGURED &&
+      adapterState.current !== AdapterStates.CONFIGURING,
+    [adapterState]
+  );
 
-  getDoesAdapterNeedInitialConfiguration = () =>
-    this.adapterState !== AdapterStates.CONFIGURED &&
-    this.adapterState !== AdapterStates.CONFIGURING;
+  const setPendingAdapterArgs = React.useCallback(
+    (nextReconfiguration: TAdapterReconfiguration): void => {
+      /**
+       * NOTE:
+       *    The next reconfiguration is merged into the previous
+       *    one instead of maintaining a queue.
+       *
+       *    The first merge is merged with `appliedAdapter` args
+       *    to contain the initial state (through property initializer).
+       */
+      pendingAdapterArgs.current = mergeAdapterArgs(
+        pendingAdapterArgs.current ?? appliedAdapterArgs,
+        nextReconfiguration
+      );
+    },
+    [appliedAdapterArgs]
+  );
 
   /**
    * NOTE:
@@ -100,33 +111,30 @@ export default class ConfigureAdapter extends React.PureComponent<
    *   Internally this component has a `ReconfigureAdapter` type;
    *   this function has two arguments for clarify.
    */
-  reconfigureOrQueue = (
-    nextAdapterArgs: TAdapterArgs,
-    options: TAdapterReconfigurationOptions
-  ) =>
-    this.getIsAdapterConfigured()
-      ? this.applyAdapterArgs(
-          mergeAdapterArgs(this.state.appliedAdapterArgs, {
+  const reconfigureOrQueue = React.useCallback(
+    (
+      nextAdapterArgs: TAdapterArgs,
+      options: TAdapterReconfigurationOptions
+    ): void => {
+      if (getIsAdapterConfigured()) {
+        applyAdapterArgs(
+          mergeAdapterArgs(appliedAdapterArgs, {
             adapterArgs: nextAdapterArgs,
             options,
           })
-        )
-      : this.setPendingAdapterArgs({ adapterArgs: nextAdapterArgs, options });
+        );
+        return;
+      }
 
-  setPendingAdapterArgs = (nextReconfiguration: TAdapterReconfiguration) => {
-    /**
-     * NOTE:
-     *    The next reconfiguration is merged into the previous
-     *    one instead of maintaining a queue.
-     *
-     *    The first merge with merge with `appliedAdapter` args
-     *    to contain the initial state (through property initializer).
-     */
-    this.pendingAdapterArgs = mergeAdapterArgs(
-      this.pendingAdapterArgs ?? this.state.appliedAdapterArgs,
-      nextReconfiguration
-    );
-  };
+      setPendingAdapterArgs({ adapterArgs: nextAdapterArgs, options });
+    },
+    [
+      appliedAdapterArgs,
+      applyAdapterArgs,
+      getIsAdapterConfigured,
+      setPendingAdapterArgs,
+    ]
+  );
 
   /**
    * NOTE:
@@ -139,135 +147,144 @@ export default class ConfigureAdapter extends React.PureComponent<
    *    be passed pending or applied adapterArgs.
    *
    */
-  getAdapterArgsForConfiguration = (): TAdapterArgs =>
-    this.pendingAdapterArgs ?? this.state.appliedAdapterArgs;
+  const getAdapterArgsForConfiguration = React.useCallback(
+    (): TAdapterArgs => pendingAdapterArgs.current ?? appliedAdapterArgs,
+    [appliedAdapterArgs]
+  );
 
-  handleDefaultFlags = (defaultFlags: TFlags) => {
-    if (Object.keys(defaultFlags).length > 0) {
-      this.props.onFlagsStateChange(defaultFlags);
-    }
-  };
+  const onFlagsStateChange = props.onFlagsStateChange;
+  const handleDefaultFlags = React.useCallback(
+    (defaultFlags: TFlags): void => {
+      if (Object.keys(defaultFlags).length > 0) {
+        onFlagsStateChange(defaultFlags);
+      }
+    },
+    [onFlagsStateChange]
+  );
 
-  /**
-   * NOTE:
-   *   This should be UNSAFE_componentWillReceiveProps.
-   *   However to maintain compatibility with older and newer versions of React
-   *   this can not be prefixed with UNSAFE_.
-   *
-   *   For the future this should likely happen in cDU however as `reconfigureOrQueue`
-   *   may trigger a `setState` it might have unexpected side-effects (setState-loop).
-   *   Maybe some more substancial refactor would be needed.
-   */
-  UNSAFE_componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.adapterArgs !== this.props.adapterArgs) {
-      /**
-       * NOTE:
-       *   The component might receive `adapterArgs` from `ReconfigureFlopflip`
-       *   before it managed to configure. If that occurs the next `adapterArgs`
-       *   passed in will overwrite what `ReconfigureFlopflip` passed in before
-       *   yieling a loss in configuration.
-       *
-       *   Whenever however the adapter has configured we want to component to
-       *   act in a controleld manner. So that overwriting will occur when the
-       *   passed `adapterArgs` change.
-       */
-      this.reconfigureOrQueue(nextProps.adapterArgs, {
-        shouldOverwrite: this.adapterState === AdapterStates.CONFIGURED,
-      });
-    }
-  }
+  // NOTE: This should only happen once when component mounted
+  React.useEffect(() => {
+    if (props.defaultFlags) handleDefaultFlags(props.defaultFlags);
 
-  componentDidMount() {
-    if (this.props.defaultFlags)
-      this.handleDefaultFlags(this.props.defaultFlags);
+    if (!props.shouldDeferAdapterConfiguration) {
+      setAdapterState(AdapterStates.CONFIGURING);
 
-    if (!this.props.shouldDeferAdapterConfiguration) {
-      this.setAdapterState(AdapterStates.CONFIGURING);
-
-      (this.props.adapter as TAdapterInterface<TAdapterArgs>)
-        .configure(this.getAdapterArgsForConfiguration(), {
-          onFlagsStateChange: this.props.onFlagsStateChange,
-          onStatusStateChange: this.props.onStatusStateChange,
+      (props.adapter as TAdapterInterface<TAdapterArgs>)
+        .configure(getAdapterArgsForConfiguration(), {
+          onFlagsStateChange: props.onFlagsStateChange,
+          onStatusStateChange: props.onStatusStateChange,
         })
         .then(() => {
-          this.setAdapterState(AdapterStates.CONFIGURED);
-          if (this.pendingAdapterArgs) {
-            this.applyAdapterArgs(this.pendingAdapterArgs);
+          setAdapterState(AdapterStates.CONFIGURED);
+          if (pendingAdapterArgs.current) {
+            applyAdapterArgs(pendingAdapterArgs.current);
           }
         });
     }
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  componentDidUpdate() {
+  const adapterArgs = props.adapterArgs;
+  React.useEffect(() => {
     /**
      * NOTE:
-     *    Be careful here to not double configure from `componentDidMount`.
-     *    Moreover, cDU will also be invoked from `setState` to `appliedAdapterArgs`.
-     *    Hence, avoid calling `setState` within cDU.
+     *   The component might receive `adapterArgs` from `ReconfigureFlopflip`
+     *   before it managed to configure. If that occurs the next `adapterArgs`
+     *   passed in will overwrite what `ReconfigureFlopflip` passed in before
+     *   yielding a loss in configuration.
+     *
+     *   However, when the adapter is configured we want the component to
+     *   act in a controlled manner so that overwriting will occur when the
+     *   passed `adapterArgs` change.
      */
+    reconfigureOrQueue(adapterArgs, {
+      shouldOverwrite: adapterState.current === AdapterStates.CONFIGURED,
+    });
+  }, [adapterArgs, reconfigureOrQueue]);
 
+  const {
+    adapter,
+    onStatusStateChange,
+    shouldDeferAdapterConfiguration,
+  } = props;
+  React.useEffect(() => {
     if (
-      !this.props.shouldDeferAdapterConfiguration &&
-      this.getDoesAdapterNeedInitialConfiguration()
+      !shouldDeferAdapterConfiguration &&
+      getDoesAdapterNeedInitialConfiguration()
     ) {
-      this.setAdapterState(AdapterStates.CONFIGURING);
+      setAdapterState(AdapterStates.CONFIGURING);
 
-      (this.props.adapter as TAdapterInterface<TAdapterArgs>)
-        .configure(this.getAdapterArgsForConfiguration(), {
-          onFlagsStateChange: this.props.onFlagsStateChange,
-          onStatusStateChange: this.props.onStatusStateChange,
+      (adapter as TAdapterInterface<TAdapterArgs>)
+        .configure(getAdapterArgsForConfiguration(), {
+          onFlagsStateChange,
+          onStatusStateChange,
         })
         .then(() => {
-          this.setAdapterState(AdapterStates.CONFIGURED);
+          setAdapterState(AdapterStates.CONFIGURED);
 
-          if (this.pendingAdapterArgs) {
-            this.applyAdapterArgs(this.pendingAdapterArgs);
+          if (pendingAdapterArgs.current) {
+            applyAdapterArgs(pendingAdapterArgs.current);
           }
         });
       return;
     }
 
-    if (this.getIsAdapterConfigured()) {
-      this.setAdapterState(AdapterStates.CONFIGURING);
+    if (getIsAdapterConfigured()) {
+      setAdapterState(AdapterStates.CONFIGURING);
 
-      (this.props.adapter as TAdapterInterface<TAdapterArgs>)
-        .reconfigure(this.getAdapterArgsForConfiguration(), {
-          onFlagsStateChange: this.props.onFlagsStateChange,
-          onStatusStateChange: this.props.onStatusStateChange,
+      (adapter as TAdapterInterface<TAdapterArgs>)
+        .reconfigure(getAdapterArgsForConfiguration(), {
+          onFlagsStateChange,
+          onStatusStateChange,
         })
         .then(() => {
-          this.setAdapterState(AdapterStates.CONFIGURED);
+          setAdapterState(AdapterStates.CONFIGURED);
         });
     }
-  }
+  }, [
+    applyAdapterArgs,
+    getAdapterArgsForConfiguration,
+    getDoesAdapterNeedInitialConfiguration,
+    getIsAdapterConfigured,
+    setAdapterState,
+    // From props
+    adapter,
+    onFlagsStateChange,
+    onStatusStateChange,
+    shouldDeferAdapterConfiguration,
+  ]);
 
-  render() {
-    return (
-      <AdapterContext.Provider
-        value={createAdapterContext(
-          this.reconfigureOrQueue,
-          this.props.adapterStatus
-        )}
-      >
-        {(() => {
-          const isAdapterReady = this.props.adapter.getIsReady();
+  return (
+    <AdapterContext.Provider
+      value={createAdapterContext(reconfigureOrQueue, props.adapterStatus)}
+    >
+      {(() => {
+        const isAdapterReady = props.adapter.getIsReady();
 
-          if (isAdapterReady) {
-            if (typeof this.props.render === 'function')
-              return this.props.render();
-          }
+        if (isAdapterReady) {
+          if (typeof props.render === 'function') return props.render();
+        }
 
-          if (isFunctionChildren(this.props.children))
-            return this.props.children({
-              isAdapterReady,
-            });
+        if (isFunctionChildren(props.children))
+          return props.children({
+            isAdapterReady,
+          });
 
-          if (this.props.children && !isEmptyChildren(this.props.children))
-            return React.Children.only<React.ReactNode>(this.props.children);
+        if (props.children && !isEmptyChildren(props.children))
+          return React.Children.only<React.ReactNode>(props.children);
 
-          return null;
-        })()}
-      </AdapterContext.Provider>
-    );
-  }
-}
+        return null;
+      })()}
+    </AdapterContext.Provider>
+  );
+};
+
+ConfigureAdapter.defaultProps = {
+  shouldDeferAdapterConfiguration: false,
+  defaultFlags: {},
+  children: null,
+  render: null,
+};
+ConfigureAdapter.displayName = 'ConfigureAdapter';
+
+export default ConfigureAdapter;
