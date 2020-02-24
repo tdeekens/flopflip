@@ -20,16 +20,12 @@ import AdapterContext, { createAdapterContext } from '../adapter-context';
 
 type valueOf<T> = T[keyof T];
 
-type TAdapterStates = {
-  UNCONFIGURED: string;
-  CONFIGURING: string;
-  CONFIGURED: string;
-};
-export const AdapterStates: TAdapterStates = {
+export const AdapterStates = {
   UNCONFIGURED: 'unconfigured',
   CONFIGURING: 'configuring',
   CONFIGURED: 'configured',
-};
+} as const;
+export type TAdapterStates = typeof AdapterStates[keyof typeof AdapterStates];
 
 type TProps = {
   shouldDeferAdapterConfiguration?: boolean;
@@ -122,15 +118,19 @@ const ConfigureAdapter = (props: TProps) => {
     (
       nextAdapterArgs: TAdapterArgs,
       options: TAdapterReconfigurationOptions
-    ): void =>
-      getIsAdapterConfigured()
-        ? applyAdapterArgs(
-            mergeAdapterArgs(appliedAdapterArgs, {
-              adapterArgs: nextAdapterArgs,
-              options,
-            })
-          )
-        : setPendingAdapterArgs({ adapterArgs: nextAdapterArgs, options }),
+    ): void => {
+      if (getIsAdapterConfigured()) {
+        applyAdapterArgs(
+          mergeAdapterArgs(appliedAdapterArgs, {
+            adapterArgs: nextAdapterArgs,
+            options,
+          })
+        );
+        return;
+      }
+
+      setPendingAdapterArgs({ adapterArgs: nextAdapterArgs, options });
+    },
     [
       appliedAdapterArgs,
       applyAdapterArgs,
@@ -187,12 +187,6 @@ const ConfigureAdapter = (props: TProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  /**
-   * NOTE:
-   *   For the future this should likely happen in cDU however as `reconfigureOrQueue`
-   *   may trigger a `setState` it might have unexpected side-effects (setState-loop).
-   *   Maybe some more substancial refactor would be needed.
-   */
   const adapterArgs = props.adapterArgs;
   React.useEffect(() => {
     /**
