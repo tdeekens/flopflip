@@ -88,6 +88,8 @@ export const updateFlags = (flags: TFlags) => {
   adapterState.emitter.emit('flagsStateChange', adapterState.flags);
 };
 
+const __internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
+
 class MemoryAdapter implements TMemoryAdapterInterface {
   id: typeof interfaceIdentifiers.memory;
 
@@ -136,7 +138,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
         configurationStatus: adapterState.configurationStatus,
       });
 
-      adapterState.emitter.emit('__internalConfiguredStatusChange__');
+      adapterState.emitter.emit(__internalConfiguredStatusChange__);
     });
   }
 
@@ -185,8 +187,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
         TAdapterConfigurationStatus.Configured
       )
         resolve();
-      else
-        adapterState.emitter.on('__internalConfiguredStatusChange__', resolve);
+      else adapterState.emitter.on(__internalConfiguredStatusChange__, resolve);
     });
   }
 

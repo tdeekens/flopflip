@@ -129,6 +129,8 @@ const subscribeToFlagsChanges = ({
   }, pollingInteral);
 };
 
+const __internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
+
 class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   id: typeof interfaceIdentifiers.localstorage;
 
@@ -175,7 +177,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       adapterState.emitter.emit('statusStateChange', {
         configurationStatus: adapterState.configurationStatus,
       });
-      adapterState.emitter.emit('__internalConfiguredStatusChange__');
+      adapterState.emitter.emit(__internalConfiguredStatusChange__);
 
       subscribeToFlagsChanges({
         pollingInteral: adapterConfiguration?.pollingInteral,
@@ -204,8 +206,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
         TAdapterConfigurationStatus.Configured
       )
         resolve();
-      else
-        adapterState.emitter.on('__internalConfiguredStatusChange__', resolve);
+      else adapterState.emitter.on(__internalConfiguredStatusChange__, resolve);
     });
   }
 
