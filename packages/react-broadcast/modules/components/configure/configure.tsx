@@ -32,13 +32,37 @@ const initialAdapterStatus: State['status'] = {
 };
 const initialFlags: State['flags'] = {};
 
-const Configure = <AdapterInstance extends TAdapter>(
-  props: Props<AdapterInstance>
-) => {
+const useFlagsState = ({ initialFlags }: { initialFlags: State['flags'] }) => {
   const [flags, setFlags] = React.useState<State['flags']>(initialFlags);
+
+  React.useDebugValue({
+    flags,
+  });
+
+  return [flags, setFlags];
+};
+
+const useStatusState = ({
+  initialAdapterStatus,
+}: {
+  initialAdapterStatus: State['status'];
+}) => {
   const [status, setStatus] = React.useState<State['status']>(
     initialAdapterStatus
   );
+
+  React.useDebugValue({
+    status,
+  });
+
+  return [status, setStatus];
+};
+
+const Configure = <AdapterInstance extends TAdapter>(
+  props: Props<AdapterInstance>
+) => {
+  const [flags, setFlags] = useFlagsState({ initialFlags });
+  const [status, setStatus] = useStatusState({ initialAdapterStatus });
 
   // NOTE:
   //   Using this prevents the callbacks being invoked

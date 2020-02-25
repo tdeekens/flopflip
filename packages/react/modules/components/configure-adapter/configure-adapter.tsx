@@ -40,12 +40,51 @@ type TProps = {
   children?: TConfigureAdapterChildren;
 };
 
-const ConfigureAdapter = (props: TProps) => {
+const useApplieAdapterArgsState = ({
+  initialAdapterArgs,
+}: {
+  initialAdapterArgs: TAdapterArgs;
+}) => {
   const [appliedAdapterArgs, setAppliedAdapterArgs] = React.useState<
     TAdapterArgs
-  >(props.adapterArgs);
-  const pendingAdapterArgs = React.useRef<TAdapterArgs | null>(null);
-  const adapterState = React.useRef<TAdapterStates>(AdapterStates.UNCONFIGURED);
+  >(initialAdapterArgs);
+
+  React.useDebugValue({
+    appliedAdapterArgs,
+  });
+
+  return [appliedAdapterArgs, setAppliedAdapterArgs];
+};
+
+const usePendingAdapterArgsRef = () => {
+  const pendingAdapterArgsRef = React.useRef<TAdapterArgs | null>(null);
+
+  React.useDebugValue({
+    pendingAdapterArgsRef,
+  });
+
+  return pendingAdapterArgsRef;
+};
+
+const useAdapterStateRef = () => {
+  const adapterStateRef = React.useRef<TAdapterStates>(
+    AdapterStates.UNCONFIGURED
+  );
+
+  React.useDebugValue({
+    adapterStateRef,
+  });
+
+  return adapterStateRef;
+};
+
+const ConfigureAdapter = (props: TProps) => {
+  const [
+    appliedAdapterArgs,
+    setAppliedAdapterArgs,
+  ] = useApplieAdapterArgsState({ initialAdapterArgs: props.adapterArgs });
+  const pendingAdapterArgs = usePendingAdapterArgsRef();
+  const adapterState = useAdapterStateRef();
 
   const setAdapterState = React.useCallback(
     (nextAdapterState: TAdapterStates) => {
@@ -64,7 +103,7 @@ const ConfigureAdapter = (props: TProps) => {
        */
       setAppliedAdapterArgs(nextAdapterArgs);
     },
-    []
+    [setAppliedAdapterArgs]
   );
 
   /**
@@ -74,7 +113,7 @@ const ConfigureAdapter = (props: TProps) => {
    */
   React.useEffect(() => {
     pendingAdapterArgs.current = null;
-  }, [appliedAdapterArgs]);
+  }, [appliedAdapterArgs, pendingAdapterArgs]);
 
   const getIsAdapterConfigured = React.useCallback(
     () => adapterState.current === AdapterStates.CONFIGURED,
@@ -103,7 +142,7 @@ const ConfigureAdapter = (props: TProps) => {
         nextReconfiguration
       );
     },
-    [appliedAdapterArgs]
+    [appliedAdapterArgs, pendingAdapterArgs]
   );
 
   /**
@@ -150,7 +189,7 @@ const ConfigureAdapter = (props: TProps) => {
    */
   const getAdapterArgsForConfiguration = React.useCallback(
     (): TAdapterArgs => pendingAdapterArgs.current ?? appliedAdapterArgs,
-    [appliedAdapterArgs]
+    [appliedAdapterArgs, pendingAdapterArgs]
   );
 
   const onFlagsStateChange = props.onFlagsStateChange;
@@ -201,7 +240,7 @@ const ConfigureAdapter = (props: TProps) => {
     reconfigureOrQueue(adapterArgs, {
       shouldOverwrite: adapterState.current === AdapterStates.CONFIGURED,
     });
-  }, [adapterArgs, reconfigureOrQueue]);
+  }, [adapterArgs, adapterState, reconfigureOrQueue]);
 
   const {
     adapter,
@@ -248,6 +287,7 @@ const ConfigureAdapter = (props: TProps) => {
     getDoesAdapterNeedInitialConfiguration,
     getIsAdapterConfigured,
     setAdapterState,
+    pendingAdapterArgs,
     // From props
     adapter,
     onFlagsStateChange,
