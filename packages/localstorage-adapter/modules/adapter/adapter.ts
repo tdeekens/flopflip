@@ -119,12 +119,18 @@ const subscribeToFlagsChanges = ({
 }: {
   pollingInteral?: number;
 }) => {
+  let prevFlagsJson = 'null';
   setInterval(() => {
     if (!getIsUnsubscribed()) {
-      adapterState.emitter.emit(
-        'flagsStateChange',
-        normalizeFlags(storage.get('flags'))
-      );
+      const nextFlags = normalizeFlags(storage.get('flags'));
+      const nextFlagsJson = JSON.stringify(nextFlags);
+      if (prevFlagsJson !== nextFlagsJson) {
+        prevFlagsJson = nextFlagsJson;
+        adapterState.emitter.emit(
+          'flagsStateChange',
+          nextFlags
+        );
+      }
     }
   }, pollingInteral);
 };
