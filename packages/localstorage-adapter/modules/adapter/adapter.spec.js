@@ -12,7 +12,11 @@ const createAdapterEventHandlers = (custom = {}) => ({
 
 describe('when configuring', () => {
   let adapterArgs = {};
-  let adapterEventHandlers = createAdapterEventHandlers();
+  let adapterEventHandlers;
+
+  beforeEach(() => {
+    adapterEventHandlers = createAdapterEventHandlers();
+  });
 
   describe('when not configured', () => {
     it('should indicate that the adapter is not configured', () => {
@@ -33,7 +37,14 @@ describe('when configuring', () => {
   });
 
   describe('when configured', () => {
-    beforeEach(() => adapter.configure(adapterArgs, adapterEventHandlers));
+    beforeEach(() => {
+      jest.useFakeTimers();
+      adapter.configure(adapterArgs, adapterEventHandlers);
+    });
+
+    afterEach(() => {
+      jest.clearAllTimers();
+    });
 
     it('should invoke `onStatusStateChange` with configuring', () => {
       expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
@@ -79,6 +90,12 @@ describe('when configuring', () => {
         updateFlags(updatedFlags);
       });
 
+      it('should set localstorage', () => {
+        expect(
+          JSON.parse(localStorage.getItem(`${STORAGE_SLICE}__flags`))
+        ).toStrictEqual(updatedFlags);
+      });
+
       it('should invoke but not trigger `warning`', () => {
         expect(warning).toHaveBeenCalledWith(true, expect.any(String));
       });
@@ -113,6 +130,42 @@ describe('when configuring', () => {
             })
           );
         });
+      });
+    });
+
+    describe('when localstorage changes', () => {
+      const initialFlags = { fooFlag: false, barFlag: false };
+      const updatedFlags = { fooFlag: true, barFlag: false };
+
+      beforeEach(() => {
+        updateFlags(initialFlags);
+        adapterEventHandlers.onFlagsStateChange.mockClear();
+
+        localStorage.setItem(
+          `${STORAGE_SLICE}__flags`,
+          JSON.stringify(updatedFlags)
+        );
+      });
+
+      it('should invoke `onFlagsStateChange`', () => {
+        jest.advanceTimersByTime(5 * 60 * 1000);
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledTimes(
+          1
+        );
+      });
+    });
+
+    describe('when localstorage has no changes', () => {
+      const initialFlags = { fooFlag: false, barFlag: false };
+
+      beforeEach(() => {
+        updateFlags(initialFlags);
+        adapterEventHandlers.onFlagsStateChange.mockClear();
+      });
+
+      it('should not invoke `onFlagsStateChange`', () => {
+        jest.advanceTimersByTime(5 * 60 * 1000);
+        expect(adapterEventHandlers.onFlagsStateChange).not.toHaveBeenCalled();
       });
     });
 
