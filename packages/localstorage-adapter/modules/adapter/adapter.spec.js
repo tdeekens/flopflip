@@ -150,8 +150,22 @@ describe('when configuring', () => {
       it('should invoke `onFlagsStateChange`', () => {
         jest.advanceTimersByTime(5 * 60 * 1000);
         expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledTimes(
-          5
+          1
         );
+      });
+    });
+
+    describe('when localstorage has no changes', () => {
+      const initialFlags = { fooFlag: false, barFlag: false };
+
+      beforeEach(() => {
+        updateFlags(initialFlags);
+        adapterEventHandlers.onFlagsStateChange.mockClear();
+      });
+
+      it('should not invoke `onFlagsStateChange`', () => {
+        jest.advanceTimersByTime(5 * 60 * 1000);
+        expect(adapterEventHandlers.onFlagsStateChange).not.toHaveBeenCalled();
       });
     });
 

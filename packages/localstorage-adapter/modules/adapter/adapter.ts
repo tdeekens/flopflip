@@ -120,7 +120,7 @@ const didFlagsChange = (nextFlags: TFlags) => {
 
   if (previousFlags === undefined) return true;
 
-  return isEqual(nextFlags, previousFlags);
+  return !isEqual(nextFlags, previousFlags);
 };
 
 const subscribeToFlagsChanges = ({
@@ -155,6 +155,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     const handleFlagsChange = (nextFlags: TFlags) => {
       if (getIsUnsubscribed()) return;
 
+      adapterState.flags = nextFlags
       adapterEventHandlers.onFlagsStateChange(nextFlags);
     };
 
