@@ -111,6 +111,7 @@ export const updateFlags = (flags: TFlags) => {
   });
 
   storage.set('flags', nextFlags);
+  adapterState.flags = nextFlags;
 
   adapterState.emitter.emit('flagsStateChange', nextFlags);
 };
@@ -133,6 +134,7 @@ const subscribeToFlagsChanges = ({
       const nextFlags = normalizeFlags(storage.get('flags'));
 
       if (didFlagsChange(nextFlags)) {
+        adapterState.flags = nextFlags;
         adapterState.emitter.emit('flagsStateChange', nextFlags);
       }
     }
@@ -155,7 +157,6 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     const handleFlagsChange = (nextFlags: TFlags) => {
       if (getIsUnsubscribed()) return;
 
-      adapterState.flags = nextFlags
       adapterEventHandlers.onFlagsStateChange(nextFlags);
     };
 
@@ -181,10 +182,10 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     return Promise.resolve().then(() => {
       adapterState.configurationStatus = TAdapterConfigurationStatus.Configured;
 
-      adapterState.emitter.emit(
-        'flagsStateChange',
-        normalizeFlags(storage.get('flags'))
-      );
+      const flags = normalizeFlags(storage.get('flags'));
+
+      adapterState.flags = flags;
+      adapterState.emitter.emit('flagsStateChange', flags);
       adapterState.emitter.emit('statusStateChange', {
         configurationStatus: adapterState.configurationStatus,
       });
@@ -201,6 +202,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
     storage.unset('flags');
+    adapterState.flags = {};
 
     const nextUser = adapterArgs.user;
     adapterState.user = nextUser;
