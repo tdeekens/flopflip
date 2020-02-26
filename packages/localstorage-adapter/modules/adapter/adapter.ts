@@ -1,6 +1,7 @@
 import warning from 'tiny-warning';
 import mitt, { Emitter } from 'mitt';
 import camelCase from 'lodash/camelCase';
+import isEqual from 'lodash/isEqual';
 import {
   TUser,
   TAdapterStatus,
@@ -114,22 +115,25 @@ export const updateFlags = (flags: TFlags) => {
   adapterState.emitter.emit('flagsStateChange', nextFlags);
 };
 
+const didFlagsChange = (nextFlags: TFlags) => {
+  const previousFlags = adapterState.flags;
+
+  if (previousFlags === undefined) return true;
+
+  return isEqual(nextFlags, previousFlags);
+};
+
 const subscribeToFlagsChanges = ({
   pollingInteral = 1000 * 60,
 }: {
   pollingInteral?: number;
 }) => {
-  let prevFlagsJson = 'null';
   setInterval(() => {
     if (!getIsUnsubscribed()) {
       const nextFlags = normalizeFlags(storage.get('flags'));
-      const nextFlagsJson = JSON.stringify(nextFlags);
-      if (prevFlagsJson !== nextFlagsJson) {
-        prevFlagsJson = nextFlagsJson;
-        adapterState.emitter.emit(
-          'flagsStateChange',
-          nextFlags
-        );
+
+      if (didFlagsChange(nextFlags)) {
+        adapterState.emitter.emit('flagsStateChange', nextFlags);
       }
     }
   }, pollingInteral);
