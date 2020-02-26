@@ -44,7 +44,7 @@ const useApplieAdapterArgsState = ({
   initialAdapterArgs,
 }: {
   initialAdapterArgs: TAdapterArgs;
-}) => {
+}): [TAdapterArgs, React.Dispatch<React.SetStateAction<TAdapterArgs>>] => {
   const [appliedAdapterArgs, setAppliedAdapterArgs] = React.useState<
     TAdapterArgs
   >(initialAdapterArgs);
