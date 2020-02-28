@@ -40,58 +40,14 @@ type TProps = {
   children?: TConfigureAdapterChildren;
 };
 
-const useApplieAdapterArgsState = ({
+const useAppliedAdapterArgsState = ({
   initialAdapterArgs,
 }: {
   initialAdapterArgs: TAdapterArgs;
-}): [TAdapterArgs, React.Dispatch<React.SetStateAction<TAdapterArgs>>] => {
+}): [TAdapterArgs, (nextAdapterArgs: TAdapterArgs) => void] => {
   const [appliedAdapterArgs, setAppliedAdapterArgs] = React.useState<
     TAdapterArgs
   >(initialAdapterArgs);
-
-  React.useDebugValue({
-    appliedAdapterArgs,
-  });
-
-  return [appliedAdapterArgs, setAppliedAdapterArgs];
-};
-
-const usePendingAdapterArgsRef = () => {
-  const pendingAdapterArgsRef = React.useRef<TAdapterArgs | null>(null);
-
-  React.useDebugValue({
-    pendingAdapterArgsRef,
-  });
-
-  return pendingAdapterArgsRef;
-};
-
-const useAdapterStateRef = () => {
-  const adapterStateRef = React.useRef<TAdapterStates>(
-    AdapterStates.UNCONFIGURED
-  );
-
-  React.useDebugValue({
-    adapterStateRef,
-  });
-
-  return adapterStateRef;
-};
-
-const ConfigureAdapter = (props: TProps) => {
-  const [
-    appliedAdapterArgs,
-    setAppliedAdapterArgs,
-  ] = useApplieAdapterArgsState({ initialAdapterArgs: props.adapterArgs });
-  const pendingAdapterArgs = usePendingAdapterArgsRef();
-  const adapterState = useAdapterStateRef();
-
-  const setAdapterState = React.useCallback(
-    (nextAdapterState: TAdapterStates) => {
-      adapterState.current = nextAdapterState;
-    },
-    [adapterState]
-  );
 
   const applyAdapterArgs = React.useCallback(
     (nextAdapterArgs: TAdapterArgs) => {
@@ -104,6 +60,37 @@ const ConfigureAdapter = (props: TProps) => {
       setAppliedAdapterArgs(nextAdapterArgs);
     },
     [setAppliedAdapterArgs]
+  );
+
+  return [appliedAdapterArgs, applyAdapterArgs];
+};
+
+const usePendingAdapterArgsRef = () => {
+  const pendingAdapterArgsRef = React.useRef<TAdapterArgs | null>(null);
+
+  return pendingAdapterArgsRef;
+};
+
+const useAdapterStateRef = () => {
+  const adapterStateRef = React.useRef<TAdapterStates>(
+    AdapterStates.UNCONFIGURED
+  );
+
+  return adapterStateRef;
+};
+
+const ConfigureAdapter = (props: TProps) => {
+  const [appliedAdapterArgs, applyAdapterArgs] = useAppliedAdapterArgsState({
+    initialAdapterArgs: props.adapterArgs,
+  });
+  const pendingAdapterArgs = usePendingAdapterArgsRef();
+  const adapterState = useAdapterStateRef();
+
+  const setAdapterState = React.useCallback(
+    (nextAdapterState: TAdapterStates) => {
+      adapterState.current = nextAdapterState;
+    },
+    [adapterState]
   );
 
   /**
