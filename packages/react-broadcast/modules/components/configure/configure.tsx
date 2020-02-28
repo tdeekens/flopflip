@@ -39,10 +39,6 @@ const useFlagsState = ({
 }): [TFlags, React.Dispatch<React.SetStateAction<TFlags>>] => {
   const [flags, setFlags] = React.useState<State['flags']>(initialFlags);
 
-  React.useDebugValue({
-    flags,
-  });
-
   return [flags, setFlags];
 };
 
@@ -54,10 +50,6 @@ const useStatusState = ({
   const [status, setStatus] = React.useState<State['status']>(
     initialAdapterStatus
   );
-
-  React.useDebugValue({
-    status,
-  });
 
   return [status, setStatus];
 };
