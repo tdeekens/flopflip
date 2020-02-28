@@ -11,7 +11,7 @@ export default function useAdapterStatus() {
     status.configurationStatus
   );
 
-  React.useDebugValue(adapterStatus);
+  React.useDebugValue({ adapterStatus });
 
   return adapterStatus;
 }

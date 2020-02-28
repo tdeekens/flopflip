@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux';
 import { selectStatus } from '../../ducks/status';
 
 export default function useAdapterStatus() {
-  const status = useSelector(selectStatus);
+  const adapterStatus = useSelector(selectStatus);
 
-  React.useDebugValue(status);
+  React.useDebugValue({ adapterStatus });
 
-  return status;
+  return adapterStatus;
 }
