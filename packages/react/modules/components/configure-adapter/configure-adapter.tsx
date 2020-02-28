@@ -65,54 +65,51 @@ const useAppliedAdapterArgsState = ({
   return [appliedAdapterArgs, applyAdapterArgs];
 };
 
-const usePendingAdapterArgsRef = () => {
-  const pendingAdapterArgsRef = React.useRef<TAdapterArgs | null>(null);
-
-  return pendingAdapterArgsRef;
-};
-
-const useAdapterStateRef = () => {
+const useAdapterStateRef = (): [
+  React.MutableRefObject<TAdapterStates>,
+  (nextAdapterState: TAdapterStates) => void,
+  () => boolean,
+  () => boolean
+] => {
   const adapterStateRef = React.useRef<TAdapterStates>(
     AdapterStates.UNCONFIGURED
   );
 
-  return adapterStateRef;
-};
-
-const ConfigureAdapter = (props: TProps) => {
-  const [appliedAdapterArgs, applyAdapterArgs] = useAppliedAdapterArgsState({
-    initialAdapterArgs: props.adapterArgs,
-  });
-  const pendingAdapterArgs = usePendingAdapterArgsRef();
-  const adapterState = useAdapterStateRef();
-
   const setAdapterState = React.useCallback(
     (nextAdapterState: TAdapterStates) => {
-      adapterState.current = nextAdapterState;
+      adapterStateRef.current = nextAdapterState;
     },
-    [adapterState]
+    [adapterStateRef]
   );
 
-  /**
-   * NOTE:
-   *   Clears the pending adapter args when applied adapter
-   *   args were set. Previously achieved via `setState` callback.
-   */
-  React.useEffect(() => {
-    pendingAdapterArgs.current = null;
-  }, [appliedAdapterArgs, pendingAdapterArgs]);
-
   const getIsAdapterConfigured = React.useCallback(
-    () => adapterState.current === AdapterStates.CONFIGURED,
-    [adapterState]
+    () => adapterStateRef.current === AdapterStates.CONFIGURED,
+    [adapterStateRef]
   );
 
   const getDoesAdapterNeedInitialConfiguration = React.useCallback(
     () =>
-      adapterState.current !== AdapterStates.CONFIGURED &&
-      adapterState.current !== AdapterStates.CONFIGURING,
-    [adapterState]
+      adapterStateRef.current !== AdapterStates.CONFIGURED &&
+      adapterStateRef.current !== AdapterStates.CONFIGURING,
+    [adapterStateRef]
   );
+
+  return [
+    adapterStateRef,
+    setAdapterState,
+    getIsAdapterConfigured,
+    getDoesAdapterNeedInitialConfiguration,
+  ];
+};
+
+const usePendingAdapterArgsRef = (
+  appliedAdapterArgs: TAdapterArgs
+): [
+  React.MutableRefObject<TAdapterArgs | null>,
+  (nextReconfiguration: TAdapterReconfiguration) => void,
+  () => TAdapterArgs
+] => {
+  const pendingAdapterArgsRef = React.useRef<TAdapterArgs | null>(null);
 
   const setPendingAdapterArgs = React.useCallback(
     (nextReconfiguration: TAdapterReconfiguration): void => {
@@ -124,13 +121,64 @@ const ConfigureAdapter = (props: TProps) => {
        *    The first merge is merged with `appliedAdapter` args
        *    to contain the initial state (through property initializer).
        */
-      pendingAdapterArgs.current = mergeAdapterArgs(
-        pendingAdapterArgs.current ?? appliedAdapterArgs,
+      pendingAdapterArgsRef.current = mergeAdapterArgs(
+        pendingAdapterArgsRef.current ?? appliedAdapterArgs,
         nextReconfiguration
       );
     },
-    [appliedAdapterArgs, pendingAdapterArgs]
+    [appliedAdapterArgs, pendingAdapterArgsRef]
   );
+
+  const unsetPendingAdapterArgs = React.useCallback(() => {
+    pendingAdapterArgsRef.current = null;
+  }, [pendingAdapterArgsRef]);
+
+  /**
+   * NOTE:
+   *    Whenever the adapter delays configuration pending adapterArgs will
+   *    be kept on `pendingAdapterArgs`. These can either be populated
+   *    from calls to `UNSAFE_componentWillReceiveProps` or through `ReconfigureFlopflip`.
+   *    Both cases go through `reconfigureOrQueue`.
+   *
+   *    In any case, when the adapter should be configured it should either
+   *    be passed pending or applied adapterArgs.
+   *
+   */
+  const getAdapterArgsForConfiguration = React.useCallback(
+    (): TAdapterArgs => pendingAdapterArgsRef.current ?? appliedAdapterArgs,
+    [appliedAdapterArgs, pendingAdapterArgsRef]
+  );
+
+  /**
+   * NOTE: Clears the pending adapter args when applied adapter args changed.
+   */
+  React.useEffect(unsetPendingAdapterArgs, [
+    appliedAdapterArgs,
+    unsetPendingAdapterArgs,
+  ]);
+
+  return [
+    pendingAdapterArgsRef,
+    setPendingAdapterArgs,
+    getAdapterArgsForConfiguration,
+  ];
+};
+
+const ConfigureAdapter = (props: TProps) => {
+  const [appliedAdapterArgs, applyAdapterArgs] = useAppliedAdapterArgsState({
+    initialAdapterArgs: props.adapterArgs,
+  });
+  const [
+    pendingAdapterArgsRef,
+    setPendingAdapterArgs,
+    getAdapterArgsForConfiguration,
+  ] = usePendingAdapterArgsRef(appliedAdapterArgs);
+  const [
+    ,
+    setAdapterState,
+    getIsAdapterConfigured,
+    getDoesAdapterNeedInitialConfiguration,
+  ] = useAdapterStateRef();
 
   /**
    * NOTE:
@@ -163,22 +211,6 @@ const ConfigureAdapter = (props: TProps) => {
     ]
   );
 
-  /**
-   * NOTE:
-   *    Whenever the adapter delays configuration pending adapterArgs will
-   *    be kept on `pendingAdapterArgs`. These can either be populated
-   *    from calls to `UNSAFE_componentWillReceiveProps` or through `ReconfigureFlopflip`.
-   *    Both cases go through `reconfigureOrQueue`.
-   *
-   *    In any case, when the adapter should be configured it should either
-   *    be passed pending or applied adapterArgs.
-   *
-   */
-  const getAdapterArgsForConfiguration = React.useCallback(
-    (): TAdapterArgs => pendingAdapterArgs.current ?? appliedAdapterArgs,
-    [appliedAdapterArgs, pendingAdapterArgs]
-  );
-
   const onFlagsStateChange = props.onFlagsStateChange;
   const handleDefaultFlags = React.useCallback(
     (defaultFlags: TFlags): void => {
@@ -203,8 +235,8 @@ const ConfigureAdapter = (props: TProps) => {
         })
         .then(() => {
           setAdapterState(AdapterStates.CONFIGURED);
-          if (pendingAdapterArgs.current) {
-            applyAdapterArgs(pendingAdapterArgs.current);
+          if (pendingAdapterArgsRef.current) {
+            applyAdapterArgs(pendingAdapterArgsRef.current);
           }
         });
     }
@@ -225,9 +257,9 @@ const ConfigureAdapter = (props: TProps) => {
      *   passed `adapterArgs` change.
      */
     reconfigureOrQueue(adapterArgs, {
-      shouldOverwrite: adapterState.current === AdapterStates.CONFIGURED,
+      shouldOverwrite: getIsAdapterConfigured(),
     });
-  }, [adapterArgs, adapterState, reconfigureOrQueue]);
+  }, [adapterArgs, getIsAdapterConfigured, reconfigureOrQueue]);
 
   const {
     adapter,
@@ -249,8 +281,8 @@ const ConfigureAdapter = (props: TProps) => {
         .then(() => {
           setAdapterState(AdapterStates.CONFIGURED);
 
-          if (pendingAdapterArgs.current) {
-            applyAdapterArgs(pendingAdapterArgs.current);
+          if (pendingAdapterArgsRef.current) {
+            applyAdapterArgs(pendingAdapterArgsRef.current);
           }
         });
       return;
@@ -274,7 +306,7 @@ const ConfigureAdapter = (props: TProps) => {
     getDoesAdapterNeedInitialConfiguration,
     getIsAdapterConfigured,
     setAdapterState,
-    pendingAdapterArgs,
+    pendingAdapterArgsRef,
     // From props
     adapter,
     onFlagsStateChange,
