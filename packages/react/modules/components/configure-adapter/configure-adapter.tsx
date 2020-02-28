@@ -164,7 +164,23 @@ const usePendingAdapterArgsRef = (
   ];
 };
 
+const useHandleDefaultFlagsCallback = ({ onFlagsStateChange }) => {
+  const handleDefaultFlags = React.useCallback(
+    (defaultFlags: TFlags): void => {
+      if (Object.keys(defaultFlags).length > 0) {
+        onFlagsStateChange(defaultFlags);
+      }
+    },
+    [onFlagsStateChange]
+  );
+
+  return handleDefaultFlags;
+};
+
 const ConfigureAdapter = (props: TProps) => {
+  const handleDefaultFlags = useHandleDefaultFlagsCallback({
+    onFlagsStateChange: props.onFlagsStateChange,
+  });
   const [appliedAdapterArgs, applyAdapterArgs] = useAppliedAdapterArgsState({
     initialAdapterArgs: props.adapterArgs,
   });
@@ -212,14 +228,6 @@ const ConfigureAdapter = (props: TProps) => {
   );
 
   const onFlagsStateChange = props.onFlagsStateChange;
-  const handleDefaultFlags = React.useCallback(
-    (defaultFlags: TFlags): void => {
-      if (Object.keys(defaultFlags).length > 0) {
-        onFlagsStateChange(defaultFlags);
-      }
-    },
-    [onFlagsStateChange]
-  );
 
   // NOTE: This should only happen once when component mounted
   React.useEffect(() => {
