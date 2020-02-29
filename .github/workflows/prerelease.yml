@@ -21,7 +21,6 @@ jobs:
           ref: master
       - name: Fetch tags
         if: success()
-        uses: actions/checkout@v2
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
       - name: Read .nvmrc
         if: success()
