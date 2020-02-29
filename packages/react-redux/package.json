@@ -35,8 +35,8 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
+    "react": "16.13.0",
+    "react-dom": "16.13.0",
     "react-redux": "7.2.0",
     "read-pkg-up": "7.0.1",
     "redux": "4.0.5"
