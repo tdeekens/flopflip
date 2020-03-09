@@ -36,7 +36,7 @@
     "read-pkg-up": "7.0.1"
   },
   "dependencies": {
-    "@babel/runtime": "7.8.4",
+    "@babel/runtime": "7.8.7",
     "@flopflip/types": "^2.4.0",
     "debounce-fn": "4.0.0",
     "deepmerge": "4.2.2",
