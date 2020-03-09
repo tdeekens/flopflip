@@ -42,7 +42,7 @@
     "redux": "4.0.5"
   },
   "dependencies": {
-    "@babel/runtime": "7.8.4",
+    "@babel/runtime": "7.8.7",
     "@flopflip/react": "^9.1.9",
     "@flopflip/types": "^2.4.0",
     "@types/react-redux": "7.1.7",

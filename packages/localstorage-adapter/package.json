@@ -38,7 +38,7 @@
     "client"
   ],
   "dependencies": {
-    "@babel/runtime": "7.8.4",
+    "@babel/runtime": "7.8.7",
     "@flopflip/types": "^2.4.0",
     "mitt": "1.2.0",
     "tiny-warning": "1.0.3"
