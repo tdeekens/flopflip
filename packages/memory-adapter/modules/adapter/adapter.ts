@@ -12,6 +12,7 @@ import {
   TMemoryAdapterInterface,
   TAdapterSubscriptionStatus,
   TAdapterConfigurationStatus,
+  TAdapterInitializationStatus,
   TMemoryAdapterArgs,
   interfaceIdentifiers,
 } from '@flopflip/types';
@@ -139,6 +140,10 @@ class MemoryAdapter implements TMemoryAdapterInterface {
       });
 
       adapterState.emitter.emit(__internalConfiguredStatusChange__);
+
+      return {
+        initializationStatus: TAdapterInitializationStatus.Succeeded,
+      };
     });
   }
 
@@ -159,7 +164,9 @@ class MemoryAdapter implements TMemoryAdapterInterface {
       configurationStatus: adapterState.configurationStatus,
     });
 
-    return Promise.resolve();
+    return Promise.resolve({
+      initializationStatus: TAdapterInitializationStatus.Succeeded,
+    });
   }
 
   getIsConfigurationStatus(configurationStatus: TAdapterConfigurationStatus) {

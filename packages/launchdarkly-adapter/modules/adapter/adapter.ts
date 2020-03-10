@@ -10,6 +10,7 @@ import {
   TAdapterEventHandlers,
   TAdapterSubscriptionStatus,
   TAdapterConfigurationStatus,
+  TAdapterInitializationStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
 import merge from 'deepmerge';
@@ -105,7 +106,10 @@ const getInitialFlags = (
     throwOnInitializationFailure,
   }: Pick<TLaunchDarklyAdapterArgs, 'flags' | 'throwOnInitializationFailure'>,
   adapterEventHandlers: TAdapterEventHandlers
-): Promise<{ flagsFromSdk: TFlags | null }> => {
+): Promise<{
+  flagsFromSdk: TFlags | null;
+  initializationStatus: TAdapterInitializationStatus;
+}> => {
   if (adapterState.client) {
     return adapterState.client
       .waitForInitialization()
@@ -152,7 +156,10 @@ const getInitialFlags = (
           });
         }
 
-        return Promise.resolve({ flagsFromSdk });
+        return Promise.resolve({
+          flagsFromSdk,
+          initializationStatus: TAdapterInitializationStatus.Succeeded,
+        });
       })
       .catch(() => {
         if (throwOnInitializationFailure)
@@ -161,7 +168,11 @@ const getInitialFlags = (
               '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
             )
           );
-        return Promise.resolve({ flagsFromSdk: null });
+
+        return Promise.resolve({
+          flagsFromSdk: null,
+          initializationStatus: TAdapterInitializationStatus.Failed,
+        });
       });
   }
 
@@ -212,7 +223,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
         throwOnInitializationFailure,
       },
       adapterEventHandlers
-    ).then(({ flagsFromSdk }) => {
+    ).then(({ flagsFromSdk, initializationStatus }) => {
       if (subscribeToFlagChanges && flagsFromSdk)
         this._setupFlagSubcription(
           {
@@ -222,7 +233,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
           adapterEventHandlers
         );
 
-      return adapterState.client;
+      return { initializationStatus };
     });
   }
 
@@ -239,14 +250,22 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
           '@flopflip/launchdarkly-adapter: please configure adapter before reconfiguring.'
         )
       );
+
     const nextUser = adapterArgs.user;
+
     if (!isEqual(adapterState.user, nextUser)) {
       adapterState.user = ensureUser(nextUser);
 
-      return changeUserContext(adapterState.user);
+      changeUserContext(adapterState.user);
+
+      return Promise.resolve({
+        initializationStatus: TAdapterInitializationStatus.Succeeded,
+      });
     }
 
-    return Promise.resolve();
+    return Promise.resolve({
+      initializationStatus: TAdapterInitializationStatus.Succeeded,
+    });
   }
 
   getIsConfigurationStatus(configurationStatus: TAdapterConfigurationStatus) {

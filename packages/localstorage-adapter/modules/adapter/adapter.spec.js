@@ -37,13 +37,25 @@ describe('when configuring', () => {
   });
 
   describe('when configured', () => {
-    beforeEach(() => {
+    let configurationResult;
+    beforeEach(async () => {
       jest.useFakeTimers();
-      adapter.configure(adapterArgs, adapterEventHandlers);
+      configurationResult = await adapter.configure(
+        adapterArgs,
+        adapterEventHandlers
+      );
     });
 
     afterEach(() => {
       jest.clearAllTimers();
+    });
+
+    it('should resolve to a successful initialization status', () => {
+      expect(configurationResult).toEqual(
+        expect.objectContaining({
+          initializationStatus: 0,
+        })
+      );
     });
 
     it('should invoke `onStatusStateChange` with configuring', () => {
@@ -172,10 +184,18 @@ describe('when configuring', () => {
     describe('when reconfiguring', () => {
       const user = { id: 'bar' };
 
-      beforeEach(() => {
+      beforeEach(async () => {
         updateFlags({ foo: 'bar' });
 
-        return adapter.reconfigure({ user });
+        configurationResult = await adapter.reconfigure({ user });
+      });
+
+      it('should resolve to a successful initialization status', () => {
+        expect(configurationResult).toEqual(
+          expect.objectContaining({
+            initializationStatus: 0,
+          })
+        );
       });
 
       it('should reset localstorage', () => {

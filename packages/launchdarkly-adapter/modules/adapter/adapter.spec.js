@@ -138,12 +138,13 @@ describe('when configuring', () => {
     });
   });
 
-  describe('when ready', () => {
+  describe('when configured', () => {
     let client;
     let onStatusStateChange;
     let onFlagsStateChange;
+    let configurationResult;
 
-    beforeEach(() => {
+    beforeEach(async () => {
       onStatusStateChange = jest.fn();
       onFlagsStateChange = jest.fn();
       client = createClient({
@@ -153,7 +154,7 @@ describe('when configuring', () => {
 
       ldClient.initialize.mockReturnValue(client);
 
-      return adapter.configure(
+      configurationResult = await adapter.configure(
         {
           clientSideId,
           user: userWithKey,
@@ -162,6 +163,14 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
+      );
+    });
+
+    it('should resolve to a successful initialization status', () => {
+      expect(configurationResult).toEqual(
+        expect.objectContaining({
+          initializationStatus: 0,
+        })
       );
     });
 
@@ -452,25 +461,33 @@ describe('when configuring', () => {
       const nextUser = { key: 'bar-user' };
       let client;
 
-      beforeEach(() => {
+      beforeEach(async () => {
         client = createClient({
           identify: jest.fn(() => Promise.resolve()),
         });
 
         ldClient.initialize.mockReturnValue(client);
 
-        return adapter
-          .configure(
-            {
-              clientSideId,
-              user: userWithKey,
-            },
-            {
-              onStatusStateChange,
-              onFlagsStateChange,
-            }
-          )
-          .then(() => adapter.reconfigure({ user: nextUser }));
+        await adapter.configure(
+          {
+            clientSideId,
+            user: userWithKey,
+          },
+          {
+            onStatusStateChange,
+            onFlagsStateChange,
+          }
+        );
+
+        configurationResult = await adapter.reconfigure({ user: nextUser });
+      });
+
+      it('should resolve to a successful initialization status', () => {
+        expect(configurationResult).toEqual(
+          expect.objectContaining({
+            initializationStatus: 0,
+          })
+        );
       });
 
       it('should invoke `identify` on the `client` with the `user`', () => {
