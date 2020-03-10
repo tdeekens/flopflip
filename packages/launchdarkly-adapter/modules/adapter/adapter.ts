@@ -169,6 +169,10 @@ const getInitialFlags = (
             )
           );
 
+        console.warn(
+          '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
+        );
+
         return Promise.resolve({
           flagsFromSdk: null,
           initializationStatus: TAdapterInitializationStatus.Failed,
