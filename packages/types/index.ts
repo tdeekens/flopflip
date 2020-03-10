@@ -20,6 +20,9 @@ export enum TAdapterInitializationStatus {
   Succeeded,
   Failed,
 }
+export type TAdapterConfiguration = {
+  initializationStatus?: TAdapterInitializationStatus;
+};
 export type TAdapterStatus = {
   configurationStatus: TAdapterConfigurationStatus;
   subscriptionStatus: TAdapterSubscriptionStatus;
@@ -79,11 +82,11 @@ export interface TAdapterInterface<Args extends TAdapterArgs> {
   configure(
     adapterArgs: Args,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<unknown>;
+  ): Promise<TAdapterConfiguration>;
   reconfigure(
     adapterArgs: Args,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<unknown>;
+  ): Promise<TAdapterConfiguration>;
   getIsConfigurationStatus(
     configurationStatus: TAdapterConfigurationStatus
   ): boolean;
@@ -102,11 +105,11 @@ export interface TLaunchDarklyAdapterInterface
   configure(
     adapterArgs: TLaunchDarklyAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<unknown>;
+  ): Promise<TAdapterConfiguration>;
   reconfigure(
     adapterArgs: TLaunchDarklyAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<unknown>;
+  ): Promise<TAdapterConfiguration>;
   getIsConfigurationStatus(
     adapterConfigurationStatus: TAdapterConfigurationStatus
   ): boolean;
@@ -122,11 +125,11 @@ export interface TLocalStorageAdapterInterface
   configure(
     adapterArgs: TLocalStorageAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<unknown>;
+  ): Promise<TAdapterConfiguration>;
   reconfigure(
     adapterArgs: TLocalStorageAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<unknown>;
+  ): Promise<TAdapterConfiguration>;
   getIsConfigurationStatus(
     adapterConfigurationStatus: TAdapterConfigurationStatus
   ): boolean;
@@ -140,11 +143,11 @@ export interface TMemoryAdapterInterface
   configure(
     adapterArgs: TMemoryAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<unknown>;
+  ): Promise<TAdapterConfiguration>;
   reconfigure(
     adapterArgs: TMemoryAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<unknown>;
+  ): Promise<TAdapterConfiguration>;
   getIsConfigurationStatus(
     adapterConfigurationStatus: TAdapterConfigurationStatus
   ): boolean;
@@ -160,11 +163,11 @@ export interface TSplitioAdapterInterface
   configure(
     adapterArgs: TSplitioAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<unknown>;
+  ): Promise<TAdapterConfiguration>;
   reconfigure(
     adapterArgs: TSplitioAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
-  ): Promise<unknown>;
+  ): Promise<TAdapterConfiguration>;
   getIsConfigurationStatus(
     adapterConfigurationStatus: TAdapterConfigurationStatus
   ): boolean;

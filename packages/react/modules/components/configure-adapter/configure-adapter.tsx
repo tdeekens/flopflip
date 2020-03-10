@@ -6,6 +6,7 @@ import {
   TAdapterStatus,
   TAdapterReconfiguration,
   TAdapterConfigurationStatus,
+  TAdapterInitializationStatus,
   TAdapterReconfigurationOptions,
   TConfigureAdapterChildren,
   TAdapterStatusChange,
@@ -202,11 +203,24 @@ const useConfigurationEffect = ({
           onFlagsStateChange,
           onStatusStateChange,
         })
-        .then(() => {
-          setAdapterState(AdapterStates.CONFIGURED);
+        .then(configuration => {
+          /**
+           * NOTE:
+           *    The configuration can be `undefined` then assuming `initializationStatus` to have
+           *    succeeded to work with old adapters.
+           */
+          const isAdapterWithoutInitializationStatus = !configuration?.initializationStatus;
 
-          if (pendingAdapterArgsRef.current) {
-            applyAdapterArgs(pendingAdapterArgsRef.current);
+          if (
+            isAdapterWithoutInitializationStatus ||
+            configuration.initializationStatus ===
+              TAdapterInitializationStatus.Succeeded
+          ) {
+            setAdapterState(AdapterStates.CONFIGURED);
+
+            if (pendingAdapterArgsRef.current) {
+              applyAdapterArgs(pendingAdapterArgsRef.current);
+            }
           }
         });
       return;
@@ -220,8 +234,21 @@ const useConfigurationEffect = ({
           onFlagsStateChange,
           onStatusStateChange,
         })
-        .then(() => {
-          setAdapterState(AdapterStates.CONFIGURED);
+        .then(reconfiguration => {
+          /**
+           * NOTE:
+           *    The configuration can be `undefined` then assuming `initializationStatus` to have
+           *    succeeded to work with old adapters.
+           */
+          const isAdapterWithoutInitializationStatus = !reconfiguration?.initializationStatus;
+
+          if (
+            isAdapterWithoutInitializationStatus ||
+            reconfiguration.initializationStatus ===
+              TAdapterInitializationStatus.Succeeded
+          ) {
+            setAdapterState(AdapterStates.CONFIGURED);
+          }
         });
     }
   }, [
@@ -265,10 +292,24 @@ const useDefaultFlagsEffect = ({
           onFlagsStateChange,
           onStatusStateChange,
         })
-        .then(() => {
-          setAdapterState(AdapterStates.CONFIGURED);
-          if (pendingAdapterArgsRef.current) {
-            applyAdapterArgs(pendingAdapterArgsRef.current);
+        .then(configuration => {
+          /**
+           * NOTE:
+           *    The configuration can be `undefined` then assuming `initializationStatus` to have
+           *    succeeded to work with old adapters.
+           */
+          const isAdapterWithoutInitializationStatus = !configuration?.initializationStatus;
+
+          if (
+            isAdapterWithoutInitializationStatus ||
+            configuration.initializationStatus ===
+              TAdapterInitializationStatus.Succeeded
+          ) {
+            setAdapterState(AdapterStates.CONFIGURED);
+
+            if (pendingAdapterArgsRef.current) {
+              applyAdapterArgs(pendingAdapterArgsRef.current);
+            }
           }
         });
     }
