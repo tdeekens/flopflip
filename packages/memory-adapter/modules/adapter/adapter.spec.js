@@ -44,7 +44,22 @@ describe('when configuring', () => {
   });
 
   describe('when configured', () => {
-    beforeEach(() => adapter.configure(adapterArgs, adapterEventHandlers));
+    let configurationResult;
+
+    beforeEach(async () => {
+      configurationResult = await adapter.configure(
+        adapterArgs,
+        adapterEventHandlers
+      );
+    });
+
+    it('should resolve to a successful initialization status', () => {
+      expect(configurationResult).toEqual(
+        expect.objectContaining({
+          initializationStatus: 0,
+        })
+      );
+    });
 
     it('should invoke `onStatusStateChange` with configuring', () => {
       expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
@@ -128,7 +143,17 @@ describe('when configuring', () => {
     describe('when reconfiguring', () => {
       const user = { id: 'bar' };
 
-      beforeEach(() => adapter.reconfigure({ user }));
+      beforeEach(async () => {
+        configurationResult = await adapter.reconfigure({ user });
+      });
+
+      it('should resolve to a successful initialization status', () => {
+        expect(configurationResult).toEqual(
+          expect.objectContaining({
+            initializationStatus: 0,
+          })
+        );
+      });
 
       it('should update the user', () => {
         expect(getUser()).toEqual(user);

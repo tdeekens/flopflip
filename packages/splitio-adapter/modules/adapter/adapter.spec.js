@@ -163,14 +163,15 @@ describe('when configuring', () => {
     });
   });
 
-  describe('when ready', () => {
+  describe('when configured', () => {
     let factory;
     let onStub;
     let onStatusStateChange;
     let onFlagsStateChange;
     let treatmentStub = jest.fn(() => flags);
+    let configurationResult;
 
-    beforeEach(() => {
+    beforeEach(async () => {
       onStatusStateChange = jest.fn();
       onFlagsStateChange = jest.fn();
       onStub = jest.fn((_, cb) => cb());
@@ -191,7 +192,7 @@ describe('when configuring', () => {
 
       SplitFactory.mockReturnValue(factory);
 
-      return adapter.configure(
+      configurationResult = await adapter.configure(
         {
           authorizationKey,
           user: userWithKey,
@@ -203,6 +204,14 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
+      );
+    });
+
+    it('should resolve to a successful initialization status', () => {
+      expect(configurationResult).toEqual(
+        expect.objectContaining({
+          initializationStatus: 0,
+        })
       );
     });
 
@@ -255,7 +264,7 @@ describe('when configuring', () => {
       let getTreatmentsStub;
       let factory;
 
-      beforeEach(() => {
+      beforeEach(async () => {
         onStatusStateChange = jest.fn();
         onFlagsStateChange = jest.fn();
         namesStub = jest.fn(() => names);
@@ -278,7 +287,7 @@ describe('when configuring', () => {
 
         SplitFactory.mockReturnValue(factory);
 
-        return adapter
+        configurationResult = await adapter
           .configure(
             {
               authorizationKey,
@@ -298,7 +307,7 @@ describe('when configuring', () => {
             namesStub.mockClear();
             getTreatmentsStub.mockClear();
 
-            adapter.reconfigure({
+            return adapter.reconfigure({
               user: nextUser,
               onStatusStateChange,
               onFlagsStateChange,
@@ -307,6 +316,14 @@ describe('when configuring', () => {
               },
             });
           });
+      });
+
+      it('should resolve to a successful initialization status', () => {
+        expect(configurationResult).toEqual(
+          expect.objectContaining({
+            initializationStatus: 0,
+          })
+        );
       });
 
       it('should call getTreatments with attributes', () => {

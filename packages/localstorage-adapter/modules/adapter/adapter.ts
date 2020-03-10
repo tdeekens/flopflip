@@ -15,6 +15,7 @@ import {
   TFlags,
   TAdapterSubscriptionStatus,
   TAdapterConfigurationStatus,
+  TAdapterInitializationStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
 
@@ -194,6 +195,10 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       subscribeToFlagsChanges({
         pollingInteral: adapterConfiguration?.pollingInteral,
       });
+
+      return {
+        initializationStatus: TAdapterInitializationStatus.Succeeded,
+      };
     });
   }
 
@@ -209,7 +214,9 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
     adapterState.emitter.emit('flagsStateChange', {});
 
-    return Promise.resolve();
+    return Promise.resolve({
+      initializationStatus: TAdapterInitializationStatus.Succeeded,
+    });
   }
 
   waitUntilConfigured() {

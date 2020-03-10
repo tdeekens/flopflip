@@ -12,6 +12,7 @@ import {
   TSplitioAdapterArgs,
   TAdapterSubscriptionStatus,
   TAdapterConfigurationStatus,
+  TAdapterInitializationStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
 import merge from 'deepmerge';
@@ -196,7 +197,9 @@ const configureSplitio = () => {
     onFlagsStateChange: adapterState.configuredCallbacks.onFlagsStateChange,
     onStatusStateChange: adapterState.configuredCallbacks.onStatusStateChange,
   }).then(() => {
-    return adapterState.client;
+    return {
+      initializationStatus: TAdapterInitializationStatus.Succeeded,
+    };
   });
 };
 
@@ -280,7 +283,9 @@ class SplitioAdapter implements TSplitioAdapterInterface {
       return configureSplitio();
     }
 
-    return Promise.resolve();
+    return Promise.resolve({
+      initializationStatus: TAdapterInitializationStatus.Succeeded,
+    });
   }
 
   getIsConfigurationStatus(configurationStatus: TAdapterConfigurationStatus) {

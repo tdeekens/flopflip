@@ -16,6 +16,10 @@ export enum TAdapterConfigurationStatus {
   Configuring,
   Configured,
 }
+export enum TAdapterInitializationStatus {
+  Succeeded,
+  Failed,
+}
 export type TAdapterStatus = {
   configurationStatus: TAdapterConfigurationStatus;
   subscriptionStatus: TAdapterSubscriptionStatus;
