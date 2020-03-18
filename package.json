@@ -87,6 +87,7 @@
     "husky": "4.2.3",
     "lerna": "3.20.2",
     "lint-staged": "10.0.8",
+    "jest-environment-jsdom-sixteen": "1.0.3",
     "mri": "1.1.4",
     "prettier": "1.19.1",
     "raf": "3.4.1",
