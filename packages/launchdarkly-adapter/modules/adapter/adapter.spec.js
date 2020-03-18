@@ -267,6 +267,8 @@ describe('when configuring', () => {
           });
 
           ldClient.initialize.mockReturnValue(client);
+
+          console.warn = jest.fn();
         });
 
         it('should resolve the configuration', async () => {
@@ -283,6 +285,8 @@ describe('when configuring', () => {
               }
             )
           ).resolves.toEqual(expect.anything());
+
+          expect(console.warn).toHaveBeenCalled();
         });
       });
 
