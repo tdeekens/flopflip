@@ -38,7 +38,7 @@
   "dependencies": {
     "@babel/runtime": "7.9.2",
     "@flopflip/types": "^2.5.0",
-    "@splitsoftware/splitio": "10.10.0",
+    "@splitsoftware/splitio": "10.11.1",
     "deepmerge": "4.2.2",
     "lodash": "4.17.15",
     "tiny-warning": "1.0.3"
