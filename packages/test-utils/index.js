@@ -6,7 +6,6 @@ import {
   screen,
   queries,
   fireEvent,
-  waitForElement,
   queryHelpers,
   buildQueries,
   act,
@@ -68,7 +67,7 @@ const defaultRender = (ui, { ...rtlOptions }) => {
   return rendered;
 };
 
-const fromEventString = string => {
+const fromEventString = (string) => {
   if (string === 'true') return true;
   if (string === 'false') return false;
 
@@ -79,7 +78,7 @@ const ChangeFlagVariation = () => (
   <input
     data-testid="change-flag-variation"
     type="text"
-    onChange={event => {
+    onChange={(event) => {
       const [flagName, flagVariation] = event.target.value.split(':');
 
       updateFlags({ [flagName]: fromEventString(flagVariation) });
@@ -99,7 +98,7 @@ const renderWithAdapter = (
   const defaultedAdapterArgs = mergeOptional(defaultAdapterArgs, adapterArgs);
   const defaultedFlags = mergeOptional(defaultFlags, flags);
 
-  const wrapUiIfNeeded = innerElement =>
+  const wrapUiIfNeeded = (innerElement) =>
     Wrapper ? React.cloneElement(Wrapper, null, innerElement) : innerElement;
 
   const rendered = render(
@@ -126,13 +125,12 @@ const renderWithAdapter = (
   return {
     changeFlagVariation: (flagName, flagVariation) =>
       changeFlagVariation(rendered, flagName, flagVariation),
-    waitUntilConfigured: async () =>
-      waitForElement(() => rendered.getByTestId('change-flag-variation')),
+    waitUntilConfigured: () => rendered.findByTestId('change-flag-variation'),
     ...rendered,
   };
 };
 
-const FlagsToComponent = props =>
+const FlagsToComponent = (props) =>
   Object.entries(props.propKey ? props[props.propKey] : props).map(
     ([flagName, flagVariation]) => (
       <div key={flagName} data-flag-name={flagName}>
@@ -141,7 +139,7 @@ const FlagsToComponent = props =>
     )
   );
 
-const UntoggledComponent = props => (
+const UntoggledComponent = (props) => (
   <span data-flag-name={props.flagName} data-flag-status="disabled">
     Feature is untoggled
   </span>
@@ -150,7 +148,7 @@ UntoggledComponent.displayName = 'UntoggledComponent';
 UntoggledComponent.defaultProps = {
   flagName: 'isFeatureEnabled',
 };
-const ToggledComponent = props => (
+const ToggledComponent = (props) => (
   <span data-flag-name={props.flagName} data-flag-status="enabled">
     Feature is toggled
   </span>

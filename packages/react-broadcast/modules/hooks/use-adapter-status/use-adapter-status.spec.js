@@ -3,7 +3,7 @@ import { renderWithAdapter } from '@flopflip/test-utils';
 import useAdapterStatus from './';
 import Configure from '../../components/configure';
 
-const render = TestComponent =>
+const render = (TestComponent) =>
   renderWithAdapter(TestComponent, {
     components: { ConfigureFlopFlip: Configure },
   });

@@ -3,7 +3,7 @@ import { renderWithAdapter, components } from '@flopflip/test-utils';
 import injectFeatureToggle from './inject-feature-toggle';
 import Configure from '../configure';
 
-const render = TestComponent =>
+const render = (TestComponent) =>
   renderWithAdapter(TestComponent, {
     components: { ConfigureFlopFlip: Configure },
   });

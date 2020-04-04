@@ -1,4 +1,4 @@
-const isEnv = env => process.env.NODE_ENV === env;
+const isEnv = (env) => process.env.NODE_ENV === env;
 
 module.exports = {
   presets: [

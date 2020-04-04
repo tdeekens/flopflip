@@ -459,7 +459,7 @@ Imagine having `ConfigureFlopflip` above a given component wrapped by a `Route`:
     <Route
       exact={false}
       path="/:projectKey"
-      render={routerProps => (
+      render={(routerProps) => (
         <>
           <MyRouteComponent />
           <ReconfigureFlopflip
@@ -722,7 +722,7 @@ matching result.
 import { injectFeatureToggles } from '@flopflip/react-redux';
 import flagsNames from './feature-flags';
 
-const Component = props => {
+const Component = (props) => {
   if (props.featureToggles[flagsNames.TOGGLE_A])
     return <h3>Something to render!</h3>;
   else if (props.featureToggles[flagsNames.TOGGLE_B])
@@ -747,7 +747,7 @@ component. You also may pass a second argument to overwrite the default
 import { injectFeatureToggle } from '@flopflip/react-redux';
 import flagsNames from './feature-flags';
 
-const Component = props => {
+const Component = (props) => {
   if (props.isFeatureEnabled) return <h3>Something to render!</h3>;
 
   return <h3>Something different to render!</h3>;
@@ -772,7 +772,7 @@ An example usage for a connected component would be:
 ```js
 import { selectFeatureFlag } from '@flopflip/react-redux';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   someOtherState: state.someOtherState,
   isFeatureOn: selectFeatureFlag('fooFlagName')(state),
 });

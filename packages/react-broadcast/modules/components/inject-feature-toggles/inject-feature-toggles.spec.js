@@ -3,15 +3,15 @@ import { renderWithAdapter, components } from '@flopflip/test-utils';
 import injectFeatureToggles from './inject-feature-toggles';
 import Configure from '../configure';
 
-const render = TestComponent =>
+const render = (TestComponent) =>
   renderWithAdapter(TestComponent, {
     components: { ConfigureFlopFlip: Configure },
   });
 
-const FlagsToComponent = props => (
+const FlagsToComponent = (props) => (
   <components.FlagsToComponent {...props} propKey="featureToggles" />
 );
-const FlagsToComponentWithPropKey = props => (
+const FlagsToComponentWithPropKey = (props) => (
   <components.FlagsToComponent {...props} propKey="onOffs" />
 );
 

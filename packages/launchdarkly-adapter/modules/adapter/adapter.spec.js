@@ -13,7 +13,7 @@ const userWithoutKey = {
   group: 'foo-group',
 };
 const flags = { 'some-flag-1': true, 'some-flag-2': false };
-const createClient = jest.fn(apiOverwrites => ({
+const createClient = jest.fn((apiOverwrites) => ({
   waitForInitialization: jest.fn(() => Promise.resolve()),
   on: jest.fn((_, cb) => cb()),
   allFlags: jest.fn(() => ({})),

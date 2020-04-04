@@ -4,7 +4,7 @@ import { AdapterStates } from './../configure-adapter';
 import AdapterContext, { createAdapterContext } from './../adapter-context';
 import ReconfigureAdapter from './reconfigure-adapter';
 
-const TestComponent = props => {
+const TestComponent = (props) => {
   const [count, setCount] = React.useState(0);
   const [, setState] = React.useState(0);
   const increment = () => setCount(count + 1);

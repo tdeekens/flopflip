@@ -1,5 +1,5 @@
 import React from 'react';
-import { render as rtlRender, wait } from '@flopflip/test-utils';
+import { render as rtlRender, waitFor } from '@flopflip/test-utils';
 import AdapterContext from '../adapter-context';
 import ConfigureAdapter, { AdapterStates } from './configure-adapter';
 
@@ -22,9 +22,9 @@ const createTestProps = ({ adapter }) => ({
   adapter,
 });
 
-const TestComponent = props => {
+const TestComponent = (props) => {
   const adapterContext = React.useContext(AdapterContext);
-  const isAdapterStatus = status => adapterContext.status === status;
+  const isAdapterStatus = (status) => adapterContext.status === status;
 
   return (
     <>
@@ -85,7 +85,7 @@ describe('rendering', () => {
 
         expect(props.render).not.toHaveBeenCalled();
 
-        await wait(() =>
+        await waitFor(() =>
           expect(adapter.getIsConfigurationStatus).toHaveBeenCalled()
         );
       });
