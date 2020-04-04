@@ -1,10 +1,10 @@
 const colors = require('colors/safe');
 
 const shouldSilenceWarnings = (...messages) =>
-  [].some(msgRegex => messages.some(msg => msgRegex.test(msg)));
+  [].some((msgRegex) => messages.some((msg) => msgRegex.test(msg)));
 
 const shouldNotThrowWarnings = (...messages) =>
-  [].some(msgRegex => messages.some(msg => msgRegex.test(msg)));
+  [].some((msgRegex) => messages.some((msg) => msgRegex.test(msg)));
 
 const logOrThrow = (log, method, messages) => {
   const warning = `console.${method} calls not allowed in tests`;

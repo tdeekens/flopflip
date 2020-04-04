@@ -43,7 +43,7 @@ export default (state = initialState, action) => {
 };
 
 export const increment = () => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({
       type: INCREMENT_REQUESTED,
     });
@@ -55,7 +55,7 @@ export const increment = () => {
 };
 
 export const incrementAsync = () => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({
       type: INCREMENT_REQUESTED,
     });
@@ -69,7 +69,7 @@ export const incrementAsync = () => {
 };
 
 export const decrement = () => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({
       type: DECREMENT_REQUESTED,
     });
@@ -81,7 +81,7 @@ export const decrement = () => {
 };
 
 export const decrementAsync = () => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch({
       type: DECREMENT_REQUESTED,
     });

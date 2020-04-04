@@ -13,10 +13,10 @@ const render = (store, TestComponent) =>
       Wrapper: <Provider store={store} />,
     },
   });
-const FlagsToComponent = props => (
+const FlagsToComponent = (props) => (
   <components.FlagsToComponent {...props} propKey="featureToggles" />
 );
-const FlagsToComponentWithPropKey = props => (
+const FlagsToComponentWithPropKey = (props) => (
   <components.FlagsToComponent {...props} propKey="onOffs" />
 );
 

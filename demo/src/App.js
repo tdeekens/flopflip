@@ -29,7 +29,7 @@ import allFlags, {
 
 const UntoggledFeature = () => <h6>Disabled Feature</h6>;
 
-const IncrementAsyncButton = props => (
+const IncrementAsyncButton = (props) => (
   <button
     type="button"
     disabled={props.isIncrementing}
@@ -42,7 +42,7 @@ const FeatureToggledIncrementAsyncButton = flowRight(
   branchOnFeatureToggle({ flag: INCREMENT_ASYNC_BUTTON }, UntoggledFeature)
 )(IncrementAsyncButton);
 
-const IncrementSyncButton = props => (
+const IncrementSyncButton = (props) => (
   <button
     type="button"
     className={classNames({
@@ -63,7 +63,7 @@ const FeatureToggledIncrementSyncButton = injectFeatureToggle(
   'syncButtonStyle'
 )(IncrementSyncButton);
 
-const Counter = props => (
+const Counter = (props) => (
   <div>
     <h1>Count around</h1>
     <p>Count: {props.count}</p>
@@ -105,7 +105,7 @@ const Counter = props => (
   </div>
 );
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   count: state.counter.count,
   isIncrementing: state.counter.isIncrementing,
   isDecrementing: state.counter.isDecrementing,

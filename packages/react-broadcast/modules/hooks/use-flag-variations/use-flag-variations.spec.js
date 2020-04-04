@@ -3,7 +3,7 @@ import useFlagVariations from './use-flag-variations';
 import { renderWithAdapter } from '@flopflip/test-utils';
 import Configure from '../../components/configure';
 
-const render = TestComponent =>
+const render = (TestComponent) =>
   renderWithAdapter(TestComponent, {
     components: { ConfigureFlopFlip: Configure },
   });

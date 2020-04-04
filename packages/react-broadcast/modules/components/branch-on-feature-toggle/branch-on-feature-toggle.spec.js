@@ -3,7 +3,7 @@ import { renderWithAdapter, components } from '@flopflip/test-utils';
 import branchOnFeatureToggle from './branch-on-feature-toggle';
 import Configure from '../configure';
 
-const render = TestComponent =>
+const render = (TestComponent) =>
   renderWithAdapter(TestComponent, {
     components: { ConfigureFlopFlip: Configure },
   });
