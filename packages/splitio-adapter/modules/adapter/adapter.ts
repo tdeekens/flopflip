@@ -1,4 +1,4 @@
-import { DeepReadonly, DeepWritable } from 'ts-essentials';
+import { DeepReadonly, Writable, DeepWritable } from 'ts-essentials';
 import {
   TFlagName,
   TFlagVariation,
@@ -95,11 +95,15 @@ const subscribeToFlagsChanges = ({
 }>) => {
   if (adapterState.client) {
     adapterState.client.on(adapterState.client.Event.SDK_UPDATE, () => {
-      if (adapterState.client) {
-        const flags = adapterState.client.getTreatments(flagNames, {
-          ...adapterState.user,
-          ...adapterState.treatmentAttributes,
-        } as SplitIO.Attributes);
+      if (adapterState.client && adapterState.user?.key) {
+        const flags = adapterState.client.getTreatments(
+          adapterState.user.key,
+          flagNames as Writable<TFlagName[]>,
+          {
+            ...adapterState.user,
+            ...adapterState.treatmentAttributes,
+          } as SplitIO.Attributes
+        );
 
         if (!getIsUnsubscribed()) {
           onFlagsStateChange(normalizeFlags(flags));
@@ -154,12 +158,20 @@ const subscribe = ({
         let flagNames: TFlagName[];
         let flags: TFlags;
 
-        if (adapterState.client && adapterState.manager) {
+        if (
+          adapterState.client &&
+          adapterState.manager &&
+          adapterState.user?.key
+        ) {
           flagNames = adapterState.manager.names();
-          flags = adapterState.client.getTreatments(flagNames, {
-            ...adapterState.user,
-            ...adapterState.treatmentAttributes,
-          } as SplitIO.Attributes);
+          flags = adapterState.client.getTreatments(
+            adapterState.user.key,
+            flagNames,
+            {
+              ...adapterState.user,
+              ...adapterState.treatmentAttributes,
+            } as SplitIO.Attributes
+          );
 
           if (!getIsUnsubscribed()) {
             onFlagsStateChange(normalizeFlags(flags));

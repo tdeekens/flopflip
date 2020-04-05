@@ -82,11 +82,11 @@ export interface TAdapterInterface<Args extends TAdapterArgs> {
   // Identifiers are used to uniquely identify an interface when performing a condition check.
   id: TAdapterInterfaceIdentifiers;
   configure(
-    adapterArgs: Args,
+    adapterArgs: DeepReadonly<Args>,
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ): Promise<TAdapterConfiguration>;
   reconfigure(
-    adapterArgs: Args,
+    adapterArgs: DeepReadonly<Args>,
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ): Promise<TAdapterConfiguration>;
   getIsConfigurationStatus(
