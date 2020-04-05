@@ -4,10 +4,10 @@ import { getFlagVariation } from '@flopflip/react';
 import { useSelector } from 'react-redux';
 import { selectFlags } from '../../ducks/flags';
 
-export default function useFlagVariations(flagNames: TFlagName[]) {
+export default function useFlagVariations(flagNames: Readonly<TFlagName[]>) {
   const allFlags = useSelector(selectFlags);
 
-  const flagVariations: TFlagVariation[] = flagNames.map(requestedVariation =>
+  const flagVariations: TFlagVariation[] = flagNames.map((requestedVariation) =>
     getFlagVariation(requestedVariation)(allFlags)
   );
 

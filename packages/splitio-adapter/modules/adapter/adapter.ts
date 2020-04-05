@@ -1,3 +1,4 @@
+import { DeepReadonly, DeepWritable } from 'ts-essentials';
 import {
   TFlagName,
   TFlagVariation,
@@ -19,6 +20,7 @@ import merge from 'deepmerge';
 import warning from 'tiny-warning';
 import { SplitFactory } from '@splitsoftware/splitio';
 import camelCase from 'lodash/camelCase';
+import cloneDeep from 'lodash/cloneDeep';
 import omit from 'lodash/omit';
 import isEqual from 'lodash/isEqual';
 
@@ -68,8 +70,9 @@ export const normalizeFlag = (
   return [camelCase(flagName), normalizeFlagValue];
 };
 
-export const normalizeFlags = (flags: TFlags) =>
+export const normalizeFlags = (flags: Readonly<TFlags>) =>
   Object.entries(flags).reduce<TFlags>(
+    // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     (normalizedFlags: TFlags, [flagName, flaValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
         flagName,
@@ -86,10 +89,10 @@ export const normalizeFlags = (flags: TFlags) =>
 const subscribeToFlagsChanges = ({
   flagNames,
   onFlagsStateChange,
-}: {
+}: DeepReadonly<{
   flagNames: TFlagName[];
   onFlagsStateChange: TOnFlagsStateChangeCallback;
-}) => {
+}>) => {
   if (adapterState.client) {
     adapterState.client.on(adapterState.client.Event.SDK_UPDATE, () => {
       if (adapterState.client) {
@@ -107,11 +110,9 @@ const subscribeToFlagsChanges = ({
 };
 
 export const createAnonymousUserKey = () =>
-  Math.random()
-    .toString(36)
-    .substring(2);
+  Math.random().toString(36).substring(2);
 
-const ensureUser = (user: TUser): TUser =>
+const ensureUser = (user: Readonly<TUser>): TUser =>
   merge(user, { key: user?.key ?? createAnonymousUserKey() });
 
 type SplitIOClient = {
@@ -136,10 +137,10 @@ const initializeClient = (): SplitIOClient => {
 const subscribe = ({
   onFlagsStateChange,
   onStatusStateChange,
-}: {
+}: Readonly<{
   onFlagsStateChange: TOnFlagsStateChangeCallback;
   onStatusStateChange: TOnStatusStateChangeCallback;
-}) =>
+}>) =>
   new Promise<void>((resolve, reject) => {
     if (adapterState.client) {
       adapterState.configurationStatus =
@@ -203,6 +204,13 @@ const configureSplitio = () => {
   });
 };
 
+const cloneTreatmentAttributes = <
+  T = TSplitioAdapterArgs['treatmentAttributes']
+>(
+  treatmentAttributes: DeepReadonly<T>
+): DeepWritable<T> =>
+  cloneDeep<DeepWritable<T>>(treatmentAttributes as DeepWritable<T>);
+
 class SplitioAdapter implements TSplitioAdapterInterface {
   id: typeof interfaceIdentifiers.splitio;
 
@@ -211,8 +219,8 @@ class SplitioAdapter implements TSplitioAdapterInterface {
   }
 
   configure(
-    adapterArgs: TSplitioAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<TSplitioAdapterArgs>,
+    adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) {
     const {
       authorizationKey,
@@ -224,8 +232,9 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     adapterState.configurationStatus = TAdapterConfigurationStatus.Configuring;
 
     adapterState.user = ensureUser(user);
-    adapterState.treatmentAttributes = treatmentAttributes;
-
+    adapterState.treatmentAttributes = cloneTreatmentAttributes(
+      treatmentAttributes
+    );
     adapterState.configuredCallbacks.onFlagsStateChange =
       adapterEventHandlers.onFlagsStateChange;
     adapterState.configuredCallbacks.onStatusStateChange =
@@ -244,8 +253,8 @@ class SplitioAdapter implements TSplitioAdapterInterface {
   }
 
   reconfigure(
-    adapterArgs: TSplitioAdapterArgs,
-    _adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<TSplitioAdapterArgs>,
+    _adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) {
     if (
       adapterState.configurationStatus !==
@@ -270,7 +279,9 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     }
 
     if (hasTreatmentChanged) {
-      adapterState.treatmentAttributes = adapterArgs.treatmentAttributes;
+      adapterState.treatmentAttributes = cloneTreatmentAttributes(
+        adapterArgs.treatmentAttributes
+      );
     }
 
     if (

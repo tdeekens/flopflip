@@ -32,6 +32,8 @@ rules:
   '@typescript-eslint/promise-function-async': 0
   '@typescript-eslint/no-explicit-any': 0
   '@typescript-eslint/default-param-last': 1
+  '@typescript-eslint/no-unsafe-call': 0
+  '@typescript-eslint/no-unsafe-return': 0
   default-param-last: 0
 globals:
   VERSION: true
@@ -41,6 +43,13 @@ overrides:
       - 'packages/test-utils/*.js'
     rules:
       react/prop-types: 0
+  - files:
+    - '*.js'
+    rules:
+      '@typescript-eslint/no-unsafe-member-access': 0
+      '@typescript-eslint/no-unsafe-call': 0
+      '@typescript-eslint/no-unsafe-return': 0
+      '@typescript-eslint/prefer-readonly-parameter-types': 0
 settings:
   react:
     version: 'detect'

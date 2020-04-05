@@ -7,7 +7,7 @@ import { updateFlags } from '../../ducks';
 const useUpdateFlags = () => {
   const dispatch = useDispatch<Dispatch<ReturnType<typeof updateFlags>>>();
   return React.useCallback(
-    (flags: TFlagsChange) => dispatch(updateFlags(flags)),
+    (flags: Readonly<TFlagsChange>) => dispatch(updateFlags(flags)),
     [dispatch]
   );
 };

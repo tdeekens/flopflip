@@ -3,10 +3,10 @@ import { getFlagVariation } from '@flopflip/react';
 import { TFlagName, TFlags, TFlagVariation } from '@flopflip/types';
 import { FlagsContext } from '../../components/flags-context';
 
-export default function useFlagVariations(flagNames: TFlagName[]) {
+export default function useFlagVariations(flagNames: Readonly<TFlagName[]>) {
   const allFlags: TFlags = React.useContext(FlagsContext);
 
-  const flagVariations: TFlagVariation[] = flagNames.map(requestedVariation =>
+  const flagVariations: TFlagVariation[] = flagNames.map((requestedVariation) =>
     getFlagVariation(requestedVariation)(allFlags)
   );
 

@@ -1,3 +1,4 @@
+import { DeepReadonly } from 'ts-essentials';
 import warning from 'tiny-warning';
 import mitt, { Emitter } from 'mitt';
 import {
@@ -38,7 +39,7 @@ const intialAdapterState: TAdapterStatus & MemoryAdapterState = {
 let adapterState: TAdapterStatus & MemoryAdapterState = {
   ...intialAdapterState,
 };
-const updateUser = (user: TUser) => {
+const updateUser = (user: Readonly<TUser>) => {
   adapterState.user = user;
 };
 
@@ -53,8 +54,9 @@ const normalizeFlag = (
   // Multi variate flags contain a string or `null` - `false` seems more natural.
   flagValue === null || flagValue === undefined ? false : flagValue,
 ];
-export const normalizeFlags = (rawFlags: TFlags) =>
+export const normalizeFlags = (rawFlags: Readonly<TFlags>) =>
   Object.entries(rawFlags).reduce<TFlags>(
+    // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     (normalizedFlags: TFlags, [flagName, flagValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
         flagName,
@@ -70,7 +72,7 @@ export const normalizeFlags = (rawFlags: TFlags) =>
 
 export const getUser = () => adapterState.user;
 
-export const updateFlags = (flags: TFlags) => {
+export const updateFlags = (flags: Readonly<TFlags>) => {
   const isAdapterConfigured =
     adapterState.configurationStatus === TAdapterConfigurationStatus.Configured;
 
@@ -99,16 +101,16 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   }
 
   configure(
-    adapterArgs: TMemoryAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<TMemoryAdapterArgs>,
+    adapterEventHandlers: Readonly<TAdapterEventHandlers>
   ) {
-    const handleFlagsChange = (nextFlags: TFlags) => {
+    const handleFlagsChange = (nextFlags: Readonly<TFlags>) => {
       if (getIsUnsubscribed()) return;
 
       adapterEventHandlers.onFlagsStateChange(nextFlags);
     };
 
-    const handleStatusChange = (nextStatus: TAdapterStatusChange) => {
+    const handleStatusChange = (nextStatus: Readonly<TAdapterStatusChange>) => {
       if (getIsUnsubscribed()) return;
 
       adapterEventHandlers.onStatusStateChange(nextStatus);
@@ -148,8 +150,8 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   }
 
   reconfigure(
-    adapterArgs: TMemoryAdapterArgs,
-    _adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<TMemoryAdapterArgs>,
+    _adapterEventHandlers: Readonly<TAdapterEventHandlers>
   ) {
     adapterState.configurationStatus = TAdapterConfigurationStatus.Configuring;
 
@@ -188,7 +190,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   };
 
   waitUntilConfigured() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if (
         adapterState.configurationStatus ===
         TAdapterConfigurationStatus.Configured
@@ -203,7 +205,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   }
 
   // For convenience
-  updateFlags(flags: TFlags) {
+  updateFlags(flags: Readonly<TFlags>) {
     return updateFlags(flags);
   }
 
