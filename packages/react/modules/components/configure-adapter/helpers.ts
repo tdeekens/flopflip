@@ -1,3 +1,4 @@
+import { DeepReadonly } from 'ts-essentials';
 import React from 'react';
 import merge from 'deepmerge';
 import {
@@ -17,7 +18,10 @@ const isEmptyChildren = (children: TConfigureAdapterChildren) =>
 
 const mergeAdapterArgs = (
   previousAdapterArgs: TAdapterArgs,
-  { adapterArgs: nextAdapterArgs, options = {} }: TAdapterReconfiguration
+  {
+    adapterArgs: nextAdapterArgs,
+    options = {},
+  }: DeepReadonly<TAdapterReconfiguration>
 ): TAdapterArgs =>
   options.shouldOverwrite
     ? nextAdapterArgs

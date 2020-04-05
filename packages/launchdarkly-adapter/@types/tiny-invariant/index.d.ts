@@ -1,7 +1,7 @@
 declare function invariant(
   testValue: any,
   format?: string,
-  ...extra: any[]
+  ...extra: readonly any[]
 ): void;
 
 declare module 'tiny-invariant' {

@@ -1,4 +1,5 @@
 import { LDClient as TLDClient } from 'launchdarkly-js-client-sdk';
+import { DeepReadonly } from 'ts-essentials';
 
 export type TFlagName = string;
 export type TFlagVariation = boolean | string;
@@ -30,8 +31,8 @@ export type TAdapterStatus = {
 export type TAdapterStatusChange = Partial<TAdapterStatus>;
 export type TFlagsChange = TFlags;
 export type TAdapterEventHandlers = {
-  onFlagsStateChange: (flags: TFlagsChange) => void;
-  onStatusStateChange: (status: TAdapterStatusChange) => void;
+  onFlagsStateChange: (flags: Readonly<TFlagsChange>) => void;
+  onStatusStateChange: (status: Readonly<TAdapterStatusChange>) => void;
 };
 export type TBaseAdapterArgs = {
   user: TUser;
@@ -44,10 +45,11 @@ export type TLaunchDarklyAdapterArgs = TBaseAdapterArgs & {
   throwOnInitializationFailure?: boolean;
   flagsUpdateDelayMs?: number;
 };
+export type TLocalStorageAdapterSubscriptionOptions = {
+  pollingInteral?: number;
+};
 export type TLocalStorageAdapterArgs = TBaseAdapterArgs & {
-  adapterConfiguration?: {
-    pollingInteral?: number;
-  };
+  adapterConfiguration?: TLocalStorageAdapterSubscriptionOptions;
 };
 export type TMemoryAdapterArgs = TBaseAdapterArgs;
 export type TSplitioAdapterArgs = TBaseAdapterArgs & {
@@ -80,12 +82,12 @@ export interface TAdapterInterface<Args extends TAdapterArgs> {
   // Identifiers are used to uniquely identify an interface when performing a condition check.
   id: TAdapterInterfaceIdentifiers;
   configure(
-    adapterArgs: Args,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<Args>,
+    adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ): Promise<TAdapterConfiguration>;
   reconfigure(
-    adapterArgs: Args,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<Args>,
+    adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ): Promise<TAdapterConfiguration>;
   getIsConfigurationStatus(
     configurationStatus: TAdapterConfigurationStatus
@@ -103,19 +105,19 @@ export interface TLaunchDarklyAdapterInterface
   extends TAdapterInterface<TLaunchDarklyAdapterArgs> {
   id: typeof interfaceIdentifiers.launchdarkly;
   configure(
-    adapterArgs: TLaunchDarklyAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<TLaunchDarklyAdapterArgs>,
+    adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ): Promise<TAdapterConfiguration>;
   reconfigure(
-    adapterArgs: TLaunchDarklyAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<TLaunchDarklyAdapterArgs>,
+    adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ): Promise<TAdapterConfiguration>;
   getIsConfigurationStatus(
     adapterConfigurationStatus: TAdapterConfigurationStatus
   ): boolean;
   getClient(): TLDClient | undefined;
   getFlag(flagName: TFlagName): TFlagVariation | undefined;
-  updateUserContext(updatedUserProps: TUser): Promise<unknown>;
+  updateUserContext(updatedUserProps: Readonly<TUser>): Promise<unknown>;
   unsubscribe(): void;
   subscribe(): void;
 }
@@ -123,12 +125,12 @@ export interface TLocalStorageAdapterInterface
   extends TAdapterInterface<TLocalStorageAdapterArgs> {
   id: typeof interfaceIdentifiers.localstorage;
   configure(
-    adapterArgs: TLocalStorageAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<TLocalStorageAdapterArgs>,
+    adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ): Promise<TAdapterConfiguration>;
   reconfigure(
-    adapterArgs: TLocalStorageAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<TLocalStorageAdapterArgs>,
+    adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ): Promise<TAdapterConfiguration>;
   getIsConfigurationStatus(
     adapterConfigurationStatus: TAdapterConfigurationStatus
@@ -141,19 +143,19 @@ export interface TMemoryAdapterInterface
   extends TAdapterInterface<TMemoryAdapterArgs> {
   id: typeof interfaceIdentifiers.memory;
   configure(
-    adapterArgs: TMemoryAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<TMemoryAdapterArgs>,
+    adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ): Promise<TAdapterConfiguration>;
   reconfigure(
-    adapterArgs: TMemoryAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<TMemoryAdapterArgs>,
+    adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ): Promise<TAdapterConfiguration>;
   getIsConfigurationStatus(
     adapterConfigurationStatus: TAdapterConfigurationStatus
   ): boolean;
   waitUntilConfigured(): Promise<unknown>;
   reset(): void;
-  updateFlags(flags: TFlags): void;
+  updateFlags(flags: Readonly<TFlags>): void;
   unsubscribe(): void;
   subscribe(): void;
 }
@@ -161,12 +163,12 @@ export interface TSplitioAdapterInterface
   extends TAdapterInterface<TSplitioAdapterArgs> {
   id: typeof interfaceIdentifiers.splitio;
   configure(
-    adapterArgs: TSplitioAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<TSplitioAdapterArgs>,
+    adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ): Promise<TAdapterConfiguration>;
   reconfigure(
-    adapterArgs: TSplitioAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<TSplitioAdapterArgs>,
+    adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ): Promise<TAdapterConfiguration>;
   getIsConfigurationStatus(
     adapterConfigurationStatus: TAdapterConfigurationStatus
@@ -202,9 +204,9 @@ export type TConfigureAdapterProps<TAdapterInstance extends TAdapter> = {
     : never;
   adapterArgs: ConfigureAdapterArgs<TAdapterInstance>;
 };
-export type TOnFlagsStateChangeCallback = (flags: TFlags) => void;
+export type TOnFlagsStateChangeCallback = (flags: Readonly<TFlags>) => void;
 export type TOnStatusStateChangeCallback = (
-  statusChange: TAdapterStatusChange
+  statusChange: Readonly<TAdapterStatusChange>
 ) => void;
 
 export type TAdapterReconfigurationOptions = {
@@ -219,14 +221,14 @@ export type TConfigureAdapterChildrenAsFunctionArgs = {
   isAdapterConfigured: boolean;
 };
 export type TConfigureAdapterChildrenAsFunction = (
-  args: TConfigureAdapterChildrenAsFunctionArgs
+  args: Readonly<TConfigureAdapterChildrenAsFunctionArgs>
 ) => React.ReactNode;
 export type TConfigureAdapterChildren =
   | TConfigureAdapterChildrenAsFunction
   | React.ReactNode;
 export type TReconfigureAdapter = (
   adapterArgs: TAdapterArgs,
-  options: TAdapterReconfigurationOptions
+  options: Readonly<TAdapterReconfigurationOptions>
 ) => void;
 export type TAdapterContext = {
   reconfigure: TReconfigureAdapter;

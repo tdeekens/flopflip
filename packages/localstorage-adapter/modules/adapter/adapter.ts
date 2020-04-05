@@ -1,3 +1,4 @@
+import { DeepReadonly } from 'ts-essentials';
 import warning from 'tiny-warning';
 import mitt, { Emitter } from 'mitt';
 import camelCase from 'lodash/camelCase';
@@ -13,6 +14,7 @@ import {
   TFlagVariation,
   TFlag,
   TFlags,
+  TLocalStorageAdapterSubscriptionOptions,
   TAdapterSubscriptionStatus,
   TAdapterConfigurationStatus,
   TAdapterInitializationStatus,
@@ -59,10 +61,11 @@ const normalizeFlag = (
   // Multi variate flags contain a string or `null` - `false` seems more natural.
   flagValue === null || flagValue === undefined ? false : flagValue,
 ];
-export const normalizeFlags = (rawFlags: TFlags) => {
+export const normalizeFlags = (rawFlags: Readonly<TFlags>) => {
   if (!rawFlags) return {};
 
   return Object.entries(rawFlags).reduce<TFlags>(
+    // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     (normalizedFlags: TFlags, [flagName, flagValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
         flagName,
@@ -78,7 +81,7 @@ export const normalizeFlags = (rawFlags: TFlags) => {
 };
 
 const storage: Storage = {
-  get: key => {
+  get: (key) => {
     const localStorageValue = localStorage.getItem(`${STORAGE_SLICE}__${key}`);
 
     return localStorageValue ? JSON.parse(localStorageValue) : null;
@@ -92,9 +95,9 @@ const storage: Storage = {
       return false;
     }
   },
-  unset: key => localStorage.removeItem(`${STORAGE_SLICE}__${key}`),
+  unset: (key) => localStorage.removeItem(`${STORAGE_SLICE}__${key}`),
 };
-export const updateFlags = (flags: TFlags) => {
+export const updateFlags = (flags: Readonly<TFlags>) => {
   const isAdapterConfigured =
     adapterState.configurationStatus === TAdapterConfigurationStatus.Configured;
 
@@ -117,7 +120,7 @@ export const updateFlags = (flags: TFlags) => {
   adapterState.emitter.emit('flagsStateChange', nextFlags);
 };
 
-const didFlagsChange = (nextFlags: TFlags) => {
+const didFlagsChange = (nextFlags: Readonly<TFlags>) => {
   const previousFlags = adapterState.flags;
 
   if (previousFlags === undefined) return true;
@@ -127,9 +130,7 @@ const didFlagsChange = (nextFlags: TFlags) => {
 
 const subscribeToFlagsChanges = ({
   pollingInteral = 1000 * 60,
-}: {
-  pollingInteral?: number;
-}) => {
+}: Readonly<TLocalStorageAdapterSubscriptionOptions>) => {
   setInterval(() => {
     if (!getIsUnsubscribed()) {
       const nextFlags = normalizeFlags(storage.get('flags'));
@@ -152,16 +153,16 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   }
 
   configure(
-    adapterArgs: TLocalStorageAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<TLocalStorageAdapterArgs>,
+    adapterEventHandlers: Readonly<TAdapterEventHandlers>
   ) {
-    const handleFlagsChange = (nextFlags: TFlags) => {
+    const handleFlagsChange = (nextFlags: Readonly<TFlags>) => {
       if (getIsUnsubscribed()) return;
 
       adapterEventHandlers.onFlagsStateChange(nextFlags);
     };
 
-    const handleStatusChange = (nextStatus: TAdapterStatusChange) => {
+    const handleStatusChange = (nextStatus: Readonly<TAdapterStatusChange>) => {
       if (getIsUnsubscribed()) return;
 
       adapterEventHandlers.onStatusStateChange(nextStatus);
@@ -203,8 +204,8 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   }
 
   reconfigure(
-    adapterArgs: TLocalStorageAdapterArgs,
-    _adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<TLocalStorageAdapterArgs>,
+    _adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) {
     storage.unset('flags');
     adapterState.flags = {};
@@ -220,7 +221,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   }
 
   waitUntilConfigured() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       if (
         adapterState.configurationStatus ===
         TAdapterConfigurationStatus.Configured

@@ -5,8 +5,8 @@ import getFlagVariation from '../get-flag-variation';
 const getIsFeatureEnabled = (
   flagName: TFlagName = DEFAULT_FLAG_PROP_KEY,
   flagVariation: TFlagVariation = true
-): ((flags: TFlags) => boolean) => {
-  return flags => getFlagVariation(flagName)(flags) === flagVariation;
+): ((flags: Readonly<TFlags>) => boolean) => {
+  return (flags) => getFlagVariation(flagName)(flags) === flagVariation;
 };
 
 export default getIsFeatureEnabled;

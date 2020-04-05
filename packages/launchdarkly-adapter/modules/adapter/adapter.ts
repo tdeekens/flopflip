@@ -1,3 +1,4 @@
+import { DeepReadonly } from 'ts-essentials';
 import {
   TFlagName,
   TFlagVariation,
@@ -39,7 +40,7 @@ const adapterState: TAdapterStatus & LaunchDarklyAdapterState = {
   flags: {},
 };
 
-const updateFlagsInAdapterState = (updatedFlags: TFlags): void => {
+const updateFlagsInAdapterState = (updatedFlags: Readonly<TFlags>): void => {
   adapterState.flags = {
     ...adapterState.flags,
     ...updatedFlags,
@@ -59,9 +60,9 @@ const normalizeFlag = (
 ];
 const denormalizeFlagName = (flagName: TFlagName) => kebabCase(flagName);
 
-const getIsAnonymousUser = (user: TUser) => !user?.key;
+const getIsAnonymousUser = (user: Readonly<TUser>) => !user?.key;
 
-const ensureUser = (user: TUser) => {
+const ensureUser = (user: Readonly<TUser>) => {
   const isAnonymousUser = getIsAnonymousUser(user);
 
   // NOTE: When marked `anonymous` the SDK will generate a unique key and cache it in local storage
@@ -73,11 +74,11 @@ const ensureUser = (user: TUser) => {
 
 const initializeClient = (
   clientSideId: TLaunchDarklyAdapterArgs['clientSideId'],
-  user: TUser,
+  user: Readonly<TUser>,
   clientOptions: TLaunchDarklyAdapterArgs['clientOptions']
 ) => initializeLaunchDarklyClient(clientSideId, user as LDUser, clientOptions);
 
-const changeUserContext = (nextUser: TUser) =>
+const changeUserContext = (nextUser: Readonly<TUser>) =>
   adapterState.client && adapterState.client.identify
     ? adapterState.client.identify(nextUser as LDUser)
     : Promise.reject(
@@ -85,8 +86,9 @@ const changeUserContext = (nextUser: TUser) =>
       );
 
 // NOTE: Exported for testing only
-export const normalizeFlags = (rawFlags: TFlags) =>
+export const normalizeFlags = (rawFlags: Readonly<TFlags>) =>
   Object.entries(rawFlags).reduce<TFlags>(
+    // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     (normalizedFlags: TFlags, [flagName, flagValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
         flagName,
@@ -104,12 +106,16 @@ const getInitialFlags = (
   {
     flags,
     throwOnInitializationFailure,
-  }: Pick<TLaunchDarklyAdapterArgs, 'flags' | 'throwOnInitializationFailure'>,
-  adapterEventHandlers: TAdapterEventHandlers
-): Promise<{
-  flagsFromSdk: TFlags | null;
-  initializationStatus: TAdapterInitializationStatus;
-}> => {
+  }: DeepReadonly<
+    Pick<TLaunchDarklyAdapterArgs, 'flags' | 'throwOnInitializationFailure'>
+  >,
+  adapterEventHandlers: Readonly<TAdapterEventHandlers>
+): Promise<
+  DeepReadonly<{
+    flagsFromSdk: TFlags | null;
+    initializationStatus: TAdapterInitializationStatus;
+  }>
+> => {
   if (adapterState.client) {
     return adapterState.client
       .waitForInitialization()
@@ -195,8 +201,8 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   }
 
   configure(
-    adapterArgs: TLaunchDarklyAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<TLaunchDarklyAdapterArgs>,
+    adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) {
     adapterState.configurationStatus = TAdapterConfigurationStatus.Configuring;
 
@@ -242,8 +248,8 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   }
 
   reconfigure(
-    adapterArgs: TLaunchDarklyAdapterArgs,
-    _adapterEventHandlers: TAdapterEventHandlers
+    adapterArgs: DeepReadonly<TLaunchDarklyAdapterArgs>,
+    _adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) {
     if (
       adapterState.configurationStatus !==
@@ -284,7 +290,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     return adapterState.flags[flagName];
   }
 
-  updateUserContext(updatedUserProps: TUser) {
+  updateUserContext(updatedUserProps: Readonly<TUser>) {
     const isAdapterConfigured =
       adapterState.configurationStatus ===
       TAdapterConfigurationStatus.Configured;
@@ -334,11 +340,11 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     {
       flagsFromSdk,
       flagsUpdateDelayMs,
-    }: {
+    }: DeepReadonly<{
       flagsFromSdk: TFlags;
       flagsUpdateDelayMs?: number;
-    },
-    adapterEventHandlers: TAdapterEventHandlers
+    }>,
+    adapterEventHandlers: Readonly<TAdapterEventHandlers>
   ) {
     for (const flagName in flagsFromSdk) {
       // Dispatch whenever a configured flag value changes
@@ -346,7 +352,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
         Object.prototype.hasOwnProperty.call(flagsFromSdk, flagName) &&
         adapterState.client
       ) {
-        adapterState.client.on(`change:${flagName}`, flagValue => {
+        adapterState.client.on(`change:${flagName}`, (flagValue) => {
           const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
             flagName,
             flagValue

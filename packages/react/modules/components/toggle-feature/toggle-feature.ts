@@ -1,18 +1,19 @@
+import { DeepReadonly } from 'ts-essentials';
 import React from 'react';
 import warning from 'tiny-warning';
 import { isValidElementType } from 'react-is';
 
-type RenderFnArgs = {
+type RenderFnArgs = Readonly<{
   isFeatureEnabled: boolean;
-};
+}>;
 type RenderFn = (args: RenderFnArgs) => React.ReactNode;
-export type Props = {
+export type Props = DeepReadonly<{
   untoggledComponent?: React.ComponentType;
   toggledComponent?: React.ComponentType;
   render?: () => React.ReactNode;
   children?: RenderFn | React.ReactNode;
   isFeatureEnabled: boolean;
-};
+}>;
 
 const ToggleFeature = (props: Props) => {
   if (props.untoggledComponent)

@@ -7,7 +7,7 @@ import { updateStatus } from '../../ducks';
 const useUpdateStatus = () => {
   const dispatch = useDispatch<Dispatch<ReturnType<typeof updateStatus>>>();
   return React.useCallback(
-    (status: TAdapterStatusChange) => dispatch(updateStatus(status)),
+    (status: Readonly<TAdapterStatusChange>) => dispatch(updateStatus(status)),
     [dispatch]
   );
 };
