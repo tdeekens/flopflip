@@ -41,7 +41,8 @@
     "@babel/runtime": "7.9.2",
     "@flopflip/types": "^2.5.1",
     "mitt": "1.2.0",
-    "tiny-warning": "1.0.3"
+    "tiny-warning": "1.0.3",
+    "ts-essentials": "6.0.4"
   },
   "devDependencies": {
     "read-pkg-up": "7.0.1"

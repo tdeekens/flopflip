@@ -41,7 +41,8 @@
     "@splitsoftware/splitio": "10.11.1",
     "deepmerge": "4.2.2",
     "lodash": "4.17.15",
-    "tiny-warning": "1.0.3"
+    "tiny-warning": "1.0.3",
+    "ts-essentials": "6.0.4"
   },
   "keywords": [
     "feature-flags",

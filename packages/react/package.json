@@ -50,7 +50,8 @@
     "lodash": "4.17.15",
     "react-fast-compare": "3.0.1",
     "react-is": "16.13.1",
-    "tiny-warning": "1.0.3"
+    "tiny-warning": "1.0.3",
+    "ts-essentials": "6.0.4"
   },
   "keywords": [
     "react",
