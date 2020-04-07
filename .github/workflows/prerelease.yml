@@ -3,7 +3,7 @@ name: Prerelease
 on:
   push:
     branches:
-      - "master"
+      - 'master'
 
 jobs:
   publish-npm:
@@ -43,7 +43,7 @@ jobs:
         if: success()
         uses: actions/setup-node@v1
         with:
-          node-version: "${{ steps.nvm.outputs.NVMRC }}"
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
           registry-url: https://registry.npmjs.org/
           scope: flopflip
       - name: Install

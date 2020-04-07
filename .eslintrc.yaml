@@ -44,7 +44,7 @@ overrides:
     rules:
       react/prop-types: 0
   - files:
-    - '*.js'
+      - '*.js'
     rules:
       '@typescript-eslint/no-unsafe-member-access': 0
       '@typescript-eslint/no-unsafe-call': 0
