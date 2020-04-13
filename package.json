@@ -63,7 +63,7 @@
     "@commercetools/jest-enzyme-matchers": "1.1.2",
     "@commitlint/cli": "8.3.5",
     "@commitlint/config-conventional": "8.3.4",
-    "@rollup/plugin-commonjs": "11.0.2",
+    "@rollup/plugin-commonjs": "11.1.0",
     "@types/jest": "25.2.1",
     "@types/lodash": "4.14.149",
     "@types/node": "13.11.1",
