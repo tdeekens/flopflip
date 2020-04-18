@@ -1,5 +1,5 @@
 import React from 'react';
-import { render as rtlRender } from '@flopflip/test-utils';
+import { render as rtlRender, act } from '@flopflip/test-utils';
 import adapter, { updateFlags } from '@flopflip/memory-adapter';
 import { Provider } from 'react-redux';
 import { createStore } from '../../../test-utils';
@@ -65,13 +65,13 @@ describe('when enabling feature is', () => {
   it('should indicate the feature being enabled', async () => {
     const rendered = render();
 
-    await adapter.waitUntilConfigured();
-
-    updateFlags({
-      [testFlagName]: true,
-    });
-
     await rendered.waitUntilConfigured();
+
+    act(() =>
+      updateFlags({
+        [testFlagName]: true,
+      })
+    );
 
     expect(rendered.queryByText(/Feature enabled: Yes/i)).toBeInTheDocument();
   });

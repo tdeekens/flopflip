@@ -59,7 +59,7 @@ export const normalizeFlag = (
   flagName: TFlagName,
   flagValue: TFlagVariation
 ): TFlag => {
-  let normalizeFlagValue;
+  let normalizeFlagValue: TFlagVariation;
   if (flagValue === null) {
     normalizeFlagValue = false;
   } else if (flagValue === 'on') {
@@ -141,7 +141,7 @@ const initializeClient = (): SplitIOClient => {
   };
 };
 
-const subscribe = ({
+const subscribe = async ({
   onFlagsStateChange,
   onStatusStateChange,
 }: Readonly<{
@@ -203,7 +203,7 @@ const subscribe = ({
     } else reject();
   });
 
-const configureSplitio = () => {
+const configureSplitio = async () => {
   const { client, manager } = initializeClient();
 
   adapterState.client = client;
@@ -233,7 +233,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     this.id = interfaceIdentifiers.splitio;
   }
 
-  configure(
+  async configure(
     adapterArgs: DeepReadonly<TSplitioAdapterArgs>,
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) {
@@ -267,7 +267,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     return configureSplitio();
   }
 
-  reconfigure(
+  async reconfigure(
     adapterArgs: DeepReadonly<TSplitioAdapterArgs>,
     _adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) {

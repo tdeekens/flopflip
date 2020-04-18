@@ -87,6 +87,7 @@ const storage: Storage = {
   get: (key) => {
     const localStorageValue = localStorage.getItem(`${STORAGE_SLICE}__${key}`);
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return localStorageValue ? JSON.parse(localStorageValue) : null;
   },
   set: (key, value) => {
@@ -155,7 +156,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     this.id = interfaceIdentifiers.localstorage;
   }
 
-  configure(
+  async configure(
     adapterArgs: DeepReadonly<TLocalStorageAdapterArgs>,
     adapterEventHandlers: Readonly<TAdapterEventHandlers>
   ) {
@@ -206,7 +207,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     });
   }
 
-  reconfigure(
+  async reconfigure(
     adapterArgs: DeepReadonly<TLocalStorageAdapterArgs>,
     _adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) {
@@ -223,7 +224,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     });
   }
 
-  waitUntilConfigured() {
+  async waitUntilConfigured() {
     return new Promise((resolve) => {
       if (
         adapterState.configurationStatus ===

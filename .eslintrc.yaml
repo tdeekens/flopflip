@@ -27,13 +27,6 @@ rules:
   max-nested-callbacks:
     - error
     - 20
-  '@typescript-eslint/no-var-requires': 0
-  '@typescript-eslint/explicit-function-return-type': 0
-  '@typescript-eslint/promise-function-async': 0
-  '@typescript-eslint/no-explicit-any': 0
-  '@typescript-eslint/default-param-last': 1
-  '@typescript-eslint/no-unsafe-call': 0
-  '@typescript-eslint/no-unsafe-return': 0
   default-param-last: 0
 globals:
   VERSION: true
@@ -46,6 +39,7 @@ overrides:
   - files:
       - '*.js'
     rules:
+      '@typescript-eslint/promise-function-async': 0
       '@typescript-eslint/no-unsafe-member-access': 0
       '@typescript-eslint/no-unsafe-call': 0
       '@typescript-eslint/no-unsafe-return': 0
