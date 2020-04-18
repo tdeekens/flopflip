@@ -30,7 +30,7 @@ it('should indicate a feature being disabled', async () => {
 
   await rendered.waitUntilConfigured();
 
-  expect(rendered.queryByText('Is disabled: Yes')).toBeInTheDocument();
+  expect(rendered.getByText('Is disabled: Yes')).toBeInTheDocument();
 });
 
 it('should indicate a feature being enabled', async () => {
@@ -38,5 +38,5 @@ it('should indicate a feature being enabled', async () => {
 
   await rendered.waitUntilConfigured();
 
-  expect(rendered.queryByText('Is enabled: Yes')).toBeInTheDocument();
+  expect(rendered.getByText('Is enabled: Yes')).toBeInTheDocument();
 });

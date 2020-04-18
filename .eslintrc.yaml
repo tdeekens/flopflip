@@ -12,6 +12,7 @@ extends:
   - prettier/@typescript-eslint
   - prettier/react
   - plugin:jest/recommended
+  - plugin:testing-library/react
 env:
   es6: true
   jest: true
@@ -28,6 +29,8 @@ rules:
     - error
     - 20
   default-param-last: 0
+  testing-library/prefer-presence-queries: 'error'
+  testing-library/await-async-query: 'error'
 globals:
   VERSION: true
 overrides:

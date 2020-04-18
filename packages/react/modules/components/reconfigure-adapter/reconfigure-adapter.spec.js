@@ -59,7 +59,7 @@ describe('with children', () => {
       />
     );
 
-    expect(rendered.queryByText('Children')).toBeInTheDocument();
+    expect(rendered.getByText('Children')).toBeInTheDocument();
   });
 });
 

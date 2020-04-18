@@ -4685,6 +4685,11 @@ eslint-plugin-react@7.19.0:
     string.prototype.matchall "^4.0.2"
     xregexp "^4.3.0"
 
+eslint-plugin-testing-library@3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-testing-library/-/eslint-plugin-testing-library-3.0.3.tgz#521f51b9b9383b31434c185bcef0b497932a20d1"
+  integrity sha512-Lk5p/WC6UA+u9KYJwSUVzDKTbNItGJFP1ozsLVJXWcV5dPPRFcfYX5Q8ntQCKBQVAxri9l4nY4cbr0yz5lIBrw==
+
 eslint-rule-docs@^1.1.5:
   version "1.1.186"
   resolved "https://registry.yarnpkg.com/eslint-rule-docs/-/eslint-rule-docs-1.1.186.tgz#7bb118ff7bd1e224c21739bc13ca979c4aafa3dc"
