@@ -59,7 +59,7 @@ export const normalizeFlag = (
   flagName: TFlagName,
   flagValue: TFlagVariation
 ): TFlag => {
-  let normalizeFlagValue;
+  let normalizeFlagValue: TFlagVariation;
   if (flagValue === null) {
     normalizeFlagValue = false;
   } else if (flagValue === 'on') {
@@ -70,7 +70,6 @@ export const normalizeFlag = (
     normalizeFlagValue = flagValue;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return [camelCase(flagName), normalizeFlagValue];
 };
 
