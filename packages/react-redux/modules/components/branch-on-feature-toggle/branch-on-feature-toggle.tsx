@@ -3,11 +3,12 @@ import type { TFlagName, TFlagVariation } from '@flopflip/types';
 import React from 'react';
 import { useFeatureToggle } from '../../hooks';
 
+type TBranchOnFeatureToggleOptions = Readonly<{
+  flag: TFlagName;
+  variation?: TFlagVariation;
+}>;
 export default function branchOnFeatureToggle<OwnProps extends object>(
-  {
-    flag: flagName,
-    variation: flagVariation,
-  }: { flag: TFlagName; variation?: TFlagVariation },
+  { flag: flagName, variation: flagVariation }: TBranchOnFeatureToggleOptions,
   UntoggledComponent?: React.ComponentType
 ) {
   return (ToggledComponent: React.ComponentType<OwnProps>) => {

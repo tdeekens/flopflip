@@ -1,3 +1,4 @@
+import type { DeepReadonly } from 'ts-essentials';
 import type {
   TAdapter,
   TFlags,
@@ -35,21 +36,29 @@ const initialAdapterStatus: State['status'] = {
 };
 const initialFlags: State['flags'] = {};
 
+type TUseFlagStateOptions = DeepReadonly<{
+  initialFlags: State['flags'];
+}>;
 const useFlagsState = ({
   initialFlags,
-}: {
-  initialFlags: State['flags'];
-}): [TFlags, React.Dispatch<React.SetStateAction<TFlags>>] => {
+}: TUseFlagStateOptions): [
+  TFlags,
+  React.Dispatch<React.SetStateAction<Readonly<TFlags>>>
+] => {
   const [flags, setFlags] = React.useState<State['flags']>(initialFlags);
 
   return [flags, setFlags];
 };
 
+type TUseStatusStateOptions = DeepReadonly<{
+  initialAdapterStatus: State['status'];
+}>;
 const useStatusState = ({
   initialAdapterStatus,
-}: {
-  initialAdapterStatus: State['status'];
-}): [TAdapterStatus, React.Dispatch<React.SetStateAction<TAdapterStatus>>] => {
+}: TUseStatusStateOptions): [
+  TAdapterStatus,
+  React.Dispatch<React.SetStateAction<Readonly<TAdapterStatus>>>
+] => {
   const [status, setStatus] = React.useState<State['status']>(
     initialAdapterStatus
   );
@@ -58,7 +67,7 @@ const useStatusState = ({
 };
 
 const Configure = <AdapterInstance extends TAdapter>(
-  props: Props<AdapterInstance>
+  props: DeepReadonly<Props<AdapterInstance>>
 ) => {
   const [flags, setFlags] = useFlagsState({ initialFlags });
   const [status, setStatus] = useStatusState({ initialAdapterStatus });
@@ -69,7 +78,9 @@ const Configure = <AdapterInstance extends TAdapter>(
   //   component.
   const getHasAdapterSubscriptionStatus = useAdapterSubscription(props.adapter);
 
-  const handleUpdateFlags = React.useCallback<(flags: TFlagsChange) => void>(
+  const handleUpdateFlags = React.useCallback<
+    (flags: Readonly<TFlagsChange>) => void
+  >(
     (flags) => {
       if (
         getHasAdapterSubscriptionStatus(TAdapterSubscriptionStatus.Unsubscribed)
@@ -86,7 +97,7 @@ const Configure = <AdapterInstance extends TAdapter>(
   );
 
   const handleUpdateStatus = React.useCallback<
-    (status: TAdapterStatusChange) => void
+    (status: Readonly<TAdapterStatusChange>) => void
   >(
     (status) => {
       if (
