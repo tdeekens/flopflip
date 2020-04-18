@@ -75,8 +75,8 @@ describe('rendering', () => {
 
     await rendered.waitUntilConfigured();
 
-    expect(rendered.queryByText(/Is subscribed: Yes/i)).toBeInTheDocument();
-    expect(rendered.queryByText(/Is unsubscribed: No/i)).toBeInTheDocument();
+    expect(rendered.getByText(/Is subscribed: Yes/i)).toBeInTheDocument();
+    expect(rendered.getByText(/Is unsubscribed: No/i)).toBeInTheDocument();
   });
 
   it('should unsubscribe the adapter when unmounting', async () => {

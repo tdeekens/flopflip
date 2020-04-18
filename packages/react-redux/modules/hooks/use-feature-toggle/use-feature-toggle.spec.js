@@ -37,7 +37,7 @@ describe('when adapter is configured', () => {
 
     await rendered.waitUntilConfigured();
 
-    expect(rendered.queryByText('Is disabled: Yes')).toBeInTheDocument();
+    expect(rendered.getByText('Is disabled: Yes')).toBeInTheDocument();
   });
 
   it('should indicate a feature being enabled', async () => {
@@ -49,6 +49,6 @@ describe('when adapter is configured', () => {
 
     await rendered.waitUntilConfigured();
 
-    expect(rendered.queryByText('Is enabled: Yes')).toBeInTheDocument();
+    expect(rendered.getByText('Is enabled: Yes')).toBeInTheDocument();
   });
 });

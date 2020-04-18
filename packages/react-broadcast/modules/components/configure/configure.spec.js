@@ -47,7 +47,7 @@ describe('when feature is disabled', () => {
 
     await rendered.waitUntilConfigured();
 
-    expect(rendered.queryByText(/Feature enabled: No/i)).toBeInTheDocument();
+    expect(rendered.getByText(/Feature enabled: No/i)).toBeInTheDocument();
   });
 });
 
@@ -63,7 +63,7 @@ describe('when enabling feature is', () => {
       })
     );
 
-    expect(rendered.queryByText(/Feature enabled: Yes/i)).toBeInTheDocument();
+    expect(rendered.getByText(/Feature enabled: Yes/i)).toBeInTheDocument();
   });
 });
 
@@ -71,9 +71,9 @@ describe('when unconfigured', () => {
   it('should indicate through the adapter state', async () => {
     const rendered = render();
 
-    expect(rendered.queryByText(/Is unconfigured: Yes/i)).toBeInTheDocument();
-    expect(rendered.queryByText(/Is configuring: No/i)).toBeInTheDocument();
-    expect(rendered.queryByText(/Is configured: No/i)).toBeInTheDocument();
+    expect(rendered.getByText(/Is unconfigured: Yes/i)).toBeInTheDocument();
+    expect(rendered.getByText(/Is configuring: No/i)).toBeInTheDocument();
+    expect(rendered.getByText(/Is configured: No/i)).toBeInTheDocument();
 
     await rendered.waitUntilConfigured();
   });
@@ -85,8 +85,8 @@ describe('when configured', () => {
 
     await rendered.waitUntilConfigured();
 
-    expect(rendered.queryByText(/Is configuring: No/i)).toBeInTheDocument();
-    expect(rendered.queryByText(/Is configured: Yes/i)).toBeInTheDocument();
+    expect(rendered.getByText(/Is configuring: No/i)).toBeInTheDocument();
+    expect(rendered.getByText(/Is configured: Yes/i)).toBeInTheDocument();
   });
 });
 

@@ -125,7 +125,7 @@ describe('rendering', () => {
 
         const rendered = render({ props, adapter });
 
-        expect(rendered.queryByText('Test component')).toBeInTheDocument();
+        expect(rendered.getByText('Test component')).toBeInTheDocument();
 
         await rendered.waitUntilStatus();
       });
@@ -140,7 +140,7 @@ describe('rendering', () => {
 
         const rendered = render({ props, adapter });
 
-        expect(rendered.queryByText('Test component')).toBeInTheDocument();
+        expect(rendered.getByText('Test component')).toBeInTheDocument();
 
         await rendered.waitUntilStatus();
       });
