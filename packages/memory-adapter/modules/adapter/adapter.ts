@@ -103,7 +103,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     this.id = interfaceIdentifiers.memory;
   }
 
-  configure(
+  async configure(
     adapterArgs: DeepReadonly<TMemoryAdapterArgs>,
     adapterEventHandlers: Readonly<TAdapterEventHandlers>
   ) {
@@ -152,7 +152,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     });
   }
 
-  reconfigure(
+  async reconfigure(
     adapterArgs: DeepReadonly<TMemoryAdapterArgs>,
     _adapterEventHandlers: Readonly<TAdapterEventHandlers>
   ) {
@@ -192,7 +192,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     };
   };
 
-  waitUntilConfigured() {
+  async waitUntilConfigured() {
     return new Promise((resolve) => {
       if (
         adapterState.configurationStatus ===

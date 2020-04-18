@@ -70,6 +70,7 @@ export const normalizeFlag = (
     normalizeFlagValue = flagValue;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return [camelCase(flagName), normalizeFlagValue];
 };
 
@@ -141,7 +142,7 @@ const initializeClient = (): SplitIOClient => {
   };
 };
 
-const subscribe = ({
+const subscribe = async ({
   onFlagsStateChange,
   onStatusStateChange,
 }: Readonly<{
@@ -203,7 +204,7 @@ const subscribe = ({
     } else reject();
   });
 
-const configureSplitio = () => {
+const configureSplitio = async () => {
   const { client, manager } = initializeClient();
 
   adapterState.client = client;
@@ -233,7 +234,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     this.id = interfaceIdentifiers.splitio;
   }
 
-  configure(
+  async configure(
     adapterArgs: DeepReadonly<TSplitioAdapterArgs>,
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) {
@@ -267,7 +268,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     return configureSplitio();
   }
 
-  reconfigure(
+  async reconfigure(
     adapterArgs: DeepReadonly<TSplitioAdapterArgs>,
     _adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) {

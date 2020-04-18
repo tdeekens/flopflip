@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.9.2",
+    "@types/react-is": "16.7.1",
     "deepmerge": "4.2.2",
     "lodash": "4.17.15",
     "react-fast-compare": "3.0.1",

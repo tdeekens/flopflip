@@ -81,7 +81,7 @@ const initializeClient = (
   clientOptions: TLaunchDarklyAdapterArgs['clientOptions']
 ) => initializeLaunchDarklyClient(clientSideId, user as LDUser, clientOptions);
 
-const changeUserContext = (nextUser: Readonly<TUser>) =>
+const changeUserContext = async (nextUser: Readonly<TUser>) =>
   adapterState.client && adapterState.client.identify
     ? adapterState.client.identify(nextUser as LDUser)
     : Promise.reject(
@@ -105,7 +105,7 @@ export const normalizeFlags = (rawFlags: Readonly<TFlags>) =>
     {}
   );
 
-const getInitialFlags = (
+const getInitialFlags = async (
   {
     flags,
     throwOnInitializationFailure,
@@ -122,7 +122,7 @@ const getInitialFlags = (
   if (adapterState.client) {
     return adapterState.client
       .waitForInitialization()
-      .then(() => {
+      .then(async () => {
         let flagsFromSdk: null | TFlags = null;
 
         if (adapterState.client && !flags) {
@@ -170,7 +170,7 @@ const getInitialFlags = (
           initializationStatus: TAdapterInitializationStatus.Succeeded,
         });
       })
-      .catch(() => {
+      .catch(async () => {
         if (throwOnInitializationFailure)
           return Promise.reject(
             new Error(
@@ -203,7 +203,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     this.id = interfaceIdentifiers.launchdarkly;
   }
 
-  configure(
+  async configure(
     adapterArgs: DeepReadonly<TLaunchDarklyAdapterArgs>,
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) {
@@ -250,7 +250,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     });
   }
 
-  reconfigure(
+  async reconfigure(
     adapterArgs: DeepReadonly<TLaunchDarklyAdapterArgs>,
     _adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) {
@@ -293,7 +293,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     return adapterState.flags[flagName];
   }
 
-  updateUserContext(updatedUserProps: Readonly<TUser>) {
+  async updateUserContext(updatedUserProps: Readonly<TUser>) {
     const isAdapterConfigured =
       adapterState.configurationStatus ===
       TAdapterConfigurationStatus.Configured;
