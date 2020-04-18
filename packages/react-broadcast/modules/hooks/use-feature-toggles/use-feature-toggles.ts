@@ -1,6 +1,7 @@
+import type { TFlagName, TFlags, TFlagVariation } from '@flopflip/types';
+
 import React from 'react';
 import { getIsFeatureEnabled } from '@flopflip/react';
-import { TFlagName, TFlags, TFlagVariation } from '@flopflip/types';
 import { FlagsContext } from '../../components/flags-context';
 
 export default function useFeatureToggles(flags: Readonly<TFlags>) {

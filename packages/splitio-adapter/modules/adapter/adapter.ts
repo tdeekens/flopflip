@@ -1,5 +1,5 @@
-import { DeepReadonly, Writable, DeepWritable } from 'ts-essentials';
-import {
+import type { DeepReadonly, Writable, DeepWritable } from 'ts-essentials';
+import type {
   TFlagName,
   TFlagVariation,
   TAdapterStatus,
@@ -11,11 +11,14 @@ import {
   TAdapterEventHandlers,
   TSplitioAdapterInterface,
   TSplitioAdapterArgs,
+} from '@flopflip/types';
+import {
   TAdapterSubscriptionStatus,
   TAdapterConfigurationStatus,
   TAdapterInitializationStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
+
 import merge from 'deepmerge';
 import warning from 'tiny-warning';
 import { SplitFactory } from '@splitsoftware/splitio';

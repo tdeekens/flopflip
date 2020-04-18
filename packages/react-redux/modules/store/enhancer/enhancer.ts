@@ -1,17 +1,18 @@
-import {
+import type {
   Store,
   StoreEnhancerStoreCreator,
   Reducer,
   PreloadedState,
 } from 'redux';
-import {
+import type {
   TAdapter,
   TAdapterArgs,
   TAdapterStatusChange,
   TFlagsChange,
   TAdapterInterface,
 } from '@flopflip/types';
-import { TState } from '../../types';
+import type { TState } from '../../types';
+
 import { updateFlags, updateStatus } from '../../ducks';
 
 export default function createFlopFlipEnhancer(

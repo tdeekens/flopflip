@@ -1,7 +1,5 @@
-import { DeepReadonly } from 'ts-essentials';
-import warning from 'tiny-warning';
-import mitt, { Emitter } from 'mitt';
-import {
+import type { DeepReadonly } from 'ts-essentials';
+import type {
   TUser,
   TAdapterStatus,
   TAdapterStatusChange,
@@ -10,13 +8,18 @@ import {
   TFlag,
   TFlags,
   TAdapterEventHandlers,
+  TMemoryAdapterArgs,
+} from '@flopflip/types';
+import {
   TMemoryAdapterInterface,
   TAdapterSubscriptionStatus,
   TAdapterConfigurationStatus,
   TAdapterInitializationStatus,
-  TMemoryAdapterArgs,
   interfaceIdentifiers,
 } from '@flopflip/types';
+
+import warning from 'tiny-warning';
+import mitt, { Emitter } from 'mitt';
 import camelCase from 'lodash/camelCase';
 
 type MemoryAdapterState = {

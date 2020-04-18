@@ -1,4 +1,5 @@
-import { TFlagName, TFlagVariation, TFlags } from '@flopflip/types';
+import type { TFlagName, TFlagVariation, TFlags } from '@flopflip/types';
+
 import { DEFAULT_FLAG_PROP_KEY } from '../../constants';
 import getFlagVariation from '../get-flag-variation';
 

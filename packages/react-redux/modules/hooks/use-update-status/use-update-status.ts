@@ -1,4 +1,5 @@
-import { TAdapterStatusChange } from '@flopflip/types';
+import type { TAdapterStatusChange } from '@flopflip/types';
+
 import React from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';

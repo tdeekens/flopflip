@@ -1,3 +1,5 @@
+import type { TFlagName, TFlags } from '@flopflip/types';
+
 import React from 'react';
 import {
   wrapDisplayName,
@@ -5,7 +7,6 @@ import {
   DEFAULT_FLAGS_PROP_KEY,
 } from '@flopflip/react';
 import { useFlagVariations } from '../../hooks';
-import { TFlagName, TFlags } from '@flopflip/types';
 
 type InjectedProps = {
   [propKey: string]: TFlags;

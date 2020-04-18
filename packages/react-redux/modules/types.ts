@@ -1,6 +1,6 @@
-import { TFlags, TAdapterStatus } from '@flopflip/types';
-import { TUpdateStatusAction } from './ducks/status/types';
-import { TUpdateFlagsAction } from './ducks/flags/types';
+import type { TFlags, TAdapterStatus } from '@flopflip/types';
+import type { TUpdateStatusAction } from './ducks/status/types';
+import type { TUpdateFlagsAction } from './ducks/flags/types';
 
 import { STATE_SLICE } from './store/constants';
 

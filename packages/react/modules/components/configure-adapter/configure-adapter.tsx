@@ -1,17 +1,20 @@
-import {
+import type {
   TFlags,
   TAdapter,
   TAdapterInterface,
   TAdapterArgs,
   TAdapterStatus,
   TAdapterReconfiguration,
-  TAdapterConfigurationStatus,
-  TAdapterInitializationStatus,
   TAdapterReconfigurationOptions,
   TConfigureAdapterChildren,
   TAdapterStatusChange,
   TFlagsChange,
 } from '@flopflip/types';
+import {
+  TAdapterConfigurationStatus,
+  TAdapterInitializationStatus,
+} from '@flopflip/types';
+
 import React from 'react';
 import {
   isFunctionChildren,
@@ -203,7 +206,7 @@ const useConfigurationEffect = ({
           onFlagsStateChange,
           onStatusStateChange,
         })
-        .then(configuration => {
+        .then((configuration) => {
           /**
            * NOTE:
            *    The configuration can be `undefined` then assuming `initializationStatus` to have
@@ -234,7 +237,7 @@ const useConfigurationEffect = ({
           onFlagsStateChange,
           onStatusStateChange,
         })
-        .then(reconfiguration => {
+        .then((reconfiguration) => {
           /**
            * NOTE:
            *    The configuration can be `undefined` then assuming `initializationStatus` to have
@@ -292,7 +295,7 @@ const useDefaultFlagsEffect = ({
           onFlagsStateChange,
           onStatusStateChange,
         })
-        .then(configuration => {
+        .then((configuration) => {
           /**
            * NOTE:
            *    The configuration can be `undefined` then assuming `initializationStatus` to have

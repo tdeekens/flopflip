@@ -1,4 +1,5 @@
-import { DeepReadonly } from 'ts-essentials';
+import type { DeepReadonly } from 'ts-essentials';
+
 import React from 'react';
 import warning from 'tiny-warning';
 import { isValidElementType } from 'react-is';

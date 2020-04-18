@@ -1,5 +1,5 @@
-import { LDClient as TLDClient } from 'launchdarkly-js-client-sdk';
-import { DeepReadonly } from 'ts-essentials';
+import type { LDClient as TLDClient } from 'launchdarkly-js-client-sdk';
+import type { DeepReadonly } from 'ts-essentials';
 
 export type TFlagName = string;
 export type TFlagVariation = boolean | string;

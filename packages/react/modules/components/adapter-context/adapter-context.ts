@@ -1,11 +1,14 @@
-import React from 'react';
-import {
+import type {
+  TReconfigureAdapter,
   TAdapterContext,
   TAdapterStatus,
-  TReconfigureAdapter,
+} from '@flopflip/types';
+import {
   TAdapterSubscriptionStatus,
   TAdapterConfigurationStatus,
 } from '@flopflip/types';
+
+import React from 'react';
 
 const initialReconfigureAdapter: TReconfigureAdapter = () => undefined;
 const initialAdapterStatus: TAdapterStatus = {
