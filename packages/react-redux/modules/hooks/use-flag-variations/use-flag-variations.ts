@@ -1,4 +1,4 @@
-import { TFlagName, TFlagVariation } from '@flopflip/types';
+import type { TFlagName, TFlagVariation } from '@flopflip/types';
 
 import { getFlagVariation } from '@flopflip/react';
 import { useSelector } from 'react-redux';

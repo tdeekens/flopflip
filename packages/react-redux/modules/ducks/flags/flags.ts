@@ -1,10 +1,11 @@
-import { DeepReadonly } from 'ts-essentials';
-import {
+import type { DeepReadonly } from 'ts-essentials';
+import type {
   TFlagName,
   TFlagVariation,
   TFlags,
   TFlagsChange,
 } from '@flopflip/types';
+
 import { isNil } from '@flopflip/react';
 import { TUpdateFlagsAction } from './types.js';
 import { TState } from '../../types';

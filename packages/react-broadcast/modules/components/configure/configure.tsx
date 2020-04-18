@@ -1,5 +1,4 @@
-import React from 'react';
-import {
+import type {
   TAdapter,
   TFlags,
   TAdapterStatus,
@@ -7,9 +6,13 @@ import {
   TAdapterStatusChange,
   TConfigureAdapterChildren,
   TConfigureAdapterProps,
+} from '@flopflip/types';
+import {
   TAdapterConfigurationStatus,
   TAdapterSubscriptionStatus,
 } from '@flopflip/types';
+
+import React from 'react';
 import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
 import { FlagsContext } from '../flags-context';
 
@@ -67,14 +70,14 @@ const Configure = <AdapterInstance extends TAdapter>(
   const getHasAdapterSubscriptionStatus = useAdapterSubscription(props.adapter);
 
   const handleUpdateFlags = React.useCallback<(flags: TFlagsChange) => void>(
-    flags => {
+    (flags) => {
       if (
         getHasAdapterSubscriptionStatus(TAdapterSubscriptionStatus.Unsubscribed)
       ) {
         return;
       }
 
-      setFlags(prevFlags => ({
+      setFlags((prevFlags) => ({
         ...prevFlags,
         ...flags,
       }));
@@ -85,14 +88,14 @@ const Configure = <AdapterInstance extends TAdapter>(
   const handleUpdateStatus = React.useCallback<
     (status: TAdapterStatusChange) => void
   >(
-    status => {
+    (status) => {
       if (
         getHasAdapterSubscriptionStatus(TAdapterSubscriptionStatus.Unsubscribed)
       ) {
         return;
       }
 
-      setStatus(prevStatus => ({
+      setStatus((prevStatus) => ({
         ...prevStatus,
         ...status,
       }));

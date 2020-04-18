@@ -1,4 +1,4 @@
-import { TFlags, TFlagName, TFlagVariation } from '@flopflip/types';
+import type { TFlags, TFlagName, TFlagVariation } from '@flopflip/types';
 
 import { useSelector } from 'react-redux';
 import { getIsFeatureEnabled } from '@flopflip/react';

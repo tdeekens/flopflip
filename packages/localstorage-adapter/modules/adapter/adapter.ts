@@ -1,25 +1,28 @@
-import { DeepReadonly } from 'ts-essentials';
-import warning from 'tiny-warning';
-import mitt, { Emitter } from 'mitt';
-import camelCase from 'lodash/camelCase';
-import isEqual from 'lodash/isEqual';
-import {
+import type { DeepReadonly } from 'ts-essentials';
+import type {
   TUser,
   TAdapterStatus,
   TAdapterStatusChange,
   TAdapterEventHandlers,
-  TLocalStorageAdapterInterface,
   TLocalStorageAdapterArgs,
   TFlagName,
   TFlagVariation,
   TFlag,
   TFlags,
   TLocalStorageAdapterSubscriptionOptions,
+} from '@flopflip/types';
+import {
+  TLocalStorageAdapterInterface,
   TAdapterSubscriptionStatus,
   TAdapterConfigurationStatus,
   TAdapterInitializationStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
+
+import warning from 'tiny-warning';
+import mitt, { Emitter } from 'mitt';
+import camelCase from 'lodash/camelCase';
+import isEqual from 'lodash/isEqual';
 
 type Storage = {
   get: (key: string) => any;

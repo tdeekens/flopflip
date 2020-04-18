@@ -1,19 +1,22 @@
-import { DeepReadonly } from 'ts-essentials';
-import {
+import type { DeepReadonly } from 'ts-essentials';
+import type {
   TFlagName,
   TFlagVariation,
   TAdapterStatus,
   TUser,
   TFlag,
   TFlags,
-  TLaunchDarklyAdapterInterface,
   TLaunchDarklyAdapterArgs,
   TAdapterEventHandlers,
+} from '@flopflip/types';
+import {
+  TLaunchDarklyAdapterInterface,
   TAdapterSubscriptionStatus,
   TAdapterConfigurationStatus,
   TAdapterInitializationStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
+
 import merge from 'deepmerge';
 import warning from 'tiny-warning';
 import isEqual from 'lodash/isEqual';

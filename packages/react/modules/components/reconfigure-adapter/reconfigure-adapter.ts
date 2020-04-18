@@ -1,6 +1,7 @@
-import { DeepReadonly } from 'ts-essentials';
+import type { DeepReadonly } from 'ts-essentials';
+import type { TUser } from '@flopflip/types';
+
 import React from 'react';
-import { TUser } from '@flopflip/types';
 import AdapterContext from '../adapter-context';
 
 type Props = DeepReadonly<{

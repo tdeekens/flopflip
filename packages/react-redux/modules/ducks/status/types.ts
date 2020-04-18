@@ -1,4 +1,4 @@
-import { TAdapterStatusChange } from '@flopflip/types';
+import type { TAdapterStatusChange } from '@flopflip/types';
 
 export type TUpdateStatusAction = {
   type: string;

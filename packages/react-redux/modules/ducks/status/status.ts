@@ -1,10 +1,10 @@
-import { DeepReadonly } from 'ts-essentials';
+import type { DeepReadonly } from 'ts-essentials';
+import type { TAdapterStatus, TAdapterStatusChange } from '@flopflip/types';
 import {
-  TAdapterStatus,
-  TAdapterStatusChange,
   TAdapterSubscriptionStatus,
   TAdapterConfigurationStatus,
 } from '@flopflip/types';
+
 import { selectAdapterConfigurationStatus } from '@flopflip/react';
 import { TUpdateStatusAction } from './types';
 import { TState } from '../../types';

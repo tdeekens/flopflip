@@ -1,4 +1,5 @@
-import { TFlagsChange } from '@flopflip/types';
+import type { TFlagsChange } from '@flopflip/types';
+
 import React from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
