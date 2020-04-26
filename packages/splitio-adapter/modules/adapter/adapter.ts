@@ -304,7 +304,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
       adapterState.manager &&
       adapterState.client
     ) {
-      adapterState.client.destroy();
+      await adapterState.client.destroy();
 
       return configureSplitio();
     }

@@ -81,100 +81,100 @@ export type TAdapterInterfaceIdentifiers = typeof interfaceIdentifiers[keyof typ
 export interface TAdapterInterface<Args extends TAdapterArgs> {
   // Identifiers are used to uniquely identify an interface when performing a condition check.
   id: TAdapterInterfaceIdentifiers;
-  configure(
+  configure: (
     adapterArgs: DeepReadonly<Args>,
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
-  ): Promise<TAdapterConfiguration>;
-  reconfigure(
+  ) => Promise<TAdapterConfiguration>;
+  reconfigure: (
     adapterArgs: DeepReadonly<Args>,
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
-  ): Promise<TAdapterConfiguration>;
-  getIsConfigurationStatus(
+  ) => Promise<TAdapterConfiguration>;
+  getIsConfigurationStatus: (
     configurationStatus: TAdapterConfigurationStatus
-  ): boolean;
-  setConfigurationStatus?(
+  ) => boolean;
+  setConfigurationStatus?: (
     nextConfigurationStatus: TAdapterConfigurationStatus
-  ): void;
-  waitUntilConfigured?(): Promise<unknown>;
-  reset?(): void;
-  getFlag?(flagName: TFlagName): TFlagVariation | undefined;
-  unsubscribe(): void;
-  subscribe(): void;
+  ) => void;
+  waitUntilConfigured?: () => Promise<unknown>;
+  reset?: () => void;
+  getFlag?: (flagName: TFlagName) => TFlagVariation | undefined;
+  unsubscribe: () => void;
+  subscribe: () => void;
 }
 export interface TLaunchDarklyAdapterInterface
   extends TAdapterInterface<TLaunchDarklyAdapterArgs> {
   id: typeof interfaceIdentifiers.launchdarkly;
-  configure(
+  configure: (
     adapterArgs: DeepReadonly<TLaunchDarklyAdapterArgs>,
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
-  ): Promise<TAdapterConfiguration>;
-  reconfigure(
+  ) => Promise<TAdapterConfiguration>;
+  reconfigure: (
     adapterArgs: DeepReadonly<TLaunchDarklyAdapterArgs>,
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
-  ): Promise<TAdapterConfiguration>;
-  getIsConfigurationStatus(
+  ) => Promise<TAdapterConfiguration>;
+  getIsConfigurationStatus: (
     adapterConfigurationStatus: TAdapterConfigurationStatus
-  ): boolean;
-  getClient(): TLDClient | undefined;
-  getFlag(flagName: TFlagName): TFlagVariation | undefined;
-  updateUserContext(updatedUserProps: Readonly<TUser>): Promise<unknown>;
-  unsubscribe(): void;
-  subscribe(): void;
+  ) => boolean;
+  getClient: () => TLDClient | undefined;
+  getFlag: (flagName: TFlagName) => TFlagVariation | undefined;
+  updateUserContext: (updatedUserProps: Readonly<TUser>) => Promise<unknown>;
+  unsubscribe: () => void;
+  subscribe: () => void;
 }
 export interface TLocalStorageAdapterInterface
   extends TAdapterInterface<TLocalStorageAdapterArgs> {
   id: typeof interfaceIdentifiers.localstorage;
-  configure(
+  configure: (
     adapterArgs: DeepReadonly<TLocalStorageAdapterArgs>,
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
-  ): Promise<TAdapterConfiguration>;
-  reconfigure(
+  ) => Promise<TAdapterConfiguration>;
+  reconfigure: (
     adapterArgs: DeepReadonly<TLocalStorageAdapterArgs>,
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
-  ): Promise<TAdapterConfiguration>;
-  getIsConfigurationStatus(
+  ) => Promise<TAdapterConfiguration>;
+  getIsConfigurationStatus: (
     adapterConfigurationStatus: TAdapterConfigurationStatus
-  ): boolean;
-  waitUntilConfigured(): Promise<unknown>;
-  unsubscribe(): void;
-  subscribe(): void;
+  ) => boolean;
+  waitUntilConfigured: () => Promise<unknown>;
+  unsubscribe: () => void;
+  subscribe: () => void;
 }
 export interface TMemoryAdapterInterface
   extends TAdapterInterface<TMemoryAdapterArgs> {
   id: typeof interfaceIdentifiers.memory;
-  configure(
+  configure: (
     adapterArgs: DeepReadonly<TMemoryAdapterArgs>,
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
-  ): Promise<TAdapterConfiguration>;
-  reconfigure(
+  ) => Promise<TAdapterConfiguration>;
+  reconfigure: (
     adapterArgs: DeepReadonly<TMemoryAdapterArgs>,
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
-  ): Promise<TAdapterConfiguration>;
-  getIsConfigurationStatus(
+  ) => Promise<TAdapterConfiguration>;
+  getIsConfigurationStatus: (
     adapterConfigurationStatus: TAdapterConfigurationStatus
-  ): boolean;
-  waitUntilConfigured(): Promise<unknown>;
-  reset(): void;
-  updateFlags(flags: Readonly<TFlags>): void;
-  unsubscribe(): void;
-  subscribe(): void;
+  ) => boolean;
+  waitUntilConfigured: () => Promise<unknown>;
+  reset: () => void;
+  updateFlags: (flags: Readonly<TFlags>) => void;
+  unsubscribe: () => void;
+  subscribe: () => void;
 }
 export interface TSplitioAdapterInterface
   extends TAdapterInterface<TSplitioAdapterArgs> {
   id: typeof interfaceIdentifiers.splitio;
-  configure(
+  configure: (
     adapterArgs: DeepReadonly<TSplitioAdapterArgs>,
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
-  ): Promise<TAdapterConfiguration>;
-  reconfigure(
+  ) => Promise<TAdapterConfiguration>;
+  reconfigure: (
     adapterArgs: DeepReadonly<TSplitioAdapterArgs>,
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
-  ): Promise<TAdapterConfiguration>;
-  getIsConfigurationStatus(
+  ) => Promise<TAdapterConfiguration>;
+  getIsConfigurationStatus: (
     adapterConfigurationStatus: TAdapterConfigurationStatus
-  ): boolean;
-  unsubscribe(): void;
-  subscribe(): void;
+  ) => boolean;
+  unsubscribe: () => void;
+  subscribe: () => void;
 }
 export type TAdapter =
   | TLaunchDarklyAdapterInterface

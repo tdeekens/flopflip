@@ -269,7 +269,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     if (!isEqual(adapterState.user, nextUser)) {
       adapterState.user = ensureUser(nextUser);
 
-      changeUserContext(adapterState.user);
+      await changeUserContext(adapterState.user);
 
       return Promise.resolve({
         initializationStatus: TAdapterInitializationStatus.Succeeded,

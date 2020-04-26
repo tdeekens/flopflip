@@ -28,6 +28,7 @@ export default function createFlopFlipEnhancer(
   return (next) => (...args) => {
     const store: Store = next(...args);
 
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     (adapter as TAdapterInterface<TAdapterArgs>).configure(adapterArgs, {
       // NOTE: This is like `bindActionCreators` but the bound action
       // creators are renamed to fit the adapter API and conventions.
