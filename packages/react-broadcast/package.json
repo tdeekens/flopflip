@@ -8,14 +8,15 @@
   "typings": "dist/typings/index.d.ts",
   "scripts": {
     "prebuild": "rimraf dist/**",
-    "prepare": "./../../bin/version.js amend",
+    "prepare": "npm run snyk-protect && ./../../bin/version.js amend",
     "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs && npm run build:typings",
     "build:typings": "cross-env tsc -p tsconfig.json --emitDeclarationOnly --declarationDir dist/typings",
     "build:watch": "cross-env npm run build:es -- -w",
     "build:umd": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f umd -i modules/index.ts -o dist/@flopflip-react-broadcast.umd.js",
     "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -i modules/index.ts -o dist/@flopflip-react-broadcast.umd.min.js",
     "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.ts -o dist/@flopflip-react-broadcast.es.js",
-    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-react-broadcast.cjs.js"
+    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-react-broadcast.cjs.js",
+    "snyk-protect": "snyk protect"
   },
   "files": [
     "readme.md",
@@ -49,7 +50,8 @@
     "@babel/runtime": "7.9.2",
     "@flopflip/react": "^9.1.12",
     "@flopflip/types": "^2.5.2",
-    "lodash": "4.17.15"
+    "lodash": "4.17.15",
+    "snyk": "^1.316.1"
   },
   "keywords": [
     "react",
@@ -57,5 +59,6 @@
     "feature-toggles",
     "LaunchDarkly",
     "client"
-  ]
+  ],
+  "snyk": true
 }
