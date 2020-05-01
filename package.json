@@ -33,7 +33,7 @@
   "author": "Tobias Deekens <nerd@tdeekens.name>",
   "license": "MIT",
   "engines": {
-    "node": ">=6",
+    "node": ">=10",
     "npm": ">=3"
   },
   "bugs": {
