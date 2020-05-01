@@ -36,7 +36,7 @@
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
     "@types/react": "16.9.34",
-    "@types/react-dom": "16.9.6",
+    "@types/react-dom": "16.9.7",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "read-pkg-up": "7.0.1"
@@ -46,7 +46,7 @@
     "react-dom": "^16.8 || ^17.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.9.2",
+    "@babel/runtime": "7.9.6",
     "@flopflip/react": "^9.1.12",
     "@flopflip/types": "^2.5.2",
     "lodash": "4.17.15"

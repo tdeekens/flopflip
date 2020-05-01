@@ -36,9 +36,9 @@
     "read-pkg-up": "7.0.1"
   },
   "dependencies": {
-    "@babel/runtime": "7.9.2",
+    "@babel/runtime": "7.9.6",
     "@flopflip/types": "^2.5.2",
-    "@splitsoftware/splitio": "10.11.1",
+    "@splitsoftware/splitio": "10.12.0",
     "deepmerge": "4.2.2",
     "lodash": "4.17.15",
     "tiny-warning": "1.0.3",

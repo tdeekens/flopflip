@@ -24,10 +24,10 @@
   ],
   "dependencies": {
     "@testing-library/jest-dom": "5.5.0",
-    "@testing-library/react": "10.0.3",
+    "@testing-library/react": "10.0.4",
     "codecov": "3.6.5",
-    "jest": "25.4.0",
-    "jest-localstorage-mock": "2.4.0",
+    "jest": "25.5.3",
+    "jest-localstorage-mock": "2.4.2",
     "jest-plugin-filename": "0.0.1",
     "jest-runner-eslint": "0.7.7",
     "jest-watch-yarn-workspaces": "1.1.0"

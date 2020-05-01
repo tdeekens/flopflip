@@ -36,11 +36,11 @@
     "read-pkg-up": "7.0.1"
   },
   "dependencies": {
-    "@babel/runtime": "7.9.2",
+    "@babel/runtime": "7.9.6",
     "@flopflip/types": "^2.5.2",
     "debounce-fn": "4.0.0",
     "deepmerge": "4.2.2",
-    "launchdarkly-js-client-sdk": "2.17.3",
+    "launchdarkly-js-client-sdk": "2.17.4",
     "lodash": "4.17.15",
     "tiny-warning": "1.0.3",
     "ts-essentials": "6.0.4"
