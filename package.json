@@ -104,7 +104,7 @@
     "replace": "1.2.0",
     "rimraf": "3.0.2",
     "rollup": "2.7.6",
-    "rollup-plugin-filesize": "6.2.1",
+    "rollup-plugin-filesize": "8.0.0",
     "rollup-plugin-includepaths": "0.2.3",
     "rollup-plugin-node-builtins": "2.1.2",
     "rollup-plugin-node-globals": "1.4.0",
@@ -124,7 +124,7 @@
   ],
   "resolutions": {
     "@types/react": "16.9.34",
-    "@types/react-dom": "16.9.6"
+    "@types/react-dom": "16.9.7"
   },
   "workspaces": [
     "packages/*"
