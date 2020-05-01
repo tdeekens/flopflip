@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 13.x]
+        node-version: [13.x, 14.x]
 
     steps:
       - name: Checkout
@@ -34,12 +34,12 @@ jobs:
       - name: Lint
         run: yarn lint
       - name: Test
-        if: startsWith(matrix.node-version, '12')
+        if: startsWith(matrix.node-version, '13')
         run: yarn test:ci
         env:
           CI: true
       - name: Test (with coverage)
-        if: startsWith(matrix.node-version, '13')
+        if: startsWith(matrix.node-version, '14')
         run: yarn test:ci:coverage
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
