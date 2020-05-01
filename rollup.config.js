@@ -2,10 +2,10 @@ const fs = require('fs');
 const readPkgUp = require('read-pkg-up');
 const resolve = require('@rollup/plugin-node-resolve');
 const commonjs = require('@rollup/plugin-commonjs');
-const babel = require('@rollup/plugin-babel');
+const { babel } = require('@rollup/plugin-babel');
 const replace = require('@rollup/plugin-replace');
-const { terser } = require('rollup-plugin-terser');
 const json = require('@rollup/plugin-json');
+const { terser } = require('rollup-plugin-terser');
 const builtins = require('rollup-plugin-node-builtins');
 const globals = require('rollup-plugin-node-globals');
 const filesize = require('rollup-plugin-filesize');
@@ -65,7 +65,7 @@ const config = {
     babel({
       exclude: '**/node_modules/**',
       extensions,
-      babelHelpers: 'runtime'
+      babelHelpers: 'runtime',
       ...babelOptions,
     }),
     commonjs({
