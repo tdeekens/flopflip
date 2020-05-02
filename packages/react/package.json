@@ -49,7 +49,7 @@
     "@types/react-is": "16.7.1",
     "deepmerge": "4.2.2",
     "lodash": "4.17.15",
-    "react-fast-compare": "3.0.1",
+    "react-fast-compare": "3.0.2",
     "react-is": "16.13.1",
     "tiny-warning": "1.0.3",
     "ts-essentials": "6.0.4"
