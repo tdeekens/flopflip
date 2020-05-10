@@ -23,13 +23,13 @@
     "types"
   ],
   "dependencies": {
-    "@testing-library/jest-dom": "5.5.0",
+    "@testing-library/jest-dom": "5.7.0",
     "@testing-library/react": "10.0.4",
     "codecov": "3.6.5",
-    "jest": "25.5.4",
+    "jest": "26.0.1",
     "jest-localstorage-mock": "2.4.2",
     "jest-plugin-filename": "0.0.1",
-    "jest-runner-eslint": "0.7.7",
+    "jest-runner-eslint": "0.8.0",
     "jest-watch-yarn-workspaces": "1.1.0"
   },
   "devDependencies": {
