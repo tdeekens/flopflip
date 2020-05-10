@@ -1,6 +1,10 @@
 name: Test and Build
 
-on: [pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
 
 jobs:
   install:
