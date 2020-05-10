@@ -59,8 +59,7 @@ jobs:
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
-        # uses: changesets/action@master
-        uses: emmenko/action@nm-fix-npmrc-overwrite
+        uses: changesets/action@master
         with:
           publish: yarn release
         env:
