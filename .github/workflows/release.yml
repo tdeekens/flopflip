@@ -32,8 +32,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "${{ steps.nvm.outputs.NVMRC }}"
-          registry-url: https://registry.npmjs.org/
-          scope: flopflip
 
       - name: Get yarn cache
         id: yarn-cache
