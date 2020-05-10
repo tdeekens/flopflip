@@ -7,19 +7,7 @@
     }
   ],
   "commit": false,
-  "linked": [
-    [
-      "@flopflip/launchdarkly-adapter",
-      "@flopflip/localstorage-adapter",
-      "@flopflip/memory-adapter",
-      "@flopflip/splitio-adapter",
-      "@flopflip/react",
-      "@flopflip/react-broadcast",
-      "@flopflip/react-redux",
-      "@flopflip/types",
-      "@flopflip/test-utils"
-    ]
-  ],
+  "linked": [],
   "access": "restricted",
   "baseBranch": "master"
 }
