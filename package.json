@@ -3,6 +3,7 @@
   "name": "flopflip",
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
+    "auth": "npm_config_registry=https://registry.npmjs.org npm whoami",
     "postinstall": "check-node-version --package --print",
     "develop": "jest --projects jest.*.config.js --watch",
     "lint": "jest --config jest.lint.config.js --maxWorkers 5",
@@ -22,7 +23,8 @@
     "build:watch": "cross-env NODE_ENV=development yarn workspaces --parallel run build:watch",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "cross-env NODE_ENV=production yarn build && changeset publish"
+    "prerelease": "cross-env NODE_ENV=production yarn auth && yarn build",
+    "release": "changeset publish"
   },
   "repository": {
     "type": "git",
