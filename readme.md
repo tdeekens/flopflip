@@ -19,7 +19,7 @@
   · ESLint
   · Babel
   · Lodash
-  · Lerna
+  · Changesets
   · Rollup
   🙏
   </sub>
@@ -181,7 +181,7 @@ In all examples flags will update in realtime (depending on the adapter and prov
 ## ❯ Installation
 
 This is a mono repository maintained using
-[lerna](https://github.com/lerna/lerna). It currently contains five
+[changesets](https://github.com/atlassian/changesets). It currently contains five
 [packages](/packages) in a `memory-adapter`, a `localstorage-adapter` or
 `launchdarkly-adapter`, `react`, `react-redux` and `react-broadcast`. You should
 not need the `launchdarkly-adapter` yourself but one of our bindings

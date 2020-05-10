@@ -4,7 +4,6 @@
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
     "postinstall": "check-node-version --package --print",
-    "clean": "lerna exec 'rm -rf dist'",
     "develop": "jest --projects jest.*.config.js --watch",
     "lint": "jest --config jest.lint.config.js --maxWorkers 5",
     "type-check": "tsc --noEmit",
@@ -19,12 +18,11 @@
     "test:ci:coverage": "cross-env NODE_ENV=test yarn test:ci --coverage && codecov",
     "test:watch": "cross-env NODE_ENV=test yarn test --watch",
     "test:coverage": "cross-env NODE_ENV=test yarn test --coverage",
-    "build": "cross-env NODE_ENV=production lerna run build",
-    "build:watch": "cross-env NODE_ENV=development lerna run --parallel build:watch",
-    "release": "cross-env NODE_ENV=production yarn build && lerna publish --registry=https://registry.npmjs.org/",
-    "release:latest": "yarn release --dist-tag latest",
-    "release:next": "yarn release --dist-tag next --exact --canary --preid next --yes",
-    "release:mv": "lerna exec --no-bail --no-private --no-sort --stream -- '[ -n \"$(npm v . dist-tags.next)\" ] && npm dist-tag add ${LERNA_PACKAGE_NAME}@$(npm v . dist-tags.next) latest'"
+    "build": "cross-env NODE_ENV=production yarn workspaces run build",
+    "build:watch": "cross-env NODE_ENV=development yarn workspaces --parallel run build:watch",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "cross-env NODE_ENV=production yarn build && changeset publish"
   },
   "repository": {
     "type": "git",
@@ -60,6 +58,8 @@
     "@babel/preset-env": "7.9.6",
     "@babel/preset-react": "7.9.4",
     "@babel/preset-typescript": "7.9.0",
+    "@changesets/cli": "2.6.5",
+    "@changesets/changelog-github": "0.2.5",
     "@commercetools/jest-enzyme-matchers": "1.1.2",
     "@commitlint/cli": "8.3.5",
     "@commitlint/config-conventional": "8.3.4",
@@ -93,7 +93,6 @@
     "eslint-plugin-testing-library": "3.0.4",
     "husky": "4.2.5",
     "jest-environment-jsdom-sixteen": "1.0.3",
-    "lerna": "3.20.2",
     "lint-staged": "10.2.2",
     "mri": "1.1.5",
     "prettier": "2.0.5",
