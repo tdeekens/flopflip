@@ -64,8 +64,3 @@ jobs:
           publish: yarn release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
-      # Publish canary releases only if the packages weren't published already
-      - name: Publishing canary releases to npm registry
-        if: steps.changesets.outputs.published != 'true'
-        run: yarn release:next
