@@ -1,0 +1,25 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@1.0.3/schema.json",
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "tdeekens/flopflip"
+    }
+  ],
+  "commit": false,
+  "linked": [
+    [
+      "@flopflip/launchdarkly-adapter",
+      "@flopflip/localstorage-adapter",
+      "@flopflip/memory-adapter",
+      "@flopflip/splitio-adapter",
+      "@flopflip/react",
+      "@flopflip/react-broadcast",
+      "@flopflip/react-redux",
+      "@flopflip/types",
+      "@flopflip/test-utils"
+    ]
+  ],
+  "access": "restricted",
+  "baseBranch": "master"
+}
