@@ -4,4 +4,4 @@
 '@flopflip/test-utils': patch
 ---
 
-Updating dependencies
+Updating dependencies.
