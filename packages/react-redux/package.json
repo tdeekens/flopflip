@@ -7,7 +7,7 @@
   "browser": "dist/@flopflip-react-redux.umd.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
-    "prepare": "./../../bin/version.js amend",
+    "prepare": "npm run snyk-protect && ./../../bin/version.js amend",
     "prebuild": "rimraf dist/**",
     "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs && npm run build:typings",
     "build:typings": "cross-env tsc -p tsconfig.json --emitDeclarationOnly --declarationDir dist/typings",
@@ -15,7 +15,8 @@
     "build:umd": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f umd -i modules/index.ts -o dist/@flopflip-react-redux.umd.js",
     "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -i modules/index.ts -o dist/@flopflip-react-redux.umd.min.js",
     "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.ts -o dist/@flopflip-react-redux.es.js",
-    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-react-redux.cjs.js"
+    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-react-redux.cjs.js",
+    "snyk-protect": "snyk protect"
   },
   "files": [
     "readme.md",
@@ -47,7 +48,8 @@
     "@flopflip/types": "^2.5.2",
     "@types/react-redux": "7.1.8",
     "lodash": "4.17.15",
-    "ts-essentials": "6.0.4"
+    "ts-essentials": "6.0.4",
+    "snyk": "^1.319.2"
   },
   "peerDependencies": {
     "react": "^16.8 || ^17.0",
@@ -60,5 +62,6 @@
     "feature-toggles",
     "LaunchDarkly",
     "client"
-  ]
+  ],
+  "snyk": true
 }
