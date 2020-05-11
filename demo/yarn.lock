@@ -995,7 +995,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
+"@babel/runtime@7.9.6", "@babel/runtime@^7.0.0", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
   version "7.9.6"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.6.tgz#a9102eb5cadedf3f31d08a9ecf294af7827ea29f"
   integrity sha512-64AF1xY3OAkFHqOb9s4jpgk1Mm5vDZ4L3acHvAml+53nO1XbXLuDodsVpO4OIUsmemlUHMxNdYMNJmsvOwLrvQ==
@@ -1100,15 +1100,15 @@
     "@flopflip/types" "^2.5.2"
     lodash "4.17.15"
 
-"@flopflip/react-redux@10.1.14":
-  version "10.1.14"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-10.1.14.tgz#587a6b210fa97da93e002c1b15da6f47ff5f4ffe"
-  integrity sha512-zxW+M14DOXF1bHY0kG+5BWPGNkEGCYJfKyONgGkWEDfCvSdnocLs8a49+rhM/TRAhrGWAx9MVqw9szdCIFJRww==
+"@flopflip/react-redux@10.1.15":
+  version "10.1.15"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-10.1.15.tgz#92d75cc1fadbd13aa9f7758a5d598b3955e7412e"
+  integrity sha512-z9QIhrCyjiZ0eQFuBPx9TbcS+L0jo7zbXJyqpvQvZ26Siek+Wy4A+Ct6f863nl9R/aiNU0da88mKO32IVj3eKw==
   dependencies:
-    "@babel/runtime" "7.9.2"
-    "@flopflip/react" "^9.1.12"
+    "@babel/runtime" "7.9.6"
+    "@flopflip/react" "^9.1.13"
     "@flopflip/types" "^2.5.2"
-    "@types/react-redux" "7.1.7"
+    "@types/react-redux" "7.1.8"
     lodash "4.17.15"
     ts-essentials "6.0.4"
 
@@ -1121,6 +1121,20 @@
     deepmerge "4.2.2"
     lodash "4.17.15"
     react-fast-compare "3.0.1"
+    react-is "16.13.1"
+    tiny-warning "1.0.3"
+    ts-essentials "6.0.4"
+
+"@flopflip/react@^9.1.13":
+  version "9.1.13"
+  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-9.1.13.tgz#e0dd21be95cb81aa0cbc3962ecdcdcf6f6aec492"
+  integrity sha512-0OBRwp8TDD8fCLf6IMA44lzp3s83wRPm6y/yNoNd/MXxh/b6vMT/kEXLzse8H9SzoTqiZQXquevXWgaRDeMVHg==
+  dependencies:
+    "@babel/runtime" "7.9.6"
+    "@types/react-is" "16.7.1"
+    deepmerge "4.2.2"
+    lodash "4.17.15"
+    react-fast-compare "3.1.1"
     react-is "16.13.1"
     tiny-warning "1.0.3"
     ts-essentials "6.0.4"
@@ -1543,10 +1557,17 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
-"@types/react-redux@7.1.7":
-  version "7.1.7"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.7.tgz#12a0c529aba660696947384a059c5c6e08185c7a"
-  integrity sha512-U+WrzeFfI83+evZE2dkZ/oF/1vjIYgqrb5dGgedkqVV8HEfDFujNgWCwHL89TDuWKb47U0nTBT6PLGq4IIogWg==
+"@types/react-is@16.7.1":
+  version "16.7.1"
+  resolved "https://registry.yarnpkg.com/@types/react-is/-/react-is-16.7.1.tgz#d3f1c68c358c00ce116b55ef5410cf486dd08539"
+  integrity sha512-dMLFD2cCsxtDgMkTydQCM0PxDq8vwc6uN5M/jRktDfYvH3nQj6pjC9OrCXS2lKlYoYTNJorI/dI8x9dpLshexQ==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-redux@7.1.8":
+  version "7.1.8"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.8.tgz#3631feb559f7858d6ad9eea1d6ef41fa64fe7205"
+  integrity sha512-kpplH7Wg2SYU00sZVT98WBN0ou6QKrYcShRaW+5Vpe5l7bluKWJbWmAL+ieiso07OQzpcP5i1PeY3690640ZWg==
   dependencies:
     "@types/hoist-non-react-statics" "^3.3.0"
     "@types/react" "*"
@@ -8784,6 +8805,11 @@ react-fast-compare@3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.0.1.tgz#884d339ce1341aad22392e7a88664c71da48600e"
   integrity sha512-C5vP0J644ofZGd54P8++O7AvrqMEbrGf8Ue0eAUJLJyw168dAX2aiYyX/zcY/eSNwO0IDjsKUaLE6n83D+TnEg==
+
+react-fast-compare@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.1.1.tgz#0becf31e3812fa70dc231e259f40d892d4767900"
+  integrity sha512-SCsAORWK59BvauR2L1BTdjQbJcSGJJz03U0awektk2hshLKrITDDFTlgGCqIZpTDlPC/NFlZee6xTMzXPVLiHw==
 
 react-is@16.13.1, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.9.0:
   version "16.13.1"
