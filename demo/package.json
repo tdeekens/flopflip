@@ -7,7 +7,7 @@
     "@flopflip/localstorage-adapter": "1.7.2",
     "@flopflip/memory-adapter": "1.7.2",
     "@flopflip/react-broadcast": "10.1.15",
-    "@flopflip/react-redux": "10.1.14",
+    "@flopflip/react-redux": "10.1.15",
     "classnames": "2.2.6",
     "lodash.flowright": "3.5.0",
     "react": "16.13.1",
