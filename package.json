@@ -61,7 +61,7 @@
     "@babel/preset-react": "7.9.4",
     "@babel/preset-typescript": "7.9.0",
     "@changesets/changelog-github": "0.2.6",
-    "@changesets/cli": "2.6.5",
+    "@changesets/cli": "2.7.1",
     "@commercetools/jest-enzyme-matchers": "1.1.2",
     "@commitlint/cli": "8.3.5",
     "@commitlint/config-conventional": "8.3.4",
