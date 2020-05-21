@@ -1,6 +1,6 @@
 const fs = require('fs');
 const readPkgUp = require('read-pkg-up');
-const resolve = require('@rollup/plugin-node-resolve');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const commonjs = require('@rollup/plugin-commonjs');
 const { babel } = require('@rollup/plugin-babel');
 const replace = require('@rollup/plugin-replace');
@@ -56,7 +56,7 @@ const config = {
     globals(),
     builtins(),
     json(),
-    resolve({
+    nodeResolve({
       extensions,
       mainFields: ['module', 'main', 'jsnext'],
       preferBuiltins: true,
