@@ -52,7 +52,7 @@
     "react-fast-compare": "3.1.1",
     "react-is": "16.13.1",
     "tiny-warning": "1.0.3",
-    "ts-essentials": "6.0.4"
+    "ts-essentials": "6.0.5"
   },
   "keywords": [
     "react",

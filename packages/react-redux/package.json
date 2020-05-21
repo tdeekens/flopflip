@@ -45,9 +45,9 @@
     "@babel/runtime": "7.9.6",
     "@flopflip/react": "^9.1.13",
     "@flopflip/types": "^2.5.2",
-    "@types/react-redux": "7.1.8",
+    "@types/react-redux": "7.1.9",
     "lodash": "4.17.15",
-    "ts-essentials": "6.0.4"
+    "ts-essentials": "6.0.5"
   },
   "peerDependencies": {
     "react": "^16.8 || ^17.0",
