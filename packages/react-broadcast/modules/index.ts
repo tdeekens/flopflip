@@ -18,6 +18,7 @@ export {
   useAdapterStatus,
   useAdapterReconfiguration,
   useFlagVariation,
+  useFlagVariations,
 } from './hooks';
 
 export { version };

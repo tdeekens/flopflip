@@ -31,6 +31,7 @@ export {
   useFeatureToggle,
   useFeatureToggles,
   useFlagVariation,
+  useFlagVariations,
 } from './hooks';
 
 export { version };
