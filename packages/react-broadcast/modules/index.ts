@@ -8,10 +8,13 @@ export {
   ConfigureFlopFlip,
   ReconfigureFlopFlip,
 } from './components';
+
 export {
   useFeatureToggle,
   useFeatureToggles,
   useAdapterStatus,
   useAdapterReconfiguration,
+  useFlagVariation,
 } from './hooks';
+
 export { version };

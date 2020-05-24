@@ -27,6 +27,7 @@ export {
   useAdapterStatus,
   useFeatureToggle,
   useFeatureToggles,
+  useFlagVariation,
 } from './hooks';
 
 export { version };
