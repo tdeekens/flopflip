@@ -490,8 +490,8 @@ share common logic.
 
 - `useFeatureToggle` a React hook to read a single flag
 - `useFeatureToggles` a React hook to read multiple flags at once
-- `useFeatureVariation` a React hook to read a single variation of a flag
-- `useFeatureVariations` a React hook to read multiple variations of a flag at once
+- `useFlagVariation` a React hook to read a single variation of a flag
+- `useFlagVariations` a React hook to read multiple variations of a flag at once
 - `useAdapterStatus` a React hook to read the underlying adapter's status
 - `branchOnFeatureToggle` a Higher-Order Component (HoC) to conditionally render
   components depending on feature toggle state
@@ -548,15 +548,15 @@ const ComponentWithFeatureToggles = props => {
 }
 ```
 
-#### `useFeatureVarition(flagName: string): FlagVariation`
+#### `useFlagVarition(flagName: string): FlagVariation`
 
 Given you want to use React hooks within a functional component you can read a variation as follows:
 
 ```js
-import { useFeatureVariation } from '@flopflip/react-broadcast';
+import { useFlagVariation } from '@flopflip/react-broadcast';
 
 const ComponentWithFeatureToggle = props => {
-   const featureVariation = useFeatureVariation('myFeatureToggle');
+   const featureVariation = useFlagVariation('myFeatureToggle');
 
    return (
      <h3>{props.title}<h3>
@@ -567,15 +567,15 @@ const ComponentWithFeatureToggle = props => {
 }
 ```
 
-#### `useFeatureVaritions([flagName: string]): FlagVariation[]`
+#### `useFlagVaritions([flagName: string]): FlagVariation[]`
 
 Given you want to use React hooks within a functional component you can read multiple variations as follows:
 
 ```js
-import { useFeatureVariations } from '@flopflip/react-broadcast';
+import { useFlagVariations } from '@flopflip/react-broadcast';
 
 const ComponentWithFeatureToggle = props => {
-   const [featureVariation1, featureVariation2] = useFeatureVariations(['myFeatureToggle1', 'myFeatureToggle2']);
+   const [featureVariation1, featureVariation2] = useFlagVariations(['myFeatureToggle1', 'myFeatureToggle2']);
 
    return (
      <h3>{props.title}<h3>
