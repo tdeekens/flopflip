@@ -490,6 +490,8 @@ share common logic.
 
 - `useFeatureToggle` a React hook to read a single flag
 - `useFeatureToggles` a React hook to read multiple flags at once
+- `useFeatureVariation` a React hook to read a single variation of a flag
+- `useFeatureVariations` a React hook to read multiple variations of a flag at once
 - `useAdapterStatus` a React hook to read the underlying adapter's status
 - `branchOnFeatureToggle` a Higher-Order Component (HoC) to conditionally render
   components depending on feature toggle state
@@ -542,6 +544,49 @@ const ComponentWithFeatureToggles = props => {
      <p>
        The v2 signup feature is {isV2SignUpEnabled ? 'enabled' : 'disabled'}
      </p>
+   );
+}
+```
+
+#### `useFeatureVarition(flagName: string): FlagVariation`
+
+Given you want to use React hooks within a functional component you can read a variation as follows:
+
+```js
+import { useFeatureVariation } from '@flopflip/react-broadcast';
+
+const ComponentWithFeatureToggle = props => {
+   const featureVariation = useFeatureVariation('myFeatureToggle');
+
+   return (
+     <h3>{props.title}<h3>
+     <p>
+       The feature variation is {featureVariation}
+     </p>
+   );
+}
+```
+
+#### `useFeatureVaritions([flagName: string]): FlagVariation[]`
+
+Given you want to use React hooks within a functional component you can read multiple variations as follows:
+
+```js
+import { useFeatureVariations } from '@flopflip/react-broadcast';
+
+const ComponentWithFeatureToggle = props => {
+   const [featureVariation1, featureVariation2] = useFeatureVariations(['myFeatureToggle1', 'myFeatureToggle2']);
+
+   return (
+     <h3>{props.title}<h3>
+     <ul>
+        <li>
+          The feature variation 1 is {featureVariation1}
+        </li>
+        <li>
+          The feature variation 2 is {featureVariation2}
+        </li>
+     </ul>
    );
 }
 ```
