@@ -15,12 +15,15 @@ export {
 
 export {
   ToggleFeature,
-  injectFeatureToggle,
-  injectFeatureToggles,
-  branchOnFeatureToggle,
   ConfigureFlopFlip,
   ReconfigureFlopFlip,
 } from './components';
+
+export {
+  injectFeatureToggle,
+  injectFeatureToggles,
+  branchOnFeatureToggle,
+} from './hocs';
 
 export {
   useAdapterReconfiguration,

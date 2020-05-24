@@ -2,12 +2,15 @@ const version = '__@FLOPFLIP/VERSION_OF_RELEASE__';
 
 export {
   ToggleFeature,
-  injectFeatureToggle,
-  injectFeatureToggles,
-  branchOnFeatureToggle,
   ConfigureFlopFlip,
   ReconfigureFlopFlip,
 } from './components';
+
+export {
+  injectFeatureToggle,
+  injectFeatureToggles,
+  branchOnFeatureToggle,
+} from './hocs';
 
 export {
   useFeatureToggle,
