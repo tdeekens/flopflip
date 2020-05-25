@@ -104,7 +104,7 @@
     "regenerator-runtime": "0.13.5",
     "replace": "1.2.0",
     "rimraf": "3.0.2",
-    "rollup": "2.10.8",
+    "rollup": "2.10.9",
     "rollup-plugin-filesize": "9.0.0",
     "rollup-plugin-includepaths": "0.2.3",
     "rollup-plugin-node-builtins": "2.1.2",
