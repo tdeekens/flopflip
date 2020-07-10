@@ -49,7 +49,7 @@
     "@babel/runtime": "7.10.4",
     "@flopflip/react": "^9.1.15",
     "@flopflip/types": "^2.5.2",
-    "lodash": "4.17.15"
+    "lodash": "4.17.16"
   },
   "keywords": [
     "react",
