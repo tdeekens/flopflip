@@ -40,7 +40,7 @@
   "dependencies": {
     "@babel/runtime": "7.10.4",
     "@flopflip/types": "^2.5.3",
-    "lodash": "4.17.15",
+    "lodash": "4.17.16",
     "mitt": "1.2.0",
     "tiny-warning": "1.0.3",
     "ts-essentials": "6.0.5"
