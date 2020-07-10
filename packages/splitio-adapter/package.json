@@ -40,7 +40,7 @@
     "@flopflip/types": "^2.5.3",
     "@splitsoftware/splitio": "10.12.1",
     "deepmerge": "4.2.2",
-    "lodash": "4.17.15",
+    "lodash": "4.17.16",
     "tiny-warning": "1.0.3",
     "ts-essentials": "6.0.5"
   },
