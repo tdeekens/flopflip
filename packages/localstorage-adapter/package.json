@@ -42,7 +42,7 @@
     "@flopflip/types": "^2.5.3",
     "mitt": "1.2.0",
     "tiny-warning": "1.0.3",
-    "ts-essentials": "6.0.5"
+    "ts-essentials": "7.0.0"
   },
   "devDependencies": {
     "read-pkg-up": "7.0.1"

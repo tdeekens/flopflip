@@ -31,14 +31,13 @@ rules:
   default-param-last: 0
   testing-library/prefer-presence-queries: 'error'
   testing-library/await-async-query: 'error'
+  react/prop-types: 0
 globals:
   VERSION: true
 overrides:
   - files:
       - '*.spec.js'
       - 'packages/test-utils/*.js'
-    rules:
-      react/prop-types: 0
   - files:
       - '*.js'
     rules:

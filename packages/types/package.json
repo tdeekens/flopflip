@@ -37,6 +37,6 @@
     "types"
   ],
   "dependencies": {
-    "ts-essentials": "6.0.5"
+    "ts-essentials": "7.0.0"
   }
 }

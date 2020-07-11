@@ -82,7 +82,7 @@ const initializeClient = (
 ) => initializeLaunchDarklyClient(clientSideId, user as LDUser, clientOptions);
 
 const changeUserContext = async (nextUser: Readonly<TUser>) =>
-  adapterState.client && adapterState.client.identify
+  adapterState.client?.identify
     ? adapterState.client.identify(nextUser as LDUser)
     : Promise.reject(
         new Error('Can not change user context: client not yet initialized.')

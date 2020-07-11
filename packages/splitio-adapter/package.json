@@ -38,11 +38,11 @@
   "dependencies": {
     "@babel/runtime": "7.10.4",
     "@flopflip/types": "^2.5.3",
-    "@splitsoftware/splitio": "10.12.1",
+    "@splitsoftware/splitio": "10.13.0",
     "deepmerge": "4.2.2",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "tiny-warning": "1.0.3",
-    "ts-essentials": "6.0.5"
+    "ts-essentials": "7.0.0"
   },
   "keywords": [
     "feature-flags",
