@@ -1,5 +1,11 @@
 # @flopflip/test-utils
 
+## 1.1.16
+
+### Patch Changes
+
+- [`76354f8`](https://github.com/tdeekens/flopflip/commit/76354f8bd034b0ece14374b5eddf39858f75c7a7) [#1143](https://github.com/tdeekens/flopflip/pull/1143) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: update deps
+
 ## 1.1.15
 
 ### Patch Changes
