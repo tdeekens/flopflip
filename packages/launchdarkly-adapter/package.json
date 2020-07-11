@@ -41,9 +41,9 @@
     "debounce-fn": "4.0.0",
     "deepmerge": "4.2.2",
     "launchdarkly-js-client-sdk": "2.17.5",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "tiny-warning": "1.0.3",
-    "ts-essentials": "6.0.5"
+    "ts-essentials": "7.0.0"
   },
   "keywords": [
     "feature-flags",

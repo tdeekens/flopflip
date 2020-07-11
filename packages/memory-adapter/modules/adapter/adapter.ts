@@ -203,7 +203,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   }
 
   getFlag(flagName: TFlagName) {
-    return adapterState.flags && adapterState.flags[flagName];
+    return adapterState?.flags[flagName];
   }
 
   // For convenience

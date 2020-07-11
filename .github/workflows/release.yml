@@ -31,7 +31,7 @@ jobs:
       - name: Setup Node (uses version in .nvmrc)
         uses: actions/setup-node@v1
         with:
-          node-version: "${{ steps.nvm.outputs.NVMRC }}"
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
 
       - name: Get yarn cache
         id: yarn-cache
