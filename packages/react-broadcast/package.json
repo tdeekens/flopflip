@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@types/react": "16.9.44",
+    "@types/react": "16.9.45",
     "@types/react-dom": "16.9.8",
     "react": "16.13.1",
     "react-dom": "16.13.1",
