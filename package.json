@@ -90,7 +90,7 @@
     "eslint-formatter-pretty": "4.0.0",
     "eslint-plugin-jest": "23.20.0",
     "eslint-plugin-prettier": "3.1.4",
-    "eslint-plugin-react": "7.20.3",
+    "eslint-plugin-react": "7.20.5",
     "eslint-plugin-react-hooks": "4.0.7",
     "eslint-plugin-testing-library": "3.3.1",
     "husky": "4.2.5",
