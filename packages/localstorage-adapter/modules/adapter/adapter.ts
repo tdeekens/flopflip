@@ -53,7 +53,7 @@ let adapterState: TAdapterStatus & LocalStorageAdapterState = {
 const getIsUnsubscribed = () =>
   adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
 
-export const STORAGE_SLICE = '@flopflip';
+const STORAGE_SLICE = '@flopflip';
 
 const normalizeFlag = (
   flagName: TFlagName,
@@ -63,7 +63,7 @@ const normalizeFlag = (
   // Multi variate flags contain a string or `null` - `false` seems more natural.
   flagValue === null || flagValue === undefined ? false : flagValue,
 ];
-export const normalizeFlags = (rawFlags: Readonly<TFlags>) => {
+const normalizeFlags = (rawFlags: Readonly<TFlags>) => {
   if (!rawFlags) return {};
 
   return Object.entries(rawFlags).reduce<TFlags>(
@@ -100,7 +100,7 @@ const storage: Storage = {
   },
   unset: (key) => localStorage.removeItem(`${STORAGE_SLICE}__${key}`),
 };
-export const updateFlags = (flags: Readonly<TFlags>) => {
+const updateFlags = (flags: Readonly<TFlags>) => {
   const isAdapterConfigured =
     adapterState.configurationStatus === TAdapterConfigurationStatus.Configured;
 
@@ -260,4 +260,6 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 }
 
 const adapter = new LocalStorageAdapter();
+
 export default adapter;
+export { updateFlags, STORAGE_SLICE, normalizeFlag };

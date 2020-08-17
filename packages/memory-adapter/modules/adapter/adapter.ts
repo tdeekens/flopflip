@@ -56,7 +56,7 @@ const normalizeFlag = (
   // Multi variate flags contain a string or `null` - `false` seems more natural.
   flagValue === null || flagValue === undefined ? false : flagValue,
 ];
-export const normalizeFlags = (rawFlags: Readonly<TFlags>) =>
+const normalizeFlags = (rawFlags: Readonly<TFlags>) =>
   Object.entries(rawFlags).reduce<TFlags>(
     // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     (normalizedFlags: TFlags, [flagName, flagValue]) => {
@@ -72,9 +72,9 @@ export const normalizeFlags = (rawFlags: Readonly<TFlags>) =>
     {}
   );
 
-export const getUser = () => adapterState.user;
+const getUser = () => adapterState.user;
 
-export const updateFlags = (flags: Readonly<TFlags>) => {
+const updateFlags = (flags: Readonly<TFlags>) => {
   const isAdapterConfigured =
     adapterState.configurationStatus === TAdapterConfigurationStatus.Configured;
 
@@ -234,3 +234,4 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
 const adapter = new MemoryAdapter();
 export default adapter;
+export { updateFlags, getUser, normalizeFlag };

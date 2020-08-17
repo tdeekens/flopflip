@@ -41,6 +41,7 @@ const adapterState: TAdapterStatus & LaunchDarklyAdapterState = {
   user: undefined,
   client: undefined,
   flags: {},
+  lockedFlags: [],
 };
 
 const updateFlagsInAdapterState = (updatedFlags: Readonly<TFlags>): void => {
@@ -88,8 +89,7 @@ const changeUserContext = async (nextUser: Readonly<TUser>) =>
         new Error('Can not change user context: client not yet initialized.')
       );
 
-// NOTE: Exported for testing only
-export const normalizeFlags = (rawFlags: Readonly<TFlags>) =>
+const normalizeFlags = (rawFlags: Readonly<TFlags>) =>
   Object.entries(rawFlags).reduce<TFlags>(
     // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     (normalizedFlags: TFlags, [flagName, flagValue]) => {
@@ -396,3 +396,4 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
 
 const adapter = new LaunchDarklyAdapter();
 export default adapter;
+export { normalizeFlag };
