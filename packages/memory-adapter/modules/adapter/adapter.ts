@@ -9,6 +9,7 @@ import type {
   TFlags,
   TAdapterEventHandlers,
   TMemoryAdapterArgs,
+  TUpdateFlagsOptions,
 } from '@flopflip/types';
 import {
   TMemoryAdapterInterface,
@@ -24,6 +25,7 @@ import camelCase from 'lodash/camelCase';
 
 type MemoryAdapterState = {
   flags: TFlags;
+  lockedFlags: Set<TFlagName>;
   user?: TUser;
   emitter: Emitter;
 };
@@ -32,6 +34,7 @@ const intialAdapterState: TAdapterStatus & MemoryAdapterState = {
   configurationStatus: TAdapterConfigurationStatus.Unconfigured,
   subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
   flags: {},
+  lockedFlags: new Set<TFlagName>(),
   user: {},
   // Typings are incorrect and state that mitt is not callable.
   // Value of type 'MittStatic' is not callable. Did you mean to include 'new'
@@ -56,25 +59,10 @@ const normalizeFlag = (
   // Multi variate flags contain a string or `null` - `false` seems more natural.
   flagValue === null || flagValue === undefined ? false : flagValue,
 ];
-const normalizeFlags = (rawFlags: Readonly<TFlags>) =>
-  Object.entries(rawFlags).reduce<TFlags>(
-    // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
-    (normalizedFlags: TFlags, [flagName, flagValue]) => {
-      const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
-        flagName,
-        flagValue
-      );
-      // Can't return expression as it is the assigned value
-      normalizedFlags[normalizedFlagName] = normalizedFlagValue;
-
-      return normalizedFlags;
-    },
-    {}
-  );
 
 const getUser = () => adapterState.user;
 
-const updateFlags = (flags: Readonly<TFlags>) => {
+const updateFlags = (flags: Readonly<TFlags>, options: TUpdateFlagsOptions) => {
   const isAdapterConfigured =
     adapterState.configurationStatus === TAdapterConfigurationStatus.Configured;
 
@@ -85,10 +73,23 @@ const updateFlags = (flags: Readonly<TFlags>) => {
 
   if (!isAdapterConfigured) return;
 
-  adapterState.flags = {
-    ...adapterState.flags,
-    ...normalizeFlags(flags),
-  };
+  Object.entries(flags).forEach(([flagName, flagValue]) => {
+    const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
+      flagName,
+      flagValue
+    );
+
+    if (adapterState.lockedFlags.has(normalizedFlagName)) return;
+
+    if (options?.lockFlags) {
+      adapterState.lockedFlags.add(normalizedFlagName);
+    }
+
+    adapterState.flags = {
+      ...adapterState.flags,
+      [normalizedFlagName]: normalizedFlagValue,
+    };
+  });
 
   adapterState.emitter.emit('flagsStateChange', adapterState.flags);
 };
