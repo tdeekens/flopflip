@@ -138,6 +138,20 @@ describe('when configuring', () => {
           expect(adapter.getFlag('flagB')).toEqual(false);
         });
       });
+
+      describe('when flag is locked', () => {
+        beforeEach(() => {
+          adapterEventHandlers.onFlagsStateChange.mockClear();
+
+          updateFlags(updatedFlags, { lockFlags: true });
+
+          updateFlags({ fooFlag: false });
+        });
+
+        it('should not update the locked flag', () => {
+          expect(adapter.getFlag('fooFlag')).toEqual(true);
+        });
+      });
     });
 
     describe('when reconfiguring', () => {

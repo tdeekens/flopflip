@@ -55,7 +55,7 @@ const adapterState: TAdapterStatus & SplitIOAdapterState = {
 const getIsUnsubscribed = () =>
   adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
 
-export const normalizeFlag = (
+const normalizeFlag = (
   flagName: TFlagName,
   flagValue: TFlagVariation
 ): TFlag => {
@@ -73,9 +73,8 @@ export const normalizeFlag = (
   return [camelCase(flagName), normalizeFlagValue];
 };
 
-export const normalizeFlags = (flags: Readonly<TFlags>) =>
+const normalizeFlags = (flags: Readonly<TFlags>) =>
   Object.entries(flags).reduce<TFlags>(
-    // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     (normalizedFlags: TFlags, [flagName, flaValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
         flagName,
@@ -116,8 +115,7 @@ const subscribeToFlagsChanges = ({
   }
 };
 
-export const createAnonymousUserKey = () =>
-  Math.random().toString(36).substring(2);
+const createAnonymousUserKey = () => Math.random().toString(36).substring(2);
 
 const ensureUser = (user: Readonly<TUser>): TUser =>
   merge(user, { key: user?.key ?? createAnonymousUserKey() });
@@ -341,3 +339,4 @@ class SplitioAdapter implements TSplitioAdapterInterface {
 
 const adapter = new SplitioAdapter();
 export default adapter;
+export { createAnonymousUserKey, normalizeFlag, normalizeFlags };

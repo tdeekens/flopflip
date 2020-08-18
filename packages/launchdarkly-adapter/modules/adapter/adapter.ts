@@ -7,6 +7,7 @@ import type {
   TFlag,
   TFlags,
   TLaunchDarklyAdapterArgs,
+  TUpdateFlagsOptions,
   TAdapterEventHandlers,
 } from '@flopflip/types';
 import {
@@ -33,6 +34,7 @@ type LaunchDarklyAdapterState = {
   user?: TUser;
   client?: LDClient;
   flags: TFlags;
+  lockedFlags: Set<TFlagName>;
 };
 
 const adapterState: TAdapterStatus & LaunchDarklyAdapterState = {
@@ -41,13 +43,44 @@ const adapterState: TAdapterStatus & LaunchDarklyAdapterState = {
   user: undefined,
   client: undefined,
   flags: {},
+  lockedFlags: new Set<TFlagName>(),
 };
 
-const updateFlagsInAdapterState = (updatedFlags: Readonly<TFlags>): void => {
+// Internal
+const updateFlagsInAdapterState = (
+  flags: Readonly<TFlags>,
+  options?: TUpdateFlagsOptions
+): void => {
+  const updatedFlags = Object.entries(flags).reduce(
+    (updatedFlags, [flagName, flagValue]) => {
+      if (adapterState.lockedFlags.has(flagName)) return updatedFlags;
+
+      if (options?.lockFlags) {
+        adapterState.lockedFlags.add(flagName);
+      }
+
+      updatedFlags = {
+        ...updatedFlags,
+        [flagName]: flagValue,
+      };
+
+      return updatedFlags;
+    },
+    {}
+  );
+
   adapterState.flags = {
     ...adapterState.flags,
     ...updatedFlags,
   };
+};
+
+// External. Flags are autolocked when updated.
+const updateFlags = (
+  flags: Readonly<TFlags>,
+  options: TUpdateFlagsOptions = { lockFlags: true }
+): void => {
+  updateFlagsInAdapterState(flags, options);
 };
 
 const getIsUnsubscribed = () =>
@@ -88,8 +121,7 @@ const changeUserContext = async (nextUser: Readonly<TUser>) =>
         new Error('Can not change user context: client not yet initialized.')
       );
 
-// NOTE: Exported for testing only
-export const normalizeFlags = (rawFlags: Readonly<TFlags>) =>
+const normalizeFlags = (rawFlags: Readonly<TFlags>) =>
   Object.entries(rawFlags).reduce<TFlags>(
     // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     (normalizedFlags: TFlags, [flagName, flagValue]) => {
@@ -396,3 +428,4 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
 
 const adapter = new LaunchDarklyAdapter();
 export default adapter;
+export { updateFlags, normalizeFlag, normalizeFlags };

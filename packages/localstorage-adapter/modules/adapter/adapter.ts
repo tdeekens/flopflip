@@ -10,6 +10,7 @@ import type {
   TFlag,
   TFlags,
   TLocalStorageAdapterSubscriptionOptions,
+  TUpdateFlagsOptions,
 } from '@flopflip/types';
 import {
   TLocalStorageAdapterInterface,
@@ -34,12 +35,14 @@ type LocalStorageAdapterState = {
   flags: TFlags;
   user?: TUser;
   emitter: Emitter;
+  lockedFlags: Set<TFlagName>;
 };
 
 const intialAdapterState: TAdapterStatus & LocalStorageAdapterState = {
   subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
   configurationStatus: TAdapterConfigurationStatus.Unconfigured,
   flags: {},
+  lockedFlags: new Set<TFlagName>(),
   user: {},
   // Typings are incorrect and state that mitt is not callable.
   // Value of type 'MittStatic' is not callable. Did you mean to include 'new'
@@ -53,7 +56,7 @@ let adapterState: TAdapterStatus & LocalStorageAdapterState = {
 const getIsUnsubscribed = () =>
   adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
 
-export const STORAGE_SLICE = '@flopflip';
+const STORAGE_SLICE = '@flopflip';
 
 const normalizeFlag = (
   flagName: TFlagName,
@@ -63,11 +66,10 @@ const normalizeFlag = (
   // Multi variate flags contain a string or `null` - `false` seems more natural.
   flagValue === null || flagValue === undefined ? false : flagValue,
 ];
-export const normalizeFlags = (rawFlags: Readonly<TFlags>) => {
+const normalizeFlags = (rawFlags: Readonly<TFlags>) => {
   if (!rawFlags) return {};
 
   return Object.entries(rawFlags).reduce<TFlags>(
-    // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     (normalizedFlags: TFlags, [flagName, flagValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
         flagName,
@@ -86,7 +88,6 @@ const storage: Storage = {
   get: (key) => {
     const localStorageValue = localStorage.getItem(`${STORAGE_SLICE}__${key}`);
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return localStorageValue ? JSON.parse(localStorageValue) : null;
   },
   set: (key, value) => {
@@ -100,7 +101,7 @@ const storage: Storage = {
   },
   unset: (key) => localStorage.removeItem(`${STORAGE_SLICE}__${key}`),
 };
-export const updateFlags = (flags: Readonly<TFlags>) => {
+const updateFlags = (flags: Readonly<TFlags>, options: TUpdateFlagsOptions) => {
   const isAdapterConfigured =
     adapterState.configurationStatus === TAdapterConfigurationStatus.Configured;
 
@@ -112,10 +113,34 @@ export const updateFlags = (flags: Readonly<TFlags>) => {
   if (!isAdapterConfigured) return;
 
   const previousFlags: TFlags | null = storage.get('flags') as TFlags;
-  const nextFlags: TFlags = normalizeFlags({
+
+  const updatedFlags = Object.entries(flags).reduce(
+    (updatedFlags, [flagName, flagValue]) => {
+      const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
+        flagName,
+        flagValue
+      );
+
+      if (adapterState.lockedFlags.has(normalizedFlagName)) return updatedFlags;
+
+      if (options?.lockFlags) {
+        adapterState.lockedFlags.add(normalizedFlagName);
+      }
+
+      updatedFlags = {
+        ...updatedFlags,
+        [normalizedFlagName]: normalizedFlagValue,
+      };
+
+      return updatedFlags;
+    },
+    {}
+  );
+
+  const nextFlags: TFlags = {
     ...previousFlags,
-    ...flags,
-  });
+    ...updatedFlags,
+  };
 
   storage.set('flags', nextFlags);
   adapterState.flags = nextFlags;
@@ -260,4 +285,6 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 }
 
 const adapter = new LocalStorageAdapter();
+
 export default adapter;
+export { updateFlags, STORAGE_SLICE, normalizeFlag };

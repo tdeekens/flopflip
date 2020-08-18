@@ -1,6 +1,6 @@
 import { TAdapterConfigurationStatus } from '@flopflip/types';
 import ldClient from 'launchdarkly-js-client-sdk';
-import adapter, { normalizeFlags } from './adapter';
+import adapter, { normalizeFlags, updateFlags } from './adapter';
 
 jest.mock('launchdarkly-js-client-sdk', () => ({
   initialize: jest.fn(),
@@ -22,7 +22,7 @@ const createClient = jest.fn((apiOverwrites) => ({
   ...apiOverwrites,
 }));
 
-const triggerFlagValueChange = (client, flagValue = false) =>
+const triggerFlagValueChange = (client, { flagValue = false } = {}) =>
   client.on.mock.calls.forEach(([event, cb]) => {
     if (event.startsWith('change:')) cb(flagValue);
   });
@@ -343,24 +343,7 @@ describe('when configuring', () => {
           // Reset due to preivous dispatches
           onFlagsStateChange.mockClear();
 
-          triggerFlagValueChange(client, true);
-        });
-
-        it('should `dispatch` `onFlagsStateChange` action', () => {
-          expect(onFlagsStateChange).toHaveBeenCalled();
-        });
-
-        it('should `dispatch` `onFlagsStateChange` action with camel cased `flags`', () => {
-          expect(onFlagsStateChange).toHaveBeenCalledWith(
-            expect.objectContaining({
-              someFlag1: true,
-            })
-          );
-          expect(onFlagsStateChange).toHaveBeenCalledWith(
-            expect.objectContaining({
-              someFlag2: false,
-            })
-          );
+          triggerFlagValueChange(client, { flagValue: true });
         });
       });
 
@@ -439,7 +422,7 @@ describe('when configuring', () => {
 
         describe('when flag update occurs', () => {
           beforeEach(() => {
-            triggerFlagValueChange(client, true);
+            triggerFlagValueChange(client, { flagValue: true });
           });
 
           it('should not `dispatch` `onFlagsStateChange` action immidiately', () => {
@@ -451,6 +434,20 @@ describe('when configuring', () => {
 
             expect(onFlagsStateChange).toHaveBeenCalledTimes(4);
           });
+        });
+      });
+
+      describe('when flag is locked', () => {
+        it('should not allow seting the flag value again', () => {
+          expect(adapter.getFlag('someFlag1')).toBe(false);
+
+          updateFlags({ someFlag1: true });
+
+          expect(adapter.getFlag('someFlag1')).toBe(true);
+
+          updateFlags({ someFlag1: false });
+
+          expect(adapter.getFlag('someFlag1')).toBe(true);
         });
       });
     });

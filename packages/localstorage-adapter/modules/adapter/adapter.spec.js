@@ -143,6 +143,22 @@ describe('when configuring', () => {
           );
         });
       });
+
+      describe('when flag is locked', () => {
+        beforeEach(() => {
+          adapterEventHandlers.onFlagsStateChange.mockClear();
+
+          updateFlags(updatedFlags, { lockFlags: true });
+
+          updateFlags({ fooFlag: false });
+        });
+
+        it('should not update the locked flag', () => {
+          expect(
+            JSON.parse(localStorage.getItem(`${STORAGE_SLICE}__flags`))
+          ).toHaveProperty('fooFlag', true);
+        });
+      });
     });
 
     describe('when localstorage changes', () => {
