@@ -75,7 +75,6 @@ const normalizeFlag = (
 
 const normalizeFlags = (flags: Readonly<TFlags>) =>
   Object.entries(flags).reduce<TFlags>(
-    // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     (normalizedFlags: TFlags, [flagName, flaValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
         flagName,

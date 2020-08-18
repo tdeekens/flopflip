@@ -49,7 +49,7 @@ const adapterState: TAdapterStatus & LaunchDarklyAdapterState = {
 // Internal
 const updateFlagsInAdapterState = (
   flags: Readonly<TFlags>,
-  options: TUpdateFlagsOptions
+  options?: TUpdateFlagsOptions
 ): void => {
   const updatedFlags = Object.entries(flags).reduce(
     (updatedFlags, [flagName, flagValue]) => {
@@ -76,8 +76,11 @@ const updateFlagsInAdapterState = (
 };
 
 // External. Flags are autolocked when updated.
-const updateFlags = (flags: Readonly<TFlags>): void => {
-  updateFlagsInAdapterState(flags, { lockFlags: true });
+const updateFlags = (
+  flags: Readonly<TFlags>,
+  options: TUpdateFlagsOptions = { lockFlags: true }
+): void => {
+  updateFlagsInAdapterState(flags, options);
 };
 
 const getIsUnsubscribed = () =>

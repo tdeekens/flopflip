@@ -62,7 +62,10 @@ const normalizeFlag = (
 
 const getUser = () => adapterState.user;
 
-const updateFlags = (flags: Readonly<TFlags>, options: TUpdateFlagsOptions) => {
+const updateFlags = (
+  flags: Readonly<TFlags>,
+  options?: TUpdateFlagsOptions
+) => {
   const isAdapterConfigured =
     adapterState.configurationStatus === TAdapterConfigurationStatus.Configured;
 
