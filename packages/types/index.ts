@@ -208,6 +208,9 @@ export type TOnFlagsStateChangeCallback = (flags: Readonly<TFlags>) => void;
 export type TOnStatusStateChangeCallback = (
   statusChange: Readonly<TAdapterStatusChange>
 ) => void;
+export type TUpdateFlagsOptions = {
+  lockFlags?: boolean;
+};
 
 export type TAdapterReconfigurationOptions = {
   shouldOverwrite?: boolean;
