@@ -7,6 +7,7 @@ import type {
   TFlag,
   TFlags,
   TLaunchDarklyAdapterArgs,
+  TUpdateFlagsOptions,
   TAdapterEventHandlers,
 } from '@flopflip/types';
 import {
@@ -33,6 +34,7 @@ type LaunchDarklyAdapterState = {
   user?: TUser;
   client?: LDClient;
   flags: TFlags;
+  lockedFlags: Set<TFlagName>;
 };
 
 const adapterState: TAdapterStatus & LaunchDarklyAdapterState = {
@@ -41,14 +43,41 @@ const adapterState: TAdapterStatus & LaunchDarklyAdapterState = {
   user: undefined,
   client: undefined,
   flags: {},
-  lockedFlags: [],
+  lockedFlags: new Set<TFlagName>(),
 };
 
-const updateFlagsInAdapterState = (updatedFlags: Readonly<TFlags>): void => {
+// Internal
+const updateFlagsInAdapterState = (
+  flags: Readonly<TFlags>,
+  options: TUpdateFlagsOptions
+): void => {
+  const updatedFlags = Object.entries(flags).reduce(
+    (updatedFlags, [flagName, flagValue]) => {
+      if (adapterState.lockedFlags.has(flagName)) return updatedFlags;
+
+      if (options?.lockFlags) {
+        adapterState.lockedFlags.add(flagName);
+      }
+
+      updatedFlags = {
+        ...updatedFlags,
+        [flagName]: flagValue,
+      };
+
+      return updatedFlags;
+    },
+    {}
+  );
+
   adapterState.flags = {
     ...adapterState.flags,
     ...updatedFlags,
   };
+};
+
+// External. Flags are autolocked when updated.
+const updateFlags = (flags: Readonly<TFlags>): void => {
+  updateFlagsInAdapterState(flags, { lockFlags: true });
 };
 
 const getIsUnsubscribed = () =>
@@ -396,4 +425,4 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
 
 const adapter = new LaunchDarklyAdapter();
 export default adapter;
-export { normalizeFlag };
+export { updateFlags, normalizeFlag, normalizeFlags };
