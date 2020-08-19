@@ -1,1 +1,1 @@
-export { addCommands } from './plugin';
+export { addCommands, install } from './plugin';

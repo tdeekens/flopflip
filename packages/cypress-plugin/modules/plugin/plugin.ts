@@ -6,4 +6,8 @@ const addCommands = ({ updateFlags }) => {
   });
 };
 
-export { addCommands };
+const install = (_on) => {
+  // Fill in with event handlers when needed.
+};
+
+export { addCommands, install };
