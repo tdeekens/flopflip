@@ -1,5 +1,11 @@
 # @flopflip/cypress-plugin
 
+## 0.0.3
+
+### Patch Changes
+
+- [`b27e1fc`](https://github.com/tdeekens/flopflip/commit/b27e1fc2b6cb719f74e6ddd02fb5947ed09a23a9) [#1194](https://github.com/tdeekens/flopflip/pull/1194) Thanks [@tdeekens](https://github.com/tdeekens)! - fix(cypress-plugin): to build umd version
+
 ## 0.0.2
 
 ### Patch Changes
