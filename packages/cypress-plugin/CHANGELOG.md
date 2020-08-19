@@ -1,5 +1,11 @@
 # @flopflip/cypress-plugin
 
+## 0.0.2
+
+### Patch Changes
+
+- [`e3ee875`](https://github.com/tdeekens/flopflip/commit/e3ee8753c908558bed2cd17127478ce0c0c2bad1) [#1192](https://github.com/tdeekens/flopflip/pull/1192) Thanks [@tdeekens](https://github.com/tdeekens)! - fix(cypress-plugin): entry point
+
 ## 0.0.1
 
 ### Patch Changes
