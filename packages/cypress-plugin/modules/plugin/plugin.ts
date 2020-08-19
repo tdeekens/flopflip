@@ -1,13 +1,16 @@
 import type { TFlags } from '@flopflip/types';
 
-const addCommands = ({ updateFlags }) => {
+const state = {};
+
+const addCommands = () => {
   Cypress.Commands.add('updateFeatureFlags', (flags: TFlags) => {
-    updateFlags(flags);
+    state.updateFlags(flags);
   });
 };
 
-const install = (_on) => {
-  // Fill in with event handlers when needed.
+const install = (on, adapter, updateFlags) => {
+  state.adapter = adapter;
+  state.updateFlags = updateFlags;
 };
 
 export { addCommands, install };
