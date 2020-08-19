@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/cypress-plugin",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A plugin for Cypress change feature toggles in Cypress runs",
   "main": "dist/@flopflip-cypress-plugin.cjs.js",
   "module": "dist/@flopflip-cypress-plugin.es.js",
@@ -40,8 +40,7 @@
   "peerDependencies": {
     "cypress": "^4.0"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "keywords": [
     "react",
     "feature-flags",
