@@ -1,5 +1,11 @@
 # @flopflip/launchdarkly-adapter
 
+## 2.14.2
+
+### Patch Changes
+
+- [`9460803`](https://github.com/tdeekens/flopflip/commit/9460803fb19339c015077c888141c4322d1b598c) [#1198](https://github.com/tdeekens/flopflip/pull/1198) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: export of updateFlags re-export edition
+
 ## 2.14.1
 
 ### Patch Changes
