@@ -1,0 +1,1 @@
+export { install } from './plugin';
