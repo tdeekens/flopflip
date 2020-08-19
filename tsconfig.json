@@ -24,7 +24,8 @@
     "strictNullChecks": true,
     "stripInternal": true,
     "target": "es5",
-    "allowJs": false
+    "allowJs": false,
+    "types": ["cypress", "node", "react"]
   },
   "include": [
     "packages/**/*.ts",
