@@ -1,5 +1,11 @@
 # @flopflip/memory-adapter
 
+## 1.8.1
+
+### Patch Changes
+
+- [`4150b1d`](https://github.com/tdeekens/flopflip/commit/4150b1dfc8e022ffcc8055f061be14a400ac62ae) [#1196](https://github.com/tdeekens/flopflip/pull/1196) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: export of updateFlags
+
 ## 1.8.0
 
 ### Minor Changes
