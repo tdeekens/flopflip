@@ -1,0 +1,52 @@
+{
+  "name": "@flopflip/cypress-plugin",
+  "version": "0.0.0",
+  "description": "A plugin for Cypress change feature toggles in Cypress runs",
+  "main": "dist/@flopflip-cypress-plugin.cjs.js",
+  "module": "dist/@flopflip-cypress-plugin.es.js",
+  "browser": "dist/@flopflip-cypress-plugin.umd.js",
+  "typings": "dist/typings/index.d.ts",
+  "scripts": {
+    "prepare": "./../../bin/version.js amend",
+    "prebuild": "rimraf dist/**",
+    "build": "cross-env npm run build:es && npm run build:cjs && npm run build:typings",
+    "build:typings": "cross-env tsc -p tsconfig.json --emitDeclarationOnly --declarationDir dist/typings",
+    "build:watch": "cross-env npm run build:es -- -w",
+    "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.ts -o dist/@flopflip-react.es.js",
+    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-react.cjs.js"
+  },
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
+  "types": "dist/typings/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdeekens/flopflip.git"
+  },
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
+  },
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "devDependencies": {
+    "@flopflip/types": "^2.5.4",
+    "cypress": "4.12.1"
+  },
+  "peerDependencies": {
+    "cypress": "^4.0"
+  },
+  "dependencies": {
+  },
+  "keywords": [
+    "react",
+    "feature-flags",
+    "feature-toggles",
+    "LaunchDarkly",
+    "client"
+  ]
+}
