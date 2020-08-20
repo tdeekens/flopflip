@@ -16,6 +16,10 @@ type TCypressPluginState = {
     | TSplitioAdapterInterface;
   updateFlags?: (flags: TFlags) => void;
 };
+type TCypressPluginAddCommandOptions = {
+  adapter: TCypressPluginState['adapter'];
+  updateFlags: TCypressPluginState['updateFlags'];
+};
 declare namespace Cypress {
   interface Chainable<Subject> {
     updateFeatureFlags: (flags: TFlags) => Chainable<Subject>;
@@ -27,7 +31,10 @@ const state: TCypressPluginState = {
   updateFlags: undefined,
 };
 
-const addCommands = () => {
+const addCommands = (options: TCypressPluginAddCommandOptions) => {
+  state.adapter = options.adapter;
+  state.updateFlags = options.updateFlags;
+
   Cypress.Commands.add('updateFeatureFlags', (flags: TFlags) => {
     if (!state.updateFlags) {
       throw new Error(
@@ -39,13 +46,8 @@ const addCommands = () => {
   });
 };
 
-const install = (
-  _on,
-  adapter: TCypressPluginState['adapter'],
-  updateFlags: TCypressPluginState['updateFlags']
-) => {
-  state.adapter = adapter;
-  state.updateFlags = updateFlags;
+const install = (_on) => {
+  // Add event listeners if needed
 };
 
 export { addCommands, install };
