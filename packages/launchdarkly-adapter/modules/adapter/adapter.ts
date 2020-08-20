@@ -24,6 +24,7 @@ import isEqual from 'lodash/isEqual';
 import camelCase from 'lodash/camelCase';
 import kebabCase from 'lodash/kebabCase';
 import debounce from 'debounce-fn';
+import mitt, { Emitter } from 'mitt';
 import {
   initialize as initializeLaunchDarklyClient,
   LDUser,
@@ -34,6 +35,7 @@ type LaunchDarklyAdapterState = {
   user?: TUser;
   client?: LDClient;
   flags: TFlags;
+  emitter: Emitter;
   lockedFlags: Set<TFlagName>;
 };
 
@@ -43,6 +45,9 @@ const adapterState: TAdapterStatus & LaunchDarklyAdapterState = {
   user: undefined,
   client: undefined,
   flags: {},
+  // Typings are incorrect and state that mitt is not callable.
+  // Value of type 'MittStatic' is not callable. Did you mean to include 'new'
+  emitter: mitt(),
   lockedFlags: new Set<TFlagName>(),
 };
 
@@ -81,6 +86,11 @@ const updateFlags = (
   options: TUpdateFlagsOptions = { lockFlags: true }
 ): void => {
   updateFlagsInAdapterState(flags, options);
+
+  // ...and flush initial state of flags
+  if (!getIsUnsubscribed()) {
+    adapterState.emitter.emit('flagsStateChange', flags);
+  }
 };
 
 const getIsUnsubscribed = () =>
@@ -123,7 +133,6 @@ const changeUserContext = async (nextUser: Readonly<TUser>) =>
 
 const normalizeFlags = (rawFlags: Readonly<TFlags>) =>
   Object.entries(rawFlags).reduce<TFlags>(
-    // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     (normalizedFlags: TFlags, [flagName, flagValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
         flagName,
@@ -137,15 +146,12 @@ const normalizeFlags = (rawFlags: Readonly<TFlags>) =>
     {}
   );
 
-const getInitialFlags = async (
-  {
-    flags,
-    throwOnInitializationFailure,
-  }: DeepReadonly<
-    Pick<TLaunchDarklyAdapterArgs, 'flags' | 'throwOnInitializationFailure'>
-  >,
-  adapterEventHandlers: Readonly<TAdapterEventHandlers>
-): Promise<
+const getInitialFlags = async ({
+  flags,
+  throwOnInitializationFailure,
+}: DeepReadonly<
+  Pick<TLaunchDarklyAdapterArgs, 'flags' | 'throwOnInitializationFailure'>
+>): Promise<
   DeepReadonly<{
     flagsFromSdk: TFlags | null;
     initializationStatus: TAdapterInitializationStatus;
@@ -179,11 +185,7 @@ const getInitialFlags = async (
 
         if (flagsFromSdk) {
           const flags: TFlags = normalizeFlags(flagsFromSdk);
-          updateFlagsInAdapterState(flags);
-          // ...and flush initial state of flags
-          if (!getIsUnsubscribed()) {
-            adapterEventHandlers.onFlagsStateChange(flags);
-          }
+          updateFlags(flags, { lockFlags: false });
         }
 
         // First update internal state
@@ -192,7 +194,7 @@ const getInitialFlags = async (
 
         // ...to then signal that the adapter is configured
         if (!getIsUnsubscribed()) {
-          adapterEventHandlers.onStatusStateChange({
+          adapterState.emitter.emit('statusStateChange', {
             configurationStatus: adapterState.configurationStatus,
           });
         }
@@ -241,7 +243,16 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   ) {
     adapterState.configurationStatus = TAdapterConfigurationStatus.Configuring;
 
-    adapterEventHandlers.onStatusStateChange({
+    adapterState.emitter.on(
+      'flagsStateChange',
+      adapterEventHandlers.onFlagsStateChange
+    );
+    adapterState.emitter.on(
+      'statusStateChange',
+      adapterEventHandlers.onStatusStateChange
+    );
+
+    adapterState.emitter.emit('statusStateChange', {
       configurationStatus: adapterState.configurationStatus,
     });
 
@@ -262,21 +273,15 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       clientOptions
     );
 
-    return getInitialFlags(
-      {
-        flags,
-        throwOnInitializationFailure,
-      },
-      adapterEventHandlers
-    ).then(({ flagsFromSdk, initializationStatus }) => {
+    return getInitialFlags({
+      flags,
+      throwOnInitializationFailure,
+    }).then(({ flagsFromSdk, initializationStatus }) => {
       if (subscribeToFlagChanges && flagsFromSdk)
-        this._setupFlagSubcription(
-          {
-            flagsFromSdk,
-            flagsUpdateDelayMs,
-          },
-          adapterEventHandlers
-        );
+        this._setupFlagSubcription({
+          flagsFromSdk,
+          flagsUpdateDelayMs,
+        });
 
       return { initializationStatus };
     });
@@ -371,16 +376,13 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     return previousFlagValue !== nextFlagValue;
   }
 
-  private _setupFlagSubcription(
-    {
-      flagsFromSdk,
-      flagsUpdateDelayMs,
-    }: DeepReadonly<{
-      flagsFromSdk: TFlags;
-      flagsUpdateDelayMs?: number;
-    }>,
-    adapterEventHandlers: Readonly<TAdapterEventHandlers>
-  ) {
+  private _setupFlagSubcription({
+    flagsFromSdk,
+    flagsUpdateDelayMs,
+  }: DeepReadonly<{
+    flagsFromSdk: TFlags;
+    flagsUpdateDelayMs?: number;
+  }>) {
     for (const flagName in flagsFromSdk) {
       // Dispatch whenever a configured flag value changes
       if (
@@ -405,16 +407,16 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
           // so that no flag updates are lost.
           updateFlagsInAdapterState(updatedFlags);
 
-          const updateFlags = () => {
+          const flushFlagsUpdate = () => {
             if (!getIsUnsubscribed()) {
-              adapterEventHandlers.onFlagsStateChange(adapterState.flags);
+              adapterState.emitter.emit('flagsStateChange', adapterState.flags);
             }
           };
 
           const scheduleImmediately = { before: true, after: false };
           const scheduleTrailingEdge = { before: false, after: true };
 
-          debounce(updateFlags, {
+          debounce(flushFlagsUpdate, {
             wait: flagsUpdateDelayMs,
             ...(flagsUpdateDelayMs
               ? scheduleTrailingEdge
