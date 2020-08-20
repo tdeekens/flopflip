@@ -1,5 +1,11 @@
 # @flopflip/launchdarkly-adapter
 
+## 2.14.3
+
+### Patch Changes
+
+- [`52ccb88`](https://github.com/tdeekens/flopflip/commit/52ccb880b7a2948ff3ee46b3f51613be6a99ee3f) [#1204](https://github.com/tdeekens/flopflip/pull/1204) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor(launchdarkly-adapter): to use emitter
+
 ## 2.14.2
 
 ### Patch Changes
