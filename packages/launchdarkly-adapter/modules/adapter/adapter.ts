@@ -78,11 +78,6 @@ const updateFlagsInAdapterState = (
     ...adapterState.flags,
     ...updatedFlags,
   };
-
-  // ...and flush initial state of flags
-  if (!getIsUnsubscribed()) {
-    adapterState.emitter.emit('flagsStateChange', flags);
-  }
 };
 
 // External. Flags are autolocked when updated.
@@ -91,6 +86,11 @@ const updateFlags = (
   options: TUpdateFlagsOptions = { lockFlags: true }
 ): void => {
   updateFlagsInAdapterState(flags, options);
+
+  // ...and flush initial state of flags
+  if (!getIsUnsubscribed()) {
+    adapterState.emitter.emit('flagsStateChange', flags);
+  }
 };
 
 const getIsUnsubscribed = () =>
@@ -185,7 +185,7 @@ const getInitialFlags = async ({
 
         if (flagsFromSdk) {
           const flags: TFlags = normalizeFlags(flagsFromSdk);
-          updateFlagsInAdapterState(flags);
+          updateFlags(flags, { lockFlags: false });
         }
 
         // First update internal state
@@ -407,7 +407,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
           // so that no flag updates are lost.
           updateFlagsInAdapterState(updatedFlags);
 
-          const updateFlags = () => {
+          const flushFlagsUpdate = () => {
             if (!getIsUnsubscribed()) {
               adapterState.emitter.emit('flagsStateChange', adapterState.flags);
             }
@@ -416,7 +416,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
           const scheduleImmediately = { before: true, after: false };
           const scheduleTrailingEdge = { before: false, after: true };
 
-          debounce(updateFlags, {
+          debounce(flushFlagsUpdate, {
             wait: flagsUpdateDelayMs,
             ...(flagsUpdateDelayMs
               ? scheduleTrailingEdge

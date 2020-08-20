@@ -322,7 +322,7 @@ describe('when configuring', () => {
           });
         });
 
-        it('should `dispatch` `onStatusStateChange`', () => {
+        it('should `dispatch` `onFlagsStateChange`', () => {
           expect(onFlagsStateChange).toHaveBeenCalledWith({
             someFlag1: true,
             someFlag2: false,
@@ -432,7 +432,7 @@ describe('when configuring', () => {
           it('should `dispatch` `onFlagsStateChange` action after the delay passed', () => {
             jest.advanceTimersByTime(flagsUpdateDelayMs);
 
-            expect(onFlagsStateChange).toHaveBeenCalledTimes(4);
+            expect(onFlagsStateChange).toHaveBeenCalledTimes(8);
           });
         });
       });
