@@ -1,5 +1,11 @@
 # @flopflip/cypress-plugin
 
+## 0.0.4
+
+### Patch Changes
+
+- [`8f444cc`](https://github.com/tdeekens/flopflip/commit/8f444cc6f9966baecdb4bf250172cb51e5cfd81a) [#1200](https://github.com/tdeekens/flopflip/pull/1200) Thanks [@tdeekens](https://github.com/tdeekens)! - fix(cypress-plugin): move to add commands
+
 ## 0.0.3
 
 ### Patch Changes
