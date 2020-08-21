@@ -1,5 +1,11 @@
 # @flopflip/cypress-plugin
 
+## 0.0.6
+
+### Patch Changes
+
+- [`8f7e504`](https://github.com/tdeekens/flopflip/commit/8f7e504951cb2dcb6b86abaa4908d10314515860) [#1206](https://github.com/tdeekens/flopflip/pull/1206) Thanks [@tdeekens](https://github.com/tdeekens)! - feat(launchdarkly-adapter): add unsubcribe flag state
+
 ## 0.0.5
 
 ### Patch Changes
