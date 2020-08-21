@@ -1,5 +1,14 @@
 # @flopflip/react-redux
 
+## 10.2.2
+
+### Patch Changes
+
+- [`b4dd923`](https://github.com/tdeekens/flopflip/commit/b4dd92356208ffe1feefea0a86f7c05d738fcabb) [#1208](https://github.com/tdeekens/flopflip/pull/1208) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: types dependency
+
+- Updated dependencies [[`b4dd923`](https://github.com/tdeekens/flopflip/commit/b4dd92356208ffe1feefea0a86f7c05d738fcabb)]:
+  - @flopflip/react@9.1.17
+
 ## 10.2.1
 
 ### Patch Changes
