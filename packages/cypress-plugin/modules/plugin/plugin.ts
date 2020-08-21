@@ -6,6 +6,7 @@ import type {
   TLocalStorageAdapterInterface,
   TMemoryAdapterInterface,
   TSplitioAdapterInterface,
+  TUpdateFlagsOptions,
 } from '@flopflip/types';
 
 type TCypressPluginState = {
@@ -14,7 +15,7 @@ type TCypressPluginState = {
     | TLocalStorageAdapterInterface
     | TMemoryAdapterInterface
     | TSplitioAdapterInterface;
-  updateFlags?: (flags: TFlags) => void;
+  updateFlags?: (flags: TFlags, options: TUpdateFlagsOptions) => void;
 };
 type TCypressPluginAddCommandOptions = {
   adapter: TCypressPluginState['adapter'];
@@ -52,7 +53,7 @@ const addCommands = (options: TCypressPluginAddCommandOptions) => {
       },
     });
 
-    state.updateFlags(flags);
+    state.updateFlags(flags, { unsubscribeFlags: true });
   });
 };
 
