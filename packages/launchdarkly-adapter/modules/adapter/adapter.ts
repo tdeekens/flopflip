@@ -89,7 +89,7 @@ const updateFlagsInAdapterState = (
 // External. Flags are autolocked when updated.
 const updateFlags = (
   flags: Readonly<TFlags>,
-  options: TUpdateFlagsOptions
+  options?: TUpdateFlagsOptions
 ): void => {
   updateFlagsInAdapterState(flags, options);
 
