@@ -52,7 +52,7 @@ const addCommands = (options: TCypressPluginAddCommandOptions) => {
       },
     });
 
-    state.updateFlags(flags);
+    state.updateFlags(flags, { unsubscribeFlags: true });
   });
 };
 

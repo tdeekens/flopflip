@@ -37,6 +37,7 @@ type LaunchDarklyAdapterState = {
   flags: TFlags;
   emitter: Emitter;
   lockedFlags: Set<TFlagName>;
+  unsubscribedFlags: Set<TFlagName>;
 };
 
 const adapterState: TAdapterStatus & LaunchDarklyAdapterState = {
@@ -49,6 +50,7 @@ const adapterState: TAdapterStatus & LaunchDarklyAdapterState = {
   // Value of type 'MittStatic' is not callable. Did you mean to include 'new'
   emitter: mitt(),
   lockedFlags: new Set<TFlagName>(),
+  unsubscribedFlags: new Set<TFlagName>(),
 };
 
 // Internal
@@ -62,6 +64,10 @@ const updateFlagsInAdapterState = (
 
       if (options?.lockFlags) {
         adapterState.lockedFlags.add(flagName);
+      }
+
+      if (options?.unsubscribeFlags) {
+        adapterState.unsubscribedFlags.add(flagName);
       }
 
       updatedFlags = {
@@ -83,13 +89,13 @@ const updateFlagsInAdapterState = (
 // External. Flags are autolocked when updated.
 const updateFlags = (
   flags: Readonly<TFlags>,
-  options: TUpdateFlagsOptions = { lockFlags: true }
+  options: TUpdateFlagsOptions
 ): void => {
   updateFlagsInAdapterState(flags, options);
 
   // ...and flush initial state of flags
   if (!getIsUnsubscribed()) {
-    adapterState.emitter.emit('flagsStateChange', flags);
+    adapterState.emitter.emit('flagsStateChange', adapterState.flags);
   }
 };
 
@@ -185,7 +191,7 @@ const getInitialFlags = async ({
 
         if (flagsFromSdk) {
           const flags: TFlags = normalizeFlags(flagsFromSdk);
-          updateFlags(flags, { lockFlags: false });
+          updateFlags(flags);
         }
 
         // First update internal state
@@ -394,6 +400,8 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
             flagName,
             flagValue
           );
+
+          if (adapterState.unsubscribedFlags.has(normalizedFlagName)) return;
 
           // Sometimes the SDK flushes flag changes without a value having changed.
           if (!this._didFlagChange(normalizedFlagName, normalizedFlagValue))

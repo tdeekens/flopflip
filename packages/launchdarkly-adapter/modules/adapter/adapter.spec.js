@@ -421,27 +421,39 @@ describe('when configuring', () => {
         });
 
         describe('when flag update occurs', () => {
-          beforeEach(() => {
-            triggerFlagValueChange(client, { flagValue: true });
+          describe('without opt-out of subscription', () => {
+            beforeEach(() => {
+              triggerFlagValueChange(client, { flagValue: true });
+            });
+
+            it('should not `dispatch` `onFlagsStateChange` action immidiately', () => {
+              expect(onFlagsStateChange).toHaveBeenCalledTimes(1);
+            });
+
+            it('should `dispatch` `onFlagsStateChange` action after the delay passed', () => {
+              jest.advanceTimersByTime(flagsUpdateDelayMs);
+
+              expect(onFlagsStateChange).toHaveBeenCalledTimes(8);
+            });
           });
 
-          it('should not `dispatch` `onFlagsStateChange` action immidiately', () => {
-            expect(onFlagsStateChange).toHaveBeenCalledTimes(1);
-          });
+          describe('with opt-out of flag change subscription', () => {
+            beforeEach(() => {
+              onFlagsStateChange.mockClear();
+              updateFlags({ someFlag1: true }, { unsubscribeFlags: true });
+              triggerFlagValueChange(client, { flagValue: true });
+            });
 
-          it('should `dispatch` `onFlagsStateChange` action after the delay passed', () => {
-            jest.advanceTimersByTime(flagsUpdateDelayMs);
-
-            expect(onFlagsStateChange).toHaveBeenCalledTimes(8);
+            it('should not `dispatch` `onFlagsStateChange` action', () => {
+              expect(onFlagsStateChange).toHaveBeenCalledTimes(1);
+            });
           });
         });
       });
 
       describe('when flag is locked', () => {
         it('should not allow seting the flag value again', () => {
-          expect(adapter.getFlag('someFlag1')).toBe(false);
-
-          updateFlags({ someFlag1: true });
+          updateFlags({ someFlag1: true }, { lockFlags: true });
 
           expect(adapter.getFlag('someFlag1')).toBe(true);
 

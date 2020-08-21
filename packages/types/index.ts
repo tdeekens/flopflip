@@ -210,6 +210,7 @@ export type TOnStatusStateChangeCallback = (
 ) => void;
 export type TUpdateFlagsOptions = {
   lockFlags?: boolean;
+  unsubscribeFlags?: boolean;
 };
 
 export type TAdapterReconfigurationOptions = {
