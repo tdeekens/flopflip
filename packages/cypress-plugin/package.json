@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@flopflip/types": "^2.5.5",
+    "@flopflip/types": "2.5.5",
     "cypress": "4.12.1"
   },
   "peerDependencies": {
