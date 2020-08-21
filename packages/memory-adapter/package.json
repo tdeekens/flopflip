@@ -39,7 +39,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.11.2",
-    "@flopflip/types": "^2.5.4",
+    "@flopflip/types": "2.5.5",
     "lodash": "4.17.19",
     "mitt": "1.2.0",
     "tiny-warning": "1.0.3",
