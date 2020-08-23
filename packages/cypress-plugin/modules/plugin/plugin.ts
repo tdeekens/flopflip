@@ -18,9 +18,9 @@ const addCommands = (options: TCypressPluginAddCommandOptions) => {
   Cypress.Commands.add('updateFeatureFlags', (flags: TFlags) => {
     const globalThis = getGlobalThis();
 
-    if (!globalThis[options.adapterId]) {
+    if (!globalThis.__flopflip__?.[options.adapterId]) {
       throw new Error(
-        '@flopflip/cypress: adapter of the passed id does not exist. Make sure you use the right adapter.'
+        '@flopflip/cypress: namespace or adapter of the passed id does not exist. Make sure you use one and the specified adapter.'
       );
     }
 
@@ -34,7 +34,7 @@ const addCommands = (options: TCypressPluginAddCommandOptions) => {
       },
     });
 
-    globalThis[options.adapterId].updateFlags(flags, {
+    globalThis.__flopflip__[options.adapterId].updateFlags(flags, {
       unsubscribeFlags: true,
     });
   });
