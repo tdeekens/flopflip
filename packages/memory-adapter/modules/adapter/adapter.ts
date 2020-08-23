@@ -22,6 +22,7 @@ import {
 import warning from 'tiny-warning';
 import mitt, { Emitter } from 'mitt';
 import camelCase from 'lodash/camelCase';
+import getGlobalThis from 'globalthis';
 
 type MemoryAdapterState = {
   flags: TFlags;
@@ -237,5 +238,21 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 }
 
 const adapter = new MemoryAdapter();
+
+const exposeGlobally = () => {
+  const globalThis = getGlobalThis();
+
+  if (!globalThis.__flopflip__) {
+    globalThis.__flopflip__ = {};
+  }
+
+  globalThis.__flopflip__.memory = {
+    adapter,
+    updateFlags,
+  };
+};
+
+exposeGlobally();
+
 export default adapter;
 export { updateFlags, getUser, normalizeFlag };

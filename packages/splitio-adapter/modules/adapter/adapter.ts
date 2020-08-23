@@ -26,6 +26,7 @@ import camelCase from 'lodash/camelCase';
 import cloneDeep from 'lodash/cloneDeep';
 import omit from 'lodash/omit';
 import isEqual from 'lodash/isEqual';
+import getGlobalThis from 'globalthis';
 
 type SplitIOAdapterState = {
   user?: TUser;
@@ -338,5 +339,20 @@ class SplitioAdapter implements TSplitioAdapterInterface {
 }
 
 const adapter = new SplitioAdapter();
+
+const exposeGlobally = () => {
+  const globalThis = getGlobalThis();
+
+  if (!globalThis.__flopflip__) {
+    globalThis.__flopflip__ = {};
+  }
+
+  globalThis.__flopflip__.splitio = {
+    adapter,
+  };
+};
+
+exposeGlobally();
+
 export default adapter;
 export { createAnonymousUserKey, normalizeFlag, normalizeFlags };

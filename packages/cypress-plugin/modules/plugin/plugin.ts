@@ -1,45 +1,26 @@
 /// <reference types="cypress" />
 
-import type {
-  TFlags,
-  TLaunchDarklyAdapterInterface,
-  TLocalStorageAdapterInterface,
-  TMemoryAdapterInterface,
-  TSplitioAdapterInterface,
-  TUpdateFlagsOptions,
-} from '@flopflip/types';
+import type { TAdapterInterfaceIdentifiers, TFlags } from '@flopflip/types';
 
-type TCypressPluginState = {
-  adapter?:
-    | TLaunchDarklyAdapterInterface
-    | TLocalStorageAdapterInterface
-    | TMemoryAdapterInterface
-    | TSplitioAdapterInterface;
-  updateFlags?: (flags: TFlags, options: TUpdateFlagsOptions) => void;
-};
+import getGlobalThis from 'globalthis';
+
 type TCypressPluginAddCommandOptions = {
-  adapter: TCypressPluginState['adapter'];
-  updateFlags: TCypressPluginState['updateFlags'];
+  adapterId: TAdapterInterfaceIdentifiers;
 };
+
 declare namespace Cypress {
   interface Chainable<Subject> {
     updateFeatureFlags: (flags: TFlags) => Chainable<Subject>;
   }
 }
 
-const state: TCypressPluginState = {
-  adapter: undefined,
-  updateFlags: undefined,
-};
-
 const addCommands = (options: TCypressPluginAddCommandOptions) => {
-  state.adapter = options.adapter;
-  state.updateFlags = options.updateFlags;
-
   Cypress.Commands.add('updateFeatureFlags', (flags: TFlags) => {
-    if (!state.updateFlags) {
+    const globalThis = getGlobalThis();
+
+    if (!globalThis[options.adapterId]) {
       throw new Error(
-        '@flopflip/cypress: `updateFlags` is not defined. Pass it when installing the plugin.'
+        '@flopflip/cypress: adapter of the passed id does not exist. Make sure you use the right adapter.'
       );
     }
 
@@ -53,7 +34,9 @@ const addCommands = (options: TCypressPluginAddCommandOptions) => {
       },
     });
 
-    state.updateFlags(flags, { unsubscribeFlags: true });
+    globalThis[options.adapterId].updateFlags(flags, {
+      unsubscribeFlags: true,
+    });
   });
 };
 

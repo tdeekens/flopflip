@@ -41,6 +41,7 @@
     "@babel/runtime": "7.11.2",
     "@flopflip/types": "2.5.5",
     "mitt": "1.2.0",
+    "globalthis": "1.0.1",
     "tiny-warning": "1.0.3",
     "ts-essentials": "7.0.0"
   },

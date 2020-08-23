@@ -1,5 +1,6 @@
 import { TAdapterConfigurationStatus } from '@flopflip/types';
 import { SplitFactory } from '@splitsoftware/splitio';
+import getGlobalThis from 'globalthis';
 import adapter, {
   normalizeFlags,
   createAnonymousUserKey,
@@ -406,5 +407,13 @@ describe('normalizeFlag', () => {
         expect(normalizeFlag(flagName, 42)).toEqual([flagName, 42]);
       });
     });
+  });
+});
+
+describe('exposeGlobally', () => {
+  it('should expose `adapter` globally', () => {
+    const globalThis = getGlobalThis();
+
+    expect(globalThis).toHaveProperty('__flopflip__.splitio.adapter', adapter);
   });
 });
