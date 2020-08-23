@@ -1,5 +1,11 @@
 # @flopflip/cypress-plugin
 
+## 0.1.1
+
+### Patch Changes
+
+- [`58022c9`](https://github.com/tdeekens/flopflip/commit/58022c97abf4deaa2b9461f2750a1756524cae6d) [#1212](https://github.com/tdeekens/flopflip/pull/1212) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: the name of the namespace
+
 ## 0.1.0
 
 ### Minor Changes
