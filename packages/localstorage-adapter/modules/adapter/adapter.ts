@@ -24,6 +24,7 @@ import warning from 'tiny-warning';
 import mitt, { Emitter } from 'mitt';
 import camelCase from 'lodash/camelCase';
 import isEqual from 'lodash/isEqual';
+import getGlobalThis from 'globalthis';
 
 type Storage = {
   get: (key: string) => any;
@@ -285,6 +286,21 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 }
 
 const adapter = new LocalStorageAdapter();
+
+const exposeGlobally = () => {
+  const globalThis = getGlobalThis();
+
+  if (!globalThis.__flopflip__) {
+    globalThis.__flopflip__ = {};
+  }
+
+  globalThis.__flopflip__.localstorage = {
+    adapter,
+    updateFlags,
+  };
+};
+
+exposeGlobally();
 
 export default adapter;
 export { updateFlags, STORAGE_SLICE, normalizeFlag };

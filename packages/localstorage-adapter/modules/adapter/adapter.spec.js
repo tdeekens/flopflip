@@ -1,5 +1,6 @@
 import { TAdapterConfigurationStatus } from '@flopflip/types';
 import warning from 'tiny-warning';
+import getGlobalThis from 'globalthis';
 import adapter, { updateFlags, STORAGE_SLICE } from './adapter';
 
 jest.mock('tiny-warning');
@@ -244,5 +245,25 @@ describe('when configuring', () => {
         );
       });
     });
+  });
+});
+
+describe('exposeGlobally', () => {
+  it('should expose `adapter` globally', () => {
+    const globalThis = getGlobalThis();
+
+    expect(globalThis).toHaveProperty(
+      '__flopflip__.localstorage.adapter',
+      adapter
+    );
+  });
+
+  it('should expose `updateFlags` globally', () => {
+    const globalThis = getGlobalThis();
+
+    expect(globalThis).toHaveProperty(
+      '__flopflip__.localstorage.updateFlags',
+      updateFlags
+    );
   });
 });

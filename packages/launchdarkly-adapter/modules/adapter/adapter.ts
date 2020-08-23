@@ -24,6 +24,8 @@ import isEqual from 'lodash/isEqual';
 import camelCase from 'lodash/camelCase';
 import kebabCase from 'lodash/kebabCase';
 import debounce from 'debounce-fn';
+import getGlobalThis from 'globalthis';
+
 import mitt, { Emitter } from 'mitt';
 import {
   initialize as initializeLaunchDarklyClient,
@@ -437,5 +439,21 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
 }
 
 const adapter = new LaunchDarklyAdapter();
+
+const exposeGlobally = () => {
+  const globalThis = getGlobalThis();
+
+  if (!globalThis.__flopflip__) {
+    globalThis.__flopflip__ = {};
+  }
+
+  globalThis.__flopflip__.launchdarkly = {
+    adapter,
+    updateFlags,
+  };
+};
+
+exposeGlobally();
+
 export default adapter;
 export { updateFlags, normalizeFlag, normalizeFlags };

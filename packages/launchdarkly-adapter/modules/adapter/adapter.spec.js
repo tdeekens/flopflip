@@ -1,5 +1,6 @@
 import { TAdapterConfigurationStatus } from '@flopflip/types';
 import ldClient from 'launchdarkly-js-client-sdk';
+import getGlobalThis from 'globalthis';
 import adapter, { normalizeFlags, updateFlags } from './adapter';
 
 jest.mock('launchdarkly-js-client-sdk', () => ({
@@ -606,5 +607,25 @@ describe('`normalizeFlags`', () => {
     it('should camel case to uppercased flag names', () => {
       expect(normalizeFlags(rawFlags)).toEqual({ aFlag: true, flagBC: false });
     });
+  });
+});
+
+describe('exposeGlobally', () => {
+  it('should expose `adapter` globally', () => {
+    const globalThis = getGlobalThis();
+
+    expect(globalThis).toHaveProperty(
+      '__flopflip__.launchdarkly.adapter',
+      adapter
+    );
+  });
+
+  it('should expose `updateFlags` globally', () => {
+    const globalThis = getGlobalThis();
+
+    expect(globalThis).toHaveProperty(
+      '__flopflip__.launchdarkly.updateFlags',
+      updateFlags
+    );
   });
 });

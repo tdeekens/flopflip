@@ -1,5 +1,6 @@
 import { TAdapterConfigurationStatus } from '@flopflip/types';
 import warning from 'tiny-warning';
+import getGlobalThis from 'globalthis';
 import adapter, { getUser, updateFlags } from './adapter';
 
 jest.mock('tiny-warning');
@@ -234,5 +235,22 @@ describe('when configuring', () => {
         );
       });
     });
+  });
+});
+
+describe('exposeGlobally', () => {
+  it('should expose `adapter` globally', () => {
+    const globalThis = getGlobalThis();
+
+    expect(globalThis).toHaveProperty('__flopflip__.memory.adapter', adapter);
+  });
+
+  it('should expose `updateFlags` globally', () => {
+    const globalThis = getGlobalThis();
+
+    expect(globalThis).toHaveProperty(
+      '__flopflip__.memory.updateFlags',
+      updateFlags
+    );
   });
 });
