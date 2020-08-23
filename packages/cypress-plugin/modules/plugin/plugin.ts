@@ -31,7 +31,7 @@ const addCommands = (options: TCypressPluginAddCommandOptions) => {
         },
       });
 
-      win.__flopflip__[options.adapterId].updateFlags(flags, {
+      win.__flopflip__[options.adapterId].updateFlags?.(flags, {
         unsubscribeFlags: true,
       });
     });

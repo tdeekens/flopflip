@@ -212,7 +212,10 @@ export type TUpdateFlagsOptions = {
   lockFlags?: boolean;
   unsubscribeFlags?: boolean;
 };
-
+export type TFlagsUpdateFunction = (
+  flags: Readonly<TFlags>,
+  options?: TUpdateFlagsOptions
+) => void;
 export type TAdapterReconfigurationOptions = {
   shouldOverwrite?: boolean;
 };
@@ -238,6 +241,19 @@ export type TAdapterContext = {
   reconfigure: TReconfigureAdapter;
   status: TAdapterStatus;
 };
+
+export type TFlopflipGlobal = {
+  [key in TAdapterInterfaceIdentifiers]: {
+    adapter: TAdapter;
+    updateFlags?: TFlagsUpdateFunction;
+  };
+};
+declare global {
+  interface Window {
+    __flopflip__: TFlopflipGlobal;
+  }
+}
+
 export type TDiff<ExcludedFrom, ToExclude> = Pick<
   ExcludedFrom,
   Exclude<keyof ExcludedFrom, keyof ToExclude>
