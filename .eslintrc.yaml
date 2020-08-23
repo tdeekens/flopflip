@@ -35,6 +35,7 @@ rules:
 globals:
   VERSION: true
   Cypress: true
+  cy: true
 overrides:
   - files:
       - '*.spec.js'
