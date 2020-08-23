@@ -1,5 +1,24 @@
 # @flopflip/splitio-adapter
 
+## 1.9.0
+
+### Minor Changes
+
+- [`3ef69dd`](https://github.com/tdeekens/flopflip/commit/3ef69dde568307a57ab6254f699eb5fe1d10f476) [#1210](https://github.com/tdeekens/flopflip/pull/1210) Thanks [@tdeekens](https://github.com/tdeekens)! - feat: to expose adapters globally
+
+  Exposing adapters globally simplifies a lot of integrations we can perform. Each adapter gets a namespace according to its `TAdapterInterfaceIdentifiers`. So we have `launchdarkly`, `memory`, etc on the `__flopflip__` global namespace.
+
+  We use the `globalThis` polyfill and TC39 spec to correctly determine the global this in any context and assign each adapter instance as `adapter` and `updateFlags`.
+
+  This means you could do `window.__flopflip__.launchdarkly.updateFlags` now.
+
+  With the next version of the `cypress-plugin` we also simplify the API. As we're not `1.x.x` we don't consider it breaking. You now have to pass an `TAdapterInterfaceIdentifiers` so that the plugin can correlate the adapter internally. This means you could do
+
+  ```diff
+  +addCommands({ adapterId: 'launchdarkly' })
+  -addCommands({ adapter: adapter, updateFlags, updateFlags })
+  ```
+
 ## 1.8.6
 
 ### Patch Changes

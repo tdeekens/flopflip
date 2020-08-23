@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/memory-adapter",
-  "version": "1.8.2",
+  "version": "1.9.0",
   "description": "An in memory adapter for flipflop",
   "main": "dist/@flopflip-memory-adapter.cjs.js",
   "module": "dist/@flopflip-memory-adapter.es.js",
