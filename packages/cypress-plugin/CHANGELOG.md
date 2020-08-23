@@ -1,5 +1,11 @@
 # @flopflip/cypress-plugin
 
+## 0.1.3
+
+### Patch Changes
+
+- [`a5e6c12`](https://github.com/tdeekens/flopflip/commit/a5e6c128f01af09ff14dc295e7ea1a05474a6be5) [#1216](https://github.com/tdeekens/flopflip/pull/1216) Thanks [@tdeekens](https://github.com/tdeekens)! - fix(cypress-plugin): to wait for global
+
 ## 0.1.2
 
 ### Patch Changes
