@@ -9,6 +9,7 @@ import type {
   TLaunchDarklyAdapterArgs,
   TUpdateFlagsOptions,
   TAdapterEventHandlers,
+  TFlagsUpdateFunction,
 } from '@flopflip/types';
 import {
   TLaunchDarklyAdapterInterface,
@@ -89,10 +90,7 @@ const updateFlagsInAdapterState = (
 };
 
 // External. Flags are autolocked when updated.
-const updateFlags = (
-  flags: Readonly<TFlags>,
-  options?: TUpdateFlagsOptions
-): void => {
+const updateFlags: TFlagsUpdateFunction = (flags, options) => {
   updateFlagsInAdapterState(flags, options);
 
   // ...and flush initial state of flags

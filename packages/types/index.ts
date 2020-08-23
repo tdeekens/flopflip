@@ -212,7 +212,10 @@ export type TUpdateFlagsOptions = {
   lockFlags?: boolean;
   unsubscribeFlags?: boolean;
 };
-
+export type TFlagsUpdateFunction = (
+  flags: Readonly<TFlags>,
+  options?: TUpdateFlagsOptions
+) => void;
 export type TAdapterReconfigurationOptions = {
   shouldOverwrite?: boolean;
 };
@@ -238,6 +241,36 @@ export type TAdapterContext = {
   reconfigure: TReconfigureAdapter;
   status: TAdapterStatus;
 };
+
+type TLaunchDarklyFlopflipGlobal = {
+  adapter: TLaunchDarklyAdapterInterface;
+  updateFlags: TFlagsUpdateFunction;
+};
+type TSplitioAdapterGlobal = {
+  adapter: TSplitioAdapterInterface;
+  updateFlags: TFlagsUpdateFunction;
+};
+type TMemoryAdapterGlobal = {
+  adapter: TMemoryAdapterInterface;
+  updateFlags: TFlagsUpdateFunction;
+};
+type TLocalStorageAdapterGlobal = {
+  adapter: TLocalStorageAdapterInterface;
+  updateFlags: TFlagsUpdateFunction;
+};
+
+export type TFlopflipGlobal = {
+  [interfaceIdentifiers.launchdarkly]?: TLaunchDarklyFlopflipGlobal;
+  [interfaceIdentifiers.splitio]?: TSplitioAdapterGlobal;
+  [interfaceIdentifiers.memory]?: TMemoryAdapterGlobal;
+  [interfaceIdentifiers.localstorage]?: TLocalStorageAdapterGlobal;
+};
+declare global {
+  interface Window {
+    __flopflip__: TFlopflipGlobal;
+  }
+}
+
 export type TDiff<ExcludedFrom, ToExclude> = Pick<
   ExcludedFrom,
   Exclude<keyof ExcludedFrom, keyof ToExclude>

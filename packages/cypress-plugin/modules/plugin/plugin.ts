@@ -2,8 +2,6 @@
 
 import type { TAdapterInterfaceIdentifiers, TFlags } from '@flopflip/types';
 
-import getGlobalThis from 'globalthis';
-
 type TCypressPluginAddCommandOptions = {
   adapterId: TAdapterInterfaceIdentifiers;
 };
@@ -16,26 +14,29 @@ declare namespace Cypress {
 
 const addCommands = (options: TCypressPluginAddCommandOptions) => {
   Cypress.Commands.add('updateFeatureFlags', (flags: TFlags) => {
-    const globalThis = getGlobalThis();
+    cy.window().then((win) => {
+      const flopFlipGlobal = win.__flopflip__;
+      const flopflipAdapterGlobal = flopFlipGlobal[options.adapterId];
 
-    if (!globalThis.__flopflip__?.[options.adapterId]) {
-      throw new Error(
-        '@flopflip/cypress: namespace or adapter of the passed id does not exist. Make sure you use one and the specified adapter.'
-      );
-    }
+      if (!flopflipAdapterGlobal) {
+        throw new Error(
+          '@flopflip/cypress: namespace or adapter of the passed id does not exist. Make sure you use one and the specified adapter.'
+        );
+      }
 
-    Cypress.log({
-      name: 'updateFeatureFlags',
-      message: 'Updating @flopflip feature flags.',
-      consoleProps: () => {
-        return {
-          flags,
-        };
-      },
-    });
+      Cypress.log({
+        name: 'updateFeatureFlags',
+        message: 'Updating @flopflip feature flags.',
+        consoleProps: () => {
+          return {
+            flags,
+          };
+        },
+      });
 
-    globalThis.__flopflip__[options.adapterId].updateFlags(flags, {
-      unsubscribeFlags: true,
+      flopflipAdapterGlobal?.updateFlags(flags, {
+        unsubscribeFlags: true,
+      });
     });
   });
 };

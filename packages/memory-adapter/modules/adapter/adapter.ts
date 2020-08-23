@@ -9,7 +9,7 @@ import type {
   TFlags,
   TAdapterEventHandlers,
   TMemoryAdapterArgs,
-  TUpdateFlagsOptions,
+  TFlagsUpdateFunction,
 } from '@flopflip/types';
 import {
   TMemoryAdapterInterface,
@@ -63,10 +63,7 @@ const normalizeFlag = (
 
 const getUser = () => adapterState.user;
 
-const updateFlags = (
-  flags: Readonly<TFlags>,
-  options?: TUpdateFlagsOptions
-) => {
+const updateFlags: TFlagsUpdateFunction = (flags, options) => {
   const isAdapterConfigured =
     adapterState.configurationStatus === TAdapterConfigurationStatus.Configured;
 

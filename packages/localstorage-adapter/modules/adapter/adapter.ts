@@ -10,7 +10,7 @@ import type {
   TFlag,
   TFlags,
   TLocalStorageAdapterSubscriptionOptions,
-  TUpdateFlagsOptions,
+  TFlagsUpdateFunction,
 } from '@flopflip/types';
 import {
   TLocalStorageAdapterInterface,
@@ -102,7 +102,7 @@ const storage: Storage = {
   },
   unset: (key) => localStorage.removeItem(`${STORAGE_SLICE}__${key}`),
 };
-const updateFlags = (flags: Readonly<TFlags>, options: TUpdateFlagsOptions) => {
+const updateFlags: TFlagsUpdateFunction = (flags, options) => {
   const isAdapterConfigured =
     adapterState.configurationStatus === TAdapterConfigurationStatus.Configured;
 

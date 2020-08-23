@@ -11,6 +11,7 @@ import type {
   TAdapterEventHandlers,
   TSplitioAdapterInterface,
   TSplitioAdapterArgs,
+  TFlagsUpdateFunction,
 } from '@flopflip/types';
 import {
   TAdapterSubscriptionStatus,
@@ -88,6 +89,12 @@ const normalizeFlags = (flags: Readonly<TFlags>) =>
     },
     {}
   );
+
+const updateFlags: TFlagsUpdateFunction = () => {
+  console.log(
+    '@flopflip/splitio-adapter: update flags it not yet implemented.'
+  );
+};
 
 const subscribeToFlagsChanges = ({
   flagNames,
@@ -355,4 +362,4 @@ const exposeGlobally = () => {
 exposeGlobally();
 
 export default adapter;
-export { createAnonymousUserKey, normalizeFlag, normalizeFlags };
+export { createAnonymousUserKey, normalizeFlag, normalizeFlags, updateFlags };
