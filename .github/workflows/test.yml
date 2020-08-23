@@ -48,7 +48,7 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: Type check
-        run: yarn type-check
+        run: yarn typecheck
       - name: Bundle size check
         run: yarn test:sizes
         env:

@@ -242,11 +242,28 @@ export type TAdapterContext = {
   status: TAdapterStatus;
 };
 
+type TLaunchDarklyFlopflipGlobal = {
+  adapter: TLaunchDarklyAdapterInterface;
+  updateFlags: TFlagsUpdateFunction;
+};
+type TSplitioAdapterGlobal = {
+  adapter: TSplitioAdapterInterface;
+  updateFlags: TFlagsUpdateFunction;
+};
+type TMemoryAdapterGlobal = {
+  adapter: TMemoryAdapterInterface;
+  updateFlags: TFlagsUpdateFunction;
+};
+type TLocalStorageAdapterGlobal = {
+  adapter: TLocalStorageAdapterInterface;
+  updateFlags: TFlagsUpdateFunction;
+};
+
 export type TFlopflipGlobal = {
-  [key in TAdapterInterfaceIdentifiers]: {
-    adapter: TAdapter;
-    updateFlags?: TFlagsUpdateFunction;
-  };
+  [interfaceIdentifiers.launchdarkly]?: TLaunchDarklyFlopflipGlobal;
+  [interfaceIdentifiers.splitio]?: TSplitioAdapterGlobal;
+  [interfaceIdentifiers.memory]?: TMemoryAdapterGlobal;
+  [interfaceIdentifiers.localstorage]?: TLocalStorageAdapterGlobal;
 };
 declare global {
   interface Window {

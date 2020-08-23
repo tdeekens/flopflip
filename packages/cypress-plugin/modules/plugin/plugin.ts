@@ -15,7 +15,10 @@ declare namespace Cypress {
 const addCommands = (options: TCypressPluginAddCommandOptions) => {
   Cypress.Commands.add('updateFeatureFlags', (flags: TFlags) => {
     cy.window().then((win) => {
-      if (!win.__flopflip__?.[options.adapterId]) {
+      const flopFlipGlobal = win.__flopflip__;
+      const flopflipAdapterGlobal = flopFlipGlobal[options.adapterId];
+
+      if (!flopflipAdapterGlobal) {
         throw new Error(
           '@flopflip/cypress: namespace or adapter of the passed id does not exist. Make sure you use one and the specified adapter.'
         );
@@ -31,7 +34,7 @@ const addCommands = (options: TCypressPluginAddCommandOptions) => {
         },
       });
 
-      win.__flopflip__[options.adapterId].updateFlags?.(flags, {
+      flopflipAdapterGlobal?.updateFlags(flags, {
         unsubscribeFlags: true,
       });
     });
