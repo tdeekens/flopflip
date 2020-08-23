@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 2.5.6
+
+### Patch Changes
+
+- [`6034a1c`](https://github.com/tdeekens/flopflip/commit/6034a1c8ff2c166f3fabee1deac86cf6262edde3) [#1214](https://github.com/tdeekens/flopflip/pull/1214) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor(cypress-plugin): type the global flopflip
+
 ## 2.5.5
 
 ### Patch Changes

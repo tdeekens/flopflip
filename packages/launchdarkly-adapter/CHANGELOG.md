@@ -1,5 +1,14 @@
 # @flopflip/launchdarkly-adapter
 
+## 2.15.1
+
+### Patch Changes
+
+- [`6034a1c`](https://github.com/tdeekens/flopflip/commit/6034a1c8ff2c166f3fabee1deac86cf6262edde3) [#1214](https://github.com/tdeekens/flopflip/pull/1214) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor(cypress-plugin): type the global flopflip
+
+- Updated dependencies [[`6034a1c`](https://github.com/tdeekens/flopflip/commit/6034a1c8ff2c166f3fabee1deac86cf6262edde3)]:
+  - @flopflip/types@2.5.6
+
 ## 2.15.0
 
 ### Minor Changes
