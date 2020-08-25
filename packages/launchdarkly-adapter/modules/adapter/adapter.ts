@@ -107,8 +107,8 @@ const getIsFlagUnsubcribed = (flagName: TFlagName) =>
 const getIsFlagLocked = (flagName: TFlagName) =>
   adapterState.lockedFlags.has(flagName);
 
-const withoutUnsubscribedOrLockedFlags = (flags: TFlags): Partial<TFlags> =>
-  Object.fromEntries<TFlags>(
+const withoutUnsubscribedOrLockedFlags = (flags: TFlags) =>
+  Object.fromEntries(
     Object.entries(flags).filter(
       ([flagName]) =>
         !getIsFlagUnsubcribed(flagName) && !getIsFlagLocked(flagName)
