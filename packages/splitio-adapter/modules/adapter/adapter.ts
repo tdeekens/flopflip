@@ -54,7 +54,7 @@ const adapterState: TAdapterStatus & SplitIOAdapterState = {
   splitioSettings: undefined,
 };
 
-const getIsUnsubscribed = () =>
+const getIsAdapterUnsubscribed = () =>
   adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
 
 const normalizeFlag = (
@@ -115,7 +115,7 @@ const subscribeToFlagsChanges = ({
           } as SplitIO.Attributes
         );
 
-        if (!getIsUnsubscribed()) {
+        if (!getIsAdapterUnsubscribed()) {
           onFlagsStateChange(normalizeFlags(flags));
         }
       }
@@ -182,7 +182,7 @@ const subscribe = async ({
             } as SplitIO.Attributes
           );
 
-          if (!getIsUnsubscribed()) {
+          if (!getIsAdapterUnsubscribed()) {
             onFlagsStateChange(normalizeFlags(flags));
           }
 
@@ -191,7 +191,7 @@ const subscribe = async ({
             TAdapterConfigurationStatus.Configured;
           // ...to then signal that the adapter is configured
 
-          if (!getIsUnsubscribed()) {
+          if (!getIsAdapterUnsubscribed()) {
             onStatusStateChange({
               configurationStatus: adapterState.configurationStatus,
             });

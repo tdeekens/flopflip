@@ -63,7 +63,7 @@ const updateFlagsInAdapterState = (
 ): void => {
   const updatedFlags = Object.entries(flags).reduce(
     (updatedFlags, [flagName, flagValue]) => {
-      if (adapterState.lockedFlags.has(flagName)) return updatedFlags;
+      if (getIsFlagLocked(flagName)) return updatedFlags;
 
       if (options?.lockFlags) {
         adapterState.lockedFlags.add(flagName);
@@ -94,13 +94,26 @@ const updateFlags: TFlagsUpdateFunction = (flags, options) => {
   updateFlagsInAdapterState(flags, options);
 
   // ...and flush initial state of flags
-  if (!getIsUnsubscribed()) {
+  if (!getIsAdapterUnsubscribed()) {
     adapterState.emitter.emit('flagsStateChange', adapterState.flags);
   }
 };
 
-const getIsUnsubscribed = () =>
+const getIsAdapterUnsubscribed = () =>
   adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
+
+const getIsFlagUnsubcribed = (flagName: TFlagName) =>
+  adapterState.unsubscribedFlags.has(flagName);
+const getIsFlagLocked = (flagName: TFlagName) =>
+  adapterState.lockedFlags.has(flagName);
+
+const withoutUnsubscribedOrLockedFlags = (flags: TFlags) =>
+  Object.fromEntries(
+    Object.entries(flags).filter(
+      ([flagName]) =>
+        !getIsFlagUnsubcribed(flagName) && !getIsFlagLocked(flagName)
+    )
+  );
 
 const normalizeFlag = (
   flagName: TFlagName,
@@ -190,7 +203,9 @@ const getInitialFlags = async ({
         }
 
         if (flagsFromSdk) {
-          const flags: TFlags = normalizeFlags(flagsFromSdk);
+          const normalizedFlags = normalizeFlags(flagsFromSdk);
+          const flags = withoutUnsubscribedOrLockedFlags(normalizedFlags);
+
           updateFlags(flags);
         }
 
@@ -199,7 +214,7 @@ const getInitialFlags = async ({
           TAdapterConfigurationStatus.Configured;
 
         // ...to then signal that the adapter is configured
-        if (!getIsUnsubscribed()) {
+        if (!getIsAdapterUnsubscribed()) {
           adapterState.emitter.emit('statusStateChange', {
             configurationStatus: adapterState.configurationStatus,
           });
@@ -401,7 +416,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
             flagValue
           );
 
-          if (adapterState.unsubscribedFlags.has(normalizedFlagName)) return;
+          if (getIsFlagUnsubcribed(normalizedFlagName)) return;
 
           // Sometimes the SDK flushes flag changes without a value having changed.
           if (!this._didFlagChange(normalizedFlagName, normalizedFlagValue))
@@ -416,7 +431,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
           updateFlagsInAdapterState(updatedFlags);
 
           const flushFlagsUpdate = () => {
-            if (!getIsUnsubscribed()) {
+            if (!getIsAdapterUnsubscribed()) {
               adapterState.emitter.emit('flagsStateChange', adapterState.flags);
             }
           };
