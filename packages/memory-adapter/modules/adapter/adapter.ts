@@ -49,8 +49,10 @@ const updateUser = (user: Readonly<TUser>) => {
   adapterState.user = user;
 };
 
-const getIsUnsubscribed = () =>
+const getIsAdapterUnsubscribed = () =>
   adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
+const getIsFlagLocked = (flagName: TFlagName) =>
+  adapterState.lockedFlags.has(flagName);
 
 const normalizeFlag = (
   flagName: TFlagName,
@@ -80,7 +82,7 @@ const updateFlags: TFlagsUpdateFunction = (flags, options) => {
       flagValue
     );
 
-    if (adapterState.lockedFlags.has(normalizedFlagName)) return;
+    if (getIsFlagLocked(normalizedFlagName)) return;
 
     if (options?.lockFlags) {
       adapterState.lockedFlags.add(normalizedFlagName);
@@ -109,13 +111,13 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     adapterEventHandlers: Readonly<TAdapterEventHandlers>
   ) {
     const handleFlagsChange = (nextFlags: Readonly<TFlags>) => {
-      if (getIsUnsubscribed()) return;
+      if (getIsAdapterUnsubscribed()) return;
 
       adapterEventHandlers.onFlagsStateChange(nextFlags);
     };
 
     const handleStatusChange = (nextStatus: Readonly<TAdapterStatusChange>) => {
-      if (getIsUnsubscribed()) return;
+      if (getIsAdapterUnsubscribed()) return;
 
       adapterEventHandlers.onStatusStateChange(nextStatus);
     };

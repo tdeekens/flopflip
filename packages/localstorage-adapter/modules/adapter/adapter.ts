@@ -54,8 +54,10 @@ let adapterState: TAdapterStatus & LocalStorageAdapterState = {
   ...intialAdapterState,
 };
 
-const getIsUnsubscribed = () =>
+const getIsAdapterUnsubscribed = () =>
   adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
+const getIsFlagLocked = (flagName: TFlagName) =>
+  adapterState.lockedFlags.has(flagName);
 
 const STORAGE_SLICE = '@flopflip';
 
@@ -122,7 +124,7 @@ const updateFlags: TFlagsUpdateFunction = (flags, options) => {
         flagValue
       );
 
-      if (adapterState.lockedFlags.has(normalizedFlagName)) return updatedFlags;
+      if (getIsFlagLocked(normalizedFlagName)) return updatedFlags;
 
       if (options?.lockFlags) {
         adapterState.lockedFlags.add(normalizedFlagName);
@@ -161,7 +163,7 @@ const subscribeToFlagsChanges = ({
   pollingInteral = 1000 * 60,
 }: Readonly<TLocalStorageAdapterSubscriptionOptions>) => {
   setInterval(() => {
-    if (!getIsUnsubscribed()) {
+    if (!getIsAdapterUnsubscribed()) {
       const nextFlags = normalizeFlags(storage.get('flags'));
 
       if (didFlagsChange(nextFlags)) {
@@ -186,13 +188,13 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     adapterEventHandlers: Readonly<TAdapterEventHandlers>
   ) {
     const handleFlagsChange = (nextFlags: Readonly<TFlags>) => {
-      if (getIsUnsubscribed()) return;
+      if (getIsAdapterUnsubscribed()) return;
 
       adapterEventHandlers.onFlagsStateChange(nextFlags);
     };
 
     const handleStatusChange = (nextStatus: Readonly<TAdapterStatusChange>) => {
-      if (getIsUnsubscribed()) return;
+      if (getIsAdapterUnsubscribed()) return;
 
       adapterEventHandlers.onStatusStateChange(nextStatus);
     };
