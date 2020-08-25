@@ -63,7 +63,7 @@ With `flopflip` you get many options and ways to toggle features. More elaborate
 </ToggleFeature>
 ```
 
-Having `flopflip` setup up you can now target users by whatever you decide to send to e.g. LaunchDarkly. This could be location, hashed E-Mails or any user groups (please respect your user's privicy).
+Having `flopflip` setup up you can now target users by whatever you decide to send to e.g. LaunchDarkly. This could be location, hashed E-Mails or any user groups (please respect your user's privacy).
 
 Another example would be to show a `<button>` but disable it for users who should not have access to the feature yet:
 
@@ -111,6 +111,7 @@ In all examples flags will update in realtime (depending on the adapter and prov
 | [`splitio-adapter`](/packages/splitio-adapter)           | [![splitio-adapter Version][splitio-adapter-latest-icon]][splitio-adapter-latest-version] [![splitio-adapter Version][splitio-adapter-next-icon]][splitio-adapter-next-version]                               | [![splitio-adapter Dependencies Status][splitio-adapter-dependencies-icon]][splitio-adapter-dependencies]                | [![splitio-adapter Downloads][splitio-adapter-downloads]][splitio-adapter-downloads]                | [![splitio-adapter Minified + GZipped][splitio-adapter-size]][splitio-adapter-size]                |
 | [`memory-adapter`](/packages/memory-adapter)             | [![memory-adapter Version][memory-adapter-latest-icon]][memory-adapter-latest-version] [![memory-adapter Version][memory-adapter-next-icon]][memory-adapter-next-version]                                     | [![memory-adapter Dependencies Status][memory-adapter-dependencies-icon]][memory-adapter-dependencies]                   | [![memory-adapter Downloads][memory-adapter-downloads]][memory-adapter-downloads]                   | [![memory-adapter Minified + GZipped][memory-adapter-size]][memory-adapter-size]                   |
 | [`localstorage-adapter`](/packages/localstorage-adapter) | [![localstorage-adapter Version][localstorage-adapter-latest-icon]][localstorage-adapter-latest-version] [![localstorage-adapter Version][localstorage-adapter-next-icon]][localstorage-adapter-next-version] | [![localstorage-adapter Dependencies Status][localstorage-adapter-dependencies-icon]][localstorage-adapter-dependencies] | [![localstorage-adapter Downloads][localstorage-adapter-downloads]][localstorage-adapter-downloads] | [![localstorage-adapter Minified + GZipped][localstorage-adapter-size]][localstorage-adapter-size] |
+| [`cypress-plugin`](/packages/cypress-plugin)             | [![cypress-plugin Version][cypress-plugin-latest-icon]][cypress-plugin-latest-version] [![cypress-plugin Version][cypress-plugin-next-icon]][cypress-plugin-next-version]                                     | [![cypress-plugin Dependencies Status][cypress-plugin-dependencies-icon]][cypress-plugin-dependencies]                   | [![cypress-plugin Downloads][cypress-plugin-downloads]][cypress-plugin-downloads]                   | [![cypress-plugin Minified + GZipped][localstorage-adapter-size]][localstorage-adapter-size]       |
 | [`types`](/packages/types)                               | [![types Version][types-latest-icon]][types-latest-version] [![types Version][types-next-icon]][types-next-version]                                                                                           | [![types Dependencies Status][types-dependencies-icon]][types-dependencies]                                              | [![types Downloads][types-downloads]][types-downloads]                                              | [![types Minified + GZipped][types-size]][types-size]                                              |
 
 [types-latest-version]: https://flat.badgen.net/npm/v/@flopflip/types
@@ -177,6 +178,14 @@ In all examples flags will update in realtime (depending on the adapter and prov
 [react-redux-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/react-redux
 [react-redux-downloads]: https://flat.badgen.net/npm/dm/@flopflip/react-redux
 [react-redux-size]: https://flat.badgen.net/bundlephobia/minzip/@flopflip/react-redux
+[cypress-plugin-latest-version]: https://flat.badgen.net/npm/v/@flopflip/cypress-plugin
+[cypress-plugin-next-version]: https://flat.badgen.net/npm/v/@flopflip/cypress-plugin
+[cypress-plugin-latest-icon]: https://flat.badgen.net/npm/v/@flopflip/cypress-plugin
+[cypress-plugin-next-icon]: https://flat.badgen.net/npm/v/@flopflip/cypress-plugin/next
+[cypress-plugin-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/cypress-plugin
+[cypress-plugin-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/cypress-plugin
+[cypress-plugin-downloads]: https://flat.badgen.net/npm/dm/@flopflip/cypress-plugin
+[cypress-plugin-size]: https://flat.badgen.net/bundlephobia/minzip/@flopflip/cypress-plugin
 
 ## ❯ Installation
 
@@ -224,9 +233,9 @@ without Redux.
 - `ConfigureFlopFlip` a component to configure flopflip with an adapter
   (alternative to the store enhancer)
 - `ReconfigureFlopFlip` a component to reconfigure flopflip with new user properties
-  either merged or overwritting old properties (`shouldOverwrite` prop)
+  either merged or overwriting old properties (`shouldOverwrite` prop)
   - `useAdapterReconfiguration` a hook to reconfigure flopflip with new user properties
-    either merged or overwritting old properties (`shouldOverwrite` prop)
+    either merged or overwriting old properties (`shouldOverwrite` prop)
 - `branchOnFeatureToggle` a Higher-Order Component (HoC) to conditionally render
   components depending on feature toggle state
 - `injectFeatureToggle` a HoC to inject a feature toggle onto the `props` of a
@@ -276,9 +285,9 @@ It takes the `props`:
     will should be invoked accordingly to notify `react-broadcast` and
     `react-redux` about flag and status changes
   - Different adapters allow for different configurations. The `@flopflip/launchdarkly-adapter` accepts:
-    - `clientOptions`: additional options to be passed to the unterlying SDK
+    - `clientOptions`: additional options to be passed to the underlying SDK
     - `subscribeToFlagChanges`: defaulting to `true` to disable real-time updates to flags once initially fetched
-    - `throwOnInitializationFailure`: defaulting to `false` to indicate if the adapter just rethrow an error during initialization
+    - `throwOnInitializationFailure`: defaulting to `false` to indicate if the adapter just re-throw an error during initialization
     - `flagsUpdateDelayMs`: defaulting to `0` to debounce the flag update subscription
     - `flags`: defaulting to `null` to subscribe only to specific flags. Helpful when not wanting to subscribe to all flags to utilise LaunchDarkly's automatic flag archiving functionality
 - The `shouldDeferAdapterConfiguration` prop can be used to defer the initial
@@ -848,6 +857,69 @@ Requires arguments of `clientSideId:string`, `user:object`.
 - The `adapterArgs` object
   - Often with the before mentioned user object `user` object which often needs
     at least a `key` attribute
+
+### `@flopflip/cypress-plugin`
+
+#### Introduction
+
+Changing flag state in End-to-End test runs helps ensuring that an application works as expected with all variations of a feature. For this `@flopflip` comes with a `cypress-plugin`. This plugin tightly integrates with any underlying adapter and allows altering flag state from within test runs.
+
+Imagine having the following Cypress test suite:
+
+```js
+describe('adding users', () => {
+  describe('with seaching by E-Mail being enabled', () => {
+    it('should allow adding users by E-Mail', () => {
+      cy.updateFeatureFlags({ searchUsersByEmail: true });
+
+      //... expecattions
+    });
+  });
+  describe('with seaching by E-Mail being disabled', () => {
+    it('should allow adding users by name', () => {
+      cy.updateFeatureFlags({ searchUsersByEmail: false });
+
+      //... expecattions
+    });
+  });
+});
+```
+
+In the example above we test two variations of a feature. Being able to alter flag state during test runs avoids work-arounds such as complex multi-project setups and makes the tests themselves resilient to changes of your flag configurations on your staging or testing environments.
+
+#### Installation
+
+To install the `@flopflip/cypress-plugin` you will have to add the respective command and plugin as follows after installing it as a `devDependency`.
+
+```bash
+yarn add --dev @floplfip/cypress-plugin
+npm install --save-dev @floplfip/cypress-plugin
+```
+
+In the `plugins/index.js` add the following to your existing config:
+
+```diff
++const flopflipCypressPlugin = require('@flopflip/cypress-plugin');
+
+module.exports = (on, cypressConfig) => {
+
++ flopflipCypressPlugin.install(on);
+
+  return { };
+};
+```
+
+In the `support/index.js` add the following to your existing commands:
+
+```js
+import { addCommands as addFlopflipCommands } from '@flopflip/cypress-plugin';
+
+addFlopflipCommands({
+  adapterId: 'launchdarkly',
+});
+```
+
+Please note that the `adapterId` should be one of `launchdarkly`, `memory`, `localstorage` or `splitio`. It allows the `cypress-plugin` to hook into the respective adapter. Also make sure to update to the most recent version of any adapter to ensure a smooth integration between the plugin and the adapter.
 
 ### Module formats
 
