@@ -919,7 +919,7 @@ addFlopflipCommands({
 });
 ```
 
-Please note that the `adapterId` should be one of `launchdarkly`, `memory`, `localstorage` or `splitio`. It allows the `cypress-plugin` to hook into the respective adapter.
+Please note that the `adapterId` should be one of `launchdarkly`, `memory`, `localstorage` or `splitio`. It allows the `cypress-plugin` to hook into the respective adapter. Also make sure to update to the most recent version of any adapter to ensure a smooth integration between the plugin and the adapter.
 
 ### Module formats
 
