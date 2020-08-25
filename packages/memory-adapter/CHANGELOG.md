@@ -1,5 +1,11 @@
 # @flopflip/memory-adapter
 
+## 1.9.2
+
+### Patch Changes
+
+- [`de8c944`](https://github.com/tdeekens/flopflip/commit/de8c944a76b5fb7185f4eccb70bb40920c3cccb0) [#1225](https://github.com/tdeekens/flopflip/pull/1225) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: to check subscription of flag upon initial sdk fetch
+
 ## 1.9.1
 
 ### Patch Changes
