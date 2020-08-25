@@ -1,5 +1,11 @@
 # @flopflip/cypress-plugin
 
+## 1.0.0
+
+### Major Changes
+
+- [`1bb0d43`](https://github.com/tdeekens/flopflip/commit/1bb0d43eda0e7ca61318ac388e07b93be97e591a) [#1226](https://github.com/tdeekens/flopflip/pull/1226) Thanks [@tdeekens](https://github.com/tdeekens)! - feat(cypress-plugin): release as 1.0.0
+
 ## 0.1.3
 
 ### Patch Changes
