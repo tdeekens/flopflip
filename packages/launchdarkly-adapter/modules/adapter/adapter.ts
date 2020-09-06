@@ -10,6 +10,8 @@ import type {
   TUpdateFlagsOptions,
   TAdapterEventHandlers,
   TFlagsUpdateFunction,
+  TAdapterStatusChange,
+  TFlagsChange,
 } from '@flopflip/types';
 import {
   TLaunchDarklyAdapterInterface,
@@ -264,12 +266,14 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   ) {
     adapterState.configurationStatus = TAdapterConfigurationStatus.Configuring;
 
-    adapterState.emitter.on(
+    adapterState.emitter.on<TFlagsChange>(
       'flagsStateChange',
+      // @ts-expect-error
       adapterEventHandlers.onFlagsStateChange
     );
-    adapterState.emitter.on(
+    adapterState.emitter.on<TAdapterStatusChange>(
       'statusStateChange',
+      // @ts-expect-error
       adapterEventHandlers.onStatusStateChange
     );
 

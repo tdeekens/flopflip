@@ -1,3 +1,5 @@
+/* global SplitIO */
+
 import type { DeepReadonly, Writable, DeepWritable } from 'ts-essentials';
 import type {
   TFlagName,
