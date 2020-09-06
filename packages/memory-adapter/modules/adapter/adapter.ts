@@ -10,6 +10,7 @@ import type {
   TAdapterEventHandlers,
   TMemoryAdapterArgs,
   TFlagsUpdateFunction,
+  TFlagsChange,
 } from '@flopflip/types';
 import {
   TMemoryAdapterInterface,
@@ -122,8 +123,16 @@ class MemoryAdapter implements TMemoryAdapterInterface {
       adapterEventHandlers.onStatusStateChange(nextStatus);
     };
 
-    adapterState.emitter.on('flagsStateChange', handleFlagsChange);
-    adapterState.emitter.on('statusStateChange', handleStatusChange);
+    adapterState.emitter.on<TFlagsChange>(
+      'flagsStateChange',
+      // @ts-expect-error
+      handleFlagsChange
+    );
+    adapterState.emitter.on<TAdapterStatusChange>(
+      'statusStateChange',
+      // @ts-expect-error
+      handleStatusChange
+    );
 
     adapterState.configurationStatus = TAdapterConfigurationStatus.Configuring;
 
