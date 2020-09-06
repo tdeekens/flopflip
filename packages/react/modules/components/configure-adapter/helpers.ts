@@ -10,6 +10,7 @@ import {
 
 const isFunctionChildren = (
   children: TConfigureAdapterChildren
+  // eslint-disable-next-line no-undef
 ): children is TConfigureAdapterChildrenAsFunction =>
   typeof children === 'function';
 

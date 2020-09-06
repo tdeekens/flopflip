@@ -1,9 +1,10 @@
+import type React from 'react';
 import type { LDClient as TLDClient } from 'launchdarkly-js-client-sdk';
 import type { DeepReadonly } from 'ts-essentials';
 
 export type TFlagName = string;
 export type TFlagVariation = boolean | string;
-export type TFlag = [TFlagName, TFlagVariation];
+export type TFlag = [flagName: TFlagName, flagVariation: TFlagVariation];
 export type TFlags = { [key: string]: TFlagVariation };
 export type TUser = {
   key?: string;
@@ -75,6 +76,7 @@ export const interfaceIdentifiers = {
   localstorage: 'localstorage',
   memory: 'memory',
   splitio: 'splitio',
+  // eslint-disable-next-line no-undef
 } as const;
 export type TAdapterInterfaceIdentifiers = typeof interfaceIdentifiers[keyof typeof interfaceIdentifiers];
 
