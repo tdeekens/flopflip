@@ -872,14 +872,14 @@ describe('adding users', () => {
     it('should allow adding users by E-Mail', () => {
       cy.updateFeatureFlags({ searchUsersByEmail: true });
 
-      //... expecattions
+      //... expectations
     });
   });
   describe('with seaching by E-Mail being disabled', () => {
     it('should allow adding users by name', () => {
       cy.updateFeatureFlags({ searchUsersByEmail: false });
 
-      //... expecattions
+      //... expectations
     });
   });
 });
