@@ -4,7 +4,9 @@ import type { DeepReadonly } from 'ts-essentials';
 
 export type TFlagName = string;
 export type TFlagVariation = boolean | string;
-export type TFlag = [flagName: TFlagName, flagVariation: TFlagVariation];
+// TODO: use labelled tuple elements only when we drop support for TS v3
+// export type TFlag = [flagName: TFlagName, flagVariation: TFlagVariation];
+export type TFlag = [TFlagName, TFlagVariation];
 export type TFlags = { [key: string]: TFlagVariation };
 export type TUser = {
   key?: string;
