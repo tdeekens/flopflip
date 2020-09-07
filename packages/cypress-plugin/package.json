@@ -40,7 +40,7 @@
     "cypress": "5.1.0"
   },
   "peerDependencies": {
-    "cypress": "^4.0"
+    "cypress": "^4.0 || ^5.0.0"
   },
   "dependencies": {},
   "keywords": [
