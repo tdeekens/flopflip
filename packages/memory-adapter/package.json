@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/memory-adapter",
-  "version": "1.9.4",
+  "version": "1.9.5",
   "description": "An in memory adapter for flipflop",
   "main": "dist/@flopflip-memory-adapter.cjs.js",
   "module": "dist/@flopflip-memory-adapter.es.js",
@@ -39,7 +39,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.11.2",
-    "@flopflip/types": "2.5.8",
+    "@flopflip/types": "2.5.9",
     "globalthis": "1.0.1",
     "lodash": "4.17.20",
     "mitt": "2.1.0",

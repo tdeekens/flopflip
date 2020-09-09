@@ -1,5 +1,12 @@
 # @flopflip/memory-adapter
 
+## 1.9.5
+
+### Patch Changes
+
+- Updated dependencies [[`8c97b10`](https://github.com/tdeekens/flopflip/commit/8c97b10ce7159e8769791834bf6d7a1b5aba37f3)]:
+  - @flopflip/types@2.5.9
+
 ## 1.9.4
 
 ### Patch Changes
