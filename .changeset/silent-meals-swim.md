@@ -2,4 +2,4 @@
 '@flopflip/types': patch	
 ---	
 
-fix: to downgrade to TS v3 due to compat
+Keep backwards compatibility with TypeScript v3	
