@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 2.5.9
+
+### Patch Changes
+
+- [`8c97b10`](https://github.com/tdeekens/flopflip/commit/8c97b10ce7159e8769791834bf6d7a1b5aba37f3) [#1244](https://github.com/tdeekens/flopflip/pull/1244) Thanks [@tdeekens](https://github.com/tdeekens)! - Keep backwards compatibility with TypeScript v3
+
 ## 2.5.8
 
 ### Patch Changes
