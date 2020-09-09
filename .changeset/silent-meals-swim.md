@@ -1,5 +1,5 @@
----	
-'@flopflip/types': patch	
----	
+---
+'@flopflip/types': patch
+---
 
-Keep backwards compatibility with TypeScript v3	
+Keep backwards compatibility with TypeScript v3
