@@ -66,7 +66,7 @@
     "@commercetools/jest-enzyme-matchers": "1.1.2",
     "@commitlint/cli": "9.1.2",
     "@commitlint/config-conventional": "9.1.2",
-    "@rollup/plugin-babel": "5.2.0",
+    "@rollup/plugin-babel": "5.2.1",
     "@rollup/plugin-commonjs": "15.0.0",
     "@rollup/plugin-json": "4.1.0",
     "@rollup/plugin-node-resolve": "9.0.0",
