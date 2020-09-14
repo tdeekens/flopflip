@@ -94,7 +94,7 @@
     "eslint-plugin-react": "7.20.6",
     "eslint-plugin-react-hooks": "4.1.2",
     "eslint-plugin-testing-library": "3.8.0",
-    "husky": "4.2.5",
+    "husky": "4.3.0",
     "jest-environment-jsdom-sixteen": "1.0.3",
     "lint-staged": "10.3.0",
     "mri": "1.1.6",
