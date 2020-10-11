@@ -1,5 +1,15 @@
 # @flopflip/react-broadcast
 
+## 10.2.7
+
+### Patch Changes
+
+- [`eac3bd4`](https://github.com/tdeekens/flopflip/commit/eac3bd4d80fee4209ed39d7b9199916afb7f192f) [#1269](https://github.com/tdeekens/flopflip/pull/1269) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: update dependencies across packages
+
+- Updated dependencies [[`eac3bd4`](https://github.com/tdeekens/flopflip/commit/eac3bd4d80fee4209ed39d7b9199916afb7f192f)]:
+  - @flopflip/react@9.1.19
+  - @flopflip/types@2.5.10
+
 ## 10.2.6
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @flopflip/test-utils
 
+## 1.1.18
+
+### Patch Changes
+
+- [`eac3bd4`](https://github.com/tdeekens/flopflip/commit/eac3bd4d80fee4209ed39d7b9199916afb7f192f) [#1269](https://github.com/tdeekens/flopflip/pull/1269) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: update dependencies across packages
+
 ## 1.1.17
 
 ### Patch Changes
