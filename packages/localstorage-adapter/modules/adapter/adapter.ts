@@ -98,8 +98,8 @@ const storage: Storage = {
     try {
       localStorage.setItem(`${STORAGE_SLICE}__${key}`, JSON.stringify(value));
       return true;
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    } catch (e) {
+      // eslint-disable-next-line
+    } catch (_error) {
       return false;
     }
   },
