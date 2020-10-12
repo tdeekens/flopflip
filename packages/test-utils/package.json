@@ -26,7 +26,7 @@
     "@testing-library/jest-dom": "5.11.4",
     "@testing-library/react": "11.0.4",
     "codecov": "3.8.0",
-    "jest": "26.5.2",
+    "jest": "26.5.3",
     "jest-localstorage-mock": "2.4.3",
     "jest-plugin-filename": "0.0.1",
     "jest-runner-eslint": "0.10.0",
