@@ -37,15 +37,15 @@
     "@flopflip/types": "2.5.10",
     "@types/react": "16.9.52",
     "@types/react-dom": "16.9.8",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react": "16.14.0",
+    "react-dom": "16.14.0"
   },
   "peerDependencies": {
     "react": "^16.8",
     "react-dom": "^16.8"
   },
   "dependencies": {
-    "@babel/runtime": "7.11.2",
+    "@babel/runtime": "7.12.0",
     "@types/react-is": "16.7.1",
     "deepmerge": "4.2.2",
     "lodash": "4.17.20",
