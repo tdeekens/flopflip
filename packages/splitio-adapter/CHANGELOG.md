@@ -1,5 +1,11 @@
 # @flopflip/splitio-adapter
 
+## 1.9.7
+
+### Patch Changes
+
+- [`5598832`](https://github.com/tdeekens/flopflip/commit/5598832df710f707fe0832cd4011e26c060e24a8) [#1275](https://github.com/tdeekens/flopflip/pull/1275) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: update deps
+
 ## 1.9.6
 
 ### Patch Changes
