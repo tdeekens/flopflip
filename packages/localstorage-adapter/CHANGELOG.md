@@ -1,5 +1,16 @@
 # @flopflip/localstorage-adapter
 
+## 2.0.0
+
+### Major Changes
+
+- [`891fb29`](https://github.com/tdeekens/flopflip/commit/891fb294d5d6e016224b5a16d22760f0a55f9606) [#1287](https://github.com/tdeekens/flopflip/pull/1287) Thanks [@renovate](https://github.com/apps/renovate)! - flopflip is now built with TypeScript v4 which can cause compatibility issues if you project runs on an older version of TypeScript
+
+### Patch Changes
+
+- Updated dependencies [[`891fb29`](https://github.com/tdeekens/flopflip/commit/891fb294d5d6e016224b5a16d22760f0a55f9606)]:
+  - @flopflip/types@3.0.0
+
 ## 1.9.7
 
 ### Patch Changes
