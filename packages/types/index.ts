@@ -4,10 +4,8 @@ import type { DeepReadonly } from 'ts-essentials';
 
 export type TFlagName = string;
 export type TFlagVariation = boolean | string;
-// TODO: use labelled tuple elements only when we drop support for TS v3
-// export type TFlag = [flagName: TFlagName, flagVariation: TFlagVariation];
-export type TFlag = [TFlagName, TFlagVariation];
-export type TFlags = { [key: string]: TFlagVariation };
+export type TFlag = [flagName: TFlagName, flagVariation: TFlagVariation];
+export type TFlags = Record<string, TFlagVariation>;
 export type TUser = {
   key?: string;
 };
@@ -57,16 +55,12 @@ export type TLocalStorageAdapterArgs = TBaseAdapterArgs & {
 export type TMemoryAdapterArgs = TBaseAdapterArgs;
 export type TSplitioAdapterArgs = TBaseAdapterArgs & {
   authorizationKey: string;
-  options?: {
-    [key: string]: unknown;
-    core?: {
-      [key: string]: string;
-    };
-  };
-  treatmentAttributes?: {
-    // Matches the signature of SplitIO.Attributes
-    [key: string]: string | number | boolean | Array<string | number>;
-  };
+  options?: Record<string, unknown> & { core?: Record<string, string> };
+  // Matches the signature of SplitIO.Attributes
+  treatmentAttributes?: Record<
+    string,
+    string | number | boolean | Array<string | number>
+  >;
 };
 export type TAdapterArgs =
   | TLaunchDarklyAdapterArgs
