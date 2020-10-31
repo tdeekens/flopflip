@@ -44,7 +44,7 @@
     "lodash": "4.17.20",
     "mitt": "2.1.0",
     "tiny-warning": "1.0.3",
-    "ts-essentials": "7.0.0"
+    "ts-essentials": "7.0.1"
   },
   "devDependencies": {
     "read-pkg-up": "7.0.1"

@@ -37,7 +37,7 @@
     "types"
   ],
   "dependencies": {
-    "ts-essentials": "7.0.0"
+    "ts-essentials": "7.0.1"
   },
   "peerDependencies": {
     "typescript": "4.x"
