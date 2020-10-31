@@ -1,5 +1,4 @@
-import { createStore as createReduxStore } from 'redux';
-import { combineReducers } from 'redux';
+import { combineReducers, createStore as createReduxStore } from 'redux';
 import {
   createFlopflipReducer,
   FLOPFLIP_STATE_SLICE,

@@ -43,7 +43,7 @@
     "globalthis": "1.0.1",
     "lodash": "4.17.20",
     "tiny-warning": "1.0.3",
-    "ts-essentials": "7.0.0"
+    "ts-essentials": "7.0.1"
   },
   "keywords": [
     "feature-flags",
