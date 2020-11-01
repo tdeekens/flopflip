@@ -3,12 +3,13 @@
   "name": "flopflip",
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
+    "install": "yarn install && yarn postinstall",
     "auth": "npm_config_registry=https://registry.npmjs.org npm whoami",
     "postinstall": "yarn check-node-version --package --print",
     "develop": "yarn jest --projects jest.*.config.js --watch",
     "lint": "yarn jest --config jest.lint.config.js --maxWorkers 5",
     "pretypecheck": "yarn rimraf packages/types/dist/**",
-    "typecheck": "yarn tsc --noEmit",
+    "typecheck": "yarn pretypecheck && yarn tsc --noEmit",
     "format": "yarn format:ts && yarn format:md && yarn format:yaml",
     "format:ts": "yarn prettier --write '**/*.{js, ts, tsx}'",
     "format:md": "yarn prettier --parser markdown --write '**/*.md'",
@@ -25,7 +26,7 @@
     "changeset": "yarn changeset",
     "version-packages": "yarn changeset version",
     "prerelease": "cross-env NODE_ENV=production yarn auth && yarn build",
-    "release": "yarn changeset publish"
+    "release": "yarn prerelease && yarn changeset publish"
   },
   "repository": {
     "type": "git",
