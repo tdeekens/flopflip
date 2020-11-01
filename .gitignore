@@ -42,3 +42,11 @@ coverage
 
 # VSCode
 .vscode
+
+# Yarn - no zero installs
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
