@@ -42,7 +42,6 @@
   "peerDependencies": {
     "cypress": "^4.0 || ^5.0.0"
   },
-  "dependencies": {},
   "keywords": [
     "react",
     "feature-flags",
