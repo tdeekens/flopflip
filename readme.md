@@ -557,7 +557,7 @@ const ComponentWithFeatureToggles = props => {
 }
 ```
 
-#### `useFlagVarition(flagName: string): FlagVariation`
+#### `useFlagVariation(flagName: string): FlagVariation`
 
 Given you want to use React hooks within a functional component you can read a variation as follows:
 
