@@ -23,7 +23,7 @@ jobs:
           node-version: '${{ steps.nvm.outputs.NVMRC }}'
 
       - name: Changeset
-        uses: generates/changeset-action@v2.0.0
+        uses: generates/changeset-action@v2.0.1
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v5
