@@ -4,7 +4,6 @@ on:
     types: [labeled]
 jobs:
   changeset:
-    if: ${{ github.event.label.name == '🤖 Dependencies' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
