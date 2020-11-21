@@ -119,10 +119,6 @@
     "HoC",
     "store-enhancer"
   ],
-  "resolutions": {
-    "@types/react": "16.9.56",
-    "@types/react-dom": "16.9.9"
-  },
   "workspaces": [
     "packages/*"
   ],
