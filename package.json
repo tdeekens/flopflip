@@ -118,7 +118,10 @@
     "packages/*"
   ],
   "preconstruct": {
-    "packages": ["packages/*"]
+    "packages": [
+      "packages/*",
+      "!packages/test-utils"
+    ]
   },
   "bundlesize": [
     {
