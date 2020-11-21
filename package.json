@@ -148,7 +148,7 @@
         "maxSize": "2.50Kb"
       },
       {
-        "path": "./packages/react-redux/dist/react-redux.browser.esm.js",
+        "path": "./packages/react-redux/dist/flopflip-react-redux.browser.esm.js",
         "maxSize": "3Kb"
       }
     ]
