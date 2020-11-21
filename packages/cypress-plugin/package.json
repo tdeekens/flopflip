@@ -3,19 +3,11 @@
   "version": "2.0.0",
   "description": "A plugin for Cypress change feature toggles in Cypress runs",
   "main": "dist/@flopflip-cypress-plugin.cjs.js",
-  "module": "dist/@flopflip-cypress-plugin.es.js",
+  "module": "dist/@flopflip-cypress-plugin.esm.js",
   "browser": "dist/@flopflip-cypress-plugin.umd.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
-    "prepare": "./../../bin/version.js amend",
-    "prebuild": "rimraf dist/**",
-    "build": "cross-env npm run build:es && npm run build:cjs && npm run build:umd && npm run build:umd:min && npm run build:typings",
-    "build:typings": "cross-env tsc -p tsconfig.json --emitDeclarationOnly --declarationDir dist/typings",
-    "build:watch": "cross-env npm run build:es -- -w",
-    "build:umd": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f umd -i modules/index.ts -o dist/@flopflip-cypress-plugin.umd.js",
-    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -i modules/index.ts -o dist/@flopflip-cypress-plugin.umd.min.js",
-    "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.ts -o dist/@flopflip-cypress-plugin.es.js",
-    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-cypress-plugin.cjs.js"
+    "prepare": "./../../bin/version.js amend"
   },
   "files": [
     "readme.md",

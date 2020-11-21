@@ -3,19 +3,11 @@
   "version": "11.0.0",
   "description": "A feature toggle wrapper to use LaunchDarkly with React Redux",
   "main": "dist/@flopflip-react-redux.cjs.js",
-  "module": "dist/@flopflip-react-redux.es.js",
+  "module": "dist/@flopflip-react-redux.esm.js",
   "browser": "dist/@flopflip-react-redux.umd.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
-    "prepare": "./../../bin/version.js amend",
-    "prebuild": "rimraf dist/**",
-    "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs && npm run build:typings",
-    "build:typings": "cross-env tsc -p tsconfig.json --emitDeclarationOnly --declarationDir dist/typings",
-    "build:watch": "cross-env npm run build:es -- -w",
-    "build:umd": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f umd -i modules/index.ts -o dist/@flopflip-react-redux.umd.js",
-    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -i modules/index.ts -o dist/@flopflip-react-redux.umd.min.js",
-    "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.ts -o dist/@flopflip-react-redux.es.js",
-    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-react-redux.cjs.js"
+    "prepare": "./../../bin/version.js amend"
   },
   "files": [
     "readme.md",

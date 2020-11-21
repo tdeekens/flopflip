@@ -27,17 +27,5 @@
     "allowJs": false,
     "types": ["cypress", "node", "react"]
   },
-  "include": [
-    "packages/**/*.ts",
-    "packages/**/modules/**/*.ts",
-    "packages/**/modules/**/*.tsx",
-    "packages/**/modules/**/*.js",
-    "packages/**/@types/**/*.d.ts",
-    "packages/test-utils/*.js"
-  ],
-  "exclude": [
-    "packages/**/node_modules/*.d.ts",
-    "node_modules/*.d.ts",
-    "**/dist/**/*"
-  ]
+  "typeRoots": ["@types", "node_modules/@types"]
 }

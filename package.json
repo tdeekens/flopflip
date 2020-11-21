@@ -4,7 +4,7 @@
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
     "auth": "npm_config_registry=https://registry.npmjs.org npm whoami",
-    "postinstall": "check-node-version --package --print",
+    "postinstall": "check-node-version --package --print && preconstruct dev",
     "develop": "jest --projects jest.*.config.js --watch",
     "lint": "jest --config jest.lint.config.js --maxWorkers 5",
     "pretypecheck": "rimraf packages/types/dist/**",
@@ -20,8 +20,8 @@
     "test:ci:coverage": "cross-env NODE_ENV=test yarn test:ci --coverage && codecov",
     "test:watch": "cross-env NODE_ENV=test yarn test --watch",
     "test:coverage": "cross-env NODE_ENV=test yarn test --coverage",
-    "build": "cross-env NODE_ENV=production yarn workspaces run build",
-    "build:watch": "cross-env NODE_ENV=development yarn workspaces --parallel run build:watch",
+    "build": "preconstruct build",
+    "build:watch": "preconstruct watch",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "prerelease": "cross-env NODE_ENV=production yarn auth && yarn build",
@@ -76,6 +76,7 @@
     "@types/node": "14.14.7",
     "@typescript-eslint/eslint-plugin": "4.7.0",
     "@typescript-eslint/parser": "4.7.0",
+    "@preconstruct/cli": "1.1.34",
     "babel-eslint": "10.1.0",
     "babel-jest": "26.6.3",
     "babel-plugin-transform-dynamic-import": "2.1.0",
@@ -105,13 +106,6 @@
     "regenerator-runtime": "0.13.7",
     "replace": "1.2.0",
     "rimraf": "3.0.2",
-    "rollup": "2.33.2",
-    "rollup-plugin-filesize": "9.0.2",
-    "rollup-plugin-includepaths": "0.2.4",
-    "rollup-plugin-node-builtins": "2.1.2",
-    "rollup-plugin-node-globals": "1.4.0",
-    "rollup-plugin-terser": "7.0.2",
-    "rollup-watch": "4.3.1",
     "ts-jest": "26.4.4",
     "typescript": "4.0.5"
   },
@@ -131,6 +125,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "preconstruct": {
+    "packages": ["packages/*"]
+  },
   "bundlesize": [
     {
       "path": "./packages/launchdarkly-adapter/dist/@flopflip-launchdarkly-adapter.es.js",
