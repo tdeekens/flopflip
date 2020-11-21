@@ -16,6 +16,18 @@
       "updateTypes": ["minor", "patch"],
       "groupName": "all dependencies",
       "groupSlug": "all"
+    },
+    {
+      "updateTypes": ["major"],
+      "labels": ["changeset:patch"]
+    },
+    {
+      "updateTypes": ["minor"],
+      "labels": ["changeset:patch"]
+    },
+    {
+      "updateTypes": ["patch"],
+      "labels": ["changeset:patch"]
     }
   ],
   "circleci": { "enabled": false },

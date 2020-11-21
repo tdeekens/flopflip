@@ -4,7 +4,6 @@ on:
     types: [labeled]
 jobs:
   changeset:
-    if: ${{ github.event.label.name == '🤖 Dependencies' }}
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -13,8 +12,17 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Read .nvmrc
+        run: echo ::set-output name=NVMRC::$(cat .nvmrc)
+        id: nvm
+
+      - name: Setup Node (uses version in .nvmrc)
+        uses: actions/setup-node@v1
+        with:
+          node-version: '${{ steps.nvm.outputs.NVMRC }}'
+
       - name: Changeset
-        uses: generates/changeset-action@v2.0.0
+        uses: generates/changeset-action@v2.0.1
 
       - name: Commit changes
         uses: EndBug/add-and-commit@v5
