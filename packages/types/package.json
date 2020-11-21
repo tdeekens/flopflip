@@ -2,11 +2,10 @@
   "name": "@flopflip/types",
   "version": "3.0.0",
   "description": "Type definitions for flipflop",
-  "main": "dist/@flopflip-types.cjs.js",
-  "module": "dist/@flopflip-types.esm.js",
+  "main": "dist/types.cjs.js",
+  "module": "dist/types.esm.js",
   "typings": "dist/typings/index.d.ts",
-  "scripts": {
-  },
+  "scripts": {},
   "files": [
     "readme.md",
     "dist/**"

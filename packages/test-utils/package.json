@@ -6,7 +6,7 @@
   "scripts": {
     "build": "exit 0"
   },
-  "main": "index.js",
+  "main": "dist/test-utils.cjs.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tdeekens/flopflip.git"

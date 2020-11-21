@@ -2,8 +2,8 @@
   "name": "@flopflip/memory-adapter",
   "version": "2.0.0",
   "description": "An in memory adapter for flipflop",
-  "main": "dist/@flopflip-memory-adapter.cjs.js",
-  "module": "dist/@flopflip-memory-adapter.esm.js",
+  "main": "dist/memory-adapter.cjs.js",
+  "module": "dist/memory-adapter.esm.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
     "prepare": "./../../bin/version.js amend"

@@ -2,8 +2,8 @@
   "name": "@flopflip/localstorage-adapter",
   "version": "2.0.0",
   "description": "An localstorage adapter for flipflop",
-  "main": "dist/@flopflip-localstorage-adapter.cjs.js",
-  "module": "dist/@flopflip-localstorage-adapter.esm.js",
+  "main": "dist/localstorage-adapter.cjs.js",
+  "module": "dist/localstorage-adapter.esm.js",
   "typings": "dist/typings/index.d.ts",
   "scripts": {
     "prepare": "./../../bin/version.js amend"

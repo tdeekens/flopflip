@@ -2,9 +2,12 @@
   "name": "@flopflip/cypress-plugin",
   "version": "2.0.0",
   "description": "A plugin for Cypress change feature toggles in Cypress runs",
-  "main": "dist/@flopflip-cypress-plugin.cjs.js",
-  "module": "dist/@flopflip-cypress-plugin.esm.js",
-  "browser": "dist/@flopflip-cypress-plugin.umd.js",
+  "main": "dist/cypress-plugin.cjs.js",
+  "module": "dist/cypress-plugin.esm.js",
+  "browser": {
+    "./dist/cypress-plugin.cjs.js": "./dist/cypress-plugin.browser.cjs.js",
+    "./dist/cypress-plugin.esm.js": "./dist/cypress-plugin.browser.esm.js"
+  },
   "typings": "dist/typings/index.d.ts",
   "scripts": {
     "prepare": "./../../bin/version.js amend"
