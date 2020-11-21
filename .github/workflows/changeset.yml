@@ -14,7 +14,12 @@ jobs:
           fetch-depth: 0
       - name: Changeset
         uses: generates/changeset-action@v2.0.0
-      - name: Commit Changes
-        uses: generates/commit-action:v1.0.1
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v5
         with:
-          token: ${{ secrets.GH_TOKEN }}
+          author_name: Tobias Deekens
+          author_email: nerd@tdeekens.name
+          message: "chore: add changeset"
+          add: ".changeset/*.md"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
