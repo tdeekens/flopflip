@@ -17,9 +17,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: yarn cache directory
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
+
       - name: Setup node_modules cache
         uses: actions/cache@v2
         with:
@@ -27,30 +29,33 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: Install
         run: yarn install --frozen-lockfile
+
       - name: Type check
         run: yarn typecheck
+
       - name: Lint
         run: yarn lint
+
       - name: Build
         run: yarn build
+
       - name: Test
         if: startsWith(matrix.node-version, '14')
         run: yarn test:ci
         env:
           CI: true
+
       - name: Test (with coverage)
         if: startsWith(matrix.node-version, '15')
         run: yarn test:ci:coverage
         env:
           CI: true
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      - name: Bundle size check
-        run: yarn test:sizes
-        env:
-          BUNDLESIZE_GITHUB_TOKEN: ${{ secrets.BUNDLESIZE_GITHUB_TOKEN }}

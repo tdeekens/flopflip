@@ -15,7 +15,6 @@
     "format:yaml": "prettier --parser yaml --write '**/*.{yml,yaml}'",
     "fix:eslint": "eslint --fix --format=node_modules/eslint-formatter-pretty",
     "test": "cross-env NODE_ENV=test jest --config jest.test.config.js",
-    "test:sizes": "bundlesize",
     "test:ci": "cross-env NODE_ENV=test yarn test --no-watchman --maxWorkers 5 --no-cache",
     "test:ci:coverage": "cross-env NODE_ENV=test yarn test:ci --coverage && codecov",
     "test:watch": "cross-env NODE_ENV=test yarn test --watch",
@@ -76,7 +75,6 @@
     "babel-jest": "26.6.3",
     "babel-plugin-lodash": "3.3.4",
     "babel-plugin-transform-dynamic-import": "2.1.0",
-    "bundlesize": "0.18.0",
     "check-node-version": "4.0.3",
     "core-js": "3.7.0",
     "cross-env": "7.0.2",
@@ -123,34 +121,36 @@
       "!packages/test-utils"
     ]
   },
-  "bundlesize": [
-    {
-      "path": "./packages/launchdarkly-adapter/dist/launchdarkly-adapter.esm.js",
-      "threshold": "2.5Kb"
-    },
-    {
-      "path": "./packages/localstorage-adapter/dist/localstorage-adapter.esm.js",
-      "threshold": "900B"
-    },
-    {
-      "path": "./packages/memory-adapter/dist/memory-adapter.esm.js",
-      "threshold": "600B"
-    },
-    {
-      "path": "./packages/splitio-adapter/dist/splitio-adapter.esm.js",
-      "threshold": "95Kb"
-    },
-    {
-      "path": "./packages/react/dist/react.esm.js",
-      "threshold": "4.5Kb"
-    },
-    {
-      "path": "./packages/react-broadcast/dist/react-broadcast.browser.esm.js",
-      "threshold": "3.75Kb"
-    },
-    {
-      "path": "./packages/react-redux/dist/react-redux.browser.esm.js",
-      "threshold": "3.75Kb"
-    }
-  ]
+  "bundlewatch": {
+    "files": [
+      {
+        "path": "./packages/launchdarkly-adapter/dist/launchdarkly-adapter.esm.js",
+        "maxSize": "2.5Kb"
+      },
+      {
+        "path": "./packages/localstorage-adapter/dist/localstorage-adapter.esm.js",
+        "maxSize": "900B"
+      },
+      {
+        "path": "./packages/memory-adapter/dist/memory-adapter.esm.js",
+        "maxSize": "600B"
+      },
+      {
+        "path": "./packages/splitio-adapter/dist/splitio-adapter.esm.js",
+        "maxSize": "95Kb"
+      },
+      {
+        "path": "./packages/react/dist/react.esm.js",
+        "maxSize": "4.5Kb"
+      },
+      {
+        "path": "./packages/react-broadcast/dist/react-broadcast.browser.esm.js",
+        "maxSize": "3.75Kb"
+      },
+      {
+        "path": "./packages/react-redux/dist/react-redux.browser.esm.js",
+        "maxSize": "3.75Kb"
+      }
+    ]
+  }
 }
