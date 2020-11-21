@@ -1,5 +1,21 @@
 # @flopflip/react-redux
 
+## 11.0.1
+
+### Patch Changes
+
+- [`ad5935f`](https://github.com/tdeekens/flopflip/commit/ad5935fe1d355dbd244f97f78e74fbe0e2a8a3f3) [#1320](https://github.com/tdeekens/flopflip/pull/1320) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: update deps
+
+* [`f0e8c66`](https://github.com/tdeekens/flopflip/commit/f0e8c66f008b1f6a959f463e01008844ee70d405) [#1314](https://github.com/tdeekens/flopflip/pull/1314) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: to use preconstruct cli
+
+  This swaps out our complete build tooling to embrase a more focussed approach.
+
+  This should not create issues as all entry points have been migrated.
+
+* Updated dependencies [[`ad5935f`](https://github.com/tdeekens/flopflip/commit/ad5935fe1d355dbd244f97f78e74fbe0e2a8a3f3), [`f0e8c66`](https://github.com/tdeekens/flopflip/commit/f0e8c66f008b1f6a959f463e01008844ee70d405)]:
+  - @flopflip/react@10.0.1
+  - @flopflip/types@3.0.1
+
 ## 11.0.0
 
 ### Major Changes
