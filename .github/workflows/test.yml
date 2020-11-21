@@ -33,10 +33,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install
         run: yarn install --frozen-lockfile
-      - name: Build
-        run: yarn build
+      - name: Type check
+        run: yarn typecheck
       - name: Lint
         run: yarn lint
+      - name: Build
+        run: yarn build
       - name: Test
         if: startsWith(matrix.node-version, '13')
         run: yarn test:ci
@@ -47,8 +49,6 @@ jobs:
         run: yarn test:ci:coverage
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      - name: Type check
-        run: yarn typecheck
       - name: Bundle size check
         run: yarn test:sizes
         env:
