@@ -10,7 +10,7 @@
 "@flopflip/types": patch
 ---
 
-refactor: to use preconsturct
+refactor: to use preconstruct cli
 
 This swaps out our complete build tooling to embrase a more focussed approach. 
 
