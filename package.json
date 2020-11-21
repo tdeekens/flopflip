@@ -124,27 +124,27 @@
   "bundlewatch": {
     "files": [
       {
-        "path": "./packages/launchdarkly-adapter/dist/launchdarkly-adapter.esm.js",
+        "path": "./packages/launchdarkly-adapter/dist/flopflip-launchdarkly-adapter.esm.js",
         "maxSize": "5Kb"
       },
       {
-        "path": "./packages/localstorage-adapter/dist/localstorage-adapter.esm.js",
+        "path": "./packages/localstorage-adapter/dist/flopflip-localstorage-adapter.esm.js",
         "maxSize": "3KB"
       },
       {
-        "path": "./packages/memory-adapter/dist/memory-adapter.esm.js",
+        "path": "./packages/memory-adapter/dist/flopflip-memory-adapter.esm.js",
         "maxSize": "3KB"
       },
       {
-        "path": "./packages/splitio-adapter/dist/splitio-adapter.esm.js",
+        "path": "./packages/splitio-adapter/dist/flopflip-splitio-adapter.esm.js",
         "maxSize": "3.5Kb"
       },
       {
-        "path": "./packages/react/dist/react.esm.js",
+        "path": "./packages/react/dist/flopflip-react.esm.js",
         "maxSize": "5Kb"
       },
       {
-        "path": "./packages/react-broadcast/dist/react-broadcast.browser.esm.js",
+        "path": "./packages/react-broadcast/dist/flopflip-react-broadcast.browser.esm.js",
         "maxSize": "2.50Kb"
       },
       {
