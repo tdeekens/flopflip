@@ -4,12 +4,25 @@
     "group:monorepos",
     "schedule:weekly"
   ],
+  "separateMajorMinor": true,
   "lockFileMaintenance": {
     "enabled": true
   },
+  "packageRules": [
+    {
+      "packagePatterns": [
+        "*"
+      ],
+      "updateTypes": ["minor", "patch"],
+      "groupName": "all dependencies",
+      "groupSlug": "all"
+    }
+  ],
   "circleci": { "enabled": false },
   "automerge": true,
   "major": {
     "automerge": false
-  }
+  },
+  "ignoreDeps": [],
+  "labels": ["🤖 Dependencies"]
 }
