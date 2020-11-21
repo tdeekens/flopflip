@@ -30,10 +30,10 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@types/react": "16.9.56",
-    "@types/react-dom": "16.9.9",
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
+    "@types/react": "17.0.0",
+    "@types/react-dom": "17.0.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
     "read-pkg-up": "7.0.1"
   },
   "peerDependencies": {
