@@ -205,7 +205,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   };
 
   async waitUntilConfigured() {
-    return new Promise((resolve) => {
+    return new Promise<void>((resolve) => {
       if (
         adapterState.configurationStatus ===
         TAdapterConfigurationStatus.Configured

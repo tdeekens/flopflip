@@ -2,11 +2,11 @@
   "name": "@flopflip/react-broadcast",
   "version": "11.0.0",
   "description": "A feature toggle wrapper to use LaunchDarkly with React",
-  "main": "dist/react-broadcast.cjs.js",
-  "module": "dist/react-broadcast.esm.js",
+  "main": "dist/flopflip-react-broadcast.cjs.js",
+  "module": "dist/flopflip-react-broadcast.esm.js",
   "browser": {
-    "./dist/react-broadcast.cjs.js": "./dist/react-broadcast.browser.cjs.js",
-    "./dist/react-broadcast.esm.js": "./dist/react-broadcast.browser.esm.js"
+    "./dist/flopflip-react-broadcast.cjs.js": "./dist/flopflip-react-broadcast.browser.cjs.js",
+    "./dist/flopflip-react-broadcast.esm.js": "./dist/flopflip-react-broadcast.browser.esm.js"
   },
   "typings": "dist/react-broadcast.cjs.d.ts",
   "scripts": {
@@ -30,10 +30,10 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@types/react": "16.9.56",
-    "@types/react-dom": "16.9.9",
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
+    "@types/react": "17.0.0",
+    "@types/react-dom": "17.0.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
     "read-pkg-up": "7.0.1"
   },
   "peerDependencies": {

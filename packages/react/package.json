@@ -2,11 +2,11 @@
   "name": "@flopflip/react",
   "version": "10.0.0",
   "description": "A feature toggle wrapper to use LaunchDarkly with React",
-  "main": "dist/react.cjs.js",
-  "module": "dist/react.esm.js",
+  "main": "dist/flopflip-react.cjs.js",
+  "module": "dist/flopflip-react.esm.js",
   "browser": {
-    "./dist/react.cjs.js": "./dist/react.browser.cjs.js",
-    "./dist/react.esm.js": "./dist/react.browser.esm.js"
+    "./dist/flopflip-react.cjs.js": "./dist/flopflip-react.browser.cjs.js",
+    "./dist/flopflip-react.esm.js": "./dist/flopflip-react.browser.esm.js"
   },
   "typings": "dist/react.cjs.d.ts",
   "scripts": {
@@ -31,23 +31,23 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@types/react": "16.9.56",
-    "@types/react-dom": "16.9.9",
-    "react": "16.14.0",
-    "react-dom": "16.14.0"
+    "@types/react": "17.0.0",
+    "@types/react-dom": "17.0.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1"
   },
   "peerDependencies": {
     "react": "^16.8",
     "react-dom": "^16.8"
   },
   "dependencies": {
-    "@flopflip/types": "3.0.0",
     "@babel/runtime": "7.12.5",
-    "@types/react-is": "16.7.1",
+    "@flopflip/types": "3.0.0",
+    "@types/react-is": "17.0.0",
     "deepmerge": "4.2.2",
     "lodash": "4.17.20",
     "react-fast-compare": "3.2.0",
-    "react-is": "16.13.1",
+    "react-is": "17.0.1",
     "tiny-warning": "1.0.3",
     "ts-essentials": "7.0.1"
   },
