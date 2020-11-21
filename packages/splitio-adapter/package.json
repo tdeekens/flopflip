@@ -4,7 +4,7 @@
   "description": "A adapter around the split.io client for flipflop",
   "main": "dist/splitio-adapter.cjs.js",
   "module": "dist/splitio-adapter.esm.js",
-  "typings": "dist/typings/index.d.ts",
+  "typings": "dist/splitio-adapter.cjs.d.ts",
   "scripts": {
     "prepare": "./../../bin/version.js amend"
   },

@@ -8,7 +8,7 @@
     "./dist/react-redux.cjs.js": "./dist/react-redux.browser.cjs.js",
     "./dist/react-redux.esm.js": "./dist/react-redux.browser.esm.js"
   },
-  "typings": "dist/typings/index.d.ts",
+  "typings": "dist/react-redux.cjs.d.ts",
   "scripts": {
     "prepare": "./../../bin/version.js amend"
   },

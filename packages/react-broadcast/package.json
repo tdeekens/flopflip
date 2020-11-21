@@ -8,7 +8,7 @@
     "./dist/react-broadcast.cjs.js": "./dist/react-broadcast.browser.cjs.js",
     "./dist/react-broadcast.esm.js": "./dist/react-broadcast.browser.esm.js"
   },
-  "typings": "dist/typings/index.d.ts",
+  "typings": "dist/react-broadcast.cjs.d.ts",
   "scripts": {
     "prepare": "./../../bin/version.js amend"
   },

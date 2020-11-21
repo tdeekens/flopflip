@@ -4,7 +4,7 @@
   "description": "An localstorage adapter for flipflop",
   "main": "dist/localstorage-adapter.cjs.js",
   "module": "dist/localstorage-adapter.esm.js",
-  "typings": "dist/typings/index.d.ts",
+  "typings": "dist/localstorage-adapter.cjs.d.ts",
   "scripts": {
     "prepare": "./../../bin/version.js amend"
   },

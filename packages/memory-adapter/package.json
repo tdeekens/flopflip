@@ -4,7 +4,7 @@
   "description": "An in memory adapter for flipflop",
   "main": "dist/memory-adapter.cjs.js",
   "module": "dist/memory-adapter.esm.js",
-  "typings": "dist/typings/index.d.ts",
+  "typings": "dist/memory-adapter.cjs.d.ts",
   "scripts": {
     "prepare": "./../../bin/version.js amend"
   },

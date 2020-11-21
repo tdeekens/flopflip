@@ -8,7 +8,7 @@
     "./dist/cypress-plugin.cjs.js": "./dist/cypress-plugin.browser.cjs.js",
     "./dist/cypress-plugin.esm.js": "./dist/cypress-plugin.browser.esm.js"
   },
-  "typings": "dist/typings/index.d.ts",
+  "typings": "dist/cypress-plugin.cjs.d.ts",
   "scripts": {
     "prepare": "./../../bin/version.js amend"
   },

@@ -8,7 +8,7 @@
     "./dist/react.cjs.js": "./dist/react.browser.cjs.js",
     "./dist/react.esm.js": "./dist/react.browser.esm.js"
   },
-  "typings": "dist/typings/index.d.ts",
+  "typings": "dist/react.cjs.d.ts",
   "scripts": {
     "prepare": "./../../bin/version.js amend"
   },
