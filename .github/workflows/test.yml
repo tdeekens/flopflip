@@ -40,14 +40,15 @@ jobs:
       - name: Build
         run: yarn build
       - name: Test
-        if: startsWith(matrix.node-version, '13')
+        if: startsWith(matrix.node-version, '14')
         run: yarn test:ci
         env:
           CI: true
       - name: Test (with coverage)
-        if: startsWith(matrix.node-version, '14')
+        if: startsWith(matrix.node-version, '15')
         run: yarn test:ci:coverage
         env:
+          CI: true
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       - name: Bundle size check
         run: yarn test:sizes
