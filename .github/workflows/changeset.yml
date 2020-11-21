@@ -12,8 +12,10 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
       - name: Changeset
         uses: generates/changeset-action@v2.0.0
+
       - name: Commit changes
         uses: EndBug/add-and-commit@v5
         with:
