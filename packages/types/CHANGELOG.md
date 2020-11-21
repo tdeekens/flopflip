@@ -1,5 +1,15 @@
 # @flopflip/types
 
+## 3.0.1
+
+### Patch Changes
+
+- [`f0e8c66`](https://github.com/tdeekens/flopflip/commit/f0e8c66f008b1f6a959f463e01008844ee70d405) [#1314](https://github.com/tdeekens/flopflip/pull/1314) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: to use preconstruct cli
+
+  This swaps out our complete build tooling to embrase a more focussed approach.
+
+  This should not create issues as all entry points have been migrated.
+
 ## 3.0.0
 
 ### Major Changes
