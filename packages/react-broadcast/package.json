@@ -2,20 +2,15 @@
   "name": "@flopflip/react-broadcast",
   "version": "11.0.0",
   "description": "A feature toggle wrapper to use LaunchDarkly with React",
-  "main": "dist/@flopflip-react-broadcast.cjs.js",
-  "module": "dist/@flopflip-react-broadcast.es.js",
-  "browser": "dist/@flopflip-react-broadcast.umd.js",
-  "typings": "dist/typings/index.d.ts",
+  "main": "dist/react-broadcast.cjs.js",
+  "module": "dist/react-broadcast.esm.js",
+  "browser": {
+    "./dist/react-broadcast.cjs.js": "./dist/react-broadcast.browser.cjs.js",
+    "./dist/react-broadcast.esm.js": "./dist/react-broadcast.browser.esm.js"
+  },
+  "typings": "dist/react-broadcast.cjs.d.ts",
   "scripts": {
-    "prebuild": "rimraf dist/**",
-    "prepare": "./../../bin/version.js amend",
-    "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs && npm run build:typings",
-    "build:typings": "cross-env tsc -p tsconfig.json --emitDeclarationOnly --declarationDir dist/typings",
-    "build:watch": "cross-env npm run build:es -- -w",
-    "build:umd": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f umd -i modules/index.ts -o dist/@flopflip-react-broadcast.umd.js",
-    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -i modules/index.ts -o dist/@flopflip-react-broadcast.umd.min.js",
-    "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -i modules/index.ts -o dist/@flopflip-react-broadcast.es.js",
-    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -i modules/index.ts -o dist/@flopflip-react-broadcast.cjs.js"
+    "prepare": "./../../bin/version.js amend"
   },
   "files": [
     "readme.md",

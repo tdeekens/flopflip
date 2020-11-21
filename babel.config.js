@@ -64,5 +64,6 @@ module.exports = {
     ],
     isEnv('test') && 'babel-plugin-transform-dynamic-import',
     isEnv('test') && '@babel/plugin-transform-modules-commonjs',
+    'babel-plugin-lodash',
   ].filter(Boolean),
 };
