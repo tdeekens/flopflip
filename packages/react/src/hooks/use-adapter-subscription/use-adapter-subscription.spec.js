@@ -1,6 +1,6 @@
 import {
-  TAdapterSubscriptionStatus,
-  TAdapterConfigurationStatus,
+  AdapterSubscriptionStatus,
+  AdapterConfigurationStatus,
 } from '@flopflip/types';
 import React from 'react';
 import { render as rtlRender } from '@flopflip/test-utils';
@@ -8,7 +8,7 @@ import useAdapterSubscription from './use-adapter-subscription';
 
 const createAdapter = () => ({
   getIsConfigurationStatus: jest.fn(
-    () => TAdapterConfigurationStatus.Unconfigured
+    () => AdapterConfigurationStatus.Unconfigured
   ),
   configure: jest.fn(() => Promise.resolve()),
   reconfigure: jest.fn(() => Promise.resolve()),
@@ -20,7 +20,7 @@ const TestComponent = (props) => {
   const getHasAdapterSubscriptionStatus = useAdapterSubscription(props.adapter);
 
   const isConfigured = props.adapter.getIsConfigurationStatus(
-    TAdapterConfigurationStatus.Configured
+    AdapterConfigurationStatus.Configured
   );
 
   return (
@@ -30,16 +30,14 @@ const TestComponent = (props) => {
         <li>Is configured: {isConfigured ? 'Yes' : 'No'}</li>
         <li>
           Is subscribed:{' '}
-          {getHasAdapterSubscriptionStatus(
-            TAdapterSubscriptionStatus.Subscribed
-          )
+          {getHasAdapterSubscriptionStatus(AdapterSubscriptionStatus.Subscribed)
             ? 'Yes'
             : 'No'}
         </li>
         <li>
           Is unsubscribed:{' '}
           {getHasAdapterSubscriptionStatus(
-            TAdapterSubscriptionStatus.Unsubscribed
+            AdapterSubscriptionStatus.Unsubscribed
           )
             ? 'Yes'
             : 'No'}

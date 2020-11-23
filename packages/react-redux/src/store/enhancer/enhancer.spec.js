@@ -1,4 +1,4 @@
-import { TAdapterConfigurationStatus } from '@flopflip/types';
+import { AdapterConfigurationStatus } from '@flopflip/types';
 import { updateFlags, updateStatus } from '../../ducks';
 import createFlopFlipEnhancer from './enhancer';
 
@@ -72,7 +72,7 @@ describe('when creating enhancer', () => {
 
     describe('when invoking  `onStatusStateChange`', () => {
       let nextStatus = {
-        adapterConfigurationStatus: TAdapterConfigurationStatus.Configured,
+        adapterConfigurationStatus: AdapterConfigurationStatus.Configured,
       };
 
       beforeEach(() => {

@@ -8,7 +8,6 @@
     "./dist/flopflip-cypress-plugin.cjs.js": "./dist/flopflip-cypress-plugin.browser.cjs.js",
     "./dist/flopflip-cypress-plugin.esm.js": "./dist/flopflip-cypress-plugin.browser.esm.js"
   },
-  "typings": "dist/cypress-plugin.cjs.d.ts",
   "scripts": {
     "prepare": "./../../bin/version.js amend"
   },
@@ -16,7 +15,6 @@
     "readme.md",
     "dist/**"
   ],
-  "types": "dist/typings/index.d.ts",
   "publishConfig": {
     "access": "public"
   },

@@ -1,5 +1,5 @@
 import type { TAdapter } from '@flopflip/types';
-import { TAdapterSubscriptionStatus } from '@flopflip/types';
+import { AdapterSubscriptionStatus } from '@flopflip/types';
 
 import React from 'react';
 
@@ -14,7 +14,7 @@ function useAdapterSubscription(adapter: TAdapter) {
    *    is a singleton).
    */
   const useAdapterSubscriptionStatusRef = React.useRef(
-    TAdapterSubscriptionStatus.Subscribed
+    AdapterSubscriptionStatus.Subscribed
   );
 
   const { subscribe, unsubscribe } = adapter;
@@ -25,7 +25,7 @@ function useAdapterSubscription(adapter: TAdapter) {
     }
 
     useAdapterSubscriptionStatusRef.current =
-      TAdapterSubscriptionStatus.Subscribed;
+      AdapterSubscriptionStatus.Subscribed;
 
     return () => {
       if (unsubscribe) {
@@ -33,11 +33,11 @@ function useAdapterSubscription(adapter: TAdapter) {
       }
 
       useAdapterSubscriptionStatusRef.current =
-        TAdapterSubscriptionStatus.Unsubscribed;
+        AdapterSubscriptionStatus.Unsubscribed;
     };
   }, [subscribe, unsubscribe]);
 
-  return (demandedAdapterSubscriptionStatus: TAdapterSubscriptionStatus) =>
+  return (demandedAdapterSubscriptionStatus: AdapterSubscriptionStatus) =>
     useAdapterSubscriptionStatusRef.current ===
     demandedAdapterSubscriptionStatus;
 }

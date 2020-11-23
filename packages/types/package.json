@@ -4,13 +4,11 @@
   "description": "Type definitions for flipflop",
   "main": "dist/flopflip-types.cjs.js",
   "module": "dist/flopflip-types.esm.js",
-  "typings": "dist/types.cjs.d.ts",
   "scripts": {},
   "files": [
     "readme.md",
     "dist/**"
   ],
-  "types": "dist/typings/index.d.ts",
   "publishConfig": {
     "access": "public"
   },

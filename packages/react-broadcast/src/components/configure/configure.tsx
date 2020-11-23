@@ -9,8 +9,8 @@ import type {
   TConfigureAdapterProps,
 } from '@flopflip/types';
 import {
-  TAdapterConfigurationStatus,
-  TAdapterSubscriptionStatus,
+  AdapterConfigurationStatus,
+  AdapterSubscriptionStatus,
 } from '@flopflip/types';
 
 import React from 'react';
@@ -31,8 +31,8 @@ type State = {
 };
 
 const initialAdapterStatus: State['status'] = {
-  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
-  configurationStatus: TAdapterConfigurationStatus.Unconfigured,
+  subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
+  configurationStatus: AdapterConfigurationStatus.Unconfigured,
 };
 const initialFlags: State['flags'] = {};
 
@@ -83,7 +83,7 @@ const Configure = <AdapterInstance extends TAdapter>(
   >(
     (flags) => {
       if (
-        getHasAdapterSubscriptionStatus(TAdapterSubscriptionStatus.Unsubscribed)
+        getHasAdapterSubscriptionStatus(AdapterSubscriptionStatus.Unsubscribed)
       ) {
         return;
       }
@@ -101,7 +101,7 @@ const Configure = <AdapterInstance extends TAdapter>(
   >(
     (status) => {
       if (
-        getHasAdapterSubscriptionStatus(TAdapterSubscriptionStatus.Unsubscribed)
+        getHasAdapterSubscriptionStatus(AdapterSubscriptionStatus.Unsubscribed)
       ) {
         return;
       }

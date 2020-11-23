@@ -8,7 +8,6 @@
     "./dist/flopflip-react.cjs.js": "./dist/flopflip-react.browser.cjs.js",
     "./dist/flopflip-react.esm.js": "./dist/flopflip-react.browser.esm.js"
   },
-  "typings": "dist/react.cjs.d.ts",
   "scripts": {
     "prepare": "./../../bin/version.js amend"
   },
@@ -16,7 +15,6 @@
     "readme.md",
     "dist/**"
   ],
-  "types": "dist/typings/index.d.ts",
   "publishConfig": {
     "access": "public"
   },

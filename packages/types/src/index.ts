@@ -9,25 +9,25 @@ export type TFlags = Record<string, TFlagVariation>;
 export type TUser = {
   key?: string;
 };
-export enum TAdapterSubscriptionStatus {
+export enum AdapterSubscriptionStatus {
   Subscribed,
   Unsubscribed,
 }
-export enum TAdapterConfigurationStatus {
+export enum AdapterConfigurationStatus {
   Unconfigured,
   Configuring,
   Configured,
 }
-export enum TAdapterInitializationStatus {
+export enum AdapterInitializationStatus {
   Succeeded,
   Failed,
 }
 export type TAdapterConfiguration = {
-  initializationStatus?: TAdapterInitializationStatus;
+  initializationStatus?: AdapterInitializationStatus;
 };
 export type TAdapterStatus = {
-  configurationStatus: TAdapterConfigurationStatus;
-  subscriptionStatus: TAdapterSubscriptionStatus;
+  configurationStatus: AdapterConfigurationStatus;
+  subscriptionStatus: AdapterSubscriptionStatus;
 };
 export type TAdapterStatusChange = Partial<TAdapterStatus>;
 export type TFlagsChange = TFlags;
@@ -88,10 +88,10 @@ export interface TAdapterInterface<Args extends TAdapterArgs> {
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) => Promise<TAdapterConfiguration>;
   getIsConfigurationStatus: (
-    configurationStatus: TAdapterConfigurationStatus
+    configurationStatus: AdapterConfigurationStatus
   ) => boolean;
   setConfigurationStatus?: (
-    nextConfigurationStatus: TAdapterConfigurationStatus
+    nextConfigurationStatus: AdapterConfigurationStatus
   ) => void;
   waitUntilConfigured?: () => Promise<unknown>;
   reset?: () => void;
@@ -111,7 +111,7 @@ export interface TLaunchDarklyAdapterInterface
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) => Promise<TAdapterConfiguration>;
   getIsConfigurationStatus: (
-    adapterConfigurationStatus: TAdapterConfigurationStatus
+    adapterConfigurationStatus: AdapterConfigurationStatus
   ) => boolean;
   getClient: () => TLDClient | undefined;
   getFlag: (flagName: TFlagName) => TFlagVariation | undefined;
@@ -131,7 +131,7 @@ export interface TLocalStorageAdapterInterface
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) => Promise<TAdapterConfiguration>;
   getIsConfigurationStatus: (
-    adapterConfigurationStatus: TAdapterConfigurationStatus
+    adapterConfigurationStatus: AdapterConfigurationStatus
   ) => boolean;
   waitUntilConfigured: () => Promise<unknown>;
   unsubscribe: () => void;
@@ -149,7 +149,7 @@ export interface TMemoryAdapterInterface
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) => Promise<TAdapterConfiguration>;
   getIsConfigurationStatus: (
-    adapterConfigurationStatus: TAdapterConfigurationStatus
+    adapterConfigurationStatus: AdapterConfigurationStatus
   ) => boolean;
   waitUntilConfigured: () => Promise<unknown>;
   reset: () => void;
@@ -169,7 +169,7 @@ export interface TSplitioAdapterInterface
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) => Promise<TAdapterConfiguration>;
   getIsConfigurationStatus: (
-    adapterConfigurationStatus: TAdapterConfigurationStatus
+    adapterConfigurationStatus: AdapterConfigurationStatus
   ) => boolean;
   unsubscribe: () => void;
   subscribe: () => void;

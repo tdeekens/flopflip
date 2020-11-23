@@ -16,9 +16,9 @@ import type {
   TFlagsUpdateFunction,
 } from '@flopflip/types';
 import {
-  TAdapterSubscriptionStatus,
-  TAdapterConfigurationStatus,
-  TAdapterInitializationStatus,
+  AdapterInitializationStatus,
+  AdapterSubscriptionStatus,
+  AdapterConfigurationStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
 
@@ -44,8 +44,8 @@ type SplitIOAdapterState = {
 };
 
 const adapterState: TAdapterStatus & SplitIOAdapterState = {
-  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
-  configurationStatus: TAdapterConfigurationStatus.Unconfigured,
+  subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
+  configurationStatus: AdapterConfigurationStatus.Unconfigured,
   user: undefined,
   client: undefined,
   manager: undefined,
@@ -57,7 +57,7 @@ const adapterState: TAdapterStatus & SplitIOAdapterState = {
 };
 
 const getIsAdapterUnsubscribed = () =>
-  adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
+  adapterState.subscriptionStatus === AdapterSubscriptionStatus.Unsubscribed;
 
 const normalizeFlag = (
   flagName: TFlagName,
@@ -158,8 +158,7 @@ const subscribe = async ({
 }>) =>
   new Promise<void>((resolve, reject) => {
     if (adapterState.client) {
-      adapterState.configurationStatus =
-        TAdapterConfigurationStatus.Configuring;
+      adapterState.configurationStatus = AdapterConfigurationStatus.Configuring;
 
       onStatusStateChange({
         configurationStatus: adapterState.configurationStatus,
@@ -190,7 +189,7 @@ const subscribe = async ({
 
           // First update internal state
           adapterState.configurationStatus =
-            TAdapterConfigurationStatus.Configured;
+            AdapterConfigurationStatus.Configured;
           // ...to then signal that the adapter is configured
 
           if (!getIsAdapterUnsubscribed()) {
@@ -222,7 +221,7 @@ const configureSplitio = async () => {
     onStatusStateChange: adapterState.configuredCallbacks.onStatusStateChange,
   }).then(() => {
     return {
-      initializationStatus: TAdapterInitializationStatus.Succeeded,
+      initializationStatus: AdapterInitializationStatus.Succeeded,
     };
   });
 };
@@ -252,7 +251,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
       treatmentAttributes,
     } = adapterArgs;
 
-    adapterState.configurationStatus = TAdapterConfigurationStatus.Configuring;
+    adapterState.configurationStatus = AdapterConfigurationStatus.Configuring;
 
     adapterState.user = ensureUser(user);
     adapterState.treatmentAttributes = cloneTreatmentAttributes(
@@ -281,7 +280,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
   ) {
     if (
       adapterState.configurationStatus !==
-        TAdapterConfigurationStatus.Configured ||
+        AdapterConfigurationStatus.Configured ||
       !adapterState.user
     ) {
       return Promise.reject(
@@ -318,20 +317,20 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     }
 
     return Promise.resolve({
-      initializationStatus: TAdapterInitializationStatus.Succeeded,
+      initializationStatus: AdapterInitializationStatus.Succeeded,
     });
   }
 
-  getIsConfigurationStatus(configurationStatus: TAdapterConfigurationStatus) {
+  getIsConfigurationStatus(configurationStatus: AdapterConfigurationStatus) {
     return adapterState.configurationStatus === configurationStatus;
   }
 
   unsubscribe() {
-    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Unsubscribed;
+    adapterState.subscriptionStatus = AdapterSubscriptionStatus.Unsubscribed;
   }
 
   subscribe() {
-    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
+    adapterState.subscriptionStatus = AdapterSubscriptionStatus.Subscribed;
   }
 
   // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
@@ -341,9 +340,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
       '@flopflip/splitio-adapter: `getIsReady` has been deprecated. Please use `getIsConfigurationStatus` instead.'
     );
 
-    return this.getIsConfigurationStatus(
-      TAdapterConfigurationStatus.Configured
-    );
+    return this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured);
   }
 }
 

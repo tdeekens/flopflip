@@ -4,16 +4,16 @@ import type {
   TAdapterStatus,
 } from '@flopflip/types';
 import {
-  TAdapterSubscriptionStatus,
-  TAdapterConfigurationStatus,
+  AdapterSubscriptionStatus,
+  AdapterConfigurationStatus,
 } from '@flopflip/types';
 
 import React from 'react';
 
 const initialReconfigureAdapter: TReconfigureAdapter = () => undefined;
 const initialAdapterStatus: TAdapterStatus = {
-  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
-  configurationStatus: TAdapterConfigurationStatus.Unconfigured,
+  subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
+  configurationStatus: AdapterConfigurationStatus.Unconfigured,
 };
 const createAdapterContext = (
   reconfigure?: TReconfigureAdapter,
@@ -26,15 +26,14 @@ const createAdapterContext = (
 const initialAdapterContext = createAdapterContext();
 const AdapterContext = React.createContext(initialAdapterContext);
 
-const selectAdapterConfigurationStatus = (
-  configurationStatus?: TAdapterConfigurationStatus
+const selecAdapterConfigurationStatus = (
+  configurationStatus?: AdapterConfigurationStatus
 ) => ({
-  isReady: configurationStatus === TAdapterConfigurationStatus.Configured,
+  isReady: configurationStatus === AdapterConfigurationStatus.Configured,
   isUnconfigured:
-    configurationStatus === TAdapterConfigurationStatus.Unconfigured,
-  isConfiguring:
-    configurationStatus === TAdapterConfigurationStatus.Configuring,
-  isConfigured: configurationStatus === TAdapterConfigurationStatus.Configured,
+    configurationStatus === AdapterConfigurationStatus.Unconfigured,
+  isConfiguring: configurationStatus === AdapterConfigurationStatus.Configuring,
+  isConfigured: configurationStatus === AdapterConfigurationStatus.Configured,
 });
 
 const useAdapterContext = () => React.useContext(AdapterContext);
@@ -43,5 +42,5 @@ export default AdapterContext;
 export {
   createAdapterContext,
   useAdapterContext,
-  selectAdapterConfigurationStatus,
+  selecAdapterConfigurationStatus,
 };

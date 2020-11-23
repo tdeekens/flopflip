@@ -1,4 +1,4 @@
-import { TAdapterConfigurationStatus } from '@flopflip/types';
+import { AdapterConfigurationStatus } from '@flopflip/types';
 import { SplitFactory } from '@splitsoftware/splitio';
 import getGlobalThis from 'globalthis';
 import adapter, {
@@ -42,7 +42,7 @@ describe('when configuring', () => {
 
   it('should indicate that the adapter is not configured', () => {
     expect(
-      adapter.getIsConfigurationStatus(TAdapterConfigurationStatus.Configured)
+      adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
     ).toBe(false);
   });
 
@@ -218,7 +218,7 @@ describe('when configuring', () => {
 
     it('should `dispatch` `onUpdateStatus` action with configured', () => {
       expect(onStatusStateChange).toHaveBeenCalledWith({
-        configurationStatus: TAdapterConfigurationStatus.Configuring,
+        configurationStatus: AdapterConfigurationStatus.Configuring,
       });
     });
 
@@ -233,14 +233,14 @@ describe('when configuring', () => {
       it('should indicate that the adapter is not configured', () => {
         expect(
           adapter.getIsConfigurationStatus(
-            TAdapterConfigurationStatus.Configured
+            AdapterConfigurationStatus.Configured
           )
         ).toBe(true);
       });
 
       it('should `dispatch` `onUpdateStatus` action with configured', () => {
         expect(onStatusStateChange).toHaveBeenCalledWith({
-          configurationStatus: TAdapterConfigurationStatus.Configured,
+          configurationStatus: AdapterConfigurationStatus.Configured,
         });
       });
 

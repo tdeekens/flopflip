@@ -8,7 +8,6 @@
     "./dist/flopflip-react-redux.cjs.js": "./dist/flopflip-react-redux.browser.cjs.js",
     "./dist/flopflip-react-redux.esm.js": "./dist/flopflip-react-redux.browser.esm.js"
   },
-  "typings": "dist/react-redux.cjs.d.ts",
   "scripts": {
     "prepare": "./../../bin/version.js amend"
   },

@@ -8,7 +8,6 @@
     "./dist/flopflip-react-broadcast.cjs.js": "./dist/flopflip-react-broadcast.browser.cjs.js",
     "./dist/flopflip-react-broadcast.esm.js": "./dist/flopflip-react-broadcast.browser.esm.js"
   },
-  "typings": "dist/react-broadcast.cjs.d.ts",
   "scripts": {
     "prepare": "./../../bin/version.js amend"
   },

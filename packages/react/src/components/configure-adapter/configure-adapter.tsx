@@ -14,8 +14,8 @@ import type {
   TAdapterConfiguration,
 } from '@flopflip/types';
 import {
-  TAdapterConfigurationStatus,
-  TAdapterInitializationStatus,
+  AdapterConfigurationStatus,
+  AdapterInitializationStatus,
 } from '@flopflip/types';
 
 import React from 'react';
@@ -245,7 +245,7 @@ const useConfigurationEffect = ({
           if (
             isAdapterWithoutInitializationStatus ||
             configuration.initializationStatus ===
-              TAdapterInitializationStatus.Succeeded
+              AdapterInitializationStatus.Succeeded
           ) {
             setAdapterState(AdapterStates.CONFIGURED);
 
@@ -276,7 +276,7 @@ const useConfigurationEffect = ({
           if (
             isAdapterWithoutInitializationStatus ||
             reconfiguration.initializationStatus ===
-              TAdapterInitializationStatus.Succeeded
+              AdapterInitializationStatus.Succeeded
           ) {
             setAdapterState(AdapterStates.CONFIGURED);
           }
@@ -345,7 +345,7 @@ const useDefaultFlagsEffect = ({
           if (
             isAdapterWithoutInitializationStatus ||
             configuration.initializationStatus ===
-              TAdapterInitializationStatus.Succeeded
+              AdapterInitializationStatus.Succeeded
           ) {
             setAdapterState(AdapterStates.CONFIGURED);
 
@@ -477,7 +477,7 @@ const ConfigureAdapter = (props: Readonly<TProps>) => {
     >
       {(() => {
         const isAdapterConfigured = props.adapter.getIsConfigurationStatus(
-          TAdapterConfigurationStatus.Configured
+          AdapterConfigurationStatus.Configured
         );
 
         if (isAdapterConfigured) {

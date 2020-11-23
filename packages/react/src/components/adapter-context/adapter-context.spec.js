@@ -1,11 +1,11 @@
-import { TAdapterConfigurationStatus } from '@flopflip/types';
-import { selectAdapterConfigurationStatus } from './adapter-context';
+import { AdapterConfigurationStatus } from '@flopflip/types';
+import { selecAdapterConfigurationStatus } from './adapter-context';
 
-describe('selectAdapterConfigurationStatus', () => {
+describe('selecAdapterConfigurationStatus', () => {
   describe('when configured', () => {
     it('should indicate ready state', () => {
       expect(
-        selectAdapterConfigurationStatus(TAdapterConfigurationStatus.Configured)
+        selecAdapterConfigurationStatus(AdapterConfigurationStatus.Configured)
       ).toEqual(
         expect.objectContaining({
           isReady: true,
@@ -14,7 +14,7 @@ describe('selectAdapterConfigurationStatus', () => {
     });
     it('should indicate configured state', () => {
       expect(
-        selectAdapterConfigurationStatus(TAdapterConfigurationStatus.Configured)
+        selecAdapterConfigurationStatus(AdapterConfigurationStatus.Configured)
       ).toEqual(
         expect.objectContaining({
           isConfigured: true,
@@ -25,9 +25,7 @@ describe('selectAdapterConfigurationStatus', () => {
   describe('when configuring', () => {
     it('should indicate configuring state', () => {
       expect(
-        selectAdapterConfigurationStatus(
-          TAdapterConfigurationStatus.Configuring
-        )
+        selecAdapterConfigurationStatus(AdapterConfigurationStatus.Configuring)
       ).toEqual(
         expect.objectContaining({
           isConfiguring: true,
@@ -36,9 +34,7 @@ describe('selectAdapterConfigurationStatus', () => {
     });
     it('should not indicate configured state', () => {
       expect(
-        selectAdapterConfigurationStatus(
-          TAdapterConfigurationStatus.Configuring
-        )
+        selecAdapterConfigurationStatus(AdapterConfigurationStatus.Configuring)
       ).toEqual(
         expect.objectContaining({
           isConfigured: false,
@@ -49,9 +45,7 @@ describe('selectAdapterConfigurationStatus', () => {
   describe('when unconfigured', () => {
     it('should indicate unconfigured', () => {
       expect(
-        selectAdapterConfigurationStatus(
-          TAdapterConfigurationStatus.Unconfigured
-        )
+        selecAdapterConfigurationStatus(AdapterConfigurationStatus.Unconfigured)
       ).toEqual(
         expect.objectContaining({
           isUnconfigured: true,

@@ -11,12 +11,12 @@ import type {
   TMemoryAdapterArgs,
   TFlagsUpdateFunction,
   TFlagsChange,
+  TMemoryAdapterInterface,
 } from '@flopflip/types';
 import {
-  TMemoryAdapterInterface,
-  TAdapterSubscriptionStatus,
-  TAdapterConfigurationStatus,
-  TAdapterInitializationStatus,
+  AdapterInitializationStatus,
+  AdapterSubscriptionStatus,
+  AdapterConfigurationStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
 
@@ -33,8 +33,8 @@ type MemoryAdapterState = {
 };
 
 const intialAdapterState: TAdapterStatus & MemoryAdapterState = {
-  configurationStatus: TAdapterConfigurationStatus.Unconfigured,
-  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
+  configurationStatus: AdapterConfigurationStatus.Unconfigured,
+  subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
   flags: {},
   lockedFlags: new Set<TFlagName>(),
   user: {},
@@ -51,7 +51,7 @@ const updateUser = (user: Readonly<TUser>) => {
 };
 
 const getIsAdapterUnsubscribed = () =>
-  adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
+  adapterState.subscriptionStatus === AdapterSubscriptionStatus.Unsubscribed;
 const getIsFlagLocked = (flagName: TFlagName) =>
   adapterState.lockedFlags.has(flagName);
 
@@ -68,7 +68,7 @@ const getUser = () => adapterState.user;
 
 const updateFlags: TFlagsUpdateFunction = (flags, options) => {
   const isAdapterConfigured =
-    adapterState.configurationStatus === TAdapterConfigurationStatus.Configured;
+    adapterState.configurationStatus === AdapterConfigurationStatus.Configured;
 
   warning(
     isAdapterConfigured,
@@ -134,7 +134,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
       handleStatusChange
     );
 
-    adapterState.configurationStatus = TAdapterConfigurationStatus.Configuring;
+    adapterState.configurationStatus = AdapterConfigurationStatus.Configuring;
 
     adapterState.emitter.emit('statusStateChange', {
       configurationStatus: adapterState.configurationStatus,
@@ -149,7 +149,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
       updateUser(user);
 
-      adapterState.configurationStatus = TAdapterConfigurationStatus.Configured;
+      adapterState.configurationStatus = AdapterConfigurationStatus.Configured;
 
       adapterState.emitter.emit('flagsStateChange', adapterState.flags);
       adapterState.emitter.emit('statusStateChange', {
@@ -159,7 +159,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
       adapterState.emitter.emit(__internalConfiguredStatusChange__);
 
       return {
-        initializationStatus: TAdapterInitializationStatus.Succeeded,
+        initializationStatus: AdapterInitializationStatus.Succeeded,
       };
     });
   }
@@ -168,13 +168,13 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     adapterArgs: DeepReadonly<TMemoryAdapterArgs>,
     _adapterEventHandlers: Readonly<TAdapterEventHandlers>
   ) {
-    adapterState.configurationStatus = TAdapterConfigurationStatus.Configuring;
+    adapterState.configurationStatus = AdapterConfigurationStatus.Configuring;
 
     updateUser(adapterArgs.user);
 
     adapterState.flags = {};
 
-    adapterState.configurationStatus = TAdapterConfigurationStatus.Configured;
+    adapterState.configurationStatus = AdapterConfigurationStatus.Configured;
 
     adapterState.emitter.emit('flagsStateChange', adapterState.flags);
     adapterState.emitter.emit('statusStateChange', {
@@ -182,15 +182,15 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     });
 
     return Promise.resolve({
-      initializationStatus: TAdapterInitializationStatus.Succeeded,
+      initializationStatus: AdapterInitializationStatus.Succeeded,
     });
   }
 
-  getIsConfigurationStatus(configurationStatus: TAdapterConfigurationStatus) {
+  getIsConfigurationStatus(configurationStatus: AdapterConfigurationStatus) {
     return adapterState.configurationStatus === configurationStatus;
   }
 
-  setConfigurationStatus(nextConfigurationStatus: TAdapterConfigurationStatus) {
+  setConfigurationStatus(nextConfigurationStatus: AdapterConfigurationStatus) {
     adapterState.configurationStatus = nextConfigurationStatus;
 
     adapterState.emitter.emit('statusStateChange', {
@@ -208,7 +208,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     return new Promise<void>((resolve) => {
       if (
         adapterState.configurationStatus ===
-        TAdapterConfigurationStatus.Configured
+        AdapterConfigurationStatus.Configured
       )
         resolve();
       else adapterState.emitter.on(__internalConfiguredStatusChange__, resolve);
@@ -225,11 +225,11 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   }
 
   unsubscribe() {
-    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Unsubscribed;
+    adapterState.subscriptionStatus = AdapterSubscriptionStatus.Unsubscribed;
   }
 
   subscribe() {
-    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
+    adapterState.subscriptionStatus = AdapterSubscriptionStatus.Subscribed;
   }
 
   // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
@@ -239,9 +239,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
       '@flopflip/memory-adapter: `getIsReady` has been deprecated. Please use `getIsConfigurationStatus` instead.'
     );
 
-    return this.getIsConfigurationStatus(
-      TAdapterConfigurationStatus.Configured
-    );
+    return this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured);
   }
 }
 
