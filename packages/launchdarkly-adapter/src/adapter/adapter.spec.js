@@ -1,4 +1,4 @@
-import { TAdapterConfigurationStatus } from '@flopflip/types';
+import { AdapterConfigurationStatus } from '@flopflip/types';
 import ldClient from 'launchdarkly-js-client-sdk';
 import getGlobalThis from 'globalthis';
 import adapter, { normalizeFlags, updateFlags } from './adapter';
@@ -41,7 +41,7 @@ describe('when configuring', () => {
 
   it('should indicate that the adapter is not configured', () => {
     expect(
-      adapter.getIsConfigurationStatus(TAdapterConfigurationStatus.Configured)
+      adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
     ).toBe(false);
   });
 
@@ -180,7 +180,7 @@ describe('when configuring', () => {
         it('should indicate that the adapter is configured', () => {
           expect(
             adapter.getIsConfigurationStatus(
-              TAdapterConfigurationStatus.Configured
+              AdapterConfigurationStatus.Configured
             )
           ).toBe(true);
         });
@@ -199,7 +199,7 @@ describe('when configuring', () => {
 
       it('should `dispatch` `onUpdateStatus` action with configured', () => {
         expect(onStatusStateChange).toHaveBeenCalledWith({
-          configurationStatus: TAdapterConfigurationStatus.Configured,
+          configurationStatus: AdapterConfigurationStatus.Configured,
         });
       });
 
@@ -319,7 +319,7 @@ describe('when configuring', () => {
 
         it('should `dispatch` `onUpdateStatus` action with configured', () => {
           expect(onStatusStateChange).toHaveBeenCalledWith({
-            configurationStatus: TAdapterConfigurationStatus.Configured,
+            configurationStatus: AdapterConfigurationStatus.Configured,
           });
         });
 

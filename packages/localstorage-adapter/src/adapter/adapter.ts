@@ -13,8 +13,8 @@ import type {
   TFlagsUpdateFunction,
   TFlagsChange,
   TLocalStorageAdapterInterface,
-  TAdapterSubscriptionStatus,
-  TAdapterConfigurationStatus,
+  AdapterSubscriptionStatus,
+  AdapterConfigurationStatus,
   TAdapterInitializationStatus,
 } from '@flopflip/types';
 import { interfaceIdentifiers } from '@flopflip/types';
@@ -39,8 +39,8 @@ type LocalStorageAdapterState = {
 };
 
 const intialAdapterState: TAdapterStatus & LocalStorageAdapterState = {
-  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
-  configurationStatus: TAdapterConfigurationStatus.Unconfigured,
+  subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
+  configurationStatus: AdapterConfigurationStatus.Unconfigured,
   flags: {},
   lockedFlags: new Set<TFlagName>(),
   user: {},
@@ -54,7 +54,7 @@ let adapterState: TAdapterStatus & LocalStorageAdapterState = {
 };
 
 const getIsAdapterUnsubscribed = () =>
-  adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
+  adapterState.subscriptionStatus === AdapterSubscriptionStatus.Unsubscribed;
 const getIsFlagLocked = (flagName: TFlagName) =>
   adapterState.lockedFlags.has(flagName);
 
@@ -105,7 +105,7 @@ const storage: Storage = {
 };
 const updateFlags: TFlagsUpdateFunction = (flags, options) => {
   const isAdapterConfigured =
-    adapterState.configurationStatus === TAdapterConfigurationStatus.Configured;
+    adapterState.configurationStatus === AdapterConfigurationStatus.Configured;
 
   warning(
     isAdapterConfigured,
@@ -209,7 +209,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       handleStatusChange
     );
 
-    adapterState.configurationStatus = TAdapterConfigurationStatus.Configuring;
+    adapterState.configurationStatus = AdapterConfigurationStatus.Configuring;
 
     adapterState.emitter.emit('statusStateChange', {
       configurationStatus: adapterState.configurationStatus,
@@ -220,7 +220,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     adapterState.user = user;
 
     return Promise.resolve().then(() => {
-      adapterState.configurationStatus = TAdapterConfigurationStatus.Configured;
+      adapterState.configurationStatus = AdapterConfigurationStatus.Configured;
 
       const flags = normalizeFlags(storage.get('flags'));
 
@@ -262,23 +262,23 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     return new Promise<void>((resolve) => {
       if (
         adapterState.configurationStatus ===
-        TAdapterConfigurationStatus.Configured
+        AdapterConfigurationStatus.Configured
       )
         resolve();
       else adapterState.emitter.on(__internalConfiguredStatusChange__, resolve);
     });
   }
 
-  getIsConfigurationStatus(configurationStatus: TAdapterConfigurationStatus) {
+  getIsConfigurationStatus(configurationStatus: AdapterConfigurationStatus) {
     return adapterState.configurationStatus === configurationStatus;
   }
 
   unsubscribe() {
-    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Unsubscribed;
+    adapterState.subscriptionStatus = AdapterSubscriptionStatus.Unsubscribed;
   }
 
   subscribe() {
-    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
+    adapterState.subscriptionStatus = AdapterSubscriptionStatus.Subscribed;
   }
 
   // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
@@ -288,9 +288,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       '@flopflip/localstorage-adapter: `getIsReady` has been deprecated. Please use `getIsConfigurationStatus` instead.'
     );
 
-    return this.getIsConfigurationStatus(
-      TAdapterConfigurationStatus.Configured
-    );
+    return this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured);
   }
 }
 

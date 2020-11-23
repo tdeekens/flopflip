@@ -1,4 +1,4 @@
-import { TAdapterConfigurationStatus } from '@flopflip/types';
+import { AdapterConfigurationStatus } from '@flopflip/types';
 import { STATE_SLICE } from '../../store/constants';
 import reducer, { UPDATE_STATUS, updateStatus, selectStatus } from './status';
 
@@ -20,13 +20,13 @@ describe('action creators', () => {
     it('should return passed configuration status', () => {
       expect(
         updateStatus({
-          configurationStatus: TAdapterConfigurationStatus.Configured,
+          configurationStatus: AdapterConfigurationStatus.Configured,
         })
       ).toEqual({
         type: expect.any(String),
         payload: {
           status: {
-            configurationStatus: TAdapterConfigurationStatus.Configured,
+            configurationStatus: AdapterConfigurationStatus.Configured,
           },
         },
       });
@@ -41,7 +41,7 @@ describe('reducers', () => {
       beforeEach(() => {
         payload = {
           status: {
-            configurationStatus: TAdapterConfigurationStatus.Configuring,
+            configurationStatus: AdapterConfigurationStatus.Configuring,
           },
         };
       });
@@ -49,7 +49,7 @@ describe('reducers', () => {
       it('should set the new status', () => {
         expect(reducer(undefined, { type: UPDATE_STATUS, payload })).toEqual(
           expect.objectContaining({
-            configurationStatus: TAdapterConfigurationStatus.Configuring,
+            configurationStatus: AdapterConfigurationStatus.Configuring,
           })
         );
       });
@@ -60,7 +60,7 @@ describe('reducers', () => {
       beforeEach(() => {
         payload = {
           status: {
-            configurationStatus: TAdapterConfigurationStatus.Configuring,
+            configurationStatus: AdapterConfigurationStatus.Configuring,
           },
         };
       });
@@ -68,11 +68,11 @@ describe('reducers', () => {
       it('should set the new status', () => {
         expect(
           reducer(
-            { configurationStatus: TAdapterConfigurationStatus.Configured },
+            { configurationStatus: AdapterConfigurationStatus.Configured },
             { type: UPDATE_STATUS, payload }
           )
         ).toEqual({
-          configurationStatus: TAdapterConfigurationStatus.Configuring,
+          configurationStatus: AdapterConfigurationStatus.Configuring,
         });
       });
     });
@@ -85,7 +85,7 @@ describe('selectors', () => {
 
   beforeEach(() => {
     status = {
-      configurationStatus: TAdapterConfigurationStatus.Configuring,
+      configurationStatus: AdapterConfigurationStatus.Configuring,
       subscriptionStatus: {},
     };
     state = {

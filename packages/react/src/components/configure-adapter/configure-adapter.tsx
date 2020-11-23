@@ -14,7 +14,7 @@ import type {
   TAdapterConfiguration,
 } from '@flopflip/types';
 import {
-  TAdapterConfigurationStatus,
+  AdapterConfigurationStatus,
   TAdapterInitializationStatus,
 } from '@flopflip/types';
 
@@ -477,7 +477,7 @@ const ConfigureAdapter = (props: Readonly<TProps>) => {
     >
       {(() => {
         const isAdapterConfigured = props.adapter.getIsConfigurationStatus(
-          TAdapterConfigurationStatus.Configured
+          AdapterConfigurationStatus.Configured
         );
 
         if (isAdapterConfigured) {

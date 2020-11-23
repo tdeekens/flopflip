@@ -1,11 +1,11 @@
 import type { DeepReadonly } from 'ts-essentials';
 import type { TAdapterStatus, TAdapterStatusChange } from '@flopflip/types';
 import {
-  TAdapterSubscriptionStatus,
-  TAdapterConfigurationStatus,
+  AdapterSubscriptionStatus,
+  AdapterConfigurationStatus,
 } from '@flopflip/types';
 
-import { selectAdapterConfigurationStatus } from '@flopflip/react';
+import { selecAdapterConfigurationStatus } from '@flopflip/react';
 import { TUpdateStatusAction } from './types';
 import { TState } from '../../types';
 import { STATE_SLICE } from '../../store/constants';
@@ -14,8 +14,8 @@ import { STATE_SLICE } from '../../store/constants';
 export const UPDATE_STATUS = '@flopflip/status/update';
 
 const initialState: TAdapterStatus = {
-  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
-  configurationStatus: TAdapterConfigurationStatus.Unconfigured,
+  subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
+  configurationStatus: AdapterConfigurationStatus.Unconfigured,
 };
 
 // Reducer
@@ -49,5 +49,5 @@ export const updateStatus = (
 export const selectStatus = (state: DeepReadonly<TState>) => {
   const { status } = state[STATE_SLICE];
 
-  return selectAdapterConfigurationStatus(status?.configurationStatus);
+  return selecAdapterConfigurationStatus(status?.configurationStatus);
 };

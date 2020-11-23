@@ -13,8 +13,8 @@ import type {
   TAdapterStatusChange,
   TFlagsChange,
   TLaunchDarklyAdapterInterface,
-  TAdapterSubscriptionStatus,
-  TAdapterConfigurationStatus,
+  AdapterSubscriptionStatus,
+  AdapterConfigurationStatus,
   TAdapterInitializationStatus,
 } from '@flopflip/types';
 import { interfaceIdentifiers } from '@flopflip/types';
@@ -44,8 +44,8 @@ type LaunchDarklyAdapterState = {
 };
 
 const adapterState: TAdapterStatus & LaunchDarklyAdapterState = {
-  subscriptionStatus: TAdapterSubscriptionStatus.Subscribed,
-  configurationStatus: TAdapterConfigurationStatus.Unconfigured,
+  subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
+  configurationStatus: AdapterConfigurationStatus.Unconfigured,
   user: undefined,
   client: undefined,
   flags: {},
@@ -100,7 +100,7 @@ const updateFlags: TFlagsUpdateFunction = (flags, options) => {
 };
 
 const getIsAdapterUnsubscribed = () =>
-  adapterState.subscriptionStatus === TAdapterSubscriptionStatus.Unsubscribed;
+  adapterState.subscriptionStatus === AdapterSubscriptionStatus.Unsubscribed;
 
 const getIsFlagUnsubcribed = (flagName: TFlagName) =>
   adapterState.unsubscribedFlags.has(flagName);
@@ -211,7 +211,7 @@ const getInitialFlags = async ({
 
         // First update internal state
         adapterState.configurationStatus =
-          TAdapterConfigurationStatus.Configured;
+          AdapterConfigurationStatus.Configured;
 
         // ...to then signal that the adapter is configured
         if (!getIsAdapterUnsubscribed()) {
@@ -262,7 +262,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     adapterArgs: DeepReadonly<TLaunchDarklyAdapterArgs>,
     adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) {
-    adapterState.configurationStatus = TAdapterConfigurationStatus.Configuring;
+    adapterState.configurationStatus = AdapterConfigurationStatus.Configuring;
 
     adapterState.emitter.on<TFlagsChange>(
       'flagsStateChange',
@@ -315,8 +315,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     _adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
   ) {
     if (
-      adapterState.configurationStatus !==
-      TAdapterConfigurationStatus.Configured
+      adapterState.configurationStatus !== AdapterConfigurationStatus.Configured
     )
       return Promise.reject(
         new Error(
@@ -341,7 +340,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     });
   }
 
-  getIsConfigurationStatus(configurationStatus: TAdapterConfigurationStatus) {
+  getIsConfigurationStatus(configurationStatus: AdapterConfigurationStatus) {
     return adapterState.configurationStatus === configurationStatus;
   }
 
@@ -356,7 +355,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   async updateUserContext(updatedUserProps: Readonly<TUser>) {
     const isAdapterConfigured =
       adapterState.configurationStatus ===
-      TAdapterConfigurationStatus.Configured;
+      AdapterConfigurationStatus.Configured;
 
     warning(
       isAdapterConfigured,
@@ -372,11 +371,11 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   }
 
   unsubscribe() {
-    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Unsubscribed;
+    adapterState.subscriptionStatus = AdapterSubscriptionStatus.Unsubscribed;
   }
 
   subscribe() {
-    adapterState.subscriptionStatus = TAdapterSubscriptionStatus.Subscribed;
+    adapterState.subscriptionStatus = AdapterSubscriptionStatus.Subscribed;
   }
 
   // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
@@ -386,9 +385,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       '@flopflip/launchdarkly-adapter: `getIsReady` has been deprecated. Please use `getIsConfigurationStatus` instead.'
     );
 
-    return this.getIsConfigurationStatus(
-      TAdapterConfigurationStatus.Configured
-    );
+    return this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured);
   }
 
   private _didFlagChange(flagName: TFlagName, nextFlagValue: TFlagVariation) {
