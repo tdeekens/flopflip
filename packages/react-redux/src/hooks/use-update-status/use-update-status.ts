@@ -1,11 +1,14 @@
-import type { TAdapterStatusChange } from '@flopflip/types';
+import type {
+  TAdapterStatusChange,
+  TUpdateStatusAction,
+} from '@flopflip/types';
 
 import React from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import { updateStatus } from '../../ducks';
 
-const useUpdateStatus = () => {
+const useUpdateStatus = (): TUpdateStatusAction => {
   const dispatch = useDispatch<Dispatch<ReturnType<typeof updateStatus>>>();
   return React.useCallback(
     (status: Readonly<TAdapterStatusChange>) => dispatch(updateStatus(status)),
