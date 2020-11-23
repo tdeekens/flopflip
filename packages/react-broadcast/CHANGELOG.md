@@ -1,5 +1,15 @@
 # @flopflip/react-broadcast
 
+## 11.0.2
+
+### Patch Changes
+
+- [`853b28d`](https://github.com/tdeekens/flopflip/commit/853b28d0d964f9cc897198d463e494881a82efcc) [#1321](https://github.com/tdeekens/flopflip/pull/1321) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: to not use typings on any package
+
+- Updated dependencies [[`853b28d`](https://github.com/tdeekens/flopflip/commit/853b28d0d964f9cc897198d463e494881a82efcc)]:
+  - @flopflip/react@10.0.2
+  - @flopflip/types@3.0.2
+
 ## 11.0.1
 
 ### Patch Changes

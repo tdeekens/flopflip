@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/cypress-plugin",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A plugin for Cypress change feature toggles in Cypress runs",
   "main": "dist/flopflip-cypress-plugin.cjs.js",
   "module": "dist/flopflip-cypress-plugin.esm.js",
@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@flopflip/types": "3.0.1",
+    "@flopflip/types": "3.0.2",
     "cypress": "5.6.0"
   },
   "peerDependencies": {
