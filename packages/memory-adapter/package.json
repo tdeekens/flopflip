@@ -4,7 +4,6 @@
   "description": "An in memory adapter for flipflop",
   "main": "dist/flopflip-memory-adapter.cjs.js",
   "module": "dist/flopflip-memory-adapter.esm.js",
-  "typings": "dist/memory-adapter.cjs.d.ts",
   "scripts": {
     "prepare": "./../../bin/version.js amend"
   },

@@ -4,7 +4,6 @@
   "description": "A adapter around the LaunchDarkly client for flipflop",
   "main": "dist/flopflip-launchdarkly-adapter.cjs.js",
   "module": "dist/flopflip-launchdarkly-adapter.esm.js",
-  "typings": "launchdarkly-adapter.cjs.d.ts",
   "scripts": {
     "prepare": "./../../bin/version.js amend"
   },
