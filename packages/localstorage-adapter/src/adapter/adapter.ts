@@ -72,10 +72,8 @@ const normalizeFlag = (
 ];
 const normalizeFlags = (
   rawFlags: Readonly<TFlags>
-): Record<'string', TFlagVariation> => {
-  if (!rawFlags) return {};
-
-  return Object.entries(rawFlags).reduce<TFlags>(
+): Record<'string', TFlagVariation> =>
+  Object.entries(rawFlags).reduce<TFlags>(
     (normalizedFlags: TFlags, [flagName, flagValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
         flagName,
@@ -88,7 +86,6 @@ const normalizeFlags = (
     },
     {}
   );
-};
 
 const storage: Storage = {
   get: (key) => {
