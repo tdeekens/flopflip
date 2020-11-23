@@ -12,14 +12,12 @@ import type {
   TFlagsUpdateFunction,
   TAdapterStatusChange,
   TFlagsChange,
-} from '@flopflip/types';
-import {
   TLaunchDarklyAdapterInterface,
   TAdapterSubscriptionStatus,
   TAdapterConfigurationStatus,
   TAdapterInitializationStatus,
-  interfaceIdentifiers,
 } from '@flopflip/types';
+import { interfaceIdentifiers } from '@flopflip/types';
 
 import merge from 'deepmerge';
 import warning from 'tiny-warning';

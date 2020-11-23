@@ -11,14 +11,12 @@ import type {
   TMemoryAdapterArgs,
   TFlagsUpdateFunction,
   TFlagsChange,
-} from '@flopflip/types';
-import {
   TMemoryAdapterInterface,
   TAdapterSubscriptionStatus,
   TAdapterConfigurationStatus,
   TAdapterInitializationStatus,
-  interfaceIdentifiers,
 } from '@flopflip/types';
+import { interfaceIdentifiers } from '@flopflip/types';
 
 import warning from 'tiny-warning';
 import mitt, { Emitter } from 'mitt';
