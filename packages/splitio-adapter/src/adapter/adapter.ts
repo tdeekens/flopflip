@@ -14,11 +14,13 @@ import type {
   TSplitioAdapterInterface,
   TSplitioAdapterArgs,
   TFlagsUpdateFunction,
-  AdapterSubscriptionStatus,
-  AdapterConfigurationStatus,
   TAdapterInitializationStatus,
 } from '@flopflip/types';
-import { interfaceIdentifiers } from '@flopflip/types';
+import {
+  AdapterSubscriptionStatus,
+  AdapterConfigurationStatus,
+  interfaceIdentifiers,
+} from '@flopflip/types';
 
 import merge from 'deepmerge';
 import warning from 'tiny-warning';
