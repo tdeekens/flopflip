@@ -13,9 +13,9 @@ import type {
   TAdapterStatusChange,
   TFlagsChange,
   TLaunchDarklyAdapterInterface,
-  TAdapterInitializationStatus,
 } from '@flopflip/types';
 import {
+  AdapterInitializationStatus,
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
   interfaceIdentifiers,
@@ -175,7 +175,7 @@ const getInitialFlags = async ({
 >): Promise<
   DeepReadonly<{
     flagsFromSdk: TFlags | null;
-    initializationStatus: TAdapterInitializationStatus;
+    initializationStatus: AdapterInitializationStatus;
   }>
 > => {
   if (adapterState.client) {
@@ -224,7 +224,7 @@ const getInitialFlags = async ({
 
         return Promise.resolve({
           flagsFromSdk,
-          initializationStatus: TAdapterInitializationStatus.Succeeded,
+          initializationStatus: AdapterInitializationStatus.Succeeded,
         });
       })
       .catch(async () => {
@@ -241,7 +241,7 @@ const getInitialFlags = async ({
 
         return Promise.resolve({
           flagsFromSdk: null,
-          initializationStatus: TAdapterInitializationStatus.Failed,
+          initializationStatus: AdapterInitializationStatus.Failed,
         });
       });
   }
@@ -333,12 +333,12 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       await changeUserContext(adapterState.user);
 
       return Promise.resolve({
-        initializationStatus: TAdapterInitializationStatus.Succeeded,
+        initializationStatus: AdapterInitializationStatus.Succeeded,
       });
     }
 
     return Promise.resolve({
-      initializationStatus: TAdapterInitializationStatus.Succeeded,
+      initializationStatus: AdapterInitializationStatus.Succeeded,
     });
   }
 

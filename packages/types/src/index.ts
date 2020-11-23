@@ -18,12 +18,12 @@ export enum AdapterConfigurationStatus {
   Configuring,
   Configured,
 }
-export enum TAdapterInitializationStatus {
+export enum AdapterInitializationStatus {
   Succeeded,
   Failed,
 }
 export type TAdapterConfiguration = {
-  initializationStatus?: TAdapterInitializationStatus;
+  initializationStatus?: AdapterInitializationStatus;
 };
 export type TAdapterStatus = {
   configurationStatus: AdapterConfigurationStatus;

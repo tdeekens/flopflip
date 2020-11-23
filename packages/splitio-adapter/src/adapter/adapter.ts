@@ -14,9 +14,9 @@ import type {
   TSplitioAdapterInterface,
   TSplitioAdapterArgs,
   TFlagsUpdateFunction,
-  TAdapterInitializationStatus,
 } from '@flopflip/types';
 import {
+  AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
   interfaceIdentifiers,
@@ -221,7 +221,7 @@ const configureSplitio = async () => {
     onStatusStateChange: adapterState.configuredCallbacks.onStatusStateChange,
   }).then(() => {
     return {
-      initializationStatus: TAdapterInitializationStatus.Succeeded,
+      initializationStatus: AdapterInitializationStatus.Succeeded,
     };
   });
 };
@@ -317,7 +317,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     }
 
     return Promise.resolve({
-      initializationStatus: TAdapterInitializationStatus.Succeeded,
+      initializationStatus: AdapterInitializationStatus.Succeeded,
     });
   }
 

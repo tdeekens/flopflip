@@ -12,9 +12,9 @@ import type {
   TFlagsUpdateFunction,
   TFlagsChange,
   TMemoryAdapterInterface,
-  TAdapterInitializationStatus,
 } from '@flopflip/types';
 import {
+  AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
   interfaceIdentifiers,
@@ -159,7 +159,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
       adapterState.emitter.emit(__internalConfiguredStatusChange__);
 
       return {
-        initializationStatus: TAdapterInitializationStatus.Succeeded,
+        initializationStatus: AdapterInitializationStatus.Succeeded,
       };
     });
   }
@@ -182,7 +182,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     });
 
     return Promise.resolve({
-      initializationStatus: TAdapterInitializationStatus.Succeeded,
+      initializationStatus: AdapterInitializationStatus.Succeeded,
     });
   }
 
