@@ -70,7 +70,9 @@ const normalizeFlag = (
   // Multi variate flags contain a string or `null` - `false` seems more natural.
   flagValue === null || flagValue === undefined ? false : flagValue,
 ];
-const normalizeFlags = (rawFlags: Readonly<TFlags>) => {
+const normalizeFlags = (
+  rawFlags: Readonly<TFlags>
+): Record<'string', TFlagVariation> => {
   if (!rawFlags) return {};
 
   return Object.entries(rawFlags).reduce<TFlags>(

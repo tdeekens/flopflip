@@ -152,7 +152,9 @@ const changeUserContext = async (nextUser: Readonly<TUser>) =>
         new Error('Can not change user context: client not yet initialized.')
       );
 
-const normalizeFlags = (rawFlags: Readonly<TFlags>) =>
+const normalizeFlags = (
+  rawFlags: Readonly<TFlags>
+): Record<string, TFlagVariation> =>
   Object.entries(rawFlags).reduce<TFlags>(
     (normalizedFlags: TFlags, [flagName, flagValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
@@ -350,7 +352,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     return adapterState.client;
   }
 
-  getFlag(flagName: TFlagName) {
+  getFlag(flagName: TFlagName): TFlagVariation {
     return adapterState.flags[flagName];
   }
 
