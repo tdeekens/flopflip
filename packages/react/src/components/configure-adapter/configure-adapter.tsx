@@ -8,8 +8,6 @@ import type {
   TAdapterReconfiguration,
   TAdapterReconfigurationOptions,
   TConfigureAdapterChildren,
-  TAdapterStatusChange,
-  TFlagsChange,
   TAdapterEventHandlers,
   TAdapterConfiguration,
 } from '@flopflip/types';
@@ -41,8 +39,8 @@ type TProps = {
   adapterArgs: TAdapterArgs;
   adapterStatus?: TAdapterStatus;
   defaultFlags?: TFlags;
-  onFlagsStateChange: (flags: Readonly<TFlagsChange>) => void;
-  onStatusStateChange: (status: Readonly<TAdapterStatusChange>) => void;
+  onFlagsStateChange: TAdapterEventHandlers['onFlagsStateChange'],
+  onStatusStateChange: TAdapterEventHandlers['onStatusStateChange'],
   render?: () => React.ReactNode;
   children?: TConfigureAdapterChildren;
 };

@@ -77,7 +77,9 @@ const normalizeFlag = (
   return [camelCase(flagName), normalizeFlagValue];
 };
 
-const normalizeFlags = (flags: Readonly<TFlags>) =>
+const normalizeFlags = (
+  flags: Readonly<TFlags>
+): Record<'string', TFlagVariation> =>
   Object.entries(flags).reduce<TFlags>(
     (normalizedFlags: TFlags, [flagName, flaValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(

@@ -72,7 +72,6 @@ export const interfaceIdentifiers = {
   localstorage: 'localstorage',
   memory: 'memory',
   splitio: 'splitio',
-  // eslint-disable-next-line no-undef
 } as const;
 export type TAdapterInterfaceIdentifiers = typeof interfaceIdentifiers[keyof typeof interfaceIdentifiers];
 

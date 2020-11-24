@@ -1,11 +1,11 @@
-import type { TFlagsChange } from '@flopflip/types';
+import type { TFlagsChange, TAdapterEventHandlers } from '@flopflip/types';
 
 import React from 'react';
 import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
 import { updateFlags } from '../../ducks';
 
-const useUpdateFlags = () => {
+const useUpdateFlags = (): TAdapterEventHandlers['onFlagsStateChange'] => {
   const dispatch = useDispatch<Dispatch<ReturnType<typeof updateFlags>>>();
   return React.useCallback(
     (flags: Readonly<TFlagsChange>) => dispatch(updateFlags(flags)),
