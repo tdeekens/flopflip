@@ -73,7 +73,7 @@ const normalizeFlag = (
 const normalizeFlags = (
   rawFlags: Readonly<TFlags>
 ): Record<'string', TFlagVariation> =>
-  Object.entries(rawFlags).reduce<TFlags>(
+  Object.entries(rawFlags || {}).reduce<TFlags>(
     (normalizedFlags: TFlags, [flagName, flagValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
         flagName,
