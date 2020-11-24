@@ -1,5 +1,14 @@
 # @flopflip/react
 
+## 10.0.3
+
+### Patch Changes
+
+- [`fb8d122`](https://github.com/tdeekens/flopflip/commit/fb8d12285062e0af4a9e66f6e5d7d1e9196a0ac2) [#1323](https://github.com/tdeekens/flopflip/pull/1323) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: to not infer returns
+
+- Updated dependencies [[`fb8d122`](https://github.com/tdeekens/flopflip/commit/fb8d12285062e0af4a9e66f6e5d7d1e9196a0ac2)]:
+  - @flopflip/types@3.0.3
+
 ## 10.0.2
 
 ### Patch Changes
