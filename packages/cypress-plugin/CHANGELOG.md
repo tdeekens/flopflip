@@ -1,5 +1,11 @@
 # @flopflip/cypress-plugin
 
+## 2.0.3
+
+### Patch Changes
+
+- [`40e212f`](https://github.com/tdeekens/flopflip/commit/40e212fba6328d6bf2f9a5f2494a4b0f6ec1b811) Thanks [@tdeekens](https://github.com/tdeekens)! - regenerate yarn.lock
+
 ## 2.0.2
 
 ### Patch Changes
