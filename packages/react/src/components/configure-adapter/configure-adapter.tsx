@@ -482,7 +482,7 @@ const ConfigureAdapter = (props: Readonly<TProps>) => {
           if (typeof props.render === 'function') return props.render();
         }
 
-        if (isFunctionChildren(props.children))
+        if (props.children && isFunctionChildren(props.children))
           return props.children({
             // NOTE: Deprecated, please use `isAdapterConfigured`.
             isAdapterReady: isAdapterConfigured,
