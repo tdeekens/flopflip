@@ -1,5 +1,14 @@
 # @flopflip/react
 
+## 10.0.6
+
+### Patch Changes
+
+- [`23b4e4d`](https://github.com/tdeekens/flopflip/commit/23b4e4dd2713e7aff2062cba60bf0251692f78ad) [#1329](https://github.com/tdeekens/flopflip/pull/1329) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: to simplify types of configure
+
+- Updated dependencies [[`23b4e4d`](https://github.com/tdeekens/flopflip/commit/23b4e4dd2713e7aff2062cba60bf0251692f78ad)]:
+  - @flopflip/types@3.0.6
+
 ## 10.0.5
 
 ### Patch Changes
