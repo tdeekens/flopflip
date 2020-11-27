@@ -1,5 +1,15 @@
 # @flopflip/react-broadcast
 
+## 11.0.4
+
+### Patch Changes
+
+- [`787b265`](https://github.com/tdeekens/flopflip/commit/787b26580f7fa973e17065c11898dada0201e9e4) [#1325](https://github.com/tdeekens/flopflip/pull/1325) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: update deps
+
+- Updated dependencies [[`787b265`](https://github.com/tdeekens/flopflip/commit/787b26580f7fa973e17065c11898dada0201e9e4)]:
+  - @flopflip/react@10.0.4
+  - @flopflip/types@3.0.4
+
 ## 11.0.3
 
 ### Patch Changes
