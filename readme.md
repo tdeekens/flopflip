@@ -319,8 +319,10 @@ You can also pass `render` or `children` as a function to act differently based 
 
 ```jsx
 <ConfigureFlopFlip adapter={adapter} adapterArgs={{ clientSideId, user }}>
-  {(isAdapterConfigured) => isAdapterConfigured ? <App /> : <LoadingSpinner />}
-</ConfigureFlopFlip>;
+  {(isAdapterConfigured) =>
+    isAdapterConfigured ? <App /> : <LoadingSpinner />
+  }
+</ConfigureFlopFlip>
 ```
 
 ```jsx

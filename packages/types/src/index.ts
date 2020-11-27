@@ -1,4 +1,3 @@
-import type React from 'react';
 import type { LDClient as TLDClient } from 'launchdarkly-js-client-sdk';
 import type { DeepReadonly } from 'ts-essentials';
 
@@ -226,10 +225,10 @@ export type TConfigureAdapterChildrenAsFunctionArgs = {
 };
 export type TConfigureAdapterChildrenAsFunction = (
   args: Readonly<TConfigureAdapterChildrenAsFunctionArgs>
-) => React.ReactNode;
+) => JSX.Element;
 export type TConfigureAdapterChildren =
   | TConfigureAdapterChildrenAsFunction
-  | React.ReactNode;
+  | JSX.Element;
 export type TReconfigureAdapter = (
   adapterArgs: TAdapterArgs,
   options: Readonly<TAdapterReconfigurationOptions>
