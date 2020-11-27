@@ -1,4 +1,3 @@
-import type { DeepReadonly } from 'ts-essentials';
 import type {
   TAdapter,
   TFlags,
@@ -36,28 +35,28 @@ const initialAdapterStatus: State['status'] = {
 };
 const initialFlags: State['flags'] = {};
 
-type TUseFlagStateOptions = DeepReadonly<{
+type TUseFlagStateOptions = {
   initialFlags: State['flags'];
-}>;
+};
 const useFlagsState = ({
   initialFlags,
 }: TUseFlagStateOptions): [
   TFlags,
-  React.Dispatch<React.SetStateAction<Readonly<TFlags>>>
+  React.Dispatch<React.SetStateAction<TFlags>>
 ] => {
   const [flags, setFlags] = React.useState<State['flags']>(initialFlags);
 
   return [flags, setFlags];
 };
 
-type TUseStatusStateOptions = DeepReadonly<{
+type TUseStatusStateOptions = {
   initialAdapterStatus: State['status'];
-}>;
+};
 const useStatusState = ({
   initialAdapterStatus,
 }: TUseStatusStateOptions): [
   TAdapterStatus,
-  React.Dispatch<React.SetStateAction<Readonly<TAdapterStatus>>>
+  React.Dispatch<React.SetStateAction<TAdapterStatus>>
 ] => {
   const [status, setStatus] = React.useState<State['status']>(
     initialAdapterStatus
@@ -67,7 +66,7 @@ const useStatusState = ({
 };
 
 const Configure = <AdapterInstance extends TAdapter>(
-  props: DeepReadonly<Props<AdapterInstance>>
+  props: Props<AdapterInstance>
 ) => {
   const [flags, setFlags] = useFlagsState({ initialFlags });
   const [status, setStatus] = useStatusState({ initialAdapterStatus });
@@ -79,7 +78,7 @@ const Configure = <AdapterInstance extends TAdapter>(
   const getHasAdapterSubscriptionStatus = useAdapterSubscription(props.adapter);
 
   const handleUpdateFlags = React.useCallback<
-    (flags: Readonly<TFlagsChange>) => void
+    (flags: TFlagsChange) => void
   >(
     (flags) => {
       if (
@@ -97,7 +96,7 @@ const Configure = <AdapterInstance extends TAdapter>(
   );
 
   const handleUpdateStatus = React.useCallback<
-    (status: Readonly<TAdapterStatusChange>) => void
+    (status: TAdapterStatusChange) => void
   >(
     (status) => {
       if (

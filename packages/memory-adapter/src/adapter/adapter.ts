@@ -1,4 +1,3 @@
-import type { DeepReadonly } from 'ts-essentials';
 import type {
   TUser,
   TAdapterStatus,
@@ -46,7 +45,7 @@ const intialAdapterState: TAdapterStatus & MemoryAdapterState = {
 let adapterState: TAdapterStatus & MemoryAdapterState = {
   ...intialAdapterState,
 };
-const updateUser = (user: Readonly<TUser>) => {
+const updateUser = (user: TUser) => {
   adapterState.user = user;
 };
 
@@ -108,16 +107,16 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   }
 
   async configure(
-    adapterArgs: DeepReadonly<TMemoryAdapterArgs>,
-    adapterEventHandlers: Readonly<TAdapterEventHandlers>
+    adapterArgs: TMemoryAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
   ) {
-    const handleFlagsChange = (nextFlags: Readonly<TFlags>) => {
+    const handleFlagsChange = (nextFlags: TFlags) => {
       if (getIsAdapterUnsubscribed()) return;
 
       adapterEventHandlers.onFlagsStateChange(nextFlags);
     };
 
-    const handleStatusChange = (nextStatus: Readonly<TAdapterStatusChange>) => {
+    const handleStatusChange = (nextStatus: TAdapterStatusChange) => {
       if (getIsAdapterUnsubscribed()) return;
 
       adapterEventHandlers.onStatusStateChange(nextStatus);
@@ -165,8 +164,8 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   }
 
   async reconfigure(
-    adapterArgs: DeepReadonly<TMemoryAdapterArgs>,
-    _adapterEventHandlers: Readonly<TAdapterEventHandlers>
+    adapterArgs: TMemoryAdapterArgs,
+    _adapterEventHandlers: TAdapterEventHandlers
   ) {
     adapterState.configurationStatus = AdapterConfigurationStatus.Configuring;
 
@@ -220,7 +219,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   }
 
   // For convenience
-  updateFlags(flags: Readonly<TFlags>) {
+  updateFlags(flags: TFlags) {
     return updateFlags(flags);
   }
 

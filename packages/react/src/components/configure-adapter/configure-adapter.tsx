@@ -1,4 +1,3 @@
-import type { DeepReadonly } from 'ts-essentials';
 import type {
   TFlags,
   TAdapter,
@@ -45,9 +44,9 @@ type TProps = {
   children?: TConfigureAdapterChildren;
 };
 
-type TUseAppliedAdapterArgsStateOptions = Readonly<{
+type TUseAppliedAdapterArgsStateOptions = {
   initialAdapterArgs: TAdapterArgs;
-}>;
+};
 type TUseAppliedAdapterArgsStateReturn = [
   TAdapterArgs,
   (nextAdapterArgs: TAdapterArgs) => void
@@ -115,7 +114,7 @@ const useAdapterStateRef = (): TUseAdapterStateRefReturn => {
 
 type TUsePendingAdapterArgsRefReturn = [
   React.MutableRefObject<TAdapterArgs | null>,
-  (nextReconfiguration: DeepReadonly<TAdapterReconfiguration>) => void,
+  (nextReconfiguration: TAdapterReconfiguration) => void,
   () => TAdapterArgs
 ];
 const usePendingAdapterArgsRef = (
@@ -124,7 +123,7 @@ const usePendingAdapterArgsRef = (
   const pendingAdapterArgsRef = React.useRef<TAdapterArgs | null>(null);
 
   const setPendingAdapterArgs = React.useCallback(
-    (nextReconfiguration: DeepReadonly<TAdapterReconfiguration>): void => {
+    (nextReconfiguration: TAdapterReconfiguration): void => {
       /**
        * NOTE:
        *    The next reconfiguration is merged into the previous
@@ -176,14 +175,14 @@ const usePendingAdapterArgsRef = (
   ];
 };
 
-type TUseHandleDefaultFlagsCallbackOptions = Readonly<{
+type TUseHandleDefaultFlagsCallbackOptions = {
   onFlagsStateChange: TAdapterEventHandlers['onFlagsStateChange'];
-}>;
+};
 const useHandleDefaultFlagsCallback = ({
   onFlagsStateChange,
 }: TUseHandleDefaultFlagsCallbackOptions) => {
   const handleDefaultFlags = React.useCallback(
-    (defaultFlags: Readonly<TFlags>): void => {
+    (defaultFlags: TFlags): void => {
       if (Object.keys(defaultFlags).length > 0) {
         onFlagsStateChange(defaultFlags);
       }
@@ -194,7 +193,7 @@ const useHandleDefaultFlagsCallback = ({
   return handleDefaultFlags;
 };
 
-type TUseConfigurationEffectOptions = DeepReadonly<{
+type TUseConfigurationEffectOptions = {
   adapter: TAdapter;
   shouldDeferAdapterConfiguration: TProps['shouldDeferAdapterConfiguration'];
   getDoesAdapterNeedInitialConfiguration: TUseAdapterStateRefReturn['3'];
@@ -206,7 +205,7 @@ type TUseConfigurationEffectOptions = DeepReadonly<{
   getIsAdapterConfigured: TUseAdapterStateRefReturn['2'];
   pendingAdapterArgsRef: TUsePendingAdapterArgsRefReturn['0'];
   appliedAdapterArgs: TAdapterArgs;
-}>;
+};
 const useConfigurationEffect = ({
   adapter,
   shouldDeferAdapterConfiguration,
@@ -232,7 +231,7 @@ const useConfigurationEffect = ({
           onFlagsStateChange,
           onStatusStateChange,
         })
-        .then((configuration: Readonly<TAdapterConfiguration>) => {
+        .then((configuration: TAdapterConfiguration) => {
           /**
            * NOTE:
            *    The configuration can be `undefined` then assuming `initializationStatus` to have
@@ -263,7 +262,7 @@ const useConfigurationEffect = ({
           onFlagsStateChange,
           onStatusStateChange,
         })
-        .then((reconfiguration: Readonly<TAdapterConfiguration>) => {
+        .then((reconfiguration: TAdapterConfiguration) => {
           /**
            * NOTE:
            *    The configuration can be `undefined` then assuming `initializationStatus` to have
@@ -295,7 +294,7 @@ const useConfigurationEffect = ({
   ]);
 };
 
-type TUseDefaultFlagsEffectOptions = DeepReadonly<{
+type TUseDefaultFlagsEffectOptions = {
   adapter: TAdapter;
   defaultFlags?: TFlags;
   onFlagsStateChange: TAdapterEventHandlers['onFlagsStateChange'];
@@ -305,7 +304,7 @@ type TUseDefaultFlagsEffectOptions = DeepReadonly<{
   shouldDeferAdapterConfiguration: TProps['shouldDeferAdapterConfiguration'];
   applyAdapterArgs: TUseAppliedAdapterArgsStateReturn['1'];
   getAdapterArgsForConfiguration: TUsePendingAdapterArgsRefReturn['2'];
-}>;
+};
 const useDefaultFlagsEffect = ({
   adapter,
   defaultFlags,
@@ -332,7 +331,7 @@ const useDefaultFlagsEffect = ({
           onFlagsStateChange,
           onStatusStateChange,
         })
-        .then((configuration: Readonly<TAdapterConfiguration>) => {
+        .then((configuration: TAdapterConfiguration) => {
           /**
            * NOTE:
            *    The configuration can be `undefined` then assuming `initializationStatus` to have
@@ -357,13 +356,13 @@ const useDefaultFlagsEffect = ({
   }, []);
 };
 
-type TUsePendingAdapterArgsEffectOptions = DeepReadonly<{
+type TUsePendingAdapterArgsEffectOptions = {
   adapterArgs: TAdapterArgs;
   appliedAdapterArgs: TAdapterArgs;
   applyAdapterArgs: TUseAppliedAdapterArgsStateReturn['1'];
   getIsAdapterConfigured: TUseAdapterStateRefReturn['2'];
   setPendingAdapterArgs: TUsePendingAdapterArgsRefReturn['1'];
-}>;
+};
 const usePendingAdapterArgsEffect = ({
   adapterArgs,
   appliedAdapterArgs,
@@ -380,7 +379,7 @@ const usePendingAdapterArgsEffect = ({
   const reconfigureOrQueue = React.useCallback(
     (
       nextAdapterArgs: TAdapterArgs,
-      options: Readonly<TAdapterReconfigurationOptions>
+      options: TAdapterReconfigurationOptions
     ): void => {
       if (getIsAdapterConfigured()) {
         applyAdapterArgs(
@@ -422,7 +421,7 @@ const usePendingAdapterArgsEffect = ({
   return [reconfigureOrQueue];
 };
 
-const ConfigureAdapter = (props: Readonly<TProps>) => {
+const ConfigureAdapter = (props: TProps) => {
   const [appliedAdapterArgs, applyAdapterArgs] = useAppliedAdapterArgsState({
     initialAdapterArgs: props.adapterArgs,
   });

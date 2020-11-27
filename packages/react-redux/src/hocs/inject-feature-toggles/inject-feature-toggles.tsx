@@ -13,7 +13,7 @@ type InjectedProps = {
 };
 
 export default <OwnProps extends object>(
-  flagNames: Readonly<TFlagName[]>,
+  flagNames: TFlagName[],
   propKey: string = DEFAULT_FLAGS_PROP_KEY
 ) => (
   Component: React.ComponentType

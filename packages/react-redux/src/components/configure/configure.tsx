@@ -1,4 +1,3 @@
-import type { DeepReadonly } from 'ts-essentials';
 import type {
   TFlags,
   TAdapter,
@@ -27,7 +26,7 @@ const defaultProps: Pick<
 };
 
 const Configure = <AdapterInstance extends TAdapter>(
-  props: DeepReadonly<Props<AdapterInstance>>
+  props: Props<AdapterInstance>
 ) => {
   const handleUpdateFlags = useUpdateFlags();
   const handleUpdateStatus = useUpdateStatus();

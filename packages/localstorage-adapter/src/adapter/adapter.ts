@@ -1,4 +1,3 @@
-import type { DeepReadonly } from 'ts-essentials';
 import type {
   TUser,
   TAdapterStatus,
@@ -70,9 +69,7 @@ const normalizeFlag = (
   // Multi variate flags contain a string or `null` - `false` seems more natural.
   flagValue === null || flagValue === undefined ? false : flagValue,
 ];
-const normalizeFlags = (
-  rawFlags: Readonly<TFlags>
-): Record<'string', TFlagVariation> =>
+const normalizeFlags = (rawFlags: TFlags): Record<'string', TFlagVariation> =>
   Object.entries(rawFlags || {}).reduce<TFlags>(
     (normalizedFlags: TFlags, [flagName, flagValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
@@ -151,7 +148,7 @@ const updateFlags: TFlagsUpdateFunction = (flags, options) => {
   adapterState.emitter.emit('flagsStateChange', nextFlags);
 };
 
-const didFlagsChange = (nextFlags: Readonly<TFlags>) => {
+const didFlagsChange = (nextFlags: TFlags) => {
   const previousFlags = adapterState.flags;
 
   if (previousFlags === undefined) return true;
@@ -161,7 +158,7 @@ const didFlagsChange = (nextFlags: Readonly<TFlags>) => {
 
 const subscribeToFlagsChanges = ({
   pollingInteral = 1000 * 60,
-}: Readonly<TLocalStorageAdapterSubscriptionOptions>) => {
+}: TLocalStorageAdapterSubscriptionOptions) => {
   setInterval(() => {
     if (!getIsAdapterUnsubscribed()) {
       const nextFlags = normalizeFlags(storage.get('flags'));
@@ -184,16 +181,16 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   }
 
   async configure(
-    adapterArgs: DeepReadonly<TLocalStorageAdapterArgs>,
-    adapterEventHandlers: Readonly<TAdapterEventHandlers>
+    adapterArgs: TLocalStorageAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
   ) {
-    const handleFlagsChange = (nextFlags: Readonly<TFlags>) => {
+    const handleFlagsChange = (nextFlags: TFlags) => {
       if (getIsAdapterUnsubscribed()) return;
 
       adapterEventHandlers.onFlagsStateChange(nextFlags);
     };
 
-    const handleStatusChange = (nextStatus: Readonly<TAdapterStatusChange>) => {
+    const handleStatusChange = (nextStatus: TAdapterStatusChange) => {
       if (getIsAdapterUnsubscribed()) return;
 
       adapterEventHandlers.onStatusStateChange(nextStatus);
@@ -243,8 +240,8 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   }
 
   async reconfigure(
-    adapterArgs: DeepReadonly<TLocalStorageAdapterArgs>,
-    _adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
+    adapterArgs: TLocalStorageAdapterArgs,
+    _adapterEventHandlers: TAdapterEventHandlers
   ) {
     storage.unset('flags');
     adapterState.flags = {};

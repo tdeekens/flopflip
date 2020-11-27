@@ -5,7 +5,7 @@ import { getFlagVariation } from '@flopflip/react';
 import { FlagsContext } from '../../components/flags-context';
 
 export default function useFlagVariations(
-  flagNames: Readonly<TFlagName[]>
+  flagNames: TFlagName[]
 ): TFlagVariation[] {
   const allFlags: TFlags = React.useContext(FlagsContext);
 

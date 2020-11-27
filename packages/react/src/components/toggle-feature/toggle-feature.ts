@@ -1,32 +1,28 @@
-import type { DeepReadonly } from 'ts-essentials';
-
 import React from 'react';
 import warning from 'tiny-warning';
 import { isValidElementType } from 'react-is';
 
-type RenderFnArgs = Readonly<{
+type RenderFnArgs = {
   isFeatureEnabled: boolean;
-}>;
+};
 type RenderFn = (args: RenderFnArgs) => React.ReactNode;
-export type Props = DeepReadonly<{
+export type Props = {
   untoggledComponent?: React.ComponentType;
   toggledComponent?: React.ComponentType;
   render?: () => React.ReactNode;
   children?: RenderFn | React.ReactNode;
   isFeatureEnabled: boolean;
-}>;
+};
 
 const ToggleFeature = (props: Props) => {
   if (props.untoggledComponent)
     warning(
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       isValidElementType(props.untoggledComponent),
       `Invalid prop 'untoggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`
     );
 
   if (props.toggledComponent)
     warning(
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       isValidElementType(props.toggledComponent),
       `Invalid prop 'toggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`
     );
@@ -37,7 +33,6 @@ const ToggleFeature = (props: Props) => {
 
     if (props.children) {
       if (typeof props.children === 'function')
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return props.children({
           isFeatureEnabled: props.isFeatureEnabled,
         });
@@ -48,7 +43,6 @@ const ToggleFeature = (props: Props) => {
   }
 
   if (typeof props.children === 'function')
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return props.children({
       isFeatureEnabled: props.isFeatureEnabled,
     });

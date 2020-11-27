@@ -1,6 +1,5 @@
 /* global SplitIO */
 
-import type { DeepReadonly, Writable, DeepWritable } from 'ts-essentials';
 import type {
   TFlagName,
   TFlagVariation,
@@ -77,9 +76,7 @@ const normalizeFlag = (
   return [camelCase(flagName), normalizeFlagValue];
 };
 
-const normalizeFlags = (
-  flags: Readonly<TFlags>
-): Record<'string', TFlagVariation> =>
+const normalizeFlags = (flags: TFlags): Record<'string', TFlagVariation> =>
   Object.entries(flags).reduce<TFlags>(
     (normalizedFlags: TFlags, [flagName, flaValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
@@ -103,16 +100,16 @@ const updateFlags: TFlagsUpdateFunction = () => {
 const subscribeToFlagsChanges = ({
   flagNames,
   onFlagsStateChange,
-}: DeepReadonly<{
+}: {
   flagNames: TFlagName[];
   onFlagsStateChange: TOnFlagsStateChangeCallback;
-}>) => {
+}) => {
   if (adapterState.client) {
     adapterState.client.on(adapterState.client.Event.SDK_UPDATE, () => {
       if (adapterState.client && adapterState.user?.key) {
         const flags = adapterState.client.getTreatments(
           adapterState.user.key,
-          flagNames as Writable<TFlagName[]>,
+          flagNames,
           {
             ...adapterState.user,
             ...adapterState.treatmentAttributes,
@@ -129,7 +126,7 @@ const subscribeToFlagsChanges = ({
 
 const createAnonymousUserKey = () => Math.random().toString(36).substring(2);
 
-const ensureUser = (user: Readonly<TUser>): TUser =>
+const ensureUser = (user: TUser): TUser =>
   merge(user, { key: user?.key ?? createAnonymousUserKey() });
 
 type SplitIOClient = {
@@ -154,10 +151,10 @@ const initializeClient = (): SplitIOClient => {
 const subscribe = async ({
   onFlagsStateChange,
   onStatusStateChange,
-}: Readonly<{
+}: {
   onFlagsStateChange: TOnFlagsStateChangeCallback;
   onStatusStateChange: TOnStatusStateChangeCallback;
-}>) =>
+}) =>
   new Promise<void>((resolve, reject) => {
     if (adapterState.client) {
       adapterState.configurationStatus = AdapterConfigurationStatus.Configuring;
@@ -231,9 +228,8 @@ const configureSplitio = async () => {
 const cloneTreatmentAttributes = <
   T = TSplitioAdapterArgs['treatmentAttributes']
 >(
-  treatmentAttributes: DeepReadonly<T>
-): DeepWritable<T> =>
-  cloneDeep<DeepWritable<T>>(treatmentAttributes as DeepWritable<T>);
+  treatmentAttributes: T
+): T => cloneDeep<T>(treatmentAttributes);
 
 class SplitioAdapter implements TSplitioAdapterInterface {
   id: typeof interfaceIdentifiers.splitio;
@@ -243,8 +239,8 @@ class SplitioAdapter implements TSplitioAdapterInterface {
   }
 
   async configure(
-    adapterArgs: DeepReadonly<TSplitioAdapterArgs>,
-    adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
+    adapterArgs: TSplitioAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
   ) {
     const {
       authorizationKey,
@@ -277,8 +273,8 @@ class SplitioAdapter implements TSplitioAdapterInterface {
   }
 
   async reconfigure(
-    adapterArgs: DeepReadonly<TSplitioAdapterArgs>,
-    _adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
+    adapterArgs: TSplitioAdapterArgs,
+    _adapterEventHandlers: TAdapterEventHandlers
   ) {
     if (
       adapterState.configurationStatus !==

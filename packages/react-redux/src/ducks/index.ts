@@ -14,7 +14,7 @@ export const flopflipReducer = combineReducers<any, Actions>({
   flags: flagsReducer,
   status: statusReducer,
 });
-export const createFlopflipReducer = (preloadedState: Readonly<TFlags> = {}) =>
+export const createFlopflipReducer = (preloadedState: TFlags = {}) =>
   combineReducers<any, Actions>({
     flags: createFlagsReducer(preloadedState),
     status: statusReducer,

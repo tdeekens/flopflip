@@ -1,4 +1,3 @@
-import type { DeepReadonly } from 'ts-essentials';
 import type { TFlagName, TFlagVariation } from '@flopflip/types';
 
 import React from 'react';
@@ -8,13 +7,13 @@ import {
 } from '@flopflip/react';
 import { useFeatureToggle } from '../../hooks/';
 
-type Props = DeepReadonly<
+type Props =
   {
     flag: TFlagName;
     variation?: TFlagVariation;
     // eslint-disable-next-line @typescript-eslint/ban-types
   } & Omit<TToggleFeatureProps, 'isFeatureEnabled'>
->;
+;
 
 const ToggleFeature = <OwnProps extends Props>(props: OwnProps) => {
   const isFeatureEnabled = useFeatureToggle(props.flag, props.variation);

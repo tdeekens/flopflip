@@ -13,7 +13,7 @@ type InjectedProps = {
 };
 
 export default function injectFeatureToggles<OwnProps extends object>(
-  flagNames: Readonly<TFlagName[]>,
+  flagNames: TFlagName[],
   propKey: string = DEFAULT_FLAGS_PROP_KEY
 ) {
   return (
