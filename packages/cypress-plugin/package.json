@@ -29,13 +29,14 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@flopflip/types": "3.0.6",
     "cypress": "5.6.0"
   },
   "peerDependencies": {
     "cypress": "^4.0 || ^5.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@flopflip/types": "3.0.6"
+  },
   "keywords": [
     "react",
     "feature-flags",

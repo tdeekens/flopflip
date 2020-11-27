@@ -1,4 +1,3 @@
-import type { DeepReadonly } from 'ts-essentials';
 import type { TAdapterStatus, TAdapterStatusChange } from '@flopflip/types';
 import {
   AdapterSubscriptionStatus,
@@ -21,8 +20,8 @@ const initialState: TAdapterStatus = {
 // Reducer
 const reducer = (
   // eslint-disable-next-line @typescript-eslint/default-param-last
-  state: Readonly<TAdapterStatus> = initialState,
-  action: DeepReadonly<TUpdateStatusAction>
+  state: TAdapterStatus = initialState,
+  action: TUpdateStatusAction
 ): TAdapterStatus => {
   switch (action.type) {
     case UPDATE_STATUS:
@@ -40,13 +39,13 @@ export default reducer;
 
 // Action Creators
 export const updateStatus = (
-  nextStatus: Readonly<TAdapterStatusChange>
+  nextStatus: TAdapterStatusChange
 ): TUpdateStatusAction => ({
   type: UPDATE_STATUS,
   payload: { status: nextStatus },
 });
 // Selectors
-export const selectStatus = (state: DeepReadonly<TState>) => {
+export const selectStatus = (state: TState) => {
   const { status } = state[STATE_SLICE];
 
   return selecAdapterConfigurationStatus(status?.configurationStatus);

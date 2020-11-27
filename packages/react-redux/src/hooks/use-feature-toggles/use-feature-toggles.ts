@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { getIsFeatureEnabled } from '@flopflip/react';
 import { selectFlags } from '../../ducks/flags';
 
-export default function useFeatureToggles(flags: Readonly<TFlags>) {
+export default function useFeatureToggles(flags: TFlags) {
   const allFlags = useSelector(selectFlags);
 
   const requestedFlags: boolean[] = Object.entries(flags).reduce<boolean[]>(

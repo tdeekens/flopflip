@@ -25,7 +25,6 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@flopflip/types": "3.0.6",
     "read-pkg-up": "7.0.1"
   },
   "dependencies": {
@@ -37,8 +36,7 @@
     "launchdarkly-js-client-sdk": "2.18.3",
     "lodash": "4.17.20",
     "mitt": "2.1.0",
-    "tiny-warning": "1.0.3",
-    "ts-essentials": "7.0.1"
+    "tiny-warning": "1.0.3"
   },
   "keywords": [
     "feature-flags",

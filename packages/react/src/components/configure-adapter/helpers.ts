@@ -1,4 +1,3 @@
-import { DeepReadonly } from 'ts-essentials';
 import React from 'react';
 import merge from 'deepmerge';
 import {
@@ -10,7 +9,6 @@ import {
 
 const isFunctionChildren = (
   children: TConfigureAdapterChildren
-  // eslint-disable-next-line no-undef
 ): children is TConfigureAdapterChildrenAsFunction =>
   typeof children === 'function';
 
@@ -19,10 +17,7 @@ const isEmptyChildren = (children: TConfigureAdapterChildren) =>
 
 const mergeAdapterArgs = (
   previousAdapterArgs: TAdapterArgs,
-  {
-    adapterArgs: nextAdapterArgs,
-    options = {},
-  }: DeepReadonly<TAdapterReconfiguration>
+  { adapterArgs: nextAdapterArgs, options = {} }: TAdapterReconfiguration
 ): TAdapterArgs =>
   options.shouldOverwrite
     ? nextAdapterArgs

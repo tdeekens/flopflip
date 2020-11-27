@@ -25,7 +25,6 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@flopflip/types": "3.0.6",
     "read-pkg-up": "7.0.1"
   },
   "dependencies": {
@@ -35,8 +34,7 @@
     "deepmerge": "4.2.2",
     "globalthis": "1.0.1",
     "lodash": "4.17.20",
-    "tiny-warning": "1.0.3",
-    "ts-essentials": "7.0.1"
+    "tiny-warning": "1.0.3"
   },
   "keywords": [
     "feature-flags",

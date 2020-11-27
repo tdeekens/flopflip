@@ -27,9 +27,7 @@
     "feature-toggles",
     "types"
   ],
-  "dependencies": {
-    "ts-essentials": "7.0.1"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "typescript": "4.x"
   }

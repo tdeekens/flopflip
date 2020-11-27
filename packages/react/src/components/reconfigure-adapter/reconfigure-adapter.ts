@@ -1,14 +1,13 @@
-import type { DeepReadonly } from 'ts-essentials';
 import type { TUser } from '@flopflip/types';
 
 import React from 'react';
 import AdapterContext from '../adapter-context';
 
-type Props = DeepReadonly<{
+type Props = {
   shouldOverwrite?: boolean;
   user: TUser;
   children?: React.ReactNode;
-}>;
+};
 
 const ReconfigureAdapter = (props: Props) => {
   const adapterContext = React.useContext(AdapterContext);

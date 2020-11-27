@@ -1,4 +1,3 @@
-import type { DeepReadonly } from 'ts-essentials';
 import type {
   TFlagName,
   TFlagVariation,
@@ -20,8 +19,8 @@ const initialState: TFlags = {};
 // Reducer
 const reducer = (
   // eslint-disable-next-line @typescript-eslint/default-param-last
-  state: Readonly<TFlags> = initialState,
-  action: DeepReadonly<TUpdateFlagsAction>
+  state: TFlags = initialState,
+  action: TUpdateFlagsAction
 ): TFlags => {
   switch (action.type) {
     case UPDATE_FLAGS:
@@ -38,27 +37,24 @@ const reducer = (
 export default reducer;
 
 export const createReducer = (
-  preloadedState: Readonly<TFlags> = initialState
-): Reducer<TFlags, DeepReadonly<TUpdateFlagsAction>> => (
+  preloadedState: TFlags = initialState
+): Reducer<TFlags, TUpdateFlagsAction> => (
   // eslint-disable-next-line @typescript-eslint/default-param-last
   state = preloadedState,
   action
 ) => reducer(state, action);
 
 // Action Creators
-export const updateFlags = (
-  flags: Readonly<TFlagsChange>
-): TUpdateFlagsAction => ({
+export const updateFlags = (flags: TFlagsChange): TUpdateFlagsAction => ({
   type: UPDATE_FLAGS,
   payload: { flags },
 });
 
 // Selectors
-export const selectFlags = (state: DeepReadonly<TState>) =>
-  state[STATE_SLICE].flags ?? {};
+export const selectFlags = (state: TState) => state[STATE_SLICE].flags ?? {};
 export const selectFlag = (
   flagName: TFlagName
-): ((state: DeepReadonly<TState>) => TFlagVariation) => (state) => {
+): ((state: TState) => TFlagVariation) => (state) => {
   const allFlags: TFlags = selectFlags(state);
   const flagValue: TFlagVariation = allFlags[flagName];
 

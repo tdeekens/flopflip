@@ -1,4 +1,3 @@
-import type { DeepReadonly } from 'ts-essentials';
 import type {
   TFlagName,
   TFlagVariation,
@@ -60,7 +59,7 @@ const adapterState: TAdapterStatus & LaunchDarklyAdapterState = {
 
 // Internal
 const updateFlagsInAdapterState = (
-  flags: Readonly<TFlags>,
+  flags: TFlags,
   options?: TUpdateFlagsOptions
 ): void => {
   const updatedFlags = Object.entries(flags).reduce(
@@ -127,9 +126,9 @@ const normalizeFlag = (
 ];
 const denormalizeFlagName = (flagName: TFlagName) => kebabCase(flagName);
 
-const getIsAnonymousUser = (user: Readonly<TUser>) => !user?.key;
+const getIsAnonymousUser = (user: TUser) => !user?.key;
 
-const ensureUser = (user: Readonly<TUser>) => {
+const ensureUser = (user: TUser) => {
   const isAnonymousUser = getIsAnonymousUser(user);
 
   // NOTE: When marked `anonymous` the SDK will generate a unique key and cache it in local storage
@@ -141,20 +140,18 @@ const ensureUser = (user: Readonly<TUser>) => {
 
 const initializeClient = (
   clientSideId: TLaunchDarklyAdapterArgs['clientSideId'],
-  user: Readonly<TUser>,
+  user: TUser,
   clientOptions: TLaunchDarklyAdapterArgs['clientOptions']
 ) => initializeLaunchDarklyClient(clientSideId, user as LDUser, clientOptions);
 
-const changeUserContext = async (nextUser: Readonly<TUser>) =>
+const changeUserContext = async (nextUser: TUser) =>
   adapterState.client?.identify
     ? adapterState.client.identify(nextUser as LDUser)
     : Promise.reject(
         new Error('Can not change user context: client not yet initialized.')
       );
 
-const normalizeFlags = (
-  rawFlags: Readonly<TFlags>
-): Record<string, TFlagVariation> =>
+const normalizeFlags = (rawFlags: TFlags): Record<string, TFlagVariation> =>
   Object.entries(rawFlags).reduce<TFlags>(
     (normalizedFlags: TFlags, [flagName, flagValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
@@ -172,14 +169,13 @@ const normalizeFlags = (
 const getInitialFlags = async ({
   flags,
   throwOnInitializationFailure,
-}: DeepReadonly<
-  Pick<TLaunchDarklyAdapterArgs, 'flags' | 'throwOnInitializationFailure'>
->): Promise<
-  DeepReadonly<{
-    flagsFromSdk: TFlags | null;
-    initializationStatus: AdapterInitializationStatus;
-  }>
-> => {
+}: Pick<
+  TLaunchDarklyAdapterArgs,
+  'flags' | 'throwOnInitializationFailure'
+>): Promise<{
+  flagsFromSdk: TFlags | null;
+  initializationStatus: AdapterInitializationStatus;
+}> => {
   if (adapterState.client) {
     return adapterState.client
       .waitForInitialization()
@@ -263,8 +259,8 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   }
 
   async configure(
-    adapterArgs: DeepReadonly<TLaunchDarklyAdapterArgs>,
-    adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
+    adapterArgs: TLaunchDarklyAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
   ) {
     adapterState.configurationStatus = AdapterConfigurationStatus.Configuring;
 
@@ -315,8 +311,8 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   }
 
   async reconfigure(
-    adapterArgs: DeepReadonly<TLaunchDarklyAdapterArgs>,
-    _adapterEventHandlers: DeepReadonly<TAdapterEventHandlers>
+    adapterArgs: TLaunchDarklyAdapterArgs,
+    _adapterEventHandlers: TAdapterEventHandlers
   ) {
     if (
       adapterState.configurationStatus !== AdapterConfigurationStatus.Configured
@@ -356,7 +352,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     return adapterState.flags[flagName];
   }
 
-  async updateUserContext(updatedUserProps: Readonly<TUser>) {
+  async updateUserContext(updatedUserProps: TUser) {
     const isAdapterConfigured =
       adapterState.configurationStatus ===
       AdapterConfigurationStatus.Configured;
@@ -403,10 +399,10 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   private _setupFlagSubcription({
     flagsFromSdk,
     flagsUpdateDelayMs,
-  }: DeepReadonly<{
+  }: {
     flagsFromSdk: TFlags;
     flagsUpdateDelayMs?: number;
-  }>) {
+  }) {
     for (const flagName in flagsFromSdk) {
       // Dispatch whenever a configured flag value changes
       if (

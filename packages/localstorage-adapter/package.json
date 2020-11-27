@@ -36,8 +36,7 @@
     "globalthis": "1.0.1",
     "mitt": "2.1.0",
     "lodash": "4.17.20",
-    "tiny-warning": "1.0.3",
-    "ts-essentials": "7.0.1"
+    "tiny-warning": "1.0.3"
   },
   "devDependencies": {
     "read-pkg-up": "7.0.1"

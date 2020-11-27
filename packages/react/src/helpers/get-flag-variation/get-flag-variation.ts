@@ -7,7 +7,7 @@ import isNil from '../is-nil';
 
 const getFlagVariation = (
   flagName: TFlagName = DEFAULT_FLAG_PROP_KEY
-): ((flags: Readonly<TFlags>) => TFlagVariation) => {
+): ((flags: TFlags) => TFlagVariation) => {
   const normalizedFlagName = getNormalizedFlagName(flagName);
 
   warning(

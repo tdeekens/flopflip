@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { selectFlags } from '../../ducks/flags';
 
 export default function useFlagVariations(
-  flagNames: Readonly<TFlagName[]>
+  flagNames: TFlagName[]
 ): TFlagVariation[] {
   const allFlags = useSelector(selectFlags);
 
