@@ -1,0 +1,2 @@
+# @flopflip/graphql-adapter
+

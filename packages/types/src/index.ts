@@ -47,6 +47,16 @@ export type TLaunchDarklyAdapterArgs = TBaseAdapterArgs & {
 export type TLocalStorageAdapterSubscriptionOptions = {
   pollingInteral?: number;
 };
+export type TGraphQLAdapterArgs = TBaseAdapterArgs & {
+  adapterConfiguration: TGraphQLAdapterSubscriptionOptions;
+};
+export type TGraphQLAdapterSubscriptionOptions = {
+  fetcher?: typeof fetch;
+  uri: string;
+  query: string;
+  pollingInteral?: number;
+  getVariables(adapterArgs: TGraphQLAdapterArgs): unknown;
+};
 export type TLocalStorageAdapterArgs = TBaseAdapterArgs & {
   adapterConfiguration?: TLocalStorageAdapterSubscriptionOptions;
 };
@@ -64,12 +74,14 @@ export type TAdapterArgs =
   | TLaunchDarklyAdapterArgs
   | TLocalStorageAdapterArgs
   | TMemoryAdapterArgs
-  | TSplitioAdapterArgs;
+  | TSplitioAdapterArgs
+  | TGraphQLAdapterArgs;
 export const interfaceIdentifiers = {
   launchdarkly: 'launchdarkly',
   localstorage: 'localstorage',
   memory: 'memory',
   splitio: 'splitio',
+  graphql: 'graphql',
 } as const;
 export type TAdapterInterfaceIdentifiers = typeof interfaceIdentifiers[keyof typeof interfaceIdentifiers];
 
@@ -134,6 +146,24 @@ export interface TLocalStorageAdapterInterface
   unsubscribe: () => void;
   subscribe: () => void;
 }
+export interface TGraphQLAdapterInterface
+  extends TAdapterInterface<TGraphQLAdapterArgs> {
+  id: typeof interfaceIdentifiers.graphql;
+  configure: (
+    adapterArgs: TGraphQLAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
+  ) => Promise<TAdapterConfiguration>;
+  reconfigure: (
+    adapterArgs: TGraphQLAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
+  ) => Promise<TAdapterConfiguration>;
+  getIsConfigurationStatus: (
+    adapterConfigurationStatus: AdapterConfigurationStatus
+  ) => boolean;
+  waitUntilConfigured: () => Promise<unknown>;
+  unsubscribe: () => void;
+  subscribe: () => void;
+}
 export interface TMemoryAdapterInterface
   extends TAdapterInterface<TMemoryAdapterArgs> {
   id: typeof interfaceIdentifiers.memory;
@@ -175,7 +205,8 @@ export type TAdapter =
   | TLaunchDarklyAdapterInterface
   | TLocalStorageAdapterInterface
   | TMemoryAdapterInterface
-  | TSplitioAdapterInterface;
+  | TSplitioAdapterInterface
+  | TGraphQLAdapterInterface;
 export type ConfigureAdapterArgs<
   TAdapterInstance extends TAdapter
 > = TAdapterInstance extends TLaunchDarklyAdapterInterface
@@ -186,6 +217,8 @@ export type ConfigureAdapterArgs<
   ? TMemoryAdapterArgs
   : TAdapterInstance extends TSplitioAdapterInterface
   ? TSplitioAdapterArgs
+  : TAdapterInstance extends TGraphQLAdapterInterface
+  ? TGraphQLAdapterArgs
   : never;
 export type TConfigureAdapterProps<TAdapterInstance extends TAdapter> = {
   adapter: TAdapterInstance extends TLaunchDarklyAdapterInterface
@@ -196,6 +229,8 @@ export type TConfigureAdapterProps<TAdapterInstance extends TAdapter> = {
     ? TMemoryAdapterInterface
     : TAdapterInstance extends TSplitioAdapterInterface
     ? TSplitioAdapterInterface
+    : TAdapterInstance extends TGraphQLAdapterInterface
+    ? TGraphQLAdapterInterface
     : never;
   adapterArgs: ConfigureAdapterArgs<TAdapterInstance>;
 };
@@ -253,12 +288,17 @@ type TLocalStorageAdapterGlobal = {
   adapter: TLocalStorageAdapterInterface;
   updateFlags: TFlagsUpdateFunction;
 };
+type TGraphQLAdapterGlobal = {
+  adapter: TLocalStorageAdapterInterface;
+  updateFlags: TFlagsUpdateFunction;
+};
 
 export type TFlopflipGlobal = {
   [interfaceIdentifiers.launchdarkly]?: TLaunchDarklyFlopflipGlobal;
   [interfaceIdentifiers.splitio]?: TSplitioAdapterGlobal;
   [interfaceIdentifiers.memory]?: TMemoryAdapterGlobal;
   [interfaceIdentifiers.localstorage]?: TLocalStorageAdapterGlobal;
+  [interfaceIdentifiers.graphql]?: TGraphQLAdapterGlobal;
 };
 declare global {
   interface Window {

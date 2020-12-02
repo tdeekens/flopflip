@@ -284,12 +284,6 @@ It takes the `props`:
   - The `adapter` will receive `onFlagsStateChange` and `onStatusStateChange`
     will should be invoked accordingly to notify `react-broadcast` and
     `react-redux` about flag and status changes
-  - Different adapters allow for different configurations. The `@flopflip/launchdarkly-adapter` accepts:
-    - `clientOptions`: additional options to be passed to the underlying SDK
-    - `subscribeToFlagChanges`: defaulting to `true` to disable real-time updates to flags once initially fetched
-    - `throwOnInitializationFailure`: defaulting to `false` to indicate if the adapter just re-throw an error during initialization
-    - `flagsUpdateDelayMs`: defaulting to `0` to debounce the flag update subscription
-    - `flags`: defaulting to `null` to subscribe only to specific flags. Helpful when not wanting to subscribe to all flags to utilise LaunchDarkly's automatic flag archiving functionality
 - The `shouldDeferAdapterConfiguration` prop can be used to defer the initial
   configuration the `adapter`. This might be helpful for cases in which you want
   to wait for e.g. the `key` to be present within your root component and you do
@@ -299,6 +293,24 @@ It takes the `props`:
 - The `localstorage-adapter` and `memory-adapter` expose a named `updateFlags`
   export which eases updating flags and flushes them to all components via
   `react-broadcast` or `react-redux`
+
+Different adapters allow for different configurations:
+
+1. The `@flopflip/launchdarkly-adapter` accepts
+
+- `clientOptions`: additional options to be passed to the underlying SDK
+- `subscribeToFlagChanges`: defaulting to `true` to disable real-time updates to flags once initially fetched
+- `throwOnInitializationFailure`: defaulting to `false` to indicate if the adapter just re-throw an error during initialization
+- `flagsUpdateDelayMs`: defaulting to `0` to debounce the flag update subscription
+- `flags`: defaulting to `null` to subscribe only to specific flags. Helpful when not wanting to subscribe to all flags to utilise LaunchDarkly's automatic flag archiving functionality
+
+2. The `@flopflip/graphql-adapter` accepts
+
+- `adapterConfiguration.uri`: the `uri` to the GraphQL endpoint so e.g. `https://graphql.com/graphql`
+- `adapterConfiguration.query`: the GraphQL query which returns features for instance `query AllFeatures { flags: allFeatures { name \n value} }`
+- `adapterConfiguration.getVariables`: a function called with `adapterArgs` being variables to your GraphQL query
+- `adapterConfiguration.fetcher`: a fetch implemtation if you prefer to not rely on the global `fetch`
+- `adapterConfiguration.pollingInteral`: the polling interval to check for updated flag values
 
 Whenever you do not want to have the state of all flags persisted in redux the
 minimal configuration for a setup with `@flopflip/react-broadcast` and
