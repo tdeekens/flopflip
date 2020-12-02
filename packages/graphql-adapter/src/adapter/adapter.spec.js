@@ -42,7 +42,7 @@ describe('when configured', () => {
   let adapterArgs = {
     adapterConfiguration: {
       url: `https://localhost:8080/graphql`,
-      query: 'query AllFeatures { allFeatures: { name \n value} }',
+      query: 'query AllFeatures { flags: allFeatures { name \n value} }',
       getVariables: () => ({ userId: '123' }),
       fetcher: jest.fn(() =>
         Promise.resolve({
@@ -87,7 +87,7 @@ describe('when configured', () => {
       adapterArgs.adapterConfiguration.uri,
       {
         body:
-          '{"query":"query AllFeatures { allFeatures: { name \\n value} }","variables":{"userId":"123"}}',
+          '{"query":"query AllFeatures { flags: allFeatures { name \\n value} }","variables":{"userId":"123"}}',
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
       }

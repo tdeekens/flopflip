@@ -307,7 +307,7 @@ Different adapters allow for different configurations:
 2. The `@flopflip/graphql-adapter` accepts
 
 - `adapterConfiguration.uri`: the `uri` to the GraphQL endpoint so e.g. `https://graphql.com/graphql`
-- `adapterConfiguration.query`: the GraphQL query which returns features for instance `query AllFeatures { allFeatures: { name \n value} }`
+- `adapterConfiguration.query`: the GraphQL query which returns features for instance `query AllFeatures { flags: allFeatures { name \n value} }`
 - `adapterConfiguration.getVariables`: a function called with `adapterArgs` being variables to your GraphQL query
 - `adapterConfiguration.fetcher`: a fetch implemtation if you prefer to not rely on the global `fetch`
 - `adapterConfiguration.pollingInteral`: the polling interval to check for updated flag values
