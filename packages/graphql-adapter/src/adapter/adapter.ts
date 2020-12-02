@@ -130,7 +130,9 @@ const didFlagsChange = (nextFlags: TFlags) => {
 const fetchFlags = async (
   adapterArgs: TGraphQLAdapterArgs
 ): Promise<TFlags> => {
-  const response = await fetch(adapterArgs.adapterConfiguration.uri, {
+  const fetcher = adapterArgs.adapterConfiguration.fetcher ?? fetch;
+
+  const response = await fetcher(adapterArgs.adapterConfiguration.uri, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
