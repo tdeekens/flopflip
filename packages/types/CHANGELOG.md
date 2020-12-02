@@ -1,5 +1,32 @@
 # @flopflip/types
 
+## 3.0.8
+
+### Patch Changes
+
+- [`a25c329`](https://github.com/tdeekens/flopflip/commit/a25c32916caec291d7f949270398e7f4c19ea2a4) [#1333](https://github.com/tdeekens/flopflip/pull/1333) Thanks [@tdeekens](https://github.com/tdeekens)! - feat(gtaphql-adapter): add graphql adapter
+
+  A new `graphql-adapter` which should be considered beta was added.
+
+  ```js
+  import { ConfigureFlopFlip } from "@flopflip/react-broadcast";
+  import adapter from "@flopflip/graphql-adapter";
+
+  const adapterArgs = React.useMemo(() => {
+     adapterConfiguration: {
+        uri: 'https://domain.at/graphql'
+        pollingInternal: 1000,
+        query: gql`query AllFeatures { flags: allFeatures(id: $userId) { name value} }`,
+        getVariables: (adapterArgs) => ({ userId: ardapterArgs.userId })
+     },
+     userId,
+  })
+
+  <ConfigureFlopFlip adapter={adapter} adapterArgs={adapterArgs}>
+     <App />
+  </ConfigureFlopFlip>;
+  ```
+
 ## 3.0.7
 
 ### Patch Changes
