@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/splitio-adapter",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "A adapter around the split.io client for flipflop",
   "main": "dist/flopflip-splitio-adapter.cjs.js",
   "module": "dist/flopflip-splitio-adapter.esm.js",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.12.5",
-    "@flopflip/types": "3.0.8",
+    "@flopflip/types": "3.0.9",
     "@splitsoftware/splitio": "10.15.1",
     "deepmerge": "4.2.2",
     "globalthis": "1.0.1",

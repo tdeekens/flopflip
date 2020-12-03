@@ -1,5 +1,14 @@
 # @flopflip/graphql-adapter
 
+## 0.0.2
+
+### Patch Changes
+
+- [`e927867`](https://github.com/tdeekens/flopflip/commit/e92786784675656a79d6866bbeb6797683dcf71e) [#1335](https://github.com/tdeekens/flopflip/pull/1335) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: update deps
+
+- Updated dependencies [[`e927867`](https://github.com/tdeekens/flopflip/commit/e92786784675656a79d6866bbeb6797683dcf71e)]:
+  - @flopflip/types@3.0.9
+
 ## 0.0.1
 
 ### Patch Changes

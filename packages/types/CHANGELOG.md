@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 3.0.9
+
+### Patch Changes
+
+- [`e927867`](https://github.com/tdeekens/flopflip/commit/e92786784675656a79d6866bbeb6797683dcf71e) [#1335](https://github.com/tdeekens/flopflip/pull/1335) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: update deps
+
 ## 3.0.8
 
 ### Patch Changes
