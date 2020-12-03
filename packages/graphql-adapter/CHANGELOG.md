@@ -1,5 +1,14 @@
 # @flopflip/graphql-adapter
 
+## 0.0.4
+
+### Patch Changes
+
+- [`9ba0922`](https://github.com/tdeekens/flopflip/commit/9ba0922651198b4cb53f4c3f71e358bdfb1fa4ae) [#1339](https://github.com/tdeekens/flopflip/pull/1339) Thanks [@tdeekens](https://github.com/tdeekens)! - feat: add parsing of flags
+
+- Updated dependencies [[`9ba0922`](https://github.com/tdeekens/flopflip/commit/9ba0922651198b4cb53f4c3f71e358bdfb1fa4ae)]:
+  - @flopflip/types@3.0.11
+
 ## 0.0.3
 
 ### Patch Changes
