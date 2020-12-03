@@ -111,6 +111,7 @@ In all examples flags will update in realtime (depending on the adapter and prov
 | [`splitio-adapter`](/packages/splitio-adapter)           | [![splitio-adapter Version][splitio-adapter-latest-icon]][splitio-adapter-latest-version] [![splitio-adapter Version][splitio-adapter-next-icon]][splitio-adapter-next-version]                               | [![splitio-adapter Dependencies Status][splitio-adapter-dependencies-icon]][splitio-adapter-dependencies]                | [![splitio-adapter Downloads][splitio-adapter-downloads]][splitio-adapter-downloads]                | [![splitio-adapter Minified + GZipped][splitio-adapter-size]][splitio-adapter-size]                |
 | [`memory-adapter`](/packages/memory-adapter)             | [![memory-adapter Version][memory-adapter-latest-icon]][memory-adapter-latest-version] [![memory-adapter Version][memory-adapter-next-icon]][memory-adapter-next-version]                                     | [![memory-adapter Dependencies Status][memory-adapter-dependencies-icon]][memory-adapter-dependencies]                   | [![memory-adapter Downloads][memory-adapter-downloads]][memory-adapter-downloads]                   | [![memory-adapter Minified + GZipped][memory-adapter-size]][memory-adapter-size]                   |
 | [`localstorage-adapter`](/packages/localstorage-adapter) | [![localstorage-adapter Version][localstorage-adapter-latest-icon]][localstorage-adapter-latest-version] [![localstorage-adapter Version][localstorage-adapter-next-icon]][localstorage-adapter-next-version] | [![localstorage-adapter Dependencies Status][localstorage-adapter-dependencies-icon]][localstorage-adapter-dependencies] | [![localstorage-adapter Downloads][localstorage-adapter-downloads]][localstorage-adapter-downloads] | [![localstorage-adapter Minified + GZipped][localstorage-adapter-size]][localstorage-adapter-size] |
+| [`graphql-adapter`](/packages/graphql-adapter)           | [![graphql-adapter Version][graphql-adapter-latest-icon]][graphql-adapter-latest-version] [![graphql-adapter Version][graphql-adapter-next-icon]][graphql-adapter-next-version]                               | [![graphql-adapter Dependencies Status][graphql-adapter-dependencies-icon]][graphql-adapter-dependencies]                | [![graphql-adapter Downloads][graphql-adapter-downloads]][graphql-adapter-downloads]                | [![graphql-adapter Minified + GZipped][graphql-adapter-size]][graphql-adapter-size]                |
 | [`cypress-plugin`](/packages/cypress-plugin)             | [![cypress-plugin Version][cypress-plugin-latest-icon]][cypress-plugin-latest-version] [![cypress-plugin Version][cypress-plugin-next-icon]][cypress-plugin-next-version]                                     | [![cypress-plugin Dependencies Status][cypress-plugin-dependencies-icon]][cypress-plugin-dependencies]                   | [![cypress-plugin Downloads][cypress-plugin-downloads]][cypress-plugin-downloads]                   | [![cypress-plugin Minified + GZipped][localstorage-adapter-size]][localstorage-adapter-size]       |
 | [`types`](/packages/types)                               | [![types Version][types-latest-icon]][types-latest-version] [![types Version][types-next-icon]][types-next-version]                                                                                           | [![types Dependencies Status][types-dependencies-icon]][types-dependencies]                                              | [![types Downloads][types-downloads]][types-downloads]                                              | [![types Minified + GZipped][types-size]][types-size]                                              |
 
@@ -154,6 +155,14 @@ In all examples flags will update in realtime (depending on the adapter and prov
 [localstorage-adapter-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/localstorage-adapter
 [localstorage-adapter-downloads]: https://flat.badgen.net/npm/dm/@flopflip/localstorage-adapter
 [localstorage-adapter-size]: https://flat.badgen.net/bundlephobia/minzip/@flopflip/localstorage-adapter
+[graphql-adapter-latest-version]: https://flat.badgen.net/npm/v/@flopflip/graphql-adapter
+[graphql-adapter-next-version]: https://flat.badgen.net/npm/v/@flopflip/graphql-adapter
+[graphql-adapter-latest-icon]: https://flat.badgen.net/npm/v/@flopflip/graphql-adapter
+[graphql-adapter-next-icon]: https://flat.badgen.net/npm/v/@flopflip/graphql-adapter/next
+[graphql-adapter-dependencies]: https://david-dm.org/tdeekens/flopflip?path=packages/graphql-adapter
+[graphql-adapter-dependencies-icon]: https://david-dm.org/tdeekens/flopflip/status.svg?style=flat-square&path=packages/graphql-adapter
+[graphql-adapter-downloads]: https://flat.badgen.net/npm/dm/@flopflip/graphql-adapter
+[graphql-adapter-size]: https://flat.badgen.net/bundlephobia/minzip/@flopflip/graphql-adapter
 [react-latest-version]: https://flat.badgen.net/npm/v/@flopflip/react
 [react-next-version]: https://flat.badgen.net/npm/v/@flopflip/react
 [react-latest-icon]: https://flat.badgen.net/npm/v/@flopflip/react
@@ -308,7 +317,9 @@ Different adapters allow for different configurations:
 
 - `adapterConfiguration.uri`: the `uri` to the GraphQL endpoint so e.g. `https://graphql.com/graphql`
 - `adapterConfiguration.query`: the GraphQL query which returns features for instance `query AllFeatures { flags: allFeatures { name \n value} }`
-- `adapterConfiguration.getVariables`: a function called with `adapterArgs` being variables to your GraphQL query
+- `adapterConfiguration.getQueryVariables`: a function called with `adapterArgs` being variables to your GraphQL query
+- `adapterConfiguration.getRequestHeaders`: a function called with `adapterArgs` being headers to your GraphQL request
+- `adapterConfiguration.parseFlags`: a function called with the `data` of fetched flags to parse the result before being exposed to your application. This function should be used to parse a query response into the `TFlags` type.
 - `adapterConfiguration.fetcher`: a fetch implemtation if you prefer to not rely on the global `fetch`
 - `adapterConfiguration.pollingInteral`: the polling interval to check for updated flag values
 
