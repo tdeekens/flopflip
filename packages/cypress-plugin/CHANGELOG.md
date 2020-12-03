@@ -1,5 +1,12 @@
 # @flopflip/cypress-plugin
 
+## 2.0.7
+
+### Patch Changes
+
+- Updated dependencies [[`5d2376b`](https://github.com/tdeekens/flopflip/commit/5d2376b6491761cd5e11cbe979d318e1d307c7ef)]:
+  - @flopflip/types@3.0.10
+
 ## 2.0.6
 
 ### Patch Changes

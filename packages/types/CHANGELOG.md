@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 3.0.10
+
+### Patch Changes
+
+- [`5d2376b`](https://github.com/tdeekens/flopflip/commit/5d2376b6491761cd5e11cbe979d318e1d307c7ef) [#1337](https://github.com/tdeekens/flopflip/pull/1337) Thanks [@tdeekens](https://github.com/tdeekens)! - feat: allow headers for adapter
+
 ## 3.0.9
 
 ### Patch Changes

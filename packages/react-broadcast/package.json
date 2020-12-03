@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/react-broadcast",
-  "version": "11.0.9",
+  "version": "11.0.10",
   "description": "A feature toggle wrapper to use LaunchDarkly with React",
   "main": "dist/flopflip-react-broadcast.cjs.js",
   "module": "dist/flopflip-react-broadcast.esm.js",
@@ -41,8 +41,8 @@
   },
   "dependencies": {
     "@babel/runtime": "7.12.5",
-    "@flopflip/react": "^10.0.9",
-    "@flopflip/types": "3.0.9",
+    "@flopflip/react": "^10.0.10",
+    "@flopflip/types": "3.0.10",
     "lodash": "4.17.20"
   },
   "keywords": [
