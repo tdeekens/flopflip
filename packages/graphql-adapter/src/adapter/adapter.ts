@@ -148,7 +148,9 @@ const fetchFlags = async (
   });
 
   const json = await response.json();
-  const flags = json.data as TFlags;
+  const flags =
+    adapterArgs.adapterConfiguration.parseFlags?.(json.data) ??
+    (json.data as TFlags);
 
   return flags;
 };

@@ -59,6 +59,7 @@ export type TGraphQLAdapterSubscriptionOptions = {
   getRequestHeaders?: (
     adapterArgs: TGraphQLAdapterArgs
   ) => Record<string, string>;
+  parseFlags?: (fetchedFlags: unknown) => TFlags;
 };
 export type TLocalStorageAdapterArgs = TBaseAdapterArgs & {
   adapterConfiguration?: TLocalStorageAdapterSubscriptionOptions;
