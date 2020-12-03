@@ -136,11 +136,14 @@ const fetchFlags = async (
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...adapterArgs.adapterConfiguration.headers,
+      ...(adapterArgs.adapterConfiguration.getRequestHeaders?.(adapterArgs) ??
+        {}),
     },
     body: JSON.stringify({
       query: adapterArgs.adapterConfiguration.query,
-      variables: adapterArgs.adapterConfiguration?.getVariables(adapterArgs),
+      variables:
+        adapterArgs.adapterConfiguration?.getQueryVariables?.(adapterArgs) ??
+        {},
     }),
   });
 
