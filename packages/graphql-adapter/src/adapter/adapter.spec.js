@@ -87,7 +87,7 @@ describe('when configured', () => {
       adapterArgs.adapterConfiguration.uri,
       {
         body:
-          '{"query":"query AllFeatures { flags: allFeatures { name \\n value} }","variables":{"userId":"123"}}',
+          '{"query":"query AllFeatures { flags: allFeatures { name \\n value} }","variables":{}}',
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
       }
