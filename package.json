@@ -140,7 +140,7 @@
         "maxSize": "3KB"
       },
       {
-        "path": "./packages/memory-adapter/dist/flopflip-graphql-adapter.esm.js",
+        "path": "./packages/graphql-adapter/dist/flopflip-graphql-adapter.esm.js",
         "maxSize": "3KB"
       },
       {
