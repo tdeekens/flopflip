@@ -55,7 +55,8 @@ export type TGraphQLAdapterSubscriptionOptions = {
   uri: string;
   query: string;
   pollingInteral?: number;
-  getVariables(adapterArgs: TGraphQLAdapterArgs): unknown;
+  getVariables?: (adapterArgs: TGraphQLAdapterArgs) => unknown;
+  headers?: Record<strting, string>;
 };
 export type TLocalStorageAdapterArgs = TBaseAdapterArgs & {
   adapterConfiguration?: TLocalStorageAdapterSubscriptionOptions;
