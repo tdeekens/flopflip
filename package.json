@@ -140,6 +140,10 @@
         "maxSize": "3KB"
       },
       {
+        "path": "./packages/memory-adapter/dist/flopflip-graphql-adapter.esm.js",
+        "maxSize": "3KB"
+      },
+      {
         "path": "./packages/splitio-adapter/dist/flopflip-splitio-adapter.esm.js",
         "maxSize": "3.5Kb"
       },
