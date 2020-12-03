@@ -49,6 +49,7 @@ const getIsAdapterUnsubscribed = () =>
   adapterState.subscriptionStatus === AdapterSubscriptionStatus.Unsubscribed;
 const getIsFlagLocked = (flagName: TFlagName) =>
   adapterState.lockedFlags.has(flagName);
+const getUser = () => adapterState.user;
 
 const normalizeFlag = (
   flagName: TFlagName,
@@ -267,6 +268,24 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
     return adapterState.configurationStatus === configurationStatus;
   }
 
+  getFlag(flagName: TFlagName): TFlagVariation {
+    return adapterState?.flags[flagName];
+  }
+
+  reset = () => {
+    adapterState = {
+      ...intialAdapterState,
+    };
+  };
+
+  setConfigurationStatus(nextConfigurationStatus: AdapterConfigurationStatus) {
+    adapterState.configurationStatus = nextConfigurationStatus;
+
+    adapterState.emitter.emit('statusStateChange', {
+      configurationStatus: adapterState.configurationStatus,
+    });
+  }
+
   unsubscribe() {
     adapterState.subscriptionStatus = AdapterSubscriptionStatus.Unsubscribed;
   }
@@ -304,4 +323,4 @@ const exposeGlobally = () => {
 exposeGlobally();
 
 export default adapter;
-export { updateFlags, normalizeFlag };
+export { updateFlags, getUser, normalizeFlag };
