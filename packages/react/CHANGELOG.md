@@ -1,5 +1,11 @@
 # @flopflip/react
 
+## 10.0.12
+
+### Patch Changes
+
+- [`62c1e09`](https://github.com/tdeekens/flopflip/commit/62c1e097755e1cd47d592cb727b78eb228958bf6) [#1343](https://github.com/tdeekens/flopflip/pull/1343) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: add warning when configure of reconfigure fails
+
 ## 10.0.11
 
 ### Patch Changes
