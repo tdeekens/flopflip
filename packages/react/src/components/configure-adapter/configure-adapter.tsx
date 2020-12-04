@@ -16,6 +16,7 @@ import {
 } from '@flopflip/types';
 
 import React from 'react';
+import warning from 'tiny-warning';
 import {
   isFunctionChildren,
   isEmptyChildren,
@@ -250,8 +251,12 @@ const useConfigurationEffect = ({
               applyAdapterArgs(pendingAdapterArgsRef.current);
             }
           }
+        }).catch(() => {
+          warning(
+            false,
+            '@flopflip/react: adapter could not be configured.'
+          );
         });
-      return;
     }
 
     if (getIsAdapterConfigured()) {
@@ -277,6 +282,11 @@ const useConfigurationEffect = ({
           ) {
             setAdapterState(AdapterStates.CONFIGURED);
           }
+        }).catch(() => {
+          warning(
+            false,
+            '@flopflip/react: adapter could not be reconfigured.'
+          );
         });
     }
   }, [
