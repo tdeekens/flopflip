@@ -1,5 +1,11 @@
 # @flopflip/react
 
+## 10.0.13
+
+### Patch Changes
+
+- [`cf47e40`](https://github.com/tdeekens/flopflip/commit/cf47e407bd55c8f9582dbce542010b6f9f6b8a45) [#1345](https://github.com/tdeekens/flopflip/pull/1345) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: update deps
+
 ## 10.0.12
 
 ### Patch Changes
