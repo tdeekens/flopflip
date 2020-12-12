@@ -1,5 +1,14 @@
 # @flopflip/react-redux
 
+## 11.0.12
+
+### Patch Changes
+
+- [`cf47e40`](https://github.com/tdeekens/flopflip/commit/cf47e407bd55c8f9582dbce542010b6f9f6b8a45) [#1345](https://github.com/tdeekens/flopflip/pull/1345) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: update deps
+
+- Updated dependencies [[`cf47e40`](https://github.com/tdeekens/flopflip/commit/cf47e407bd55c8f9582dbce542010b6f9f6b8a45)]:
+  - @flopflip/react@10.0.13
+
 ## 11.0.11
 
 ### Patch Changes
