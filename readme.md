@@ -928,7 +928,7 @@ In the `plugins/index.js` add the following to your existing config:
 
 module.exports = (on, cypressConfig) => {
 
-+ flopflipCypressPlugin.install(on);
++flopflipCypressPlugin.install(on);
 
   return { };
 };
