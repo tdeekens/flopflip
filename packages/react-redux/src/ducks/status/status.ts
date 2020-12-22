@@ -4,7 +4,7 @@ import {
   AdapterConfigurationStatus,
 } from '@flopflip/types';
 
-import { selecAdapterConfigurationStatus } from '@flopflip/react';
+import { selectAdapterConfigurationStatus } from '@flopflip/react';
 import { TUpdateStatusAction } from './types';
 import { TState } from '../../types';
 import { STATE_SLICE } from '../../store/constants';
@@ -48,5 +48,5 @@ export const updateStatus = (
 export const selectStatus = (state: TState) => {
   const { status } = state[STATE_SLICE];
 
-  return selecAdapterConfigurationStatus(status?.configurationStatus);
+  return selectAdapterConfigurationStatus(status?.configurationStatus);
 };
