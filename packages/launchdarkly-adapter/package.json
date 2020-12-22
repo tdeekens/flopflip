@@ -25,7 +25,6 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "read-pkg-up": "7.0.1"
   },
   "dependencies": {
     "@babel/runtime": "7.12.5",

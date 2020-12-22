@@ -35,6 +35,5 @@
     "@flopflip/types": "3.0.11"
   },
   "devDependencies": {
-    "read-pkg-up": "7.0.1"
   }
 }

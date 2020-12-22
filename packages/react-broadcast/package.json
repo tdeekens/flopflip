@@ -32,8 +32,7 @@
     "@types/react": "17.0.0",
     "@types/react-dom": "17.0.0",
     "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "read-pkg-up": "7.0.1"
+    "react-dom": "17.0.1"
   },
   "peerDependencies": {
     "react": "^16.8 || ^17.0",
