@@ -314,3 +314,12 @@ export type TDiff<ExcludedFrom, ToExclude> = Pick<
   ExcludedFrom,
   Exclude<keyof ExcludedFrom, keyof ToExclude>
 >;
+
+export type TCache = {
+  get: (key: string) => any;
+  set: (key: string, value: any) => boolean;
+  unset: (key: string) => void;
+};
+export type TCacheOptions = {
+  prefix: string;
+};

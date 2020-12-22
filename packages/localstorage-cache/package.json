@@ -1,0 +1,40 @@
+{
+  "name": "@flopflip/localstorage-cache",
+  "version": "0.0.0",
+  "description": "Localstorage cache for flipflop adapters",
+  "main": "dist/flopflip-localstorage-cache.cjs.js",
+  "module": "dist/flopflip-localstorage-cache.esm.js",
+  "scripts": {
+    "prepare": "./../../bin/version.js amend"
+  },
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdeekens/flopflip.git"
+  },
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
+  },
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "keywords": [
+    "feature-flags",
+    "feature-toggles",
+    "localstorage",
+    "cache",
+    "client"
+  ],
+  "dependencies": {
+    "@flopflip/types": "3.0.11"
+  },
+  "devDependencies": {
+    "read-pkg-up": "7.0.1"
+  }
+}

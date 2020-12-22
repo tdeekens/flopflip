@@ -25,12 +25,7 @@ import mitt, { Emitter } from 'mitt';
 import camelCase from 'lodash/camelCase';
 import isEqual from 'lodash/isEqual';
 import getGlobalThis from 'globalthis';
-
-type Storage = {
-  get: (key: string) => any;
-  set: (key: string, value: any) => boolean;
-  unset: (key: string) => void;
-};
+import createCache from '@flopflip/localstorage-cache';
 
 type LocalStorageAdapterState = {
   flags: TFlags;
@@ -60,6 +55,7 @@ const getIsFlagLocked = (flagName: TFlagName) =>
   adapterState.lockedFlags.has(flagName);
 
 const STORAGE_SLICE = '@flopflip';
+const cache = createCache({ prefix: STORAGE_SLICE });
 
 const normalizeFlag = (
   flagName: TFlagName,
@@ -84,23 +80,6 @@ const normalizeFlags = (rawFlags: TFlags): Record<'string', TFlagVariation> =>
     {}
   );
 
-const storage: Storage = {
-  get: (key) => {
-    const localStorageValue = localStorage.getItem(`${STORAGE_SLICE}__${key}`);
-
-    return localStorageValue ? JSON.parse(localStorageValue) : null;
-  },
-  set: (key, value) => {
-    try {
-      localStorage.setItem(`${STORAGE_SLICE}__${key}`, JSON.stringify(value));
-      return true;
-      // eslint-disable-next-line
-    } catch (_error) {
-      return false;
-    }
-  },
-  unset: (key) => localStorage.removeItem(`${STORAGE_SLICE}__${key}`),
-};
 const updateFlags: TFlagsUpdateFunction = (flags, options) => {
   const isAdapterConfigured =
     adapterState.configurationStatus === AdapterConfigurationStatus.Configured;
@@ -112,7 +91,7 @@ const updateFlags: TFlagsUpdateFunction = (flags, options) => {
 
   if (!isAdapterConfigured) return;
 
-  const previousFlags: TFlags | null = storage.get('flags') as TFlags;
+  const previousFlags: TFlags | null = cache.get('flags') as TFlags;
 
   const updatedFlags = Object.entries(flags).reduce(
     (updatedFlags, [flagName, flagValue]) => {
@@ -142,7 +121,7 @@ const updateFlags: TFlagsUpdateFunction = (flags, options) => {
     ...updatedFlags,
   };
 
-  storage.set('flags', nextFlags);
+  cache.set('flags', nextFlags);
   adapterState.flags = nextFlags;
 
   adapterState.emitter.emit('flagsStateChange', nextFlags);
@@ -161,7 +140,7 @@ const subscribeToFlagsChanges = ({
 }: TLocalStorageAdapterSubscriptionOptions) => {
   setInterval(() => {
     if (!getIsAdapterUnsubscribed()) {
-      const nextFlags = normalizeFlags(storage.get('flags'));
+      const nextFlags = normalizeFlags(cache.get('flags'));
 
       if (didFlagsChange(nextFlags)) {
         adapterState.flags = nextFlags;
@@ -220,7 +199,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     return Promise.resolve().then(() => {
       adapterState.configurationStatus = AdapterConfigurationStatus.Configured;
 
-      const flags = normalizeFlags(storage.get('flags'));
+      const flags = normalizeFlags(cache.get('flags'));
 
       adapterState.flags = flags;
       adapterState.emitter.emit('flagsStateChange', flags);
@@ -243,7 +222,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     adapterArgs: TLocalStorageAdapterArgs,
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
-    storage.unset('flags');
+    cache.unset('flags');
     adapterState.flags = {};
 
     const nextUser = adapterArgs.user;
