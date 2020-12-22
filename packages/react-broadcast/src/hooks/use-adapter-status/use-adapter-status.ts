@@ -1,13 +1,13 @@
 import React from 'react';
 import {
   useAdapterContext,
-  selecAdapterConfigurationStatus,
+  selectAdapterConfigurationStatus,
 } from '@flopflip/react';
 
 export default function useAdapterStatus() {
   const { status } = useAdapterContext();
 
-  const adapterStatus = selecAdapterConfigurationStatus(
+  const adapterStatus = selectAdapterConfigurationStatus(
     status.configurationStatus
   );
 

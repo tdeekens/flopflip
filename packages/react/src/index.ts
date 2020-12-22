@@ -8,7 +8,7 @@ export {
   AdapterContext,
   createAdapterContext,
   useAdapterContext,
-  selecAdapterConfigurationStatus,
+  selectAdapterConfigurationStatus,
   ToggleFeature,
   ConfigureAdapter,
   ReconfigureAdapter,

@@ -2,5 +2,5 @@ export { default } from './adapter-context';
 export {
   createAdapterContext,
   useAdapterContext,
-  selecAdapterConfigurationStatus,
+  selectAdapterConfigurationStatus,
 } from './adapter-context';

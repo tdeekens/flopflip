@@ -26,7 +26,7 @@ const createAdapterContext = (
 const initialAdapterContext = createAdapterContext();
 const AdapterContext = React.createContext(initialAdapterContext);
 
-const selecAdapterConfigurationStatus = (
+const selectAdapterConfigurationStatus = (
   configurationStatus?: AdapterConfigurationStatus
 ) => ({
   isReady: configurationStatus === AdapterConfigurationStatus.Configured,
@@ -42,5 +42,5 @@ export default AdapterContext;
 export {
   createAdapterContext,
   useAdapterContext,
-  selecAdapterConfigurationStatus,
+  selectAdapterConfigurationStatus,
 };
