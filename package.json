@@ -136,6 +136,10 @@
         "maxSize": "3KB"
       },
       {
+        "path": "./packages/localstorage-cache/dist/flopflip-localstorage-cache.esm.js",
+        "maxSize": "1KB"
+      },
+      {
         "path": "./packages/memory-adapter/dist/flopflip-memory-adapter.esm.js",
         "maxSize": "3KB"
       },
