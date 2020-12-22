@@ -3,3 +3,4 @@
 // (ie, a bundle that hasn't been built yet) then jest will fail if the bundle is not yet built.
 // all apps should export all their named exports from their root index.js
 export * from './src';
+export { default } from './src';
