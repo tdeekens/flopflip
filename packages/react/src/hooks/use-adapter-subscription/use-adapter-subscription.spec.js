@@ -1,8 +1,8 @@
+import React from 'react';
 import {
   AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
 } from '@flopflip/types';
-import React from 'react';
 import { render as rtlRender } from '@flopflip/test-utils';
 import useAdapterSubscription from './use-adapter-subscription';
 

@@ -12,7 +12,7 @@ import {
   AdapterSubscriptionStatus,
 } from '@flopflip/types';
 
-import React from 'react';
+import * as React from 'react';
 import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
 import { FlagsContext } from '../flags-context';
 

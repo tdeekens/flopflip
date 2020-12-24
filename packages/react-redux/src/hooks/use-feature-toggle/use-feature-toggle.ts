@@ -1,6 +1,6 @@
 import type { TFlagName, TFlagVariation } from '@flopflip/types';
 
-import React from 'react';
+import { useDebugValue } from 'react';
 import { useSelector } from 'react-redux';
 import { getIsFeatureEnabled } from '@flopflip/react';
 import { selectFlags } from '../../ducks/flags';
@@ -15,7 +15,7 @@ export default function useFeatureToggle(
     flagVariation
   )(flags);
 
-  React.useDebugValue({
+  useDebugValue({
     flagName,
     flagVariation,
     isEnabled: isFeatureEnabled,

@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { render, fireEvent } from '@flopflip/test-utils';
 import { AdapterStates } from './../configure-adapter';
 import AdapterContext, { createAdapterContext } from './../adapter-context';
 import ReconfigureAdapter from './reconfigure-adapter';
 
 const TestComponent = (props) => {
-  const [count, setCount] = React.useState(0);
-  const [, setState] = React.useState(0);
+  const [count, setCount] = useState(0);
+  const [, setState] = useState(0);
   const increment = () => setCount(count + 1);
 
-  const user = React.useMemo(
+  const user = useMemo(
     () => ({
       ...props.reconfiguration.user,
       count,

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React from 'react';
+import React, { cloneElement } from 'react';
 import adapter, { updateFlags } from '@flopflip/memory-adapter';
 import {
   render,
@@ -137,7 +137,7 @@ const renderWithAdapter = (
   const defaultedFlags = mergeOptional(defaultFlags, flags);
 
   const wrapUiIfNeeded = (innerElement) =>
-    Wrapper ? React.cloneElement(Wrapper, null, innerElement) : innerElement;
+    Wrapper ? cloneElement(Wrapper, null, innerElement) : innerElement;
 
   const rendered = render(
     wrapUiIfNeeded(

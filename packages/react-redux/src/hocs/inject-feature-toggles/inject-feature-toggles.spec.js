@@ -1,5 +1,5 @@
-import { Provider } from 'react-redux';
 import React from 'react';
+import { Provider } from 'react-redux';
 import { renderWithAdapter, components } from '@flopflip/test-utils';
 import { createStore } from '../../../test-utils';
 import Configure from '../../components/configure';

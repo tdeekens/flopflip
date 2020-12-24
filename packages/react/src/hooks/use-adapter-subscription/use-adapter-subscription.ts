@@ -1,7 +1,7 @@
 import type { TAdapter } from '@flopflip/types';
 import { AdapterSubscriptionStatus } from '@flopflip/types';
 
-import React from 'react';
+import { useRef, useEffect } from 'react';
 
 function useAdapterSubscription(adapter: TAdapter) {
   /**
@@ -13,13 +13,13 @@ function useAdapterSubscription(adapter: TAdapter) {
    *    which yields A and B being subscribed as the adapter
    *    is a singleton).
    */
-  const useAdapterSubscriptionStatusRef = React.useRef(
+  const useAdapterSubscriptionStatusRef = useRef(
     AdapterSubscriptionStatus.Subscribed
   );
 
   const { subscribe, unsubscribe } = adapter;
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (subscribe) {
       subscribe();
     }

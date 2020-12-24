@@ -1,4 +1,4 @@
-import React from 'react';
+import { Children } from 'react';
 import merge from 'deepmerge';
 import {
   TAdapterArgs,
@@ -13,7 +13,7 @@ const isFunctionChildren = (
   typeof children === 'function';
 
 const isEmptyChildren = (children: TConfigureAdapterChildren) =>
-  !isFunctionChildren(children) && React.Children.count(children) === 0;
+  !isFunctionChildren(children) && Children.count(children) === 0;
 
 const mergeAdapterArgs = (
   previousAdapterArgs: TAdapterArgs,

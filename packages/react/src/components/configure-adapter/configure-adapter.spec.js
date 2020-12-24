@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { render as rtlRender, waitFor } from '@flopflip/test-utils';
 import AdapterContext from '../adapter-context';
 import ConfigureAdapter, { AdapterStates } from './configure-adapter';
@@ -23,7 +23,7 @@ const createTestProps = ({ adapter }) => ({
 });
 
 const TestComponent = (props) => {
-  const adapterContext = React.useContext(AdapterContext);
+  const adapterContext = useContext(AdapterContext);
   const isAdapterStatus = (status) => adapterContext.status === status;
 
   return (

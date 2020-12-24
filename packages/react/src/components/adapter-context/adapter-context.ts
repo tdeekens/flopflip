@@ -8,7 +8,7 @@ import {
   AdapterConfigurationStatus,
 } from '@flopflip/types';
 
-import React from 'react';
+import { createContext, useContext } from 'react';
 
 const initialReconfigureAdapter: TReconfigureAdapter = () => undefined;
 const initialAdapterStatus: TAdapterStatus = {
@@ -24,7 +24,7 @@ const createAdapterContext = (
 });
 
 const initialAdapterContext = createAdapterContext();
-const AdapterContext = React.createContext(initialAdapterContext);
+const AdapterContext = createContext(initialAdapterContext);
 
 const selectAdapterConfigurationStatus = (
   configurationStatus?: AdapterConfigurationStatus
@@ -36,7 +36,7 @@ const selectAdapterConfigurationStatus = (
   isConfigured: configurationStatus === AdapterConfigurationStatus.Configured,
 });
 
-const useAdapterContext = () => React.useContext(AdapterContext);
+const useAdapterContext = () => useContext(AdapterContext);
 
 export default AdapterContext;
 export {

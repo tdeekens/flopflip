@@ -1,4 +1,4 @@
-import React from 'react';
+import { useDebugValue } from 'react';
 import {
   useAdapterContext,
   selectAdapterConfigurationStatus,
@@ -11,7 +11,7 @@ export default function useAdapterStatus() {
     status.configurationStatus
   );
 
-  React.useDebugValue({ adapterStatus });
+  useDebugValue({ adapterStatus });
 
   return adapterStatus;
 }
