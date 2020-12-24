@@ -1,6 +1,6 @@
 import type { TUser } from '@flopflip/types';
 
-import React from 'react';
+import * as React from 'react';
 import AdapterContext from '../adapter-context';
 
 type Props = {

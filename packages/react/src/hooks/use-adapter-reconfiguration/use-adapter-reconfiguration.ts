@@ -1,10 +1,10 @@
 import type { TAdapterContext } from '@flopflip/types';
 
-import React from 'react';
+import { useContext } from 'react';
 import { AdapterContext } from '../../components';
 
 export default function useAdapterReconfiguration() {
-  const adapterContext: TAdapterContext = React.useContext(AdapterContext);
+  const adapterContext: TAdapterContext = useContext(AdapterContext);
 
   return adapterContext.reconfigure;
 }

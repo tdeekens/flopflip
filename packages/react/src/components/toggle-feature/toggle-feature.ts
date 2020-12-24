@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import warning from 'tiny-warning';
 import { isValidElementType } from 'react-is';
 

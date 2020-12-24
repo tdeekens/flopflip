@@ -1,6 +1,6 @@
+import React from 'react';
 import { Provider } from 'react-redux';
 import { renderWithAdapter, components } from '@flopflip/test-utils';
-import React from 'react';
 import { createStore } from '../../../test-utils';
 import Configure from '../configure';
 import { STATE_SLICE } from './../../store/constants';

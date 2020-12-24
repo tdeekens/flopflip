@@ -1,6 +1,6 @@
 import type { TFlagName, TFlags } from '@flopflip/types';
 
-import React from 'react';
+import * as React from 'react';
 import {
   wrapDisplayName,
   setDisplayName,
