@@ -1,0 +1,39 @@
+{
+  "name": "@flopflip/sessionstorage-cache",
+  "version": "0.0.1",
+  "description": "Sessionstorage cache for flipflop adapters",
+  "main": "dist/flopflip-sessionstorage-cache.cjs.js",
+  "module": "dist/flopflip-sessionstorage-cache.esm.js",
+  "scripts": {
+    "prepare": "./../../bin/version.js amend"
+  },
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdeekens/flopflip.git"
+  },
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
+  },
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "keywords": [
+    "feature-flags",
+    "feature-toggles",
+    "sessionstorage",
+    "cache",
+    "client"
+  ],
+  "dependencies": {
+    "@flopflip/types": "3.0.11"
+  },
+  "devDependencies": {
+  }
+}
