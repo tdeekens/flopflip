@@ -49,6 +49,7 @@ export type TLocalStorageAdapterSubscriptionOptions = {
 };
 export type TGraphQLAdapterArgs = TBaseAdapterArgs & {
   adapterConfiguration: TGraphQLAdapterSubscriptionOptions;
+  cacheIdentifier?: TCacheIdentifiers;
 };
 export type TGraphQLAdapterSubscriptionOptions = {
   fetcher?: typeof fetch;
@@ -88,6 +89,12 @@ export const interfaceIdentifiers = {
   graphql: 'graphql',
 } as const;
 export type TAdapterInterfaceIdentifiers = typeof interfaceIdentifiers[keyof typeof interfaceIdentifiers];
+
+export const cacheIdentifiers = {
+  local: 'local',
+  session: 'session',
+} as const;
+export type TCacheIdentifiers = typeof cacheIdentifiers[keyof typeof cacheIdentifiers];
 
 export interface TAdapterInterface<Args extends TAdapterArgs> {
   // Identifiers are used to uniquely identify an interface when performing a condition check.

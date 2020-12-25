@@ -1,4 +1,4 @@
-import { AdapterConfigurationStatus } from '@flopflip/types';
+import { AdapterConfigurationStatus, cacheIdentifiers } from '@flopflip/types';
 import warning from 'tiny-warning';
 import getGlobalThis from 'globalthis';
 import adapter, { getUser, updateFlags } from './adapter';
@@ -12,7 +12,6 @@ const createAdapterEventHandlers = (custom = {}) => ({
 });
 
 describe('when configuring', () => {
-  let adapterArgs = {};
   let adapterEventHandlers;
 
   beforeEach(() => {
@@ -20,6 +19,8 @@ describe('when configuring', () => {
   });
 
   describe('when not configured', () => {
+    let adapterArgs = {};
+
     it('should indicate that the adapter is not configured', () => {
       expect(
         adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
@@ -45,105 +46,174 @@ describe('when configured', () => {
       query: 'query AllFeatures { flags: allFeatures { name \n value} }',
       getQueryVariables: jest.fn(() => ({ userId: '123' })),
       getRequestHeaders: jest.fn(() => ({})),
-      parseFlags: jest.fn(() => ({})),
-      fetcher: jest.fn(() =>
-        Promise.resolve({
-          json: () => Promise.resolve({ enabled: true, disabled: false }),
-        })
-      ),
+      parseFlags: jest.fn((flags) => flags),
+      fetcher: jest.fn().mockResolvedValue({
+        json: () =>
+          Promise.resolve({ data: { enabled: true, disabled: false } }),
+      }),
     },
   };
   let configurationResult;
   let adapterEventHandlers;
 
-  beforeEach(async () => {
-    adapterEventHandlers = createAdapterEventHandlers();
-    jest.useFakeTimers();
-    configurationResult = await adapter.configure(
-      adapterArgs,
-      adapterEventHandlers
-    );
-  });
-
   afterEach(() => {
     jest.clearAllTimers();
   });
 
-  it('should resolve to a successful initialization status', () => {
-    expect(configurationResult).toEqual(
-      expect.objectContaining({
-        initializationStatus: 0,
-      })
-    );
+  describe('without cache', () => {
+    beforeEach(async () => {
+      adapterEventHandlers = createAdapterEventHandlers();
+      jest.useFakeTimers();
+      configurationResult = await adapter.configure(
+        adapterArgs,
+        adapterEventHandlers
+      );
+    });
+
+    it('should resolve to a successful initialization status', () => {
+      expect(configurationResult).toEqual(
+        expect.objectContaining({
+          initializationStatus: 0,
+        })
+      );
+    });
+
+    it('should invoke the fetcher with uri', () => {
+      expect(adapterArgs.adapterConfiguration.fetcher).toHaveBeenCalledWith(
+        adapterArgs.adapterConfiguration.uri,
+        expect.anything()
+      );
+    });
+
+    it('should invoke the fetcher with body', () => {
+      expect(adapterArgs.adapterConfiguration.fetcher).toHaveBeenCalledWith(
+        adapterArgs.adapterConfiguration.uri,
+        {
+          body:
+            '{"query":"query AllFeatures { flags: allFeatures { name \\n value} }","variables":{"userId":"123"}}',
+          headers: { 'Content-Type': 'application/json' },
+          method: 'POST',
+        }
+      );
+    });
+
+    it('should invoke `onStatusStateChange` with configuring', () => {
+      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
+        expect.objectContaining({
+          configurationStatus: AdapterConfigurationStatus.Configuring,
+        })
+      );
+    });
+
+    it('should indicate that the adapter is configured', () => {
+      expect(
+        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+      ).toBe(true);
+    });
+
+    it('should invoke `onStatusStateChange` with configured', () => {
+      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
+        expect.objectContaining({
+          configurationStatus: AdapterConfigurationStatus.Configured,
+        })
+      );
+    });
+
+    it('should resolve `waitUntilConfigured`', async () => {
+      await expect(adapter.waitUntilConfigured()).resolves.not.toBeDefined();
+    });
+
+    it('should invoke `onStatusStateChange`', () => {
+      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalled();
+    });
+
+    it('should invoke `onFlagsStateChange`', () => {
+      expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+        enabled: true,
+        disabled: false,
+      });
+    });
+
+    it('should apply query variables and pass adapter args for evaluation', () => {
+      expect(
+        adapterArgs.adapterConfiguration.getQueryVariables
+      ).toHaveBeenCalledWith(adapterArgs);
+    });
+
+    it('should apply request headers and pass adapter args for evaluation', () => {
+      expect(
+        adapterArgs.adapterConfiguration.getRequestHeaders
+      ).toHaveBeenCalledWith(adapterArgs);
+    });
+
+    it('should allow parsing flags', () => {
+      expect(adapterArgs.adapterConfiguration.parseFlags).toHaveBeenCalled();
+    });
   });
 
-  it('should invoke the fetcher with uri', () => {
-    expect(adapterArgs.adapterConfiguration.fetcher).toHaveBeenCalledWith(
-      adapterArgs.adapterConfiguration.uri,
-      expect.anything()
-    );
-  });
+  describe('with cache', () => {
+    const cachePrefix = 'test';
+    let adapterArgs = {
+      cacheIdentifier: 'session',
+      adapterConfiguration: {
+        url: `https://localhost:8080/graphql`,
+        query: 'query AllFeatures { flags: allFeatures { name \n value} }',
+        getQueryVariables: jest.fn(() => ({ userId: '123' })),
+        getRequestHeaders: jest.fn(() => ({})),
+        parseFlags: jest.fn((flags) => flags),
+        fetcher: jest.fn().mockResolvedValue({
+          json: () =>
+            Promise.resolve({ data: { enabled: true, disabled: false } }),
+        }),
+      },
+    };
+    let configurationResult;
+    let adapterEventHandlers;
 
-  it('should invoke the fetcher with body', () => {
-    expect(adapterArgs.adapterConfiguration.fetcher).toHaveBeenCalledWith(
-      adapterArgs.adapterConfiguration.uri,
-      {
-        body:
-          '{"query":"query AllFeatures { flags: allFeatures { name \\n value} }","variables":{"userId":"123"}}',
-        headers: { 'Content-Type': 'application/json' },
-        method: 'POST',
-      }
-    );
-  });
+    beforeEach(async () => {
+      sessionStorage.getItem.mockReturnValueOnce(
+        JSON.stringify({ cached: true })
+      );
+      adapterEventHandlers = createAdapterEventHandlers();
+      jest.useFakeTimers();
+      configurationResult = await adapter.configure(
+        adapterArgs,
+        adapterEventHandlers
+      );
+    });
 
-  it('should invoke `onStatusStateChange` with configuring', () => {
-    expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
-      expect.objectContaining({
-        configurationStatus: AdapterConfigurationStatus.Configuring,
-      })
-    );
-  });
+    afterEach(() => {
+      jest.clearAllTimers();
+    });
 
-  it('should indicate that the adapter is configured', () => {
-    expect(
-      adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
-    ).toBe(true);
-  });
+    it('should resolve to a successful initialization status', () => {
+      expect(configurationResult).toEqual(
+        expect.objectContaining({
+          initializationStatus: 0,
+        })
+      );
+    });
 
-  it('should invoke `onStatusStateChange` with configured', () => {
-    expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
-      expect.objectContaining({
-        configurationStatus: AdapterConfigurationStatus.Configured,
-      })
-    );
-  });
+    it('should restore cached flags', () => {
+      expect(sessionStorage.getItem).toHaveBeenCalledWith('@flopflip__flags');
 
-  it('should resolve `waitUntilConfigured`', async () => {
-    await expect(adapter.waitUntilConfigured()).resolves.not.toBeDefined();
-  });
+      expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+        cached: true,
+      });
+    });
 
-  it('should invoke `onStatusStateChange`', () => {
-    expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalled();
-  });
+    it('should cache newly fetched flags', () => {
+      expect(
+        JSON.parse(sessionStorage.getItem('@flopflip__flags'))
+      ).toStrictEqual({ disabled: false, enabled: true });
+    });
 
-  it('should invoke `onFlagsStateChange`', () => {
-    expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalled();
-  });
-
-  it('should apply query variables and pass adapter args for evaluation', () => {
-    expect(
-      adapterArgs.adapterConfiguration.getQueryVariables
-    ).toHaveBeenCalledWith(adapterArgs);
-  });
-
-  it('should apply request headers and pass adapter args for evaluation', () => {
-    expect(
-      adapterArgs.adapterConfiguration.getRequestHeaders
-    ).toHaveBeenCalledWith(adapterArgs);
-  });
-
-  it('should allow parsing flags', () => {
-    expect(adapterArgs.adapterConfiguration.parseFlags).toHaveBeenCalled();
+    it('should flush fetched flags', () => {
+      expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+        enabled: true,
+        disabled: false,
+      });
+    });
   });
 
   describe('when updating flags', () => {
@@ -211,7 +281,10 @@ describe('when configured', () => {
     const user = { id: 'bar' };
 
     beforeEach(async () => {
-      configurationResult = await adapter.reconfigure({ user });
+      configurationResult = await adapter.reconfigure({
+        user,
+        cacheIdentifier: 'session',
+      });
     });
 
     it('should resolve to a successful initialization status', () => {
@@ -232,6 +305,12 @@ describe('when configured', () => {
 
     it('should invoke `onFlagsStateChange` with empty flags', () => {
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({});
+    });
+
+    it('should reset cache', () => {
+      expect(sessionStorage.removeItem).toHaveBeenCalledWith(
+        '@flopflip__flags'
+      );
     });
   });
 
