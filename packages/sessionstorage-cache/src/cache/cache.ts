@@ -21,7 +21,9 @@ const createCache = (options: TCacheOptions) => {
         return false;
       }
     },
-    unset: (key) => sessionStorage.removeItem(`${options.prefix}__${key}`),
+    unset: (key) => {
+      sessionStorage.removeItem(`${options.prefix}__${key}`)
+    },
   };
 
   return cache;

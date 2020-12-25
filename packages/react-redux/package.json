@@ -38,7 +38,7 @@
     "@babel/runtime": "7.12.5",
     "@flopflip/react": "^10.0.13",
     "@flopflip/types": "3.0.11",
-    "@types/react-redux": "7.1.12",
+    "@types/react-redux": "7.1.14",
     "lodash": "4.17.20"
   },
   "peerDependencies": {

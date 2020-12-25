@@ -67,11 +67,11 @@ describe('when enabling feature is', () => {
 
     await rendered.waitUntilConfigured();
 
-    act(() =>
+    act(() => {
       updateFlags({
         [testFlagName]: true,
-      })
-    );
+      });
+    });
 
     expect(rendered.getByText(/Feature enabled: Yes/i)).toBeInTheDocument();
   });

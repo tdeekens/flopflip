@@ -220,7 +220,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
   // For convenience
   updateFlags(flags: TFlags) {
-    return updateFlags(flags);
+    updateFlags(flags);
   }
 
   unsubscribe() {

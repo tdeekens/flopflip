@@ -37,6 +37,7 @@ const addCommands = (options: TCypressPluginAddCommandOptions) => {
           },
         });
 
+        // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
         flopflipAdapterGlobal?.updateFlags(flags, {
           unsubscribeFlags: true,
         });
