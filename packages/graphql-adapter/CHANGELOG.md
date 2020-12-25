@@ -1,5 +1,22 @@
 # @flopflip/graphql-adapter
 
+## 1.0.0
+
+### Major Changes
+
+- [`d72a4cd`](https://github.com/tdeekens/flopflip/commit/d72a4cd013295fa15478212d56840c6c4dd2c9df) [#1354](https://github.com/tdeekens/flopflip/pull/1354) Thanks [@tdeekens](https://github.com/tdeekens)! - feat(graphql-adapter): add cache option
+
+  This as a result is considered the initial v1 version of the adapter.
+
+### Patch Changes
+
+- [`18bd598`](https://github.com/tdeekens/flopflip/commit/18bd598f78891bcc24901f8c916c38f55d80e445) [#1349](https://github.com/tdeekens/flopflip/pull/1349) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: remove unused read-pkg-\* dependencies
+
+- Updated dependencies [[`3f707fb`](https://github.com/tdeekens/flopflip/commit/3f707fbffb82ad35b7c883a732d42ebd4604009b), [`f288170`](https://github.com/tdeekens/flopflip/commit/f2881702bcaf39029d78faf5d89d7bf645096310), [`d72a4cd`](https://github.com/tdeekens/flopflip/commit/d72a4cd013295fa15478212d56840c6c4dd2c9df), [`33b3216`](https://github.com/tdeekens/flopflip/commit/33b3216f227969f8a5ce0670b9590e5e06243fea), [`18bd598`](https://github.com/tdeekens/flopflip/commit/18bd598f78891bcc24901f8c916c38f55d80e445)]:
+  - @flopflip/sessionstorage-cache@1.0.0
+  - @flopflip/localstorage-cache@1.0.0
+  - @flopflip/types@3.1.0
+
 ## 0.0.4
 
 ### Patch Changes

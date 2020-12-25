@@ -1,5 +1,14 @@
 # @flopflip/launchdarkly-adapter
 
+## 3.0.12
+
+### Patch Changes
+
+- [`18bd598`](https://github.com/tdeekens/flopflip/commit/18bd598f78891bcc24901f8c916c38f55d80e445) [#1349](https://github.com/tdeekens/flopflip/pull/1349) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: remove unused read-pkg-\* dependencies
+
+- Updated dependencies [[`d72a4cd`](https://github.com/tdeekens/flopflip/commit/d72a4cd013295fa15478212d56840c6c4dd2c9df), [`33b3216`](https://github.com/tdeekens/flopflip/commit/33b3216f227969f8a5ce0670b9590e5e06243fea)]:
+  - @flopflip/types@3.1.0
+
 ## 3.0.11
 
 ### Patch Changes

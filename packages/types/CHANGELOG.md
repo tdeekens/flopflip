@@ -1,5 +1,17 @@
 # @flopflip/types
 
+## 3.1.0
+
+### Minor Changes
+
+- [`d72a4cd`](https://github.com/tdeekens/flopflip/commit/d72a4cd013295fa15478212d56840c6c4dd2c9df) [#1354](https://github.com/tdeekens/flopflip/pull/1354) Thanks [@tdeekens](https://github.com/tdeekens)! - feat(graphql-adapter): add cache option
+
+  This as a result is considered the initial v1 version of the adapter.
+
+### Patch Changes
+
+- [`33b3216`](https://github.com/tdeekens/flopflip/commit/33b3216f227969f8a5ce0670b9590e5e06243fea) [#1348](https://github.com/tdeekens/flopflip/pull/1348) Thanks [@tdeekens](https://github.com/tdeekens)! - feat: to have localstorage-cache package
+
 ## 3.0.11
 
 ### Patch Changes
