@@ -2,7 +2,6 @@ import { AdapterConfigurationStatus, cacheIdentifiers } from '@flopflip/types';
 import warning from 'tiny-warning';
 import getGlobalThis from 'globalthis';
 import adapter, { getUser, updateFlags } from './adapter';
-import { sessionStorage } from 'globalthis/implementation';
 
 jest.mock('tiny-warning');
 
