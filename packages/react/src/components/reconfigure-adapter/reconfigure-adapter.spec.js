@@ -4,10 +4,12 @@ import { AdapterStates } from './../configure-adapter';
 import AdapterContext, { createAdapterContext } from './../adapter-context';
 import ReconfigureAdapter from './reconfigure-adapter';
 
-const TestComponent = (props) => {
+const TestComponent = props => {
   const [count, setCount] = useState(0);
   const [, setState] = useState(0);
-  const increment = () => setCount(count + 1);
+  const increment = () => {
+    setCount(count + 1);
+  };
 
   const user = useMemo(
     () => ({

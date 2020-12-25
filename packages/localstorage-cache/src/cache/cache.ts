@@ -21,7 +21,9 @@ const createCache = (options: TCacheOptions) => {
         return false;
       }
     },
-    unset: (key) => localStorage.removeItem(`${options.prefix}__${key}`),
+    unset: (key) => {
+      localStorage.removeItem(`${options.prefix}__${key}`)
+    },
   };
 
   return cache;

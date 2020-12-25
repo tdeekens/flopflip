@@ -203,7 +203,7 @@ const subscribe = async ({
             onFlagsStateChange,
           });
 
-          return resolve();
+          resolve();
         }
       });
     } else reject();
