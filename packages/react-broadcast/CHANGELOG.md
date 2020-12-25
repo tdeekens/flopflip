@@ -1,5 +1,21 @@
 # @flopflip/react-broadcast
 
+## 11.0.12
+
+### Patch Changes
+
+- [`f288170`](https://github.com/tdeekens/flopflip/commit/f2881702bcaf39029d78faf5d89d7bf645096310) [#1355](https://github.com/tdeekens/flopflip/pull/1355) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: update deps
+
+* [`5e825b9`](https://github.com/tdeekens/flopflip/commit/5e825b96aee89a325e16a11ee8e3f4b68c9f8f56) [#1351](https://github.com/tdeekens/flopflip/pull/1351) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: typo of selector for adapter context
+
+- [`18bd598`](https://github.com/tdeekens/flopflip/commit/18bd598f78891bcc24901f8c916c38f55d80e445) [#1349](https://github.com/tdeekens/flopflip/pull/1349) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: remove unused read-pkg-\* dependencies
+
+* [`cbacd83`](https://github.com/tdeekens/flopflip/commit/cbacd836dd9d9411043efb9ad4795d75ed520d83) [#1352](https://github.com/tdeekens/flopflip/pull/1352) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: to use explicit React imports
+
+* Updated dependencies [[`f288170`](https://github.com/tdeekens/flopflip/commit/f2881702bcaf39029d78faf5d89d7bf645096310), [`5e825b9`](https://github.com/tdeekens/flopflip/commit/5e825b96aee89a325e16a11ee8e3f4b68c9f8f56), [`d72a4cd`](https://github.com/tdeekens/flopflip/commit/d72a4cd013295fa15478212d56840c6c4dd2c9df), [`33b3216`](https://github.com/tdeekens/flopflip/commit/33b3216f227969f8a5ce0670b9590e5e06243fea), [`18bd598`](https://github.com/tdeekens/flopflip/commit/18bd598f78891bcc24901f8c916c38f55d80e445), [`cbacd83`](https://github.com/tdeekens/flopflip/commit/cbacd836dd9d9411043efb9ad4795d75ed520d83)]:
+  - @flopflip/react@10.0.14
+  - @flopflip/types@3.1.0
+
 ## 11.0.11
 
 ### Patch Changes
