@@ -42,7 +42,7 @@ const render = () => {
   return { ...rtlRendered, waitUntilConfigured };
 };
 
-const createTestProps = custom => ({
+const createTestProps = (custom) => ({
   adapter,
   adapterArgs: {
     fooId: 'foo-id',
