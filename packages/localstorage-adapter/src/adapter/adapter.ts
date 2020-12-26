@@ -92,7 +92,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     }, pollingInteral);
   };
 
-  updateFlags(flags: TFlags, options?: TUpdateFlagsOptions) {
+  updateFlags = (flags: TFlags, options?: TUpdateFlagsOptions) => {
     const isAdapterConfigured =
       this.#adapterState.configurationStatus ===
       AdapterConfigurationStatus.Configured;
@@ -140,7 +140,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     this.#adapterState.flags = nextFlags;
 
     this.#adapterState.emitter.emit('flagsStateChange', nextFlags);
-  }
+  };
 
   async configure(
     adapterArgs: TLocalStorageAdapterArgs,
@@ -239,15 +239,15 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     return this.#adapterState.configurationStatus === configurationStatus;
   }
 
-  unsubscribe() {
+  unsubscribe = () => {
     this.#adapterState.subscriptionStatus =
       AdapterSubscriptionStatus.Unsubscribed;
-  }
+  };
 
-  subscribe() {
+  subscribe = () => {
     this.#adapterState.subscriptionStatus =
       AdapterSubscriptionStatus.Subscribed;
-  }
+  };
 
   // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
   getIsReady() {

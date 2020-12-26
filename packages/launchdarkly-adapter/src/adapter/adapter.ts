@@ -293,7 +293,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   };
 
   // External. Flags are autolocked when updated.
-  updateFlags(flags: TFlags, options?: TUpdateFlagsOptions) {
+  updateFlags = (flags: TFlags, options?: TUpdateFlagsOptions) => {
     this.#updateFlagsInAdapterState(flags, options);
 
     // ...and flush initial state of flags
@@ -303,7 +303,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
         this.#adapterState.flags
       );
     }
-  }
+  };
 
   async configure(
     adapterArgs: TLaunchDarklyAdapterArgs,
@@ -422,15 +422,15 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     });
   }
 
-  unsubscribe() {
+  unsubscribe = () => {
     this.#adapterState.subscriptionStatus =
       AdapterSubscriptionStatus.Unsubscribed;
-  }
+  };
 
-  subscribe() {
+  subscribe = () => {
     this.#adapterState.subscriptionStatus =
       AdapterSubscriptionStatus.Subscribed;
-  }
+  };
 
   // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
   getIsReady() {

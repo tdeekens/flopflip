@@ -317,15 +317,15 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     return this.#adapterState.configurationStatus === configurationStatus;
   }
 
-  unsubscribe() {
+  unsubscribe = () => {
     this.#adapterState.subscriptionStatus =
       AdapterSubscriptionStatus.Unsubscribed;
-  }
+  };
 
-  subscribe() {
+  subscribe = () => {
     this.#adapterState.subscriptionStatus =
       AdapterSubscriptionStatus.Subscribed;
-  }
+  };
 
   // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
   getIsReady() {

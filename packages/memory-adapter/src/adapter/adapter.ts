@@ -64,11 +64,9 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     this.#adapterState.user = user;
   };
 
-  getUser() {
-    return this.#adapterState.user;
-  }
+  getUser = () => this.#adapterState.user;
 
-  updateFlags(flags: TFlags, options?: TUpdateFlagsOptions) {
+  updateFlags = (flags: TFlags, options?: TUpdateFlagsOptions) => {
     const isAdapterConfigured =
       this.#adapterState.configurationStatus ===
       AdapterConfigurationStatus.Configured;
@@ -102,7 +100,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
       'flagsStateChange',
       this.#adapterState.flags
     );
-  }
+  };
 
   async configure(
     adapterArgs: TMemoryAdapterArgs,
@@ -230,15 +228,15 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     return this.#adapterState?.flags[flagName];
   }
 
-  unsubscribe() {
+  unsubscribe = () => {
     this.#adapterState.subscriptionStatus =
       AdapterSubscriptionStatus.Unsubscribed;
-  }
+  };
 
-  subscribe() {
+  subscribe = () => {
     this.#adapterState.subscriptionStatus =
       AdapterSubscriptionStatus.Subscribed;
-  }
+  };
 
   // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
   getIsReady() {

@@ -345,13 +345,13 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
     });
   }
 
-  unsubscribe() {
+  unsubscribe = () => {
     adapterState.subscriptionStatus = AdapterSubscriptionStatus.Unsubscribed;
-  }
+  };
 
-  subscribe() {
+  subscribe = () => {
     adapterState.subscriptionStatus = AdapterSubscriptionStatus.Subscribed;
-  }
+  };
 
   // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
   getIsReady() {
