@@ -60,17 +60,18 @@ const getIsAdapterUnsubscribed = () =>
 
 const normalizeFlag = (
   flagName: TFlagName,
-  flagValue: TFlagVariation
+  flagValue?: TFlagVariation
 ): TFlag => {
   let normalizeFlagValue: TFlagVariation;
-  if (flagValue === null) {
-    normalizeFlagValue = false;
-  } else if (flagValue === 'on') {
+
+  if (flagValue === 'on') {
     normalizeFlagValue = true;
   } else if (flagValue === 'off') {
     normalizeFlagValue = false;
-  } else {
+  } else if (flagValue !== undefined && flagValue !== null) {
     normalizeFlagValue = flagValue;
+  } else {
+    normalizeFlagValue = false;
   }
 
   return [camelCase(flagName), normalizeFlagValue];
@@ -102,7 +103,7 @@ const subscribeToFlagsChanges = ({
         );
 
         if (!getIsAdapterUnsubscribed()) {
-          onFlagsStateChange(normalizeFlags(flags));
+          onFlagsStateChange(normalizeFlags(flags, normalizeFlag));
         }
       }
     });
@@ -168,7 +169,7 @@ const subscribe = async ({
           );
 
           if (!getIsAdapterUnsubscribed()) {
-            onFlagsStateChange(normalizeFlags(flags));
+            onFlagsStateChange(normalizeFlags(flags, normalizeFlag));
           }
 
           // First update internal state
