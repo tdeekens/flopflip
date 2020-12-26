@@ -1,7 +1,7 @@
 import { AdapterConfigurationStatus } from '@flopflip/types';
 import warning from 'tiny-warning';
 import getGlobalThis from 'globalthis';
-import adapter, { updateFlags, STORAGE_SLICE } from './adapter';
+import adapter, { STORAGE_SLICE } from './adapter';
 
 jest.mock('tiny-warning');
 
@@ -28,7 +28,7 @@ describe('when configuring', () => {
 
     describe('updating flags', () => {
       beforeEach(() => {
-        updateFlags({ attempted: 'flagUpdate' });
+        adapter.updateFlags({ attempted: 'flagUpdate' });
       });
 
       it('should invoke and trigger `warning`', () => {
@@ -100,7 +100,7 @@ describe('when configuring', () => {
         // From `configure`
         adapterEventHandlers.onFlagsStateChange.mockClear();
 
-        updateFlags(updatedFlags);
+        adapter.updateFlags(updatedFlags);
       });
 
       it('should set localstorage', () => {
@@ -132,7 +132,7 @@ describe('when configuring', () => {
           // From `configure`
           adapterEventHandlers.onFlagsStateChange.mockClear();
 
-          updateFlags(nonNormalizedUpdatedFlags);
+          adapter.updateFlags(nonNormalizedUpdatedFlags);
         });
 
         it('should invoke `onFlagsStateChange`', () => {
@@ -149,9 +149,9 @@ describe('when configuring', () => {
         beforeEach(() => {
           adapterEventHandlers.onFlagsStateChange.mockClear();
 
-          updateFlags(updatedFlags, { lockFlags: true });
+          adapter.updateFlags(updatedFlags, { lockFlags: true });
 
-          updateFlags({ fooFlag: false });
+          adapter.updateFlags({ fooFlag: false });
         });
 
         it('should not update the locked flag', () => {
@@ -167,7 +167,7 @@ describe('when configuring', () => {
       const updatedFlags = { fooFlag: true, barFlag: false };
 
       beforeEach(() => {
-        updateFlags(initialFlags);
+        adapter.updateFlags(initialFlags);
         adapterEventHandlers.onFlagsStateChange.mockClear();
 
         localStorage.setItem(
@@ -188,7 +188,7 @@ describe('when configuring', () => {
       const initialFlags = { fooFlag: false, barFlag: false };
 
       beforeEach(() => {
-        updateFlags(initialFlags);
+        adapter.updateFlags(initialFlags);
         adapterEventHandlers.onFlagsStateChange.mockClear();
       });
 
@@ -202,7 +202,7 @@ describe('when configuring', () => {
       const user = { id: 'bar' };
 
       beforeEach(async () => {
-        updateFlags({ foo: 'bar' });
+        adapter.updateFlags({ foo: 'bar' });
 
         configurationResult = await adapter.reconfigure({ user });
       });
@@ -252,18 +252,6 @@ describe('exposeGlobally', () => {
   it('should expose `adapter` globally', () => {
     const globalThis = getGlobalThis();
 
-    expect(globalThis).toHaveProperty(
-      '__flopflip__.localstorage.adapter',
-      adapter
-    );
-  });
-
-  it('should expose `updateFlags` globally', () => {
-    const globalThis = getGlobalThis();
-
-    expect(globalThis).toHaveProperty(
-      '__flopflip__.localstorage.updateFlags',
-      updateFlags
-    );
+    expect(globalThis).toHaveProperty('__flopflip__.localstorage', adapter);
   });
 });

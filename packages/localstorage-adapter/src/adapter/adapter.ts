@@ -262,9 +262,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
 const adapter = new LocalStorageAdapter();
 
-exposeGlobally(adapter, adapter.updateFlags);
-
-const updateFlags = adapter.updateFlags;
+exposeGlobally(adapter);
 
 export default adapter;
-export { updateFlags, STORAGE_SLICE };
+export { STORAGE_SLICE };

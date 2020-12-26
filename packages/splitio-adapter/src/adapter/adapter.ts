@@ -342,7 +342,5 @@ const adapter = new SplitioAdapter();
 
 exposeGlobally(adapter, adapter.updateFlags);
 
-const updateFlags = adapter.updateFlags;
-
 export default adapter;
-export { createAnonymousUserKey, normalizeFlag, updateFlags };
+export { createAnonymousUserKey, normalizeFlag };

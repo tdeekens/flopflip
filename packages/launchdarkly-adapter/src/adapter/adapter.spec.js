@@ -1,7 +1,7 @@
 import { AdapterConfigurationStatus } from '@flopflip/types';
 import ldClient from 'launchdarkly-js-client-sdk';
 import getGlobalThis from 'globalthis';
-import adapter, { normalizeFlags, updateFlags } from './adapter';
+import adapter from './adapter';
 
 jest.mock('launchdarkly-js-client-sdk', () => ({
   initialize: jest.fn(),
@@ -441,7 +441,10 @@ describe('when configuring', () => {
           describe('with opt-out of flag change subscription', () => {
             beforeEach(() => {
               onFlagsStateChange.mockClear();
-              updateFlags({ someFlag1: true }, { unsubscribeFlags: true });
+              adapter.updateFlags(
+                { someFlag1: true },
+                { unsubscribeFlags: true }
+              );
               triggerFlagValueChange(client, { flagValue: true });
             });
 
@@ -454,11 +457,11 @@ describe('when configuring', () => {
 
       describe('when flag is locked', () => {
         it('should not allow seting the flag value again', () => {
-          updateFlags({ someFlag1: true }, { lockFlags: true });
+          adapter.updateFlags({ someFlag1: true }, { lockFlags: true });
 
           expect(adapter.getFlag('someFlag1')).toBe(true);
 
-          updateFlags({ someFlag1: false });
+          adapter.updateFlags({ someFlag1: false });
 
           expect(adapter.getFlag('someFlag1')).toBe(true);
         });
@@ -590,18 +593,6 @@ describe('exposeGlobally', () => {
   it('should expose `adapter` globally', () => {
     const globalThis = getGlobalThis();
 
-    expect(globalThis).toHaveProperty(
-      '__flopflip__.launchdarkly.adapter',
-      adapter
-    );
-  });
-
-  it('should expose `updateFlags` globally', () => {
-    const globalThis = getGlobalThis();
-
-    expect(globalThis).toHaveProperty(
-      '__flopflip__.launchdarkly.updateFlags',
-      updateFlags
-    );
+    expect(globalThis).toHaveProperty('__flopflip__.launchdarkly', adapter);
   });
 });

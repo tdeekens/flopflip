@@ -390,6 +390,6 @@ describe('exposeGlobally', () => {
   it('should expose `adapter` globally', () => {
     const globalThis = getGlobalThis();
 
-    expect(globalThis).toHaveProperty('__flopflip__.splitio.adapter', adapter);
+    expect(globalThis).toHaveProperty('__flopflip__.splitio', adapter);
   });
 });

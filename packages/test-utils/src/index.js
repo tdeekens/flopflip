@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import React, { cloneElement } from 'react';
-import adapter, { updateFlags } from '@flopflip/memory-adapter';
+import adapter from '@flopflip/memory-adapter';
 import {
   render,
   screen,
@@ -84,7 +84,7 @@ const FlagChangeField = () => {
         onChange={(event) => {
           const { flagName, flagVariation } = JSON.parse(event.target.value);
 
-          updateFlags({ [flagName]: fromEventString(flagVariation) });
+          adapter.updateFlags({ [flagName]: fromEventString(flagVariation) });
         }}
       />
     </>
@@ -184,7 +184,6 @@ export {
   defaultRender as render,
   renderWithAdapter,
   adapter,
-  updateFlags,
   components,
   screen,
   act,

@@ -251,10 +251,6 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
 const adapter = new MemoryAdapter();
 
-const updateFlags = adapter.updateFlags;
-const getUser = adapter.getUser;
-
-exposeGlobally(adapter, updateFlags);
+exposeGlobally(adapter);
 
 export default adapter;
-export { updateFlags, getUser };
