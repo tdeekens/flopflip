@@ -1,23 +1,38 @@
 import normalizeFlags from './normalize-flags';
+import normalizeFlag from '../normalize-flag';
 
-describe('with dashes', () => {
-  const rawFlags = {
-    'a-flag': true,
-    'flag-b-c': false,
-  };
+const rawFlags = {
+  'a-flag': true,
+  'flag-b-c': false,
+};
 
-  it('should camel case to uppercased flag names', () => {
-    expect(normalizeFlags(rawFlags)).toEqual({ aFlag: true, flagBC: false });
+describe('with default normalization', () => {
+  describe('with dashes', () => {
+    it('should camel case to uppercased flag names', () => {
+      expect(normalizeFlags(rawFlags)).toEqual({ aFlag: true, flagBC: false });
+    });
+  });
+
+  describe('with spaces', () => {
+    const rawFlags = {
+      'a flag': true,
+      'flag b-c': false,
+    };
+
+    it('should camel case to uppercased flag names', () => {
+      expect(normalizeFlags(rawFlags)).toEqual({ aFlag: true, flagBC: false });
+    });
   });
 });
 
-describe('with spaces', () => {
-  const rawFlags = {
-    'a flag': true,
-    'flag b-c': false,
-  };
+describe('with custom normalization', () => {
+  it('should use the custom normalization function', () => {
+    const customNormalizeFlag = jest.fn((...args) => normalizeFlag(...args));
 
-  it('should camel case to uppercased flag names', () => {
-    expect(normalizeFlags(rawFlags)).toEqual({ aFlag: true, flagBC: false });
+    expect(normalizeFlags(rawFlags, customNormalizeFlag)).toEqual({
+      aFlag: true,
+      flagBC: false,
+    });
+    expect(customNormalizeFlag).toHaveBeenCalled();
   });
 });

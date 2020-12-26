@@ -102,7 +102,7 @@ const subscribeToFlagsChanges = ({
         );
 
         if (!getIsAdapterUnsubscribed()) {
-          onFlagsStateChange(normalizeFlags(flags));
+          onFlagsStateChange(normalizeFlags(flags, normalizeFlag));
         }
       }
     });
@@ -168,7 +168,7 @@ const subscribe = async ({
           );
 
           if (!getIsAdapterUnsubscribed()) {
-            onFlagsStateChange(normalizeFlags(flags));
+            onFlagsStateChange(normalizeFlags(flags, normalizeFlag));
           }
 
           // First update internal state

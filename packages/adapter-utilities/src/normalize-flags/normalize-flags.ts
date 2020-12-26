@@ -1,7 +1,10 @@
 import type { TFlagVariation, TFlag, TFlags } from '@flopflip/types';
-import normalizeFlag from '../normalize-flag/normalize-flag';
+import defaultNormalizeFlag from '../normalize-flag/normalize-flag';
 
-const normalizeFlags = (rawFlags: TFlags): Record<string, TFlagVariation> =>
+const normalizeFlags = (
+  rawFlags: TFlags,
+  normalizeFlag: typeof defaultNormalizeFlag = defaultNormalizeFlag
+): Record<string, TFlagVariation> =>
   Object.entries(rawFlags || {}).reduce<TFlags>(
     (normalizedFlags: TFlags, [flagName, flagValue]) => {
       const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
