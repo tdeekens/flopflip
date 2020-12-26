@@ -132,9 +132,11 @@ const __internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
 
 class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   id: typeof interfaceIdentifiers.localstorage;
+  updateFlags: typeof updateFlags;
 
   constructor() {
     this.id = interfaceIdentifiers.localstorage;
+    this.updateFlags = updateFlags;
   }
 
   async configure(

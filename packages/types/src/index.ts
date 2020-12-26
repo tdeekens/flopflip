@@ -96,6 +96,19 @@ export const cacheIdentifiers = {
 } as const;
 export type TCacheIdentifiers = typeof cacheIdentifiers[keyof typeof cacheIdentifiers];
 
+export type TOnFlagsStateChangeCallback = (flags: TFlags) => void;
+export type TOnStatusStateChangeCallback = (
+  statusChange: TAdapterStatusChange
+) => void;
+export type TUpdateFlagsOptions = {
+  lockFlags?: boolean;
+  unsubscribeFlags?: boolean;
+};
+export type TFlagsUpdateFunction = (
+  flags: TFlags,
+  options?: TUpdateFlagsOptions
+) => void;
+
 export interface TAdapterInterface<Args extends TAdapterArgs> {
   // Identifiers are used to uniquely identify an interface when performing a condition check.
   id: TAdapterInterfaceIdentifiers;
@@ -118,6 +131,8 @@ export interface TAdapterInterface<Args extends TAdapterArgs> {
   getFlag?: (flagName: TFlagName) => TFlagVariation | undefined;
   unsubscribe: () => void;
   subscribe: () => void;
+  updateFlags: TFlagsUpdateFunction;
+  getUser?: () => TUser | undefined;
 }
 export interface TLaunchDarklyAdapterInterface
   extends TAdapterInterface<TLaunchDarklyAdapterArgs> {
@@ -245,18 +260,6 @@ export type TConfigureAdapterProps<TAdapterInstance extends TAdapter> = {
     : never;
   adapterArgs: ConfigureAdapterArgs<TAdapterInstance>;
 };
-export type TOnFlagsStateChangeCallback = (flags: TFlags) => void;
-export type TOnStatusStateChangeCallback = (
-  statusChange: TAdapterStatusChange
-) => void;
-export type TUpdateFlagsOptions = {
-  lockFlags?: boolean;
-  unsubscribeFlags?: boolean;
-};
-export type TFlagsUpdateFunction = (
-  flags: TFlags,
-  options?: TUpdateFlagsOptions
-) => void;
 export type TAdapterReconfigurationOptions = {
   shouldOverwrite?: boolean;
 };

@@ -218,9 +218,11 @@ const cloneTreatmentAttributes = <
 
 class SplitioAdapter implements TSplitioAdapterInterface {
   id: typeof interfaceIdentifiers.splitio;
+  updateFlags: typeof updateFlags;
 
   constructor() {
     this.id = interfaceIdentifiers.splitio;
+    this.updateFlags = updateFlags;
   }
 
   async configure(

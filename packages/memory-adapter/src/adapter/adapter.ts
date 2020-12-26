@@ -90,9 +90,13 @@ const __internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
 
 class MemoryAdapter implements TMemoryAdapterInterface {
   id: typeof interfaceIdentifiers.memory;
+  updateFlags: typeof updateFlags;
+  getUser?: typeof getUser;
 
   constructor() {
     this.id = interfaceIdentifiers.memory;
+    this.getUser = getUser;
+    this.updateFlags = updateFlags;
   }
 
   async configure(
@@ -205,11 +209,6 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
   getFlag(flagName: TFlagName): TFlagVariation {
     return adapterState?.flags[flagName];
-  }
-
-  // For convenience
-  updateFlags(flags: TFlags) {
-    updateFlags(flags);
   }
 
   unsubscribe() {

@@ -203,9 +203,13 @@ const __internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
 
 class GraphQLAdapter implements TGraphQLAdapterInterface {
   id: typeof interfaceIdentifiers.graphql;
+  updateFlags: typeof updateFlags;
+  getUser?: typeof getUser;
 
   constructor() {
     this.id = interfaceIdentifiers.graphql;
+    this.getUser = getUser;
+    this.updateFlags = updateFlags;
   }
 
   async configure(

@@ -229,9 +229,11 @@ const getInitialFlags = async ({
 
 class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   id: typeof interfaceIdentifiers.launchdarkly;
+  updateFlags: typeof updateFlags;
 
   constructor() {
     this.id = interfaceIdentifiers.launchdarkly;
+    this.updateFlags = updateFlags;
   }
 
   async configure(
