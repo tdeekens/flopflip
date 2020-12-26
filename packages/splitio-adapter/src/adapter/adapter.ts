@@ -20,6 +20,7 @@ import {
   AdapterConfigurationStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
+import { normalizeFlags, exposeGlobally } from '@flopflip/adapter-utilities';
 
 import merge from 'deepmerge';
 import warning from 'tiny-warning';
@@ -28,7 +29,6 @@ import camelCase from 'lodash/camelCase';
 import cloneDeep from 'lodash/cloneDeep';
 import omit from 'lodash/omit';
 import isEqual from 'lodash/isEqual';
-import getGlobalThis from 'globalthis';
 
 type SplitIOAdapterState = {
   user?: TUser;
@@ -75,21 +75,6 @@ const normalizeFlag = (
 
   return [camelCase(flagName), normalizeFlagValue];
 };
-
-const normalizeFlags = (flags: TFlags): Record<'string', TFlagVariation> =>
-  Object.entries(flags).reduce<TFlags>(
-    (normalizedFlags: TFlags, [flagName, flaValue]) => {
-      const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
-        flagName,
-        flaValue
-      );
-
-      normalizedFlags[normalizedFlagName] = normalizedFlagValue;
-
-      return normalizedFlags;
-    },
-    {}
-  );
 
 const updateFlags: TFlagsUpdateFunction = () => {
   console.log(
@@ -344,19 +329,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
 
 const adapter = new SplitioAdapter();
 
-const exposeGlobally = () => {
-  const globalThis = getGlobalThis();
-
-  if (!globalThis.__flopflip__) {
-    globalThis.__flopflip__ = {};
-  }
-
-  globalThis.__flopflip__.splitio = {
-    adapter,
-  };
-};
-
-exposeGlobally();
+exposeGlobally(adapter, updateFlags);
 
 export default adapter;
-export { createAnonymousUserKey, normalizeFlag, normalizeFlags, updateFlags };
+export { createAnonymousUserKey, normalizeFlag, updateFlags };

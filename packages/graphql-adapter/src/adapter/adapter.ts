@@ -5,7 +5,6 @@ import type {
   TAdapterEventHandlers,
   TFlagName,
   TFlagVariation,
-  TFlag,
   TFlags,
   TFlagsUpdateFunction,
   TFlagsChange,
@@ -20,12 +19,15 @@ import {
   interfaceIdentifiers,
   cacheIdentifiers,
 } from '@flopflip/types';
+import {
+  normalizeFlags,
+  normalizeFlag,
+  exposeGlobally,
+} from '@flopflip/adapter-utilities';
 
 import warning from 'tiny-warning';
 import mitt, { Emitter } from 'mitt';
-import camelCase from 'lodash/camelCase';
 import isEqual from 'lodash/isEqual';
-import getGlobalThis from 'globalthis';
 
 type GraphQLAdapterState = {
   flags: TFlags;
@@ -90,29 +92,6 @@ const getCache = async (cacheIdentifier: TCacheIdentifiers) => {
     },
   };
 };
-
-const normalizeFlag = (
-  flagName: TFlagName,
-  flagValue?: TFlagVariation
-): TFlag => [
-  camelCase(flagName),
-  // Multi variate flags contain a string or `null` - `false` seems more natural.
-  flagValue === null || flagValue === undefined ? false : flagValue,
-];
-const normalizeFlags = (rawFlags: TFlags): Record<'string', TFlagVariation> =>
-  Object.entries(rawFlags || {}).reduce<TFlags>(
-    (normalizedFlags: TFlags, [flagName, flagValue]) => {
-      const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
-        flagName,
-        flagValue
-      );
-      // Can't return expression as it is the assigned value
-      normalizedFlags[normalizedFlagName] = normalizedFlagValue;
-
-      return normalizedFlags;
-    },
-    {}
-  );
 
 const updateFlags: TFlagsUpdateFunction = (flags, options) => {
   const isAdapterConfigured =
@@ -381,20 +360,7 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
 
 const adapter = new GraphQLAdapter();
 
-const exposeGlobally = () => {
-  const globalThis = getGlobalThis();
-
-  if (!globalThis.__flopflip__) {
-    globalThis.__flopflip__ = {};
-  }
-
-  globalThis.__flopflip__.graphql = {
-    adapter,
-    updateFlags,
-  };
-};
-
-exposeGlobally();
+exposeGlobally(adapter, updateFlags);
 
 export default adapter;
-export { updateFlags, getUser, normalizeFlag };
+export { updateFlags, getUser };

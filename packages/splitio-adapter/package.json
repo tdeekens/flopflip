@@ -24,13 +24,15 @@
     "url": "https://github.com/tdeekens/flopflip/issues"
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
-  "devDependencies": {},
+  "devDependencies": {
+    "globalthis": "1.0.1"
+  },
   "dependencies": {
     "@babel/runtime": "7.12.5",
     "@flopflip/types": "3.1.0",
     "@splitsoftware/splitio": "10.15.2",
+    "@flopflip/adapter-utilities": "0.0.1",
     "deepmerge": "4.2.2",
-    "globalthis": "1.0.1",
     "lodash": "4.17.20",
     "tiny-warning": "1.0.3"
   },
