@@ -12,7 +12,6 @@ import type {
   TAdapterEventHandlers,
   TSplitioAdapterInterface,
   TSplitioAdapterArgs,
-  TFlagsUpdateFunction,
 } from '@flopflip/types';
 import {
   AdapterInitializationStatus,
@@ -41,22 +40,10 @@ type SplitIOAdapterState = {
   splitioSettings?: SplitIO.IBrowserSettings;
   treatmentAttributes?: SplitIO.Attributes;
 };
-
-const adapterState: TAdapterStatus & SplitIOAdapterState = {
-  subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
-  configurationStatus: AdapterConfigurationStatus.Unconfigured,
-  user: undefined,
-  client: undefined,
-  manager: undefined,
-  configuredCallbacks: {
-    onFlagsStateChange: () => undefined,
-    onStatusStateChange: () => undefined,
-  },
-  splitioSettings: undefined,
+type SplitIOClient = {
+  client: SplitIO.IClient;
+  manager: SplitIO.IManager;
 };
-
-const getIsAdapterUnsubscribed = () =>
-  adapterState.subscriptionStatus === AdapterSubscriptionStatus.Unsubscribed;
 
 const normalizeFlag = (
   flagName: TFlagName,
@@ -77,153 +64,171 @@ const normalizeFlag = (
   return [camelCase(flagName), normalizeFlagValue];
 };
 
-const updateFlags: TFlagsUpdateFunction = () => {
-  console.log(
-    '@flopflip/splitio-adapter: update flags it not yet implemented.'
-  );
-};
-
-const subscribeToFlagsChanges = ({
-  flagNames,
-  onFlagsStateChange,
-}: {
-  flagNames: TFlagName[];
-  onFlagsStateChange: TOnFlagsStateChangeCallback;
-}) => {
-  if (adapterState.client) {
-    adapterState.client.on(adapterState.client.Event.SDK_UPDATE, () => {
-      if (adapterState.client && adapterState.user?.key) {
-        const flags = adapterState.client.getTreatments(
-          adapterState.user.key,
-          flagNames,
-          {
-            ...adapterState.user,
-            ...adapterState.treatmentAttributes,
-          } as SplitIO.Attributes
-        );
-
-        if (!getIsAdapterUnsubscribed()) {
-          onFlagsStateChange(normalizeFlags(flags, normalizeFlag));
-        }
-      }
-    });
-  }
-};
-
 const createAnonymousUserKey = () => Math.random().toString(36).substring(2);
 
-const ensureUser = (user: TUser): TUser =>
-  merge(user, { key: user?.key ?? createAnonymousUserKey() });
-
-type SplitIOClient = {
-  client: SplitIO.IClient;
-  manager: SplitIO.IManager;
-};
-const initializeClient = (): SplitIOClient => {
-  if (!adapterState.splitioSettings) {
-    throw Error(
-      'cannot initialize SplitIo without configured settings, call configure() first'
-    );
-  }
-
-  const sdk = SplitFactory(adapterState.splitioSettings); // eslint-disable-line new-cap
-
-  return {
-    client: sdk.client(),
-    manager: sdk.manager(),
-  };
-};
-
-const subscribe = async ({
-  onFlagsStateChange,
-  onStatusStateChange,
-}: {
-  onFlagsStateChange: TOnFlagsStateChangeCallback;
-  onStatusStateChange: TOnStatusStateChangeCallback;
-}) =>
-  new Promise<void>((resolve, reject) => {
-    if (adapterState.client) {
-      adapterState.configurationStatus = AdapterConfigurationStatus.Configuring;
-
-      onStatusStateChange({
-        configurationStatus: adapterState.configurationStatus,
-      });
-
-      adapterState.client.on(adapterState.client.Event.SDK_READY, () => {
-        let flagNames: TFlagName[];
-        let flags: TFlags;
-
-        if (
-          adapterState.client &&
-          adapterState.manager &&
-          adapterState.user?.key
-        ) {
-          flagNames = adapterState.manager.names();
-          flags = adapterState.client.getTreatments(
-            adapterState.user.key,
-            flagNames,
-            {
-              ...adapterState.user,
-              ...adapterState.treatmentAttributes,
-            } as SplitIO.Attributes
-          );
-
-          if (!getIsAdapterUnsubscribed()) {
-            onFlagsStateChange(normalizeFlags(flags, normalizeFlag));
-          }
-
-          // First update internal state
-          adapterState.configurationStatus =
-            AdapterConfigurationStatus.Configured;
-          // ...to then signal that the adapter is configured
-
-          if (!getIsAdapterUnsubscribed()) {
-            onStatusStateChange({
-              configurationStatus: adapterState.configurationStatus,
-            });
-          }
-
-          // ...to finally subscribe to later changes.
-          subscribeToFlagsChanges({
-            flagNames,
-            onFlagsStateChange,
-          });
-
-          resolve();
-        }
-      });
-    } else reject();
-  });
-
-const configureSplitio = async () => {
-  const { client, manager } = initializeClient();
-
-  adapterState.client = client;
-  adapterState.manager = manager;
-
-  return subscribe({
-    onFlagsStateChange: adapterState.configuredCallbacks.onFlagsStateChange,
-    onStatusStateChange: adapterState.configuredCallbacks.onStatusStateChange,
-  }).then(() => {
-    return {
-      initializationStatus: AdapterInitializationStatus.Succeeded,
-    };
-  });
-};
-
-const cloneTreatmentAttributes = <
-  T = TSplitioAdapterArgs['treatmentAttributes']
->(
-  treatmentAttributes: T
-): T => cloneDeep<T>(treatmentAttributes);
-
 class SplitioAdapter implements TSplitioAdapterInterface {
+  #adapterState: TAdapterStatus & SplitIOAdapterState;
   id: typeof interfaceIdentifiers.splitio;
-  updateFlags: typeof updateFlags;
 
   constructor() {
+    this.#adapterState = {
+      subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
+      configurationStatus: AdapterConfigurationStatus.Unconfigured,
+      user: undefined,
+      client: undefined,
+      manager: undefined,
+      configuredCallbacks: {
+        onFlagsStateChange: () => undefined,
+        onStatusStateChange: () => undefined,
+      },
+      splitioSettings: undefined,
+    };
     this.id = interfaceIdentifiers.splitio;
-    this.updateFlags = updateFlags;
+  }
+
+  #getIsAdapterUnsubscribed = () =>
+    this.#adapterState.subscriptionStatus ===
+    AdapterSubscriptionStatus.Unsubscribed;
+
+  #subscribeToFlagsChanges = ({
+    flagNames,
+    onFlagsStateChange,
+  }: {
+    flagNames: TFlagName[];
+    onFlagsStateChange: TOnFlagsStateChangeCallback;
+  }) => {
+    if (this.#adapterState.client) {
+      this.#adapterState.client.on(
+        this.#adapterState.client.Event.SDK_UPDATE,
+        () => {
+          if (this.#adapterState.client && this.#adapterState.user?.key) {
+            const flags = this.#adapterState.client.getTreatments(
+              this.#adapterState.user.key,
+              flagNames,
+              {
+                ...this.#adapterState.user,
+                ...this.#adapterState.treatmentAttributes,
+              } as SplitIO.Attributes
+            );
+
+            if (!this.#getIsAdapterUnsubscribed()) {
+              onFlagsStateChange(normalizeFlags(flags));
+            }
+          }
+        }
+      );
+    }
+  };
+
+  #ensureUser = (user: TUser): TUser =>
+    merge(user, { key: user?.key ?? createAnonymousUserKey() });
+
+  #initializeClient = (): SplitIOClient => {
+    if (!this.#adapterState.splitioSettings) {
+      throw Error(
+        'cannot initialize SplitIo without configured settings, call configure() first'
+      );
+    }
+
+    const sdk = SplitFactory(this.#adapterState.splitioSettings); // eslint-disable-line new-cap
+
+    return {
+      client: sdk.client(),
+      manager: sdk.manager(),
+    };
+  };
+
+  #subscribe = async ({
+    onFlagsStateChange,
+    onStatusStateChange,
+  }: {
+    onFlagsStateChange: TOnFlagsStateChangeCallback;
+    onStatusStateChange: TOnStatusStateChangeCallback;
+  }) =>
+    new Promise<void>((resolve, reject) => {
+      if (this.#adapterState.client) {
+        this.#adapterState.configurationStatus =
+          AdapterConfigurationStatus.Configuring;
+
+        onStatusStateChange({
+          configurationStatus: this.#adapterState.configurationStatus,
+        });
+
+        this.#adapterState.client.on(
+          this.#adapterState.client.Event.SDK_READY,
+          () => {
+            let flagNames: TFlagName[];
+            let flags: TFlags;
+
+            if (
+              this.#adapterState.client &&
+              this.#adapterState.manager &&
+              this.#adapterState.user?.key
+            ) {
+              flagNames = this.#adapterState.manager.names();
+              flags = this.#adapterState.client.getTreatments(
+                this.#adapterState.user.key,
+                flagNames,
+                {
+                  ...this.#adapterState.user,
+                  ...this.#adapterState.treatmentAttributes,
+                } as SplitIO.Attributes
+              );
+
+              if (!this.#getIsAdapterUnsubscribed()) {
+                onFlagsStateChange(normalizeFlags(flags));
+              }
+
+              // First update internal state
+              this.#adapterState.configurationStatus =
+                AdapterConfigurationStatus.Configured;
+              // ...to then signal that the adapter is configured
+
+              if (!this.#getIsAdapterUnsubscribed()) {
+                onStatusStateChange({
+                  configurationStatus: this.#adapterState.configurationStatus,
+                });
+              }
+
+              // ...to finally subscribe to later changes.
+              this.#subscribeToFlagsChanges({
+                flagNames,
+                onFlagsStateChange,
+              });
+
+              resolve();
+            }
+          }
+        );
+      } else reject();
+    });
+
+  #configureSplitio = async () => {
+    const { client, manager } = this.#initializeClient();
+
+    this.#adapterState.client = client;
+    this.#adapterState.manager = manager;
+
+    return this.#subscribe({
+      onFlagsStateChange: this.#adapterState.configuredCallbacks
+        .onFlagsStateChange,
+      onStatusStateChange: this.#adapterState.configuredCallbacks
+        .onStatusStateChange,
+    }).then(() => {
+      return {
+        initializationStatus: AdapterInitializationStatus.Succeeded,
+      };
+    });
+  };
+
+  #cloneTreatmentAttributes = <T = TSplitioAdapterArgs['treatmentAttributes']>(
+    treatmentAttributes: T
+  ): T => cloneDeep<T>(treatmentAttributes);
+
+  updateFlags() {
+    console.log(
+      '@flopflip/splitio-adapter: update flags it not yet implemented.'
+    );
   }
 
   async configure(
@@ -237,27 +242,28 @@ class SplitioAdapter implements TSplitioAdapterInterface {
       treatmentAttributes,
     } = adapterArgs;
 
-    adapterState.configurationStatus = AdapterConfigurationStatus.Configuring;
+    this.#adapterState.configurationStatus =
+      AdapterConfigurationStatus.Configuring;
 
-    adapterState.user = ensureUser(user);
-    adapterState.treatmentAttributes = cloneTreatmentAttributes(
+    this.#adapterState.user = this.#ensureUser(user);
+    this.#adapterState.treatmentAttributes = this.#cloneTreatmentAttributes(
       treatmentAttributes
     );
-    adapterState.configuredCallbacks.onFlagsStateChange =
+    this.#adapterState.configuredCallbacks.onFlagsStateChange =
       adapterEventHandlers.onFlagsStateChange;
-    adapterState.configuredCallbacks.onStatusStateChange =
+    this.#adapterState.configuredCallbacks.onStatusStateChange =
       adapterEventHandlers.onStatusStateChange;
 
-    adapterState.splitioSettings = {
+    this.#adapterState.splitioSettings = {
       ...omit(options, ['core']),
       core: {
         authorizationKey,
-        key: adapterState.user.key ?? createAnonymousUserKey(),
+        key: this.#adapterState.user.key ?? createAnonymousUserKey(),
         ...options.core,
       },
     };
 
-    return configureSplitio();
+    return this.#configureSplitio();
   }
 
   async reconfigure(
@@ -265,9 +271,9 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
     if (
-      adapterState.configurationStatus !==
+      this.#adapterState.configurationStatus !==
         AdapterConfigurationStatus.Configured ||
-      !adapterState.user
+      !this.#adapterState.user
     ) {
       return Promise.reject(
         new Error(
@@ -276,30 +282,30 @@ class SplitioAdapter implements TSplitioAdapterInterface {
       );
     }
 
-    const hasUserChanged = !isEqual(adapterState.user, adapterArgs.user);
+    const hasUserChanged = !isEqual(this.#adapterState.user, adapterArgs.user);
     const hasTreatmentChanged = !isEqual(
-      adapterState.treatmentAttributes,
+      this.#adapterState.treatmentAttributes,
       adapterArgs.treatmentAttributes
     );
 
     if (hasUserChanged) {
-      adapterState.user = ensureUser(adapterArgs.user);
+      this.#adapterState.user = this.#ensureUser(adapterArgs.user);
     }
 
     if (hasTreatmentChanged) {
-      adapterState.treatmentAttributes = cloneTreatmentAttributes(
+      this.#adapterState.treatmentAttributes = this.#cloneTreatmentAttributes(
         adapterArgs.treatmentAttributes
       );
     }
 
     if (
       (hasUserChanged || hasTreatmentChanged) &&
-      adapterState.manager &&
-      adapterState.client
+      this.#adapterState.manager &&
+      this.#adapterState.client
     ) {
-      await adapterState.client.destroy();
+      await this.#adapterState.client.destroy();
 
-      return configureSplitio();
+      return this.#configureSplitio();
     }
 
     return Promise.resolve({
@@ -308,16 +314,18 @@ class SplitioAdapter implements TSplitioAdapterInterface {
   }
 
   getIsConfigurationStatus(configurationStatus: AdapterConfigurationStatus) {
-    return adapterState.configurationStatus === configurationStatus;
+    return this.#adapterState.configurationStatus === configurationStatus;
   }
 
-  unsubscribe() {
-    adapterState.subscriptionStatus = AdapterSubscriptionStatus.Unsubscribed;
-  }
+  unsubscribe = () => {
+    this.#adapterState.subscriptionStatus =
+      AdapterSubscriptionStatus.Unsubscribed;
+  };
 
-  subscribe() {
-    adapterState.subscriptionStatus = AdapterSubscriptionStatus.Subscribed;
-  }
+  subscribe = () => {
+    this.#adapterState.subscriptionStatus =
+      AdapterSubscriptionStatus.Subscribed;
+  };
 
   // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
   getIsReady() {
@@ -332,7 +340,9 @@ class SplitioAdapter implements TSplitioAdapterInterface {
 
 const adapter = new SplitioAdapter();
 
-exposeGlobally(adapter, updateFlags);
+exposeGlobally(adapter, adapter.updateFlags);
+
+const updateFlags = adapter.updateFlags;
 
 export default adapter;
 export { createAnonymousUserKey, normalizeFlag, updateFlags };

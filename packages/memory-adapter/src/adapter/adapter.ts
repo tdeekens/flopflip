@@ -5,9 +5,9 @@ import type {
   TFlagName,
   TFlagVariation,
   TFlags,
+  TUpdateFlagsOptions,
   TAdapterEventHandlers,
   TMemoryAdapterArgs,
-  TFlagsUpdateFunction,
   TFlagsChange,
   TMemoryAdapterInterface,
 } from '@flopflip/types';
@@ -40,115 +40,123 @@ const intialAdapterState: TAdapterStatus & MemoryAdapterState = {
   emitter: mitt(),
 };
 
-let adapterState: TAdapterStatus & MemoryAdapterState = {
-  ...intialAdapterState,
-};
-const updateUser = (user: TUser) => {
-  adapterState.user = user;
-};
-
-const getIsAdapterUnsubscribed = () =>
-  adapterState.subscriptionStatus === AdapterSubscriptionStatus.Unsubscribed;
-const getIsFlagLocked = (flagName: TFlagName) =>
-  adapterState.lockedFlags.has(flagName);
-
-const getUser = () => adapterState.user;
-
-const updateFlags: TFlagsUpdateFunction = (flags, options) => {
-  const isAdapterConfigured =
-    adapterState.configurationStatus === AdapterConfigurationStatus.Configured;
-
-  warning(
-    isAdapterConfigured,
-    '@flopflip/memory-adapter: adapter is not configured. Flags can not be updated before.'
-  );
-
-  if (!isAdapterConfigured) return;
-
-  Object.entries(flags).forEach(([flagName, flagValue]) => {
-    const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
-      flagName,
-      flagValue
-    );
-
-    if (getIsFlagLocked(normalizedFlagName)) return;
-
-    if (options?.lockFlags) {
-      adapterState.lockedFlags.add(normalizedFlagName);
-    }
-
-    adapterState.flags = {
-      ...adapterState.flags,
-      [normalizedFlagName]: normalizedFlagValue,
-    };
-  });
-
-  adapterState.emitter.emit('flagsStateChange', adapterState.flags);
-};
-
-const __internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
-
 class MemoryAdapter implements TMemoryAdapterInterface {
+  #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
+  #adapterState: TAdapterStatus & MemoryAdapterState;
+
   id: typeof interfaceIdentifiers.memory;
-  updateFlags: typeof updateFlags;
-  getUser?: typeof getUser;
 
   constructor() {
+    this.#adapterState = {
+      ...intialAdapterState,
+    };
     this.id = interfaceIdentifiers.memory;
-    this.getUser = getUser;
-    this.updateFlags = updateFlags;
   }
+
+  #getIsAdapterUnsubscribed = () =>
+    this.#adapterState.subscriptionStatus ===
+    AdapterSubscriptionStatus.Unsubscribed;
+
+  #getIsFlagLocked = (flagName: TFlagName) =>
+    this.#adapterState.lockedFlags.has(flagName);
+
+  #updateUser = (user: TUser) => {
+    this.#adapterState.user = user;
+  };
+
+  getUser = () => this.#adapterState.user;
+
+  updateFlags = (flags: TFlags, options?: TUpdateFlagsOptions) => {
+    const isAdapterConfigured =
+      this.#adapterState.configurationStatus ===
+      AdapterConfigurationStatus.Configured;
+
+    warning(
+      isAdapterConfigured,
+      '@flopflip/memory-adapter: adapter is not configured. Flags can not be updated before.'
+    );
+
+    if (!isAdapterConfigured) return;
+
+    Object.entries(flags).forEach(([flagName, flagValue]) => {
+      const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
+        flagName,
+        flagValue
+      );
+
+      if (this.#getIsFlagLocked(normalizedFlagName)) return;
+
+      if (options?.lockFlags) {
+        this.#adapterState.lockedFlags.add(normalizedFlagName);
+      }
+
+      this.#adapterState.flags = {
+        ...this.#adapterState.flags,
+        [normalizedFlagName]: normalizedFlagValue,
+      };
+    });
+
+    this.#adapterState.emitter.emit(
+      'flagsStateChange',
+      this.#adapterState.flags
+    );
+  };
 
   async configure(
     adapterArgs: TMemoryAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) {
     const handleFlagsChange = (nextFlags: TFlags) => {
-      if (getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) return;
 
       adapterEventHandlers.onFlagsStateChange(nextFlags);
     };
 
     const handleStatusChange = (nextStatus: TAdapterStatusChange) => {
-      if (getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) return;
 
       adapterEventHandlers.onStatusStateChange(nextStatus);
     };
 
-    adapterState.emitter.on<TFlagsChange>(
+    this.#adapterState.emitter.on<TFlagsChange>(
       'flagsStateChange',
       // @ts-expect-error
       handleFlagsChange
     );
-    adapterState.emitter.on<TAdapterStatusChange>(
+    this.#adapterState.emitter.on<TAdapterStatusChange>(
       'statusStateChange',
       // @ts-expect-error
       handleStatusChange
     );
 
-    adapterState.configurationStatus = AdapterConfigurationStatus.Configuring;
+    this.#adapterState.configurationStatus =
+      AdapterConfigurationStatus.Configuring;
 
-    adapterState.emitter.emit('statusStateChange', {
-      configurationStatus: adapterState.configurationStatus,
+    this.#adapterState.emitter.emit('statusStateChange', {
+      configurationStatus: this.#adapterState.configurationStatus,
     });
 
     const { user } = adapterArgs;
 
-    adapterState.user = user;
+    this.#adapterState.user = user;
 
     return Promise.resolve().then(() => {
-      adapterState.flags = {};
+      this.#adapterState.flags = {};
 
-      updateUser(user);
+      this.#updateUser(user);
 
-      adapterState.configurationStatus = AdapterConfigurationStatus.Configured;
+      this.#adapterState.configurationStatus =
+        AdapterConfigurationStatus.Configured;
 
-      adapterState.emitter.emit('flagsStateChange', adapterState.flags);
-      adapterState.emitter.emit('statusStateChange', {
-        configurationStatus: adapterState.configurationStatus,
+      this.#adapterState.emitter.emit(
+        'flagsStateChange',
+        this.#adapterState.flags
+      );
+      this.#adapterState.emitter.emit('statusStateChange', {
+        configurationStatus: this.#adapterState.configurationStatus,
       });
 
-      adapterState.emitter.emit(__internalConfiguredStatusChange__);
+      this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
       return {
         initializationStatus: AdapterInitializationStatus.Succeeded,
@@ -160,17 +168,22 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     adapterArgs: TMemoryAdapterArgs,
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
-    adapterState.configurationStatus = AdapterConfigurationStatus.Configuring;
+    this.#adapterState.configurationStatus =
+      AdapterConfigurationStatus.Configuring;
 
-    updateUser(adapterArgs.user);
+    this.#updateUser(adapterArgs.user);
 
-    adapterState.flags = {};
+    this.#adapterState.flags = {};
 
-    adapterState.configurationStatus = AdapterConfigurationStatus.Configured;
+    this.#adapterState.configurationStatus =
+      AdapterConfigurationStatus.Configured;
 
-    adapterState.emitter.emit('flagsStateChange', adapterState.flags);
-    adapterState.emitter.emit('statusStateChange', {
-      configurationStatus: adapterState.configurationStatus,
+    this.#adapterState.emitter.emit(
+      'flagsStateChange',
+      this.#adapterState.flags
+    );
+    this.#adapterState.emitter.emit('statusStateChange', {
+      configurationStatus: this.#adapterState.configurationStatus,
     });
 
     return Promise.resolve({
@@ -179,19 +192,19 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   }
 
   getIsConfigurationStatus(configurationStatus: AdapterConfigurationStatus) {
-    return adapterState.configurationStatus === configurationStatus;
+    return this.#adapterState.configurationStatus === configurationStatus;
   }
 
   setConfigurationStatus(nextConfigurationStatus: AdapterConfigurationStatus) {
-    adapterState.configurationStatus = nextConfigurationStatus;
+    this.#adapterState.configurationStatus = nextConfigurationStatus;
 
-    adapterState.emitter.emit('statusStateChange', {
-      configurationStatus: adapterState.configurationStatus,
+    this.#adapterState.emitter.emit('statusStateChange', {
+      configurationStatus: this.#adapterState.configurationStatus,
     });
   }
 
   reset = () => {
-    adapterState = {
+    this.#adapterState = {
       ...intialAdapterState,
     };
   };
@@ -199,25 +212,31 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   async waitUntilConfigured() {
     return new Promise<void>((resolve) => {
       if (
-        adapterState.configurationStatus ===
+        this.#adapterState.configurationStatus ===
         AdapterConfigurationStatus.Configured
       )
         resolve();
-      else adapterState.emitter.on(__internalConfiguredStatusChange__, resolve);
+      else
+        this.#adapterState.emitter.on(
+          this.#__internalConfiguredStatusChange__,
+          resolve
+        );
     });
   }
 
   getFlag(flagName: TFlagName): TFlagVariation {
-    return adapterState?.flags[flagName];
+    return this.#adapterState?.flags[flagName];
   }
 
-  unsubscribe() {
-    adapterState.subscriptionStatus = AdapterSubscriptionStatus.Unsubscribed;
-  }
+  unsubscribe = () => {
+    this.#adapterState.subscriptionStatus =
+      AdapterSubscriptionStatus.Unsubscribed;
+  };
 
-  subscribe() {
-    adapterState.subscriptionStatus = AdapterSubscriptionStatus.Subscribed;
-  }
+  subscribe = () => {
+    this.#adapterState.subscriptionStatus =
+      AdapterSubscriptionStatus.Subscribed;
+  };
 
   // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
   getIsReady() {
@@ -231,6 +250,9 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 }
 
 const adapter = new MemoryAdapter();
+
+const updateFlags = adapter.updateFlags;
+const getUser = adapter.getUser;
 
 exposeGlobally(adapter, updateFlags);
 

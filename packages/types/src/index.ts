@@ -206,7 +206,7 @@ export interface TMemoryAdapterInterface
   ) => boolean;
   waitUntilConfigured: () => Promise<unknown>;
   reset: () => void;
-  updateFlags: (flags: TFlags) => void;
+  updateFlags: TFlagsUpdateFunction;
   unsubscribe: () => void;
   subscribe: () => void;
 }
