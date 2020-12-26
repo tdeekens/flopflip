@@ -352,16 +352,6 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
   subscribe = () => {
     adapterState.subscriptionStatus = AdapterSubscriptionStatus.Subscribed;
   };
-
-  // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
-  getIsReady() {
-    warning(
-      false,
-      '@flopflip/graphql-adapter: `getIsReady` has been deprecated. Please use `getIsConfigurationStatus` instead.'
-    );
-
-    return this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured);
-  }
 }
 
 const adapter = new GraphQLAdapter();

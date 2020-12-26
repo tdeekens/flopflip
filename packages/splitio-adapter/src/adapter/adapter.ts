@@ -326,16 +326,6 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     this.#adapterState.subscriptionStatus =
       AdapterSubscriptionStatus.Subscribed;
   };
-
-  // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
-  getIsReady() {
-    warning(
-      false,
-      '@flopflip/splitio-adapter: `getIsReady` has been deprecated. Please use `getIsConfigurationStatus` instead.'
-    );
-
-    return this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured);
-  }
 }
 
 const adapter = new SplitioAdapter();
