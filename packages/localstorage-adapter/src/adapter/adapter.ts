@@ -4,10 +4,8 @@ import type {
   TAdapterStatusChange,
   TAdapterEventHandlers,
   TLocalStorageAdapterArgs,
-  TFlagName,
-  TFlagVariation,
-  TFlag,
   TFlags,
+  TFlagName,
   TLocalStorageAdapterSubscriptionOptions,
   TFlagsUpdateFunction,
   TFlagsChange,
@@ -19,12 +17,15 @@ import {
   AdapterConfigurationStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
+import {
+  normalizeFlags,
+  normalizeFlag,
+  exposeGlobally,
+} from '@flopflip/adapter-utilities';
 
 import warning from 'tiny-warning';
 import mitt, { Emitter } from 'mitt';
-import camelCase from 'lodash/camelCase';
 import isEqual from 'lodash/isEqual';
-import getGlobalThis from 'globalthis';
 import createCache from '@flopflip/localstorage-cache';
 
 type LocalStorageAdapterState = {
@@ -56,29 +57,6 @@ const getIsFlagLocked = (flagName: TFlagName) =>
 
 const STORAGE_SLICE = '@flopflip';
 const cache = createCache({ prefix: STORAGE_SLICE });
-
-const normalizeFlag = (
-  flagName: TFlagName,
-  flagValue?: TFlagVariation
-): TFlag => [
-  camelCase(flagName),
-  // Multi variate flags contain a string or `null` - `false` seems more natural.
-  flagValue === null || flagValue === undefined ? false : flagValue,
-];
-const normalizeFlags = (rawFlags: TFlags): Record<'string', TFlagVariation> =>
-  Object.entries(rawFlags || {}).reduce<TFlags>(
-    (normalizedFlags: TFlags, [flagName, flagValue]) => {
-      const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
-        flagName,
-        flagValue
-      );
-      // Can't return expression as it is the assigned value
-      normalizedFlags[normalizedFlagName] = normalizedFlagValue;
-
-      return normalizedFlags;
-    },
-    {}
-  );
 
 const updateFlags: TFlagsUpdateFunction = (flags, options) => {
   const isAdapterConfigured =
@@ -271,20 +249,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
 const adapter = new LocalStorageAdapter();
 
-const exposeGlobally = () => {
-  const globalThis = getGlobalThis();
-
-  if (!globalThis.__flopflip__) {
-    globalThis.__flopflip__ = {};
-  }
-
-  globalThis.__flopflip__.localstorage = {
-    adapter,
-    updateFlags,
-  };
-};
-
-exposeGlobally();
+exposeGlobally(adapter, updateFlags);
 
 export default adapter;
-export { updateFlags, STORAGE_SLICE, normalizeFlag };
+export { updateFlags, STORAGE_SLICE };

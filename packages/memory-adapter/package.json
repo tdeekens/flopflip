@@ -31,12 +31,13 @@
     "client"
   ],
   "dependencies": {
-    "@babel/runtime": "7.12.5",
     "@flopflip/types": "3.1.0",
-    "globalthis": "1.0.1",
-    "lodash": "4.17.20",
+    "@flopflip/adapter-utilities": "0.0.1",
+    "@babel/runtime": "7.12.5",
     "mitt": "2.1.0",
     "tiny-warning": "1.0.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "globalthis": "1.0.1"
+  }
 }

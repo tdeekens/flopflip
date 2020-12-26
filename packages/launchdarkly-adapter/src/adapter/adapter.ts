@@ -3,7 +3,6 @@ import type {
   TFlagVariation,
   TAdapterStatus,
   TUser,
-  TFlag,
   TFlags,
   TLaunchDarklyAdapterArgs,
   TUpdateFlagsOptions,
@@ -19,15 +18,17 @@ import {
   AdapterSubscriptionStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
+import {
+  normalizeFlags,
+  normalizeFlag,
+  denormalizeFlagName,
+  exposeGlobally,
+} from '@flopflip/adapter-utilities';
 
 import merge from 'deepmerge';
 import warning from 'tiny-warning';
 import isEqual from 'lodash/isEqual';
-import camelCase from 'lodash/camelCase';
-import kebabCase from 'lodash/kebabCase';
 import debounce from 'debounce-fn';
-import getGlobalThis from 'globalthis';
-
 import mitt, { Emitter } from 'mitt';
 import {
   initialize as initializeLaunchDarklyClient,
@@ -116,16 +117,6 @@ const withoutUnsubscribedOrLockedFlags = (flags: TFlags) =>
     )
   );
 
-const normalizeFlag = (
-  flagName: TFlagName,
-  flagValue?: TFlagVariation
-): TFlag => [
-  camelCase(flagName),
-  // Multi variate flags contain a string or `null` - `false` seems more natural.
-  flagValue === null || flagValue === undefined ? false : flagValue,
-];
-const denormalizeFlagName = (flagName: TFlagName) => kebabCase(flagName);
-
 const getIsAnonymousUser = (user: TUser) => !user?.key;
 
 const ensureUser = (user: TUser) => {
@@ -150,21 +141,6 @@ const changeUserContext = async (nextUser: TUser) =>
     : Promise.reject(
         new Error('Can not change user context: client not yet initialized.')
       );
-
-const normalizeFlags = (rawFlags: TFlags): Record<string, TFlagVariation> =>
-  Object.entries(rawFlags).reduce<TFlags>(
-    (normalizedFlags: TFlags, [flagName, flagValue]) => {
-      const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
-        flagName,
-        flagValue
-      );
-      // Can't return expression as it is the assigned value
-      normalizedFlags[normalizedFlagName] = normalizedFlagValue;
-
-      return normalizedFlags;
-    },
-    {}
-  );
 
 const getInitialFlags = async ({
   flags,
@@ -452,20 +428,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
 
 const adapter = new LaunchDarklyAdapter();
 
-const exposeGlobally = () => {
-  const globalThis = getGlobalThis();
-
-  if (!globalThis.__flopflip__) {
-    globalThis.__flopflip__ = {};
-  }
-
-  globalThis.__flopflip__.launchdarkly = {
-    adapter,
-    updateFlags,
-  };
-};
-
-exposeGlobally();
+exposeGlobally(adapter, updateFlags);
 
 export default adapter;
-export { updateFlags, normalizeFlag, normalizeFlags };
+export { updateFlags };

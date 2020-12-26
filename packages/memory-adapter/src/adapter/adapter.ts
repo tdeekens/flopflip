@@ -4,7 +4,6 @@ import type {
   TAdapterStatusChange,
   TFlagName,
   TFlagVariation,
-  TFlag,
   TFlags,
   TAdapterEventHandlers,
   TMemoryAdapterArgs,
@@ -18,11 +17,10 @@ import {
   AdapterConfigurationStatus,
   interfaceIdentifiers,
 } from '@flopflip/types';
+import { normalizeFlag, exposeGlobally } from '@flopflip/adapter-utilities';
 
 import warning from 'tiny-warning';
 import mitt, { Emitter } from 'mitt';
-import camelCase from 'lodash/camelCase';
-import getGlobalThis from 'globalthis';
 
 type MemoryAdapterState = {
   flags: TFlags;
@@ -53,15 +51,6 @@ const getIsAdapterUnsubscribed = () =>
   adapterState.subscriptionStatus === AdapterSubscriptionStatus.Unsubscribed;
 const getIsFlagLocked = (flagName: TFlagName) =>
   adapterState.lockedFlags.has(flagName);
-
-const normalizeFlag = (
-  flagName: TFlagName,
-  flagValue?: TFlagVariation
-): TFlag => [
-  camelCase(flagName),
-  // Multi variate flags contain a string or `null` - `false` seems more natural.
-  flagValue === null || flagValue === undefined ? false : flagValue,
-];
 
 const getUser = () => adapterState.user;
 
@@ -244,20 +233,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
 const adapter = new MemoryAdapter();
 
-const exposeGlobally = () => {
-  const globalThis = getGlobalThis();
-
-  if (!globalThis.__flopflip__) {
-    globalThis.__flopflip__ = {};
-  }
-
-  globalThis.__flopflip__.memory = {
-    adapter,
-    updateFlags,
-  };
-};
-
-exposeGlobally();
+exposeGlobally(adapter, updateFlags);
 
 export default adapter;
-export { updateFlags, getUser, normalizeFlag };
+export { updateFlags, getUser };
