@@ -47,70 +47,67 @@ const updateUser = (user: TUser) => {
   adapterState.user = user;
 };
 
-const getIsAdapterUnsubscribed = () =>
-  adapterState.subscriptionStatus === AdapterSubscriptionStatus.Unsubscribed;
-const getIsFlagLocked = (flagName: TFlagName) =>
-  adapterState.lockedFlags.has(flagName);
-
-const getUser = () => adapterState.user;
-
-const updateFlags: TFlagsUpdateFunction = (flags, options) => {
-  const isAdapterConfigured =
-    adapterState.configurationStatus === AdapterConfigurationStatus.Configured;
-
-  warning(
-    isAdapterConfigured,
-    '@flopflip/memory-adapter: adapter is not configured. Flags can not be updated before.'
-  );
-
-  if (!isAdapterConfigured) return;
-
-  Object.entries(flags).forEach(([flagName, flagValue]) => {
-    const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
-      flagName,
-      flagValue
-    );
-
-    if (getIsFlagLocked(normalizedFlagName)) return;
-
-    if (options?.lockFlags) {
-      adapterState.lockedFlags.add(normalizedFlagName);
-    }
-
-    adapterState.flags = {
-      ...adapterState.flags,
-      [normalizedFlagName]: normalizedFlagValue,
-    };
-  });
-
-  adapterState.emitter.emit('flagsStateChange', adapterState.flags);
-};
-
-const __internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
-
 class MemoryAdapter implements TMemoryAdapterInterface {
+  #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
   id: typeof interfaceIdentifiers.memory;
-  updateFlags: typeof updateFlags;
-  getUser?: typeof getUser;
 
   constructor() {
     this.id = interfaceIdentifiers.memory;
-    this.getUser = getUser;
-    this.updateFlags = updateFlags;
   }
+
+  #getIsAdapterUnsubscribed = () =>
+    adapterState.subscriptionStatus === AdapterSubscriptionStatus.Unsubscribed;
+
+  #getIsFlagLocked = (flagName: TFlagName) =>
+    adapterState.lockedFlags.has(flagName);
+
+  getUser = () => adapterState.user;
+
+  updateFlags: TFlagsUpdateFunction = (flags, options) => {
+    const isAdapterConfigured =
+      adapterState.configurationStatus ===
+      AdapterConfigurationStatus.Configured;
+
+    warning(
+      isAdapterConfigured,
+      '@flopflip/memory-adapter: adapter is not configured. Flags can not be updated before.'
+    );
+
+    if (!isAdapterConfigured) return;
+
+    Object.entries(flags).forEach(([flagName, flagValue]) => {
+      const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
+        flagName,
+        flagValue
+      );
+
+      if (this.#getIsFlagLocked(normalizedFlagName)) return;
+
+      if (options?.lockFlags) {
+        adapterState.lockedFlags.add(normalizedFlagName);
+      }
+
+      adapterState.flags = {
+        ...adapterState.flags,
+        [normalizedFlagName]: normalizedFlagValue,
+      };
+    });
+
+    adapterState.emitter.emit('flagsStateChange', adapterState.flags);
+  };
 
   async configure(
     adapterArgs: TMemoryAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) {
     const handleFlagsChange = (nextFlags: TFlags) => {
-      if (getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) return;
 
       adapterEventHandlers.onFlagsStateChange(nextFlags);
     };
 
     const handleStatusChange = (nextStatus: TAdapterStatusChange) => {
-      if (getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) return;
 
       adapterEventHandlers.onStatusStateChange(nextStatus);
     };
@@ -148,7 +145,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
         configurationStatus: adapterState.configurationStatus,
       });
 
-      adapterState.emitter.emit(__internalConfiguredStatusChange__);
+      adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
       return {
         initializationStatus: AdapterInitializationStatus.Succeeded,
@@ -203,7 +200,11 @@ class MemoryAdapter implements TMemoryAdapterInterface {
         AdapterConfigurationStatus.Configured
       )
         resolve();
-      else adapterState.emitter.on(__internalConfiguredStatusChange__, resolve);
+      else
+        adapterState.emitter.on(
+          this.#__internalConfiguredStatusChange__,
+          resolve
+        );
     });
   }
 
@@ -231,6 +232,9 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 }
 
 const adapter = new MemoryAdapter();
+
+const updateFlags = adapter.updateFlags;
+const getUser = adapter.getUser;
 
 exposeGlobally(adapter, updateFlags);
 
