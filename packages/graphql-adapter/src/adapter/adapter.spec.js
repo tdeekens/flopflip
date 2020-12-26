@@ -1,7 +1,7 @@
 import { AdapterConfigurationStatus, cacheIdentifiers } from '@flopflip/types';
 import warning from 'tiny-warning';
 import getGlobalThis from 'globalthis';
-import adapter, { getUser, updateFlags } from './adapter';
+import adapter from './adapter';
 
 jest.mock('tiny-warning');
 
@@ -29,7 +29,7 @@ describe('when configuring', () => {
 
     describe('updating flags', () => {
       beforeEach(() => {
-        updateFlags({ attempted: 'flagUpdate' });
+        adapter.updateFlags({ attempted: 'flagUpdate' });
       });
 
       it('should invoke and trigger `warning`', () => {
@@ -223,7 +223,7 @@ describe('when configured', () => {
       // From `configure`
       adapterEventHandlers.onFlagsStateChange.mockClear();
 
-      updateFlags(updatedFlags);
+      adapter.updateFlags(updatedFlags);
     });
 
     it('should invoke but not trigger `warning`', () => {
@@ -249,7 +249,7 @@ describe('when configured', () => {
         // From `configure`
         adapterEventHandlers.onFlagsStateChange.mockClear();
 
-        updateFlags(nonNormalizedUpdatedFlags);
+        adapter.updateFlags(nonNormalizedUpdatedFlags);
       });
 
       it('should invoke `onFlagsStateChange`', () => {
@@ -266,9 +266,9 @@ describe('when configured', () => {
       beforeEach(() => {
         adapterEventHandlers.onFlagsStateChange.mockClear();
 
-        updateFlags(updatedFlags, { lockFlags: true });
+        adapter.updateFlags(updatedFlags, { lockFlags: true });
 
-        updateFlags({ fooFlag: false });
+        adapter.updateFlags({ fooFlag: false });
       });
 
       it('should not update the locked flag', () => {
@@ -296,7 +296,7 @@ describe('when configured', () => {
     });
 
     it('should update the user', () => {
-      expect(getUser()).toEqual(user);
+      expect(adapter.getUser()).toEqual(user);
     });
 
     it('should invoke `onFlagsStateChange`', () => {
@@ -318,7 +318,7 @@ describe('when configured', () => {
     const updatedFlags = { fooFlag: true, barFlag: false };
 
     beforeEach(() => {
-      updateFlags(updatedFlags);
+      adapter.updateFlags(updatedFlags);
 
       adapterEventHandlers.onFlagsStateChange.mockClear();
 
@@ -370,15 +370,6 @@ describe('exposeGlobally', () => {
   it('should expose `adapter` globally', () => {
     const globalThis = getGlobalThis();
 
-    expect(globalThis).toHaveProperty('__flopflip__.graphql.adapter', adapter);
-  });
-
-  it('should expose `updateFlags` globally', () => {
-    const globalThis = getGlobalThis();
-
-    expect(globalThis).toHaveProperty(
-      '__flopflip__.graphql.updateFlags',
-      updateFlags
-    );
+    expect(globalThis).toHaveProperty('__flopflip__.graphql', adapter);
   });
 });

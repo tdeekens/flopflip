@@ -366,10 +366,6 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
 
 const adapter = new GraphQLAdapter();
 
-exposeGlobally(adapter, adapter.updateFlags);
-
-const updateFlags = adapter.updateFlags;
-const getUser = adapter.getUser;
+exposeGlobally(adapter);
 
 export default adapter;
-export { updateFlags, getUser };

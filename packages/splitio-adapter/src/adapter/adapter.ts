@@ -340,9 +340,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
 
 const adapter = new SplitioAdapter();
 
-exposeGlobally(adapter, adapter.updateFlags);
-
-const updateFlags = adapter.updateFlags;
+exposeGlobally(adapter);
 
 export default adapter;
-export { createAnonymousUserKey, normalizeFlag, updateFlags };
+export { createAnonymousUserKey, normalizeFlag };

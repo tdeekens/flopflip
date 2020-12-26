@@ -1,6 +1,6 @@
 import React from 'react';
 import { render as rtlRender, act } from '@flopflip/test-utils';
-import adapter, { updateFlags } from '@flopflip/memory-adapter';
+import adapter from '@flopflip/memory-adapter';
 import { Provider } from 'react-redux';
 import { createStore } from '../../../test-utils';
 import { STATE_SLICE } from '../../store/constants';
@@ -68,7 +68,7 @@ describe('when enabling feature is', () => {
     await rendered.waitUntilConfigured();
 
     act(() => {
-      updateFlags({
+      adapter.updateFlags({
         [testFlagName]: true,
       });
     });

@@ -1,1 +1,1 @@
-export { default, updateFlags } from './adapter';
+export { default } from './adapter';

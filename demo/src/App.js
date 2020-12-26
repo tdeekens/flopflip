@@ -3,8 +3,8 @@ import flowRight from 'lodash.flowright';
 import { Provider, connect } from 'react-redux';
 import classNames from 'classnames';
 // Import adapter from '@flopflip/launchdarkly-adapter';
-// import adapter, { updateFlags } from '@flopflip/memory-adapter';
-import adapter, { updateFlags } from '@flopflip/memory-adapter';
+// import adapter from '@flopflip/memory-adapter';
+import adapter from '@flopflip/memory-adapter';
 import {
   ConfigureFlopFlip,
   branchOnFeatureToggle,
@@ -156,6 +156,6 @@ class App extends Component {
   }
 }
 
-window.updateFlags = updateFlags;
+window.updateFlags = adapter.updateFlags;
 
 export default App;

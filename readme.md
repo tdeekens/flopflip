@@ -299,8 +299,8 @@ It takes the `props`:
   not want `flopflip` to generate a `uuid` for you automatically.
 - The `defaultFlags` prop object can be used to specify default flag values
   until an `adapter` responds or in case flags were removed
-- The `localstorage-adapter` and `memory-adapter` expose a named `updateFlags`
-  export which eases updating flags and flushes them to all components via
+- The adapters expose function to update flags explicitely via `adapter.updateFlags`
+  which eases updating flags and flushes them to all components via
   `react-broadcast` or `react-redux`
 
 Different adapters allow for different configurations:

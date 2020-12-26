@@ -445,9 +445,6 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
 
 const adapter = new LaunchDarklyAdapter();
 
-exposeGlobally(adapter, adapter.updateFlags);
-
-const updateFlags = adapter.updateFlags;
+exposeGlobally(adapter);
 
 export default adapter;
-export { updateFlags };
