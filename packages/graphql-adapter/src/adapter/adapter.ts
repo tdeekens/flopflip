@@ -52,178 +52,176 @@ let adapterState: TAdapterStatus & GraphQLAdapterState = {
   ...intialAdapterState,
 };
 
-const getIsAdapterUnsubscribed = () =>
-  adapterState.subscriptionStatus === AdapterSubscriptionStatus.Unsubscribed;
-const getIsFlagLocked = (flagName: TFlagName) =>
-  adapterState.lockedFlags.has(flagName);
-const getUser = () => adapterState.user;
-
-const getCache = async (cacheIdentifier: TCacheIdentifiers) => {
-  let cacheModule;
-
-  switch (cacheIdentifier) {
-    case cacheIdentifiers.local: {
-      cacheModule = await import('@flopflip/localstorage-cache');
-      break;
-    }
-
-    case cacheIdentifiers.session: {
-      cacheModule = await import('@flopflip/sessionstorage-cache');
-      break;
-    }
-
-    default:
-      break;
-  }
-
-  const createCache = cacheModule.default;
-
-  const cache = createCache({ prefix: STORAGE_SLICE });
-
-  return {
-    set(flags: TFlags) {
-      return cache.set('flags', flags);
-    },
-    get() {
-      return cache.get('flags');
-    },
-    unset() {
-      return cache.unset('flags');
-    },
-  };
-};
-
-const updateFlags: TFlagsUpdateFunction = (flags, options) => {
-  const isAdapterConfigured =
-    adapterState.configurationStatus === AdapterConfigurationStatus.Configured;
-
-  warning(
-    isAdapterConfigured,
-    '@flopflip/graphql-adapter: adapter not configured. Flags can not be updated before.'
-  );
-
-  if (!isAdapterConfigured) return;
-
-  const previousFlags: TFlags | null = adapterState.flags;
-
-  const updatedFlags = Object.entries(flags).reduce(
-    (updatedFlags, [flagName, flagValue]) => {
-      const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
-        flagName,
-        flagValue
-      );
-
-      if (getIsFlagLocked(normalizedFlagName)) return updatedFlags;
-
-      if (options?.lockFlags) {
-        adapterState.lockedFlags.add(normalizedFlagName);
-      }
-
-      updatedFlags = {
-        ...updatedFlags,
-        [normalizedFlagName]: normalizedFlagValue,
-      };
-
-      return updatedFlags;
-    },
-    {}
-  );
-
-  const nextFlags: TFlags = {
-    ...previousFlags,
-    ...updatedFlags,
-  };
-
-  adapterState.flags = nextFlags;
-
-  adapterState.emitter.emit('flagsStateChange', nextFlags);
-};
-
-const didFlagsChange = (nextFlags: TFlags) => {
-  const previousFlags = adapterState.flags;
-
-  if (previousFlags === undefined) return true;
-
-  return !isEqual(nextFlags, previousFlags);
-};
-
-const fetchFlags = async (
-  adapterArgs: TGraphQLAdapterArgs
-): Promise<TFlags> => {
-  const fetcher = adapterArgs.adapterConfiguration.fetcher ?? fetch;
-
-  const response = await fetcher(adapterArgs.adapterConfiguration.uri, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      ...(adapterArgs.adapterConfiguration.getRequestHeaders?.(adapterArgs) ??
-        {}),
-    },
-    body: JSON.stringify({
-      query: adapterArgs.adapterConfiguration.query,
-      variables:
-        adapterArgs.adapterConfiguration?.getQueryVariables?.(adapterArgs) ??
-        {},
-    }),
-  });
-
-  const json = await response.json();
-
-  const flags =
-    adapterArgs.adapterConfiguration.parseFlags?.(json.data) ??
-    (json.data as TFlags);
-
-  return flags;
-};
-
-const defaultPollingInteral = 1000 * 60;
-const subscribeToFlagsChanges = (adapterArgs: TGraphQLAdapterArgs) => {
-  const pollingInteral =
-    adapterArgs.adapterConfiguration.pollingInteral ?? defaultPollingInteral;
-
-  setInterval(async () => {
-    if (!getIsAdapterUnsubscribed()) {
-      const nextFlags = normalizeFlags(await fetchFlags(adapterArgs));
-
-      if (didFlagsChange(nextFlags)) {
-        if (adapterArgs.cacheIdentifier) {
-          const cache = await getCache(adapterArgs.cacheIdentifier);
-
-          cache.set(nextFlags);
-        }
-
-        adapterState.flags = nextFlags;
-        adapterState.emitter.emit('flagsStateChange', nextFlags);
-      }
-    }
-  }, pollingInteral);
-};
-
-const __internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
-
 class GraphQLAdapter implements TGraphQLAdapterInterface {
+  #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
+  #defaultPollingInteral = 1000 * 60;
+
   id: typeof interfaceIdentifiers.graphql;
-  updateFlags: typeof updateFlags;
-  getUser?: typeof getUser;
 
   constructor() {
     this.id = interfaceIdentifiers.graphql;
-    this.getUser = getUser;
-    this.updateFlags = updateFlags;
   }
+
+  #getIsAdapterUnsubscribed = () =>
+    adapterState.subscriptionStatus === AdapterSubscriptionStatus.Unsubscribed;
+
+  #getIsFlagLocked = (flagName: TFlagName) =>
+    adapterState.lockedFlags.has(flagName);
+
+  #getCache = async (cacheIdentifier: TCacheIdentifiers) => {
+    let cacheModule;
+
+    switch (cacheIdentifier) {
+      case cacheIdentifiers.local: {
+        cacheModule = await import('@flopflip/localstorage-cache');
+        break;
+      }
+
+      case cacheIdentifiers.session: {
+        cacheModule = await import('@flopflip/sessionstorage-cache');
+        break;
+      }
+
+      default:
+        break;
+    }
+
+    const createCache = cacheModule.default;
+
+    const cache = createCache({ prefix: STORAGE_SLICE });
+
+    return {
+      set(flags: TFlags) {
+        return cache.set('flags', flags);
+      },
+      get() {
+        return cache.get('flags');
+      },
+      unset() {
+        return cache.unset('flags');
+      },
+    };
+  };
+
+  #didFlagsChange = (nextFlags: TFlags) => {
+    const previousFlags = adapterState.flags;
+
+    if (previousFlags === undefined) return true;
+
+    return !isEqual(nextFlags, previousFlags);
+  };
+
+  #fetchFlags = async (adapterArgs: TGraphQLAdapterArgs): Promise<TFlags> => {
+    const fetcher = adapterArgs.adapterConfiguration.fetcher ?? fetch;
+
+    const response = await fetcher(adapterArgs.adapterConfiguration.uri, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(adapterArgs.adapterConfiguration.getRequestHeaders?.(adapterArgs) ??
+          {}),
+      },
+      body: JSON.stringify({
+        query: adapterArgs.adapterConfiguration.query,
+        variables:
+          adapterArgs.adapterConfiguration?.getQueryVariables?.(adapterArgs) ??
+          {},
+      }),
+    });
+
+    const json = await response.json();
+
+    const flags =
+      adapterArgs.adapterConfiguration.parseFlags?.(json.data) ??
+      (json.data as TFlags);
+
+    return flags;
+  };
+
+  #subscribeToFlagsChanges = (adapterArgs: TGraphQLAdapterArgs) => {
+    const pollingInteral =
+      adapterArgs.adapterConfiguration.pollingInteral ??
+      this.#defaultPollingInteral;
+
+    setInterval(async () => {
+      if (!this.#getIsAdapterUnsubscribed()) {
+        const nextFlags = normalizeFlags(await this.#fetchFlags(adapterArgs));
+
+        if (this.#didFlagsChange(nextFlags)) {
+          if (adapterArgs.cacheIdentifier) {
+            const cache = await this.#getCache(adapterArgs.cacheIdentifier);
+
+            cache.set(nextFlags);
+          }
+
+          adapterState.flags = nextFlags;
+          adapterState.emitter.emit('flagsStateChange', nextFlags);
+        }
+      }
+    }, pollingInteral);
+  };
+
+  getUser = () => adapterState.user;
+
+  updateFlags: TFlagsUpdateFunction = (flags, options) => {
+    const isAdapterConfigured =
+      adapterState.configurationStatus ===
+      AdapterConfigurationStatus.Configured;
+
+    warning(
+      isAdapterConfigured,
+      '@flopflip/graphql-adapter: adapter not configured. Flags can not be updated before.'
+    );
+
+    if (!isAdapterConfigured) return;
+
+    const previousFlags: TFlags | null = adapterState.flags;
+
+    const updatedFlags = Object.entries(flags).reduce(
+      (updatedFlags, [flagName, flagValue]) => {
+        const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
+          flagName,
+          flagValue
+        );
+
+        if (this.#getIsFlagLocked(normalizedFlagName)) return updatedFlags;
+
+        if (options?.lockFlags) {
+          adapterState.lockedFlags.add(normalizedFlagName);
+        }
+
+        updatedFlags = {
+          ...updatedFlags,
+          [normalizedFlagName]: normalizedFlagValue,
+        };
+
+        return updatedFlags;
+      },
+      {}
+    );
+
+    const nextFlags: TFlags = {
+      ...previousFlags,
+      ...updatedFlags,
+    };
+
+    adapterState.flags = nextFlags;
+
+    adapterState.emitter.emit('flagsStateChange', nextFlags);
+  };
 
   async configure(
     adapterArgs: TGraphQLAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) {
     const handleFlagsChange = (nextFlags: TFlags) => {
-      if (getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) return;
 
       adapterEventHandlers.onFlagsStateChange(nextFlags);
     };
 
     const handleStatusChange = (nextStatus: TAdapterStatusChange) => {
-      if (getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) return;
 
       adapterEventHandlers.onStatusStateChange(nextStatus);
     };
@@ -251,7 +249,7 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
       let cachedFlags;
 
       if (adapterArgs.cacheIdentifier) {
-        const cache = await getCache(adapterArgs.cacheIdentifier);
+        const cache = await this.#getCache(adapterArgs.cacheIdentifier);
 
         cachedFlags = cache.get();
 
@@ -264,12 +262,12 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
 
       adapterState.configurationStatus = AdapterConfigurationStatus.Configured;
 
-      const flags = normalizeFlags(await fetchFlags(adapterArgs));
+      const flags = normalizeFlags(await this.#fetchFlags(adapterArgs));
 
       adapterState.flags = flags;
 
       if (adapterArgs.cacheIdentifier) {
-        const cache = await getCache(adapterArgs.cacheIdentifier);
+        const cache = await this.#getCache(adapterArgs.cacheIdentifier);
 
         cache.set(flags);
       }
@@ -278,9 +276,9 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
       adapterState.emitter.emit('statusStateChange', {
         configurationStatus: adapterState.configurationStatus,
       });
-      adapterState.emitter.emit(__internalConfiguredStatusChange__);
+      adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
-      subscribeToFlagsChanges(adapterArgs);
+      this.#subscribeToFlagsChanges(adapterArgs);
 
       return {
         initializationStatus: AdapterInitializationStatus.Succeeded,
@@ -295,7 +293,7 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
     adapterState.flags = {};
 
     if (adapterArgs.cacheIdentifier) {
-      const cache = await getCache(adapterArgs.cacheIdentifier);
+      const cache = await this.#getCache(adapterArgs.cacheIdentifier);
 
       cache.unset();
     }
@@ -317,7 +315,11 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
         AdapterConfigurationStatus.Configured
       )
         resolve();
-      else adapterState.emitter.on(__internalConfiguredStatusChange__, resolve);
+      else
+        adapterState.emitter.on(
+          this.#__internalConfiguredStatusChange__,
+          resolve
+        );
     });
   }
 
@@ -364,7 +366,10 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
 
 const adapter = new GraphQLAdapter();
 
-exposeGlobally(adapter, updateFlags);
+exposeGlobally(adapter, adapter.updateFlags);
+
+const updateFlags = adapter.updateFlags;
+const getUser = adapter.getUser;
 
 export default adapter;
 export { updateFlags, getUser };
