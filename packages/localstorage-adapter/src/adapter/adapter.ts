@@ -50,107 +50,107 @@ let adapterState: TAdapterStatus & LocalStorageAdapterState = {
   ...intialAdapterState,
 };
 
-const getIsAdapterUnsubscribed = () =>
-  adapterState.subscriptionStatus === AdapterSubscriptionStatus.Unsubscribed;
-const getIsFlagLocked = (flagName: TFlagName) =>
-  adapterState.lockedFlags.has(flagName);
-
 const STORAGE_SLICE = '@flopflip';
-const cache = createCache({ prefix: STORAGE_SLICE });
-
-const updateFlags: TFlagsUpdateFunction = (flags, options) => {
-  const isAdapterConfigured =
-    adapterState.configurationStatus === AdapterConfigurationStatus.Configured;
-
-  warning(
-    isAdapterConfigured,
-    '@flopflip/localstorage-adapter: adapter not configured. Flags can not be updated before.'
-  );
-
-  if (!isAdapterConfigured) return;
-
-  const previousFlags: TFlags | null = cache.get('flags') as TFlags;
-
-  const updatedFlags = Object.entries(flags).reduce(
-    (updatedFlags, [flagName, flagValue]) => {
-      const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
-        flagName,
-        flagValue
-      );
-
-      if (getIsFlagLocked(normalizedFlagName)) return updatedFlags;
-
-      if (options?.lockFlags) {
-        adapterState.lockedFlags.add(normalizedFlagName);
-      }
-
-      updatedFlags = {
-        ...updatedFlags,
-        [normalizedFlagName]: normalizedFlagValue,
-      };
-
-      return updatedFlags;
-    },
-    {}
-  );
-
-  const nextFlags: TFlags = {
-    ...previousFlags,
-    ...updatedFlags,
-  };
-
-  cache.set('flags', nextFlags);
-  adapterState.flags = nextFlags;
-
-  adapterState.emitter.emit('flagsStateChange', nextFlags);
-};
-
-const didFlagsChange = (nextFlags: TFlags) => {
-  const previousFlags = adapterState.flags;
-
-  if (previousFlags === undefined) return true;
-
-  return !isEqual(nextFlags, previousFlags);
-};
-
-const subscribeToFlagsChanges = ({
-  pollingInteral = 1000 * 60,
-}: TLocalStorageAdapterSubscriptionOptions) => {
-  setInterval(() => {
-    if (!getIsAdapterUnsubscribed()) {
-      const nextFlags = normalizeFlags(cache.get('flags'));
-
-      if (didFlagsChange(nextFlags)) {
-        adapterState.flags = nextFlags;
-        adapterState.emitter.emit('flagsStateChange', nextFlags);
-      }
-    }
-  }, pollingInteral);
-};
-
-const __internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
 
 class LocalStorageAdapter implements TLocalStorageAdapterInterface {
+  #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
+  #cache = createCache({ prefix: STORAGE_SLICE });
+
   id: typeof interfaceIdentifiers.localstorage;
-  updateFlags: typeof updateFlags;
 
   constructor() {
     this.id = interfaceIdentifiers.localstorage;
-    this.updateFlags = updateFlags;
   }
+
+  #getIsAdapterUnsubscribed = () =>
+    adapterState.subscriptionStatus === AdapterSubscriptionStatus.Unsubscribed;
+
+  #getIsFlagLocked = (flagName: TFlagName) =>
+    adapterState.lockedFlags.has(flagName);
+
+  #didFlagsChange = (nextFlags: TFlags) => {
+    const previousFlags = adapterState.flags;
+
+    if (previousFlags === undefined) return true;
+
+    return !isEqual(nextFlags, previousFlags);
+  };
+
+  #subscribeToFlagsChanges = ({
+    pollingInteral = 1000 * 60,
+  }: TLocalStorageAdapterSubscriptionOptions) => {
+    setInterval(() => {
+      if (!this.#getIsAdapterUnsubscribed()) {
+        const nextFlags = normalizeFlags(this.#cache.get('flags'));
+
+        if (this.#didFlagsChange(nextFlags)) {
+          adapterState.flags = nextFlags;
+          adapterState.emitter.emit('flagsStateChange', nextFlags);
+        }
+      }
+    }, pollingInteral);
+  };
+
+  updateFlags: TFlagsUpdateFunction = (flags, options) => {
+    const isAdapterConfigured =
+      adapterState.configurationStatus ===
+      AdapterConfigurationStatus.Configured;
+
+    warning(
+      isAdapterConfigured,
+      '@flopflip/localstorage-adapter: adapter not configured. Flags can not be updated before.'
+    );
+
+    if (!isAdapterConfigured) return;
+
+    const previousFlags: TFlags | null = this.#cache.get('flags') as TFlags;
+
+    const updatedFlags = Object.entries(flags).reduce(
+      (updatedFlags, [flagName, flagValue]) => {
+        const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
+          flagName,
+          flagValue
+        );
+
+        if (this.#getIsFlagLocked(normalizedFlagName)) return updatedFlags;
+
+        if (options?.lockFlags) {
+          adapterState.lockedFlags.add(normalizedFlagName);
+        }
+
+        updatedFlags = {
+          ...updatedFlags,
+          [normalizedFlagName]: normalizedFlagValue,
+        };
+
+        return updatedFlags;
+      },
+      {}
+    );
+
+    const nextFlags: TFlags = {
+      ...previousFlags,
+      ...updatedFlags,
+    };
+
+    this.#cache.set('flags', nextFlags);
+    adapterState.flags = nextFlags;
+
+    adapterState.emitter.emit('flagsStateChange', nextFlags);
+  };
 
   async configure(
     adapterArgs: TLocalStorageAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) {
     const handleFlagsChange = (nextFlags: TFlags) => {
-      if (getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) return;
 
       adapterEventHandlers.onFlagsStateChange(nextFlags);
     };
 
     const handleStatusChange = (nextStatus: TAdapterStatusChange) => {
-      if (getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) return;
 
       adapterEventHandlers.onStatusStateChange(nextStatus);
     };
@@ -179,16 +179,16 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     return Promise.resolve().then(() => {
       adapterState.configurationStatus = AdapterConfigurationStatus.Configured;
 
-      const flags = normalizeFlags(cache.get('flags'));
+      const flags = normalizeFlags(this.#cache.get('flags'));
 
       adapterState.flags = flags;
       adapterState.emitter.emit('flagsStateChange', flags);
       adapterState.emitter.emit('statusStateChange', {
         configurationStatus: adapterState.configurationStatus,
       });
-      adapterState.emitter.emit(__internalConfiguredStatusChange__);
+      adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
-      subscribeToFlagsChanges({
+      this.#subscribeToFlagsChanges({
         pollingInteral: adapterConfiguration?.pollingInteral,
       });
 
@@ -202,7 +202,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     adapterArgs: TLocalStorageAdapterArgs,
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
-    cache.unset('flags');
+    this.#cache.unset('flags');
     adapterState.flags = {};
 
     const nextUser = adapterArgs.user;
@@ -222,7 +222,11 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
         AdapterConfigurationStatus.Configured
       )
         resolve();
-      else adapterState.emitter.on(__internalConfiguredStatusChange__, resolve);
+      else
+        adapterState.emitter.on(
+          this.#__internalConfiguredStatusChange__,
+          resolve
+        );
     });
   }
 
@@ -251,7 +255,9 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
 const adapter = new LocalStorageAdapter();
 
-exposeGlobally(adapter, updateFlags);
+exposeGlobally(adapter, adapter.updateFlags);
+
+const updateFlags = adapter.updateFlags;
 
 export default adapter;
 export { updateFlags, STORAGE_SLICE };
