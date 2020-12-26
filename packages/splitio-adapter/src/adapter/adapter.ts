@@ -12,7 +12,6 @@ import type {
   TAdapterEventHandlers,
   TSplitioAdapterInterface,
   TSplitioAdapterArgs,
-  TFlagsUpdateFunction,
 } from '@flopflip/types';
 import {
   AdapterInitializationStatus,
@@ -226,11 +225,11 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     treatmentAttributes: T
   ): T => cloneDeep<T>(treatmentAttributes);
 
-  updateFlags: TFlagsUpdateFunction = () => {
+  updateFlags() {
     console.log(
       '@flopflip/splitio-adapter: update flags it not yet implemented.'
     );
-  };
+  }
 
   async configure(
     adapterArgs: TSplitioAdapterArgs,

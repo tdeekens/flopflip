@@ -7,7 +7,6 @@ import type {
   TLaunchDarklyAdapterArgs,
   TUpdateFlagsOptions,
   TAdapterEventHandlers,
-  TFlagsUpdateFunction,
   TAdapterStatusChange,
   TFlagsChange,
   TLaunchDarklyAdapterInterface,
@@ -229,8 +228,72 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     );
   };
 
+  #didFlagChange = (flagName: TFlagName, nextFlagValue: TFlagVariation) => {
+    const previousFlagValue = this.getFlag(flagName);
+
+    if (previousFlagValue === undefined) return true;
+
+    return previousFlagValue !== nextFlagValue;
+  };
+
+  #setupFlagSubcription = ({
+    flagsFromSdk,
+    flagsUpdateDelayMs,
+  }: {
+    flagsFromSdk: TFlags;
+    flagsUpdateDelayMs?: number;
+  }) => {
+    for (const flagName in flagsFromSdk) {
+      // Dispatch whenever a configured flag value changes
+      if (
+        Object.prototype.hasOwnProperty.call(flagsFromSdk, flagName) &&
+        this.#adapterState.client
+      ) {
+        this.#adapterState.client.on(`change:${flagName}`, (flagValue) => {
+          const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
+            flagName,
+            flagValue
+          );
+
+          if (this.#getIsFlagUnsubcribed(normalizedFlagName)) return;
+
+          // Sometimes the SDK flushes flag changes without a value having changed.
+          if (!this.#didFlagChange(normalizedFlagName, normalizedFlagValue))
+            return;
+
+          const updatedFlags: TFlags = {
+            [normalizedFlagName]: normalizedFlagValue,
+          };
+
+          // NOTE: Adapter state needs to be updated outside of debounced-fn
+          // so that no flag updates are lost.
+          this.#updateFlagsInAdapterState(updatedFlags);
+
+          const flushFlagsUpdate = () => {
+            if (!this.#getIsAdapterUnsubscribed()) {
+              this.#adapterState.emitter.emit(
+                'flagsStateChange',
+                this.#adapterState.flags
+              );
+            }
+          };
+
+          const scheduleImmediately = { before: true, after: false };
+          const scheduleTrailingEdge = { before: false, after: true };
+
+          debounce(flushFlagsUpdate, {
+            wait: flagsUpdateDelayMs,
+            ...(flagsUpdateDelayMs
+              ? scheduleTrailingEdge
+              : scheduleImmediately),
+          })();
+        });
+      }
+    }
+  };
+
   // External. Flags are autolocked when updated.
-  updateFlags: TFlagsUpdateFunction = (flags, options) => {
+  updateFlags(flags: TFlags, options?: TUpdateFlagsOptions) {
     this.#updateFlagsInAdapterState(flags, options);
 
     // ...and flush initial state of flags
@@ -240,7 +303,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
         this.#adapterState.flags
       );
     }
-  };
+  }
 
   async configure(
     adapterArgs: TLaunchDarklyAdapterArgs,
@@ -286,7 +349,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       throwOnInitializationFailure,
     }).then(({ flagsFromSdk, initializationStatus }) => {
       if (subscribeToFlagChanges && flagsFromSdk)
-        this._setupFlagSubcription({
+        this.#setupFlagSubcription({
           flagsFromSdk,
           flagsUpdateDelayMs,
         });
@@ -377,70 +440,6 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     );
 
     return this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured);
-  }
-
-  private _didFlagChange(flagName: TFlagName, nextFlagValue: TFlagVariation) {
-    const previousFlagValue = this.getFlag(flagName);
-
-    if (previousFlagValue === undefined) return true;
-
-    return previousFlagValue !== nextFlagValue;
-  }
-
-  private _setupFlagSubcription({
-    flagsFromSdk,
-    flagsUpdateDelayMs,
-  }: {
-    flagsFromSdk: TFlags;
-    flagsUpdateDelayMs?: number;
-  }) {
-    for (const flagName in flagsFromSdk) {
-      // Dispatch whenever a configured flag value changes
-      if (
-        Object.prototype.hasOwnProperty.call(flagsFromSdk, flagName) &&
-        this.#adapterState.client
-      ) {
-        this.#adapterState.client.on(`change:${flagName}`, (flagValue) => {
-          const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
-            flagName,
-            flagValue
-          );
-
-          if (this.#getIsFlagUnsubcribed(normalizedFlagName)) return;
-
-          // Sometimes the SDK flushes flag changes without a value having changed.
-          if (!this._didFlagChange(normalizedFlagName, normalizedFlagValue))
-            return;
-
-          const updatedFlags: TFlags = {
-            [normalizedFlagName]: normalizedFlagValue,
-          };
-
-          // NOTE: Adapter state needs to be updated outside of debounced-fn
-          // so that no flag updates are lost.
-          this.#updateFlagsInAdapterState(updatedFlags);
-
-          const flushFlagsUpdate = () => {
-            if (!this.#getIsAdapterUnsubscribed()) {
-              this.#adapterState.emitter.emit(
-                'flagsStateChange',
-                this.#adapterState.flags
-              );
-            }
-          };
-
-          const scheduleImmediately = { before: true, after: false };
-          const scheduleTrailingEdge = { before: false, after: true };
-
-          debounce(flushFlagsUpdate, {
-            wait: flagsUpdateDelayMs,
-            ...(flagsUpdateDelayMs
-              ? scheduleTrailingEdge
-              : scheduleImmediately),
-          })();
-        });
-      }
-    }
   }
 }
 

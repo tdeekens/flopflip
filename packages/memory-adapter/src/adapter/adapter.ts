@@ -5,9 +5,9 @@ import type {
   TFlagName,
   TFlagVariation,
   TFlags,
+  TUpdateFlagsOptions,
   TAdapterEventHandlers,
   TMemoryAdapterArgs,
-  TFlagsUpdateFunction,
   TFlagsChange,
   TMemoryAdapterInterface,
 } from '@flopflip/types';
@@ -64,9 +64,11 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     this.#adapterState.user = user;
   };
 
-  getUser = () => this.#adapterState.user;
+  getUser() {
+    return this.#adapterState.user;
+  }
 
-  updateFlags: TFlagsUpdateFunction = (flags, options) => {
+  updateFlags(flags: TFlags, options?: TUpdateFlagsOptions) {
     const isAdapterConfigured =
       this.#adapterState.configurationStatus ===
       AdapterConfigurationStatus.Configured;
@@ -100,7 +102,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
       'flagsStateChange',
       this.#adapterState.flags
     );
-  };
+  }
 
   async configure(
     adapterArgs: TMemoryAdapterArgs,

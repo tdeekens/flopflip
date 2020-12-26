@@ -5,9 +5,9 @@ import type {
   TAdapterEventHandlers,
   TLocalStorageAdapterArgs,
   TFlags,
+  TUpdateFlagsOptions,
   TFlagName,
   TLocalStorageAdapterSubscriptionOptions,
-  TFlagsUpdateFunction,
   TFlagsChange,
   TLocalStorageAdapterInterface,
 } from '@flopflip/types';
@@ -92,7 +92,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     }, pollingInteral);
   };
 
-  updateFlags: TFlagsUpdateFunction = (flags, options) => {
+  updateFlags(flags: TFlags, options?: TUpdateFlagsOptions) {
     const isAdapterConfigured =
       this.#adapterState.configurationStatus ===
       AdapterConfigurationStatus.Configured;
@@ -106,14 +106,16 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
     const previousFlags: TFlags | null = this.#cache.get('flags') as TFlags;
 
-    const updatedFlags = Object.entries(flags).reduce(
-      (updatedFlags, [flagName, flagValue]) => {
+    const updatedFlags = Object.entries(flags).reduce<TFlags>(
+      (updatedFlags: TFlags, [flagName, flagValue]) => {
         const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
           flagName,
           flagValue
         );
 
-        if (this.#getIsFlagLocked(normalizedFlagName)) return updatedFlags;
+        if (this.#getIsFlagLocked(normalizedFlagName)) {
+          return updatedFlags;
+        }
 
         if (options?.lockFlags) {
           this.#adapterState.lockedFlags.add(normalizedFlagName);
@@ -138,7 +140,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     this.#adapterState.flags = nextFlags;
 
     this.#adapterState.emitter.emit('flagsStateChange', nextFlags);
-  };
+  }
 
   async configure(
     adapterArgs: TLocalStorageAdapterArgs,
