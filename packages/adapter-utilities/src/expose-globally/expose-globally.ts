@@ -1,4 +1,4 @@
-import type { TAdapter, TFlagsUpdateFunction } from '@flopflip/types';
+import type { TAdapter } from '@flopflip/types';
 
 import getGlobalThis from 'globalthis';
 
