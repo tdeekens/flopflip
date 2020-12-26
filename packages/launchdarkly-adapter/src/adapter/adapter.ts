@@ -58,183 +58,185 @@ const adapterState: TAdapterStatus & LaunchDarklyAdapterState = {
   unsubscribedFlags: new Set<TFlagName>(),
 };
 
-// Internal
-const updateFlagsInAdapterState = (
-  flags: TFlags,
-  options?: TUpdateFlagsOptions
-): void => {
-  const updatedFlags = Object.entries(flags).reduce(
-    (updatedFlags, [flagName, flagValue]) => {
-      if (getIsFlagLocked(flagName)) return updatedFlags;
-
-      if (options?.lockFlags) {
-        adapterState.lockedFlags.add(flagName);
-      }
-
-      if (options?.unsubscribeFlags) {
-        adapterState.unsubscribedFlags.add(flagName);
-      }
-
-      updatedFlags = {
-        ...updatedFlags,
-        [flagName]: flagValue,
-      };
-
-      return updatedFlags;
-    },
-    {}
-  );
-
-  adapterState.flags = {
-    ...adapterState.flags,
-    ...updatedFlags,
-  };
-};
-
-// External. Flags are autolocked when updated.
-const updateFlags: TFlagsUpdateFunction = (flags, options) => {
-  updateFlagsInAdapterState(flags, options);
-
-  // ...and flush initial state of flags
-  if (!getIsAdapterUnsubscribed()) {
-    adapterState.emitter.emit('flagsStateChange', adapterState.flags);
-  }
-};
-
-const getIsAdapterUnsubscribed = () =>
-  adapterState.subscriptionStatus === AdapterSubscriptionStatus.Unsubscribed;
-
-const getIsFlagUnsubcribed = (flagName: TFlagName) =>
-  adapterState.unsubscribedFlags.has(flagName);
-const getIsFlagLocked = (flagName: TFlagName) =>
-  adapterState.lockedFlags.has(flagName);
-
-const withoutUnsubscribedOrLockedFlags = (flags: TFlags) =>
-  Object.fromEntries(
-    Object.entries(flags).filter(
-      ([flagName]) =>
-        !getIsFlagUnsubcribed(flagName) && !getIsFlagLocked(flagName)
-    )
-  );
-
-const getIsAnonymousUser = (user: TUser) => !user?.key;
-
-const ensureUser = (user: TUser) => {
-  const isAnonymousUser = getIsAnonymousUser(user);
-
-  // NOTE: When marked `anonymous` the SDK will generate a unique key and cache it in local storage
-  return merge<TUser, LDUser>(user, {
-    key: isAnonymousUser ? undefined : user.key,
-    anonymous: isAnonymousUser,
-  });
-};
-
-const initializeClient = (
-  clientSideId: TLaunchDarklyAdapterArgs['clientSideId'],
-  user: TUser,
-  clientOptions: TLaunchDarklyAdapterArgs['clientOptions']
-) => initializeLaunchDarklyClient(clientSideId, user as LDUser, clientOptions);
-
-const changeUserContext = async (nextUser: TUser) =>
-  adapterState.client?.identify
-    ? adapterState.client.identify(nextUser as LDUser)
-    : Promise.reject(
-        new Error('Can not change user context: client not yet initialized.')
-      );
-
-const getInitialFlags = async ({
-  flags,
-  throwOnInitializationFailure,
-}: Pick<
-  TLaunchDarklyAdapterArgs,
-  'flags' | 'throwOnInitializationFailure'
->): Promise<{
-  flagsFromSdk: TFlags | null;
-  initializationStatus: AdapterInitializationStatus;
-}> => {
-  if (adapterState.client) {
-    return adapterState.client
-      .waitForInitialization()
-      .then(async () => {
-        let flagsFromSdk: null | TFlags = null;
-
-        if (adapterState.client && !flags) {
-          flagsFromSdk = adapterState.client.allFlags();
-        } else if (adapterState.client && flags) {
-          flagsFromSdk = {};
-
-          for (let [requestedFlagName, defaultFlagValue] of Object.entries(
-            flags
-          )) {
-            const denormalizedRequestedFlagName = denormalizeFlagName(
-              requestedFlagName
-            );
-            flagsFromSdk[
-              denormalizedRequestedFlagName
-            ] = adapterState.client.variation(
-              denormalizedRequestedFlagName,
-              defaultFlagValue
-            );
-          }
-        }
-
-        if (flagsFromSdk) {
-          const normalizedFlags = normalizeFlags(flagsFromSdk);
-          const flags = withoutUnsubscribedOrLockedFlags(normalizedFlags);
-
-          updateFlags(flags);
-        }
-
-        // First update internal state
-        adapterState.configurationStatus =
-          AdapterConfigurationStatus.Configured;
-
-        // ...to then signal that the adapter is configured
-        if (!getIsAdapterUnsubscribed()) {
-          adapterState.emitter.emit('statusStateChange', {
-            configurationStatus: adapterState.configurationStatus,
-          });
-        }
-
-        return Promise.resolve({
-          flagsFromSdk,
-          initializationStatus: AdapterInitializationStatus.Succeeded,
-        });
-      })
-      .catch(async () => {
-        if (throwOnInitializationFailure)
-          return Promise.reject(
-            new Error(
-              '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
-            )
-          );
-
-        console.warn(
-          '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
-        );
-
-        return Promise.resolve({
-          flagsFromSdk: null,
-          initializationStatus: AdapterInitializationStatus.Failed,
-        });
-      });
-  }
-
-  return Promise.reject(
-    new Error(
-      '@flopflip/launchdarkly-adapter: can not subscribe with non initialized client.'
-    )
-  );
-};
-
 class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   id: typeof interfaceIdentifiers.launchdarkly;
-  updateFlags: typeof updateFlags;
 
   constructor() {
     this.id = interfaceIdentifiers.launchdarkly;
-    this.updateFlags = updateFlags;
   }
+
+  #updateFlagsInAdapterState = (
+    flags: TFlags,
+    options?: TUpdateFlagsOptions
+  ): void => {
+    const updatedFlags = Object.entries(flags).reduce(
+      (updatedFlags, [flagName, flagValue]) => {
+        if (this.#getIsFlagLocked(flagName)) return updatedFlags;
+
+        if (options?.lockFlags) {
+          adapterState.lockedFlags.add(flagName);
+        }
+
+        if (options?.unsubscribeFlags) {
+          adapterState.unsubscribedFlags.add(flagName);
+        }
+
+        updatedFlags = {
+          ...updatedFlags,
+          [flagName]: flagValue,
+        };
+
+        return updatedFlags;
+      },
+      {}
+    );
+
+    adapterState.flags = {
+      ...adapterState.flags,
+      ...updatedFlags,
+    };
+  };
+
+  #getIsAdapterUnsubscribed = () =>
+    adapterState.subscriptionStatus === AdapterSubscriptionStatus.Unsubscribed;
+
+  #getIsFlagUnsubcribed = (flagName: TFlagName) =>
+    adapterState.unsubscribedFlags.has(flagName);
+
+  #getIsFlagLocked = (flagName: TFlagName) =>
+    adapterState.lockedFlags.has(flagName);
+
+  #withoutUnsubscribedOrLockedFlags = (flags: TFlags) =>
+    Object.fromEntries(
+      Object.entries(flags).filter(
+        ([flagName]) =>
+          !this.#getIsFlagUnsubcribed(flagName) &&
+          !this.#getIsFlagLocked(flagName)
+      )
+    );
+
+  #getIsAnonymousUser = (user: TUser) => !user?.key;
+
+  #ensureUser = (user: TUser) => {
+    const isAnonymousUser = this.#getIsAnonymousUser(user);
+
+    // NOTE: When marked `anonymous` the SDK will generate a unique key and cache it in local storage
+    return merge<TUser, LDUser>(user, {
+      key: isAnonymousUser ? undefined : user.key,
+      anonymous: isAnonymousUser,
+    });
+  };
+
+  #initializeClient = (
+    clientSideId: TLaunchDarklyAdapterArgs['clientSideId'],
+    user: TUser,
+    clientOptions: TLaunchDarklyAdapterArgs['clientOptions']
+  ) =>
+    initializeLaunchDarklyClient(clientSideId, user as LDUser, clientOptions);
+
+  #changeUserContext = async (nextUser: TUser) =>
+    adapterState.client?.identify
+      ? adapterState.client.identify(nextUser as LDUser)
+      : Promise.reject(
+          new Error('Can not change user context: client not yet initialized.')
+        );
+
+  #getInitialFlags = async ({
+    flags,
+    throwOnInitializationFailure,
+  }: Pick<
+    TLaunchDarklyAdapterArgs,
+    'flags' | 'throwOnInitializationFailure'
+  >): Promise<{
+    flagsFromSdk: TFlags | null;
+    initializationStatus: AdapterInitializationStatus;
+  }> => {
+    if (adapterState.client) {
+      return adapterState.client
+        .waitForInitialization()
+        .then(async () => {
+          let flagsFromSdk: null | TFlags = null;
+
+          if (adapterState.client && !flags) {
+            flagsFromSdk = adapterState.client.allFlags();
+          } else if (adapterState.client && flags) {
+            flagsFromSdk = {};
+
+            for (let [requestedFlagName, defaultFlagValue] of Object.entries(
+              flags
+            )) {
+              const denormalizedRequestedFlagName = denormalizeFlagName(
+                requestedFlagName
+              );
+              flagsFromSdk[
+                denormalizedRequestedFlagName
+              ] = adapterState.client.variation(
+                denormalizedRequestedFlagName,
+                defaultFlagValue
+              );
+            }
+          }
+
+          if (flagsFromSdk) {
+            const normalizedFlags = normalizeFlags(flagsFromSdk);
+            const flags = this.#withoutUnsubscribedOrLockedFlags(
+              normalizedFlags
+            );
+
+            this.updateFlags(flags);
+          }
+
+          // First update internal state
+          adapterState.configurationStatus =
+            AdapterConfigurationStatus.Configured;
+
+          // ...to then signal that the adapter is configured
+          if (!this.#getIsAdapterUnsubscribed()) {
+            adapterState.emitter.emit('statusStateChange', {
+              configurationStatus: adapterState.configurationStatus,
+            });
+          }
+
+          return Promise.resolve({
+            flagsFromSdk,
+            initializationStatus: AdapterInitializationStatus.Succeeded,
+          });
+        })
+        .catch(async () => {
+          if (throwOnInitializationFailure)
+            return Promise.reject(
+              new Error(
+                '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
+              )
+            );
+
+          console.warn(
+            '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
+          );
+
+          return Promise.resolve({
+            flagsFromSdk: null,
+            initializationStatus: AdapterInitializationStatus.Failed,
+          });
+        });
+    }
+
+    return Promise.reject(
+      new Error(
+        '@flopflip/launchdarkly-adapter: can not subscribe with non initialized client.'
+      )
+    );
+  };
+
+  // External. Flags are autolocked when updated.
+  updateFlags: TFlagsUpdateFunction = (flags, options) => {
+    this.#updateFlagsInAdapterState(flags, options);
+
+    // ...and flush initial state of flags
+    if (!this.#getIsAdapterUnsubscribed()) {
+      adapterState.emitter.emit('flagsStateChange', adapterState.flags);
+    }
+  };
 
   async configure(
     adapterArgs: TLaunchDarklyAdapterArgs,
@@ -267,14 +269,14 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       flagsUpdateDelayMs,
     } = adapterArgs;
 
-    adapterState.user = ensureUser(user);
-    adapterState.client = initializeClient(
+    adapterState.user = this.#ensureUser(user);
+    adapterState.client = this.#initializeClient(
       clientSideId,
       adapterState.user,
       clientOptions
     );
 
-    return getInitialFlags({
+    return this.#getInitialFlags({
       flags,
       throwOnInitializationFailure,
     }).then(({ flagsFromSdk, initializationStatus }) => {
@@ -304,9 +306,9 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     const nextUser = adapterArgs.user;
 
     if (!isEqual(adapterState.user, nextUser)) {
-      adapterState.user = ensureUser(nextUser);
+      adapterState.user = this.#ensureUser(nextUser);
 
-      await changeUserContext(adapterState.user);
+      await this.#changeUserContext(adapterState.user);
 
       return Promise.resolve({
         initializationStatus: AdapterInitializationStatus.Succeeded,
@@ -345,7 +347,10 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
         new Error('Can not update user context: adapter not yet configured.')
       );
 
-    return changeUserContext({ ...adapterState.user, ...updatedUserProps });
+    return this.#changeUserContext({
+      ...adapterState.user,
+      ...updatedUserProps,
+    });
   }
 
   unsubscribe() {
@@ -393,7 +398,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
             flagValue
           );
 
-          if (getIsFlagUnsubcribed(normalizedFlagName)) return;
+          if (this.#getIsFlagUnsubcribed(normalizedFlagName)) return;
 
           // Sometimes the SDK flushes flag changes without a value having changed.
           if (!this._didFlagChange(normalizedFlagName, normalizedFlagValue))
@@ -405,10 +410,10 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
 
           // NOTE: Adapter state needs to be updated outside of debounced-fn
           // so that no flag updates are lost.
-          updateFlagsInAdapterState(updatedFlags);
+          this.#updateFlagsInAdapterState(updatedFlags);
 
           const flushFlagsUpdate = () => {
-            if (!getIsAdapterUnsubscribed()) {
+            if (!this.#getIsAdapterUnsubscribed()) {
               adapterState.emitter.emit('flagsStateChange', adapterState.flags);
             }
           };
@@ -430,7 +435,9 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
 
 const adapter = new LaunchDarklyAdapter();
 
-exposeGlobally(adapter, updateFlags);
+exposeGlobally(adapter, adapter.updateFlags);
+
+const updateFlags = adapter.updateFlags;
 
 export default adapter;
 export { updateFlags };

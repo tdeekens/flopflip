@@ -23,7 +23,7 @@
     "strict": true,
     "strictNullChecks": true,
     "stripInternal": true,
-    "target": "es5",
+    "target": "ES2015",
     "allowJs": false,
     "types": ["cypress", "node", "react"]
   },
