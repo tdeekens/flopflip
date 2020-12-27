@@ -39,10 +39,10 @@ export default reducer;
 
 // Action Creators
 export const updateStatus = (
-  nextStatus: TAdapterStatusChange
+  statusChange: TAdapterStatusChange
 ): TUpdateStatusAction => ({
   type: UPDATE_STATUS,
-  payload: { status: nextStatus },
+  payload: statusChange,
 });
 // Selectors
 export const selectStatus = (state: TState) => {

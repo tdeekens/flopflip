@@ -185,7 +185,7 @@ const useHandleDefaultFlagsCallback = ({
   const handleDefaultFlags = React.useCallback(
     (defaultFlags: TFlags): void => {
       if (Object.keys(defaultFlags).length > 0) {
-        onFlagsStateChange(defaultFlags);
+        onFlagsStateChange({flags: defaultFlags});
       }
     },
     [onFlagsStateChange]
@@ -360,6 +360,11 @@ const useDefaultFlagsEffect = ({
               applyAdapterArgs(pendingAdapterArgsRef.current);
             }
           }
+        }).catch(() => {
+          warning(
+            false,
+            '@flopflip/react: adapter could not be configured.'
+          );
         });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

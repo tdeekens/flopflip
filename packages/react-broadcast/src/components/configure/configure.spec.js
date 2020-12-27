@@ -51,7 +51,7 @@ describe('when feature is disabled', () => {
   });
 });
 
-describe('when enabling feature is', () => {
+describe('when enabling feature', () => {
   it('should indicate the feature being enabled', async () => {
     const rendered = render();
 

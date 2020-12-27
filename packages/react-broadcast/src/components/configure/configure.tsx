@@ -32,28 +32,20 @@ const initialAdapterStatus: State['status'] = {
   subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
   configurationStatus: AdapterConfigurationStatus.Unconfigured,
 };
-const initialFlags: State['flags'] = {};
+const getInitialFlags = () => ({})
 
-type TUseFlagStateOptions = {
-  initialFlags: State['flags'];
-};
-const useFlagsState = ({
-  initialFlags,
-}: TUseFlagStateOptions): [
+const useFlagsState = (): [
   TFlags,
   React.Dispatch<React.SetStateAction<TFlags>>
 ] => {
-  const [flags, setFlags] = React.useState<State['flags']>(initialFlags);
+  const [flags, setFlags] = React.useState<State['flags']>(
+    getInitialFlags()
+  );
 
   return [flags, setFlags];
 };
 
-type TUseStatusStateOptions = {
-  initialAdapterStatus: State['status'];
-};
-const useStatusState = ({
-  initialAdapterStatus,
-}: TUseStatusStateOptions): [
+const useStatusState = (): [
   TAdapterStatus,
   React.Dispatch<React.SetStateAction<TAdapterStatus>>
 ] => {
@@ -67,8 +59,9 @@ const useStatusState = ({
 const Configure = <AdapterInstance extends TAdapter>(
   props: Props<AdapterInstance>
 ) => {
-  const [flags, setFlags] = useFlagsState({ initialFlags });
-  const [status, setStatus] = useStatusState({ initialAdapterStatus });
+  const [flags, setFlags] = useFlagsState();
+  const [status, setStatus] = useStatusState();
+
 
   // NOTE:
   //   Using this prevents the callbacks being invoked
@@ -76,10 +69,8 @@ const Configure = <AdapterInstance extends TAdapter>(
   //   component.
   const getHasAdapterSubscriptionStatus = useAdapterSubscription(props.adapter);
 
-  const handleUpdateFlags = React.useCallback<
-    (flags: TFlagsChange) => void
-  >(
-    (flags) => {
+  const handleUpdateFlags = React.useCallback<(flagsChange: TFlagsChange) => void>(
+    (flagsChange) => {
       if (
         getHasAdapterSubscriptionStatus(AdapterSubscriptionStatus.Unsubscribed)
       ) {
@@ -88,16 +79,16 @@ const Configure = <AdapterInstance extends TAdapter>(
 
       setFlags((prevFlags) => ({
         ...prevFlags,
-        ...flags,
+        ...flagsChange.flags,
       }));
     },
     [setFlags, getHasAdapterSubscriptionStatus]
   );
 
   const handleUpdateStatus = React.useCallback<
-    (status: TAdapterStatusChange) => void
+    (statusChange: TAdapterStatusChange) => void
   >(
-    (status) => {
+    (statusChange) => {
       if (
         getHasAdapterSubscriptionStatus(AdapterSubscriptionStatus.Unsubscribed)
       ) {
@@ -106,7 +97,7 @@ const Configure = <AdapterInstance extends TAdapter>(
 
       setStatus((prevStatus) => ({
         ...prevStatus,
-        ...status,
+        ...statusChange.status,
       }));
     },
     [setStatus, getHasAdapterSubscriptionStatus]

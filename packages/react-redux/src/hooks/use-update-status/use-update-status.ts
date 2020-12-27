@@ -11,7 +11,8 @@ import { updateStatus } from '../../ducks';
 const useUpdateStatus = (): TAdapterEventHandlers['onStatusStateChange'] => {
   const dispatch = useDispatch<Dispatch<ReturnType<typeof updateStatus>>>();
   return useCallback(
-    (status: TAdapterStatusChange) => dispatch(updateStatus(status)),
+    (statusChange: TAdapterStatusChange) =>
+      dispatch(updateStatus(statusChange)),
     [dispatch]
   );
 };

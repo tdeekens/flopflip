@@ -19,14 +19,14 @@ describe('action creators', () => {
       flags = { a: 'b' };
     });
     it('should return `flags/updateFlags` type', () => {
-      expect(updateFlags(flags)).toEqual({
+      expect(updateFlags({ flags })).toEqual({
         type: UPDATE_FLAGS,
         payload: expect.any(Object),
       });
     });
 
     it('should return passed `flags`', () => {
-      expect(updateFlags(flags)).toEqual({
+      expect(updateFlags({ flags })).toEqual({
         type: expect.any(String),
         payload: { flags },
       });

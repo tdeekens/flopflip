@@ -27,11 +27,14 @@ export type TAdapterStatus = {
   configurationStatus: AdapterConfigurationStatus;
   subscriptionStatus: AdapterSubscriptionStatus;
 };
-export type TAdapterStatusChange = Partial<TAdapterStatus>;
-export type TFlagsChange = TFlags;
+export type TAdapterStatusChange = {
+  id?: TAdapterInterfaceIdentifiers;
+  status: Partial<TAdapterStatus>;
+};
+export type TFlagsChange = { id?: TAdapterInterfaceIdentifiers; flags: TFlags };
 export type TAdapterEventHandlers = {
-  onFlagsStateChange: (flags: TFlagsChange) => void;
-  onStatusStateChange: (status: TAdapterStatusChange) => void;
+  onFlagsStateChange: (flagsChange: TFlagsChange) => void;
+  onStatusStateChange: (statusChange: TAdapterStatusChange) => void;
 };
 export type TBaseAdapterArgs = {
   user: TUser;
@@ -81,25 +84,20 @@ export type TAdapterArgs =
   | TMemoryAdapterArgs
   | TSplitioAdapterArgs
   | TGraphQLAdapterArgs;
-export const interfaceIdentifiers = {
+export const adapterInterfaceIdentifiers = {
   launchdarkly: 'launchdarkly',
   localstorage: 'localstorage',
   memory: 'memory',
   splitio: 'splitio',
   graphql: 'graphql',
 } as const;
-export type TAdapterInterfaceIdentifiers = typeof interfaceIdentifiers[keyof typeof interfaceIdentifiers];
-
+export type TAdapterInterfaceIdentifiers = typeof adapterInterfaceIdentifiers[keyof typeof adapterInterfaceIdentifiers];
+export type TFlagsContext = Record<TAdapterInterfaceIdentifiers, TFlags>;
 export const cacheIdentifiers = {
   local: 'local',
   session: 'session',
 } as const;
 export type TCacheIdentifiers = typeof cacheIdentifiers[keyof typeof cacheIdentifiers];
-
-export type TOnFlagsStateChangeCallback = (flags: TFlags) => void;
-export type TOnStatusStateChangeCallback = (
-  statusChange: TAdapterStatusChange
-) => void;
 export type TUpdateFlagsOptions = {
   lockFlags?: boolean;
   unsubscribeFlags?: boolean;
@@ -112,6 +110,7 @@ export type TFlagsUpdateFunction = (
 export interface TAdapterInterface<Args extends TAdapterArgs> {
   // Identifiers are used to uniquely identify an interface when performing a condition check.
   id: TAdapterInterfaceIdentifiers;
+  ids?: TAdapterInterfaceIdentifiers[];
   configure: (
     adapterArgs: Args,
     adapterEventHandlers: TAdapterEventHandlers
@@ -136,7 +135,7 @@ export interface TAdapterInterface<Args extends TAdapterArgs> {
 }
 export interface TLaunchDarklyAdapterInterface
   extends TAdapterInterface<TLaunchDarklyAdapterArgs> {
-  id: typeof interfaceIdentifiers.launchdarkly;
+  id: typeof adapterInterfaceIdentifiers.launchdarkly;
   configure: (
     adapterArgs: TLaunchDarklyAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
@@ -156,7 +155,7 @@ export interface TLaunchDarklyAdapterInterface
 }
 export interface TLocalStorageAdapterInterface
   extends TAdapterInterface<TLocalStorageAdapterArgs> {
-  id: typeof interfaceIdentifiers.localstorage;
+  id: typeof adapterInterfaceIdentifiers.localstorage;
   configure: (
     adapterArgs: TLocalStorageAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
@@ -174,7 +173,7 @@ export interface TLocalStorageAdapterInterface
 }
 export interface TGraphQLAdapterInterface
   extends TAdapterInterface<TGraphQLAdapterArgs> {
-  id: typeof interfaceIdentifiers.graphql;
+  id: typeof adapterInterfaceIdentifiers.graphql;
   configure: (
     adapterArgs: TGraphQLAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
@@ -192,7 +191,7 @@ export interface TGraphQLAdapterInterface
 }
 export interface TMemoryAdapterInterface
   extends TAdapterInterface<TMemoryAdapterArgs> {
-  id: typeof interfaceIdentifiers.memory;
+  id: typeof adapterInterfaceIdentifiers.memory;
   configure: (
     adapterArgs: TMemoryAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
@@ -212,7 +211,7 @@ export interface TMemoryAdapterInterface
 }
 export interface TSplitioAdapterInterface
   extends TAdapterInterface<TSplitioAdapterArgs> {
-  id: typeof interfaceIdentifiers.splitio;
+  id: typeof adapterInterfaceIdentifiers.splitio;
   configure: (
     adapterArgs: TSplitioAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
@@ -307,23 +306,21 @@ type TGraphQLAdapterGlobal = {
 };
 
 export type TFlopflipGlobal = {
-  [interfaceIdentifiers.launchdarkly]?: TLaunchDarklyFlopflipGlobal;
-  [interfaceIdentifiers.splitio]?: TSplitioAdapterGlobal;
-  [interfaceIdentifiers.memory]?: TMemoryAdapterGlobal;
-  [interfaceIdentifiers.localstorage]?: TLocalStorageAdapterGlobal;
-  [interfaceIdentifiers.graphql]?: TGraphQLAdapterGlobal;
+  [adapterInterfaceIdentifiers.launchdarkly]?: TLaunchDarklyFlopflipGlobal;
+  [adapterInterfaceIdentifiers.splitio]?: TSplitioAdapterGlobal;
+  [adapterInterfaceIdentifiers.memory]?: TMemoryAdapterGlobal;
+  [adapterInterfaceIdentifiers.localstorage]?: TLocalStorageAdapterGlobal;
+  [adapterInterfaceIdentifiers.graphql]?: TGraphQLAdapterGlobal;
 };
 declare global {
   interface Window {
     __flopflip__: TFlopflipGlobal;
   }
 }
-
 export type TDiff<ExcludedFrom, ToExclude> = Pick<
   ExcludedFrom,
   Exclude<keyof ExcludedFrom, keyof ToExclude>
 >;
-
 export type TCache = {
   get: (key: string) => any;
   set: (key: string, value: any) => boolean;

@@ -6,9 +6,7 @@ import { FlagsContext } from '../../components/flags-context';
 
 export default function useFeatureToggles(flags: TFlags) {
   const allFlags: TFlags = useContext(FlagsContext);
-
   const requestedFlags: boolean[] = Object.entries(flags).reduce<boolean[]>(
-    // eslint-disable-next-line @typescript-eslint/prefer-readonly-parameter-types
     (previousFlags, [flagName, flagVariation]: [TFlagName, TFlagVariation]) => {
       const isFeatureEnabled: boolean = getIsFeatureEnabled(
         flagName,

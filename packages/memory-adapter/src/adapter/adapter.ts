@@ -15,7 +15,7 @@ import {
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
-  interfaceIdentifiers,
+  adapterInterfaceIdentifiers,
 } from '@flopflip/types';
 import { normalizeFlag, exposeGlobally } from '@flopflip/adapter-utilities';
 
@@ -44,13 +44,13 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
   #adapterState: TAdapterStatus & MemoryAdapterState;
 
-  id: typeof interfaceIdentifiers.memory;
+  id: typeof adapterInterfaceIdentifiers.memory;
 
   constructor() {
     this.#adapterState = {
       ...intialAdapterState,
     };
-    this.id = interfaceIdentifiers.memory;
+    this.id = adapterInterfaceIdentifiers.memory;
   }
 
   #getIsAdapterUnsubscribed = () =>
@@ -106,16 +106,22 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     adapterArgs: TMemoryAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) {
-    const handleFlagsChange = (nextFlags: TFlags) => {
+    const handleFlagsChange = (nextFlags: TFlagsChange['flags']) => {
       if (this.#getIsAdapterUnsubscribed()) return;
 
-      adapterEventHandlers.onFlagsStateChange(nextFlags);
+      adapterEventHandlers.onFlagsStateChange({
+        flags: nextFlags,
+        id: this.id,
+      });
     };
 
-    const handleStatusChange = (nextStatus: TAdapterStatusChange) => {
+    const handleStatusChange = (nextStatus: TAdapterStatusChange['status']) => {
       if (this.#getIsAdapterUnsubscribed()) return;
 
-      adapterEventHandlers.onStatusStateChange(nextStatus);
+      adapterEventHandlers.onStatusStateChange({
+        status: nextStatus,
+        id: this.id,
+      });
     };
 
     this.#adapterState.emitter.on<TFlagsChange>(

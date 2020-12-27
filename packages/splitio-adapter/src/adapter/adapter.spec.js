@@ -218,7 +218,8 @@ describe('when configuring', () => {
 
     it('should `dispatch` `onUpdateStatus` action with configured', () => {
       expect(onStatusStateChange).toHaveBeenCalledWith({
-        configurationStatus: AdapterConfigurationStatus.Configuring,
+        id: adapter.id,
+        status: { configurationStatus: AdapterConfigurationStatus.Configuring },
       });
     });
 
@@ -240,14 +241,20 @@ describe('when configuring', () => {
 
       it('should `dispatch` `onUpdateStatus` action with configured', () => {
         expect(onStatusStateChange).toHaveBeenCalledWith({
-          configurationStatus: AdapterConfigurationStatus.Configured,
+          id: adapter.id,
+          status: {
+            configurationStatus: AdapterConfigurationStatus.Configured,
+          },
         });
       });
 
       it('should `dispatch` `onStatusStateChange`', () => {
         expect(onFlagsStateChange).toHaveBeenCalledWith({
-          someFlag1: true,
-          someFlag2: false,
+          id: adapter.id,
+          flags: {
+            someFlag1: true,
+            someFlag2: false,
+          },
         });
       });
 

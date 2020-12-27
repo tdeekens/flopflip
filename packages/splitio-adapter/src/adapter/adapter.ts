@@ -7,8 +7,6 @@ import type {
   TUser,
   TFlag,
   TFlags,
-  TOnFlagsStateChangeCallback,
-  TOnStatusStateChangeCallback,
   TAdapterEventHandlers,
   TSplitioAdapterInterface,
   TSplitioAdapterArgs,
@@ -17,7 +15,7 @@ import {
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
-  interfaceIdentifiers,
+  adapterInterfaceIdentifiers,
 } from '@flopflip/types';
 import { normalizeFlags, exposeGlobally } from '@flopflip/adapter-utilities';
 
@@ -33,8 +31,8 @@ type SplitIOAdapterState = {
   client?: SplitIO.IClient;
   manager?: SplitIO.IManager;
   configuredCallbacks: {
-    onFlagsStateChange: TOnFlagsStateChangeCallback;
-    onStatusStateChange: TOnStatusStateChangeCallback;
+    onFlagsStateChange: TAdapterEventHandlers['onFlagsStateChange'];
+    onStatusStateChange: TAdapterEventHandlers['onStatusStateChange'];
   };
   splitioSettings?: SplitIO.IBrowserSettings;
   treatmentAttributes?: SplitIO.Attributes;
@@ -67,7 +65,7 @@ const createAnonymousUserKey = () => Math.random().toString(36).substring(2);
 
 class SplitioAdapter implements TSplitioAdapterInterface {
   #adapterState: TAdapterStatus & SplitIOAdapterState;
-  id: typeof interfaceIdentifiers.splitio;
+  id: typeof adapterInterfaceIdentifiers.splitio;
 
   constructor() {
     this.#adapterState = {
@@ -82,7 +80,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
       },
       splitioSettings: undefined,
     };
-    this.id = interfaceIdentifiers.splitio;
+    this.id = adapterInterfaceIdentifiers.splitio;
   }
 
   #getIsAdapterUnsubscribed = () =>
@@ -94,7 +92,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     onFlagsStateChange,
   }: {
     flagNames: TFlagName[];
-    onFlagsStateChange: TOnFlagsStateChangeCallback;
+    onFlagsStateChange: TAdapterEventHandlers['onFlagsStateChange'];
   }) => {
     if (this.#adapterState.client) {
       this.#adapterState.client.on(
@@ -111,7 +109,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
             );
 
             if (!this.#getIsAdapterUnsubscribed()) {
-              onFlagsStateChange(normalizeFlags(flags));
+              onFlagsStateChange({ id: this.id, flags: normalizeFlags(flags) });
             }
           }
         }
@@ -141,8 +139,8 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     onFlagsStateChange,
     onStatusStateChange,
   }: {
-    onFlagsStateChange: TOnFlagsStateChangeCallback;
-    onStatusStateChange: TOnStatusStateChangeCallback;
+    onFlagsStateChange: TAdapterEventHandlers['onFlagsStateChange'];
+    onStatusStateChange: TAdapterEventHandlers['onStatusStateChange'];
   }) =>
     new Promise<void>((resolve, reject) => {
       if (this.#adapterState.client) {
@@ -150,7 +148,10 @@ class SplitioAdapter implements TSplitioAdapterInterface {
           AdapterConfigurationStatus.Configuring;
 
         onStatusStateChange({
-          configurationStatus: this.#adapterState.configurationStatus,
+          id: this.id,
+          status: {
+            configurationStatus: this.#adapterState.configurationStatus,
+          },
         });
 
         this.#adapterState.client.on(
@@ -175,7 +176,10 @@ class SplitioAdapter implements TSplitioAdapterInterface {
               );
 
               if (!this.#getIsAdapterUnsubscribed()) {
-                onFlagsStateChange(normalizeFlags(flags));
+                onFlagsStateChange({
+                  id: this.id,
+                  flags: normalizeFlags(flags),
+                });
               }
 
               // First update internal state
@@ -185,7 +189,10 @@ class SplitioAdapter implements TSplitioAdapterInterface {
 
               if (!this.#getIsAdapterUnsubscribed()) {
                 onStatusStateChange({
-                  configurationStatus: this.#adapterState.configurationStatus,
+                  id: this.id,
+                  status: {
+                    configurationStatus: this.#adapterState.configurationStatus,
+                  },
                 });
               }
 
