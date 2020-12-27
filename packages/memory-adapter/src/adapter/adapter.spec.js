@@ -65,7 +65,10 @@ describe('when configuring', () => {
     it('should invoke `onStatusStateChange` with configuring', () => {
       expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
         expect.objectContaining({
-          configurationStatus: AdapterConfigurationStatus.Configuring,
+          id: adapter.id,
+          status: {
+            configurationStatus: AdapterConfigurationStatus.Configuring,
+          },
         })
       );
     });
@@ -87,7 +90,10 @@ describe('when configuring', () => {
     it('should invoke `onStatusStateChange` with configured', () => {
       expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
         expect.objectContaining({
-          configurationStatus: AdapterConfigurationStatus.Configured,
+          id: adapter.id,
+          status: {
+            configurationStatus: AdapterConfigurationStatus.Configured,
+          },
         })
       );
     });
@@ -113,9 +119,10 @@ describe('when configuring', () => {
       });
 
       it('should invoke `onFlagsStateChange` with `updatedFlags`', () => {
-        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith(
-          expect.objectContaining(updatedFlags)
-        );
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+          id: adapter.id,
+          flags: expect.objectContaining(updatedFlags),
+        });
       });
 
       describe('when flags are not normalized', () => {
@@ -179,9 +186,10 @@ describe('when configuring', () => {
       });
 
       it('should invoke `onFlagsStateChange` with empty flags', () => {
-        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith(
-          {}
-        );
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+          id: adapter.id,
+          flags: {},
+        });
       });
     });
 
@@ -214,7 +222,10 @@ describe('when configuring', () => {
       it('should invoke `onStatusStateChange` with configuring', () => {
         expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
           expect.objectContaining({
-            configurationStatus: AdapterConfigurationStatus.Configuring,
+            id: adapter.id,
+            status: {
+              configurationStatus: AdapterConfigurationStatus.Configuring,
+            },
           })
         );
       });
@@ -230,7 +241,10 @@ describe('when configuring', () => {
       it('should invoke `onStatusStateChange` with configured', () => {
         expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
           expect.objectContaining({
-            configurationStatus: AdapterConfigurationStatus.Configuring,
+            id: adapter.id,
+            status: {
+              configurationStatus: AdapterConfigurationStatus.Configuring,
+            },
           })
         );
       });

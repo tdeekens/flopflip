@@ -7,9 +7,10 @@ import { updateFlags } from '../../ducks';
 
 const useUpdateFlags = (): TAdapterEventHandlers['onFlagsStateChange'] => {
   const dispatch = useDispatch<Dispatch<ReturnType<typeof updateFlags>>>();
-  return useCallback((flags: TFlagsChange) => dispatch(updateFlags(flags)), [
-    dispatch,
-  ]);
+  return useCallback(
+    (flagsChange: TFlagsChange) => dispatch(updateFlags(flagsChange)),
+    [dispatch]
+  );
 };
 
 export { useUpdateFlags };

@@ -98,11 +98,12 @@ describe('when configured', () => {
     });
 
     it('should invoke `onStatusStateChange` with configuring', () => {
-      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
-        expect.objectContaining({
+      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith({
+        id: adapter.id,
+        status: expect.objectContaining({
           configurationStatus: AdapterConfigurationStatus.Configuring,
-        })
-      );
+        }),
+      });
     });
 
     it('should indicate that the adapter is configured', () => {
@@ -112,11 +113,12 @@ describe('when configured', () => {
     });
 
     it('should invoke `onStatusStateChange` with configured', () => {
-      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
-        expect.objectContaining({
+      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith({
+        id: adapter.id,
+        status: expect.objectContaining({
           configurationStatus: AdapterConfigurationStatus.Configured,
-        })
-      );
+        }),
+      });
     });
 
     it('should resolve `waitUntilConfigured`', async () => {
@@ -129,8 +131,11 @@ describe('when configured', () => {
 
     it('should invoke `onFlagsStateChange`', () => {
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
-        enabled: true,
-        disabled: false,
+        id: adapter.id,
+        flags: {
+          enabled: true,
+          disabled: false,
+        },
       });
     });
 
@@ -198,7 +203,10 @@ describe('when configured', () => {
       expect(sessionStorage.getItem).toHaveBeenCalledWith('@flopflip__flags');
 
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
-        cached: true,
+        id: adapter.id,
+        flags: {
+          cached: true,
+        },
       });
     });
 
@@ -210,8 +218,11 @@ describe('when configured', () => {
 
     it('should flush fetched flags', () => {
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
-        enabled: true,
-        disabled: false,
+        id: adapter.id,
+        flags: {
+          enabled: true,
+          disabled: false,
+        },
       });
     });
   });
@@ -235,9 +246,10 @@ describe('when configured', () => {
     });
 
     it('should invoke `onFlagsStateChange` with `updatedFlags`', () => {
-      expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith(
-        expect.objectContaining(updatedFlags)
-      );
+      expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+        id: adapter.id,
+        flags: expect.objectContaining(updatedFlags),
+      });
     });
 
     describe('when flags are not normalized', () => {
@@ -304,7 +316,10 @@ describe('when configured', () => {
     });
 
     it('should invoke `onFlagsStateChange` with empty flags', () => {
-      expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({});
+      expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+        id: adapter.id,
+        flags: {},
+      });
     });
 
     it('should reset cache', () => {
@@ -343,11 +358,12 @@ describe('when configured', () => {
     });
 
     it('should invoke `onStatusStateChange` with configuring', () => {
-      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
-        expect.objectContaining({
+      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith({
+        id: adapter.id,
+        status: expect.objectContaining({
           configurationStatus: AdapterConfigurationStatus.Configuring,
-        })
-      );
+        }),
+      });
     });
 
     it('should indicate that the adapter is not configured', () => {
@@ -357,11 +373,12 @@ describe('when configured', () => {
     });
 
     it('should invoke `onStatusStateChange` with configured', () => {
-      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
-        expect.objectContaining({
+      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith({
+        id: adapter.id,
+        status: expect.objectContaining({
           configurationStatus: AdapterConfigurationStatus.Configuring,
-        })
-      );
+        }),
+      });
     });
   });
 });

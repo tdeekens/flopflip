@@ -15,7 +15,7 @@ import {
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
-  interfaceIdentifiers,
+  adapterInterfaceIdentifiers,
 } from '@flopflip/types';
 import {
   normalizeFlags,
@@ -53,13 +53,13 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   #cache = createCache({ prefix: STORAGE_SLICE });
   #adapterState: TAdapterStatus & LocalStorageAdapterState;
 
-  id: typeof interfaceIdentifiers.localstorage;
+  id: typeof adapterInterfaceIdentifiers.localstorage;
 
   constructor() {
     this.#adapterState = {
       ...intialAdapterState,
     };
-    this.id = interfaceIdentifiers.localstorage;
+    this.id = adapterInterfaceIdentifiers.localstorage;
   }
 
   #getIsAdapterUnsubscribed = () =>
@@ -146,16 +146,22 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     adapterArgs: TLocalStorageAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) {
-    const handleFlagsChange = (nextFlags: TFlags) => {
+    const handleFlagsChange = (nextFlags: TFlagsChange['flags']) => {
       if (this.#getIsAdapterUnsubscribed()) return;
 
-      adapterEventHandlers.onFlagsStateChange(nextFlags);
+      adapterEventHandlers.onFlagsStateChange({
+        flags: nextFlags,
+        id: this.id,
+      });
     };
 
-    const handleStatusChange = (nextStatus: TAdapterStatusChange) => {
+    const handleStatusChange = (nextStatus: TAdapterStatusChange['status']) => {
       if (this.#getIsAdapterUnsubscribed()) return;
 
-      adapterEventHandlers.onStatusStateChange(nextStatus);
+      adapterEventHandlers.onStatusStateChange({
+        status: nextStatus,
+        id: this.id,
+      });
     };
 
     this.#adapterState.emitter.on<TFlagsChange>(

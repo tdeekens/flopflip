@@ -15,7 +15,7 @@ import {
   AdapterInitializationStatus,
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
-  interfaceIdentifiers,
+  adapterInterfaceIdentifiers,
 } from '@flopflip/types';
 import {
   normalizeFlags,
@@ -46,7 +46,7 @@ type LaunchDarklyAdapterState = {
 
 class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   #adapterState: TAdapterStatus & LaunchDarklyAdapterState;
-  id: typeof interfaceIdentifiers.launchdarkly;
+  id: typeof adapterInterfaceIdentifiers.launchdarkly;
 
   constructor() {
     this.#adapterState = {
@@ -61,7 +61,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       lockedFlags: new Set<TFlagName>(),
       unsubscribedFlags: new Set<TFlagName>(),
     };
-    this.id = interfaceIdentifiers.launchdarkly;
+    this.id = adapterInterfaceIdentifiers.launchdarkly;
   }
 
   #updateFlagsInAdapterState = (
@@ -191,11 +191,9 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
             AdapterConfigurationStatus.Configured;
 
           // ...to then signal that the adapter is configured
-          if (!this.#getIsAdapterUnsubscribed()) {
-            this.#adapterState.emitter.emit('statusStateChange', {
-              configurationStatus: this.#adapterState.configurationStatus,
-            });
-          }
+          this.#adapterState.emitter.emit('statusStateChange', {
+            configurationStatus: this.#adapterState.configurationStatus,
+          });
 
           return Promise.resolve({
             flagsFromSdk,
@@ -270,12 +268,10 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
           this.#updateFlagsInAdapterState(updatedFlags);
 
           const flushFlagsUpdate = () => {
-            if (!this.#getIsAdapterUnsubscribed()) {
-              this.#adapterState.emitter.emit(
-                'flagsStateChange',
-                this.#adapterState.flags
-              );
-            }
+            this.#adapterState.emitter.emit(
+              'flagsStateChange',
+              this.#adapterState.flags
+            );
           };
 
           const scheduleImmediately = { before: true, after: false };
@@ -297,30 +293,46 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     this.#updateFlagsInAdapterState(flags, options);
 
     // ...and flush initial state of flags
-    if (!this.#getIsAdapterUnsubscribed()) {
-      this.#adapterState.emitter.emit(
-        'flagsStateChange',
-        this.#adapterState.flags
-      );
-    }
+    this.#adapterState.emitter.emit(
+      'flagsStateChange',
+      this.#adapterState.flags
+    );
   };
 
   async configure(
     adapterArgs: TLaunchDarklyAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) {
+    const handleFlagsChange = (nextFlags: TFlagsChange['flags']) => {
+      if (this.#getIsAdapterUnsubscribed()) return;
+
+      adapterEventHandlers.onFlagsStateChange({
+        flags: nextFlags,
+        id: this.id,
+      });
+    };
+
+    const handleStatusChange = (nextStatus: TAdapterStatusChange['status']) => {
+      if (this.#getIsAdapterUnsubscribed()) return;
+
+      adapterEventHandlers.onStatusStateChange({
+        status: nextStatus,
+        id: this.id,
+      });
+    };
+
     this.#adapterState.configurationStatus =
       AdapterConfigurationStatus.Configuring;
 
     this.#adapterState.emitter.on<TFlagsChange>(
       'flagsStateChange',
       // @ts-expect-error
-      adapterEventHandlers.onFlagsStateChange
+      handleFlagsChange
     );
     this.#adapterState.emitter.on<TAdapterStatusChange>(
       'statusStateChange',
       // @ts-expect-error
-      adapterEventHandlers.onStatusStateChange
+      handleStatusChange
     );
 
     this.#adapterState.emitter.emit('statusStateChange', {

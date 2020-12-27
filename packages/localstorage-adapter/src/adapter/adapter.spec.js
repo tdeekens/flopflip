@@ -62,7 +62,10 @@ describe('when configuring', () => {
     it('should invoke `onStatusStateChange` with configuring', () => {
       expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
         expect.objectContaining({
-          configurationStatus: AdapterConfigurationStatus.Configuring,
+          id: adapter.id,
+          status: {
+            configurationStatus: AdapterConfigurationStatus.Configuring,
+          },
         })
       );
     });
@@ -74,11 +77,12 @@ describe('when configuring', () => {
     });
 
     it('should invoke `onStatusStateChange` with configured', () => {
-      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
-        expect.objectContaining({
+      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith({
+        id: adapter.id,
+        status: expect.objectContaining({
           configurationStatus: AdapterConfigurationStatus.Configured,
-        })
-      );
+        }),
+      });
     });
 
     it('should resolve `waitUntilConfigured`', async () => {
@@ -118,9 +122,10 @@ describe('when configuring', () => {
       });
 
       it('should invoke `onFlagsStateChange` with `updatedFlags`', () => {
-        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith(
-          updatedFlags
-        );
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+          id: adapter.id,
+          flags: updatedFlags,
+        });
       });
 
       describe('when flags are not normalized', () => {
@@ -136,12 +141,13 @@ describe('when configuring', () => {
         });
 
         it('should invoke `onFlagsStateChange`', () => {
-          expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith(
-            expect.objectContaining({
+          expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+            id: adapter.id,
+            flags: expect.objectContaining({
               flagA1: false,
               flagB: false,
-            })
-          );
+            }),
+          });
         });
       });
 
@@ -224,25 +230,28 @@ describe('when configuring', () => {
       });
 
       it('should invoke `onFlagsStateChange` with empty flags', () => {
-        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith(
-          {}
-        );
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+          id: adapter.id,
+          flags: {},
+        });
       });
 
       it('should invoke `onStatusStateChange` with configuring', () => {
-        expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
-          expect.objectContaining({
+        expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith({
+          id: adapter.id,
+          status: expect.objectContaining({
             configurationStatus: AdapterConfigurationStatus.Configuring,
-          })
-        );
+          }),
+        });
       });
 
       it('should invoke `onStatusStateChange` with configured', () => {
-        expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
-          expect.objectContaining({
+        expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith({
+          id: adapter.id,
+          status: expect.objectContaining({
             configurationStatus: AdapterConfigurationStatus.Configured,
-          })
-        );
+          }),
+        });
       });
     });
   });

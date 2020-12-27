@@ -191,9 +191,9 @@ describe('when providing default flags', () => {
 
     const rendered = render({ props, adapter });
 
-    expect(rendered.props.onFlagsStateChange).toHaveBeenCalledWith(
-      defaultFlags
-    );
+    expect(rendered.props.onFlagsStateChange).toHaveBeenCalledWith({
+      flags: defaultFlags,
+    });
 
     await rendered.waitUntilStatus();
   });

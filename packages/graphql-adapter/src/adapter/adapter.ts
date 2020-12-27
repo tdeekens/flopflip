@@ -16,7 +16,7 @@ import {
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
-  interfaceIdentifiers,
+  adapterInterfaceIdentifiers,
   cacheIdentifiers,
 } from '@flopflip/types';
 import {
@@ -56,10 +56,10 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
   #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
   #defaultPollingInteral = 1000 * 60;
 
-  id: typeof interfaceIdentifiers.graphql;
+  id: typeof adapterInterfaceIdentifiers.graphql;
 
   constructor() {
-    this.id = interfaceIdentifiers.graphql;
+    this.id = adapterInterfaceIdentifiers.graphql;
   }
 
   #getIsAdapterUnsubscribed = () =>
@@ -214,16 +214,22 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
     adapterArgs: TGraphQLAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) {
-    const handleFlagsChange = (nextFlags: TFlags) => {
+    const handleFlagsChange = (nextFlags: TFlagsChange['flags']) => {
       if (this.#getIsAdapterUnsubscribed()) return;
 
-      adapterEventHandlers.onFlagsStateChange(nextFlags);
+      adapterEventHandlers.onFlagsStateChange({
+        flags: nextFlags,
+        id: this.id,
+      });
     };
 
-    const handleStatusChange = (nextStatus: TAdapterStatusChange) => {
+    const handleStatusChange = (nextStatus: TAdapterStatusChange['status']) => {
       if (this.#getIsAdapterUnsubscribed()) return;
 
-      adapterEventHandlers.onStatusStateChange(nextStatus);
+      adapterEventHandlers.onStatusStateChange({
+        status: nextStatus,
+        id: this.id,
+      });
     };
 
     adapterState.emitter.on<TFlagsChange>(

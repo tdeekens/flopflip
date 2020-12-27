@@ -20,7 +20,9 @@ describe('action creators', () => {
     it('should return passed configuration status', () => {
       expect(
         updateStatus({
-          configurationStatus: AdapterConfigurationStatus.Configured,
+          status: {
+            configurationStatus: AdapterConfigurationStatus.Configured,
+          },
         })
       ).toEqual({
         type: expect.any(String),

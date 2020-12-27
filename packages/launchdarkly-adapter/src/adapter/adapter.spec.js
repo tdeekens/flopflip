@@ -199,14 +199,20 @@ describe('when configuring', () => {
 
       it('should `dispatch` `onUpdateStatus` action with configured', () => {
         expect(onStatusStateChange).toHaveBeenCalledWith({
-          configurationStatus: AdapterConfigurationStatus.Configured,
+          id: adapter.id,
+          status: {
+            configurationStatus: AdapterConfigurationStatus.Configured,
+          },
         });
       });
 
-      it('should `dispatch` `onStatusStateChange`', () => {
+      it('should `dispatch` `onFlagsStateChange`', () => {
         expect(onFlagsStateChange).toHaveBeenCalledWith({
-          someFlag1: true,
-          someFlag2: false,
+          id: adapter.id,
+          flags: {
+            someFlag1: true,
+            someFlag2: false,
+          },
         });
       });
 
@@ -319,14 +325,20 @@ describe('when configuring', () => {
 
         it('should `dispatch` `onUpdateStatus` action with configured', () => {
           expect(onStatusStateChange).toHaveBeenCalledWith({
-            configurationStatus: AdapterConfigurationStatus.Configured,
+            id: adapter.id,
+            status: {
+              configurationStatus: AdapterConfigurationStatus.Configured,
+            },
           });
         });
 
         it('should `dispatch` `onFlagsStateChange`', () => {
           expect(onFlagsStateChange).toHaveBeenCalledWith({
-            someFlag1: true,
-            someFlag2: false,
+            id: adapter.id,
+            flags: {
+              someFlag1: true,
+              someFlag2: false,
+            },
           });
         });
 

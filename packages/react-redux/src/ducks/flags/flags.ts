@@ -45,9 +45,9 @@ export const createReducer = (
 ) => reducer(state, action);
 
 // Action Creators
-export const updateFlags = (flags: TFlagsChange): TUpdateFlagsAction => ({
+export const updateFlags = (flagsChange: TFlagsChange): TUpdateFlagsAction => ({
   type: UPDATE_FLAGS,
-  payload: { flags },
+  payload: flagsChange,
 });
 
 // Selectors
