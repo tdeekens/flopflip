@@ -15,7 +15,7 @@ import {
   AdapterInitializationStatus,
 } from '@flopflip/types';
 
-import * as React from 'react';
+import React from 'react';
 import warning from 'tiny-warning';
 import {
   isFunctionChildren,
