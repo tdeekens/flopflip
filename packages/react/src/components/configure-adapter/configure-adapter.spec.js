@@ -104,7 +104,7 @@ describe('rendering', () => {
         const rendered = render({ props, adapter });
 
         expect(props.children).toHaveBeenCalledWith(
-          expect.objectContaining({ isAdapterReady: true })
+          expect.objectContaining({ isAdapterConfigured: true })
         );
 
         await rendered.waitUntilStatus();

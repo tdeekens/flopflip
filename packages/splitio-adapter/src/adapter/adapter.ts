@@ -22,7 +22,6 @@ import {
 import { normalizeFlags, exposeGlobally } from '@flopflip/adapter-utilities';
 
 import merge from 'deepmerge';
-import warning from 'tiny-warning';
 import { SplitFactory } from '@splitsoftware/splitio';
 import camelCase from 'lodash/camelCase';
 import cloneDeep from 'lodash/cloneDeep';
@@ -326,16 +325,6 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     this.#adapterState.subscriptionStatus =
       AdapterSubscriptionStatus.Subscribed;
   };
-
-  // NOTE: This function is deprecated. Please use `getIsConfigurationStatus`.
-  getIsReady() {
-    warning(
-      false,
-      '@flopflip/splitio-adapter: `getIsReady` has been deprecated. Please use `getIsConfigurationStatus` instead.'
-    );
-
-    return this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured);
-  }
 }
 
 const adapter = new SplitioAdapter();

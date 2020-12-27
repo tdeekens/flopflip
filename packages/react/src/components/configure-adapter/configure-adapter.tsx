@@ -493,8 +493,6 @@ const ConfigureAdapter = (props: TProps) => {
 
         if (props.children && isFunctionChildren(props.children))
           return props.children({
-            // NOTE: Deprecated, please use `isAdapterConfigured`.
-            isAdapterReady: isAdapterConfigured,
             isAdapterConfigured,
           });
 
