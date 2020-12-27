@@ -33,8 +33,7 @@
     "@splitsoftware/splitio": "10.15.2",
     "@flopflip/adapter-utilities": "0.0.1",
     "deepmerge": "4.2.2",
-    "lodash": "4.17.20",
-    "tiny-warning": "1.0.3"
+    "lodash": "4.17.20"
   },
   "keywords": [
     "feature-flags",

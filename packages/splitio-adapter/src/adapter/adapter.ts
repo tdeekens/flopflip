@@ -22,7 +22,6 @@ import {
 import { normalizeFlags, exposeGlobally } from '@flopflip/adapter-utilities';
 
 import merge from 'deepmerge';
-import warning from 'tiny-warning';
 import { SplitFactory } from '@splitsoftware/splitio';
 import camelCase from 'lodash/camelCase';
 import cloneDeep from 'lodash/cloneDeep';
