@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 export default <T extends React.ComponentType<any>>(
   nextDisplayName: string

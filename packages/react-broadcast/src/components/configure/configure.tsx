@@ -12,7 +12,7 @@ import {
   AdapterSubscriptionStatus,
 } from '@flopflip/types';
 
-import * as React from 'react';
+import React from 'react';
 import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
 import { FlagsContext } from '../flags-context';
 
@@ -26,7 +26,6 @@ type Props<AdapterInstance extends TAdapter> = BaseProps &
 type State = {
   flags: TFlags;
   status: TAdapterStatus;
-  configurationId?: string;
 };
 
 const initialAdapterStatus: State['status'] = {
