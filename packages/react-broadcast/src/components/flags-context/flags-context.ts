@@ -1,12 +1,13 @@
 import type { TFlagsContext } from '@flopflip/types';
 
 import { createContext } from 'react';
-import { adapterInterfaceIdentifiers } from '@flopflip/types';
+import { adapterIdentifiers } from '@flopflip/types';
 
 const intialFlagsContext = Object.fromEntries(
-  Object.values(
-    adapterInterfaceIdentifiers
-  ).map((adapterInterfaceIdentifier) => [adapterInterfaceIdentifier, {}])
+  Object.values(adapterIdentifiers).map((adapterInterfaceIdentifier) => [
+    adapterInterfaceIdentifier,
+    {},
+  ])
 );
 const FlagsContext = createContext<TFlagsContext>(intialFlagsContext);
 

@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 
-import type { TAdapterInterfaceIdentifiers, TFlags } from '@flopflip/types';
+import type { TAdapterIdentifiers, TFlags } from '@flopflip/types';
 
 type TCypressPluginAddCommandOptions = {
-  adapterId: TAdapterInterfaceIdentifiers;
+  adapterId: TAdapterIdentifiers;
 };
 
 declare namespace Cypress {
@@ -37,7 +37,6 @@ const addCommands = (options: TCypressPluginAddCommandOptions) => {
           },
         });
 
-        // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
         flopflipAdapterGlobal?.updateFlags(flags, {
           unsubscribeFlags: true,
         });

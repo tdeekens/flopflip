@@ -8,11 +8,11 @@ describe('with a single adapter interface identifier', () => {
     describe('with flag variation', () => {
       it('should return the flag variation', () => {
         const flags = { memory: { fooFlag: 'foo-variation' } };
-        const adapterInterfaceIdentifiers = ['memory'];
+        const adapterIdentifiers = ['memory'];
 
-        expect(
-          getFlagVariation(adapterInterfaceIdentifiers, 'fooFlag')(flags)
-        ).toBe('foo-variation');
+        expect(getFlagVariation(adapterIdentifiers, 'fooFlag')(flags)).toBe(
+          'foo-variation'
+        );
       });
     });
   });
@@ -20,18 +20,18 @@ describe('with a single adapter interface identifier', () => {
   describe('with non normalized flag variation', () => {
     it('should return the flag variation', () => {
       const flags = { memory: { fooFlag: true } };
-      const adapterInterfaceIdentifiers = ['memory'];
+      const adapterIdentifiers = ['memory'];
 
-      expect(
-        getFlagVariation(adapterInterfaceIdentifiers, 'foo-flag')(flags)
-      ).toBe(true);
+      expect(getFlagVariation(adapterIdentifiers, 'foo-flag')(flags)).toBe(
+        true
+      );
     });
 
     it('should invoke `warning`', () => {
       const flags = { memory: { fooFlag: false } };
-      const adapterInterfaceIdentifiers = ['memory'];
+      const adapterIdentifiers = ['memory'];
 
-      getFlagVariation(adapterInterfaceIdentifiers, 'fooFlag')(flags);
+      getFlagVariation(adapterIdentifiers, 'fooFlag')(flags);
 
       expect(warning).toHaveBeenCalled();
     });
@@ -40,11 +40,11 @@ describe('with a single adapter interface identifier', () => {
   describe('with non existing flag variation', () => {
     it('should indicate flag variation not existing', () => {
       const flags = { memory: { fooFlag: true } };
-      const adapterInterfaceIdentifiers = ['memory'];
+      const adapterIdentifiers = ['memory'];
 
-      expect(
-        getFlagVariation(adapterInterfaceIdentifiers, 'fooFlag2')(flags)
-      ).toBe(false);
+      expect(getFlagVariation(adapterIdentifiers, 'fooFlag2')(flags)).toBe(
+        false
+      );
     });
   });
 });
@@ -57,11 +57,11 @@ describe('with multiple adapter interface identifier', () => {
           memory: { fooFlag: 'memory-foo-variation' },
           graphql: { fooFlag: 'graphql-foo-variation' },
         };
-        const adapterInterfaceIdentifiers = ['memory', 'graphql'];
+        const adapterIdentifiers = ['memory', 'graphql'];
 
-        expect(
-          getFlagVariation(adapterInterfaceIdentifiers, 'fooFlag')(flags)
-        ).toBe('memory-foo-variation');
+        expect(getFlagVariation(adapterIdentifiers, 'fooFlag')(flags)).toBe(
+          'memory-foo-variation'
+        );
       });
     });
 
@@ -71,11 +71,11 @@ describe('with multiple adapter interface identifier', () => {
           memory: { fooFlag: false },
           graphql: { fooFlag: 'graphql-foo-variation' },
         };
-        const adapterInterfaceIdentifiers = ['memory', 'graphql'];
+        const adapterIdentifiers = ['memory', 'graphql'];
 
-        expect(
-          getFlagVariation(adapterInterfaceIdentifiers, 'fooFlag')(flags)
-        ).toBe(false);
+        expect(getFlagVariation(adapterIdentifiers, 'fooFlag')(flags)).toBe(
+          false
+        );
       });
     });
 
@@ -85,11 +85,11 @@ describe('with multiple adapter interface identifier', () => {
           memory: { fooFlag: null },
           graphql: { fooFlag: 'graphql-foo-variation' },
         };
-        const adapterInterfaceIdentifiers = ['memory', 'graphql'];
+        const adapterIdentifiers = ['memory', 'graphql'];
 
-        expect(
-          getFlagVariation(adapterInterfaceIdentifiers, 'fooFlag')(flags)
-        ).toBe('graphql-foo-variation');
+        expect(getFlagVariation(adapterIdentifiers, 'fooFlag')(flags)).toBe(
+          'graphql-foo-variation'
+        );
       });
     });
   });

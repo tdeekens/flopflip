@@ -9,7 +9,7 @@ export default function useFeatureToggles(flags: TFlags) {
   const requestedFlags: boolean[] = Object.entries(flags).reduce<boolean[]>(
     (previousFlags, [flagName, flagVariation]: [TFlagName, TFlagVariation]) => {
       const isFeatureEnabled: boolean = getIsFeatureEnabled(
-        adapterContext.adapterInterfaceIdentifiers,
+        adapterContext.adapterEffectIdentifiers,
         flagName,
         flagVariation
       )(flagsContext);

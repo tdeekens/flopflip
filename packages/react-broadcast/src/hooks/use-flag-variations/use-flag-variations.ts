@@ -11,7 +11,7 @@ export default function useFlagVariations(
 
   const flagVariations: TFlagVariation[] = flagNames.map((requestedVariation) =>
     getFlagVariation(
-      adapterContext.adapterInterfaceIdentifiers,
+      adapterContext.adapterEffectIdentifiers,
       requestedVariation
     )(flagsContext)
   );

@@ -11,7 +11,7 @@ export default function useFeatureToggle(
   const adapterContext = useAdapterContext();
   const flagsContext = useFlagsContext();
   const isFeatureEnabled: boolean = getIsFeatureEnabled(
-    adapterContext.adapterInterfaceIdentifiers,
+    adapterContext.adapterEffectIdentifiers,
     flagName,
     flagVariation
   )(flagsContext);

@@ -6,7 +6,7 @@ import reducer, {
   selectFlags,
 } from './flags';
 
-const adapterInterfaceIdentifiers = ['memory'];
+const adapterIdentifiers = ['memory'];
 
 describe('constants', () => {
   it('should contain `flags/updateFlags`', () => {
@@ -19,23 +19,23 @@ describe('action creators', () => {
     const flags = { a: 'b' };
 
     it('should return `flags/updateFlags` type', () => {
-      expect(updateFlags({ flags }, adapterInterfaceIdentifiers)).toEqual({
+      expect(updateFlags({ flags }, adapterIdentifiers)).toEqual({
         type: UPDATE_FLAGS,
         payload: expect.any(Object),
       });
     });
 
     it('should return passed `flags`', () => {
-      expect(updateFlags({ flags }, adapterInterfaceIdentifiers)).toEqual({
+      expect(updateFlags({ flags }, adapterIdentifiers)).toEqual({
         type: expect.any(String),
         payload: expect.objectContaining({ flags }),
       });
     });
 
-    it('should return passed `adapterInterfaceIdentifiers`', () => {
-      expect(updateFlags({ flags }, adapterInterfaceIdentifiers)).toEqual({
+    it('should return passed `adapterIdentifiers`', () => {
+      expect(updateFlags({ flags }, adapterIdentifiers)).toEqual({
         type: expect.any(String),
-        payload: expect.objectContaining({ adapterInterfaceIdentifiers }),
+        payload: expect.objectContaining({ adapterIdentifiers }),
       });
     });
   });
@@ -61,7 +61,7 @@ describe('reducers', () => {
 
       describe('without id', () => {
         const payload = {
-          adapterInterfaceIdentifiers: ['memory', 'graphql'],
+          adapterIdentifiers: ['memory', 'graphql'],
           flags: {
             a: true,
             b: false,
@@ -105,7 +105,7 @@ describe('reducers', () => {
 
       describe('without id', () => {
         const payload = {
-          adapterInterfaceIdentifiers: ['memory', 'graphql'],
+          adapterIdentifiers: ['memory', 'graphql'],
           flags: {
             a: true,
             b: false,

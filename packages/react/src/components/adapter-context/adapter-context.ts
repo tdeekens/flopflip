@@ -2,7 +2,7 @@ import type {
   TReconfigureAdapter,
   TAdapterContext,
   TAdapterStatus,
-  TAdapterInterfaceIdentifiers,
+  TAdapterIdentifiers,
 } from '@flopflip/types';
 import {
   AdapterSubscriptionStatus,
@@ -17,11 +17,11 @@ const initialAdapterStatus: TAdapterStatus = {
   configurationStatus: AdapterConfigurationStatus.Unconfigured,
 };
 const createAdapterContext = (
-  adapterInterfaceIdentifiers?: TAdapterInterfaceIdentifiers[],
+  adapterIdentifiers?: TAdapterIdentifiers[],
   reconfigure?: TReconfigureAdapter,
   status?: TAdapterStatus
 ): TAdapterContext => ({
-  adapterInterfaceIdentifiers: adapterInterfaceIdentifiers ?? [],
+  adapterEffectIdentifiers: adapterIdentifiers ?? [],
   reconfigure: reconfigure ?? initialReconfigureAdapter,
   status: status ?? initialAdapterStatus,
 });

@@ -15,7 +15,7 @@ import {
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
-  adapterInterfaceIdentifiers,
+  adapterIdentifiers,
 } from '@flopflip/types';
 import {
   normalizeFlags,
@@ -53,13 +53,13 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   #cache = createCache({ prefix: STORAGE_SLICE });
   #adapterState: TAdapterStatus & LocalStorageAdapterState;
 
-  id: typeof adapterInterfaceIdentifiers.localstorage;
+  id: typeof adapterIdentifiers.localstorage;
 
   constructor() {
     this.#adapterState = {
       ...intialAdapterState,
     };
-    this.id = adapterInterfaceIdentifiers.localstorage;
+    this.id = adapterIdentifiers.localstorage;
   }
 
   #getIsAdapterUnsubscribed = () =>

@@ -2,7 +2,7 @@ import type {
   TFlagName,
   TFlagVariation,
   TFlagsContext,
-  TAdapterInterfaceIdentifiers,
+  TAdapterIdentifiers,
 } from '@flopflip/types';
 
 import warning from 'tiny-warning';
@@ -11,7 +11,7 @@ import getNormalizedFlagName from '../get-normalized-flag-name';
 import isNil from '../is-nil';
 
 const getFlagVariation = (
-  adapterInterfaceIdentifiers: TAdapterInterfaceIdentifiers[],
+  adapterIdentifiers: TAdapterIdentifiers[],
   flagName: TFlagName = DEFAULT_FLAG_PROP_KEY
 ): ((flags: TFlagsContext) => TFlagVariation) => {
   const normalizedFlagName = getNormalizedFlagName(flagName);
@@ -24,7 +24,7 @@ const getFlagVariation = (
   return (flags) => {
     let foundFlagVariation: TFlagVariation = false;
 
-    for (const adapterInterfaceIdentifier of adapterInterfaceIdentifiers) {
+    for (const adapterInterfaceIdentifier of adapterIdentifiers) {
       const flagVariation =
         flags[adapterInterfaceIdentifier]?.[normalizedFlagName];
 
