@@ -93,9 +93,9 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   };
 
   updateFlags = (flags: TFlags, options?: TUpdateFlagsOptions) => {
-    const isAdapterConfigured =
-      this.#adapterState.configurationStatus ===
-      AdapterConfigurationStatus.Configured;
+    const isAdapterConfigured = this.getIsConfigurationStatus(
+      AdapterConfigurationStatus.Configured
+    );
 
     warning(
       isAdapterConfigured,
@@ -175,28 +175,19 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       handleStatusChange
     );
 
-    this.#adapterState.configurationStatus =
-      AdapterConfigurationStatus.Configuring;
-
-    this.#adapterState.emitter.emit('statusStateChange', {
-      configurationStatus: this.#adapterState.configurationStatus,
-    });
+    this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 
     const { user, adapterConfiguration } = adapterArgs;
 
     this.#adapterState.user = user;
 
     return Promise.resolve().then(() => {
-      this.#adapterState.configurationStatus =
-        AdapterConfigurationStatus.Configured;
+      this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
 
       const flags = normalizeFlags(this.#cache.get('flags'));
 
       this.#adapterState.flags = flags;
       this.#adapterState.emitter.emit('flagsStateChange', flags);
-      this.#adapterState.emitter.emit('statusStateChange', {
-        configurationStatus: this.#adapterState.configurationStatus,
-      });
       this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
       this.#subscribeToFlagsChanges({
@@ -228,10 +219,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
   async waitUntilConfigured() {
     return new Promise<void>((resolve) => {
-      if (
-        this.#adapterState.configurationStatus ===
-        AdapterConfigurationStatus.Configured
-      )
+      if (this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured))
         resolve();
       else
         this.#adapterState.emitter.on(
@@ -243,6 +231,14 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
   getIsConfigurationStatus(configurationStatus: AdapterConfigurationStatus) {
     return this.#adapterState.configurationStatus === configurationStatus;
+  }
+
+  setConfigurationStatus(nextConfigurationStatus: AdapterConfigurationStatus) {
+    this.#adapterState.configurationStatus = nextConfigurationStatus;
+
+    this.#adapterState.emitter.emit('statusStateChange', {
+      configurationStatus: this.#adapterState.configurationStatus,
+    });
   }
 
   unsubscribe = () => {

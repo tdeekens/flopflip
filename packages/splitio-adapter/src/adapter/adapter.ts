@@ -277,8 +277,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
     if (
-      this.#adapterState.configurationStatus !==
-        AdapterConfigurationStatus.Configured ||
+      !this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured) ||
       !this.#adapterState.user
     ) {
       return Promise.reject(
