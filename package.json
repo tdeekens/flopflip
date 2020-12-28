@@ -151,7 +151,7 @@
       },
       {
         "path": "./packages/react/dist/flopflip-react.esm.js",
-        "maxSize": "5Kb"
+        "maxSize": "6Kb"
       },
       {
         "path": "./packages/react-broadcast/dist/flopflip-react-broadcast.browser.esm.js",
