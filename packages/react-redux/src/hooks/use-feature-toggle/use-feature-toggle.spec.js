@@ -31,7 +31,7 @@ const TestComponent = () => {
 describe('when adapter is configured', () => {
   it('should indicate a feature being disabled', async () => {
     const store = createStore({
-      [STATE_SLICE]: { flags: { disabledFeature: false } },
+      [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
     });
     const rendered = render(store, <TestComponent />);
 
@@ -42,7 +42,7 @@ describe('when adapter is configured', () => {
 
   it('should indicate a feature being enabled', async () => {
     const store = createStore({
-      [STATE_SLICE]: { flags: { disabledFeature: false } },
+      [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
     });
 
     const rendered = render(store, <TestComponent />);

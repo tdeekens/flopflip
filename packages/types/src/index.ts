@@ -91,7 +91,9 @@ export const adapterInterfaceIdentifiers = {
   splitio: 'splitio',
   graphql: 'graphql',
 } as const;
-export type TAdapterInterfaceIdentifiers = typeof adapterInterfaceIdentifiers[keyof typeof adapterInterfaceIdentifiers];
+export type TAdapterInterfaceIdentifiers =
+  | typeof adapterInterfaceIdentifiers[keyof typeof adapterInterfaceIdentifiers]
+  | string;
 export type TFlagsContext = Record<TAdapterInterfaceIdentifiers, TFlags>;
 export const cacheIdentifiers = {
   local: 'local',
@@ -280,6 +282,7 @@ export type TReconfigureAdapter = (
   options: TAdapterReconfigurationOptions
 ) => void;
 export type TAdapterContext = {
+  adapterInterfaceIdentifiers: TAdapterInterfaceIdentifiers[];
   reconfigure: TReconfigureAdapter;
   status: TAdapterStatus;
 };

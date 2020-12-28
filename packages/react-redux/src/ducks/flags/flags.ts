@@ -1,8 +1,9 @@
 import type {
   TFlagName,
   TFlagVariation,
-  TFlags,
+  TFlagsContext,
   TFlagsChange,
+  TAdapterInterfaceIdentifiers,
 } from '@flopflip/types';
 
 import { isNil } from '@flopflip/react';
@@ -14,20 +15,41 @@ import { Reducer } from 'redux';
 // Actions
 export const UPDATE_FLAGS = '@flopflip/flags/update';
 
-const initialState: TFlags = {};
+const initialState: TFlagsContext = { memory: {} };
 
 // Reducer
 const reducer = (
   // eslint-disable-next-line @typescript-eslint/default-param-last
-  state: TFlags = initialState,
+  state: TFlagsContext = initialState,
   action: TUpdateFlagsAction
-): TFlags => {
+): TFlagsContext => {
   switch (action.type) {
-    case UPDATE_FLAGS:
+    case UPDATE_FLAGS: {
+      if (action.payload.id) {
+        return {
+          ...state,
+          [action.payload.id]: {
+            ...state?.[action.payload.id],
+            ...action.payload.flags,
+          },
+        };
+      }
+
       return {
         ...state,
-        ...action.payload.flags,
+        ...Object.fromEntries(
+          action.payload.adapterInterfaceIdentifiers.map(
+            (adapterInterfaceIdentifier) => [
+              adapterInterfaceIdentifier,
+              {
+                ...state?.[adapterInterfaceIdentifier],
+                ...action.payload.flags,
+              },
+            ]
+          )
+        ),
       };
+    }
 
     default:
       return state;
@@ -37,26 +59,42 @@ const reducer = (
 export default reducer;
 
 export const createReducer = (
-  preloadedState: TFlags = initialState
-): Reducer<TFlags, TUpdateFlagsAction> => (
+  preloadedState: TFlagsContext = initialState
+): Reducer<TFlagsContext, TUpdateFlagsAction> => (
   // eslint-disable-next-line @typescript-eslint/default-param-last
   state = preloadedState,
   action
 ) => reducer(state, action);
 
 // Action Creators
-export const updateFlags = (flagsChange: TFlagsChange): TUpdateFlagsAction => ({
+export const updateFlags = (
+  flagsChange: TFlagsChange,
+  adapterInterfaceIdentifiers: TAdapterInterfaceIdentifiers[]
+): TUpdateFlagsAction => ({
   type: UPDATE_FLAGS,
-  payload: flagsChange,
+  payload: { ...flagsChange, adapterInterfaceIdentifiers },
 });
 
 // Selectors
-export const selectFlags = (state: TState) => state[STATE_SLICE].flags ?? {};
-export const selectFlag = (
-  flagName: TFlagName
-): ((state: TState) => TFlagVariation) => (state) => {
-  const allFlags: TFlags = selectFlags(state);
-  const flagValue: TFlagVariation = allFlags[flagName];
+export const selectFlags = () => (state: TState) =>
+  state[STATE_SLICE].flags ?? {};
 
-  return isNil(flagValue) ? false : flagValue;
+export const selectFlag = (
+  flagName: TFlagName,
+  adapterInterfaceIdentifiers: TAdapterInterfaceIdentifiers[]
+): ((state: TState) => TFlagVariation) => (state) => {
+  const allFlags = selectFlags()(state);
+
+  let foundFlagVariation: TFlagVariation = false;
+
+  for (const adapterInterfaceIdentifier of adapterInterfaceIdentifiers) {
+    const flagValue: TFlagVariation =
+      allFlags[adapterInterfaceIdentifier]?.[flagName];
+
+    if (!isNil(flagValue)) {
+      foundFlagVariation = flagValue;
+    }
+  }
+
+  return foundFlagVariation;
 };

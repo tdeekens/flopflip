@@ -8,9 +8,7 @@ import {
 } from '@flopflip/react';
 import { useFlagVariations } from '../../hooks';
 
-type InjectedProps = {
-  [propKey: string]: TFlagVariation;
-};
+type InjectedProps = Record<string, TFlagVariation>;
 
 export default <OwnProps extends object>(
   flagName: TFlagName,

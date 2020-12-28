@@ -7,7 +7,6 @@ const version = '__@FLOPFLIP/VERSION_OF_RELEASE__';
 export {
   AdapterContext,
   createAdapterContext,
-  useAdapterContext,
   selectAdapterConfigurationStatus,
   ToggleFeature,
   ConfigureAdapter,
@@ -24,6 +23,10 @@ export {
 
 export { setDisplayName, wrapDisplayName } from './hocs';
 
-export { useAdapterReconfiguration, useAdapterSubscription } from './hooks';
+export {
+  useAdapterReconfiguration,
+  useAdapterSubscription,
+  useAdapterContext,
+} from './hooks';
 
 export { version };
