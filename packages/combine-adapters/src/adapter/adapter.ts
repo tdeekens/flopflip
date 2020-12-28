@@ -52,9 +52,9 @@ class CombineAdapters implements TCombinedAdapterInterface {
     AdapterSubscriptionStatus.Unsubscribed;
 
   updateFlags = (flags: TFlags, options?: TUpdateFlagsOptions) => {
-    const isAdapterConfigured =
-      this.#adapterState.configurationStatus ===
-      AdapterConfigurationStatus.Configured;
+    const isAdapterConfigured = this.getIsConfigurationStatus(
+      AdapterConfigurationStatus.Configured
+    );
 
     warning(
       isAdapterConfigured,
@@ -114,13 +114,30 @@ class CombineAdapters implements TCombinedAdapterInterface {
       this.#adapters.map(async (adapter) =>
         adapter.configure(adapterArgs as any, adapterEventHandlers)
       )
-    ).then(() => {
-      this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
+    ).then((allInitializationStatus) => {
+      const haveAllAdaptersInitializedSuccessfully = allInitializationStatus.every(
+        ({ initializationStatus }) =>
+          initializationStatus === AdapterInitializationStatus.Succeeded
+      );
+
+      if (haveAllAdaptersInitializedSuccessfully) {
+        this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
+
+        this.#adapterState.emitter.emit(
+          this.#__internalConfiguredStatusChange__
+        );
+
+        return {
+          initializationStatus: AdapterInitializationStatus.Succeeded,
+        };
+      }
+
+      this.setConfigurationStatus(AdapterConfigurationStatus.Failed);
 
       this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
       return {
-        initializationStatus: AdapterInitializationStatus.Succeeded,
+        initializationStatus: AdapterInitializationStatus.Failed,
       };
     });
   }
@@ -146,9 +163,18 @@ class CombineAdapters implements TCombinedAdapterInterface {
       this.#adapters.map(async (adapter) =>
         adapter.reconfigure(adapterArgs as any, adapterEventHandlers)
       )
-    ).then(() => ({
-      initializationStatus: AdapterInitializationStatus.Succeeded,
-    }));
+    ).then((allInitializationStatus) => {
+      const haveAllAdaptersInitializedSuccessfully = allInitializationStatus.every(
+        ({ initializationStatus }) =>
+          initializationStatus === AdapterInitializationStatus.Succeeded
+      );
+
+      if (haveAllAdaptersInitializedSuccessfully) {
+        return { initializationStatus: AdapterInitializationStatus.Succeeded };
+      }
+
+      return { initializationStatus: AdapterInitializationStatus.Failed };
+    });
   }
 
   getIsConfigurationStatus(configurationStatus: AdapterConfigurationStatus) {
@@ -172,8 +198,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
   async waitUntilConfigured() {
     return new Promise<void>((resolve) => {
       if (
-        this.#adapterState.configurationStatus ===
-        AdapterConfigurationStatus.Configured
+        this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
       ) {
         resolve();
       } else

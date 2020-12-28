@@ -1,6 +1,9 @@
 import warning from 'tiny-warning';
 import getGlobalThis from 'globalthis';
-import { AdapterConfigurationStatus } from '@flopflip/types';
+import {
+  AdapterConfigurationStatus,
+  AdapterInitializationStatus,
+} from '@flopflip/types';
 import memoryAdapter from '@flopflip/memory-adapter';
 import localstorageAdapter from '@flopflip/localstorage-adapter';
 import adapter from './adapter';
@@ -29,17 +32,65 @@ describe('when combining', () => {
     adapterEventHandlers = createAdapterEventHandlers();
   });
 
-  beforeAll(() => {
-    adapter.combine([memoryAdapter, localstorageAdapter]);
-  });
-
   it('should indicate that the adapter is not configured', () => {
     expect(
       adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
     ).toBe(false);
   });
 
-  describe('when configured', () => {
+  describe('when configuring', () => {
+    let configurationResult;
+
+    beforeEach(async () => {
+      configurationResult = await adapter.configure(
+        adapterArgs,
+        adapterEventHandlers
+      );
+    });
+
+    describe('without combined adapters', () => {
+      it('should invoke and trigger `warning`', () => {
+        expect(warning).toHaveBeenCalledWith(
+          false,
+          expect.stringContaining('adapter has no combined adapters')
+        );
+      });
+
+      it('should resolve configuration to have failed', () => {
+        expect(configurationResult).toEqual({
+          initializationStatus: AdapterInitializationStatus.Failed,
+        });
+      });
+    });
+
+    describe('when updating flags', () => {
+      beforeEach(() => {
+        adapterEventHandlers.onFlagsStateChange.mockClear();
+
+        memoryAdapter.updateFlags(updatedFlags);
+      });
+
+      it('should invoke and trigger `warning` for lack of configuration', () => {
+        expect(warning).toHaveBeenCalledWith(
+          false,
+          expect.stringContaining('adapter is not configured')
+        );
+      });
+
+      it('should invoke and trigger `warning` for lack of combined adapters', () => {
+        expect(warning).toHaveBeenCalledWith(
+          false,
+          expect.stringContaining('adapter has no combined adapters')
+        );
+      });
+    });
+  });
+
+  describe('when all configured sucessfully', () => {
+    beforeAll(() => {
+      adapter.combine([memoryAdapter, localstorageAdapter]);
+    });
+
     let configurationResult;
 
     const memoryAdapterConfigureSpy = jest.spyOn(memoryAdapter, 'configure');
@@ -100,9 +151,8 @@ describe('when combining', () => {
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalled();
     });
 
-    describe('when updating flags of a used adapter', () => {
+    describe('when updating flags of an underlying adapter', () => {
       beforeEach(() => {
-        // From `configure`
         adapterEventHandlers.onFlagsStateChange.mockClear();
 
         memoryAdapter.updateFlags(updatedFlags);
@@ -176,6 +226,42 @@ describe('when combining', () => {
         expect(memoryAdapterReconfigureSpy).toHaveBeenCalled();
         expect(localstorageAdapterReconfigureSpy).toHaveBeenCalled();
       });
+    });
+  });
+
+  describe('when not all configured sucessfully', () => {
+    const failingAdapter = {
+      id: 'failing',
+      configure: async () => ({
+        initializationStatus: AdapterInitializationStatus.Failed,
+      }),
+    };
+
+    beforeAll(() => {
+      adapter.combine([memoryAdapter, failingAdapter]);
+    });
+
+    let configurationResult;
+
+    beforeEach(async () => {
+      configurationResult = await adapter.configure(
+        adapterArgs,
+        adapterEventHandlers
+      );
+    });
+
+    it('should resolve to a failed initialization status', () => {
+      expect(configurationResult).toEqual(
+        expect.objectContaining({
+          initializationStatus: 1,
+        })
+      );
+    });
+
+    it('should indicate that the adapter is not configured', () => {
+      expect(
+        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+      ).toBe(false);
     });
   });
 
