@@ -3,6 +3,8 @@ import type {
   TAdapterStatusChange,
   TAdapterEventHandlers,
   TCombinedAdapterArgs,
+  TFlags,
+  TUpdateFlagsOptions,
   TCombinedAdapterInterface,
   TAdapter,
 } from '@flopflip/types';
@@ -110,7 +112,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
 
     return Promise.all(
       this.#adapters.map(async (adapter) =>
-        adapter.configure(adapterArgs, adapterEventHandlers)
+        adapter.configure(adapterArgs as any, adapterEventHandlers)
       )
     ).then(() => {
       this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
@@ -142,7 +144,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
 
     return Promise.all(
       this.#adapters.map(async (adapter) =>
-        adapter.reconfigure(adapterArgs, adapterEventHandlers)
+        adapter.reconfigure(adapterArgs as any, adapterEventHandlers)
       )
     ).then(() => ({
       initializationStatus: AdapterInitializationStatus.Succeeded,
