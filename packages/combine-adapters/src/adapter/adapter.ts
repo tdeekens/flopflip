@@ -4,9 +4,9 @@ import type {
   TAdapterEventHandlers,
   TAdapterArgs,
   TFlags,
+  TAdapter,
   TUpdateFlagsOptions,
   TCombinedAdapterInterface,
-  TAdapter,
 } from '@flopflip/types';
 import {
   AdapterInitializationStatus,
@@ -132,7 +132,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
         };
       }
 
-      this.setConfigurationStatus(AdapterConfigurationStatus.Failed);
+      this.setConfigurationStatus(AdapterConfigurationStatus.Unconfigured);
 
       this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 

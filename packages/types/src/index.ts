@@ -216,7 +216,9 @@ export interface TMemoryAdapterInterface
 export interface TCombinedAdapterInterface
   extends TAdapterInterface<TAdapterArgs> {
   id: typeof adapterIdentifiers.combined;
-  combine: (adapters: TAdapter[]) => void;
+  combine: <TAdapterInstance extends TAdapter>(
+    adapters: TAdapterInstance[]
+  ) => void;
   configure: (
     adapterArgs: TAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
@@ -258,7 +260,7 @@ export type TAdapter =
   | TCombinedAdapterInterface
   | TSplitioAdapterInterface
   | TGraphQLAdapterInterface;
-export type ConfigureAdapterArgs<
+export type TConfigureAdapterArgs<
   TAdapterInstance extends TAdapter
 > = TAdapterInstance extends TLaunchDarklyAdapterInterface
   ? TLaunchDarklyAdapterArgs
@@ -285,7 +287,7 @@ export type TConfigureAdapterProps<TAdapterInstance extends TAdapter> = {
     : TAdapterInstance extends TGraphQLAdapterInterface
     ? TGraphQLAdapterInterface
     : never;
-  adapterArgs: ConfigureAdapterArgs<TAdapterInstance>;
+  adapterArgs: TConfigureAdapterArgs<TAdapterInstance>;
 };
 export type TAdapterReconfigurationOptions = {
   shouldOverwrite?: boolean;
