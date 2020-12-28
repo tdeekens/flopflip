@@ -35,9 +35,11 @@ describe('when adaopter is configured', () => {
     const store = createStore({
       [STATE_SLICE]: {
         flags: {
-          enabledFeature: true,
-          disabledFeature: false,
-          variation: 'A',
+          memory: {
+            enabledFeature: true,
+            disabledFeature: false,
+            variation: 'A',
+          },
         },
       },
     });
@@ -53,9 +55,11 @@ describe('when adaopter is configured', () => {
     const store = createStore({
       [STATE_SLICE]: {
         flags: {
-          enabledFeature: true,
-          disabledFeature: false,
-          variation: 'A',
+          memory: {
+            enabledFeature: true,
+            disabledFeature: false,
+            variation: 'A',
+          },
         },
       },
     });
@@ -71,9 +75,11 @@ describe('when adaopter is configured', () => {
     const store = createStore({
       [STATE_SLICE]: {
         flags: {
-          enabledFeature: true,
-          disabledFeature: false,
-          variation: 'A',
+          memory: {
+            enabledFeature: true,
+            disabledFeature: false,
+            variation: 'A',
+          },
         },
       },
     });

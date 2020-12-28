@@ -1,18 +1,20 @@
-import type { TFlagName, TFlags, TFlagVariation } from '@flopflip/types';
+import type { TFlagName, TFlagVariation } from '@flopflip/types';
 
-import { useContext, useDebugValue } from 'react';
-import { getIsFeatureEnabled } from '@flopflip/react';
-import { FlagsContext } from '../../components/flags-context';
+import { useDebugValue } from 'react';
+import { getIsFeatureEnabled, useAdapterContext } from '@flopflip/react';
+import useFlagsContext from '../use-flags-context';
 
 export default function useFeatureToggle(
   flagName: TFlagName,
   flagVariation: TFlagVariation = true
 ) {
-  const flags: TFlags = useContext(FlagsContext);
+  const adapterContext = useAdapterContext();
+  const flagsContext = useFlagsContext();
   const isFeatureEnabled: boolean = getIsFeatureEnabled(
+    adapterContext.adapterInterfaceIdentifiers,
     flagName,
     flagVariation
-  )(flags);
+  )(flagsContext);
 
   useDebugValue({
     flagName,

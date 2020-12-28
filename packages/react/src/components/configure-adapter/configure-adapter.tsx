@@ -485,7 +485,7 @@ const ConfigureAdapter = (props: TProps) => {
 
   return (
     <AdapterContext.Provider
-      value={createAdapterContext(reconfigureOrQueue, props.adapterStatus)}
+      value={createAdapterContext([props.adapter.id], reconfigureOrQueue, props.adapterStatus)}
     >
       {(() => {
         const isAdapterConfigured = props.adapter.getIsConfigurationStatus(

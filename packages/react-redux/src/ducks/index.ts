@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { TFlags } from '@flopflip/types';
+import { TFlagsContext } from '@flopflip/types';
 import { TUpdateFlagsAction } from './flags/types';
 import { TUpdateStatusAction } from './status/types';
 import { flagsReducer, createFlagsReducer } from './flags';
@@ -14,7 +14,9 @@ export const flopflipReducer = combineReducers<any, Actions>({
   flags: flagsReducer,
   status: statusReducer,
 });
-export const createFlopflipReducer = (preloadedState: TFlags = {}) =>
+export const createFlopflipReducer = (
+  preloadedState: TFlagsContext = { memory: {} }
+) =>
   combineReducers<any, Actions>({
     flags: createFlagsReducer(preloadedState),
     status: statusReducer,

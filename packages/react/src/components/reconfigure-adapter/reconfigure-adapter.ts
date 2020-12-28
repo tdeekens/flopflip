@@ -1,7 +1,7 @@
 import type { TUser } from '@flopflip/types';
 
-import React from 'react';
-import AdapterContext from '../adapter-context';
+import { useEffect, Children } from 'react';
+import useAdapterContext from '../../hooks/use-adapter-context';
 
 type Props = {
   shouldOverwrite?: boolean;
@@ -10,9 +10,9 @@ type Props = {
 };
 
 const ReconfigureAdapter = (props: Props) => {
-  const adapterContext = React.useContext(AdapterContext);
+  const adapterContext = useAdapterContext();
 
-  React.useEffect(() => {
+  useEffect(() => {
     adapterContext.reconfigure(
       {
         user: props.user,
@@ -23,7 +23,7 @@ const ReconfigureAdapter = (props: Props) => {
     );
   }, [props.user, props.shouldOverwrite, adapterContext]);
 
-  return props.children ? React.Children.only(props.children) : null;
+  return props.children ? Children.only(props.children) : null;
 };
 
 ReconfigureAdapter.displayName = 'ReconfigureAdapter';

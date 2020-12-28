@@ -28,7 +28,9 @@ it('should indicate a flag variation', async () => {
   const store = createStore({
     [STATE_SLICE]: {
       flags: {
-        variation: 'A',
+        memory: {
+          variation: 'A',
+        },
       },
     },
   });

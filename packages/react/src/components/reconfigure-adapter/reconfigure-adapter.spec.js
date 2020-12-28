@@ -50,6 +50,7 @@ const createReconfiguration = () => ({
 describe('with children', () => {
   it('should render children', () => {
     const adapterContext = createAdapterContext(
+      ['memory'],
       jest.fn(),
       AdapterStates.UNCONFIGURED
     );
@@ -68,6 +69,7 @@ describe('with children', () => {
 describe('when mounted', () => {
   it('should reconfigure with user and configuration', () => {
     const adapterContext = createAdapterContext(
+      ['memory'],
       jest.fn(),
       AdapterStates.UNCONFIGURED
     );
@@ -95,6 +97,7 @@ describe('when updated', () => {
   describe('without reconfiguration change', () => {
     it('should not reconfigure again with user and configuration', () => {
       const adapterContext = createAdapterContext(
+        ['memory'],
         jest.fn(),
         AdapterStates.UNCONFIGURED
       );
@@ -116,6 +119,7 @@ describe('when updated', () => {
   describe('with reconfiguration change', () => {
     it('should reconfigure again with user and configuration', () => {
       const adapterContext = createAdapterContext(
+        ['memory'],
         jest.fn(),
         AdapterStates.UNCONFIGURED
       );

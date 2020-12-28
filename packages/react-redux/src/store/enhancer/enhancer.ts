@@ -32,7 +32,7 @@ export default function createFlopFlipEnhancer(
       // NOTE: This is like `bindActionCreators` but the bound action
       // creators are renamed to fit the adapter API and conventions.
       onFlagsStateChange: (flagsChange: TFlagsChange) => {
-        store.dispatch(updateFlags(flagsChange));
+        store.dispatch(updateFlags(flagsChange, [adapter.id]));
       },
       onStatusStateChange: (statusChange: TAdapterStatusChange) => {
         store.dispatch(updateStatus(statusChange));

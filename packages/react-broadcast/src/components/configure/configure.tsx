@@ -6,6 +6,7 @@ import type {
   TAdapterStatusChange,
   TConfigureAdapterChildren,
   TConfigureAdapterProps,
+  TAdapterInterfaceIdentifiers,
 } from '@flopflip/types';
 import {
   AdapterConfigurationStatus,
@@ -23,33 +24,76 @@ type BaseProps = {
 };
 type Props<AdapterInstance extends TAdapter> = BaseProps &
   TConfigureAdapterProps<AdapterInstance>;
-type State = {
-  flags: TFlags;
+type TFlagsState = Record<TAdapterInterfaceIdentifiers, TFlags>;
+type TState = {
+  flags: TFlagsState;
   status: TAdapterStatus;
 };
 
-const initialAdapterStatus: State['status'] = {
+const initialAdapterStatus: TState['status'] = {
   subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
   configurationStatus: AdapterConfigurationStatus.Unconfigured,
 };
-const getInitialFlags = () => ({})
 
-const useFlagsState = (): [
-  TFlags,
-  React.Dispatch<React.SetStateAction<TFlags>>
-] => {
-  const [flags, setFlags] = React.useState<State['flags']>(
-    getInitialFlags()
+type TGetInitialFlagsOptions = {
+  adapterInterfaceIdentifiers: TAdapterInterfaceIdentifiers[];
+};
+const getInitialFlags = ({
+  adapterInterfaceIdentifiers,
+}: TGetInitialFlagsOptions): TState['flags'] =>
+  Object.fromEntries(
+    adapterInterfaceIdentifiers.map((adapterInterfaceIdentifier) => [
+      adapterInterfaceIdentifier,
+      {},
+    ])
   );
 
-  return [flags, setFlags];
+type TUseFlagsStateOptions = {
+  adapterInterfaceIdentifiers: TAdapterInterfaceIdentifiers[];
+};
+type TFlagUpdateFunction = (flagsChange: TFlagsChange) => void;
+const useFlagsState = ({
+  adapterInterfaceIdentifiers,
+}: TUseFlagsStateOptions): [TFlagsState, TFlagUpdateFunction] => {
+  const [flags, setFlags] = React.useState<TState['flags']>(
+    getInitialFlags({ adapterInterfaceIdentifiers })
+  );
+
+  const updateFlags = (flagsChange: TFlagsChange) => {
+    setFlags((prevState) => {
+      if (flagsChange.id) {
+        return {
+          ...prevState,
+          [flagsChange.id]: {
+            ...prevState[flagsChange.id],
+            ...flagsChange.flags,
+          },
+        };
+      }
+
+      return {
+        ...prevState,
+        ...Object.fromEntries(
+          adapterInterfaceIdentifiers.map((adapterInterfaceIdentifier) => [
+            adapterInterfaceIdentifier,
+            {
+              ...prevState[adapterInterfaceIdentifier],
+              ...flagsChange.flags,
+            },
+          ])
+        )
+      };
+    });
+  };
+
+  return [flags, updateFlags];
 };
 
 const useStatusState = (): [
   TAdapterStatus,
   React.Dispatch<React.SetStateAction<TAdapterStatus>>
 ] => {
-  const [status, setStatus] = React.useState<State['status']>(
+  const [status, setStatus] = React.useState<TState['status']>(
     initialAdapterStatus
   );
 
@@ -59,9 +103,9 @@ const useStatusState = (): [
 const Configure = <AdapterInstance extends TAdapter>(
   props: Props<AdapterInstance>
 ) => {
-  const [flags, setFlags] = useFlagsState();
+  const adapterInterfaceIdentifiers = [props.adapter.id];
+  const [flags, updateFlags] = useFlagsState({ adapterInterfaceIdentifiers });
   const [status, setStatus] = useStatusState();
-
 
   // NOTE:
   //   Using this prevents the callbacks being invoked
@@ -69,7 +113,9 @@ const Configure = <AdapterInstance extends TAdapter>(
   //   component.
   const getHasAdapterSubscriptionStatus = useAdapterSubscription(props.adapter);
 
-  const handleUpdateFlags = React.useCallback<(flagsChange: TFlagsChange) => void>(
+  const handleUpdateFlags = React.useCallback<
+    (flagsChange: TFlagsChange) => void
+  >(
     (flagsChange) => {
       if (
         getHasAdapterSubscriptionStatus(AdapterSubscriptionStatus.Unsubscribed)
@@ -77,12 +123,9 @@ const Configure = <AdapterInstance extends TAdapter>(
         return;
       }
 
-      setFlags((prevFlags) => ({
-        ...prevFlags,
-        ...flagsChange.flags,
-      }));
+      updateFlags(flagsChange);
     },
-    [setFlags, getHasAdapterSubscriptionStatus]
+    [updateFlags, getHasAdapterSubscriptionStatus]
   );
 
   const handleUpdateStatus = React.useCallback<
