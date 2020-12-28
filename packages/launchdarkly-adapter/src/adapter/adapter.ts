@@ -186,14 +186,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
             this.updateFlags(flags);
           }
 
-          // First update internal state
-          this.#adapterState.configurationStatus =
-            AdapterConfigurationStatus.Configured;
-
-          // ...to then signal that the adapter is configured
-          this.#adapterState.emitter.emit('statusStateChange', {
-            configurationStatus: this.#adapterState.configurationStatus,
-          });
+          this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
 
           return Promise.resolve({
             flagsFromSdk,
@@ -374,10 +367,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     adapterArgs: TLaunchDarklyAdapterArgs,
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
-    if (
-      this.#adapterState.configurationStatus !==
-      AdapterConfigurationStatus.Configured
-    )
+    if (!this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured))
       return Promise.reject(
         new Error(
           '@flopflip/launchdarkly-adapter: please configure adapter before reconfiguring.'
@@ -405,6 +395,14 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     return this.#adapterState.configurationStatus === configurationStatus;
   }
 
+  setConfigurationStatus(nextConfigurationStatus: AdapterConfigurationStatus) {
+    this.#adapterState.configurationStatus = nextConfigurationStatus;
+
+    this.#adapterState.emitter.emit('statusStateChange', {
+      configurationStatus: this.#adapterState.configurationStatus,
+    });
+  }
+
   getClient() {
     return this.#adapterState.client;
   }
@@ -414,9 +412,9 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   }
 
   async updateUserContext(updatedUserProps: TUser) {
-    const isAdapterConfigured =
-      this.#adapterState.configurationStatus ===
-      AdapterConfigurationStatus.Configured;
+    const isAdapterConfigured = this.getIsConfigurationStatus(
+      AdapterConfigurationStatus.Configured
+    );
 
     warning(
       isAdapterConfigured,

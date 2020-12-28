@@ -48,25 +48,26 @@ const intialAdapterState: TAdapterStatus & GraphQLAdapterState = {
   emitter: mitt(),
 };
 
-let adapterState: TAdapterStatus & GraphQLAdapterState = {
-  ...intialAdapterState,
-};
-
 class GraphQLAdapter implements TGraphQLAdapterInterface {
   #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
+  #adapterState: TAdapterStatus & GraphQLAdapterState;
   #defaultPollingInteral = 1000 * 60;
 
   id: typeof adapterIdentifiers.graphql;
 
   constructor() {
     this.id = adapterIdentifiers.graphql;
+    this.#adapterState = {
+      ...intialAdapterState,
+    };
   }
 
   #getIsAdapterUnsubscribed = () =>
-    adapterState.subscriptionStatus === AdapterSubscriptionStatus.Unsubscribed;
+    this.#adapterState.subscriptionStatus ===
+    AdapterSubscriptionStatus.Unsubscribed;
 
   #getIsFlagLocked = (flagName: TFlagName) =>
-    adapterState.lockedFlags.has(flagName);
+    this.#adapterState.lockedFlags.has(flagName);
 
   #getCache = async (cacheIdentifier: TCacheIdentifiers) => {
     let cacheModule;
@@ -104,7 +105,7 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
   };
 
   #didFlagsChange = (nextFlags: TFlags) => {
-    const previousFlags = adapterState.flags;
+    const previousFlags = this.#adapterState.flags;
 
     if (previousFlags === undefined) return true;
 
@@ -154,19 +155,19 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
             cache.set(nextFlags);
           }
 
-          adapterState.flags = nextFlags;
-          adapterState.emitter.emit('flagsStateChange', nextFlags);
+          this.#adapterState.flags = nextFlags;
+          this.#adapterState.emitter.emit('flagsStateChange', nextFlags);
         }
       }
     }, pollingInteral);
   };
 
-  getUser = () => adapterState.user;
+  getUser = () => this.#adapterState.user;
 
   updateFlags: TFlagsUpdateFunction = (flags, options) => {
-    const isAdapterConfigured =
-      adapterState.configurationStatus ===
-      AdapterConfigurationStatus.Configured;
+    const isAdapterConfigured = this.getIsConfigurationStatus(
+      AdapterConfigurationStatus.Configured
+    );
 
     warning(
       isAdapterConfigured,
@@ -175,7 +176,7 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
 
     if (!isAdapterConfigured) return;
 
-    const previousFlags: TFlags | null = adapterState.flags;
+    const previousFlags: TFlags | null = this.#adapterState.flags;
 
     const updatedFlags = Object.entries(flags).reduce(
       (updatedFlags, [flagName, flagValue]) => {
@@ -187,7 +188,7 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
         if (this.#getIsFlagLocked(normalizedFlagName)) return updatedFlags;
 
         if (options?.lockFlags) {
-          adapterState.lockedFlags.add(normalizedFlagName);
+          this.#adapterState.lockedFlags.add(normalizedFlagName);
         }
 
         updatedFlags = {
@@ -205,9 +206,8 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
       ...updatedFlags,
     };
 
-    adapterState.flags = nextFlags;
-
-    adapterState.emitter.emit('flagsStateChange', nextFlags);
+    this.#adapterState.flags = nextFlags;
+    this.#adapterState.emitter.emit('flagsStateChange', nextFlags);
   };
 
   async configure(
@@ -232,24 +232,20 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
       });
     };
 
-    adapterState.emitter.on<TFlagsChange>(
+    this.#adapterState.emitter.on<TFlagsChange>(
       'flagsStateChange',
       // @ts-expect-error
       handleFlagsChange
     );
-    adapterState.emitter.on<TAdapterStatusChange>(
+    this.#adapterState.emitter.on<TAdapterStatusChange>(
       'statusStateChange',
       // @ts-expect-error
       handleStatusChange
     );
 
-    adapterState.configurationStatus = AdapterConfigurationStatus.Configuring;
+    this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 
-    adapterState.emitter.emit('statusStateChange', {
-      configurationStatus: adapterState.configurationStatus,
-    });
-
-    adapterState.user = adapterArgs.user;
+    this.#adapterState.user = adapterArgs.user;
 
     return Promise.resolve().then(async () => {
       let cachedFlags;
@@ -260,17 +256,16 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
         cachedFlags = cache.get();
 
         if (cachedFlags) {
-          adapterState.flags = cachedFlags;
-
-          adapterState.emitter.emit('flagsStateChange', cachedFlags);
+          this.#adapterState.flags = cachedFlags;
+          this.#adapterState.emitter.emit('flagsStateChange', cachedFlags);
         }
       }
 
-      adapterState.configurationStatus = AdapterConfigurationStatus.Configured;
+      this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
 
       const flags = normalizeFlags(await this.#fetchFlags(adapterArgs));
 
-      adapterState.flags = flags;
+      this.#adapterState.flags = flags;
 
       if (adapterArgs.cacheIdentifier) {
         const cache = await this.#getCache(adapterArgs.cacheIdentifier);
@@ -278,11 +273,8 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
         cache.set(flags);
       }
 
-      adapterState.emitter.emit('flagsStateChange', flags);
-      adapterState.emitter.emit('statusStateChange', {
-        configurationStatus: adapterState.configurationStatus,
-      });
-      adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
+      this.#adapterState.emitter.emit('flagsStateChange', flags);
+      this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
       this.#subscribeToFlagsChanges(adapterArgs);
 
@@ -296,7 +288,14 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
     adapterArgs: TGraphQLAdapterArgs,
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
-    adapterState.flags = {};
+    if (!this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured))
+      return Promise.reject(
+        new Error(
+          '@flopflip/graphql-adapter: please configure adapter before reconfiguring.'
+        )
+      );
+
+    this.#adapterState.flags = {};
 
     if (adapterArgs.cacheIdentifier) {
       const cache = await this.#getCache(adapterArgs.cacheIdentifier);
@@ -305,9 +304,9 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
     }
 
     const nextUser = adapterArgs.user;
-    adapterState.user = nextUser;
 
-    adapterState.emitter.emit('flagsStateChange', {});
+    this.#adapterState.user = nextUser;
+    this.#adapterState.emitter.emit('flagsStateChange', {});
 
     return Promise.resolve({
       initializationStatus: AdapterInitializationStatus.Succeeded,
@@ -316,13 +315,10 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
 
   async waitUntilConfigured() {
     return new Promise<void>((resolve) => {
-      if (
-        adapterState.configurationStatus ===
-        AdapterConfigurationStatus.Configured
-      )
+      if (this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured))
         resolve();
       else
-        adapterState.emitter.on(
+        this.#adapterState.emitter.on(
           this.#__internalConfiguredStatusChange__,
           resolve
         );
@@ -330,33 +326,35 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
   }
 
   getIsConfigurationStatus(configurationStatus: AdapterConfigurationStatus) {
-    return adapterState.configurationStatus === configurationStatus;
+    return this.#adapterState.configurationStatus === configurationStatus;
   }
 
   getFlag(flagName: TFlagName): TFlagVariation {
-    return adapterState?.flags[flagName];
+    return this.#adapterState?.flags[flagName];
   }
 
   reset = () => {
-    adapterState = {
+    this.#adapterState = {
       ...intialAdapterState,
     };
   };
 
   setConfigurationStatus(nextConfigurationStatus: AdapterConfigurationStatus) {
-    adapterState.configurationStatus = nextConfigurationStatus;
+    this.#adapterState.configurationStatus = nextConfigurationStatus;
 
-    adapterState.emitter.emit('statusStateChange', {
-      configurationStatus: adapterState.configurationStatus,
+    this.#adapterState.emitter.emit('statusStateChange', {
+      configurationStatus: this.#adapterState.configurationStatus,
     });
   }
 
   unsubscribe = () => {
-    adapterState.subscriptionStatus = AdapterSubscriptionStatus.Unsubscribed;
+    this.#adapterState.subscriptionStatus =
+      AdapterSubscriptionStatus.Unsubscribed;
   };
 
   subscribe = () => {
-    adapterState.subscriptionStatus = AdapterSubscriptionStatus.Subscribed;
+    this.#adapterState.subscriptionStatus =
+      AdapterSubscriptionStatus.Subscribed;
   };
 }
 

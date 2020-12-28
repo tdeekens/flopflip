@@ -67,9 +67,9 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   getUser = () => this.#adapterState.user;
 
   updateFlags = (flags: TFlags, options?: TUpdateFlagsOptions) => {
-    const isAdapterConfigured =
-      this.#adapterState.configurationStatus ===
-      AdapterConfigurationStatus.Configured;
+    const isAdapterConfigured = this.getIsConfigurationStatus(
+      AdapterConfigurationStatus.Configured
+    );
 
     warning(
       isAdapterConfigured,
@@ -135,12 +135,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
       handleStatusChange
     );
 
-    this.#adapterState.configurationStatus =
-      AdapterConfigurationStatus.Configuring;
-
-    this.#adapterState.emitter.emit('statusStateChange', {
-      configurationStatus: this.#adapterState.configurationStatus,
-    });
+    this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 
     const { user } = adapterArgs;
 
@@ -151,16 +146,12 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
       this.#updateUser(user);
 
-      this.#adapterState.configurationStatus =
-        AdapterConfigurationStatus.Configured;
+      this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
 
       this.#adapterState.emitter.emit(
         'flagsStateChange',
         this.#adapterState.flags
       );
-      this.#adapterState.emitter.emit('statusStateChange', {
-        configurationStatus: this.#adapterState.configurationStatus,
-      });
 
       this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
@@ -174,23 +165,18 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     adapterArgs: TMemoryAdapterArgs,
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
-    this.#adapterState.configurationStatus =
-      AdapterConfigurationStatus.Configuring;
+    this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 
     this.#updateUser(adapterArgs.user);
 
     this.#adapterState.flags = {};
 
-    this.#adapterState.configurationStatus =
-      AdapterConfigurationStatus.Configured;
+    this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
 
     this.#adapterState.emitter.emit(
       'flagsStateChange',
       this.#adapterState.flags
     );
-    this.#adapterState.emitter.emit('statusStateChange', {
-      configurationStatus: this.#adapterState.configurationStatus,
-    });
 
     return Promise.resolve({
       initializationStatus: AdapterInitializationStatus.Succeeded,
@@ -217,10 +203,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
   async waitUntilConfigured() {
     return new Promise<void>((resolve) => {
-      if (
-        this.#adapterState.configurationStatus ===
-        AdapterConfigurationStatus.Configured
-      )
+      if (this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured))
         resolve();
       else
         this.#adapterState.emitter.on(
