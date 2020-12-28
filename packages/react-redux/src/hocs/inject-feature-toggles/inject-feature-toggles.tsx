@@ -12,7 +12,7 @@ type InjectedProps = {
   [propKey: string]: TFlags;
 };
 
-export default <OwnProps extends object>(
+export default <OwnProps extends Record<string, unknown>>(
   flagNames: TFlagName[],
   propKey: string = DEFAULT_FLAGS_PROP_KEY
 ) => (
