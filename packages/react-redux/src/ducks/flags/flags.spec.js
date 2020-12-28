@@ -159,9 +159,13 @@ describe('selectors', () => {
   describe('selecting a flag', () => {
     describe('when existing', () => {
       it('should return the flag value', () => {
-        expect(selectFlag('flagA', 'memory')(state)).toEqual(true);
-        expect(selectFlag('flagB', 'memory')(state)).toEqual(false);
-        expect(selectFlag('flagC', 'graphql')(state)).toEqual(true);
+        expect(selectFlag('flagA', ['memory'])(state)).toEqual(true);
+        expect(selectFlag('flagB', ['memory'])(state)).toEqual(false);
+        expect(selectFlag('flagC', ['graphql'])(state)).toEqual(true);
+        expect(selectFlag('flagA', ['graphql', 'memory'])(state)).toEqual(true);
+        expect(selectFlag('flagA', ['memory', 'graphql'])(state)).toEqual(
+          false
+        );
       });
     });
 

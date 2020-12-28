@@ -81,11 +81,20 @@ export const selectFlags = () => (state: TState) =>
 
 export const selectFlag = (
   flagName: TFlagName,
-  adapterInterfaceIdentifier: TAdapterInterfaceIdentifiers
+  adapterInterfaceIdentifiers: TAdapterInterfaceIdentifiers[]
 ): ((state: TState) => TFlagVariation) => (state) => {
   const allFlags = selectFlags()(state);
-  const flagValue: TFlagVariation =
-    allFlags[adapterInterfaceIdentifier]?.[flagName];
 
-  return isNil(flagValue) ? false : flagValue;
+  let foundFlagVariation: TFlagVariation = false;
+
+  for (const adapterInterfaceIdentifier of adapterInterfaceIdentifiers) {
+    const flagValue: TFlagVariation =
+      allFlags[adapterInterfaceIdentifier]?.[flagName];
+
+    if (!isNil(flagValue)) {
+      foundFlagVariation = flagValue;
+    }
+  }
+
+  return foundFlagVariation;
 };
