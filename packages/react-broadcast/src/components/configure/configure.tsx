@@ -13,7 +13,7 @@ import {
   AdapterSubscriptionStatus,
 } from '@flopflip/types';
 
-import React from 'react';
+import React, {useState, useCallback} from 'react';
 import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
 import { FlagsContext } from '../flags-context';
 
@@ -55,11 +55,11 @@ type TFlagUpdateFunction = (flagsChange: TFlagsChange) => void;
 const useFlagsState = ({
   adapterIdentifiers,
 }: TUseFlagsStateOptions): [TFlagsState, TFlagUpdateFunction] => {
-  const [flags, setFlags] = React.useState<TState['flags']>(
+  const [flags, setFlags] = useState<TState['flags']>(
     getInitialFlags({ adapterIdentifiers })
   );
 
-  const updateFlags = (flagsChange: TFlagsChange) => {
+  const updateFlags = useCallback((flagsChange: TFlagsChange) => {
     setFlags((prevState) => {
       if (flagsChange.id) {
         return {
@@ -84,7 +84,7 @@ const useFlagsState = ({
         )
       };
     });
-  };
+  }, [adapterIdentifiers]);
 
   return [flags, updateFlags];
 };
@@ -93,7 +93,7 @@ const useStatusState = (): [
   TAdapterStatus,
   React.Dispatch<React.SetStateAction<TAdapterStatus>>
 ] => {
-  const [status, setStatus] = React.useState<TState['status']>(
+  const [status, setStatus] = useState<TState['status']>(
     initialAdapterStatus
   );
 
@@ -113,7 +113,7 @@ const Configure = <AdapterInstance extends TAdapter>(
   //   component.
   const getHasAdapterSubscriptionStatus = useAdapterSubscription(props.adapter);
 
-  const handleUpdateFlags = React.useCallback<
+  const handleUpdateFlags = useCallback<
     (flagsChange: TFlagsChange) => void
   >(
     (flagsChange) => {
@@ -128,7 +128,7 @@ const Configure = <AdapterInstance extends TAdapter>(
     [updateFlags, getHasAdapterSubscriptionStatus]
   );
 
-  const handleUpdateStatus = React.useCallback<
+  const handleUpdateStatus = useCallback<
     (statusChange: TAdapterStatusChange) => void
   >(
     (statusChange) => {

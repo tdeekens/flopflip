@@ -15,7 +15,7 @@ import {
   AdapterInitializationStatus,
 } from '@flopflip/types';
 
-import React from 'react';
+import React, {useCallback, useRef, useEffect, useState} from 'react';
 import warning from 'tiny-warning';
 import {
   isFunctionChildren,
@@ -55,11 +55,11 @@ type TUseAppliedAdapterArgsStateReturn = [
 const useAppliedAdapterArgsState = ({
   initialAdapterArgs,
 }: TUseAppliedAdapterArgsStateOptions): TUseAppliedAdapterArgsStateReturn => {
-  const [appliedAdapterArgs, setAppliedAdapterArgs] = React.useState<
+  const [appliedAdapterArgs, setAppliedAdapterArgs] = useState<
     TAdapterArgs
   >(initialAdapterArgs);
 
-  const applyAdapterArgs = React.useCallback(
+  const applyAdapterArgs = useCallback(
     (nextAdapterArgs: TAdapterArgs) => {
       /**
        * NOTE:
@@ -82,23 +82,23 @@ type TUseAdapterStateRefReturn = [
   () => boolean
 ];
 const useAdapterStateRef = (): TUseAdapterStateRefReturn => {
-  const adapterStateRef = React.useRef<TAdapterStates>(
+  const adapterStateRef = useRef<TAdapterStates>(
     AdapterStates.UNCONFIGURED
   );
 
-  const setAdapterState = React.useCallback(
+  const setAdapterState = useCallback(
     (nextAdapterState: TAdapterStates) => {
       adapterStateRef.current = nextAdapterState;
     },
     [adapterStateRef]
   );
 
-  const getIsAdapterConfigured = React.useCallback(
+  const getIsAdapterConfigured = useCallback(
     () => adapterStateRef.current === AdapterStates.CONFIGURED,
     [adapterStateRef]
   );
 
-  const getDoesAdapterNeedInitialConfiguration = React.useCallback(
+  const getDoesAdapterNeedInitialConfiguration = useCallback(
     () =>
       adapterStateRef.current !== AdapterStates.CONFIGURED &&
       adapterStateRef.current !== AdapterStates.CONFIGURING,
@@ -121,9 +121,9 @@ type TUsePendingAdapterArgsRefReturn = [
 const usePendingAdapterArgsRef = (
   appliedAdapterArgs: TAdapterArgs
 ): TUsePendingAdapterArgsRefReturn => {
-  const pendingAdapterArgsRef = React.useRef<TAdapterArgs | null>(null);
+  const pendingAdapterArgsRef = useRef<TAdapterArgs | null>(null);
 
-  const setPendingAdapterArgs = React.useCallback(
+  const setPendingAdapterArgs = useCallback(
     (nextReconfiguration: TAdapterReconfiguration): void => {
       /**
        * NOTE:
@@ -141,7 +141,7 @@ const usePendingAdapterArgsRef = (
     [appliedAdapterArgs, pendingAdapterArgsRef]
   );
 
-  const unsetPendingAdapterArgs = React.useCallback(() => {
+  const unsetPendingAdapterArgs = useCallback(() => {
     pendingAdapterArgsRef.current = null;
   }, [pendingAdapterArgsRef]);
 
@@ -156,7 +156,7 @@ const usePendingAdapterArgsRef = (
    *    be passed pending or applied adapterArgs.
    *
    */
-  const getAdapterArgsForConfiguration = React.useCallback(
+  const getAdapterArgsForConfiguration = useCallback(
     (): TAdapterArgs => pendingAdapterArgsRef.current ?? appliedAdapterArgs,
     [appliedAdapterArgs, pendingAdapterArgsRef]
   );
@@ -164,7 +164,7 @@ const usePendingAdapterArgsRef = (
   /**
    * NOTE: Clears the pending adapter args when applied adapter args changed.
    */
-  React.useEffect(unsetPendingAdapterArgs, [
+  useEffect(unsetPendingAdapterArgs, [
     appliedAdapterArgs,
     unsetPendingAdapterArgs,
   ]);
@@ -182,7 +182,7 @@ type TUseHandleDefaultFlagsCallbackOptions = {
 const useHandleDefaultFlagsCallback = ({
   onFlagsStateChange,
 }: TUseHandleDefaultFlagsCallbackOptions) => {
-  const handleDefaultFlags = React.useCallback(
+  const handleDefaultFlags = useCallback(
     (defaultFlags: TFlags): void => {
       if (Object.keys(defaultFlags).length > 0) {
         onFlagsStateChange({flags: defaultFlags});
@@ -220,7 +220,7 @@ const useConfigurationEffect = ({
   pendingAdapterArgsRef,
   appliedAdapterArgs,
 }: TUseConfigurationEffectOptions) => {
-  React.useEffect(() => {
+  useEffect(() => {
     if (
       !shouldDeferAdapterConfiguration &&
       getDoesAdapterNeedInitialConfiguration()
@@ -330,7 +330,7 @@ const useDefaultFlagsEffect = ({
     onFlagsStateChange,
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (defaultFlags) handleDefaultFlags(defaultFlags);
 
     if (!shouldDeferAdapterConfiguration) {
@@ -391,7 +391,7 @@ const usePendingAdapterArgsEffect = ({
    *   Internally this component has a `ReconfigureAdapter` type;
    *   this function has two arguments for clarify.
    */
-  const reconfigureOrQueue = React.useCallback(
+  const reconfigureOrQueue = useCallback(
     (
       nextAdapterArgs: TAdapterArgs,
       options: TAdapterReconfigurationOptions
@@ -416,7 +416,7 @@ const usePendingAdapterArgsEffect = ({
     ]
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     /**
      * NOTE:
      *   The component might receive `adapterArgs` from `ReconfigureFlopflip`
