@@ -7,7 +7,7 @@ type TBranchOnFeatureToggleOptions = {
   flag: TFlagName;
   variation?: TFlagVariation;
 };
-export default function branchOnFeatureToggle<OwnProps extends object>(
+export default function branchOnFeatureToggle<OwnProps extends Record<string, unknown>>(
   { flag: flagName, variation: flagVariation }: TBranchOnFeatureToggleOptions,
   UntoggledComponent?: React.ComponentType
 ) {

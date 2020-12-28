@@ -12,7 +12,7 @@ type InjectedProps = {
   [propKey: string]: TFlagVariation;
 };
 
-export default function injectFeatureToggle<OwnProps extends object>(
+export default function injectFeatureToggle<OwnProps extends Record<string, unknown>>(
   flagName: TFlagName,
   propKey: string = DEFAULT_FLAG_PROP_KEY
 ) {
