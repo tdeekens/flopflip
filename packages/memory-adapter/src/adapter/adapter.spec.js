@@ -7,8 +7,6 @@ jest.mock('tiny-warning');
 
 const createAdapterArgs = (customArgs = {}) => ({
   user: { id: 'foo' },
-  onFlagsStateChange: jest.fn(),
-  onStatusStateChange: jest.fn(),
   ...customArgs,
 });
 const createAdapterEventHandlers = (custom = {}) => ({
