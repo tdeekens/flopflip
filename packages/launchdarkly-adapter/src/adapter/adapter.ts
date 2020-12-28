@@ -398,7 +398,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   setConfigurationStatus(nextConfigurationStatus: AdapterConfigurationStatus) {
     this.#adapterState.configurationStatus = nextConfigurationStatus;
 
-    adapterState.emitter.emit('statusStateChange', {
+    this.#adapterState.emitter.emit('statusStateChange', {
       configurationStatus: this.#adapterState.configurationStatus,
     });
   }
