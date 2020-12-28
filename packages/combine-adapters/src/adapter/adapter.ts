@@ -2,7 +2,7 @@ import type {
   TAdapterStatus,
   TAdapterStatusChange,
   TAdapterEventHandlers,
-  TCombinedAdapterArgs,
+  TAdapterArgs,
   TFlags,
   TUpdateFlagsOptions,
   TCombinedAdapterInterface,
@@ -79,7 +79,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
   }
 
   async configure(
-    adapterArgs: TCombinedAdapterArgs,
+    adapterArgs: TAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) {
     warning(
@@ -126,7 +126,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
   }
 
   async reconfigure(
-    adapterArgs: TCombinedAdapterArgs,
+    adapterArgs: TAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) {
     this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);

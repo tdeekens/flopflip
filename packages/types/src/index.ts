@@ -69,7 +69,6 @@ export type TLocalStorageAdapterArgs = TBaseAdapterArgs & {
   adapterConfiguration?: TLocalStorageAdapterSubscriptionOptions;
 };
 export type TMemoryAdapterArgs = TBaseAdapterArgs;
-export type TCombinedAdapterArgs = TBaseAdapterArgs;
 export type TSplitioAdapterArgs = TBaseAdapterArgs & {
   authorizationKey: string;
   options?: Record<string, unknown> & { core?: Record<string, string> };
@@ -215,15 +214,15 @@ export interface TMemoryAdapterInterface
   subscribe: () => void;
 }
 export interface TCombinedAdapterInterface
-  extends TAdapterInterface<TCombinedAdapterArgs> {
+  extends TAdapterInterface<TAdapterArgs> {
   id: typeof adapterIdentifiers.combined;
   combine: (adapters: TAdapter[]) => void;
   configure: (
-    adapterArgs: TMemoryAdapterArgs,
+    adapterArgs: TAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) => Promise<TAdapterConfiguration>;
   reconfigure: (
-    adapterArgs: TMemoryAdapterArgs,
+    adapterArgs: TAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) => Promise<TAdapterConfiguration>;
   getIsConfigurationStatus: (
@@ -267,8 +266,6 @@ export type ConfigureAdapterArgs<
   ? TLocalStorageAdapterArgs
   : TAdapterInstance extends TMemoryAdapterInterface
   ? TMemoryAdapterArgs
-  : TAdapterInstance extends TCombinedAdapterInterface
-  ? TCombinedAdapterArgs
   : TAdapterInstance extends TSplitioAdapterInterface
   ? TSplitioAdapterArgs
   : TAdapterInstance extends TGraphQLAdapterInterface
