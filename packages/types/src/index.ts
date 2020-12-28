@@ -113,7 +113,7 @@ export interface TAdapterInterface<Args extends TAdapterArgs> {
   // Identifiers are used to uniquely identify an interface when performing a condition check.
   id: TAdapterIdentifiers;
   // Used if a combined adapter intends to affect variaus other adapter's feature states
-  adapterEffectIds?: TAdapterIdentifiers[];
+  effectIds?: TAdapterIdentifiers[];
   configure: (
     adapterArgs: Args,
     adapterEventHandlers: TAdapterEventHandlers

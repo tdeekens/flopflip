@@ -482,7 +482,7 @@ const ConfigureAdapter = (props: TProps) => {
     applyAdapterArgs,
     appliedAdapterArgs,
   });
-  const adapterEffectIdentifiers = props.adapter.adapterEffectIds ?? [props.adapter.id];
+  const adapterEffectIdentifiers = props.adapter.effectIds ?? [props.adapter.id];
 
   return (
     <AdapterContext.Provider
