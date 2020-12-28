@@ -40,7 +40,7 @@ it('should indicate a feature being enabled', async () => {
   expect(rendered.getByText('Is enabled: Yes')).toBeInTheDocument();
 });
 
-it('should indicate a flag variation', async () => {
+it.only('should indicate a flag variation', async () => {
   const rendered = render(<TestComponent />);
 
   await rendered.waitUntilConfigured();

@@ -7,6 +7,7 @@ const adapterArgs = {
   user: { key: 'foo-user' },
 };
 const adapter = {
+  id: 'test',
   configure: jest.fn(),
   reconfigure: jest.fn(),
 };
@@ -66,7 +67,9 @@ describe('when creating enhancer', () => {
       });
 
       it('should invoke `dispatch` with `updateFlags`', () => {
-        expect(dispatch).toHaveBeenCalledWith(updateFlags(nextFlags));
+        expect(dispatch).toHaveBeenCalledWith(
+          updateFlags(nextFlags, [adapter.id])
+        );
       });
     });
 

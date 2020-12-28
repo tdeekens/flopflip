@@ -23,7 +23,7 @@ describe('<ToggleFeature>', () => {
         </ToggleFeature>
       );
       const store = createStore({
-        [STATE_SLICE]: { flags: { disabledFeature: false } },
+        [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
       });
 
       const rendered = render(store, <TestComponent />);
@@ -43,7 +43,7 @@ describe('<ToggleFeature>', () => {
           </ToggleFeature>
         );
         const store = createStore({
-          [STATE_SLICE]: { flags: { disabledFeature: false } },
+          [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
         });
 
         const rendered = render(store, <TestComponent />);
@@ -60,7 +60,7 @@ describe('<ToggleFeature>', () => {
   describe('when feature is enabled', () => {
     it('should render the component representing a enabled feature', async () => {
       const store = createStore({
-        [STATE_SLICE]: { flags: { enabledFeature: true } },
+        [STATE_SLICE]: { flags: { memory: { enabledFeature: true } } },
       });
       const TestComponent = () => (
         <ToggleFeature flag="enabledFeature">

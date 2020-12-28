@@ -25,7 +25,7 @@ describe('injectFeatureToggles', () => {
     it('should have feature enabling prop for `enabledFeature`', async () => {
       const store = createStore({
         [STATE_SLICE]: {
-          flags: { enabledFeature: true, disabledFeature: false },
+          flags: { memory: { enabledFeature: true, disabledFeature: false } },
         },
       });
       const TestComponent = injectFeatureToggles([
@@ -45,7 +45,7 @@ describe('injectFeatureToggles', () => {
     it('should have feature disabling prop for `disabledFeature`', async () => {
       const store = createStore({
         [STATE_SLICE]: {
-          flags: { enabledFeature: true, disabledFeature: false },
+          flags: { memory: { enabledFeature: true, disabledFeature: false } },
         },
       });
       const TestComponent = injectFeatureToggles([
@@ -70,7 +70,7 @@ describe('injectFeatureToggles', () => {
         ])(FlagsToComponent);
         const store = createStore({
           [STATE_SLICE]: {
-            flags: { enabledFeature: true, disabledFeature: false },
+            flags: { memory: { enabledFeature: true, disabledFeature: false } },
           },
         });
 
@@ -91,7 +91,7 @@ describe('injectFeatureToggles', () => {
     it('should have feature enabling prop for `enabledFeature`', async () => {
       const store = createStore({
         [STATE_SLICE]: {
-          flags: { enabledFeature: true, disabledFeature: false },
+          flags: { memory: { enabledFeature: true, disabledFeature: false } },
         },
       });
       const TestComponent = injectFeatureToggles(
@@ -111,7 +111,7 @@ describe('injectFeatureToggles', () => {
     it('should have feature disabling prop for `disabledFeature`', async () => {
       const store = createStore({
         [STATE_SLICE]: {
-          flags: { enabledFeature: true, disabledFeature: false },
+          flags: { memory: { enabledFeature: true, disabledFeature: false } },
         },
       });
       const TestComponent = injectFeatureToggles(

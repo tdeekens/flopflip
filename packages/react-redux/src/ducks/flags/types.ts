@@ -1,6 +1,11 @@
-import type { TFlagsChange } from '@flopflip/types';
+import type {
+  TFlagsChange,
+  TAdapterInterfaceIdentifiers,
+} from '@flopflip/types';
 
 export type TUpdateFlagsAction = {
   type: string;
-  payload: TFlagsChange;
+  payload: TFlagsChange & {
+    adapterInterfaceIdentifiers: TAdapterInterfaceIdentifiers[];
+  };
 };

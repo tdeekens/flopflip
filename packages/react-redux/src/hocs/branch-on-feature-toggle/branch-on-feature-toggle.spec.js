@@ -18,7 +18,7 @@ describe('without `untoggledComponent', () => {
   describe('when feature is disabled', () => {
     it('should render neither the component representing an disabled or enabled feature', async () => {
       const store = createStore({
-        [STATE_SLICE]: { flags: { disabledFeature: false } },
+        [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
       });
       const TestComponent = branchOnFeatureToggle({ flag: 'disabledFeature' })(
         components.ToggledComponent
@@ -36,7 +36,7 @@ describe('without `untoggledComponent', () => {
     describe('when enabling feature', () => {
       it('should render the component representing a enabled feature', async () => {
         const store = createStore({
-          [STATE_SLICE]: { flags: { disabledFeature: false } },
+          [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
         });
         const TestComponent = branchOnFeatureToggle({
           flag: 'disabledFeature',
@@ -58,7 +58,7 @@ describe('without `untoggledComponent', () => {
   describe('when feature is enabled', () => {
     it('should render the component representing an enabled feature', async () => {
       const store = createStore({
-        [STATE_SLICE]: { flags: { enabledFeature: true } },
+        [STATE_SLICE]: { flags: { memory: { enabledFeature: true } } },
       });
       const TestComponent = branchOnFeatureToggle({ flag: 'enabledFeature' })(
         components.ToggledComponent
@@ -80,7 +80,7 @@ describe('with `untoggledComponent', () => {
   describe('when feature is disabled', () => {
     it('should not render the component representing a enabled feature', async () => {
       const store = createStore({
-        [STATE_SLICE]: { flags: { disabledFeature: false } },
+        [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
       });
       const TestComponent = branchOnFeatureToggle(
         { flag: 'disabledFeature' },
@@ -99,7 +99,7 @@ describe('with `untoggledComponent', () => {
 
     it('should render the component representing a disabled feature', async () => {
       const store = createStore({
-        [STATE_SLICE]: { flags: { disabledFeature: false } },
+        [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
       });
       const TestComponent = branchOnFeatureToggle(
         { flag: 'disabledFeature' },
@@ -120,7 +120,7 @@ describe('with `untoggledComponent', () => {
   describe('when feature is enabled', () => {
     it('should render the component representing a enabled feature', async () => {
       const store = createStore({
-        [STATE_SLICE]: { flags: { enabledFeature: true } },
+        [STATE_SLICE]: { flags: { memory: { enabledFeature: true } } },
       });
       const TestComponent = branchOnFeatureToggle({ flag: 'enabledFeature' })(
         components.ToggledComponent
@@ -138,7 +138,7 @@ describe('with `untoggledComponent', () => {
 
     it('should not render the component representing a disabled feature', async () => {
       const store = createStore({
-        [STATE_SLICE]: { flags: { enabledFeature: true } },
+        [STATE_SLICE]: { flags: { memory: { enabledFeature: true } } },
       });
       const TestComponent = branchOnFeatureToggle({ flag: 'enabledFeature' })(
         components.ToggledComponent
