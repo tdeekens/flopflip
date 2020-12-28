@@ -1,14 +1,14 @@
 ---
-"@flopflip/adapter-utilities": major
-"@flopflip/graphql-adapter": major
-"@flopflip/launchdarkly-adapter": major
-"@flopflip/localstorage-adapter": major
-"@flopflip/memory-adapter": major
-"@flopflip/react-broadcast": patch
-"@flopflip/react-redux": patch
-"@flopflip/react": patch
-"@flopflip/splitio-adapter": patch
-"@flopflip/test-utils": major
+'@flopflip/adapter-utilities': major
+'@flopflip/graphql-adapter': major
+'@flopflip/launchdarkly-adapter': major
+'@flopflip/localstorage-adapter': major
+'@flopflip/memory-adapter': major
+'@flopflip/react-broadcast': patch
+'@flopflip/react-redux': patch
+'@flopflip/react': patch
+'@flopflip/splitio-adapter': patch
+'@flopflip/test-utils': major
 ---
 
 refactor: updateFlags to be only on adapter

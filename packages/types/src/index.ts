@@ -90,6 +90,7 @@ export const adapterIdentifiers = {
   memory: 'memory',
   splitio: 'splitio',
   graphql: 'graphql',
+  combined: 'combined',
 } as const;
 export type TAdapterIdentifiers =
   | typeof adapterIdentifiers[keyof typeof adapterIdentifiers]
@@ -212,6 +213,29 @@ export interface TMemoryAdapterInterface
   unsubscribe: () => void;
   subscribe: () => void;
 }
+export interface TCombinedAdapterInterface
+  extends TAdapterInterface<TAdapterArgs> {
+  id: typeof adapterIdentifiers.combined;
+  combine: <TAdapterInstance extends TAdapter>(
+    adapters: TAdapterInstance[]
+  ) => void;
+  configure: (
+    adapterArgs: TAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
+  ) => Promise<TAdapterConfiguration>;
+  reconfigure: (
+    adapterArgs: TAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
+  ) => Promise<TAdapterConfiguration>;
+  getIsConfigurationStatus: (
+    adapterConfigurationStatus: AdapterConfigurationStatus
+  ) => boolean;
+  waitUntilConfigured: () => Promise<unknown>;
+  reset: () => void;
+  updateFlags: TFlagsUpdateFunction;
+  unsubscribe: () => void;
+  subscribe: () => void;
+}
 export interface TSplitioAdapterInterface
   extends TAdapterInterface<TSplitioAdapterArgs> {
   id: typeof adapterIdentifiers.splitio;
@@ -233,9 +257,10 @@ export type TAdapter =
   | TLaunchDarklyAdapterInterface
   | TLocalStorageAdapterInterface
   | TMemoryAdapterInterface
+  | TCombinedAdapterInterface
   | TSplitioAdapterInterface
   | TGraphQLAdapterInterface;
-export type ConfigureAdapterArgs<
+export type TConfigureAdapterArgs<
   TAdapterInstance extends TAdapter
 > = TAdapterInstance extends TLaunchDarklyAdapterInterface
   ? TLaunchDarklyAdapterArgs
@@ -255,12 +280,14 @@ export type TConfigureAdapterProps<TAdapterInstance extends TAdapter> = {
     ? TLocalStorageAdapterInterface
     : TAdapterInstance extends TMemoryAdapterInterface
     ? TMemoryAdapterInterface
+    : TAdapterInstance extends TCombinedAdapterInterface
+    ? TCombinedAdapterInterface
     : TAdapterInstance extends TSplitioAdapterInterface
     ? TSplitioAdapterInterface
     : TAdapterInstance extends TGraphQLAdapterInterface
     ? TGraphQLAdapterInterface
     : never;
-  adapterArgs: ConfigureAdapterArgs<TAdapterInstance>;
+  adapterArgs: TConfigureAdapterArgs<TAdapterInstance>;
 };
 export type TAdapterReconfigurationOptions = {
   shouldOverwrite?: boolean;
@@ -308,6 +335,10 @@ type TGraphQLAdapterGlobal = {
   adapter: TLocalStorageAdapterInterface;
   updateFlags: TFlagsUpdateFunction;
 };
+type TCombinedAdapterGlobal = {
+  adapter: TCombinedAdapterInterface;
+  updateFlags: TFlagsUpdateFunction;
+};
 
 export type TFlopflipGlobal = {
   [adapterIdentifiers.launchdarkly]?: TLaunchDarklyFlopflipGlobal;
@@ -315,6 +346,7 @@ export type TFlopflipGlobal = {
   [adapterIdentifiers.memory]?: TMemoryAdapterGlobal;
   [adapterIdentifiers.localstorage]?: TLocalStorageAdapterGlobal;
   [adapterIdentifiers.graphql]?: TGraphQLAdapterGlobal;
+  [adapterIdentifiers.combined]?: TCombinedAdapterGlobal;
 };
 declare global {
   interface Window {

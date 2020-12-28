@@ -1,7 +1,7 @@
 ---
-"@flopflip/react-broadcast": patch
-"@flopflip/react-redux": major
-"@flopflip/react": patch
+'@flopflip/react-broadcast': patch
+'@flopflip/react-redux': major
+'@flopflip/react': patch
 ---
 
 refactor: adapters to have own state slice

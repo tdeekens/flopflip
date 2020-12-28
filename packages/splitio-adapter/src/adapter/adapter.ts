@@ -135,7 +135,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     };
   };
 
-  #subscribe = async ({
+  #subscribeToFlagChanges = async ({
     onFlagsStateChange,
     onStatusStateChange,
   }: {
@@ -215,7 +215,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     this.#adapterState.client = client;
     this.#adapterState.manager = manager;
 
-    return this.#subscribe({
+    return this.#subscribeToFlagChanges({
       onFlagsStateChange: this.#adapterState.configuredCallbacks
         .onFlagsStateChange,
       onStatusStateChange: this.#adapterState.configuredCallbacks
