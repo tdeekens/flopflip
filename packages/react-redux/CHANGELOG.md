@@ -1,5 +1,54 @@
 # @flopflip/react-redux
 
+## 12.0.0
+
+### Major Changes
+
+- [`3d2a174`](https://github.com/tdeekens/flopflip/commit/3d2a1742f9e6c99ba0360e8f33de6ce077fbd404) [#1367](https://github.com/tdeekens/flopflip/pull/1367) Thanks [@tdeekens](https://github.com/tdeekens)! - feat: allow adapters to affect each others state
+
+  An adapter can now have an `effectIds` besides its own `id`. This allows one adapter to effect other adapters state. In turn allowing flopflip to theoretically support multiple adapters.
+
+* [`41d403e`](https://github.com/tdeekens/flopflip/commit/41d403eb74afbbc3b703a529ccf0c40150964e9a) [#1366](https://github.com/tdeekens/flopflip/pull/1366) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: adapters to have own state slice
+
+  The `react-redux` package has one potential breaking change. If you used `selectFlags` and/or or `selectFlag` directly then you will have to use their new signature.
+
+  ```diff
+  -useSelector(selectFlags);
+  +useSelector(selectFlags());
+  ```
+
+  ```diff
+  -useSelector(selectFlag('fooFlag');
+  +useSelector(selectFlag([adapter.id], 'fooFlag'));
+  ```
+
+  In the second example `memory` could be `id` of your adapter. In the future we plan to support multiple adapters resulting in an array being passed.
+
+  Note that in other locations, e.g. with `useFeatureToggle` we now which adapter you are using as we retrive it from the adapter context.
+
+### Patch Changes
+
+- [`b099b51`](https://github.com/tdeekens/flopflip/commit/b099b5175aebc472281ef40f3d67c5cb298d1be9) [#1362](https://github.com/tdeekens/flopflip/pull/1362) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: updateFlags to be only on adapter
+
+  The `updateFlags` export from each adapter is no longer present. Please use the `adapter.updateFlags` function instead. The prior was a re-export of the latter for longer anyway.
+
+  This affects also other locations you should hopefully not be affected by:
+
+  1. `test-utils`: does not export `updateFlags` anymore. Use `adapter.updateFlags`
+  2. Globals: The globals on the window do not contain a `window.__flopflip__.[id].updateFlags` anymore
+
+* [`b9c74ed`](https://github.com/tdeekens/flopflip/commit/b9c74ed24b5e695c914b8c82a3a81926558b78f7) [#1365](https://github.com/tdeekens/flopflip/pull/1365) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: adapters and system to receive ids
+
+- [`1e34552`](https://github.com/tdeekens/flopflip/commit/1e345527629b27bd0fba65b4006a7e3d5537fd9c) [#1368](https://github.com/tdeekens/flopflip/pull/1368) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: to use record with unknown over object
+
+* [`981075d`](https://github.com/tdeekens/flopflip/commit/981075dbf4b293e44102205c594b39ffad31188d) [#1364](https://github.com/tdeekens/flopflip/pull/1364) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: to change import \* style
+
+- [`feddd2c`](https://github.com/tdeekens/flopflip/commit/feddd2cbfa8e41d372f79dc214e14f250c114f97) [#1358](https://github.com/tdeekens/flopflip/pull/1358) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: clean up deps
+
+- Updated dependencies [[`521660c`](https://github.com/tdeekens/flopflip/commit/521660c2452628e336896300fd1ab743cf6a4b12), [`b099b51`](https://github.com/tdeekens/flopflip/commit/b099b5175aebc472281ef40f3d67c5cb298d1be9), [`3d2a174`](https://github.com/tdeekens/flopflip/commit/3d2a1742f9e6c99ba0360e8f33de6ce077fbd404), [`b9c74ed`](https://github.com/tdeekens/flopflip/commit/b9c74ed24b5e695c914b8c82a3a81926558b78f7), [`1e34552`](https://github.com/tdeekens/flopflip/commit/1e345527629b27bd0fba65b4006a7e3d5537fd9c), [`ea542f5`](https://github.com/tdeekens/flopflip/commit/ea542f5174c3094f7af444caed788f17942bcf38), [`339a427`](https://github.com/tdeekens/flopflip/commit/339a42745a7131ee18aaa27d196a0cdc4207ee88), [`4c1d86b`](https://github.com/tdeekens/flopflip/commit/4c1d86be23e0c0f50b07191e6984db4fd4b0139c), [`41d403e`](https://github.com/tdeekens/flopflip/commit/41d403eb74afbbc3b703a529ccf0c40150964e9a), [`981075d`](https://github.com/tdeekens/flopflip/commit/981075dbf4b293e44102205c594b39ffad31188d), [`feddd2c`](https://github.com/tdeekens/flopflip/commit/feddd2cbfa8e41d372f79dc214e14f250c114f97)]:
+  - @flopflip/react@11.0.0
+  - @flopflip/types@4.0.0
+
 ## 11.0.13
 
 ### Patch Changes

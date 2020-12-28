@@ -1,5 +1,29 @@
 # @flopflip/types
 
+## 4.0.0
+
+### Major Changes
+
+- [`521660c`](https://github.com/tdeekens/flopflip/commit/521660c2452628e336896300fd1ab743cf6a4b12) [#1363](https://github.com/tdeekens/flopflip/pull/1363) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: to remove isAdapterReady
+
+  The deprecated `adapter.getIsReady` and FaaC of `isAdapterReady` is removed. Please now `adapter.getIsConfigured` and `isAdapterConfigured`.
+
+### Patch Changes
+
+- [`3d2a174`](https://github.com/tdeekens/flopflip/commit/3d2a1742f9e6c99ba0360e8f33de6ce077fbd404) [#1367](https://github.com/tdeekens/flopflip/pull/1367) Thanks [@tdeekens](https://github.com/tdeekens)! - feat: allow adapters to affect each others state
+
+  An adapter can now have an `effectIds` besides its own `id`. This allows one adapter to effect other adapters state. In turn allowing flopflip to theoretically support multiple adapters.
+
+* [`b9c74ed`](https://github.com/tdeekens/flopflip/commit/b9c74ed24b5e695c914b8c82a3a81926558b78f7) [#1365](https://github.com/tdeekens/flopflip/pull/1365) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: adapters and system to receive ids
+
+- [`339a427`](https://github.com/tdeekens/flopflip/commit/339a42745a7131ee18aaa27d196a0cdc4207ee88) [#1359](https://github.com/tdeekens/flopflip/pull/1359) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: expose helpers on adapter
+
+* [`4c1d86b`](https://github.com/tdeekens/flopflip/commit/4c1d86be23e0c0f50b07191e6984db4fd4b0139c) [#1361](https://github.com/tdeekens/flopflip/pull/1361) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: adapters to use instance variables
+
+  This is a large refactor which changes all adapters to use instance variables over properties on the modules. During this refactora a public and private class variables were used.
+
+  This should be entirely backwards compatible but is quite a large change. Please report any issues you see.
+
 ## 3.1.0
 
 ### Minor Changes
