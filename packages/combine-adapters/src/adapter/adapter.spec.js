@@ -211,7 +211,11 @@ describe('when combining', () => {
       );
 
       beforeEach(async () => {
-        configurationResult = await adapter.reconfigure({ user });
+        configurationResult = await adapter.reconfigure(
+          { user },
+          adapterEventHandlers
+        );
+        adapterEventHandlers = createAdapterEventHandlers();
       });
 
       it('should resolve to a successful initialization status', () => {
