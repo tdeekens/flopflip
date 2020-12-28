@@ -3,7 +3,7 @@ import type {
   TFlagVariation,
   TFlagsContext,
   TFlagsChange,
-  TAdapterInterfaceIdentifiers,
+  TAdapterIdentifiers,
 } from '@flopflip/types';
 
 import { isNil } from '@flopflip/react';
@@ -38,7 +38,7 @@ const reducer = (
       return {
         ...state,
         ...Object.fromEntries(
-          action.payload.adapterInterfaceIdentifiers.map(
+          action.payload.adapterIdentifiers.map(
             (adapterInterfaceIdentifier) => [
               adapterInterfaceIdentifier,
               {
@@ -69,10 +69,10 @@ export const createReducer = (
 // Action Creators
 export const updateFlags = (
   flagsChange: TFlagsChange,
-  adapterInterfaceIdentifiers: TAdapterInterfaceIdentifiers[]
+  adapterIdentifiers: TAdapterIdentifiers[]
 ): TUpdateFlagsAction => ({
   type: UPDATE_FLAGS,
-  payload: { ...flagsChange, adapterInterfaceIdentifiers },
+  payload: { ...flagsChange, adapterIdentifiers },
 });
 
 // Selectors
@@ -81,13 +81,13 @@ export const selectFlags = () => (state: TState) =>
 
 export const selectFlag = (
   flagName: TFlagName,
-  adapterInterfaceIdentifiers: TAdapterInterfaceIdentifiers[]
+  adapterIdentifiers: TAdapterIdentifiers[]
 ): ((state: TState) => TFlagVariation) => (state) => {
   const allFlags = selectFlags()(state);
 
   let foundFlagVariation: TFlagVariation = false;
 
-  for (const adapterInterfaceIdentifier of adapterInterfaceIdentifiers) {
+  for (const adapterInterfaceIdentifier of adapterIdentifiers) {
     const flagValue: TFlagVariation =
       allFlags[adapterInterfaceIdentifier]?.[flagName];
 

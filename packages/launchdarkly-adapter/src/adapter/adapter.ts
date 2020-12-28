@@ -15,7 +15,7 @@ import {
   AdapterInitializationStatus,
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
-  adapterInterfaceIdentifiers,
+  adapterIdentifiers,
 } from '@flopflip/types';
 import {
   normalizeFlags,
@@ -46,7 +46,7 @@ type LaunchDarklyAdapterState = {
 
 class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   #adapterState: TAdapterStatus & LaunchDarklyAdapterState;
-  id: typeof adapterInterfaceIdentifiers.launchdarkly;
+  id: typeof adapterIdentifiers.launchdarkly;
 
   constructor() {
     this.#adapterState = {
@@ -61,7 +61,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       lockedFlags: new Set<TFlagName>(),
       unsubscribedFlags: new Set<TFlagName>(),
     };
-    this.id = adapterInterfaceIdentifiers.launchdarkly;
+    this.id = adapterIdentifiers.launchdarkly;
   }
 
   #updateFlagsInAdapterState = (

@@ -15,7 +15,7 @@ import {
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
-  adapterInterfaceIdentifiers,
+  adapterIdentifiers,
 } from '@flopflip/types';
 import { normalizeFlag, exposeGlobally } from '@flopflip/adapter-utilities';
 
@@ -44,13 +44,13 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
   #adapterState: TAdapterStatus & MemoryAdapterState;
 
-  id: typeof adapterInterfaceIdentifiers.memory;
+  id: typeof adapterIdentifiers.memory;
 
   constructor() {
     this.#adapterState = {
       ...intialAdapterState,
     };
-    this.id = adapterInterfaceIdentifiers.memory;
+    this.id = adapterIdentifiers.memory;
   }
 
   #getIsAdapterUnsubscribed = () =>

@@ -28,8 +28,8 @@ const defaultProps: Pick<
 const Configure = <AdapterInstance extends TAdapter>(
   props: Props<AdapterInstance>
 ) => {
-  const adapterInterfaceIdentifiers = [props.adapter.id];
-  const handleUpdateFlags = useUpdateFlags({adapterInterfaceIdentifiers});
+  const adapterIdentifiers = [props.adapter.id];
+  const handleUpdateFlags = useUpdateFlags({adapterIdentifiers});
   const handleUpdateStatus = useUpdateStatus();
 
   useAdapterSubscription(props.adapter);

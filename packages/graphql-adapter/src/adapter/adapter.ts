@@ -16,7 +16,7 @@ import {
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
-  adapterInterfaceIdentifiers,
+  adapterIdentifiers,
   cacheIdentifiers,
 } from '@flopflip/types';
 import {
@@ -56,10 +56,10 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
   #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
   #defaultPollingInteral = 1000 * 60;
 
-  id: typeof adapterInterfaceIdentifiers.graphql;
+  id: typeof adapterIdentifiers.graphql;
 
   constructor() {
-    this.id = adapterInterfaceIdentifiers.graphql;
+    this.id = adapterIdentifiers.graphql;
   }
 
   #getIsAdapterUnsubscribed = () =>

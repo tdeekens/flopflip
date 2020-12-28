@@ -482,10 +482,11 @@ const ConfigureAdapter = (props: TProps) => {
     applyAdapterArgs,
     appliedAdapterArgs,
   });
+  const adapterEffectIdentifiers = props.adapter.adapterEffectIds ?? [props.adapter.id];
 
   return (
     <AdapterContext.Provider
-      value={createAdapterContext([props.adapter.id], reconfigureOrQueue, props.adapterStatus)}
+      value={createAdapterContext(adapterEffectIdentifiers, reconfigureOrQueue, props.adapterStatus)}
     >
       {(() => {
         const isAdapterConfigured = props.adapter.getIsConfigurationStatus(

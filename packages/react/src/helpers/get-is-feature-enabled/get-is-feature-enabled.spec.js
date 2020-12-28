@@ -5,12 +5,12 @@ jest.mock('tiny-warning');
 describe('with existing flag', () => {
   describe('with flag variation', () => {
     const flags = { memory: { fooFlag: 'foo-variation' } };
-    const adapterInterfaceIdentifiers = ['memory'];
+    const adapterIdentifiers = ['memory'];
 
     it('should indicate feature being enabled', () => {
       expect(
         getIsFeatureEnabled(
-          adapterInterfaceIdentifiers,
+          adapterIdentifiers,
           'fooFlag',
           'foo-variation'
         )(flags)
@@ -20,7 +20,7 @@ describe('with existing flag', () => {
     it('should indicate feature being disabled', () => {
       expect(
         getIsFeatureEnabled(
-          adapterInterfaceIdentifiers,
+          adapterIdentifiers,
           'fooFlag',
           'foo-variation-1'
         )(flags)
@@ -31,20 +31,20 @@ describe('with existing flag', () => {
   describe('without flag variation', () => {
     it('should indicate feature being enabled', () => {
       const flags = { memory: { fooFlag: true } };
-      const adapterInterfaceIdentifiers = ['memory'];
+      const adapterIdentifiers = ['memory'];
 
-      expect(
-        getIsFeatureEnabled(adapterInterfaceIdentifiers, 'fooFlag')(flags)
-      ).toBe(true);
+      expect(getIsFeatureEnabled(adapterIdentifiers, 'fooFlag')(flags)).toBe(
+        true
+      );
     });
 
     it('should indicate feature being disabled', () => {
       const flags = { memory: { fooFlag: false } };
-      const adapterInterfaceIdentifiers = ['memory'];
+      const adapterIdentifiers = ['memory'];
 
-      expect(
-        getIsFeatureEnabled(adapterInterfaceIdentifiers, 'fooFlag')(flags)
-      ).toBe(false);
+      expect(getIsFeatureEnabled(adapterIdentifiers, 'fooFlag')(flags)).toBe(
+        false
+      );
     });
   });
 });
@@ -52,10 +52,10 @@ describe('with existing flag', () => {
 describe('with non existing flag', () => {
   it('should indicate feature being disabled', () => {
     const flags = { memory: { fooFlag: true } };
-    const adapterInterfaceIdentifiers = ['memory'];
+    const adapterIdentifiers = ['memory'];
 
-    expect(
-      getIsFeatureEnabled(adapterInterfaceIdentifiers, 'fooFlag2')(flags)
-    ).toBe(false);
+    expect(getIsFeatureEnabled(adapterIdentifiers, 'fooFlag2')(flags)).toBe(
+      false
+    );
   });
 });

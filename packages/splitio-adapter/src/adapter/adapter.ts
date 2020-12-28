@@ -15,7 +15,7 @@ import {
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
-  adapterInterfaceIdentifiers,
+  adapterIdentifiers,
 } from '@flopflip/types';
 import { normalizeFlags, exposeGlobally } from '@flopflip/adapter-utilities';
 
@@ -65,7 +65,7 @@ const createAnonymousUserKey = () => Math.random().toString(36).substring(2);
 
 class SplitioAdapter implements TSplitioAdapterInterface {
   #adapterState: TAdapterStatus & SplitIOAdapterState;
-  id: typeof adapterInterfaceIdentifiers.splitio;
+  id: typeof adapterIdentifiers.splitio;
 
   constructor() {
     this.#adapterState = {
@@ -80,7 +80,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
       },
       splitioSettings: undefined,
     };
-    this.id = adapterInterfaceIdentifiers.splitio;
+    this.id = adapterIdentifiers.splitio;
   }
 
   #getIsAdapterUnsubscribed = () =>

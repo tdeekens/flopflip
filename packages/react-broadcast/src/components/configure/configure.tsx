@@ -6,7 +6,7 @@ import type {
   TAdapterStatusChange,
   TConfigureAdapterChildren,
   TConfigureAdapterProps,
-  TAdapterInterfaceIdentifiers,
+  TAdapterIdentifiers,
 } from '@flopflip/types';
 import {
   AdapterConfigurationStatus,
@@ -24,7 +24,7 @@ type BaseProps = {
 };
 type Props<AdapterInstance extends TAdapter> = BaseProps &
   TConfigureAdapterProps<AdapterInstance>;
-type TFlagsState = Record<TAdapterInterfaceIdentifiers, TFlags>;
+type TFlagsState = Record<TAdapterIdentifiers, TFlags>;
 type TState = {
   flags: TFlagsState;
   status: TAdapterStatus;
@@ -36,27 +36,27 @@ const initialAdapterStatus: TState['status'] = {
 };
 
 type TGetInitialFlagsOptions = {
-  adapterInterfaceIdentifiers: TAdapterInterfaceIdentifiers[];
+  adapterIdentifiers: TAdapterIdentifiers[];
 };
 const getInitialFlags = ({
-  adapterInterfaceIdentifiers,
+  adapterIdentifiers,
 }: TGetInitialFlagsOptions): TState['flags'] =>
   Object.fromEntries(
-    adapterInterfaceIdentifiers.map((adapterInterfaceIdentifier) => [
+    adapterIdentifiers.map((adapterInterfaceIdentifier) => [
       adapterInterfaceIdentifier,
       {},
     ])
   );
 
 type TUseFlagsStateOptions = {
-  adapterInterfaceIdentifiers: TAdapterInterfaceIdentifiers[];
+  adapterIdentifiers: TAdapterIdentifiers[];
 };
 type TFlagUpdateFunction = (flagsChange: TFlagsChange) => void;
 const useFlagsState = ({
-  adapterInterfaceIdentifiers,
+  adapterIdentifiers,
 }: TUseFlagsStateOptions): [TFlagsState, TFlagUpdateFunction] => {
   const [flags, setFlags] = React.useState<TState['flags']>(
-    getInitialFlags({ adapterInterfaceIdentifiers })
+    getInitialFlags({ adapterIdentifiers })
   );
 
   const updateFlags = (flagsChange: TFlagsChange) => {
@@ -74,7 +74,7 @@ const useFlagsState = ({
       return {
         ...prevState,
         ...Object.fromEntries(
-          adapterInterfaceIdentifiers.map((adapterInterfaceIdentifier) => [
+          adapterIdentifiers.map((adapterInterfaceIdentifier) => [
             adapterInterfaceIdentifier,
             {
               ...prevState[adapterInterfaceIdentifier],
@@ -103,8 +103,8 @@ const useStatusState = (): [
 const Configure = <AdapterInstance extends TAdapter>(
   props: Props<AdapterInstance>
 ) => {
-  const adapterInterfaceIdentifiers = [props.adapter.id];
-  const [flags, updateFlags] = useFlagsState({ adapterInterfaceIdentifiers });
+  const adapterIdentifiers = [props.adapter.id];
+  const [flags, updateFlags] = useFlagsState({ adapterIdentifiers });
   const [status, setStatus] = useStatusState();
 
   // NOTE:
