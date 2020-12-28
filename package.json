@@ -150,6 +150,10 @@
         "maxSize": "3.5Kb"
       },
       {
+        "path": "./packages/combine-adapters/dist/flopflip-combine-adapters.esm.js",
+        "maxSize": "3.0Kb"
+      },
+      {
         "path": "./packages/react/dist/flopflip-react.esm.js",
         "maxSize": "6Kb"
       },
