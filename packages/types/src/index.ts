@@ -84,6 +84,11 @@ export type TAdapterArgs =
   | TMemoryAdapterArgs
   | TSplitioAdapterArgs
   | TGraphQLAdapterArgs;
+export type TCombinedAdapterArgs = TLaunchDarklyAdapterArgs &
+  TLocalStorageAdapterArgs &
+  TMemoryAdapterArgs &
+  TSplitioAdapterArgs &
+  TGraphQLAdapterArgs;
 export const adapterIdentifiers = {
   launchdarkly: 'launchdarkly',
   localstorage: 'localstorage',
@@ -214,17 +219,17 @@ export interface TMemoryAdapterInterface
   subscribe: () => void;
 }
 export interface TCombinedAdapterInterface
-  extends TAdapterInterface<TAdapterArgs> {
+  extends TAdapterInterface<TCombinedAdapterArgs> {
   id: typeof adapterIdentifiers.combined;
   combine: <TAdapterInstance extends TAdapter>(
     adapters: TAdapterInstance[]
   ) => void;
   configure: (
-    adapterArgs: TAdapterArgs,
+    adapterArgs: TCombinedAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) => Promise<TAdapterConfiguration>;
   reconfigure: (
-    adapterArgs: TAdapterArgs,
+    adapterArgs: TCombinedAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) => Promise<TAdapterConfiguration>;
   getIsConfigurationStatus: (
@@ -268,6 +273,8 @@ export type TConfigureAdapterArgs<
   ? TLocalStorageAdapterArgs
   : TAdapterInstance extends TMemoryAdapterInterface
   ? TMemoryAdapterArgs
+  : TAdapterInstance extends TCombinedAdapterInterface
+  ? TCombinedAdapterArgs
   : TAdapterInstance extends TSplitioAdapterInterface
   ? TSplitioAdapterArgs
   : TAdapterInstance extends TGraphQLAdapterInterface

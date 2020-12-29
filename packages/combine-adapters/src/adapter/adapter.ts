@@ -2,7 +2,7 @@ import type {
   TAdapterStatus,
   TAdapterStatusChange,
   TAdapterEventHandlers,
-  TAdapterArgs,
+  TCombinedAdapterArgs,
   TFlags,
   TAdapter,
   TUpdateFlagsOptions,
@@ -79,7 +79,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
   }
 
   async configure(
-    adapterArgs: TAdapterArgs,
+    adapterArgs: TCombinedAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) {
     warning(
@@ -112,7 +112,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
 
     return Promise.all(
       this.#adapters.map(async (adapter) =>
-        adapter.configure(adapterArgs as any, {
+        adapter.configure(adapterArgs, {
           onFlagsStateChange: adapterEventHandlers.onFlagsStateChange,
           onStatusStateChange: () => undefined,
         })
@@ -146,7 +146,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
   }
 
   async reconfigure(
-    adapterArgs: TAdapterArgs,
+    adapterArgs: TCombinedAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) {
     this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
@@ -164,7 +164,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
 
     return Promise.all(
       this.#adapters.map(async (adapter) =>
-        adapter.reconfigure(adapterArgs as any, {
+        adapter.reconfigure(adapterArgs, {
           onFlagsStateChange: adapterEventHandlers.onFlagsStateChange,
           onStatusStateChange: () => undefined,
         })
