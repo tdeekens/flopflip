@@ -1,5 +1,19 @@
 # @flopflip/react-broadcast
 
+## 12.1.0
+
+### Minor Changes
+
+- [`57c90be`](https://github.com/tdeekens/flopflip/commit/57c90be8517cea797b0d89ece686cd66cd65e38e) [#1374](https://github.com/tdeekens/flopflip/pull/1374) Thanks [@tdeekens](https://github.com/tdeekens)! - feat: add support for number json variations
+
+  Prior to this `@flopflip` supported `sttring` or `boolean` variations. With it it also supports JSON variations (as LaunchDarkly calls them). For `@flopflip` these variations are of type `Record<string, unknown>` or `unknown[]`. In the future we might allow passing in a generic to narrow down the type.
+
+### Patch Changes
+
+- Updated dependencies [[`57c90be`](https://github.com/tdeekens/flopflip/commit/57c90be8517cea797b0d89ece686cd66cd65e38e)]:
+  - @flopflip/react@11.1.0
+  - @flopflip/types@4.1.0
+
 ## 12.0.1
 
 ### Patch Changes
