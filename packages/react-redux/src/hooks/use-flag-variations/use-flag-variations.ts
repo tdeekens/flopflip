@@ -11,9 +11,10 @@ export default function useFlagVariations(
   const allFlags = useSelector(selectFlags());
   const flagVariations: TFlagVariation[] = flagNames.map((requestedVariation) =>
     getFlagVariation(
+      allFlags,
       adapterContext.adapterEffectIdentifiers,
       requestedVariation
-    )(allFlags)
+    )
   );
 
   return flagVariations;

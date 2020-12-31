@@ -11,9 +11,10 @@ import getNormalizedFlagName from '../get-normalized-flag-name';
 import isNil from '../is-nil';
 
 const getFlagVariation = (
+  allFlags: TFlagsContext,
   adapterIdentifiers: TAdapterIdentifiers[],
   flagName: TFlagName = DEFAULT_FLAG_PROP_KEY
-): ((flags: TFlagsContext) => TFlagVariation) => {
+): TFlagVariation => {
   const normalizedFlagName = getNormalizedFlagName(flagName);
 
   warning(
@@ -21,22 +22,20 @@ const getFlagVariation = (
     '@flopflip/react: passed flag name does not seem to be normalized which may result in unexpected toggling. Please refer to our readme for more information: https://github.com/tdeekens/flopflip#flag-normalization'
   );
 
-  return (flags) => {
-    let foundFlagVariation: TFlagVariation = false;
+  let foundFlagVariation: TFlagVariation = false;
 
-    for (const adapterInterfaceIdentifier of adapterIdentifiers) {
-      const flagVariation =
-        flags[adapterInterfaceIdentifier]?.[normalizedFlagName];
+  for (const adapterInterfaceIdentifier of adapterIdentifiers) {
+    const flagVariation =
+      allFlags[adapterInterfaceIdentifier]?.[normalizedFlagName];
 
-      if (!isNil(flagVariation)) {
-        foundFlagVariation = flagVariation;
+    if (!isNil(flagVariation)) {
+      foundFlagVariation = flagVariation;
 
-        break;
-      }
+      break;
     }
+  }
 
-    return foundFlagVariation;
-  };
+  return foundFlagVariation;
 };
 
 export default getFlagVariation;

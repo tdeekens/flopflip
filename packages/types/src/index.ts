@@ -1,7 +1,11 @@
 import type { LDClient as TLDClient } from 'launchdarkly-js-client-sdk';
 
 export type TFlagName = string;
-export type TFlagVariation = boolean | string;
+export type TFlagVariation =
+  | boolean
+  | string
+  | number
+  | Record<string, unknown>;
 export type TFlag = [flagName: TFlagName, flagVariation: TFlagVariation];
 export type TFlags = Record<string, TFlagVariation>;
 export type TUser = {

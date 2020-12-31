@@ -13,10 +13,11 @@ export default function useFeatureToggle(
   const allFlags = useSelector(selectFlags());
 
   const isFeatureEnabled: boolean = getIsFeatureEnabled(
+    allFlags,
     adapterContext.adapterEffectIdentifiers,
     flagName,
     flagVariation
-  )(allFlags);
+  );
 
   useDebugValue({
     flagName,
