@@ -5,7 +5,8 @@ export type TFlagVariation =
   | boolean
   | string
   | number
-  | Record<string, unknown>;
+  | Record<string, unknown>
+  | unknown[];
 export type TFlag = [flagName: TFlagName, flagVariation: TFlagVariation];
 export type TFlags = Record<string, TFlagVariation>;
 export type TUser = {
