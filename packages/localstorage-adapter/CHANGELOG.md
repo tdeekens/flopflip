@@ -1,5 +1,18 @@
 # @flopflip/localstorage-adapter
 
+## 4.0.1
+
+### Patch Changes
+
+- [`498f3bc`](https://github.com/tdeekens/flopflip/commit/498f3bcdc605f60bd8e72924cdef08c4a079d4f1) [#1380](https://github.com/tdeekens/flopflip/pull/1380) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: to type TUser to be generic
+
+* [`92ebba8`](https://github.com/tdeekens/flopflip/commit/92ebba83bdf1fb876ad830db124c306de6f5c86d) [#1382](https://github.com/tdeekens/flopflip/pull/1382) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: add manypkg for validation for workspaces
+
+* Updated dependencies [[`498f3bc`](https://github.com/tdeekens/flopflip/commit/498f3bcdc605f60bd8e72924cdef08c4a079d4f1), [`92ebba8`](https://github.com/tdeekens/flopflip/commit/92ebba83bdf1fb876ad830db124c306de6f5c86d)]:
+  - @flopflip/types@4.1.3
+  - @flopflip/adapter-utilities@1.0.5
+  - @flopflip/localstorage-cache@1.0.6
+
 ## 4.0.0
 
 ### Major Changes
