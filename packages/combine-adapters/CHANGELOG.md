@@ -1,5 +1,15 @@
 # @flopflip/combine-adapters
 
+## 0.0.5
+
+### Patch Changes
+
+- [`badd563`](https://github.com/tdeekens/flopflip/commit/badd563fb90f0af3a0e364d4393a108c0b7ebec8) [#1376](https://github.com/tdeekens/flopflip/pull/1376) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: to split out adapter args
+
+- Updated dependencies [[`badd563`](https://github.com/tdeekens/flopflip/commit/badd563fb90f0af3a0e364d4393a108c0b7ebec8)]:
+  - @flopflip/types@4.1.1
+  - @flopflip/adapter-utilities@1.0.3
+
 ## 0.0.4
 
 ### Patch Changes

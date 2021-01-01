@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 4.1.1
+
+### Patch Changes
+
+- [`badd563`](https://github.com/tdeekens/flopflip/commit/badd563fb90f0af3a0e364d4393a108c0b7ebec8) [#1376](https://github.com/tdeekens/flopflip/pull/1376) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: to split out adapter args
+
 ## 4.1.0
 
 ### Minor Changes

@@ -1,5 +1,13 @@
 # @flopflip/launchdarkly-adapter
 
+## 4.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`badd563`](https://github.com/tdeekens/flopflip/commit/badd563fb90f0af3a0e364d4393a108c0b7ebec8)]:
+  - @flopflip/types@4.1.1
+  - @flopflip/adapter-utilities@1.0.3
+
 ## 4.0.2
 
 ### Patch Changes
