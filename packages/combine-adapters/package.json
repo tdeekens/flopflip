@@ -31,15 +31,15 @@
     "client"
   ],
   "dependencies": {
-    "@flopflip/types": "4.1.2",
-    "@flopflip/adapter-utilities": "1.0.4",
     "@babel/runtime": "7.12.5",
+    "@flopflip/adapter-utilities": "1.0.4",
+    "@flopflip/types": "4.1.2",
     "mitt": "2.1.0",
     "tiny-warning": "1.0.3"
   },
   "devDependencies": {
-    "globalthis": "1.0.1",
+    "@flopflip/localstorage-adapter": "4.0.0",
     "@flopflip/memory-adapter": "3.0.4",
-    "@flopflip/localstorage-adapter": "4.0.0"
+    "globalthis": "1.0.1"
   }
 }
