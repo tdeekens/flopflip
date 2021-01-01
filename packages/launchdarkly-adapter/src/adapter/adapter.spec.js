@@ -78,7 +78,7 @@ describe('when configuring', () => {
     beforeEach(() => {
       return adapter.configure(
         {
-          clientSideId,
+          sdk: { clientSideId },
           user: userWithKey,
         },
         {
@@ -109,7 +109,7 @@ describe('when configuring', () => {
     beforeEach(() =>
       adapter.configure(
         {
-          clientSideId,
+          sdk: { clientSideId },
           user: userWithoutKey,
         },
         {
@@ -157,7 +157,7 @@ describe('when configuring', () => {
 
       configurationResult = await adapter.configure(
         {
-          clientSideId,
+          sdk: { clientSideId },
           user: userWithKey,
         },
         {
@@ -251,7 +251,7 @@ describe('when configuring', () => {
           await expect(
             adapter.configure(
               {
-                clientSideId,
+                sdk: { clientSideId },
                 user: userWithKey,
                 throwOnInitializationFailure: true,
               },
@@ -282,7 +282,7 @@ describe('when configuring', () => {
           await expect(
             adapter.configure(
               {
-                clientSideId,
+                sdk: { clientSideId },
                 user: userWithKey,
                 throwOnInitializationFailure: false,
               },
@@ -312,7 +312,7 @@ describe('when configuring', () => {
 
           return adapter.configure(
             {
-              clientSideId,
+              sdk: { clientSideId },
               user: userWithKey,
               flags: flags,
             },
@@ -377,8 +377,8 @@ describe('when configuring', () => {
 
           await adapter.configure(
             {
+              sdk: { clientSideId },
               subscribeToFlagChanges: false,
-              clientSideId,
               user: userWithKey,
             },
             {
@@ -418,8 +418,8 @@ describe('when configuring', () => {
 
           return adapter.configure(
             {
+              sdk: { clientSideId },
               flagsUpdateDelayMs,
-              clientSideId,
               user: userWithKey,
             },
             {
@@ -499,7 +499,7 @@ describe('when configuring', () => {
 
         await adapter.configure(
           {
-            clientSideId,
+            sdk: { clientSideId },
             user: userWithKey,
           },
           {
@@ -546,7 +546,7 @@ describe('when configuring', () => {
 
         return adapter.configure(
           {
-            clientSideId,
+            sdk: { clientSideId },
             user: userWithKey,
           },
           {

@@ -128,11 +128,10 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   };
 
   #initializeClient = (
-    clientSideId: TLaunchDarklyAdapterArgs['clientSideId'],
+    clientSideId: TLaunchDarklyAdapterArgs['sdk']['clientSideId'],
     user: TUser,
-    clientOptions: TLaunchDarklyAdapterArgs['clientOptions']
-  ) =>
-    initializeLaunchDarklyClient(clientSideId, user as LDUser, clientOptions);
+    options: TLaunchDarklyAdapterArgs['sdk']['clientOptions']
+  ) => initializeLaunchDarklyClient(clientSideId, user as LDUser, options);
 
   #changeUserContext = async (nextUser: TUser) =>
     this.#adapterState.client?.identify
@@ -333,9 +332,8 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     });
 
     const {
-      clientSideId,
+      sdk,
       user,
-      clientOptions = {},
       flags,
       subscribeToFlagChanges = true,
       throwOnInitializationFailure = false,
@@ -344,9 +342,9 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
 
     this.#adapterState.user = this.#ensureUser(user);
     this.#adapterState.client = this.#initializeClient(
-      clientSideId,
+      sdk.clientSideId,
       this.#adapterState.user,
-      clientOptions
+      sdk.clientOptions ?? {}
     );
 
     return this.#getInitialFlags({

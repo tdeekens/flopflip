@@ -51,7 +51,7 @@ const intialAdapterState: TAdapterStatus & GraphQLAdapterState = {
 class GraphQLAdapter implements TGraphQLAdapterInterface {
   #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
   #adapterState: TAdapterStatus & GraphQLAdapterState;
-  #defaultPollingInteral = 1000 * 60;
+  #defaultPollingInteralMs = 1000 * 60;
 
   id: typeof adapterIdentifiers.graphql;
 
@@ -113,36 +113,30 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
   };
 
   #fetchFlags = async (adapterArgs: TGraphQLAdapterArgs): Promise<TFlags> => {
-    const fetcher = adapterArgs.adapterConfiguration.fetcher ?? fetch;
+    const fetcher = adapterArgs.fetcher ?? fetch;
 
-    const response = await fetcher(adapterArgs.adapterConfiguration.uri, {
+    const response = await fetcher(adapterArgs.uri, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        ...(adapterArgs.adapterConfiguration.getRequestHeaders?.(adapterArgs) ??
-          {}),
+        ...(adapterArgs.getRequestHeaders?.(adapterArgs) ?? {}),
       },
       body: JSON.stringify({
-        query: adapterArgs.adapterConfiguration.query,
-        variables:
-          adapterArgs.adapterConfiguration?.getQueryVariables?.(adapterArgs) ??
-          {},
+        query: adapterArgs.query,
+        variables: adapterArgs?.getQueryVariables?.(adapterArgs) ?? {},
       }),
     });
 
     const json = await response.json();
 
-    const flags =
-      adapterArgs.adapterConfiguration.parseFlags?.(json.data) ??
-      (json.data as TFlags);
+    const flags = adapterArgs.parseFlags?.(json.data) ?? (json.data as TFlags);
 
     return flags;
   };
 
   #subscribeToFlagsChanges = (adapterArgs: TGraphQLAdapterArgs) => {
-    const pollingInteral =
-      adapterArgs.adapterConfiguration.pollingInteral ??
-      this.#defaultPollingInteral;
+    const pollingInteralMs =
+      adapterArgs.pollingInteralMs ?? this.#defaultPollingInteralMs;
 
     setInterval(async () => {
       if (!this.#getIsAdapterUnsubscribed()) {
@@ -159,7 +153,7 @@ class GraphQLAdapter implements TGraphQLAdapterInterface {
           this.#adapterState.emitter.emit('flagsStateChange', nextFlags);
         }
       }
-    }, pollingInteral);
+    }, pollingInteralMs);
   };
 
   getUser = () => this.#adapterState.user;

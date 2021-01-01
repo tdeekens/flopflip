@@ -7,7 +7,6 @@ import type {
   TFlags,
   TUpdateFlagsOptions,
   TFlagName,
-  TLocalStorageAdapterSubscriptionOptions,
   TFlagsChange,
   TLocalStorageAdapterInterface,
 } from '@flopflip/types';
@@ -78,8 +77,10 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   };
 
   #subscribeToFlagsChanges = ({
-    pollingInteral = 1000 * 60,
-  }: TLocalStorageAdapterSubscriptionOptions) => {
+    pollingInteralMs = 1000 * 60,
+  }: {
+    pollingInteralMs?: TLocalStorageAdapterArgs['pollingInteralMs'];
+  }) => {
     setInterval(() => {
       if (!this.#getIsAdapterUnsubscribed()) {
         const nextFlags = normalizeFlags(this.#cache.get('flags'));
@@ -89,7 +90,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
           this.#adapterState.emitter.emit('flagsStateChange', nextFlags);
         }
       }
-    }, pollingInteral);
+    }, pollingInteralMs);
   };
 
   updateFlags = (flags: TFlags, options?: TUpdateFlagsOptions) => {
@@ -177,7 +178,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
     this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 
-    const { user, adapterConfiguration } = adapterArgs;
+    const { user, pollingInteralMs } = adapterArgs;
 
     this.#adapterState.user = user;
 
@@ -191,7 +192,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
       this.#subscribeToFlagsChanges({
-        pollingInteral: adapterConfiguration?.pollingInteral,
+        pollingInteralMs: pollingInteralMs,
       });
 
       return {
