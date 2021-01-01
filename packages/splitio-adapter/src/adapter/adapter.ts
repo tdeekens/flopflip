@@ -227,7 +227,9 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     });
   };
 
-  #cloneTreatmentAttributes = <T = TSplitioAdapterArgs['treatmentAttributes']>(
+  #cloneTreatmentAttributes = <
+    T = TSplitioAdapterArgs['sdk']['treatmentAttributes']
+  >(
     treatmentAttributes: T
   ): T => cloneDeep<T>(treatmentAttributes);
 
@@ -241,19 +243,14 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     adapterArgs: TSplitioAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) {
-    const {
-      authorizationKey,
-      user,
-      options = {},
-      treatmentAttributes,
-    } = adapterArgs;
+    const { sdk, user } = adapterArgs;
 
     this.#adapterState.configurationStatus =
       AdapterConfigurationStatus.Configuring;
 
     this.#adapterState.user = this.#ensureUser(user);
     this.#adapterState.treatmentAttributes = this.#cloneTreatmentAttributes(
-      treatmentAttributes
+      sdk.treatmentAttributes
     );
     this.#adapterState.configuredCallbacks.onFlagsStateChange =
       adapterEventHandlers.onFlagsStateChange;
@@ -261,11 +258,11 @@ class SplitioAdapter implements TSplitioAdapterInterface {
       adapterEventHandlers.onStatusStateChange;
 
     this.#adapterState.splitioSettings = {
-      ...omit(options, ['core']),
+      ...omit(sdk.options ?? {}, ['core']),
       core: {
-        authorizationKey,
+        authorizationKey: sdk.authorizationKey,
         key: this.#adapterState.user.key ?? createAnonymousUserKey(),
-        ...options.core,
+        ...sdk.options?.core,
       },
     };
 
@@ -290,7 +287,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     const hasUserChanged = !isEqual(this.#adapterState.user, adapterArgs.user);
     const hasTreatmentChanged = !isEqual(
       this.#adapterState.treatmentAttributes,
-      adapterArgs.treatmentAttributes
+      adapterArgs.sdk?.treatmentAttributes
     );
 
     if (hasUserChanged) {
@@ -299,7 +296,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
 
     if (hasTreatmentChanged) {
       this.#adapterState.treatmentAttributes = this.#cloneTreatmentAttributes(
-        adapterArgs.treatmentAttributes
+        adapterArgs.sdk.treatmentAttributes
       );
     }
 

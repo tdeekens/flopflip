@@ -58,7 +58,7 @@ describe('when configuring', () => {
     beforeEach(() => {
       return adapter.configure(
         {
-          authorizationKey,
+          sdk: { authorizationKey },
           user: userWithKey,
         },
         {
@@ -82,7 +82,7 @@ describe('when configuring', () => {
     beforeEach(() =>
       adapter.configure(
         {
-          authorizationKey,
+          sdk: { authorizationKey },
           user: userWithoutKey,
         },
         {
@@ -110,9 +110,8 @@ describe('when configuring', () => {
     beforeEach(() => {
       return adapter.configure(
         {
-          authorizationKey,
+          sdk: { authorizationKey, options },
           user: userWithKey,
-          options,
         },
         {
           onStatusStateChange,
@@ -140,11 +139,8 @@ describe('when configuring', () => {
     beforeEach(() => {
       return adapter.configure(
         {
-          authorizationKey,
+          sdk: { authorizationKey, options: { core: coreOptions } },
           user: userWithKey,
-          options: {
-            core: coreOptions,
-          },
         },
         {
           onStatusStateChange,
@@ -195,11 +191,13 @@ describe('when configuring', () => {
 
       configurationResult = await adapter.configure(
         {
-          authorizationKey,
-          user: userWithKey,
-          treatmentAttributes: {
-            platform: 'iOS',
+          sdk: {
+            authorizationKey,
+            treatmentAttributes: {
+              platform: 'iOS',
+            },
           },
+          user: userWithKey,
         },
         {
           onStatusStateChange,
@@ -298,11 +296,13 @@ describe('when configuring', () => {
         configurationResult = await adapter
           .configure(
             {
-              authorizationKey,
-              user: userWithKey,
-              treatmentAttributes: {
-                platform: 'iOS',
+              sdk: {
+                authorizationKey,
+                treatmentAttributes: {
+                  platform: 'iOS',
+                },
               },
+              user: userWithKey,
             },
             {
               onStatusStateChange,

@@ -45,43 +45,41 @@ export type TBaseAdapterArgs = {
   user: TUser;
 };
 export type TLaunchDarklyAdapterArgs = TBaseAdapterArgs & {
-  clientSideId: string;
+  sdk: {
+    clientSideId: string;
+    clientOptions?: { fetchGoals?: boolean };
+  };
   flags: TFlags;
-  clientOptions?: { fetchGoals?: boolean };
   subscribeToFlagChanges?: boolean;
   throwOnInitializationFailure?: boolean;
   flagsUpdateDelayMs?: number;
 };
-export type TLocalStorageAdapterSubscriptionOptions = {
-  pollingInteral?: number;
-};
 export type TGraphQLAdapterArgs = TBaseAdapterArgs & {
-  adapterConfiguration: TGraphQLAdapterSubscriptionOptions;
-  cacheIdentifier?: TCacheIdentifiers;
-};
-export type TGraphQLAdapterSubscriptionOptions = {
   fetcher?: typeof fetch;
   uri: string;
   query: string;
-  pollingInteral?: number;
+  pollingInteralMs?: number;
   getQueryVariables?: (adapterArgs: TGraphQLAdapterArgs) => unknown;
   getRequestHeaders?: (
     adapterArgs: TGraphQLAdapterArgs
   ) => Record<string, string>;
   parseFlags?: (fetchedFlags: unknown) => TFlags;
+  cacheIdentifier?: TCacheIdentifiers;
 };
 export type TLocalStorageAdapterArgs = TBaseAdapterArgs & {
-  adapterConfiguration?: TLocalStorageAdapterSubscriptionOptions;
+  pollingInteralMs?: number;
 };
 export type TMemoryAdapterArgs = TBaseAdapterArgs;
 export type TSplitioAdapterArgs = TBaseAdapterArgs & {
-  authorizationKey: string;
-  options?: Record<string, unknown> & { core?: Record<string, string> };
-  // Matches the signature of SplitIO.Attributes
-  treatmentAttributes?: Record<
-    string,
-    string | number | boolean | Array<string | number>
-  >;
+  sdk: {
+    authorizationKey: string;
+    options?: Record<string, unknown> & { core?: Record<string, string> };
+    // Matches the signature of SplitIO.Attributes
+    treatmentAttributes?: Record<
+      string,
+      string | number | boolean | Array<string | number>
+    >;
+  };
 };
 export type TCombinedAdapterArgs = TBaseAdapterArgs & {
   launchdarkly: TLaunchDarklyAdapterArgs;

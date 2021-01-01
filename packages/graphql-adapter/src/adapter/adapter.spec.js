@@ -41,17 +41,14 @@ describe('when configuring', () => {
 
 describe('when configured', () => {
   let adapterArgs = {
-    adapterConfiguration: {
-      url: `https://localhost:8080/graphql`,
-      query: 'query AllFeatures { flags: allFeatures { name \n value} }',
-      getQueryVariables: jest.fn(() => ({ userId: '123' })),
-      getRequestHeaders: jest.fn(() => ({})),
-      parseFlags: jest.fn((flags) => flags),
-      fetcher: jest.fn().mockResolvedValue({
-        json: () =>
-          Promise.resolve({ data: { enabled: true, disabled: false } }),
-      }),
-    },
+    url: `https://localhost:8080/graphql`,
+    query: 'query AllFeatures { flags: allFeatures { name \n value} }',
+    getQueryVariables: jest.fn(() => ({ userId: '123' })),
+    getRequestHeaders: jest.fn(() => ({})),
+    parseFlags: jest.fn((flags) => flags),
+    fetcher: jest.fn().mockResolvedValue({
+      json: () => Promise.resolve({ data: { enabled: true, disabled: false } }),
+    }),
   };
   let configurationResult;
   let adapterEventHandlers;
@@ -79,22 +76,19 @@ describe('when configured', () => {
     });
 
     it('should invoke the fetcher with uri', () => {
-      expect(adapterArgs.adapterConfiguration.fetcher).toHaveBeenCalledWith(
-        adapterArgs.adapterConfiguration.uri,
+      expect(adapterArgs.fetcher).toHaveBeenCalledWith(
+        adapterArgs.uri,
         expect.anything()
       );
     });
 
     it('should invoke the fetcher with body', () => {
-      expect(adapterArgs.adapterConfiguration.fetcher).toHaveBeenCalledWith(
-        adapterArgs.adapterConfiguration.uri,
-        {
-          body:
-            '{"query":"query AllFeatures { flags: allFeatures { name \\n value} }","variables":{"userId":"123"}}',
-          headers: { 'Content-Type': 'application/json' },
-          method: 'POST',
-        }
-      );
+      expect(adapterArgs.fetcher).toHaveBeenCalledWith(adapterArgs.uri, {
+        body:
+          '{"query":"query AllFeatures { flags: allFeatures { name \\n value} }","variables":{"userId":"123"}}',
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+      });
     });
 
     it('should invoke `onStatusStateChange` with configuring', () => {
@@ -140,19 +134,15 @@ describe('when configured', () => {
     });
 
     it('should apply query variables and pass adapter args for evaluation', () => {
-      expect(
-        adapterArgs.adapterConfiguration.getQueryVariables
-      ).toHaveBeenCalledWith(adapterArgs);
+      expect(adapterArgs.getQueryVariables).toHaveBeenCalledWith(adapterArgs);
     });
 
     it('should apply request headers and pass adapter args for evaluation', () => {
-      expect(
-        adapterArgs.adapterConfiguration.getRequestHeaders
-      ).toHaveBeenCalledWith(adapterArgs);
+      expect(adapterArgs.getRequestHeaders).toHaveBeenCalledWith(adapterArgs);
     });
 
     it('should allow parsing flags', () => {
-      expect(adapterArgs.adapterConfiguration.parseFlags).toHaveBeenCalled();
+      expect(adapterArgs.parseFlags).toHaveBeenCalled();
     });
   });
 
@@ -160,17 +150,15 @@ describe('when configured', () => {
     const cachePrefix = 'test';
     let adapterArgs = {
       cacheIdentifier: 'session',
-      adapterConfiguration: {
-        url: `https://localhost:8080/graphql`,
-        query: 'query AllFeatures { flags: allFeatures { name \n value} }',
-        getQueryVariables: jest.fn(() => ({ userId: '123' })),
-        getRequestHeaders: jest.fn(() => ({})),
-        parseFlags: jest.fn((flags) => flags),
-        fetcher: jest.fn().mockResolvedValue({
-          json: () =>
-            Promise.resolve({ data: { enabled: true, disabled: false } }),
-        }),
-      },
+      url: `https://localhost:8080/graphql`,
+      query: 'query AllFeatures { flags: allFeatures { name \n value} }',
+      getQueryVariables: jest.fn(() => ({ userId: '123' })),
+      getRequestHeaders: jest.fn(() => ({})),
+      parseFlags: jest.fn((flags) => flags),
+      fetcher: jest.fn().mockResolvedValue({
+        json: () =>
+          Promise.resolve({ data: { enabled: true, disabled: false } }),
+      }),
     };
     let configurationResult;
     let adapterEventHandlers;
