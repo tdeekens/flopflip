@@ -1,5 +1,12 @@
 # @flopflip/react
 
+## 11.1.2
+
+### Patch Changes
+
+- Updated dependencies [[`0fbcac4`](https://github.com/tdeekens/flopflip/commit/0fbcac4d42568dda5fad6f1e33ff605b954301ee)]:
+  - @flopflip/types@4.1.2
+
 ## 11.1.1
 
 ### Patch Changes
