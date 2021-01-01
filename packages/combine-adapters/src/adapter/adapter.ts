@@ -112,7 +112,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
 
     return Promise.all(
       this.#adapters.map(async (adapter) =>
-        adapter.configure(adapterArgs, {
+        adapter.configure(adapterArgs[adapter.id], {
           onFlagsStateChange: adapterEventHandlers.onFlagsStateChange,
           onStatusStateChange: () => undefined,
         })
@@ -164,7 +164,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
 
     return Promise.all(
       this.#adapters.map(async (adapter) =>
-        adapter.reconfigure(adapterArgs, {
+        adapter.reconfigure(adapterArgs[adapter.id], {
           onFlagsStateChange: adapterEventHandlers.onFlagsStateChange,
           onStatusStateChange: () => undefined,
         })

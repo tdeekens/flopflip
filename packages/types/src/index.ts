@@ -83,17 +83,21 @@ export type TSplitioAdapterArgs = TBaseAdapterArgs & {
     string | number | boolean | Array<string | number>
   >;
 };
+export type TCombinedAdapterArgs = TBaseAdapterArgs & {
+  launchdarkly: TLaunchDarklyAdapterArgs;
+  localstorage: TLocalStorageAdapterArgs;
+  memory: TMemoryAdapterArgs;
+  splitio: TSplitioAdapterArgs;
+  graphql: TGraphQLAdapterArgs;
+};
 export type TAdapterArgs =
   | TLaunchDarklyAdapterArgs
   | TLocalStorageAdapterArgs
   | TMemoryAdapterArgs
   | TSplitioAdapterArgs
-  | TGraphQLAdapterArgs;
-export type TCombinedAdapterArgs = TLaunchDarklyAdapterArgs &
-  TLocalStorageAdapterArgs &
-  TMemoryAdapterArgs &
-  TSplitioAdapterArgs &
-  TGraphQLAdapterArgs;
+  | TGraphQLAdapterArgs
+  | TCombinedAdapterArgs;
+
 export const adapterIdentifiers = {
   launchdarkly: 'launchdarkly',
   localstorage: 'localstorage',
