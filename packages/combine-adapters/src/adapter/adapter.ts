@@ -46,6 +46,8 @@ class CombineAdapters implements TCombinedAdapterInterface {
   }
 
   #getHasCombinedAdapters = () => this.#adapters.length > 0;
+  #getHasArgsForAllAdapters = (adapterArgs: TCombinedAdapterArgs) =>
+    this.#adapters.every((adapter) => adapterArgs[adapter.id]);
 
   #getIsAdapterUnsubscribed = () =>
     this.#adapterState.subscriptionStatus ===
@@ -55,17 +57,18 @@ class CombineAdapters implements TCombinedAdapterInterface {
     const isAdapterConfigured = this.getIsConfigurationStatus(
       AdapterConfigurationStatus.Configured
     );
+    const hasCombinedAdapters = this.#getHasCombinedAdapters();
 
     warning(
       isAdapterConfigured,
       '@flopflip/combine-adapters: adapter is not configured. Flags can not be updated before.'
     );
     warning(
-      this.#getHasCombinedAdapters(),
+      hasCombinedAdapters,
       '@flopflip/combine-adapters: adapter has no combined adapters. Please combine before updating flags.'
     );
 
-    if (!isAdapterConfigured || !this.#getHasCombinedAdapters()) {
+    if (!isAdapterConfigured || !hasCombinedAdapters) {
       return;
     }
 
@@ -82,12 +85,19 @@ class CombineAdapters implements TCombinedAdapterInterface {
     adapterArgs: TCombinedAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) {
+    const hasCombinedAdapters = this.#getHasCombinedAdapters();
+    const hasArgsForAllAdapters = this.#getHasArgsForAllAdapters(adapterArgs);
+
     warning(
-      this.#getHasCombinedAdapters(),
+      hasCombinedAdapters,
       '@flopflip/combine-adapters: adapter has no combined adapters. Please combine before reconfiguring flags.'
     );
+    warning(
+      hasArgsForAllAdapters,
+      '@flopflip/combine-adapters: not all adapters have args. Please provide args for all adapters.'
+    );
 
-    if (!this.#getHasCombinedAdapters()) {
+    if (!hasCombinedAdapters || !hasArgsForAllAdapters) {
       return Promise.resolve({
         initializationStatus: AdapterInitializationStatus.Failed,
       });
@@ -111,12 +121,12 @@ class CombineAdapters implements TCombinedAdapterInterface {
     this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 
     return Promise.all(
-      this.#adapters.map(async (adapter) =>
-        adapter.configure(adapterArgs[adapter.id], {
+      this.#adapters.map(async (adapter) => {
+        return adapter.configure(adapterArgs[adapter.id], {
           onFlagsStateChange: adapterEventHandlers.onFlagsStateChange,
           onStatusStateChange: () => undefined,
-        })
-      )
+        });
+      })
     ).then((allInitializationStatus) => {
       const haveAllAdaptersInitializedSuccessfully = allInitializationStatus.every(
         ({ initializationStatus }) =>
@@ -151,24 +161,31 @@ class CombineAdapters implements TCombinedAdapterInterface {
   ) {
     this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 
+    const hasCombinedAdapters = this.#getHasCombinedAdapters();
+    const hasArgsForAllAdapters = this.#getHasArgsForAllAdapters(adapterArgs);
+
     warning(
-      this.#getHasCombinedAdapters(),
+      hasCombinedAdapters,
       '@flopflip/combine-adapters: adapter has no combined adapters. Please combine before reconfiguring flags.'
     );
+    warning(
+      hasArgsForAllAdapters,
+      '@flopflip/combine-adapters: not all adapters have args. Please provide args for all adapters.'
+    );
 
-    if (!this.#getHasCombinedAdapters()) {
+    if (!hasCombinedAdapters || !hasArgsForAllAdapters) {
       return Promise.resolve({
         initializationStatus: AdapterInitializationStatus.Failed,
       });
     }
 
     return Promise.all(
-      this.#adapters.map(async (adapter) =>
-        adapter.reconfigure(adapterArgs[adapter.id], {
+      this.#adapters.map(async (adapter) => {
+        return adapter.reconfigure(adapterArgs[adapter.id], {
           onFlagsStateChange: adapterEventHandlers.onFlagsStateChange,
           onStatusStateChange: () => undefined,
-        })
-      )
+        });
+      })
     ).then((allInitializationStatus) => {
       const haveAllAdaptersInitializedSuccessfully = allInitializationStatus.every(
         ({ initializationStatus }) =>

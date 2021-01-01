@@ -13,6 +13,16 @@ jest.mock('tiny-warning');
 
 const createAdapterArgs = (customArgs = {}) => ({
   user: { id: 'foo' },
+  [memoryAdapter.id]: {
+    user: {
+      id: 'memory-adapter-user-id',
+    },
+  },
+  [localstorageAdapter.id]: {
+    user: {
+      id: 'localstorage-adapter-user-id',
+    },
+  },
   ...customArgs,
 });
 const createAdapterEventHandlers = (custom = {}) => ({
@@ -39,20 +49,47 @@ describe('when combining', () => {
   });
 
   describe('when configuring', () => {
-    let configurationResult;
-
-    beforeEach(async () => {
-      configurationResult = await adapter.configure(
-        adapterArgs,
-        adapterEventHandlers
-      );
-    });
-
     describe('without combined adapters', () => {
+      let configurationResult;
+
+      beforeEach(async () => {
+        configurationResult = await adapter.configure(
+          adapterArgs,
+          adapterEventHandlers
+        );
+      });
+
       it('should invoke and trigger `warning`', () => {
         expect(warning).toHaveBeenCalledWith(
           false,
           expect.stringContaining('adapter has no combined adapters')
+        );
+      });
+
+      it('should resolve configuration to have failed', () => {
+        expect(configurationResult).toEqual({
+          initializationStatus: AdapterInitializationStatus.Failed,
+        });
+      });
+    });
+
+    describe('without args for all adapters', () => {
+      let configurationResult;
+
+      beforeEach(async () => {
+        adapter.combine([memoryAdapter, localstorageAdapter]);
+
+        adapterArgs = createAdapterArgs({ [memoryAdapter.id]: null });
+        configurationResult = await adapter.configure(
+          adapterArgs,
+          adapterEventHandlers
+        );
+      });
+
+      it('should invoke and trigger `warning`', () => {
+        expect(warning).toHaveBeenCalledWith(
+          false,
+          expect.stringContaining('not all adapters have args')
         );
       });
 
@@ -76,13 +113,6 @@ describe('when combining', () => {
           expect.stringContaining('adapter is not configured')
         );
       });
-
-      it('should invoke and trigger `warning` for lack of combined adapters', () => {
-        expect(warning).toHaveBeenCalledWith(
-          false,
-          expect.stringContaining('adapter has no combined adapters')
-        );
-      });
     });
   });
 
@@ -95,7 +125,7 @@ describe('when combining', () => {
 
     const memoryAdapterConfigureSpy = jest.spyOn(memoryAdapter, 'configure');
     const localstorageAdapterConfigureSpy = jest.spyOn(
-      memoryAdapter,
+      localstorageAdapter,
       'configure'
     );
 
@@ -124,8 +154,14 @@ describe('when combining', () => {
     });
 
     it('should invoke `configure` on all adapters', () => {
-      expect(memoryAdapterConfigureSpy).toHaveBeenCalled();
-      expect(localstorageAdapterConfigureSpy).toHaveBeenCalled();
+      expect(memoryAdapterConfigureSpy).toHaveBeenCalledWith(
+        adapterArgs[memoryAdapter.id],
+        expect.anything()
+      );
+      expect(localstorageAdapterConfigureSpy).toHaveBeenCalledWith(
+        adapterArgs[localstorageAdapter.id],
+        expect.anything()
+      );
     });
 
     it('should invoke `onStatusStateChange`', () => {
@@ -206,13 +242,13 @@ describe('when combining', () => {
         'reconfigure'
       );
       const localstorageAdapterReconfigureSpy = jest.spyOn(
-        memoryAdapter,
+        localstorageAdapter,
         'reconfigure'
       );
 
       beforeEach(async () => {
         configurationResult = await adapter.reconfigure(
-          { user },
+          { [localstorageAdapter.id]: { user }, [memoryAdapter.id]: { user } },
           adapterEventHandlers
         );
         adapterEventHandlers = createAdapterEventHandlers();
@@ -227,8 +263,16 @@ describe('when combining', () => {
       });
 
       it('should invoke `reconfigure` on all adapters', () => {
-        expect(memoryAdapterReconfigureSpy).toHaveBeenCalled();
-        expect(localstorageAdapterReconfigureSpy).toHaveBeenCalled();
+        expect(memoryAdapterReconfigureSpy).toHaveBeenCalledWith(
+          { user },
+          expect.anything()
+        );
+        expect(localstorageAdapterReconfigureSpy).toHaveBeenCalledWith(
+          {
+            user,
+          },
+          expect.anything()
+        );
       });
     });
   });
