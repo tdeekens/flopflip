@@ -1,5 +1,12 @@
 # @flopflip/react
 
+## 11.1.1
+
+### Patch Changes
+
+- Updated dependencies [[`badd563`](https://github.com/tdeekens/flopflip/commit/badd563fb90f0af3a0e364d4393a108c0b7ebec8)]:
+  - @flopflip/types@4.1.1
+
 ## 11.1.0
 
 ### Minor Changes
