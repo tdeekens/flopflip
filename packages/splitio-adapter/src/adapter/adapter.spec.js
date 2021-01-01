@@ -315,14 +315,17 @@ describe('when configuring', () => {
             namesStub.mockClear();
             getTreatmentsStub.mockClear();
 
-            return adapter.reconfigure({
-              user: nextUser,
-              onStatusStateChange,
-              onFlagsStateChange,
-              treatmentAttributes: {
-                platform: 'android',
+            return adapter.reconfigure(
+              {
+                user: nextUser,
+                sdk: {
+                  treatmentAttributes: {
+                    platform: 'android',
+                  },
+                },
               },
-            });
+              { onStatusStateChange, onFlagsStateChange }
+            );
           });
       });
 

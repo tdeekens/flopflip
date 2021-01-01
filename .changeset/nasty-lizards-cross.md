@@ -1,9 +1,9 @@
 ---
-"@flopflip/graphql-adapter": major
-"@flopflip/launchdarkly-adapter": major
-"@flopflip/localstorage-adapter": major
-"@flopflip/splitio-adapter": major
-"@flopflip/types": patch
+'@flopflip/graphql-adapter': major
+'@flopflip/launchdarkly-adapter': major
+'@flopflip/localstorage-adapter': major
+'@flopflip/splitio-adapter': major
+'@flopflip/types': patch
 ---
 
 refactor(adapters): to split out sdk options
@@ -32,9 +32,12 @@ Over `adapterArgs.{clientSideId, clientOptions}`.
 **graphql-adapter**
 
 All fields are now top-level not under `adapterConfiguration`
+<<<<<<< Updated upstream
 
 **localstorage-adapter**
 
 All fields are now top-level not under `adapterConfiguration` while it is now `pollingInteralMs` not `pollingInteral`.
 
+=======
 
+> > > > > > > Stashed changes
