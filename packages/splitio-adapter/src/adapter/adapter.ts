@@ -26,7 +26,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import omit from 'lodash/omit';
 import isEqual from 'lodash/isEqual';
 
-type SplitIOAdapterState = {
+type TSplitIOAdapterState = {
   user?: TUser;
   client?: SplitIO.IClient;
   manager?: SplitIO.IManager;
@@ -64,7 +64,7 @@ const normalizeFlag = (
 const createAnonymousUserKey = () => Math.random().toString(36).substring(2);
 
 class SplitioAdapter implements TSplitioAdapterInterface {
-  #adapterState: TAdapterStatus & SplitIOAdapterState;
+  #adapterState: TAdapterStatus & TSplitIOAdapterState;
   id: typeof adapterIdentifiers.splitio;
 
   constructor() {
@@ -261,7 +261,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
       ...omit(sdk.options ?? {}, ['core']),
       core: {
         authorizationKey: sdk.authorizationKey,
-        key: this.#adapterState.user.key ?? createAnonymousUserKey(),
+        key: this.#adapterState.user?.key ?? createAnonymousUserKey(),
         ...sdk.options?.core,
       },
     };

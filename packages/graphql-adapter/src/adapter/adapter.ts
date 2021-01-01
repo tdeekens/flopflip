@@ -29,7 +29,7 @@ import warning from 'tiny-warning';
 import mitt, { Emitter } from 'mitt';
 import isEqual from 'lodash/isEqual';
 
-type GraphQLAdapterState = {
+type TGraphQLAdapterState = {
   flags: TFlags;
   user?: TUser;
   emitter: Emitter;
@@ -39,7 +39,7 @@ type GraphQLAdapterState = {
 
 const STORAGE_SLICE = '@flopflip';
 
-const intialAdapterState: TAdapterStatus & GraphQLAdapterState = {
+const intialAdapterState: TAdapterStatus & TGraphQLAdapterState = {
   subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
   configurationStatus: AdapterConfigurationStatus.Unconfigured,
   flags: {},
@@ -50,7 +50,7 @@ const intialAdapterState: TAdapterStatus & GraphQLAdapterState = {
 
 class GraphQLAdapter implements TGraphQLAdapterInterface {
   #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
-  #adapterState: TAdapterStatus & GraphQLAdapterState;
+  #adapterState: TAdapterStatus & TGraphQLAdapterState;
   #defaultPollingInteralMs = 1000 * 60;
 
   id: typeof adapterIdentifiers.graphql;

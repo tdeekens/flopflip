@@ -27,14 +27,14 @@ import mitt, { Emitter } from 'mitt';
 import isEqual from 'lodash/isEqual';
 import createCache from '@flopflip/localstorage-cache';
 
-type LocalStorageAdapterState = {
+type TLocalStorageAdapterState = {
   flags: TFlags;
   user?: TUser;
   emitter: Emitter;
   lockedFlags: Set<TFlagName>;
 };
 
-const intialAdapterState: TAdapterStatus & LocalStorageAdapterState = {
+const intialAdapterState: TAdapterStatus & TLocalStorageAdapterState = {
   subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
   configurationStatus: AdapterConfigurationStatus.Unconfigured,
   flags: {},
@@ -50,7 +50,7 @@ const STORAGE_SLICE = '@flopflip';
 class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
   #cache = createCache({ prefix: STORAGE_SLICE });
-  #adapterState: TAdapterStatus & LocalStorageAdapterState;
+  #adapterState: TAdapterStatus & TLocalStorageAdapterState;
 
   id: typeof adapterIdentifiers.localstorage;
 
