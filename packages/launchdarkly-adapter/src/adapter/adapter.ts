@@ -1,3 +1,4 @@
+import type { LDUser as TLDUser } from 'launchdarkly-js-sdk-common';
 import type {
   TFlagName,
   TFlagVariation,
@@ -35,8 +36,9 @@ import {
   LDClient,
 } from 'launchdarkly-js-client-sdk';
 
-type LaunchDarklyAdapterState = {
-  user?: TUser;
+type TLaunchDarklyUser = TUser<TLDUser>;
+type TLaunchDarklyAdapterState = {
+  user?: TLaunchDarklyUser;
   client?: LDClient;
   flags: TFlags;
   emitter: Emitter;
@@ -45,7 +47,7 @@ type LaunchDarklyAdapterState = {
 };
 
 class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
-  #adapterState: TAdapterStatus & LaunchDarklyAdapterState;
+  #adapterState: TAdapterStatus & TLaunchDarklyAdapterState;
   id: typeof adapterIdentifiers.launchdarkly;
 
   constructor() {
@@ -115,13 +117,13 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       )
     );
 
-  #getIsAnonymousUser = (user: TUser) => !user?.key;
+  #getIsAnonymousUser = (user: TLaunchDarklyUser) => !user?.key;
 
-  #ensureUser = (user: TUser) => {
+  #ensureUser = (user: TLaunchDarklyUser) => {
     const isAnonymousUser = this.#getIsAnonymousUser(user);
 
     // NOTE: When marked `anonymous` the SDK will generate a unique key and cache it in local storage
-    return merge<TUser, LDUser>(user, {
+    return merge<TLaunchDarklyUser, LDUser>(user, {
       key: isAnonymousUser ? undefined : user.key,
       anonymous: isAnonymousUser,
     });
@@ -129,11 +131,11 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
 
   #initializeClient = (
     clientSideId: TLaunchDarklyAdapterArgs['sdk']['clientSideId'],
-    user: TUser,
+    user: TLaunchDarklyUser,
     options: TLaunchDarklyAdapterArgs['sdk']['clientOptions']
   ) => initializeLaunchDarklyClient(clientSideId, user as LDUser, options);
 
-  #changeUserContext = async (nextUser: TUser) =>
+  #changeUserContext = async (nextUser: TLaunchDarklyUser) =>
     this.#adapterState.client?.identify
       ? this.#adapterState.client.identify(nextUser as LDUser)
       : Promise.reject(
@@ -409,7 +411,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     return this.#adapterState.flags[flagName];
   }
 
-  async updateUserContext(updatedUserProps: TUser) {
+  async updateUserContext(updatedUserProps: TLaunchDarklyUser) {
     const isAdapterConfigured = this.getIsConfigurationStatus(
       AdapterConfigurationStatus.Configured
     );

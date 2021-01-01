@@ -21,6 +21,7 @@ const mergeAdapterArgs = (
 ): TAdapterArgs =>
   options.shouldOverwrite
     ? nextAdapterArgs
-    : merge(previousAdapterArgs, nextAdapterArgs);
+    : // @ts-expect-error
+      merge(previousAdapterArgs, nextAdapterArgs);
 
 export { isFunctionChildren, isEmptyChildren, mergeAdapterArgs };

@@ -3,13 +3,15 @@ import type { TUser } from '@flopflip/types';
 import { useEffect, Children } from 'react';
 import useAdapterContext from '../../hooks/use-adapter-context';
 
-type Props = {
+type Props<TAdditionalUserProperties> = {
   shouldOverwrite?: boolean;
-  user: TUser;
+  user: TUser<TAdditionalUserProperties>;
   children?: React.ReactNode;
 };
 
-const ReconfigureAdapter = (props: Props) => {
+const ReconfigureAdapter = <TAdditionalUserProperties>(
+  props: Props<TAdditionalUserProperties>
+) => {
   const adapterContext = useAdapterContext();
 
   useEffect(() => {

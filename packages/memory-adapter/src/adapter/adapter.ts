@@ -22,14 +22,14 @@ import { normalizeFlag, exposeGlobally } from '@flopflip/adapter-utilities';
 import warning from 'tiny-warning';
 import mitt, { Emitter } from 'mitt';
 
-type MemoryAdapterState = {
+type TMemoryAdapterState = {
   flags: TFlags;
   lockedFlags: Set<TFlagName>;
   user?: TUser;
   emitter: Emitter;
 };
 
-const intialAdapterState: TAdapterStatus & MemoryAdapterState = {
+const intialAdapterState: TAdapterStatus & TMemoryAdapterState = {
   configurationStatus: AdapterConfigurationStatus.Unconfigured,
   subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
   flags: {},
@@ -42,7 +42,7 @@ const intialAdapterState: TAdapterStatus & MemoryAdapterState = {
 
 class MemoryAdapter implements TMemoryAdapterInterface {
   #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
-  #adapterState: TAdapterStatus & MemoryAdapterState;
+  #adapterState: TAdapterStatus & TMemoryAdapterState;
 
   id: typeof adapterIdentifiers.memory;
 

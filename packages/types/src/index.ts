@@ -1,4 +1,8 @@
-import type { LDClient as TLDClient } from 'launchdarkly-js-client-sdk';
+import type {
+  LDClient as TLDClient,
+  LDOptions as TLDOptions,
+} from 'launchdarkly-js-client-sdk';
+import type { LDUser as TLDUser } from 'launchdarkly-js-sdk-common';
 
 export type TFlagName = string;
 export type TFlagVariation =
@@ -9,9 +13,9 @@ export type TFlagVariation =
   | unknown[];
 export type TFlag = [flagName: TFlagName, flagVariation: TFlagVariation];
 export type TFlags = Record<string, TFlagVariation>;
-export type TUser = {
+export type TUser<TAdditionalUserProperties = Record<string, unknown>> = {
   key?: string;
-};
+} & TAdditionalUserProperties;
 export enum AdapterSubscriptionStatus {
   Subscribed,
   Unsubscribed,
@@ -41,13 +45,15 @@ export type TAdapterEventHandlers = {
   onFlagsStateChange: (flagsChange: TFlagsChange) => void;
   onStatusStateChange: (statusChange: TAdapterStatusChange) => void;
 };
-export type TBaseAdapterArgs = {
-  user: TUser;
+export type TBaseAdapterArgs<
+  TAdditionalUserProperties = Record<string, unknown>
+> = {
+  user: TUser<TAdditionalUserProperties>;
 };
-export type TLaunchDarklyAdapterArgs = TBaseAdapterArgs & {
+export type TLaunchDarklyAdapterArgs = TBaseAdapterArgs<TLDUser> & {
   sdk: {
     clientSideId: string;
-    clientOptions?: { fetchGoals?: boolean };
+    clientOptions?: TLDOptions;
   };
   flags: TFlags;
   subscribeToFlagChanges?: boolean;
@@ -165,7 +171,9 @@ export interface TLaunchDarklyAdapterInterface
   ) => boolean;
   getClient: () => TLDClient | undefined;
   getFlag: (flagName: TFlagName) => TFlagVariation | undefined;
-  updateUserContext: (updatedUserProps: TUser) => Promise<unknown>;
+  updateUserContext: (
+    updatedUserProps: TLaunchDarklyAdapterArgs['user']
+  ) => Promise<unknown>;
   unsubscribe: () => void;
   subscribe: () => void;
 }
