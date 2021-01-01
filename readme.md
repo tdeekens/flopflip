@@ -309,8 +309,9 @@ Please note that all adapters accept a `user: TUser` which has an optional `key`
 
 1. The `@flopflip/launchdarkly-adapter` accepts
 
+- `sdk.clientSideId`: The client side id of LaunchDarkly
 - `sdk.clientOptions`: additional options to be passed to the underlying SDK
-- `sdk.flags`: defaulting to `null` to subscribe only to specific flags. Helpful when not wanting to subscribe to all flags to utilise LaunchDarkly's automatic flag archiving functionality
+- `flags`: defaulting to `null` to subscribe only to specific flags. Helpful when not wanting to subscribe to all flags to utilise LaunchDarkly's automatic flag archiving functionality
 - `subscribeToFlagChanges`: defaulting to `true` to disable real-time updates to flags once initially fetched
 - `throwOnInitializationFailure`: defaulting to `false` to indicate if the adapter just re-throw an error during initialization
 - `flagsUpdateDelayMs`: defaulting to `0` to debounce the flag update subscription
