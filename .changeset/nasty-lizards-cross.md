@@ -14,7 +14,7 @@ This release introduces a new `sdk` field on the `adapterArgs` which contain onl
 
 In essenence: `adapterConfiguration` is now directly flat out on `adapterArgs` while any SDK fields are nested into the `sdk` field.
 
-**SplitIO**
+**splitio-adapter**
 
 - `sdk.authorizationKey`: Authorization key for splitio
 - `sdk.options`: General attributes passed to splitio SDK
@@ -22,15 +22,19 @@ In essenence: `adapterConfiguration` is now directly flat out on `adapterArgs` w
 
 Over `adapterArgs.{authorizationKey, options, treatmentAttributes}`
 
-**LaunchDarkly**
+**launchdarkly-adapter**
 
 - `sdk.clientSideId`
 - `sdk.clientOptions`
 
 Over `adapterArgs.{clientSideId, clientOptions}`.
 
-**GraphQL and LocalStorage**
+**graphql-adapter**
 
 All fields are now top-level not under `adapterConfiguration`
+
+**localstorage-adapter**
+
+All fields are now top-level not under `adapterConfiguration` while it is now `pollingInteralMs` not `pollingInteral`.
 
 
