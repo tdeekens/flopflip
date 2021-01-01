@@ -32,12 +32,7 @@ Over `adapterArgs.{clientSideId, clientOptions}`.
 **graphql-adapter**
 
 All fields are now top-level not under `adapterConfiguration`
-<<<<<<< Updated upstream
 
 **localstorage-adapter**
 
 All fields are now top-level not under `adapterConfiguration` while it is now `pollingInteralMs` not `pollingInteral`.
-
-=======
-
-> > > > > > > Stashed changes
