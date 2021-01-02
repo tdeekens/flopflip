@@ -4,7 +4,7 @@
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
     "auth": "npm_config_registry=https://registry.npmjs.org npm whoami",
-    "postinstall": "check-node-version --package --print && manypkg check && preconstruct dev",
+    "postinstall": "check-node-version --package --print && preconstruct dev && husky install",
     "develop": "jest --projects jest.*.config.js --watch",
     "lint": "jest --config jest.lint.config.js --maxWorkers 5",
     "pretypecheck": "rimraf packages/**/dist/",
@@ -24,6 +24,8 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "prerelease": "cross-env NODE_ENV=production yarn auth && yarn build",
+    "prepublishOnly": "pinst --disable",
+    "postpublish": "pinst --enable",
     "release": "changeset publish"
   },
   "repository": {
@@ -40,7 +42,7 @@
     "url": "https://github.com/tdeekens/flopflip/issues"
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
-  "dependencies": {
+  "devDependencies": {
     "@babel/cli": "7.12.10",
     "@babel/core": "7.12.10",
     "@babel/plugin-external-helpers": "7.12.1",
@@ -65,7 +67,6 @@
     "@commercetools/jest-enzyme-matchers": "1.1.2",
     "@commitlint/cli": "11.0.0",
     "@commitlint/config-conventional": "11.0.0",
-    "@manypkg/cli": "0.17.0",
     "@preconstruct/cli": "2.0.1",
     "@types/jest": "26.0.19",
     "@types/lodash": "4.14.166",
@@ -90,7 +91,7 @@
     "eslint-plugin-react": "7.21.5",
     "eslint-plugin-react-hooks": "4.2.0",
     "eslint-plugin-testing-library": "3.10.1",
-    "husky": "4.3.6",
+    "husky": "5.0.0",
     "jest-environment-jsdom-sixteen": "1.0.3",
     "lint-staged": "10.5.3",
     "mri": "1.1.6",
@@ -99,6 +100,7 @@
     "regenerator-runtime": "0.13.7",
     "replace": "1.2.0",
     "rimraf": "3.0.2",
+    "pinst": "2.1.1",
     "ts-jest": "26.4.4",
     "typescript": "4.1.3"
   },
