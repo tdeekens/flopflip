@@ -69,7 +69,9 @@ export type TGraphQLAdapterArgs = TBaseAdapterArgs & {
   getRequestHeaders?: (
     adapterArgs: TGraphQLAdapterArgs
   ) => Record<string, string>;
-  parseFlags?: (fetchedFlags: unknown) => TFlags;
+  parseFlags?: <TFetchedFlags = unknown, TParsedFlags = TFlags>(
+    fetchedFlags: TFetchedFlags
+  ) => TParsedFlags;
   cacheIdentifier?: TCacheIdentifiers;
 };
 export type TLocalStorageAdapterArgs = TBaseAdapterArgs & {
