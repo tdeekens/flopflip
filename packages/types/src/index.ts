@@ -70,7 +70,7 @@ export type TGraphQLAdapterArgs = TBaseAdapterArgs & {
     adapterArgs: TGraphQLAdapterArgs
   ) => Record<string, string>;
   parseFlags?: <TFetchedFlags = unknown, TParsedFlags = TFlags>(
-    fetchedFlags: TUnparsedFlags
+    fetchedFlags: TFetchedFlags
   ) => TParsedFlags;
   cacheIdentifier?: TCacheIdentifiers;
 };
