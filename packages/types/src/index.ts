@@ -88,11 +88,11 @@ export type TSplitioAdapterArgs = TBaseAdapterArgs & {
   };
 };
 export type TCombinedAdapterArgs = TBaseAdapterArgs & {
-  launchdarkly: TLaunchDarklyAdapterArgs;
-  localstorage: TLocalStorageAdapterArgs;
-  memory: TMemoryAdapterArgs;
-  splitio: TSplitioAdapterArgs;
-  graphql: TGraphQLAdapterArgs;
+  launchdarkly?: TLaunchDarklyAdapterArgs;
+  localstorage?: TLocalStorageAdapterArgs;
+  memory?: TMemoryAdapterArgs;
+  splitio?: TSplitioAdapterArgs;
+  graphql?: TGraphQLAdapterArgs;
 };
 export type TAdapterArgs =
   | TLaunchDarklyAdapterArgs
