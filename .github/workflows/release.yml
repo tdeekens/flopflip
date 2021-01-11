@@ -61,6 +61,8 @@ jobs:
         id: changesets
         uses: changesets/action@master
         with:
+          title: 'ci(changesets): version packages'
+          commit: 'ci(changesets): version packages'
           publish: yarn release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
