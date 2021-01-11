@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 4.1.5
+
+### Patch Changes
+
+- [`8fd148b`](https://github.com/tdeekens/flopflip/commit/8fd148b724394887e99ed9136bb309776a2fc375) [#1387](https://github.com/tdeekens/flopflip/pull/1387) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: types of parse flags
+
 ## 4.1.4
 
 ### Patch Changes
