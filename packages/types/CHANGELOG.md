@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 4.1.4
+
+### Patch Changes
+
+- [`d203f38`](https://github.com/tdeekens/flopflip/commit/d203f382100d681f8699e7c6f3b82dd8ad8ab257) [#1385](https://github.com/tdeekens/flopflip/pull/1385) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: typing of combined adapter args
+
 ## 4.1.3
 
 ### Patch Changes
