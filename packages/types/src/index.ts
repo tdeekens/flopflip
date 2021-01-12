@@ -45,8 +45,9 @@ export type TAdapterEventHandlers = {
   onFlagsStateChange: (flagsChange: TFlagsChange) => void;
   onStatusStateChange: (statusChange: TAdapterStatusChange) => void;
 };
+type TDefaultAdditionalUserProperties = Record<string, unknown>;
 export type TBaseAdapterArgs<
-  TAdditionalUserProperties = Record<string, unknown>
+  TAdditionalUserProperties = TDefaultAdditionalUserProperties
 > = {
   user: TUser<TAdditionalUserProperties>;
 };
@@ -60,7 +61,9 @@ export type TLaunchDarklyAdapterArgs = TBaseAdapterArgs<TLDUser> & {
   throwOnInitializationFailure?: boolean;
   flagsUpdateDelayMs?: number;
 };
-export type TGraphQLAdapterArgs = TBaseAdapterArgs & {
+export type TGraphQLAdapterArgs<
+  TAdditionalUserProperties = TDefaultAdditionalUserProperties
+> = TBaseAdapterArgs<TAdditionalUserProperties> & {
   fetcher?: typeof fetch;
   uri: string;
   query: string;
@@ -74,10 +77,14 @@ export type TGraphQLAdapterArgs = TBaseAdapterArgs & {
   ) => TParsedFlags;
   cacheIdentifier?: TCacheIdentifiers;
 };
-export type TLocalStorageAdapterArgs = TBaseAdapterArgs & {
+export type TLocalStorageAdapterArgs<
+  TAdditionalUserProperties = TDefaultAdditionalUserProperties
+> = TBaseAdapterArgs<TAdditionalUserProperties> & {
   pollingInteralMs?: number;
 };
-export type TMemoryAdapterArgs = TBaseAdapterArgs;
+export type TMemoryAdapterArgs<
+  TAdditionalUserProperties = TDefaultAdditionalUserProperties
+> = TBaseAdapterArgs<TAdditionalUserProperties>;
 export type TSplitioAdapterArgs = TBaseAdapterArgs & {
   sdk: {
     authorizationKey: string;
@@ -89,12 +96,14 @@ export type TSplitioAdapterArgs = TBaseAdapterArgs & {
     >;
   };
 };
-export type TCombinedAdapterArgs = TBaseAdapterArgs & {
+export type TCombinedAdapterArgs<
+  TAdditionalUserProperties = TDefaultAdditionalUserProperties
+> = TBaseAdapterArgs<TAdditionalUserProperties> & {
   launchdarkly?: TLaunchDarklyAdapterArgs;
-  localstorage?: TLocalStorageAdapterArgs;
-  memory?: TMemoryAdapterArgs;
+  localstorage?: TLocalStorageAdapterArgs<TAdditionalUserProperties>;
+  memory?: TMemoryAdapterArgs<TAdditionalUserProperties>;
   splitio?: TSplitioAdapterArgs;
-  graphql?: TGraphQLAdapterArgs;
+  graphql?: TGraphQLAdapterArgs<TAdditionalUserProperties>;
 };
 export type TAdapterArgs =
   | TLaunchDarklyAdapterArgs
