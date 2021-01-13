@@ -1,5 +1,15 @@
 # @flopflip/graphql-adapter
 
+## 3.0.4
+
+### Patch Changes
+
+- Updated dependencies [[`dfc1463`](https://github.com/tdeekens/flopflip/commit/dfc146387052c05697353e36c18285df37c0a87f)]:
+  - @flopflip/types@4.1.6
+  - @flopflip/adapter-utilities@1.0.8
+  - @flopflip/localstorage-cache@1.0.9
+  - @flopflip/sessionstorage-cache@1.0.9
+
 ## 3.0.3
 
 ### Patch Changes

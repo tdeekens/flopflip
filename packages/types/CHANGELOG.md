@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 4.1.6
+
+### Patch Changes
+
+- [`dfc1463`](https://github.com/tdeekens/flopflip/commit/dfc146387052c05697353e36c18285df37c0a87f) [#1390](https://github.com/tdeekens/flopflip/pull/1390) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: to have different user type per adapter
+
 ## 4.1.5
 
 ### Patch Changes
