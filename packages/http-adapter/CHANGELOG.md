@@ -1,0 +1,2 @@
+# @flopflip/http-adapter
+
