@@ -1,0 +1,46 @@
+{
+  "name": "@flopflip/http-adapter",
+  "version": "0.0.1",
+  "description": "An HTTP adapter for flipflop",
+  "main": "dist/flopflip-http-adapter.cjs.js",
+  "module": "dist/flopflip-http-adapter.esm.js",
+  "scripts": {
+    "prepare": "./../../bin/version.js amend"
+  },
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tdeekens/flopflip.git"
+  },
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
+  },
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "keywords": [
+    "feature-flags",
+    "feature-toggles",
+    "graphql",
+    "client"
+  ],
+  "dependencies": {
+    "@babel/runtime": "7.12.5",
+    "@flopflip/adapter-utilities": "1.0.8",
+    "@flopflip/localstorage-cache": "1.0.9",
+    "@flopflip/sessionstorage-cache": "1.0.9",
+    "@flopflip/types": "4.1.6",
+    "lodash": "4.17.20",
+    "mitt": "2.1.0",
+    "tiny-warning": "1.0.3"
+  },
+  "devDependencies": {
+    "globalthis": "1.0.1"
+  }
+}

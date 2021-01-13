@@ -61,20 +61,27 @@ export type TLaunchDarklyAdapterArgs = TBaseAdapterArgs<TLDUser> & {
   throwOnInitializationFailure?: boolean;
   flagsUpdateDelayMs?: number;
 };
-export type TGraphQLAdapterArgs<
+export type TGraphQlAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties
 > = TBaseAdapterArgs<TAdditionalUserProperties> & {
   fetcher?: typeof fetch;
   uri: string;
   query: string;
   pollingInteralMs?: number;
-  getQueryVariables?: (adapterArgs: TGraphQLAdapterArgs) => unknown;
+  getQueryVariables?: (adapterArgs: TGraphQlAdapterArgs) => unknown;
   getRequestHeaders?: (
-    adapterArgs: TGraphQLAdapterArgs
+    adapterArgs: TGraphQlAdapterArgs
   ) => Record<string, string>;
   parseFlags?: <TFetchedFlags = unknown, TParsedFlags = TFlags>(
     fetchedFlags: TFetchedFlags
   ) => TParsedFlags;
+  cacheIdentifier?: TCacheIdentifiers;
+};
+export type THttpAdapterArgs<
+  TAdditionalUserProperties = TDefaultAdditionalUserProperties
+> = TBaseAdapterArgs<TAdditionalUserProperties> & {
+  execute: <TParsedFlags = TFlags>() => Promise<TParsedFlags>;
+  pollingInteralMs?: number;
   cacheIdentifier?: TCacheIdentifiers;
 };
 export type TLocalStorageAdapterArgs<
@@ -98,22 +105,25 @@ export type TSplitioAdapterArgs = TBaseAdapterArgs & {
 };
 export type TCombinedAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,
+  TAdditionalHttpUserProperties = TDefaultAdditionalUserProperties,
+  TAdditionalGraphQlUserProperties = TDefaultAdditionalUserProperties,
   TAdditionalLocalStorageUserProperties = TDefaultAdditionalUserProperties,
-  TAdditionalMemoryUserProperties = TDefaultAdditionalUserProperties,
-  TAdditionalGraphQlUserProperties = TDefaultAdditionalUserProperties
+  TAdditionalMemoryUserProperties = TDefaultAdditionalUserProperties
 > = TBaseAdapterArgs<TAdditionalUserProperties> & {
   launchdarkly?: TLaunchDarklyAdapterArgs;
   localstorage?: TLocalStorageAdapterArgs<TAdditionalLocalStorageUserProperties>;
   memory?: TMemoryAdapterArgs<TAdditionalMemoryUserProperties>;
   splitio?: TSplitioAdapterArgs;
-  graphql?: TGraphQLAdapterArgs<TAdditionalGraphQlUserProperties>;
+  graphql?: TGraphQlAdapterArgs<TAdditionalGraphQlUserProperties>;
+  http?: THttpAdapterArgs<TAdditionalHttpUserProperties>;
 };
 export type TAdapterArgs =
   | TLaunchDarklyAdapterArgs
   | TLocalStorageAdapterArgs
   | TMemoryAdapterArgs
   | TSplitioAdapterArgs
-  | TGraphQLAdapterArgs
+  | TGraphQlAdapterArgs
+  | THttpAdapterArgs
   | TCombinedAdapterArgs;
 
 export const adapterIdentifiers = {
@@ -122,6 +132,7 @@ export const adapterIdentifiers = {
   memory: 'memory',
   splitio: 'splitio',
   graphql: 'graphql',
+  http: 'http',
   combined: 'combined',
 } as const;
 export type TAdapterIdentifiers =
@@ -209,15 +220,33 @@ export interface TLocalStorageAdapterInterface
   unsubscribe: () => void;
   subscribe: () => void;
 }
-export interface TGraphQLAdapterInterface
-  extends TAdapterInterface<TGraphQLAdapterArgs> {
+export interface TGraphQlAdapterInterface
+  extends TAdapterInterface<TGraphQlAdapterArgs> {
   id: typeof adapterIdentifiers.graphql;
   configure: (
-    adapterArgs: TGraphQLAdapterArgs,
+    adapterArgs: TGraphQlAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) => Promise<TAdapterConfiguration>;
   reconfigure: (
-    adapterArgs: TGraphQLAdapterArgs,
+    adapterArgs: TGraphQlAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
+  ) => Promise<TAdapterConfiguration>;
+  getIsConfigurationStatus: (
+    adapterConfigurationStatus: AdapterConfigurationStatus
+  ) => boolean;
+  waitUntilConfigured: () => Promise<unknown>;
+  unsubscribe: () => void;
+  subscribe: () => void;
+}
+export interface THttpAdapterInterface
+  extends TAdapterInterface<THttpAdapterArgs> {
+  id: typeof adapterIdentifiers.http;
+  configure: (
+    adapterArgs: THttpAdapterArgs,
+    adapterEventHandlers: TAdapterEventHandlers
+  ) => Promise<TAdapterConfiguration>;
+  reconfigure: (
+    adapterArgs: THttpAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) => Promise<TAdapterConfiguration>;
   getIsConfigurationStatus: (
@@ -291,9 +320,10 @@ export type TAdapter =
   | TLaunchDarklyAdapterInterface
   | TLocalStorageAdapterInterface
   | TMemoryAdapterInterface
-  | TCombinedAdapterInterface
   | TSplitioAdapterInterface
-  | TGraphQLAdapterInterface;
+  | TGraphQlAdapterInterface
+  | THttpAdapterInterface
+  | TCombinedAdapterInterface;
 export type TConfigureAdapterArgs<
   TAdapterInstance extends TAdapter
 > = TAdapterInstance extends TLaunchDarklyAdapterInterface
@@ -302,12 +332,14 @@ export type TConfigureAdapterArgs<
   ? TLocalStorageAdapterArgs
   : TAdapterInstance extends TMemoryAdapterInterface
   ? TMemoryAdapterArgs
-  : TAdapterInstance extends TCombinedAdapterInterface
-  ? TCombinedAdapterArgs
   : TAdapterInstance extends TSplitioAdapterInterface
   ? TSplitioAdapterArgs
-  : TAdapterInstance extends TGraphQLAdapterInterface
-  ? TGraphQLAdapterArgs
+  : TAdapterInstance extends TGraphQlAdapterInterface
+  ? TGraphQlAdapterArgs
+  : TAdapterInstance extends THttpAdapterInterface
+  ? THttpAdapterArgs
+  : TAdapterInstance extends TCombinedAdapterInterface
+  ? TCombinedAdapterArgs
   : never;
 export type TConfigureAdapterProps<TAdapterInstance extends TAdapter> = {
   adapter: TAdapterInstance extends TLaunchDarklyAdapterInterface
@@ -316,12 +348,14 @@ export type TConfigureAdapterProps<TAdapterInstance extends TAdapter> = {
     ? TLocalStorageAdapterInterface
     : TAdapterInstance extends TMemoryAdapterInterface
     ? TMemoryAdapterInterface
-    : TAdapterInstance extends TCombinedAdapterInterface
-    ? TCombinedAdapterInterface
     : TAdapterInstance extends TSplitioAdapterInterface
     ? TSplitioAdapterInterface
-    : TAdapterInstance extends TGraphQLAdapterInterface
-    ? TGraphQLAdapterInterface
+    : TAdapterInstance extends TGraphQlAdapterInterface
+    ? TGraphQlAdapterInterface
+    : TAdapterInstance extends THttpAdapterInterface
+    ? THttpAdapterInterface
+    : TAdapterInstance extends TCombinedAdapterInterface
+    ? TCombinedAdapterInterface
     : never;
   adapterArgs: TConfigureAdapterArgs<TAdapterInstance>;
 };
@@ -367,7 +401,11 @@ type TLocalStorageAdapterGlobal = {
   adapter: TLocalStorageAdapterInterface;
   updateFlags: TFlagsUpdateFunction;
 };
-type TGraphQLAdapterGlobal = {
+type TGraphQlAdapterGlobal = {
+  adapter: TLocalStorageAdapterInterface;
+  updateFlags: TFlagsUpdateFunction;
+};
+type THttpAdapterGlobal = {
   adapter: TLocalStorageAdapterInterface;
   updateFlags: TFlagsUpdateFunction;
 };
@@ -381,7 +419,8 @@ export type TFlopflipGlobal = {
   [adapterIdentifiers.splitio]?: TSplitioAdapterGlobal;
   [adapterIdentifiers.memory]?: TMemoryAdapterGlobal;
   [adapterIdentifiers.localstorage]?: TLocalStorageAdapterGlobal;
-  [adapterIdentifiers.graphql]?: TGraphQLAdapterGlobal;
+  [adapterIdentifiers.graphql]?: TGraphQlAdapterGlobal;
+  [adapterIdentifiers.http]?: THttpAdapterGlobal;
   [adapterIdentifiers.combined]?: TCombinedAdapterGlobal;
 };
 declare global {

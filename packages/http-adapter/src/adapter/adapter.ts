@@ -8,8 +8,8 @@ import type {
   TFlags,
   TFlagsUpdateFunction,
   TFlagsChange,
-  TGraphQlAdapterInterface,
-  TGraphQlAdapterArgs,
+  THttpAdapterInterface,
+  THttpAdapterArgs,
   TCacheIdentifiers,
 } from '@flopflip/types';
 import {
@@ -29,7 +29,7 @@ import warning from 'tiny-warning';
 import mitt, { Emitter } from 'mitt';
 import isEqual from 'lodash/isEqual';
 
-type TGraphQlAdapterState = {
+type THttpAdapterState = {
   flags: TFlags;
   user?: TUser;
   emitter: Emitter;
@@ -39,7 +39,7 @@ type TGraphQlAdapterState = {
 
 const STORAGE_SLICE = '@flopflip';
 
-const intialAdapterState: TAdapterStatus & TGraphQlAdapterState = {
+const intialAdapterState: TAdapterStatus & THttpAdapterState = {
   subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
   configurationStatus: AdapterConfigurationStatus.Unconfigured,
   flags: {},
@@ -48,15 +48,15 @@ const intialAdapterState: TAdapterStatus & TGraphQlAdapterState = {
   emitter: mitt(),
 };
 
-class GraphQlAdapter implements TGraphQlAdapterInterface {
+class HttpAdapter implements THttpAdapterInterface {
   #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
-  #adapterState: TAdapterStatus & TGraphQlAdapterState;
+  #adapterState: TAdapterStatus & THttpAdapterState;
   #defaultPollingInteralMs = 1000 * 60;
 
-  id: typeof adapterIdentifiers.graphql;
+  id: typeof adapterIdentifiers.http;
 
   constructor() {
-    this.id = adapterIdentifiers.graphql;
+    this.id = adapterIdentifiers.http;
     this.#adapterState = {
       ...intialAdapterState,
     };
@@ -112,29 +112,13 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
     return !isEqual(nextFlags, previousFlags);
   };
 
-  #fetchFlags = async (adapterArgs: TGraphQlAdapterArgs): Promise<TFlags> => {
-    const fetcher = adapterArgs.fetcher ?? fetch;
-
-    const response = await fetcher(adapterArgs.uri, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(adapterArgs.getRequestHeaders?.(adapterArgs) ?? {}),
-      },
-      body: JSON.stringify({
-        query: adapterArgs.query,
-        variables: adapterArgs?.getQueryVariables?.(adapterArgs) ?? {},
-      }),
-    });
-
-    const json = await response.json();
-
-    const flags = adapterArgs.parseFlags?.(json.data) ?? (json.data as TFlags);
+  #fetchFlags = async (adapterArgs: THttpAdapterArgs): Promise<TFlags> => {
+    const flags = await adapterArgs.execute();
 
     return flags;
   };
 
-  #subscribeToFlagsChanges = (adapterArgs: TGraphQlAdapterArgs) => {
+  #subscribeToFlagsChanges = (adapterArgs: THttpAdapterArgs) => {
     const pollingInteralMs =
       adapterArgs.pollingInteralMs ?? this.#defaultPollingInteralMs;
 
@@ -165,7 +149,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
 
     warning(
       isAdapterConfigured,
-      '@flopflip/graphql-adapter: adapter not configured. Flags can not be updated before.'
+      '@flopflip/http-adapter: adapter not configured. Flags can not be updated before.'
     );
 
     if (!isAdapterConfigured) return;
@@ -205,7 +189,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
   };
 
   async configure(
-    adapterArgs: TGraphQlAdapterArgs,
+    adapterArgs: THttpAdapterArgs,
     adapterEventHandlers: TAdapterEventHandlers
   ) {
     const handleFlagsChange = (nextFlags: TFlagsChange['flags']) => {
@@ -279,13 +263,13 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
   }
 
   async reconfigure(
-    adapterArgs: TGraphQlAdapterArgs,
+    adapterArgs: THttpAdapterArgs,
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
     if (!this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured))
       return Promise.reject(
         new Error(
-          '@flopflip/graphql-adapter: please configure adapter before reconfiguring.'
+          '@flopflip/http-adapter: please configure adapter before reconfiguring.'
         )
       );
 
@@ -352,7 +336,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
   };
 }
 
-const adapter = new GraphQlAdapter();
+const adapter = new HttpAdapter();
 
 exposeGlobally(adapter);
 
