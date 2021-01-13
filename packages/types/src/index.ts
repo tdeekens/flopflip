@@ -97,13 +97,16 @@ export type TSplitioAdapterArgs = TBaseAdapterArgs & {
   };
 };
 export type TCombinedAdapterArgs<
-  TAdditionalUserProperties = TDefaultAdditionalUserProperties
+  TAdditionalUserProperties = TDefaultAdditionalUserProperties,
+  TAdditionalLocalStorageUserProperties = TDefaultAdditionalUserProperties,
+  TAdditionalMemoryUserProperties = TDefaultAdditionalUserProperties,
+  TAdditionalGraphQlUserProperties = TDefaultAdditionalUserProperties
 > = TBaseAdapterArgs<TAdditionalUserProperties> & {
   launchdarkly?: TLaunchDarklyAdapterArgs;
-  localstorage?: TLocalStorageAdapterArgs<TAdditionalUserProperties>;
-  memory?: TMemoryAdapterArgs<TAdditionalUserProperties>;
+  localstorage?: TLocalStorageAdapterArgs<TAdditionalLocalStorageUserProperties>;
+  memory?: TMemoryAdapterArgs<TAdditionalMemoryUserProperties>;
   splitio?: TSplitioAdapterArgs;
-  graphql?: TGraphQLAdapterArgs<TAdditionalUserProperties>;
+  graphql?: TGraphQLAdapterArgs<TAdditionalGraphQlUserProperties>;
 };
 export type TAdapterArgs =
   | TLaunchDarklyAdapterArgs
