@@ -97,6 +97,7 @@ export type TSplitioAdapterArgs = TBaseAdapterArgs & {
   };
 };
 export type TCombinedAdapterArgs<
+  TAdditionalUserProperties = TDefaultAdditionalUserProperties,
   TAdditionalLocalStorageUserProperties = TDefaultAdditionalUserProperties,
   TAdditionalMemoryUserProperties = TDefaultAdditionalUserProperties,
   TAdditionalGraphQlUserProperties = TDefaultAdditionalUserProperties
