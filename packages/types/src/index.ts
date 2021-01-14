@@ -80,7 +80,7 @@ export type TGraphQlAdapterArgs<
 export type THttpAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties
 > = TBaseAdapterArgs<TAdditionalUserProperties> & {
-  execute: <TParsedFlags = any>() => TParsedFlags;
+  execute: () => Promise<any>;
   pollingInteralMs?: number;
   cacheIdentifier?: TCacheIdentifiers;
 };
