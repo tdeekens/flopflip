@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 4.1.9
+
+### Patch Changes
+
+- [`780a527`](https://github.com/tdeekens/flopflip/commit/780a527f6a86395463b5de5fcf88937491dee805) [#1398](https://github.com/tdeekens/flopflip/pull/1398) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: return to be unknown over generic
+
 ## 4.1.8
 
 ### Patch Changes
