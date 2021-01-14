@@ -1,5 +1,14 @@
 # @flopflip/test-utils
 
+## 3.0.9
+
+### Patch Changes
+
+- [`e12bda8`](https://github.com/tdeekens/flopflip/commit/e12bda837d42b3a516f47bfe9241162668fa9963) [#1393](https://github.com/tdeekens/flopflip/pull/1393) Thanks [@tdeekens](https://github.com/tdeekens)! - update dependencies
+
+- Updated dependencies [[`e12bda8`](https://github.com/tdeekens/flopflip/commit/e12bda837d42b3a516f47bfe9241162668fa9963)]:
+  - @flopflip/memory-adapter@3.0.9
+
 ## 3.0.8
 
 ### Patch Changes
