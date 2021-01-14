@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 4.1.8
+
+### Patch Changes
+
+- [`fbc9bce`](https://github.com/tdeekens/flopflip/commit/fbc9bce3281b88e8fe81330cd442409b18b5162b) [#1396](https://github.com/tdeekens/flopflip/pull/1396) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: return type of execute
+
 ## 4.1.7
 
 ### Patch Changes
