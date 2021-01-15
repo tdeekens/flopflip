@@ -7,6 +7,7 @@ import type {
   TAdapter,
   TUpdateFlagsOptions,
   TCombinedAdapterInterface,
+  TAdapterIdentifiers,
 } from '@flopflip/types';
 import {
   AdapterInitializationStatus,
@@ -37,6 +38,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
   #adapterState: TAdapterStatus & CombinedAdaptersState;
 
   id: typeof adapterIdentifiers.combined;
+  effectIds?: TAdapterIdentifiers[];
 
   constructor() {
     this.#adapterState = {
@@ -79,6 +81,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
 
   combine(adapters: TAdapter[]) {
     this.#adapters = adapters;
+    this.effectIds = adapters.map((adapter) => adapter.id);
   }
 
   async configure(

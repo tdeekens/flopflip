@@ -279,6 +279,7 @@ export interface TMemoryAdapterInterface
 export interface TCombinedAdapterInterface
   extends TAdapterInterface<TCombinedAdapterArgs> {
   id: typeof adapterIdentifiers.combined;
+  effectIds?: TAdapterIdentifiers[];
   combine: <TAdapterInstance extends TAdapter>(
     adapters: TAdapterInstance[]
   ) => void;
