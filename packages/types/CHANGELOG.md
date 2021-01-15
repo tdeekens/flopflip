@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 4.1.10
+
+### Patch Changes
+
+- [`5461b6c`](https://github.com/tdeekens/flopflip/commit/5461b6c5746fe004aaff1a6a64be28be40522601) [#1400](https://github.com/tdeekens/flopflip/pull/1400) Thanks [@tdeekens](https://github.com/tdeekens)! - fix(combine-adapter): to assign effectIds
+
 ## 4.1.9
 
 ### Patch Changes
