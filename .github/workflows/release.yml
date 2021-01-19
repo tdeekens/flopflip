@@ -18,9 +18,6 @@ jobs:
       - name: Checkout
         if: github.ref == 'refs/heads/master'
         uses: actions/checkout@v2
-        with:
-          ref: master
-          fetch-depth: 50
 
       - name: Fetch all tags (for releases)
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
