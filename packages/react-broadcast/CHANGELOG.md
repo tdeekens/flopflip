@@ -1,5 +1,37 @@
 # @flopflip/react-broadcast
 
+## 12.2.0
+
+### Minor Changes
+
+- [`93a1c0b`](https://github.com/tdeekens/flopflip/commit/93a1c0bfda4b50f6c4fd2c2f0bf447ea70b8c06c) [#1403](https://github.com/tdeekens/flopflip/pull/1403) Thanks [@tdeekens](https://github.com/tdeekens)! - feat: add test context provider for react-broadcast
+
+  You can wrap your application using for instance `react-testing-library` as
+
+  ```jsx
+  import { TestProviderFlopFlip } from '@flopflip/react-broadcast';
+  import { render } from '@testing-library/react';
+
+  const testFlags = {
+    myFlag: true,
+  };
+
+  describe('rendering', () => {
+    it('should render the application with feature flags', () => {
+      render(
+        <TestProviderFlopFlip flags={testFlags}>
+          <App />
+        </TestProviderFlopFlip>
+      );
+    });
+  });
+  ```
+
+### Patch Changes
+
+- Updated dependencies [[`93a1c0b`](https://github.com/tdeekens/flopflip/commit/93a1c0bfda4b50f6c4fd2c2f0bf447ea70b8c06c)]:
+  - @flopflip/react@11.1.11
+
 ## 12.1.10
 
 ### Patch Changes
