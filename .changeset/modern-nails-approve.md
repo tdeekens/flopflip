@@ -9,8 +9,19 @@ You can wrap your application using for instance `react-testing-library` as
 
 ```jsx
 import { FlopflipTestProvider } from '@flopflip/react-broadcast';
+import { render } from '@testing-library/react';
 
-<FlopflipTestProvider flags={testFlags} status={adapterStatus}>
-   <App />
-</FlopflipTestProvider>
+const testFlags = {
+  myFlag: true,
+};
+
+describe('rendering', () => {
+  it('should render the application with feature flags', () => {
+    render(
+      <FlopflipTestProvider flags={testFlags}>
+        <App />
+      </FlopflipTestProvider>
+    );
+  });
+});
 ```
