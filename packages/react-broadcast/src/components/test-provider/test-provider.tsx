@@ -32,7 +32,7 @@ const defaultProps: Pick<
   },
 };
 
-const TestContextProvider = (props: TProps) => {
+const TestProvider = (props: TProps) => {
   const adapterContextValue = createAdapterContext(
     props.adapterIdentifiers,
     props.reconfigure,
@@ -52,7 +52,7 @@ const TestContextProvider = (props: TProps) => {
   );
 };
 
-TestContextProvider.displayName = 'FlopflipTestContextProvider';
-TestContextProvider.defaultProps = defaultProps;
+TestProvider.displayName = 'FlopflipTestProvider';
+TestProvider.defaultProps = defaultProps;
 
-export { TestContextProvider };
+export { TestProvider };

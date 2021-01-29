@@ -5,7 +5,7 @@ import {
   AdapterSubscriptionStatus,
 } from '@flopflip/types';
 import { useFeatureToggle, useAdapterStatus } from '../../hooks';
-import { TestContextProvider } from './test-context-provider';
+import { TestProvider } from './test-provider';
 
 const testFlagName = 'testFlag1';
 const TestComponent = () => {
@@ -25,9 +25,9 @@ const TestComponent = () => {
 
 const render = ({ flags, status } = {}) => {
   rtlRender(
-    <TestContextProvider flags={flags} status={status}>
+    <TestProvider flags={flags} status={status}>
       <TestComponent />
-    </TestContextProvider>
+    </TestProvider>
   );
 };
 
