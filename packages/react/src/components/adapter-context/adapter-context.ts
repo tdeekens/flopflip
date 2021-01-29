@@ -31,13 +31,17 @@ const AdapterContext = createContext(initialAdapterContext);
 
 const selectAdapterConfigurationStatus = (
   configurationStatus?: AdapterConfigurationStatus
-) => ({
-  isReady: configurationStatus === AdapterConfigurationStatus.Configured,
-  isUnconfigured:
-    configurationStatus === AdapterConfigurationStatus.Unconfigured,
-  isConfiguring: configurationStatus === AdapterConfigurationStatus.Configuring,
-  isConfigured: configurationStatus === AdapterConfigurationStatus.Configured,
-});
+) => {
+  const isReady = configurationStatus === AdapterConfigurationStatus.Configured;
+  const isUnconfigured =
+    configurationStatus === AdapterConfigurationStatus.Unconfigured;
+  const isConfiguring =
+    configurationStatus === AdapterConfigurationStatus.Configuring;
+  const isConfigured =
+    configurationStatus === AdapterConfigurationStatus.Configured;
+
+  return { isReady, isUnconfigured, isConfiguring, isConfigured };
+};
 
 export default AdapterContext;
 export { createAdapterContext, selectAdapterConfigurationStatus };
