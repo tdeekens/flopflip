@@ -1,6 +1,6 @@
 ---
-"@flopflip/react-broadcast": minor
-"@flopflip/react": patch
+'@flopflip/react-broadcast': minor
+'@flopflip/react': patch
 ---
 
 feat: add test context provider for react-broadcast
@@ -8,7 +8,7 @@ feat: add test context provider for react-broadcast
 You can wrap your application using for instance `react-testing-library` as
 
 ```jsx
-import { FlopflipTestProvider } from '@flopflip/react-broadcast';
+import { TestProviderFlopflip } from '@flopflip/react-broadcast';
 import { render } from '@testing-library/react';
 
 const testFlags = {
@@ -18,9 +18,9 @@ const testFlags = {
 describe('rendering', () => {
   it('should render the application with feature flags', () => {
     render(
-      <FlopflipTestProvider flags={testFlags}>
+      <TestProviderFlopflip flags={testFlags}>
         <App />
-      </FlopflipTestProvider>
+      </TestProviderFlopflip>
     );
   });
 });

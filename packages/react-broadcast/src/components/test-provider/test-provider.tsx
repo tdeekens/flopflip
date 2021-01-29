@@ -52,7 +52,7 @@ const TestProvider = (props: TProps) => {
   );
 };
 
-TestProvider.displayName = 'FlopflipTestProvider';
+TestProvider.displayName = 'TestProviderFlopflip';
 TestProvider.defaultProps = defaultProps;
 
 export { TestProvider };
