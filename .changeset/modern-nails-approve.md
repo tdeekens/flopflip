@@ -8,7 +8,7 @@ feat: add test context provider for react-broadcast
 You can wrap your application using for instance `react-testing-library` as
 
 ```jsx
-import { TestProviderFlopflip } from '@flopflip/react-broadcast';
+import { TestProviderFlopFlip } from '@flopflip/react-broadcast';
 import { render } from '@testing-library/react';
 
 const testFlags = {
@@ -18,9 +18,9 @@ const testFlags = {
 describe('rendering', () => {
   it('should render the application with feature flags', () => {
     render(
-      <TestProviderFlopflip flags={testFlags}>
+      <TestProviderFlopFlip flags={testFlags}>
         <App />
-      </TestProviderFlopflip>
+      </TestProviderFlopFlip>
     );
   });
 });
