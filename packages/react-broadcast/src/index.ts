@@ -4,6 +4,7 @@ export {
   ToggleFeature,
   ConfigureFlopFlip,
   ReconfigureFlopFlip,
+  TestProviderFlopFlip,
 } from './components';
 
 export {
