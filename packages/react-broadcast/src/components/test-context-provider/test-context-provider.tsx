@@ -6,24 +6,30 @@ import type {
 } from '@flopflip/types';
 
 import React from 'react';
-import { AdapterConfigurationStatus, AdapterSubscriptionStatus } from '@flopflip/types';
+import {
+  AdapterConfigurationStatus,
+  AdapterSubscriptionStatus,
+} from '@flopflip/types';
 import { createAdapterContext, AdapterContext } from '@flopflip/react';
 import { createIntialFlagsContext, FlagsContext } from '../flags-context';
 
 type TProps = {
   children: React.ReactNode;
   flags: TFlags;
-  adapterIdentifiers?: TAdapterIdentifiers & string[];
+  adapterIdentifiers?: TAdapterIdentifiers[];
   reconfigure?: TReconfigureAdapter;
   status?: TAdapterStatus;
 };
 
-const defaultProps: Pick<TProps, 'recondigure' | 'status'> = {
+const defaultProps: Pick<
+  TProps,
+  'adapterIdentifiers' | 'reconfigure' | 'status'
+> = {
   adapterIdentifiers: ['test'],
   status: {
     subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
     configurationStatus: AdapterConfigurationStatus.Configured,
-  }
+  },
 };
 
 const TestContextProvider = (props: TProps) => {
@@ -49,4 +55,4 @@ const TestContextProvider = (props: TProps) => {
 TestContextProvider.displayName = 'FlopflipTestContextProvider';
 TestContextProvider.defaultProps = defaultProps;
 
-export default TestContextProvider;
+export { TestContextProvider };
