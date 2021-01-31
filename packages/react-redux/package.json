@@ -40,7 +40,7 @@
     "@babel/runtime": "7.12.5",
     "@flopflip/react": "^11.1.10",
     "@flopflip/types": "4.1.10",
-    "@types/react-redux": "7.1.15"
+    "@types/react-redux": "7.1.16"
   },
   "peerDependencies": {
     "react": "^16.8 || ^17.0",
