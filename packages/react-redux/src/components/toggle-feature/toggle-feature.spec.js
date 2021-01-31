@@ -26,13 +26,14 @@ describe('<ToggleFeature>', () => {
         [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
       });
 
-      const rendered = render(store, <TestComponent />);
+      const { waitUntilConfigured, queryByFlagName } = render(
+        store,
+        <TestComponent />
+      );
 
-      await rendered.waitUntilConfigured();
+      await waitUntilConfigured();
 
-      expect(
-        rendered.queryByFlagName('disabledFeature')
-      ).not.toBeInTheDocument();
+      expect(queryByFlagName('disabledFeature')).not.toBeInTheDocument();
     });
 
     describe('when enabling feature', () => {
@@ -46,13 +47,17 @@ describe('<ToggleFeature>', () => {
           [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
         });
 
-        const rendered = render(store, <TestComponent />);
+        const {
+          waitUntilConfigured,
+          queryByFlagName,
+          changeFlagVariation,
+        } = render(store, <TestComponent />);
 
-        await rendered.waitUntilConfigured();
+        await waitUntilConfigured();
 
-        rendered.changeFlagVariation('disabledFeature', true);
+        changeFlagVariation('disabledFeature', true);
 
-        expect(rendered.queryByFlagName('disabledFeature')).toBeInTheDocument();
+        expect(queryByFlagName('disabledFeature')).toBeInTheDocument();
       });
     });
   });
@@ -68,11 +73,14 @@ describe('<ToggleFeature>', () => {
         </ToggleFeature>
       );
 
-      const rendered = render(store, <TestComponent />);
+      const { waitUntilConfigured, queryByFlagName } = render(
+        store,
+        <TestComponent />
+      );
 
-      await rendered.waitUntilConfigured();
+      await waitUntilConfigured();
 
-      expect(rendered.queryByFlagName('enabledFeature')).toHaveAttribute(
+      expect(queryByFlagName('enabledFeature')).toHaveAttribute(
         'data-flag-status',
         'enabled'
       );

@@ -24,13 +24,14 @@ describe('without `untoggledComponent', () => {
         components.ToggledComponent
       );
 
-      const rendered = render(store, <TestComponent />);
+      const { waitUntilConfigured, queryByFlagName } = render(
+        store,
+        <TestComponent />
+      );
 
-      await rendered.waitUntilConfigured();
+      await waitUntilConfigured();
 
-      expect(
-        rendered.queryByFlagName('isFeatureEnabled')
-      ).not.toBeInTheDocument();
+      expect(queryByFlagName('isFeatureEnabled')).not.toBeInTheDocument();
     });
 
     describe('when enabling feature', () => {
@@ -42,15 +43,17 @@ describe('without `untoggledComponent', () => {
           flag: 'disabledFeature',
         })(components.ToggledComponent);
 
-        const rendered = render(store, <TestComponent />);
+        const {
+          waitUntilConfigured,
+          queryByFlagName,
+          changeFlagVariation,
+        } = render(store, <TestComponent />);
 
-        await rendered.waitUntilConfigured();
+        await waitUntilConfigured();
 
-        rendered.changeFlagVariation('disabledFeature', true);
+        changeFlagVariation('disabledFeature', true);
 
-        expect(
-          rendered.queryByFlagName('isFeatureEnabled')
-        ).toBeInTheDocument();
+        expect(queryByFlagName('isFeatureEnabled')).toBeInTheDocument();
       });
     });
   });
@@ -64,11 +67,14 @@ describe('without `untoggledComponent', () => {
         components.ToggledComponent
       );
 
-      const rendered = render(store, <TestComponent />);
+      const { waitUntilConfigured, queryByFlagName } = render(
+        store,
+        <TestComponent />
+      );
 
-      await rendered.waitUntilConfigured();
+      await waitUntilConfigured();
 
-      expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
+      expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
         'enabled'
       );
@@ -87,11 +93,14 @@ describe('with `untoggledComponent', () => {
         components.UntoggledComponent
       )(components.ToggledComponent);
 
-      const rendered = render(store, <TestComponent />);
+      const { waitUntilConfigured, queryByFlagName } = render(
+        store,
+        <TestComponent />
+      );
 
-      await rendered.waitUntilConfigured();
+      await waitUntilConfigured();
 
-      expect(rendered.queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
+      expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
         'data-flag-status',
         'enabled'
       );
@@ -106,11 +115,14 @@ describe('with `untoggledComponent', () => {
         components.UntoggledComponent
       )(components.ToggledComponent);
 
-      const rendered = render(store, <TestComponent />);
+      const { waitUntilConfigured, queryByFlagName } = render(
+        store,
+        <TestComponent />
+      );
 
-      await rendered.waitUntilConfigured();
+      await waitUntilConfigured();
 
-      expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
+      expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
         'disabled'
       );
@@ -126,11 +138,14 @@ describe('with `untoggledComponent', () => {
         components.ToggledComponent
       );
 
-      const rendered = render(store, <TestComponent />);
+      const { waitUntilConfigured, queryByFlagName } = render(
+        store,
+        <TestComponent />
+      );
 
-      await rendered.waitUntilConfigured();
+      await waitUntilConfigured();
 
-      expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
+      expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
         'enabled'
       );
@@ -144,11 +159,14 @@ describe('with `untoggledComponent', () => {
         components.ToggledComponent
       );
 
-      const rendered = render(store, <TestComponent />);
+      const { waitUntilConfigured, queryByFlagName } = render(
+        store,
+        <TestComponent />
+      );
 
-      await rendered.waitUntilConfigured();
+      await waitUntilConfigured();
 
-      expect(rendered.queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
+      expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
         'data-flag-status',
         'disabled'
       );

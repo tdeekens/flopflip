@@ -1,6 +1,6 @@
 import React from 'react';
 import useFlagVariation from './use-flag-variation';
-import { renderWithAdapter } from '@flopflip/test-utils';
+import { screen, renderWithAdapter } from '@flopflip/test-utils';
 import Configure from '../../components/configure';
 
 const render = (TestComponent) =>
@@ -19,9 +19,9 @@ const TestComponent = () => {
 };
 
 it('should indicate a flag variation', async () => {
-  const rendered = render(<TestComponent />);
+  const { waitUntilConfigured } = render(<TestComponent />);
 
-  await rendered.waitUntilConfigured();
+  await waitUntilConfigured();
 
-  expect(rendered.getByText('Variation: A')).toBeInTheDocument();
+  expect(screen.getByText('Variation: A')).toBeInTheDocument();
 });

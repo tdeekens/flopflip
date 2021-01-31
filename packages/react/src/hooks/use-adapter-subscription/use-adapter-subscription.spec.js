@@ -3,7 +3,7 @@ import {
   AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
 } from '@flopflip/types';
-import { render as rtlRender } from '@flopflip/test-utils';
+import { screen, render as rtlRender } from '@flopflip/test-utils';
 import useAdapterSubscription from './use-adapter-subscription';
 
 const createAdapter = () => ({
@@ -49,43 +49,43 @@ const TestComponent = (props) => {
 
 const render = ({ adapter }) => {
   const props = { adapter };
-  const rendered = rtlRender(<TestComponent {...props} />);
+  const { unmount } = rtlRender(<TestComponent {...props} />);
   const waitUntilConfigured = () => Promise.resolve();
 
-  return { ...rendered, waitUntilConfigured, props };
+  return { waitUntilConfigured, unmount, renderProps: props };
 };
 
 describe('rendering', () => {
   it('should unsubscribe the adapter when mounting', async () => {
     const adapter = createAdapter();
 
-    const rendered = render({ adapter });
+    const { waitUntilConfigured, renderProps } = render({ adapter });
 
-    await rendered.waitUntilConfigured();
+    await waitUntilConfigured();
 
-    expect(rendered.props.adapter.subscribe).toHaveBeenCalled();
+    expect(renderProps.adapter.subscribe).toHaveBeenCalled();
   });
 
   it('should return adapter subscribtion status indicating being subscribed', async () => {
     const adapter = createAdapter();
 
-    const rendered = render({ adapter });
+    const { waitUntilConfigured } = render({ adapter });
 
-    await rendered.waitUntilConfigured();
+    await waitUntilConfigured();
 
-    expect(rendered.getByText(/Is subscribed: Yes/i)).toBeInTheDocument();
-    expect(rendered.getByText(/Is unsubscribed: No/i)).toBeInTheDocument();
+    expect(screen.getByText(/Is subscribed: Yes/i)).toBeInTheDocument();
+    expect(screen.getByText(/Is unsubscribed: No/i)).toBeInTheDocument();
   });
 
   it('should unsubscribe the adapter when unmounting', async () => {
     const adapter = createAdapter();
 
-    const rendered = render({ adapter });
+    const { unmount, waitUntilConfigured, renderProps } = render({ adapter });
 
-    await rendered.waitUntilConfigured();
+    await waitUntilConfigured();
 
-    rendered.unmount();
+    unmount();
 
-    expect(rendered.props.adapter.unsubscribe).toHaveBeenCalled();
+    expect(renderProps.adapter.unsubscribe).toHaveBeenCalled();
   });
 });

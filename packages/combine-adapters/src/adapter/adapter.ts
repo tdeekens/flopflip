@@ -81,7 +81,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
 
   combine(adapters: TAdapter[]) {
     this.#adapters = adapters;
-    this.effectIds = adapters.map((adapter) => adapter.id);
+    this.effectIds = adapters.map((adapter) => adapter.id).concat(this.id);
   }
 
   async configure(

@@ -22,13 +22,11 @@ describe('without `propKey`', () => {
       'enabledFeature',
     ])(FlagsToComponent);
 
-    const rendered = render(<TestComponent />);
+    const { waitUntilConfigured, queryByFlagName } = render(<TestComponent />);
 
-    await rendered.waitUntilConfigured();
+    await waitUntilConfigured();
 
-    expect(rendered.queryByFlagName('enabledFeature')).toHaveTextContent(
-      'true'
-    );
+    expect(queryByFlagName('enabledFeature')).toHaveTextContent('true');
   });
 
   it('should have feature disabling prop for `disabledFeature`', async () => {
@@ -37,13 +35,11 @@ describe('without `propKey`', () => {
       'enabledFeature',
     ])(FlagsToComponent);
 
-    const rendered = render(<TestComponent />);
+    const { waitUntilConfigured, queryByFlagName } = render(<TestComponent />);
 
-    await rendered.waitUntilConfigured();
+    await waitUntilConfigured();
 
-    expect(rendered.queryByFlagName('disabledFeature')).toHaveTextContent(
-      'false'
-    );
+    expect(queryByFlagName('disabledFeature')).toHaveTextContent('false');
   });
 
   describe('when enabling feature', () => {
@@ -53,15 +49,17 @@ describe('without `propKey`', () => {
         'enabledFeature',
       ])(FlagsToComponent);
 
-      const rendered = render(<TestComponent />);
+      const {
+        waitUntilConfigured,
+        changeFlagVariation,
+        queryByFlagName,
+      } = render(<TestComponent />);
 
-      await rendered.waitUntilConfigured();
+      await waitUntilConfigured();
 
-      rendered.changeFlagVariation('disabledFeature', true);
+      changeFlagVariation('disabledFeature', true);
 
-      expect(rendered.queryByFlagName('disabledFeature')).toHaveTextContent(
-        'true'
-      );
+      expect(queryByFlagName('disabledFeature')).toHaveTextContent('true');
     });
   });
 });
@@ -73,13 +71,11 @@ describe('with `propKey`', () => {
       'onOffs'
     )(FlagsToComponentWithPropKey);
 
-    const rendered = render(<TestComponent />);
+    const { waitUntilConfigured, queryByFlagName } = render(<TestComponent />);
 
-    await rendered.waitUntilConfigured();
+    await waitUntilConfigured();
 
-    expect(rendered.queryByFlagName('enabledFeature')).toHaveTextContent(
-      'true'
-    );
+    expect(queryByFlagName('enabledFeature')).toHaveTextContent('true');
   });
 
   it('should have feature disabling prop for `disabledFeature`', async () => {
@@ -88,12 +84,10 @@ describe('with `propKey`', () => {
       'onOffs'
     )(FlagsToComponentWithPropKey);
 
-    const rendered = render(<TestComponent />);
+    const { waitUntilConfigured, queryByFlagName } = render(<TestComponent />);
 
-    await rendered.waitUntilConfigured();
+    await waitUntilConfigured();
 
-    expect(rendered.queryByFlagName('disabledFeature')).toHaveTextContent(
-      'false'
-    );
+    expect(queryByFlagName('disabledFeature')).toHaveTextContent('false');
   });
 });

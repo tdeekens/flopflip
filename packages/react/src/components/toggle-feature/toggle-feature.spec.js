@@ -14,9 +14,9 @@ describe('when feature disabled', () => {
         </ToggleFeature>
       );
 
-      const rendered = render(<TestComponent />);
+      const { queryByFlagName } = render(<TestComponent />);
 
-      expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
+      expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
         'disabled'
       );
@@ -32,9 +32,9 @@ describe('when feature disabled', () => {
         </ToggleFeature>
       );
 
-      const rendered = render(<TestComponent />);
+      const { queryByFlagName } = render(<TestComponent />);
 
-      expect(rendered.queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
+      expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
         'data-flag-status',
         'enabled'
       );
@@ -49,11 +49,9 @@ describe('when feature disabled', () => {
         </ToggleFeature>
       );
 
-      const rendered = render(<TestComponent />);
+      const { queryByFlagName } = render(<TestComponent />);
 
-      expect(
-        rendered.queryByFlagName('isFeatureEnabled')
-      ).not.toBeInTheDocument();
+      expect(queryByFlagName('isFeatureEnabled')).not.toBeInTheDocument();
     });
   });
 });
@@ -71,11 +69,12 @@ describe('when feature enabled', () => {
           </ToggleFeature>
         );
 
-        const rendered = render(<TestComponent />);
+        const { queryByFlagName } = render(<TestComponent />);
 
-        expect(
-          rendered.queryByFlagName('isFeatureEnabled')
-        ).not.toHaveAttribute('data-flag-status', 'disabled');
+        expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
+          'data-flag-status',
+          'disabled'
+        );
       });
 
       it('should render the component representing a enabled feature', () => {
@@ -88,9 +87,9 @@ describe('when feature enabled', () => {
           </ToggleFeature>
         );
 
-        const rendered = render(<TestComponent />);
+        const { queryByFlagName } = render(<TestComponent />);
 
-        expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
+        expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
           'data-flag-status',
           'enabled'
         );
@@ -136,9 +135,9 @@ describe('when feature enabled', () => {
         />
       );
 
-      const rendered = render(<TestComponent />);
+      const { queryByFlagName } = render(<TestComponent />);
 
-      expect(rendered.queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
+      expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
         'data-flag-status',
         'disabled'
       );
@@ -153,9 +152,9 @@ describe('when feature enabled', () => {
         />
       );
 
-      const rendered = render(<TestComponent />);
+      const { queryByFlagName } = render(<TestComponent />);
 
-      expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
+      expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
         'enabled'
       );
@@ -182,9 +181,9 @@ describe('when feature enabled', () => {
         render: jest.fn(() => <components.ToggledComponent />),
       };
 
-      const rendered = render(<ToggleFeature {...props} />);
+      const { queryByFlagName } = render(<ToggleFeature {...props} />);
 
-      expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveAttribute(
+      expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
         'enabled'
       );

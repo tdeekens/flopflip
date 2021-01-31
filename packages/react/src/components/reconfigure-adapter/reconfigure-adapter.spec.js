@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { render, fireEvent } from '@flopflip/test-utils';
+import { screen, render, fireEvent } from '@flopflip/test-utils';
 import { AdapterStates } from './../configure-adapter';
 import AdapterContext, { createAdapterContext } from './../adapter-context';
 import ReconfigureAdapter from './reconfigure-adapter';
@@ -55,14 +55,14 @@ describe('with children', () => {
       AdapterStates.UNCONFIGURED
     );
     const reconfiguration = createReconfiguration();
-    const rendered = render(
+    render(
       <TestComponent
         adapterContext={adapterContext}
         reconfiguration={reconfiguration}
       />
     );
 
-    expect(rendered.getByText('Children')).toBeInTheDocument();
+    expect(screen.getByText('Children')).toBeInTheDocument();
   });
 });
 
@@ -103,14 +103,14 @@ describe('when updated', () => {
       );
       const reconfiguration = createReconfiguration();
 
-      const rendered = render(
+      render(
         <TestComponent
           adapterContext={adapterContext}
           reconfiguration={reconfiguration}
         />
       );
 
-      fireEvent.click(rendered.queryByText(/Reconfigure without changes/i));
+      fireEvent.click(screen.queryByText(/Reconfigure without changes/i));
 
       expect(adapterContext.reconfigure).toHaveBeenCalledTimes(1);
     });
@@ -125,14 +125,14 @@ describe('when updated', () => {
       );
       const reconfiguration = createReconfiguration();
 
-      const rendered = render(
+      render(
         <TestComponent
           adapterContext={adapterContext}
           reconfiguration={reconfiguration}
         />
       );
 
-      fireEvent.click(rendered.queryByText(/Reconfigure with changes/i));
+      fireEvent.click(screen.queryByText(/Reconfigure with changes/i));
 
       expect(adapterContext.reconfigure).toHaveBeenNthCalledWith(
         2,

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { render as rtlRender, waitFor } from '@flopflip/test-utils';
+import { screen, render as rtlRender, waitFor } from '@flopflip/test-utils';
 import AdapterContext from '../adapter-context';
 import ConfigureAdapter, { AdapterStates } from './configure-adapter';
 
@@ -51,12 +51,12 @@ const render = ({ props, adapter }) => {
   const baseProps = createTestProps({ adapter });
   const mergedProps = { ...baseProps, ...props };
 
-  const rendered = rtlRender(<ConfigureAdapter {...mergedProps} />);
+  const { rerender } = rtlRender(<ConfigureAdapter {...mergedProps} />);
 
   const waitUntilStatus = (status = AdapterStates.CONFIGURED) =>
-    rendered.findByText(`Is ${status}: Yes`);
+    screen.findByText(`Is ${status}: Yes`);
 
-  return { ...rendered, waitUntilStatus, props: mergedProps };
+  return { waitUntilStatus, rerender, mergedRenderProps: mergedProps };
 };
 
 describe('rendering', () => {
@@ -67,11 +67,11 @@ describe('rendering', () => {
         const props = { render: jest.fn(() => <TestComponent />) };
         adapter.getIsConfigurationStatus.mockReturnValue(true);
 
-        const rendered = render({ props, adapter });
+        const { waitUntilStatus } = render({ props, adapter });
 
         expect(props.render).toHaveBeenCalled();
 
-        await rendered.waitUntilStatus();
+        await waitUntilStatus();
       });
     });
 
@@ -101,13 +101,13 @@ describe('rendering', () => {
 
         const props = { children: jest.fn(() => <TestComponent />) };
 
-        const rendered = render({ props, adapter });
+        const { waitUntilStatus } = render({ props, adapter });
 
         expect(props.children).toHaveBeenCalledWith(
           expect.objectContaining({ isAdapterConfigured: true })
         );
 
-        await rendered.waitUntilStatus();
+        await waitUntilStatus();
       });
     });
   });
@@ -123,11 +123,11 @@ describe('rendering', () => {
           children: <TestComponent>Test component</TestComponent>,
         };
 
-        const rendered = render({ props, adapter });
+        const { waitUntilStatus } = render({ props, adapter });
 
-        expect(rendered.getByText('Test component')).toBeInTheDocument();
+        expect(screen.getByText('Test component')).toBeInTheDocument();
 
-        await rendered.waitUntilStatus();
+        await waitUntilStatus();
       });
     });
 
@@ -138,11 +138,11 @@ describe('rendering', () => {
           children: <TestComponent>Test component</TestComponent>,
         };
 
-        const rendered = render({ props, adapter });
+        const { waitUntilStatus } = render({ props, adapter });
 
-        expect(rendered.getByText('Test component')).toBeInTheDocument();
+        expect(screen.getByText('Test component')).toBeInTheDocument();
 
-        await rendered.waitUntilStatus();
+        await waitUntilStatus();
       });
     });
   });
@@ -157,11 +157,11 @@ describe('when adapter configuration should be deferred', () => {
       shouldDeferAdapterConfiguration: true,
     };
 
-    const rendered = render({ props, adapter });
+    const { waitUntilStatus } = render({ props, adapter });
 
     expect(adapter.configure).not.toHaveBeenCalled();
 
-    await rendered.waitUntilStatus();
+    await waitUntilStatus();
   });
 });
 
@@ -170,14 +170,17 @@ describe('when adapter configuration should not be deferred', () => {
     const adapter = createAdapter();
     const props = { children: <TestComponent /> };
 
-    const rendered = render({ props, adapter });
+    const { waitUntilStatus, mergedRenderProps } = render({ props, adapter });
 
-    expect(adapter.configure).toHaveBeenCalledWith(rendered.props.adapterArgs, {
-      onFlagsStateChange: rendered.props.onFlagsStateChange,
-      onStatusStateChange: rendered.props.onStatusStateChange,
-    });
+    expect(adapter.configure).toHaveBeenCalledWith(
+      mergedRenderProps.adapterArgs,
+      {
+        onFlagsStateChange: mergedRenderProps.onFlagsStateChange,
+        onStatusStateChange: mergedRenderProps.onStatusStateChange,
+      }
+    );
 
-    await rendered.waitUntilStatus();
+    await waitUntilStatus();
   });
 });
 
@@ -189,13 +192,13 @@ describe('when providing default flags', () => {
     };
     const props = { children: <TestComponent />, defaultFlags };
 
-    const rendered = render({ props, adapter });
+    const { waitUntilStatus, mergedRenderProps } = render({ props, adapter });
 
-    expect(rendered.props.onFlagsStateChange).toHaveBeenCalledWith({
+    expect(mergedRenderProps.onFlagsStateChange).toHaveBeenCalledWith({
       flags: defaultFlags,
     });
 
-    await rendered.waitUntilStatus();
+    await waitUntilStatus();
   });
 });
 
@@ -207,7 +210,7 @@ describe('when adapter args change before adapter was configured', () => {
       shouldDeferAdapterConfiguration: true,
     };
 
-    const rendered = render({
+    const { rerender, waitUntilStatus, mergedRenderProps } = render({
       props,
       adapter,
     });
@@ -216,9 +219,9 @@ describe('when adapter args change before adapter was configured', () => {
       nextValue: true,
     };
 
-    rendered.rerender(
+    rerender(
       <ConfigureAdapter
-        {...rendered.props}
+        {...mergedRenderProps}
         shouldDeferAdapterConfiguration={false}
         adapterArgs={nextAdapterArgs}
       >
@@ -226,11 +229,11 @@ describe('when adapter args change before adapter was configured', () => {
       </ConfigureAdapter>
     );
     expect(adapter.configure).toHaveBeenCalledWith(
-      { ...rendered.props.adapterArgs, ...nextAdapterArgs },
+      { ...mergedRenderProps.adapterArgs, ...nextAdapterArgs },
       expect.anything()
     );
 
-    await rendered.waitUntilStatus();
+    await waitUntilStatus();
   });
 });
 
@@ -241,20 +244,23 @@ describe('when adapter args change after adapter was configured', () => {
       children: <TestComponent />,
     };
 
-    const rendered = render({ props, adapter });
+    const { rerender, waitUntilStatus, mergedRenderProps } = render({
+      props,
+      adapter,
+    });
 
     const nextAdapterArgs = {
-      ...rendered.props.adapterArgs,
+      ...mergedRenderProps.adapterArgs,
       nextValue: true,
     };
 
-    rendered.rerender(
-      <ConfigureAdapter {...rendered.props} adapterArgs={nextAdapterArgs}>
+    rerender(
+      <ConfigureAdapter {...mergedRenderProps} adapterArgs={nextAdapterArgs}>
         <TestComponent />
       </ConfigureAdapter>
     );
 
-    await rendered.waitUntilStatus();
+    await waitUntilStatus();
 
     expect(adapter.reconfigure).toHaveBeenCalledWith(
       nextAdapterArgs,
@@ -271,15 +277,18 @@ describe('when adapter was configured and component updates', () => {
       children: <TestComponent />,
     };
 
-    const rendered = render({ props, adapter });
+    const { rerender, waitUntilStatus, mergedRenderProps } = render({
+      props,
+      adapter,
+    });
 
     const nextProps = {
-      ...rendered.props,
+      ...mergedRenderProps,
       adapterStatus: AdapterStates.CONFIGURED,
       changedValue: true,
     };
 
-    rendered.rerender(
+    rerender(
       <ConfigureAdapter {...nextProps}>
         <TestComponent />
       </ConfigureAdapter>
@@ -287,7 +296,7 @@ describe('when adapter was configured and component updates', () => {
 
     expect(adapter.configure).toHaveBeenCalledTimes(1);
 
-    await rendered.waitUntilStatus();
+    await waitUntilStatus();
   });
 });
 

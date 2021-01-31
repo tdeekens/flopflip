@@ -1,5 +1,5 @@
 import React from 'react';
-import { render as rtlRender, act } from '@flopflip/test-utils';
+import { screen, render as rtlRender, act } from '@flopflip/test-utils';
 import adapter from '@flopflip/memory-adapter';
 import { Provider } from 'react-redux';
 import { createStore } from '../../../test-utils';
@@ -28,7 +28,7 @@ const render = () => {
     [STATE_SLICE]: { flags: { disabledFeature: false } },
   });
 
-  const rtlRendered = rtlRender(
+  rtlRender(
     <Provider store={store}>
       <Configure {...props}>
         <TestComponent />
@@ -36,10 +36,9 @@ const render = () => {
     </Provider>
   );
 
-  const waitUntilConfigured = () =>
-    rtlRendered.findByText(/Is configured: Yes/i);
+  const waitUntilConfigured = () => screen.findByText(/Is configured: Yes/i);
 
-  return { ...rtlRendered, waitUntilConfigured };
+  return { waitUntilConfigured };
 };
 
 const createTestProps = (custom) => ({
@@ -53,19 +52,19 @@ const createTestProps = (custom) => ({
 
 describe('when feature is disabled', () => {
   it('should indicate the feature being disabled', async () => {
-    const rendered = render();
+    const { waitUntilConfigured } = render();
 
-    await rendered.waitUntilConfigured();
+    await waitUntilConfigured();
 
-    expect(rendered.getByText(/Feature enabled: No/i)).toBeInTheDocument();
+    expect(screen.getByText(/Feature enabled: No/i)).toBeInTheDocument();
   });
 });
 
 describe('when enabling feature is', () => {
   it('should indicate the feature being enabled', async () => {
-    const rendered = render();
+    const { waitUntilConfigured } = render();
 
-    await rendered.waitUntilConfigured();
+    await waitUntilConfigured();
 
     act(() => {
       adapter.updateFlags({
@@ -73,31 +72,31 @@ describe('when enabling feature is', () => {
       });
     });
 
-    expect(rendered.getByText(/Feature enabled: Yes/i)).toBeInTheDocument();
+    expect(screen.getByText(/Feature enabled: Yes/i)).toBeInTheDocument();
   });
 });
 
 describe('when unconfigured', () => {
   it('should indicate through the adapter state', async () => {
-    const rendered = render();
+    const { waitUntilConfigured } = render();
 
-    expect(rendered.getByText(/Is unconfigured: Yes/i)).toBeInTheDocument();
-    expect(rendered.getByText(/Is configuring: No/i)).toBeInTheDocument();
-    expect(rendered.getByText(/Is configured: No/i)).toBeInTheDocument();
+    expect(screen.getByText(/Is unconfigured: Yes/i)).toBeInTheDocument();
+    expect(screen.getByText(/Is configuring: No/i)).toBeInTheDocument();
+    expect(screen.getByText(/Is configured: No/i)).toBeInTheDocument();
 
-    await rendered.waitUntilConfigured();
+    await waitUntilConfigured();
   });
 });
 
 describe('when configured', () => {
   it('should indicate through the adapter state', async () => {
-    const rendered = render();
+    const { waitUntilConfigured } = render();
 
-    await rendered.waitUntilConfigured();
+    await waitUntilConfigured();
     await adapter.waitUntilConfigured();
 
-    expect(rendered.getByText(/Is configuring: No/i)).toBeInTheDocument();
-    expect(rendered.getByText(/Is configured: Yes/i)).toBeInTheDocument();
+    expect(screen.getByText(/Is configuring: No/i)).toBeInTheDocument();
+    expect(screen.getByText(/Is configured: Yes/i)).toBeInTheDocument();
   });
 });
 
