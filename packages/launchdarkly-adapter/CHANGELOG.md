@@ -1,5 +1,11 @@
 # @flopflip/launchdarkly-adapter
 
+## 5.0.9
+
+### Patch Changes
+
+- [`808080d0`](https://github.com/tdeekens/flopflip/commit/808080d0d953434d079b15c8afb8211112c4c5ef) [#1406](https://github.com/tdeekens/flopflip/pull/1406) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: update dependencies
+
 ## 5.0.8
 
 ### Patch Changes
