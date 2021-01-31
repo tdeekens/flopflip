@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/combine-adapters",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "An adapter which combines other adapters for flipflop",
   "main": "dist/flopflip-combine-adapters.cjs.js",
   "module": "dist/flopflip-combine-adapters.esm.js",

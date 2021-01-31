@@ -1,5 +1,11 @@
 # @flopflip/combine-adapters
 
+## 0.0.15
+
+### Patch Changes
+
+- [`91f6379b`](https://github.com/tdeekens/flopflip/commit/91f6379b64733f63e9df363a0be78d4c5e0d6dcf) [#1405](https://github.com/tdeekens/flopflip/pull/1405) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: to use screen over rendered
+
 ## 0.0.14
 
 ### Patch Changes

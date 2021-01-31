@@ -1,5 +1,14 @@
 # @flopflip/react-broadcast
 
+## 12.2.1
+
+### Patch Changes
+
+- [`91f6379b`](https://github.com/tdeekens/flopflip/commit/91f6379b64733f63e9df363a0be78d4c5e0d6dcf) [#1405](https://github.com/tdeekens/flopflip/pull/1405) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: to use screen over rendered
+
+- Updated dependencies [[`91f6379b`](https://github.com/tdeekens/flopflip/commit/91f6379b64733f63e9df363a0be78d4c5e0d6dcf), [`808080d0`](https://github.com/tdeekens/flopflip/commit/808080d0d953434d079b15c8afb8211112c4c5ef)]:
+  - @flopflip/react@11.1.12
+
 ## 12.2.0
 
 ### Minor Changes
