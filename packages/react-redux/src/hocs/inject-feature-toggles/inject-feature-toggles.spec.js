@@ -33,13 +33,14 @@ describe('injectFeatureToggles', () => {
         'enabledFeature',
       ])(FlagsToComponent);
 
-      const rendered = render(store, <TestComponent />);
-
-      await rendered.waitUntilConfigured();
-
-      expect(rendered.queryByFlagName('enabledFeature')).toHaveTextContent(
-        'true'
+      const { waitUntilConfigured, queryByFlagName } = render(
+        store,
+        <TestComponent />
       );
+
+      await waitUntilConfigured();
+
+      expect(queryByFlagName('enabledFeature')).toHaveTextContent('true');
     });
 
     it('should have feature disabling prop for `disabledFeature`', async () => {
@@ -53,13 +54,14 @@ describe('injectFeatureToggles', () => {
         'enabledFeature',
       ])(FlagsToComponent);
 
-      const rendered = render(store, <TestComponent />);
-
-      await rendered.waitUntilConfigured();
-
-      expect(rendered.queryByFlagName('disabledFeature')).toHaveTextContent(
-        'false'
+      const { waitUntilConfigured, queryByFlagName } = render(
+        store,
+        <TestComponent />
       );
+
+      await waitUntilConfigured();
+
+      expect(queryByFlagName('disabledFeature')).toHaveTextContent('false');
     });
 
     describe('when enabling feature', () => {
@@ -74,15 +76,17 @@ describe('injectFeatureToggles', () => {
           },
         });
 
-        const rendered = render(store, <TestComponent />);
+        const {
+          waitUntilConfigured,
+          changeFlagVariation,
+          queryByFlagName,
+        } = render(store, <TestComponent />);
 
-        await rendered.waitUntilConfigured();
+        await waitUntilConfigured();
 
-        rendered.changeFlagVariation('disabledFeature', true);
+        changeFlagVariation('disabledFeature', true);
 
-        expect(rendered.queryByFlagName('disabledFeature')).toHaveTextContent(
-          'true'
-        );
+        expect(queryByFlagName('disabledFeature')).toHaveTextContent('true');
       });
     });
   });
@@ -99,13 +103,14 @@ describe('injectFeatureToggles', () => {
         'onOffs'
       )(FlagsToComponentWithPropKey);
 
-      const rendered = render(store, <TestComponent />);
-
-      await rendered.waitUntilConfigured();
-
-      expect(rendered.queryByFlagName('enabledFeature')).toHaveTextContent(
-        'true'
+      const { waitUntilConfigured, queryByFlagName } = render(
+        store,
+        <TestComponent />
       );
+
+      await waitUntilConfigured();
+
+      expect(queryByFlagName('enabledFeature')).toHaveTextContent('true');
     });
 
     it('should have feature disabling prop for `disabledFeature`', async () => {
@@ -119,13 +124,14 @@ describe('injectFeatureToggles', () => {
         'onOffs'
       )(FlagsToComponentWithPropKey);
 
-      const rendered = render(store, <TestComponent />);
-
-      await rendered.waitUntilConfigured();
-
-      expect(rendered.queryByFlagName('disabledFeature')).toHaveTextContent(
-        'false'
+      const { waitUntilConfigured, queryByFlagName } = render(
+        store,
+        <TestComponent />
       );
+
+      await waitUntilConfigured();
+
+      expect(queryByFlagName('disabledFeature')).toHaveTextContent('false');
     });
   });
 });

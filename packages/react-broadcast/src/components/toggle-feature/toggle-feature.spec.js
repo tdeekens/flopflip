@@ -20,33 +20,41 @@ const TestDisabledComponent = () => (
 
 describe('when feature is disabled', () => {
   it('should not render the component representing a enabled feature', async () => {
-    const rendered = render(<TestEnabledComponent />);
+    const { waitUntilConfigured, queryByFlagName } = render(
+      <TestEnabledComponent />
+    );
 
-    expect(rendered.queryByFlagName('disabledFeature')).not.toBeInTheDocument();
+    expect(queryByFlagName('disabledFeature')).not.toBeInTheDocument();
 
-    await rendered.waitUntilConfigured();
+    await waitUntilConfigured();
   });
 
   describe('when enabling feature', () => {
     it('should render the component representing a enabled feature', async () => {
-      const rendered = render(<TestEnabledComponent />);
+      const {
+        waitUntilConfigured,
+        queryByFlagName,
+        changeFlagVariation,
+      } = render(<TestEnabledComponent />);
 
-      await rendered.waitUntilConfigured();
+      await waitUntilConfigured();
 
-      rendered.changeFlagVariation('disabledFeature', true);
+      changeFlagVariation('disabledFeature', true);
 
-      expect(rendered.queryByFlagName('disabledFeature')).toBeInTheDocument();
+      expect(queryByFlagName('disabledFeature')).toBeInTheDocument();
     });
   });
 });
 
 describe('when feature is enabled', () => {
   it('should render the component representing a enabled feature', async () => {
-    const rendered = render(<TestDisabledComponent />);
+    const { waitUntilConfigured, queryByFlagName } = render(
+      <TestDisabledComponent />
+    );
 
-    await rendered.waitUntilConfigured();
+    await waitUntilConfigured();
 
-    expect(rendered.queryByFlagName('enabledFeature')).toHaveAttribute(
+    expect(queryByFlagName('enabledFeature')).toHaveAttribute(
       'data-flag-status',
       'enabled'
     );

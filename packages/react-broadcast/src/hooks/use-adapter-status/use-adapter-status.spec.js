@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithAdapter } from '@flopflip/test-utils';
+import { screen, renderWithAdapter } from '@flopflip/test-utils';
 import useAdapterStatus from './';
 import Configure from '../../components/configure';
 
@@ -20,19 +20,19 @@ const TestComponent = () => {
 };
 
 it('should indicate the adapter not configured yet', async () => {
-  const rendered = render(<TestComponent />);
+  const { waitUntilConfigured } = render(<TestComponent />);
 
-  expect(rendered.getByText(/Is configuring: Yes/i)).toBeInTheDocument();
-  expect(rendered.getByText(/Is configured: No/i)).toBeInTheDocument();
+  expect(screen.getByText(/Is configuring: Yes/i)).toBeInTheDocument();
+  expect(screen.getByText(/Is configured: No/i)).toBeInTheDocument();
 
-  await rendered.waitUntilConfigured();
+  await waitUntilConfigured();
 });
 
 it('should indicate the adapter is configured', async () => {
-  const rendered = render(<TestComponent />);
+  const { waitUntilConfigured } = render(<TestComponent />);
 
-  await rendered.waitUntilConfigured();
+  await waitUntilConfigured();
 
-  expect(rendered.getByText(/Is configuring: No/i)).toBeInTheDocument();
-  expect(rendered.getByText(/Is configured: Yes/i)).toBeInTheDocument();
+  expect(screen.getByText(/Is configuring: No/i)).toBeInTheDocument();
+  expect(screen.getByText(/Is configured: Yes/i)).toBeInTheDocument();
 });

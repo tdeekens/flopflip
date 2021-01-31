@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import useFlagVariations from './use-flag-variations';
-import { renderWithAdapter } from '@flopflip/test-utils';
+import { screen, renderWithAdapter } from '@flopflip/test-utils';
 import { createStore } from '../../../test-utils';
 import { STATE_SLICE } from '../../store/constants';
 import Configure from '../../components/configure';
@@ -44,11 +44,11 @@ describe('when adaopter is configured', () => {
       },
     });
 
-    const rendered = render(store, <TestComponent />);
+    const { waitUntilConfigured } = render(store, <TestComponent />);
 
-    await rendered.waitUntilConfigured();
+    await waitUntilConfigured();
 
-    expect(rendered.getByText('Is disabled: Yes')).toBeInTheDocument();
+    expect(screen.getByText('Is disabled: Yes')).toBeInTheDocument();
   });
 
   it('should indicate a feature being enabled', async () => {
@@ -64,11 +64,11 @@ describe('when adaopter is configured', () => {
       },
     });
 
-    const rendered = render(store, <TestComponent />);
+    const { waitUntilConfigured } = render(store, <TestComponent />);
 
-    await rendered.waitUntilConfigured();
+    await waitUntilConfigured();
 
-    expect(rendered.getByText('Is enabled: Yes')).toBeInTheDocument();
+    expect(screen.getByText('Is enabled: Yes')).toBeInTheDocument();
   });
 
   it('should indicate a flag variation', async () => {
@@ -84,10 +84,10 @@ describe('when adaopter is configured', () => {
       },
     });
 
-    const rendered = render(store, <TestComponent />);
+    const { waitUntilConfigured } = render(store, <TestComponent />);
 
-    await rendered.waitUntilConfigured();
+    await waitUntilConfigured();
 
-    expect(rendered.getByText('Variation: A')).toBeInTheDocument();
+    expect(screen.getByText('Variation: A')).toBeInTheDocument();
   });
 });

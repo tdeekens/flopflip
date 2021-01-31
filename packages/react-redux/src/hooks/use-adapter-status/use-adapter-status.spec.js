@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithAdapter } from '@flopflip/test-utils';
+import { screen, renderWithAdapter } from '@flopflip/test-utils';
 import { Provider } from 'react-redux';
 import { createStore } from '../../../test-utils';
 import { STATE_SLICE } from '../../store/constants';
@@ -30,12 +30,12 @@ it('should indicate the adapter not configured yet', async () => {
     [STATE_SLICE]: { flags: { disabledFeature: false } },
   });
 
-  const rendered = render(store, <TestComponent />);
+  const { waitUntilConfigured } = render(store, <TestComponent />);
 
-  expect(rendered.getByText(/Is configured: No/i)).toBeInTheDocument();
-  expect(rendered.getByText(/Is configuring: Yes/i)).toBeInTheDocument();
+  expect(screen.getByText(/Is configured: No/i)).toBeInTheDocument();
+  expect(screen.getByText(/Is configuring: Yes/i)).toBeInTheDocument();
 
-  await rendered.waitUntilConfigured();
+  await waitUntilConfigured();
 });
 
 it('should indicate the adapter is configured and not configuring any longer', async () => {
@@ -43,10 +43,10 @@ it('should indicate the adapter is configured and not configuring any longer', a
     [STATE_SLICE]: { flags: { disabledFeature: false } },
   });
 
-  const rendered = render(store, <TestComponent />);
+  const { waitUntilConfigured } = render(store, <TestComponent />);
 
-  await rendered.waitUntilConfigured();
+  await waitUntilConfigured();
 
-  expect(rendered.getByText(/Is configured: Yes/i)).toBeInTheDocument();
-  expect(rendered.getByText(/Is configuring: No/i)).toBeInTheDocument();
+  expect(screen.getByText(/Is configured: Yes/i)).toBeInTheDocument();
+  expect(screen.getByText(/Is configuring: No/i)).toBeInTheDocument();
 });

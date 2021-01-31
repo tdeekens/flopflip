@@ -136,6 +136,14 @@ describe('when combining', () => {
       );
     });
 
+    it('should assign the effect ids for each adapter and itself', () => {
+      expect(adapter.effectIds).toEqual([
+        memoryAdapter.id,
+        localstorageAdapter.id,
+        adapter.id,
+      ]);
+    });
+
     it('should invoke `onStatusStateChange` with configuring', () => {
       expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
         expect.objectContaining({

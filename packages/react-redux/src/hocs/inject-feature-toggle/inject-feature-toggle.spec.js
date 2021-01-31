@@ -24,13 +24,14 @@ describe('without `propKey`', () => {
         components.FlagsToComponent
       );
 
-      const rendered = render(store, <TestComponent />);
-
-      await rendered.waitUntilConfigured();
-
-      expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveTextContent(
-        'false'
+      const { waitUntilConfigured, queryByFlagName } = render(
+        store,
+        <TestComponent />
       );
+
+      await waitUntilConfigured();
+
+      expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('false');
     });
 
     describe('when enabling feature', () => {
@@ -42,15 +43,17 @@ describe('without `propKey`', () => {
           components.FlagsToComponent
         );
 
-        const rendered = render(store, <TestComponent />);
+        const {
+          waitUntilConfigured,
+          queryByFlagName,
+          changeFlagVariation,
+        } = render(store, <TestComponent />);
 
-        await rendered.waitUntilConfigured();
+        await waitUntilConfigured();
 
-        rendered.changeFlagVariation('disabledFeature', true);
+        changeFlagVariation('disabledFeature', true);
 
-        expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveTextContent(
-          'true'
-        );
+        expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('true');
       });
     });
   });
@@ -64,13 +67,14 @@ describe('without `propKey`', () => {
         components.FlagsToComponent
       );
 
-      const rendered = render(store, <TestComponent />);
-
-      await rendered.waitUntilConfigured();
-
-      expect(rendered.queryByFlagName('isFeatureEnabled')).toHaveTextContent(
-        'true'
+      const { waitUntilConfigured, queryByFlagName } = render(
+        store,
+        <TestComponent />
       );
+
+      await waitUntilConfigured();
+
+      expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('true');
     });
   });
 });
@@ -86,13 +90,14 @@ describe('with `propKey`', () => {
         'customPropKey'
       )(components.FlagsToComponent);
 
-      const rendered = render(store, <TestComponent />);
-
-      await rendered.waitUntilConfigured();
-
-      expect(rendered.queryByFlagName('customPropKey')).toHaveTextContent(
-        'false'
+      const { waitUntilConfigured, queryByFlagName } = render(
+        store,
+        <TestComponent />
       );
+
+      await waitUntilConfigured();
+
+      expect(queryByFlagName('customPropKey')).toHaveTextContent('false');
     });
   });
 });

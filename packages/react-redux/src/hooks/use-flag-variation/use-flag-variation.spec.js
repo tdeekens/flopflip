@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import useFlagVariation from './use-flag-variation';
-import { renderWithAdapter } from '@flopflip/test-utils';
+import { screen, renderWithAdapter } from '@flopflip/test-utils';
 import { createStore } from '../../../test-utils';
 import { STATE_SLICE } from '../../store/constants';
 import Configure from '../../components/configure';
@@ -34,9 +34,9 @@ it('should indicate a flag variation', async () => {
       },
     },
   });
-  const rendered = render(store, <TestComponent />);
+  const { waitUntilConfigured } = render(store, <TestComponent />);
 
-  await rendered.waitUntilConfigured();
+  await waitUntilConfigured();
 
-  expect(rendered.getByText('Variation: A')).toBeInTheDocument();
+  expect(screen.getByText('Variation: A')).toBeInTheDocument();
 });

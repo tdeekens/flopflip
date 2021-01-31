@@ -1,6 +1,6 @@
 import React from 'react';
 import useFeatureToggle from './use-feature-toggle';
-import { renderWithAdapter } from '@flopflip/test-utils';
+import { screen, renderWithAdapter } from '@flopflip/test-utils';
 import Configure from '../../components/configure';
 
 const render = (TestComponent) =>
@@ -23,17 +23,17 @@ const TestComponent = () => {
 };
 
 it('should indicate a feature being disabled', async () => {
-  const rendered = render(<TestComponent />);
+  const { waitUntilConfigured } = render(<TestComponent />);
 
-  await rendered.waitUntilConfigured();
+  await waitUntilConfigured();
 
-  expect(rendered.getByText('Is disabled: Yes')).toBeInTheDocument();
+  expect(screen.getByText('Is disabled: Yes')).toBeInTheDocument();
 });
 
 it('should indicate a feature being enabled', async () => {
-  const rendered = render(<TestComponent />);
+  const { waitUntilConfigured } = render(<TestComponent />);
 
-  await rendered.waitUntilConfigured();
+  await waitUntilConfigured();
 
-  expect(rendered.getByText('Is enabled: Yes')).toBeInTheDocument();
+  expect(screen.getByText('Is enabled: Yes')).toBeInTheDocument();
 });
