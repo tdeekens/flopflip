@@ -1,5 +1,15 @@
 # @flopflip/splitio-adapter
 
+## 4.0.9
+
+### Patch Changes
+
+- [`8707dfd8`](https://github.com/tdeekens/flopflip/commit/8707dfd8a34fd581a5e7db448bd3c635d79cfad0) [#1408](https://github.com/tdeekens/flopflip/pull/1408) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: update deps
+
+- Updated dependencies [[`8707dfd8`](https://github.com/tdeekens/flopflip/commit/8707dfd8a34fd581a5e7db448bd3c635d79cfad0)]:
+  - @flopflip/adapter-utilities@1.0.13
+  - @flopflip/types@4.1.11
+
 ## 4.0.8
 
 ### Patch Changes
