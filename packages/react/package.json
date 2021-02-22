@@ -40,11 +40,11 @@
     "react-dom": "^16.8 || ^17.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.12.13",
+    "@babel/runtime": "7.12.18",
     "@flopflip/types": "4.1.11",
     "@types/react-is": "17.0.0",
     "deepmerge": "4.2.2",
-    "lodash": "4.17.20",
+    "lodash": "4.17.21",
     "react-is": "17.0.1",
     "tiny-warning": "1.0.3"
   },

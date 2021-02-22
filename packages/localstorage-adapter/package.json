@@ -31,11 +31,11 @@
     "client"
   ],
   "dependencies": {
-    "@babel/runtime": "7.12.13",
+    "@babel/runtime": "7.12.18",
     "@flopflip/adapter-utilities": "1.0.13",
     "@flopflip/localstorage-cache": "1.0.14",
     "@flopflip/types": "4.1.11",
-    "lodash": "4.17.20",
+    "lodash": "4.17.21",
     "mitt": "2.1.0",
     "tiny-warning": "1.0.3"
   },
