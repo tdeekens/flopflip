@@ -1098,10 +1098,17 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4":
+"@babel/runtime@7.12.13", "@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4":
   version "7.12.13"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.12.13.tgz#0a21452352b02542db0ffb928ac2d3ca7cb6d66d"
   integrity sha512-8+3UMPBrjFa/6TtKi/7sehPKqfAm4g6K+YQjyyFOLUTxzOngcRZTlAVY8sc2CORJYqdHQY8gRPHmn+qo15rCBw==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
+"@babel/runtime@7.12.5":
+  version "7.12.5"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.12.5.tgz#410e7e487441e1b360c29be715d870d9b985882e"
+  integrity sha512-plcc+hbExy3McchJCEQG3knOsuh3HH+Prx1P6cLIkET/0dLuQDEnrT+s27Axgc9bqfsmNUNHfscgMUdBpC9xfg==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -1228,17 +1235,28 @@
     "@flopflip/types" "2.5.10"
     lodash "4.17.20"
 
-"@flopflip/react-redux@10.2.8":
-  version "10.2.8"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-10.2.8.tgz#1c72b8d6709c5daa3321b2586ae3950ef5b57a7d"
-  integrity sha512-kEQ81P87ZgrTHURx0WR8ky/SfN0esCHMfNgad9fwB4zAqAZQiqXGBuhnRvxDsgPCQmRc4PUxbB4P/+vqQn9T5A==
+"@flopflip/react-redux@12.0.0":
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-12.0.0.tgz#3b616d7c71110950a76bcdc7fd7314a0a3511233"
+  integrity sha512-VxJkeKXqEXVtCSznHuc/v1t7+1v6BwZogOg9NnXVC5pP67QhupDIz8SlbEsUsQrFXCj9LWKaspG8siPMbqeNEQ==
   dependencies:
-    "@babel/runtime" "7.12.0"
-    "@flopflip/react" "^9.1.20"
-    "@flopflip/types" "2.5.10"
-    "@types/react-redux" "7.1.9"
+    "@babel/runtime" "7.12.5"
+    "@flopflip/react" "^11.0.0"
+    "@flopflip/types" "4.0.0"
+    "@types/react-redux" "7.1.14"
+
+"@flopflip/react@^11.0.0":
+  version "11.1.13"
+  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-11.1.13.tgz#397209a2f22d656ecb7e6e76fda5baa6294f2f6f"
+  integrity sha512-vQBYgznU4UiTFGwI6JGdfKoH43Pqfay3qpNQZ+dAYcIRDu4G0dvPD2xKbU1z6n/BVMuMZvaHjnV7X9tUsLjsfA==
+  dependencies:
+    "@babel/runtime" "7.12.13"
+    "@flopflip/types" "4.1.11"
+    "@types/react-is" "17.0.0"
+    deepmerge "4.2.2"
     lodash "4.17.20"
-    ts-essentials "7.0.0"
+    react-is "17.0.1"
+    tiny-warning "1.0.3"
 
 "@flopflip/react@^9.1.20":
   version "9.1.20"
@@ -1260,6 +1278,16 @@
   integrity sha512-Sduh4QpKTBIW9fdLbpArPDpUTYbNr6H5y1JOBAx5Z4xDatomUKXuZwbLdSDeVLWRQsululMLqxPsQrVLTEYLXg==
   dependencies:
     ts-essentials "7.0.0"
+
+"@flopflip/types@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@flopflip/types/-/types-4.0.0.tgz#28207886e639c87ea976710a4435eeb90533a16c"
+  integrity sha512-FfDqSVNy6gYLx5dojIOWjCLyAqkcnT69JMGIR7ossuvu27cBVJa0VfsKxCK2fJEMtsvjDmD6/UG+m/w/oBu8uQ==
+
+"@flopflip/types@4.1.11":
+  version "4.1.11"
+  resolved "https://registry.yarnpkg.com/@flopflip/types/-/types-4.1.11.tgz#c5daaae6823c813673946ac627658a35eda9659f"
+  integrity sha512-QmYqBksYCRIxeLXVK0RqWmIKSwgcZYHVI64oJYEDHZLcWehgc9TjrxAJsrZux8y7y8InlUqVhiiXKeBlnei8dA==
 
 "@hapi/address@2.x.x":
   version "2.1.4"
@@ -1829,10 +1857,17 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-redux@7.1.9":
-  version "7.1.9"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.9.tgz#280c13565c9f13ceb727ec21e767abe0e9b4aec3"
-  integrity sha512-mpC0jqxhP4mhmOl3P4ipRsgTgbNofMRXJb08Ms6gekViLj61v1hOZEKWDCyWsdONr6EjEA6ZHXC446wdywDe0w==
+"@types/react-is@17.0.0":
+  version "17.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react-is/-/react-is-17.0.0.tgz#6b60190ae60591ae0c83d6f3854e61e08f5a7976"
+  integrity sha512-A0DQ1YWZ0RG2+PV7neAotNCIh8gZ3z7tQnDJyS2xRPDNtAtSPcJ9YyfMP8be36Ha0kQRzbZCrrTMznA4blqO5g==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-redux@7.1.14":
+  version "7.1.14"
+  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.14.tgz#694609eb906ffc2da4b01f0a1e4f27c1937ac33a"
+  integrity sha512-WItBNJRC8N/HsgKFXxX8t9NjUY1vv3YTzj9m8HvmaaYRTgy3hgZMIs5ZWAJHQ58nISSakIvS6T91nhJV4iBuaA==
   dependencies:
     "@types/hoist-non-react-statics" "^3.3.0"
     "@types/react" "*"
@@ -9064,7 +9099,7 @@ react-is@16.13.1, react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-is@^17.0.1:
+react-is@17.0.1, react-is@^17.0.1:
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
