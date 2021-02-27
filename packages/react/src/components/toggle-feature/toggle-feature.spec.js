@@ -1,5 +1,6 @@
+import { components, render } from '@flopflip/test-utils';
 import React from 'react';
-import { render, components } from '@flopflip/test-utils';
+
 import ToggleFeature from './toggle-feature';
 
 describe('when feature disabled', () => {

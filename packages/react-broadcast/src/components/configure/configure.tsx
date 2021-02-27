@@ -1,20 +1,20 @@
+import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
 import type {
   TAdapter,
-  TFlags,
+  TAdapterIdentifiers,
   TAdapterStatus,
-  TFlagsChange,
   TAdapterStatusChange,
   TConfigureAdapterChildren,
   TConfigureAdapterProps,
-  TAdapterIdentifiers,
+  TFlags,
+  TFlagsChange,
 } from '@flopflip/types';
 import {
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
 } from '@flopflip/types';
+import React, {useCallback,useState} from 'react';
 
-import React, {useState, useCallback} from 'react';
-import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
 import { FlagsContext } from '../flags-context';
 
 type BaseProps = {

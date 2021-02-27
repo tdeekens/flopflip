@@ -1,33 +1,32 @@
+import {
+  exposeGlobally,
+  normalizeFlag,
+  normalizeFlags,
+} from '@flopflip/adapter-utilities';
 import type {
-  TUser,
+  TAdapterEventHandlers,
   TAdapterStatus,
   TAdapterStatusChange,
-  TAdapterEventHandlers,
-  TFlagName,
-  TFlagVariation,
-  TFlags,
-  TFlagsUpdateFunction,
-  TFlagsChange,
-  THttpAdapterInterface,
-  THttpAdapterArgs,
   TCacheIdentifiers,
+  TFlagName,
+  TFlags,
+  TFlagsChange,
+  TFlagsUpdateFunction,
+  TFlagVariation,
+  THttpAdapterArgs,
+  THttpAdapterInterface,
+  TUser,
 } from '@flopflip/types';
 import {
-  AdapterInitializationStatus,
-  AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
   adapterIdentifiers,
+  AdapterInitializationStatus,
+  AdapterSubscriptionStatus,
   cacheIdentifiers,
 } from '@flopflip/types';
-import {
-  normalizeFlags,
-  normalizeFlag,
-  exposeGlobally,
-} from '@flopflip/adapter-utilities';
-
-import warning from 'tiny-warning';
-import mitt, { Emitter } from 'mitt';
 import isEqual from 'lodash/isEqual';
+import mitt, { Emitter } from 'mitt';
+import warning from 'tiny-warning';
 
 type THttpAdapterState = {
   flags: TFlags;

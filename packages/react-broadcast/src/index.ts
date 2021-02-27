@@ -1,23 +1,21 @@
 const version = '__@FLOPFLIP/VERSION_OF_RELEASE__';
 
 export {
-  ToggleFeature,
   ConfigureFlopFlip,
   ReconfigureFlopFlip,
   TestProviderFlopFlip,
+  ToggleFeature,
 } from './components';
-
 export {
+  branchOnFeatureToggle,
   injectFeatureToggle,
   injectFeatureToggles,
-  branchOnFeatureToggle,
 } from './hocs';
-
 export {
+  useAdapterReconfiguration,
+  useAdapterStatus,
   useFeatureToggle,
   useFeatureToggles,
-  useAdapterStatus,
-  useAdapterReconfiguration,
   useFlagVariation,
   useFlagVariations,
 } from './hooks';

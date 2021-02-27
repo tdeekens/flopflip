@@ -1,6 +1,7 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import { applyMiddleware, compose, createStore } from 'redux';
 import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+
 // Import adapter from '@flopflip/localstorage-adapter';
 // import { createFlopFlipEnhancer } from '@flopflip/react-redux';
 import rootReducer from './modules';

@@ -1,7 +1,7 @@
-import type { TFlagName, TFlagVariation } from '@flopflip/types';
-
 import { getFlagVariation, useAdapterContext } from '@flopflip/react';
+import type { TFlagName, TFlagVariation } from '@flopflip/types';
 import { useSelector } from 'react-redux';
+
 import { selectFlags } from '../../ducks/flags';
 
 export default function useFlagVariations(

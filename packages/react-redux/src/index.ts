@@ -2,29 +2,24 @@ const version = '__@FLOPFLIP/VERSION_OF_RELEASE__';
 
 export { default as createFlopFlipEnhancer } from './store/enhancer';
 // Import this separately to avoid a circular dependency
-export { STATE_SLICE as FLOPFLIP_STATE_SLICE } from './store/constants';
-
+export {
+  ConfigureFlopFlip,
+  ReconfigureFlopFlip,
+  ToggleFeature,
+} from './components';
 export {
   createFlopflipReducer,
   flopflipReducer,
-  selectFlags as selectFeatureFlags,
   selectFlag as selectFeatureFlag,
-  UPDATE_STATUS,
+  selectFlags as selectFeatureFlags,
   UPDATE_FLAGS,
+  UPDATE_STATUS,
 } from './ducks';
-
 export {
-  ToggleFeature,
-  ConfigureFlopFlip,
-  ReconfigureFlopFlip,
-} from './components';
-
-export {
+  branchOnFeatureToggle,
   injectFeatureToggle,
   injectFeatureToggles,
-  branchOnFeatureToggle,
 } from './hocs';
-
 export {
   useAdapterReconfiguration,
   useAdapterStatus,
@@ -33,5 +28,6 @@ export {
   useFlagVariation,
   useFlagVariations,
 } from './hooks';
+export { STATE_SLICE as FLOPFLIP_STATE_SLICE } from './store/constants';
 
 export { version };

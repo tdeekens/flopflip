@@ -1,31 +1,30 @@
+import {
+  exposeGlobally,
+  normalizeFlag,
+  normalizeFlags,
+} from '@flopflip/adapter-utilities';
+import createCache from '@flopflip/localstorage-cache';
 import type {
-  TUser,
+  TAdapterEventHandlers,
   TAdapterStatus,
   TAdapterStatusChange,
-  TAdapterEventHandlers,
-  TLocalStorageAdapterArgs,
-  TFlags,
-  TUpdateFlagsOptions,
   TFlagName,
+  TFlags,
   TFlagsChange,
+  TLocalStorageAdapterArgs,
   TLocalStorageAdapterInterface,
+  TUpdateFlagsOptions,
+  TUser,
 } from '@flopflip/types';
 import {
-  AdapterInitializationStatus,
-  AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
   adapterIdentifiers,
+  AdapterInitializationStatus,
+  AdapterSubscriptionStatus,
 } from '@flopflip/types';
-import {
-  normalizeFlags,
-  normalizeFlag,
-  exposeGlobally,
-} from '@flopflip/adapter-utilities';
-
-import warning from 'tiny-warning';
-import mitt, { Emitter } from 'mitt';
 import isEqual from 'lodash/isEqual';
-import createCache from '@flopflip/localstorage-cache';
+import mitt, { Emitter } from 'mitt';
+import warning from 'tiny-warning';
 
 type TLocalStorageAdapterState = {
   flags: TFlags;

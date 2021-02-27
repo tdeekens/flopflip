@@ -1,4 +1,4 @@
-import { TCacheOptions, TCache } from '@flopflip/types';
+import { TCache, TCacheOptions } from '@flopflip/types';
 
 const createCache = (options: TCacheOptions) => {
   const cache: TCache = {
@@ -22,7 +22,7 @@ const createCache = (options: TCacheOptions) => {
       }
     },
     unset: (key) => {
-      sessionStorage.removeItem(`${options.prefix}__${key}`)
+      sessionStorage.removeItem(`${options.prefix}__${key}`);
     },
   };
 

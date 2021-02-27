@@ -1,8 +1,8 @@
-import { useDebugValue } from 'react';
 import {
-  useAdapterContext,
   selectAdapterConfigurationStatus,
+  useAdapterContext,
 } from '@flopflip/react';
+import { useDebugValue } from 'react';
 
 export default function useAdapterStatus() {
   const { status } = useAdapterContext();

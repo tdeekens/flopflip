@@ -1,6 +1,6 @@
+import { getIsFeatureEnabled, useAdapterContext } from '@flopflip/react';
 import type { TFlagName, TFlags, TFlagVariation } from '@flopflip/types';
 
-import { getIsFeatureEnabled, useAdapterContext } from '@flopflip/react';
 import useFlagsContext from '../use-flags-context';
 
 export default function useFeatureToggles(flags: TFlags) {

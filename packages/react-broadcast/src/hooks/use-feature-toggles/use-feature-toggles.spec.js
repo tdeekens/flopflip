@@ -1,7 +1,8 @@
+import { renderWithAdapter, screen } from '@flopflip/test-utils';
 import React from 'react';
-import useFeatureToggles from './use-feature-toggles';
-import { screen, renderWithAdapter } from '@flopflip/test-utils';
+
 import Configure from '../../components/configure';
+import useFeatureToggles from './use-feature-toggles';
 
 const render = (TestComponent) =>
   renderWithAdapter(TestComponent, {

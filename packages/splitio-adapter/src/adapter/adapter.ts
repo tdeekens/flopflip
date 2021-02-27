@@ -1,30 +1,28 @@
 /* global SplitIO */
-
+import { exposeGlobally, normalizeFlags } from '@flopflip/adapter-utilities';
 import type {
-  TFlagName,
-  TFlagVariation,
-  TAdapterStatus,
-  TUser,
-  TFlag,
-  TFlags,
   TAdapterEventHandlers,
-  TSplitioAdapterInterface,
+  TAdapterStatus,
+  TFlag,
+  TFlagName,
+  TFlags,
+  TFlagVariation,
   TSplitioAdapterArgs,
+  TSplitioAdapterInterface,
+  TUser,
 } from '@flopflip/types';
 import {
-  AdapterInitializationStatus,
-  AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
   adapterIdentifiers,
+  AdapterInitializationStatus,
+  AdapterSubscriptionStatus,
 } from '@flopflip/types';
-import { normalizeFlags, exposeGlobally } from '@flopflip/adapter-utilities';
-
-import merge from 'deepmerge';
 import { SplitFactory } from '@splitsoftware/splitio';
+import merge from 'deepmerge';
 import camelCase from 'lodash/camelCase';
 import cloneDeep from 'lodash/cloneDeep';
-import omit from 'lodash/omit';
 import isEqual from 'lodash/isEqual';
+import omit from 'lodash/omit';
 
 type TSplitIOAdapterState = {
   user?: TUser;

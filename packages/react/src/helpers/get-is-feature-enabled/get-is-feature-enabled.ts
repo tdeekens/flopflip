@@ -1,8 +1,8 @@
 import type {
-  TFlagName,
-  TFlagVariation,
-  TFlagsContext,
   TAdapterIdentifiers,
+  TFlagName,
+  TFlagsContext,
+  TFlagVariation,
 } from '@flopflip/types';
 
 import { DEFAULT_FLAG_PROP_KEY } from '../../constants';

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import useAdapterReconfiguration from './use-adapter-reconfiguration';
 
 const reconfigure = jest.fn();

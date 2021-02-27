@@ -1,4 +1,5 @@
 import { AdapterConfigurationStatus } from '@flopflip/types';
+
 import { selectAdapterConfigurationStatus } from './adapter-context';
 
 describe('selectAdapterConfigurationStatus', () => {

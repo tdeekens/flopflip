@@ -25,10 +25,10 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "globalthis": "1.0.1"
+    "globalthis": "1.0.2"
   },
   "dependencies": {
-    "@babel/runtime": "7.12.18",
+    "@babel/runtime": "7.13.8",
     "@flopflip/adapter-utilities": "1.0.13",
     "@flopflip/types": "4.1.11",
     "@splitsoftware/splitio": "10.15.3",

@@ -1,5 +1,6 @@
+import { render as rtlRender, screen, waitFor } from '@flopflip/test-utils';
 import React, { useContext } from 'react';
-import { screen, render as rtlRender, waitFor } from '@flopflip/test-utils';
+
 import AdapterContext from '../adapter-context';
 import ConfigureAdapter, { AdapterStates } from './configure-adapter';
 

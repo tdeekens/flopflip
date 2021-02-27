@@ -1,7 +1,8 @@
+import { renderWithAdapter, screen } from '@flopflip/test-utils';
 import React from 'react';
-import useFlagVariations from './use-flag-variations';
-import { screen, renderWithAdapter } from '@flopflip/test-utils';
+
 import Configure from '../../components/configure';
+import useFlagVariations from './use-flag-variations';
 
 const render = (TestComponent) =>
   renderWithAdapter(TestComponent, {

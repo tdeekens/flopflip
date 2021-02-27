@@ -1,10 +1,11 @@
+import { renderWithAdapter, screen } from '@flopflip/test-utils';
 import React from 'react';
-import { screen, renderWithAdapter } from '@flopflip/test-utils';
 import { Provider } from 'react-redux';
+
 import { createStore } from '../../../test-utils';
+import Configure from '../../components/configure';
 import { STATE_SLICE } from '../../store/constants';
 import useAdapterStatus from './use-adapter-status';
-import Configure from '../../components/configure';
 
 const render = (store, TestComponent) =>
   renderWithAdapter(TestComponent, {

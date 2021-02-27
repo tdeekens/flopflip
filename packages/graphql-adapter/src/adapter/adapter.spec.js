@@ -1,6 +1,7 @@
 import { AdapterConfigurationStatus, cacheIdentifiers } from '@flopflip/types';
-import warning from 'tiny-warning';
 import getGlobalThis from 'globalthis';
+import warning from 'tiny-warning';
+
 import adapter from './adapter';
 
 jest.mock('tiny-warning');

@@ -1,6 +1,6 @@
 import React from 'react';
-import warning from 'tiny-warning';
 import { isValidElementType } from 'react-is';
+import warning from 'tiny-warning';
 
 type RenderFnArgs = {
   isFeatureEnabled: boolean;

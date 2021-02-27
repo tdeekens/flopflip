@@ -1,10 +1,11 @@
+import { renderWithAdapter } from '@flopflip/test-utils';
 import React from 'react';
 import { Provider } from 'react-redux';
-import useFeatureToggles from './use-feature-toggles';
-import { renderWithAdapter } from '@flopflip/test-utils';
+
 import { createStore } from '../../../test-utils';
-import { STATE_SLICE } from '../../store/constants';
 import Configure from '../../components/configure';
+import { STATE_SLICE } from '../../store/constants';
+import useFeatureToggles from './use-feature-toggles';
 
 const render = (store, TestComponent) =>
   renderWithAdapter(TestComponent, {

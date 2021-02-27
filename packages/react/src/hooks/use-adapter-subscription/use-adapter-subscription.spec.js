@@ -1,9 +1,10 @@
-import React from 'react';
+import { render as rtlRender, screen } from '@flopflip/test-utils';
 import {
-  AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
+  AdapterSubscriptionStatus,
 } from '@flopflip/types';
-import { screen, render as rtlRender } from '@flopflip/test-utils';
+import React from 'react';
+
 import useAdapterSubscription from './use-adapter-subscription';
 
 const createAdapter = () => ({

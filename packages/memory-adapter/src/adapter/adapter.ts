@@ -1,26 +1,25 @@
+import { exposeGlobally, normalizeFlag } from '@flopflip/adapter-utilities';
 import type {
-  TUser,
+  TAdapterEventHandlers,
   TAdapterStatus,
   TAdapterStatusChange,
   TFlagName,
-  TFlagVariation,
   TFlags,
-  TUpdateFlagsOptions,
-  TAdapterEventHandlers,
-  TMemoryAdapterArgs,
   TFlagsChange,
+  TFlagVariation,
+  TMemoryAdapterArgs,
   TMemoryAdapterInterface,
+  TUpdateFlagsOptions,
+  TUser,
 } from '@flopflip/types';
 import {
-  AdapterInitializationStatus,
-  AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
   adapterIdentifiers,
+  AdapterInitializationStatus,
+  AdapterSubscriptionStatus,
 } from '@flopflip/types';
-import { normalizeFlag, exposeGlobally } from '@flopflip/adapter-utilities';
-
-import warning from 'tiny-warning';
 import mitt, { Emitter } from 'mitt';
+import warning from 'tiny-warning';
 
 type TMemoryAdapterState = {
   flags: TFlags;

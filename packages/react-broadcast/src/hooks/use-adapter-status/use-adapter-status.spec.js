@@ -1,7 +1,8 @@
+import { renderWithAdapter, screen } from '@flopflip/test-utils';
 import React from 'react';
-import { screen, renderWithAdapter } from '@flopflip/test-utils';
-import useAdapterStatus from './';
+
 import Configure from '../../components/configure';
+import useAdapterStatus from './';
 
 const render = (TestComponent) =>
   renderWithAdapter(TestComponent, {

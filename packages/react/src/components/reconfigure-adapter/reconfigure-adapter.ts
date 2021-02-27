@@ -1,6 +1,6 @@
 import type { TUser } from '@flopflip/types';
+import { Children, useEffect } from 'react';
 
-import { useEffect, Children } from 'react';
 import useAdapterContext from '../../hooks/use-adapter-context';
 
 type Props<TAdditionalUserProperties> = {

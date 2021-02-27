@@ -1,7 +1,7 @@
-import type { TFlags, TFlagName, TFlagVariation } from '@flopflip/types';
-
-import { useSelector } from 'react-redux';
 import { getIsFeatureEnabled, useAdapterContext } from '@flopflip/react';
+import type { TFlagName, TFlags, TFlagVariation } from '@flopflip/types';
+import { useSelector } from 'react-redux';
+
 import { selectFlags } from '../../ducks/flags';
 
 export default function useFeatureToggles(flags: TFlags) {

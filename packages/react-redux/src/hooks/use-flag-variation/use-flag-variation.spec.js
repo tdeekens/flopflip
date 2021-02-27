@@ -1,10 +1,11 @@
+import { renderWithAdapter, screen } from '@flopflip/test-utils';
 import React from 'react';
 import { Provider } from 'react-redux';
-import useFlagVariation from './use-flag-variation';
-import { screen, renderWithAdapter } from '@flopflip/test-utils';
+
 import { createStore } from '../../../test-utils';
-import { STATE_SLICE } from '../../store/constants';
 import Configure from '../../components/configure';
+import { STATE_SLICE } from '../../store/constants';
+import useFlagVariation from './use-flag-variation';
 
 const render = (store, TestComponent) =>
   renderWithAdapter(TestComponent, {

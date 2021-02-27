@@ -1,11 +1,11 @@
-import { Children } from 'react';
-import merge from 'deepmerge';
 import {
   TAdapterArgs,
   TAdapterReconfiguration,
   TConfigureAdapterChildren,
   TConfigureAdapterChildrenAsFunction,
 } from '@flopflip/types';
+import merge from 'deepmerge';
+import { Children } from 'react';
 
 const isFunctionChildren = (
   children: TConfigureAdapterChildren
@@ -24,4 +24,4 @@ const mergeAdapterArgs = (
     : // @ts-expect-error
       merge(previousAdapterArgs, nextAdapterArgs);
 
-export { isFunctionChildren, isEmptyChildren, mergeAdapterArgs };
+export { isEmptyChildren, isFunctionChildren, mergeAdapterArgs };
