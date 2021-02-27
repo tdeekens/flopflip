@@ -9,8 +9,6 @@ module.exports = {
     'xo-typescript',
     'xo-react',
     'prettier',
-    'prettier/@typescript-eslint',
-    'prettier/react',
     'plugin:jest/recommended',
     'plugin:testing-library/react',
   ],
