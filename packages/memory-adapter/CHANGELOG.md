@@ -1,5 +1,15 @@
 # @flopflip/memory-adapter
 
+## 3.0.14
+
+### Patch Changes
+
+- [`bc7b3f41`](https://github.com/tdeekens/flopflip/commit/bc7b3f413554c4b11ab52ecdc5983da348014885) [#1414](https://github.com/tdeekens/flopflip/pull/1414) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: update dependencies and add eslint sorting of imports
+
+- Updated dependencies [[`bc7b3f41`](https://github.com/tdeekens/flopflip/commit/bc7b3f413554c4b11ab52ecdc5983da348014885)]:
+  - @flopflip/adapter-utilities@1.0.14
+  - @flopflip/types@4.1.12
+
 ## 3.0.13
 
 ### Patch Changes

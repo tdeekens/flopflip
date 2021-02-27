@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/sessionstorage-cache",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Sessionstorage cache for flipflop adapters",
   "main": "dist/flopflip-sessionstorage-cache.cjs.js",
   "module": "dist/flopflip-sessionstorage-cache.esm.js",
@@ -32,7 +32,7 @@
     "client"
   ],
   "dependencies": {
-    "@flopflip/types": "4.1.11"
+    "@flopflip/types": "4.1.12"
   },
   "devDependencies": {}
 }
