@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 4.1.12
+
+### Patch Changes
+
+- [`bc7b3f41`](https://github.com/tdeekens/flopflip/commit/bc7b3f413554c4b11ab52ecdc5983da348014885) [#1414](https://github.com/tdeekens/flopflip/pull/1414) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: update dependencies and add eslint sorting of imports
+
 ## 4.1.11
 
 ### Patch Changes
