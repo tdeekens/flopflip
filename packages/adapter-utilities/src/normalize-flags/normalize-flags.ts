@@ -1,4 +1,5 @@
-import type { TFlagVariation, TFlag, TFlags } from '@flopflip/types';
+import type { TFlag, TFlags, TFlagVariation } from '@flopflip/types';
+
 import defaultNormalizeFlag from '../normalize-flag/normalize-flag';
 
 const normalizeFlags = (

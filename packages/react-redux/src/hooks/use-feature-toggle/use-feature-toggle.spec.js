@@ -1,10 +1,11 @@
+import { renderWithAdapter, screen } from '@flopflip/test-utils';
 import React from 'react';
 import { Provider } from 'react-redux';
-import useFeatureToggle from './use-feature-toggle';
-import { screen, renderWithAdapter } from '@flopflip/test-utils';
+
 import { createStore } from '../../../test-utils';
-import { STATE_SLICE } from '../../store/constants';
 import Configure from '../../components/configure';
+import { STATE_SLICE } from '../../store/constants';
+import useFeatureToggle from './use-feature-toggle';
 
 jest.mock('tiny-warning');
 

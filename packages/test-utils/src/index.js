@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import React, { cloneElement } from 'react';
 import adapter from '@flopflip/memory-adapter';
 import {
+  act,
+  buildQueries,
+  fireEvent,
+  queries,
+  queryHelpers,
   render,
   screen,
-  queries,
-  fireEvent,
-  queryHelpers,
-  buildQueries,
-  act,
 } from '@testing-library/react';
+import React, { cloneElement } from 'react';
 
 const mergeOptional = (defaultValue, value) =>
   value === null ? undefined : { ...defaultValue, ...value };
@@ -181,10 +181,10 @@ const components = {
 
 export * from '@testing-library/react';
 export {
-  defaultRender as render,
-  renderWithAdapter,
+  act,
   adapter,
   components,
+  defaultRender as render,
+  renderWithAdapter,
   screen,
-  act,
 };

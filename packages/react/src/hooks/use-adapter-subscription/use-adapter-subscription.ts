@@ -1,7 +1,6 @@
 import type { TAdapter } from '@flopflip/types';
 import { AdapterSubscriptionStatus } from '@flopflip/types';
-
-import { useRef, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 function useAdapterSubscription(adapter: TAdapter) {
   /**

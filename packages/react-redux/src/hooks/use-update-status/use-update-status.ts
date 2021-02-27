@@ -1,11 +1,11 @@
 import type {
-  TAdapterStatusChange,
   TAdapterEventHandlers,
+  TAdapterStatusChange,
 } from '@flopflip/types';
-
 import { useCallback } from 'react';
-import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+
 import { updateStatus } from '../../ducks';
 
 const useUpdateStatus = (): TAdapterEventHandlers['onStatusStateChange'] => {

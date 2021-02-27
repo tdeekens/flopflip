@@ -1,40 +1,39 @@
-import type { LDUser as TLDUser } from 'launchdarkly-js-sdk-common';
-import type {
-  TFlagName,
-  TFlagVariation,
-  TAdapterStatus,
-  TUser,
-  TFlags,
-  TLaunchDarklyAdapterArgs,
-  TUpdateFlagsOptions,
-  TAdapterEventHandlers,
-  TAdapterStatusChange,
-  TFlagsChange,
-  TLaunchDarklyAdapterInterface,
-} from '@flopflip/types';
 import {
-  AdapterInitializationStatus,
-  AdapterConfigurationStatus,
-  AdapterSubscriptionStatus,
-  adapterIdentifiers,
-} from '@flopflip/types';
-import {
-  normalizeFlags,
-  normalizeFlag,
   denormalizeFlagName,
   exposeGlobally,
+  normalizeFlag,
+  normalizeFlags,
 } from '@flopflip/adapter-utilities';
-
-import merge from 'deepmerge';
-import warning from 'tiny-warning';
-import isEqual from 'lodash/isEqual';
+import type {
+  TAdapterEventHandlers,
+  TAdapterStatus,
+  TAdapterStatusChange,
+  TFlagName,
+  TFlags,
+  TFlagsChange,
+  TFlagVariation,
+  TLaunchDarklyAdapterArgs,
+  TLaunchDarklyAdapterInterface,
+  TUpdateFlagsOptions,
+  TUser,
+} from '@flopflip/types';
+import {
+  AdapterConfigurationStatus,
+  adapterIdentifiers,
+  AdapterInitializationStatus,
+  AdapterSubscriptionStatus,
+} from '@flopflip/types';
 import debounce from 'debounce-fn';
-import mitt, { Emitter } from 'mitt';
+import merge from 'deepmerge';
 import {
   initialize as initializeLaunchDarklyClient,
-  LDUser,
   LDClient,
+  LDUser,
 } from 'launchdarkly-js-client-sdk';
+import type { LDUser as TLDUser } from 'launchdarkly-js-sdk-common';
+import isEqual from 'lodash/isEqual';
+import mitt, { Emitter } from 'mitt';
+import warning from 'tiny-warning';
 
 type TLaunchDarklyUser = TUser<TLDUser>;
 type TLaunchDarklyAdapterState = {

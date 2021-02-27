@@ -1,12 +1,12 @@
-import type {
-  TFlags,
-  TAdapter,
-  TConfigureAdapterProps,
-  TConfigureAdapterChildren,
-} from '@flopflip/types';
-
-import React from 'react';
 import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
+import type {
+  TAdapter,
+  TConfigureAdapterChildren,
+  TConfigureAdapterProps,
+  TFlags,
+} from '@flopflip/types';
+import React from 'react';
+
 import { useUpdateFlags, useUpdateStatus } from '../../hooks';
 
 type BaseProps = {

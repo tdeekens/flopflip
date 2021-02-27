@@ -1,31 +1,33 @@
-import React, { Component } from 'react';
-import flowRight from 'lodash.flowright';
-import { Provider, connect } from 'react-redux';
-import classNames from 'classnames';
-// Import adapter from '@flopflip/launchdarkly-adapter';
-// import adapter from '@flopflip/memory-adapter';
+import './App.css';
+
 import adapter from '@flopflip/memory-adapter';
 import {
-  ConfigureFlopFlip,
   branchOnFeatureToggle,
+  ConfigureFlopFlip,
   injectFeatureToggle,
   ToggleFeature,
 } from '@flopflip/react-broadcast';
+import classNames from 'classnames';
+import flowRight from 'lodash.flowright';
+import React, { Component } from 'react';
+import { connect, Provider } from 'react-redux';
+
+// Import adapter from '@flopflip/launchdarkly-adapter';
+// import adapter from '@flopflip/memory-adapter';
 // Change to `from '@flopflip/react-broadcast'` and everything will just work wtihout redux
-import {
-  increment,
-  incrementAsync,
-  decrement,
-  decrementAsync,
-} from './modules/counter';
-import logo from './logo.svg';
-import store from './store';
-import './App.css';
 import allFlags, {
-  INCREMENT_ASYNC_BUTTON,
   DECREMENT_ASYNC_BUTTON,
+  INCREMENT_ASYNC_BUTTON,
   INCREMENT_SYNC_BUTTON,
 } from './flags';
+import logo from './logo.svg';
+import {
+  decrement,
+  decrementAsync,
+  increment,
+  incrementAsync,
+} from './modules/counter';
+import store from './store';
 
 const UntoggledFeature = () => <h6>Disabled Feature</h6>;
 

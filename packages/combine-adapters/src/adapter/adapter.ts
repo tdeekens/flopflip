@@ -1,24 +1,23 @@
+import { exposeGlobally } from '@flopflip/adapter-utilities';
 import type {
+  TAdapter,
+  TAdapterEventHandlers,
+  TAdapterIdentifiers,
   TAdapterStatus,
   TAdapterStatusChange,
-  TAdapterEventHandlers,
   TCombinedAdapterArgs,
-  TFlags,
-  TAdapter,
-  TUpdateFlagsOptions,
   TCombinedAdapterInterface,
-  TAdapterIdentifiers,
+  TFlags,
+  TUpdateFlagsOptions,
 } from '@flopflip/types';
 import {
-  AdapterInitializationStatus,
-  AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
   adapterIdentifiers,
+  AdapterInitializationStatus,
+  AdapterSubscriptionStatus,
 } from '@flopflip/types';
-import { exposeGlobally } from '@flopflip/adapter-utilities';
-
-import warning from 'tiny-warning';
 import mitt, { Emitter } from 'mitt';
+import warning from 'tiny-warning';
 
 type CombinedAdaptersState = {
   emitter: Emitter;

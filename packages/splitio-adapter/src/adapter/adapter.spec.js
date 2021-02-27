@@ -1,10 +1,11 @@
 import { AdapterConfigurationStatus } from '@flopflip/types';
 import { SplitFactory } from '@splitsoftware/splitio';
 import getGlobalThis from 'globalthis';
+
 import adapter, {
-  normalizeFlags,
   createAnonymousUserKey,
   normalizeFlag,
+  normalizeFlags,
 } from './adapter';
 
 jest.mock('@splitsoftware/splitio', () => ({

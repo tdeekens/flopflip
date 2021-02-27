@@ -1,5 +1,5 @@
 export {
-  default as flagsReducer,
   createReducer as createFlagsReducer,
+  default as flagsReducer,
 } from './flags';
-export { UPDATE_FLAGS, updateFlags, selectFlag, selectFlags } from './flags';
+export { selectFlag, selectFlags, UPDATE_FLAGS, updateFlags } from './flags';

@@ -1,10 +1,11 @@
-import React from 'react';
-import { screen, render as rtlRender, act } from '@flopflip/test-utils';
 import adapter from '@flopflip/memory-adapter';
+import { act, render as rtlRender, screen } from '@flopflip/test-utils';
+import React from 'react';
 import { Provider } from 'react-redux';
+
 import { createStore } from '../../../test-utils';
+import { useAdapterStatus, useFeatureToggle } from '../../hooks';
 import { STATE_SLICE } from '../../store/constants';
-import { useFeatureToggle, useAdapterStatus } from '../../hooks';
 import Configure from './configure';
 
 const testFlagName = 'firstFlag';

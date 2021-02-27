@@ -1,7 +1,8 @@
+import { components, renderWithAdapter } from '@flopflip/test-utils';
 import React from 'react';
-import { renderWithAdapter, components } from '@flopflip/test-utils';
-import branchOnFeatureToggle from './branch-on-feature-toggle';
+
 import Configure from '../../components/configure';
+import branchOnFeatureToggle from './branch-on-feature-toggle';
 
 const render = (TestComponent) =>
   renderWithAdapter(TestComponent, {

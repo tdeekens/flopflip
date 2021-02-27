@@ -1,9 +1,9 @@
 import { STATE_SLICE } from '../../store/constants';
 import reducer, {
-  UPDATE_FLAGS,
-  updateFlags,
   selectFlag,
   selectFlags,
+  UPDATE_FLAGS,
+  updateFlags,
 } from './flags';
 
 const adapterIdentifiers = ['memory'];

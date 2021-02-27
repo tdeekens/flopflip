@@ -1,28 +1,28 @@
 import type {
-  TFlags,
   TAdapter,
-  TAdapterInterface,
   TAdapterArgs,
-  TAdapterStatus,
+  TAdapterConfiguration,
+  TAdapterEventHandlers,
+  TAdapterInterface,
   TAdapterReconfiguration,
   TAdapterReconfigurationOptions,
+  TAdapterStatus,
   TConfigureAdapterChildren,
-  TAdapterEventHandlers,
-  TAdapterConfiguration,
+  TFlags,
 } from '@flopflip/types';
 import {
   AdapterConfigurationStatus,
   AdapterInitializationStatus,
 } from '@flopflip/types';
-
-import React, {useCallback, useRef, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import warning from 'tiny-warning';
+
+import AdapterContext, { createAdapterContext } from '../adapter-context';
 import {
-  isFunctionChildren,
   isEmptyChildren,
+  isFunctionChildren,
   mergeAdapterArgs,
 } from './helpers';
-import AdapterContext, { createAdapterContext } from '../adapter-context';
 
 type ValueOf<T> = T[keyof T];
 

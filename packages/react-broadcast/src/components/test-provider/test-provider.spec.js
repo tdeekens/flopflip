@@ -1,10 +1,11 @@
-import React from 'react';
-import { screen, render as rtlRender } from '@flopflip/test-utils';
+import { render as rtlRender, screen } from '@flopflip/test-utils';
 import {
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
 } from '@flopflip/types';
-import { useFeatureToggle, useAdapterStatus } from '../../hooks';
+import React from 'react';
+
+import { useAdapterStatus, useFeatureToggle } from '../../hooks';
 import { TestProvider } from './test-provider';
 
 const testFlagName = 'testFlag1';

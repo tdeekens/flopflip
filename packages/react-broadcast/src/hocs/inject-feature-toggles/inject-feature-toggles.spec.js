@@ -1,7 +1,8 @@
+import { components, renderWithAdapter } from '@flopflip/test-utils';
 import React from 'react';
-import { renderWithAdapter, components } from '@flopflip/test-utils';
-import injectFeatureToggles from './inject-feature-toggles';
+
 import Configure from '../../components/configure';
+import injectFeatureToggles from './inject-feature-toggles';
 
 const render = (TestComponent) =>
   renderWithAdapter(TestComponent, {

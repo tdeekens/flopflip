@@ -1,4 +1,4 @@
-import type { TFlagsChange, TAdapterIdentifiers } from '@flopflip/types';
+import type { TAdapterIdentifiers, TFlagsChange } from '@flopflip/types';
 
 export type TUpdateFlagsAction = {
   type: string;

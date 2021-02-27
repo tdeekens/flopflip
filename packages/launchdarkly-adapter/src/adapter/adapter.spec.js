@@ -1,6 +1,7 @@
 import { AdapterConfigurationStatus } from '@flopflip/types';
-import ldClient from 'launchdarkly-js-client-sdk';
 import getGlobalThis from 'globalthis';
+import ldClient from 'launchdarkly-js-client-sdk';
+
 import adapter from './adapter';
 
 jest.mock('launchdarkly-js-client-sdk', () => ({

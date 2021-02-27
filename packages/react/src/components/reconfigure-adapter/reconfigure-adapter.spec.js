@@ -1,7 +1,8 @@
-import React, { useState, useMemo } from 'react';
-import { screen, render, fireEvent } from '@flopflip/test-utils';
-import { AdapterStates } from './../configure-adapter';
+import { fireEvent, render, screen } from '@flopflip/test-utils';
+import React, { useMemo, useState } from 'react';
+
 import AdapterContext, { createAdapterContext } from './../adapter-context';
+import { AdapterStates } from './../configure-adapter';
 import ReconfigureAdapter from './reconfigure-adapter';
 
 const TestComponent = (props) => {

@@ -1,4 +1,5 @@
 import warning from 'tiny-warning';
+
 import getFlagVariation from './get-flag-variation';
 
 jest.mock('tiny-warning');

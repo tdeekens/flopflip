@@ -1,1 +1,1 @@
-export { default, AdapterStates } from './configure-adapter';
+export { AdapterStates, default } from './configure-adapter';

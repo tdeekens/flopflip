@@ -1,13 +1,14 @@
-import warning from 'tiny-warning';
-import getGlobalThis from 'globalthis';
+import localstorageAdapter from '@flopflip/localstorage-adapter';
+import memoryAdapter from '@flopflip/memory-adapter';
 import {
   AdapterConfigurationStatus,
   AdapterInitializationStatus,
 } from '@flopflip/types';
-import memoryAdapter from '@flopflip/memory-adapter';
-import localstorageAdapter from '@flopflip/localstorage-adapter';
-import adapter from './adapter';
+import getGlobalThis from 'globalthis';
 import { beforeAll } from 'globalthis/implementation';
+import warning from 'tiny-warning';
+
+import adapter from './adapter';
 
 jest.mock('tiny-warning');
 

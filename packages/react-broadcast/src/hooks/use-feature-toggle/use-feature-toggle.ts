@@ -1,7 +1,7 @@
-import type { TFlagName, TFlagVariation } from '@flopflip/types';
-
-import { useDebugValue } from 'react';
 import { getIsFeatureEnabled, useAdapterContext } from '@flopflip/react';
+import type { TFlagName, TFlagVariation } from '@flopflip/types';
+import { useDebugValue } from 'react';
+
 import useFlagsContext from '../use-flags-context';
 
 export default function useFeatureToggle(

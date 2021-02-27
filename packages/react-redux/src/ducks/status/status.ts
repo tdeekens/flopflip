@@ -1,13 +1,13 @@
+import { selectAdapterConfigurationStatus } from '@flopflip/react';
 import type { TAdapterStatus, TAdapterStatusChange } from '@flopflip/types';
 import {
-  AdapterSubscriptionStatus,
   AdapterConfigurationStatus,
+  AdapterSubscriptionStatus,
 } from '@flopflip/types';
 
-import { selectAdapterConfigurationStatus } from '@flopflip/react';
-import { TUpdateStatusAction } from './types';
-import { TState } from '../../types';
 import { STATE_SLICE } from '../../store/constants';
+import { TState } from '../../types';
+import { TUpdateStatusAction } from './types';
 
 // Actions
 export const UPDATE_STATUS = '@flopflip/status/update';

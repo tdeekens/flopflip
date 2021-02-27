@@ -1,5 +1,5 @@
-import normalizeFlags from './normalize-flags';
 import normalizeFlag from '../normalize-flag';
+import normalizeFlags from './normalize-flags';
 
 const rawFlags = {
   'a-flag': true,

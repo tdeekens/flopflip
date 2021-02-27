@@ -1,6 +1,7 @@
 import { AdapterConfigurationStatus } from '@flopflip/types';
+
 import { STATE_SLICE } from '../../store/constants';
-import reducer, { UPDATE_STATUS, updateStatus, selectStatus } from './status';
+import reducer, { selectStatus, UPDATE_STATUS, updateStatus } from './status';
 
 describe('constants', () => {
   it('should contain `UPDATE_STATUS`', () => {

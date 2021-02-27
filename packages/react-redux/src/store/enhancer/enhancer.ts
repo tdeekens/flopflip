@@ -1,19 +1,19 @@
 import type {
-  Store,
-  StoreEnhancerStoreCreator,
-  Reducer,
-  PreloadedState,
-} from 'redux';
-import type {
   TAdapter,
   TAdapterArgs,
+  TAdapterInterface,
   TAdapterStatusChange,
   TFlagsChange,
-  TAdapterInterface,
 } from '@flopflip/types';
-import type { TState } from '../../types';
+import type {
+  PreloadedState,
+  Reducer,
+  Store,
+  StoreEnhancerStoreCreator,
+} from 'redux';
 
 import { updateFlags, updateStatus } from '../../ducks';
+import type { TState } from '../../types';
 
 export default function createFlopFlipEnhancer(
   adapter: TAdapter,

@@ -1,6 +1,6 @@
+import { getFlagVariation, useAdapterContext } from '@flopflip/react';
 import type { TFlagName, TFlagVariation } from '@flopflip/types';
 
-import { getFlagVariation, useAdapterContext } from '@flopflip/react';
 import useFlagsContext from '../use-flags-context';
 
 export default function useFlagVariations(

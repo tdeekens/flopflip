@@ -1,0 +1,47 @@
+module.exports = {
+  parserOptions: {
+    sourceType: 'module',
+    ecmaVersion: 7,
+    ecmaFeatures: { jsx: true, modules: true },
+  },
+  extends: [
+    'xo',
+    'xo-typescript',
+    'xo-react',
+    'prettier',
+    'prettier/@typescript-eslint',
+    'prettier/react',
+    'plugin:jest/recommended',
+    'plugin:testing-library/react',
+  ],
+  env: { es6: true, jest: true, browser: true },
+  plugins: ['prettier', 'jest', 'simple-import-sort'],
+  rules: {
+    'jest/no-disabled-tests': 'warn',
+    'jest/no-focused-tests': 'error',
+    'jest/no-identical-title': 'error',
+    'jest/valid-expect': 'error',
+    'max-nested-callbacks': ['error', 20],
+    'default-param-last': 0,
+    'testing-library/prefer-presence-queries': 'error',
+    'testing-library/await-async-query': 'error',
+    'react/prop-types': 0,
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
+  },
+  globals: { VERSION: true, Cypress: true, cy: true },
+  overrides: [
+    { files: ['*.spec.js', 'packages/test-utils/*.js'] },
+    {
+      files: ['*.js'],
+      rules: {
+        '@typescript-eslint/promise-function-async': 0,
+        '@typescript-eslint/no-unsafe-member-access': 0,
+        '@typescript-eslint/no-unsafe-call': 0,
+        '@typescript-eslint/no-unsafe-return': 0,
+        '@typescript-eslint/prefer-readonly-parameter-types': 0,
+      },
+    },
+  ],
+  settings: { react: { version: 'detect' } },
+};

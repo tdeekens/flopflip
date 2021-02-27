@@ -1,16 +1,16 @@
+import { AdapterContext,createAdapterContext } from '@flopflip/react';
 import type {
+  TAdapterIdentifiers,
+  TAdapterStatus,
   TFlags,
   TReconfigureAdapter,
-  TAdapterStatus,
-  TAdapterIdentifiers,
 } from '@flopflip/types';
-
-import React from 'react';
 import {
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
 } from '@flopflip/types';
-import { createAdapterContext, AdapterContext } from '@flopflip/react';
+import React from 'react';
+
 import { createIntialFlagsContext, FlagsContext } from '../flags-context';
 
 type TProps = {

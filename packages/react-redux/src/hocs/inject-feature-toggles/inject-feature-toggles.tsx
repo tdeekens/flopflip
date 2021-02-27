@@ -1,16 +1,14 @@
-import type { TFlagName, TFlags } from '@flopflip/types';
-
-import React from 'react';
 import {
-  wrapDisplayName,
-  setDisplayName,
   DEFAULT_FLAGS_PROP_KEY,
+  setDisplayName,
+  wrapDisplayName,
 } from '@flopflip/react';
+import type { TFlagName, TFlags } from '@flopflip/types';
+import React from 'react';
+
 import { useFlagVariations } from '../../hooks';
 
-type InjectedProps = {
-  [propKey: string]: TFlags;
-};
+type InjectedProps = Record<string, TFlags>;
 
 export default <OwnProps extends Record<string, unknown>>(
   flagNames: TFlagName[],

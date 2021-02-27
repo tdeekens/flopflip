@@ -1,7 +1,8 @@
-import { screen, render as rtlRender, act } from '@flopflip/test-utils';
-import React from 'react';
 import adapter from '@flopflip/memory-adapter';
-import { useFeatureToggle, useAdapterStatus } from '../../hooks';
+import { act, render as rtlRender, screen } from '@flopflip/test-utils';
+import React from 'react';
+
+import { useAdapterStatus, useFeatureToggle } from '../../hooks';
 import Configure from './configure';
 
 const testFlagName = 'firstFlag';

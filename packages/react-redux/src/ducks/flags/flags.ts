@@ -1,16 +1,16 @@
-import type {
-  TFlagName,
-  TFlagVariation,
-  TFlagsContext,
-  TFlagsChange,
-  TAdapterIdentifiers,
-} from '@flopflip/types';
-
 import { isNil } from '@flopflip/react';
-import { TUpdateFlagsAction } from './types.js';
-import { TState } from '../../types';
-import { STATE_SLICE } from '../../store/constants';
+import type {
+  TAdapterIdentifiers,
+  TFlagName,
+  TFlagsChange,
+  TFlagsContext,
+  TFlagVariation,
+} from '@flopflip/types';
 import { Reducer } from 'redux';
+
+import { STATE_SLICE } from '../../store/constants';
+import { TState } from '../../types';
+import { TUpdateFlagsAction } from './types';
 
 // Actions
 export const UPDATE_FLAGS = '@flopflip/flags/update';

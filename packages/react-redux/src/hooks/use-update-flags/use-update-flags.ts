@@ -1,12 +1,12 @@
 import type {
-  TFlagsChange,
   TAdapterEventHandlers,
   TAdapterIdentifiers,
+  TFlagsChange,
 } from '@flopflip/types';
-
 import { useCallback } from 'react';
-import { Dispatch } from 'redux';
 import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+
 import { updateFlags } from '../../ducks';
 
 type TUseUpdateFlagsOptions = {

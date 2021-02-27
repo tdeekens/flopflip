@@ -6,27 +6,23 @@ const version = '__@FLOPFLIP/VERSION_OF_RELEASE__';
 
 export {
   AdapterContext,
+  ConfigureAdapter,
   createAdapterContext,
+  ReconfigureAdapter,
   selectAdapterConfigurationStatus,
   ToggleFeature,
-  ConfigureAdapter,
-  ReconfigureAdapter,
 } from './components';
-
-export { getIsFeatureEnabled, getFlagVariation, isNil } from './helpers';
-
 export {
+  ALL_FLAGS_PROP_KEY,
   DEFAULT_FLAG_PROP_KEY,
   DEFAULT_FLAGS_PROP_KEY,
-  ALL_FLAGS_PROP_KEY,
 } from './constants';
-
+export { getFlagVariation, getIsFeatureEnabled, isNil } from './helpers';
 export { setDisplayName, wrapDisplayName } from './hocs';
-
 export {
+  useAdapterContext,
   useAdapterReconfiguration,
   useAdapterSubscription,
-  useAdapterContext,
 } from './hooks';
 
 export { version };

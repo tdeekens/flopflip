@@ -1,6 +1,7 @@
 import { AdapterConfigurationStatus } from '@flopflip/types';
-import warning from 'tiny-warning';
 import getGlobalThis from 'globalthis';
+import warning from 'tiny-warning';
+
 import adapter, { STORAGE_SLICE } from './adapter';
 
 jest.mock('tiny-warning');

@@ -1,4 +1,5 @@
 import { AdapterConfigurationStatus } from '@flopflip/types';
+
 import { updateFlags, updateStatus } from '../../ducks';
 import createFlopFlipEnhancer from './enhancer';
 
