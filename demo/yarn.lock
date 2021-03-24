@@ -1104,13 +1104,6 @@
     core-js-pure "^3.0.0"
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@7.12.0":
-  version "7.12.0"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.12.0.tgz#98bd7666186969c04be893d747cf4a6c6c8fa6b0"
-  integrity sha512-lS4QLXQ2Vbw2ubfQjeQcn+BZgZ5+ROHW9f+DWjEp5Y+NHYmkRGKqHSJ1tuhbUauKu2nhZNTBIvsIQ8dXfY5Gjw==
-  dependencies:
-    regenerator-runtime "^0.13.4"
-
 "@babel/runtime@7.12.1":
   version "7.12.1"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.12.1.tgz#b4116a6b6711d010b2dad3b7b6e43bf1b9954740"
@@ -1203,56 +1196,70 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@flopflip/launchdarkly-adapter@2.15.7":
-  version "2.15.7"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-2.15.7.tgz#339af06feed9fdf3740db5b0bddc87a30a22cde1"
-  integrity sha512-gqOM1OBaEn7fvAoJf0DDHkeKxUF4dymacElTOJEeAdlCjA9SxuT07owiBFts2ZoiVzI7Wbo7icwKyRpAVP9SJA==
+"@flopflip/adapter-utilities@1.0.14":
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/@flopflip/adapter-utilities/-/adapter-utilities-1.0.14.tgz#8145f586b3d245ac6438bfcf7f2ecdeb20557eaa"
+  integrity sha512-k0dNpn86MwHX7MwW4wkjoN54Wr839v0eeDKWxgG0goN/6iyHuBrr5eX0RScnHBLpkmvDCXYyki5ga4XWIk1SNw==
   dependencies:
-    "@babel/runtime" "7.12.0"
-    "@flopflip/types" "2.5.10"
+    "@babel/runtime" "7.13.8"
+    "@flopflip/types" "4.1.12"
+    globalthis "1.0.2"
+    lodash "4.17.21"
+
+"@flopflip/launchdarkly-adapter@5.0.11":
+  version "5.0.11"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-5.0.11.tgz#e2b2008244526a0aa0e897d9094917e5274ffed0"
+  integrity sha512-Lt5NMcIMkSwM+eeN2OV10ZZHF5+hDCT3ZTF9cXPST6Ll5YMrg49IEMfDUjoFubpcitl1csoKYuwjZZ1J14M7/w==
+  dependencies:
+    "@babel/runtime" "7.13.8"
+    "@flopflip/adapter-utilities" "1.0.14"
+    "@flopflip/types" "4.1.12"
     debounce-fn "4.0.0"
     deepmerge "4.2.2"
-    globalthis "1.0.1"
-    launchdarkly-js-client-sdk "2.18.1"
-    lodash "4.17.20"
+    launchdarkly-js-client-sdk "2.19.0"
+    lodash "4.17.21"
     mitt "2.1.0"
     tiny-warning "1.0.3"
-    ts-essentials "7.0.0"
 
-"@flopflip/localstorage-adapter@1.9.7":
-  version "1.9.7"
-  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-1.9.7.tgz#43b278d4593335edd23b66f4131a55abd240b412"
-  integrity sha512-HCZMbtCVCqf803MXJt+zXeAkJoBYkMAu3gcYiyN46tSbRCsfnspFzRy6TGUzXHhmCjXDgfyDW6zSc5VB+qZ3Fg==
+"@flopflip/localstorage-adapter@4.0.10":
+  version "4.0.10"
+  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-4.0.10.tgz#eda10ff89ed813ae5fa7fbd5666f5f8b2d1fcbe9"
+  integrity sha512-4pKCza4wHF/BRvOUr6S7BNQHMxmAJLnLfb5nbO9F4dKP/jVA6aJWy6JIG5Fu64Y3UCckJPYuxY+4+QreiXtn+A==
   dependencies:
-    "@babel/runtime" "7.12.0"
-    "@flopflip/types" "2.5.10"
-    globalthis "1.0.1"
+    "@babel/runtime" "7.13.8"
+    "@flopflip/adapter-utilities" "1.0.14"
+    "@flopflip/localstorage-cache" "1.0.15"
+    "@flopflip/types" "4.1.12"
+    lodash "4.17.21"
     mitt "2.1.0"
     tiny-warning "1.0.3"
-    ts-essentials "7.0.0"
 
-"@flopflip/memory-adapter@1.9.7":
-  version "1.9.7"
-  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-1.9.7.tgz#3f684fc81ee8d3e8a452a726e4ac33c8494c6743"
-  integrity sha512-fAZ+VlQ6/o0IOq3Fi6E2whgeqpgBlHKX33grIFcC9SAt+hqlVthGBgdvra6c8cbM1ZXMmZtTIYPJHBIe3M8l+g==
+"@flopflip/localstorage-cache@1.0.15":
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-cache/-/localstorage-cache-1.0.15.tgz#44d863eec2d295d686fde12b425b2ea170ce5bde"
+  integrity sha512-ELqyxmzX8bZCPS/MrwIM+vlxfzSfB7k+M2Jy9Qp6eiVdeDcJ4BWkGrsGORASr/UHBXBDUJpLtFCtMU6DxMu5iQ==
   dependencies:
-    "@babel/runtime" "7.12.0"
-    "@flopflip/types" "2.5.10"
-    globalthis "1.0.1"
-    lodash "4.17.20"
+    "@flopflip/types" "4.1.12"
+
+"@flopflip/memory-adapter@3.0.14":
+  version "3.0.14"
+  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-3.0.14.tgz#f17db4a255b97db4ce806f170bc81d5f3ede8354"
+  integrity sha512-hqYKg8QPNkZO5eEGfstf2OJklGe4gSXjAOHloUOgAH1cFUrgphvwHxrIDGMHTzavihGX0cDqVBnZESKktQBfOw==
+  dependencies:
+    "@babel/runtime" "7.13.8"
+    "@flopflip/adapter-utilities" "1.0.14"
+    "@flopflip/types" "4.1.12"
     mitt "2.1.0"
     tiny-warning "1.0.3"
-    ts-essentials "7.0.0"
 
-"@flopflip/react-broadcast@10.2.8":
-  version "10.2.8"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-10.2.8.tgz#575252b840c5f53ec97e53ddd0661795aba475ef"
-  integrity sha512-EjcbQc0qn8s0U/IytEZs7tDYlMorK1+EfmC9viAFHJM26ERnXjcyw4qGsKbXVJDPUPLQcXtIe3M+B+0WLUVHcA==
+"@flopflip/react-broadcast@12.2.3":
+  version "12.2.3"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-12.2.3.tgz#2892761c451e6e2a24d20cb0a2f61a25b906d2f0"
+  integrity sha512-2HYQr62yWuQNR2VhsH/WQgNrYpZzPBOh+VzmgGMypHz2E/peYjsY+3RwbXuPYDVbu4lqPd3tr594SSuEgfKOVA==
   dependencies:
-    "@babel/runtime" "7.12.0"
-    "@flopflip/react" "^9.1.20"
-    "@flopflip/types" "2.5.10"
-    lodash "4.17.20"
+    "@babel/runtime" "7.13.8"
+    "@flopflip/react" "^11.1.14"
+    "@flopflip/types" "4.1.12"
 
 "@flopflip/react-redux@12.1.13":
   version "12.1.13"
@@ -1276,27 +1283,6 @@
     lodash "4.17.21"
     react-is "17.0.1"
     tiny-warning "1.0.3"
-
-"@flopflip/react@^9.1.20":
-  version "9.1.20"
-  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-9.1.20.tgz#894a62439211009d8bf08a45c65a7ff5f334568c"
-  integrity sha512-wUXUQk3DLlaygf4uVMAdfcpXHSrPdRWc4vbjHGzm4C+KUJOYVjGa9qbMTighEcU1J0FUCrST3HZY3H+X7OnHbA==
-  dependencies:
-    "@babel/runtime" "7.12.0"
-    "@types/react-is" "16.7.1"
-    deepmerge "4.2.2"
-    lodash "4.17.20"
-    react-fast-compare "3.2.0"
-    react-is "16.13.1"
-    tiny-warning "1.0.3"
-    ts-essentials "7.0.0"
-
-"@flopflip/types@2.5.10":
-  version "2.5.10"
-  resolved "https://registry.yarnpkg.com/@flopflip/types/-/types-2.5.10.tgz#deec34ae7736bf0a64b9407705dca16904dc444a"
-  integrity sha512-Sduh4QpKTBIW9fdLbpArPDpUTYbNr6H5y1JOBAx5Z4xDatomUKXuZwbLdSDeVLWRQsululMLqxPsQrVLTEYLXg==
-  dependencies:
-    ts-essentials "7.0.0"
 
 "@flopflip/types@4.1.12":
   version "4.1.12"
@@ -1863,13 +1849,6 @@
   version "1.5.4"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
   integrity sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
-
-"@types/react-is@16.7.1":
-  version "16.7.1"
-  resolved "https://registry.yarnpkg.com/@types/react-is/-/react-is-16.7.1.tgz#d3f1c68c358c00ce116b55ef5410cf486dd08539"
-  integrity sha512-dMLFD2cCsxtDgMkTydQCM0PxDq8vwc6uN5M/jRktDfYvH3nQj6pjC9OrCXS2lKlYoYTNJorI/dI8x9dpLshexQ==
-  dependencies:
-    "@types/react" "*"
 
 "@types/react-is@17.0.0":
   version "17.0.0"
@@ -5365,10 +5344,10 @@ globals@^13.6.0:
   dependencies:
     type-fest "^0.20.2"
 
-globalthis@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/globalthis/-/globalthis-1.0.1.tgz#40116f5d9c071f9e8fb0037654df1ab3a83b7ef9"
-  integrity sha512-mJPRTc/P39NH/iNG4mXa9aIhNymaQikTrnspeCa2ZuJ+mH2QN/rXwtX3XwKrHqWgUQFbNZKtHM105aHzJalElw==
+globalthis@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/globalthis/-/globalthis-1.0.2.tgz#2a235d34f4d8036219f7e34929b5de9e18166b8b"
+  integrity sha512-ZQnSFO1la8P7auIOQECnm0sSuoMeaSq0EEdXMBFF2QJO4uNcwbyhSgG3MruWNbFTqCLmxVwGOl7LZ9kASvHdeQ==
   dependencies:
     define-properties "^1.1.3"
 
@@ -6946,18 +6925,18 @@ last-call-webpack-plugin@^3.0.0:
     lodash "^4.17.5"
     webpack-sources "^1.1.0"
 
-launchdarkly-js-client-sdk@2.18.1:
-  version "2.18.1"
-  resolved "https://registry.yarnpkg.com/launchdarkly-js-client-sdk/-/launchdarkly-js-client-sdk-2.18.1.tgz#f04f1242cec5e41f40a65304f0d285d9991ee36a"
-  integrity sha512-LEdGZlN9hRMiw1Fl5m6cZzgXGoUuS+SdQ2sBNdy/shh0SFfVMQ0Of3ygZtKlypoIV9kDeHeEOvL/Ps6lW/cK3A==
+launchdarkly-js-client-sdk@2.19.0:
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/launchdarkly-js-client-sdk/-/launchdarkly-js-client-sdk-2.19.0.tgz#eb846ecf8d195d0631a6612f7c01c4cec157a1dd"
+  integrity sha512-wt5jQVFcTfietLsgHm2hFPenIx4vejCctrsi4KnjcI1mTWW9fWhpGqFVbQWfuezePr4xp8+1Ldol+lpe9c0DhA==
   dependencies:
     escape-string-regexp "^1.0.5"
-    launchdarkly-js-sdk-common "3.2.10"
+    launchdarkly-js-sdk-common "3.3.0"
 
-launchdarkly-js-sdk-common@3.2.10:
-  version "3.2.10"
-  resolved "https://registry.yarnpkg.com/launchdarkly-js-sdk-common/-/launchdarkly-js-sdk-common-3.2.10.tgz#d76b829aa969508c27bb83f902fcbb95f08055be"
-  integrity sha512-zyEt5iy+7L3N7nPjERndPk87eOPpJn+gdIoqpWcIzrZvDxzOSG2pkAkP7f4U4LJBU6pYkb68krlDRO6LKQfAzQ==
+launchdarkly-js-sdk-common@3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/launchdarkly-js-sdk-common/-/launchdarkly-js-sdk-common-3.3.0.tgz#1f78adeb4944e62850f8e8b0227ddd8fcc8af513"
+  integrity sha512-YZNwD9t7qL530Diz+thetn+9qVHzz+m421i4RAlMhWcximr9UCA9ZktuBa1ry1Fca1+wLNWXKI4Es94lTZSOVw==
   dependencies:
     base64-js "^1.3.0"
     fast-deep-equal "^2.0.1"
@@ -7098,11 +7077,6 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
-
-lodash@4.17.20:
-  version "4.17.20"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
-  integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
 
 lodash@4.17.21, "lodash@>=3.5 <5", lodash@^4.17.11, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.5:
   version "4.17.21"
@@ -9155,20 +9129,15 @@ react-error-overlay@^6.0.9:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.9.tgz#3c743010c9359608c375ecd6bc76f35d93995b0a"
   integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
 
-react-fast-compare@3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
-  integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
-
-react-is@16.13.1, react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1:
-  version "16.13.1"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
-  integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
-
 react-is@17.0.1, react-is@^17.0.1:
   version "17.0.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
+
+react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1:
+  version "16.13.1"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
+  integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
 react-redux@7.2.2:
   version "7.2.2"
@@ -10733,11 +10702,6 @@ tryer@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
   integrity sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==
-
-ts-essentials@7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/ts-essentials/-/ts-essentials-7.0.0.tgz#eb807945d65e258bae8914f541543758f879f6c5"
-  integrity sha512-DptrzFAwb5afnsTdKxfScHqLbVZHl7YsxvDT+iT8tbXWFGSzbXALhfWlal25HBesqlX0NZd6wz9KBGnJcWScdQ==
 
 ts-pnp@1.2.0, ts-pnp@^1.1.6:
   version "1.2.0"
