@@ -31,9 +31,9 @@
   "devDependencies": {
     "@flopflip/test-utils": "*",
     "@types/react": "17.0.3",
-    "@types/react-dom": "17.0.2",
-    "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "@types/react-dom": "17.0.3",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
   },
   "peerDependencies": {
     "react": "^16.8 || ^17.0",
@@ -45,7 +45,7 @@
     "@types/react-is": "17.0.0",
     "deepmerge": "4.2.2",
     "lodash": "4.17.21",
-    "react-is": "17.0.1",
+    "react-is": "17.0.2",
     "tiny-warning": "1.0.3"
   },
   "keywords": [
