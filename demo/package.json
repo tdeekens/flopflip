@@ -8,7 +8,7 @@
     "@flopflip/memory-adapter": "3.0.14",
     "@flopflip/react-broadcast": "12.2.3",
     "@flopflip/react-redux": "12.1.13",
-    "classnames": "2.2.6",
+    "classnames": "2.3.1",
     "lodash.flowright": "3.5.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
