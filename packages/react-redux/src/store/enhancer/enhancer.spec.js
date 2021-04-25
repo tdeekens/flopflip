@@ -51,7 +51,7 @@ describe('when creating enhancer', () => {
     });
 
     describe('when invoking  `onFlagsStateChange`', () => {
-      let nextFlags = {
+      const nextFlags = {
         foo: true,
       };
 
@@ -75,7 +75,7 @@ describe('when creating enhancer', () => {
     });
 
     describe('when invoking  `onStatusStateChange`', () => {
-      let nextStatus = {
+      const nextStatus = {
         adapterConfigurationStatus: AdapterConfigurationStatus.Configured,
       };
 

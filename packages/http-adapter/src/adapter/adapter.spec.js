@@ -1,4 +1,4 @@
-import { AdapterConfigurationStatus, cacheIdentifiers } from '@flopflip/types';
+import { AdapterConfigurationStatus } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
 
@@ -13,15 +13,7 @@ const createAdapterEventHandlers = (custom = {}) => ({
 });
 
 describe('when configuring', () => {
-  let adapterEventHandlers;
-
-  beforeEach(() => {
-    adapterEventHandlers = createAdapterEventHandlers();
-  });
-
   describe('when not configured', () => {
-    let adapterArgs = {};
-
     it('should indicate that the adapter is not configured', () => {
       expect(
         adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
@@ -41,7 +33,7 @@ describe('when configuring', () => {
 });
 
 describe('when configured', () => {
-  let adapterArgs = {
+  const adapterArgs = {
     execute: jest.fn().mockResolvedValue({ enabled: true, disabled: false }),
   };
   let configurationResult;
@@ -113,8 +105,7 @@ describe('when configured', () => {
   });
 
   describe('with cache', () => {
-    const cachePrefix = 'test';
-    let adapterArgs = {
+    const adapterArgs = {
       cacheIdentifier: 'session',
       execute: jest.fn().mockResolvedValue({ enabled: true, disabled: false }),
     };

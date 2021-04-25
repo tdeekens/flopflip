@@ -29,15 +29,16 @@ module.exports = {
   },
   globals: { VERSION: true, Cypress: true, cy: true },
   overrides: [
-    { files: ['*.spec.js', 'packages/test-utils/*.js'] },
     {
-      files: ['*.js'],
+      files: ['*.spec.js', 'packages/test-utils/*.js', '*.js'],
       rules: {
         '@typescript-eslint/promise-function-async': 0,
         '@typescript-eslint/no-unsafe-member-access': 0,
         '@typescript-eslint/no-unsafe-call': 0,
         '@typescript-eslint/no-unsafe-return': 0,
         '@typescript-eslint/prefer-readonly-parameter-types': 0,
+        '@typescript-eslint/no-unsafe': 0,
+        '@typescript-eslint/no-unsafe-argument': 0,
       },
     },
   ],

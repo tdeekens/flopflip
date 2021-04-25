@@ -162,7 +162,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
           } else if (this.#adapterState.client && flags) {
             flagsFromSdk = {};
 
-            for (let [requestedFlagName, defaultFlagValue] of Object.entries(
+            for (const [requestedFlagName, defaultFlagValue] of Object.entries(
               flags
             )) {
               const denormalizedRequestedFlagName = denormalizeFlagName(
@@ -243,7 +243,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
         this.#adapterState.client.on(`change:${flagName}`, (flagValue) => {
           const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
             flagName,
-            flagValue
+            flagValue as TFlagVariation
           );
 
           if (this.#getIsFlagUnsubcribed(normalizedFlagName)) return;

@@ -124,7 +124,10 @@ class CombineAdapters implements TCombinedAdapterInterface {
 
     return Promise.all(
       this.#adapters.map(async (adapter) => {
-        return adapter.configure(adapterArgs[adapter.id], {
+        const adapterArgs = adapterArgs[adapter.id];
+
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        return adapter.configure(adapterArgs, {
           onFlagsStateChange: adapterEventHandlers.onFlagsStateChange,
           onStatusStateChange: () => undefined,
         });
@@ -183,7 +186,10 @@ class CombineAdapters implements TCombinedAdapterInterface {
 
     return Promise.all(
       this.#adapters.map(async (adapter) => {
-        return adapter.reconfigure(adapterArgs[adapter.id], {
+        const adapterArgs = adapterArgs[adapter.id];
+
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        return adapter.reconfigure(adapterArgs, {
           onFlagsStateChange: adapterEventHandlers.onFlagsStateChange,
           onStatusStateChange: () => undefined,
         });

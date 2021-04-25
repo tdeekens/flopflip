@@ -2,11 +2,7 @@ import { AdapterConfigurationStatus } from '@flopflip/types';
 import { SplitFactory } from '@splitsoftware/splitio';
 import getGlobalThis from 'globalthis';
 
-import adapter, {
-  createAnonymousUserKey,
-  normalizeFlag,
-  normalizeFlags,
-} from './adapter';
+import adapter, { createAnonymousUserKey, normalizeFlag } from './adapter';
 
 jest.mock('@splitsoftware/splitio', () => ({
   SplitFactory: jest.fn(() => ({
@@ -162,11 +158,11 @@ describe('when configuring', () => {
   });
 
   describe('when configured', () => {
+    const treatmentStub = jest.fn(() => flags);
     let factory;
     let onStub;
     let onStatusStateChange;
     let onFlagsStateChange;
-    let treatmentStub = jest.fn(() => flags);
     let configurationResult;
 
     beforeEach(async () => {

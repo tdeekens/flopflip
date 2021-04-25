@@ -434,7 +434,7 @@ export type TDiff<ExcludedFrom, ToExclude> = Pick<
   Exclude<keyof ExcludedFrom, keyof ToExclude>
 >;
 export type TCache = {
-  get: (key: string) => any;
+  get: <T = any>(key: string) => T;
   set: (key: string, value: any) => boolean;
   unset: (key: string) => void;
 };

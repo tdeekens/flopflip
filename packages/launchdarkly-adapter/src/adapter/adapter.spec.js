@@ -315,7 +315,7 @@ describe('when configuring', () => {
             {
               sdk: { clientSideId },
               user: userWithKey,
-              flags: flags,
+              flags,
             },
             {
               onStatusStateChange,
