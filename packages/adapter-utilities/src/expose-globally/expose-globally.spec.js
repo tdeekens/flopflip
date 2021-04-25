@@ -1,5 +1,4 @@
 import getGlobalThis from 'globalthis';
-import { update } from 'lodash';
 
 import exposeGlobally from './expose-globally';
 

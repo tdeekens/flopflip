@@ -1,4 +1,4 @@
-import { AdapterContext,createAdapterContext } from '@flopflip/react';
+import { AdapterContext, createAdapterContext } from '@flopflip/react';
 import type {
   TAdapterIdentifiers,
   TAdapterStatus,
@@ -39,6 +39,7 @@ const TestProvider = (props: TProps) => {
     props.status
   );
   const flagsContextValue = createIntialFlagsContext(
+    // @ts-expect-error
     props.adapterIdentifiers,
     props.flags
   );

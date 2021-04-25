@@ -13,7 +13,7 @@ const createAdapterEventHandlers = (custom = {}) => ({
 });
 
 describe('when configuring', () => {
-  let adapterArgs = {};
+  const adapterArgs = {};
   let adapterEventHandlers;
 
   beforeEach(() => {
