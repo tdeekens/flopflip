@@ -1,13 +1,9 @@
-import type {
-  TAdapterIdentifiers,
-  TFlags,
-  TFlagsContext,
-} from '@flopflip/types';
+import type { TFlags, TFlagsContext } from '@flopflip/types';
 import { adapterIdentifiers as allAdapterIdentifiers } from '@flopflip/types';
 import { createContext } from 'react';
 
 const createIntialFlagsContext = (
-  adapterIdentifiers: TAdapterIdentifiers,
+  adapterIdentifiers: Record<string, string>,
   initialFlags: TFlags
 ) =>
   Object.fromEntries(

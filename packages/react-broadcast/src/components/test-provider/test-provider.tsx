@@ -1,6 +1,5 @@
-import { AdapterContext,createAdapterContext } from '@flopflip/react';
+import { AdapterContext, createAdapterContext } from '@flopflip/react';
 import type {
-  TAdapterIdentifiers,
   TAdapterStatus,
   TFlags,
   TReconfigureAdapter,
@@ -16,7 +15,7 @@ import { createIntialFlagsContext, FlagsContext } from '../flags-context';
 type TProps = {
   children: React.ReactNode;
   flags: TFlags;
-  adapterIdentifiers?: TAdapterIdentifiers[];
+  adapterIdentifiers?: Record<string, string>;
   reconfigure?: TReconfigureAdapter;
   status?: TAdapterStatus;
 };
@@ -25,7 +24,7 @@ const defaultProps: Pick<
   TProps,
   'adapterIdentifiers' | 'reconfigure' | 'status'
 > = {
-  adapterIdentifiers: ['test'],
+  adapterIdentifiers: { test: 'test' },
   status: {
     subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
     configurationStatus: AdapterConfigurationStatus.Configured,
@@ -34,11 +33,13 @@ const defaultProps: Pick<
 
 const TestProvider = (props: TProps) => {
   const adapterContextValue = createAdapterContext(
+    // @ts-expect-error
     props.adapterIdentifiers,
     props.reconfigure,
     props.status
   );
   const flagsContextValue = createIntialFlagsContext(
+    // @ts-expect-error
     props.adapterIdentifiers,
     props.flags
   );
