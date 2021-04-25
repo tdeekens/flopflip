@@ -1,4 +1,4 @@
-import { renderWithAdapter } from '@flopflip/test-utils';
+import { renderWithAdapter, screen } from '@flopflip/test-utils';
 import React from 'react';
 import { Provider } from 'react-redux';
 
@@ -38,11 +38,11 @@ describe('when adapter is configured', () => {
       [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
     });
 
-    const { getByText, waitUntilConfigured } = render(store, <TestComponent />);
+    const { waitUntilConfigured } = render(store, <TestComponent />);
 
     await waitUntilConfigured();
 
-    expect(getByText('Is disabled: Yes')).toBeInTheDocument();
+    expect(screen.getByText('Is disabled: Yes')).toBeInTheDocument();
   });
 
   it('should indicate a feature being enabled', async () => {
@@ -50,10 +50,10 @@ describe('when adapter is configured', () => {
       [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
     });
 
-    const { getByText, waitUntilConfigured } = render(store, <TestComponent />);
+    const { waitUntilConfigured } = render(store, <TestComponent />);
 
     await waitUntilConfigured();
 
-    expect(getByText('Is enabled: Yes')).toBeInTheDocument();
+    expect(screen.getByText('Is enabled: Yes')).toBeInTheDocument();
   });
 });

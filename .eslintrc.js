@@ -22,7 +22,7 @@ module.exports = {
     'max-nested-callbacks': ['error', 20],
     'default-param-last': 0,
     'testing-library/prefer-presence-queries': 'error',
-    'testing-library/await-async-query': 'error',
+    'testing-library/await-async-query': 'warn',
     'react/prop-types': 0,
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
