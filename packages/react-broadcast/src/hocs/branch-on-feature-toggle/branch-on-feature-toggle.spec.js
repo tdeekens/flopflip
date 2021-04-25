@@ -33,7 +33,7 @@ describe('without `untoggledComponent', () => {
 
         const {
           waitUntilConfigured,
-          queryByFlagName,
+          getByFlagName,
           changeFlagVariation,
         } = render(<TestComponent />);
 
@@ -41,7 +41,7 @@ describe('without `untoggledComponent', () => {
 
         changeFlagVariation('disabledFeature', true);
 
-        expect(queryByFlagName('isFeatureEnabled')).toBeInTheDocument();
+        expect(getByFlagName('isFeatureEnabled')).toBeInTheDocument();
       });
     });
   });

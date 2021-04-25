@@ -36,7 +36,7 @@ const getMissingFlagNameError = (c, flagName) =>
 const [
   queryByFlagName,
   getAllByFlagName,
-  getByDataFlagName,
+  getByFlagName,
   findAllByFlagName,
   findByFlagName,
 ] = buildQueries(
@@ -48,17 +48,18 @@ const [
 const flagNameQueries = {
   queryByFlagName,
   getAllByFlagName,
-  getByDataFlagName,
+  getByFlagName,
   findAllByFlagName,
   findByFlagName,
 };
 
-const changeFlagVariation = (rendered, flagName, flagVariation) =>
-  fireEvent.change(rendered.getByLabelText('Change flag variation'), {
+const changeFlagVariation = (flagName, flagVariation) =>
+  fireEvent.change(screen.getByLabelText('Change flag variation'), {
     target: { value: JSON.stringify({ flagName, flagVariation }) },
   });
 
 const defaultRender = (ui, { ...rtlOptions }) => {
+  // eslint-disable-next-line testing-library/render-result-naming-convention
   const rendered = render(ui, {
     ...rtlOptions,
     queries: {
@@ -139,6 +140,7 @@ const renderWithAdapter = (
   const wrapUiIfNeeded = (innerElement) =>
     Wrapper ? cloneElement(Wrapper, null, innerElement) : innerElement;
 
+  // eslint-disable-next-line testing-library/render-result-naming-convention
   const rendered = render(
     wrapUiIfNeeded(
       <ConfigureFlopFlip
@@ -164,9 +166,9 @@ const renderWithAdapter = (
 
   return {
     changeFlagVariation: (flagName, flagVariation) =>
-      changeFlagVariation(rendered, flagName, flagVariation),
+      changeFlagVariation(flagName, flagVariation),
     waitUntilConfigured: async () => {
-      await rendered.findByLabelText(INTERNAL_FLAG_VARIATION_LABEL);
+      await screen.findByLabelText(INTERNAL_FLAG_VARIATION_LABEL);
       await rendered.findByFlagName(INTERNAL_FLAG_NAME);
     },
     ...rendered,

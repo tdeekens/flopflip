@@ -34,7 +34,7 @@ describe('when feature is disabled', () => {
     it('should render the component representing a enabled feature', async () => {
       const {
         waitUntilConfigured,
-        queryByFlagName,
+        getByFlagName,
         changeFlagVariation,
       } = render(<TestEnabledComponent />);
 
@@ -42,7 +42,7 @@ describe('when feature is disabled', () => {
 
       changeFlagVariation('disabledFeature', true);
 
-      expect(queryByFlagName('disabledFeature')).toBeInTheDocument();
+      expect(getByFlagName('disabledFeature')).toBeInTheDocument();
     });
   });
 });

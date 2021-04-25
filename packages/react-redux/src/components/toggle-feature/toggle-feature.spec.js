@@ -50,7 +50,7 @@ describe('<ToggleFeature>', () => {
 
         const {
           waitUntilConfigured,
-          queryByFlagName,
+          getByFlagName,
           changeFlagVariation,
         } = render(store, <TestComponent />);
 
@@ -58,7 +58,7 @@ describe('<ToggleFeature>', () => {
 
         changeFlagVariation('disabledFeature', true);
 
-        expect(queryByFlagName('disabledFeature')).toBeInTheDocument();
+        expect(getByFlagName('disabledFeature')).toBeInTheDocument();
       });
     });
   });
