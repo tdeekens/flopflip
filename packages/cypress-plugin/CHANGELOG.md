@@ -1,5 +1,14 @@
 # @flopflip/cypress-plugin
 
+## 2.0.27
+
+### Patch Changes
+
+- [#1433](https://github.com/tdeekens/flopflip/pull/1433) [`51e06ad4`](https://github.com/tdeekens/flopflip/commit/51e06ad40e06783daf4fdbfd12df1b13f636f7ba) Thanks [@renovate](https://github.com/apps/renovate)! - chore(deps): update dependency cypress to v7
+
+- Updated dependencies [[`10f981f5`](https://github.com/tdeekens/flopflip/commit/10f981f556284c5908b2be0d792db007a4002256)]:
+  - @flopflip/types@4.1.13
+
 ## 2.0.26
 
 ### Patch Changes
