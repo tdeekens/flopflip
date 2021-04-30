@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@flopflip/test-utils",
-  "version": "3.0.14",
+  "version": "3.0.15",
   "description": "Test utils for flipflop",
   "scripts": {},
   "main": "index.js",
@@ -22,7 +22,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.13.17",
-    "@flopflip/memory-adapter": "3.0.14",
+    "@flopflip/memory-adapter": "3.0.15",
     "@testing-library/jest-dom": "5.12.0",
     "@testing-library/react": "11.2.6",
     "codecov": "3.8.1",
