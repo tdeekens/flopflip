@@ -28,7 +28,7 @@
     "globalthis": "1.0.2"
   },
   "dependencies": {
-    "@babel/runtime": "7.13.17",
+    "@babel/runtime": "7.14.0",
     "@flopflip/adapter-utilities": "1.0.15",
     "@flopflip/types": "4.1.13",
     "debounce-fn": "4.0.0",
