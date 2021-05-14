@@ -48,11 +48,8 @@ describe('<ToggleFeature>', () => {
           [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
         });
 
-        const {
-          waitUntilConfigured,
-          getByFlagName,
-          changeFlagVariation,
-        } = render(store, <TestComponent />);
+        const { waitUntilConfigured, getByFlagName, changeFlagVariation } =
+          render(store, <TestComponent />);
 
         await waitUntilConfigured();
 
