@@ -26,6 +26,10 @@ module.exports = {
     'react/prop-types': 0,
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
+    '@typescript-eslint/no-unsafe-assignment': 0,
+    '@typescript-eslint/no-unsafe-member-access': 0,
+    '@typescript-eslint/no-unsafe-call': 0,
+    '@typescript-eslint/no-unsafe-return': 0,
   },
   globals: { VERSION: true, Cypress: true, cy: true },
   overrides: [
@@ -33,9 +37,6 @@ module.exports = {
       files: ['*.spec.js', 'packages/test-utils/*.js', '*.js'],
       rules: {
         '@typescript-eslint/promise-function-async': 0,
-        '@typescript-eslint/no-unsafe-member-access': 0,
-        '@typescript-eslint/no-unsafe-call': 0,
-        '@typescript-eslint/no-unsafe-return': 0,
         '@typescript-eslint/prefer-readonly-parameter-types': 0,
         '@typescript-eslint/no-unsafe': 0,
         '@typescript-eslint/no-unsafe-argument': 0,
