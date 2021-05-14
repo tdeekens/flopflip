@@ -31,11 +31,8 @@ describe('without `untoggledComponent', () => {
           flag: 'disabledFeature',
         })(components.ToggledComponent);
 
-        const {
-          waitUntilConfigured,
-          getByFlagName,
-          changeFlagVariation,
-        } = render(<TestComponent />);
+        const { waitUntilConfigured, getByFlagName, changeFlagVariation } =
+          render(<TestComponent />);
 
         await waitUntilConfigured();
 

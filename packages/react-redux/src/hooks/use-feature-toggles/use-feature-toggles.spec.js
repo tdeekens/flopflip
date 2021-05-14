@@ -16,13 +16,11 @@ const render = (store, TestComponent) =>
   });
 
 const TestComponent = () => {
-  const [
-    isEnabledFeatureEnabled,
-    isDisabledFeatureDisabled,
-  ] = useFeatureToggles({
-    enabledFeature: true,
-    disabledFeature: true,
-  });
+  const [isEnabledFeatureEnabled, isDisabledFeatureDisabled] =
+    useFeatureToggles({
+      enabledFeature: true,
+      disabledFeature: true,
+    });
 
   return (
     <ul>

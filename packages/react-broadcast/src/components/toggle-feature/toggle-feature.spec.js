@@ -32,11 +32,8 @@ describe('when feature is disabled', () => {
 
   describe('when enabling feature', () => {
     it('should render the component representing a enabled feature', async () => {
-      const {
-        waitUntilConfigured,
-        getByFlagName,
-        changeFlagVariation,
-      } = render(<TestEnabledComponent />);
+      const { waitUntilConfigured, getByFlagName, changeFlagVariation } =
+        render(<TestEnabledComponent />);
 
       await waitUntilConfigured();
 

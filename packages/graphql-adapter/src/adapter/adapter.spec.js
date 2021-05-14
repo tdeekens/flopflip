@@ -77,8 +77,7 @@ describe('when configured', () => {
 
     it('should invoke the fetcher with body', () => {
       expect(adapterArgs.fetcher).toHaveBeenCalledWith(adapterArgs.uri, {
-        body:
-          '{"query":"query AllFeatures { flags: allFeatures { name \\n value} }","variables":{"userId":"123"}}',
+        body: '{"query":"query AllFeatures { flags: allFeatures { name \\n value} }","variables":{"userId":"123"}}',
         headers: { 'Content-Type': 'application/json' },
         method: 'POST',
       });

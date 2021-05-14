@@ -44,11 +44,8 @@ describe('without `propKey`', () => {
           components.FlagsToComponent
         );
 
-        const {
-          waitUntilConfigured,
-          queryByFlagName,
-          changeFlagVariation,
-        } = render(store, <TestComponent />);
+        const { waitUntilConfigured, queryByFlagName, changeFlagVariation } =
+          render(store, <TestComponent />);
 
         await waitUntilConfigured();
 

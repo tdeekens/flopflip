@@ -77,11 +77,8 @@ describe('injectFeatureToggles', () => {
           },
         });
 
-        const {
-          waitUntilConfigured,
-          changeFlagVariation,
-          queryByFlagName,
-        } = render(store, <TestComponent />);
+        const { waitUntilConfigured, changeFlagVariation, queryByFlagName } =
+          render(store, <TestComponent />);
 
         await waitUntilConfigured();
 

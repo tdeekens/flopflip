@@ -50,11 +50,8 @@ describe('without `propKey`', () => {
         'enabledFeature',
       ])(FlagsToComponent);
 
-      const {
-        waitUntilConfigured,
-        changeFlagVariation,
-        queryByFlagName,
-      } = render(<TestComponent />);
+      const { waitUntilConfigured, changeFlagVariation, queryByFlagName } =
+        render(<TestComponent />);
 
       await waitUntilConfigured();
 

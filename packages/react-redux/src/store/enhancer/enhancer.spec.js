@@ -56,9 +56,10 @@ describe('when creating enhancer', () => {
       };
 
       beforeEach(() => {
-        const { onFlagsStateChange } = adapter.configure.mock.calls[
-          adapter.configure.mock.calls.length - 1
-        ][1];
+        const { onFlagsStateChange } =
+          adapter.configure.mock.calls[
+            adapter.configure.mock.calls.length - 1
+          ][1];
 
         onFlagsStateChange(nextFlags);
       });
@@ -80,9 +81,10 @@ describe('when creating enhancer', () => {
       };
 
       beforeEach(() => {
-        const { onStatusStateChange } = adapter.configure.mock.calls[
-          adapter.configure.mock.calls.length - 1
-        ][1];
+        const { onStatusStateChange } =
+          adapter.configure.mock.calls[
+            adapter.configure.mock.calls.length - 1
+          ][1];
 
         onStatusStateChange(nextStatus);
       });

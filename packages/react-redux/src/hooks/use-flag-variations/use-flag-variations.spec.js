@@ -16,11 +16,8 @@ const render = (store, TestComponent) =>
   });
 
 const TestComponent = () => {
-  const [
-    isEnabledFeatureEnabled,
-    isDisabledFeatureDisabled,
-    variation,
-  ] = useFlagVariations(['enabledFeature', 'disabledFeature', 'variation']);
+  const [isEnabledFeatureEnabled, isDisabledFeatureDisabled, variation] =
+    useFlagVariations(['enabledFeature', 'disabledFeature', 'variation']);
 
   return (
     <ul>
