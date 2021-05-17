@@ -50,7 +50,7 @@ const normalizeFlag = (
     normalizeFlagValue = true;
   } else if (flagValue === 'off') {
     normalizeFlagValue = false;
-  } else if (flagValue !== undefined && flagValue !== null) {
+  } else if (flagValue != null) {
     normalizeFlagValue = flagValue;
   } else {
     normalizeFlagValue = false;

@@ -1,3 +1,3 @@
-const isNil = (value: any) => value === undefined || value === null;
+const isNil = (value: any) => value == null;
 
 export default isNil;

@@ -7,7 +7,7 @@ const normalizeFlag = (
 ): TFlag => [
   camelCase(flagName),
   // Multi variate flags contain a string or `null` - `false` seems more natural.
-  flagValue === null || flagValue === undefined ? false : flagValue,
+  flagValue == null ? false : flagValue,
 ];
 
 export default normalizeFlag;
