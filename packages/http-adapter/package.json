@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/http-adapter",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "An HTTP adapter for flipflop",
   "main": "dist/flopflip-http-adapter.cjs.js",
   "module": "dist/flopflip-http-adapter.esm.js",
@@ -32,7 +32,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.14.0",
-    "@flopflip/adapter-utilities": "1.0.15",
+    "@flopflip/adapter-utilities": "1.0.16",
     "@flopflip/localstorage-cache": "1.0.16",
     "@flopflip/sessionstorage-cache": "1.0.16",
     "@flopflip/types": "4.1.13",

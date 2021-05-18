@@ -1,5 +1,12 @@
 # @flopflip/http-adapter
 
+## 0.0.9
+
+### Patch Changes
+
+- Updated dependencies [[`2dfef1c0`](https://github.com/tdeekens/flopflip/commit/2dfef1c045b238c66a804739012b2e2c879b4a3f)]:
+  - @flopflip/adapter-utilities@1.0.16
+
 ## 0.0.8
 
 ### Patch Changes

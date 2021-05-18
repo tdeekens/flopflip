@@ -1,5 +1,11 @@
 # @flopflip/react
 
+## 11.1.16
+
+### Patch Changes
+
+- [#1451](https://github.com/tdeekens/flopflip/pull/1451) [`2dfef1c0`](https://github.com/tdeekens/flopflip/commit/2dfef1c045b238c66a804739012b2e2c879b4a3f) Thanks [@p42-ai](https://github.com/apps/p42-ai)! - Refactor to use `== null` comparison
+
 ## 11.1.15
 
 ### Patch Changes

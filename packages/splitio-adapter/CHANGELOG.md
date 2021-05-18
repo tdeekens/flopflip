@@ -1,5 +1,14 @@
 # @flopflip/splitio-adapter
 
+## 4.0.12
+
+### Patch Changes
+
+- [#1451](https://github.com/tdeekens/flopflip/pull/1451) [`2dfef1c0`](https://github.com/tdeekens/flopflip/commit/2dfef1c045b238c66a804739012b2e2c879b4a3f) Thanks [@p42-ai](https://github.com/apps/p42-ai)! - Refactor to use `== null` comparison
+
+- Updated dependencies [[`2dfef1c0`](https://github.com/tdeekens/flopflip/commit/2dfef1c045b238c66a804739012b2e2c879b4a3f)]:
+  - @flopflip/adapter-utilities@1.0.16
+
 ## 4.0.11
 
 ### Patch Changes
