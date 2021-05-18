@@ -50,6 +50,7 @@ const normalizeFlag = (
     normalizeFlagValue = true;
   } else if (flagValue === 'off') {
     normalizeFlagValue = false;
+    // eslint-disable-next-line no-eq-null, eqeqeq, no-negated-condition
   } else if (flagValue != null) {
     normalizeFlagValue = flagValue;
   } else {
@@ -214,10 +215,10 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     this.#adapterState.manager = manager;
 
     return this.#subscribeToFlagChanges({
-      onFlagsStateChange: this.#adapterState.configuredCallbacks
-        .onFlagsStateChange,
-      onStatusStateChange: this.#adapterState.configuredCallbacks
-        .onStatusStateChange,
+      onFlagsStateChange:
+        this.#adapterState.configuredCallbacks.onFlagsStateChange,
+      onStatusStateChange:
+        this.#adapterState.configuredCallbacks.onStatusStateChange,
     }).then(() => {
       return {
         initializationStatus: AdapterInitializationStatus.Succeeded,
