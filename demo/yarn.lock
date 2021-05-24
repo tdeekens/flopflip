@@ -1164,7 +1164,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
+"@babel/runtime@7.14.0", "@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
   version "7.14.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.14.0.tgz#46794bc20b612c5f75e62dd071e24dfd95f1cbe6"
   integrity sha512-JELkvo/DlpNdJ7dlyw/eY7E0suy5i5GQH+Vlxaq1nsNJ+H7f4Vtv3jMeCEgRhZZQFXTjldYfQgv2qmM6M1v5wA==
@@ -1240,23 +1240,23 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@flopflip/adapter-utilities@1.0.15":
-  version "1.0.15"
-  resolved "https://registry.yarnpkg.com/@flopflip/adapter-utilities/-/adapter-utilities-1.0.15.tgz#54411631cb7ea0860268b24799f73dc5e25d2e72"
-  integrity sha512-6PfBBQfzwjvykDrwPvYGeOOCytu42x/CvhEZHoUsD1ec9HF6wV3aOdbtqPueUpM1ifjJWTEgBm9wfvVtyl0fdg==
+"@flopflip/adapter-utilities@1.0.16":
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@flopflip/adapter-utilities/-/adapter-utilities-1.0.16.tgz#1b5a00d8aadd80d0dea6b293eade0edd79d13d61"
+  integrity sha512-FjfEjBCu7uQkh+HUI3xFygUFW/mbA93Q3sIYRXvNxn20G6ChMBwHwvoH+rgEUq0UlYG6jRrBixo+u0UAaRhztQ==
   dependencies:
-    "@babel/runtime" "7.13.17"
+    "@babel/runtime" "7.14.0"
     "@flopflip/types" "4.1.13"
     globalthis "1.0.2"
     lodash "4.17.21"
 
-"@flopflip/launchdarkly-adapter@5.0.12":
-  version "5.0.12"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-5.0.12.tgz#f458a230d348e32a68d84c4057e668acd70f8454"
-  integrity sha512-ADWAOpztvO11ljiGTijUQbaKwXojnsDWgQebIu43LJsQqLlRoNL+F7XHoexnwFKK2n7xemIbcaUps5IcvarVow==
+"@flopflip/launchdarkly-adapter@5.0.13":
+  version "5.0.13"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-5.0.13.tgz#2805ab93018d295219ba9f90e6b5b28d23cecc54"
+  integrity sha512-I7y3WK6ejSencxSPZaGkB0vzyXuAGtYJE1A+1cw98xVNajA29ncWSlq5C2YMM4BrgeDCOIeAGlbHt14b8gJYWw==
   dependencies:
-    "@babel/runtime" "7.13.17"
-    "@flopflip/adapter-utilities" "1.0.15"
+    "@babel/runtime" "7.14.0"
+    "@flopflip/adapter-utilities" "1.0.16"
     "@flopflip/types" "4.1.13"
     debounce-fn "4.0.0"
     deepmerge "4.2.2"
@@ -1265,13 +1265,13 @@
     mitt "2.1.0"
     tiny-warning "1.0.3"
 
-"@flopflip/localstorage-adapter@4.0.11":
-  version "4.0.11"
-  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-4.0.11.tgz#af36149522df5c83ff1d0bfc618d66c9e5cbb773"
-  integrity sha512-Xjtaiha+BNjX51t0GQj+OullK/KPEjdSSWxx7N1iOHmgRULk24z4LX27ZeW/ZdAFxd1Sl77acooRdB0TIHudog==
+"@flopflip/localstorage-adapter@4.0.12":
+  version "4.0.12"
+  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-4.0.12.tgz#9150b8c385fe1cfebc8a66b9831e20e86cb82c73"
+  integrity sha512-b8u1NoQXG/+SF0bV0oD8pEz/l3XUgF+MZG9YEHZAlNiXKXrshwiLCv7900XJqAZLYpEG2iCRjQ37O7Bb9kV+gw==
   dependencies:
-    "@babel/runtime" "7.13.17"
-    "@flopflip/adapter-utilities" "1.0.15"
+    "@babel/runtime" "7.14.0"
+    "@flopflip/adapter-utilities" "1.0.16"
     "@flopflip/localstorage-cache" "1.0.16"
     "@flopflip/types" "4.1.13"
     lodash "4.17.21"
@@ -1285,13 +1285,13 @@
   dependencies:
     "@flopflip/types" "4.1.13"
 
-"@flopflip/memory-adapter@3.0.15":
-  version "3.0.15"
-  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-3.0.15.tgz#69f50667b85b5ef75b2a7246d2984a0057fd73ff"
-  integrity sha512-a9AoPWV+X6b/JVJcihAZbob+FKOVgIQh4HqM4dmciy+mjdyECqap8uYdOXZL2zSPre7DHkV7p7hU8iaJ40gZbg==
+"@flopflip/memory-adapter@3.0.16":
+  version "3.0.16"
+  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-3.0.16.tgz#89f7ad50b515db7977e673a87d1f9de072b8e19c"
+  integrity sha512-6oGeGaUQOO2AzoX1gUv1sWjRj96MBPK2kT/fsohjlq+95Hy5DkDC9jIHAC81p3hdFO+Va31vyCe1umviKQ4acg==
   dependencies:
-    "@babel/runtime" "7.13.17"
-    "@flopflip/adapter-utilities" "1.0.15"
+    "@babel/runtime" "7.14.0"
+    "@flopflip/adapter-utilities" "1.0.16"
     "@flopflip/types" "4.1.13"
     mitt "2.1.0"
     tiny-warning "1.0.3"
