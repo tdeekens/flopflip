@@ -32,6 +32,5 @@
     "jest-runner-eslint": "0.10.0",
     "jest-watch-yarn-workspaces": "1.1.0",
     "react": "17.0.2"
-  },
-  "devDependencies": {}
+  }
 }

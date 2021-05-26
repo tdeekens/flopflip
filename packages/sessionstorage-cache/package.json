@@ -33,6 +33,5 @@
   ],
   "dependencies": {
     "@flopflip/types": "4.1.13"
-  },
-  "devDependencies": {}
+  }
 }
