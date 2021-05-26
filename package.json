@@ -4,6 +4,7 @@
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
     "auth": "npm_config_registry=https://registry.npmjs.org npm whoami",
+    "install": "yarn install && yarn postinstall",
     "postinstall": "yarn check-node-version --package --print && yarn manypkg check && yarn preconstruct dev && yarn husky install",
     "develop": "yarn jest --projects jest.*.config.js --watch",
     "lint": "yarn jest --config jest.lint.config.js --maxWorkers 5",
@@ -94,6 +95,7 @@
     "eslint-plugin-simple-import-sort": "7.0.0",
     "eslint-plugin-testing-library": "4.6.0",
     "husky": "6.0.0",
+    "jest": "^27.0.1",
     "jest-environment-jsdom-sixteen": "2.0.0",
     "lint-staged": "11.0.0",
     "mri": "1.1.6",

@@ -39,7 +39,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn run install --immutable
 
       - uses: jackyef/bundlewatch-gh-action@master
         with:
