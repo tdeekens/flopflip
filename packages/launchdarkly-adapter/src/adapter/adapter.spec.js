@@ -352,15 +352,6 @@ describe('when configuring', () => {
     });
 
     describe('with flag updates', () => {
-      describe('when `subscribeToFlagChanges`', () => {
-        beforeEach(() => {
-          // Reset due to preivous dispatches
-          onFlagsStateChange.mockClear();
-
-          triggerFlagValueChange(client, { flagValue: true });
-        });
-      });
-
       describe('when not `subscribeToFlagChanges`', () => {
         beforeEach(async () => {
           // Reset due to preivous dispatches
