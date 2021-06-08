@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/types",
-  "version": "4.1.13",
+  "version": "4.1.14",
   "description": "Type definitions for flipflop",
   "main": "dist/flopflip-types.cjs.js",
   "module": "dist/flopflip-types.esm.js",
