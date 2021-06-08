@@ -1,5 +1,12 @@
 # @flopflip/localstorage-cache
 
+## 1.0.17
+
+### Patch Changes
+
+- Updated dependencies [[`fe4fdfc0`](https://github.com/tdeekens/flopflip/commit/fe4fdfc0c51de4364d6ad2e881947d77780faabf)]:
+  - @flopflip/types@4.1.14
+
 ## 1.0.16
 
 ### Patch Changes

@@ -1,5 +1,15 @@
 # @flopflip/http-adapter
 
+## 0.0.10
+
+### Patch Changes
+
+- Updated dependencies [[`fe4fdfc0`](https://github.com/tdeekens/flopflip/commit/fe4fdfc0c51de4364d6ad2e881947d77780faabf)]:
+  - @flopflip/adapter-utilities@1.0.17
+  - @flopflip/types@4.1.14
+  - @flopflip/localstorage-cache@1.0.17
+  - @flopflip/sessionstorage-cache@1.0.17
+
 ## 0.0.9
 
 ### Patch Changes
