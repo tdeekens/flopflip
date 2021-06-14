@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/logo.png" width="250" /><br /><br />
+  <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/main/logo.png" width="250" /><br /><br />
 </p>
 
 <h2 align="center">🎚 flopflip - Feature Toggling 🚦</h2>
@@ -47,7 +47,7 @@
 <details><br /><br />
   <summary><b>Want to see a demo?</b></summary>
 
-  <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/demo.gif" />
+  <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/main/demo.gif" />
   <br /><br />
 </details>
 
@@ -96,9 +96,9 @@ In all examples flags will update in realtime (depending on the adapter and prov
 
 ## ❯ Browser support
 
-| [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png" alt="IE / Edge" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png" alt="Firefox" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png" alt="Chrome" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png" alt="Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/opera.png" alt="Opera" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Opera | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari-ios.png" alt="iOS Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>iOS Safari | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome-android.png" alt="Chrome for Android" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome for Android |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| IE11, Edge                                                                                                                                                                                                             | last 2 versions                                                                                                                                                                                                       | last 2 versions                                                                                                                                                                                                    | last 2 versions                                                                                                                                                                                                    | last 2 versions                                                                                                                                                                                                 | last 2 versions                                                                                                                                                                                                                | last version                                                                                                                                                                                                                                       |
+| [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/main/src/images/edge.png" alt="IE / Edge" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/main/src/images/firefox.png" alt="Firefox" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/main/src/images/chrome.png" alt="Chrome" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/main/src/images/safari.png" alt="Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/main/src/images/opera.png" alt="Opera" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Opera | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/main/src/images/safari-ios.png" alt="iOS Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>iOS Safari | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/main/src/images/chrome-android.png" alt="Chrome for Android" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome for Android |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| IE11, Edge                                                                                                                                                                                                           | last 2 versions                                                                                                                                                                                                     | last 2 versions                                                                                                                                                                                                  | last 2 versions                                                                                                                                                                                                  | last 2 versions                                                                                                                                                                                               | last 2 versions                                                                                                                                                                                                              | last version                                                                                                                                                                                                                                     |
 
 ## ❯ Package Status
 
@@ -217,10 +217,10 @@ or
 ## ❯ Demo
 
 A minimal [demo](/demo) exists and can be adjusted to point to a
-[custom](https://github.com/tdeekens/flopflip/blob/master/demo/src/App.js#L108)
+[custom](https://github.com/tdeekens/flopflip/blob/main/demo/src/App.js#L108)
 LaunchDarkly account. You would have to create feature toggles according to the
 existing
-[flags](https://github.com/tdeekens/flopflip/blob/master/demo/src/flags.js),
+[flags](https://github.com/tdeekens/flopflip/blob/main/demo/src/flags.js),
 though.
 
 Then simply run:
@@ -967,7 +967,7 @@ Please note that the `adapterId` should be one of `launchdarkly`, `memory`, `loc
 
 `@flopflip/react-redux` and `@flopflip/react-broadcast` is built for UMD (un-
 and minified) and ESM using
-[`rollup`](https://github.com/tdeekens/flopflip/blob/master/rollup.config.js).
+[`rollup`](https://github.com/tdeekens/flopflip/blob/main/rollup.config.js).
 
 Both our `@flopflip/launchdarkly-wrapper` and `@flopflip/react` packages are
 "only" build for ESM and CommonJS (not UMD) as they are meant to be consumed by
@@ -984,7 +984,7 @@ CommonJS and ESM build.
   `dist/@flopflip/<package>.umd.min.js`
 
 All build files are part of the npm distribution using the
-[`files`](https://github.com/tdeekens/flopflip/blob/master/packages/react-redux/package.json)
+[`files`](https://github.com/tdeekens/flopflip/blob/main/packages/react-redux/package.json)
 array to keep install time short.
 
 Also feel free to use

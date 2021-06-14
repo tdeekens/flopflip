@@ -3,7 +3,7 @@ name: Test and Build
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
 
 jobs:
@@ -54,7 +54,7 @@ jobs:
           CI: true
 
       - name: Test (with coverage)
-        if: startsWith(matrix.node-version, '15')
+        if: startsWith(matrix.node-version, '16')
         run: yarn test:ci:coverage
         env:
           CI: true

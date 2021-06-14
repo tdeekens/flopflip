@@ -4,7 +4,7 @@
 </p>
 
 <p align="center">
-  <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/master/logo.png" /><br /><br />
+  <img alt="Logo" src="https://raw.githubusercontent.com/tdeekens/flopflip/main/logo.png" /><br /><br />
   <b>Toggle (flip or flop) features being stored in Redux or in a broadcasting system (through the context) via a set of React components or HoCs.</b>
 </p>
 

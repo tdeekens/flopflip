@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   release:
@@ -16,7 +16,7 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
 
       - name: Checkout
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         uses: actions/checkout@v2
 
       - name: Fetch all tags (for releases)
