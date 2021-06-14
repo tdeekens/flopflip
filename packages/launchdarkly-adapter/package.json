@@ -28,12 +28,12 @@
     "globalthis": "1.0.2"
   },
   "dependencies": {
-    "@babel/runtime": "7.14.0",
+    "@babel/runtime": "7.14.5",
     "@flopflip/adapter-utilities": "1.0.17",
     "@flopflip/types": "4.1.14",
     "debounce-fn": "4.0.0",
     "deepmerge": "4.2.2",
-    "launchdarkly-js-client-sdk": "2.19.1",
+    "launchdarkly-js-client-sdk": "2.19.2",
     "lodash": "4.17.21",
     "mitt": "2.1.0",
     "tiny-warning": "1.0.3"

@@ -31,8 +31,8 @@
   "devDependencies": {
     "@flopflip/memory-adapter": "3.0.17",
     "@flopflip/test-utils": "*",
-    "@types/react": "17.0.9",
-    "@types/react-dom": "17.0.6",
+    "@types/react": "17.0.11",
+    "@types/react-dom": "17.0.7",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
@@ -41,7 +41,7 @@
     "react-dom": "^16.8 || ^17.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.14.0",
+    "@babel/runtime": "7.14.5",
     "@flopflip/react": "^11.1.17",
     "@flopflip/types": "4.1.14"
   },
