@@ -1,5 +1,15 @@
 # @flopflip/react-redux
 
+## 12.1.16
+
+### Patch Changes
+
+- [#1464](https://github.com/tdeekens/flopflip/pull/1464) [`ef59e379`](https://github.com/tdeekens/flopflip/commit/ef59e379764bc04903ab6dc6b1e1ad42e7288b93) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update all dependencies
+
+- Updated dependencies [[`ef59e379`](https://github.com/tdeekens/flopflip/commit/ef59e379764bc04903ab6dc6b1e1ad42e7288b93)]:
+  - @flopflip/react@11.1.18
+  - @flopflip/types@4.1.15
+
 ## 12.1.15
 
 ### Patch Changes
