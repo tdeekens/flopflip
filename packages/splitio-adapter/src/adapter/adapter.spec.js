@@ -44,16 +44,15 @@ describe('when configuring', () => {
   });
 
   describe('when reconfiguring before configured', () => {
-    it('should reject reconfiguration', () => {
-      return expect(adapter.reconfigure({ user: userWithKey })).rejects.toEqual(
+    it('should reject reconfiguration', () =>
+      expect(adapter.reconfigure({ user: userWithKey })).rejects.toEqual(
         expect.any(Error)
-      );
-    });
+      ));
   });
 
   describe('with user key', () => {
-    beforeEach(() => {
-      return adapter.configure(
+    beforeEach(() =>
+      adapter.configure(
         {
           sdk: { authorizationKey },
           user: userWithKey,
@@ -62,8 +61,8 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
-      );
-    });
+      )
+    );
 
     it('should initialize the `SplitFactory` client with `authorizationKey` and given `user`', () => {
       expect(SplitFactory).toHaveBeenCalledWith({
@@ -104,8 +103,8 @@ describe('when configuring', () => {
       additional: 'option',
     };
 
-    beforeEach(() => {
-      return adapter.configure(
+    beforeEach(() =>
+      adapter.configure(
         {
           sdk: { authorizationKey, options },
           user: userWithKey,
@@ -114,8 +113,8 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
-      );
-    });
+      )
+    );
 
     it('should initialize the `SplitFactory` client with `options`', () => {
       expect(SplitFactory).toHaveBeenCalledWith({
@@ -133,8 +132,8 @@ describe('when configuring', () => {
       additional: 'core-option',
     };
 
-    beforeEach(() => {
-      return adapter.configure(
+    beforeEach(() =>
+      adapter.configure(
         {
           sdk: { authorizationKey, options: { core: coreOptions } },
           user: userWithKey,
@@ -143,8 +142,8 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
-      );
-    });
+      )
+    );
 
     it('should initialize the `SplitFactory` client with `core` options in `core` property', () => {
       expect(SplitFactory).toHaveBeenCalledWith({

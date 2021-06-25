@@ -13,10 +13,6 @@ const getIsFeatureEnabled = (
   adapterIdentifiers: TAdapterIdentifiers[],
   flagName: TFlagName = DEFAULT_FLAG_PROP_KEY,
   flagVariation: TFlagVariation = true
-) => {
-  return (
-    getFlagVariation(allFlags, adapterIdentifiers, flagName) === flagVariation
-  );
-};
+) => getFlagVariation(allFlags, adapterIdentifiers, flagName) === flagVariation;
 
 export default getIsFeatureEnabled;

@@ -51,11 +51,10 @@ describe('when configuring', () => {
   });
 
   describe('when reconfiguring before configured', () => {
-    it('should reject reconfiguration', () => {
-      return expect(adapter.reconfigure({ user: userWithKey })).rejects.toEqual(
+    it('should reject reconfiguration', () =>
+      expect(adapter.reconfigure({ user: userWithKey })).rejects.toEqual(
         expect.any(Error)
-      );
-    });
+      ));
   });
 
   describe('when changing user context before configured', () => {
@@ -76,8 +75,8 @@ describe('when configuring', () => {
   });
 
   describe('with user key', () => {
-    beforeEach(() => {
-      return adapter.configure(
+    beforeEach(() =>
+      adapter.configure(
         {
           sdk: { clientSideId },
           user: userWithKey,
@@ -86,8 +85,8 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
-      );
-    });
+      )
+    );
 
     it('should initialize the `ld-client` with `clientSideId` and given `user`', () => {
       expect(ldClient.initialize).toHaveBeenCalledWith(
@@ -549,9 +548,7 @@ describe('when configuring', () => {
       });
 
       describe('with partial prop update', () => {
-        beforeEach(() => {
-          return adapter.updateUserContext(updatedUserProps);
-        });
+        beforeEach(() => adapter.updateUserContext(updatedUserProps));
 
         it('should invoke `identify` on the client with the updated props', () => {
           expect(client.identify).toHaveBeenCalledWith(
@@ -567,12 +564,12 @@ describe('when configuring', () => {
       });
 
       describe('with full prop update', () => {
-        beforeEach(() => {
-          return adapter.updateUserContext({
+        beforeEach(() =>
+          adapter.updateUserContext({
             ...userWithKey,
             ...updatedUserProps,
-          });
-        });
+          })
+        );
 
         it('should invoke `identify` on the client with the full props', () => {
           expect(client.identify).toHaveBeenCalledWith(
