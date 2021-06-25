@@ -219,11 +219,9 @@ class SplitioAdapter implements TSplitioAdapterInterface {
         this.#adapterState.configuredCallbacks.onFlagsStateChange,
       onStatusStateChange:
         this.#adapterState.configuredCallbacks.onStatusStateChange,
-    }).then(() => {
-      return {
-        initializationStatus: AdapterInitializationStatus.Succeeded,
-      };
-    });
+    }).then(() => ({
+      initializationStatus: AdapterInitializationStatus.Succeeded,
+    }));
   };
 
   #cloneTreatmentAttributes = <

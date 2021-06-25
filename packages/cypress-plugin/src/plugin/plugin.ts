@@ -32,11 +32,9 @@ const addCommands = (options: TCypressPluginAddCommandOptions) => {
         Cypress.log({
           name: 'updateFeatureFlags',
           message: 'Updating @flopflip feature flags.',
-          consoleProps: () => {
-            return {
-              flags,
-            };
-          },
+          consoleProps: () => ({
+            flags,
+          }),
         });
 
         flopflipAdapterGlobal?.updateFlags(flags, {
