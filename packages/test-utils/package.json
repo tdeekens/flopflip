@@ -24,7 +24,7 @@
     "@babel/runtime": "7.14.6",
     "@flopflip/memory-adapter": "3.0.19",
     "@testing-library/jest-dom": "5.14.1",
-    "@testing-library/react": "11.2.7",
+    "@testing-library/react": "12.0.0",
     "codecov": "3.8.2",
     "jest": "27.0.5",
     "jest-localstorage-mock": "2.4.14",
