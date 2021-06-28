@@ -97,7 +97,7 @@
     "lint-staged": "11.0.0",
     "mri": "1.1.6",
     "pinst": "2.1.6",
-    "prettier": "2.3.1",
+    "prettier": "2.3.2",
     "raf": "3.4.1",
     "regenerator-runtime": "0.13.7",
     "replace": "1.2.1",
