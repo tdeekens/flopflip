@@ -34,7 +34,7 @@
     "@babel/runtime": "7.14.6",
     "@flopflip/adapter-utilities": "1.0.19",
     "@flopflip/types": "4.1.16",
-    "mitt": "2.1.0",
+    "mitt": "3.0.0",
     "tiny-warning": "1.0.3"
   },
   "devDependencies": {

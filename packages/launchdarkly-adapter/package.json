@@ -35,7 +35,7 @@
     "deepmerge": "4.2.2",
     "launchdarkly-js-client-sdk": "2.19.2",
     "lodash": "4.17.21",
-    "mitt": "2.1.0",
+    "mitt": "3.0.0",
     "tiny-warning": "1.0.3"
   },
   "keywords": [
