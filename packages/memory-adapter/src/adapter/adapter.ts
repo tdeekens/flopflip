@@ -46,6 +46,7 @@ const intialAdapterState: TAdapterStatus & TMemoryAdapterState = {
 class MemoryAdapter implements TMemoryAdapterInterface {
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
+
   #adapterState: TAdapterStatus & TMemoryAdapterState;
 
   id: typeof adapterIdentifiers.memory;

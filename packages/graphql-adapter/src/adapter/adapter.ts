@@ -56,6 +56,7 @@ const intialAdapterState: TAdapterStatus & TGraphQlAdapterState = {
 class GraphQlAdapter implements TGraphQlAdapterInterface {
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
+
   #adapterState: TAdapterStatus & TGraphQlAdapterState;
   #defaultPollingInteralMs = 1000 * 60;
 

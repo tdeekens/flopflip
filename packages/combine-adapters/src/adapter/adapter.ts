@@ -38,6 +38,7 @@ const intialAdapterState: TAdapterStatus & CombinedAdaptersState = {
 class CombineAdapters implements TCombinedAdapterInterface {
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
+
   #adapters: TAdapter[] = [];
   #adapterState: TAdapterStatus & CombinedAdaptersState;
 

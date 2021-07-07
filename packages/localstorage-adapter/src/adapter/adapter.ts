@@ -54,6 +54,7 @@ const STORAGE_SLICE = '@flopflip';
 class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
+
   #cache = createCache({ prefix: STORAGE_SLICE });
   #adapterState: TAdapterStatus & TLocalStorageAdapterState;
 

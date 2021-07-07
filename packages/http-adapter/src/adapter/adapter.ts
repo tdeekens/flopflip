@@ -56,6 +56,7 @@ const intialAdapterState: TAdapterStatus & THttpAdapterState = {
 class HttpAdapter implements THttpAdapterInterface {
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
+
   #adapterState: TAdapterStatus & THttpAdapterState;
   #defaultPollingInteralMs = 1000 * 60;
 
