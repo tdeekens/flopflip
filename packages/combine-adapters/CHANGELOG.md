@@ -1,5 +1,11 @@
 # @flopflip/combine-adapters
 
+## 0.0.23
+
+### Patch Changes
+
+- [#1474](https://github.com/tdeekens/flopflip/pull/1474) [`99c06a04`](https://github.com/tdeekens/flopflip/commit/99c06a040ba9904b239b42b0885f807dbcebf8cc) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency mitt to v3
+
 ## 0.0.22
 
 ### Patch Changes
