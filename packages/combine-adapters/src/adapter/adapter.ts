@@ -19,20 +19,26 @@ import {
 import mitt, { Emitter } from 'mitt';
 import warning from 'tiny-warning';
 
+type TInternalStatusChange = '__internalConfiguredStatusChange__';
+type TEmitterEvents = {
+  __internalConfiguredStatusChange__: undefined;
+  flagsStateChange: TFlags;
+  statusStateChange: Partial<TAdapterStatus>;
+};
 type CombinedAdaptersState = {
-  emitter: Emitter;
+  emitter: Emitter<TEmitterEvents>;
 };
 
 const intialAdapterState: TAdapterStatus & CombinedAdaptersState = {
   configurationStatus: AdapterConfigurationStatus.Unconfigured,
   subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
-  // Typings are incorrect and state that mitt is not callable.
-  // Value of type 'MittStatic' is not callable. Did you mean to include 'new'
   emitter: mitt(),
 };
 
 class CombineAdapters implements TCombinedAdapterInterface {
-  #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
+  #__internalConfiguredStatusChange__: TInternalStatusChange =
+    '__internalConfiguredStatusChange__';
+
   #adapters: TAdapter[] = [];
   #adapterState: TAdapterStatus & CombinedAdaptersState;
 
@@ -114,11 +120,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
       });
     };
 
-    this.#adapterState.emitter.on<TAdapterStatusChange>(
-      'statusStateChange',
-      // @ts-expect-error
-      handleStatusChange
-    );
+    this.#adapterState.emitter.on('statusStateChange', handleStatusChange);
 
     this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 
@@ -133,10 +135,11 @@ class CombineAdapters implements TCombinedAdapterInterface {
         });
       })
     ).then((allInitializationStatus) => {
-      const haveAllAdaptersInitializedSuccessfully = allInitializationStatus.every(
-        ({ initializationStatus }) =>
-          initializationStatus === AdapterInitializationStatus.Succeeded
-      );
+      const haveAllAdaptersInitializedSuccessfully =
+        allInitializationStatus.every(
+          ({ initializationStatus }) =>
+            initializationStatus === AdapterInitializationStatus.Succeeded
+        );
 
       if (haveAllAdaptersInitializedSuccessfully) {
         this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
@@ -195,10 +198,11 @@ class CombineAdapters implements TCombinedAdapterInterface {
         });
       })
     ).then((allInitializationStatus) => {
-      const haveAllAdaptersInitializedSuccessfully = allInitializationStatus.every(
-        ({ initializationStatus }) =>
-          initializationStatus === AdapterInitializationStatus.Succeeded
-      );
+      const haveAllAdaptersInitializedSuccessfully =
+        allInitializationStatus.every(
+          ({ initializationStatus }) =>
+            initializationStatus === AdapterInitializationStatus.Succeeded
+        );
 
       if (haveAllAdaptersInitializedSuccessfully) {
         return { initializationStatus: AdapterInitializationStatus.Succeeded };
