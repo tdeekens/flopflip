@@ -28,10 +28,16 @@ import isEqual from 'lodash/isEqual';
 import mitt, { Emitter } from 'mitt';
 import warning from 'tiny-warning';
 
+type TInternalStatusChange = '__internalConfiguredStatusChange__';
+type TEmitterEvents = {
+  __internalConfiguredStatusChange__: undefined;
+  flagsStateChange: TFlags;
+  statusStateChange: Partial<TAdapterStatus>;
+};
 type THttpAdapterState = {
   flags: TFlags;
   user?: TUser;
-  emitter: Emitter;
+  emitter: Emitter<TEmitterEvents>;
   lockedFlags: Set<TFlagName>;
   cacheIdentifier?: TCacheIdentifiers;
 };
@@ -48,7 +54,8 @@ const intialAdapterState: TAdapterStatus & THttpAdapterState = {
 };
 
 class HttpAdapter implements THttpAdapterInterface {
-  #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
+  #__internalConfiguredStatusChange__: TInternalStatusChange =
+    '__internalConfiguredStatusChange__';
   #adapterState: TAdapterStatus & THttpAdapterState;
   #defaultPollingInteralMs = 1000 * 60;
 
@@ -209,16 +216,8 @@ class HttpAdapter implements THttpAdapterInterface {
       });
     };
 
-    this.#adapterState.emitter.on<TFlagsChange>(
-      'flagsStateChange',
-      // @ts-expect-error
-      handleFlagsChange
-    );
-    this.#adapterState.emitter.on<TAdapterStatusChange>(
-      'statusStateChange',
-      // @ts-expect-error
-      handleStatusChange
-    );
+    this.#adapterState.emitter.on('flagsStateChange', handleFlagsChange);
+    this.#adapterState.emitter.on('statusStateChange', handleStatusChange);
 
     this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 

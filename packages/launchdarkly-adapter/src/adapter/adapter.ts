@@ -35,12 +35,16 @@ import isEqual from 'lodash/isEqual';
 import mitt, { Emitter } from 'mitt';
 import warning from 'tiny-warning';
 
+type TEmitterEvents = {
+  flagsStateChange: TFlags;
+  statusStateChange: Partial<TAdapterStatus>;
+};
 type TLaunchDarklyUser = TUser<TLDUser>;
 type TLaunchDarklyAdapterState = {
   user?: TLaunchDarklyUser;
   client?: LDClient;
   flags: TFlags;
-  emitter: Emitter;
+  emitter: Emitter<TEmitterEvents>;
   lockedFlags: Set<TFlagName>;
   unsubscribedFlags: Set<TFlagName>;
 };
@@ -165,23 +169,20 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
             for (const [requestedFlagName, defaultFlagValue] of Object.entries(
               flags
             )) {
-              const denormalizedRequestedFlagName = denormalizeFlagName(
-                requestedFlagName
-              );
-              flagsFromSdk[
-                denormalizedRequestedFlagName
-              ] = this.#adapterState.client.variation(
-                denormalizedRequestedFlagName,
-                defaultFlagValue
-              );
+              const denormalizedRequestedFlagName =
+                denormalizeFlagName(requestedFlagName);
+              flagsFromSdk[denormalizedRequestedFlagName] =
+                this.#adapterState.client.variation(
+                  denormalizedRequestedFlagName,
+                  defaultFlagValue
+                );
             }
           }
 
           if (flagsFromSdk) {
             const normalizedFlags = normalizeFlags(flagsFromSdk);
-            const flags = this.#withoutUnsubscribedOrLockedFlags(
-              normalizedFlags
-            );
+            const flags =
+              this.#withoutUnsubscribedOrLockedFlags(normalizedFlags);
 
             this.updateFlags(flags);
           }
@@ -317,16 +318,8 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     this.#adapterState.configurationStatus =
       AdapterConfigurationStatus.Configuring;
 
-    this.#adapterState.emitter.on<TFlagsChange>(
-      'flagsStateChange',
-      // @ts-expect-error
-      handleFlagsChange
-    );
-    this.#adapterState.emitter.on<TAdapterStatusChange>(
-      'statusStateChange',
-      // @ts-expect-error
-      handleStatusChange
-    );
+    this.#adapterState.emitter.on('flagsStateChange', handleFlagsChange);
+    this.#adapterState.emitter.on('statusStateChange', handleStatusChange);
 
     this.#adapterState.emitter.emit('statusStateChange', {
       configurationStatus: this.#adapterState.configurationStatus,

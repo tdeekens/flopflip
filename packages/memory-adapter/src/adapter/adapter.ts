@@ -21,11 +21,17 @@ import {
 import mitt, { Emitter } from 'mitt';
 import warning from 'tiny-warning';
 
+type TInternalStatusChange = '__internalConfiguredStatusChange__';
+type TEmitterEvents = {
+  __internalConfiguredStatusChange__: undefined;
+  flagsStateChange: TFlags;
+  statusStateChange: Partial<TAdapterStatus>;
+};
 type TMemoryAdapterState = {
   flags: TFlags;
   lockedFlags: Set<TFlagName>;
   user?: TUser;
-  emitter: Emitter;
+  emitter: Emitter<TEmitterEvents>;
 };
 
 const intialAdapterState: TAdapterStatus & TMemoryAdapterState = {
@@ -34,13 +40,12 @@ const intialAdapterState: TAdapterStatus & TMemoryAdapterState = {
   flags: {},
   lockedFlags: new Set<TFlagName>(),
   user: {},
-  // Typings are incorrect and state that mitt is not callable.
-  // Value of type 'MittStatic' is not callable. Did you mean to include 'new'
   emitter: mitt(),
 };
 
 class MemoryAdapter implements TMemoryAdapterInterface {
-  #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
+  #__internalConfiguredStatusChange__: TInternalStatusChange =
+    '__internalConfiguredStatusChange__';
   #adapterState: TAdapterStatus & TMemoryAdapterState;
 
   id: typeof adapterIdentifiers.memory;
@@ -123,16 +128,8 @@ class MemoryAdapter implements TMemoryAdapterInterface {
       });
     };
 
-    this.#adapterState.emitter.on<TFlagsChange>(
-      'flagsStateChange',
-      // @ts-expect-error
-      handleFlagsChange
-    );
-    this.#adapterState.emitter.on<TAdapterStatusChange>(
-      'statusStateChange',
-      // @ts-expect-error
-      handleStatusChange
-    );
+    this.#adapterState.emitter.on('flagsStateChange', handleFlagsChange);
+    this.#adapterState.emitter.on('statusStateChange', handleStatusChange);
 
     this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 

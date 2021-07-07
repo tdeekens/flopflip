@@ -26,10 +26,17 @@ import isEqual from 'lodash/isEqual';
 import mitt, { Emitter } from 'mitt';
 import warning from 'tiny-warning';
 
+type TInternalStatusChange = '__internalConfiguredStatusChange__';
+type TEmitterEvents = {
+  __internalConfiguredStatusChange__: undefined;
+  flagsStateChange: TFlags;
+  statusStateChange: Partial<TAdapterStatus>;
+};
+
 type TLocalStorageAdapterState = {
   flags: TFlags;
   user?: TUser;
-  emitter: Emitter;
+  emitter: Emitter<TEmitterEvents>;
   lockedFlags: Set<TFlagName>;
 };
 
@@ -39,15 +46,14 @@ const intialAdapterState: TAdapterStatus & TLocalStorageAdapterState = {
   flags: {},
   lockedFlags: new Set<TFlagName>(),
   user: {},
-  // Typings are incorrect and state that mitt is not callable.
-  // Value of type 'MittStatic' is not callable. Did you mean to include 'new'
   emitter: mitt(),
 };
 
 const STORAGE_SLICE = '@flopflip';
 
 class LocalStorageAdapter implements TLocalStorageAdapterInterface {
-  #__internalConfiguredStatusChange__ = '__internalConfiguredStatusChange__';
+  #__internalConfiguredStatusChange__: TInternalStatusChange =
+    '__internalConfiguredStatusChange__';
   #cache = createCache({ prefix: STORAGE_SLICE });
   #adapterState: TAdapterStatus & TLocalStorageAdapterState;
 
@@ -164,16 +170,8 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       });
     };
 
-    this.#adapterState.emitter.on<TFlagsChange>(
-      'flagsStateChange',
-      // @ts-expect-error
-      handleFlagsChange
-    );
-    this.#adapterState.emitter.on<TAdapterStatusChange>(
-      'statusStateChange',
-      // @ts-expect-error
-      handleStatusChange
-    );
+    this.#adapterState.emitter.on('flagsStateChange', handleFlagsChange);
+    this.#adapterState.emitter.on('statusStateChange', handleStatusChange);
 
     this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 
