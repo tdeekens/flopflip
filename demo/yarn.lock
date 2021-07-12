@@ -1244,10 +1244,10 @@
     globalthis "1.0.2"
     lodash "4.17.21"
 
-"@flopflip/launchdarkly-adapter@5.0.16":
-  version "5.0.16"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-5.0.16.tgz#1659ed75d4a93dcffe5a1615f4ecb983cbb19ea4"
-  integrity sha512-4n/y9uTADaLH8axfffPVaVRxtq7qpJQfT0+WoUAHGwsX1ht/ESRRtYWK6WhrCwTAqv3c6yZyGJNAIhX/iy5sSw==
+"@flopflip/launchdarkly-adapter@5.0.17":
+  version "5.0.17"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-5.0.17.tgz#01bd0fe5af1c885539f34968b44a550a0a83a090"
+  integrity sha512-b6dT5bBDd8l7JW+mQM4IiSQyEus7AmOI/e3YzEosRuMQwfhdn2YA6BUQ1ewqNedwg5o39BOzsH59bMw6h+76fA==
   dependencies:
     "@babel/runtime" "7.14.6"
     "@flopflip/adapter-utilities" "1.0.19"
@@ -1256,20 +1256,20 @@
     deepmerge "4.2.2"
     launchdarkly-js-client-sdk "2.19.2"
     lodash "4.17.21"
-    mitt "2.1.0"
+    mitt "3.0.0"
     tiny-warning "1.0.3"
 
-"@flopflip/localstorage-adapter@4.0.15":
-  version "4.0.15"
-  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-4.0.15.tgz#b9e2064522cdaa182197a402582c1dd048f8c75d"
-  integrity sha512-k3ITgl7vgnTJbpE0Fl+uqAyD5h4yJPVRncpJtWdrLoPlRTNaaSJ1jiWNHY+3bjwhOiWHIdExXVG2n+Dq0YVhsQ==
+"@flopflip/localstorage-adapter@4.0.16":
+  version "4.0.16"
+  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-4.0.16.tgz#48b837b8449c6f8cb37174d113174719482c4e4b"
+  integrity sha512-2q57LhC9WIIBwDc/pZkcv6+IAqNDeJKMN5Fx9Z4Vh20RyNgnew6ECShx9mRoTX2kEYSijzSxnV4JgO8QY6v8wA==
   dependencies:
     "@babel/runtime" "7.14.6"
     "@flopflip/adapter-utilities" "1.0.19"
     "@flopflip/localstorage-cache" "1.0.19"
     "@flopflip/types" "4.1.16"
     lodash "4.17.21"
-    mitt "2.1.0"
+    mitt "3.0.0"
     tiny-warning "1.0.3"
 
 "@flopflip/localstorage-cache@1.0.19":
@@ -1279,15 +1279,15 @@
   dependencies:
     "@flopflip/types" "4.1.16"
 
-"@flopflip/memory-adapter@3.0.19":
-  version "3.0.19"
-  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-3.0.19.tgz#d8c2021b723bbaa03a73b5ab45b5aafe480c108a"
-  integrity sha512-XBp/GcjR3Is9imG1Ei/ob/j97tqEhiKTg1jw1xEjbx/NCtMvOOlOj8nta26Amwp/0w6bNHq22TWVi8gRayWUCA==
+"@flopflip/memory-adapter@3.0.20":
+  version "3.0.20"
+  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-3.0.20.tgz#5a23d11a918d62cb533493278d693bba1f6385dc"
+  integrity sha512-/okU2akDPt+UDHz9Pbz77OjpUclBRvdlblemzdAlkUI5dVYsCDQRvvqDhNPJJmSLVIup3m9VrHn3+AHTj0nO0g==
   dependencies:
     "@babel/runtime" "7.14.6"
     "@flopflip/adapter-utilities" "1.0.19"
     "@flopflip/types" "4.1.16"
-    mitt "2.1.0"
+    mitt "3.0.0"
     tiny-warning "1.0.3"
 
 "@flopflip/react-broadcast@12.2.7":
@@ -7349,10 +7349,10 @@ mississippi@^3.0.0:
     stream-each "^1.1.0"
     through2 "^2.0.0"
 
-mitt@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/mitt/-/mitt-2.1.0.tgz#f740577c23176c6205b121b2973514eade1b2230"
-  integrity sha512-ILj2TpLiysu2wkBbWjAmww7TkZb65aiQO+DkVdUTBpBXq+MHYiETENkKFMtsJZX1Lf4pe4QOrTSjIfUwN5lRdg==
+mitt@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/mitt/-/mitt-3.0.0.tgz#69ef9bd5c80ff6f57473e8d89326d01c414be0bd"
+  integrity sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==
 
 mixin-deep@^1.2.0:
   version "1.3.2"
