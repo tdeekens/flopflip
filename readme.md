@@ -307,36 +307,32 @@ It takes the `props`:
 
 Please note that all adapters accept a `user: TUser` which has an optional `key` of type string. This `user` attribute can be used by each adapter to identify a user uniquely. Some adapters which require a `user.key` will generate a uuid whenever no `key` is passed.
 
-1. The `@flopflip/launchdarkly-adapter` accepts
+_1. The `@flopflip/launchdarkly-adapter` accepts_
+    - `sdk.clientSideId`: The client side id of LaunchDarkly
+    - `sdk.clientOptions`: additional options to be passed to the underlying SDK
+    - `flags`: defaulting to `null` to subscribe only to specific flags. Helpful when not wanting to subscribe to all flags to utilise LaunchDarkly's automatic flag archiving functionality
+    - `subscribeToFlagChanges`: defaulting to `true` to disable real-time updates to flags once initially fetched
+    - `throwOnInitializationFailure`: defaulting to `false` to indicate if the adapter just re-throw an error during initialization
+    - `flagsUpdateDelayMs`: defaulting to `0` to debounce the flag update subscription
 
-- `sdk.clientSideId`: The client side id of LaunchDarkly
-- `sdk.clientOptions`: additional options to be passed to the underlying SDK
-- `flags`: defaulting to `null` to subscribe only to specific flags. Helpful when not wanting to subscribe to all flags to utilise LaunchDarkly's automatic flag archiving functionality
-- `subscribeToFlagChanges`: defaulting to `true` to disable real-time updates to flags once initially fetched
-- `throwOnInitializationFailure`: defaulting to `false` to indicate if the adapter just re-throw an error during initialization
-- `flagsUpdateDelayMs`: defaulting to `0` to debounce the flag update subscription
+_2. The `@flopflip/splitio-adapter` accepts_
+    - `sdk.authorizationKey`: Authorization key for splitio
+    - `sdk.options`: General attributes passed to splitio SDK
+    - `sdk.treatmentAttributes`: The treatment attributes passed to splitio
 
-2. The `@flopflip/splitio-adapter` accepts
+_3. The `@flopflip/graphql-adapter` accepts_
+    - `uri`: the `uri` to the GraphQL endpoint so e.g. `https://graphql.com/graphql`
+    - `query`: the GraphQL query which returns features for instance `query AllFeatures { flags: allFeatures { name \n value} }`
+    - `getQueryVariables`: a function called with `adapterArgs` being variables to your GraphQL query
+    - `getRequestHeaders`: a function called with `adapterArgs` being headers to your GraphQL request
+    - `parseFlags`: a function called with the `data` of fetched flags to parse the result before being exposed to your application. This function should be used to parse a query response into the `TFlags` type.
+    - `fetcher`: a fetch implemtation if you prefer to not rely on the global `fetch`
+    - `pollingInteralMs`: the polling interval to check for updated flag values
 
-- `sdk.authorizationKey`: Authorization key for splitio
-- `sdk.options`: General attributes passed to splitio SDK
-- `sdk.treatmentAttributes`: The treatment attributes passed to splitio
+_4. The `@flopflip/localstorage-adapter` accepts_
+    - `pollingInteralMs`: an interval at which the adapter polls for new flags from localstorage in milliseconds
 
-3. The `@flopflip/graphql-adapter` accepts
-
-- `uri`: the `uri` to the GraphQL endpoint so e.g. `https://graphql.com/graphql`
-- `query`: the GraphQL query which returns features for instance `query AllFeatures { flags: allFeatures { name \n value} }`
-- `getQueryVariables`: a function called with `adapterArgs` being variables to your GraphQL query
-- `getRequestHeaders`: a function called with `adapterArgs` being headers to your GraphQL request
-- `parseFlags`: a function called with the `data` of fetched flags to parse the result before being exposed to your application. This function should be used to parse a query response into the `TFlags` type.
-- `fetcher`: a fetch implemtation if you prefer to not rely on the global `fetch`
-- `pollingInteralMs`: the polling interval to check for updated flag values
-
-4. The `@flopflip/localstorage-adapter` accepts
-
-- `pollingInteralMs`: an interval at which the adapter polls for new flags from localstorage in milliseconds
-
-5. The `@flopflip/memory-adapter` accepts
+_5. The `@flopflip/memory-adapter` accepts_
 
 No special configuration is required for the memory adapter at this point.
 
