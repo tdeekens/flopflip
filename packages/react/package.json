@@ -42,7 +42,7 @@
   "dependencies": {
     "@babel/runtime": "7.14.6",
     "@flopflip/types": "4.1.16",
-    "@types/react-is": "17.0.1",
+    "@types/react-is": "17.0.2",
     "deepmerge": "4.2.2",
     "lodash": "4.17.21",
     "react-is": "17.0.2",
