@@ -28,10 +28,10 @@
     "globalthis": "1.0.2"
   },
   "dependencies": {
-    "@babel/runtime": "7.14.8",
+    "@babel/runtime": "7.15.3",
     "@flopflip/adapter-utilities": "1.0.19",
     "@flopflip/types": "4.1.16",
-    "@splitsoftware/splitio": "10.15.8",
+    "@splitsoftware/splitio": "10.15.9",
     "deepmerge": "4.2.2",
     "lodash": "4.17.21"
   },
