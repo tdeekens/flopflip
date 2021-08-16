@@ -28,7 +28,7 @@
     "types"
   ],
   "dependencies": {
-    "@babel/runtime": "7.14.8",
+    "@babel/runtime": "7.15.3",
     "@flopflip/types": "4.1.16",
     "globalthis": "1.0.2",
     "lodash": "4.17.21"
