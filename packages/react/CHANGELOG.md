@@ -1,5 +1,16 @@
 # @flopflip/react
 
+## 11.1.20
+
+### Patch Changes
+
+- [#1502](https://github.com/tdeekens/flopflip/pull/1502) [`98bc4018`](https://github.com/tdeekens/flopflip/commit/98bc4018a83a9b9ea4ade25d880496a472c6140c) Thanks [@ibratoev](https://github.com/ibratoev)! - Fix ConfigureFlopFlip to not reconfigure adapter multiple times.
+
+* [`a14d3863`](https://github.com/tdeekens/flopflip/commit/a14d3863e97546da0ccd5877555eace3650f2a60) Thanks [@tdeekens](https://github.com/tdeekens)! - Publish all packages
+
+* Updated dependencies [[`a14d3863`](https://github.com/tdeekens/flopflip/commit/a14d3863e97546da0ccd5877555eace3650f2a60)]:
+  - @flopflip/types@4.1.17
+
 ## 11.1.19
 
 ### Patch Changes
