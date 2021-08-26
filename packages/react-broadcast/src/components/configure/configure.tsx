@@ -13,7 +13,7 @@ import {
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
 } from '@flopflip/types';
-import React, {useCallback,useState} from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { FlagsContext } from '../flags-context';
 
@@ -59,32 +59,35 @@ const useFlagsState = ({
     getInitialFlags({ adapterIdentifiers })
   );
 
-  const updateFlags = useCallback((flagsChange: TFlagsChange) => {
-    setFlags((prevState) => {
-      if (flagsChange.id) {
-        return {
-          ...prevState,
-          [flagsChange.id]: {
-            ...prevState[flagsChange.id],
-            ...flagsChange.flags,
-          },
-        };
-      }
-
-      return {
-        ...prevState,
-        ...Object.fromEntries(
-          adapterIdentifiers.map((adapterInterfaceIdentifier) => [
-            adapterInterfaceIdentifier,
-            {
-              ...prevState[adapterInterfaceIdentifier],
+  const updateFlags = useCallback(
+    (flagsChange: TFlagsChange) => {
+      setFlags((prevState) => {
+        if (flagsChange.id) {
+          return {
+            ...prevState,
+            [flagsChange.id]: {
+              ...prevState[flagsChange.id],
               ...flagsChange.flags,
             },
-          ])
-        )
-      };
-    });
-  }, [adapterIdentifiers]);
+          };
+        }
+
+        return {
+          ...prevState,
+          ...Object.fromEntries(
+            adapterIdentifiers.map((adapterInterfaceIdentifier) => [
+              adapterInterfaceIdentifier,
+              {
+                ...prevState[adapterInterfaceIdentifier],
+                ...flagsChange.flags,
+              },
+            ])
+          ),
+        };
+      });
+    },
+    [adapterIdentifiers]
+  );
 
   return [flags, updateFlags];
 };
@@ -93,9 +96,7 @@ const useStatusState = (): [
   TAdapterStatus,
   React.Dispatch<React.SetStateAction<TAdapterStatus>>
 ] => {
-  const [status, setStatus] = useState<TState['status']>(
-    initialAdapterStatus
-  );
+  const [status, setStatus] = useState<TState['status']>(initialAdapterStatus);
 
   return [status, setStatus];
 };
@@ -103,7 +104,11 @@ const useStatusState = (): [
 const Configure = <AdapterInstance extends TAdapter>(
   props: Props<AdapterInstance>
 ) => {
-  const adapterIdentifiers = [props.adapter.id];
+  const adapterIdentifiers = useMemo(
+    () => [props.adapter.id],
+    [props.adapter.id]
+  );
+
   const [flags, updateFlags] = useFlagsState({ adapterIdentifiers });
   const [status, setStatus] = useStatusState();
 
@@ -113,9 +118,7 @@ const Configure = <AdapterInstance extends TAdapter>(
   //   component.
   const getHasAdapterSubscriptionStatus = useAdapterSubscription(props.adapter);
 
-  const handleUpdateFlags = useCallback<
-    (flagsChange: TFlagsChange) => void
-  >(
+  const handleUpdateFlags = useCallback<(flagsChange: TFlagsChange) => void>(
     (flagsChange) => {
       if (
         getHasAdapterSubscriptionStatus(AdapterSubscriptionStatus.Unsubscribed)
