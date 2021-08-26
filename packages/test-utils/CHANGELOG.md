@@ -1,5 +1,11 @@
 # @flopflip/test-utils
 
+## 3.0.21
+
+### Patch Changes
+
+- [#1501](https://github.com/tdeekens/flopflip/pull/1501) [`e37f3b6e`](https://github.com/tdeekens/flopflip/commit/e37f3b6eb579cba656c6ac6d238e7912c17a5962) Thanks [@tdeekens](https://github.com/tdeekens)! - chore: update deps
+
 ## 3.0.20
 
 ### Patch Changes
