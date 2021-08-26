@@ -66,6 +66,22 @@ describe('when enabling feature', () => {
 
     expect(screen.getByText(/Feature enabled: Yes/i)).toBeInTheDocument();
   });
+
+  it('should not reconfigure the adapter multiple times', async () => {
+    const { waitUntilConfigured } = render();
+    const spy = jest.spyOn(adapter, 'reconfigure');
+
+    await waitUntilConfigured();
+
+    act(() => {
+      adapter.updateFlags({
+        [testFlagName]: true,
+      });
+    });
+
+    expect(spy).toHaveBeenCalledTimes(1);
+    spy.mockRestore();
+  });
 });
 
 describe('when unconfigured', () => {

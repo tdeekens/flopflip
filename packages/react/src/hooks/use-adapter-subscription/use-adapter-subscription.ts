@@ -1,6 +1,6 @@
 import type { TAdapter } from '@flopflip/types';
 import { AdapterSubscriptionStatus } from '@flopflip/types';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 function useAdapterSubscription(adapter: TAdapter) {
   /**
@@ -36,9 +36,12 @@ function useAdapterSubscription(adapter: TAdapter) {
     };
   }, [subscribe, unsubscribe]);
 
-  return (demandedAdapterSubscriptionStatus: AdapterSubscriptionStatus) =>
-    useAdapterSubscriptionStatusRef.current ===
-    demandedAdapterSubscriptionStatus;
+  return useCallback(
+    (demandedAdapterSubscriptionStatus: AdapterSubscriptionStatus) =>
+      useAdapterSubscriptionStatusRef.current ===
+      demandedAdapterSubscriptionStatus,
+    [useAdapterSubscriptionStatusRef]
+  );
 }
 
 export default useAdapterSubscription;
