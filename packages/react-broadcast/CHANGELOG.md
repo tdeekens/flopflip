@@ -1,5 +1,11 @@
 # @flopflip/react-broadcast
 
+## 12.2.8
+
+### Patch Changes
+
+- [#1499](https://github.com/tdeekens/flopflip/pull/1499) [`2a2f6f5b`](https://github.com/tdeekens/flopflip/commit/2a2f6f5bd76ce3b73ee35c5d14f3b1e9cf2d6ff0) Thanks [@ibratoev](https://github.com/ibratoev)! - Fix ConfigureFlopFlip to not reconfigure adapter multiple times
+
 ## 12.2.7
 
 ### Patch Changes
