@@ -1,5 +1,14 @@
 # @flopflip/test-utils
 
+## 3.0.22
+
+### Patch Changes
+
+- [`a14d3863`](https://github.com/tdeekens/flopflip/commit/a14d3863e97546da0ccd5877555eace3650f2a60) Thanks [@tdeekens](https://github.com/tdeekens)! - Publish all packages
+
+- Updated dependencies [[`a14d3863`](https://github.com/tdeekens/flopflip/commit/a14d3863e97546da0ccd5877555eace3650f2a60)]:
+  - @flopflip/memory-adapter@3.0.21
+
 ## 3.0.21
 
 ### Patch Changes
