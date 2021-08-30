@@ -1157,14 +1157,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@7.14.6":
-  version "7.14.6"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.14.6.tgz#535203bc0892efc7dec60bdc27b2ecf6e409062d"
-  integrity sha512-/PCB2uJ7oM44tz8YhC4Z/6PeOKXp4K588f+5M3clr1M4zbqztlo0XEfJ2LEzj/FgwfgGcIdl8n7YYjTCI0BYwg==
-  dependencies:
-    regenerator-runtime "^0.13.4"
-
-"@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
+"@babel/runtime@7.15.3", "@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
   version "7.15.3"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.15.3.tgz#2e1c2880ca118e5b2f9988322bd8a7656a32502b"
   integrity sha512-OvwMLqNXkCXSz1kSm58sEsNuhqOx/fKpnUnKnFB5v8uDda5bLNEHNgKPvhDN6IU0LDcnHQ90LlJ0Q6jnyBSIBA==
@@ -1241,24 +1234,24 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@flopflip/adapter-utilities@1.0.19":
-  version "1.0.19"
-  resolved "https://registry.yarnpkg.com/@flopflip/adapter-utilities/-/adapter-utilities-1.0.19.tgz#f4ae5b25842bd372d76c7b34906584e3a27866b4"
-  integrity sha512-W1bfDuNO2RcfcYG/9gjkzjqpxtxDYm0mHxJiYeCXV6e+0fnHrBmDVSrhHR0hve2OXoMI0xfOA2WNyqUILokRdg==
+"@flopflip/adapter-utilities@1.0.20":
+  version "1.0.20"
+  resolved "https://registry.yarnpkg.com/@flopflip/adapter-utilities/-/adapter-utilities-1.0.20.tgz#da396e770de2bdbc68d91f0eb057ee881b5cc31b"
+  integrity sha512-SomjJpeZhrov1oLO+XBGfjBLbV48JQC3YagUCalF+jIKPOE+bVfkD3lpA9/BWz9cjDBa7AVmOUu0e2VYHu/DQg==
   dependencies:
-    "@babel/runtime" "7.14.6"
-    "@flopflip/types" "4.1.16"
+    "@babel/runtime" "7.15.3"
+    "@flopflip/types" "4.1.17"
     globalthis "1.0.2"
     lodash "4.17.21"
 
-"@flopflip/launchdarkly-adapter@5.0.17":
-  version "5.0.17"
-  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-5.0.17.tgz#01bd0fe5af1c885539f34968b44a550a0a83a090"
-  integrity sha512-b6dT5bBDd8l7JW+mQM4IiSQyEus7AmOI/e3YzEosRuMQwfhdn2YA6BUQ1ewqNedwg5o39BOzsH59bMw6h+76fA==
+"@flopflip/launchdarkly-adapter@5.0.18":
+  version "5.0.18"
+  resolved "https://registry.yarnpkg.com/@flopflip/launchdarkly-adapter/-/launchdarkly-adapter-5.0.18.tgz#b8dee127b2c2e45679405ce4de36400be76b427a"
+  integrity sha512-3cyUBUyWtiypgkSxiTPtiDD/grytA8Sd67c81JtsHHMcJaHI4HN0UPwyL66iqLx2tYmYRNNbY/1KskaDsu67XQ==
   dependencies:
-    "@babel/runtime" "7.14.6"
-    "@flopflip/adapter-utilities" "1.0.19"
-    "@flopflip/types" "4.1.16"
+    "@babel/runtime" "7.15.3"
+    "@flopflip/adapter-utilities" "1.0.20"
+    "@flopflip/types" "4.1.17"
     debounce-fn "4.0.0"
     deepmerge "4.2.2"
     launchdarkly-js-client-sdk "2.19.2"
@@ -1266,73 +1259,73 @@
     mitt "3.0.0"
     tiny-warning "1.0.3"
 
-"@flopflip/localstorage-adapter@4.0.16":
-  version "4.0.16"
-  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-4.0.16.tgz#48b837b8449c6f8cb37174d113174719482c4e4b"
-  integrity sha512-2q57LhC9WIIBwDc/pZkcv6+IAqNDeJKMN5Fx9Z4Vh20RyNgnew6ECShx9mRoTX2kEYSijzSxnV4JgO8QY6v8wA==
+"@flopflip/localstorage-adapter@4.0.17":
+  version "4.0.17"
+  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-adapter/-/localstorage-adapter-4.0.17.tgz#8de02c3a5dd0921bc6d60d59a77f361286a9ddd3"
+  integrity sha512-e3p7Ucfy2Xu/dOt2b0bYhiFoDCnI0i0Y3s/KKuEImFuDTJJMONvY1kcI+Vw3pP8YfUwMDVUILxHBcU4mFZwbug==
   dependencies:
-    "@babel/runtime" "7.14.6"
-    "@flopflip/adapter-utilities" "1.0.19"
-    "@flopflip/localstorage-cache" "1.0.19"
-    "@flopflip/types" "4.1.16"
+    "@babel/runtime" "7.15.3"
+    "@flopflip/adapter-utilities" "1.0.20"
+    "@flopflip/localstorage-cache" "1.0.20"
+    "@flopflip/types" "4.1.17"
     lodash "4.17.21"
     mitt "3.0.0"
     tiny-warning "1.0.3"
 
-"@flopflip/localstorage-cache@1.0.19":
-  version "1.0.19"
-  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-cache/-/localstorage-cache-1.0.19.tgz#f8243fa0b600782d36feeae80a87bde6fe228878"
-  integrity sha512-dklUBJD4c7bVTf6uCORcwjtKgDdg9Tym/k7FnSXpOMtwV+kXFFThIvhdppfowSNoRWHLYiePXs/QkqChygtFwQ==
+"@flopflip/localstorage-cache@1.0.20":
+  version "1.0.20"
+  resolved "https://registry.yarnpkg.com/@flopflip/localstorage-cache/-/localstorage-cache-1.0.20.tgz#086ec720c46cafa829d3109298001e5549f3d9c1"
+  integrity sha512-kvnexBLSabZTrkYw+Csi1qiveSUn2UtbvwiM+0ZzVIO0fkI/p6wDqcyTFuTDkBzHjNrswNrNCorSCaTl2i/x3A==
   dependencies:
-    "@flopflip/types" "4.1.16"
+    "@flopflip/types" "4.1.17"
 
-"@flopflip/memory-adapter@3.0.20":
-  version "3.0.20"
-  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-3.0.20.tgz#5a23d11a918d62cb533493278d693bba1f6385dc"
-  integrity sha512-/okU2akDPt+UDHz9Pbz77OjpUclBRvdlblemzdAlkUI5dVYsCDQRvvqDhNPJJmSLVIup3m9VrHn3+AHTj0nO0g==
+"@flopflip/memory-adapter@3.0.21":
+  version "3.0.21"
+  resolved "https://registry.yarnpkg.com/@flopflip/memory-adapter/-/memory-adapter-3.0.21.tgz#1eba97c745d40c8988f9a611c75a737305321df5"
+  integrity sha512-51WiYLL08J/yoPp9pihftNTg0LipllP/rR+HT89ejeIqoowRIFf+UnIlDQFM5XJiP71BriZsPzcwo4dV9mmKUQ==
   dependencies:
-    "@babel/runtime" "7.14.6"
-    "@flopflip/adapter-utilities" "1.0.19"
-    "@flopflip/types" "4.1.16"
+    "@babel/runtime" "7.15.3"
+    "@flopflip/adapter-utilities" "1.0.20"
+    "@flopflip/types" "4.1.17"
     mitt "3.0.0"
     tiny-warning "1.0.3"
 
-"@flopflip/react-broadcast@12.2.7":
-  version "12.2.7"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-12.2.7.tgz#015bd573673e945a8b22eabdca2ed698b899c1e8"
-  integrity sha512-Cuie08aXhru3rOBdu/pC5YRHiS9f652RYZq85RF+azFO4GtTjTZREdibBX1h4AD5Zc+olNsZ3EcX+5ic84EYUQ==
+"@flopflip/react-broadcast@12.2.9":
+  version "12.2.9"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-broadcast/-/react-broadcast-12.2.9.tgz#10f2415b37a2d3431576477bcb1aad826ea4dc0a"
+  integrity sha512-UsbKpVurH/WLhWAzynC75SHP3WtZNx+KubhLVkg5YrUVT2EN+y1GCu7qDUJnOxRPrcgFl3HHFH2oTUXdNiFxRg==
   dependencies:
-    "@babel/runtime" "7.14.6"
-    "@flopflip/react" "^11.1.19"
-    "@flopflip/types" "4.1.16"
+    "@babel/runtime" "7.15.3"
+    "@flopflip/react" "^11.1.20"
+    "@flopflip/types" "4.1.17"
 
-"@flopflip/react-redux@12.1.17":
-  version "12.1.17"
-  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-12.1.17.tgz#3ba5efef0c7344f379ed8b21904ec34ec9700727"
-  integrity sha512-EGxQClKEo3drdVvC6yvbi4kxbdiqnU7inAi9QFD6htDm8AJjQYkNzUDvlIdq+M2SHuyhvECReAo62HN2iLXbeQ==
+"@flopflip/react-redux@12.1.18":
+  version "12.1.18"
+  resolved "https://registry.yarnpkg.com/@flopflip/react-redux/-/react-redux-12.1.18.tgz#fd8f9cdcfa5adb74e5b2d13c457d714fa1e20321"
+  integrity sha512-iOPPB/cbAdHAFG6eOlIJrmsPGmunVQKUzfZwtSIDNNwqGppMOKLqrlPX7Z14fz0zOdjzyXuWMse1xpdZYwhCQA==
   dependencies:
-    "@babel/runtime" "7.14.6"
-    "@flopflip/react" "^11.1.19"
-    "@flopflip/types" "4.1.16"
-    "@types/react-redux" "7.1.16"
+    "@babel/runtime" "7.15.3"
+    "@flopflip/react" "^11.1.20"
+    "@flopflip/types" "4.1.17"
+    "@types/react-redux" "7.1.18"
 
-"@flopflip/react@^11.1.19":
-  version "11.1.19"
-  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-11.1.19.tgz#0f9cdd7cbfce442f5e5d87044482fd5835a824a6"
-  integrity sha512-uzaujl95j7ajITF7bujRx/KC8S5AG/J2ivHQIP3nKzPS4gXSdAlUk785tVTF13hYFdzNQQtoQEapbgoCGakEOA==
+"@flopflip/react@^11.1.20":
+  version "11.1.20"
+  resolved "https://registry.yarnpkg.com/@flopflip/react/-/react-11.1.20.tgz#d46f4f6bedbd57980646bd4056821726e2919584"
+  integrity sha512-UF0c+lGzrf3SRQaRNDsl712y4MqsWrS87z2qivuRINKeDsdqUkVocBuKnQUIhor0/eUEir/WnqkE3BU5H5VzfA==
   dependencies:
-    "@babel/runtime" "7.14.6"
-    "@flopflip/types" "4.1.16"
-    "@types/react-is" "17.0.1"
+    "@babel/runtime" "7.15.3"
+    "@flopflip/types" "4.1.17"
+    "@types/react-is" "17.0.2"
     deepmerge "4.2.2"
     lodash "4.17.21"
     react-is "17.0.2"
     tiny-warning "1.0.3"
 
-"@flopflip/types@4.1.16":
-  version "4.1.16"
-  resolved "https://registry.yarnpkg.com/@flopflip/types/-/types-4.1.16.tgz#8f2847f14129f1e4902fab5a821b324f66e09a83"
-  integrity sha512-au7YSbN7v6SfrJ/1GVCF2ucnwtOBpORD1kzhG/uKKK9xCnyNT4hOXtbd4aDEdV7PF99sEJPEQfc+VRj0S2rLKQ==
+"@flopflip/types@4.1.17":
+  version "4.1.17"
+  resolved "https://registry.yarnpkg.com/@flopflip/types/-/types-4.1.17.tgz#2e16816936d1815e076034939edc9a66725f481f"
+  integrity sha512-qKafS9GLe3uStZXBUnFE/N+82y9WwNxRnfCrtNNB7xaqbTxFQNb7h+Qu8QPqnuzgzgtj9Sb3Jt6+P9ps1Thb1Q==
 
 "@hapi/address@2.x.x":
   version "2.1.4"
@@ -1904,24 +1897,14 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.5.tgz#75a2a8e7d8ab4b230414505d92335d1dcb53a6df"
   integrity sha512-L28j2FcJfSZOnL1WBjDYp2vUHCeIFlyYI/53EwD/rKUBQ7MtUUfbQWiyKJGpcnv4/WgrhWsFKrcPstcAt/J0tQ==
 
-"@types/react-is@17.0.1":
-  version "17.0.1"
-  resolved "https://registry.yarnpkg.com/@types/react-is/-/react-is-17.0.1.tgz#8298442d3860a716e3e8435c1e6e36c189639bdb"
-  integrity sha512-X6jVqDIibL2sY0Qtth5EzNeUgPyoCWeBZdmE5xKr7hI4zaQDwN0VaQd7pJnlOB0mDGnOVH0cZZVXg9cnWhztQg==
+"@types/react-is@17.0.2":
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/@types/react-is/-/react-is-17.0.2.tgz#abc4d910bff5b0bc6b3e1bec57575f6b63fd4e05"
+  integrity sha512-2+L0ilcAEG8udkDnvx8B0upwXFBbNnVwOsSCTxW3SDOkmar9NyEeLG0ZLa3uOEw9zyYf/fQapcnfXAVmDKlyHw==
   dependencies:
     "@types/react" "*"
 
-"@types/react-redux@7.1.16":
-  version "7.1.16"
-  resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.16.tgz#0fbd04c2500c12105494c83d4a3e45c084e3cb21"
-  integrity sha512-f/FKzIrZwZk7YEO9E1yoxIuDNRiDducxkFlkw/GNMGEnK9n4K8wJzlJBghpSuOVDgEUHoDkDF7Gi9lHNQR4siw==
-  dependencies:
-    "@types/hoist-non-react-statics" "^3.3.0"
-    "@types/react" "*"
-    hoist-non-react-statics "^3.3.0"
-    redux "^4.0.0"
-
-"@types/react-redux@^7.1.16":
+"@types/react-redux@7.1.18", "@types/react-redux@^7.1.16":
   version "7.1.18"
   resolved "https://registry.yarnpkg.com/@types/react-redux/-/react-redux-7.1.18.tgz#2bf8fd56ebaae679a90ebffe48ff73717c438e04"
   integrity sha512-9iwAsPyJ9DLTRH+OFeIrm9cAbIj1i2ANL3sKQFATqnPWRbg+jEFXyZOKHiQK/N86pNRXbb4HRxAxo0SIX1XwzQ==
