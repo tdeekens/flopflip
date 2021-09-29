@@ -31,7 +31,7 @@
     "@babel/runtime": "7.15.4",
     "@flopflip/adapter-utilities": "1.0.20",
     "@flopflip/types": "4.1.17",
-    "@splitsoftware/splitio": "10.15.9",
+    "@splitsoftware/splitio": "10.16.0",
     "deepmerge": "4.2.2",
     "lodash": "4.17.21"
   },
