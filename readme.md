@@ -350,7 +350,10 @@ import adapter from '@flopflip/launchdarkly-adapter';
 // or import adapter from '@flopflip/memory-adapter';
 // or import adapter from '@flopflip/localstorage-adapter';
 
-<ConfigureFlopFlip adapter={adapter} adapterArgs={{ clientSideId, user }}>
+<ConfigureFlopFlip
+  adapter={adapter}
+  adapterArgs={{ sdk: { clientSideId }, user }}
+>
   <App />
 </ConfigureFlopFlip>;
 ```
@@ -358,7 +361,10 @@ import adapter from '@flopflip/launchdarkly-adapter';
 You can also pass `render` or `children` as a function to act differently based on the underlying adapter's ready state:
 
 ```jsx
-<ConfigureFlopFlip adapter={adapter} adapterArgs={{ clientSideId, user }}>
+<ConfigureFlopFlip
+  adapter={adapter}
+  adapterArgs={{ sdk: { clientSideId }, user }}
+>
   {(isAdapterConfigured) =>
     isAdapterConfigured ? <App /> : <LoadingSpinner />
   }
@@ -368,7 +374,7 @@ You can also pass `render` or `children` as a function to act differently based 
 ```jsx
 <ConfigureFlopFlip
   adapter={adapter}
-  adapterArgs={{ clientSideId, user }}
+  adapterArgs={{ sdk: { clientSideId }, user }}
   render={() => <App />}
 />
 ```
@@ -445,7 +451,7 @@ const store = createStore(
     createFlopFlipEnhancer(
       adapter,
       {
-        clientSideId: window.application.env.LD_CLIENT_ID,
+        sdk: { clientSideId: window.application.env.LD_CLIENT_ID },
         user
       }
     )
@@ -489,7 +495,10 @@ Note: This is not needed when using the memory-adapter.
 ```js
 import adapter from '@flopflip/launchdarkly-adapter';
 
-<ConfigureFlopFlip adapter={adapter} adapterArgs={{ clientSideId, user }}>
+<ConfigureFlopFlip
+  adapter={adapter}
+  adapterArgs={{ sdk: { clientSideId }, user }}
+>
   <App />
 </ConfigureFlopFlip>;
 ```
@@ -504,7 +513,10 @@ initialized (e.g. LaunchDarkly). Requested reconfigurations will be queued and p
 Imagine having `ConfigureFlopflip` above a given component wrapped by a `Route`:
 
 ```jsx
-<ConfigureFlopFlip adapter={adapter} adapterArgs={{ clientSideId, user }}>
+<ConfigureFlopFlip
+  adapter={adapter}
+  adapterArgs={{ sdk: { clientSideId }, user }}
+>
   <>
     <SomeOtherAppComponent />
     <Route
