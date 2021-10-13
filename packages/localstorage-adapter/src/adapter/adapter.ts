@@ -118,7 +118,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
     if (!isAdapterConfigured) return;
 
-    const flagsCacheKey = this.#getFlagsCacheKey(this.#adapterState.user);
+    const flagsCacheKey = this.#getFlagsCacheKey(this.#adapterState.user!);
     const previousFlags: TFlags | null = this.#cache.get<TFlags>(flagsCacheKey);
 
     const updatedFlags = Object.entries(flags).reduce<TFlags>(
