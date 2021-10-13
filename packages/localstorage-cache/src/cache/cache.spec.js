@@ -10,7 +10,7 @@ describe('setting a value', () => {
       cache.set('foo', 'bar');
 
       expect(
-        JSON.parse(localStorage.getItem(`${cachePrefix}__foo`))
+        JSON.parse(localStorage.getItem(`${cachePrefix}/foo`))
       ).toStrictEqual('bar');
     });
   });
@@ -23,7 +23,7 @@ describe('setting a value', () => {
       cache.set('foo', 'baz');
 
       expect(
-        JSON.parse(localStorage.getItem(`${cachePrefix}__foo`))
+        JSON.parse(localStorage.getItem(`${cachePrefix}/foo`))
       ).toStrictEqual('baz');
     });
   });
@@ -37,7 +37,7 @@ describe('getting a value', () => {
       cache.set('foo', 'bar');
 
       expect(
-        JSON.parse(localStorage.getItem(`${cachePrefix}__foo`))
+        JSON.parse(localStorage.getItem(`${cachePrefix}/foo`))
       ).toStrictEqual('bar');
     });
   });
@@ -50,7 +50,7 @@ describe('getting a value', () => {
       cache.set('foo', json);
 
       expect(
-        JSON.parse(localStorage.getItem(`${cachePrefix}__foo`))
+        JSON.parse(localStorage.getItem(`${cachePrefix}/foo`))
       ).toStrictEqual(json);
     });
   });
@@ -62,11 +62,11 @@ describe('unsetting a value', () => {
 
     cache.set('foo', 'bar');
     expect(
-      JSON.parse(localStorage.getItem(`${cachePrefix}__foo`))
+      JSON.parse(localStorage.getItem(`${cachePrefix}/foo`))
     ).toStrictEqual('bar');
 
     cache.unset('foo', 'bar');
 
-    expect(JSON.parse(localStorage.getItem(`${cachePrefix}__foo`))).toBeNull();
+    expect(JSON.parse(localStorage.getItem(`${cachePrefix}/foo`))).toBeNull();
   });
 });
