@@ -82,14 +82,21 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     return !isEqual(nextFlags, previousFlags);
   };
 
+  #getFlagsCacheKey = (user: TUser) =>
+    [user.key, 'flags'].filter(Boolean).join('/');
+
   #subscribeToFlagsChanges = ({
     pollingInteralMs = 1000 * 60,
+    user,
   }: {
     pollingInteralMs?: TLocalStorageAdapterArgs['pollingInteralMs'];
+    user: TUser;
   }) => {
     setInterval(() => {
       if (!this.#getIsAdapterUnsubscribed()) {
-        const nextFlags = normalizeFlags(this.#cache.get<TFlags>('flags'));
+        const nextFlags = normalizeFlags(
+          this.#cache.get<TFlags>(this.#getFlagsCacheKey(user))
+        );
 
         if (this.#didFlagsChange(nextFlags)) {
           this.#adapterState.flags = nextFlags;
@@ -111,7 +118,8 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
     if (!isAdapterConfigured) return;
 
-    const previousFlags: TFlags | null = this.#cache.get<TFlags>('flags');
+    const flagsCacheKey = this.#getFlagsCacheKey(this.#adapterState.user);
+    const previousFlags: TFlags | null = this.#cache.get<TFlags>(flagsCacheKey);
 
     const updatedFlags = Object.entries(flags).reduce<TFlags>(
       (updatedFlags: TFlags, [flagName, flagValue]) => {
@@ -143,7 +151,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       ...updatedFlags,
     };
 
-    this.#cache.set('flags', nextFlags);
+    this.#cache.set(flagsCacheKey, nextFlags);
     this.#adapterState.flags = nextFlags;
 
     this.#adapterState.emitter.emit('flagsStateChange', nextFlags);
@@ -183,7 +191,9 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     return Promise.resolve().then(() => {
       this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
 
-      const flags = normalizeFlags(this.#cache.get('flags'));
+      const flags = normalizeFlags(
+        this.#cache.get(this.#getFlagsCacheKey(user))
+      );
 
       this.#adapterState.flags = flags;
       this.#adapterState.emitter.emit('flagsStateChange', flags);
@@ -191,6 +201,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
       this.#subscribeToFlagsChanges({
         pollingInteralMs,
+        user,
       });
 
       return {
@@ -203,8 +214,10 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     adapterArgs: TLocalStorageAdapterArgs,
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
-    this.#cache.unset('flags');
-    this.#adapterState.flags = {};
+    const previousFlags = this.#cache.get<TFlags>(
+      this.#getFlagsCacheKey(adapterArgs.user)
+    );
+    this.#adapterState.flags = previousFlags || {};
 
     const nextUser = adapterArgs.user;
     this.#adapterState.user = nextUser;

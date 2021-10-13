@@ -13,7 +13,7 @@ const createAdapterEventHandlers = (custom = {}) => ({
 });
 
 describe('when configuring', () => {
-  const adapterArgs = {};
+  const adapterArgs = { user: { key: 'user-id' } };
   let adapterEventHandlers;
 
   beforeEach(() => {
@@ -110,7 +110,11 @@ describe('when configuring', () => {
 
       it('should set localstorage', () => {
         expect(
-          JSON.parse(localStorage.getItem(`${STORAGE_SLICE}__flags`))
+          JSON.parse(
+            localStorage.getItem(
+              `${STORAGE_SLICE}/${adapterArgs.user.key}/flags`
+            )
+          )
         ).toStrictEqual(updatedFlags);
       });
 
@@ -163,7 +167,11 @@ describe('when configuring', () => {
 
         it('should not update the locked flag', () => {
           expect(
-            JSON.parse(localStorage.getItem(`${STORAGE_SLICE}__flags`))
+            JSON.parse(
+              localStorage.getItem(
+                `${STORAGE_SLICE}/${adapterArgs.user.key}/flags`
+              )
+            )
           ).toHaveProperty('fooFlag', true);
         });
       });
@@ -178,7 +186,7 @@ describe('when configuring', () => {
         adapterEventHandlers.onFlagsStateChange.mockClear();
 
         localStorage.setItem(
-          `${STORAGE_SLICE}__flags`,
+          `${STORAGE_SLICE}/${adapterArgs.user.key}/flags`,
           JSON.stringify(updatedFlags)
         );
       });
@@ -206,10 +214,15 @@ describe('when configuring', () => {
     });
 
     describe('when reconfiguring', () => {
-      const user = { id: 'bar' };
+      const user = { key: 'bar' };
 
       beforeEach(async () => {
         adapter.updateFlags({ foo: 'bar' });
+
+        localStorage.setItem(
+          `${STORAGE_SLICE}/${user.key}/flags`,
+          JSON.stringify({ foo: 'bar' })
+        );
 
         configurationResult = await adapter.reconfigure({ user });
       });
@@ -222,8 +235,10 @@ describe('when configuring', () => {
         );
       });
 
-      it('should reset localstorage', () => {
-        expect(localStorage.getItem(`${STORAGE_SLICE}__flags`)).toBe(null);
+      it('should restore flags from localstorage', () => {
+        expect(localStorage.getItem).toHaveBeenCalledWith(
+          `${STORAGE_SLICE}/${user.key}/flags`
+        );
       });
 
       it('should invoke `onFlagsStateChange`', () => {
