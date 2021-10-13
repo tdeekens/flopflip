@@ -79,7 +79,7 @@
     "babel-plugin-lodash": "3.3.4",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "check-node-version": "4.1.0",
-    "core-js": "3.18.2",
+    "core-js": "3.18.3",
     "cross-env": "7.0.3",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
@@ -104,10 +104,10 @@
     "rimraf": "3.0.2",
     "ts-jest": "27.0.5",
     "tslib": "2.3.1",
-    "typescript": "4.4.3"
+    "typescript": "4.4.4"
   },
   "resolutions": {
-    "@types/react": "17.0.27",
+    "@types/react": "17.0.29",
     "@types/react-dom": "17.0.9"
   },
   "keywords": [
