@@ -4,7 +4,7 @@ const createCache = (options: TCacheOptions) => {
   const cache: TCache = {
     get: (key) => {
       const localStorageValue = localStorage.getItem(
-        `${options.prefix}__${key}`
+        [options.prefix, key].join('/')
       );
 
       return localStorageValue ? JSON.parse(localStorageValue) : null;
@@ -12,7 +12,7 @@ const createCache = (options: TCacheOptions) => {
     set: (key, value) => {
       try {
         localStorage.setItem(
-          `${options.prefix}__${key}`,
+          [options.prefix, key].join('/'),
           JSON.stringify(value)
         );
         return true;
@@ -22,7 +22,7 @@ const createCache = (options: TCacheOptions) => {
       }
     },
     unset: (key) => {
-      localStorage.removeItem(`${options.prefix}__${key}`);
+      localStorage.removeItem([options.prefix, key].join('/'));
     },
   };
 
