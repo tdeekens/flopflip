@@ -1,5 +1,12 @@
 # @flopflip/test-utils
 
+## 3.0.23
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/memory-adapter@3.0.22
+
 ## 3.0.22
 
 ### Patch Changes

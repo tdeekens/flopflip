@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/react-redux",
-  "version": "12.1.18",
+  "version": "12.1.19",
   "description": "A feature toggle wrapper to use LaunchDarkly with React Redux",
   "main": "dist/flopflip-react-redux.cjs.js",
   "module": "dist/flopflip-react-redux.esm.js",
@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@flopflip/memory-adapter": "3.0.21",
+    "@flopflip/memory-adapter": "3.0.22",
     "@flopflip/test-utils": "*",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -38,8 +38,8 @@
   },
   "dependencies": {
     "@babel/runtime": "7.15.4",
-    "@flopflip/react": "^11.1.20",
-    "@flopflip/types": "4.1.17",
+    "@flopflip/react": "^11.1.21",
+    "@flopflip/types": "4.1.18",
     "@types/react-redux": "7.1.19"
   },
   "peerDependencies": {
