@@ -1,5 +1,14 @@
 # @flopflip/localstorage-cache
 
+## 1.0.21
+
+### Patch Changes
+
+- [#1531](https://github.com/tdeekens/flopflip/pull/1531) [`7b8964dd`](https://github.com/tdeekens/flopflip/commit/7b8964dd1870974d53c9fa229f50e750887940a2) Thanks [@tdeekens](https://github.com/tdeekens)! - Fix localstorage-adapter to restore previous flags
+
+- Updated dependencies [[`fef83a93`](https://github.com/tdeekens/flopflip/commit/fef83a9303ce329b2f1e044b0b8e462d3554414f)]:
+  - @flopflip/types@4.1.18
+
 ## 1.0.20
 
 ### Patch Changes
