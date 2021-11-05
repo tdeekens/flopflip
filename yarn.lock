@@ -2181,8 +2181,6 @@ __metadata:
     "@flopflip/memory-adapter": 3.0.22
     "@testing-library/jest-dom": 5.14.1
     "@testing-library/react": 12.1.2
-    codecov: ^3.8.3
-    jest: 27.3.1
     jest-localstorage-mock: 2.4.18
     jest-plugin-filename: 0.0.1
     jest-runner-eslint: 1.0.0
@@ -4524,7 +4522,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"codecov@npm:^3.8.3":
+"codecov@npm:3.8.3":
   version: 3.8.3
   resolution: "codecov@npm:3.8.3"
   dependencies:
@@ -6280,7 +6278,7 @@ __metadata:
     babel-plugin-lodash: 3.3.4
     babel-plugin-transform-dynamic-import: 2.1.0
     check-node-version: 4.1.0
-    codecov: ^3.8.3
+    codecov: 3.8.3
     core-js: 3.19.0
     cross-env: 7.0.3
     eslint: 8.1.0
