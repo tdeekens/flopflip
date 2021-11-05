@@ -29,7 +29,7 @@ jobs:
 
       - name: Get yarn cache
         id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
 
       - uses: actions/cache@v2
         with:
@@ -39,7 +39,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - uses: jackyef/bundlewatch-gh-action@master
         with:

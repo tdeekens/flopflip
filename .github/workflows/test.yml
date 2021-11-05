@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [16.x, 17.x]
 
     steps:
       - name: Checkout
@@ -20,7 +20,7 @@ jobs:
 
       - name: yarn cache directory
         id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
 
       - name: Setup node_modules cache
         uses: actions/cache@v2
@@ -36,7 +36,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
+      - name: Check for unmet constraints (fix w/ "yarn constraints --fix")
+        run: yarn constraints
 
       - name: Type check
         run: yarn typecheck
@@ -48,13 +50,13 @@ jobs:
         run: yarn build
 
       - name: Test
-        if: startsWith(matrix.node-version, '14')
+        if: startsWith(matrix.node-version, '16')
         run: yarn test:ci
         env:
           CI: true
 
       - name: Test (with coverage)
-        if: startsWith(matrix.node-version, '16')
+        if: startsWith(matrix.node-version, '17')
         run: yarn test:ci:coverage
         env:
           CI: true

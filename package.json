@@ -3,8 +3,8 @@
   "name": "flopflip",
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
+    "setup": "husky install && preconstruct dev && manypkg check && check-node-version --package --print",
     "auth": "npm_config_registry=https://registry.npmjs.org npm whoami",
-    "postinstall": "check-node-version --package --print && manypkg check && preconstruct dev && husky install",
     "develop": "jest --projects jest.*.config.js --watch",
     "lint": "jest --config jest.lint.config.js --maxWorkers 5",
     "pretypecheck": "rimraf packages/**/dist/",
@@ -28,12 +28,7 @@
     "postpublish": "pinst --enable",
     "release": "changeset publish"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tdeekens/flopflip.git"
-  },
   "author": "Tobias Deekens <nerd@tdeekens.name>",
-  "license": "MIT",
   "engines": {
     "node": ">=10",
     "npm": ">=3"
@@ -79,6 +74,7 @@
     "babel-plugin-lodash": "3.3.4",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "check-node-version": "4.1.0",
+    "codecov": "3.8.3",
     "core-js": "3.19.0",
     "cross-env": "7.0.3",
     "eslint": "8.1.0",
@@ -94,6 +90,7 @@
     "eslint-plugin-simple-import-sort": "7.0.0",
     "eslint-plugin-testing-library": "5.0.0",
     "husky": "7.0.4",
+    "jest": "27.3.1",
     "lint-staged": "11.2.6",
     "mri": "1.2.0",
     "pinst": "2.1.6",
@@ -122,6 +119,7 @@
   "workspaces": [
     "packages/*"
   ],
+  "packageManager": "yarn@3.1.0",
   "preconstruct": {
     "packages": [
       "packages/*",

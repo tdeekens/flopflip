@@ -3,14 +3,8 @@
   "name": "@flopflip/test-utils",
   "version": "3.0.23",
   "description": "Test utils for flipflop",
-  "scripts": {},
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tdeekens/flopflip.git"
-  },
   "author": "Tobias Deekens <nerd@tdeekens.name>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/tdeekens/flopflip/issues"
   },
@@ -25,13 +19,10 @@
     "@flopflip/memory-adapter": "3.0.22",
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "12.1.2",
-    "codecov": "3.8.3",
-    "jest": "27.3.1",
     "jest-localstorage-mock": "2.4.18",
     "jest-plugin-filename": "0.0.1",
     "jest-runner-eslint": "1.0.0",
     "jest-watch-yarn-workspaces": "1.1.0",
     "react": "17.0.2"
-  },
-  "devDependencies": {}
+  }
 }
