@@ -3,14 +3,8 @@
   "name": "@flopflip/test-utils",
   "version": "3.0.23",
   "description": "Test utils for flipflop",
-  "scripts": {},
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tdeekens/flopflip.git"
-  },
   "author": "Tobias Deekens <nerd@tdeekens.name>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/tdeekens/flopflip/issues"
   },
@@ -32,6 +26,5 @@
     "jest-runner-eslint": "1.0.0",
     "jest-watch-yarn-workspaces": "1.1.0",
     "react": "17.0.2"
-  },
-  "devDependencies": {}
+  }
 }

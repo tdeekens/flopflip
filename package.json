@@ -3,8 +3,8 @@
   "name": "flopflip",
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
+    "setup": "husky install && preconstruct dev && manypkg check && check-node-version --package --print",
     "auth": "npm_config_registry=https://registry.npmjs.org npm whoami",
-    "postinstall": "check-node-version --package --print && manypkg check && preconstruct dev && husky install",
     "develop": "jest --projects jest.*.config.js --watch",
     "lint": "jest --config jest.lint.config.js --maxWorkers 5",
     "pretypecheck": "rimraf packages/**/dist/",
@@ -28,12 +28,7 @@
     "postpublish": "pinst --enable",
     "release": "changeset publish"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tdeekens/flopflip.git"
-  },
   "author": "Tobias Deekens <nerd@tdeekens.name>",
-  "license": "MIT",
   "engines": {
     "node": ">=10",
     "npm": ">=3"
@@ -122,6 +117,7 @@
   "workspaces": [
     "packages/*"
   ],
+  "packageManager": "yarn@3.1.0",
   "preconstruct": {
     "packages": [
       "packages/*",

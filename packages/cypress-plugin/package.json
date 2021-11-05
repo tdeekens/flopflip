@@ -20,7 +20,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tdeekens/flopflip.git"
+    "url": "https://github.com/commercetools/test-data.git",
+    "directory": "packages/cypress-plugin"
   },
   "author": "Tobias Deekens <nerd@tdeekens.name>",
   "license": "MIT",

@@ -16,7 +16,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tdeekens/flopflip.git"
+    "url": "https://github.com/commercetools/test-data.git",
+    "directory": "packages/localstorage-cache"
   },
   "author": "Tobias Deekens <nerd@tdeekens.name>",
   "license": "MIT",
@@ -33,6 +34,5 @@
   ],
   "dependencies": {
     "@flopflip/types": "4.1.18"
-  },
-  "devDependencies": {}
+  }
 }
