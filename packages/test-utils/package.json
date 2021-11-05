@@ -19,7 +19,7 @@
     "@flopflip/memory-adapter": "3.0.22",
     "@testing-library/jest-dom": "5.14.1",
     "@testing-library/react": "12.1.2",
-    "codecov": "3.8.3",
+    "codecov": "^3.8.3",
     "jest": "27.3.1",
     "jest-localstorage-mock": "2.4.18",
     "jest-plugin-filename": "0.0.1",
