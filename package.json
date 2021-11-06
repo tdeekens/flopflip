@@ -22,11 +22,9 @@
     "build": "preconstruct build",
     "build:watch": "preconstruct watch",
     "changeset": "changeset",
-    "version-packages": "changeset version",
-    "prerelease": "cross-env NODE_ENV=production yarn auth && yarn build",
+    "changeset:version-and-format": "changeset version && prettier --write --parser json '**/package.json' && yarn install",
     "prepublishOnly": "pinst --disable",
-    "postpublish": "pinst --enable",
-    "release": "changeset publish"
+    "postpublish": "pinst --enable"
   },
   "author": "Tobias Deekens <nerd@tdeekens.name>",
   "engines": {
