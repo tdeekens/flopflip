@@ -1,5 +1,8 @@
 const isEnv = (env) => process.env.NODE_ENV === env;
 
+/**
+ * @type {import('@babel/core').TransformOptions}
+ */
 module.exports = {
   presets: [
     [
@@ -77,5 +80,6 @@ module.exports = {
     isEnv('test') && 'babel-plugin-transform-dynamic-import',
     isEnv('test') && '@babel/plugin-transform-modules-commonjs',
     'babel-plugin-lodash',
+    './babel-plugin-package-version',
   ].filter(Boolean),
 };

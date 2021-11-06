@@ -4,9 +4,6 @@
   "description": "An adapter which combines other adapters for flipflop",
   "main": "dist/flopflip-combine-adapters.cjs.js",
   "module": "dist/flopflip-combine-adapters.esm.js",
-  "scripts": {
-    "prepare": "./../../bin/version.js amend"
-  },
   "files": [
     "readme.md",
     "dist/**"
@@ -16,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/commercetools/test-data.git",
+    "url": "https://github.com/tdeekens/flopflip.git",
     "directory": "packages/combine-adapters"
   },
   "author": "Tobias Deekens <nerd@tdeekens.name>",

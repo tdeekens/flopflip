@@ -8,9 +8,6 @@
     "./dist/flopflip-react.cjs.js": "./dist/flopflip-react.browser.cjs.js",
     "./dist/flopflip-react.esm.js": "./dist/flopflip-react.browser.esm.js"
   },
-  "scripts": {
-    "prepare": "./../../bin/version.js amend"
-  },
   "files": [
     "readme.md",
     "dist/**"
@@ -20,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/commercetools/test-data.git",
+    "url": "https://github.com/tdeekens/flopflip.git",
     "directory": "packages/react"
   },
   "author": "Tobias Deekens <nerd@tdeekens.name>",

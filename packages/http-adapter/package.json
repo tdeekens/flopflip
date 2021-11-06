@@ -4,9 +4,6 @@
   "description": "An HTTP adapter for flipflop",
   "main": "dist/flopflip-http-adapter.cjs.js",
   "module": "dist/flopflip-http-adapter.esm.js",
-  "scripts": {
-    "prepare": "./../../bin/version.js amend"
-  },
   "files": [
     "readme.md",
     "dist/**"
@@ -16,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/commercetools/test-data.git",
+    "url": "https://github.com/tdeekens/flopflip.git",
     "directory": "packages/http-adapter"
   },
   "author": "Tobias Deekens <nerd@tdeekens.name>",

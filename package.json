@@ -22,11 +22,9 @@
     "build": "preconstruct build",
     "build:watch": "preconstruct watch",
     "changeset": "changeset",
-    "version-packages": "changeset version",
-    "prerelease": "cross-env NODE_ENV=production yarn auth && yarn build",
+    "changeset:version-and-format": "changeset version && prettier --write --parser json '**/package.json' && YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn install",
     "prepublishOnly": "pinst --disable",
-    "postpublish": "pinst --enable",
-    "release": "changeset publish"
+    "postpublish": "pinst --enable"
   },
   "author": "Tobias Deekens <nerd@tdeekens.name>",
   "engines": {
@@ -92,12 +90,10 @@
     "husky": "7.0.4",
     "jest": "27.3.1",
     "lint-staged": "11.2.6",
-    "mri": "1.2.0",
     "pinst": "2.1.6",
     "prettier": "2.4.1",
     "raf": "3.4.1",
     "regenerator-runtime": "0.13.9",
-    "replace": "1.2.1",
     "rimraf": "3.0.2",
     "ts-jest": "27.0.7",
     "tslib": "2.3.1",
