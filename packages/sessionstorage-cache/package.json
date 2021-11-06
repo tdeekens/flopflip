@@ -4,9 +4,6 @@
   "description": "Sessionstorage cache for flipflop adapters",
   "main": "dist/flopflip-sessionstorage-cache.cjs.js",
   "module": "dist/flopflip-sessionstorage-cache.esm.js",
-  "scripts": {
-    "prepare": "./../../bin/version.js amend"
-  },
   "files": [
     "readme.md",
     "dist/**"

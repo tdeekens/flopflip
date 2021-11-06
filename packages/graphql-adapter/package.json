@@ -4,9 +4,6 @@
   "description": "An GraphQL adapter for flipflop",
   "main": "dist/flopflip-graphql-adapter.cjs.js",
   "module": "dist/flopflip-graphql-adapter.esm.js",
-  "scripts": {
-    "prepare": "./../../bin/version.js amend"
-  },
   "files": [
     "readme.md",
     "dist/**"

@@ -4,9 +4,6 @@
   "description": "An HTTP adapter for flipflop",
   "main": "dist/flopflip-http-adapter.cjs.js",
   "module": "dist/flopflip-http-adapter.esm.js",
-  "scripts": {
-    "prepare": "./../../bin/version.js amend"
-  },
   "files": [
     "readme.md",
     "dist/**"

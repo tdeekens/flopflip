@@ -4,9 +4,6 @@
   "description": "A adapter around the split.io client for flipflop",
   "main": "dist/flopflip-splitio-adapter.cjs.js",
   "module": "dist/flopflip-splitio-adapter.esm.js",
-  "scripts": {
-    "prepare": "./../../bin/version.js amend"
-  },
   "files": [
     "readme.md",
     "dist/**"

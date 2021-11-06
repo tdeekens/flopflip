@@ -8,9 +8,6 @@
     "./dist/flopflip-react.cjs.js": "./dist/flopflip-react.browser.cjs.js",
     "./dist/flopflip-react.esm.js": "./dist/flopflip-react.browser.esm.js"
   },
-  "scripts": {
-    "prepare": "./../../bin/version.js amend"
-  },
   "files": [
     "readme.md",
     "dist/**"

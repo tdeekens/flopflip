@@ -8,9 +8,6 @@
     "./dist/flopflip-cypress-plugin.cjs.js": "./dist/flopflip-cypress-plugin.browser.cjs.js",
     "./dist/flopflip-cypress-plugin.esm.js": "./dist/flopflip-cypress-plugin.browser.esm.js"
   },
-  "scripts": {
-    "prepare": "./../../bin/version.js amend"
-  },
   "files": [
     "readme.md",
     "dist/**"
