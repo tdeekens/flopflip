@@ -10,7 +10,7 @@ gen_enforced_field(WorkspaceCwd, 'license', null) :-
 % Enforces the repository field for all public workspaces while removing it from private workspaces
 gen_enforced_field(WorkspaceCwd, 'repository.type', 'git') :-
   \+ workspace_field(WorkspaceCwd, 'private', true).
-gen_enforced_field(WorkspaceCwd, 'repository.url', 'https://github.com/commercetools/test-data.git') :-
+gen_enforced_field(WorkspaceCwd, 'repository.url', 'https://github.com/tdeekens/flopflip.git') :-
   \+ workspace_field(WorkspaceCwd, 'private', true).
 gen_enforced_field(WorkspaceCwd, 'repository.directory', WorkspaceCwd) :-
   \+ workspace_field(WorkspaceCwd, 'private', true).
