@@ -22,7 +22,7 @@
     "build": "preconstruct build",
     "build:watch": "preconstruct watch",
     "changeset": "changeset",
-    "changeset:version-and-format": "changeset version && prettier --write --parser json '**/package.json' && yarn install",
+    "changeset:version-and-format": "changeset version && prettier --write --parser json '**/package.json' && YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn install",
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable"
   },
