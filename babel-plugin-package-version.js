@@ -6,9 +6,7 @@ const pluginReplacePackageVersion = function (babel) {
   return {
     visitor: {
       StringLiteral(path, state) {
-        if (
-          path.node.value === '__@FLOPFLIP/VERSION_OF_RELEASE__'
-        ) {
+        if (path.node.value === '__@FLOPFLIP/VERSION_OF_RELEASE__') {
           const packageJsonPath = findUpSync('package.json', {
             cwd: state.file.opts.filename,
           });
