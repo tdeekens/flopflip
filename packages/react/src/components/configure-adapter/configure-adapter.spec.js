@@ -1,4 +1,9 @@
-import { render as rtlRender, screen, waitFor } from '@flopflip/test-utils';
+import {
+  act,
+  render as rtlRender,
+  screen,
+  waitFor,
+} from '@flopflip/test-utils';
 import React, { useContext } from 'react';
 
 import AdapterContext from '../adapter-context';
@@ -262,6 +267,12 @@ describe('when adapter args change after adapter was configured', () => {
     );
 
     await waitUntilStatus();
+    await act(async () => {
+      await Promise.resolve();
+    });
+    await act(async () => {
+      await Promise.resolve();
+    });
 
     expect(adapter.reconfigure).toHaveBeenCalledWith(
       nextAdapterArgs,

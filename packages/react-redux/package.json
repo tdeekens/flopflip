@@ -29,9 +29,9 @@
   "devDependencies": {
     "@flopflip/memory-adapter": "3.0.22",
     "@flopflip/test-utils": "*",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-redux": "7.2.6",
+    "react": "beta",
+    "react-dom": "beta",
+    "react-redux": "next",
     "redux": "4.1.2"
   },
   "dependencies": {

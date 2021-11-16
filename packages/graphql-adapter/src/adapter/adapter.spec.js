@@ -302,9 +302,7 @@ describe('when configured', () => {
     });
 
     it('should reset cache', () => {
-      expect(sessionStorage.removeItem).toHaveBeenCalledWith(
-        '@flopflip/flags'
-      );
+      expect(sessionStorage.removeItem).toHaveBeenCalledWith('@flopflip/flags');
     });
   });
 
