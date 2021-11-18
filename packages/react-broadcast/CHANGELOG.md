@@ -1,5 +1,15 @@
 # @flopflip/react-broadcast
 
+## 12.2.11
+
+### Patch Changes
+
+- [#1543](https://github.com/tdeekens/flopflip/pull/1543) [`5c02eb83`](https://github.com/tdeekens/flopflip/commit/5c02eb830a0019b326bb0510a5a15f62e5dfe348) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: to migrate to yarn#3
+
+- Updated dependencies [[`5c02eb83`](https://github.com/tdeekens/flopflip/commit/5c02eb830a0019b326bb0510a5a15f62e5dfe348)]:
+  - @flopflip/react@11.1.22
+  - @flopflip/types@4.1.19
+
 ## 12.2.10
 
 ### Patch Changes
