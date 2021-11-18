@@ -30,8 +30,8 @@
     "@flopflip/test-utils": "*",
     "@types/react": "17.0.34",
     "@types/react-dom": "17.0.11",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react": "beta",
+    "react-dom": "beta"
   },
   "peerDependencies": {
     "react": "^16.8 || ^17.0",

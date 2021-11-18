@@ -18,11 +18,11 @@
     "@babel/runtime": "7.16.3",
     "@flopflip/memory-adapter": "3.0.22",
     "@testing-library/jest-dom": "5.15.0",
-    "@testing-library/react": "12.1.2",
+    "@testing-library/react": "alpha",
     "jest-localstorage-mock": "2.4.18",
     "jest-plugin-filename": "0.0.1",
     "jest-runner-eslint": "1.0.0",
     "jest-watch-yarn-workspaces": "1.1.0",
-    "react": "17.0.2"
+    "react": "beta"
   }
 }

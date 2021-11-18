@@ -1,4 +1,4 @@
-import { renderWithAdapter, screen } from '@flopflip/test-utils';
+import { act, renderWithAdapter, screen } from '@flopflip/test-utils';
 import React from 'react';
 
 import Configure from '../../components/configure';
