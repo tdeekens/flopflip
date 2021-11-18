@@ -11,6 +11,8 @@ import {
 } from '@testing-library/react';
 import React, { cloneElement } from 'react';
 
+afterEach(adapter.reset);
+
 const mergeOptional = (defaultValue, value) =>
   value === null ? undefined : { ...defaultValue, ...value };
 

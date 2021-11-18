@@ -263,9 +263,11 @@ describe('when adapter args change after adapter was configured', () => {
 
     await waitUntilStatus();
 
-    expect(adapter.reconfigure).toHaveBeenCalledWith(
-      nextAdapterArgs,
-      expect.anything()
+    await waitFor(() =>
+      expect(adapter.reconfigure).toHaveBeenCalledWith(
+        nextAdapterArgs,
+        expect.anything()
+      )
     );
   });
 });

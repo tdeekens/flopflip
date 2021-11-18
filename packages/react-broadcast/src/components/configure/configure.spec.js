@@ -84,18 +84,6 @@ describe('when enabling feature', () => {
   });
 });
 
-describe('when unconfigured', () => {
-  it('should indicate through the adapter state', async () => {
-    const { waitUntilConfigured } = render();
-
-    expect(screen.getByText(/Is unconfigured: Yes/i)).toBeInTheDocument();
-    expect(screen.getByText(/Is configuring: No/i)).toBeInTheDocument();
-    expect(screen.getByText(/Is configured: No/i)).toBeInTheDocument();
-
-    await waitUntilConfigured();
-  });
-});
-
 describe('when configured', () => {
   it('should indicate through the adapter state', async () => {
     const { waitUntilConfigured } = render();

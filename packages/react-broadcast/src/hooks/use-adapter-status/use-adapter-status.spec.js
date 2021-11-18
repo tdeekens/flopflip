@@ -34,6 +34,6 @@ it('should indicate the adapter is configured', async () => {
 
   await waitUntilConfigured();
 
-  expect(screen.getByText(/Is configuring: No/i)).toBeInTheDocument();
-  expect(screen.getByText(/Is configured: Yes/i)).toBeInTheDocument();
+  await screen.findByText(/Is configuring: No/i);
+  await screen.findByText(/Is configured: Yes/i);
 });
