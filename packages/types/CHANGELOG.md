@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 4.1.19
+
+### Patch Changes
+
+- [#1543](https://github.com/tdeekens/flopflip/pull/1543) [`5c02eb83`](https://github.com/tdeekens/flopflip/commit/5c02eb830a0019b326bb0510a5a15f62e5dfe348) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: to migrate to yarn#3
+
 ## 4.1.18
 
 ### Patch Changes
