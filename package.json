@@ -29,7 +29,8 @@
   "author": "Tobias Deekens <nerd@tdeekens.name>",
   "engines": {
     "node": ">=10",
-    "npm": ">=3"
+    "npm": ">=3",
+    "yarn": ">=3"
   },
   "bugs": {
     "url": "https://github.com/tdeekens/flopflip/issues"
