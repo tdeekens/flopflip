@@ -119,8 +119,10 @@
   "packageManager": "yarn@3.1.0",
   "preconstruct": {
     "packages": [
+      "demo",
       "packages/*",
-      "!packages/test-utils"
+      "!packages/test-utils",
+      "!demo"
     ]
   },
   "bundlewatch": {

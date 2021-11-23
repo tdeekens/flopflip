@@ -46,6 +46,7 @@ coverage
 # Yarn
 .pnp.*
 .yarn/*
+demo/.yarn/*
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
