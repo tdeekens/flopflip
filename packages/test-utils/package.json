@@ -17,7 +17,7 @@
   "dependencies": {
     "@babel/runtime": "7.16.3",
     "@flopflip/memory-adapter": "3.0.23",
-    "@testing-library/jest-dom": "5.15.0",
+    "@testing-library/jest-dom": "5.15.1",
     "@testing-library/react": "12.1.2",
     "jest-localstorage-mock": "2.4.18",
     "jest-plugin-filename": "0.0.1",

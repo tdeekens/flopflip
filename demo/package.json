@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@flopflip/launchdarkly-adapter": "5.0.19",
-    "@flopflip/localstorage-adapter": "4.0.18",
-    "@flopflip/memory-adapter": "3.0.22",
-    "@flopflip/react-broadcast": "12.2.10",
-    "@flopflip/react-redux": "12.1.19",
+    "@flopflip/launchdarkly-adapter": "5.0.20",
+    "@flopflip/localstorage-adapter": "4.0.19",
+    "@flopflip/memory-adapter": "3.0.23",
+    "@flopflip/react-broadcast": "12.2.11",
+    "@flopflip/react-redux": "12.1.20",
     "classnames": "2.3.1",
     "lodash.flowright": "3.5.0",
     "react": "17.0.2",
@@ -16,7 +16,7 @@
     "react-scripts": "4.0.3",
     "redux": "4.1.2",
     "redux-logger": "3.0.6",
-    "redux-thunk": "2.4.0"
+    "redux-thunk": "2.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
