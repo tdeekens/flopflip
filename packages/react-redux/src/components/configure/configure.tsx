@@ -1,11 +1,11 @@
-import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
-import type {
-  TAdapter,
-  TConfigureAdapterChildren,
-  TConfigureAdapterProps,
-  TFlags,
+import {
+  type TAdapter,
+  type TConfigureAdapterChildren,
+  type TConfigureAdapterProps,
+  type TFlags,
 } from '@flopflip/types';
 import React from 'react';
+import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
 
 import { useUpdateFlags, useUpdateStatus } from '../../hooks';
 
@@ -29,7 +29,7 @@ const Configure = <AdapterInstance extends TAdapter>(
   props: Props<AdapterInstance>
 ) => {
   const adapterIdentifiers = [props.adapter.id];
-  const handleUpdateFlags = useUpdateFlags({adapterIdentifiers});
+  const handleUpdateFlags = useUpdateFlags({ adapterIdentifiers });
   const handleUpdateStatus = useUpdateStatus();
 
   useAdapterSubscription(props.adapter);

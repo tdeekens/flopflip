@@ -1,6 +1,7 @@
 import { selectAdapterConfigurationStatus } from '@flopflip/react';
-import type { TAdapterStatus, TAdapterStatusChange } from '@flopflip/types';
 import {
+  type TAdapterStatus,
+  type TAdapterStatusChange,
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
 } from '@flopflip/types';

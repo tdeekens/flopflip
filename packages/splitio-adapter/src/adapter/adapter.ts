@@ -1,17 +1,15 @@
 /* global SplitIO */
 import { exposeGlobally, normalizeFlags } from '@flopflip/adapter-utilities';
-import type {
-  TAdapterEventHandlers,
-  TAdapterStatus,
-  TFlag,
-  TFlagName,
-  TFlags,
-  TFlagVariation,
-  TSplitioAdapterArgs,
-  TSplitioAdapterInterface,
-  TUser,
-} from '@flopflip/types';
 import {
+  type TAdapterEventHandlers,
+  type TAdapterStatus,
+  type TFlag,
+  type TFlagName,
+  type TFlags,
+  type TFlagVariation,
+  type TSplitioAdapterArgs,
+  type TSplitioAdapterInterface,
+  type TUser,
   AdapterConfigurationStatus,
   adapterIdentifiers,
   AdapterInitializationStatus,

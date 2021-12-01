@@ -1,19 +1,18 @@
+import { type TFlagName, type TFlagVariation } from '@flopflip/types';
 import {
   DEFAULT_FLAG_PROP_KEY,
   setDisplayName,
   wrapDisplayName,
 } from '@flopflip/react';
-import type { TFlagName, TFlagVariation } from '@flopflip/types';
 import React from 'react';
 
 import { useFlagVariations } from '../../hooks';
 
 type InjectedProps = Record<string, TFlagVariation>;
 
-export default function injectFeatureToggle<OwnProps extends Record<string, unknown>>(
-  flagName: TFlagName,
-  propKey: string = DEFAULT_FLAG_PROP_KEY
-) {
+export default function injectFeatureToggle<
+  OwnProps extends Record<string, unknown>
+>(flagName: TFlagName, propKey: string = DEFAULT_FLAG_PROP_KEY) {
   return (
     Component: React.ComponentType<any>
   ): React.ComponentType<OwnProps & InjectedProps> => {

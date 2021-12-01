@@ -1,16 +1,14 @@
 import { exposeGlobally } from '@flopflip/adapter-utilities';
-import type {
-  TAdapter,
-  TAdapterEventHandlers,
-  TAdapterIdentifiers,
-  TAdapterStatus,
-  TAdapterStatusChange,
-  TCombinedAdapterArgs,
-  TCombinedAdapterInterface,
-  TFlags,
-  TUpdateFlagsOptions,
-} from '@flopflip/types';
 import {
+  type TAdapter,
+  type TAdapterEventHandlers,
+  type TAdapterIdentifiers,
+  type TAdapterStatus,
+  type TAdapterStatusChange,
+  type TCombinedAdapterArgs,
+  type TCombinedAdapterInterface,
+  type TFlags,
+  type TUpdateFlagsOptions,
   AdapterConfigurationStatus,
   adapterIdentifiers,
   AdapterInitializationStatus,
@@ -128,7 +126,6 @@ class CombineAdapters implements TCombinedAdapterInterface {
       this.#adapters.map(async (adapter) => {
         const adapterArgsForAdapter = adapterArgs[adapter.id];
 
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         return adapter.configure(adapterArgsForAdapter, {
           onFlagsStateChange: adapterEventHandlers.onFlagsStateChange,
           onStatusStateChange: () => undefined,
@@ -191,7 +188,6 @@ class CombineAdapters implements TCombinedAdapterInterface {
       this.#adapters.map(async (adapter) => {
         const adapterArgsForAdapter = adapterArgs[adapter.id];
 
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         return adapter.reconfigure(adapterArgsForAdapter, {
           onFlagsStateChange: adapterEventHandlers.onFlagsStateChange,
           onStatusStateChange: () => undefined,

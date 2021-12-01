@@ -1,20 +1,20 @@
-import type {
-  TAdapter,
-  TAdapterArgs,
-  TAdapterConfiguration,
-  TAdapterEventHandlers,
-  TAdapterInterface,
-  TAdapterReconfiguration,
-  TAdapterReconfigurationOptions,
-  TAdapterStatus,
-  TConfigureAdapterChildren,
-  TFlags,
+import {
+  type TAdapter,
+  type TAdapterArgs,
+  type TAdapterConfiguration,
+  type TAdapterEventHandlers,
+  type TAdapterInterface,
+  type TAdapterReconfiguration,
+  type TAdapterReconfigurationOptions,
+  type TAdapterStatus,
+  type TConfigureAdapterChildren,
+  type TFlags,
 } from '@flopflip/types';
 import {
   AdapterConfigurationStatus,
   AdapterInitializationStatus,
 } from '@flopflip/types';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import warning from 'tiny-warning';
 
 import AdapterContext, { createAdapterContext } from '../adapter-context';
@@ -39,8 +39,8 @@ type TProps = {
   adapterArgs: TAdapterArgs;
   adapterStatus?: TAdapterStatus;
   defaultFlags?: TFlags;
-  onFlagsStateChange: TAdapterEventHandlers['onFlagsStateChange'],
-  onStatusStateChange: TAdapterEventHandlers['onStatusStateChange'],
+  onFlagsStateChange: TAdapterEventHandlers['onFlagsStateChange'];
+  onStatusStateChange: TAdapterEventHandlers['onStatusStateChange'];
   render?: () => React.ReactNode;
   children?: TConfigureAdapterChildren;
 };
@@ -55,9 +55,8 @@ type TUseAppliedAdapterArgsStateReturn = [
 const useAppliedAdapterArgsState = ({
   initialAdapterArgs,
 }: TUseAppliedAdapterArgsStateOptions): TUseAppliedAdapterArgsStateReturn => {
-  const [appliedAdapterArgs, setAppliedAdapterArgs] = useState<
-    TAdapterArgs
-  >(initialAdapterArgs);
+  const [appliedAdapterArgs, setAppliedAdapterArgs] =
+    useState<TAdapterArgs>(initialAdapterArgs);
 
   const applyAdapterArgs = useCallback(
     (nextAdapterArgs: TAdapterArgs) => {
@@ -82,9 +81,7 @@ type TUseAdapterStateRefReturn = [
   () => boolean
 ];
 const useAdapterStateRef = (): TUseAdapterStateRefReturn => {
-  const adapterStateRef = useRef<TAdapterStates>(
-    AdapterStates.UNCONFIGURED
-  );
+  const adapterStateRef = useRef<TAdapterStates>(AdapterStates.UNCONFIGURED);
 
   const setAdapterState = useCallback(
     (nextAdapterState: TAdapterStates) => {
@@ -185,7 +182,7 @@ const useHandleDefaultFlagsCallback = ({
   const handleDefaultFlags = useCallback(
     (defaultFlags: TFlags): void => {
       if (Object.keys(defaultFlags).length > 0) {
-        onFlagsStateChange({flags: defaultFlags});
+        onFlagsStateChange({ flags: defaultFlags });
       }
     },
     [onFlagsStateChange]
@@ -238,7 +235,8 @@ const useConfigurationEffect = ({
            *    The configuration can be `undefined` then assuming `initializationStatus` to have
            *    succeeded to work with old adapters.
            */
-          const isAdapterWithoutInitializationStatus = !configuration?.initializationStatus;
+          const isAdapterWithoutInitializationStatus =
+            !configuration?.initializationStatus;
 
           if (
             isAdapterWithoutInitializationStatus ||
@@ -251,11 +249,9 @@ const useConfigurationEffect = ({
               applyAdapterArgs(pendingAdapterArgsRef.current);
             }
           }
-        }).catch(() => {
-          warning(
-            false,
-            '@flopflip/react: adapter could not be configured.'
-          );
+        })
+        .catch(() => {
+          warning(false, '@flopflip/react: adapter could not be configured.');
         });
     }
 
@@ -273,7 +269,8 @@ const useConfigurationEffect = ({
            *    The configuration can be `undefined` then assuming `initializationStatus` to have
            *    succeeded to work with old adapters.
            */
-          const isAdapterWithoutInitializationStatus = !reconfiguration?.initializationStatus;
+          const isAdapterWithoutInitializationStatus =
+            !reconfiguration?.initializationStatus;
 
           if (
             isAdapterWithoutInitializationStatus ||
@@ -282,11 +279,9 @@ const useConfigurationEffect = ({
           ) {
             setAdapterState(AdapterStates.CONFIGURED);
           }
-        }).catch(() => {
-          warning(
-            false,
-            '@flopflip/react: adapter could not be reconfigured.'
-          );
+        })
+        .catch(() => {
+          warning(false, '@flopflip/react: adapter could not be reconfigured.');
         });
     }
   }, [
@@ -347,7 +342,8 @@ const useDefaultFlagsEffect = ({
            *    The configuration can be `undefined` then assuming `initializationStatus` to have
            *    succeeded to work with old adapters.
            */
-          const isAdapterWithoutInitializationStatus = !configuration?.initializationStatus;
+          const isAdapterWithoutInitializationStatus =
+            !configuration?.initializationStatus;
 
           if (
             isAdapterWithoutInitializationStatus ||
@@ -360,11 +356,9 @@ const useDefaultFlagsEffect = ({
               applyAdapterArgs(pendingAdapterArgsRef.current);
             }
           }
-        }).catch(() => {
-          warning(
-            false,
-            '@flopflip/react: adapter could not be configured.'
-          );
+        })
+        .catch(() => {
+          warning(false, '@flopflip/react: adapter could not be configured.');
         });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -482,11 +476,17 @@ const ConfigureAdapter = (props: TProps) => {
     applyAdapterArgs,
     appliedAdapterArgs,
   });
-  const adapterEffectIdentifiers = props.adapter.effectIds ?? [props.adapter.id];
+  const adapterEffectIdentifiers = props.adapter.effectIds ?? [
+    props.adapter.id,
+  ];
 
   return (
     <AdapterContext.Provider
-      value={createAdapterContext(adapterEffectIdentifiers, reconfigureOrQueue, props.adapterStatus)}
+      value={createAdapterContext(
+        adapterEffectIdentifiers,
+        reconfigureOrQueue,
+        props.adapterStatus
+      )}
     >
       {(() => {
         const isAdapterConfigured = props.adapter.getIsConfigurationStatus(

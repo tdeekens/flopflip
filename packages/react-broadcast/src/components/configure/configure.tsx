@@ -1,13 +1,13 @@
 import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
-import type {
-  TAdapter,
-  TAdapterIdentifiers,
-  TAdapterStatus,
-  TAdapterStatusChange,
-  TConfigureAdapterChildren,
-  TConfigureAdapterProps,
-  TFlags,
-  TFlagsChange,
+import {
+  type TAdapter,
+  type TAdapterIdentifiers,
+  type TAdapterStatus,
+  type TAdapterStatusChange,
+  type TConfigureAdapterChildren,
+  type TConfigureAdapterProps,
+  type TFlags,
+  type TFlagsChange,
 } from '@flopflip/types';
 import {
   AdapterConfigurationStatus,

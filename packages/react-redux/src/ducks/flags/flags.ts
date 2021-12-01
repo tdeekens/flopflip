@@ -1,10 +1,10 @@
 import { isNil } from '@flopflip/react';
-import type {
-  TAdapterIdentifiers,
-  TFlagName,
-  TFlagsChange,
-  TFlagsContext,
-  TFlagVariation,
+import {
+  type TAdapterIdentifiers,
+  type TFlagName,
+  type TFlagsChange,
+  type TFlagsContext,
+  type TFlagVariation,
 } from '@flopflip/types';
 import { Reducer } from 'redux';
 
@@ -58,13 +58,16 @@ const reducer = (
 
 export default reducer;
 
-export const createReducer = (
-  preloadedState: TFlagsContext = initialState
-): Reducer<TFlagsContext, TUpdateFlagsAction> => (
-  // eslint-disable-next-line @typescript-eslint/default-param-last
-  state = preloadedState,
-  action
-) => reducer(state, action);
+export const createReducer =
+  (
+    preloadedState: TFlagsContext = initialState
+  ): Reducer<TFlagsContext, TUpdateFlagsAction> =>
+  (
+    // eslint-disable-next-line @typescript-eslint/default-param-last
+    state = preloadedState,
+    action
+  ) =>
+    reducer(state, action);
 
 // Action Creators
 export const updateFlags = (
@@ -79,22 +82,24 @@ export const updateFlags = (
 export const selectFlags = () => (state: TState) =>
   state[STATE_SLICE].flags ?? {};
 
-export const selectFlag = (
-  flagName: TFlagName,
-  adapterIdentifiers: TAdapterIdentifiers[]
-): ((state: TState) => TFlagVariation) => (state) => {
-  const allFlags = selectFlags()(state);
+export const selectFlag =
+  (
+    flagName: TFlagName,
+    adapterIdentifiers: TAdapterIdentifiers[]
+  ): ((state: TState) => TFlagVariation) =>
+  (state) => {
+    const allFlags = selectFlags()(state);
 
-  let foundFlagVariation: TFlagVariation = false;
+    let foundFlagVariation: TFlagVariation = false;
 
-  for (const adapterInterfaceIdentifier of adapterIdentifiers) {
-    const flagValue: TFlagVariation =
-      allFlags[adapterInterfaceIdentifier]?.[flagName];
+    for (const adapterInterfaceIdentifier of adapterIdentifiers) {
+      const flagValue: TFlagVariation =
+        allFlags[adapterInterfaceIdentifier]?.[flagName];
 
-    if (!isNil(flagValue)) {
-      foundFlagVariation = flagValue;
+      if (!isNil(flagValue)) {
+        foundFlagVariation = flagValue;
+      }
     }
-  }
 
-  return foundFlagVariation;
-};
+    return foundFlagVariation;
+  };

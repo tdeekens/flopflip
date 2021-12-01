@@ -1,5 +1,4 @@
-import type { TAdapter } from '@flopflip/types';
-import { AdapterSubscriptionStatus } from '@flopflip/types';
+import { type TAdapter, AdapterSubscriptionStatus } from '@flopflip/types';
 import { useCallback, useEffect, useRef } from 'react';
 
 function useAdapterSubscription(adapter: TAdapter) {

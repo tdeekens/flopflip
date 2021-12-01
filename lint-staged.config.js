@@ -1,10 +1,10 @@
 module.exports = {
-  'demo/**/*.js': ['npm run fix:eslint', 'npm run format:ts', 'git add -u'],
+  'demo/**/*.js': ['yarn run fix:eslint', 'yarn run format:ts', 'git add -u'],
   'packages/**/*.{js,ts}': [
-    'npm run fix:eslint',
-    'npm run format:ts',
+    'yarn run fix:eslint',
+    'yarn run format:ts',
     'git add -u',
   ],
-  '*.md': ['npm run format:md', 'git add -u'],
-  '*.yaml': ['npm run format:yaml', 'git add -u'],
+  '*.md': ['yarn run format:md', 'git add -u'],
+  '*.yaml': ['yarn run format:yaml', 'git add -u'],
 };

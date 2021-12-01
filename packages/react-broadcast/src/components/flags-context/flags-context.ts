@@ -1,5 +1,8 @@
-import type { TFlags, TFlagsContext } from '@flopflip/types';
-import { adapterIdentifiers as allAdapterIdentifiers } from '@flopflip/types';
+import {
+  type TFlags,
+  type TFlagsContext,
+  adapterIdentifiers as allAdapterIdentifiers,
+} from '@flopflip/types';
 import { createContext } from 'react';
 
 const createIntialFlagsContext = (
