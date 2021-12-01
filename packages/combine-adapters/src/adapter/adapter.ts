@@ -1,16 +1,14 @@
 import { exposeGlobally } from '@flopflip/adapter-utilities';
-import type {
-  TAdapter,
-  TAdapterEventHandlers,
-  TAdapterIdentifiers,
-  TAdapterStatus,
-  TAdapterStatusChange,
-  TCombinedAdapterArgs,
-  TCombinedAdapterInterface,
-  TFlags,
-  TUpdateFlagsOptions,
-} from '@flopflip/types';
 import {
+  type TAdapter,
+  type TAdapterEventHandlers,
+  type TAdapterIdentifiers,
+  type TAdapterStatus,
+  type TAdapterStatusChange,
+  type TCombinedAdapterArgs,
+  type TCombinedAdapterInterface,
+  type TFlags,
+  type TUpdateFlagsOptions,
   AdapterConfigurationStatus,
   adapterIdentifiers,
   AdapterInitializationStatus,

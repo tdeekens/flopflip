@@ -4,20 +4,18 @@ import {
   normalizeFlag,
   normalizeFlags,
 } from '@flopflip/adapter-utilities';
-import type {
-  TAdapterEventHandlers,
-  TAdapterStatus,
-  TAdapterStatusChange,
-  TFlagName,
-  TFlags,
-  TFlagsChange,
-  TFlagVariation,
-  TLaunchDarklyAdapterArgs,
-  TLaunchDarklyAdapterInterface,
-  TUpdateFlagsOptions,
-  TUser,
-} from '@flopflip/types';
 import {
+  type TAdapterEventHandlers,
+  type TAdapterStatus,
+  type TAdapterStatusChange,
+  type TFlagName,
+  type TFlags,
+  type TFlagsChange,
+  type TFlagVariation,
+  type TLaunchDarklyAdapterArgs,
+  type TLaunchDarklyAdapterInterface,
+  type TUpdateFlagsOptions,
+  type TUser,
   AdapterConfigurationStatus,
   adapterIdentifiers,
   AdapterInitializationStatus,
@@ -30,7 +28,7 @@ import {
   LDClient,
   LDUser,
 } from 'launchdarkly-js-client-sdk';
-import type { LDUser as TLDUser } from 'launchdarkly-js-sdk-common';
+import { type LDUser as TLDUser } from 'launchdarkly-js-sdk-common';
 import isEqual from 'lodash/isEqual';
 import mitt, { Emitter } from 'mitt';
 import warning from 'tiny-warning';

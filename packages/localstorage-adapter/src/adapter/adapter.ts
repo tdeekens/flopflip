@@ -4,19 +4,17 @@ import {
   normalizeFlags,
 } from '@flopflip/adapter-utilities';
 import createCache from '@flopflip/localstorage-cache';
-import type {
-  TAdapterEventHandlers,
-  TAdapterStatus,
-  TAdapterStatusChange,
-  TFlagName,
-  TFlags,
-  TFlagsChange,
-  TLocalStorageAdapterArgs,
-  TLocalStorageAdapterInterface,
-  TUpdateFlagsOptions,
-  TUser,
-} from '@flopflip/types';
 import {
+  type TAdapterEventHandlers,
+  type TAdapterStatus,
+  type TAdapterStatusChange,
+  type TFlagName,
+  type TFlags,
+  type TFlagsChange,
+  type TLocalStorageAdapterArgs,
+  type TLocalStorageAdapterInterface,
+  type TUpdateFlagsOptions,
+  type TUser,
   AdapterConfigurationStatus,
   adapterIdentifiers,
   AdapterInitializationStatus,

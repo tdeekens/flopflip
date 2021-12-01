@@ -1,4 +1,4 @@
-import type { TAdapterContext } from '@flopflip/types';
+import { type TAdapterContext } from '@flopflip/types';
 import { useContext } from 'react';
 
 import { AdapterContext } from '../../components';

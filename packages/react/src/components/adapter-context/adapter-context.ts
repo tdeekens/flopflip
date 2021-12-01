@@ -1,10 +1,8 @@
-import type {
-  TAdapterContext,
-  TAdapterIdentifiers,
-  TAdapterStatus,
-  TReconfigureAdapter,
-} from '@flopflip/types';
 import {
+  type TAdapterContext,
+  type TAdapterIdentifiers,
+  type TAdapterStatus,
+  type TReconfigureAdapter,
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
 } from '@flopflip/types';

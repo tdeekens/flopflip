@@ -1,4 +1,4 @@
-import type { TFlagName, TFlagVariation } from '@flopflip/types';
+import { type TFlagName, type TFlagVariation } from '@flopflip/types';
 
 import useFlagVariations from '../use-flag-variations';
 

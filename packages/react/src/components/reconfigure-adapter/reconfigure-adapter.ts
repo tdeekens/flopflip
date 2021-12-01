@@ -1,4 +1,4 @@
-import type { TUser } from '@flopflip/types';
+import { type TUser } from '@flopflip/types';
 import { Children, useEffect } from 'react';
 
 import useAdapterContext from '../../hooks/use-adapter-context';

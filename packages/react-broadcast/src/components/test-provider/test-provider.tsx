@@ -1,9 +1,9 @@
 import { AdapterContext, createAdapterContext } from '@flopflip/react';
-import type {
-  TAdapterIdentifiers,
-  TAdapterStatus,
-  TFlags,
-  TReconfigureAdapter,
+import {
+  type TAdapterIdentifiers,
+  type TAdapterStatus,
+  type TFlags,
+  type TReconfigureAdapter,
 } from '@flopflip/types';
 import {
   AdapterConfigurationStatus,

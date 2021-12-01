@@ -1,7 +1,7 @@
-import type {
-  TAdapterEventHandlers,
-  TAdapterIdentifiers,
-  TFlagsChange,
+import {
+  type TAdapterEventHandlers,
+  type TAdapterIdentifiers,
+  type TFlagsChange,
 } from '@flopflip/types';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';

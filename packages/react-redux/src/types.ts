@@ -1,7 +1,7 @@
-import type { TAdapterStatus, TFlagsContext } from '@flopflip/types';
+import { type TAdapterStatus, type TFlagsContext } from '@flopflip/types';
 
-import type { TUpdateFlagsAction } from './ducks/flags/types';
-import type { TUpdateStatusAction } from './ducks/status/types';
+import { type TUpdateFlagsAction } from './ducks/flags/types';
+import { type TUpdateStatusAction } from './ducks/status/types';
 import { STATE_SLICE } from './store/constants';
 
 export type TState = {

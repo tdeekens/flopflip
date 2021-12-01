@@ -1,8 +1,8 @@
-import type {
-  TAdapterIdentifiers,
-  TFlagName,
-  TFlagsContext,
-  TFlagVariation,
+import {
+  type TAdapterIdentifiers,
+  type TFlagName,
+  type TFlagsContext,
+  type TFlagVariation,
 } from '@flopflip/types';
 import warning from 'tiny-warning';
 

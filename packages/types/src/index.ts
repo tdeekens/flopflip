@@ -1,8 +1,8 @@
-import type {
-  LDClient as TLDClient,
-  LDOptions as TLDOptions,
+import {
+  type LDClient as TLDClient,
+  type LDOptions as TLDOptions,
 } from 'launchdarkly-js-client-sdk';
-import type { LDUser as TLDUser } from 'launchdarkly-js-sdk-common';
+import { type LDUser as TLDUser } from 'launchdarkly-js-sdk-common';
 
 export type TFlagName = string;
 export type TFlagVariation =

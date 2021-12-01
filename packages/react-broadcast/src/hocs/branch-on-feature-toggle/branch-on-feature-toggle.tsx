@@ -1,4 +1,4 @@
-import type { TFlagName, TFlagVariation } from '@flopflip/types';
+import { type TFlagName, type TFlagVariation } from '@flopflip/types';
 import React from 'react';
 
 import { useFeatureToggle } from '../../hooks';
@@ -7,7 +7,9 @@ type TBranchOnFeatureToggleOptions = {
   flag: TFlagName;
   variation?: TFlagVariation;
 };
-export default function branchOnFeatureToggle<OwnProps extends Record<string, unknown>>(
+export default function branchOnFeatureToggle<
+  OwnProps extends Record<string, unknown>
+>(
   { flag: flagName, variation: flagVariation }: TBranchOnFeatureToggleOptions,
   UntoggledComponent?: React.ComponentType
 ) {
