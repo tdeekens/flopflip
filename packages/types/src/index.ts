@@ -143,7 +143,8 @@ export const cacheIdentifiers = {
   local: 'local',
   session: 'session',
 } as const;
-export type TCacheIdentifiers = typeof cacheIdentifiers[keyof typeof cacheIdentifiers];
+export type TCacheIdentifiers =
+  typeof cacheIdentifiers[keyof typeof cacheIdentifiers];
 export type TUpdateFlagsOptions = {
   lockFlags?: boolean;
   unsubscribeFlags?: boolean;
@@ -325,23 +326,22 @@ export type TAdapter =
   | TGraphQlAdapterInterface
   | THttpAdapterInterface
   | TCombinedAdapterInterface;
-export type TConfigureAdapterArgs<
-  TAdapterInstance extends TAdapter
-> = TAdapterInstance extends TLaunchDarklyAdapterInterface
-  ? TLaunchDarklyAdapterArgs
-  : TAdapterInstance extends TLocalStorageAdapterInterface
-  ? TLocalStorageAdapterArgs
-  : TAdapterInstance extends TMemoryAdapterInterface
-  ? TMemoryAdapterArgs
-  : TAdapterInstance extends TSplitioAdapterInterface
-  ? TSplitioAdapterArgs
-  : TAdapterInstance extends TGraphQlAdapterInterface
-  ? TGraphQlAdapterArgs
-  : TAdapterInstance extends THttpAdapterInterface
-  ? THttpAdapterArgs
-  : TAdapterInstance extends TCombinedAdapterInterface
-  ? TCombinedAdapterArgs
-  : never;
+export type TConfigureAdapterArgs<TAdapterInstance extends TAdapter> =
+  TAdapterInstance extends TLaunchDarklyAdapterInterface
+    ? TLaunchDarklyAdapterArgs
+    : TAdapterInstance extends TLocalStorageAdapterInterface
+    ? TLocalStorageAdapterArgs
+    : TAdapterInstance extends TMemoryAdapterInterface
+    ? TMemoryAdapterArgs
+    : TAdapterInstance extends TSplitioAdapterInterface
+    ? TSplitioAdapterArgs
+    : TAdapterInstance extends TGraphQlAdapterInterface
+    ? TGraphQlAdapterArgs
+    : TAdapterInstance extends THttpAdapterInterface
+    ? THttpAdapterArgs
+    : TAdapterInstance extends TCombinedAdapterInterface
+    ? TCombinedAdapterArgs
+    : never;
 export type TConfigureAdapterProps<TAdapterInstance extends TAdapter> = {
   adapter: TAdapterInstance extends TLaunchDarklyAdapterInterface
     ? TLaunchDarklyAdapterInterface
