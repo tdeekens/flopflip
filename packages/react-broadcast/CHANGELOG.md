@@ -1,5 +1,14 @@
 # @flopflip/react-broadcast
 
+## 12.2.13
+
+### Patch Changes
+
+- [#1564](https://github.com/tdeekens/flopflip/pull/1564) [`adf292b7`](https://github.com/tdeekens/flopflip/commit/adf292b70cc733481f5c56eb54ff80dd2dd1afcd) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: to not call hook conditionally
+
+- Updated dependencies [[`adf292b7`](https://github.com/tdeekens/flopflip/commit/adf292b70cc733481f5c56eb54ff80dd2dd1afcd)]:
+  - @flopflip/react@11.1.24
+
 ## 12.2.12
 
 ### Patch Changes

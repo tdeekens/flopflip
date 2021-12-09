@@ -1,5 +1,11 @@
 # @flopflip/react
 
+## 11.1.24
+
+### Patch Changes
+
+- [#1564](https://github.com/tdeekens/flopflip/pull/1564) [`adf292b7`](https://github.com/tdeekens/flopflip/commit/adf292b70cc733481f5c56eb54ff80dd2dd1afcd) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: to not call hook conditionally
+
 ## 11.1.23
 
 ### Patch Changes
