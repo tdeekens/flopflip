@@ -2083,7 +2083,7 @@ __metadata:
   dependencies:
     "@babel/runtime": 7.16.3
     "@flopflip/memory-adapter": 3.0.24
-    "@flopflip/react": ^11.1.23
+    "@flopflip/react": ^11.1.24
     "@flopflip/test-utils": "*"
     "@flopflip/types": 4.1.20
     "@types/react": 17.0.37
@@ -2118,7 +2118,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flopflip/react@^11.1.23, @flopflip/react@workspace:packages/react":
+"@flopflip/react@^11.1.23, @flopflip/react@^11.1.24, @flopflip/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@flopflip/react@workspace:packages/react"
   dependencies:
