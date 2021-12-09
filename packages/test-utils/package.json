@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@flopflip/test-utils",
-  "version": "3.0.24",
+  "version": "3.0.25",
   "description": "Test utils for flipflop",
   "main": "index.js",
   "author": "Tobias Deekens <nerd@tdeekens.name>",
@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.16.3",
-    "@flopflip/memory-adapter": "3.0.23",
+    "@flopflip/memory-adapter": "3.0.24",
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "12.1.2",
     "jest-localstorage-mock": "2.4.18",

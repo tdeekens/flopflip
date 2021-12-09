@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/react",
-  "version": "11.1.22",
+  "version": "11.1.23",
   "description": "A feature toggle wrapper to use LaunchDarkly with React",
   "main": "dist/flopflip-react.cjs.js",
   "module": "dist/flopflip-react.esm.js",
@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.16.3",
-    "@flopflip/types": "4.1.19",
+    "@flopflip/types": "4.1.20",
     "@types/react-is": "17.0.3",
     "deepmerge": "4.2.2",
     "lodash": "4.17.21",
