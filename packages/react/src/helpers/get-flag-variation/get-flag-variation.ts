@@ -22,20 +22,16 @@ const getFlagVariation = (
     '@flopflip/react: passed flag name does not seem to be normalized which may result in unexpected toggling. Please refer to our readme for more information: https://github.com/tdeekens/flopflip#flag-normalization'
   );
 
-  let foundFlagVariation: TFlagVariation = false;
-
   for (const adapterInterfaceIdentifier of adapterIdentifiers) {
     const flagVariation =
       allFlags[adapterInterfaceIdentifier]?.[normalizedFlagName];
 
     if (!isNil(flagVariation)) {
-      foundFlagVariation = flagVariation;
-
-      break;
+      return flagVariation;
     }
   }
 
-  return foundFlagVariation;
+  return false;
 };
 
 export default getFlagVariation;
