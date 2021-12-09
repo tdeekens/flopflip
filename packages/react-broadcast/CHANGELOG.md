@@ -1,5 +1,15 @@
 # @flopflip/react-broadcast
 
+## 12.2.12
+
+### Patch Changes
+
+- [#1558](https://github.com/tdeekens/flopflip/pull/1558) [`3624d423`](https://github.com/tdeekens/flopflip/commit/3624d42357145a13432b74dceccb4ad1682c5509) Thanks [@tdeekens](https://github.com/tdeekens)! - Refactor to use TypeScript v4.5 feature of inline type imports
+
+- Updated dependencies [[`746f4057`](https://github.com/tdeekens/flopflip/commit/746f40573d3710321f85af0aced952644bbedb37), [`3624d423`](https://github.com/tdeekens/flopflip/commit/3624d42357145a13432b74dceccb4ad1682c5509)]:
+  - @flopflip/react@11.1.23
+  - @flopflip/types@4.1.20
+
 ## 12.2.11
 
 ### Patch Changes

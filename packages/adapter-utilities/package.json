@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/adapter-utilities",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "Adapter utilities for flipflop",
   "main": "dist/flopflip-adapter-utilities.cjs.js",
   "module": "dist/flopflip-adapter-utilities.esm.js",
@@ -29,7 +29,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.16.3",
-    "@flopflip/types": "4.1.19",
+    "@flopflip/types": "4.1.20",
     "globalthis": "1.0.2",
     "lodash": "4.17.21"
   },

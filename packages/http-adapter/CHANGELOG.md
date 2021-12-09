@@ -1,5 +1,17 @@
 # @flopflip/http-adapter
 
+## 0.0.17
+
+### Patch Changes
+
+- [#1558](https://github.com/tdeekens/flopflip/pull/1558) [`3624d423`](https://github.com/tdeekens/flopflip/commit/3624d42357145a13432b74dceccb4ad1682c5509) Thanks [@tdeekens](https://github.com/tdeekens)! - Refactor to use TypeScript v4.5 feature of inline type imports
+
+- Updated dependencies [[`3624d423`](https://github.com/tdeekens/flopflip/commit/3624d42357145a13432b74dceccb4ad1682c5509)]:
+  - @flopflip/adapter-utilities@1.0.23
+  - @flopflip/types@4.1.20
+  - @flopflip/localstorage-cache@1.0.23
+  - @flopflip/sessionstorage-cache@1.0.23
+
 ## 0.0.16
 
 ### Patch Changes
