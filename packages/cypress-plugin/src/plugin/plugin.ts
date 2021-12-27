@@ -20,8 +20,8 @@ const addCommands = (options: TCypressPluginAddCommandOptions) => {
   Cypress.Commands.add(
     // @ts-expect-error Cypress doesn't seem to allow a non any chainable
     'updateFeatureFlags',
-    function flopflipCommand(flags: TFlags) {
-      return cy
+    (flags: TFlags) =>
+      cy
         .window()
         .its(FLOPFLIP_GLOBAL)
         .then((flopFlipGlobal) => {
@@ -44,8 +44,7 @@ const addCommands = (options: TCypressPluginAddCommandOptions) => {
           flopflipAdapterGlobal?.updateFlags(flags, {
             unsubscribeFlags: true,
           });
-        });
-    }
+        })
   );
 };
 
