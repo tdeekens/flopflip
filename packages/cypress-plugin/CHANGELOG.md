@@ -1,5 +1,11 @@
 # @flopflip/cypress-plugin
 
+## 2.0.35
+
+### Patch Changes
+
+- [#1549](https://github.com/tdeekens/flopflip/pull/1549) [`840ec257`](https://github.com/tdeekens/flopflip/commit/840ec257b2e6341a918f6e95bc15a31ad479fa86) Thanks [@renovate](https://github.com/apps/renovate)! - chore(deps): update dependency cypress to v9
+
 ## 2.0.34
 
 ### Patch Changes
