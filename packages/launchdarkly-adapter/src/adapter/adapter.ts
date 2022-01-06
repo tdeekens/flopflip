@@ -150,14 +150,14 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     TLaunchDarklyAdapterArgs,
     'flags' | 'throwOnInitializationFailure'
   >): Promise<{
-    flagsFromSdk: TFlags | null;
+    flagsFromSdk?: TFlags;
     initializationStatus: AdapterInitializationStatus;
   }> => {
     if (this.#adapterState.client) {
       return this.#adapterState.client
         .waitForInitialization()
         .then(async () => {
-          let flagsFromSdk: null | TFlags = null;
+          let flagsFromSdk: TFlags | undefined;
 
           if (this.#adapterState.client && !flags) {
             flagsFromSdk = this.#adapterState.client.allFlags();
@@ -205,7 +205,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
           );
 
           return Promise.resolve({
-            flagsFromSdk: null,
+            flagsFromSdk: undefined,
             initializationStatus: AdapterInitializationStatus.Failed,
           });
         });
