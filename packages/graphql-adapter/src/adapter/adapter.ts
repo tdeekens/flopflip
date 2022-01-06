@@ -175,7 +175,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
 
     if (!isAdapterConfigured) return;
 
-    const previousFlags: TFlags | null = this.#adapterState.flags;
+    const previousFlags: TFlags | undefined = this.#adapterState.flags;
 
     const updatedFlags = Object.entries(flags).reduce(
       (updatedFlags, [flagName, flagValue]) => {

@@ -38,7 +38,7 @@
     "react-dom": "^16.8 || ^17.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.16.5",
+    "@babel/runtime": "7.16.7",
     "@flopflip/types": "4.1.20",
     "@types/react-is": "17.0.3",
     "deepmerge": "4.2.2",
