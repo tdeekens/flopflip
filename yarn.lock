@@ -2054,9 +2054,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/cli@npm:16.0.1":
-  version: 16.0.1
-  resolution: "@commitlint/cli@npm:16.0.1"
+"@commitlint/cli@npm:16.0.2":
+  version: 16.0.2
+  resolution: "@commitlint/cli@npm:16.0.2"
   dependencies:
     "@commitlint/format": ^16.0.0
     "@commitlint/lint": ^16.0.0
@@ -2069,7 +2069,7 @@ __metadata:
     yargs: ^17.0.0
   bin:
     commitlint: cli.js
-  checksum: a4ec182911a6a26cd4e5ad878089075ca96c417aac538b6bb42a4e7fd9c96e1c73ef4c9034c153f017ce28bf1c2ca837f403034e6462910f4c51a383aba3d5ee
+  checksum: 20760e0f8d54cfffad8a3c24ab4052b815d4545e2237f6b2c54a9a9a1190bf69adcff49b22ba665ae5e3b758b17b7a9dfb162d49d8b3926a756f60a314edd5e3
   languageName: node
   linkType: hard
 
@@ -3607,7 +3607,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/experimental-utils@npm:5.9.0":
+"@typescript-eslint/experimental-utils@npm:5.9.0, @typescript-eslint/experimental-utils@npm:^5.9.0":
   version: 5.9.0
   resolution: "@typescript-eslint/experimental-utils@npm:5.9.0"
   dependencies:
@@ -3623,7 +3623,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/experimental-utils@npm:^5.0.0, @typescript-eslint/experimental-utils@npm:^5.5.0":
+"@typescript-eslint/experimental-utils@npm:^5.0.0":
   version: 5.5.0
   resolution: "@typescript-eslint/experimental-utils@npm:5.5.0"
   dependencies:
@@ -5980,25 +5980,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-xo-react@npm:0.25.0":
-  version: 0.25.0
-  resolution: "eslint-config-xo-react@npm:0.25.0"
+"eslint-config-xo-react@npm:0.26.0":
+  version: 0.26.0
+  resolution: "eslint-config-xo-react@npm:0.26.0"
   peerDependencies:
-    eslint: ">=7"
-    eslint-plugin-react: ">=7.22.0"
-    eslint-plugin-react-hooks: ">=4.2.0"
-  checksum: 14edd921d06077f864842d2d7a0b4bb2e4e5a9b2b7f76c778e5138330eb692f9068474a8593040930ffdae1beaf5092b3977767fc3d74c951bf2eb3667812223
+    eslint: ">=8.6.0"
+    eslint-plugin-react: ">=7.28.0"
+    eslint-plugin-react-hooks: ">=4.3.0"
+  checksum: 172763b96405ba32d19826fe28c8d069d0c96d1b3a912a6463673d9db16b6e33b8a8afa8a7ecbc8cca2cf963752896fc54dbb7d6a9917b026a07614268616dd6
   languageName: node
   linkType: hard
 
-"eslint-config-xo-typescript@npm:0.48.0":
-  version: 0.48.0
-  resolution: "eslint-config-xo-typescript@npm:0.48.0"
+"eslint-config-xo-typescript@npm:0.49.0":
+  version: 0.49.0
+  resolution: "eslint-config-xo-typescript@npm:0.49.0"
   peerDependencies:
     "@typescript-eslint/eslint-plugin": ">=5.8.0"
     eslint: ">=8.0.0"
     typescript: ">=4.4"
-  checksum: a69f70612449d3e461d2b4d38a5ccae7a877c838ed1743c5e16cc677c0fa2f1e5fb1800c3b54fe5479b31b9c85362a9a7016908c516e4d0e3b4771114bb35e2a
+  checksum: 607b8ac8437f56389da6019e2a01bb2beefd257cbcbce999d2519f47f625d48b1d45d674ce986797930b8dfbf045823053be5e24ee182ec8eda2729cf25e24ca
   languageName: node
   linkType: hard
 
@@ -6103,14 +6103,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-testing-library@npm:5.0.1":
-  version: 5.0.1
-  resolution: "eslint-plugin-testing-library@npm:5.0.1"
+"eslint-plugin-testing-library@npm:5.0.3":
+  version: 5.0.3
+  resolution: "eslint-plugin-testing-library@npm:5.0.3"
   dependencies:
-    "@typescript-eslint/experimental-utils": ^5.5.0
+    "@typescript-eslint/experimental-utils": ^5.9.0
   peerDependencies:
     eslint: ^7.5.0 || ^8.0.0
-  checksum: a609f65d4ef4d2c68904e6a52ed22a9dd6ed4de3157937c16a56de1021c6270dc8041785a2f0603d619575c4a957e93476c29e28a756cf6973526a8aeafc9e13
+  checksum: 177b101749770618b94baad8e06984ced6f2cc628dc931972843eef3e5ba9d6aac3bf996a147f8f156fb2975b929211b621729b13a3df9883055c7d5acea5ef7
   languageName: node
   linkType: hard
 
@@ -6722,7 +6722,7 @@ __metadata:
     "@changesets/changelog-github": 0.4.2
     "@changesets/cli": 2.19.0
     "@commercetools/jest-enzyme-matchers": 1.1.2
-    "@commitlint/cli": 16.0.1
+    "@commitlint/cli": 16.0.2
     "@commitlint/config-conventional": 16.0.0
     "@manypkg/cli": 0.19.1
     "@preconstruct/cli": 2.1.5
@@ -6742,18 +6742,18 @@ __metadata:
     eslint: 8.6.0
     eslint-config-prettier: 8.3.0
     eslint-config-xo: 0.39.0
-    eslint-config-xo-react: 0.25.0
-    eslint-config-xo-typescript: 0.48.0
+    eslint-config-xo-react: 0.26.0
+    eslint-config-xo-typescript: 0.49.0
     eslint-formatter-pretty: 4.1.0
     eslint-plugin-jest: 25.3.4
     eslint-plugin-prettier: 4.0.0
     eslint-plugin-react: 7.28.0
     eslint-plugin-react-hooks: 4.3.0
     eslint-plugin-simple-import-sort: 7.0.0
-    eslint-plugin-testing-library: 5.0.1
+    eslint-plugin-testing-library: 5.0.3
     husky: 7.0.4
     jest: 27.4.7
-    lint-staged: 12.1.5
+    lint-staged: 12.1.7
     pinst: 2.1.6
     prettier: 2.5.1
     raf: 3.4.1
@@ -9061,9 +9061,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:12.1.5":
-  version: 12.1.5
-  resolution: "lint-staged@npm:12.1.5"
+"lint-staged@npm:12.1.7":
+  version: 12.1.7
+  resolution: "lint-staged@npm:12.1.7"
   dependencies:
     cli-truncate: ^3.1.0
     colorette: ^2.0.16
@@ -9080,7 +9080,7 @@ __metadata:
     yaml: ^1.10.2
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: e4d64e97769faf45adad9898c843ed8ef495469fc3edef0b8daff834ddb504ab47e33579763f8d85cbba6db993bd5cd86ac0bcaf92f6fd7486d4fb9a5fe774c6
+  checksum: 3d0757706c8b0ca3f004bb2ffa89a9d5fc97ccdebfa4cde29a9636c661538780e194b99cbc5e4b8b89b13986187b33c97e009b09014511bbd45ee05ba557d0eb
   languageName: node
   linkType: hard
 
