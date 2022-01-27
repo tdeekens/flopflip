@@ -143,7 +143,11 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <ConfigureFlopFlip adapter={adapter} defaultFlags={allFlags}>
+        <ConfigureFlopFlip
+          adapter={adapter}
+          adapterArgs={{}}
+          defaultFlags={allFlags}
+        >
           <div className="App">
             <div className="App-header">
               <img src={logo} className="App-logo" alt="logo" />
