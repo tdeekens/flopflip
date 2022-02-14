@@ -2,14 +2,14 @@ import { TCache, TCacheOptions } from '@flopflip/types';
 
 const createCache = (options: TCacheOptions) => {
   const cache: TCache = {
-    get: (key) => {
+    get(key) {
       const localStorageValue = localStorage.getItem(
         [options.prefix, key].join('/')
       );
 
       return localStorageValue ? JSON.parse(localStorageValue) : null;
     },
-    set: (key, value) => {
+    set(key, value) {
       try {
         localStorage.setItem(
           [options.prefix, key].join('/'),
@@ -21,7 +21,7 @@ const createCache = (options: TCacheOptions) => {
         return false;
       }
     },
-    unset: (key) => {
+    unset(key) {
       localStorage.removeItem([options.prefix, key].join('/'));
     },
   };
