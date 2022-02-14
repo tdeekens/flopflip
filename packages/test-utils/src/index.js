@@ -163,9 +163,10 @@ const renderWithAdapter = (
   );
 
   return {
-    changeFlagVariation: (flagName, flagVariation) =>
-      changeFlagVariation(flagName, flagVariation),
-    waitUntilConfigured: async () => {
+    changeFlagVariation(flagName, flagVariation) {
+      return changeFlagVariation(flagName, flagVariation);
+    },
+    async waitUntilConfigured() {
       await screen.findByLabelText(INTERNAL_FLAG_VARIATION_LABEL);
       await rendered.findByFlagName(INTERNAL_FLAG_NAME);
     },

@@ -5,7 +5,6 @@ import {
 } from '@flopflip/types';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { Dispatch } from 'redux';
 
 import { updateFlags } from '../../ducks';
 
@@ -15,7 +14,7 @@ type TUseUpdateFlagsOptions = {
 const useUpdateFlags = ({
   adapterIdentifiers,
 }: TUseUpdateFlagsOptions): TAdapterEventHandlers['onFlagsStateChange'] => {
-  const dispatch = useDispatch<Dispatch<ReturnType<typeof updateFlags>>>();
+  const dispatch = useDispatch();
 
   return useCallback(
     (flagsChange: TFlagsChange) =>
