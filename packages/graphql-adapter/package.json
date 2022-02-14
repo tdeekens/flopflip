@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/graphql-adapter",
-  "version": "3.0.20",
+  "version": "3.0.21",
   "description": "An GraphQL adapter for flipflop",
   "main": "dist/flopflip-graphql-adapter.cjs.js",
   "module": "dist/flopflip-graphql-adapter.esm.js",
@@ -30,9 +30,9 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.17.2",
-    "@flopflip/adapter-utilities": "1.0.23",
-    "@flopflip/localstorage-cache": "1.0.23",
-    "@flopflip/sessionstorage-cache": "1.0.23",
+    "@flopflip/adapter-utilities": "1.0.24",
+    "@flopflip/localstorage-cache": "1.0.24",
+    "@flopflip/sessionstorage-cache": "1.0.24",
     "@flopflip/types": "4.1.20",
     "lodash": "4.17.21",
     "mitt": "3.0.0",
