@@ -1,5 +1,16 @@
 # @flopflip/http-adapter
 
+## 0.0.18
+
+### Patch Changes
+
+- [#1586](https://github.com/tdeekens/flopflip/pull/1586) [`7272bce5`](https://github.com/tdeekens/flopflip/commit/7272bce5fdd25736798115d91196e404ca79f741) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update all dependencies
+
+- Updated dependencies [[`7272bce5`](https://github.com/tdeekens/flopflip/commit/7272bce5fdd25736798115d91196e404ca79f741)]:
+  - @flopflip/adapter-utilities@1.0.24
+  - @flopflip/localstorage-cache@1.0.24
+  - @flopflip/sessionstorage-cache@1.0.24
+
 ## 0.0.17
 
 ### Patch Changes

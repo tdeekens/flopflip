@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/launchdarkly-adapter",
-  "version": "5.0.21",
+  "version": "5.0.22",
   "description": "A adapter around the LaunchDarkly client for flipflop",
   "main": "dist/flopflip-launchdarkly-adapter.cjs.js",
   "module": "dist/flopflip-launchdarkly-adapter.esm.js",
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.17.2",
-    "@flopflip/adapter-utilities": "1.0.23",
+    "@flopflip/adapter-utilities": "1.0.24",
     "@flopflip/types": "4.1.20",
     "debounce-fn": "4.0.0",
     "deepmerge": "4.2.2",
