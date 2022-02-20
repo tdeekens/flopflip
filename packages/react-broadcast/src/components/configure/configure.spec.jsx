@@ -69,7 +69,7 @@ describe('when enabling feature', () => {
 
   it('should not reconfigure the adapter multiple times', async () => {
     const { waitUntilConfigured } = render();
-    const spy = jest.spyOn(adapter, 'reconfigure');
+    const spy = vi.spyOn(adapter, 'reconfigure');
 
     await waitUntilConfigured();
 

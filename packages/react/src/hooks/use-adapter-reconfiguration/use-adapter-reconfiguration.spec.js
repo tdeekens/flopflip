@@ -2,9 +2,9 @@ import React from 'react';
 
 import useAdapterReconfiguration from './use-adapter-reconfiguration';
 
-const reconfigure = jest.fn();
+const reconfigure = vi.fn();
 
 it('should return a function', () => {
-  React.useContext = jest.fn(() => ({ reconfigure }));
+  React.useContext = vi.fn(() => ({ reconfigure }));
   expect(useAdapterReconfiguration()).toBe(reconfigure);
 });

@@ -4,11 +4,12 @@ import warning from 'tiny-warning';
 
 import adapter from './adapter';
 
-jest.mock('tiny-warning');
+vi.mock('tiny-warning');
+vi.mock('@flopflip/sessionstorage-cache');
 
 const createAdapterEventHandlers = (custom = {}) => ({
-  onFlagsStateChange: jest.fn(),
-  onStatusStateChange: jest.fn(),
+  onFlagsStateChange: vi.fn(),
+  onStatusStateChange: vi.fn(),
   ...custom,
 });
 
@@ -34,19 +35,19 @@ describe('when configuring', () => {
 
 describe('when configured', () => {
   const adapterArgs = {
-    execute: jest.fn().mockResolvedValue({ enabled: true, disabled: false }),
+    execute: vi.fn().mockResolvedValue({ enabled: true, disabled: false }),
   };
   let configurationResult;
   let adapterEventHandlers;
 
   afterEach(() => {
-    jest.clearAllTimers();
+    vi.clearAllTimers();
   });
 
   describe('without cache', () => {
     beforeEach(async () => {
       adapterEventHandlers = createAdapterEventHandlers();
-      jest.useFakeTimers();
+      vi.useFakeTimers();
       configurationResult = await adapter.configure(
         adapterArgs,
         adapterEventHandlers
@@ -107,7 +108,7 @@ describe('when configured', () => {
   describe('with cache', () => {
     const adapterArgs = {
       cacheIdentifier: 'session',
-      execute: jest.fn().mockResolvedValue({ enabled: true, disabled: false }),
+      execute: vi.fn().mockResolvedValue({ enabled: true, disabled: false }),
     };
     let configurationResult;
     let adapterEventHandlers;
@@ -117,7 +118,7 @@ describe('when configured', () => {
         JSON.stringify({ cached: true })
       );
       adapterEventHandlers = createAdapterEventHandlers();
-      jest.useFakeTimers();
+      vi.useFakeTimers();
       configurationResult = await adapter.configure(
         adapterArgs,
         adapterEventHandlers
@@ -125,7 +126,7 @@ describe('when configured', () => {
     });
 
     afterEach(() => {
-      jest.clearAllTimers();
+      vi.clearAllTimers();
     });
 
     it('should resolve to a successful initialization status', () => {

@@ -4,11 +4,11 @@ import warning from 'tiny-warning';
 
 import adapter, { STORAGE_SLICE } from './adapter';
 
-jest.mock('tiny-warning');
+vi.mock('tiny-warning');
 
 const createAdapterEventHandlers = (custom = {}) => ({
-  onFlagsStateChange: jest.fn(),
-  onStatusStateChange: jest.fn(),
+  onFlagsStateChange: vi.fn(),
+  onStatusStateChange: vi.fn(),
   ...custom,
 });
 
@@ -41,7 +41,7 @@ describe('when configuring', () => {
   describe('when configured', () => {
     let configurationResult;
     beforeEach(async () => {
-      jest.useFakeTimers();
+      vi.useFakeTimers();
       configurationResult = await adapter.configure(
         adapterArgs,
         adapterEventHandlers
@@ -49,7 +49,7 @@ describe('when configuring', () => {
     });
 
     afterEach(() => {
-      jest.clearAllTimers();
+      vi.clearAllTimers();
     });
 
     it('should resolve to a successful initialization status', () => {
@@ -192,7 +192,7 @@ describe('when configuring', () => {
       });
 
       it('should invoke `onFlagsStateChange`', () => {
-        jest.advanceTimersByTime(5 * 60 * 1000);
+        vi.advanceTimersByTime(5 * 60 * 1000);
         expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledTimes(
           1
         );
@@ -208,7 +208,7 @@ describe('when configuring', () => {
       });
 
       it('should not invoke `onFlagsStateChange`', () => {
-        jest.advanceTimersByTime(5 * 60 * 1000);
+        vi.advanceTimersByTime(5 * 60 * 1000);
         expect(adapterEventHandlers.onFlagsStateChange).not.toHaveBeenCalled();
       });
     });

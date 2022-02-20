@@ -7,7 +7,7 @@ import Configure from '../../components/configure';
 import { STATE_SLICE } from '../../store/constants';
 import useFeatureToggle from './use-feature-toggle';
 
-jest.mock('tiny-warning');
+vi.mock('tiny-warning');
 
 const render = (store, TestComponent) =>
   renderWithAdapter(TestComponent, {

@@ -4,15 +4,15 @@ import warning from 'tiny-warning';
 
 import adapter from './adapter';
 
-jest.mock('tiny-warning');
+vi.mock('tiny-warning');
 
 const createAdapterArgs = (customArgs = {}) => ({
   user: { id: 'foo' },
   ...customArgs,
 });
 const createAdapterEventHandlers = (custom = {}) => ({
-  onFlagsStateChange: jest.fn(),
-  onStatusStateChange: jest.fn(),
+  onFlagsStateChange: vi.fn(),
+  onStatusStateChange: vi.fn(),
   ...custom,
 });
 

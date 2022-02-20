@@ -1,6 +1,6 @@
 import getIsFeatureEnabled from './get-is-feature-enabled';
 
-jest.mock('tiny-warning');
+vi.mock('tiny-warning');
 
 describe('with existing flag', () => {
   describe('with flag variation', () => {
