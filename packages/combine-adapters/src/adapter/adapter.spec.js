@@ -10,7 +10,7 @@ import warning from 'tiny-warning';
 
 import adapter from './adapter';
 
-jest.mock('tiny-warning');
+vi.mock('tiny-warning');
 
 const createAdapterArgs = (customArgs = {}) => ({
   user: { id: 'foo' },
@@ -27,8 +27,8 @@ const createAdapterArgs = (customArgs = {}) => ({
   ...customArgs,
 });
 const createAdapterEventHandlers = (custom = {}) => ({
-  onFlagsStateChange: jest.fn(),
-  onStatusStateChange: jest.fn(),
+  onFlagsStateChange: vi.fn(),
+  onStatusStateChange: vi.fn(),
   ...custom,
 });
 
@@ -124,8 +124,8 @@ describe('when combining', () => {
 
     let configurationResult;
 
-    const memoryAdapterConfigureSpy = jest.spyOn(memoryAdapter, 'configure');
-    const localstorageAdapterConfigureSpy = jest.spyOn(
+    const memoryAdapterConfigureSpy = vi.spyOn(memoryAdapter, 'configure');
+    const localstorageAdapterConfigureSpy = vi.spyOn(
       localstorageAdapter,
       'configure'
     );
@@ -246,11 +246,11 @@ describe('when combining', () => {
     describe('when reconfiguring', () => {
       const user = { id: 'bar' };
 
-      const memoryAdapterReconfigureSpy = jest.spyOn(
+      const memoryAdapterReconfigureSpy = vi.spyOn(
         memoryAdapter,
         'reconfigure'
       );
-      const localstorageAdapterReconfigureSpy = jest.spyOn(
+      const localstorageAdapterReconfigureSpy = vi.spyOn(
         localstorageAdapter,
         'reconfigure'
       );

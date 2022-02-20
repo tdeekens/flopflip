@@ -1,9 +1,9 @@
-import { type TFlagName, type TFlagVariation } from '@flopflip/types';
 import {
   DEFAULT_FLAG_PROP_KEY,
   setDisplayName,
   wrapDisplayName,
 } from '@flopflip/react';
+import { type TFlagName, type TFlagVariation } from '@flopflip/types';
 import React from 'react';
 
 import { useFlagVariations } from '../../hooks';

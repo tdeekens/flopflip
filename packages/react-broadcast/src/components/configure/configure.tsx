@@ -8,8 +8,6 @@ import {
   type TConfigureAdapterProps,
   type TFlags,
   type TFlagsChange,
-} from '@flopflip/types';
-import {
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
 } from '@flopflip/types';

@@ -102,7 +102,7 @@ describe('when feature enabled', () => {
         const props = {
           isFeatureEnabled: true,
           untoggledComponent: components.UntoggledComponent,
-          children: jest.fn(() => <div>FeatureComponent</div>),
+          children: vi.fn(() => <div>FeatureComponent</div>),
         };
 
         render(<ToggleFeature {...props} />);
@@ -114,7 +114,7 @@ describe('when feature enabled', () => {
         const props = {
           isFeatureEnabled: true,
           untoggledComponent: components.UntoggledComponent,
-          children: jest.fn(() => <div>FeatureComponent</div>),
+          children: vi.fn(() => <div>FeatureComponent</div>),
         };
 
         render(<ToggleFeature {...props} />);
@@ -167,7 +167,7 @@ describe('when feature enabled', () => {
       const props = {
         isFeatureEnabled: true,
         untoggledComponent: components.UntoggledComponent,
-        render: jest.fn(() => <components.ToggledComponent />),
+        render: vi.fn(() => <components.ToggledComponent />),
       };
 
       render(<ToggleFeature {...props} />);
@@ -179,7 +179,7 @@ describe('when feature enabled', () => {
       const props = {
         isFeatureEnabled: true,
         untoggledComponent: components.UntoggledComponent,
-        render: jest.fn(() => <components.ToggledComponent />),
+        render: vi.fn(() => <components.ToggledComponent />),
       };
 
       const { queryByFlagName } = render(<ToggleFeature {...props} />);

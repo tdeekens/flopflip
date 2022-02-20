@@ -1,3 +1,4 @@
+import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
 import {
   type TAdapter,
   type TConfigureAdapterChildren,
@@ -5,7 +6,6 @@ import {
   type TFlags,
 } from '@flopflip/types';
 import React from 'react';
-import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
 
 import { useUpdateFlags, useUpdateStatus } from '../../hooks';
 
