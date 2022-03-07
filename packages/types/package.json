@@ -28,7 +28,7 @@
     "types"
   ],
   "devDependencies": {
-    "typescript": "4.5.5"
+    "typescript": "4.6.2"
   },
   "peerDependencies": {
     "typescript": "4.x"
