@@ -66,8 +66,8 @@
     "@types/jest": "27.4.1",
     "@types/lodash": "4.14.179",
     "@types/node": "16.11.26",
-    "@typescript-eslint/eslint-plugin": "5.13.0",
-    "@typescript-eslint/parser": "5.13.0",
+    "@typescript-eslint/eslint-plugin": "5.14.0",
+    "@typescript-eslint/parser": "5.14.0",
     "babel-eslint": "10.1.0",
     "babel-jest": "27.5.1",
     "babel-plugin-lodash": "3.3.4",
@@ -76,7 +76,7 @@
     "codecov": "3.8.3",
     "core-js": "3.21.1",
     "cross-env": "7.0.3",
-    "eslint": "8.10.0",
+    "eslint": "8.11.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-config-xo": "0.40.0",
     "eslint-config-xo-react": "0.26.0",
@@ -84,10 +84,10 @@
     "eslint-formatter-pretty": "4.1.0",
     "eslint-plugin-jest": "26.1.1",
     "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-react": "7.29.3",
+    "eslint-plugin-react": "7.29.4",
     "eslint-plugin-react-hooks": "4.3.0",
     "eslint-plugin-simple-import-sort": "7.0.0",
-    "eslint-plugin-testing-library": "5.0.6",
+    "eslint-plugin-testing-library": "5.1.0",
     "husky": "7.0.4",
     "jest": "27.5.1",
     "lint-staged": "12.3.5",
@@ -101,7 +101,7 @@
     "typescript": "4.6.2"
   },
   "resolutions": {
-    "@types/react": "17.0.39",
+    "@types/react": "17.0.40",
     "@types/react-dom": "17.0.13"
   },
   "keywords": [
