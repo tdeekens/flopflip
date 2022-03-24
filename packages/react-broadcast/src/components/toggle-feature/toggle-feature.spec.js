@@ -8,16 +8,21 @@ const render = (TestComponent) =>
   renderWithAdapter(TestComponent, {
     components: { ConfigureFlopFlip: Configure },
   });
-const TestEnabledComponent = () => (
-  <ToggleFeature flag="disabledFeature">
-    <components.ToggledComponent flagName="disabledFeature" />
-  </ToggleFeature>
-);
-const TestDisabledComponent = () => (
-  <ToggleFeature flag="enabledFeature">
-    <components.ToggledComponent flagName="enabledFeature" />
-  </ToggleFeature>
-);
+function TestEnabledComponent() {
+  return (
+    <ToggleFeature flag="disabledFeature">
+      <components.ToggledComponent flagName="disabledFeature" />
+    </ToggleFeature>
+  );
+}
+
+function TestDisabledComponent() {
+  return (
+    <ToggleFeature flag="enabledFeature">
+      <components.ToggledComponent flagName="enabledFeature" />
+    </ToggleFeature>
+  );
+}
 
 describe('when feature is disabled', () => {
   it('should not render the component representing a enabled feature', async () => {

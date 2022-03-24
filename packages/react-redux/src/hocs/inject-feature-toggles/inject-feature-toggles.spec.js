@@ -14,12 +14,13 @@ const render = (store, TestComponent) =>
       Wrapper: <Provider store={store} />,
     },
   });
-const FlagsToComponent = (props) => (
-  <components.FlagsToComponent {...props} propKey="featureToggles" />
-);
-const FlagsToComponentWithPropKey = (props) => (
-  <components.FlagsToComponent {...props} propKey="onOffs" />
-);
+function FlagsToComponent(props) {
+  return <components.FlagsToComponent {...props} propKey="featureToggles" />;
+}
+
+function FlagsToComponentWithPropKey(props) {
+  return <components.FlagsToComponent {...props} propKey="onOffs" />;
+}
 
 describe('injectFeatureToggles', () => {
   describe('without `propKey`', () => {

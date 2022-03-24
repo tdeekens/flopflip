@@ -15,7 +15,7 @@ const render = (store, TestComponent) =>
     },
   });
 
-const TestComponent = () => {
+function TestComponent() {
   const [isEnabledFeatureEnabled, isDisabledFeatureDisabled, variation] =
     useFlagVariations(['enabledFeature', 'disabledFeature', 'variation']);
 
@@ -26,7 +26,7 @@ const TestComponent = () => {
       <li>Variation: {variation}</li>
     </ul>
   );
-};
+}
 
 describe('when adaopter is configured', () => {
   it('should indicate a feature being disabled', async () => {

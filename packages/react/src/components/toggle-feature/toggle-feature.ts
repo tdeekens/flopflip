@@ -14,7 +14,7 @@ export type Props = {
   isFeatureEnabled: boolean;
 };
 
-const ToggleFeature = (props: Props) => {
+function ToggleFeature(props: Props) {
   if (props.untoggledComponent)
     warning(
       isValidElementType(props.untoggledComponent),
@@ -52,7 +52,7 @@ const ToggleFeature = (props: Props) => {
   }
 
   return null;
-};
+}
 
 ToggleFeature.displayName = 'ToggleFeature';
 

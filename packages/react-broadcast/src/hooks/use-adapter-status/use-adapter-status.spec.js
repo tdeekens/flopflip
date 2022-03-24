@@ -9,7 +9,7 @@ const render = (TestComponent) =>
     components: { ConfigureFlopFlip: Configure },
   });
 
-const TestComponent = () => {
+function TestComponent() {
   const { isConfiguring, isConfigured } = useAdapterStatus();
 
   return (
@@ -18,7 +18,7 @@ const TestComponent = () => {
       <li>Is configured: {isConfigured ? 'Yes' : 'No'}</li>
     </ul>
   );
-};
+}
 
 it('should indicate the adapter not configured yet', async () => {
   const { waitUntilConfigured } = render(<TestComponent />);

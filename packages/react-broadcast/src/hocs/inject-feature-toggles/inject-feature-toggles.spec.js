@@ -9,12 +9,13 @@ const render = (TestComponent) =>
     components: { ConfigureFlopFlip: Configure },
   });
 
-const FlagsToComponent = (props) => (
-  <components.FlagsToComponent {...props} propKey="featureToggles" />
-);
-const FlagsToComponentWithPropKey = (props) => (
-  <components.FlagsToComponent {...props} propKey="onOffs" />
-);
+function FlagsToComponent(props) {
+  return <components.FlagsToComponent {...props} propKey="featureToggles" />;
+}
+
+function FlagsToComponentWithPropKey(props) {
+  return <components.FlagsToComponent {...props} propKey="onOffs" />;
+}
 
 describe('without `propKey`', () => {
   it('should have feature enabling prop for `enabledFeature`', async () => {

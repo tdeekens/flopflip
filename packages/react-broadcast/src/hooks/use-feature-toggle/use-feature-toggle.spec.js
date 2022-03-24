@@ -9,7 +9,7 @@ const render = (TestComponent) =>
     components: { ConfigureFlopFlip: Configure },
   });
 
-const TestComponent = () => {
+function TestComponent() {
   const isEnabledFeatureEnabled = useFeatureToggle('enabledFeature');
   const isDisabledFeatureDisabled = useFeatureToggle('disabledFeature');
   const flagVariation = useFeatureToggle('variation', null);
@@ -21,7 +21,7 @@ const TestComponent = () => {
       <li>Variation: {flagVariation}</li>
     </ul>
   );
-};
+}
 
 it('should indicate a feature being disabled', async () => {
   const { waitUntilConfigured } = render(<TestComponent />);

@@ -9,7 +9,7 @@ import { useAdapterStatus, useFeatureToggle } from '../../hooks';
 import { TestProvider } from './test-provider';
 
 const testFlagName = 'testFlag1';
-const TestComponent = () => {
+function TestComponent() {
   const { isUnconfigured, isConfiguring, isConfigured } = useAdapterStatus();
 
   const isFeatureEnabled = useFeatureToggle(testFlagName);
@@ -22,7 +22,7 @@ const TestComponent = () => {
       <li>Feature enabled: {isFeatureEnabled ? 'Yes' : 'No'}</li>
     </ul>
   );
-};
+}
 
 const render = ({ flags, status } = {}) => {
   rtlRender(

@@ -6,14 +6,16 @@ import ToggleFeature from './toggle-feature';
 describe('when feature disabled', () => {
   describe('with untoggled component', () => {
     it('should render the component representing a disabled feature', () => {
-      const TestComponent = () => (
-        <ToggleFeature
-          isFeatureEnabled={false}
-          untoggledComponent={components.UntoggledComponent}
-        >
-          <components.ToggledComponent />
-        </ToggleFeature>
-      );
+      function TestComponent() {
+        return (
+          <ToggleFeature
+            isFeatureEnabled={false}
+            untoggledComponent={components.UntoggledComponent}
+          >
+            <components.ToggledComponent />
+          </ToggleFeature>
+        );
+      }
 
       const { queryByFlagName } = render(<TestComponent />);
 
@@ -24,14 +26,16 @@ describe('when feature disabled', () => {
     });
 
     it('should not render the component representing am enabled feature', () => {
-      const TestComponent = () => (
-        <ToggleFeature
-          isFeatureEnabled={false}
-          untoggledComponent={components.UntoggledComponent}
-        >
-          <components.ToggledComponent />
-        </ToggleFeature>
-      );
+      function TestComponent() {
+        return (
+          <ToggleFeature
+            isFeatureEnabled={false}
+            untoggledComponent={components.UntoggledComponent}
+          >
+            <components.ToggledComponent />
+          </ToggleFeature>
+        );
+      }
 
       const { queryByFlagName } = render(<TestComponent />);
 
@@ -44,11 +48,13 @@ describe('when feature disabled', () => {
 
   describe('without untoggled component', () => {
     it('should render neither the component representing an disabled or enabled feature', () => {
-      const TestComponent = () => (
-        <ToggleFeature isFeatureEnabled={false}>
-          <components.ToggledComponent />
-        </ToggleFeature>
-      );
+      function TestComponent() {
+        return (
+          <ToggleFeature isFeatureEnabled={false}>
+            <components.ToggledComponent />
+          </ToggleFeature>
+        );
+      }
 
       const { queryByFlagName } = render(<TestComponent />);
 
@@ -61,14 +67,16 @@ describe('when feature enabled', () => {
   describe('with `children`', () => {
     describe('being a `node`', () => {
       it('should not render the component representing a disabled feature', () => {
-        const TestComponent = () => (
-          <ToggleFeature
-            isFeatureEnabled
-            untoggledComponent={components.UntoggledComponent}
-          >
-            <components.ToggledComponent />
-          </ToggleFeature>
-        );
+        function TestComponent() {
+          return (
+            <ToggleFeature
+              isFeatureEnabled
+              untoggledComponent={components.UntoggledComponent}
+            >
+              <components.ToggledComponent />
+            </ToggleFeature>
+          );
+        }
 
         const { queryByFlagName } = render(<TestComponent />);
 
@@ -79,14 +87,16 @@ describe('when feature enabled', () => {
       });
 
       it('should render the component representing a enabled feature', () => {
-        const TestComponent = () => (
-          <ToggleFeature
-            isFeatureEnabled
-            untoggledComponent={components.UntoggledComponent}
-          >
-            <components.ToggledComponent />
-          </ToggleFeature>
-        );
+        function TestComponent() {
+          return (
+            <ToggleFeature
+              isFeatureEnabled
+              untoggledComponent={components.UntoggledComponent}
+            >
+              <components.ToggledComponent />
+            </ToggleFeature>
+          );
+        }
 
         const { queryByFlagName } = render(<TestComponent />);
 
@@ -128,13 +138,15 @@ describe('when feature enabled', () => {
 
   describe('with `toggledComponent`', () => {
     it('should not render the component representing a disabled feature', () => {
-      const TestComponent = () => (
-        <ToggleFeature
-          isFeatureEnabled
-          untoggledComponent={components.UntoggledComponent}
-          toggledComponent={components.ToggledComponent}
-        />
-      );
+      function TestComponent() {
+        return (
+          <ToggleFeature
+            isFeatureEnabled
+            untoggledComponent={components.UntoggledComponent}
+            toggledComponent={components.ToggledComponent}
+          />
+        );
+      }
 
       const { queryByFlagName } = render(<TestComponent />);
 
@@ -145,13 +157,15 @@ describe('when feature enabled', () => {
     });
 
     it('should render the component representing a enabled feature', () => {
-      const TestComponent = () => (
-        <ToggleFeature
-          isFeatureEnabled
-          untoggledComponent={components.UntoggledComponent}
-          toggledComponent={components.ToggledComponent}
-        />
-      );
+      function TestComponent() {
+        return (
+          <ToggleFeature
+            isFeatureEnabled
+            untoggledComponent={components.UntoggledComponent}
+            toggledComponent={components.ToggledComponent}
+          />
+        );
+      }
 
       const { queryByFlagName } = render(<TestComponent />);
 

@@ -6,7 +6,7 @@ import { useAdapterStatus, useFeatureToggle } from '../../hooks';
 import Configure from './configure';
 
 const testFlagName = 'firstFlag';
-const TestComponent = () => {
+function TestComponent() {
   const { isUnconfigured, isConfiguring, isConfigured } = useAdapterStatus();
 
   const isFeatureEnabled = useFeatureToggle(testFlagName);
@@ -19,7 +19,7 @@ const TestComponent = () => {
       <li>Feature enabled: {isFeatureEnabled ? 'Yes' : 'No'}</li>
     </ul>
   );
-};
+}
 
 const createTestProps = (custom) => ({
   adapter,
