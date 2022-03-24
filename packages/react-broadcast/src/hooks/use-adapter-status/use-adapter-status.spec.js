@@ -29,6 +29,7 @@ it('should indicate the adapter not configured yet', async () => {
   await waitUntilConfigured();
 });
 
+// eslint-disable-next-line jest/expect-expect
 it('should indicate the adapter is configured', async () => {
   const { waitUntilConfigured } = render(<TestComponent />);
 

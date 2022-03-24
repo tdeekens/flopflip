@@ -18,46 +18,42 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: yarn cache directory
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-
-      - name: Setup node_modules cache
-        uses: actions/cache@v2
+      - name: Cache pnpm modules
+        uses: actions/cache@v3
         with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}-v1
 
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install
-        run: yarn install --immutable
-      - name: Check for unmet constraints (fix w/ "yarn constraints --fix")
-        run: yarn constraints
+      - uses: pnpm/action-setup@v2.1.0
+        with:
+          version: 6.32.3
+          run_install: |
+            - recursive: true
+              args: [--frozen-lockfile]
 
       - name: Type check
-        run: yarn typecheck
+        run: pnpm typecheck
 
       - name: Lint
-        run: yarn lint
-
-      - name: Build
-        run: yarn build
+        run: pnpm lint
 
       - name: Test
         if: startsWith(matrix.node-version, '16')
-        run: yarn test:ci
+        run: pnpm test:ci
         env:
           CI: true
 
       - name: Test (with coverage)
         if: startsWith(matrix.node-version, '17')
-        run: yarn test:ci:coverage
+        run: pnpm test:ci:coverage
         env:
           CI: true
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Build
+        run: pnpm build

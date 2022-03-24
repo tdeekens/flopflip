@@ -29,10 +29,10 @@
     "@babel/runtime": "7.17.8",
     "@flopflip/adapter-utilities": "1.0.24",
     "@flopflip/types": "4.1.20",
-    "@splitsoftware/splitio": "10.17.3",
     "@types/merge-deep": "3.0.0",
-    "lodash": "4.17.21",
-    "merge-deep": "3.0.3"
+    "@splitsoftware/splitio": "10.17.3",
+    "merge-deep": "3.0.3",
+    "lodash": "4.17.21"
   },
   "keywords": [
     "feature-flags",
