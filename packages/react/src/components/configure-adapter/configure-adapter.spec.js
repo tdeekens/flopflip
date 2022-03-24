@@ -23,7 +23,7 @@ const createTestProps = ({ adapter }) => ({
   adapter,
 });
 
-const TestComponent = (props) => {
+function TestComponent(props) {
   const adapterContext = useContext(AdapterContext);
   const isAdapterStatus = (status) => adapterContext.status === status;
 
@@ -46,7 +46,7 @@ const TestComponent = (props) => {
       {props.children}
     </>
   );
-};
+}
 
 const render = ({ props, adapter }) => {
   const baseProps = createTestProps({ adapter });

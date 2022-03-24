@@ -15,7 +15,7 @@ const render = (store, TestComponent) =>
     },
   });
 
-const TestComponent = () => {
+function TestComponent() {
   const [isEnabledFeatureEnabled, isDisabledFeatureDisabled] =
     useFeatureToggles({
       enabledFeature: true,
@@ -28,7 +28,7 @@ const TestComponent = () => {
       <li>Is disabled: {isDisabledFeatureDisabled ? 'No' : 'Yes'}</li>
     </ul>
   );
-};
+}
 
 describe('when adapter is configured', () => {
   it('should indicate a feature being disabled', async () => {

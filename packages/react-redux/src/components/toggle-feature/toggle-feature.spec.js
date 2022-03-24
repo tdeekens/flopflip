@@ -18,11 +18,14 @@ const render = (store, TestComponent) =>
 describe('<ToggleFeature>', () => {
   describe('when feature is disabled', () => {
     it('should not render the component representing a enabled feature', async () => {
-      const TestComponent = () => (
-        <ToggleFeature flag="disabledFeature">
-          <components.ToggledComponent flagName="disabledFeature" />
-        </ToggleFeature>
-      );
+      function TestComponent() {
+        return (
+          <ToggleFeature flag="disabledFeature">
+            <components.ToggledComponent flagName="disabledFeature" />
+          </ToggleFeature>
+        );
+      }
+
       const store = createStore({
         [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
       });
@@ -39,11 +42,14 @@ describe('<ToggleFeature>', () => {
 
     describe('when enabling feature', () => {
       it('should render the component representing a enabled feature', async () => {
-        const TestComponent = () => (
-          <ToggleFeature flag="disabledFeature">
-            <components.ToggledComponent flagName="disabledFeature" />
-          </ToggleFeature>
-        );
+        function TestComponent() {
+          return (
+            <ToggleFeature flag="disabledFeature">
+              <components.ToggledComponent flagName="disabledFeature" />
+            </ToggleFeature>
+          );
+        }
+
         const store = createStore({
           [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
         });
@@ -65,11 +71,13 @@ describe('<ToggleFeature>', () => {
       const store = createStore({
         [STATE_SLICE]: { flags: { memory: { enabledFeature: true } } },
       });
-      const TestComponent = () => (
-        <ToggleFeature flag="enabledFeature">
-          <components.ToggledComponent flagName="enabledFeature" />
-        </ToggleFeature>
-      );
+      function TestComponent() {
+        return (
+          <ToggleFeature flag="enabledFeature">
+            <components.ToggledComponent flagName="enabledFeature" />
+          </ToggleFeature>
+        );
+      }
 
       const { waitUntilConfigured, queryByFlagName } = render(
         store,

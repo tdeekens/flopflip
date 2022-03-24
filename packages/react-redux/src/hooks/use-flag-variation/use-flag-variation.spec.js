@@ -15,7 +15,7 @@ const render = (store, TestComponent) =>
     },
   });
 
-const TestComponent = () => {
+function TestComponent() {
   const variation = useFlagVariation('variation');
 
   return (
@@ -23,7 +23,7 @@ const TestComponent = () => {
       <li>Variation: {variation}</li>
     </ul>
   );
-};
+}
 
 it('should indicate a flag variation', async () => {
   const store = createStore({

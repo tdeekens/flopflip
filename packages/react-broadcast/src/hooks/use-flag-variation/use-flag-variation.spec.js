@@ -9,7 +9,7 @@ const render = (TestComponent) =>
     components: { ConfigureFlopFlip: Configure },
   });
 
-const TestComponent = () => {
+function TestComponent() {
   const variation = useFlagVariation('variation');
 
   return (
@@ -17,7 +17,7 @@ const TestComponent = () => {
       <li>Variation: {variation}</li>
     </ul>
   );
-};
+}
 
 it('should indicate a flag variation', async () => {
   const { waitUntilConfigured } = render(<TestComponent />);

@@ -9,9 +9,9 @@ type Props<TAdditionalUserProperties> = {
   children?: React.ReactNode;
 };
 
-const ReconfigureAdapter = <TAdditionalUserProperties>(
+function ReconfigureAdapter<TAdditionalUserProperties>(
   props: Props<TAdditionalUserProperties>
-) => {
+) {
   const adapterContext = useAdapterContext();
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const ReconfigureAdapter = <TAdditionalUserProperties>(
   }, [props.user, props.shouldOverwrite, adapterContext]);
 
   return props.children ? Children.only(props.children) : null;
-};
+}
 
 ReconfigureAdapter.displayName = 'ReconfigureAdapter';
 ReconfigureAdapter.defaultProps = {
