@@ -32,6 +32,7 @@ export const AdapterStates = {
 export type TAdapterStates = ValueOf<typeof AdapterStates>;
 
 type TProps = {
+  // eslint-disable-next-line react/boolean-prop-naming
   shouldDeferAdapterConfiguration?: boolean;
   adapter: TAdapter;
   adapterArgs: TAdapterArgs;

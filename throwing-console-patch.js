@@ -8,6 +8,7 @@ const shouldNotThrowWarnings = (...messages) =>
   [].some((msgRegex) => messages.some((msg) => msgRegex.test(msg)));
 
 const logOrThrow = (log, method, messages) => {
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   const warning = `console.${method} calls not allowed in tests`;
   if (process.env.CI) {
     if (shouldSilenceWarnings(messages)) return;
