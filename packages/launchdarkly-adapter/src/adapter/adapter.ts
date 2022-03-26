@@ -29,7 +29,7 @@ import {
 } from 'launchdarkly-js-client-sdk';
 import isEqual from 'lodash/isEqual';
 import merge from 'merge-deep';
-import mitt, { Emitter } from 'mitt';
+import mitt, { type Emitter } from 'mitt';
 import warning from 'tiny-warning';
 
 type TEmitterEvents = {

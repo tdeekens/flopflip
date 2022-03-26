@@ -14,7 +14,7 @@ import {
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
 } from '@flopflip/types';
-import mitt, { Emitter } from 'mitt';
+import mitt, { type Emitter } from 'mitt';
 import warning from 'tiny-warning';
 
 type TInternalStatusChange = '__internalConfiguredStatusChange__';
