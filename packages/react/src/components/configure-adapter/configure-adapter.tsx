@@ -9,8 +9,6 @@ import {
   type TAdapterStatus,
   type TConfigureAdapterChildren,
   type TFlags,
-} from '@flopflip/types';
-import {
   AdapterConfigurationStatus,
   AdapterInitializationStatus,
 } from '@flopflip/types';

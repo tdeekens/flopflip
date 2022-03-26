@@ -1,9 +1,9 @@
-import React from 'react';
 import {
   type LDClient as TLDClient,
   type LDOptions as TLDOptions,
   type LDUser,
 } from 'launchdarkly-js-client-sdk';
+import React from 'react';
 
 export type TFlagName = string;
 export type TFlagVariation =

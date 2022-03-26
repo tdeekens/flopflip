@@ -24,9 +24,9 @@ import {
 import debounce from 'debounce-fn';
 import merge from 'deepmerge';
 import {
-  initialize as initializeLaunchDarklyClient,
   type LDClient,
   type LDUser,
+  initialize as initializeLaunchDarklyClient,
 } from 'launchdarkly-js-client-sdk';
 import isEqual from 'lodash/isEqual';
 import mitt, { Emitter } from 'mitt';

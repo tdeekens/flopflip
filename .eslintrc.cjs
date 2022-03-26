@@ -3,6 +3,7 @@ module.exports = {
     sourceType: 'module',
     ecmaVersion: 7,
     ecmaFeatures: { jsx: true, modules: true },
+    project: ['./tsconfig.lint.json'],
   },
   extends: [
     'xo',
