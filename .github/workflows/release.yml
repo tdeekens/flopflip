@@ -22,27 +22,18 @@ jobs:
       - name: Fetch all tags (for releases)
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
+      - uses: pnpm/action-setup@v2.1.0
+        with:
+          version: 6.32.3
+
       - name: Setup Node (uses version in .nvmrc)
         uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
+          cache: 'pnpm'
 
-      - name: Cache pnpm modules
-        uses: actions/cache@v3
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}-v1
-
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
-
-      - uses: pnpm/action-setup@v2.1.0
-        with:
-          version: 6.32.3
-          run_install: |
-            - recursive: true
-              args: [--frozen-lockfile]
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Creating .npmrc
         run: |
