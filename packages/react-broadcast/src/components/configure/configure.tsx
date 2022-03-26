@@ -8,8 +8,6 @@ import {
   type TConfigureAdapterProps,
   type TFlags,
   type TFlagsChange,
-} from '@flopflip/types';
-import {
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
 } from '@flopflip/types';
@@ -101,9 +99,9 @@ const useStatusState = (): [
   return [status, setStatus];
 };
 
-const Configure = <AdapterInstance extends TAdapter>(
+function Configure<AdapterInstance extends TAdapter>(
   props: Props<AdapterInstance>
-) => {
+) {
   const adapterIdentifiers = useMemo(
     () => [props.adapter.id],
     [props.adapter.id]
@@ -164,7 +162,7 @@ const Configure = <AdapterInstance extends TAdapter>(
       </ConfigureAdapter>
     </FlagsContext.Provider>
   );
-};
+}
 
 Configure.displayName = 'ConfigureFlopflip';
 Configure.defaultProps = {

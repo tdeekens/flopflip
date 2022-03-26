@@ -1,3 +1,4 @@
+import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
 import {
   type TAdapter,
   type TConfigureAdapterChildren,
@@ -5,7 +6,6 @@ import {
   type TFlags,
 } from '@flopflip/types';
 import React from 'react';
-import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
 
 import { useUpdateFlags, useUpdateStatus } from '../../hooks';
 
@@ -25,9 +25,7 @@ const defaultProps: Pick<
   shouldDeferAdapterConfiguration: false,
 };
 
-const Configure = <AdapterInstance extends TAdapter>(
-  props: Props<AdapterInstance>
-) => {
+function Configure<AdapterInstance extends TAdapter>(props: Props<AdapterInstance>) {
   const adapterIdentifiers = [props.adapter.id];
   const handleUpdateFlags = useUpdateFlags({ adapterIdentifiers });
   const handleUpdateStatus = useUpdateStatus();
@@ -46,7 +44,7 @@ const Configure = <AdapterInstance extends TAdapter>(
       {props.children}
     </ConfigureAdapter>
   );
-};
+}
 
 Configure.displayName = 'ConfigureFlopflip';
 Configure.defaultProps = defaultProps;

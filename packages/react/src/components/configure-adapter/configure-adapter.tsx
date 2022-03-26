@@ -111,14 +111,14 @@ const useAdapterStateRef = (): TUseAdapterStateRefReturn => {
 };
 
 type TUsePendingAdapterArgsRefReturn = [
-  React.MutableRefObject<TAdapterArgs | null>,
+  React.MutableRefObject<TAdapterArgs | undefined>,
   (nextReconfiguration: TAdapterReconfiguration) => void,
   () => TAdapterArgs
 ];
 const usePendingAdapterArgsRef = (
   appliedAdapterArgs: TAdapterArgs
 ): TUsePendingAdapterArgsRefReturn => {
-  const pendingAdapterArgsRef = useRef<TAdapterArgs | null>(null);
+  const pendingAdapterArgsRef = useRef<TAdapterArgs | undefined>(null);
 
   const setPendingAdapterArgs = useCallback(
     (nextReconfiguration: TAdapterReconfiguration): void => {
@@ -430,7 +430,7 @@ const usePendingAdapterArgsEffect = ({
   return [reconfigureOrQueue];
 };
 
-const ConfigureAdapter = (props: TProps) => {
+function ConfigureAdapter(props: TProps) {
   const [appliedAdapterArgs, applyAdapterArgs] = useAppliedAdapterArgsState({
     initialAdapterArgs: props.adapterArgs,
   });
@@ -509,7 +509,7 @@ const ConfigureAdapter = (props: TProps) => {
       })()}
     </AdapterContext.Provider>
   );
-};
+}
 
 ConfigureAdapter.defaultProps = {
   shouldDeferAdapterConfiguration: false,

@@ -87,7 +87,7 @@ describe('rendering', () => {
         expect(props.render).not.toHaveBeenCalled();
 
         await waitFor(() =>
-          expect(adapter.getIsConfigurationStatus).toHaveBeenCalled()
+          { expect(adapter.getIsConfigurationStatus).toHaveBeenCalled(); }
         );
       });
     });
@@ -264,10 +264,10 @@ describe('when adapter args change after adapter was configured', () => {
     await waitUntilStatus();
 
     await waitFor(() =>
-      expect(adapter.reconfigure).toHaveBeenCalledWith(
+      { expect(adapter.reconfigure).toHaveBeenCalledWith(
         nextAdapterArgs,
         expect.anything()
-      )
+      ); }
     );
   });
 });

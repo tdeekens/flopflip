@@ -32,7 +32,7 @@ const defaultProps: Pick<
   },
 };
 
-const TestProvider = (props: TProps) => {
+function TestProvider(props: TProps) {
   const adapterContextValue = createAdapterContext(
     props.adapterIdentifiers,
     props.reconfigure,
@@ -51,7 +51,7 @@ const TestProvider = (props: TProps) => {
       </FlagsContext.Provider>
     </AdapterContext.Provider>
   );
-};
+}
 
 TestProvider.displayName = 'TestProviderFlopFlip';
 TestProvider.defaultProps = defaultProps;

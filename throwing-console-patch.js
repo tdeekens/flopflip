@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 const colors = require('colors/safe');
 
 const shouldSilenceWarnings = (...messages) =>
@@ -23,25 +24,21 @@ const logOrThrow = (log, method, messages) => {
   }
 };
 
-// eslint-disable-next-line no-console
 const logMessage = console.log;
 global.console.log = (...messages) => {
   logOrThrow(logMessage, 'log', messages);
 };
 
-// eslint-disable-next-line no-console
 const logInfo = console.info;
 global.console.info = (...messages) => {
   logOrThrow(logInfo, 'info', messages);
 };
 
-// eslint-disable-next-line no-console
 const logWarning = console.warn;
 global.console.warn = (...messages) => {
   logOrThrow(logWarning, 'warn', messages);
 };
 
-// eslint-disable-next-line no-console
 const logError = console.error;
 global.console.error = (...messages) => {
   logOrThrow(logError, 'error', messages);
