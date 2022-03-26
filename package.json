@@ -8,7 +8,7 @@
     "develop": "jest --projects jest.*.config.js --watch",
     "lint": "jest --config jest.lint.config.js --maxWorkers 5",
     "pretypecheck": "rimraf packages/**/dist/",
-    "typecheck": "yarn pretypecheck && tsc --project tsconfig.json --noEmit && tsc --project packages/cypress-plugin/tsconfig.json --noEmit",
+    "typecheck": "tsc --project tsconfig.json --noEmit && tsc --project packages/cypress-plugin/tsconfig.json --noEmit",
     "format": "yarn format:ts && yarn format:md && yarn format:yaml",
     "format:ts": "prettier --write '**/*.{js, ts, tsx}'",
     "format:md": "prettier --parser markdown --write '**/*.md'",
