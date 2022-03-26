@@ -1,7 +1,4 @@
-import {
-  createFlopflipReducer,
-  FLOPFLIP_STATE_SLICE,
-} from '@flopflip/react-redux';
+import { createFlopflipReducer, FLOPFLIP_STATE_SLICE } from '../src/';
 import { combineReducers, createStore as createReduxStore } from 'redux';
 
 const defaultInitialState = {};
