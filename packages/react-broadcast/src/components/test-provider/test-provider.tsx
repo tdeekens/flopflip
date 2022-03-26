@@ -4,8 +4,6 @@ import {
   type TAdapterStatus,
   type TFlags,
   type TReconfigureAdapter,
-} from '@flopflip/types';
-import {
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
 } from '@flopflip/types';
@@ -32,14 +30,14 @@ const defaultProps: Pick<
   },
 };
 
-const TestProvider = (props: TProps) => {
+function TestProvider(props: TProps) {
   const adapterContextValue = createAdapterContext(
     props.adapterIdentifiers,
     props.reconfigure,
     props.status
   );
   const flagsContextValue = createIntialFlagsContext(
-    // @ts-expect-error
+    // @ts-expect-error Can not remember. Sorry to myself.
     props.adapterIdentifiers,
     props.flags
   );
@@ -51,7 +49,7 @@ const TestProvider = (props: TProps) => {
       </FlagsContext.Provider>
     </AdapterContext.Provider>
   );
-};
+}
 
 TestProvider.displayName = 'TestProviderFlopFlip';
 TestProvider.defaultProps = defaultProps;

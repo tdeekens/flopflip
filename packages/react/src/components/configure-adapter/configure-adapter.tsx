@@ -9,8 +9,6 @@ import {
   type TAdapterStatus,
   type TConfigureAdapterChildren,
   type TFlags,
-} from '@flopflip/types';
-import {
   AdapterConfigurationStatus,
   AdapterInitializationStatus,
 } from '@flopflip/types';
@@ -34,6 +32,7 @@ export const AdapterStates = {
 export type TAdapterStates = ValueOf<typeof AdapterStates>;
 
 type TProps = {
+  // eslint-disable-next-line react/boolean-prop-naming
   shouldDeferAdapterConfiguration?: boolean;
   adapter: TAdapter;
   adapterArgs: TAdapterArgs;
@@ -111,14 +110,14 @@ const useAdapterStateRef = (): TUseAdapterStateRefReturn => {
 };
 
 type TUsePendingAdapterArgsRefReturn = [
-  React.MutableRefObject<TAdapterArgs | null>,
+  React.MutableRefObject<TAdapterArgs | undefined>,
   (nextReconfiguration: TAdapterReconfiguration) => void,
   () => TAdapterArgs
 ];
 const usePendingAdapterArgsRef = (
   appliedAdapterArgs: TAdapterArgs
 ): TUsePendingAdapterArgsRefReturn => {
-  const pendingAdapterArgsRef = useRef<TAdapterArgs | null>(null);
+  const pendingAdapterArgsRef = useRef<TAdapterArgs | undefined>(undefined);
 
   const setPendingAdapterArgs = useCallback(
     (nextReconfiguration: TAdapterReconfiguration): void => {
@@ -139,7 +138,7 @@ const usePendingAdapterArgsRef = (
   );
 
   const unsetPendingAdapterArgs = useCallback(() => {
-    pendingAdapterArgsRef.current = null;
+    pendingAdapterArgsRef.current = undefined;
   }, [pendingAdapterArgsRef]);
 
   /**
@@ -430,7 +429,7 @@ const usePendingAdapterArgsEffect = ({
   return [reconfigureOrQueue];
 };
 
-const ConfigureAdapter = (props: TProps) => {
+function ConfigureAdapter(props: TProps) {
   const [appliedAdapterArgs, applyAdapterArgs] = useAppliedAdapterArgsState({
     initialAdapterArgs: props.adapterArgs,
   });
@@ -509,7 +508,7 @@ const ConfigureAdapter = (props: TProps) => {
       })()}
     </AdapterContext.Provider>
   );
-};
+}
 
 ConfigureAdapter.defaultProps = {
   shouldDeferAdapterConfiguration: false,

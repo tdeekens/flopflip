@@ -16,11 +16,11 @@ import {
   AdapterSubscriptionStatus,
 } from '@flopflip/types';
 import { SplitFactory } from '@splitsoftware/splitio';
-import merge from 'deepmerge';
 import camelCase from 'lodash/camelCase';
 import cloneDeep from 'lodash/cloneDeep';
 import isEqual from 'lodash/isEqual';
 import omit from 'lodash/omit';
+import merge from 'merge-deep';
 
 type TSplitIOAdapterState = {
   user?: TUser;

@@ -1,9 +1,9 @@
-import { type TFlagName, type TFlags } from '@flopflip/types';
 import {
   DEFAULT_FLAGS_PROP_KEY,
   setDisplayName,
   wrapDisplayName,
 } from '@flopflip/react';
+import { type TFlagName, type TFlags } from '@flopflip/types';
 import React from 'react';
 
 import { useFlagVariations } from '../../hooks';
@@ -17,7 +17,7 @@ export default <OwnProps extends Record<string, unknown>>(
   (
     Component: React.ComponentType
   ): React.ComponentType<OwnProps & InjectedProps> => {
-    const WrappedComponent = (ownProps: OwnProps) => {
+    function WrappedComponent(ownProps: OwnProps) {
       const flagVariations = useFlagVariations(flagNames);
       const flags = Object.fromEntries(
         flagNames.map((flagName, indexOfFlagName) => [
@@ -31,7 +31,7 @@ export default <OwnProps extends Record<string, unknown>>(
       };
 
       return <Component {...props} />;
-    };
+    }
 
     setDisplayName(wrapDisplayName(WrappedComponent, 'injectFeatureToggles'));
 

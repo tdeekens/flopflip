@@ -14,13 +14,13 @@ export default function branchOnFeatureToggle<
   UntoggledComponent?: React.ComponentType
 ) {
   return (ToggledComponent: React.ComponentType<OwnProps>) => {
-    const WrappedToggledComponent = (ownProps: OwnProps) => {
+    function WrappedToggledComponent(ownProps: OwnProps) {
       const isFeatureEnabled = useFeatureToggle(flagName, flagVariation);
 
       if (isFeatureEnabled) return <ToggledComponent {...ownProps} />;
       if (UntoggledComponent) return <UntoggledComponent {...ownProps} />;
       return null;
-    };
+    }
 
     return WrappedToggledComponent;
   };

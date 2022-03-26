@@ -2081,11 +2081,12 @@ __metadata:
     "@babel/runtime": 7.17.8
     "@flopflip/adapter-utilities": 1.0.24
     "@flopflip/types": 4.1.20
+    "@types/merge-deep": 3.0.0
     debounce-fn: 4.0.0
-    deepmerge: 4.2.2
     globalthis: 1.0.2
     launchdarkly-js-client-sdk: 2.20.2
     lodash: 4.17.21
+    merge-deep: 3.0.3
     mitt: 3.0.0
     tiny-warning: 1.0.3
   languageName: unknown
@@ -2175,11 +2176,12 @@ __metadata:
     "@babel/runtime": 7.17.8
     "@flopflip/test-utils": "*"
     "@flopflip/types": 4.1.20
+    "@types/merge-deep": 3.0.0
     "@types/react": 17.0.41
     "@types/react-dom": 17.0.14
     "@types/react-is": 17.0.3
-    deepmerge: 4.2.2
     lodash: 4.17.21
+    merge-deep: 3.0.3
     react: 17.0.2
     react-dom: 17.0.2
     react-is: 17.0.2
@@ -2206,9 +2208,10 @@ __metadata:
     "@flopflip/adapter-utilities": 1.0.24
     "@flopflip/types": 4.1.20
     "@splitsoftware/splitio": 10.17.3
-    deepmerge: 4.2.2
+    "@types/merge-deep": 3.0.0
     globalthis: 1.0.2
     lodash: 4.17.21
+    merge-deep: 3.0.3
   languageName: unknown
   linkType: soft
 
@@ -2220,11 +2223,11 @@ __metadata:
     "@flopflip/memory-adapter": 3.0.25
     "@testing-library/jest-dom": 5.16.2
     "@testing-library/react": 12.1.4
-    jest-localstorage-mock: 2.4.19
     jest-plugin-filename: 0.0.1
     jest-runner-eslint: 1.0.0
     jest-watch-yarn-workspaces: 1.1.0
     react: 17.0.2
+    react-dom: 17.0.2
   languageName: unknown
   linkType: soft
 
@@ -2232,6 +2235,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flopflip/types@workspace:packages/types"
   dependencies:
+    launchdarkly-js-client-sdk: 2.20.2
     typescript: 4.6.2
   peerDependencies:
     typescript: 4.x
@@ -3085,6 +3089,13 @@ __metadata:
   version: 4.14.180
   resolution: "@types/lodash@npm:4.14.180"
   checksum: fc42ae3473695cac6e91553f832fef8eb51a31c1c0381cafa81b00dc3efe18e279786bdda77caf0b90a8340ba2ba7aa46ae6541d69870565f775d04c89128bc1
+  languageName: node
+  linkType: hard
+
+"@types/merge-deep@npm:3.0.0":
+  version: 3.0.0
+  resolution: "@types/merge-deep@npm:3.0.0"
+  checksum: b1f8659a92be98b92375a91ba12a44f93250e1c4802f946f3ce1f85df711c18431a3836c211b0cf3873d6eea00f2ef29d0325079b8b01809a18246a37d025653
   languageName: node
   linkType: hard
 
@@ -4588,6 +4599,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"clone-deep@npm:^0.2.4":
+  version: 0.2.4
+  resolution: "clone-deep@npm:0.2.4"
+  dependencies:
+    for-own: ^0.1.3
+    is-plain-object: ^2.0.1
+    kind-of: ^3.0.2
+    lazy-cache: ^1.0.3
+    shallow-clone: ^0.1.2
+  checksum: bcf9752052130c270c47d3e1c357497354b91d682f507e0079bec5950975b3293b619d9e100d70874606d716f2376e84956b045759a09af703e1038ecad6c438
+  languageName: node
+  linkType: hard
+
 "clone-response@npm:^1.0.2":
   version: 1.0.2
   resolution: "clone-response@npm:1.0.2"
@@ -5269,7 +5293,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"deepmerge@npm:4.2.2, deepmerge@npm:^4.2.2":
+"deepmerge@npm:^4.2.2":
   version: 4.2.2
   resolution: "deepmerge@npm:4.2.2"
   checksum: a8c43a1ed8d6d1ed2b5bf569fa4c8eb9f0924034baf75d5d406e47e157a451075c4db353efea7b6bcc56ec48116a8ce72fccf867b6e078e7c561904b5897530b
@@ -6396,6 +6420,7 @@ __metadata:
     eslint-plugin-testing-library: 5.1.0
     husky: 7.0.4
     jest: 27.5.1
+    jest-localstorage-mock: 2.4.19
     lint-staged: 12.3.7
     pinst: 3.0.0
     prettier: 2.6.0
@@ -6408,10 +6433,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"for-in@npm:^1.0.2":
+"for-in@npm:^0.1.3":
+  version: 0.1.8
+  resolution: "for-in@npm:0.1.8"
+  checksum: f5bdad7811700ee6a0f96b33d72a1db966aea75a1f03c7245d147f8369305e709f53a55ee7ae8eaddcfa85c7c89bca78472be8f1bc605475ce5bb2c70f77f8da
+  languageName: node
+  linkType: hard
+
+"for-in@npm:^1.0.1, for-in@npm:^1.0.2":
   version: 1.0.2
   resolution: "for-in@npm:1.0.2"
   checksum: 09f4ae93ce785d253ac963d94c7f3432d89398bf25ac7a24ed034ca393bf74380bdeccc40e0f2d721a895e54211b07c8fad7132e8157827f6f7f059b70b4043d
+  languageName: node
+  linkType: hard
+
+"for-own@npm:^0.1.3":
+  version: 0.1.5
+  resolution: "for-own@npm:0.1.5"
+  dependencies:
+    for-in: ^1.0.1
+  checksum: 07eb0a2e98eb55ce13b56dd11ef4fb5e619ba7380aaec388b9eec1946153d74fa734ce409e8434020557e9489a50c34bc004d55754f5863bf7d77b441d8dee8c
   languageName: node
   linkType: hard
 
@@ -7311,7 +7352,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-buffer@npm:^1.1.5":
+"is-buffer@npm:^1.0.2, is-buffer@npm:^1.1.5":
   version: 1.1.6
   resolution: "is-buffer@npm:1.1.6"
   checksum: 4a186d995d8bbf9153b4bd9ff9fd04ae75068fe695d29025d25e592d9488911eeece84eefbd8fa41b8ddcc0711058a71d4c466dcf6f1f6e1d83830052d8ca707
@@ -7576,7 +7617,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-plain-object@npm:^2.0.3, is-plain-object@npm:^2.0.4":
+"is-plain-object@npm:^2.0.1, is-plain-object@npm:^2.0.3, is-plain-object@npm:^2.0.4":
   version: 2.0.4
   resolution: "is-plain-object@npm:2.0.4"
   dependencies:
@@ -8572,6 +8613,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"kind-of@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "kind-of@npm:2.0.1"
+  dependencies:
+    is-buffer: ^1.0.2
+  checksum: 043df2943e113bca612d26224947395e9673bb3808d94aed30e47fbf0bafd618e2a29ff0ca2d5498f64332c320fff07f0aa9d6edfc20906a93c1b8792f11759c
+  languageName: node
+  linkType: hard
+
 "kind-of@npm:^3.0.2, kind-of@npm:^3.0.3, kind-of@npm:^3.2.0":
   version: 3.2.2
   resolution: "kind-of@npm:3.2.2"
@@ -8636,6 +8686,20 @@ __metadata:
   version: 1.6.0
   resolution: "lazy-ass@npm:1.6.0"
   checksum: 5a3ebb17915b03452320804466345382a6c25ac782ec4874fecdb2385793896cd459be2f187dc7def8899180c32ee0ab9a1aa7fe52193ac3ff3fe29bb0591729
+  languageName: node
+  linkType: hard
+
+"lazy-cache@npm:^0.2.3":
+  version: 0.2.7
+  resolution: "lazy-cache@npm:0.2.7"
+  checksum: b4538aff20db586c354f31de3ed59ea2c8d5dc4f01141bf49f07601e7ca0d7ed43a3f49362ade49b1e18ab1f3d121df0f2c9ea9b599b44dd54fb0c0db253c8b9
+  languageName: node
+  linkType: hard
+
+"lazy-cache@npm:^1.0.3":
+  version: 1.0.4
+  resolution: "lazy-cache@npm:1.0.4"
+  checksum: e6650c22e5de1cc3f4a0c25d2b35fe9cd400473c1b3562be9fceadf8f368d708b54d24f5aa51b321b090da65b36426823a8f706b8dbdd68270db0daba812c5d3
   languageName: node
   linkType: hard
 
@@ -9104,6 +9168,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"merge-deep@npm:3.0.3":
+  version: 3.0.3
+  resolution: "merge-deep@npm:3.0.3"
+  dependencies:
+    arr-union: ^3.1.0
+    clone-deep: ^0.2.4
+    kind-of: ^3.0.2
+  checksum: d2eb367b8300327c66a3e1e01eb06251f51b440bf5bfa5f0f8065ae95bf3af620d21fcd0ab2eb50e74f5119aac40ffd26c85e3bf82f79082e8757675f5885d3d
+  languageName: node
+  linkType: hard
+
 "merge-stream@npm:^2.0.0":
   version: 2.0.0
   resolution: "merge-stream@npm:2.0.0"
@@ -9329,6 +9404,16 @@ __metadata:
     for-in: ^1.0.2
     is-extendable: ^1.0.1
   checksum: 820d5a51fcb7479f2926b97f2c3bb223546bc915e6b3a3eb5d906dda871bba569863595424a76682f2b15718252954644f3891437cb7e3f220949bed54b1750d
+  languageName: node
+  linkType: hard
+
+"mixin-object@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "mixin-object@npm:2.0.1"
+  dependencies:
+    for-in: ^0.1.3
+    is-extendable: ^0.1.1
+  checksum: 7d0eb7c2f06435fcc01d132824b4c973a0df689a117d8199d79911b506363b6f4f86a84458a63f3acfa7388f3052612cfe27105400b4932678452925a9739a4c
   languageName: node
   linkType: hard
 
@@ -10915,6 +11000,18 @@ __metadata:
     is-plain-object: ^2.0.3
     split-string: ^3.0.1
   checksum: 09a4bc72c94641aeae950eb60dc2755943b863780fcc32e441eda964b64df5e3f50603d5ebdd33394ede722528bd55ed43aae26e9df469b4d32e2292b427b601
+  languageName: node
+  linkType: hard
+
+"shallow-clone@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "shallow-clone@npm:0.1.2"
+  dependencies:
+    is-extendable: ^0.1.1
+    kind-of: ^2.0.1
+    lazy-cache: ^0.2.3
+    mixin-object: ^2.0.1
+  checksum: cc4c85c6e42186fec33a81a85622c48dbcfdf280f3a7bd0800b4de57df8e365a8760aa2e31dd79df365b317dddb2fd0bbd92be0aab14dbd2de6a65992eab2177
   languageName: node
   linkType: hard
 

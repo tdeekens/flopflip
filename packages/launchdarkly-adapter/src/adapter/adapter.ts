@@ -22,14 +22,13 @@ import {
   AdapterSubscriptionStatus,
 } from '@flopflip/types';
 import debounce from 'debounce-fn';
-import merge from 'deepmerge';
 import {
+  type LDClient,
+  type LDUser,
   initialize as initializeLaunchDarklyClient,
-  LDClient,
-  LDUser,
 } from 'launchdarkly-js-client-sdk';
-import { type LDUser as TLDUser } from 'launchdarkly-js-sdk-common';
 import isEqual from 'lodash/isEqual';
+import merge from 'merge-deep';
 import mitt, { Emitter } from 'mitt';
 import warning from 'tiny-warning';
 
@@ -37,7 +36,7 @@ type TEmitterEvents = {
   flagsStateChange: TFlags;
   statusStateChange: Partial<TAdapterStatus>;
 };
-type TLaunchDarklyUser = TUser<TLDUser>;
+type TLaunchDarklyUser = TUser<LDUser>;
 type TLaunchDarklyAdapterState = {
   user?: TLaunchDarklyUser;
   client?: LDClient;

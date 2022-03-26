@@ -1,8 +1,9 @@
 import {
   type LDClient as TLDClient,
   type LDOptions as TLDOptions,
+  type LDUser,
 } from 'launchdarkly-js-client-sdk';
-import { type LDUser as TLDUser } from 'launchdarkly-js-sdk-common';
+import React from 'react';
 
 export type TFlagName = string;
 export type TFlagVariation =
@@ -51,7 +52,7 @@ export type TBaseAdapterArgs<
 > = {
   user: TUser<TAdditionalUserProperties>;
 };
-export type TLaunchDarklyAdapterArgs = TBaseAdapterArgs<TLDUser> & {
+export type TLaunchDarklyAdapterArgs = TBaseAdapterArgs<LDUser> & {
   sdk: {
     clientSideId: string;
     clientOptions?: TLDOptions;
