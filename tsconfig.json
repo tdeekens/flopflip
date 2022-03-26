@@ -25,7 +25,8 @@
     "stripInternal": true,
     "target": "ES2015",
     "allowJs": false,
-    "types": ["cypress", "node", "react"]
+    "types": ["jest"],
   },
+  "exclude": ["packages/cypress-plugin"],
   "typeRoots": ["@types", "node_modules/@types"]
 }
