@@ -116,7 +116,7 @@ type TUsePendingAdapterArgsRefReturn = [
 const usePendingAdapterArgsRef = (
   appliedAdapterArgs: TAdapterArgs
 ): TUsePendingAdapterArgsRefReturn => {
-  const pendingAdapterArgsRef = useRef<TAdapterArgs | undefined>(null);
+  const pendingAdapterArgsRef = useRef<TAdapterArgs | undefined>(undefined);
 
   const setPendingAdapterArgs = useCallback(
     (nextReconfiguration: TAdapterReconfiguration): void => {
@@ -137,7 +137,7 @@ const usePendingAdapterArgsRef = (
   );
 
   const unsetPendingAdapterArgs = useCallback(() => {
-    pendingAdapterArgsRef.current = null;
+    pendingAdapterArgsRef.current = undefined;
   }, [pendingAdapterArgsRef]);
 
   /**
