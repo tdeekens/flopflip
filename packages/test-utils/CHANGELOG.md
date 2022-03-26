@@ -1,5 +1,14 @@
 # @flopflip/test-utils
 
+## 3.0.27
+
+### Patch Changes
+
+- [#1604](https://github.com/tdeekens/flopflip/pull/1604) [`4f13cb85`](https://github.com/tdeekens/flopflip/commit/4f13cb85167d33e89d03aeaba2d991f2a9f0728c) Thanks [@tdeekens](https://github.com/tdeekens)! - Refactor to import fixes from pnpm migration to `main`
+
+- Updated dependencies []:
+  - @flopflip/memory-adapter@3.0.26
+
 ## 3.0.26
 
 ### Patch Changes
