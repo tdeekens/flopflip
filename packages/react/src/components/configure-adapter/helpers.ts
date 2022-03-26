@@ -4,8 +4,8 @@ import {
   TConfigureAdapterChildren,
   TConfigureAdapterChildrenAsFunction,
 } from '@flopflip/types';
-import merge from 'deepmerge';
 import { Children } from 'react';
+import merge from 'merge-deep';
 
 const isFunctionChildren = (
   children: TConfigureAdapterChildren
@@ -21,7 +21,6 @@ const mergeAdapterArgs = (
 ): TAdapterArgs =>
   options.shouldOverwrite
     ? nextAdapterArgs
-    : // @ts-expect-error merging does not give correct typing
-      merge(previousAdapterArgs, nextAdapterArgs);
+    : merge(previousAdapterArgs, nextAdapterArgs);
 
 export { isEmptyChildren, isFunctionChildren, mergeAdapterArgs };

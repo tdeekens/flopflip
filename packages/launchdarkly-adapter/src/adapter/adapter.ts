@@ -22,7 +22,6 @@ import {
   AdapterSubscriptionStatus,
 } from '@flopflip/types';
 import debounce from 'debounce-fn';
-import merge from 'deepmerge';
 import {
   type LDClient,
   type LDUser,
@@ -31,6 +30,7 @@ import {
 import isEqual from 'lodash/isEqual';
 import mitt, { Emitter } from 'mitt';
 import warning from 'tiny-warning';
+import merge from 'merge-deep';
 
 type TEmitterEvents = {
   flagsStateChange: TFlags;
