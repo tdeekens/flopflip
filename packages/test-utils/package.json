@@ -23,6 +23,7 @@
     "jest-plugin-filename": "0.0.1",
     "jest-runner-eslint": "1.0.0",
     "jest-watch-yarn-workspaces": "1.1.0",
-    "react": "17.0.2"
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
   }
 }
