@@ -1,3 +1,4 @@
+import React from 'react';
 import { type TUser } from '@flopflip/types';
 import { Children, useEffect } from 'react';
 

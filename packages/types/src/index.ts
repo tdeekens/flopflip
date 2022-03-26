@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   type LDClient as TLDClient,
   type LDOptions as TLDOptions,
