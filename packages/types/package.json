@@ -27,6 +27,9 @@
     "feature-toggles",
     "types"
   ],
+  "dependencies": {
+    "launchdarkly-js-client-sdk": "2.20.2"
+  },
   "devDependencies": {
     "typescript": "4.6.2"
   },
