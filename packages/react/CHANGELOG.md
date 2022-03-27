@@ -1,5 +1,14 @@
 # @flopflip/react
 
+## 11.1.26
+
+### Patch Changes
+
+- [#1604](https://github.com/tdeekens/flopflip/pull/1604) [`4f13cb85`](https://github.com/tdeekens/flopflip/commit/4f13cb85167d33e89d03aeaba2d991f2a9f0728c) Thanks [@tdeekens](https://github.com/tdeekens)! - Refactor to import fixes from pnpm migration to `main`
+
+- Updated dependencies [[`4f13cb85`](https://github.com/tdeekens/flopflip/commit/4f13cb85167d33e89d03aeaba2d991f2a9f0728c)]:
+  - @flopflip/types@4.1.21
+
 ## 11.1.25
 
 ### Patch Changes
