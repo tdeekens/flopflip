@@ -31,7 +31,7 @@
     "@flopflip/types": "4.1.21",
     "@types/merge-deep": "3.0.0",
     "debounce-fn": "4.0.0",
-    "launchdarkly-js-client-sdk": "2.20.2",
+    "launchdarkly-js-client-sdk": "2.21.0",
     "lodash": "4.17.21",
     "merge-deep": "3.0.3",
     "mitt": "3.0.0",
