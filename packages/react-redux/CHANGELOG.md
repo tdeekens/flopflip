@@ -1,5 +1,15 @@
 # @flopflip/react-redux
 
+## 12.1.24
+
+### Patch Changes
+
+- [#1612](https://github.com/tdeekens/flopflip/pull/1612) [`aea0a3aa`](https://github.com/tdeekens/flopflip/commit/aea0a3aaf0e3d53fa3dc18868f40f7a5650f4099) Thanks [@emmenko](https://github.com/emmenko)! - Bump version of all packages. The previous release didn't include all changes so we're forcing a new release.
+
+- Updated dependencies [[`aea0a3aa`](https://github.com/tdeekens/flopflip/commit/aea0a3aaf0e3d53fa3dc18868f40f7a5650f4099)]:
+  - @flopflip/react@11.1.28
+  - @flopflip/types@4.1.22
+
 ## 12.1.23
 
 ### Patch Changes
