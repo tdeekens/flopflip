@@ -28,7 +28,8 @@ import {
   initialize as initializeLaunchDarklyClient,
 } from 'launchdarkly-js-client-sdk';
 import isEqual from 'lodash/isEqual';
-import merge from 'merge-deep';
+
+import merge from 'ts-deepmerge';
 import mitt, { type Emitter } from 'mitt';
 import warning from 'tiny-warning';
 
@@ -123,7 +124,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     const isAnonymousUser = this.#getIsAnonymousUser(user);
 
     // NOTE: When marked `anonymous` the SDK will generate a unique key and cache it in local storage
-    return merge<TLaunchDarklyUser, LDUser>(user, {
+    return merge(user, {
       key: isAnonymousUser ? undefined : user.key,
       anonymous: isAnonymousUser,
     });

@@ -40,12 +40,11 @@
   "dependencies": {
     "@babel/runtime": "7.17.8",
     "@flopflip/types": "4.1.21",
-    "@types/merge-deep": "3.0.0",
     "@types/react-is": "17.0.3",
     "lodash": "4.17.21",
-    "merge-deep": "3.0.3",
     "react-is": "17.0.2",
-    "tiny-warning": "1.0.3"
+    "tiny-warning": "1.0.3",
+    "ts-deepmerge": "2.0.1"
   },
   "keywords": [
     "react",

@@ -20,7 +20,7 @@ import camelCase from 'lodash/camelCase';
 import cloneDeep from 'lodash/cloneDeep';
 import isEqual from 'lodash/isEqual';
 import omit from 'lodash/omit';
-import merge from 'merge-deep';
+import merge from 'ts-deepmerge';
 
 type TSplitIOAdapterState = {
   user?: TUser;
