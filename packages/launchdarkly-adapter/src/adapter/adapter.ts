@@ -28,10 +28,9 @@ import {
   initialize as initializeLaunchDarklyClient,
 } from 'launchdarkly-js-client-sdk';
 import isEqual from 'lodash/isEqual';
-
-import merge from 'ts-deepmerge';
 import mitt, { type Emitter } from 'mitt';
 import warning from 'tiny-warning';
+import merge from 'ts-deepmerge';
 
 type TEmitterEvents = {
   flagsStateChange: TFlags;

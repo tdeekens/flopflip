@@ -29,83 +29,92 @@ import {
 } from './modules/counter';
 import store from './store';
 
-const UntoggledFeature = () => <h6>Disabled Feature</h6>;
+function UntoggledFeature() {
+  return <h6>Disabled Feature</h6>;
+}
 
-const IncrementAsyncButton = (props) => (
-  <button
-    type="button"
-    disabled={props.isIncrementing}
-    onClick={props.incrementAsync}
-  >
-    Increment Async
-  </button>
-);
+function IncrementAsyncButton(props) {
+  return (
+    <button
+      type="button"
+      disabled={props.isIncrementing}
+      onClick={props.incrementAsync}
+    >
+      Increment Async
+    </button>
+  );
+}
+
 const FeatureToggledIncrementAsyncButton = flowRight(
   branchOnFeatureToggle({ flag: INCREMENT_ASYNC_BUTTON }, UntoggledFeature)
 )(IncrementAsyncButton);
 
-const IncrementSyncButton = (props) => (
-  <button
-    type="button"
-    className={classNames({
-      'incrementSyncButton--disabled': props.syncButtonStyle === false,
-      'incrementSyncButton--yellow': props.syncButtonStyle === 'yellow',
-      'incrementSyncButton--blue': props.syncButtonStyle === 'blue',
-      'incrementSyncButton--purple': props.syncButtonStyle === 'purple',
-    })}
-    disabled={props.isIncrementing}
-    onClick={props.increment}
-  >
-    Increment
-  </button>
-);
+function IncrementSyncButton(props) {
+  return (
+    <button
+      type="button"
+      className={classNames({
+        'incrementSyncButton--disabled': props.syncButtonStyle === false,
+        'incrementSyncButton--yellow': props.syncButtonStyle === 'yellow',
+        'incrementSyncButton--blue': props.syncButtonStyle === 'blue',
+        'incrementSyncButton--purple': props.syncButtonStyle === 'purple',
+      })}
+      disabled={props.isIncrementing}
+      onClick={props.increment}
+    >
+      Increment
+    </button>
+  );
+}
 
 const FeatureToggledIncrementSyncButton = injectFeatureToggle(
   INCREMENT_SYNC_BUTTON,
   'syncButtonStyle'
 )(IncrementSyncButton);
 
-const Counter = (props) => (
-  <div>
-    <h1>Count around</h1>
-    <p>Count: {props.count}</p>
-
+function Counter(props) {
+  return (
     <div>
-      <FeatureToggledIncrementSyncButton
-        increment={props.increment}
-        disabled={props.isIncrementing}
-      />
-      <br />
-      <FeatureToggledIncrementAsyncButton
-        incrementAsync={props.incrementAsync}
-        isIncrementing={props.isIncrementing}
-      />
-    </div>
+      <h1>Count around</h1>
+      <p>Count: {props.count}</p>
 
-    <div>
-      <button
-        type="button"
-        disabled={props.isDecrementing}
-        onClick={props.decrement}
-      >
-        Decrementing
-      </button>
-      <br />
-      <ToggleFeature
-        flag={DECREMENT_ASYNC_BUTTON}
-        untoggledComponent={UntoggledFeature}
-      >
+      <div>
+        <FeatureToggledIncrementSyncButton
+          increment={props.increment}
+          disabled={props.isIncrementing}
+        />
+        <br />
+        <FeatureToggledIncrementAsyncButton
+          incrementAsync={props.incrementAsync}
+          isIncrementing={props.isIncrementing}
+        />
+      </div>
+
+      <div>
         <button
           type="button"
           disabled={props.isDecrementing}
-          onClick={props.decrementAsync}
+          onClick={props.decrement}
         >
-          Decrement Async
+          Decrementing
         </button>
-      </ToggleFeature>
+        <br />
+        <ToggleFeature
+          flag={DECREMENT_ASYNC_BUTTON}
+          untoggledComponent={UntoggledFeature}
+        >
+          <button
+            type="button"
+            disabled={props.isDecrementing}
+            onClick={props.decrementAsync}
+          >
+            Decrement Async
+          </button>
+        </ToggleFeature>
+      </div>
     </div>
-  </div>
-);
+  );
+}
 
 const mapStateToProps = (state) => ({
   count: state.counter.count,

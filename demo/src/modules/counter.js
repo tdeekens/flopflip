@@ -42,54 +42,46 @@ export default (state = initialState, action) => {
   }
 };
 
-export const increment = () => {
-  return (dispatch) => {
-    dispatch({
-      type: INCREMENT_REQUESTED,
-    });
+export const increment = () => (dispatch) => {
+  dispatch({
+    type: INCREMENT_REQUESTED,
+  });
 
+  dispatch({
+    type: INCREMENT,
+  });
+};
+
+export const incrementAsync = () => (dispatch) => {
+  dispatch({
+    type: INCREMENT_REQUESTED,
+  });
+
+  return setTimeout(() => {
     dispatch({
       type: INCREMENT,
     });
-  };
+  }, 3000);
 };
 
-export const incrementAsync = () => {
-  return (dispatch) => {
-    dispatch({
-      type: INCREMENT_REQUESTED,
-    });
+export const decrement = () => (dispatch) => {
+  dispatch({
+    type: DECREMENT_REQUESTED,
+  });
 
-    return setTimeout(() => {
-      dispatch({
-        type: INCREMENT,
-      });
-    }, 3000);
-  };
+  dispatch({
+    type: DECREMENT,
+  });
 };
 
-export const decrement = () => {
-  return (dispatch) => {
-    dispatch({
-      type: DECREMENT_REQUESTED,
-    });
+export const decrementAsync = () => (dispatch) => {
+  dispatch({
+    type: DECREMENT_REQUESTED,
+  });
 
+  return setTimeout(() => {
     dispatch({
       type: DECREMENT,
     });
-  };
-};
-
-export const decrementAsync = () => {
-  return (dispatch) => {
-    dispatch({
-      type: DECREMENT_REQUESTED,
-    });
-
-    return setTimeout(() => {
-      dispatch({
-        type: DECREMENT,
-      });
-    }, 3000);
-  };
+  }, 3000);
 };
