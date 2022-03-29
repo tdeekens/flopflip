@@ -1,5 +1,11 @@
 # @flopflip/react
 
+## 11.1.27
+
+### Patch Changes
+
+- [#1610](https://github.com/tdeekens/flopflip/pull/1610) [`600dd038`](https://github.com/tdeekens/flopflip/commit/600dd03802063bc5ee9782164c0f283102db2ef5) Thanks [@tdeekens](https://github.com/tdeekens)! - Refactor to use ts-deepmerge over deepmerge.
+
 ## 11.1.26
 
 ### Patch Changes

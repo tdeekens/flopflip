@@ -1,5 +1,11 @@
 # @flopflip/cypress-plugin
 
+## 2.0.37
+
+### Patch Changes
+
+- [#1610](https://github.com/tdeekens/flopflip/pull/1610) [`600dd038`](https://github.com/tdeekens/flopflip/commit/600dd03802063bc5ee9782164c0f283102db2ef5) Thanks [@tdeekens](https://github.com/tdeekens)! - Refactor to use ts-deepmerge over deepmerge.
+
 ## 2.0.36
 
 ### Patch Changes
