@@ -31,14 +31,14 @@
     "@flopflip/test-utils": "*",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-redux": "7.2.6",
+    "react-redux": "7.2.8",
     "redux": "4.1.2"
   },
   "dependencies": {
-    "@babel/runtime": "7.17.8",
+    "@babel/runtime": "7.17.9",
     "@flopflip/react": "^11.1.28",
     "@flopflip/types": "4.1.22",
-    "@types/react-redux": "7.1.23"
+    "@types/react-redux": "7.1.24"
   },
   "peerDependencies": {
     "react": "^16.8 || ^17.0",
