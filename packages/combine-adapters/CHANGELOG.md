@@ -1,5 +1,14 @@
 # @flopflip/combine-adapters
 
+## 0.0.31
+
+### Patch Changes
+
+- [#1614](https://github.com/tdeekens/flopflip/pull/1614) [`36ade93e`](https://github.com/tdeekens/flopflip/commit/36ade93e602ec9478af005bba0c4abd9a46daf08) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update all dependencies
+
+- Updated dependencies [[`36ade93e`](https://github.com/tdeekens/flopflip/commit/36ade93e602ec9478af005bba0c4abd9a46daf08)]:
+  - @flopflip/adapter-utilities@1.0.27
+
 ## 0.0.30
 
 ### Patch Changes
