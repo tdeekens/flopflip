@@ -4647,6 +4647,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"colors@npm:1.4.0":
+  version: 1.4.0
+  resolution: "colors@npm:1.4.0"
+  checksum: 98aa2c2418ad87dedf25d781be69dc5fc5908e279d9d30c34d8b702e586a0474605b3a189511482b9d5ed0d20c867515d22749537f7bc546256c6014f3ebdcec
+  languageName: node
+  linkType: hard
+
 "combined-stream@npm:^1.0.6, combined-stream@npm:^1.0.8, combined-stream@npm:~1.0.6":
   version: 1.0.8
   resolution: "combined-stream@npm:1.0.8"
@@ -6318,6 +6325,7 @@ __metadata:
     babel-plugin-transform-dynamic-import: 2.1.0
     check-node-version: 4.2.1
     codecov: 3.8.3
+    colors: 1.4.0
     core-js: 3.22.0
     cross-env: 7.0.3
     eslint: 8.13.0
