@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@flopflip/test-utils",
-  "version": "3.0.28",
+  "version": "3.0.29",
   "description": "Test utils for flipflop",
   "main": "index.js",
   "author": "Tobias Deekens <nerd@tdeekens.name>",
@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.17.9",
-    "@flopflip/memory-adapter": "3.0.27",
+    "@flopflip/memory-adapter": "3.0.28",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "12.1.5",
     "jest-runner-eslint": "1.0.0",
