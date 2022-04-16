@@ -3126,17 +3126,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=12":
+"@types/node@npm:*, @types/node@npm:17.0.24, @types/node@npm:>=12":
   version: 17.0.24
   resolution: "@types/node@npm:17.0.24"
   checksum: 9e7c4f863601b2430b4c2429a89935f22eba692956f5013c90a4c7fb0e1401ed8add8c4307453c5d6b8b985384500f8c3f644427ab88632640cc396159af479a
-  languageName: node
-  linkType: hard
-
-"@types/node@npm:16.11.27":
-  version: 16.11.27
-  resolution: "@types/node@npm:16.11.27"
-  checksum: 6ed0c8c4d29a549d0cfd607d19edf9a4668fbd39087701d923b4a04cd760564e47ad27f9403968cb9c11ee006f0ea6ab698b2491b4b2d2dec3f4a53d0fc22df7
   languageName: node
   linkType: hard
 
@@ -6338,7 +6331,7 @@ __metadata:
     "@preconstruct/cli": 2.1.5
     "@types/jest": 27.4.1
     "@types/lodash": 4.14.181
-    "@types/node": 16.11.27
+    "@types/node": 17.0.24
     "@typescript-eslint/eslint-plugin": 5.19.0
     "@typescript-eslint/parser": 5.19.0
     babel-eslint: 10.1.0
