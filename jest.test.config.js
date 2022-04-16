@@ -21,7 +21,11 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
   testEnvironment: 'jsdom',
   testURL: 'http://localhost',
-  watchPlugins: ['jest-plugin-filename', 'jest-watch-yarn-workspaces'],
+  watchPlugins: [
+    'jest-watch-yarn-workspaces',
+    'jest-watch-typeahead/filename',
+    'jest-watch-typeahead/testname',
+  ],
   testPathIgnorePatterns: [
     '/node_modules/',
     '/packages/.*/node_modules',
