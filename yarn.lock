@@ -2142,7 +2142,7 @@ __metadata:
     "@flopflip/test-utils": "*"
     "@flopflip/types": 4.1.22
     "@types/react": 17.0.44
-    "@types/react-dom": 17.0.15
+    "@types/react-dom": 18.0.2
     react: 17.0.2
     react-dom: 17.0.2
   peerDependencies:
@@ -2181,7 +2181,7 @@ __metadata:
     "@flopflip/test-utils": "*"
     "@flopflip/types": 4.1.22
     "@types/react": 17.0.44
-    "@types/react-dom": 17.0.15
+    "@types/react-dom": 18.0.2
     "@types/react-is": 17.0.3
     lodash: 4.17.21
     react: 17.0.2
@@ -3182,12 +3182,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:17.0.15":
-  version: 17.0.15
-  resolution: "@types/react-dom@npm:17.0.15"
+"@types/react-dom@npm:18.0.2":
+  version: 18.0.2
+  resolution: "@types/react-dom@npm:18.0.2"
   dependencies:
-    "@types/react": ^17
-  checksum: 7b90372bd7207d3860e1043ebfe10fd21fbd9ec3417a29593ca14359774830c888ba4ebb25cf0510628607496f8d35b09d23d329ea709b9311f5866185c5fd67
+    "@types/react": "*"
+  checksum: 2b0b138d8634ccfd8a86b17cb5414b122ee0cb6f650377d772f6008761a27e4c2531c08e3cab71aaa19b6893af6a508c664aa314db3ebcff5b8179173c9c9307
   languageName: node
   linkType: hard
 

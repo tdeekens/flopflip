@@ -104,7 +104,7 @@
   },
   "resolutions": {
     "@types/react": "17.0.44",
-    "@types/react-dom": "17.0.15"
+    "@types/react-dom": "18.0.2"
   },
   "keywords": [
     "react",
