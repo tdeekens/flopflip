@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "cypress": "9.5.4"
+    "cypress": "9.6.0"
   },
   "peerDependencies": {
     "cypress": "4.x || 5.x || 6.x || 7.x || 8.x || 9.x"
