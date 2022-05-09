@@ -30,7 +30,7 @@
   "dependencies": {
     "@babel/runtime": "7.17.9",
     "@flopflip/types": "4.1.22",
-    "globalthis": "1.0.2",
+    "globalthis": "1.0.3",
     "lodash": "4.17.21"
   },
   "devDependencies": {

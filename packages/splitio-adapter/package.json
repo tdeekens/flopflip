@@ -23,13 +23,13 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "globalthis": "1.0.2"
+    "globalthis": "1.0.3"
   },
   "dependencies": {
     "@babel/runtime": "7.17.9",
     "@flopflip/adapter-utilities": "1.0.27",
     "@flopflip/types": "4.1.22",
-    "@splitsoftware/splitio": "10.18.1",
+    "@splitsoftware/splitio": "10.18.2",
     "lodash": "4.17.21",
     "ts-deepmerge": "2.0.1"
   },

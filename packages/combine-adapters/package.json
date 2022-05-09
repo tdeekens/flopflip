@@ -38,6 +38,6 @@
   "devDependencies": {
     "@flopflip/localstorage-adapter": "4.0.24",
     "@flopflip/memory-adapter": "3.0.28",
-    "globalthis": "1.0.2"
+    "globalthis": "1.0.3"
   }
 }
