@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "globalthis": "1.0.2"
+    "globalthis": "1.0.3"
   },
   "dependencies": {
     "@babel/runtime": "7.17.9",
