@@ -27,10 +27,10 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "cypress": "9.6.0"
+    "cypress": "10.0.3"
   },
   "peerDependencies": {
-    "cypress": "4.x || 5.x || 6.x || 7.x || 8.x || 9.x"
+    "cypress": "4.x || 5.x || 6.x || 7.x || 8.x || 9.x || 10.x"
   },
   "dependencies": {
     "@flopflip/types": "4.1.22"
