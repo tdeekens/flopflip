@@ -1,5 +1,16 @@
 # @flopflip/cypress-plugin
 
+## 2.1.0
+
+### Minor Changes
+
+- [#1627](https://github.com/tdeekens/flopflip/pull/1627) [`28c0400f`](https://github.com/tdeekens/flopflip/commit/28c0400fb334bca041df8461d1f8022ff816d935) Thanks [@renovate](https://github.com/apps/renovate)! - Add support for Cypress v10.
+
+### Patch Changes
+
+- Updated dependencies [[`50d202af`](https://github.com/tdeekens/flopflip/commit/50d202af3379bc3c6e28e78f34c6a1506f241de9)]:
+  - @flopflip/types@4.1.23
+
 ## 2.0.39
 
 ### Patch Changes
