@@ -1,5 +1,18 @@
 # @flopflip/react
 
+## 11.2.0
+
+### Minor Changes
+
+- [#1621](https://github.com/tdeekens/flopflip/pull/1621) [`c6d54bd0`](https://github.com/tdeekens/flopflip/commit/c6d54bd0da1fb54bd439baaa136604936ad17010) Thanks [@renovate](https://github.com/apps/renovate)! - Add support for react-redux v8
+
+### Patch Changes
+
+- [#1625](https://github.com/tdeekens/flopflip/pull/1625) [`50d202af`](https://github.com/tdeekens/flopflip/commit/50d202af3379bc3c6e28e78f34c6a1506f241de9) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update all dependencies
+
+- Updated dependencies [[`50d202af`](https://github.com/tdeekens/flopflip/commit/50d202af3379bc3c6e28e78f34c6a1506f241de9)]:
+  - @flopflip/types@4.1.23
+
 ## 11.1.29
 
 ### Patch Changes
