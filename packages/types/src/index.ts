@@ -137,8 +137,8 @@ export const adapterIdentifiers = {
   combined: 'combined',
 } as const;
 export type TAdapterIdentifiers =
-  | typeof adapterIdentifiers[keyof typeof adapterIdentifiers]
-  | string;
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
+  typeof adapterIdentifiers[keyof typeof adapterIdentifiers] | string;
 export type TFlagsContext = Record<TAdapterIdentifiers, TFlags>;
 export const cacheIdentifiers = {
   local: 'local',
