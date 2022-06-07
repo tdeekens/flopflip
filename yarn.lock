@@ -2132,9 +2132,9 @@ __metadata:
   resolution: "@flopflip/cypress-plugin@workspace:packages/cypress-plugin"
   dependencies:
     "@flopflip/types": 4.1.22
-    cypress: 9.6.0
+    cypress: 10.0.3
   peerDependencies:
-    cypress: 4.x || 5.x || 6.x || 7.x || 8.x || 9.x
+    cypress: 4.x || 5.x || 6.x || 7.x || 8.x || 9.x || 10.x
   languageName: unknown
   linkType: soft
 
@@ -5297,9 +5297,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:9.6.0":
-  version: 9.6.0
-  resolution: "cypress@npm:9.6.0"
+"cypress@npm:10.0.3":
+  version: 10.0.3
+  resolution: "cypress@npm:10.0.3"
   dependencies:
     "@cypress/request": ^2.88.10
     "@cypress/xvfb": ^1.2.4
@@ -5345,7 +5345,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: 1e5142885a3fb54db6ef7477e3b11b363f1f610ff008982af014e6df3261ac3899f4cad407c598fb690f93029634adb4ad4605929d10776f92175a3eebb471c4
+  checksum: b65ed7aba0b767b760d6b3103c5d93d4ba78c195650c0ffed5af0d26454fe35455b17c452882db6826bc88245e75925c5f6c333ae962d5813a4db274ab7fd55f
   languageName: node
   linkType: hard
 
