@@ -31,7 +31,7 @@
     "launchdarkly-js-client-sdk": "2.22.1"
   },
   "devDependencies": {
-    "typescript": "4.7.3"
+    "typescript": "4.7.4"
   },
   "peerDependencies": {
     "typescript": "4.x"
