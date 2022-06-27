@@ -18,7 +18,7 @@
     "@babel/runtime": "7.18.3",
     "@flopflip/memory-adapter": "3.0.29",
     "@testing-library/jest-dom": "5.16.4",
-    "@testing-library/react": "12.1.5",
+    "@testing-library/react": "13.3.0",
     "jest-runner-eslint": "1.0.1",
     "jest-watch-typeahead": "1.1.0",
     "jest-watch-yarn-workspaces": "1.1.0",
