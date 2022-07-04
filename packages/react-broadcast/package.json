@@ -39,7 +39,7 @@
     "react-dom": "^16.8 || ^17.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.18.3",
+    "@babel/runtime": "7.18.6",
     "@flopflip/react": "^11.2.0",
     "@flopflip/types": "4.1.23"
   },
