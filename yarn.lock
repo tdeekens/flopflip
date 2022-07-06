@@ -2455,7 +2455,7 @@ __metadata:
     "@flopflip/react": ^11.2.0
     "@flopflip/test-utils": "*"
     "@flopflip/types": 4.1.23
-    "@types/react": 17.0.47
+    "@types/react": 18.0.15
     "@types/react-dom": 18.0.5
     react: 17.0.2
     react-dom: 17.0.2
@@ -2494,7 +2494,7 @@ __metadata:
     "@babel/runtime": 7.18.6
     "@flopflip/test-utils": "*"
     "@flopflip/types": 4.1.23
-    "@types/react": 17.0.47
+    "@types/react": 18.0.15
     "@types/react-dom": 18.0.5
     "@types/react-is": 17.0.3
     lodash: 4.17.21
@@ -3646,14 +3646,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:17.0.47":
-  version: 17.0.47
-  resolution: "@types/react@npm:17.0.47"
+"@types/react@npm:18.0.15":
+  version: 18.0.15
+  resolution: "@types/react@npm:18.0.15"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 2e7fe0eb630cb77da03b6da308c58728c01b38e878118e9ff5cd8045181c8d4f32dc936e328f46a62cadb56e1fe4c5a911b5113584f93a99e1f35df7f059246b
+  checksum: e22cc388d1c145aa184787e44dc28db4789976c704cd5db475c170bb76a560eb81def5f346cfe750949bb3d43ad88822b8cbb9f19b1286e3795892a8263e7715
   languageName: node
   linkType: hard
 
