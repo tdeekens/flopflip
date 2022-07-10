@@ -437,7 +437,7 @@ describe('when configuring', () => {
             it('should `dispatch` `onFlagsStateChange` action after the delay passed', () => {
               jest.advanceTimersByTime(flagsUpdateDelayMs);
 
-              expect(onFlagsStateChange).toHaveBeenCalledTimes(8);
+              expect(onFlagsStateChange).toHaveBeenCalledTimes(4);
             });
           });
 
