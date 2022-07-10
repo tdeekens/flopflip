@@ -10,11 +10,12 @@ import { useFeatureToggle } from '../../hooks/';
 type Props = {
   flag: TFlagName;
   variation?: TFlagVariation;
-   
 } & Omit<TToggleFeatureProps, 'isFeatureEnabled'>;
 
 function ToggleFeature<OwnProps extends Props>(props: OwnProps) {
   const isFeatureEnabled = useFeatureToggle(props.flag, props.variation);
+
+  // @ts-expect-error Never returns undefined or null.
   return <SharedToggleFeature {...props} isFeatureEnabled={isFeatureEnabled} />;
 }
 
