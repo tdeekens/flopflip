@@ -20,7 +20,9 @@ module.exports = {
   setupFilesAfterEnv: ['./jest-runner-test.config.js'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
   testEnvironment: 'jsdom',
-  testURL: 'http://localhost',
+  testEnvironmentOptions: {
+    testURL: 'http://localhost',
+  },
   watchPlugins: [
     'jest-watch-yarn-workspaces',
     'jest-watch-typeahead/filename',
