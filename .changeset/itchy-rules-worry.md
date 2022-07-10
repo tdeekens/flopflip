@@ -1,8 +1,8 @@
 ---
-"@flopflip/react-broadcast": patch
-"@flopflip/react-redux": patch
-"@flopflip/react": patch
-"@flopflip/test-utils": patch
+"@flopflip/react-broadcast": minor
+"@flopflip/react-redux": minor
+"@flopflip/react": minor
+"@flopflip/test-utils": minor
 ---
 
 Add support for React v18
