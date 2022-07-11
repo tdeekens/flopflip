@@ -2103,7 +2103,7 @@ __metadata:
     lodash: 4.17.21
     mitt: 3.0.0
     tiny-warning: 1.0.3
-    ts-deepmerge: 2.0.1
+    ts-deepmerge: 2.0.3
   languageName: unknown
   linkType: soft
 
@@ -2199,7 +2199,7 @@ __metadata:
     react-dom: 18.2.0
     react-is: 18.2.0
     tiny-warning: 1.0.3
-    ts-deepmerge: 2.0.1
+    ts-deepmerge: 2.0.3
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0.0
     react-dom: ^16.8 || ^17.0 || ^18.0.0
@@ -2224,7 +2224,7 @@ __metadata:
     "@splitsoftware/splitio": 10.20.0
     globalthis: 1.0.3
     lodash: 4.17.21
-    ts-deepmerge: 2.0.1
+    ts-deepmerge: 2.0.3
   languageName: unknown
   linkType: soft
 
@@ -2725,9 +2725,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@preconstruct/cli@npm:2.1.7":
-  version: 2.1.7
-  resolution: "@preconstruct/cli@npm:2.1.7"
+"@preconstruct/cli@npm:2.1.8":
+  version: 2.1.8
+  resolution: "@preconstruct/cli@npm:2.1.8"
   dependencies:
     "@babel/code-frame": ^7.5.5
     "@babel/core": ^7.7.7
@@ -2768,7 +2768,7 @@ __metadata:
     v8-compile-cache: ^2.1.1
   bin:
     preconstruct: bin.js
-  checksum: 5ff8c5086d12ebf1ce5ffbb6ed567e02472aec5268c43b70792e7630675cb648f888c713ab4232c2e9384f9a3cc901722c6f6c7878eb6b9c486e8b627ca55edb
+  checksum: 6da067d6d99fb43d4623d1be6de6f8233ec9151fa7c3f64128ff2275c63426155d8c684059cdeaf63a4a1bb2c06cb2ad9ea6cc080185a2faee7219d126dd8dcb
   languageName: node
   linkType: hard
 
@@ -3295,12 +3295,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.0.5":
-  version: 18.0.5
-  resolution: "@types/react-dom@npm:18.0.5"
+"@types/react-dom@npm:18.0.6":
+  version: 18.0.6
+  resolution: "@types/react-dom@npm:18.0.6"
   dependencies:
     "@types/react": "*"
-  checksum: cd48b81950f499b52a3f0c08261f00046f9b7c96699fa249c9664e257e820daf6ecac815cd1028cebc9d105094adc39d047d1efd79214394b8b2d515574c0787
+  checksum: db571047af1a567631758700b9f7d143e566df939cfe5fbf7535347cc0c726a1cdbb5e3f8566d076e54cf708b6c1166689de194a9ba09ee35efc9e1d45911685
   languageName: node
   linkType: hard
 
@@ -6507,7 +6507,7 @@ __metadata:
     "@commitlint/cli": 17.0.3
     "@commitlint/config-conventional": 17.0.3
     "@manypkg/cli": 0.19.1
-    "@preconstruct/cli": 2.1.7
+    "@preconstruct/cli": 2.1.8
     "@types/jest": 28.1.4
     "@types/lodash": 4.14.182
     "@types/node": 18.0.3
@@ -12017,10 +12017,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-deepmerge@npm:2.0.1":
-  version: 2.0.1
-  resolution: "ts-deepmerge@npm:2.0.1"
-  checksum: 1d41981364192b521ce375740646ac2e00d7e3815c066624159309d3a2e43100449bc05c56d51938a1e5be444b0ca88ad9ce599fc489719805b9a2e9d4153194
+"ts-deepmerge@npm:2.0.3":
+  version: 2.0.3
+  resolution: "ts-deepmerge@npm:2.0.3"
+  checksum: 6c57543674f74009e6c974feea70e73f469c724526e69c5f32490afbeaf35e946c69d031f4dcb3cdbf2768a16f0966effdb441abf121996322a066cb01892019
   languageName: node
   linkType: hard
 
