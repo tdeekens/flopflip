@@ -34,7 +34,7 @@
     "lodash": "4.17.21",
     "mitt": "3.0.0",
     "tiny-warning": "1.0.3",
-    "ts-deepmerge": "2.0.1"
+    "ts-deepmerge": "2.0.3"
   },
   "keywords": [
     "feature-flags",
