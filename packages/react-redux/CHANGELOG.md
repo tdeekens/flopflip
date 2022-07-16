@@ -1,5 +1,19 @@
 # @flopflip/react-redux
 
+## 12.3.0
+
+### Minor Changes
+
+- [#1635](https://github.com/tdeekens/flopflip/pull/1635) [`ea64c97f`](https://github.com/tdeekens/flopflip/commit/ea64c97fdbcb5ca392993e5cb6b36a1171c31dd9) Thanks [@renovate](https://github.com/apps/renovate)! - Add support for React v18
+
+### Patch Changes
+
+- [#1640](https://github.com/tdeekens/flopflip/pull/1640) [`9cac278c`](https://github.com/tdeekens/flopflip/commit/9cac278cced8377f0e759608afbd9db8fb4894ef) Thanks [@tdeekens](https://github.com/tdeekens)! - Update dependencies
+
+- Updated dependencies [[`940ac66c`](https://github.com/tdeekens/flopflip/commit/940ac66c2ad412183a8c9543a5f8cac85e0b9d36), [`ea64c97f`](https://github.com/tdeekens/flopflip/commit/ea64c97fdbcb5ca392993e5cb6b36a1171c31dd9), [`9cac278c`](https://github.com/tdeekens/flopflip/commit/9cac278cced8377f0e759608afbd9db8fb4894ef)]:
+  - @flopflip/react@11.3.0
+  - @flopflip/types@4.1.24
+
 ## 12.2.0
 
 ### Minor Changes
