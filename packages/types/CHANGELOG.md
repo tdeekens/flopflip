@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 4.1.24
+
+### Patch Changes
+
+- [#1640](https://github.com/tdeekens/flopflip/pull/1640) [`9cac278c`](https://github.com/tdeekens/flopflip/commit/9cac278cced8377f0e759608afbd9db8fb4894ef) Thanks [@tdeekens](https://github.com/tdeekens)! - Update dependencies
+
 ## 4.1.23
 
 ### Patch Changes

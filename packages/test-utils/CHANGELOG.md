@@ -1,5 +1,18 @@
 # @flopflip/test-utils
 
+## 3.1.0
+
+### Minor Changes
+
+- [#1635](https://github.com/tdeekens/flopflip/pull/1635) [`ea64c97f`](https://github.com/tdeekens/flopflip/commit/ea64c97fdbcb5ca392993e5cb6b36a1171c31dd9) Thanks [@renovate](https://github.com/apps/renovate)! - Add support for React v18
+
+### Patch Changes
+
+- [#1640](https://github.com/tdeekens/flopflip/pull/1640) [`9cac278c`](https://github.com/tdeekens/flopflip/commit/9cac278cced8377f0e759608afbd9db8fb4894ef) Thanks [@tdeekens](https://github.com/tdeekens)! - Update dependencies
+
+- Updated dependencies [[`9cac278c`](https://github.com/tdeekens/flopflip/commit/9cac278cced8377f0e759608afbd9db8fb4894ef)]:
+  - @flopflip/memory-adapter@3.0.30
+
 ## 3.0.30
 
 ### Patch Changes
