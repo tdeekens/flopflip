@@ -11,8 +11,10 @@ import {
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
 } from '@flopflip/types';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
+import { useSyncExternalStore } from 'use-sync-external-store/shim';
 
+import { createStore } from '../../store';
 import { FlagsContext } from '../flags-context';
 
 type BaseProps = {
@@ -32,19 +34,10 @@ const initialAdapterStatus: TState['status'] = {
   subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
   configurationStatus: AdapterConfigurationStatus.Unconfigured,
 };
-
-type TGetInitialFlagsOptions = {
-  adapterIdentifiers: TAdapterIdentifiers[];
-};
-const getInitialFlags = ({
-  adapterIdentifiers,
-}: TGetInitialFlagsOptions): TState['flags'] =>
-  Object.fromEntries(
-    adapterIdentifiers.map((adapterInterfaceIdentifier) => [
-      adapterInterfaceIdentifier,
-      {},
-    ])
-  );
+const store = createStore<TState>({
+  status: initialAdapterStatus,
+  flags: {},
+});
 
 type TUseFlagsStateOptions = {
   adapterIdentifiers: TAdapterIdentifiers[];
@@ -53,35 +46,43 @@ type TFlagUpdateFunction = (flagsChange: TFlagsChange) => void;
 const useFlagsState = ({
   adapterIdentifiers,
 }: TUseFlagsStateOptions): [TFlagsState, TFlagUpdateFunction] => {
-  const [flags, setFlags] = useState<TState['flags']>(
-    getInitialFlags({ adapterIdentifiers })
+  const flags = useSyncExternalStore(
+    store.subscribe,
+    () => store.getSnapshot().flags
   );
 
   const updateFlags = useCallback(
     (flagsChange: TFlagsChange) => {
-      setFlags((prevState) => {
+      store.setState((prevState) => {
+        let nextState;
         if (flagsChange.id) {
-          return {
+          nextState = {
             ...prevState,
-            [flagsChange.id]: {
-              ...prevState[flagsChange.id],
-              ...flagsChange.flags,
+            flags: {
+              [flagsChange.id]: {
+                ...prevState.flags[flagsChange.id],
+                ...flagsChange.flags,
+              },
             },
           };
+
+          return nextState;
         }
 
-        return {
+        nextState = {
           ...prevState,
-          ...Object.fromEntries(
+          flags: Object.fromEntries(
             adapterIdentifiers.map((adapterInterfaceIdentifier) => [
               adapterInterfaceIdentifier,
               {
-                ...prevState[adapterInterfaceIdentifier],
+                ...prevState.flags[adapterInterfaceIdentifier],
                 ...flagsChange.flags,
               },
             ])
           ),
         };
+
+        return nextState;
       });
     },
     [adapterIdentifiers]
@@ -92,9 +93,22 @@ const useFlagsState = ({
 
 const useStatusState = (): [
   TAdapterStatus,
-  React.Dispatch<React.SetStateAction<TAdapterStatus>>
+  (nextStatus: Partial<TAdapterStatus>) => void
 ] => {
-  const [status, setStatus] = useState<TState['status']>(initialAdapterStatus);
+  const status = useSyncExternalStore(
+    store.subscribe,
+    () => store.getSnapshot().status
+  );
+
+  const setStatus = useCallback((nextStatus: Partial<TAdapterStatus>) => {
+    store.setState((prevState) => ({
+      ...prevState,
+      status: {
+        ...prevState.status,
+        ...nextStatus,
+      },
+    }));
+  }, []);
 
   return [status, setStatus];
 };
@@ -139,10 +153,7 @@ function Configure<AdapterInstance extends TAdapter>(
         return;
       }
 
-      setStatus((prevStatus) => ({
-        ...prevStatus,
-        ...statusChange.status,
-      }));
+      setStatus(statusChange.status);
     },
     [setStatus, getHasAdapterSubscriptionStatus]
   );

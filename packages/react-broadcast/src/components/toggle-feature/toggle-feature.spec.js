@@ -51,7 +51,7 @@ describe('when feature is disabled', () => {
 
 describe('when feature is enabled', () => {
   it('should render the component representing a enabled feature', async () => {
-    const { waitUntilConfigured, queryByFlagName } = render(
+    const { waitUntilConfigured, queryByFlagName, debug } = render(
       <TestDisabledComponent />
     );
 
