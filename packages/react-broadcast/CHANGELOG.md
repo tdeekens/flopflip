@@ -1,5 +1,17 @@
 # @flopflip/react-broadcast
 
+## 12.3.1
+
+### Patch Changes
+
+- [#1648](https://github.com/tdeekens/flopflip/pull/1648) [`75872793`](https://github.com/tdeekens/flopflip/commit/7587279337e5828ff1ba6b047725a165ad5df2db) Thanks [@renovate](https://github.com/apps/renovate)! - Update all dependencies
+
+* [#1656](https://github.com/tdeekens/flopflip/pull/1656) [`9f4fd476`](https://github.com/tdeekens/flopflip/commit/9f4fd4768a1a7c5739d73d080b791c1275b028da) Thanks [@tdeekens](https://github.com/tdeekens)! - Fix flag updating loosing previous flags
+
+* Updated dependencies [[`75872793`](https://github.com/tdeekens/flopflip/commit/7587279337e5828ff1ba6b047725a165ad5df2db), [`9f4fd476`](https://github.com/tdeekens/flopflip/commit/9f4fd4768a1a7c5739d73d080b791c1275b028da)]:
+  - @flopflip/react@11.3.1
+  - @flopflip/types@4.1.25
+
 ## 12.3.0
 
 ### Minor Changes
