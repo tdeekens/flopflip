@@ -59,6 +59,7 @@ const useFlagsState = ({
           nextState = {
             ...prevState,
             flags: {
+              ...prevState.flags,
               [flagsChange.id]: {
                 ...prevState.flags[flagsChange.id],
                 ...flagsChange.flags,
@@ -71,15 +72,18 @@ const useFlagsState = ({
 
         nextState = {
           ...prevState,
-          flags: Object.fromEntries(
-            adapterIdentifiers.map((adapterInterfaceIdentifier) => [
-              adapterInterfaceIdentifier,
-              {
-                ...prevState.flags[adapterInterfaceIdentifier],
-                ...flagsChange.flags,
-              },
-            ])
-          ),
+          flags: {
+            ...prevState.flags,
+            ...Object.fromEntries(
+              adapterIdentifiers.map((adapterInterfaceIdentifier) => [
+                adapterInterfaceIdentifier,
+                {
+                  ...prevState.flags[adapterInterfaceIdentifier],
+                  ...flagsChange.flags,
+                },
+              ])
+            ),
+          },
         };
 
         return nextState;
