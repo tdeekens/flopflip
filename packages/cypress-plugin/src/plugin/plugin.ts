@@ -9,6 +9,7 @@ type TCypressPluginAddCommandOptions = {
 
 // eslint-disable-next-line @typescript-eslint/no-namespace
 declare namespace Cypress {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface Chainable {
     updateFeatureFlags: (flags: TFlags) => Chainable;
   }

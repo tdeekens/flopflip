@@ -155,6 +155,7 @@ export type TFlagsUpdateFunction = (
   options?: TUpdateFlagsOptions
 ) => void;
 
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface TAdapterInterface<Args extends TAdapterArgs> {
   // Identifiers are used to uniquely identify an interface when performing a condition check.
   id: TAdapterIdentifiers;
@@ -182,6 +183,8 @@ export interface TAdapterInterface<Args extends TAdapterArgs> {
   updateFlags: TFlagsUpdateFunction;
   getUser?: () => TUser | undefined;
 }
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface TLaunchDarklyAdapterInterface
   extends TAdapterInterface<TLaunchDarklyAdapterArgs> {
   id: typeof adapterIdentifiers.launchdarkly;
@@ -204,6 +207,8 @@ export interface TLaunchDarklyAdapterInterface
   unsubscribe: () => void;
   subscribe: () => void;
 }
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface TLocalStorageAdapterInterface
   extends TAdapterInterface<TLocalStorageAdapterArgs> {
   id: typeof adapterIdentifiers.localstorage;
@@ -222,6 +227,8 @@ export interface TLocalStorageAdapterInterface
   unsubscribe: () => void;
   subscribe: () => void;
 }
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface TGraphQlAdapterInterface
   extends TAdapterInterface<TGraphQlAdapterArgs> {
   id: typeof adapterIdentifiers.graphql;
@@ -240,6 +247,8 @@ export interface TGraphQlAdapterInterface
   unsubscribe: () => void;
   subscribe: () => void;
 }
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface THttpAdapterInterface
   extends TAdapterInterface<THttpAdapterArgs> {
   id: typeof adapterIdentifiers.http;
@@ -258,6 +267,8 @@ export interface THttpAdapterInterface
   unsubscribe: () => void;
   subscribe: () => void;
 }
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface TMemoryAdapterInterface
   extends TAdapterInterface<TMemoryAdapterArgs> {
   id: typeof adapterIdentifiers.memory;
@@ -278,6 +289,8 @@ export interface TMemoryAdapterInterface
   unsubscribe: () => void;
   subscribe: () => void;
 }
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface TCombinedAdapterInterface
   extends TAdapterInterface<TCombinedAdapterArgs> {
   id: typeof adapterIdentifiers.combined;
@@ -302,6 +315,8 @@ export interface TCombinedAdapterInterface
   unsubscribe: () => void;
   subscribe: () => void;
 }
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface TSplitioAdapterInterface
   extends TAdapterInterface<TSplitioAdapterArgs> {
   id: typeof adapterIdentifiers.splitio;
@@ -426,6 +441,7 @@ export type TFlopflipGlobal = {
   [adapterIdentifiers.combined]?: TCombinedAdapterGlobal;
 };
 declare global {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface Window {
     __flopflip__: TFlopflipGlobal;
   }
