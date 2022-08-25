@@ -48,6 +48,7 @@ const useFlagsState = ({
 }: TUseFlagsStateOptions): [TFlagsState, TFlagUpdateFunction] => {
   const flags = useSyncExternalStore(
     store.subscribe,
+    () => store.getSnapshot().flags,
     () => store.getSnapshot().flags
   );
 
@@ -101,6 +102,7 @@ const useStatusState = (): [
 ] => {
   const status = useSyncExternalStore(
     store.subscribe,
+    () => store.getSnapshot().status,
     () => store.getSnapshot().status
   );
 
