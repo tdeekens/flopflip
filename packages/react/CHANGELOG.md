@@ -1,5 +1,11 @@
 # @flopflip/react
 
+## 11.3.2
+
+### Patch Changes
+
+- [#1659](https://github.com/tdeekens/flopflip/pull/1659) [`942765f1`](https://github.com/tdeekens/flopflip/commit/942765f1b75de81d6bf2d38e251bd5678e7e3d5a) Thanks [@vcapretz](https://github.com/vcapretz)! - Fix to add `getServerSnapshot` to be able to use flopflip in Next.js
+
 ## 11.3.1
 
 ### Patch Changes
