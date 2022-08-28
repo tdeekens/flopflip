@@ -7,8 +7,8 @@ import {
 } from '@flopflip/types';
 
 import { STATE_SLICE } from '../../store/constants';
-import { TState } from '../../types';
-import { TUpdateStatusAction } from './types';
+import type { TState } from '../../types';
+import type { TUpdateStatusAction } from './types';
 
 // Actions
 export const UPDATE_STATUS = '@flopflip/status/update';

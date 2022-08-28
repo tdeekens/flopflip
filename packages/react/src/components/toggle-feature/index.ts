@@ -1,4 +1,4 @@
-import { Props } from './toggle-feature';
+import type { Props } from './toggle-feature';
 
 export type TProps = Props;
 

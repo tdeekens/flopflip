@@ -6,11 +6,11 @@ import {
   type TFlagsContext,
   type TFlagVariation,
 } from '@flopflip/types';
-import { Reducer } from 'redux';
+import type { Reducer } from 'redux';
 
 import { STATE_SLICE } from '../../store/constants';
-import { TState } from '../../types';
-import { TUpdateFlagsAction } from './types';
+import type { TState } from '../../types';
+import type { TUpdateFlagsAction } from './types';
 
 // Actions
 export const UPDATE_FLAGS = '@flopflip/flags/update';

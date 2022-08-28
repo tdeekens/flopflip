@@ -1,4 +1,4 @@
-import { TProps as ToggleFeatureProps } from './components/toggle-feature';
+import type { TProps as ToggleFeatureProps } from './components/toggle-feature';
 
 export type TToggleFeatureProps = ToggleFeatureProps;
 
