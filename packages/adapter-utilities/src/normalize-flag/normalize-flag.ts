@@ -11,7 +11,7 @@ const normalizeFlag = (
 ): TFlag => [
   camelCase(flagName),
   // Multi variate flags contain a string or `null` - `false` seems more natural.
-  // eslint-disable-next-line no-eq-null, eqeqeq
+  // eslint-disable-next-line no-eq-null, eqeqeq, @typescript-eslint/prefer-nullish-coalescing
   flagValue == null ? false : flagValue,
 ];
 

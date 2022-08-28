@@ -1,10 +1,10 @@
-import { TFlagsContext } from '@flopflip/types';
+import type { TFlagsContext } from '@flopflip/types';
 import { combineReducers } from 'redux';
 
 import { createFlagsReducer, flagsReducer } from './flags';
-import { TUpdateFlagsAction } from './flags/types';
+import type { TUpdateFlagsAction } from './flags/types';
 import { statusReducer } from './status';
-import { TUpdateStatusAction } from './status/types';
+import type { TUpdateStatusAction } from './status/types';
 
 type Actions = TUpdateFlagsAction & TUpdateStatusAction;
 

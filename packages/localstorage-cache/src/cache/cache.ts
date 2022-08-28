@@ -1,4 +1,4 @@
-import { TCache, TCacheOptions } from '@flopflip/types';
+import type { TCache, TCacheOptions } from '@flopflip/types';
 
 const createCache = (options: TCacheOptions) => {
   const cache: TCache = {
