@@ -83,7 +83,7 @@
     "eslint-config-xo-react": "0.27.0",
     "eslint-config-xo-typescript": "0.53.0",
     "eslint-formatter-pretty": "4.1.0",
-    "eslint-plugin-jest": "26.8.7",
+    "eslint-plugin-jest": "26.9.0",
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-react": "7.31.1",
     "eslint-plugin-react-hooks": "4.6.0",
