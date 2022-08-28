@@ -19,8 +19,8 @@
     "@flopflip/memory-adapter": "3.0.31",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.3.0",
-    "jest-runner-eslint": "1.0.1",
-    "jest-watch-typeahead": "2.0.0",
+    "jest-runner-eslint": "1.1.0",
+    "jest-watch-typeahead": "2.1.1",
     "jest-watch-yarn-workspaces": "1.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
