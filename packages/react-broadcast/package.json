@@ -29,7 +29,7 @@
   "devDependencies": {
     "@flopflip/memory-adapter": "3.0.31",
     "@flopflip/test-utils": "*",
-    "@types/react": "18.0.17",
+    "@types/react": "18.0.18",
     "@types/react-dom": "18.0.6",
     "react": "18.2.0",
     "react-dom": "18.2.0"
