@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 4.1.26
+
+### Patch Changes
+
+- [#1661](https://github.com/tdeekens/flopflip/pull/1661) [`360a61c5`](https://github.com/tdeekens/flopflip/commit/360a61c57b0b7deb3d63538e04615b83e446e923) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update all dependencies
+
 ## 4.1.25
 
 ### Patch Changes
