@@ -3267,13 +3267,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:*, @types/jest@npm:28.1.8":
+"@types/jest@npm:*":
   version: 28.1.8
   resolution: "@types/jest@npm:28.1.8"
   dependencies:
     expect: ^28.0.0
     pretty-format: ^28.0.0
   checksum: d4cd36158a3ae1d4b42cc48a77c95de74bc56b84cf81e09af3ee0399c34f4a7da8ab9e787570f10004bd642f9e781b0033c37327fbbf4a8e4b6e37e8ee3693a7
+  languageName: node
+  linkType: hard
+
+"@types/jest@npm:29.0.0":
+  version: 29.0.0
+  resolution: "@types/jest@npm:29.0.0"
+  dependencies:
+    expect: ^29.0.0
+    pretty-format: ^29.0.0
+  checksum: b20c4b38c7c963862d82c21c0a1ae2b96015afb1511c835da43e8fd53659ca884f8103a2159be2ce74d2888472a1ac93d20d08ec1ac0970385cbb74c46d47585
   languageName: node
   linkType: hard
 
@@ -6295,7 +6305,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expect@npm:^29.0.1":
+"expect@npm:^29.0.0, expect@npm:^29.0.1":
   version: 29.0.1
   resolution: "expect@npm:29.0.1"
   dependencies:
@@ -6613,7 +6623,7 @@ __metadata:
     "@commitlint/config-conventional": 17.1.0
     "@manypkg/cli": 0.19.1
     "@preconstruct/cli": 2.2.1
-    "@types/jest": 28.1.8
+    "@types/jest": 29.0.0
     "@types/lodash": 4.14.184
     "@types/node": 18.0.3
     "@typescript-eslint/eslint-plugin": 5.35.1
@@ -10522,7 +10532,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pretty-format@npm:^29.0.1":
+"pretty-format@npm:^29.0.0, pretty-format@npm:^29.0.1":
   version: 29.0.1
   resolution: "pretty-format@npm:29.0.1"
   dependencies:
