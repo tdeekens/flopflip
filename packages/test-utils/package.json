@@ -15,12 +15,12 @@
     "types"
   ],
   "dependencies": {
-    "@babel/runtime": "7.18.9",
+    "@babel/runtime": "7.19.0",
     "@flopflip/memory-adapter": "3.0.32",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
     "jest-runner-eslint": "1.1.0",
-    "jest-watch-typeahead": "2.1.1",
+    "jest-watch-typeahead": "2.2.0",
     "jest-watch-yarn-workspaces": "1.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
