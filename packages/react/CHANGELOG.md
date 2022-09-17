@@ -1,5 +1,14 @@
 # @flopflip/react
 
+## 11.3.4
+
+### Patch Changes
+
+- [#1677](https://github.com/tdeekens/flopflip/pull/1677) [`12a30d04`](https://github.com/tdeekens/flopflip/commit/12a30d04b64296171ac5de7fac964d98cf86452a) Thanks [@tdeekens](https://github.com/tdeekens)! - Update dependencies
+
+- Updated dependencies [[`12a30d04`](https://github.com/tdeekens/flopflip/commit/12a30d04b64296171ac5de7fac964d98cf86452a)]:
+  - @flopflip/types@4.1.27
+
 ## 11.3.3
 
 ### Patch Changes

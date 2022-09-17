@@ -1,5 +1,15 @@
 # @flopflip/memory-adapter
 
+## 3.0.33
+
+### Patch Changes
+
+- [#1677](https://github.com/tdeekens/flopflip/pull/1677) [`12a30d04`](https://github.com/tdeekens/flopflip/commit/12a30d04b64296171ac5de7fac964d98cf86452a) Thanks [@tdeekens](https://github.com/tdeekens)! - Update dependencies
+
+- Updated dependencies [[`12a30d04`](https://github.com/tdeekens/flopflip/commit/12a30d04b64296171ac5de7fac964d98cf86452a)]:
+  - @flopflip/adapter-utilities@1.0.32
+  - @flopflip/types@4.1.27
+
 ## 3.0.32
 
 ### Patch Changes
