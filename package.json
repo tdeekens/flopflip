@@ -23,7 +23,8 @@
     "changeset": "changeset",
     "changeset:version-and-format": "changeset version && prettier --write --parser json '**/package.json' && YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn install",
     "prepublishOnly": "pinst --disable",
-    "postpublish": "pinst --enable"
+    "postpublish": "pinst --enable",
+    "clean": "manypkg exec rm -rf dist"
   },
   "author": "Tobias Deekens <nerd@tdeekens.name>",
   "engines": {

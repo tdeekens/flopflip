@@ -110,6 +110,7 @@ const useAdapterStateRef = (): TUseAdapterStateRefReturn => {
 };
 
 type TUsePendingAdapterArgsRefReturn = [
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   React.MutableRefObject<TAdapterArgs | undefined>,
   (nextReconfiguration: TAdapterReconfiguration) => void,
   () => TAdapterArgs
@@ -117,7 +118,8 @@ type TUsePendingAdapterArgsRefReturn = [
 const usePendingAdapterArgsRef = (
   appliedAdapterArgs: TAdapterArgs
 ): TUsePendingAdapterArgsRefReturn => {
-  const pendingAdapterArgsRef = useRef<TAdapterArgs | undefined>(null);
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
+  const pendingAdapterArgsRef = useRef<TAdapterArgs | undefined>(undefined);
 
   const setPendingAdapterArgs = useCallback(
     (nextReconfiguration: TAdapterReconfiguration): void => {

@@ -37,13 +37,7 @@ function TestProvider(props: TProps) {
     props.status
   );
   const flagsContextValue = createIntialFlagsContext(
-<<<<<<< HEAD
-    // @ts-expect-error Can not remember. Sorry to myself.
-||||||| parent of e49d8a66 (refactor: to use vitest over jest)
-    // @ts-expect-error
-=======
     // @ts-expect-error I can't remember ;)
->>>>>>> e49d8a66 (refactor: to use vitest over jest)
     props.adapterIdentifiers,
     props.flags
   );

@@ -1,5 +1,4 @@
-/// <reference types="vitest" />
-/// <reference types="vite/client" />
+/** @type {import('vite').UserConfig} */
 
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
