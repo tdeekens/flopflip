@@ -28,7 +28,7 @@
     "types"
   ],
   "dependencies": {
-    "launchdarkly-js-client-sdk": "2.22.1"
+    "launchdarkly-js-client-sdk": "2.23.0"
   },
   "devDependencies": {
     "typescript": "4.8.4"
