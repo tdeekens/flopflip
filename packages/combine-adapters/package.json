@@ -29,7 +29,7 @@
     "client"
   ],
   "dependencies": {
-    "@babel/runtime": "7.19.0",
+    "@babel/runtime": "7.19.4",
     "@flopflip/adapter-utilities": "1.0.32",
     "@flopflip/types": "4.1.27",
     "mitt": "3.0.0",
