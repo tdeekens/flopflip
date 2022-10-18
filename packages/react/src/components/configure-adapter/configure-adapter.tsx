@@ -410,19 +410,8 @@ const usePendingAdapterArgsEffect = ({
   );
 
   useEffect(() => {
-    /**
-     * NOTE:
-     *   The component might receive `adapterArgs` from `ReconfigureFlopflip`
-     *   before it managed to configure. If that occurs the next `adapterArgs`
-     *   passed in will overwrite what `ReconfigureFlopflip` passed in before
-     *   yielding a loss in configuration.
-     *
-     *   However, when the adapter is configured we want the component to
-     *   act in a controlled manner so that overwriting will occur when the
-     *   passed `adapterArgs` change.
-     */
     reconfigureOrQueue(adapterArgs, {
-      shouldOverwrite: getIsAdapterConfigured(),
+      shouldOverwrite: false,
     });
   }, [adapterArgs, getIsAdapterConfigured, reconfigureOrQueue]);
 
