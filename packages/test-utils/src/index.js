@@ -60,7 +60,7 @@ const changeFlagVariation = (flagName, flagVariation) =>
     target: { value: JSON.stringify({ flagName, flagVariation }) },
   });
 
-const defaultRender = (ui, { ...rtlOptions }) => {
+const defaultRender = (ui, { ...rtlOptions } = {}) => {
   // eslint-disable-next-line testing-library/render-result-naming-convention
   const rendered = render(ui, {
     ...rtlOptions,

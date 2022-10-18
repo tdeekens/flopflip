@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires
+const { defaults: tsjPreset } = require('ts-jest/presets');
+
 module.exports = {
   displayName: 'test',
   preset: 'ts-jest/presets/js-with-babel',
@@ -7,10 +10,8 @@ module.exports = {
   // Fix is based on this comment:
   // - https://github.com/kulshekhar/ts-jest/issues/805#issuecomment-456055213
   // - https://github.com/kulshekhar/ts-jest/blob/master/docs/user/config/isolatedModules.md
-  globals: {
-    'ts-jest': {
-      isolatedModules: true,
-    },
+  transform: {
+    ...tsjPreset.transform,
   },
   setupFiles: [
     'raf/polyfill',
