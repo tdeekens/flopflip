@@ -28,6 +28,13 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'yarn'
 
+      - name: Storing release version for changeset
+        id: release_version
+        run: echo "::set-output name=value::$(./scripts/print_release_version.sh)"
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
+
       - name: Install dependencies
         run: yarn install --immutable
 
@@ -54,5 +61,17 @@ jobs:
           version: yarn changeset:version-and-format
           title: 'ci(changesets): version packages'
           commit: 'ci(changesets): version packages'
+          createGithubReleases: aggregate
+          githubReleaseName: v${{ steps.release_version.outputs.value }}
+          githubTagName: v${{ steps.release_version.outputs.value }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Publishing canary releases to npm registry
+        if: steps.changesets.outputs.published != 'true' && github.ref == 'refs/heads/main'
+        run: |
+          git checkout main
+          yarn changeset version --snapshot canary
+          yarn changeset publish --tag canary
+        env:
+          GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
