@@ -1,5 +1,16 @@
 # @flopflip/react
 
+## 11.3.5
+
+### Patch Changes
+
+- [#1688](https://github.com/tdeekens/flopflip/pull/1688) [`37c71527`](https://github.com/tdeekens/flopflip/commit/37c71527404f3b7389662c4488bf9390c51e2d1a) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependencies
+
+- [#1691](https://github.com/tdeekens/flopflip/pull/1691) [`b71e5f72`](https://github.com/tdeekens/flopflip/commit/b71e5f724a5b70b6473d98d5f9fdf5b9fd6532be) Thanks [@tdeekens](https://github.com/tdeekens)! - Fix to not overwrite internally set adapter args
+
+- Updated dependencies [[`37c71527`](https://github.com/tdeekens/flopflip/commit/37c71527404f3b7389662c4488bf9390c51e2d1a)]:
+  - @flopflip/types@4.1.28
+
 ## 11.3.4
 
 ### Patch Changes
