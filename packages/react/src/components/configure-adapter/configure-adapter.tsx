@@ -410,9 +410,11 @@ const usePendingAdapterArgsEffect = ({
   );
 
   useEffect(() => {
-    reconfigureOrQueue(adapterArgs, {
-      shouldOverwrite: false,
-    });
+    if (!getIsAdapterConfigured()) {
+      reconfigureOrQueue(adapterArgs, {
+        shouldOverwrite: false,
+      });
+    }
   }, [adapterArgs, getIsAdapterConfigured, reconfigureOrQueue]);
 
   return [reconfigureOrQueue];

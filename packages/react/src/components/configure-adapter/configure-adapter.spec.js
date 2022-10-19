@@ -284,6 +284,7 @@ describe('when adapter args change before adapter was configured', () => {
         <AdapterStatus />
       </ConfigureAdapter>
     );
+
     expect(adapter.configure).toHaveBeenCalledWith(
       { ...mergedRenderProps.adapterArgs, ...nextAdapterArgs },
       expect.anything()
