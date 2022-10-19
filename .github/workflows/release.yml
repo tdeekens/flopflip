@@ -30,7 +30,7 @@ jobs:
 
       - name: Storing release version for changeset
         id: release_version
-        run: echo "::set-output name=value::$(./scripts/print_release_version.sh)"
+        run: echo "::set-output name=value::$(./scripts/echo-release-version.sh)"
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
