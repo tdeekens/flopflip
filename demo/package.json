@@ -12,11 +12,11 @@
     "lodash.flowright": "3.5.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-redux": "8.0.4",
+    "react-redux": "8.0.5",
     "react-scripts": "5.0.1",
     "redux": "4.2.0",
     "redux-logger": "3.0.6",
-    "redux-thunk": "2.4.1"
+    "redux-thunk": "2.4.2"
   },
   "scripts": {
     "start": "react-scripts start",
