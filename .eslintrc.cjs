@@ -33,6 +33,7 @@ module.exports = {
     '@typescript-eslint/no-unsafe-call': 0,
     '@typescript-eslint/no-unsafe-return': 0,
     '@typescript-eslint/naming-convention': 0,
+    '@typescript-eslint/member-ordering': 0,
   },
   globals: { VERSION: true, Cypress: true, cy: true },
   overrides: [

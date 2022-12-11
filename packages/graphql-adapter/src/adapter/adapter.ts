@@ -52,13 +52,13 @@ const intialAdapterState: TAdapterStatus & TGraphQlAdapterState = {
 };
 
 class GraphQlAdapter implements TGraphQlAdapterInterface {
+  id: typeof adapterIdentifiers.graphql;
+
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
 
   #adapterState: TAdapterStatus & TGraphQlAdapterState;
   #defaultPollingInteralMs = 1000 * 60;
-
-  id: typeof adapterIdentifiers.graphql;
 
   constructor() {
     this.id = adapterIdentifiers.graphql;

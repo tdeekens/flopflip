@@ -52,13 +52,12 @@ const intialAdapterState: TAdapterStatus & THttpAdapterState = {
 };
 
 class HttpAdapter implements THttpAdapterInterface {
+  id: typeof adapterIdentifiers.http;
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
 
   #adapterState: TAdapterStatus & THttpAdapterState;
   #defaultPollingInteralMs = 1000 * 60;
-
-  id: typeof adapterIdentifiers.http;
 
   constructor() {
     this.id = adapterIdentifiers.http;

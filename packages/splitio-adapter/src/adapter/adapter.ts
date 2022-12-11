@@ -61,8 +61,9 @@ const normalizeFlag = (
 const createAnonymousUserKey = () => Math.random().toString(36).substring(2);
 
 class SplitioAdapter implements TSplitioAdapterInterface {
-  #adapterState: TAdapterStatus & TSplitIOAdapterState;
   id: typeof adapterIdentifiers.splitio;
+
+  #adapterState: TAdapterStatus & TSplitIOAdapterState;
 
   constructor() {
     this.#adapterState = {

@@ -34,14 +34,14 @@ const intialAdapterState: TAdapterStatus & CombinedAdaptersState = {
 };
 
 class CombineAdapters implements TCombinedAdapterInterface {
+  id: typeof adapterIdentifiers.combined;
+  effectIds?: TAdapterIdentifiers[];
+
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
 
   #adapters: TAdapter[] = [];
   #adapterState: TAdapterStatus & CombinedAdaptersState;
-
-  id: typeof adapterIdentifiers.combined;
-  effectIds?: TAdapterIdentifiers[];
 
   constructor() {
     this.#adapterState = {

@@ -50,13 +50,13 @@ const intialAdapterState: TAdapterStatus & TLocalStorageAdapterState = {
 const STORAGE_SLICE = '@flopflip';
 
 class LocalStorageAdapter implements TLocalStorageAdapterInterface {
+  id: typeof adapterIdentifiers.localstorage;
+  #adapterState: TAdapterStatus & TLocalStorageAdapterState;
+
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
 
   #cache = createCache({ prefix: STORAGE_SLICE });
-  #adapterState: TAdapterStatus & TLocalStorageAdapterState;
-
-  id: typeof adapterIdentifiers.localstorage;
 
   constructor() {
     this.#adapterState = {

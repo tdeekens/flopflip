@@ -47,8 +47,9 @@ type TLaunchDarklyAdapterState = {
 };
 
 class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
-  #adapterState: TAdapterStatus & TLaunchDarklyAdapterState;
   id: typeof adapterIdentifiers.launchdarkly;
+
+  #adapterState: TAdapterStatus & TLaunchDarklyAdapterState;
 
   constructor() {
     this.#adapterState = {

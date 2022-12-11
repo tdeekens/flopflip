@@ -42,12 +42,12 @@ const intialAdapterState: TAdapterStatus & TMemoryAdapterState = {
 };
 
 class MemoryAdapter implements TMemoryAdapterInterface {
+  id: typeof adapterIdentifiers.memory;
+
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
 
   #adapterState: TAdapterStatus & TMemoryAdapterState;
-
-  id: typeof adapterIdentifiers.memory;
 
   constructor() {
     this.#adapterState = {
