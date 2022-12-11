@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [18.x, 19.x]
 
     steps:
       - name: Checkout
@@ -39,13 +39,13 @@ jobs:
         run: yarn build
 
       - name: Test
-        if: startsWith(matrix.node-version, '16')
+        if: startsWith(matrix.node-version, '18')
         run: yarn test:ci
         env:
           CI: true
 
       - name: Test (with coverage)
-        if: startsWith(matrix.node-version, '18')
+        if: startsWith(matrix.node-version, '19')
         run: yarn test:ci:coverage
         env:
           CI: true
