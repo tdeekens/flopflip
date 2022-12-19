@@ -29,7 +29,7 @@
     "@babel/runtime": "7.20.6",
     "@flopflip/adapter-utilities": "12.3.8",
     "@flopflip/types": "12.3.8",
-    "@splitsoftware/splitio": "10.22.2",
+    "@splitsoftware/splitio": "10.22.3",
     "lodash": "4.17.21",
     "ts-deepmerge": "5.0.0"
   },
