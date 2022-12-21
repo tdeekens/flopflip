@@ -30,8 +30,7 @@ jobs:
 
       - name: Storing release version for changeset
         id: release_version
-        run: |
-          echo "VERSION=$(./scripts/echo-release-version.sh)" >> $GITHUB_OUTPUT
+        run: ./scripts/echo-release-version.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Ouptut version
