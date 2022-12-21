@@ -32,10 +32,10 @@ jobs:
         id: release_version
         run: |
           echo "VERSION=$(./scripts/echo-release-version.sh)" >> $GITHUB_OUTPUT
-          - name: Get color
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      - run: echo "The version is ${{ steps.release_version.outputs.VERSION }}"
+      - name: Ouptut version
+        run: echo "The version is ${{ steps.release_version.outputs.VERSION }}"
 
       - name: Install dependencies
         run: yarn install --immutable
