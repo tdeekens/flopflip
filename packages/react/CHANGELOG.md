@@ -1,5 +1,12 @@
 # @flopflip/react
 
+## 12.4.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/types@12.4.0
+
 ## 12.3.8
 
 ### Patch Changes
