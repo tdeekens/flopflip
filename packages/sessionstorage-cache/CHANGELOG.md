@@ -1,5 +1,14 @@
 # @flopflip/sessionstorage-cache
 
+## 12.5.3
+
+### Patch Changes
+
+- [`ac088ccf`](https://github.com/tdeekens/flopflip/commit/ac088ccf55c443fe7c920792539e70f92d7ae49e) Thanks [@tdeekens](https://github.com/tdeekens)! - Release for GitHub release
+
+- Updated dependencies [[`ac088ccf`](https://github.com/tdeekens/flopflip/commit/ac088ccf55c443fe7c920792539e70f92d7ae49e)]:
+  - @flopflip/types@12.5.3
+
 ## 12.5.2
 
 ### Patch Changes
