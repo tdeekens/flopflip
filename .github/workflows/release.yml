@@ -30,7 +30,7 @@ jobs:
 
       - name: Storing release version for changeset
         id: release_version
-        run: echo "::set-output name=value::$(./scripts/echo-release-version.sh)"
+        run: echo "VALUE=$(./scripts/echo_release_version.sh)" >> $GITHUB_OUTPUT
         shell: bash
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
@@ -63,8 +63,8 @@ jobs:
           title: 'ci(changesets): version packages'
           commit: 'ci(changesets): version packages'
           createGithubReleases: aggregate
-          githubReleaseName: v${{ steps.release_version.outputs.value }}
-          githubTagName: v${{ steps.release_version.outputs.value }}
+          githubReleaseName: v${{ steps.release_version.outputs.VALUE }}
+          githubTagName: v${{ steps.release_version.outputs.VALUE }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
