@@ -28,6 +28,9 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'yarn'
 
+      - name: Install dependencies
+        run: yarn install --immutable
+
       - name: Storing release version for changeset
         id: release_version
         run: ./scripts/echo-release-version.sh
@@ -35,9 +38,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - name: Ouptut version
         run: echo "The version is ${{ steps.release_version.outputs.VERSION }}"
-
-      - name: Install dependencies
-        run: yarn install --immutable
 
       - name: Creating .npmrc
         run: |
