@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/combine-adapters",
-  "version": "12.5.0",
+  "version": "12.5.1",
   "description": "An adapter which combines other adapters for flipflop",
   "main": "dist/flopflip-combine-adapters.cjs.js",
   "module": "dist/flopflip-combine-adapters.esm.js",
@@ -30,14 +30,14 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.20.6",
-    "@flopflip/adapter-utilities": "12.5.0",
-    "@flopflip/types": "12.5.0",
+    "@flopflip/adapter-utilities": "12.5.1",
+    "@flopflip/types": "12.5.1",
     "mitt": "3.0.0",
     "tiny-warning": "1.0.3"
   },
   "devDependencies": {
-    "@flopflip/localstorage-adapter": "12.5.0",
-    "@flopflip/memory-adapter": "12.5.0",
+    "@flopflip/localstorage-adapter": "12.5.1",
+    "@flopflip/memory-adapter": "12.5.1",
     "globalthis": "1.0.3"
   }
 }
