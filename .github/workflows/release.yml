@@ -31,7 +31,7 @@ jobs:
       - name: Storing release version for changeset
         id: release_version
         run: |
-          echo "VERSION=$(./scripts/echo_release_version.sh)" >> $GITHUB_OUTPUT
+          echo "VERSION=$(./scripts/echo-release-version.sh)" >> $GITHUB_OUTPUT
           echo "Release version will be $VERSION"
         shell: bash
         env:
