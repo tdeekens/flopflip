@@ -1,5 +1,17 @@
 # @flopflip/graphql-adapter
 
+## 12.5.2
+
+### Patch Changes
+
+- [`63f2a54a`](https://github.com/tdeekens/flopflip/commit/63f2a54a4a62d43e49ead767ae2fe3a1cb56063e) Thanks [@tdeekens](https://github.com/tdeekens)! - Another attempt to fix the GitHub release tab
+
+- Updated dependencies [[`63f2a54a`](https://github.com/tdeekens/flopflip/commit/63f2a54a4a62d43e49ead767ae2fe3a1cb56063e)]:
+  - @flopflip/adapter-utilities@12.5.2
+  - @flopflip/localstorage-cache@12.5.2
+  - @flopflip/sessionstorage-cache@12.5.2
+  - @flopflip/types@12.5.2
+
 ## 12.5.1
 
 ### Patch Changes
