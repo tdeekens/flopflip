@@ -1,5 +1,16 @@
 # @flopflip/cypress-plugin
 
+## 12.4.0
+
+### Minor Changes
+
+- [#1711](https://github.com/tdeekens/flopflip/pull/1711) [`e06a95d8`](https://github.com/tdeekens/flopflip/commit/e06a95d8e1485dc0bbddbf2663f5a9dfc16eaebf) Thanks [@renovate](https://github.com/apps/renovate)! - Add support for Cypress v12
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/types@12.4.0
+
 ## 12.3.8
 
 ### Patch Changes
