@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 12.5.1
+
+### Patch Changes
+
+- [`eac3ea46`](https://github.com/tdeekens/flopflip/commit/eac3ea467ff2a41ecbf07d9f5f1a08b088b91c16) Thanks [@tdeekens](https://github.com/tdeekens)! - Fix release issue with updating release on GitHub
+
 ## 12.5.0
 
 ### Minor Changes
