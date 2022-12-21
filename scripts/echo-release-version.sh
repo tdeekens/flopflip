@@ -4,7 +4,7 @@ set -e
 
 echo "Running 'changeset version' to know the new release version"
 
-yarn changeset version &>/dev/null
+yarn changeset version
 
 echo "Running 'git status' to see the worktree changes"
 
@@ -17,7 +17,7 @@ echo "Version for release is $release_version"
 
 echo "Running 'git reset' and exporting to GITHUB_OUTPUT"
 
-git reset --hard &>/dev/null
+git reset --hard
 
 echo "VERSION=$release_version" >> $GITHUB_OUTPUT
 
