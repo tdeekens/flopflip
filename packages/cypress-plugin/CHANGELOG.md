@@ -1,5 +1,16 @@
 # @flopflip/cypress-plugin
 
+## 12.5.0
+
+### Minor Changes
+
+- [#1717](https://github.com/tdeekens/flopflip/pull/1717) [`c268ee5f`](https://github.com/tdeekens/flopflip/commit/c268ee5f66b318d044e385958247a7141d0f8cce) Thanks [@tdeekens](https://github.com/tdeekens)! - Versiong and release issue on path version.
+
+### Patch Changes
+
+- Updated dependencies [[`c268ee5f`](https://github.com/tdeekens/flopflip/commit/c268ee5f66b318d044e385958247a7141d0f8cce)]:
+  - @flopflip/types@12.5.0
+
 ## 12.4.0
 
 ### Minor Changes
