@@ -35,7 +35,7 @@ jobs:
           echo "Release version will be $VERSION"
         shell: bash
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Install dependencies
         run: yarn install --immutable
