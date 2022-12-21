@@ -2031,12 +2031,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flopflip/adapter-utilities@12.4.0, @flopflip/adapter-utilities@workspace:packages/adapter-utilities":
+"@flopflip/adapter-utilities@12.5.0, @flopflip/adapter-utilities@workspace:packages/adapter-utilities":
   version: 0.0.0-use.local
   resolution: "@flopflip/adapter-utilities@workspace:packages/adapter-utilities"
   dependencies:
     "@babel/runtime": 7.20.6
-    "@flopflip/types": 12.4.0
+    "@flopflip/types": 12.5.0
     globalthis: 1.0.3
     lodash: 4.17.21
     typescript: 4.9.4
@@ -2050,10 +2050,10 @@ __metadata:
   resolution: "@flopflip/combine-adapters@workspace:packages/combine-adapters"
   dependencies:
     "@babel/runtime": 7.20.6
-    "@flopflip/adapter-utilities": 12.4.0
-    "@flopflip/localstorage-adapter": 12.4.0
-    "@flopflip/memory-adapter": 12.4.0
-    "@flopflip/types": 12.4.0
+    "@flopflip/adapter-utilities": 12.5.0
+    "@flopflip/localstorage-adapter": 12.5.0
+    "@flopflip/memory-adapter": 12.5.0
+    "@flopflip/types": 12.5.0
     globalthis: 1.0.3
     mitt: 3.0.0
     tiny-warning: 1.0.3
@@ -2064,7 +2064,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flopflip/cypress-plugin@workspace:packages/cypress-plugin"
   dependencies:
-    "@flopflip/types": 12.4.0
+    "@flopflip/types": 12.5.0
     cypress: 12.2.0
   peerDependencies:
     cypress: 4.x || 5.x || 6.x || 7.x || 8.x || 9.x || 10.x || 11.x || 12.x
@@ -2076,10 +2076,10 @@ __metadata:
   resolution: "@flopflip/graphql-adapter@workspace:packages/graphql-adapter"
   dependencies:
     "@babel/runtime": 7.20.6
-    "@flopflip/adapter-utilities": 12.4.0
-    "@flopflip/localstorage-cache": 12.4.0
-    "@flopflip/sessionstorage-cache": 12.4.0
-    "@flopflip/types": 12.4.0
+    "@flopflip/adapter-utilities": 12.5.0
+    "@flopflip/localstorage-cache": 12.5.0
+    "@flopflip/sessionstorage-cache": 12.5.0
+    "@flopflip/types": 12.5.0
     globalthis: 1.0.3
     lodash: 4.17.21
     mitt: 3.0.0
@@ -2092,10 +2092,10 @@ __metadata:
   resolution: "@flopflip/http-adapter@workspace:packages/http-adapter"
   dependencies:
     "@babel/runtime": 7.20.6
-    "@flopflip/adapter-utilities": 12.4.0
-    "@flopflip/localstorage-cache": 12.4.0
-    "@flopflip/sessionstorage-cache": 12.4.0
-    "@flopflip/types": 12.4.0
+    "@flopflip/adapter-utilities": 12.5.0
+    "@flopflip/localstorage-cache": 12.5.0
+    "@flopflip/sessionstorage-cache": 12.5.0
+    "@flopflip/types": 12.5.0
     globalthis: 1.0.3
     lodash: 4.17.21
     mitt: 3.0.0
@@ -2108,8 +2108,8 @@ __metadata:
   resolution: "@flopflip/launchdarkly-adapter@workspace:packages/launchdarkly-adapter"
   dependencies:
     "@babel/runtime": 7.20.6
-    "@flopflip/adapter-utilities": 12.4.0
-    "@flopflip/types": 12.4.0
+    "@flopflip/adapter-utilities": 12.5.0
+    "@flopflip/types": 12.5.0
     debounce-fn: 4.0.0
     globalthis: 1.0.3
     launchdarkly-js-client-sdk: 2.24.2
@@ -2120,14 +2120,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flopflip/localstorage-adapter@12.4.0, @flopflip/localstorage-adapter@workspace:packages/localstorage-adapter":
+"@flopflip/localstorage-adapter@12.5.0, @flopflip/localstorage-adapter@workspace:packages/localstorage-adapter":
   version: 0.0.0-use.local
   resolution: "@flopflip/localstorage-adapter@workspace:packages/localstorage-adapter"
   dependencies:
     "@babel/runtime": 7.20.6
-    "@flopflip/adapter-utilities": 12.4.0
-    "@flopflip/localstorage-cache": 12.4.0
-    "@flopflip/types": 12.4.0
+    "@flopflip/adapter-utilities": 12.5.0
+    "@flopflip/localstorage-cache": 12.5.0
+    "@flopflip/types": 12.5.0
     globalthis: 1.0.3
     lodash: 4.17.21
     mitt: 3.0.0
@@ -2135,21 +2135,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flopflip/localstorage-cache@12.4.0, @flopflip/localstorage-cache@workspace:packages/localstorage-cache":
+"@flopflip/localstorage-cache@12.5.0, @flopflip/localstorage-cache@workspace:packages/localstorage-cache":
   version: 0.0.0-use.local
   resolution: "@flopflip/localstorage-cache@workspace:packages/localstorage-cache"
   dependencies:
-    "@flopflip/types": 12.4.0
+    "@flopflip/types": 12.5.0
   languageName: unknown
   linkType: soft
 
-"@flopflip/memory-adapter@12.4.0, @flopflip/memory-adapter@workspace:packages/memory-adapter":
+"@flopflip/memory-adapter@12.5.0, @flopflip/memory-adapter@workspace:packages/memory-adapter":
   version: 0.0.0-use.local
   resolution: "@flopflip/memory-adapter@workspace:packages/memory-adapter"
   dependencies:
     "@babel/runtime": 7.20.6
-    "@flopflip/adapter-utilities": 12.4.0
-    "@flopflip/types": 12.4.0
+    "@flopflip/adapter-utilities": 12.5.0
+    "@flopflip/types": 12.5.0
     globalthis: 1.0.3
     mitt: 3.0.0
     tiny-warning: 1.0.3
@@ -2161,10 +2161,10 @@ __metadata:
   resolution: "@flopflip/react-broadcast@workspace:packages/react-broadcast"
   dependencies:
     "@babel/runtime": 7.20.6
-    "@flopflip/memory-adapter": 12.4.0
-    "@flopflip/react": ^12.4.0
+    "@flopflip/memory-adapter": 12.5.0
+    "@flopflip/react": ^12.5.0
     "@flopflip/test-utils": "*"
-    "@flopflip/types": 12.4.0
+    "@flopflip/types": 12.5.0
     "@types/react": 18.0.26
     "@types/react-dom": 18.0.9
     react: 18.2.0
@@ -2181,10 +2181,10 @@ __metadata:
   resolution: "@flopflip/react-redux@workspace:packages/react-redux"
   dependencies:
     "@babel/runtime": 7.20.6
-    "@flopflip/memory-adapter": 12.4.0
-    "@flopflip/react": ^12.4.0
+    "@flopflip/memory-adapter": 12.5.0
+    "@flopflip/react": ^12.5.0
     "@flopflip/test-utils": "*"
-    "@flopflip/types": 12.4.0
+    "@flopflip/types": 12.5.0
     "@types/react-redux": 7.1.24
     react: 18.2.0
     react-dom: 18.2.0
@@ -2198,13 +2198,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flopflip/react@^12.4.0, @flopflip/react@workspace:packages/react":
+"@flopflip/react@^12.5.0, @flopflip/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@flopflip/react@workspace:packages/react"
   dependencies:
     "@babel/runtime": 7.20.6
     "@flopflip/test-utils": "*"
-    "@flopflip/types": 12.4.0
+    "@flopflip/types": 12.5.0
     "@types/react": 18.0.26
     "@types/react-dom": 18.0.9
     "@types/react-is": 17.0.3
@@ -2220,11 +2220,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flopflip/sessionstorage-cache@12.4.0, @flopflip/sessionstorage-cache@workspace:packages/sessionstorage-cache":
+"@flopflip/sessionstorage-cache@12.5.0, @flopflip/sessionstorage-cache@workspace:packages/sessionstorage-cache":
   version: 0.0.0-use.local
   resolution: "@flopflip/sessionstorage-cache@workspace:packages/sessionstorage-cache"
   dependencies:
-    "@flopflip/types": 12.4.0
+    "@flopflip/types": 12.5.0
   languageName: unknown
   linkType: soft
 
@@ -2233,8 +2233,8 @@ __metadata:
   resolution: "@flopflip/splitio-adapter@workspace:packages/splitio-adapter"
   dependencies:
     "@babel/runtime": 7.20.6
-    "@flopflip/adapter-utilities": 12.4.0
-    "@flopflip/types": 12.4.0
+    "@flopflip/adapter-utilities": 12.5.0
+    "@flopflip/types": 12.5.0
     "@splitsoftware/splitio": 10.22.3
     globalthis: 1.0.3
     lodash: 4.17.21
@@ -2247,7 +2247,7 @@ __metadata:
   resolution: "@flopflip/test-utils@workspace:packages/test-utils"
   dependencies:
     "@babel/runtime": 7.20.6
-    "@flopflip/memory-adapter": 12.4.0
+    "@flopflip/memory-adapter": 12.5.0
     "@testing-library/jest-dom": 5.16.5
     "@testing-library/react": 13.4.0
     jest-runner-eslint: 1.1.0
@@ -2258,7 +2258,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flopflip/types@12.4.0, @flopflip/types@workspace:packages/types":
+"@flopflip/types@12.5.0, @flopflip/types@workspace:packages/types":
   version: 0.0.0-use.local
   resolution: "@flopflip/types@workspace:packages/types"
   dependencies:
