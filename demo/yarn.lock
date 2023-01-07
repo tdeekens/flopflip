@@ -1709,107 +1709,107 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flopflip/adapter-utilities@npm:12.3.8":
-  version: 12.3.8
-  resolution: "@flopflip/adapter-utilities@npm:12.3.8"
+"@flopflip/adapter-utilities@npm:12.5.4":
+  version: 12.5.4
+  resolution: "@flopflip/adapter-utilities@npm:12.5.4"
   dependencies:
     "@babel/runtime": 7.20.6
-    "@flopflip/types": 12.3.8
+    "@flopflip/types": 12.5.4
     globalthis: 1.0.3
     lodash: 4.17.21
   peerDependencies:
     typescript: 4.x
-  checksum: 13750da6d44b68535c2417a933a44d1802e297ce7597c850dc4ce848ff48b0f2b5264235ade96cfd378e4bfaa8cbf53a7b9adaa2c81828b2ececcc48d0e794c5
+  checksum: eccd02d6afda01712979667b63826745818953df1ad0c8f6c52b12d2ed0d43d856fe3da980abcae06d10d1238a99f346a7b2e093972a1d6df67538427340e2fe
   languageName: node
   linkType: hard
 
-"@flopflip/launchdarkly-adapter@npm:12.3.8":
-  version: 12.3.8
-  resolution: "@flopflip/launchdarkly-adapter@npm:12.3.8"
+"@flopflip/launchdarkly-adapter@npm:12.5.4":
+  version: 12.5.4
+  resolution: "@flopflip/launchdarkly-adapter@npm:12.5.4"
   dependencies:
     "@babel/runtime": 7.20.6
-    "@flopflip/adapter-utilities": 12.3.8
-    "@flopflip/types": 12.3.8
+    "@flopflip/adapter-utilities": 12.5.4
+    "@flopflip/types": 12.5.4
     debounce-fn: 4.0.0
     launchdarkly-js-client-sdk: 2.24.2
     lodash: 4.17.21
     mitt: 3.0.0
     tiny-warning: 1.0.3
     ts-deepmerge: 5.0.0
-  checksum: 787ab3cde64faa7ff9a628a8e994e5d2d9d7b4f945636b1252ae66bd4105916a5d6fce6a99b5b00d8f0e642599810814e6df765e83d7a6857d60b0a54c5347a9
+  checksum: 988a1ae35c3df88cc02e82ca592275e04f6eeae283f00d1292b523a03e5de0fcd44c3b64742be0130c2a2d79159ed39d3f989ce21472dc53ac9741fd4d44e115
   languageName: node
   linkType: hard
 
-"@flopflip/localstorage-adapter@npm:12.3.8":
-  version: 12.3.8
-  resolution: "@flopflip/localstorage-adapter@npm:12.3.8"
+"@flopflip/localstorage-adapter@npm:12.5.4":
+  version: 12.5.4
+  resolution: "@flopflip/localstorage-adapter@npm:12.5.4"
   dependencies:
     "@babel/runtime": 7.20.6
-    "@flopflip/adapter-utilities": 12.3.8
-    "@flopflip/localstorage-cache": 12.3.8
-    "@flopflip/types": 12.3.8
+    "@flopflip/adapter-utilities": 12.5.4
+    "@flopflip/localstorage-cache": 12.5.4
+    "@flopflip/types": 12.5.4
     lodash: 4.17.21
     mitt: 3.0.0
     tiny-warning: 1.0.3
-  checksum: 0e0e93561978936c87d12d25bee316c2b80a4d9ae6001e87da8fa614df412c7debd3ff19c79a7e9b95f9b874bab619cf1b1afad30da42b9c8a286de00721672f
+  checksum: fdc05ad6b7b972a8c993b84fcab48021aa3fc503572ac8ea5c370760900269e9cde8393b34eef0c046373b6701b4599be49be87b57b79724f41d3232a39d3415
   languageName: node
   linkType: hard
 
-"@flopflip/localstorage-cache@npm:12.3.8":
-  version: 12.3.8
-  resolution: "@flopflip/localstorage-cache@npm:12.3.8"
+"@flopflip/localstorage-cache@npm:12.5.4":
+  version: 12.5.4
+  resolution: "@flopflip/localstorage-cache@npm:12.5.4"
   dependencies:
-    "@flopflip/types": 12.3.8
-  checksum: 7b6edeabfe3955f53e4b8558d27cd978aacaec080aa53f2a5ac371d20bb53a374b9d3d1e9cf27cfbd2c6727dcee1e97b3629d44d3e877071b68a24c8030ab5ac
+    "@flopflip/types": 12.5.4
+  checksum: c4bac21d4ebeb3d497415fdfce22f3820ea5f0c7539859c7c6eae715735bb212773f76c9eee2fd97d67f83888213d777566731bc0893b02b6b02f68136ac82b9
   languageName: node
   linkType: hard
 
-"@flopflip/memory-adapter@npm:12.3.8":
-  version: 12.3.8
-  resolution: "@flopflip/memory-adapter@npm:12.3.8"
+"@flopflip/memory-adapter@npm:12.5.4":
+  version: 12.5.4
+  resolution: "@flopflip/memory-adapter@npm:12.5.4"
   dependencies:
     "@babel/runtime": 7.20.6
-    "@flopflip/adapter-utilities": 12.3.8
-    "@flopflip/types": 12.3.8
+    "@flopflip/adapter-utilities": 12.5.4
+    "@flopflip/types": 12.5.4
     mitt: 3.0.0
     tiny-warning: 1.0.3
-  checksum: 64fdf5a1b9f610de83f717d285a88adc288d56bb35061ced63c46a5fa3c81e54f13c366c6ac63bcac1b3f8b9d5f456bc745a4bbe9523b720d9b9d1f9610bf171
+  checksum: d8a50878ec8cfd63f5438ccff33cc6cf3453de1198ccbe911582919ef031595d979d8d5e62aa4c959f6b2ea8e6aaa6ab7309363e05e23bcacdb6b46a42d57881
   languageName: node
   linkType: hard
 
-"@flopflip/react-broadcast@npm:12.3.8":
-  version: 12.3.8
-  resolution: "@flopflip/react-broadcast@npm:12.3.8"
+"@flopflip/react-broadcast@npm:12.5.4":
+  version: 12.5.4
+  resolution: "@flopflip/react-broadcast@npm:12.5.4"
   dependencies:
     "@babel/runtime": 7.20.6
-    "@flopflip/react": ^12.3.8
-    "@flopflip/types": 12.3.8
+    "@flopflip/react": ^12.5.4
+    "@flopflip/types": 12.5.4
     use-sync-external-store: 1.2.0
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0.0
     react-dom: ^16.8 || ^17.0 || ^18.0.0
-  checksum: 4840ce3729216bcfd5a5148a7ab1bd8e1dc5b73adc1624ade60605435bdc355d2900f4cb18d78ff6eea3074c633dcd88a57a1af86f7d06ef1d02077d28471b7a
+  checksum: a7e2e17b2145066f2a677c659fcb858d0ad80364dd3a615df1e30cca3e5952fb2448064b115daa487759346c1837897c50d21ab42a7bdf9141f7f925076c2e73
   languageName: node
   linkType: hard
 
-"@flopflip/react-redux@npm:12.3.8":
-  version: 12.3.8
-  resolution: "@flopflip/react-redux@npm:12.3.8"
+"@flopflip/react-redux@npm:12.5.4":
+  version: 12.5.4
+  resolution: "@flopflip/react-redux@npm:12.5.4"
   dependencies:
     "@babel/runtime": 7.20.6
-    "@flopflip/react": ^12.3.8
-    "@flopflip/types": 12.3.8
+    "@flopflip/react": ^12.5.4
+    "@flopflip/types": 12.5.4
     "@types/react-redux": 7.1.24
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0.0
     react-dom: ^16.8 || ^17.0 || ^18.0.0
     react-redux: ^7.0.0 || ^8.0.0
     redux: ^4.0
-  checksum: d0ff5aaee9409d49179db814b8b5f19ed89136ed69fedfbb5cfebbabf06794713701ffb63f4cdb32ca10aa4f8b0d6e8bf0cb41ea02a6fef22260f7393254ff7a
+  checksum: 70602bc19fe834d82d9cee538e69b449bf5a328e0b4a785aaec6d1fc234625f174cc5a19d3120c94294a76ae8fc1608054f324580d4d9fd001687efbee59d764
   languageName: node
   linkType: hard
 
-"@flopflip/react@npm:^12.3.8":
+"@flopflip/react@npm:^12.5.4":
   version: 12.5.4
   resolution: "@flopflip/react@npm:12.5.4"
   dependencies:
@@ -1824,17 +1824,6 @@ __metadata:
     react: ^16.8 || ^17.0 || ^18.0.0
     react-dom: ^16.8 || ^17.0 || ^18.0.0
   checksum: 9a0c9a62fb91c0b0fcf34bae6bd0d15ddcde2f8adf7fddc9fc0691f75ced23c800dca42c450dc9b2a5dcce9524cb63869b6edfad9d9f5def89b9c98b8cf7049d
-  languageName: node
-  linkType: hard
-
-"@flopflip/types@npm:12.3.8":
-  version: 12.3.8
-  resolution: "@flopflip/types@npm:12.3.8"
-  dependencies:
-    launchdarkly-js-client-sdk: 2.24.2
-  peerDependencies:
-    typescript: 4.x
-  checksum: 6d386e3e62c084ae115aa87ad81710ad983d4c3bfcef23bcfb8c39c38380d5a8c27146a64cebe62dd16ffef46d02fdd962fd6d4fe31ce5b9a0555e65990e7341
   languageName: node
   linkType: hard
 
@@ -5033,11 +5022,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "demo@workspace:."
   dependencies:
-    "@flopflip/launchdarkly-adapter": 12.3.8
-    "@flopflip/localstorage-adapter": 12.3.8
-    "@flopflip/memory-adapter": 12.3.8
-    "@flopflip/react-broadcast": 12.3.8
-    "@flopflip/react-redux": 12.3.8
+    "@flopflip/launchdarkly-adapter": 12.5.4
+    "@flopflip/localstorage-adapter": 12.5.4
+    "@flopflip/memory-adapter": 12.5.4
+    "@flopflip/react-broadcast": 12.5.4
+    "@flopflip/react-redux": 12.5.4
     classnames: 2.3.2
     lodash.flowright: 3.5.0
     react: 18.2.0
