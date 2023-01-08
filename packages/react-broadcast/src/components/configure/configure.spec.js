@@ -58,7 +58,7 @@ describe('when enabling feature', () => {
 
     await waitUntilConfigured();
 
-    await act(() => {
+    act(() => {
       adapter.updateFlags({
         [testFlagName]: true,
       });
@@ -73,7 +73,7 @@ describe('when enabling feature', () => {
 
     await waitUntilConfigured();
 
-    await act(() => {
+    act(() => {
       adapter.updateFlags({
         [testFlagName]: true,
       });
