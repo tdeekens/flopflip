@@ -248,7 +248,10 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
 
         if (cachedFlags) {
           this.#adapterState.flags = cachedFlags;
-          this.#adapterState.emitter.emit('flagsStateChange', cachedFlags);
+          this.#adapterState.emitter.emit(
+            'flagsStateChange',
+            cachedFlags as TFlags
+          );
         }
       }
 
