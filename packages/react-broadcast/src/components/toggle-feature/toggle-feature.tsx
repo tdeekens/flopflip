@@ -1,6 +1,6 @@
 import {
   ToggleFeature as SharedToggleFeature,
-  TToggleFeatureProps,
+  type TToggleFeatureProps,
 } from '@flopflip/react';
 import { type TFlagName, type TFlagVariation } from '@flopflip/types';
 import React from 'react';

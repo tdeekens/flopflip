@@ -1,11 +1,11 @@
 import { AdapterContext, createAdapterContext } from '@flopflip/react';
 import {
+  AdapterConfigurationStatus,
+  AdapterSubscriptionStatus,
   type TAdapterIdentifiers,
   type TAdapterStatus,
   type TFlags,
   type TReconfigureAdapter,
-  AdapterConfigurationStatus,
-  AdapterSubscriptionStatus,
 } from '@flopflip/types';
 import React from 'react';
 

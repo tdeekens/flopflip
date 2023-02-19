@@ -4,6 +4,11 @@ import {
   normalizeFlags,
 } from '@flopflip/adapter-utilities';
 import {
+  AdapterConfigurationStatus,
+  adapterIdentifiers,
+  AdapterInitializationStatus,
+  AdapterSubscriptionStatus,
+  cacheIdentifiers,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
@@ -16,11 +21,6 @@ import {
   type THttpAdapterArgs,
   type THttpAdapterInterface,
   type TUser,
-  AdapterConfigurationStatus,
-  adapterIdentifiers,
-  AdapterInitializationStatus,
-  AdapterSubscriptionStatus,
-  cacheIdentifiers,
 } from '@flopflip/types';
 import isEqual from 'lodash/isEqual';
 import mitt, { type Emitter } from 'mitt';

@@ -1,4 +1,6 @@
 import {
+  AdapterConfigurationStatus,
+  AdapterInitializationStatus,
   type TAdapter,
   type TAdapterArgs,
   type TAdapterConfiguration,
@@ -9,8 +11,6 @@ import {
   type TAdapterStatus,
   type TConfigureAdapterChildren,
   type TFlags,
-  AdapterConfigurationStatus,
-  AdapterInitializationStatus,
 } from '@flopflip/types';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import warning from 'tiny-warning';

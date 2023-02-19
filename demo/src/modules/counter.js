@@ -9,6 +9,7 @@ const initialState = {
   isDecrementing: false,
 };
 
+// eslint-disable-next-line @typescript-eslint/default-param-last
 export default (state = initialState, action) => {
   switch (action.type) {
     case INCREMENT_REQUESTED:

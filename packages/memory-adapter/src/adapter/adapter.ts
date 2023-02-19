@@ -1,5 +1,9 @@
 import { exposeGlobally, normalizeFlag } from '@flopflip/adapter-utilities';
 import {
+  AdapterConfigurationStatus,
+  adapterIdentifiers,
+  AdapterInitializationStatus,
+  AdapterSubscriptionStatus,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
@@ -11,10 +15,6 @@ import {
   type TMemoryAdapterInterface,
   type TUpdateFlagsOptions,
   type TUser,
-  AdapterConfigurationStatus,
-  adapterIdentifiers,
-  AdapterInitializationStatus,
-  AdapterSubscriptionStatus,
 } from '@flopflip/types';
 import mitt, { type Emitter } from 'mitt';
 import warning from 'tiny-warning';
