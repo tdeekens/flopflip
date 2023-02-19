@@ -2116,7 +2116,7 @@ __metadata:
     "@flopflip/types": 12.5.5
     debounce-fn: 4.0.0
     globalthis: 1.0.3
-    launchdarkly-js-client-sdk: 2.24.2
+    launchdarkly-js-client-sdk: 3.1.1
     lodash: 4.17.21
     mitt: 3.0.0
     tiny-warning: 1.0.3
@@ -2266,7 +2266,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@flopflip/types@workspace:packages/types"
   dependencies:
-    launchdarkly-js-client-sdk: 2.24.2
+    launchdarkly-js-client-sdk: 3.1.1
     typescript: 4.9.5
   peerDependencies:
     typescript: 4.x
@@ -8698,24 +8698,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"launchdarkly-js-client-sdk@npm:2.24.2":
-  version: 2.24.2
-  resolution: "launchdarkly-js-client-sdk@npm:2.24.2"
+"launchdarkly-js-client-sdk@npm:3.1.1":
+  version: 3.1.1
+  resolution: "launchdarkly-js-client-sdk@npm:3.1.1"
   dependencies:
     escape-string-regexp: ^4.0.0
-    launchdarkly-js-sdk-common: 3.8.2
-  checksum: c12564e4ee49358692dc4bde3a841119f734d4454e0e9c0e12c415f910539d969a3e3bb89b29cb52596f3c0c8a56d29cc9e38352b95748c1519bc506455e18bc
+    launchdarkly-js-sdk-common: 5.0.2
+  checksum: 1ce7746edd10892c48d24885b24355fb3c892194264375ffd56b8770ae382b30bbbb6f1571c601e939dc976906db2a378a6ce8befbfbe1327fc6bebf96f1d007
   languageName: node
   linkType: hard
 
-"launchdarkly-js-sdk-common@npm:3.8.2":
-  version: 3.8.2
-  resolution: "launchdarkly-js-sdk-common@npm:3.8.2"
+"launchdarkly-js-sdk-common@npm:5.0.2":
+  version: 5.0.2
+  resolution: "launchdarkly-js-sdk-common@npm:5.0.2"
   dependencies:
     base64-js: ^1.3.0
     fast-deep-equal: ^2.0.1
-    uuid: ^3.3.2
-  checksum: ad8725c4fc578caf5bbaf594d3c8eb73b9ba834b00c2c1315d168745a062af2b8a412158d890be55bb93990fc09a2c69481d0d24676e9fedfe535a6edde51425
+    uuid: ^8.0.0
+  checksum: f83d4ba04a83e9139bc6278c45eda1ca85eb765742458d9d40d7b0fb8e884758bd152dc3429cd716493f4ae23e8f8e496d7848d559be5facbb1062ccd673c0d8
   languageName: node
   linkType: hard
 
@@ -12165,15 +12165,6 @@ __metadata:
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
   checksum: 474acf1146cb2701fe3b074892217553dfcf9a031280919ba1b8d651a068c9b15d863b7303cb15bd00a862b498e6cf4ad7b4a08fb134edd5a6f7641681cb54a2
-  languageName: node
-  linkType: hard
-
-"uuid@npm:^3.3.2":
-  version: 3.4.0
-  resolution: "uuid@npm:3.4.0"
-  bin:
-    uuid: ./bin/uuid
-  checksum: 58de2feed61c59060b40f8203c0e4ed7fd6f99d42534a499f1741218a1dd0c129f4aa1de797bcf822c8ea5da7e4137aa3673431a96dae729047f7aca7b27866f
   languageName: node
   linkType: hard
 
