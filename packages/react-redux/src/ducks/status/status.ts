@@ -1,9 +1,9 @@
 import { selectAdapterConfigurationStatus } from '@flopflip/react';
 import {
-  type TAdapterStatus,
-  type TAdapterStatusChange,
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
+  type TAdapterStatus,
+  type TAdapterStatusChange,
 } from '@flopflip/types';
 
 import { STATE_SLICE } from '../../store/constants';

@@ -1,6 +1,10 @@
 /* global SplitIO */
 import { exposeGlobally, normalizeFlags } from '@flopflip/adapter-utilities';
 import {
+  AdapterConfigurationStatus,
+  adapterIdentifiers,
+  AdapterInitializationStatus,
+  AdapterSubscriptionStatus,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TFlag,
@@ -10,10 +14,6 @@ import {
   type TSplitioAdapterArgs,
   type TSplitioAdapterInterface,
   type TUser,
-  AdapterConfigurationStatus,
-  adapterIdentifiers,
-  AdapterInitializationStatus,
-  AdapterSubscriptionStatus,
 } from '@flopflip/types';
 import { SplitFactory } from '@splitsoftware/splitio';
 import camelCase from 'lodash/camelCase';

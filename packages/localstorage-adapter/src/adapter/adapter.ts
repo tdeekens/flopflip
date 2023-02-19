@@ -5,6 +5,10 @@ import {
 } from '@flopflip/adapter-utilities';
 import createCache from '@flopflip/localstorage-cache';
 import {
+  AdapterConfigurationStatus,
+  adapterIdentifiers,
+  AdapterInitializationStatus,
+  AdapterSubscriptionStatus,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
@@ -15,10 +19,6 @@ import {
   type TLocalStorageAdapterInterface,
   type TUpdateFlagsOptions,
   type TUser,
-  AdapterConfigurationStatus,
-  adapterIdentifiers,
-  AdapterInitializationStatus,
-  AdapterSubscriptionStatus,
 } from '@flopflip/types';
 import isEqual from 'lodash/isEqual';
 import mitt, { type Emitter } from 'mitt';

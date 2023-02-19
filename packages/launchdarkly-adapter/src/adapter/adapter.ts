@@ -5,6 +5,10 @@ import {
   normalizeFlags,
 } from '@flopflip/adapter-utilities';
 import {
+  AdapterConfigurationStatus,
+  adapterIdentifiers,
+  AdapterInitializationStatus,
+  AdapterSubscriptionStatus,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
@@ -16,16 +20,12 @@ import {
   type TLaunchDarklyAdapterInterface,
   type TUpdateFlagsOptions,
   type TUser,
-  AdapterConfigurationStatus,
-  adapterIdentifiers,
-  AdapterInitializationStatus,
-  AdapterSubscriptionStatus,
 } from '@flopflip/types';
 import debounce from 'debounce-fn';
 import {
+  initialize as initializeLaunchDarklyClient,
   type LDClient,
   type LDUser,
-  initialize as initializeLaunchDarklyClient,
 } from 'launchdarkly-js-client-sdk';
 import isEqual from 'lodash/isEqual';
 import mitt, { type Emitter } from 'mitt';
