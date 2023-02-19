@@ -1,5 +1,7 @@
 import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
 import {
+  AdapterConfigurationStatus,
+  AdapterSubscriptionStatus,
   type TAdapter,
   type TAdapterIdentifiers,
   type TAdapterStatus,
@@ -8,8 +10,6 @@ import {
   type TConfigureAdapterProps,
   type TFlags,
   type TFlagsChange,
-  AdapterConfigurationStatus,
-  AdapterSubscriptionStatus,
 } from '@flopflip/types';
 import React, { useCallback, useMemo } from 'react';
 import { useSyncExternalStore } from 'use-sync-external-store/shim';
