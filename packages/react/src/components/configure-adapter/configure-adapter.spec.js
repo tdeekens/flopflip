@@ -351,7 +351,7 @@ describe('when adapter args change after adapter was configured', () => {
 
     // The adapter should reconfigure multiple times overwriting
     // prior configurations
-    expect(adapter.reconfigure).toHaveBeenCalledTimes(1);
+    expect(adapter.reconfigure).toHaveBeenCalledTimes(2);
   });
 });
 
