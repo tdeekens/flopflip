@@ -2269,7 +2269,7 @@ __metadata:
     "@flopflip/memory-adapter": 12.5.6
     "@testing-library/jest-dom": 5.16.5
     "@testing-library/react": 14.0.0
-    jest-runner-eslint: 1.1.0
+    jest-runner-eslint: 1.2.0
     jest-watch-typeahead: 2.2.2
     jest-watch-yarn-workspaces: 1.1.0
     react: 18.2.0
@@ -3274,10 +3274,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:18.14.2":
+"@types/node@npm:*":
   version: 18.14.2
   resolution: "@types/node@npm:18.14.2"
   checksum: 53c07e721f6ae33de71306f6a0b75dae6066a4f55bd5484c93bd59ff25f0c5f004ceafeef509a4d0cb9e24a247efc34d50489bcc1b05a53ecc68e2fc088e65cb
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:18.14.6":
+  version: 18.14.6
+  resolution: "@types/node@npm:18.14.6"
+  checksum: 2f88f482cabadc6dbddd627a1674239e68c3c9beab56eb4ae2309fb96fd17fc3a509d99b0309bafe13b58529574f49ecf3a583f2ebe2896dd32fe4be436dc96e
   languageName: node
   linkType: hard
 
@@ -6425,7 +6432,7 @@ __metadata:
     "@preconstruct/cli": 2.3.0
     "@types/jest": 29.4.0
     "@types/lodash": 4.14.191
-    "@types/node": 18.14.2
+    "@types/node": 18.14.6
     "@typescript-eslint/eslint-plugin": 5.54.0
     "@typescript-eslint/parser": 5.54.0
     babel-eslint: 10.1.0
@@ -8051,9 +8058,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-runner-eslint@npm:1.1.0":
-  version: 1.1.0
-  resolution: "jest-runner-eslint@npm:1.1.0"
+"jest-runner-eslint@npm:1.2.0":
+  version: 1.2.0
+  resolution: "jest-runner-eslint@npm:1.2.0"
   dependencies:
     chalk: ^3.0.0
     cosmiconfig: ^6.0.0
@@ -8062,7 +8069,7 @@ __metadata:
   peerDependencies:
     eslint: ^6 || ^7 || ^8
     jest: ^25.1 || ^26 || ^27 || ^28 || ^29
-  checksum: c4b2da40666c8cc1a7e9dbd1ac73a74bc2af6c3dd598b3a0bac224cffac6fb677d31082f14987982b3fb06b5c41602dbe31fe6beb107da4b3c1c17eb324d4907
+  checksum: 3efd27d6bae26075c97319fad26b183662b1ce3adff2e929324152d04d84eb1675031c76332c729b4cfa5a6e818e766dc6fddf9f941d45ba212fa57e44048803
   languageName: node
   linkType: hard
 
