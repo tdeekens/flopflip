@@ -33,8 +33,8 @@ You will have to replace `user` with `context`
 The `context` itself which previously was a `user` of for instance
 
 ```js
-user: {
-  key: props.user?.id,
+const user = {
+  key: user?.id,
   custom: {
      foo: 'bar'
   }
@@ -44,9 +44,9 @@ user: {
 should now be
 
 ```js
-context: {
+const context = {
   kind: 'user',
-  key: props.user?.id,
+  key: user?.id,
   foo: 'bar'
 },
 ```
