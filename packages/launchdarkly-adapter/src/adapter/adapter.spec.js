@@ -10,8 +10,9 @@ jest.mock('launchdarkly-js-client-sdk', () => ({
 jest.mock('tiny-warning');
 
 const clientSideId = '123-abc';
-const userWithKey = { key: 'foo-user' };
+const userWithKey = { kind: 'user', key: 'foo-user' };
 const userWithoutKey = {
+  kind: 'user',
   group: 'foo-group',
 };
 const flags = { 'some-flag-1': true, 'some-flag-2': false };
@@ -52,26 +53,27 @@ describe('when configuring', () => {
 
   describe('when reconfiguring before configured', () => {
     it('should reject reconfiguration', () =>
-      expect(adapter.reconfigure({ user: userWithKey })).rejects.toEqual(
+      expect(adapter.reconfigure({ context: userWithKey })).rejects.toEqual(
         expect.any(Error)
       ));
   });
 
   describe('when changing user context before configured', () => {
-    const updatedUserProps = {
+    const updatedClientProps = {
+      kind: 'user',
       bar: 'baz',
       foo: 'far',
     };
-    let updatingOfUserContext;
+    let updatingOfClientContext;
 
     beforeEach(() => {
-      updatingOfUserContext = adapter.updateUserContext(updatedUserProps);
+      updatingOfClientContext = adapter.updateClientContext(updatedClientProps);
 
-      return updatingOfUserContext.catch(() => null);
+      return updatingOfClientContext.catch(() => null);
     });
 
-    it('should reject `updateUserContext`', () =>
-      expect(updatingOfUserContext).rejects.toEqual(expect.any(Error)));
+    it('should reject `updateClientContext`', () =>
+      expect(updatingOfClientContext).rejects.toEqual(expect.any(Error)));
   });
 
   describe('with user key', () => {
@@ -79,7 +81,7 @@ describe('when configuring', () => {
       adapter.configure(
         {
           sdk: { clientSideId },
-          user: userWithKey,
+          context: userWithKey,
         },
         {
           onStatusStateChange,
@@ -110,7 +112,7 @@ describe('when configuring', () => {
       adapter.configure(
         {
           sdk: { clientSideId },
-          user: userWithoutKey,
+          context: userWithoutKey,
         },
         {
           onStatusStateChange,
@@ -158,7 +160,7 @@ describe('when configuring', () => {
       configurationResult = await adapter.configure(
         {
           sdk: { clientSideId },
-          user: userWithKey,
+          context: userWithKey,
         },
         {
           onStatusStateChange,
@@ -252,7 +254,7 @@ describe('when configuring', () => {
             adapter.configure(
               {
                 sdk: { clientSideId },
-                user: userWithKey,
+                context: userWithKey,
                 throwOnInitializationFailure: true,
               },
               {
@@ -283,7 +285,7 @@ describe('when configuring', () => {
             adapter.configure(
               {
                 sdk: { clientSideId },
-                user: userWithKey,
+                context: userWithKey,
                 throwOnInitializationFailure: false,
               },
               {
@@ -313,7 +315,7 @@ describe('when configuring', () => {
           return adapter.configure(
             {
               sdk: { clientSideId },
-              user: userWithKey,
+              context: userWithKey,
               flags,
             },
             {
@@ -370,7 +372,7 @@ describe('when configuring', () => {
             {
               sdk: { clientSideId },
               subscribeToFlagChanges: false,
-              user: userWithKey,
+              context: userWithKey,
             },
             {
               onStatusStateChange,
@@ -411,7 +413,7 @@ describe('when configuring', () => {
             {
               sdk: { clientSideId },
               flagsUpdateDelayMs,
-              user: userWithKey,
+              context: userWithKey,
             },
             {
               onStatusStateChange,
@@ -478,7 +480,7 @@ describe('when configuring', () => {
     });
 
     describe('when reconfiguring', () => {
-      const nextUser = { key: 'bar-user' };
+      const nextContext = { kind: 'user', key: 'bar-user' };
       let client;
 
       beforeEach(async () => {
@@ -491,7 +493,7 @@ describe('when configuring', () => {
         await adapter.configure(
           {
             sdk: { clientSideId },
-            user: userWithKey,
+            context: userWithKey,
           },
           {
             onStatusStateChange,
@@ -499,7 +501,9 @@ describe('when configuring', () => {
           }
         );
 
-        configurationResult = await adapter.reconfigure({ user: nextUser });
+        configurationResult = await adapter.reconfigure({
+          context: nextContext,
+        });
       });
 
       it('should resolve to a successful initialization status', () => {
@@ -510,9 +514,9 @@ describe('when configuring', () => {
         );
       });
 
-      it('should invoke `identify` on the `client` with the `user`', () => {
+      it('should invoke `identify` on the `client` with the `context`', () => {
         expect(client.identify).toHaveBeenCalledWith(
-          expect.objectContaining(nextUser)
+          expect.objectContaining(nextContext)
         );
       });
       it('should invoke `identify` on the `client` marking the user as not anonymous', () => {
@@ -522,8 +526,8 @@ describe('when configuring', () => {
       });
     });
 
-    describe('when updating user context', () => {
-      const updatedUserProps = {
+    describe('when updating client context', () => {
+      const updatedClientProps = {
         bar: 'baz',
         foo: 'far',
       };
@@ -538,7 +542,7 @@ describe('when configuring', () => {
         return adapter.configure(
           {
             sdk: { clientSideId },
-            user: userWithKey,
+            context: userWithKey,
           },
           {
             onStatusStateChange,
@@ -548,11 +552,11 @@ describe('when configuring', () => {
       });
 
       describe('with partial prop update', () => {
-        beforeEach(() => adapter.updateUserContext(updatedUserProps));
+        beforeEach(() => adapter.updateClientContext(updatedClientProps));
 
         it('should invoke `identify` on the client with the updated props', () => {
           expect(client.identify).toHaveBeenCalledWith(
-            expect.objectContaining(updatedUserProps)
+            expect.objectContaining(updatedClientProps)
           );
         });
 
@@ -565,9 +569,9 @@ describe('when configuring', () => {
 
       describe('with full prop update', () => {
         beforeEach(() =>
-          adapter.updateUserContext({
+          adapter.updateClientContext({
             ...userWithKey,
-            ...updatedUserProps,
+            ...updatedClientProps,
           })
         );
 
@@ -575,7 +579,7 @@ describe('when configuring', () => {
           expect(client.identify).toHaveBeenCalledWith(
             expect.objectContaining({
               ...userWithKey,
-              ...updatedUserProps,
+              ...updatedClientProps,
             })
           );
         });
