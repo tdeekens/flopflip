@@ -19,13 +19,12 @@ import {
   type TLaunchDarklyAdapterArgs,
   type TLaunchDarklyAdapterInterface,
   type TUpdateFlagsOptions,
-  type TUser,
 } from '@flopflip/types';
 import debounce from 'debounce-fn';
 import {
   initialize as initializeLaunchDarklyClient,
   type LDClient,
-  type LDUser,
+  type LDContext,
 } from 'launchdarkly-js-client-sdk';
 import isEqual from 'lodash/isEqual';
 import mitt, { type Emitter } from 'mitt';
@@ -36,9 +35,9 @@ type TEmitterEvents = {
   flagsStateChange: TFlags;
   statusStateChange: Partial<TAdapterStatus>;
 };
-type TLaunchDarklyUser = TUser<LDUser>;
+
 type TLaunchDarklyAdapterState = {
-  user?: TLaunchDarklyUser;
+  context?: LDContext;
   client?: LDClient;
   flags: TFlags;
   emitter: Emitter<TEmitterEvents>;
@@ -55,7 +54,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     this.#adapterState = {
       subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
       configurationStatus: AdapterConfigurationStatus.Unconfigured,
-      user: undefined,
+      context: undefined,
       client: undefined,
       flags: {},
       // Typings are incorrect and state that mitt is not callable.
@@ -118,27 +117,27 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       )
     );
 
-  #getIsAnonymousUser = (user: TLaunchDarklyUser) => !user?.key;
+  #getIsAnonymousContext = (context: LDContext) => !context?.key;
 
-  #ensureUser = (user: TLaunchDarklyUser) => {
-    const isAnonymousUser = this.#getIsAnonymousUser(user);
+  #ensureContext = (context: LDContext) => {
+    const isAnonymousContext = this.#getIsAnonymousContext(context);
 
     // NOTE: When marked `anonymous` the SDK will generate a unique key and cache it in local storage
-    return merge(user, {
-      key: isAnonymousUser ? undefined : user.key,
-      anonymous: isAnonymousUser,
+    return merge(context, {
+      key: isAnonymousContext ? undefined : context.key,
+      anonymous: isAnonymousContext,
     });
   };
 
   #initializeClient = (
     clientSideId: TLaunchDarklyAdapterArgs['sdk']['clientSideId'],
-    user: TLaunchDarklyUser,
+    context: LDContext,
     options: TLaunchDarklyAdapterArgs['sdk']['clientOptions']
-  ) => initializeLaunchDarklyClient(clientSideId, user as LDUser, options);
+  ) => initializeLaunchDarklyClient(clientSideId, context, options);
 
-  #changeUserContext = async (nextUser: TLaunchDarklyUser) =>
+  #changeClientContext = async (nextContext: LDContext) =>
     this.#adapterState.client?.identify
-      ? this.#adapterState.client.identify(nextUser as LDUser)
+      ? this.#adapterState.client.identify(nextContext)
       : Promise.reject(
           new Error('Can not change user context: client not yet initialized.')
         );
@@ -325,17 +324,17 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
 
     const {
       sdk,
-      user,
+      context,
       flags,
       subscribeToFlagChanges = true,
       throwOnInitializationFailure = false,
       flagsUpdateDelayMs,
     } = adapterArgs;
 
-    this.#adapterState.user = this.#ensureUser(user);
+    this.#adapterState.context = this.#ensureContext(context);
     this.#adapterState.client = this.#initializeClient(
       sdk.clientSideId,
-      this.#adapterState.user,
+      this.#adapterState.context,
       sdk.clientOptions ?? {}
     );
 
@@ -364,12 +363,12 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
         )
       );
 
-    const nextUser = adapterArgs.user;
+    const nextContext = adapterArgs.context;
 
-    if (!isEqual(this.#adapterState.user, nextUser)) {
-      this.#adapterState.user = this.#ensureUser(nextUser);
+    if (!isEqual(this.#adapterState.context, nextContext)) {
+      this.#adapterState.context = this.#ensureContext(nextContext);
 
-      await this.#changeUserContext(this.#adapterState.user);
+      await this.#changeClientContext(this.#adapterState.context);
 
       return Promise.resolve({
         initializationStatus: AdapterInitializationStatus.Succeeded,
@@ -401,24 +400,26 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     return this.#adapterState.flags[flagName];
   }
 
-  async updateUserContext(updatedUserProps: TLaunchDarklyUser) {
+  async updateClientContext(
+    updatedContextProps: TLaunchDarklyAdapterArgs['context']
+  ) {
     const isAdapterConfigured = this.getIsConfigurationStatus(
       AdapterConfigurationStatus.Configured
     );
 
     warning(
       isAdapterConfigured,
-      '@flopflip/launchdarkly-adapter: adapter not configured. User context can not be updated before.'
+      '@flopflip/launchdarkly-adapter: adapter not configured. Client context can not be updated before.'
     );
 
     if (!isAdapterConfigured)
       return Promise.reject(
-        new Error('Can not update user context: adapter not yet configured.')
+        new Error('Can not update client context: adapter not yet configured.')
       );
 
-    return this.#changeUserContext({
-      ...this.#adapterState.user,
-      ...updatedUserProps,
+    return this.#changeClientContext({
+      ...this.#adapterState.context,
+      ...updatedContextProps,
     });
   }
 

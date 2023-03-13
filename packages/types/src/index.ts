@@ -1,7 +1,7 @@
 import {
   type LDClient as TLDClient,
+  type LDContext,
   type LDOptions as TLDOptions,
-  type LDUser,
 } from 'launchdarkly-js-client-sdk';
 import type React from 'react';
 
@@ -52,7 +52,8 @@ export type TBaseAdapterArgs<
 > = {
   user: TUser<TAdditionalUserProperties>;
 };
-export type TLaunchDarklyAdapterArgs = TBaseAdapterArgs<LDUser> & {
+export type TLaunchDarklyContextArgs = { context: LDContext };
+export type TLaunchDarklyAdapterArgs = TLaunchDarklyContextArgs & {
   sdk: {
     clientSideId: string;
     clientOptions?: TLDOptions;
@@ -138,14 +139,14 @@ export const adapterIdentifiers = {
 } as const;
 export type TAdapterIdentifiers =
   // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
-  typeof adapterIdentifiers[keyof typeof adapterIdentifiers] | string;
+  (typeof adapterIdentifiers)[keyof typeof adapterIdentifiers] | string;
 export type TFlagsContext = Record<TAdapterIdentifiers, TFlags>;
 export const cacheIdentifiers = {
   local: 'local',
   session: 'session',
 } as const;
 export type TCacheIdentifiers =
-  typeof cacheIdentifiers[keyof typeof cacheIdentifiers];
+  (typeof cacheIdentifiers)[keyof typeof cacheIdentifiers];
 export type TUpdateFlagsOptions = {
   lockFlags?: boolean;
   unsubscribeFlags?: boolean;
@@ -201,8 +202,8 @@ export interface TLaunchDarklyAdapterInterface
   ) => boolean;
   getClient: () => TLDClient | undefined;
   getFlag: (flagName: TFlagName) => TFlagVariation | undefined;
-  updateUserContext: (
-    updatedUserProps: TLaunchDarklyAdapterArgs['user']
+  updateClientContext: (
+    updatedContextProps: TLaunchDarklyAdapterArgs['context']
   ) => Promise<unknown>;
   unsubscribe: () => void;
   subscribe: () => void;
