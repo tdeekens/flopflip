@@ -1,5 +1,12 @@
 # @flopflip/test-utils
 
+## 13.0.0
+
+### Patch Changes
+
+- Updated dependencies [[`d5a25758`](https://github.com/tdeekens/flopflip/commit/d5a2575881c023b2d81ae98c6e972859ae61205b)]:
+  - @flopflip/memory-adapter@13.0.0
+
 ## 12.5.6
 
 ### Patch Changes

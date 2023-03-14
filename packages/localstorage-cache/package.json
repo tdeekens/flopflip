@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/localstorage-cache",
-  "version": "12.5.6",
+  "version": "13.0.0",
   "description": "Localstorage cache for flipflop adapters",
   "main": "dist/flopflip-localstorage-cache.cjs.js",
   "module": "dist/flopflip-localstorage-cache.esm.js",
@@ -30,6 +30,6 @@
     "client"
   ],
   "dependencies": {
-    "@flopflip/types": "12.5.6"
+    "@flopflip/types": "13.0.0"
   }
 }

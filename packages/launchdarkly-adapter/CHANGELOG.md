@@ -1,5 +1,88 @@
 # @flopflip/launchdarkly-adapter
 
+## 13.0.0
+
+### Major Changes
+
+- [#1742](https://github.com/tdeekens/flopflip/pull/1742) [`3fc3012a`](https://github.com/tdeekens/flopflip/commit/3fc3012a5891cfeae1b4ba68859fd390a1e3201c) Thanks [@userContext,](https://github.com/userContext,)! - Refactor to support v3 of the LaunchDarkly JavaScript SDK. The offical migration guide can be found [here](https://docs.launchdarkly.com/sdk/client-side/javascript/migration-2-to-3).
+
+  If you're using LaunchDarkly as your adapter, then the shape of the `adapterArgs` passed to `ConfigureFlopflip` has changed.
+
+  Assuming you are currently only using a user context (please refer to LaunchDarkly's documentation for more) then your previous configuration was:
+
+  ```jsx
+  <ConfigureFlopFlip
+    adapter={adapter}
+    adapterArgs={{ sdk: { clientSideId }, user }}
+  >
+    <App />
+  </ConfigureFlopFlip>
+  ```
+
+  You will have to replace `user` with `context`
+
+  ```diff
+  <ConfigureFlopFlip
+    adapter={adapter}
+  -  adapterArgs={{ sdk: { clientSideId }, user }}
+  +  adapterArgs={{ sdk: { clientSideId }, context }}
+  >
+    <App />
+  </ConfigureFlopFlip>;
+  ```
+
+  The `context` itself which previously was a `user` of for instance
+
+  ```js
+  const user = {
+    key: user?.id,
+    custom: {
+       foo: 'bar'
+    }
+  },
+  ```
+
+  should now be
+
+  ```js
+  const context = {
+    kind: 'user',
+    key: user?.id,
+    foo: 'bar'
+  },
+  ```
+
+  Please note that if you previously used a large user object with a lot of different information you might want to think about splitting it. This is the main purpose of the change on LaunchDarkly's side.
+
+  ```js
+  const deviceContext = {
+    kind: 'device',
+    type: 'iPad',
+    key: 'device-key-123abc',
+  };
+
+  const userContext = {
+    kind: 'user',
+    key: 'user-key-123abc',
+    name: 'Sandy',
+    role: 'doctor',
+  };
+
+  const multiContext = {
+    kind: 'multi',
+
+    device: deviceContext,
+  };
+  ```
+
+### Patch Changes
+
+- [#1745](https://github.com/tdeekens/flopflip/pull/1745) [`d5a25758`](https://github.com/tdeekens/flopflip/commit/d5a2575881c023b2d81ae98c6e972859ae61205b) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update all dependencies
+
+- Updated dependencies [[`3fc3012a`](https://github.com/tdeekens/flopflip/commit/3fc3012a5891cfeae1b4ba68859fd390a1e3201c)]:
+  - @flopflip/types@13.0.0
+  - @flopflip/adapter-utilities@13.0.0
+
 ## 12.5.6
 
 ### Patch Changes
