@@ -3,29 +3,13 @@ const isEnv = (env) => process.env.NODE_ENV === env;
 /**
  * @type {import('@babel/core').TransformOptions}
  */
-module.exports = {
+const preset = {
   presets: [
     [
       '@babel/env',
       {
         useBuiltIns: 'entry',
         corejs: 3,
-        ...(isEnv('test')
-          ? {
-              targets: {
-                browsers: ['last 1 versions'],
-                node: '8',
-              },
-              modules: 'commonjs',
-            }
-          : {
-              targets: {
-                browsers: ['last 2 versions', 'ie >= 11'],
-              },
-              modules: false,
-              useBuiltIns: 'entry',
-              include: ['transform-classes'],
-            }),
       },
     ],
     [
@@ -83,3 +67,5 @@ module.exports = {
     './babel-plugin-package-version',
   ].filter(Boolean),
 };
+
+module.exports = preset;
