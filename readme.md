@@ -96,9 +96,22 @@ In all examples flags will update in realtime (depending on the adapter and prov
 
 ## ❯ Browser support
 
-| IE / Edge  | Firefox         | Chrome          | Safari          | Opera           | iOS Safari      | Chrome for Android |
-| ---------- | --------------- | --------------- | --------------- | --------------- | --------------- | ------------------ |
-| IE11, Edge | last 2 versions | last 2 versions | last 2 versions | last 2 versions | last 2 versions | last version       |
+```bash
+npx browserlist
+
+and_chr 110
+chrome 110
+chrome 109
+edge 110
+edge 109
+firefox 109
+ios_saf 16.3
+ios_saf 16.2
+ios_saf 16.1
+ios_saf 16.0
+ios_saf 15.6
+samsung 19.0
+```
 
 ## ❯ Package Status
 
