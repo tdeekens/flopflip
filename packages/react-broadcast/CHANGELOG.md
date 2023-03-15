@@ -1,5 +1,15 @@
 # @flopflip/react-broadcast
 
+## 13.0.1
+
+### Patch Changes
+
+- [#1747](https://github.com/tdeekens/flopflip/pull/1747) [`8914921b`](https://github.com/tdeekens/flopflip/commit/8914921bf6cd4ddcaf3cf22563d142ae8f5a0cef) Thanks [@tdeekens](https://github.com/tdeekens)! - To update browser list and compilation targets. Ideally this should not affect consumers.
+
+- Updated dependencies [[`8914921b`](https://github.com/tdeekens/flopflip/commit/8914921bf6cd4ddcaf3cf22563d142ae8f5a0cef)]:
+  - @flopflip/react@13.0.1
+  - @flopflip/types@13.0.1
+
 ## 13.0.0
 
 ### Patch Changes

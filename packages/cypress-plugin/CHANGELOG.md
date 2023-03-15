@@ -1,5 +1,12 @@
 # @flopflip/cypress-plugin
 
+## 13.0.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/types@13.0.1
+
 ## 13.0.0
 
 ### Patch Changes
