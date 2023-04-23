@@ -44,7 +44,7 @@
     "lodash": "4.17.21",
     "react-is": "18.2.0",
     "tiny-warning": "1.0.3",
-    "ts-deepmerge": "5.0.0"
+    "ts-deepmerge": "6.0.3"
   },
   "keywords": [
     "react",

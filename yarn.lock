@@ -2170,7 +2170,7 @@ __metadata:
     lodash: 4.17.21
     mitt: 3.0.0
     tiny-warning: 1.0.3
-    ts-deepmerge: 5.0.0
+    ts-deepmerge: 6.0.3
   languageName: unknown
   linkType: soft
 
@@ -2267,7 +2267,7 @@ __metadata:
     react-dom: 18.2.0
     react-is: 18.2.0
     tiny-warning: 1.0.3
-    ts-deepmerge: 5.0.0
+    ts-deepmerge: 6.0.3
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0.0
     react-dom: ^16.8 || ^17.0 || ^18.0.0
@@ -2292,7 +2292,7 @@ __metadata:
     "@splitsoftware/splitio": 10.22.4
     globalthis: 1.0.3
     lodash: 4.17.21
-    ts-deepmerge: 5.0.0
+    ts-deepmerge: 6.0.3
   languageName: unknown
   linkType: soft
 
@@ -11617,10 +11617,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-deepmerge@npm:5.0.0":
-  version: 5.0.0
-  resolution: "ts-deepmerge@npm:5.0.0"
-  checksum: 251557d72a4999fb70edf57e6b3d5afa129a6fdd62d6b06c57de3a931fa45740d3193b2b914632def85ae99f6a1f78657707397811108f3af5f3dbc64ea3d7fc
+"ts-deepmerge@npm:6.0.3":
+  version: 6.0.3
+  resolution: "ts-deepmerge@npm:6.0.3"
+  checksum: 188120aac49a2d1bc0ef1a54365b01d0b720351cdd0e28cbb98dadcdd0cf8a65e0412154c66e08d87974471a24d559d384a1e49d7b4bcca7d22c826ffcf6690f
   languageName: node
   linkType: hard
 
