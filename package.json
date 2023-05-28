@@ -98,7 +98,7 @@
     "prettier": "2.8.8",
     "raf": "3.4.1",
     "regenerator-runtime": "0.13.11",
-    "rimraf": "3.0.2",
+    "rimraf": "5.0.1",
     "ts-jest": "29.1.0",
     "ts-node": "10.9.1",
     "tslib": "2.5.0",
