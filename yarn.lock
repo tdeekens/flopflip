@@ -2385,7 +2385,7 @@ __metadata:
     "@types/react-redux": 7.1.25
     react: 18.2.0
     react-dom: 18.2.0
-    react-redux: 8.1.1
+    react-redux: 8.0.5
     redux: 4.2.1
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0.0
@@ -10533,9 +10533,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-redux@npm:8.1.1":
-  version: 8.1.1
-  resolution: "react-redux@npm:8.1.1"
+"react-redux@npm:8.0.5":
+  version: 8.0.5
+  resolution: "react-redux@npm:8.0.5"
   dependencies:
     "@babel/runtime": ^7.12.1
     "@types/hoist-non-react-statics": ^3.3.1
@@ -10549,7 +10549,7 @@ __metadata:
     react: ^16.8 || ^17.0 || ^18.0
     react-dom: ^16.8 || ^17.0 || ^18.0
     react-native: ">=0.59"
-    redux: ^4 || ^5.0.0-beta.0
+    redux: ^4
   peerDependenciesMeta:
     "@types/react":
       optional: true
@@ -10561,7 +10561,7 @@ __metadata:
       optional: true
     redux:
       optional: true
-  checksum: 370676330727764d78f35e9c5a0ed0591d79482fe9b70fffcab4aa6bcccc6194e4f1ebd818b4b390351dea5557e70d3bd4d95d7a0ac9baa1f45d6bf2230ee713
+  checksum: a108f4f7ead6ac005e656d46051474a2bbdb31ede481bbbb3d8d779c1a35e1940b8655577cc5021313411864d305f67fc719aa48d6e5ed8288cf9cbe8b7042e4
   languageName: node
   linkType: hard
 
