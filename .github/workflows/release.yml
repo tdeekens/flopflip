@@ -57,7 +57,7 @@ jobs:
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         # uses: changesets/action@v1
-        uses: dotansimha/changesets-action@v1.5.1
+        uses: dotansimha/changesets-action@v1.5.2
         with:
           publish: yarn changeset publish
           version: yarn changeset:version-and-format
