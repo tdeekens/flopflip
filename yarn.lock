@@ -2432,7 +2432,7 @@ __metadata:
     "@babel/runtime": 7.22.5
     "@flopflip/adapter-utilities": 13.0.2
     "@flopflip/types": 13.0.2
-    "@splitsoftware/splitio": 10.22.5
+    "@splitsoftware/splitio": 10.22.4
     globalthis: 1.0.3
     lodash: 4.17.21
     ts-deepmerge: 6.1.0
@@ -3145,9 +3145,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@splitsoftware/splitio-commons@npm:1.8.2":
-  version: 1.8.2
-  resolution: "@splitsoftware/splitio-commons@npm:1.8.2"
+"@splitsoftware/splitio-commons@npm:1.8.1":
+  version: 1.8.1
+  resolution: "@splitsoftware/splitio-commons@npm:1.8.1"
   dependencies:
     tslib: ^2.3.1
   peerDependencies:
@@ -3155,15 +3155,15 @@ __metadata:
   peerDependenciesMeta:
     ioredis:
       optional: true
-  checksum: b978a952e18b828c6668b0de5e951342809ea25c130dd7ca5f414a77a8b39a1030bf8dc628fba300ef743208de047fa8d250a706f5593052cabc6af9abc4bfa9
+  checksum: 9298f1fd7cf69a11c70d5f1d52d11e2d4b30324fb1c44852f67e971198ff70af9e0982356abea2ecd79018486106a097d9039e3e9174a6c6051b87ec0fc5ef1d
   languageName: node
   linkType: hard
 
-"@splitsoftware/splitio@npm:10.22.5":
-  version: 10.22.5
-  resolution: "@splitsoftware/splitio@npm:10.22.5"
+"@splitsoftware/splitio@npm:10.22.4":
+  version: 10.22.4
+  resolution: "@splitsoftware/splitio@npm:10.22.4"
   dependencies:
-    "@splitsoftware/splitio-commons": 1.8.2
+    "@splitsoftware/splitio-commons": 1.8.1
     "@types/google.analytics": 0.0.40
     "@types/ioredis": ^4.28.0
     bloom-filters: ^3.0.0
@@ -3175,7 +3175,7 @@ __metadata:
   dependenciesMeta:
     eventsource:
       optional: true
-  checksum: b1ca8c18bd518a29a61d3e2c36bbeb8d8d12a523e8cd4617ac564d6aa0edb30815619961e826e57d89ab7272895b864fdd60ac57e9c37f48d86712cafc9c3bfb
+  checksum: 9d94b0feb006f81ca0278d5df2687f8f3e30af634515a0c1723a877c3941cb1830d141544e316bd6ee1709318a8d9ae5dcbaa445d91e157ef8ef8c053b26852d
   languageName: node
   linkType: hard
 

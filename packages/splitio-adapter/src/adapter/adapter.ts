@@ -34,8 +34,8 @@ type TSplitIOAdapterState = {
   treatmentAttributes?: SplitIO.Attributes;
 };
 type SplitIOClient = {
-  client: SplitIO.IAsyncClient;
-  manager: SplitIO.IAsyncManager;
+  client: SplitIO.IClient;
+  manager: SplitIO.IManager;
 };
 
 const normalizeFlag = (
