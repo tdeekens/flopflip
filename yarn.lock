@@ -6096,15 +6096,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-xo-typescript@npm:0.57.0":
-  version: 0.57.0
-  resolution: "eslint-config-xo-typescript@npm:0.57.0"
+"eslint-config-xo-typescript@npm:1.0.1":
+  version: 1.0.1
+  resolution: "eslint-config-xo-typescript@npm:1.0.1"
   peerDependencies:
-    "@typescript-eslint/eslint-plugin": ">=5.57.0"
-    "@typescript-eslint/parser": ">=5.57.0"
+    "@typescript-eslint/eslint-plugin": ">=6.0.0"
+    "@typescript-eslint/parser": ">=6.0.0"
     eslint: ">=8.0.0"
-    typescript: ">=4.4"
-  checksum: 6676c5820d0ab477a8395b37f1bad0d2bc9e086350f07b86e8074504e86fae402dde43358829d98eb019377f17575590379df827584fe4596ce435d2baab3ae7
+    typescript: ">=4.7"
+  checksum: 8f77a38cbc11d8e9d34bf5e3f4acc05d83cbd9e4a2e9cc076168210132f453bcb6a70434c8e6522fb9e02570b45ea927f51fd9cac29abb85781fc8aeb902bea0
   languageName: node
   linkType: hard
 
@@ -6752,7 +6752,7 @@ __metadata:
     eslint-config-prettier: 8.8.0
     eslint-config-xo: 0.43.1
     eslint-config-xo-react: 0.27.0
-    eslint-config-xo-typescript: 0.57.0
+    eslint-config-xo-typescript: 1.0.1
     eslint-formatter-pretty: 5.0.0
     eslint-plugin-jest: 27.2.2
     eslint-plugin-prettier: 4.2.1
