@@ -31,11 +31,11 @@
     "@flopflip/test-utils": "*",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-redux": "8.0.5",
+    "react-redux": "8.1.1",
     "redux": "4.2.1"
   },
   "dependencies": {
-    "@babel/runtime": "7.22.5",
+    "@babel/runtime": "7.22.6",
     "@flopflip/react": "^13.0.2",
     "@flopflip/types": "13.0.2",
     "@types/react-redux": "7.1.25"

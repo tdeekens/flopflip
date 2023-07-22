@@ -28,8 +28,8 @@
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
     "@flopflip/test-utils": "*",
-    "@types/react": "18.2.13",
-    "@types/react-dom": "18.2.6",
+    "@types/react": "18.2.15",
+    "@types/react-dom": "18.2.7",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
@@ -38,13 +38,13 @@
     "react-dom": "^16.8 || ^17.0 || ^18.0.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.22.5",
+    "@babel/runtime": "7.22.6",
     "@flopflip/types": "13.0.2",
     "@types/react-is": "17.0.4",
     "lodash": "4.17.21",
     "react-is": "18.2.0",
     "tiny-warning": "1.0.3",
-    "ts-deepmerge": "6.1.0"
+    "ts-deepmerge": "6.2.0"
   },
   "keywords": [
     "react",
