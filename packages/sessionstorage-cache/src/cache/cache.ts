@@ -16,7 +16,6 @@ const createCache = (options: TCacheOptions) => {
           JSON.stringify(value)
         );
         return true;
-        // eslint-disable-next-line
       } catch (_error) {
         return false;
       }

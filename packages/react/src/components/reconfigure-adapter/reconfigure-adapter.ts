@@ -6,9 +6,9 @@ import useAdapterContext from '../../hooks/use-adapter-context';
 
 type Props<TAdditionalUserProperties> = {
   // eslint-disable-next-line react/boolean-prop-naming
-  shouldOverwrite?: boolean;
-  user: TUser<TAdditionalUserProperties>;
-  children?: React.ReactNode;
+  readonly shouldOverwrite?: boolean;
+  readonly user: TUser<TAdditionalUserProperties>;
+  readonly children?: React.ReactNode;
 };
 
 function ReconfigureAdapter<TAdditionalUserProperties>(

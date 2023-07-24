@@ -48,7 +48,7 @@ export type TAdapterEventHandlers = {
 };
 type TDefaultAdditionalUserProperties = Record<string, unknown>;
 export type TBaseAdapterArgs<
-  TAdditionalUserProperties = TDefaultAdditionalUserProperties
+  TAdditionalUserProperties = TDefaultAdditionalUserProperties,
 > = {
   user: TUser<TAdditionalUserProperties>;
 };
@@ -64,7 +64,7 @@ export type TLaunchDarklyAdapterArgs = TLaunchDarklyContextArgs & {
   flagsUpdateDelayMs?: number;
 };
 export type TGraphQlAdapterArgs<
-  TAdditionalUserProperties = TDefaultAdditionalUserProperties
+  TAdditionalUserProperties = TDefaultAdditionalUserProperties,
 > = TBaseAdapterArgs<TAdditionalUserProperties> & {
   fetcher?: typeof fetch;
   uri: string;
@@ -80,19 +80,19 @@ export type TGraphQlAdapterArgs<
   cacheIdentifier?: TCacheIdentifiers;
 };
 export type THttpAdapterArgs<
-  TAdditionalUserProperties = TDefaultAdditionalUserProperties
+  TAdditionalUserProperties = TDefaultAdditionalUserProperties,
 > = TBaseAdapterArgs<TAdditionalUserProperties> & {
   execute: () => Promise<any>;
   pollingInteralMs?: number;
   cacheIdentifier?: TCacheIdentifiers;
 };
 export type TLocalStorageAdapterArgs<
-  TAdditionalUserProperties = TDefaultAdditionalUserProperties
+  TAdditionalUserProperties = TDefaultAdditionalUserProperties,
 > = TBaseAdapterArgs<TAdditionalUserProperties> & {
   pollingInteralMs?: number;
 };
 export type TMemoryAdapterArgs<
-  TAdditionalUserProperties = TDefaultAdditionalUserProperties
+  TAdditionalUserProperties = TDefaultAdditionalUserProperties,
 > = TBaseAdapterArgs<TAdditionalUserProperties>;
 export type TSplitioAdapterArgs = TBaseAdapterArgs & {
   sdk: {
@@ -110,7 +110,7 @@ export type TCombinedAdapterArgs<
   TAdditionalHttpUserProperties = TDefaultAdditionalUserProperties,
   TAdditionalGraphQlUserProperties = TDefaultAdditionalUserProperties,
   TAdditionalLocalStorageUserProperties = TDefaultAdditionalUserProperties,
-  TAdditionalMemoryUserProperties = TDefaultAdditionalUserProperties
+  TAdditionalMemoryUserProperties = TDefaultAdditionalUserProperties,
 > = TBaseAdapterArgs<TAdditionalUserProperties> & {
   launchdarkly?: TLaunchDarklyAdapterArgs;
   localstorage?: TLocalStorageAdapterArgs<TAdditionalLocalStorageUserProperties>;
@@ -138,8 +138,8 @@ export const adapterIdentifiers = {
   combined: 'combined',
 } as const;
 export type TAdapterIdentifiers =
-  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
-  (typeof adapterIdentifiers)[keyof typeof adapterIdentifiers] | string;
+  | (typeof adapterIdentifiers)[keyof typeof adapterIdentifiers]
+  | string;
 export type TFlagsContext = Record<TAdapterIdentifiers, TFlags>;
 export const cacheIdentifiers = {
   local: 'local',
