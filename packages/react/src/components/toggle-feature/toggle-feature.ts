@@ -7,11 +7,11 @@ type RenderFnArgs = {
 };
 type RenderFn = (args: RenderFnArgs) => React.ReactNode;
 export type Props = {
-  untoggledComponent?: React.ComponentType;
-  toggledComponent?: React.ComponentType;
-  render?: () => React.ReactNode;
-  children?: RenderFn | React.ReactNode;
-  isFeatureEnabled: boolean;
+  readonly untoggledComponent?: React.ComponentType;
+  readonly toggledComponent?: React.ComponentType;
+  readonly render?: () => React.ReactNode;
+  readonly children?: RenderFn | React.ReactNode;
+  readonly isFeatureEnabled: boolean;
 };
 
 function ToggleFeature(props: Props) {
