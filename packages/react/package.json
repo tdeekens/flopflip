@@ -40,7 +40,7 @@
   "dependencies": {
     "@babel/runtime": "7.22.6",
     "@flopflip/types": "13.0.2",
-    "@types/react-is": "17.0.4",
+    "@types/react-is": "18.2.1",
     "lodash": "4.17.21",
     "react-is": "18.2.0",
     "tiny-warning": "1.0.3",
