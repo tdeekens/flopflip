@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import adapter from '@flopflip/memory-adapter';
 import {
   act,

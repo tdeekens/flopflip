@@ -25,6 +25,7 @@ module.exports = {
     'default-param-last': 0,
     'testing-library/prefer-presence-queries': 'error',
     'testing-library/await-async-query': 'warn',
+    'testing-library/await-async-query': 0,
     'react/prop-types': 0,
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
