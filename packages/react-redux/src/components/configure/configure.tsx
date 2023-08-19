@@ -10,9 +10,9 @@ import React from 'react';
 import { useUpdateFlags, useUpdateStatus } from '../../hooks';
 
 type BaseProps = {
-  children?: TConfigureAdapterChildren;
-  shouldDeferAdapterConfiguration?: boolean;
-  defaultFlags?: TFlags;
+  readonly children?: TConfigureAdapterChildren;
+  readonly shouldDeferAdapterConfiguration?: boolean;
+  readonly defaultFlags?: TFlags;
 };
 type Props<AdapterInstance extends TAdapter> = BaseProps &
   TConfigureAdapterProps<AdapterInstance>;
@@ -25,7 +25,9 @@ const defaultProps: Pick<
   shouldDeferAdapterConfiguration: false,
 };
 
-function Configure<AdapterInstance extends TAdapter>(props: Props<AdapterInstance>) {
+function Configure<AdapterInstance extends TAdapter>(
+  props: Props<AdapterInstance>
+) {
   const adapterIdentifiers = [props.adapter.id];
   const handleUpdateFlags = useUpdateFlags({ adapterIdentifiers });
   const handleUpdateStatus = useUpdateStatus();

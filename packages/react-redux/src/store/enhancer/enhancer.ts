@@ -1,4 +1,5 @@
 import {
+  adapterIdentifiers as allAdapterIdentifiers,
   type TAdapter,
   type TAdapterArgs,
   type TAdapterInterface,
@@ -36,7 +37,9 @@ export default function createFlopFlipEnhancer(
           store.dispatch(updateFlags(flagsChange, [adapter.id]));
         },
         onStatusStateChange(statusChange: TAdapterStatusChange) {
-          store.dispatch(updateStatus(statusChange));
+          store.dispatch(
+            updateStatus(statusChange, Object.keys(allAdapterIdentifiers))
+          );
         },
       });
 

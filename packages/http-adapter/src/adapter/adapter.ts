@@ -238,11 +238,11 @@ class HttpAdapter implements THttpAdapterInterface {
         }
       }
 
-      this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
-
       const flags = normalizeFlags(await this.#fetchFlags(adapterArgs));
 
       this.#adapterState.flags = flags;
+
+      this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
 
       if (adapterArgs.cacheIdentifier) {
         const cache = await this.#getCache(adapterArgs.cacheIdentifier);

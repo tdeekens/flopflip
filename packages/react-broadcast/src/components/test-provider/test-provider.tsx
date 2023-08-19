@@ -3,7 +3,7 @@ import {
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
   type TAdapterIdentifiers,
-  type TAdapterStatus,
+  type TAdaptersStatus,
   type TFlags,
   type TReconfigureAdapter,
 } from '@flopflip/types';
@@ -12,11 +12,11 @@ import React from 'react';
 import { createIntialFlagsContext, FlagsContext } from '../flags-context';
 
 type TProps = {
-  children: React.ReactNode;
-  flags: TFlags;
-  adapterIdentifiers?: TAdapterIdentifiers[];
-  reconfigure?: TReconfigureAdapter;
-  status?: TAdapterStatus;
+  readonly children: React.ReactNode;
+  readonly flags: TFlags;
+  readonly adapterIdentifiers?: TAdapterIdentifiers[];
+  readonly reconfigure?: TReconfigureAdapter;
+  readonly status?: TAdaptersStatus;
 };
 
 const defaultProps: Pick<
@@ -25,8 +25,10 @@ const defaultProps: Pick<
 > = {
   adapterIdentifiers: ['test'],
   status: {
-    subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
-    configurationStatus: AdapterConfigurationStatus.Configured,
+    memory: {
+      subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
+      configurationStatus: AdapterConfigurationStatus.Configured,
+    },
   },
 };
 

@@ -6,7 +6,11 @@ describe('selectAdapterConfigurationStatus', () => {
   describe('when configured', () => {
     it('should indicate ready state', () => {
       expect(
-        selectAdapterConfigurationStatus(AdapterConfigurationStatus.Configured)
+        selectAdapterConfigurationStatus({
+          memory: {
+            configurationStatus: AdapterConfigurationStatus.Configured,
+          },
+        })
       ).toEqual(
         expect.objectContaining({
           isReady: true,
@@ -15,7 +19,11 @@ describe('selectAdapterConfigurationStatus', () => {
     });
     it('should indicate configured state', () => {
       expect(
-        selectAdapterConfigurationStatus(AdapterConfigurationStatus.Configured)
+        selectAdapterConfigurationStatus({
+          memory: {
+            configurationStatus: AdapterConfigurationStatus.Configured,
+          },
+        })
       ).toEqual(
         expect.objectContaining({
           isConfigured: true,
@@ -26,7 +34,11 @@ describe('selectAdapterConfigurationStatus', () => {
   describe('when configuring', () => {
     it('should indicate configuring state', () => {
       expect(
-        selectAdapterConfigurationStatus(AdapterConfigurationStatus.Configuring)
+        selectAdapterConfigurationStatus({
+          memory: {
+            configurationStatus: AdapterConfigurationStatus.Configuring,
+          },
+        })
       ).toEqual(
         expect.objectContaining({
           isConfiguring: true,
@@ -35,7 +47,11 @@ describe('selectAdapterConfigurationStatus', () => {
     });
     it('should not indicate configured state', () => {
       expect(
-        selectAdapterConfigurationStatus(AdapterConfigurationStatus.Configuring)
+        selectAdapterConfigurationStatus({
+          memory: {
+            configurationStatus: AdapterConfigurationStatus.Configuring,
+          },
+        })
       ).toEqual(
         expect.objectContaining({
           isConfigured: false,
@@ -46,9 +62,11 @@ describe('selectAdapterConfigurationStatus', () => {
   describe('when unconfigured', () => {
     it('should indicate unconfigured', () => {
       expect(
-        selectAdapterConfigurationStatus(
-          AdapterConfigurationStatus.Unconfigured
-        )
+        selectAdapterConfigurationStatus({
+          memory: {
+            configurationStatus: AdapterConfigurationStatus.Unconfigured,
+          },
+        })
       ).toEqual(
         expect.objectContaining({
           isUnconfigured: true,

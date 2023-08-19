@@ -1,4 +1,7 @@
-import { AdapterConfigurationStatus } from '@flopflip/types';
+import {
+  AdapterConfigurationStatus,
+  adapterIdentifiers as allAdapterIdentifiers,
+} from '@flopflip/types';
 
 import { updateFlags, updateStatus } from '../../ducks';
 import createFlopFlipEnhancer from './enhancer';
@@ -94,7 +97,9 @@ describe('when creating enhancer', () => {
       });
 
       it('should invoke `dispatch` with `updateStatus`', () => {
-        expect(dispatch).toHaveBeenCalledWith(updateStatus(nextStatus));
+        expect(dispatch).toHaveBeenCalledWith(
+          updateStatus(nextStatus, Object.keys(allAdapterIdentifiers))
+        );
       });
     });
   });

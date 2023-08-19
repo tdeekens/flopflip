@@ -7,9 +7,7 @@ import { useDebugValue } from 'react';
 export default function useAdapterStatus() {
   const { status } = useAdapterContext();
 
-  const adapterStatus = selectAdapterConfigurationStatus(
-    status.configurationStatus
-  );
+  const adapterStatus = selectAdapterConfigurationStatus(status);
 
   useDebugValue({ adapterStatus });
 
