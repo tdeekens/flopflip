@@ -1,4 +1,7 @@
-import { AdapterConfigurationStatus } from '@flopflip/types';
+import {
+  AdapterConfigurationStatus,
+  adapterIdentifiers as allAdapterIdentifiers,
+} from '@flopflip/types';
 
 import { STATE_SLICE } from '../../store/constants';
 import reducer, { selectStatus, UPDATE_STATUS, updateStatus } from './status';
@@ -18,20 +21,47 @@ describe('action creators', () => {
       });
     });
 
-    it('should return passed configuration status', () => {
-      expect(
-        updateStatus({
-          status: {
-            configurationStatus: AdapterConfigurationStatus.Configured,
+    describe('with id in payload', () => {
+      it('should return passed configuration status', () => {
+        expect(
+          updateStatus({
+            id: 'memory',
+            status: {
+              configurationStatus: AdapterConfigurationStatus.Configured,
+            },
+          })
+        ).toEqual({
+          type: expect.any(String),
+          payload: {
+            id: 'memory',
+            status: {
+              configurationStatus: AdapterConfigurationStatus.Configured,
+            },
           },
-        })
-      ).toEqual({
-        type: expect.any(String),
-        payload: {
-          status: {
-            configurationStatus: AdapterConfigurationStatus.Configured,
+        });
+      });
+    });
+
+    describe('without id in payload', () => {
+      it('should return passed configuration status for all adapters', () => {
+        expect(
+          updateStatus(
+            {
+              status: {
+                configurationStatus: AdapterConfigurationStatus.Configured,
+              },
+            },
+            allAdapterIdentifiers
+          )
+        ).toEqual({
+          type: expect.any(String),
+          payload: {
+            adapterIdentifiers: allAdapterIdentifiers,
+            status: {
+              configurationStatus: AdapterConfigurationStatus.Configured,
+            },
           },
-        },
+        });
       });
     });
   });
@@ -43,6 +73,7 @@ describe('reducers', () => {
       let payload;
       beforeEach(() => {
         payload = {
+          id: 'memory',
           status: {
             configurationStatus: AdapterConfigurationStatus.Configuring,
           },
@@ -52,7 +83,9 @@ describe('reducers', () => {
       it('should set the new status', () => {
         expect(reducer(undefined, { type: UPDATE_STATUS, payload })).toEqual(
           expect.objectContaining({
-            configurationStatus: AdapterConfigurationStatus.Configuring,
+            memory: {
+              configurationStatus: AdapterConfigurationStatus.Configuring,
+            },
           })
         );
       });
@@ -62,6 +95,7 @@ describe('reducers', () => {
       let payload;
       beforeEach(() => {
         payload = {
+          id: 'memory',
           status: {
             configurationStatus: AdapterConfigurationStatus.Configuring,
           },
@@ -71,11 +105,17 @@ describe('reducers', () => {
       it('should set the new status', () => {
         expect(
           reducer(
-            { configurationStatus: AdapterConfigurationStatus.Configured },
+            {
+              memory: {
+                configurationStatus: AdapterConfigurationStatus.Configured,
+              },
+            },
             { type: UPDATE_STATUS, payload }
           )
         ).toEqual({
-          configurationStatus: AdapterConfigurationStatus.Configuring,
+          memory: {
+            configurationStatus: AdapterConfigurationStatus.Configuring,
+          },
         });
       });
     });
@@ -88,8 +128,10 @@ describe('selectors', () => {
 
   beforeEach(() => {
     status = {
-      configurationStatus: AdapterConfigurationStatus.Configuring,
-      subscriptionStatus: {},
+      memory: {
+        configurationStatus: AdapterConfigurationStatus.Configuring,
+        subscriptionStatus: {},
+      },
     };
     state = {
       [STATE_SLICE]: {

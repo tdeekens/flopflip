@@ -37,6 +37,7 @@ export type TAdapterStatus = {
   configurationStatus: AdapterConfigurationStatus;
   subscriptionStatus: AdapterSubscriptionStatus;
 };
+export type TAdaptersStatus = Record<TAdapterIdentifiers, TAdapterStatus>;
 export type TAdapterStatusChange = {
   id?: TAdapterIdentifiers;
   status: Partial<TAdapterStatus>;
@@ -400,7 +401,7 @@ export type TReconfigureAdapter = (
 export type TAdapterContext = {
   adapterEffectIdentifiers: TAdapterIdentifiers[];
   reconfigure: TReconfigureAdapter;
-  status: TAdapterStatus;
+  status?: TAdaptersStatus;
 };
 
 type TLaunchDarklyFlopflipGlobal = {

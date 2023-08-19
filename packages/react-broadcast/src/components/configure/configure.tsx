@@ -1,10 +1,9 @@
 import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
 import {
-  AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
   type TAdapter,
   type TAdapterIdentifiers,
-  type TAdapterStatus,
+  type TAdaptersStatus,
   type TAdapterStatusChange,
   type TConfigureAdapterChildren,
   type TConfigureAdapterProps,
@@ -18,24 +17,20 @@ import { createStore } from '../../store';
 import { FlagsContext } from '../flags-context';
 
 type BaseProps = {
-  children?: TConfigureAdapterChildren;
-  shouldDeferAdapterConfiguration?: boolean;
-  defaultFlags?: TFlags;
+  readonly children?: TConfigureAdapterChildren;
+  readonly shouldDeferAdapterConfiguration?: boolean;
+  readonly defaultFlags?: TFlags;
 };
 type Props<AdapterInstance extends TAdapter> = BaseProps &
   TConfigureAdapterProps<AdapterInstance>;
 type TFlagsState = Record<TAdapterIdentifiers, TFlags>;
 type TState = {
   flags: TFlagsState;
-  status: TAdapterStatus;
+  status: TAdaptersStatus;
 };
 
-const initialAdapterStatus: TState['status'] = {
-  subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
-  configurationStatus: AdapterConfigurationStatus.Unconfigured,
-};
 const store = createStore<TState>({
-  status: initialAdapterStatus,
+  status: {},
   flags: {},
 });
 
@@ -96,25 +91,60 @@ const useFlagsState = ({
   return [flags, updateFlags];
 };
 
-const useStatusState = (): [
-  TAdapterStatus,
-  (nextStatus: Partial<TAdapterStatus>) => void
-] => {
+type TUseStatusStateOptions = {
+  adapterIdentifiers: TAdapterIdentifiers[];
+};
+type TStatusUpdateFunction = (statusChange: TAdapterStatusChange) => void;
+const useStatusState = ({
+  adapterIdentifiers,
+}: TUseStatusStateOptions): [TAdaptersStatus, TStatusUpdateFunction] => {
   const status = useSyncExternalStore(
     store.subscribe,
     () => store.getSnapshot().status,
     () => store.getSnapshot().status
   );
 
-  const setStatus = useCallback((nextStatus: Partial<TAdapterStatus>) => {
-    store.setState((prevState) => ({
-      ...prevState,
-      status: {
-        ...prevState.status,
-        ...nextStatus,
-      },
-    }));
-  }, []);
+  const setStatus = useCallback(
+    (statusChange: TAdapterStatusChange) => {
+      store.setState((prevState) => {
+        let nextState;
+
+        if (statusChange.id) {
+          nextState = {
+            ...prevState,
+            status: {
+              ...prevState.status,
+              [statusChange.id]: {
+                ...prevState.status[statusChange.id],
+                ...statusChange.status,
+              },
+            },
+          };
+
+          return nextState;
+        }
+
+        nextState = {
+          ...prevState,
+          status: {
+            ...prevState.status,
+            ...Object.fromEntries(
+              adapterIdentifiers.map((adapterInterfaceIdentifier) => [
+                adapterInterfaceIdentifier,
+                {
+                  ...prevState.status[adapterInterfaceIdentifier],
+                  ...statusChange.status,
+                },
+              ])
+            ),
+          },
+        };
+
+        return nextState;
+      });
+    },
+    [adapterIdentifiers]
+  );
 
   return [status, setStatus];
 };
@@ -128,8 +158,7 @@ function Configure<AdapterInstance extends TAdapter>(
   );
 
   const [flags, updateFlags] = useFlagsState({ adapterIdentifiers });
-  const [status, setStatus] = useStatusState();
-
+  const [status, updateStatus] = useStatusState({ adapterIdentifiers });
   // NOTE:
   //   Using this prevents the callbacks being invoked
   //   which would trigger a setState as a result on an unmounted
@@ -159,9 +188,9 @@ function Configure<AdapterInstance extends TAdapter>(
         return;
       }
 
-      setStatus(statusChange.status);
+      updateStatus(statusChange);
     },
-    [setStatus, getHasAdapterSubscriptionStatus]
+    [updateStatus, getHasAdapterSubscriptionStatus]
   );
 
   return (

@@ -1,8 +1,7 @@
 import { selectAdapterConfigurationStatus } from '@flopflip/react';
 import {
-  AdapterConfigurationStatus,
-  AdapterSubscriptionStatus,
-  type TAdapterStatus,
+  type TAdapterIdentifiers,
+  type TAdaptersStatus,
   type TAdapterStatusChange,
 } from '@flopflip/types';
 
@@ -13,22 +12,39 @@ import type { TUpdateStatusAction } from './types';
 // Actions
 export const UPDATE_STATUS = '@flopflip/status/update';
 
-const initialState: TAdapterStatus = {
-  subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
-  configurationStatus: AdapterConfigurationStatus.Unconfigured,
-};
+const initialState = {};
 
 // Reducer
 const reducer = (
   // eslint-disable-next-line @typescript-eslint/default-param-last
-  state: TAdapterStatus = initialState,
+  state: TAdaptersStatus = initialState,
   action: TUpdateStatusAction
-): TAdapterStatus => {
+): TAdaptersStatus => {
   switch (action.type) {
     case UPDATE_STATUS:
+      if (action.payload.id) {
+        return {
+          ...state,
+          [action.payload.id]: {
+            ...state?.[action.payload.id],
+            ...action.payload.status,
+          },
+        };
+      }
+
       return {
         ...state,
-        ...action.payload.status,
+        ...Object.fromEntries(
+          action.payload.adapterIdentifiers.map(
+            (adapterInterfaceIdentifier) => [
+              adapterInterfaceIdentifier,
+              {
+                ...state?.[adapterInterfaceIdentifier],
+                ...action.payload.status,
+              },
+            ]
+          )
+        ),
       };
 
     default:
@@ -40,14 +56,15 @@ export default reducer;
 
 // Action Creators
 export const updateStatus = (
-  statusChange: TAdapterStatusChange
+  statusChange: TAdapterStatusChange,
+  adapterIdentifiers: TAdapterIdentifiers[]
 ): TUpdateStatusAction => ({
   type: UPDATE_STATUS,
-  payload: statusChange,
+  payload: { ...statusChange, adapterIdentifiers },
 });
 // Selectors
 export const selectStatus = (state: TState) => {
   const { status } = state[STATE_SLICE];
 
-  return selectAdapterConfigurationStatus(status?.configurationStatus);
+  return selectAdapterConfigurationStatus(status);
 };

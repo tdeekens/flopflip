@@ -48,8 +48,10 @@ describe('when configured', () => {
   it('should expose a passed adapter status', async () => {
     render({
       status: {
-        subscriptionStatus: AdapterSubscriptionStatus.Unsubscribed,
-        configurationStatus: AdapterConfigurationStatus.Unconfigured,
+        memory: {
+          subscriptionStatus: AdapterSubscriptionStatus.Unsubscribed,
+          configurationStatus: AdapterConfigurationStatus.Unconfigured,
+        },
       },
     });
 

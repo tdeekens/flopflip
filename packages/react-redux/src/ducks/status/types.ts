@@ -1,6 +1,11 @@
-import { type TAdapterStatusChange } from '@flopflip/types';
+import {
+  type TAdapterIdentifiers,
+  type TAdapterStatusChange,
+} from '@flopflip/types';
 
 export type TUpdateStatusAction = {
   type: string;
-  payload: TAdapterStatusChange;
+  payload: TAdapterStatusChange & {
+    adapterIdentifiers: TAdapterIdentifiers[];
+  };
 };

@@ -8,7 +8,7 @@ import {
   type TAdapterInterface,
   type TAdapterReconfiguration,
   type TAdapterReconfigurationOptions,
-  type TAdapterStatus,
+  type TAdaptersStatus,
   type TConfigureAdapterChildren,
   type TFlags,
 } from '@flopflip/types';
@@ -33,15 +33,15 @@ export type TAdapterStates = ValueOf<typeof AdapterStates>;
 
 type TProps = {
   // eslint-disable-next-line react/boolean-prop-naming
-  shouldDeferAdapterConfiguration?: boolean;
-  adapter: TAdapter;
-  adapterArgs: TAdapterArgs;
-  adapterStatus?: TAdapterStatus;
-  defaultFlags?: TFlags;
-  onFlagsStateChange: TAdapterEventHandlers['onFlagsStateChange'];
-  onStatusStateChange: TAdapterEventHandlers['onStatusStateChange'];
-  render?: () => React.ReactNode;
-  children?: TConfigureAdapterChildren;
+  readonly shouldDeferAdapterConfiguration?: boolean;
+  readonly adapter: TAdapter;
+  readonly adapterArgs: TAdapterArgs;
+  readonly adapterStatus?: TAdaptersStatus;
+  readonly defaultFlags?: TFlags;
+  readonly onFlagsStateChange: TAdapterEventHandlers['onFlagsStateChange'];
+  readonly onStatusStateChange: TAdapterEventHandlers['onStatusStateChange'];
+  readonly render?: () => React.ReactNode;
+  readonly children?: TConfigureAdapterChildren;
 };
 
 type TUseAppliedAdapterArgsStateOptions = {
@@ -49,7 +49,7 @@ type TUseAppliedAdapterArgsStateOptions = {
 };
 type TUseAppliedAdapterArgsStateReturn = [
   TAdapterArgs,
-  (nextAdapterArgs: TAdapterArgs) => void
+  (nextAdapterArgs: TAdapterArgs) => void,
 ];
 const useAppliedAdapterArgsState = ({
   initialAdapterArgs,
@@ -77,7 +77,7 @@ type TUseAdapterStateRefReturn = [
   React.MutableRefObject<TAdapterStates>,
   (nextAdapterState: TAdapterStates) => void,
   () => boolean,
-  () => boolean
+  () => boolean,
 ];
 const useAdapterStateRef = (): TUseAdapterStateRefReturn => {
   const adapterStateRef = useRef<TAdapterStates>(AdapterStates.UNCONFIGURED);
@@ -112,7 +112,7 @@ const useAdapterStateRef = (): TUseAdapterStateRefReturn => {
 type TUsePendingAdapterArgsRefReturn = [
   React.MutableRefObject<TAdapterArgs | undefined>,
   (nextReconfiguration: TAdapterReconfiguration) => void,
-  () => TAdapterArgs
+  () => TAdapterArgs,
 ];
 const usePendingAdapterArgsRef = (
   appliedAdapterArgs: TAdapterArgs

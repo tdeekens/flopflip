@@ -1,43 +1,60 @@
 import {
   AdapterConfigurationStatus,
-  AdapterSubscriptionStatus,
   type TAdapterContext,
   type TAdapterIdentifiers,
-  type TAdapterStatus,
+  type TAdaptersStatus,
   type TReconfigureAdapter,
 } from '@flopflip/types';
 import { createContext } from 'react';
 
 const initialReconfigureAdapter: TReconfigureAdapter = () => undefined;
-const initialAdapterStatus: TAdapterStatus = {
-  subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
-  configurationStatus: AdapterConfigurationStatus.Unconfigured,
-};
+
 const createAdapterContext = (
   adapterIdentifiers?: TAdapterIdentifiers[],
   reconfigure?: TReconfigureAdapter,
-  status?: TAdapterStatus
+  status?: TAdaptersStatus
 ): TAdapterContext => ({
   adapterEffectIdentifiers: adapterIdentifiers ?? [],
   reconfigure: reconfigure ?? initialReconfigureAdapter,
-  status: status ?? initialAdapterStatus,
+  status,
 });
 
 const initialAdapterContext = createAdapterContext();
 const AdapterContext = createContext(initialAdapterContext);
 
-const selectAdapterConfigurationStatus = (
-  configurationStatus?: AdapterConfigurationStatus
-) => {
-  const isReady = configurationStatus === AdapterConfigurationStatus.Configured;
-  const isUnconfigured =
-    configurationStatus === AdapterConfigurationStatus.Unconfigured;
-  const isConfiguring =
-    configurationStatus === AdapterConfigurationStatus.Configuring;
-  const isConfigured =
-    configurationStatus === AdapterConfigurationStatus.Configured;
+function hasEveryAdapterStatus(
+  adapterConfigurationStatus: AdapterConfigurationStatus,
+  adaptersStatus?: TAdaptersStatus
+) {
+  if (Object.keys(adaptersStatus ?? {}).length === 0) return false;
 
-  return { isReady, isUnconfigured, isConfiguring, isConfigured };
+  return Object.values(adaptersStatus ?? {}).every(
+    (adapterStatus) =>
+      adapterStatus.configurationStatus === adapterConfigurationStatus
+  );
+}
+
+const selectAdapterConfigurationStatus = (adaptersStatus?: TAdaptersStatus) => {
+  const isReady = hasEveryAdapterStatus(
+    AdapterConfigurationStatus.Configured,
+    adaptersStatus
+  );
+  const isUnconfigured = hasEveryAdapterStatus(
+    AdapterConfigurationStatus.Unconfigured,
+    adaptersStatus
+  );
+  const isConfiguring = hasEveryAdapterStatus(
+    AdapterConfigurationStatus.Configuring,
+    adaptersStatus
+  );
+  const isConfigured = hasEveryAdapterStatus(
+    AdapterConfigurationStatus.Configured,
+    adaptersStatus
+  );
+
+  const status = { isReady, isUnconfigured, isConfiguring, isConfigured };
+
+  return status;
 };
 
 export default AdapterContext;

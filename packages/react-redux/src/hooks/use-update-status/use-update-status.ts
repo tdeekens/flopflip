@@ -1,4 +1,5 @@
 import {
+  adapterIdentifiers as allAdapterIdentifiers,
   type TAdapterEventHandlers,
   type TAdapterStatusChange,
 } from '@flopflip/types';
@@ -9,9 +10,10 @@ import { updateStatus } from '../../ducks';
 
 const useUpdateStatus = (): TAdapterEventHandlers['onStatusStateChange'] => {
   const dispatch = useDispatch();
+
   return useCallback(
     (statusChange: TAdapterStatusChange) =>
-      dispatch(updateStatus(statusChange)),
+      dispatch(updateStatus(statusChange, Object.keys(allAdapterIdentifiers))),
     [dispatch]
   );
 };
