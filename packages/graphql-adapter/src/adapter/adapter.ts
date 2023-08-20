@@ -58,7 +58,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
     '__internalConfiguredStatusChange__';
 
   #adapterState: TAdapterStatus & TGraphQlAdapterState;
-  #defaultPollingInteralMs = 1000 * 60;
+  #defaultpollingIntervalMs = 1000 * 60;
 
   constructor() {
     this.id = adapterIdentifiers.graphql;
@@ -140,8 +140,8 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
   };
 
   #subscribeToFlagsChanges = (adapterArgs: TGraphQlAdapterArgs) => {
-    const pollingInteralMs =
-      adapterArgs.pollingInteralMs ?? this.#defaultPollingInteralMs;
+    const pollingIntervalMs =
+      adapterArgs.pollingIntervalMs ?? this.#defaultpollingIntervalMs;
 
     setInterval(async () => {
       if (!this.#getIsAdapterUnsubscribed()) {
@@ -158,7 +158,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
           this.#adapterState.emitter.emit('flagsStateChange', nextFlags);
         }
       }
-    }, pollingInteralMs);
+    }, pollingIntervalMs);
   };
 
   getUser = () => this.#adapterState.user;

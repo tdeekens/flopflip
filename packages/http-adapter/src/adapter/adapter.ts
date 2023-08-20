@@ -57,7 +57,7 @@ class HttpAdapter implements THttpAdapterInterface {
     '__internalConfiguredStatusChange__';
 
   #adapterState: TAdapterStatus & THttpAdapterState;
-  #defaultPollingInteralMs = 1000 * 60;
+  #defaultpollingIntervalMs = 1000 * 60;
 
   constructor() {
     this.id = adapterIdentifiers.http;
@@ -123,8 +123,8 @@ class HttpAdapter implements THttpAdapterInterface {
   };
 
   #subscribeToFlagsChanges = (adapterArgs: THttpAdapterArgs) => {
-    const pollingInteralMs =
-      adapterArgs.pollingInteralMs ?? this.#defaultPollingInteralMs;
+    const pollingIntervalMs =
+      adapterArgs.pollingIntervalMs ?? this.#defaultpollingIntervalMs;
 
     setInterval(async () => {
       if (!this.#getIsAdapterUnsubscribed()) {
@@ -141,7 +141,7 @@ class HttpAdapter implements THttpAdapterInterface {
           this.#adapterState.emitter.emit('flagsStateChange', nextFlags);
         }
       }
-    }, pollingInteralMs);
+    }, pollingIntervalMs);
   };
 
   getUser = () => this.#adapterState.user;

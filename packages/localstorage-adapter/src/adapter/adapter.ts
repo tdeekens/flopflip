@@ -84,10 +84,10 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     [user.key, 'flags'].filter(Boolean).join('/');
 
   #subscribeToFlagsChanges = ({
-    pollingInteralMs = 1000 * 60,
+    pollingIntervalMs = 1000 * 60,
     user,
   }: {
-    pollingInteralMs?: TLocalStorageAdapterArgs['pollingInteralMs'];
+    pollingIntervalMs?: TLocalStorageAdapterArgs['pollingIntervalMs'];
     user: TUser;
   }) => {
     setInterval(() => {
@@ -101,7 +101,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
           this.#adapterState.emitter.emit('flagsStateChange', nextFlags);
         }
       }
-    }, pollingInteralMs);
+    }, pollingIntervalMs);
   };
 
   updateFlags = (flags: TFlags, options?: TUpdateFlagsOptions) => {
@@ -183,7 +183,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
     this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 
-    const { user, pollingInteralMs } = adapterArgs;
+    const { user, pollingIntervalMs } = adapterArgs;
 
     this.#adapterState.user = user;
 
@@ -199,7 +199,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
       this.#subscribeToFlagsChanges({
-        pollingInteralMs,
+        pollingIntervalMs,
         user,
       });
 
