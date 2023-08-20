@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/react-broadcast",
-  "version": "13.0.3",
+  "version": "13.0.4",
   "description": "A feature toggle wrapper to use LaunchDarkly with React",
   "main": "dist/flopflip-react-broadcast.cjs.js",
   "module": "dist/flopflip-react-broadcast.esm.js",
@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@flopflip/memory-adapter": "13.0.3",
+    "@flopflip/memory-adapter": "13.0.4",
     "@flopflip/test-utils": "*",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.0",
@@ -40,8 +40,8 @@
   },
   "dependencies": {
     "@babel/runtime": "7.22.10",
-    "@flopflip/react": "^13.0.3",
-    "@flopflip/types": "13.0.3",
+    "@flopflip/react": "^13.0.4",
+    "@flopflip/types": "13.0.4",
     "use-sync-external-store": "1.2.0"
   },
   "keywords": [
