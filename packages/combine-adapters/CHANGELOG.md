@@ -1,5 +1,15 @@
 # @flopflip/combine-adapters
 
+## 13.1.1
+
+### Patch Changes
+
+- [#1798](https://github.com/tdeekens/flopflip/pull/1798) [`f5b9d931`](https://github.com/tdeekens/flopflip/commit/f5b9d931182fd9fdbe9622f4c69739eb64e7365f) Thanks [@tdeekens](https://github.com/tdeekens)! - fix(combine-adapters): to not be stuck in configuring state
+
+- Updated dependencies []:
+  - @flopflip/adapter-utilities@13.1.1
+  - @flopflip/types@13.1.1
+
 ## 13.1.0
 
 ### Patch Changes

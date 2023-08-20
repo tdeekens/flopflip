@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/memory-adapter",
-  "version": "13.1.0",
+  "version": "13.1.1",
   "description": "An in memory adapter for flipflop",
   "main": "dist/flopflip-memory-adapter.cjs.js",
   "module": "dist/flopflip-memory-adapter.esm.js",
@@ -30,8 +30,8 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.22.10",
-    "@flopflip/adapter-utilities": "13.1.0",
-    "@flopflip/types": "13.1.0",
+    "@flopflip/adapter-utilities": "13.1.1",
+    "@flopflip/types": "13.1.1",
     "mitt": "3.0.1",
     "tiny-warning": "1.0.3"
   },
