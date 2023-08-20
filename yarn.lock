@@ -2490,8 +2490,8 @@ __metadata:
     "@flopflip/react": ^13.0.3
     "@flopflip/test-utils": "*"
     "@flopflip/types": 13.0.3
-    "@types/react": 18.2.20
-    "@types/react-dom": 18.2.7
+    "@types/react": 18.2.0
+    "@types/react-dom": 18.2.0
     react: 18.2.0
     react-dom: 18.2.0
     use-sync-external-store: 1.2.0
@@ -2530,9 +2530,9 @@ __metadata:
     "@babel/runtime": 7.22.10
     "@flopflip/test-utils": "*"
     "@flopflip/types": 13.0.3
-    "@types/react": 18.2.20
-    "@types/react-dom": 18.2.7
-    "@types/react-is": 18.2.1
+    "@types/react": 18.2.0
+    "@types/react-dom": 18.2.0
+    "@types/react-is": 17.0.4
     lodash: 4.17.21
     react: 18.2.0
     react-dom: 18.2.0
@@ -3714,21 +3714,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:18.2.7":
-  version: 18.2.7
-  resolution: "@types/react-dom@npm:18.2.7"
+"@types/react-dom@npm:18.2.0":
+  version: 18.2.0
+  resolution: "@types/react-dom@npm:18.2.0"
   dependencies:
     "@types/react": "*"
-  checksum: e02ea908289a7ad26053308248d2b87f6aeafd73d0e2de2a3d435947bcea0422599016ffd1c3e38ff36c42f5e1c87c7417f05b0a157e48649e4a02f21727d54f
+  checksum: 9212b3793707a763f10e2c608f6ccb5f729029da6cb84204f333634d3d7baafbc1b20b7faf7cf788a8fd385050a1fb579902031f9462473ef10607116f33f33c
   languageName: node
   linkType: hard
 
-"@types/react-is@npm:18.2.1":
-  version: 18.2.1
-  resolution: "@types/react-is@npm:18.2.1"
+"@types/react-is@npm:17.0.4":
+  version: 17.0.4
+  resolution: "@types/react-is@npm:17.0.4"
   dependencies:
-    "@types/react": "*"
-  checksum: b44c3262efa2c68fa6fe2beb9ef86170b18305469461a3f97aa14943cc033cb21a26944f718bdb6434eea6e8f7fcba251c4f45b65b897a3fcf751b5a6003cf82
+    "@types/react": ^17
+  checksum: 4c273945795b539f6ae0efdbd917e86edfbd9a9fad12cd6724fb2216bf47d724560b7b3cd07541c3f9e86dd085b386d7020119c5db0a289fbb069524b1242586
   languageName: node
   linkType: hard
 
@@ -3744,14 +3744,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:18.2.20":
-  version: 18.2.20
-  resolution: "@types/react@npm:18.2.20"
+"@types/react@npm:18.2.0":
+  version: 18.2.0
+  resolution: "@types/react@npm:18.2.0"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 30f699c60e5e4bfef273ce64d320651cdd60f5c6a08361c6c7eca8cebcccda1ac953d2ee57c9f321b5ae87f8a62c72b6d35ca42df0e261d337849952daab2141
+  checksum: db3d92b423150222a666329f7aa3023e3e942044700557b8a7d161530847e621aec9f56c9e7f71761b06dd164c8a7b17ad52355863efe80963dffa5537e8e5fd
   languageName: node
   linkType: hard
 
