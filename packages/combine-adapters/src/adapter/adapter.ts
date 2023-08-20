@@ -139,18 +139,20 @@ class CombineAdapters implements TCombinedAdapterInterface {
             initializationStatus === AdapterInitializationStatus.Succeeded
         );
 
+      // NOTE: We consider this adapter configured if all adapters have been asked to do so
+      // and have reported to be initialized successfully.
+      this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
+
+      this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
+
       if (haveAllAdaptersInitializedSuccessfully) {
-        this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
-
-        this.#adapterState.emitter.emit(
-          this.#__internalConfiguredStatusChange__
-        );
-
         return {
           initializationStatus: AdapterInitializationStatus.Succeeded,
         };
       }
 
+      // NOTE: If not all adapters have initialized successfully we can not consider
+      // this adapter being configured fully.
       this.setConfigurationStatus(AdapterConfigurationStatus.Unconfigured);
 
       this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
