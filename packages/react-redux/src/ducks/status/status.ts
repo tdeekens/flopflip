@@ -63,8 +63,13 @@ export const updateStatus = (
   payload: { ...statusChange, adapterIdentifiers },
 });
 // Selectors
-export const selectStatus = (state: TState) => {
-  const { status } = state[STATE_SLICE];
-
-  return selectAdapterConfigurationStatus(status);
+type TSelectStatusArgs = {
+  adapterIdentifiers?: TAdapterIdentifiers[];
 };
+export const selectStatus =
+  ({ adapterIdentifiers }: TSelectStatusArgs = {}) =>
+  (state: TState) => {
+    const { status } = state[STATE_SLICE];
+
+    return selectAdapterConfigurationStatus(status, adapterIdentifiers);
+  };
