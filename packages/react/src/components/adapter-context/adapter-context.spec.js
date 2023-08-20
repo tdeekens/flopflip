@@ -74,4 +74,44 @@ describe('selectAdapterConfigurationStatus', () => {
       );
     });
   });
+  describe('with multiple adapters and one of interest', () => {
+    it('should indicate ready state for one', () => {
+      expect(
+        selectAdapterConfigurationStatus(
+          {
+            memory: {
+              configurationStatus: AdapterConfigurationStatus.Configured,
+            },
+            http: {
+              configurationStatus: AdapterConfigurationStatus.Unconfigured,
+            },
+          },
+          ['memory']
+        )
+      ).toEqual(
+        expect.objectContaining({
+          isReady: true,
+        })
+      );
+    });
+    it('should indicate unconfigured state for another', () => {
+      expect(
+        selectAdapterConfigurationStatus(
+          {
+            memory: {
+              configurationStatus: AdapterConfigurationStatus.Configured,
+            },
+            http: {
+              configurationStatus: AdapterConfigurationStatus.Unconfigured,
+            },
+          },
+          ['http']
+        )
+      ).toEqual(
+        expect.objectContaining({
+          isUnconfigured: true,
+        })
+      );
+    });
+  });
 });

@@ -132,6 +132,10 @@ describe('selectors', () => {
         configurationStatus: AdapterConfigurationStatus.Configuring,
         subscriptionStatus: {},
       },
+      http: {
+        configurationStatus: AdapterConfigurationStatus.Unconfigured,
+        subscriptionStatus: {},
+      },
     };
     state = {
       [STATE_SLICE]: {
@@ -140,12 +144,29 @@ describe('selectors', () => {
     };
   });
 
-  describe('selecting status', () => {
+  describe('selecting status for all', () => {
     it('should return configuration and ready status', () => {
-      expect(selectStatus(state)).toEqual(
+      expect(selectStatus()(state)).toEqual(
+        expect.objectContaining({
+          isConfiguring: false,
+          isReady: false,
+          isUnconfigured: false,
+        })
+      );
+    });
+  });
+  describe('selecting status for one', () => {
+    it('should return unconfigured status', () => {
+      expect(selectStatus({ adapterIdentifiers: ['http'] })(state)).toEqual(
+        expect.objectContaining({
+          isUnconfigured: true,
+        })
+      );
+    });
+    it('should return configuring status', () => {
+      expect(selectStatus({ adapterIdentifiers: ['memory'] })(state)).toEqual(
         expect.objectContaining({
           isConfiguring: true,
-          isConfigured: false,
         })
       );
     });

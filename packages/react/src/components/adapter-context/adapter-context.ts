@@ -24,9 +24,18 @@ const AdapterContext = createContext(initialAdapterContext);
 
 function hasEveryAdapterStatus(
   adapterConfigurationStatus: AdapterConfigurationStatus,
-  adaptersStatus?: TAdaptersStatus
+  adaptersStatus?: TAdaptersStatus,
+  adapterIdentifiers?: TAdapterIdentifiers[]
 ) {
   if (Object.keys(adaptersStatus ?? {}).length === 0) return false;
+
+  if (Array.isArray(adapterIdentifiers)) {
+    return adapterIdentifiers.every(
+      (adapterIdentifier) =>
+        adaptersStatus?.[adapterIdentifier].configurationStatus ===
+        adapterConfigurationStatus
+    );
+  }
 
   return Object.values(adaptersStatus ?? {}).every(
     (adapterStatus) =>
@@ -34,22 +43,29 @@ function hasEveryAdapterStatus(
   );
 }
 
-const selectAdapterConfigurationStatus = (adaptersStatus?: TAdaptersStatus) => {
+const selectAdapterConfigurationStatus = (
+  adaptersStatus?: TAdaptersStatus,
+  adapterIdentifiers?: TAdapterIdentifiers[]
+) => {
   const isReady = hasEveryAdapterStatus(
     AdapterConfigurationStatus.Configured,
-    adaptersStatus
+    adaptersStatus,
+    adapterIdentifiers
   );
   const isUnconfigured = hasEveryAdapterStatus(
     AdapterConfigurationStatus.Unconfigured,
-    adaptersStatus
+    adaptersStatus,
+    adapterIdentifiers
   );
   const isConfiguring = hasEveryAdapterStatus(
     AdapterConfigurationStatus.Configuring,
-    adaptersStatus
+    adaptersStatus,
+    adapterIdentifiers
   );
   const isConfigured = hasEveryAdapterStatus(
     AdapterConfigurationStatus.Configured,
-    adaptersStatus
+    adaptersStatus,
+    adapterIdentifiers
   );
 
   const status = { isReady, isUnconfigured, isConfiguring, isConfigured };
