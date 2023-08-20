@@ -1,5 +1,14 @@
 # @flopflip/react
 
+## 13.0.4
+
+### Patch Changes
+
+- [#1792](https://github.com/tdeekens/flopflip/pull/1792) [`e537658a`](https://github.com/tdeekens/flopflip/commit/e537658a40dd64020360e8f996cd84aa1cf7c4de) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: build with older types
+
+- Updated dependencies []:
+  - @flopflip/types@13.0.4
+
 ## 13.0.3
 
 ### Patch Changes
