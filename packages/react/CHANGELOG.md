@@ -1,5 +1,24 @@
 # @flopflip/react
 
+## 13.1.0
+
+### Minor Changes
+
+- [#1797](https://github.com/tdeekens/flopflip/pull/1797) [`34c4b6fd`](https://github.com/tdeekens/flopflip/commit/34c4b6fd8335c0ae96bf7b15540064a3cb419ecc) Thanks [@tdeekens](https://github.com/tdeekens)! - The `useAdapterStatus` hooks now allow to fetch status of one or more adapters instead of always all.
+
+  You can pass the `adapterIdentifiers` argument which is of type `TAdapterIdentifiers[]`. This means you can:
+
+  ```js
+  const status = useAdapterStatus({ adapterIdentifiers: ['http', 'memory] });
+  ```
+
+  This returns `isConfigured` once both adapters have reached the configurd state.
+
+### Patch Changes
+
+- Updated dependencies [[`c5439254`](https://github.com/tdeekens/flopflip/commit/c54392541aa7413c3d1425fafb46b184c90f3872)]:
+  - @flopflip/types@13.1.0
+
 ## 13.0.4
 
 ### Patch Changes

@@ -1,5 +1,17 @@
 # @flopflip/http-adapter
 
+## 13.1.0
+
+### Patch Changes
+
+- [#1796](https://github.com/tdeekens/flopflip/pull/1796) [`c5439254`](https://github.com/tdeekens/flopflip/commit/c54392541aa7413c3d1425fafb46b184c90f3872) Thanks [@tdeekens](https://github.com/tdeekens)! - Rename pollingInteralMs to pollingIntervalMs.
+
+- Updated dependencies [[`c5439254`](https://github.com/tdeekens/flopflip/commit/c54392541aa7413c3d1425fafb46b184c90f3872)]:
+  - @flopflip/types@13.1.0
+  - @flopflip/adapter-utilities@13.1.0
+  - @flopflip/localstorage-cache@13.1.0
+  - @flopflip/sessionstorage-cache@13.1.0
+
 ## 13.0.4
 
 ### Patch Changes
