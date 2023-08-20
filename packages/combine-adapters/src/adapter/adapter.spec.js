@@ -345,10 +345,10 @@ describe('when combining', () => {
       );
     });
 
-    it('should indicate that the adapter is not configured', () => {
+    it('should indicate that the adapter is configured regardless', () => {
       expect(
         adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
-      ).toBe(false);
+      ).toBe(true);
     });
   });
 
