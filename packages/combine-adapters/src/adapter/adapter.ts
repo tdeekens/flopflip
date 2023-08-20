@@ -129,7 +129,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         return adapter.configure(adapterArgsForAdapter, {
           onFlagsStateChange: adapterEventHandlers.onFlagsStateChange,
-          onStatusStateChange: () => undefined,
+          onStatusStateChange: adapterEventHandlers.onStatusStateChange,
         });
       })
     ).then((allInitializationStatus) => {
@@ -192,7 +192,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         return adapter.reconfigure(adapterArgsForAdapter, {
           onFlagsStateChange: adapterEventHandlers.onFlagsStateChange,
-          onStatusStateChange: () => undefined,
+          onStatusStateChange: adapterEventHandlers.onStatusStateChange,
         });
       })
     ).then((allInitializationStatus) => {
@@ -229,17 +229,9 @@ class CombineAdapters implements TCombinedAdapterInterface {
   };
 
   async waitUntilConfigured() {
-    return new Promise<void>((resolve) => {
-      if (
-        this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
-      ) {
-        resolve();
-      } else
-        this.#adapterState.emitter.on(
-          this.#__internalConfiguredStatusChange__,
-          resolve
-        );
-    });
+    return Promise.all(
+      this.#adapters.map(async (adapter) => adapter?.waitUntilConfigured?.())
+    );
   }
 
   unsubscribe = () => {

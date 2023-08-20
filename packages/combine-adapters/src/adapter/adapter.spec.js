@@ -178,18 +178,48 @@ describe('when combining', () => {
     });
 
     it('should resolve `waitUntilConfigured`', async () => {
-      await expect(adapter.waitUntilConfigured()).resolves.not.toBeDefined();
+      await expect(adapter.waitUntilConfigured()).resolves.toBeDefined();
     });
 
-    it('should invoke `onStatusStateChange` with configured', () => {
-      expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
-        expect.objectContaining({
-          id: adapter.id,
-          status: {
-            configurationStatus: AdapterConfigurationStatus.Configured,
-          },
-        })
-      );
+    describe('invokcation of `onStatusStateChange`', () => {
+      describe('of `combine-adapters`', () => {
+        it('should invoke `onStatusStateChange` with configured', () => {
+          expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
+            expect.objectContaining({
+              id: adapter.id,
+              status: {
+                configurationStatus: AdapterConfigurationStatus.Configured,
+              },
+            })
+          );
+        });
+      });
+
+      describe('of `memory-adapter`', () => {
+        it('should invoke `onStatusStateChange` with configured', () => {
+          expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
+            expect.objectContaining({
+              id: memoryAdapter.id,
+              status: {
+                configurationStatus: AdapterConfigurationStatus.Configured,
+              },
+            })
+          );
+        });
+      });
+
+      describe('of `localstorage-adapter`', () => {
+        it('should invoke `onStatusStateChange` with configured', () => {
+          expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
+            expect.objectContaining({
+              id: localstorageAdapter.id,
+              status: {
+                configurationStatus: AdapterConfigurationStatus.Configured,
+              },
+            })
+          );
+        });
+      });
     });
 
     it('should invoke `onFlagsStateChange`', () => {
