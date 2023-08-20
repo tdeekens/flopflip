@@ -323,11 +323,11 @@ _3. The `@flopflip/graphql-adapter` accepts_
 - `getRequestHeaders`: a function called with `adapterArgs` being headers to your GraphQL request
 - `parseFlags`: a function called with the `data` of fetched flags to parse the result before being exposed to your application. This function should be used to parse a query response into the `TFlags` type.
 - `fetcher`: a fetch implemtation if you prefer to not rely on the global `fetch`
-- `pollingInteralMs`: the polling interval to check for updated flag values
+- `pollingIntervalMs`: the polling interval to check for updated flag values
 
 _4. The `@flopflip/localstorage-adapter` accepts_
 
-- `pollingInteralMs`: an interval at which the adapter polls for new flags from localstorage in milliseconds
+- `pollingIntervalMs`: an interval at which the adapter polls for new flags from localstorage in milliseconds
 
 _5. The `@flopflip/memory-adapter` accepts_
 

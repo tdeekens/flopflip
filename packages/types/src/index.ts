@@ -70,7 +70,7 @@ export type TGraphQlAdapterArgs<
   fetcher?: typeof fetch;
   uri: string;
   query: string;
-  pollingInteralMs?: number;
+  pollingIntervalMs?: number;
   getQueryVariables?: (adapterArgs: TGraphQlAdapterArgs) => unknown;
   getRequestHeaders?: (
     adapterArgs: TGraphQlAdapterArgs
@@ -84,13 +84,13 @@ export type THttpAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,
 > = TBaseAdapterArgs<TAdditionalUserProperties> & {
   execute: () => Promise<any>;
-  pollingInteralMs?: number;
+  pollingIntervalMs?: number;
   cacheIdentifier?: TCacheIdentifiers;
 };
 export type TLocalStorageAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,
 > = TBaseAdapterArgs<TAdditionalUserProperties> & {
-  pollingInteralMs?: number;
+  pollingIntervalMs?: number;
 };
 export type TMemoryAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,

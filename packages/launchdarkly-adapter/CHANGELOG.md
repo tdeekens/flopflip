@@ -555,7 +555,7 @@
 
   **localstorage-adapter**
 
-  All fields are now top-level not under `adapterConfiguration` while it is now `pollingInteralMs` not `pollingInteral`.
+  All fields are now top-level not under `adapterConfiguration` while it is now `pollingIntervalMs` not `pollingInteral`.
 
 ### Patch Changes
 
