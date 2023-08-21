@@ -1,5 +1,13 @@
 # @flopflip/combine-adapters
 
+## 13.1.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/adapter-utilities@13.1.2
+  - @flopflip/types@13.1.2
+
 ## 13.1.1
 
 ### Patch Changes
