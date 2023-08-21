@@ -1,6 +1,7 @@
 import { AdapterContext, createAdapterContext } from '@flopflip/react';
 import {
   AdapterConfigurationStatus,
+  adapterIdentifiers,
   AdapterSubscriptionStatus,
   type TAdapterIdentifiers,
   type TAdaptersStatus,
@@ -25,10 +26,15 @@ const defaultProps: Pick<
 > = {
   adapterIdentifiers: ['test'],
   status: {
-    memory: {
-      subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
-      configurationStatus: AdapterConfigurationStatus.Configured,
-    },
+    ...Object.fromEntries(
+      Object.values(adapterIdentifiers).map((adapterInterfaceIdentifier) => [
+        adapterInterfaceIdentifier,
+        {
+          subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
+          configurationStatus: AdapterConfigurationStatus.Configured,
+        },
+      ])
+    ),
   },
 };
 
