@@ -1,5 +1,14 @@
 # @flopflip/react
 
+## 13.1.2
+
+### Patch Changes
+
+- [#1803](https://github.com/tdeekens/flopflip/pull/1803) [`f8ad668b`](https://github.com/tdeekens/flopflip/commit/f8ad668b69f6335ae7a970cd3da6474a3a9b5f21) Thanks [@tdeekens](https://github.com/tdeekens)! - Fix test provider to have configuration state for all adapters.
+
+- Updated dependencies []:
+  - @flopflip/types@13.1.2
+
 ## 13.1.1
 
 ### Patch Changes
