@@ -32,7 +32,7 @@ function hasEveryAdapterStatus(
   if (Array.isArray(adapterIdentifiers)) {
     return adapterIdentifiers.every(
       (adapterIdentifier) =>
-        adaptersStatus?.[adapterIdentifier].configurationStatus ===
+        adaptersStatus?.[adapterIdentifier]?.configurationStatus ===
         adapterConfigurationStatus
     );
   }
