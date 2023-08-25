@@ -31,6 +31,7 @@
     "launchdarkly-js-client-sdk": "3.1.3"
   },
   "devDependencies": {
+    "@types/react": "18.2.0",
     "typescript": "5.1.6"
   },
   "peerDependencies": {

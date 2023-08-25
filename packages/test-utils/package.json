@@ -21,7 +21,6 @@
     "@testing-library/react": "14.0.0",
     "jest-runner-eslint": "2.1.0",
     "jest-watch-typeahead": "2.2.2",
-    "jest-watch-yarn-workspaces": "1.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   }

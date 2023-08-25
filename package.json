@@ -3,26 +3,27 @@
   "name": "flopflip",
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
-    "setup": "husky install && preconstruct dev && manypkg check && check-node-version --package --print",
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "husky install && preconstruct dev && manypkg check && check-node-version --package --print",
     "auth": "npm_config_registry=https://registry.npmjs.org npm whoami",
     "develop": "jest --projects jest.*.config.js --watch",
     "lint": "jest --config jest.lint.config.js --maxWorkers 5",
     "pretypecheck": "rimraf packages/**/dist/**",
     "typecheck": "tsc --project tsconfig.json --noEmit && tsc --project packages/cypress-plugin/tsconfig.json --noEmit",
-    "format": "yarn format:ts && yarn format:md && yarn format:yaml",
+    "format": "pnpm format:ts && pnpm format:md && pnpm format:yaml",
     "format:ts": "prettier --write '**/*.{js, ts, tsx}'",
     "format:md": "prettier --parser markdown --write '**/*.md'",
     "format:yaml": "prettier --parser yaml --write '**/*.{yml,yaml}'",
     "fix:eslint": "eslint --fix --format=node_modules/eslint-formatter-pretty",
     "test": "cross-env NODE_ENV=test jest --config jest.test.config.js",
-    "test:ci": "cross-env NODE_ENV=test yarn test --no-watchman --maxWorkers 5 --no-cache",
-    "test:ci:coverage": "cross-env NODE_ENV=test yarn test:ci --coverage && codecov",
-    "test:watch": "cross-env NODE_ENV=test yarn test --watch",
-    "test:coverage": "cross-env NODE_ENV=test yarn test --coverage",
+    "test:ci": "cross-env NODE_ENV=test pnpm test -- --no-watchman --maxWorkers 5 --no-cache",
+    "test:ci:coverage": "cross-env NODE_ENV=test pnpm test:ci --coverage && codecov",
+    "test:watch": "cross-env NODE_ENV=test pnpm test -- --watch",
+    "test:coverage": "cross-env NODE_ENV=test pnpm test -- --coverage",
     "build": "preconstruct build",
     "build:watch": "preconstruct watch",
     "changeset": "changeset",
-    "changeset:version-and-format": "changeset version && prettier --write --parser json '**/package.json' && YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn install",
+    "changeset:version-and-format": "changeset version && prettier --write --parser json '**/package.json' && pnpm install",
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable"
   },
@@ -30,7 +31,7 @@
   "engines": {
     "node": ">=10",
     "npm": ">=3",
-    "yarn": ">=3"
+    "pnpm": ">=8"
   },
   "bugs": {
     "url": "https://github.com/tdeekens/flopflip/issues"
@@ -106,11 +107,6 @@
     "tslib": "2.6.2",
     "typescript": "5.1.6"
   },
-  "resolutions": {
-    "@types/react": "18.2.0",
-    "@types/react-dom": "18.2.0",
-    "babel-plugin-lodash/@babel/types": "~7.22.0"
-  },
   "keywords": [
     "react",
     "redux",
@@ -120,10 +116,7 @@
     "HoC",
     "store-enhancer"
   ],
-  "workspaces": [
-    "packages/*"
-  ],
-  "packageManager": "yarn@3.6.2",
+  "packageManager": "pnpm@8.6.11",
   "preconstruct": {
     "packages": [
       "demo",
@@ -131,6 +124,12 @@
       "!packages/test-utils",
       "!demo"
     ]
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "18.2.0",
+      "@types/react-dom": "18.2.0"
+    }
   },
   "bundlewatch": {
     "files": [
