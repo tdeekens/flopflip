@@ -18,35 +18,41 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          run_install: false
+
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Install
-        run: yarn install --immutable
+        run: pnpm install
+
       - name: Check for unmet constraints (fix w/ "yarn constraints --fix")
-        run: yarn constraints
+        run: pnpm constraints
 
       - name: Type check
-        run: yarn typecheck
+        run: pnpm typecheck
 
       - name: Lint
-        run: yarn lint
+        run: pnpm lint
 
       - name: Build
-        run: yarn build
+        run: pnpm build
 
       - name: Test
         if: startsWith(matrix.node-version, '18')
-        run: yarn test:ci
+        run: pnpm test:ci
         env:
           CI: true
 
       - name: Test (with coverage)
         if: startsWith(matrix.node-version, '20')
-        run: yarn test:ci:coverage
+        run: pnpm test:ci:coverage
         env:
           CI: true
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

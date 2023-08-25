@@ -19,6 +19,11 @@ jobs:
         if: github.ref == 'refs/heads/main'
         uses: actions/checkout@v3
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          run_install: false
+
       - name: Fetch all tags (for releases)
         run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
@@ -26,16 +31,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version-file: '.nvmrc'
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: pnpm install
 
       - name: Storing release version for changeset
         id: release_version
         run: ./scripts/echo-release-version.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
       - name: Ouptut version
         run: echo "The version is ${{ steps.release_version.outputs.VERSION }}"
 
@@ -49,18 +55,18 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Verify NPM user
-        run: yarn auth
+        run: pnpm auth
 
       - name: Building packages
-        run: yarn build
+        run: pnpm build
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         # uses: changesets/action@v1
         uses: dotansimha/changesets-action@v1.5.2
         with:
-          publish: yarn changeset publish
-          version: yarn changeset:version-and-format
+          publish: pnpm changeset publish
+          version: pnpm changeset:version-and-format
           title: 'ci(changesets): version packages'
           commit: 'ci(changesets): version packages'
           createGithubReleases: aggregate
@@ -73,7 +79,7 @@ jobs:
         if: steps.changesets.outputs.published != 'true' && github.ref == 'refs/heads/main'
         run: |
           git checkout main
-          yarn changeset version --snapshot canary
-          yarn changeset publish --tag canary
+          pnpm changeset version --snapshot canary
+          pnpm changeset publish --tag canary
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
