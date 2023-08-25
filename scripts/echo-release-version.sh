@@ -4,7 +4,7 @@ set -e
 
 echo "Running 'changeset version' to know the new release version"
 
-yarn changeset version
+pnpm changeset version
 
 echo "Running 'git status' to see the worktree changes"
 

@@ -588,9 +588,6 @@ importers:
       jest-watch-typeahead:
         specifier: 2.2.2
         version: 2.2.2(jest@29.6.2)
-      jest-watch-yarn-workspaces:
-        specifier: 1.1.0
-        version: 1.1.0(jest@29.6.2)
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -3754,11 +3751,6 @@ packages:
     resolution: {integrity: sha512-/6w/C21Pm1A7aZitlI5Ni/2J6FFQN8i1Cvz3kHABAAbw93v/NlvKdVOqz7CCWz/3iv/JplRSEEZ83XION15ovw==}
     engines: {node: '>=6'}
 
-  /ansi-escapes@3.2.0:
-    resolution: {integrity: sha512-cBhpre4ma+U0T1oM5fXg7Dy1Jw7zzwv7lt/GoCpr+hDQJoYnKVPLL4dCvSEFMmQurOQvSrwT7SL/DAlhBI97RQ==}
-    engines: {node: '>=4'}
-    dev: false
-
   /ansi-escapes@4.3.2:
     resolution: {integrity: sha512-gKXj5ALrKWQLsYG9jlTRmR/xKluxHV+Z9QEwNIgCfM1/uwPMCuzVVnh5mwTd+OuBZcwSIMbqssNWRm1lE51QaQ==}
     engines: {node: '>=8'}
@@ -6555,13 +6547,6 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /is-path-inside@2.1.0:
-    resolution: {integrity: sha512-wiyhTzfDWsvwAW53OBWF5zuvaOGlZ6PwYxAbPVDhpm+gM09xKQGjBq/8uYN12aDvMxnAnq3dxTyoSoRNmg5YFg==}
-    engines: {node: '>=6'}
-    dependencies:
-      path-is-inside: 1.0.2
-    dev: false
-
   /is-path-inside@3.0.3:
     resolution: {integrity: sha512-Fd4gABb+ycGAmKou8eMftCupSir5lRxqf4aD/vd0cD2qc4HL07OjCeuHMr8Ro4CoMaeCKDB0/ECBOVWjTwUvPQ==}
     engines: {node: '>=8'}
@@ -7182,19 +7167,6 @@ packages:
       pretty-format: 29.6.3
     dev: false
 
-  /jest-watch-directories@1.1.0(jest@29.6.2):
-    resolution: {integrity: sha512-hSXyGELXGUnkV2RsbPSV2m6jUzKY+WEOMG35sq9ZLm4yIJzeXNnOiNYtvIusi1/4rizS6PgTRAF6hiCmBClt4g==}
-    peerDependencies:
-      jest: '>= 23.0.0'
-    dependencies:
-      ansi-escapes: 3.2.0
-      glob: 7.2.3
-      is-path-inside: 2.1.0
-      jest: 29.6.2(@types/node@18.17.6)(ts-node@10.9.1)
-      messageformat: 2.3.0
-      prompts: 1.2.1
-    dev: false
-
   /jest-watch-typeahead@2.2.2(jest@29.6.2):
     resolution: {integrity: sha512-+QgOFW4o5Xlgd6jGS5X37i08tuuXNW8X0CV9WNFi+3n8ExCIP+E1melYhvYLjv5fE6D0yyzk74vsSO8I6GqtvQ==}
     engines: {node: ^14.17.0 || ^16.10.0 || >=18.0.0}
@@ -7209,14 +7181,6 @@ packages:
       slash: 5.1.0
       string-length: 5.0.1
       strip-ansi: 7.1.0
-    dev: false
-
-  /jest-watch-yarn-workspaces@1.1.0(jest@29.6.2):
-    resolution: {integrity: sha512-kfufQPfJoBN5n1qP9LjsVA//D6LIGxDd0/ZZbRorN6cinCKs5u+7ACIkk7XGFIaW+PH2HjBlvelIw6G0rPwFIA==}
-    dependencies:
-      jest-watch-directories: 1.1.0(jest@29.6.2)
-    transitivePeerDependencies:
-      - jest
     dev: false
 
   /jest-watcher@29.6.4:
@@ -7760,13 +7724,6 @@ packages:
     resolution: {integrity: sha512-s8UhlNe7vPKomQhC1qFelMokr/Sc3AgNbso3n74mVPA5LTZwkB9NlXf4XPamLxJE8h0gh73rM94xvwRT2CVInw==}
     dev: false
 
-  /make-plural@4.3.0:
-    resolution: {integrity: sha512-xTYd4JVHpSCW+aqDof6w/MebaMVNTVYBZhbB/vi513xXdiPT92JMVCo0Jq8W2UZnzYRFeVbQiQ+I25l13JuKvA==}
-    hasBin: true
-    optionalDependencies:
-      minimist: 1.2.8
-    dev: false
-
   /makeerror@1.0.12:
     resolution: {integrity: sha512-JmqCvUhmt43madlpFzG4BQzG2Z3m6tvQDNKdClZnO3VbIudJYmxsT0FNJMeiB2+JTSlTQTSbU8QdesVmwJcmLg==}
     dependencies:
@@ -7844,23 +7801,6 @@ packages:
   /merge2@1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
     engines: {node: '>= 8'}
-    dev: false
-
-  /messageformat-formatters@2.0.1:
-    resolution: {integrity: sha512-E/lQRXhtHwGuiQjI7qxkLp8AHbMD5r2217XNe/SREbBlSawe0lOqsFb7rflZJmlQFSULNLIqlcjjsCPlB3m3Mg==}
-    dev: false
-
-  /messageformat-parser@4.1.3:
-    resolution: {integrity: sha512-2fU3XDCanRqeOCkn7R5zW5VQHWf+T3hH65SzuqRvjatBK7r4uyFa5mEX+k6F9Bd04LVM5G4/BHBTUJsOdW7uyg==}
-    dev: false
-
-  /messageformat@2.3.0:
-    resolution: {integrity: sha512-uTzvsv0lTeQxYI2y1NPa1lItL5VRI8Gb93Y2K2ue5gBPyrbJxfDi/EYWxh2PKv5yO42AJeeqblS9MJSh/IEk4w==}
-    deprecated: Package renamed as '@messageformat/core', see messageformat.github.io for more details. 'messageformat@4' will eventually provide a polyfill for Intl.MessageFormat, once it's been defined by Unicode & ECMA.
-    dependencies:
-      make-plural: 4.3.0
-      messageformat-formatters: 2.0.1
-      messageformat-parser: 4.1.3
     dev: false
 
   /micromatch@4.0.5:
@@ -8276,10 +8216,6 @@ packages:
     resolution: {integrity: sha512-AVbw3UJ2e9bq64vSaS9Am0fje1Pa8pbGqTTsmXfaIiMpnr5DlDhfJOuLj9Sf95ZPVDAUerDfEk88MPmPe7UCQg==}
     engines: {node: '>=0.10.0'}
 
-  /path-is-inside@1.0.2:
-    resolution: {integrity: sha512-DUWJr3+ULp4zXmol/SZkFf3JGsS9/SIv+Y3Rt93/UjPpDpklB5f1er4O3POIbUuUJ3FXgqte2Q7SrU6zAqwk8w==}
-    dev: false
-
   /path-key@3.1.1:
     resolution: {integrity: sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==}
     engines: {node: '>=8'}
@@ -8429,14 +8365,6 @@ packages:
     resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
     engines: {node: '>= 0.6.0'}
     dev: true
-
-  /prompts@1.2.1:
-    resolution: {integrity: sha512-GE33SMMVO1ISfnq3i6cE+WYK/tLxRWtZiRkl5vdg0KR0owOCPFOsq8BuFajFbW7b2bMHb8krXaQHOpZyUEuvmA==}
-    engines: {node: '>= 6'}
-    dependencies:
-      kleur: 3.0.3
-      sisteransi: 1.0.5
-    dev: false
 
   /prompts@2.4.2:
     resolution: {integrity: sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q==}
