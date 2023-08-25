@@ -32,9 +32,6 @@ jobs:
       - name: Install
         run: pnpm install
 
-      - name: Check for unmet constraints (fix w/ "yarn constraints --fix")
-        run: pnpm constraints
-
       - name: Type check
         run: pnpm typecheck
 
