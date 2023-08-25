@@ -3,7 +3,8 @@
   "name": "flopflip",
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
-    "setup": "husky install && preconstruct dev && manypkg check && check-node-version --package --print",
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "husky install && preconstruct dev && manypkg check && check-node-version --package --print",
     "auth": "npm_config_registry=https://registry.npmjs.org npm whoami",
     "develop": "jest --projects jest.*.config.js --watch",
     "lint": "jest --config jest.lint.config.js --maxWorkers 5",
