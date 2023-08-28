@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 13.1.3
+
+### Patch Changes
+
+- [#1805](https://github.com/tdeekens/flopflip/pull/1805) [`0909a2f5`](https://github.com/tdeekens/flopflip/commit/0909a2f58a003157b3e212b37a6bf50bba6feafb) Thanks [@tdeekens](https://github.com/tdeekens)! - Migrate from yarn to pnpm.
+
 ## 13.1.2
 
 ## 13.1.1
