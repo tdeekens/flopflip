@@ -28,7 +28,7 @@
     "types"
   ],
   "dependencies": {
-    "launchdarkly-js-client-sdk": "3.1.3"
+    "launchdarkly-js-client-sdk": "3.1.4"
   },
   "devDependencies": {
     "@types/react": "18.2.21",
