@@ -1,5 +1,14 @@
 # @flopflip/react
 
+## 13.1.4
+
+### Patch Changes
+
+- [#1806](https://github.com/tdeekens/flopflip/pull/1806) [`2723f752`](https://github.com/tdeekens/flopflip/commit/2723f752a36260c61148de80c553c08c64aa2c57) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependencies
+
+- Updated dependencies [[`2723f752`](https://github.com/tdeekens/flopflip/commit/2723f752a36260c61148de80c553c08c64aa2c57)]:
+  - @flopflip/types@13.1.4
+
 ## 13.1.3
 
 ### Patch Changes

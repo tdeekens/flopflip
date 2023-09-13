@@ -223,7 +223,7 @@ importers:
         specifier: 7.22.15
         version: 7.22.15
       '@flopflip/types':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../types
       globalthis:
         specifier: 1.0.3
@@ -242,10 +242,10 @@ importers:
         specifier: 7.22.15
         version: 7.22.15
       '@flopflip/adapter-utilities':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../adapter-utilities
       '@flopflip/types':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../types
       mitt:
         specifier: 3.0.1
@@ -255,10 +255,10 @@ importers:
         version: 1.0.3
     devDependencies:
       '@flopflip/localstorage-adapter':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../localstorage-adapter
       '@flopflip/memory-adapter':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../memory-adapter
       globalthis:
         specifier: 1.0.3
@@ -267,7 +267,7 @@ importers:
   packages/cypress-plugin:
     dependencies:
       '@flopflip/types':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../types
     devDependencies:
       cypress:
@@ -280,16 +280,16 @@ importers:
         specifier: 7.22.15
         version: 7.22.15
       '@flopflip/adapter-utilities':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../adapter-utilities
       '@flopflip/localstorage-cache':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../localstorage-cache
       '@flopflip/sessionstorage-cache':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../sessionstorage-cache
       '@flopflip/types':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../types
       lodash:
         specifier: 4.17.21
@@ -311,16 +311,16 @@ importers:
         specifier: 7.22.15
         version: 7.22.15
       '@flopflip/adapter-utilities':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../adapter-utilities
       '@flopflip/localstorage-cache':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../localstorage-cache
       '@flopflip/sessionstorage-cache':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../sessionstorage-cache
       '@flopflip/types':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../types
       lodash:
         specifier: 4.17.21
@@ -342,10 +342,10 @@ importers:
         specifier: 7.22.15
         version: 7.22.15
       '@flopflip/adapter-utilities':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../adapter-utilities
       '@flopflip/types':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../types
       debounce-fn:
         specifier: 4.0.0
@@ -376,13 +376,13 @@ importers:
         specifier: 7.22.15
         version: 7.22.15
       '@flopflip/adapter-utilities':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../adapter-utilities
       '@flopflip/localstorage-cache':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../localstorage-cache
       '@flopflip/types':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../types
       lodash:
         specifier: 4.17.21
@@ -401,7 +401,7 @@ importers:
   packages/localstorage-cache:
     dependencies:
       '@flopflip/types':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../types
 
   packages/memory-adapter:
@@ -410,10 +410,10 @@ importers:
         specifier: 7.22.15
         version: 7.22.15
       '@flopflip/adapter-utilities':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../adapter-utilities
       '@flopflip/types':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../types
       mitt:
         specifier: 3.0.1
@@ -432,7 +432,7 @@ importers:
         specifier: 7.22.15
         version: 7.22.15
       '@flopflip/types':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../types
       '@types/react-is':
         specifier: 17.0.4
@@ -472,17 +472,17 @@ importers:
         specifier: 7.22.15
         version: 7.22.15
       '@flopflip/react':
-        specifier: ^13.1.3
+        specifier: ^13.1.4
         version: link:../react
       '@flopflip/types':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../types
       use-sync-external-store:
         specifier: 1.2.0
         version: 1.2.0(react@18.2.0)
     devDependencies:
       '@flopflip/memory-adapter':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../memory-adapter
       '@flopflip/test-utils':
         specifier: '*'
@@ -506,10 +506,10 @@ importers:
         specifier: 7.22.15
         version: 7.22.15
       '@flopflip/react':
-        specifier: ^13.1.3
+        specifier: ^13.1.4
         version: link:../react
       '@flopflip/types':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../types
       '@types/react':
         specifier: 18.2.0
@@ -519,7 +519,7 @@ importers:
         version: 7.1.26
     devDependencies:
       '@flopflip/memory-adapter':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../memory-adapter
       '@flopflip/test-utils':
         specifier: '*'
@@ -540,7 +540,7 @@ importers:
   packages/sessionstorage-cache:
     dependencies:
       '@flopflip/types':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../types
 
   packages/splitio-adapter:
@@ -549,10 +549,10 @@ importers:
         specifier: 7.22.15
         version: 7.22.15
       '@flopflip/adapter-utilities':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../adapter-utilities
       '@flopflip/types':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../types
       '@splitsoftware/splitio':
         specifier: 10.23.0
@@ -574,7 +574,7 @@ importers:
         specifier: 7.22.15
         version: 7.22.15
       '@flopflip/memory-adapter':
-        specifier: 13.1.3
+        specifier: 13.1.4
         version: link:../memory-adapter
       '@testing-library/jest-dom':
         specifier: 6.1.3
