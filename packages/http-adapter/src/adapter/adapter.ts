@@ -53,11 +53,12 @@ const intialAdapterState: TAdapterStatus & THttpAdapterState = {
 
 class HttpAdapter implements THttpAdapterInterface {
   id: typeof adapterIdentifiers.http;
+  // eslint-disable-next-line @typescript-eslint/prefer-readonly
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
 
   #adapterState: TAdapterStatus & THttpAdapterState;
-  #defaultpollingIntervalMs = 1000 * 60;
+  readonly #defaultpollingIntervalMs = 1000 * 60;
 
   constructor() {
     this.id = adapterIdentifiers.http;
@@ -66,14 +67,14 @@ class HttpAdapter implements THttpAdapterInterface {
     };
   }
 
-  #getIsAdapterUnsubscribed = () =>
+  readonly #getIsAdapterUnsubscribed = () =>
     this.#adapterState.subscriptionStatus ===
     AdapterSubscriptionStatus.Unsubscribed;
 
-  #getIsFlagLocked = (flagName: TFlagName) =>
+  readonly #getIsFlagLocked = (flagName: TFlagName) =>
     this.#adapterState.lockedFlags.has(flagName);
 
-  #getCache = async (cacheIdentifier: TCacheIdentifiers) => {
+  readonly #getCache = async (cacheIdentifier: TCacheIdentifiers) => {
     let cacheModule;
 
     switch (cacheIdentifier) {
@@ -108,7 +109,7 @@ class HttpAdapter implements THttpAdapterInterface {
     };
   };
 
-  #didFlagsChange = (nextFlags: TFlags) => {
+  readonly #didFlagsChange = (nextFlags: TFlags) => {
     const previousFlags = this.#adapterState.flags;
 
     if (previousFlags === undefined) return true;
@@ -116,13 +117,15 @@ class HttpAdapter implements THttpAdapterInterface {
     return !isEqual(nextFlags, previousFlags);
   };
 
-  #fetchFlags = async (adapterArgs: THttpAdapterArgs): Promise<TFlags> => {
+  readonly #fetchFlags = async (
+    adapterArgs: THttpAdapterArgs
+  ): Promise<TFlags> => {
     const flags = await adapterArgs.execute();
 
     return flags;
   };
 
-  #subscribeToFlagsChanges = (adapterArgs: THttpAdapterArgs) => {
+  readonly #subscribeToFlagsChanges = (adapterArgs: THttpAdapterArgs) => {
     const pollingIntervalMs =
       adapterArgs.pollingIntervalMs ?? this.#defaultpollingIntervalMs;
 

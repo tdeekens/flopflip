@@ -44,6 +44,7 @@ const intialAdapterState: TAdapterStatus & TMemoryAdapterState = {
 class MemoryAdapter implements TMemoryAdapterInterface {
   id: typeof adapterIdentifiers.memory;
 
+  // eslint-disable-next-line @typescript-eslint/prefer-readonly
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
 
@@ -56,14 +57,14 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     this.id = adapterIdentifiers.memory;
   }
 
-  #getIsAdapterUnsubscribed = () =>
+  readonly #getIsAdapterUnsubscribed = () =>
     this.#adapterState.subscriptionStatus ===
     AdapterSubscriptionStatus.Unsubscribed;
 
-  #getIsFlagLocked = (flagName: TFlagName) =>
+  readonly #getIsFlagLocked = (flagName: TFlagName) =>
     this.#adapterState.lockedFlags.has(flagName);
 
-  #updateUser = (user: TUser) => {
+  readonly #updateUser = (user: TUser) => {
     this.#adapterState.user = user;
   };
 

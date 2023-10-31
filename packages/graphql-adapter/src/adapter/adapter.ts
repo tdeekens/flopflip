@@ -54,11 +54,12 @@ const intialAdapterState: TAdapterStatus & TGraphQlAdapterState = {
 class GraphQlAdapter implements TGraphQlAdapterInterface {
   id: typeof adapterIdentifiers.graphql;
 
+  // eslint-disable-next-line @typescript-eslint/prefer-readonly
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
 
   #adapterState: TAdapterStatus & TGraphQlAdapterState;
-  #defaultpollingIntervalMs = 1000 * 60;
+  readonly #defaultpollingIntervalMs = 1000 * 60;
 
   constructor() {
     this.id = adapterIdentifiers.graphql;
@@ -67,14 +68,14 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
     };
   }
 
-  #getIsAdapterUnsubscribed = () =>
+  readonly #getIsAdapterUnsubscribed = () =>
     this.#adapterState.subscriptionStatus ===
     AdapterSubscriptionStatus.Unsubscribed;
 
-  #getIsFlagLocked = (flagName: TFlagName) =>
+  readonly #getIsFlagLocked = (flagName: TFlagName) =>
     this.#adapterState.lockedFlags.has(flagName);
 
-  #getCache = async (cacheIdentifier: TCacheIdentifiers) => {
+  readonly #getCache = async (cacheIdentifier: TCacheIdentifiers) => {
     let cacheModule;
 
     switch (cacheIdentifier) {
@@ -109,7 +110,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
     };
   };
 
-  #didFlagsChange = (nextFlags: TFlags) => {
+  readonly #didFlagsChange = (nextFlags: TFlags) => {
     const previousFlags = this.#adapterState.flags;
 
     if (previousFlags === undefined) return true;
@@ -117,7 +118,9 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
     return !isEqual(nextFlags, previousFlags);
   };
 
-  #fetchFlags = async (adapterArgs: TGraphQlAdapterArgs): Promise<TFlags> => {
+  readonly #fetchFlags = async (
+    adapterArgs: TGraphQlAdapterArgs
+  ): Promise<TFlags> => {
     const fetcher = adapterArgs.fetcher ?? fetch;
 
     const response = await fetcher(adapterArgs.uri, {
@@ -139,7 +142,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
     return flags;
   };
 
-  #subscribeToFlagsChanges = (adapterArgs: TGraphQlAdapterArgs) => {
+  readonly #subscribeToFlagsChanges = (adapterArgs: TGraphQlAdapterArgs) => {
     const pollingIntervalMs =
       adapterArgs.pollingIntervalMs ?? this.#defaultpollingIntervalMs;
 
