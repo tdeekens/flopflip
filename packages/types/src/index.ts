@@ -59,7 +59,7 @@ export type TLaunchDarklyAdapterArgs = TLaunchDarklyContextArgs & {
     clientSideId: string;
     clientOptions?: TLDOptions;
   };
-  flags: TFlags;
+  flags?: TFlags;
   subscribeToFlagChanges?: boolean;
   throwOnInitializationFailure?: boolean;
   flagsUpdateDelayMs?: number;
