@@ -1,5 +1,13 @@
 # @flopflip/splitio-adapter
 
+## 13.1.6
+
+### Patch Changes
+
+- Updated dependencies [[`bd713a41`](https://github.com/tdeekens/flopflip/commit/bd713a41e92da2e68a122f8eb1709f9bdfef9831), [`c99ee374`](https://github.com/tdeekens/flopflip/commit/c99ee374a432b01533330661487807617a6aab91)]:
+  - @flopflip/adapter-utilities@13.1.6
+  - @flopflip/types@13.1.6
+
 ## 13.1.5
 
 ### Patch Changes
