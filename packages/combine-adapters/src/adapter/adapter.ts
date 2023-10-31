@@ -37,6 +37,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
   id: typeof adapterIdentifiers.combined;
   effectIds?: TAdapterIdentifiers[];
 
+  // eslint-disable-next-line @typescript-eslint/prefer-readonly
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
 
@@ -50,11 +51,11 @@ class CombineAdapters implements TCombinedAdapterInterface {
     this.id = adapterIdentifiers.combined;
   }
 
-  #getHasCombinedAdapters = () => this.#adapters.length > 0;
-  #getHasArgsForAllAdapters = (adapterArgs: TCombinedAdapterArgs) =>
+  readonly #getHasCombinedAdapters = () => this.#adapters.length > 0;
+  readonly #getHasArgsForAllAdapters = (adapterArgs: TCombinedAdapterArgs) =>
     this.#adapters.every((adapter) => adapterArgs[adapter.id]);
 
-  #getIsAdapterUnsubscribed = () =>
+  readonly #getIsAdapterUnsubscribed = () =>
     this.#adapterState.subscriptionStatus ===
     AdapterSubscriptionStatus.Unsubscribed;
 

@@ -48,7 +48,7 @@ type TLaunchDarklyAdapterState = {
 class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   id: typeof adapterIdentifiers.launchdarkly;
 
-  #adapterState: TAdapterStatus & TLaunchDarklyAdapterState;
+  readonly #adapterState: TAdapterStatus & TLaunchDarklyAdapterState;
 
   constructor() {
     this.#adapterState = {
@@ -66,7 +66,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     this.id = adapterIdentifiers.launchdarkly;
   }
 
-  #updateFlagsInAdapterState = (
+  readonly #updateFlagsInAdapterState = (
     flags: TFlags,
     options?: TUpdateFlagsOptions
   ): void => {
@@ -98,17 +98,17 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     };
   };
 
-  #getIsAdapterUnsubscribed = () =>
+  readonly #getIsAdapterUnsubscribed = () =>
     this.#adapterState.subscriptionStatus ===
     AdapterSubscriptionStatus.Unsubscribed;
 
-  #getIsFlagUnsubcribed = (flagName: TFlagName) =>
+  readonly #getIsFlagUnsubcribed = (flagName: TFlagName) =>
     this.#adapterState.unsubscribedFlags.has(flagName);
 
-  #getIsFlagLocked = (flagName: TFlagName) =>
+  readonly #getIsFlagLocked = (flagName: TFlagName) =>
     this.#adapterState.lockedFlags.has(flagName);
 
-  #withoutUnsubscribedOrLockedFlags = (flags: TFlags) =>
+  readonly #withoutUnsubscribedOrLockedFlags = (flags: TFlags) =>
     Object.fromEntries(
       Object.entries(flags).filter(
         ([flagName]) =>
@@ -117,9 +117,9 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       )
     );
 
-  #getIsAnonymousContext = (context: LDContext) => !context?.key;
+  readonly #getIsAnonymousContext = (context: LDContext) => !context?.key;
 
-  #ensureContext = (context: LDContext) => {
+  readonly #ensureContext = (context: LDContext) => {
     const isAnonymousContext = this.#getIsAnonymousContext(context);
 
     // NOTE: When marked `anonymous` the SDK will generate a unique key and cache it in local storage
@@ -129,20 +129,20 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     });
   };
 
-  #initializeClient = (
+  readonly #initializeClient = (
     clientSideId: TLaunchDarklyAdapterArgs['sdk']['clientSideId'],
     context: LDContext,
     options: TLaunchDarklyAdapterArgs['sdk']['clientOptions']
   ) => initializeLaunchDarklyClient(clientSideId, context, options);
 
-  #changeClientContext = async (nextContext: LDContext) =>
+  readonly #changeClientContext = async (nextContext: LDContext) =>
     this.#adapterState.client?.identify
       ? this.#adapterState.client.identify(nextContext)
       : Promise.reject(
           new Error('Can not change user context: client not yet initialized.')
         );
 
-  #getInitialFlags = async ({
+  readonly #getInitialFlags = async ({
     flags,
     throwOnInitializationFailure,
   }: Pick<
@@ -217,7 +217,10 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     );
   };
 
-  #didFlagChange = (flagName: TFlagName, nextFlagValue: TFlagVariation) => {
+  readonly #didFlagChange = (
+    flagName: TFlagName,
+    nextFlagValue: TFlagVariation
+  ) => {
     const previousFlagValue = this.getFlag(flagName);
 
     if (previousFlagValue === undefined) return true;
@@ -225,7 +228,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     return previousFlagValue !== nextFlagValue;
   };
 
-  #setupFlagSubcription = ({
+  readonly #setupFlagSubcription = ({
     flagsFromSdk,
     flagsUpdateDelayMs,
   }: {

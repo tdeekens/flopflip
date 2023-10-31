@@ -63,7 +63,7 @@ const createAnonymousUserKey = () => Math.random().toString(36).substring(2);
 class SplitioAdapter implements TSplitioAdapterInterface {
   id: typeof adapterIdentifiers.splitio;
 
-  #adapterState: TAdapterStatus & TSplitIOAdapterState;
+  readonly #adapterState: TAdapterStatus & TSplitIOAdapterState;
 
   constructor() {
     this.#adapterState = {
@@ -81,11 +81,11 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     this.id = adapterIdentifiers.splitio;
   }
 
-  #getIsAdapterUnsubscribed = () =>
+  readonly #getIsAdapterUnsubscribed = () =>
     this.#adapterState.subscriptionStatus ===
     AdapterSubscriptionStatus.Unsubscribed;
 
-  #subscribeToFlagsChanges = ({
+  readonly #subscribeToFlagsChanges = ({
     flagNames,
     onFlagsStateChange,
   }: {
@@ -115,10 +115,10 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     }
   };
 
-  #ensureUser = (user: TUser): TUser =>
+  readonly #ensureUser = (user: TUser): TUser =>
     merge(user, { key: user?.key ?? createAnonymousUserKey() });
 
-  #initializeClient = (): SplitIOClient => {
+  readonly #initializeClient = (): SplitIOClient => {
     if (!this.#adapterState.splitioSettings) {
       throw Error(
         'cannot initialize SplitIo without configured settings, call configure() first'
@@ -133,7 +133,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     };
   };
 
-  #subscribeToFlagChanges = async ({
+  readonly #subscribeToFlagChanges = async ({
     onFlagsStateChange,
     onStatusStateChange,
   }: {
@@ -207,7 +207,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
       } else reject();
     });
 
-  #configureSplitio = async () => {
+  readonly #configureSplitio = async () => {
     const { client, manager } = this.#initializeClient();
 
     this.#adapterState.client = client;
@@ -223,8 +223,8 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     }));
   };
 
-  #cloneTreatmentAttributes = <
-    T = TSplitioAdapterArgs['sdk']['treatmentAttributes']
+  readonly #cloneTreatmentAttributes = <
+    T = TSplitioAdapterArgs['sdk']['treatmentAttributes'],
   >(
     treatmentAttributes: T
   ): T => cloneDeep<T>(treatmentAttributes);

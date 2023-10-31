@@ -51,12 +51,13 @@ const STORAGE_SLICE = '@flopflip';
 
 class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   id: typeof adapterIdentifiers.localstorage;
-  #adapterState: TAdapterStatus & TLocalStorageAdapterState;
+  readonly #adapterState: TAdapterStatus & TLocalStorageAdapterState;
 
+  // eslint-disable-next-line @typescript-eslint/prefer-readonly
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
 
-  #cache = createCache({ prefix: STORAGE_SLICE });
+  readonly #cache = createCache({ prefix: STORAGE_SLICE });
 
   constructor() {
     this.#adapterState = {
@@ -65,14 +66,14 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     this.id = adapterIdentifiers.localstorage;
   }
 
-  #getIsAdapterUnsubscribed = () =>
+  readonly #getIsAdapterUnsubscribed = () =>
     this.#adapterState.subscriptionStatus ===
     AdapterSubscriptionStatus.Unsubscribed;
 
-  #getIsFlagLocked = (flagName: TFlagName) =>
+  readonly #getIsFlagLocked = (flagName: TFlagName) =>
     this.#adapterState.lockedFlags.has(flagName);
 
-  #didFlagsChange = (nextFlags: TFlags) => {
+  readonly #didFlagsChange = (nextFlags: TFlags) => {
     const previousFlags = this.#adapterState.flags;
 
     if (previousFlags === undefined) return true;
@@ -80,10 +81,10 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     return !isEqual(nextFlags, previousFlags);
   };
 
-  #getFlagsCacheKey = (user: TUser) =>
+  readonly #getFlagsCacheKey = (user: TUser) =>
     [user.key, 'flags'].filter(Boolean).join('/');
 
-  #subscribeToFlagsChanges = ({
+  readonly #subscribeToFlagsChanges = ({
     pollingIntervalMs = 1000 * 60,
     user,
   }: {
