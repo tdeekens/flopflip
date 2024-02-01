@@ -175,8 +175,8 @@ importers:
         specifier: 6.1.2
         version: 6.1.2(eslint@8.53.0)(typescript@5.1.6)
       husky:
-        specifier: 8.0.3
-        version: 8.0.3
+        specifier: 9.0.10
+        version: 9.0.10
       jest:
         specifier: 29.7.0
         version: 29.7.0(@types/node@20.9.0)(ts-node@10.9.1)
@@ -6252,9 +6252,9 @@ packages:
     engines: {node: '>=16.17.0'}
     dev: false
 
-  /husky@8.0.3:
-    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
-    engines: {node: '>=14'}
+  /husky@9.0.10:
+    resolution: {integrity: sha512-TQGNknoiy6bURzIO77pPRu+XHi6zI7T93rX+QnJsoYFf3xdjKOur+IlfqzJGMHIK/wXrLg+GsvMs8Op7vI2jVA==}
+    engines: {node: '>=18'}
     hasBin: true
     dev: false
 
