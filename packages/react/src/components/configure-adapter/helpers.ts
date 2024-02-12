@@ -5,7 +5,7 @@ import type {
   TConfigureAdapterChildrenAsFunction,
 } from '@flopflip/types';
 import { Children } from 'react';
-import merge from 'ts-deepmerge';
+import { merge } from 'ts-deepmerge';
 
 const isFunctionChildren = (
   children: TConfigureAdapterChildren

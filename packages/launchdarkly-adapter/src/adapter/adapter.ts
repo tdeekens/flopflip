@@ -29,7 +29,7 @@ import {
 import isEqual from 'lodash/isEqual';
 import mitt, { type Emitter } from 'mitt';
 import warning from 'tiny-warning';
-import merge from 'ts-deepmerge';
+import { merge } from 'ts-deepmerge';
 
 type TEmitterEvents = {
   flagsStateChange: TFlags;
