@@ -8,6 +8,11 @@ overrides:
   '@types/react': 18.2.0
   '@types/react-dom': 18.2.0
 
+patchedDependencies:
+  cypress@13.6.4:
+    hash: bnmjxin5yu4gimwzcgzqydy6di
+    path: patches/cypress@13.6.4.patch
+
 importers:
 
   .:
@@ -269,7 +274,7 @@ importers:
     devDependencies:
       cypress:
         specifier: 13.6.4
-        version: 13.6.4
+        version: 13.6.4(patch_hash=bnmjxin5yu4gimwzcgzqydy6di)
 
   packages/graphql-adapter:
     dependencies:
@@ -4806,7 +4811,7 @@ packages:
     resolution: {integrity: sha512-d4ZVpCW31eWwCMe1YT3ur7mUDnTXbgwyzaL320DrcRT45rfjYxkt5QWLrmOJ+/UEAI2+fQgKe/fCjR8l4TpRgw==}
     dev: false
 
-  /cypress@13.6.4:
+  /cypress@13.6.4(patch_hash=bnmjxin5yu4gimwzcgzqydy6di):
     resolution: {integrity: sha512-pYJjCfDYB+hoOoZuhysbbYhEmNW7DEDsqn+ToCLwuVowxUXppIWRr7qk4TVRIU471ksfzyZcH+mkoF0CQUKnpw==}
     engines: {node: ^16.0.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -4855,6 +4860,7 @@ packages:
       untildify: 4.0.0
       yauzl: 2.10.0
     dev: true
+    patched: true
 
   /dargs@7.0.0:
     resolution: {integrity: sha512-2iy1EkLdlBzQGvbweYRFxmFath8+K7+AKB0TlhHWkNuH+TmovaMH/Wp7V7R4u7f4SnX3OgLsU9t1NI9ioDnUpg==}
