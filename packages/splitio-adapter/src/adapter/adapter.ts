@@ -204,7 +204,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
             }
           }
         );
-      } else reject();
+      } else reject(new Error());
     });
 
   readonly #configureSplitio = async () => {

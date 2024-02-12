@@ -77,6 +77,7 @@ class HttpAdapter implements THttpAdapterInterface {
   readonly #getCache = async (cacheIdentifier: TCacheIdentifiers) => {
     let cacheModule;
 
+    // eslint-disable-next-line default-case
     switch (cacheIdentifier) {
       case cacheIdentifiers.local: {
         cacheModule = await import('@flopflip/localstorage-cache');
@@ -87,9 +88,6 @@ class HttpAdapter implements THttpAdapterInterface {
         cacheModule = await import('@flopflip/sessionstorage-cache');
         break;
       }
-
-      default:
-        break;
     }
 
     const createCache = cacheModule.default;
