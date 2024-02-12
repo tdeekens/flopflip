@@ -365,8 +365,8 @@ importers:
         specifier: 1.0.3
         version: 1.0.3
       ts-deepmerge:
-        specifier: 6.2.1
-        version: 6.2.1
+        specifier: 7.0.0
+        version: 7.0.0
     devDependencies:
       globalthis:
         specifier: 1.0.3
@@ -449,8 +449,8 @@ importers:
         specifier: 1.0.3
         version: 1.0.3
       ts-deepmerge:
-        specifier: 6.2.1
-        version: 6.2.1
+        specifier: 7.0.0
+        version: 7.0.0
     devDependencies:
       '@flopflip/test-utils':
         specifier: '*'
@@ -563,8 +563,8 @@ importers:
         specifier: 4.17.21
         version: 4.17.21
       ts-deepmerge:
-        specifier: 6.2.1
-        version: 6.2.1
+        specifier: 7.0.0
+        version: 7.0.0
     devDependencies:
       globalthis:
         specifier: 1.0.3
@@ -9452,8 +9452,8 @@ packages:
       typescript: 5.3.3
     dev: false
 
-  /ts-deepmerge@6.2.1:
-    resolution: {integrity: sha512-8CYSLazCyj0DJDpPIxOFzJG46r93uh6EynYjuey+bxcLltBeqZL7DMfaE5ZPzZNFlav7wx+2TDa/mBl8gkTYzw==}
+  /ts-deepmerge@7.0.0:
+    resolution: {integrity: sha512-WZ/iAJrKDhdINv1WG6KZIGHrZDar6VfhftG1QJFpVbOYZMYJLJOvZOo1amictRXVdBXZIgBHKswMTXzElngprA==}
     engines: {node: '>=14.13.1'}
     dev: false
 
