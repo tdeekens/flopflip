@@ -78,6 +78,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
   readonly #getCache = async (cacheIdentifier: TCacheIdentifiers) => {
     let cacheModule;
 
+    // eslint-disable-next-line default-case
     switch (cacheIdentifier) {
       case cacheIdentifiers.local: {
         cacheModule = await import('@flopflip/localstorage-cache');
@@ -88,9 +89,6 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
         cacheModule = await import('@flopflip/sessionstorage-cache');
         break;
       }
-
-      default:
-        break;
     }
 
     const createCache = cacheModule.default;

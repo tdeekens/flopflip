@@ -243,7 +243,9 @@ describe('when configuring', () => {
           onStatusStateChange = jest.fn();
           onFlagsStateChange = jest.fn();
           client = createClient({
-            waitForInitialization: jest.fn(() => Promise.reject()),
+            waitForInitialization: jest.fn(() => {
+              throw new Error();
+            }),
           });
 
           ldClient.initialize.mockReturnValue(client);
@@ -272,7 +274,9 @@ describe('when configuring', () => {
           onStatusStateChange = jest.fn();
           onFlagsStateChange = jest.fn();
           client = createClient({
-            waitForInitialization: jest.fn(() => Promise.reject()),
+            waitForInitialization: jest.fn(() => {
+              throw new Error();
+            }),
           });
 
           ldClient.initialize.mockReturnValue(client);
