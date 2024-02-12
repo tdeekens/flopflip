@@ -31,7 +31,7 @@
     "@flopflip/types": "13.1.7",
     "@splitsoftware/splitio": "10.25.1",
     "lodash": "4.17.21",
-    "ts-deepmerge": "6.2.1"
+    "ts-deepmerge": "7.0.0"
   },
   "keywords": [
     "feature-flags",
