@@ -34,5 +34,5 @@ jobs:
 
       - uses: jackyef/bundlewatch-gh-action@master
         with:
-          build-script: yarn build
+          build-script: pnpm build
           bundlewatch-github-token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
