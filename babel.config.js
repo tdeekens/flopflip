@@ -63,7 +63,6 @@ const preset = {
     ],
     isEnv('test') && 'babel-plugin-transform-dynamic-import',
     isEnv('test') && '@babel/plugin-transform-modules-commonjs',
-    'babel-plugin-lodash',
     './babel-plugin-package-version',
   ].filter(Boolean),
 };
