@@ -237,10 +237,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   }) => {
     for (const flagName in flagsFromSdk) {
       // Dispatch whenever a configured flag value changes
-      if (
-        Object.prototype.hasOwnProperty.call(flagsFromSdk, flagName) &&
-        this.#adapterState.client
-      ) {
+      if (Object.hasOwn(flagsFromSdk, flagName) && this.#adapterState.client) {
         this.#adapterState.client.on(`change:${flagName}`, (flagValue) => {
           const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
             flagName,
