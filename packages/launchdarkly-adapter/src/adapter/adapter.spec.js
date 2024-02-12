@@ -278,9 +278,13 @@ describe('when configuring', () => {
           onStatusStateChange = jest.fn();
           onFlagsStateChange = jest.fn();
           client = createClient({
-            waitForInitialization: jest.fn(() => {
-              throw new Error();
-            }),
+            waitForInitialization: jest.fn(() =>
+              Promise.reject(
+                new Error(
+                  '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
+                )
+              )
+            ),
           });
 
           ldClient.initialize.mockReturnValue(client);
