@@ -1,5 +1,17 @@
 # @flopflip/react-broadcast
 
+## 13.1.8
+
+### Patch Changes
+
+- [#1833](https://github.com/tdeekens/flopflip/pull/1833) [`7835be0`](https://github.com/tdeekens/flopflip/commit/7835be092b8fdb211b7dcabefc2d588356920484) Thanks [@renovate](https://github.com/apps/renovate)! - Updatge dependencies
+
+- [#1838](https://github.com/tdeekens/flopflip/pull/1838) [`054eb0e`](https://github.com/tdeekens/flopflip/commit/054eb0eade09033d321bd02a4052d673a6669353) Thanks [@renovate](https://github.com/apps/renovate)! - Update ts-deepmerge to v7
+
+- Updated dependencies [[`7835be0`](https://github.com/tdeekens/flopflip/commit/7835be092b8fdb211b7dcabefc2d588356920484), [`054eb0e`](https://github.com/tdeekens/flopflip/commit/054eb0eade09033d321bd02a4052d673a6669353)]:
+  - @flopflip/react@13.1.8
+  - @flopflip/types@13.1.8
+
 ## 13.1.7
 
 ### Patch Changes
@@ -496,19 +508,19 @@
   You can wrap your application using for instance `react-testing-library` as
 
   ```jsx
-  import { TestProviderFlopFlip } from '@flopflip/react-broadcast';
-  import { render } from '@testing-library/react';
+  import { TestProviderFlopFlip } from "@flopflip/react-broadcast";
+  import { render } from "@testing-library/react";
 
   const testFlags = {
     myFlag: true,
   };
 
-  describe('rendering', () => {
-    it('should render the application with feature flags', () => {
+  describe("rendering", () => {
+    it("should render the application with feature flags", () => {
       render(
         <TestProviderFlopFlip flags={testFlags}>
           <App />
-        </TestProviderFlopFlip>
+        </TestProviderFlopFlip>,
       );
     });
   });
@@ -910,15 +922,15 @@
   You can now conveniently a flag variation without evaluating its actual state (as with `useFeatureToggle`).
 
   ```js
-  const variation = useFlagVariation('myFlagName');
+  const variation = useFlagVariation("myFlagName");
 
   const isAEnabled = variation === VARIATION_A;
   const isBEnabled = variation === VARIATION_B;
 
   // Is the same as
 
-  const isAEnabled = useFlagVariation('myFlagName', VARIATION_A);
-  const isBEnabled = useFlagVariation('myFlagName', VARIATION_B);
+  const isAEnabled = useFlagVariation("myFlagName", VARIATION_A);
+  const isBEnabled = useFlagVariation("myFlagName", VARIATION_B);
   ```
 
   Using `useFlagVariation` is often a bit more concise if you want to work with the variation value yourself.

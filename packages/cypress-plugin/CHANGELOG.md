@@ -1,5 +1,16 @@
 # @flopflip/cypress-plugin
 
+## 13.1.8
+
+### Patch Changes
+
+- [#1833](https://github.com/tdeekens/flopflip/pull/1833) [`7835be0`](https://github.com/tdeekens/flopflip/commit/7835be092b8fdb211b7dcabefc2d588356920484) Thanks [@renovate](https://github.com/apps/renovate)! - Updatge dependencies
+
+- [#1838](https://github.com/tdeekens/flopflip/pull/1838) [`054eb0e`](https://github.com/tdeekens/flopflip/commit/054eb0eade09033d321bd02a4052d673a6669353) Thanks [@renovate](https://github.com/apps/renovate)! - Update ts-deepmerge to v7
+
+- Updated dependencies [[`7835be0`](https://github.com/tdeekens/flopflip/commit/7835be092b8fdb211b7dcabefc2d588356920484), [`054eb0e`](https://github.com/tdeekens/flopflip/commit/054eb0eade09033d321bd02a4052d673a6669353)]:
+  - @flopflip/types@13.1.8
+
 ## 13.1.7
 
 ### Patch Changes
