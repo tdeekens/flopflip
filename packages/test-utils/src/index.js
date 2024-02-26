@@ -194,6 +194,7 @@ export {
   act,
   adapter,
   components,
+  defaultFlags,
   defaultRender as render,
   renderWithAdapter,
   screen,

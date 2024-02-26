@@ -1,4 +1,4 @@
-import { renderWithAdapter, screen } from '@flopflip/test-utils';
+import { defaultFlags, renderWithAdapter, screen } from '@flopflip/test-utils';
 import React from 'react';
 import { Provider } from 'react-redux';
 
@@ -9,11 +9,12 @@ import useAllFeatureToggles from './use-all-feature-toggles';
 
 jest.mock('tiny-warning');
 
-const testFeatures = {
-  featureA: true,
-  featureB: false,
-  featureC: true,
-};
+const disabledDefaultFlags = Object.fromEntries(
+  Object.entries(defaultFlags).filter(([, isEnabled]) => !isEnabled)
+);
+const enabledDefaultFlags = Object.fromEntries(
+  Object.entries(defaultFlags).filter(([, isEnabled]) => isEnabled)
+);
 
 const render = (store, TestComponent) =>
   renderWithAdapter(TestComponent, {
@@ -21,41 +22,52 @@ const render = (store, TestComponent) =>
       ConfigureFlopFlip: Configure,
       Wrapper: <Provider store={store} />,
     },
-    flags: testFeatures,
   });
 
 function TestComponent() {
-  const allFlags = useAllFeatureToggles();
+  const allFlags = useAllFeatureToggles(['memory']);
 
   return (
-    <div>
-      <h1>Enabled features</h1>
-      <ul>
-        {Object.keys(allFlags).map((flagName) => (
-          <li key={flagName}>{flagName}</li>
-        ))}
-      </ul>
-    </div>
+    <ul>
+      {Object.entries(allFlags).map(([flagName, flagValue]) => (
+        <li key={flagName}>
+          {`${flagName} is ${flagValue ? 'enabled' : 'disabled'}`}
+        </li>
+      ))}
+    </ul>
   );
 }
 
-describe('when adapter is configured', () => {
-  it('should list all enabled features', async () => {
-    const store = createStore({
-      [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
-    });
-    const { waitUntilConfigured } = render(store, <TestComponent />);
+describe('disabled features', () => {
+  it.each(Object.keys(disabledDefaultFlags))(
+    'should list disabled feature "%s"',
+    async (featureName) => {
+      const store = createStore({
+        [STATE_SLICE]: { flags: { memory: defaultFlags } },
+      });
+      const { waitUntilConfigured } = render(store, <TestComponent />);
 
-    await waitUntilConfigured();
+      await waitUntilConfigured();
 
-    Object.entries(testFeatures).forEach(([featureName, isEnabled]) => {
-      if (isEnabled) {
-        // eslint-disable-next-line jest/no-conditional-expect
-        expect(screen.getByText(featureName)).toBeInTheDocument();
-      } else {
-        // eslint-disable-next-line jest/no-conditional-expect
-        expect(screen.queryByText(featureName)).not.toBeInTheDocument();
-      }
-    });
-  });
+      expect(
+        screen.getByText(`${featureName} is disabled`)
+      ).toBeInTheDocument();
+    }
+  );
+});
+
+describe('enabled features', () => {
+  it.each(Object.keys(enabledDefaultFlags))(
+    'should list enabled feature "%s"',
+    async (featureName) => {
+      const store = createStore({
+        [STATE_SLICE]: { flags: { memory: defaultFlags } },
+      });
+      const { waitUntilConfigured } = render(store, <TestComponent />);
+
+      await waitUntilConfigured();
+
+      expect(screen.getByText(`${featureName} is enabled`)).toBeInTheDocument();
+    }
+  );
 });
