@@ -83,7 +83,7 @@
     "eslint-config-prettier": "9.1.0",
     "eslint-config-xo": "0.44.0",
     "eslint-config-xo-react": "0.27.0",
-    "eslint-config-xo-typescript": "2.0.0",
+    "eslint-config-xo-typescript": "3.0.0",
     "eslint-formatter-pretty": "5.0.0",
     "eslint-plugin-jest": "27.6.3",
     "eslint-plugin-prettier": "5.1.3",

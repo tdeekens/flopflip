@@ -153,8 +153,8 @@ importers:
         specifier: 0.27.0
         version: 0.27.0(eslint-plugin-react-hooks@4.6.0)(eslint-plugin-react@7.33.2)(eslint@8.56.0)
       eslint-config-xo-typescript:
-        specifier: 2.0.0
-        version: 2.0.0(@typescript-eslint/eslint-plugin@7.0.1)(@typescript-eslint/parser@7.0.1)(eslint@8.56.0)(typescript@5.3.3)
+        specifier: 3.0.0
+        version: 3.0.0(@typescript-eslint/eslint-plugin@7.0.1)(@typescript-eslint/parser@7.0.1)(eslint@8.56.0)(typescript@5.3.3)
       eslint-formatter-pretty:
         specifier: 5.0.0
         version: 5.0.0
@@ -460,7 +460,7 @@ importers:
         version: 18.2.0
       '@types/react-dom':
         specifier: 18.2.0
-        version: 18.2.19
+        version: 18.2.0
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -494,7 +494,7 @@ importers:
         version: 18.2.0
       '@types/react-dom':
         specifier: 18.2.0
-        version: 18.2.19
+        version: 18.2.0
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -586,7 +586,7 @@ importers:
         version: 14.2.1(react-dom@18.2.0)(react@18.2.0)
       jest-runner-eslint:
         specifier: 2.1.2
-        version: 2.1.2(eslint@8.57.0)(jest@29.7.0)
+        version: 2.1.2(eslint@8.56.0)(jest@29.7.0)
       jest-watch-typeahead:
         specifier: 2.2.2
         version: 2.2.2(jest@29.7.0)
@@ -2443,16 +2443,6 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: false
 
-  /@eslint-community/eslint-utils@4.4.0(eslint@8.57.0):
-    resolution: {integrity: sha512-1/sA4dwrzBAyeUoQ6oxahHKmrZvsnLCg4RfxW3ZFGGmQkSNQPFNLV9CUEFQP1x9EYXHTo5p6xdhZM1Ne9p/AfA==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    peerDependencies:
-      eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
-    dependencies:
-      eslint: 8.57.0
-      eslint-visitor-keys: 3.4.3
-    dev: false
-
   /@eslint-community/regexpp@4.10.0:
     resolution: {integrity: sha512-Cu96Sd2By9mCNTx2iyKOmq10v22jUVQv0lQnlGNy16oE9589yE+QADPbrMGCkA51cKZSg3Pu/aTJVTGfL/qjUA==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
@@ -2477,11 +2467,6 @@ packages:
 
   /@eslint/js@8.56.0:
     resolution: {integrity: sha512-gMsVel9D7f2HLkBma9VbtzZRehRogVRfbr++f06nL2vnCGCNlzOD+/MUov/F4p8myyAHspEhVobgjpX64q5m6A==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    dev: false
-
-  /@eslint/js@8.57.0:
-    resolution: {integrity: sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: false
 
@@ -3340,13 +3325,6 @@ packages:
     resolution: {integrity: sha512-8yQrvS6sMpSwIovhPOwfyNf2Wz6v/B62LFSVYQ85+Rq3tLsBIG7rP5geMxaijTUxSkrO6RzN/IRuIAADYQsleA==}
     dependencies:
       '@types/react': 18.2.0
-    dev: false
-
-  /@types/react-dom@18.2.19:
-    resolution: {integrity: sha512-aZvQL6uUbIJpjZk4U8JZGbau9KDeAwMfmhyWorxgBkqDIEf6ROjRozcmPIicqsUwPUjbkDfHKgGee1Lq65APcA==}
-    dependencies:
-      '@types/react': 18.2.0
-    dev: true
 
   /@types/react-is@17.0.7:
     resolution: {integrity: sha512-WrTEiT+c6rgq36QApoy0063uAOdltCrhF0QMXLIgYPaTvIdQhAB8hPb5oGGqX18xToElNILS9UprwU6GyINcJg==}
@@ -5229,12 +5207,12 @@ packages:
       eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
     dev: false
 
-  /eslint-config-xo-typescript@2.0.0(@typescript-eslint/eslint-plugin@7.0.1)(@typescript-eslint/parser@7.0.1)(eslint@8.56.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-Z6LxmerEsGzLH4niSgfD/ZfqnCkOWZmE1XPnbU9gyYRQbHFZUkjstvi2prvGF9ToXkTDBiBZWvAWwNw9F2lFHg==}
+  /eslint-config-xo-typescript@3.0.0(@typescript-eslint/eslint-plugin@7.0.1)(@typescript-eslint/parser@7.0.1)(eslint@8.56.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-8C1EFMHBHMxnFuY+0gSLrnOfSvGG766L85EEFYNqEfO7XmfAVvEKUDgLMwDQ34Dq/bEpOSvVx8gkN9Owx3iKEw==}
     engines: {node: '>=18'}
     peerDependencies:
-      '@typescript-eslint/eslint-plugin': '>=6.21.0'
-      '@typescript-eslint/parser': '>=6.21.0'
+      '@typescript-eslint/eslint-plugin': '>=7.0.2'
+      '@typescript-eslint/parser': '>=7.0.2'
       eslint: '>=8.56.0'
       typescript: '>=5.0.0'
     dependencies:
@@ -5405,53 +5383,6 @@ packages:
       '@eslint-community/regexpp': 4.10.0
       '@eslint/eslintrc': 2.1.4
       '@eslint/js': 8.56.0
-      '@humanwhocodes/config-array': 0.11.14
-      '@humanwhocodes/module-importer': 1.0.1
-      '@nodelib/fs.walk': 1.2.8
-      '@ungap/structured-clone': 1.2.0
-      ajv: 6.12.6
-      chalk: 4.1.2
-      cross-spawn: 7.0.3
-      debug: 4.3.4(supports-color@8.1.1)
-      doctrine: 3.0.0
-      escape-string-regexp: 4.0.0
-      eslint-scope: 7.2.2
-      eslint-visitor-keys: 3.4.3
-      espree: 9.6.1
-      esquery: 1.5.0
-      esutils: 2.0.3
-      fast-deep-equal: 3.1.3
-      file-entry-cache: 6.0.1
-      find-up: 5.0.0
-      glob-parent: 6.0.2
-      globals: 13.24.0
-      graphemer: 1.4.0
-      ignore: 5.3.1
-      imurmurhash: 0.1.4
-      is-glob: 4.0.3
-      is-path-inside: 3.0.3
-      js-yaml: 4.1.0
-      json-stable-stringify-without-jsonify: 1.0.1
-      levn: 0.4.1
-      lodash.merge: 4.6.2
-      minimatch: 3.1.2
-      natural-compare: 1.4.0
-      optionator: 0.9.3
-      strip-ansi: 6.0.1
-      text-table: 0.2.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: false
-
-  /eslint@8.57.0:
-    resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    hasBin: true
-    dependencies:
-      '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
-      '@eslint-community/regexpp': 4.10.0
-      '@eslint/eslintrc': 2.1.4
-      '@eslint/js': 8.57.0
       '@humanwhocodes/config-array': 0.11.14
       '@humanwhocodes/module-importer': 1.0.1
       '@nodelib/fs.walk': 1.2.8
@@ -7005,7 +6936,7 @@ packages:
       slash: 3.0.0
     dev: false
 
-  /jest-runner-eslint@2.1.2(eslint@8.57.0)(jest@29.7.0):
+  /jest-runner-eslint@2.1.2(eslint@8.56.0)(jest@29.7.0):
     resolution: {integrity: sha512-XONe3I5YMPPyQ55EoPKk+RT59fZ/4A+NvmTCmwFLhw5+OONxGL73yojVwXZO1x2mvhH0IigknfE+mKQ5ki1RnA==}
     engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=18.0.0}
     peerDependencies:
@@ -7016,7 +6947,7 @@ packages:
       cosmiconfig: 7.1.0
       create-jest-runner: 0.11.2
       dot-prop: 6.0.1
-      eslint: 8.57.0
+      eslint: 8.56.0
       jest: 29.7.0(@types/node@20.11.17)(ts-node@10.9.2)
     transitivePeerDependencies:
       - '@jest/test-result'
