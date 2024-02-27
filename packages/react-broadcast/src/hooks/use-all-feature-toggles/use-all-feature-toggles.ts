@@ -1,28 +1,16 @@
-import { getIsFeatureEnabled, useAdapterContext } from '@flopflip/react';
-import { type TFlags } from '@flopflip/types';
+import { type TAdapterIdentifiers, type TFlags } from '@flopflip/types';
 
 import useFlagsContext from '../use-flags-context';
 
-export default function useAllFeatureToggles(): TFlags {
-  const adapterContext = useAdapterContext();
+export default function useAllFeatureToggles(
+  adapterIdentifiers: TAdapterIdentifiers[]
+): TFlags {
   const flagsContext = useFlagsContext();
-  const enabledFlags: TFlags = Object.values(flagsContext).reduce<TFlags>(
-    (_enabledFlags, flags) => {
-      Object.keys(flags).forEach((featureName) => {
-        if (
-          getIsFeatureEnabled(
-            flagsContext,
-            adapterContext.adapterEffectIdentifiers,
-            featureName
-          )
-        ) {
-          _enabledFlags[featureName] = true;
-        }
-      });
-      return _enabledFlags;
-    },
-    {}
-  );
 
-  return enabledFlags;
+  let allFlags: TFlags = {};
+  for (const adapterIdentifier of adapterIdentifiers) {
+    allFlags = { ...allFlags, ...flagsContext[adapterIdentifier] };
+  }
+
+  return allFlags;
 }
