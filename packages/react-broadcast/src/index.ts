@@ -14,6 +14,7 @@ export {
 export {
   useAdapterReconfiguration,
   useAdapterStatus,
+  useAllFeatureToggles,
   useFeatureToggle,
   useFeatureToggles,
   useFlagVariation,
