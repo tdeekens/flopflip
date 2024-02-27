@@ -16,6 +16,10 @@
       "updateTypes": ["minor", "patch"],
       "groupName": "all dependencies",
       "groupSlug": "all"
+    },
+    {
+      "matchPackageNames": ["react-redux"],
+      "allowedVersions": "<=8.0.5"
     }
   ],
   "circleci": { "enabled": false },
