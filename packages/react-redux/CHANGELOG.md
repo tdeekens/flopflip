@@ -1,5 +1,15 @@
 # @flopflip/react-redux
 
+## 13.2.1
+
+### Patch Changes
+
+- [#1850](https://github.com/tdeekens/flopflip/pull/1850) [`fffc52c`](https://github.com/tdeekens/flopflip/commit/fffc52cc394466c452602fda502468022b05917a) Thanks [@CarlosCortizasCT](https://github.com/CarlosCortizasCT)! - Exporting the new hooks introduced in the previous release.
+
+- Updated dependencies []:
+  - @flopflip/react@13.2.1
+  - @flopflip/types@13.2.1
+
 ## 13.2.0
 
 ### Minor Changes
