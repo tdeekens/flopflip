@@ -1,5 +1,37 @@
 # @flopflip/test-utils
 
+## 13.2.0
+
+### Minor Changes
+
+- [#1848](https://github.com/tdeekens/flopflip/pull/1848) [`2f75a14`](https://github.com/tdeekens/flopflip/commit/2f75a146bcf0c6145a7f625927b52ac767caece8) Thanks [@CarlosCortizasCT](https://github.com/CarlosCortizasCT)! - Included a new hook that allows a consumer to read all the flags configured in the FlopFlip context.
+
+  Example:
+
+  ```javascript
+  import { useAllFeatureToggles } from "@flopflip/react-broadcast";
+
+  const MyComponent = () => {
+    const allFeatureToggles = useAllFeatureToggles();
+
+    return (
+      <div>
+        {allFeatureToggles.map(({ featureName, featureValue }) => (
+          <div key={id}>
+            <span>Feature name: {featureName}</span>
+            <span>Feature value: {featureValue}</span>
+          </div>
+        ))}
+      </div>
+    );
+  };
+  ```
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/memory-adapter@13.2.0
+
 ## 13.1.8
 
 ### Patch Changes

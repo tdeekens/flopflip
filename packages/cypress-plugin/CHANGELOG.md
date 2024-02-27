@@ -1,5 +1,12 @@
 # @flopflip/cypress-plugin
 
+## 13.2.0
+
+### Patch Changes
+
+- Updated dependencies [[`445ee19`](https://github.com/tdeekens/flopflip/commit/445ee199d6b0962945d67c0469352d737b8c5f93)]:
+  - @flopflip/types@13.2.0
+
 ## 13.1.8
 
 ### Patch Changes
