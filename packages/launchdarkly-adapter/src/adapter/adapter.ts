@@ -184,9 +184,10 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   readonly #getInitialFlags = async ({
     flags,
     throwOnInitializationFailure,
+    cacheIdentifier,
   }: Pick<
     TLaunchDarklyAdapterArgs,
-    'flags' | 'throwOnInitializationFailure'
+    'flags' | 'throwOnInitializationFailure' | 'cacheIdentifier'
   >): Promise<{
     flagsFromSdk?: TFlags;
     initializationStatus: AdapterInitializationStatus;
@@ -217,6 +218,16 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
 
           if (flagsFromSdk) {
             const normalizedFlags = normalizeFlags(flagsFromSdk);
+
+            if (cacheIdentifier) {
+              const cache = await this.#getCache(
+                cacheIdentifier,
+                this.#adapterState.context?.key
+              );
+
+              cache.set(normalizedFlags);
+            }
+
             const flags =
               this.#withoutUnsubscribedOrLockedFlags(normalizedFlags);
 
@@ -399,20 +410,12 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     return this.#getInitialFlags({
       flags,
       throwOnInitializationFailure,
-    }).then(async ({ flagsFromSdk, initializationStatus }) => {
-      if (subscribeToFlagChanges && flagsFromSdk)
+    }).then(({ flagsFromSdk, initializationStatus }) => {
+      if (subscribeToFlagChanges && flagsFromSdk) {
         this.#setupFlagSubcription({
           flagsFromSdk,
           flagsUpdateDelayMs,
         });
-
-      if (adapterArgs.cacheIdentifier) {
-        const cache = await this.#getCache(
-          adapterArgs.cacheIdentifier,
-          this.#adapterState.context?.key
-        );
-
-        cache.set(flagsFromSdk ?? {});
       }
 
       return { initializationStatus };
