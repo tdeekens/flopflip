@@ -303,7 +303,6 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
           const updatedFlags: TFlags = {
             [normalizedFlagName]: normalizedFlagValue,
           };
-
           // NOTE: Adapter state needs to be updated outside of debounced-fn
           // so that no flag updates are lost.
           this.#updateFlagsInAdapterState(updatedFlags);

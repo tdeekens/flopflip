@@ -147,194 +147,57 @@ describe('when configuring', () => {
     let onFlagsStateChange;
     let configurationResult;
 
-    beforeEach(async () => {
-      onStatusStateChange = jest.fn();
-      onFlagsStateChange = jest.fn();
-      client = createClient({
-        allFlags: jest.fn(() => flags),
-        variation: jest.fn(() => true),
-      });
-
-      ldClient.initialize.mockReturnValue(client);
-
-      configurationResult = await adapter.configure(
-        {
-          sdk: { clientSideId },
-          context: userWithKey,
-        },
-        {
-          onStatusStateChange,
-          onFlagsStateChange,
-        }
-      );
-    });
-
-    it('should resolve to a successful initialization status', () => {
-      expect(configurationResult).toEqual(
-        expect.objectContaining({
-          initializationStatus: 0,
-        })
-      );
-    });
-
-    describe('when `ldClient` is configured', () => {
-      describe('when determining if adapter is configured', () => {
-        it('should indicate that the adapter is configured', () => {
-          expect(
-            adapter.getIsConfigurationStatus(
-              AdapterConfigurationStatus.Configured
-            )
-          ).toBe(true);
+    describe('without cache', () => {
+      beforeEach(async () => {
+        onStatusStateChange = jest.fn();
+        onFlagsStateChange = jest.fn();
+        client = createClient({
+          allFlags: jest.fn(() => flags),
+          variation: jest.fn(() => true),
         });
 
-        it('should return client', () => {
-          expect(adapter.getClient()).toEqual(
-            expect.objectContaining({
-              allFlags: expect.any(Function),
-              on: expect.any(Function),
-              variation: expect.any(Function),
-              waitForInitialization: expect.any(Function),
-            })
-          );
-        });
-      });
+        ldClient.initialize.mockReturnValue(client);
 
-      it('should `dispatch` `onUpdateStatus` action with configured', () => {
-        expect(onStatusStateChange).toHaveBeenCalledWith({
-          id: adapter.id,
-          status: {
-            configurationStatus: AdapterConfigurationStatus.Configured,
+        configurationResult = await adapter.configure(
+          {
+            sdk: { clientSideId },
+            context: userWithKey,
           },
-        });
-      });
-
-      it('should `dispatch` `onFlagsStateChange`', () => {
-        expect(onFlagsStateChange).toHaveBeenCalledWith({
-          id: adapter.id,
-          flags: {
-            someFlag1: true,
-            someFlag2: false,
-          },
-        });
-      });
-
-      it('should register callbacks to receive flag updates', () => {
-        expect(client.on).toHaveBeenCalledWith(
-          `change:some-flag-1`,
-          expect.any(Function)
-        );
-
-        expect(client.on).toHaveBeenCalledWith(
-          `change:some-flag-2`,
-          expect.any(Function)
+          {
+            onStatusStateChange,
+            onFlagsStateChange,
+          }
         );
       });
 
-      describe('`getFlag`', () => {
-        it('should return the flag', () => {
-          expect(adapter.getFlag('someFlag1')).toBe(false);
-        });
+      it('should resolve to a successful initialization status', () => {
+        expect(configurationResult).toEqual(
+          expect.objectContaining({
+            initializationStatus: 0,
+          })
+        );
       });
-    });
 
-    describe('when `waitForInitialization` throws', () => {
-      describe('when it should `throwOnInitializationFailure`', () => {
-        beforeEach(() => {
-          onStatusStateChange = jest.fn();
-          onFlagsStateChange = jest.fn();
-          client = createClient({
-            waitForInitialization: jest.fn(() =>
-              Promise.reject(
-                new Error(
-                  '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
-                )
+      describe('when `ldClient` is configured', () => {
+        describe('when determining if adapter is configured', () => {
+          it('should indicate that the adapter is configured', () => {
+            expect(
+              adapter.getIsConfigurationStatus(
+                AdapterConfigurationStatus.Configured
               )
-            ),
+            ).toBe(true);
           });
 
-          ldClient.initialize.mockReturnValue(client);
-        });
-
-        it('should reject the configuration with an error', async () => {
-          await expect(
-            adapter.configure(
-              {
-                sdk: { clientSideId },
-                context: userWithKey,
-                throwOnInitializationFailure: true,
-              },
-              {
-                onStatusStateChange,
-                onFlagsStateChange,
-              }
-            )
-          ).rejects.toThrow(
-            '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
-          );
-        });
-      });
-      describe('when it should not `throwOnInitializationFailure`', () => {
-        beforeEach(() => {
-          onStatusStateChange = jest.fn();
-          onFlagsStateChange = jest.fn();
-          client = createClient({
-            waitForInitialization: jest.fn(() =>
-              Promise.reject(
-                new Error(
-                  '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
-                )
-              )
-            ),
+          it('should return client', () => {
+            expect(adapter.getClient()).toEqual(
+              expect.objectContaining({
+                allFlags: expect.any(Function),
+                on: expect.any(Function),
+                variation: expect.any(Function),
+                waitForInitialization: expect.any(Function),
+              })
+            );
           });
-
-          ldClient.initialize.mockReturnValue(client);
-
-          console.warn = jest.fn();
-        });
-
-        it('should resolve the configuration', async () => {
-          await expect(
-            adapter.configure(
-              {
-                sdk: { clientSideId },
-                context: userWithKey,
-                throwOnInitializationFailure: false,
-              },
-              {
-                onStatusStateChange,
-                onFlagsStateChange,
-              }
-            )
-          ).resolves.toEqual(expect.anything());
-
-          expect(console.warn).toHaveBeenCalled();
-        });
-      });
-
-      describe('when `flags` is passed', () => {
-        beforeEach(() => {
-          onStatusStateChange = jest.fn();
-          onFlagsStateChange = jest.fn();
-          client = createClient({
-            allFlags: jest.fn(),
-            variation: jest.fn(
-              (flagName, defaultFlagValue) => defaultFlagValue
-            ),
-          });
-
-          ldClient.initialize.mockReturnValue(client);
-
-          return adapter.configure(
-            {
-              sdk: { clientSideId },
-              context: userWithKey,
-              flags,
-            },
-            {
-              onStatusStateChange,
-              onFlagsStateChange,
-            }
-          );
         });
 
         it('should `dispatch` `onUpdateStatus` action with configured', () => {
@@ -356,21 +219,275 @@ describe('when configuring', () => {
           });
         });
 
-        it('should load flags not from `allFlags` but `variation`', () => {
-          expect(client.allFlags).not.toHaveBeenCalled();
-          expect(client.variation).toHaveBeenCalledWith('some-flag-1', true);
-          expect(client.variation).toHaveBeenCalledWith('some-flag-2', false);
+        it('should register callbacks to receive flag updates', () => {
+          expect(client.on).toHaveBeenCalledWith(
+            `change:some-flag-1`,
+            expect.any(Function)
+          );
+
+          expect(client.on).toHaveBeenCalledWith(
+            `change:some-flag-2`,
+            expect.any(Function)
+          );
+        });
+
+        describe('`getFlag`', () => {
+          it('should return the flag', () => {
+            expect(adapter.getFlag('someFlag1')).toBe(false);
+          });
         });
       });
-    });
 
-    describe('with flag updates', () => {
-      describe('when not `subscribeToFlagChanges`', () => {
+      describe('when `waitForInitialization` throws', () => {
+        describe('when it should `throwOnInitializationFailure`', () => {
+          beforeEach(() => {
+            onStatusStateChange = jest.fn();
+            onFlagsStateChange = jest.fn();
+            client = createClient({
+              waitForInitialization: jest.fn(() =>
+                Promise.reject(
+                  new Error(
+                    '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
+                  )
+                )
+              ),
+            });
+
+            ldClient.initialize.mockReturnValue(client);
+          });
+
+          it('should reject the configuration with an error', async () => {
+            await expect(
+              adapter.configure(
+                {
+                  sdk: { clientSideId },
+                  context: userWithKey,
+                  throwOnInitializationFailure: true,
+                },
+                {
+                  onStatusStateChange,
+                  onFlagsStateChange,
+                }
+              )
+            ).rejects.toThrow(
+              '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
+            );
+          });
+        });
+        describe('when it should not `throwOnInitializationFailure`', () => {
+          beforeEach(() => {
+            onStatusStateChange = jest.fn();
+            onFlagsStateChange = jest.fn();
+            client = createClient({
+              waitForInitialization: jest.fn(() =>
+                Promise.reject(
+                  new Error(
+                    '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
+                  )
+                )
+              ),
+            });
+
+            ldClient.initialize.mockReturnValue(client);
+
+            console.warn = jest.fn();
+          });
+
+          it('should resolve the configuration', async () => {
+            await expect(
+              adapter.configure(
+                {
+                  sdk: { clientSideId },
+                  context: userWithKey,
+                  throwOnInitializationFailure: false,
+                },
+                {
+                  onStatusStateChange,
+                  onFlagsStateChange,
+                }
+              )
+            ).resolves.toEqual(expect.anything());
+
+            expect(console.warn).toHaveBeenCalled();
+          });
+        });
+
+        describe('when `flags` is passed', () => {
+          beforeEach(() => {
+            onStatusStateChange = jest.fn();
+            onFlagsStateChange = jest.fn();
+            client = createClient({
+              allFlags: jest.fn(),
+              variation: jest.fn(
+                (flagName, defaultFlagValue) => defaultFlagValue
+              ),
+            });
+
+            ldClient.initialize.mockReturnValue(client);
+
+            return adapter.configure(
+              {
+                sdk: { clientSideId },
+                context: userWithKey,
+                flags,
+              },
+              {
+                onStatusStateChange,
+                onFlagsStateChange,
+              }
+            );
+          });
+
+          it('should `dispatch` `onUpdateStatus` action with configured', () => {
+            expect(onStatusStateChange).toHaveBeenCalledWith({
+              id: adapter.id,
+              status: {
+                configurationStatus: AdapterConfigurationStatus.Configured,
+              },
+            });
+          });
+
+          it('should `dispatch` `onFlagsStateChange`', () => {
+            expect(onFlagsStateChange).toHaveBeenCalledWith({
+              id: adapter.id,
+              flags: {
+                someFlag1: true,
+                someFlag2: false,
+              },
+            });
+          });
+
+          it('should load flags not from `allFlags` but `variation`', () => {
+            expect(client.allFlags).not.toHaveBeenCalled();
+            expect(client.variation).toHaveBeenCalledWith('some-flag-1', true);
+            expect(client.variation).toHaveBeenCalledWith('some-flag-2', false);
+          });
+        });
+      });
+
+      describe('with flag updates', () => {
+        describe('when not `subscribeToFlagChanges`', () => {
+          beforeEach(async () => {
+            // Reset due to preivous dispatches
+            onFlagsStateChange.mockClear();
+            client.on.mockClear();
+
+            onStatusStateChange = jest.fn();
+            onFlagsStateChange = jest.fn();
+            client = createClient({
+              allFlags: jest.fn(() => flags),
+              variation: jest.fn(() => true),
+            });
+
+            ldClient.initialize.mockReturnValue(client);
+
+            await adapter.configure(
+              {
+                sdk: { clientSideId },
+                subscribeToFlagChanges: false,
+                context: userWithKey,
+              },
+              {
+                onStatusStateChange,
+                onFlagsStateChange,
+              }
+            );
+
+            onFlagsStateChange.mockClear();
+
+            triggerFlagValueChange(client);
+          });
+
+          it('should not `dispatch` `onFlagsStateChange` action', () => {
+            expect(onFlagsStateChange).not.toHaveBeenCalled();
+          });
+        });
+
+        describe('with `flagsUpdateDelayMs`', () => {
+          const flagsUpdateDelayMs = 1000;
+
+          beforeEach(() => {
+            jest.useFakeTimers();
+
+            // Reset due to preivous dispatches
+            onFlagsStateChange.mockClear();
+            client.on.mockClear();
+
+            onStatusStateChange = jest.fn();
+            onFlagsStateChange = jest.fn();
+            client = createClient({
+              allFlags: jest.fn(() => flags),
+              variation: jest.fn(() => true),
+            });
+
+            ldClient.initialize.mockReturnValue(client);
+
+            return adapter.configure(
+              {
+                sdk: { clientSideId },
+                flagsUpdateDelayMs,
+                context: userWithKey,
+              },
+              {
+                onStatusStateChange,
+                onFlagsStateChange,
+              }
+            );
+          });
+
+          it('should `dispatch` `onFlagsStateChange` action once', () => {
+            expect(onFlagsStateChange).toHaveBeenCalledTimes(1);
+          });
+
+          describe('when flag update occurs', () => {
+            describe('without opt-out of subscription', () => {
+              beforeEach(() => {
+                triggerFlagValueChange(client, { flagValue: true });
+              });
+
+              it('should not `dispatch` `onFlagsStateChange` action immidiately', () => {
+                expect(onFlagsStateChange).toHaveBeenCalledTimes(1);
+              });
+
+              it('should `dispatch` `onFlagsStateChange` action after the delay passed', () => {
+                jest.advanceTimersByTime(flagsUpdateDelayMs);
+
+                expect(onFlagsStateChange).toHaveBeenCalledTimes(4);
+              });
+            });
+
+            describe('with opt-out of flag change subscription', () => {
+              beforeEach(() => {
+                onFlagsStateChange.mockClear();
+                adapter.updateFlags(
+                  { someFlag1: true },
+                  { unsubscribeFlags: true }
+                );
+                triggerFlagValueChange(client, { flagValue: true });
+              });
+
+              it('should not `dispatch` `onFlagsStateChange` action', () => {
+                expect(onFlagsStateChange).toHaveBeenCalledTimes(1);
+              });
+            });
+          });
+        });
+
+        describe('when flag is locked', () => {
+          it('should not allow seting the flag value again', () => {
+            adapter.updateFlags({ someFlag1: true }, { lockFlags: true });
+
+            expect(adapter.getFlag('someFlag1')).toBe(true);
+
+            adapter.updateFlags({ someFlag1: false });
+
+            expect(adapter.getFlag('someFlag1')).toBe(true);
+          });
+        });
+      });
+
+      describe('with cache', () => {
         beforeEach(async () => {
-          // Reset due to preivous dispatches
-          onFlagsStateChange.mockClear();
-          client.on.mockClear();
-
           onStatusStateChange = jest.fn();
           onFlagsStateChange = jest.fn();
           client = createClient({
@@ -379,53 +496,15 @@ describe('when configuring', () => {
           });
 
           ldClient.initialize.mockReturnValue(client);
-
-          await adapter.configure(
-            {
-              sdk: { clientSideId },
-              subscribeToFlagChanges: false,
-              context: userWithKey,
-            },
-            {
-              onStatusStateChange,
-              onFlagsStateChange,
-            }
+          sessionStorage.getItem.mockReturnValueOnce(
+            JSON.stringify({ cached: true })
           );
 
-          onFlagsStateChange.mockClear();
-
-          triggerFlagValueChange(client);
-        });
-
-        it('should not `dispatch` `onFlagsStateChange` action', () => {
-          expect(onFlagsStateChange).not.toHaveBeenCalled();
-        });
-      });
-
-      describe('with `flagsUpdateDelayMs`', () => {
-        const flagsUpdateDelayMs = 1000;
-
-        beforeEach(() => {
-          jest.useFakeTimers();
-
-          // Reset due to preivous dispatches
-          onFlagsStateChange.mockClear();
-          client.on.mockClear();
-
-          onStatusStateChange = jest.fn();
-          onFlagsStateChange = jest.fn();
-          client = createClient({
-            allFlags: jest.fn(() => flags),
-            variation: jest.fn(() => true),
-          });
-
-          ldClient.initialize.mockReturnValue(client);
-
-          return adapter.configure(
+          configurationResult = await adapter.configure(
             {
               sdk: { clientSideId },
-              flagsUpdateDelayMs,
               context: userWithKey,
+              cacheIdentifier: 'session',
             },
             {
               onStatusStateChange,
@@ -434,53 +513,48 @@ describe('when configuring', () => {
           );
         });
 
-        it('should `dispatch` `onFlagsStateChange` action once', () => {
-          expect(onFlagsStateChange).toHaveBeenCalledTimes(1);
+        it('should resolve to a successful initialization status', () => {
+          expect(configurationResult).toEqual(
+            expect.objectContaining({
+              initializationStatus: 0,
+            })
+          );
         });
 
-        describe('when flag update occurs', () => {
-          describe('without opt-out of subscription', () => {
-            beforeEach(() => {
-              triggerFlagValueChange(client, { flagValue: true });
-            });
+        it('should restore cached flags', () => {
+          expect(sessionStorage.getItem).toHaveBeenCalledWith(
+            '@flopflip/launchdarkly-adapter/foo-user/flags'
+          );
 
-            it('should not `dispatch` `onFlagsStateChange` action immidiately', () => {
-              expect(onFlagsStateChange).toHaveBeenCalledTimes(1);
-            });
-
-            it('should `dispatch` `onFlagsStateChange` action after the delay passed', () => {
-              jest.advanceTimersByTime(flagsUpdateDelayMs);
-
-              expect(onFlagsStateChange).toHaveBeenCalledTimes(4);
-            });
-          });
-
-          describe('with opt-out of flag change subscription', () => {
-            beforeEach(() => {
-              onFlagsStateChange.mockClear();
-              adapter.updateFlags(
-                { someFlag1: true },
-                { unsubscribeFlags: true }
-              );
-              triggerFlagValueChange(client, { flagValue: true });
-            });
-
-            it('should not `dispatch` `onFlagsStateChange` action', () => {
-              expect(onFlagsStateChange).toHaveBeenCalledTimes(1);
-            });
+          expect(onFlagsStateChange).toHaveBeenCalledWith({
+            id: adapter.id,
+            flags: {
+              cached: true,
+            },
           });
         });
-      });
 
-      describe('when flag is locked', () => {
-        it('should not allow seting the flag value again', () => {
-          adapter.updateFlags({ someFlag1: true }, { lockFlags: true });
+        it('should cache newly fetched flags', () => {
+          expect(
+            JSON.parse(
+              sessionStorage.getItem(
+                '@flopflip/launchdarkly-adapter/foo-user/flags'
+              )
+            )
+          ).toStrictEqual({
+            someFlag1: true,
+            someFlag2: false,
+          });
+        });
 
-          expect(adapter.getFlag('someFlag1')).toBe(true);
-
-          adapter.updateFlags({ someFlag1: false });
-
-          expect(adapter.getFlag('someFlag1')).toBe(true);
+        it('should flush fetched flags', () => {
+          expect(onFlagsStateChange).toHaveBeenCalledWith({
+            id: adapter.id,
+            flags: {
+              someFlag2: false,
+              cached: true,
+            },
+          });
         });
       });
     });
