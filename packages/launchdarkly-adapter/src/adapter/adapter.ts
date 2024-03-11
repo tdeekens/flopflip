@@ -9,9 +9,11 @@ import {
   adapterIdentifiers,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
+  cacheIdentifiers,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
+  type TCacheIdentifiers,
   type TFlagName,
   type TFlags,
   type TFlagsChange,
@@ -44,6 +46,8 @@ type TLaunchDarklyAdapterState = {
   lockedFlags: Set<TFlagName>;
   unsubscribedFlags: Set<TFlagName>;
 };
+
+const STORAGE_SLICE = '@flopflip';
 
 class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   id: typeof adapterIdentifiers.launchdarkly;
@@ -116,6 +120,42 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
           !this.#getIsFlagLocked(flagName)
       )
     );
+
+  readonly #getCache = async (
+    cacheIdentifier: TCacheIdentifiers,
+    cacheKey: LDContext['key']
+  ) => {
+    let cacheModule;
+
+    // eslint-disable-next-line default-case, @typescript-eslint/switch-exhaustiveness-check
+    switch (cacheIdentifier) {
+      case cacheIdentifiers.local: {
+        cacheModule = await import('@flopflip/localstorage-cache');
+        break;
+      }
+
+      case cacheIdentifiers.session: {
+        cacheModule = await import('@flopflip/sessionstorage-cache');
+        break;
+      }
+    }
+
+    const createCache = cacheModule.default;
+    const cachePrefix = [STORAGE_SLICE, cacheKey].filter(Boolean).join('/');
+    const cache = createCache({ prefix: cachePrefix });
+
+    return {
+      set(flags: TFlags) {
+        return cache.set('flags', flags);
+      },
+      get() {
+        return cache.get('flags');
+      },
+      unset() {
+        return cache.unset('flags');
+      },
+    };
+  };
 
   readonly #getIsAnonymousContext = (context: LDContext) => !context?.key;
 
@@ -330,8 +370,27 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       throwOnInitializationFailure = false,
       flagsUpdateDelayMs,
     } = adapterArgs;
+    let cachedFlags;
 
     this.#adapterState.context = this.#ensureContext(context);
+
+    if (adapterArgs.cacheIdentifier) {
+      const cache = await this.#getCache(
+        adapterArgs.cacheIdentifier,
+        context.key
+      );
+
+      cachedFlags = cache.get();
+
+      if (cachedFlags) {
+        this.#adapterState.flags = cachedFlags;
+        this.#adapterState.emitter.emit(
+          'flagsStateChange',
+          cachedFlags as TFlags
+        );
+      }
+    }
+
     this.#adapterState.client = this.#initializeClient(
       sdk.clientSideId,
       this.#adapterState.context,
@@ -341,12 +400,21 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     return this.#getInitialFlags({
       flags,
       throwOnInitializationFailure,
-    }).then(({ flagsFromSdk, initializationStatus }) => {
+    }).then(async ({ flagsFromSdk, initializationStatus }) => {
       if (subscribeToFlagChanges && flagsFromSdk)
         this.#setupFlagSubcription({
           flagsFromSdk,
           flagsUpdateDelayMs,
         });
+
+      if (adapterArgs.cacheIdentifier) {
+        const cache = await this.#getCache(
+          adapterArgs.cacheIdentifier,
+          this.#adapterState.context?.key
+        );
+
+        cache.set(flagsFromSdk ?? {});
+      }
 
       return { initializationStatus };
     });
@@ -366,6 +434,15 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     const nextContext = adapterArgs.context;
 
     if (!isEqual(this.#adapterState.context, nextContext)) {
+      if (adapterArgs.cacheIdentifier) {
+        const cache = await this.#getCache(
+          adapterArgs.cacheIdentifier,
+          this.#adapterState.context?.key
+        );
+
+        cache.unset();
+      }
+
       this.#adapterState.context = this.#ensureContext(nextContext);
 
       await this.#changeClientContext(this.#adapterState.context);

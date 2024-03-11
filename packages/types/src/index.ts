@@ -63,6 +63,7 @@ export type TLaunchDarklyAdapterArgs = TLaunchDarklyContextArgs & {
   subscribeToFlagChanges?: boolean;
   throwOnInitializationFailure?: boolean;
   flagsUpdateDelayMs?: number;
+  cacheIdentifier?: TCacheIdentifiers;
 };
 export type TGraphQlAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,
@@ -348,34 +349,34 @@ export type TConfigureAdapterArgs<TAdapterInstance extends TAdapter> =
   TAdapterInstance extends TLaunchDarklyAdapterInterface
     ? TLaunchDarklyAdapterArgs
     : TAdapterInstance extends TLocalStorageAdapterInterface
-    ? TLocalStorageAdapterArgs
-    : TAdapterInstance extends TMemoryAdapterInterface
-    ? TMemoryAdapterArgs
-    : TAdapterInstance extends TSplitioAdapterInterface
-    ? TSplitioAdapterArgs
-    : TAdapterInstance extends TGraphQlAdapterInterface
-    ? TGraphQlAdapterArgs
-    : TAdapterInstance extends THttpAdapterInterface
-    ? THttpAdapterArgs
-    : TAdapterInstance extends TCombinedAdapterInterface
-    ? TCombinedAdapterArgs
-    : never;
+      ? TLocalStorageAdapterArgs
+      : TAdapterInstance extends TMemoryAdapterInterface
+        ? TMemoryAdapterArgs
+        : TAdapterInstance extends TSplitioAdapterInterface
+          ? TSplitioAdapterArgs
+          : TAdapterInstance extends TGraphQlAdapterInterface
+            ? TGraphQlAdapterArgs
+            : TAdapterInstance extends THttpAdapterInterface
+              ? THttpAdapterArgs
+              : TAdapterInstance extends TCombinedAdapterInterface
+                ? TCombinedAdapterArgs
+                : never;
 export type TConfigureAdapterProps<TAdapterInstance extends TAdapter> = {
   adapter: TAdapterInstance extends TLaunchDarklyAdapterInterface
     ? TLaunchDarklyAdapterInterface
     : TAdapterInstance extends TLocalStorageAdapterInterface
-    ? TLocalStorageAdapterInterface
-    : TAdapterInstance extends TMemoryAdapterInterface
-    ? TMemoryAdapterInterface
-    : TAdapterInstance extends TSplitioAdapterInterface
-    ? TSplitioAdapterInterface
-    : TAdapterInstance extends TGraphQlAdapterInterface
-    ? TGraphQlAdapterInterface
-    : TAdapterInstance extends THttpAdapterInterface
-    ? THttpAdapterInterface
-    : TAdapterInstance extends TCombinedAdapterInterface
-    ? TCombinedAdapterInterface
-    : never;
+      ? TLocalStorageAdapterInterface
+      : TAdapterInstance extends TMemoryAdapterInterface
+        ? TMemoryAdapterInterface
+        : TAdapterInstance extends TSplitioAdapterInterface
+          ? TSplitioAdapterInterface
+          : TAdapterInstance extends TGraphQlAdapterInterface
+            ? TGraphQlAdapterInterface
+            : TAdapterInstance extends THttpAdapterInterface
+              ? THttpAdapterInterface
+              : TAdapterInstance extends TCombinedAdapterInterface
+                ? TCombinedAdapterInterface
+                : never;
   adapterArgs: TConfigureAdapterArgs<TAdapterInstance>;
 };
 export type TAdapterReconfigurationOptions = {
