@@ -9,6 +9,7 @@ import {
   adapterIdentifiers,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
+  cacheIdentifiers,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
@@ -399,7 +400,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     return this.#getInitialFlags({
       flags,
       throwOnInitializationFailure,
-    }).then(({ flagsFromSdk, initializationStatus }) => {
+    }).then(async ({ flagsFromSdk, initializationStatus }) => {
       if (subscribeToFlagChanges && flagsFromSdk)
         this.#setupFlagSubcription({
           flagsFromSdk,
@@ -412,7 +413,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
           this.#adapterState.context?.key
         );
 
-        cache.set(flagsFromSdk);
+        cache.set(flagsFromSdk ?? {});
       }
 
       return { initializationStatus };
