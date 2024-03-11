@@ -1,5 +1,19 @@
 # @flopflip/launchdarkly-adapter
 
+## 13.2.3
+
+### Patch Changes
+
+- [#1861](https://github.com/tdeekens/flopflip/pull/1861) [`5330ec0`](https://github.com/tdeekens/flopflip/commit/5330ec0c4a8e9f5f2b23910f9f3c2eb3a23c8fd6) Thanks [@tdeekens](https://github.com/tdeekens)! - Fix to cache normalized flags
+
+- [#1859](https://github.com/tdeekens/flopflip/pull/1859) [`9df66d0`](https://github.com/tdeekens/flopflip/commit/9df66d04da09ef50208c0c27f5386774a5c9fc0b) Thanks [@tdeekens](https://github.com/tdeekens)! - Fix needless reconfiguration due to missing `anonymous` property on next context when comparing.
+
+- Updated dependencies []:
+  - @flopflip/adapter-utilities@13.2.3
+  - @flopflip/localstorage-cache@13.2.3
+  - @flopflip/sessionstorage-cache@13.2.3
+  - @flopflip/types@13.2.3
+
 ## 13.2.2
 
 ### Patch Changes
