@@ -1,5 +1,19 @@
 # @flopflip/launchdarkly-adapter
 
+## 13.2.2
+
+### Patch Changes
+
+- [#1857](https://github.com/tdeekens/flopflip/pull/1857) [`95e9bfd`](https://github.com/tdeekens/flopflip/commit/95e9bfd211e6cd40d1d355e415a8eed345446c8b) Thanks [@tdeekens](https://github.com/tdeekens)! - Allow caching flags in localstorage or sessionstorage in launchdarkly adapter.
+
+- [#1852](https://github.com/tdeekens/flopflip/pull/1852) [`b90946f`](https://github.com/tdeekens/flopflip/commit/b90946f52d8f71bcd1ed2fcdbfbbea3ed0005fdf) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update all dependencies
+
+- Updated dependencies [[`95e9bfd`](https://github.com/tdeekens/flopflip/commit/95e9bfd211e6cd40d1d355e415a8eed345446c8b), [`b90946f`](https://github.com/tdeekens/flopflip/commit/b90946f52d8f71bcd1ed2fcdbfbbea3ed0005fdf)]:
+  - @flopflip/types@13.2.2
+  - @flopflip/adapter-utilities@13.2.2
+  - @flopflip/localstorage-cache@13.2.2
+  - @flopflip/sessionstorage-cache@13.2.2
+
 ## 13.2.1
 
 ### Patch Changes
