@@ -137,7 +137,9 @@ describe('when configured', () => {
     });
 
     it('should restore cached flags', () => {
-      expect(sessionStorage.getItem).toHaveBeenCalledWith('@flopflip/flags');
+      expect(sessionStorage.getItem).toHaveBeenCalledWith(
+        '@flopflip/http-adapter/flags'
+      );
 
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
         id: adapter.id,
@@ -149,7 +151,7 @@ describe('when configured', () => {
 
     it('should cache newly fetched flags', () => {
       expect(
-        JSON.parse(sessionStorage.getItem('@flopflip/flags'))
+        JSON.parse(sessionStorage.getItem('@flopflip/http-adapter/flags'))
       ).toStrictEqual({ disabled: false, enabled: true });
     });
 
@@ -260,7 +262,9 @@ describe('when configured', () => {
     });
 
     it('should reset cache', () => {
-      expect(sessionStorage.removeItem).toHaveBeenCalledWith('@flopflip/flags');
+      expect(sessionStorage.removeItem).toHaveBeenCalledWith(
+        '@flopflip/http-adapter/flags'
+      );
     });
   });
 

@@ -40,7 +40,7 @@ type THttpAdapterState = {
   cacheIdentifier?: TCacheIdentifiers;
 };
 
-const STORAGE_SLICE = '@flopflip';
+const STORAGE_SLICE = '@flopflip/http-adapter';
 
 const intialAdapterState: TAdapterStatus & THttpAdapterState = {
   subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
@@ -77,7 +77,6 @@ class HttpAdapter implements THttpAdapterInterface {
   readonly #getCache = async (cacheIdentifier: TCacheIdentifiers) => {
     let cacheModule;
 
-    // eslint-disable-next-line default-case
     switch (cacheIdentifier) {
       case cacheIdentifiers.local: {
         cacheModule = await import('@flopflip/localstorage-cache');

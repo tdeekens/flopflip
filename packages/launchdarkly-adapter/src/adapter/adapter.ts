@@ -47,7 +47,7 @@ type TLaunchDarklyAdapterState = {
   unsubscribedFlags: Set<TFlagName>;
 };
 
-const STORAGE_SLICE = '@flopflip';
+const STORAGE_SLICE = '@flopflip/launchdarkly-adapter';
 
 class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   id: typeof adapterIdentifiers.launchdarkly;
@@ -127,7 +127,6 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   ) => {
     let cacheModule;
 
-    // eslint-disable-next-line default-case, @typescript-eslint/switch-exhaustiveness-check
     switch (cacheIdentifier) {
       case cacheIdentifiers.local: {
         cacheModule = await import('@flopflip/localstorage-cache');
@@ -431,7 +430,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
         )
       );
 
-    const nextContext = adapterArgs.context;
+    const nextContext = this.#ensureContext(adapterArgs.context);
 
     if (!isEqual(this.#adapterState.context, nextContext)) {
       if (adapterArgs.cacheIdentifier) {
@@ -443,7 +442,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
         cache.unset();
       }
 
-      this.#adapterState.context = this.#ensureContext(nextContext);
+      this.#adapterState.context = nextContext;
 
       await this.#changeClientContext(this.#adapterState.context);
 

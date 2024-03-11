@@ -40,7 +40,7 @@ type TGraphQlAdapterState = {
   cacheIdentifier?: TCacheIdentifiers;
 };
 
-const STORAGE_SLICE = '@flopflip';
+const STORAGE_SLICE = '@flopflip/graphql-adapter';
 
 const intialAdapterState: TAdapterStatus & TGraphQlAdapterState = {
   subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
@@ -78,7 +78,6 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
   readonly #getCache = async (cacheIdentifier: TCacheIdentifiers) => {
     let cacheModule;
 
-    // eslint-disable-next-line default-case
     switch (cacheIdentifier) {
       case cacheIdentifiers.local: {
         cacheModule = await import('@flopflip/localstorage-cache');
