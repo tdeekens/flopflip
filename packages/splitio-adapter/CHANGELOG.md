@@ -1,5 +1,13 @@
 # @flopflip/splitio-adapter
 
+## 13.2.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/adapter-utilities@13.2.3
+  - @flopflip/types@13.2.3
+
 ## 13.2.2
 
 ### Patch Changes

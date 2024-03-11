@@ -1,5 +1,13 @@
 # @flopflip/react-broadcast
 
+## 13.2.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/react@13.2.3
+  - @flopflip/types@13.2.3
+
 ## 13.2.2
 
 ### Patch Changes
