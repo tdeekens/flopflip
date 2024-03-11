@@ -410,6 +410,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     return this.#getInitialFlags({
       flags,
       throwOnInitializationFailure,
+      cacheIdentifier: adapterArgs.cacheIdentifier,
     }).then(({ flagsFromSdk, initializationStatus }) => {
       if (subscribeToFlagChanges && flagsFromSdk) {
         this.#setupFlagSubcription({
