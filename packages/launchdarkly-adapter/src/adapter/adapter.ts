@@ -12,6 +12,7 @@ import {
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
+  type TCacheIdentifiers,
   type TFlagName,
   type TFlags,
   type TFlagsChange,
