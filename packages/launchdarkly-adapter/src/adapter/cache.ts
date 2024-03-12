@@ -6,11 +6,10 @@ import {
 import { type LDContext } from 'launchdarkly-js-client-sdk';
 
 const CACHE_PREFIX = '@flopflip/launchdarkly-adapter';
+const FLAGS_KEY = 'flags';
+const FLAGS_REFERENCE_KEY = 'flags-reference';
 
-async function getCache(
-  cacheIdentifier: TCacheIdentifiers,
-  cacheKey: LDContext['key']
-) {
+async function importCache(cacheIdentifier: TCacheIdentifiers) {
   let cacheModule;
 
   switch (cacheIdentifier) {
@@ -25,21 +24,60 @@ async function getCache(
     }
   }
 
+  return cacheModule;
+}
+
+async function getCache(
+  cacheIdentifier: TCacheIdentifiers,
+  cacheKey: LDContext['key']
+) {
+  const cacheModule = await importCache(cacheIdentifier);
+
   const createCache = cacheModule.default;
-  const cachePrefix = [CACHE_PREFIX, cacheKey].filter(Boolean).join('/');
-  const cache = createCache({ prefix: cachePrefix });
+  const flagsCachePrefix = [CACHE_PREFIX, cacheKey].filter(Boolean).join('/');
+
+  const flagsCache = createCache({ prefix: flagsCachePrefix });
+  const referenceCache = createCache({ prefix: CACHE_PREFIX });
 
   return {
     set(flags: TFlags) {
-      return cache.set('flags', flags);
+      const haveFlagsBeenWritten = flagsCache.set(FLAGS_KEY, flags);
+
+      if (haveFlagsBeenWritten) {
+        referenceCache.set(
+          FLAGS_REFERENCE_KEY,
+          [flagsCachePrefix, FLAGS_KEY].join('/')
+        );
+      }
+
+      return haveFlagsBeenWritten;
     },
     get() {
-      return cache.get('flags');
+      return flagsCache.get(FLAGS_KEY);
     },
     unset() {
-      return cache.unset('flags');
+      referenceCache.unset(FLAGS_REFERENCE_KEY);
+
+      return flagsCache.unset(FLAGS_KEY);
     },
   };
 }
 
-export { CACHE_PREFIX, getCache };
+async function getCachedFlags(cacheIdentifier: TCacheIdentifiers) {
+  const cacheModule = await importCache(cacheIdentifier);
+
+  const createCache = cacheModule.default;
+
+  const referenceCache = createCache({ prefix: CACHE_PREFIX });
+
+  const reference = referenceCache.get(FLAGS_REFERENCE_KEY);
+
+  if (reference) {
+    // Cache without prefix as the reference is already prefixed.
+    const flagsCache = createCache({ prefix: '' });
+
+    return flagsCache.get(reference);
+  }
+}
+
+export { CACHE_PREFIX, getCache, getCachedFlags };
