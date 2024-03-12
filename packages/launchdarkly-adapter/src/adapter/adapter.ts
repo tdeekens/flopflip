@@ -9,11 +9,9 @@ import {
   adapterIdentifiers,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
-  cacheIdentifiers,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
-  type TCacheIdentifiers,
   type TFlagName,
   type TFlags,
   type TFlagsChange,
@@ -33,6 +31,8 @@ import mitt, { type Emitter } from 'mitt';
 import warning from 'tiny-warning';
 import { merge } from 'ts-deepmerge';
 
+import { getCache } from './cache';
+
 type TEmitterEvents = {
   flagsStateChange: TFlags;
   statusStateChange: Partial<TAdapterStatus>;
@@ -46,8 +46,6 @@ type TLaunchDarklyAdapterState = {
   lockedFlags: Set<TFlagName>;
   unsubscribedFlags: Set<TFlagName>;
 };
-
-const STORAGE_SLICE = '@flopflip/launchdarkly-adapter';
 
 class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   id: typeof adapterIdentifiers.launchdarkly;
@@ -121,41 +119,6 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       )
     );
 
-  readonly #getCache = async (
-    cacheIdentifier: TCacheIdentifiers,
-    cacheKey: LDContext['key']
-  ) => {
-    let cacheModule;
-
-    switch (cacheIdentifier) {
-      case cacheIdentifiers.local: {
-        cacheModule = await import('@flopflip/localstorage-cache');
-        break;
-      }
-
-      case cacheIdentifiers.session: {
-        cacheModule = await import('@flopflip/sessionstorage-cache');
-        break;
-      }
-    }
-
-    const createCache = cacheModule.default;
-    const cachePrefix = [STORAGE_SLICE, cacheKey].filter(Boolean).join('/');
-    const cache = createCache({ prefix: cachePrefix });
-
-    return {
-      set(flags: TFlags) {
-        return cache.set('flags', flags);
-      },
-      get() {
-        return cache.get('flags');
-      },
-      unset() {
-        return cache.unset('flags');
-      },
-    };
-  };
-
   readonly #getIsAnonymousContext = (context: LDContext) => !context?.key;
 
   readonly #ensureContext = (context: LDContext) => {
@@ -220,7 +183,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
             const normalizedFlags = normalizeFlags(flagsFromSdk);
 
             if (cacheIdentifier) {
-              const cache = await this.#getCache(
+              const cache = await getCache(
                 cacheIdentifier,
                 this.#adapterState.context?.key
               );
@@ -384,10 +347,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     this.#adapterState.context = this.#ensureContext(context);
 
     if (adapterArgs.cacheIdentifier) {
-      const cache = await this.#getCache(
-        adapterArgs.cacheIdentifier,
-        context.key
-      );
+      const cache = await getCache(adapterArgs.cacheIdentifier, context.key);
 
       cachedFlags = cache.get();
 
@@ -437,7 +397,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
 
     if (!isEqual(this.#adapterState.context, nextContext)) {
       if (adapterArgs.cacheIdentifier) {
-        const cache = await this.#getCache(
+        const cache = await getCache(
           adapterArgs.cacheIdentifier,
           this.#adapterState.context?.key
         );
