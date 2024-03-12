@@ -63,20 +63,24 @@ async function getCache(
   };
 }
 
-async function getCachedFlags(cacheIdentifier: TCacheIdentifiers) {
-  const cacheModule = await importCache(cacheIdentifier);
+function getCachedFlags(cacheIdentifier: TCacheIdentifiers) {
+  const cacheModule =
+    cacheIdentifier === cacheIdentifiers.local ? localStorage : sessionStorage;
 
-  const createCache = cacheModule.default;
+  const referenceToCachedFlags: string | undefined =
+    cacheModule.get(FLAGS_REFERENCE_KEY);
 
-  const referenceCache = createCache({ prefix: CACHE_PREFIX });
+  if (referenceToCachedFlags) {
+    try {
+      const cacheKey = JSON.parse(referenceToCachedFlags);
+      const cachedFlags: string | undefined = cacheModule.get(cacheKey);
 
-  const reference = referenceCache.get(FLAGS_REFERENCE_KEY);
+      if (cacheKey && cachedFlags) {
+        return JSON.parse(cachedFlags);
+      }
 
-  if (reference) {
-    // Cache without prefix as the reference is already prefixed.
-    const flagsCache = createCache({ prefix: '' });
-
-    return flagsCache.get(reference);
+      return {};
+    } catch (error) {}
   }
 }
 
