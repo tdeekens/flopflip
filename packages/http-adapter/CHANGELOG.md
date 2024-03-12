@@ -1,5 +1,15 @@
 # @flopflip/http-adapter
 
+## 13.3.4
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/adapter-utilities@13.3.4
+  - @flopflip/localstorage-cache@13.3.4
+  - @flopflip/sessionstorage-cache@13.3.4
+  - @flopflip/types@13.3.4
+
 ## 13.3.3
 
 ### Patch Changes

@@ -1,5 +1,17 @@
 # @flopflip/launchdarkly-adapter
 
+## 13.3.4
+
+### Patch Changes
+
+- [#1871](https://github.com/tdeekens/flopflip/pull/1871) [`c01142b`](https://github.com/tdeekens/flopflip/commit/c01142bce927786a6fe9083c4b9cdd37f3e277e6) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: path to reference for flag values
+
+- Updated dependencies []:
+  - @flopflip/adapter-utilities@13.3.4
+  - @flopflip/localstorage-cache@13.3.4
+  - @flopflip/sessionstorage-cache@13.3.4
+  - @flopflip/types@13.3.4
+
 ## 13.3.3
 
 ### Patch Changes
