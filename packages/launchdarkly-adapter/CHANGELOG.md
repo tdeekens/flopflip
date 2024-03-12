@@ -1,5 +1,17 @@
 # @flopflip/launchdarkly-adapter
 
+## 13.3.1
+
+### Patch Changes
+
+- [#1864](https://github.com/tdeekens/flopflip/pull/1864) [`1005756`](https://github.com/tdeekens/flopflip/commit/100575623918c1d57050b645f9bb1dea3157286d) Thanks [@tdeekens](https://github.com/tdeekens)! - Refactor to make restoring cached flags leaner and sync
+
+- Updated dependencies []:
+  - @flopflip/adapter-utilities@13.3.1
+  - @flopflip/localstorage-cache@13.3.1
+  - @flopflip/sessionstorage-cache@13.3.1
+  - @flopflip/types@13.3.1
+
 ## 13.3.0
 
 ### Minor Changes
