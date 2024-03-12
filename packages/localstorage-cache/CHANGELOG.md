@@ -1,5 +1,16 @@
 # @flopflip/localstorage-cache
 
+## 13.3.0
+
+### Minor Changes
+
+- [#1862](https://github.com/tdeekens/flopflip/pull/1862) [`f34ff2a`](https://github.com/tdeekens/flopflip/commit/f34ff2a2d82a67f014c04cc700bbf121e1469f6d) Thanks [@tdeekens](https://github.com/tdeekens)! - Add support to pull latest cached flags by reference out of cache
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/types@13.3.0
+
 ## 13.2.3
 
 ### Patch Changes
