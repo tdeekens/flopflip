@@ -63,7 +63,7 @@ async function getCache(
   };
 }
 
-function getCachedFlags(cacheIdentifier: TCacheIdentifiers) {
+function getCachedFlags(cacheIdentifier: TCacheIdentifiers): TFlags {
   const cacheModule =
     cacheIdentifier === cacheIdentifiers.local ? localStorage : sessionStorage;
 
@@ -77,10 +77,10 @@ function getCachedFlags(cacheIdentifier: TCacheIdentifiers) {
       if (cacheKey && cachedFlags) {
         return JSON.parse(cachedFlags);
       }
-
-      return {};
     } catch (error) {}
   }
+
+  return {};
 }
 
 export { CACHE_PREFIX, getCache, getCachedFlags };
