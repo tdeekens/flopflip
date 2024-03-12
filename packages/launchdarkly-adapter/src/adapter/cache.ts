@@ -66,8 +66,9 @@ async function getCache(
 function getCachedFlags(cacheIdentifier: TCacheIdentifiers): TFlags {
   const cacheModule =
     cacheIdentifier === cacheIdentifiers.local ? localStorage : sessionStorage;
+  const flagReferenceKey = [CACHE_PREFIX, FLAGS_REFERENCE_KEY].join('/');
 
-  const referenceToCachedFlags = cacheModule.getItem(FLAGS_REFERENCE_KEY);
+  const referenceToCachedFlags = cacheModule.getItem(flagReferenceKey);
 
   if (referenceToCachedFlags) {
     try {
