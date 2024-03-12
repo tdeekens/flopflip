@@ -1,5 +1,12 @@
 # @flopflip/sessionstorage-cache
 
+## 13.3.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/types@13.3.1
+
 ## 13.3.0
 
 ### Patch Changes
