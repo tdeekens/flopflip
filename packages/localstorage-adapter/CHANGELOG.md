@@ -1,5 +1,14 @@
 # @flopflip/localstorage-adapter
 
+## 13.3.0
+
+### Patch Changes
+
+- Updated dependencies [[`f34ff2a`](https://github.com/tdeekens/flopflip/commit/f34ff2a2d82a67f014c04cc700bbf121e1469f6d)]:
+  - @flopflip/localstorage-cache@13.3.0
+  - @flopflip/adapter-utilities@13.3.0
+  - @flopflip/types@13.3.0
+
 ## 13.2.3
 
 ### Patch Changes
