@@ -67,13 +67,12 @@ function getCachedFlags(cacheIdentifier: TCacheIdentifiers) {
   const cacheModule =
     cacheIdentifier === cacheIdentifiers.local ? localStorage : sessionStorage;
 
-  const referenceToCachedFlags: string | undefined =
-    cacheModule.getItem(FLAGS_REFERENCE_KEY);
+  const referenceToCachedFlags = cacheModule.getItem(FLAGS_REFERENCE_KEY);
 
   if (referenceToCachedFlags) {
     try {
       const cacheKey: string = JSON.parse(referenceToCachedFlags);
-      const cachedFlags: string | undefined = cacheModule.getItem(cacheKey);
+      const cachedFlags = cacheModule.getItem(cacheKey);
 
       if (cacheKey && cachedFlags) {
         return JSON.parse(cachedFlags);
