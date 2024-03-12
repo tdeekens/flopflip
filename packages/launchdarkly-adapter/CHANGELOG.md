@@ -1,5 +1,17 @@
 # @flopflip/launchdarkly-adapter
 
+## 13.3.3
+
+### Patch Changes
+
+- [#1869](https://github.com/tdeekens/flopflip/pull/1869) [`6ba8e74`](https://github.com/tdeekens/flopflip/commit/6ba8e74884d2f838e41c419ac31e110af8eb994e) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: add return type
+
+- Updated dependencies []:
+  - @flopflip/adapter-utilities@13.3.3
+  - @flopflip/localstorage-cache@13.3.3
+  - @flopflip/sessionstorage-cache@13.3.3
+  - @flopflip/types@13.3.3
+
 ## 13.3.2
 
 ### Patch Changes
