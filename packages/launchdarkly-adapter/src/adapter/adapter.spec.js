@@ -27,7 +27,9 @@ const createClient = jest.fn((apiOverwrites) => ({
 
 const triggerFlagValueChange = (client, { flagValue = false } = {}) =>
   client.on.mock.calls.forEach(([event, cb]) => {
-    if (event.startsWith('change:')) cb(flagValue);
+    if (event.startsWith('change:')) {
+      cb(flagValue);
+    }
   });
 
 describe('when configuring', () => {
@@ -488,8 +490,8 @@ describe('when configuring', () => {
 
       describe('with cache', () => {
         beforeEach(async () => {
-          onStatusStateChange = jest.fn();
-          onFlagsStateChange = jest.fn();
+          onStatusStateChange.mockClear();
+          onFlagsStateChange.mockClear();
           client = createClient({
             allFlags: jest.fn(() => flags),
             variation: jest.fn(() => true),
@@ -542,18 +544,72 @@ describe('when configuring', () => {
               )
             )
           ).toStrictEqual({
-            someFlag1: true,
+            someFlag1: false,
             someFlag2: false,
           });
         });
 
-        it('should flush fetched flags', () => {
-          expect(onFlagsStateChange).toHaveBeenCalledWith({
-            id: adapter.id,
-            flags: {
-              someFlag2: false,
-              cached: true,
-            },
+        describe('when unsubscribing from cached flags', () => {
+          beforeEach(async () => {
+            onStatusStateChange.mockClear();
+            onFlagsStateChange.mockClear();
+            client = createClient({
+              allFlags: jest.fn(() => ({
+                cached: false,
+                updated: false,
+              })),
+              variation: jest.fn(() => true),
+            });
+
+            ldClient.initialize.mockReturnValue(client);
+            sessionStorage.getItem.mockReturnValueOnce(
+              JSON.stringify({ cached: true })
+            );
+
+            configurationResult = await adapter.configure(
+              {
+                sdk: { clientSideId },
+                context: userWithKey,
+                cacheIdentifier: 'session',
+                unsubscribeFromCachedFlags: true,
+              },
+              {
+                onStatusStateChange,
+                onFlagsStateChange,
+              }
+            );
+          });
+
+          it('should prefer the cached version and flush flags', () => {
+            expect(onFlagsStateChange).toHaveBeenCalledWith({
+              id: adapter.id,
+              flags: {
+                cached: true,
+                updated: false,
+              },
+            });
+          });
+
+          describe('when flag update occurs', () => {
+            it('should resolve to a successful initialization status', () => {
+              expect(configurationResult).toEqual(
+                expect.objectContaining({
+                  initializationStatus: 0,
+                })
+              );
+            });
+
+            it('should update non cached flags and not cached flags', () => {
+              expect(client.allFlags).toHaveBeenCalled();
+              triggerFlagValueChange(client, { flagValue: true });
+              expect(onFlagsStateChange).toHaveBeenCalledWith({
+                id: adapter.id,
+                flags: {
+                  // Value was cached, thus should not be updated
+                  cached: true,
+                },
+              });
+            });
           });
         });
       });
@@ -561,7 +617,7 @@ describe('when configuring', () => {
 
     describe('`getFlag`', () => {
       it('should return the flag', () => {
-        expect(adapter.getFlag('someFlag2')).toBe(false);
+        expect(adapter.getFlag('updated')).toBe(true);
       });
     });
 

@@ -64,6 +64,7 @@ export type TLaunchDarklyAdapterArgs = TLaunchDarklyContextArgs & {
   throwOnInitializationFailure?: boolean;
   flagsUpdateDelayMs?: number;
   cacheIdentifier?: TCacheIdentifiers;
+  unsubscribeFromCachedFlags?: boolean;
 };
 export type TGraphQlAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,
