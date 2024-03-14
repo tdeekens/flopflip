@@ -1,5 +1,12 @@
 # @flopflip/react
 
+## 13.4.0
+
+### Patch Changes
+
+- Updated dependencies [[`e817bcc`](https://github.com/tdeekens/flopflip/commit/e817bcc2e6161f53aecfd31eb72dc05451fadd6b)]:
+  - @flopflip/types@13.4.0
+
 ## 13.3.4
 
 ### Patch Changes
