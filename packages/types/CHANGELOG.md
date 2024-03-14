@@ -1,5 +1,13 @@
 # @flopflip/types
 
+## 13.4.0
+
+### Minor Changes
+
+- [#1873](https://github.com/tdeekens/flopflip/pull/1873) [`e817bcc`](https://github.com/tdeekens/flopflip/commit/e817bcc2e6161f53aecfd31eb72dc05451fadd6b) Thanks [@tdeekens](https://github.com/tdeekens)! - Allow cached flags to be updated silently only taking effect whenever adapter is configured again.
+
+  You can pass `unsubscribeFromCachedFlags` as an `adapterArg` to the LaunchDarkly adapter to try this out.
+
 ## 13.3.4
 
 ## 13.3.3
