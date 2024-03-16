@@ -27,6 +27,8 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
+    "@flopflip/combine-adapters": "13.4.0",
+    "@flopflip/localstorage-adapter": "13.4.0",
     "@flopflip/memory-adapter": "13.4.0",
     "@flopflip/test-utils": "*",
     "react": "18.2.0",

@@ -5,7 +5,6 @@ import {
   AdapterInitializationStatus,
 } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
-import { beforeAll } from 'globalthis/implementation';
 import warning from 'tiny-warning';
 
 import adapter from './adapter';
@@ -269,6 +268,38 @@ describe('when combining', () => {
         expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
           id: localstorageAdapter.id,
           flags: expect.objectContaining(updatedFlags),
+        });
+      });
+    });
+
+    describe('when updating flags existing in both adapters', () => {
+      const similarFlags = updatedFlags;
+      beforeEach(() => {
+        adapterEventHandlers.onFlagsStateChange.mockClear();
+
+        memoryAdapter.updateFlags({ ...similarFlags, duplicateFlag: true });
+        localstorageAdapter.updateFlags({
+          ...similarFlags,
+          duplicateFlag: false,
+        });
+      });
+
+      it('should invoke `onFlagsStateChange` with `updatedFlags` for all combined adapters', () => {
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+          id: memoryAdapter.id,
+          flags: expect.objectContaining(similarFlags),
+        });
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+          id: localstorageAdapter.id,
+          flags: expect.objectContaining(similarFlags),
+        });
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+          id: memoryAdapter.id,
+          flags: expect.objectContaining({ duplicateFlag: true }),
+        });
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+          id: localstorageAdapter.id,
+          flags: expect.objectContaining({ duplicateFlag: false }),
         });
       });
     });

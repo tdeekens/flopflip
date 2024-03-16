@@ -7,8 +7,11 @@ import { selectFlags } from '../../ducks/flags';
 export default function useAllFeatureToggles(): TFlags {
   const adapterContext = useAdapterContext();
   const allFlags = useSelector(selectFlags());
+  const reversedAdapterEffectIdentifiers = [
+    ...adapterContext.adapterEffectIdentifiers,
+  ].reverse();
 
-  return adapterContext.adapterEffectIdentifiers.reverse().reduce<TFlags>(
+  return reversedAdapterEffectIdentifiers.reduce<TFlags>(
     (_allFlags, adapterIdentifier) => ({
       ..._allFlags,
       ...allFlags[adapterIdentifier],

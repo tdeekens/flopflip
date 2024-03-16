@@ -489,6 +489,12 @@ importers:
         specifier: 1.2.0
         version: 1.2.0(react@18.2.0)
     devDependencies:
+      '@flopflip/combine-adapters':
+        specifier: 13.4.0
+        version: link:../combine-adapters
+      '@flopflip/localstorage-adapter':
+        specifier: 13.4.0
+        version: link:../localstorage-adapter
       '@flopflip/memory-adapter':
         specifier: 13.4.0
         version: link:../memory-adapter
@@ -526,6 +532,12 @@ importers:
         specifier: 7.1.33
         version: 7.1.33
     devDependencies:
+      '@flopflip/combine-adapters':
+        specifier: 13.4.0
+        version: link:../combine-adapters
+      '@flopflip/localstorage-adapter':
+        specifier: 13.4.0
+        version: link:../localstorage-adapter
       '@flopflip/memory-adapter':
         specifier: 13.4.0
         version: link:../memory-adapter
