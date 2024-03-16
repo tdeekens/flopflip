@@ -1,4 +1,4 @@
-import adapter from '@flopflip/memory-adapter';
+import memoryAdapter from '@flopflip/memory-adapter';
 import {
   act,
   buildQueries,
@@ -10,7 +10,7 @@ import {
 } from '@testing-library/react';
 import React, { cloneElement } from 'react';
 
-afterEach(adapter.reset);
+afterEach(memoryAdapter.reset);
 
 const mergeOptional = (defaultValue, value) =>
   value === null ? undefined : { ...defaultValue, ...value };
@@ -86,7 +86,9 @@ function FlagChangeField() {
         onChange={(event) => {
           const { flagName, flagVariation } = JSON.parse(event.target.value);
 
-          adapter.updateFlags({ [flagName]: fromEventString(flagVariation) });
+          memoryAdapter.updateFlags({
+            [flagName]: fromEventString(flagVariation),
+          });
         }}
       />
     </>
@@ -136,6 +138,7 @@ const renderWithAdapter = (
   ui,
   {
     components: { ConfigureFlopFlip, Wrapper = null },
+    adapter,
     adapterArgs,
     flags,
     ...rtlOptions
@@ -143,6 +146,7 @@ const renderWithAdapter = (
 ) => {
   const defaultedAdapterArgs = mergeOptional(defaultAdapterArgs, adapterArgs);
   const defaultedFlags = mergeOptional(defaultFlags, flags);
+  const defaultedAdapter = adapter || memoryAdapter;
 
   const wrapUiIfNeeded = (innerElement) =>
     Wrapper ? cloneElement(Wrapper, null, innerElement) : innerElement;
@@ -151,7 +155,7 @@ const renderWithAdapter = (
   const rendered = render(
     wrapUiIfNeeded(
       <ConfigureFlopFlip
-        adapter={adapter}
+        adapter={defaultedAdapter}
         adapterArgs={defaultedAdapterArgs}
         defaultFlags={defaultedFlags}
       >
@@ -192,7 +196,7 @@ const components = {
 export * from '@testing-library/react';
 export {
   act,
-  adapter,
+  memoryAdapter as adapter,
   components,
   defaultFlags,
   defaultRender as render,
