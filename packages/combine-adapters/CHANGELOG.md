@@ -1,5 +1,15 @@
 # @flopflip/combine-adapters
 
+## 13.4.1
+
+### Patch Changes
+
+- [#1875](https://github.com/tdeekens/flopflip/pull/1875) [`6672683`](https://github.com/tdeekens/flopflip/commit/667268341ba8ebf1cfb565e493e8dc4e8d2735b3) Thanks [@tdeekens](https://github.com/tdeekens)! - Fix reversing adapter identifiers in place
+
+- Updated dependencies []:
+  - @flopflip/adapter-utilities@13.4.1
+  - @flopflip/types@13.4.1
+
 ## 13.4.0
 
 ### Patch Changes
