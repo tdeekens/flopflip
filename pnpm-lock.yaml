@@ -443,8 +443,8 @@ importers:
         specifier: 13.4.1
         version: link:../types
       '@types/react-is':
-        specifier: 17.0.7
-        version: 17.0.7
+        specifier: 18.2.4
+        version: 18.2.4
       lodash:
         specifier: 4.17.21
         version: 4.17.21
@@ -3370,8 +3370,8 @@ packages:
     dependencies:
       '@types/react': 18.2.0
 
-  /@types/react-is@17.0.7:
-    resolution: {integrity: sha512-WrTEiT+c6rgq36QApoy0063uAOdltCrhF0QMXLIgYPaTvIdQhAB8hPb5oGGqX18xToElNILS9UprwU6GyINcJg==}
+  /@types/react-is@18.2.4:
+    resolution: {integrity: sha512-wBc7HgmbCcrvw0fZjxbgz/xrrlZKzEqmABBMeSvpTvdm25u6KI6xdIi9pRE2G0C1Lw5ETFdcn4UbYZ4/rpqUYw==}
     dependencies:
       '@types/react': 18.2.0
     dev: false
