@@ -75,7 +75,7 @@ describe('with one adapter', () => {
   });
 });
 
-describe.only('when combining adapters', () => {
+describe('when combining adapters', () => {
   let adapterArgs;
 
   const createAdapterArgs = (customArgs = {}) => ({

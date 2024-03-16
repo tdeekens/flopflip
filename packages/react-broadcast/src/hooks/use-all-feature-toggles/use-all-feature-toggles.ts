@@ -6,8 +6,11 @@ import useFlagsContext from '../use-flags-context';
 export default function useAllFeatureToggles(): TFlags {
   const adapterContext = useAdapterContext();
   const flagsContext = useFlagsContext();
+  const reversedAdapterEffectIdentifiers = [
+    ...adapterContext.adapterEffectIdentifiers,
+  ].reverse();
 
-  return adapterContext.adapterEffectIdentifiers.reverse().reduce<TFlags>(
+  return reversedAdapterEffectIdentifiers.reduce<TFlags>(
     (_allFlags, adapterIdentifier) => ({
       ..._allFlags,
       ...flagsContext[adapterIdentifier],
