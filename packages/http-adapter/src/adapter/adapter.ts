@@ -293,6 +293,9 @@ class HttpAdapter implements THttpAdapterInterface {
 
     this.#adapterState.flags = flags;
 
+    this.#adapterState.emitter.emit('flagsStateChange', flags);
+    this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
+
     this.#subscribeToFlagsChanges(adapterArgs);
 
     return Promise.resolve({
