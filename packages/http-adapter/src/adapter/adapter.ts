@@ -57,6 +57,7 @@ class HttpAdapter implements THttpAdapterInterface {
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
 
+  #flagPollingInternal?: ReturnType<typeof setInterval>;
   #adapterState: TAdapterStatus & THttpAdapterState;
   readonly #defaultpollingIntervalMs = 1000 * 60;
 
@@ -126,7 +127,11 @@ class HttpAdapter implements THttpAdapterInterface {
     const pollingIntervalMs =
       adapterArgs.pollingIntervalMs ?? this.#defaultpollingIntervalMs;
 
-    setInterval(async () => {
+    if (this.#flagPollingInternal) {
+      clearInterval(this.#flagPollingInternal);
+    }
+
+    this.#flagPollingInternal = setInterval(async () => {
       if (!this.#getIsAdapterUnsubscribed()) {
         const nextFlags = normalizeFlags(await this.#fetchFlags(adapterArgs));
 
@@ -283,7 +288,7 @@ class HttpAdapter implements THttpAdapterInterface {
     const nextUser = adapterArgs.user;
 
     this.#adapterState.user = nextUser;
-    this.#adapterState.emitter.emit('flagsStateChange', {});
+    this.#subscribeToFlagsChanges(adapterArgs);
 
     return Promise.resolve({
       initializationStatus: AdapterInitializationStatus.Succeeded,

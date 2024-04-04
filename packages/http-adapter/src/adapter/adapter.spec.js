@@ -257,7 +257,14 @@ describe('when configured', () => {
     it('should invoke `onFlagsStateChange` with empty flags', () => {
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
         id: adapter.id,
-        flags: {},
+        flags: {
+          barFlag: false,
+          disabled: false,
+          enabled: true,
+          flagA1: false,
+          flagB: false,
+          fooFlag: true,
+        },
       });
     });
 
