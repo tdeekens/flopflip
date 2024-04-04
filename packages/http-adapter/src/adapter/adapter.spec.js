@@ -233,6 +233,7 @@ describe('when configured', () => {
 
     beforeEach(async () => {
       configurationResult = await adapter.reconfigure({
+        ...adapterArgs,
         user,
         cacheIdentifier: 'session',
       });
