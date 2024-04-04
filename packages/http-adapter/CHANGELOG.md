@@ -1,5 +1,17 @@
 # @flopflip/http-adapter
 
+## 13.5.2
+
+### Patch Changes
+
+- [#1886](https://github.com/tdeekens/flopflip/pull/1886) [`5c604ed`](https://github.com/tdeekens/flopflip/commit/5c604ed9a1cecd29eb504cbd1df9b386cf5f7bd2) Thanks [@tdeekens](https://github.com/tdeekens)! - Fix to flush flags once loaded
+
+- Updated dependencies []:
+  - @flopflip/adapter-utilities@13.5.2
+  - @flopflip/localstorage-cache@13.5.2
+  - @flopflip/sessionstorage-cache@13.5.2
+  - @flopflip/types@13.5.2
+
 ## 13.5.1
 
 ### Patch Changes

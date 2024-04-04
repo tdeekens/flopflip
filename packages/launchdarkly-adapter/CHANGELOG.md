@@ -1,5 +1,15 @@
 # @flopflip/launchdarkly-adapter
 
+## 13.5.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/adapter-utilities@13.5.2
+  - @flopflip/localstorage-cache@13.5.2
+  - @flopflip/sessionstorage-cache@13.5.2
+  - @flopflip/types@13.5.2
+
 ## 13.5.1
 
 ### Patch Changes
