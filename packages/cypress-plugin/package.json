@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/cypress-plugin",
-  "version": "13.5.0",
+  "version": "13.5.1",
   "description": "A plugin for Cypress change feature toggles in Cypress runs",
   "main": "dist/flopflip-cypress-plugin.cjs.js",
   "module": "dist/flopflip-cypress-plugin.esm.js",
@@ -33,7 +33,7 @@
     "cypress": "4.x || 5.x || 6.x || 7.x || 8.x || 9.x || 10.x || 11.x || 12.x || 13.x"
   },
   "dependencies": {
-    "@flopflip/types": "13.5.0"
+    "@flopflip/types": "13.5.1"
   },
   "keywords": [
     "react",

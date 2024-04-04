@@ -1,5 +1,17 @@
 # @flopflip/http-adapter
 
+## 13.5.1
+
+### Patch Changes
+
+- [#1884](https://github.com/tdeekens/flopflip/pull/1884) [`1b89d9a`](https://github.com/tdeekens/flopflip/commit/1b89d9a7b9165e21e1e0caee52ec8e8cb5cd35ea) Thanks [@tdeekens](https://github.com/tdeekens)! - Fix http-adapter to reload flags right away
+
+- Updated dependencies []:
+  - @flopflip/adapter-utilities@13.5.1
+  - @flopflip/localstorage-cache@13.5.1
+  - @flopflip/sessionstorage-cache@13.5.1
+  - @flopflip/types@13.5.1
+
 ## 13.5.0
 
 ### Minor Changes

@@ -1,5 +1,15 @@
 # @flopflip/graphql-adapter
 
+## 13.5.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/adapter-utilities@13.5.1
+  - @flopflip/localstorage-cache@13.5.1
+  - @flopflip/sessionstorage-cache@13.5.1
+  - @flopflip/types@13.5.1
+
 ## 13.5.0
 
 ### Patch Changes

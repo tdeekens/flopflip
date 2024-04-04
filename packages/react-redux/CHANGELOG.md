@@ -1,5 +1,13 @@
 # @flopflip/react-redux
 
+## 13.5.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/react@13.5.1
+  - @flopflip/types@13.5.1
+
 ## 13.5.0
 
 ### Patch Changes
