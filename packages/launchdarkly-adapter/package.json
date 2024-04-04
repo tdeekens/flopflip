@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/launchdarkly-adapter",
-  "version": "13.5.1",
+  "version": "13.5.2",
   "description": "A adapter around the LaunchDarkly client for flipflop",
   "main": "dist/flopflip-launchdarkly-adapter.cjs.js",
   "module": "dist/flopflip-launchdarkly-adapter.esm.js",
@@ -27,10 +27,10 @@
   },
   "dependencies": {
     "@babel/runtime": "7.24.4",
-    "@flopflip/adapter-utilities": "13.5.1",
-    "@flopflip/localstorage-cache": "13.5.1",
-    "@flopflip/sessionstorage-cache": "13.5.1",
-    "@flopflip/types": "13.5.1",
+    "@flopflip/adapter-utilities": "13.5.2",
+    "@flopflip/localstorage-cache": "13.5.2",
+    "@flopflip/sessionstorage-cache": "13.5.2",
+    "@flopflip/types": "13.5.2",
     "debounce-fn": "4.0.0",
     "launchdarkly-js-client-sdk": "3.2.0",
     "lodash": "4.17.21",
