@@ -288,6 +288,11 @@ class HttpAdapter implements THttpAdapterInterface {
     const nextUser = adapterArgs.user;
 
     this.#adapterState.user = nextUser;
+
+    const flags = normalizeFlags(await this.#fetchFlags(adapterArgs));
+
+    this.#adapterState.flags = flags;
+
     this.#subscribeToFlagsChanges(adapterArgs);
 
     return Promise.resolve({
