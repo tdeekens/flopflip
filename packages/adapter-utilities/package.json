@@ -28,13 +28,13 @@
     "types"
   ],
   "dependencies": {
-    "@babel/runtime": "7.24.0",
+    "@babel/runtime": "7.24.4",
     "@flopflip/types": "13.4.1",
     "globalthis": "1.0.3",
     "lodash": "4.17.21"
   },
   "devDependencies": {
-    "typescript": "5.4.2"
+    "typescript": "5.4.3"
   },
   "peerDependencies": {
     "typescript": "4.x || 5.x"

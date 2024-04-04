@@ -26,13 +26,13 @@
     "globalthis": "1.0.3"
   },
   "dependencies": {
-    "@babel/runtime": "7.24.0",
+    "@babel/runtime": "7.24.4",
     "@flopflip/adapter-utilities": "13.4.1",
     "@flopflip/localstorage-cache": "13.4.1",
     "@flopflip/sessionstorage-cache": "13.4.1",
     "@flopflip/types": "13.4.1",
     "debounce-fn": "4.0.0",
-    "launchdarkly-js-client-sdk": "3.1.4",
+    "launchdarkly-js-client-sdk": "3.2.0",
     "lodash": "4.17.21",
     "mitt": "3.0.1",
     "tiny-warning": "1.0.3",
