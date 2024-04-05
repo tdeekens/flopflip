@@ -368,43 +368,6 @@ describe('when configuring', () => {
       });
 
       describe('with flag updates', () => {
-        describe('when not `subscribeToFlagChanges`', () => {
-          beforeEach(async () => {
-            // Reset due to preivous dispatches
-            onFlagsStateChange.mockClear();
-            client.on.mockClear();
-
-            onStatusStateChange = jest.fn();
-            onFlagsStateChange = jest.fn();
-            client = createClient({
-              allFlags: jest.fn(() => flags),
-              variation: jest.fn(() => true),
-            });
-
-            ldClient.initialize.mockReturnValue(client);
-
-            await adapter.configure(
-              {
-                sdk: { clientSideId },
-                subscribeToFlagChanges: false,
-                context: userWithKey,
-              },
-              {
-                onStatusStateChange,
-                onFlagsStateChange,
-              }
-            );
-
-            onFlagsStateChange.mockClear();
-
-            triggerFlagValueChange(client);
-          });
-
-          it('should not `dispatch` `onFlagsStateChange` action', () => {
-            expect(onFlagsStateChange).not.toHaveBeenCalled();
-          });
-        });
-
         describe('with `flagsUpdateDelayMs`', () => {
           const flagsUpdateDelayMs = 1000;
 

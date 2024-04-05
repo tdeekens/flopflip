@@ -13,6 +13,7 @@ import {
   type TAdapterStatus,
   type TAdapterStatusChange,
   type TCacheIdentifiers,
+  type TCacheMode,
   type TFlagName,
   type TFlags,
   type TFlagsChange,
@@ -262,12 +263,14 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     flagsFromSdk: TFlags;
     flagsUpdateDelayMs?: number;
     cacheIdentifier?: TCacheIdentifiers;
+    cacheMode?: TCacheMode;
   }) => {
     for (const flagName in flagsFromSdk) {
       // Dispatch whenever a configured flag value changes
       if (Object.hasOwn(flagsFromSdk, flagName) && this.#adapterState.client) {
         this.#adapterState.client.on(
           `change:${flagName}`,
+          // eslint-disable-next-line @typescript-eslint/no-loop-func
           async (flagValue) => {
             const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
               flagName,
@@ -295,6 +298,10 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
             this.#updateFlagsInAdapterState(updatedFlags);
 
             const flushFlagsUpdate = () => {
+              if (cacheMode === 'lazy') {
+                return;
+              }
+
               this.#adapterState.emitter.emit(
                 'flagsStateChange',
                 this.#adapterState.flags
@@ -363,7 +370,6 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       sdk,
       context,
       flags,
-      subscribeToFlagChanges = true,
       throwOnInitializationFailure = false,
       flagsUpdateDelayMs,
     } = adapterArgs;
@@ -377,9 +383,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       cachedFlags = cache.get();
 
       if (cachedFlags) {
-        this.#updateFlagsInAdapterState(cachedFlags, {
-          unsubscribeFlags: adapterArgs.unsubscribeFromCachedFlags,
-        });
+        this.#updateFlagsInAdapterState(cachedFlags);
         this.#adapterState.flags = cachedFlags;
         this.#adapterState.emitter.emit('flagsStateChange', cachedFlags);
       }
@@ -396,11 +400,12 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       throwOnInitializationFailure,
       cacheIdentifier: adapterArgs.cacheIdentifier,
     }).then(({ flagsFromSdk, initializationStatus }) => {
-      if (subscribeToFlagChanges && flagsFromSdk) {
+      if (flagsFromSdk) {
         this.#setupFlagSubcription({
           flagsFromSdk,
           flagsUpdateDelayMs,
           cacheIdentifier: adapterArgs.cacheIdentifier,
+          cacheMode: adapterArgs.cacheMode,
         });
       }
 

@@ -37,6 +37,7 @@ export type TAdapterStatus = {
   configurationStatus: AdapterConfigurationStatus;
   subscriptionStatus: AdapterSubscriptionStatus;
 };
+export type TCacheMode = 'eager' | 'lazy';
 export type TAdaptersStatus = Record<TAdapterIdentifiers, TAdapterStatus>;
 export type TAdapterStatusChange = {
   id?: TAdapterIdentifiers;
@@ -60,11 +61,10 @@ export type TLaunchDarklyAdapterArgs = TLaunchDarklyContextArgs & {
     clientOptions?: TLDOptions;
   };
   flags?: TFlags;
-  subscribeToFlagChanges?: boolean;
   throwOnInitializationFailure?: boolean;
   flagsUpdateDelayMs?: number;
   cacheIdentifier?: TCacheIdentifiers;
-  unsubscribeFromCachedFlags?: boolean;
+  cacheMode?: TCacheMode;
 };
 export type TGraphQlAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,
