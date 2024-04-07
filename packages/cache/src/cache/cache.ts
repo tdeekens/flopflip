@@ -33,7 +33,7 @@ async function importCache(cacheIdentifier: TCacheIdentifiers) {
 async function getCache(
   cacheIdentifier: TCacheIdentifiers,
   adapterIdentifiers: TAdapterIdentifiers,
-  cacheKey: string
+  cacheKey?: string
 ) {
   const cacheModule = await importCache(cacheIdentifier);
 

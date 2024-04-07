@@ -153,7 +153,8 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       const cache = await getCache(
         cacheIdentifier,
         adapterIdentifiers.launchdarkly,
-        this.#adapterState.context?.key
+        // NOTE: LDContextCommon is part of the type which we never use.
+        this.#adapterState.context?.key as string
       );
 
       const cachedFlags: TFlags = cache.get();
