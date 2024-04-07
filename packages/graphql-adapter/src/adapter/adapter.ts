@@ -58,6 +58,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
     '__internalConfiguredStatusChange__';
 
   #adapterState: TAdapterStatus & TGraphQlAdapterState;
+  #flagPollingInternal?: ReturnType<typeof setInterval>;
   readonly #defaultpollingIntervalMs = 1000 * 60;
 
   constructor() {
@@ -110,7 +111,11 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
     const pollingIntervalMs =
       adapterArgs.pollingIntervalMs ?? this.#defaultpollingIntervalMs;
 
-    setInterval(async () => {
+    if (this.#flagPollingInternal) {
+      clearInterval(this.#flagPollingInternal);
+    }
+
+    this.#flagPollingInternal = setInterval(async () => {
       if (!this.#getIsAdapterUnsubscribed()) {
         const nextFlags = normalizeFlags(await this.#fetchFlags(adapterArgs));
 
@@ -251,7 +256,10 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
         cache.set(flags);
       }
 
-      this.#adapterState.emitter.emit('flagsStateChange', flags);
+      if (adapterArgs.cacheMode !== cacheModes.lazy) {
+        this.#adapterState.emitter.emit('flagsStateChange', flags);
+      }
+
       this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
       this.#subscribeToFlagsChanges(adapterArgs);
@@ -288,7 +296,18 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
     const nextUser = adapterArgs.user;
 
     this.#adapterState.user = nextUser;
-    this.#adapterState.emitter.emit('flagsStateChange', {});
+
+    const flags = normalizeFlags(await this.#fetchFlags(adapterArgs));
+
+    this.#adapterState.flags = flags;
+
+    if (adapterArgs.cacheMode !== cacheModes.lazy) {
+      this.#adapterState.emitter.emit('flagsStateChange', flags);
+    }
+
+    this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
+
+    this.#subscribeToFlagsChanges(adapterArgs);
 
     return Promise.resolve({
       initializationStatus: AdapterInitializationStatus.Succeeded,

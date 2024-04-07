@@ -239,7 +239,10 @@ class HttpAdapter implements THttpAdapterInterface {
         cache.set(flags);
       }
 
-      this.#adapterState.emitter.emit('flagsStateChange', flags);
+      if (adapterArgs.cacheMode !== cacheModes.lazy) {
+        this.#adapterState.emitter.emit('flagsStateChange', flags);
+      }
+
       this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
       this.#subscribeToFlagsChanges(adapterArgs);
@@ -281,7 +284,10 @@ class HttpAdapter implements THttpAdapterInterface {
 
     this.#adapterState.flags = flags;
 
-    this.#adapterState.emitter.emit('flagsStateChange', flags);
+    if (adapterArgs.cacheMode !== cacheModes.lazy) {
+      this.#adapterState.emitter.emit('flagsStateChange', flags);
+    }
+
     this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
     this.#subscribeToFlagsChanges(adapterArgs);

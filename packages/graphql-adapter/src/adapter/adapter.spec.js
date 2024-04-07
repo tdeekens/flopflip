@@ -275,6 +275,7 @@ describe('when configured', () => {
 
     beforeEach(async () => {
       configurationResult = await adapter.reconfigure({
+        ...adapterArgs,
         user,
         cacheIdentifier: 'session',
       });
@@ -296,10 +297,17 @@ describe('when configured', () => {
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalled();
     });
 
-    it('should invoke `onFlagsStateChange` with empty flags', () => {
+    it('should invoke `onFlagsStateChange` with all flags', () => {
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
         id: adapter.id,
-        flags: {},
+        flags: {
+          barFlag: false,
+          disabled: false,
+          enabled: true,
+          flagA1: false,
+          flagB: false,
+          fooFlag: true,
+        },
       });
     });
 
