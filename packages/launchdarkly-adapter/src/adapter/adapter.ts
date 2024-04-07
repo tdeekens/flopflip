@@ -4,6 +4,7 @@ import {
   normalizeFlag,
   normalizeFlags,
 } from '@flopflip/adapter-utilities';
+import { getCache } from '@flopflip/cache';
 import {
   AdapterConfigurationStatus,
   adapterIdentifiers,
@@ -32,8 +33,6 @@ import isEqual from 'lodash/isEqual';
 import mitt, { type Emitter } from 'mitt';
 import warning from 'tiny-warning';
 import { merge } from 'ts-deepmerge';
-
-import { getCache } from './cache';
 
 type TEmitterEvents = {
   flagsStateChange: TFlags;
@@ -153,6 +152,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     if (cacheIdentifier) {
       const cache = await getCache(
         cacheIdentifier,
+        adapterIdentifiers.launchdarkly,
         this.#adapterState.context?.key
       );
 
@@ -378,7 +378,11 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     this.#adapterState.context = this.#ensureContext(context);
 
     if (adapterArgs.cacheIdentifier) {
-      const cache = await getCache(adapterArgs.cacheIdentifier, context.key);
+      const cache = await getCache(
+        adapterArgs.cacheIdentifier,
+        adapterIdentifiers.launchdarkly,
+        context.key
+      );
 
       cachedFlags = cache.get();
 
@@ -430,6 +434,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       if (adapterArgs.cacheIdentifier) {
         const cache = await getCache(
           adapterArgs.cacheIdentifier,
+          adapterIdentifiers.launchdarkly,
           this.#adapterState.context?.key
         );
 

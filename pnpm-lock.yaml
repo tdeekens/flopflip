@@ -241,13 +241,13 @@ importers:
   packages/cache:
     dependencies:
       '@flopflip/localstorage-cache':
-        specifier: 13.5.2
+        specifier: 13.6.0
         version: link:../localstorage-cache
       '@flopflip/sessionstorage-cache':
-        specifier: 13.5.2
+        specifier: 13.6.0
         version: link:../sessionstorage-cache
       '@flopflip/types':
-        specifier: 13.5.2
+        specifier: 13.6.0
         version: link:../types
 
   packages/combine-adapters:
@@ -358,6 +358,9 @@ importers:
       '@flopflip/adapter-utilities':
         specifier: 13.6.0
         version: link:../adapter-utilities
+      '@flopflip/cache':
+        specifier: 13.5.2
+        version: link:../cache
       '@flopflip/localstorage-cache':
         specifier: 13.6.0
         version: link:../localstorage-cache
