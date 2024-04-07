@@ -10,11 +10,12 @@ import {
   adapterIdentifiers,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
+  cacheModes,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
   type TCacheIdentifiers,
-  type TCacheMode,
+  type TCacheModes,
   type TFlagName,
   type TFlags,
   type TFlagsChange,
@@ -265,7 +266,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     flagsFromSdk: TFlags;
     flagsUpdateDelayMs?: number;
     cacheIdentifier?: TCacheIdentifiers;
-    cacheMode?: TCacheMode;
+    cacheMode?: TCacheModes;
   }) => {
     for (const flagName in flagsFromSdk) {
       // Dispatch whenever a configured flag value changes
@@ -299,7 +300,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
             this.#updateFlagsInAdapterState(updatedFlags);
 
             const flushFlagsUpdate = () => {
-              if (cacheMode === 'lazy') {
+              if (cacheMode === cacheModes.lazy) {
                 return;
               }
 

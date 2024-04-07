@@ -9,6 +9,7 @@ import {
   adapterIdentifiers,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
+  cacheModes,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
@@ -126,7 +127,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
 
           this.#adapterState.flags = nextFlags;
 
-          if (adapterArgs.cacheMode === 'lazy') {
+          if (adapterArgs.cacheMode === cacheModes.lazy) {
             return;
           }
 

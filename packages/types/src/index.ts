@@ -37,7 +37,11 @@ export type TAdapterStatus = {
   configurationStatus: AdapterConfigurationStatus;
   subscriptionStatus: AdapterSubscriptionStatus;
 };
-export type TCacheMode = 'eager' | 'lazy';
+export const cacheModes = {
+  eager: 'eager',
+  lazy: 'lazy',
+} as const;
+export type TCacheModes = (typeof cacheModes)[keyof typeof cacheModes];
 export type TAdaptersStatus = Record<TAdapterIdentifiers, TAdapterStatus>;
 export type TAdapterStatusChange = {
   id?: TAdapterIdentifiers;
@@ -64,7 +68,7 @@ export type TLaunchDarklyAdapterArgs = TLaunchDarklyContextArgs & {
   throwOnInitializationFailure?: boolean;
   flagsUpdateDelayMs?: number;
   cacheIdentifier?: TCacheIdentifiers;
-  cacheMode?: TCacheMode;
+  cacheMode?: TCacheModes;
 };
 export type TGraphQlAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,
@@ -81,7 +85,7 @@ export type TGraphQlAdapterArgs<
     fetchedFlags: TFetchedFlags
   ) => TParsedFlags;
   cacheIdentifier?: TCacheIdentifiers;
-  cacheMode?: TCacheMode;
+  cacheMode?: TCacheModes;
 };
 export type THttpAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,
@@ -93,7 +97,7 @@ export type THttpAdapterArgs<
   ) => Promise<any>;
   pollingIntervalMs?: number;
   cacheIdentifier?: TCacheIdentifiers;
-  cacheMode?: TCacheMode;
+  cacheMode?: TCacheModes;
 };
 export type TLocalStorageAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,
