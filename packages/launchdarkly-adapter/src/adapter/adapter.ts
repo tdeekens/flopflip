@@ -260,6 +260,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     flagsFromSdk,
     flagsUpdateDelayMs,
     cacheIdentifier,
+    cacheMode,
   }: {
     flagsFromSdk: TFlags;
     flagsUpdateDelayMs?: number;
@@ -271,7 +272,6 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       if (Object.hasOwn(flagsFromSdk, flagName) && this.#adapterState.client) {
         this.#adapterState.client.on(
           `change:${flagName}`,
-          // eslint-disable-next-line @typescript-eslint/no-loop-func
           async (flagValue) => {
             const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
               flagName,
@@ -382,7 +382,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       const cache = await getCache(
         adapterArgs.cacheIdentifier,
         adapterIdentifiers.launchdarkly,
-        context.key
+        context.key as string
       );
 
       cachedFlags = cache.get();
@@ -436,7 +436,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
         const cache = await getCache(
           adapterArgs.cacheIdentifier,
           adapterIdentifiers.launchdarkly,
-          this.#adapterState.context?.key
+          this.#adapterState.context?.key as string
         );
 
         cache.unset();
