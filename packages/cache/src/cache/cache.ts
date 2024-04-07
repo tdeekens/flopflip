@@ -1,13 +1,17 @@
 import {
+  adapterIdentifiers,
   cacheIdentifiers,
+  type TAdapterIdentifiers,
   type TCacheIdentifiers,
   type TFlags,
 } from '@flopflip/types';
-import { type LDContext } from 'launchdarkly-js-client-sdk';
 
-const CACHE_PREFIX = '@flopflip/launchdarkly-adapter';
-const FLAGS_KEY = 'flags';
-const FLAGS_REFERENCE_KEY = 'flags-reference';
+const FLAGS_CACHE_KEY = 'flags';
+const FLAGS_REFERENCE_CACHE_KEY = 'flags-reference';
+
+function getCachePrefix(adapterIdentifiers: TAdapterIdentifiers) {
+  return `@flopflip/${adapterIdentifiers}-adapter`;
+}
 
 async function importCache(cacheIdentifier: TCacheIdentifiers) {
   let cacheModule;
@@ -27,10 +31,7 @@ async function importCache(cacheIdentifier: TCacheIdentifiers) {
   return cacheModule;
 }
 
-async function getCache(
-  cacheIdentifier: TCacheIdentifiers,
-  cacheKey: LDContext['key']
-) {
+async function getCache(cacheIdentifier: TCacheIdentifiers, cacheKey: string) {
   const cacheModule = await importCache(cacheIdentifier);
 
   const createCache = cacheModule.default;
@@ -41,24 +42,24 @@ async function getCache(
 
   return {
     set(flags: TFlags) {
-      const haveFlagsBeenWritten = flagsCache.set(FLAGS_KEY, flags);
+      const haveFlagsBeenWritten = flagsCache.set(FLAGS_CACHE_KEY, flags);
 
       if (haveFlagsBeenWritten) {
         referenceCache.set(
-          FLAGS_REFERENCE_KEY,
-          [flagsCachePrefix, FLAGS_KEY].join('/')
+          FLAGS_REFERENCE_CACHE_KEY,
+          [flagsCachePrefix, FLAGS_CACHE_KEY].join('/')
         );
       }
 
       return haveFlagsBeenWritten;
     },
     get() {
-      return flagsCache.get(FLAGS_KEY);
+      return flagsCache.get(FLAGS_CACHE_KEY);
     },
     unset() {
-      referenceCache.unset(FLAGS_REFERENCE_KEY);
+      referenceCache.unset(FLAGS_REFERENCE_CACHE_KEY);
 
-      return flagsCache.unset(FLAGS_KEY);
+      return flagsCache.unset(FLAGS_CACHE_KEY);
     },
   };
 }
@@ -66,7 +67,7 @@ async function getCache(
 function getCachedFlags(cacheIdentifier: TCacheIdentifiers): TFlags {
   const cacheModule =
     cacheIdentifier === cacheIdentifiers.local ? localStorage : sessionStorage;
-  const flagReferenceKey = [CACHE_PREFIX, FLAGS_REFERENCE_KEY].join('/');
+  const flagReferenceKey = [CACHE_PREFIX, FLAGS_REFERENCE_CACHE_KEY].join('/');
 
   const referenceToCachedFlags = cacheModule.getItem(flagReferenceKey);
 
@@ -78,10 +79,14 @@ function getCachedFlags(cacheIdentifier: TCacheIdentifiers): TFlags {
       if (cacheKey && cachedFlags) {
         return JSON.parse(cachedFlags);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.warn(
+        `@flopflip/cache: Failed to parse cached flags from ${cacheIdentifier}.`
+      );
+    }
   }
 
   return {};
 }
 
-export { CACHE_PREFIX, getCache, getCachedFlags };
+export { getCache, getCachedFlags };

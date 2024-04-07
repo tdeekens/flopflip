@@ -238,6 +238,18 @@ importers:
         specifier: 5.4.3
         version: 5.4.3
 
+  packages/cache:
+    dependencies:
+      '@flopflip/localstorage-cache':
+        specifier: 13.5.2
+        version: link:../localstorage-cache
+      '@flopflip/sessionstorage-cache':
+        specifier: 13.5.2
+        version: link:../sessionstorage-cache
+      '@flopflip/types':
+        specifier: 13.5.2
+        version: link:../types
+
   packages/combine-adapters:
     dependencies:
       '@babel/runtime':

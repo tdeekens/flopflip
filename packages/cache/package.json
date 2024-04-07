@@ -1,0 +1,36 @@
+{
+  "name": "@flopflip/cache",
+  "version": "13.5.2",
+  "description": "Caching for flipflop adapters",
+  "main": "dist/flopflip-cache.cjs.js",
+  "module": "dist/flopflip-cache.esm.js",
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tdeekens/flopflip.git",
+    "directory": "packages/cache"
+  },
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
+  },
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "keywords": [
+    "feature-flags",
+    "feature-toggles",
+    "cache",
+    "client"
+  ],
+  "dependencies": {
+    "@flopflip/localstorage-cache": "13.5.2",
+    "@flopflip/sessionstorage-cache": "13.5.2",
+    "@flopflip/types": "13.5.2"
+  }
+}
