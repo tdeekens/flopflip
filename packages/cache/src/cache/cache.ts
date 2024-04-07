@@ -1,5 +1,4 @@
 import {
-  adapterIdentifiers,
   cacheIdentifiers,
   type TAdapterIdentifiers,
   type TCacheIdentifiers,
@@ -31,9 +30,14 @@ async function importCache(cacheIdentifier: TCacheIdentifiers) {
   return cacheModule;
 }
 
-async function getCache(cacheIdentifier: TCacheIdentifiers, cacheKey: string) {
+async function getCache(
+  cacheIdentifier: TCacheIdentifiers,
+  adapterIdentifiers: TAdapterIdentifiers,
+  cacheKey: string
+) {
   const cacheModule = await importCache(cacheIdentifier);
 
+  const CACHE_PREFIX = getCachePrefix(adapterIdentifiers);
   const createCache = cacheModule.default;
   const flagsCachePrefix = [CACHE_PREFIX, cacheKey].filter(Boolean).join('/');
 
@@ -64,7 +68,12 @@ async function getCache(cacheIdentifier: TCacheIdentifiers, cacheKey: string) {
   };
 }
 
-function getCachedFlags(cacheIdentifier: TCacheIdentifiers): TFlags {
+function getCachedFlags(
+  cacheIdentifier: TCacheIdentifiers,
+  adapterIdentifiers: TAdapterIdentifiers
+): TFlags {
+  const CACHE_PREFIX = getCachePrefix(adapterIdentifiers);
+
   const cacheModule =
     cacheIdentifier === cacheIdentifiers.local ? localStorage : sessionStorage;
   const flagReferenceKey = [CACHE_PREFIX, FLAGS_REFERENCE_CACHE_KEY].join('/');
