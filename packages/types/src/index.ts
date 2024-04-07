@@ -81,6 +81,7 @@ export type TGraphQlAdapterArgs<
     fetchedFlags: TFetchedFlags
   ) => TParsedFlags;
   cacheIdentifier?: TCacheIdentifiers;
+  cacheMode?: TCacheMode;
 };
 export type THttpAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,
@@ -92,6 +93,7 @@ export type THttpAdapterArgs<
   ) => Promise<any>;
   pollingIntervalMs?: number;
   cacheIdentifier?: TCacheIdentifiers;
+  cacheMode?: TCacheMode;
 };
 export type TLocalStorageAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,

@@ -113,6 +113,11 @@ class HttpAdapter implements THttpAdapterInterface {
           }
 
           this.#adapterState.flags = nextFlags;
+
+          if (adapterArgs.cacheMode === 'lazy') {
+            return;
+          }
+
           this.#adapterState.emitter.emit('flagsStateChange', nextFlags);
         }
       }
