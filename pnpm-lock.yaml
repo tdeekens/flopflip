@@ -296,6 +296,9 @@ importers:
       '@flopflip/adapter-utilities':
         specifier: 13.6.0
         version: link:../adapter-utilities
+      '@flopflip/cache':
+        specifier: 13.5.2
+        version: link:../cache
       '@flopflip/localstorage-cache':
         specifier: 13.6.0
         version: link:../localstorage-cache
@@ -327,6 +330,9 @@ importers:
       '@flopflip/adapter-utilities':
         specifier: 13.6.0
         version: link:../adapter-utilities
+      '@flopflip/cache':
+        specifier: 13.5.2
+        version: link:../cache
       '@flopflip/localstorage-cache':
         specifier: 13.6.0
         version: link:../localstorage-cache
