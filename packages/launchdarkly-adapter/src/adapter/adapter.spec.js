@@ -512,7 +512,7 @@ describe('when configuring', () => {
           });
         });
 
-        describe('when unsubscribing from cached flags', () => {
+        describe('with lazy cache mode', () => {
           beforeEach(async () => {
             onStatusStateChange.mockClear();
             onFlagsStateChange.mockClear();
@@ -534,7 +534,7 @@ describe('when configuring', () => {
                 sdk: { clientSideId },
                 context: userWithKey,
                 cacheIdentifier: 'session',
-                unsubscribeFromCachedFlags: true,
+                cacheMode: 'lazy',
               },
               {
                 onStatusStateChange,
@@ -543,13 +543,19 @@ describe('when configuring', () => {
             );
           });
 
-          it('should prefer the cached version and flush flags', () => {
+          it('should only flush cached but not updated flags', () => {
             expect(onFlagsStateChange).toHaveBeenCalledWith({
               id: adapter.id,
-              flags: {
-                cached: true,
+              flags: expect.objectContaining({
+                cached: false,
+              }),
+            });
+
+            expect(onFlagsStateChange).toHaveBeenCalledWith({
+              id: adapter.id,
+              flags: expect.not.objectContaining({
                 updated: false,
-              },
+              }),
             });
           });
 
