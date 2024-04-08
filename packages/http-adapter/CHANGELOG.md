@@ -1,5 +1,19 @@
 # @flopflip/http-adapter
 
+## 13.6.0
+
+### Minor Changes
+
+- [#1891](https://github.com/tdeekens/flopflip/pull/1891) [`7624ccb`](https://github.com/tdeekens/flopflip/commit/7624ccb0d7d2c04f54381e89fdeb12d9dd5e3e48) Thanks [@tdeekens](https://github.com/tdeekens)! - Add `adapterArgs` being passed to `execute` on the `http-adapter`.
+
+### Patch Changes
+
+- Updated dependencies [[`7624ccb`](https://github.com/tdeekens/flopflip/commit/7624ccb0d7d2c04f54381e89fdeb12d9dd5e3e48)]:
+  - @flopflip/types@13.6.0
+  - @flopflip/adapter-utilities@13.6.0
+  - @flopflip/localstorage-cache@13.6.0
+  - @flopflip/sessionstorage-cache@13.6.0
+
 ## 13.5.2
 
 ### Patch Changes
