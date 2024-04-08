@@ -85,7 +85,11 @@ export type TGraphQlAdapterArgs<
 export type THttpAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,
 > = TBaseAdapterArgs<TAdditionalUserProperties> & {
-  execute: () => Promise<any>;
+  execute: <
+    TPassedAdapterArgs extends TBaseAdapterArgs<TAdditionalUserProperties>,
+  >(
+    adapterArgs: TPassedAdapterArgs
+  ) => Promise<any>;
   pollingIntervalMs?: number;
   cacheIdentifier?: TCacheIdentifiers;
 };

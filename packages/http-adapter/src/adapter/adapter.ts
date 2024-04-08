@@ -118,7 +118,7 @@ class HttpAdapter implements THttpAdapterInterface {
   readonly #fetchFlags = async (
     adapterArgs: THttpAdapterArgs
   ): Promise<TFlags> => {
-    const flags = await adapterArgs.execute();
+    const flags = await adapterArgs.execute(adapterArgs);
 
     return flags;
   };
