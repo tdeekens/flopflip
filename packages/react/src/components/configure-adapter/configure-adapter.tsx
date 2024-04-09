@@ -1,3 +1,4 @@
+import { getAllCachedFlags } from '@flopflip/cache';
 import {
   AdapterConfigurationStatus,
   AdapterInitializationStatus,
@@ -437,7 +438,11 @@ function ConfigureAdapter(props: TProps) {
   ] = useAdapterStateRef();
   useDefaultFlagsEffect({
     adapter: props.adapter,
-    defaultFlags: props.defaultFlags,
+    defaultFlags: {
+      ...props.defaultFlags,
+      // @ts-expect-error: not all adapters support caching
+      ...getAllCachedFlags(props.adapter, props.adapterArgs.cacheIdentifier),
+    },
     onFlagsStateChange: props.onFlagsStateChange,
     onStatusStateChange: props.onStatusStateChange,
     shouldDeferAdapterConfiguration: props.shouldDeferAdapterConfiguration,

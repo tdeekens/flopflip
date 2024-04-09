@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.24.4",
+    "@flopflip/cache": "13.5.2",
     "@flopflip/types": "13.6.0",
     "@types/react-is": "17.0.7",
     "lodash": "4.17.21",

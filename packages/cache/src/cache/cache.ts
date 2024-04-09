@@ -1,5 +1,6 @@
 import {
   cacheIdentifiers,
+  type TAdapter,
   type TAdapterIdentifiers,
   type TCacheIdentifiers,
   type TFlags,
@@ -98,4 +99,25 @@ function getCachedFlags(
   return {};
 }
 
-export { getCache, getCachedFlags };
+function getAllCachedFlags(
+  adapter: TAdapter,
+  cacheIdentifier?: TCacheIdentifiers
+) {
+  if (!cacheIdentifier) {
+    return {};
+  }
+
+  if (adapter.effectIds) {
+    return adapter.effectIds.reduce(
+      (defaultFlags, effectId) => ({
+        ...defaultFlags,
+        ...getCachedFlags(cacheIdentifier, effectId),
+      }),
+      {}
+    );
+  }
+
+  return getCachedFlags(cacheIdentifier, adapter.id);
+}
+
+export { getAllCachedFlags, getCache, getCachedFlags };
