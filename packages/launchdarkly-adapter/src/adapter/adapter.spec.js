@@ -547,14 +547,14 @@ describe('when configuring', () => {
             expect(onFlagsStateChange).toHaveBeenCalledWith({
               id: adapter.id,
               flags: expect.objectContaining({
-                cached: false,
+                cached: true,
               }),
             });
 
             expect(onFlagsStateChange).toHaveBeenCalledWith({
               id: adapter.id,
               flags: expect.not.objectContaining({
-                updated: false,
+                updated: true,
               }),
             });
           });

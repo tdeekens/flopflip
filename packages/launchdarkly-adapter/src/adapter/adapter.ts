@@ -168,9 +168,10 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     flags,
     throwOnInitializationFailure,
     cacheIdentifier,
+    cacheMode,
   }: Pick<
     TLaunchDarklyAdapterArgs,
-    'flags' | 'throwOnInitializationFailure' | 'cacheIdentifier'
+    'flags' | 'throwOnInitializationFailure' | 'cacheIdentifier' | 'cacheMode'
   >): Promise<{
     flagsFromSdk?: TFlags;
     initializationStatus: AdapterInitializationStatus;
@@ -210,7 +211,14 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
             const flags =
               this.#withoutUnsubscribedOrLockedFlags(normalizedFlags);
 
-            this.updateFlags(flags);
+            this.#updateFlagsInAdapterState(flags);
+
+            if (cacheMode !== cacheModes.lazy) {
+              this.#adapterState.emitter.emit(
+                'flagsStateChange',
+                this.#adapterState.flags
+              );
+            }
           }
 
           this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
@@ -405,6 +413,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       flags,
       throwOnInitializationFailure,
       cacheIdentifier: adapterArgs.cacheIdentifier,
+      cacheMode: adapterArgs.cacheMode,
     }).then(({ flagsFromSdk, initializationStatus }) => {
       if (flagsFromSdk) {
         this.#setupFlagSubcription({
