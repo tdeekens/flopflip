@@ -301,9 +301,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
 
     this.#adapterState.flags = flags;
 
-    if (adapterArgs.cacheMode !== cacheModes.lazy) {
-      this.#adapterState.emitter.emit('flagsStateChange', flags);
-    }
+    this.#adapterState.emitter.emit('flagsStateChange', flags);
 
     this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
