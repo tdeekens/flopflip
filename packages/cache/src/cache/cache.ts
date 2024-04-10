@@ -120,4 +120,4 @@ function getAllCachedFlags(
   return getCachedFlags(cacheIdentifier, adapter.id);
 }
 
-export { getAllCachedFlags, getCache, getCachedFlags };
+export { getAllCachedFlags, getCache, getCachedFlags, getCachePrefix };
