@@ -69,9 +69,9 @@
     "@preconstruct/cli": "2.8.3",
     "@types/jest": "29.5.12",
     "@types/lodash": "4.17.0",
-    "@types/node": "20.12.4",
-    "@typescript-eslint/eslint-plugin": "7.5.0",
-    "@typescript-eslint/parser": "7.5.0",
+    "@types/node": "20.12.7",
+    "@typescript-eslint/eslint-plugin": "7.6.0",
+    "@typescript-eslint/parser": "7.6.0",
     "babel-jest": "29.7.0",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "check-node-version": "4.2.1",
@@ -104,7 +104,7 @@
     "ts-jest": "29.1.2",
     "ts-node": "10.9.2",
     "tslib": "2.6.2",
-    "typescript": "5.4.3"
+    "typescript": "5.4.5"
   },
   "keywords": [
     "react",
