@@ -440,8 +440,6 @@ function ConfigureAdapter(props: TProps) {
     adapter: props.adapter,
     defaultFlags: {
       ...props.defaultFlags,
-      // @ts-expect-error: not all adapters support caching
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       ...getAllCachedFlags(props.adapter, props.adapterArgs.cacheIdentifier),
     },
     onFlagsStateChange: props.onFlagsStateChange,

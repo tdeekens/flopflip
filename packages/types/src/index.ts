@@ -57,6 +57,8 @@ export type TBaseAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,
 > = {
   user: TUser<TAdditionalUserProperties>;
+  cacheIdentifier?: TCacheIdentifiers;
+  cacheMode?: TCacheModes;
 };
 export type TLaunchDarklyContextArgs = { context: LDContext };
 export type TLaunchDarklyAdapterArgs = TLaunchDarklyContextArgs & {
@@ -84,8 +86,6 @@ export type TGraphQlAdapterArgs<
   parseFlags?: <TFetchedFlags = unknown, TParsedFlags = TFlags>(
     fetchedFlags: TFetchedFlags
   ) => TParsedFlags;
-  cacheIdentifier?: TCacheIdentifiers;
-  cacheMode?: TCacheModes;
 };
 export type THttpAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,
@@ -96,8 +96,6 @@ export type THttpAdapterArgs<
     adapterArgs: TPassedAdapterArgs
   ) => Promise<any>;
   pollingIntervalMs?: number;
-  cacheIdentifier?: TCacheIdentifiers;
-  cacheMode?: TCacheModes;
 };
 export type TLocalStorageAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,
