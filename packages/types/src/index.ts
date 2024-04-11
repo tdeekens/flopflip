@@ -37,6 +37,11 @@ export type TAdapterStatus = {
   configurationStatus: AdapterConfigurationStatus;
   subscriptionStatus: AdapterSubscriptionStatus;
 };
+export const cacheModes = {
+  eager: 'eager',
+  lazy: 'lazy',
+} as const;
+export type TCacheModes = (typeof cacheModes)[keyof typeof cacheModes];
 export type TAdaptersStatus = Record<TAdapterIdentifiers, TAdapterStatus>;
 export type TAdapterStatusChange = {
   id?: TAdapterIdentifiers;
@@ -52,6 +57,8 @@ export type TBaseAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,
 > = {
   user: TUser<TAdditionalUserProperties>;
+  cacheIdentifier?: TCacheIdentifiers;
+  cacheMode?: TCacheModes;
 };
 export type TLaunchDarklyContextArgs = { context: LDContext };
 export type TLaunchDarklyAdapterArgs = TLaunchDarklyContextArgs & {
@@ -60,11 +67,10 @@ export type TLaunchDarklyAdapterArgs = TLaunchDarklyContextArgs & {
     clientOptions?: TLDOptions;
   };
   flags?: TFlags;
-  subscribeToFlagChanges?: boolean;
   throwOnInitializationFailure?: boolean;
   flagsUpdateDelayMs?: number;
   cacheIdentifier?: TCacheIdentifiers;
-  unsubscribeFromCachedFlags?: boolean;
+  cacheMode?: TCacheModes;
 };
 export type TGraphQlAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,
@@ -80,7 +86,6 @@ export type TGraphQlAdapterArgs<
   parseFlags?: <TFetchedFlags = unknown, TParsedFlags = TFlags>(
     fetchedFlags: TFetchedFlags
   ) => TParsedFlags;
-  cacheIdentifier?: TCacheIdentifiers;
 };
 export type THttpAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,
@@ -91,7 +96,6 @@ export type THttpAdapterArgs<
     adapterArgs: TPassedAdapterArgs
   ) => Promise<any>;
   pollingIntervalMs?: number;
-  cacheIdentifier?: TCacheIdentifiers;
 };
 export type TLocalStorageAdapterArgs<
   TAdditionalUserProperties = TDefaultAdditionalUserProperties,

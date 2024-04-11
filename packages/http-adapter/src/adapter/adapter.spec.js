@@ -164,6 +164,36 @@ describe('when configured', () => {
         },
       });
     });
+
+    describe('with lazy cache mode', () => {
+      beforeEach(async () => {
+        sessionStorage.getItem.mockReturnValueOnce(
+          JSON.stringify({ cached: true })
+        );
+        adapterEventHandlers = createAdapterEventHandlers();
+        jest.useFakeTimers();
+        configurationResult = await adapter.configure(
+          adapterArgs,
+          adapterEventHandlers
+        );
+      });
+
+      it('should only flush cached but not updated flags', () => {
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+          id: adapter.id,
+          flags: expect.objectContaining({
+            cached: true,
+          }),
+        });
+
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+          id: adapter.id,
+          flags: expect.not.objectContaining({
+            updated: true,
+          }),
+        });
+      });
+    });
   });
 
   describe('when updating flags', () => {
@@ -255,7 +285,7 @@ describe('when configured', () => {
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalled();
     });
 
-    it('should invoke `onFlagsStateChange` with empty flags', () => {
+    it('should invoke `onFlagsStateChange` with all flags', () => {
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
         id: adapter.id,
         flags: {

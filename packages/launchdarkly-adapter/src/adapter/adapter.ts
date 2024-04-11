@@ -4,15 +4,18 @@ import {
   normalizeFlag,
   normalizeFlags,
 } from '@flopflip/adapter-utilities';
+import { getCache } from '@flopflip/cache';
 import {
   AdapterConfigurationStatus,
   adapterIdentifiers,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
+  cacheModes,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
   type TCacheIdentifiers,
+  type TCacheModes,
   type TFlagName,
   type TFlags,
   type TFlagsChange,
@@ -31,8 +34,6 @@ import isEqual from 'lodash/isEqual';
 import mitt, { type Emitter } from 'mitt';
 import warning from 'tiny-warning';
 import { merge } from 'ts-deepmerge';
-
-import { getCache } from './cache';
 
 type TEmitterEvents = {
   flagsStateChange: TFlags;
@@ -152,7 +153,9 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     if (cacheIdentifier) {
       const cache = await getCache(
         cacheIdentifier,
-        this.#adapterState.context?.key
+        adapterIdentifiers.launchdarkly,
+        // NOTE: LDContextCommon is part of the type which we never use.
+        this.#adapterState.context?.key as string
       );
 
       const cachedFlags: TFlags = cache.get();
@@ -165,9 +168,10 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     flags,
     throwOnInitializationFailure,
     cacheIdentifier,
+    cacheMode,
   }: Pick<
     TLaunchDarklyAdapterArgs,
-    'flags' | 'throwOnInitializationFailure' | 'cacheIdentifier'
+    'flags' | 'throwOnInitializationFailure' | 'cacheIdentifier' | 'cacheMode'
   >): Promise<{
     flagsFromSdk?: TFlags;
     initializationStatus: AdapterInitializationStatus;
@@ -207,7 +211,14 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
             const flags =
               this.#withoutUnsubscribedOrLockedFlags(normalizedFlags);
 
-            this.updateFlags(flags);
+            this.#updateFlagsInAdapterState(flags);
+
+            if (cacheMode !== cacheModes.lazy) {
+              this.#adapterState.emitter.emit(
+                'flagsStateChange',
+                this.#adapterState.flags
+              );
+            }
           }
 
           this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
@@ -258,10 +269,12 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     flagsFromSdk,
     flagsUpdateDelayMs,
     cacheIdentifier,
+    cacheMode,
   }: {
     flagsFromSdk: TFlags;
     flagsUpdateDelayMs?: number;
     cacheIdentifier?: TCacheIdentifiers;
+    cacheMode?: TCacheModes;
   }) => {
     for (const flagName in flagsFromSdk) {
       // Dispatch whenever a configured flag value changes
@@ -295,6 +308,10 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
             this.#updateFlagsInAdapterState(updatedFlags);
 
             const flushFlagsUpdate = () => {
+              if (cacheMode === cacheModes.lazy) {
+                return;
+              }
+
               this.#adapterState.emitter.emit(
                 'flagsStateChange',
                 this.#adapterState.flags
@@ -363,7 +380,6 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       sdk,
       context,
       flags,
-      subscribeToFlagChanges = true,
       throwOnInitializationFailure = false,
       flagsUpdateDelayMs,
     } = adapterArgs;
@@ -372,14 +388,16 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     this.#adapterState.context = this.#ensureContext(context);
 
     if (adapterArgs.cacheIdentifier) {
-      const cache = await getCache(adapterArgs.cacheIdentifier, context.key);
+      const cache = await getCache(
+        adapterArgs.cacheIdentifier,
+        adapterIdentifiers.launchdarkly,
+        context.key as string
+      );
 
       cachedFlags = cache.get();
 
       if (cachedFlags) {
-        this.#updateFlagsInAdapterState(cachedFlags, {
-          unsubscribeFlags: adapterArgs.unsubscribeFromCachedFlags,
-        });
+        this.#updateFlagsInAdapterState(cachedFlags);
         this.#adapterState.flags = cachedFlags;
         this.#adapterState.emitter.emit('flagsStateChange', cachedFlags);
       }
@@ -395,12 +413,14 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       flags,
       throwOnInitializationFailure,
       cacheIdentifier: adapterArgs.cacheIdentifier,
+      cacheMode: adapterArgs.cacheMode,
     }).then(({ flagsFromSdk, initializationStatus }) => {
-      if (subscribeToFlagChanges && flagsFromSdk) {
+      if (flagsFromSdk) {
         this.#setupFlagSubcription({
           flagsFromSdk,
           flagsUpdateDelayMs,
           cacheIdentifier: adapterArgs.cacheIdentifier,
+          cacheMode: adapterArgs.cacheMode,
         });
       }
 
@@ -425,7 +445,8 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       if (adapterArgs.cacheIdentifier) {
         const cache = await getCache(
           adapterArgs.cacheIdentifier,
-          this.#adapterState.context?.key
+          adapterIdentifiers.launchdarkly,
+          this.#adapterState.context?.key as string
         );
 
         cache.unset();

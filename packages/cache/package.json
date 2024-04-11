@@ -1,9 +1,9 @@
 {
-  "name": "@flopflip/graphql-adapter",
-  "version": "13.6.0",
-  "description": "An GraphQL adapter for flipflop",
-  "main": "dist/flopflip-graphql-adapter.cjs.js",
-  "module": "dist/flopflip-graphql-adapter.esm.js",
+  "name": "@flopflip/cache",
+  "version": "13.5.2",
+  "description": "Caching for flipflop adapters",
+  "main": "dist/flopflip-cache.cjs.js",
+  "module": "dist/flopflip-cache.esm.js",
   "files": [
     "readme.md",
     "dist/**"
@@ -14,7 +14,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/tdeekens/flopflip.git",
-    "directory": "packages/graphql-adapter"
+    "directory": "packages/cache"
   },
   "author": "Tobias Deekens <nerd@tdeekens.name>",
   "license": "MIT",
@@ -25,21 +25,12 @@
   "keywords": [
     "feature-flags",
     "feature-toggles",
-    "graphql",
+    "cache",
     "client"
   ],
   "dependencies": {
-    "@babel/runtime": "7.24.4",
-    "@flopflip/adapter-utilities": "13.6.0",
-    "@flopflip/cache": "13.5.2",
     "@flopflip/localstorage-cache": "13.6.0",
     "@flopflip/sessionstorage-cache": "13.6.0",
-    "@flopflip/types": "13.6.0",
-    "lodash": "4.17.21",
-    "mitt": "3.0.1",
-    "tiny-warning": "1.0.3"
-  },
-  "devDependencies": {
-    "globalthis": "1.0.3"
+    "@flopflip/types": "13.6.0"
   }
 }

@@ -305,7 +305,9 @@ _1. The `@flopflip/launchdarkly-adapter` accepts_
 - `sdk.clientSideId`: The client side id of LaunchDarkly
 - `sdk.clientOptions`: additional options to be passed to the underlying SDK
 - `flags`: defaulting to `null` to subscribe only to specific flags. Helpful when not wanting to subscribe to all flags to utilise LaunchDarkly's automatic flag archiving functionality
-- `subscribeToFlagChanges`: defaulting to `true` to disable real-time updates to flags once initially fetched
+- `cacheMode`: defaulting to `null` to change application of cached flags
+  - The value can be `eager` to indicate that remote values should have effect immediately
+  - The value can be `lazy` to indicate that values should be updated in the cache but only be applied once the adapter is configured again
 - `throwOnInitializationFailure`: defaulting to `false` to indicate if the adapter just re-throw an error during initialization
 - `flagsUpdateDelayMs`: defaulting to `0` to debounce the flag update subscription
 

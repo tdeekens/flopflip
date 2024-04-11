@@ -1,9 +1,11 @@
+import { getCache } from '@flopflip/cache';
 import {
   fireEvent,
   render as rtlRender,
   screen,
   waitFor,
 } from '@flopflip/test-utils';
+import { adapterIdentifiers, cacheIdentifiers } from '@flopflip/types';
 import React, { useContext } from 'react';
 
 import useAdapterReconfiguration from '../../hooks/use-adapter-reconfiguration';
@@ -11,6 +13,7 @@ import AdapterContext from '../adapter-context';
 import ConfigureAdapter, { AdapterStates } from './configure-adapter';
 
 const createAdapter = () => ({
+  id: adapterIdentifiers.memory,
   getIsConfigurationStatus: jest.fn(() => false),
   configure: jest.fn(() => Promise.resolve()),
   reconfigure: jest.fn(() => Promise.resolve()),
@@ -241,20 +244,68 @@ describe('when adapter configuration should not be deferred', () => {
 });
 
 describe('when providing default flags', () => {
-  it('should notify parent about the default flag state', async () => {
-    const adapter = createAdapter();
-    const defaultFlags = {
-      flagName: true,
+  describe('without cached flags', () => {
+    it('should notify parent about the default flag state', async () => {
+      const adapter = createAdapter();
+      const defaultFlags = {
+        flagName: true,
+      };
+      const props = { children: <AdapterStatus />, defaultFlags };
+
+      const { waitUntilStatus, mergedRenderProps } = render({ props, adapter });
+
+      expect(mergedRenderProps.onFlagsStateChange).toHaveBeenCalledWith({
+        flags: defaultFlags,
+      });
+
+      await waitUntilStatus();
+    });
+  });
+  describe('with cached flags', () => {
+    const cachedFlags = {
+      cachedFlag: true,
     };
-    const props = { children: <AdapterStatus />, defaultFlags };
+    const cacheKey = 'test';
+    let cache;
 
-    const { waitUntilStatus, mergedRenderProps } = render({ props, adapter });
+    beforeEach(async () => {
+      cache = await getCache(
+        cacheIdentifiers.session,
+        adapterIdentifiers.memory,
+        cacheKey
+      );
 
-    expect(mergedRenderProps.onFlagsStateChange).toHaveBeenCalledWith({
-      flags: defaultFlags,
+      cache.set(cachedFlags);
     });
 
-    await waitUntilStatus();
+    it('should notify parent about the cached and default flag state', async () => {
+      const adapter = createAdapter();
+      const defaultFlags = {
+        defaultFlag: true,
+      };
+      const props = {
+        children: <AdapterStatus />,
+        defaultFlags,
+        adapterArgs: {
+          cacheIdentifier: cacheIdentifiers.session,
+          clientSideId: 'foo-clientSideId',
+          user: {
+            key: 'foo-user-key',
+          },
+        },
+      };
+
+      const { waitUntilStatus, mergedRenderProps } = render({ props, adapter });
+
+      expect(mergedRenderProps.onFlagsStateChange).toHaveBeenCalledWith({
+        flags: {
+          ...defaultFlags,
+          ...cachedFlags,
+        },
+      });
+
+      await waitUntilStatus();
+    });
   });
 });
 

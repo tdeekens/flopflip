@@ -368,43 +368,6 @@ describe('when configuring', () => {
       });
 
       describe('with flag updates', () => {
-        describe('when not `subscribeToFlagChanges`', () => {
-          beforeEach(async () => {
-            // Reset due to preivous dispatches
-            onFlagsStateChange.mockClear();
-            client.on.mockClear();
-
-            onStatusStateChange = jest.fn();
-            onFlagsStateChange = jest.fn();
-            client = createClient({
-              allFlags: jest.fn(() => flags),
-              variation: jest.fn(() => true),
-            });
-
-            ldClient.initialize.mockReturnValue(client);
-
-            await adapter.configure(
-              {
-                sdk: { clientSideId },
-                subscribeToFlagChanges: false,
-                context: userWithKey,
-              },
-              {
-                onStatusStateChange,
-                onFlagsStateChange,
-              }
-            );
-
-            onFlagsStateChange.mockClear();
-
-            triggerFlagValueChange(client);
-          });
-
-          it('should not `dispatch` `onFlagsStateChange` action', () => {
-            expect(onFlagsStateChange).not.toHaveBeenCalled();
-          });
-        });
-
         describe('with `flagsUpdateDelayMs`', () => {
           const flagsUpdateDelayMs = 1000;
 
@@ -549,7 +512,7 @@ describe('when configuring', () => {
           });
         });
 
-        describe('when unsubscribing from cached flags', () => {
+        describe('with lazy cache mode', () => {
           beforeEach(async () => {
             onStatusStateChange.mockClear();
             onFlagsStateChange.mockClear();
@@ -571,7 +534,7 @@ describe('when configuring', () => {
                 sdk: { clientSideId },
                 context: userWithKey,
                 cacheIdentifier: 'session',
-                unsubscribeFromCachedFlags: true,
+                cacheMode: 'lazy',
               },
               {
                 onStatusStateChange,
@@ -580,13 +543,19 @@ describe('when configuring', () => {
             );
           });
 
-          it('should prefer the cached version and flush flags', () => {
+          it('should only flush cached but not updated flags', () => {
             expect(onFlagsStateChange).toHaveBeenCalledWith({
               id: adapter.id,
-              flags: {
+              flags: expect.objectContaining({
                 cached: true,
-                updated: false,
-              },
+              }),
+            });
+
+            expect(onFlagsStateChange).toHaveBeenCalledWith({
+              id: adapter.id,
+              flags: expect.not.objectContaining({
+                updated: true,
+              }),
             });
           });
 
