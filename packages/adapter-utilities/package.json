@@ -34,7 +34,7 @@
     "lodash": "4.17.21"
   },
   "devDependencies": {
-    "typescript": "5.4.3"
+    "typescript": "5.4.5"
   },
   "peerDependencies": {
     "typescript": "4.x || 5.x"
