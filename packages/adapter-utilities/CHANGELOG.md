@@ -1,5 +1,14 @@
 # @flopflip/adapter-utilities
 
+## 14.0.0
+
+### Patch Changes
+
+- [#1889](https://github.com/tdeekens/flopflip/pull/1889) [`612461e`](https://github.com/tdeekens/flopflip/commit/612461ee77a6332f6481462a09c14375eb0e4001) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependencies
+
+- Updated dependencies [[`612461e`](https://github.com/tdeekens/flopflip/commit/612461ee77a6332f6481462a09c14375eb0e4001), [`72f308b`](https://github.com/tdeekens/flopflip/commit/72f308b6a2447fceeb84abc2198247354b5c2d43)]:
+  - @flopflip/types@14.0.0
+
 ## 13.6.0
 
 ### Patch Changes
