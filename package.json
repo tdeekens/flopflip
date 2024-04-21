@@ -5,6 +5,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "postinstall": "husky install && preconstruct dev && manypkg check && check-node-version --package --print",
+    "reinstall": "manypkg exec rm -rf node_modules && rm -rf node_modules pnpm-lock.yaml && pnpm install",
     "auth": "npm_config_registry=https://registry.npmjs.org npm whoami",
     "develop": "jest --projects jest.*.config.js --watch",
     "lint": "jest --config jest.lint.config.js --maxWorkers 5",
