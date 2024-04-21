@@ -115,7 +115,7 @@
     "HoC",
     "store-enhancer"
   ],
-  "packageManager": "pnpm@8.15.6",
+  "packageManager": "pnpm@9.0.4",
   "preconstruct": {
     "packages": [
       "demo",
