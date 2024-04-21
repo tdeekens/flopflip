@@ -9,7 +9,6 @@
     "auth": "npm_config_registry=https://registry.npmjs.org npm whoami",
     "develop": "jest --projects jest.*.config.js --watch",
     "lint": "jest --config jest.lint.config.js --maxWorkers 5",
-    "pretypecheck": "rimraf packages/**/dist/**",
     "typecheck": "tsc --project tsconfig.json --noEmit && tsc --project packages/cypress-plugin/tsconfig.json --noEmit",
     "format": "pnpm format:ts && pnpm format:md && pnpm format:yaml",
     "format:ts": "prettier --write '**/*.{js, ts, tsx}'",
