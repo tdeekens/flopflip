@@ -1,4 +1,4 @@
-lockfileVersion: '6.0'
+lockfileVersion: '9.0'
 
 settings:
   autoInstallPeers: true
@@ -115,7 +115,7 @@ importers:
         version: 20.12.7
       '@typescript-eslint/eslint-plugin':
         specifier: 7.6.0
-        version: 7.6.0(@typescript-eslint/parser@7.6.0)(eslint@8.57.0)(typescript@5.4.5)
+        version: 7.6.0(@typescript-eslint/parser@7.6.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
       '@typescript-eslint/parser':
         specifier: 7.6.0
         version: 7.6.0(eslint@8.57.0)(typescript@5.4.5)
@@ -151,19 +151,19 @@ importers:
         version: 0.44.0(eslint@8.57.0)
       eslint-config-xo-react:
         specifier: 0.27.0
-        version: 0.27.0(eslint-plugin-react-hooks@4.6.0)(eslint-plugin-react@7.34.1)(eslint@8.57.0)
+        version: 0.27.0(eslint-plugin-react-hooks@4.6.0(eslint@8.57.0))(eslint-plugin-react@7.34.1(eslint@8.57.0))(eslint@8.57.0)
       eslint-config-xo-typescript:
         specifier: 4.0.0
-        version: 4.0.0(@typescript-eslint/eslint-plugin@7.6.0)(@typescript-eslint/parser@7.6.0)(eslint@8.57.0)(typescript@5.4.5)
+        version: 4.0.0(@typescript-eslint/eslint-plugin@7.6.0(@typescript-eslint/parser@7.6.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5))(@typescript-eslint/parser@7.6.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
       eslint-formatter-pretty:
         specifier: 5.0.0
         version: 5.0.0
       eslint-plugin-jest:
         specifier: 28.2.0
-        version: 28.2.0(@typescript-eslint/eslint-plugin@7.6.0)(eslint@8.57.0)(jest@29.7.0)(typescript@5.4.5)
+        version: 28.2.0(@typescript-eslint/eslint-plugin@7.6.0(@typescript-eslint/parser@7.6.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(jest@29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))(typescript@5.4.5)
       eslint-plugin-prettier:
         specifier: 5.1.3
-        version: 5.1.3(eslint-config-prettier@9.1.0)(eslint@8.57.0)(prettier@3.2.5)
+        version: 5.1.3(@types/eslint@8.56.6)(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.2.5)
       eslint-plugin-react:
         specifier: 7.34.1
         version: 7.34.1(eslint@8.57.0)
@@ -181,7 +181,7 @@ importers:
         version: 9.0.11
       jest:
         specifier: 29.7.0
-        version: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2)
+        version: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
       jest-environment-jsdom:
         specifier: 29.7.0
         version: 29.7.0
@@ -208,7 +208,7 @@ importers:
         version: 5.0.5
       ts-jest:
         specifier: 29.1.2
-        version: 29.1.2(@babel/core@7.24.4)(babel-jest@29.7.0)(jest@29.7.0)(typescript@5.4.5)
+        version: 29.1.2(@babel/core@7.24.4)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.4))(jest@29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))(typescript@5.4.5)
       ts-node:
         specifier: 10.9.2
         version: 10.9.2(@types/node@20.12.7)(typescript@5.4.5)
@@ -225,7 +225,7 @@ importers:
         specifier: 7.24.4
         version: 7.24.4
       '@flopflip/types':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../types
       globalthis:
         specifier: 1.0.3
@@ -241,13 +241,13 @@ importers:
   packages/cache:
     dependencies:
       '@flopflip/localstorage-cache':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../localstorage-cache
       '@flopflip/sessionstorage-cache':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../sessionstorage-cache
       '@flopflip/types':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../types
 
   packages/combine-adapters:
@@ -256,10 +256,10 @@ importers:
         specifier: 7.24.4
         version: 7.24.4
       '@flopflip/adapter-utilities':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../adapter-utilities
       '@flopflip/types':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../types
       mitt:
         specifier: 3.0.1
@@ -269,10 +269,10 @@ importers:
         version: 1.0.3
     devDependencies:
       '@flopflip/localstorage-adapter':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../localstorage-adapter
       '@flopflip/memory-adapter':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../memory-adapter
       globalthis:
         specifier: 1.0.3
@@ -281,7 +281,7 @@ importers:
   packages/cypress-plugin:
     dependencies:
       '@flopflip/types':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../types
     devDependencies:
       cypress:
@@ -294,19 +294,19 @@ importers:
         specifier: 7.24.4
         version: 7.24.4
       '@flopflip/adapter-utilities':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../adapter-utilities
       '@flopflip/cache':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../cache
       '@flopflip/localstorage-cache':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../localstorage-cache
       '@flopflip/sessionstorage-cache':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../sessionstorage-cache
       '@flopflip/types':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../types
       lodash:
         specifier: 4.17.21
@@ -328,19 +328,19 @@ importers:
         specifier: 7.24.4
         version: 7.24.4
       '@flopflip/adapter-utilities':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../adapter-utilities
       '@flopflip/cache':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../cache
       '@flopflip/localstorage-cache':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../localstorage-cache
       '@flopflip/sessionstorage-cache':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../sessionstorage-cache
       '@flopflip/types':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../types
       lodash:
         specifier: 4.17.21
@@ -362,19 +362,19 @@ importers:
         specifier: 7.24.4
         version: 7.24.4
       '@flopflip/adapter-utilities':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../adapter-utilities
       '@flopflip/cache':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../cache
       '@flopflip/localstorage-cache':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../localstorage-cache
       '@flopflip/sessionstorage-cache':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../sessionstorage-cache
       '@flopflip/types':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../types
       debounce-fn:
         specifier: 4.0.0
@@ -405,13 +405,13 @@ importers:
         specifier: 7.24.4
         version: 7.24.4
       '@flopflip/adapter-utilities':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../adapter-utilities
       '@flopflip/localstorage-cache':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../localstorage-cache
       '@flopflip/types':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../types
       lodash:
         specifier: 4.17.21
@@ -430,7 +430,7 @@ importers:
   packages/localstorage-cache:
     dependencies:
       '@flopflip/types':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../types
 
   packages/memory-adapter:
@@ -439,10 +439,10 @@ importers:
         specifier: 7.24.4
         version: 7.24.4
       '@flopflip/adapter-utilities':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../adapter-utilities
       '@flopflip/types':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../types
       mitt:
         specifier: 3.0.1
@@ -461,10 +461,10 @@ importers:
         specifier: 7.24.4
         version: 7.24.4
       '@flopflip/cache':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../cache
       '@flopflip/types':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../types
       '@types/react-is':
         specifier: 17.0.7
@@ -483,7 +483,7 @@ importers:
         version: 7.0.0
     devDependencies:
       '@flopflip/test-utils':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../test-utils
       '@types/react':
         specifier: 18.2.0
@@ -504,26 +504,26 @@ importers:
         specifier: 7.24.4
         version: 7.24.4
       '@flopflip/react':
-        specifier: ^14.0.0
+        specifier: workspace:*
         version: link:../react
       '@flopflip/types':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../types
       use-sync-external-store:
         specifier: 1.2.0
         version: 1.2.0(react@18.2.0)
     devDependencies:
       '@flopflip/combine-adapters':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../combine-adapters
       '@flopflip/localstorage-adapter':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../localstorage-adapter
       '@flopflip/memory-adapter':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../memory-adapter
       '@flopflip/test-utils':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../test-utils
       '@types/react':
         specifier: 18.2.0
@@ -544,10 +544,10 @@ importers:
         specifier: 7.24.4
         version: 7.24.4
       '@flopflip/react':
-        specifier: ^14.0.0
+        specifier: workspace:*
         version: link:../react
       '@flopflip/types':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../types
       '@types/react':
         specifier: 18.2.0
@@ -557,16 +557,16 @@ importers:
         version: 7.1.33
     devDependencies:
       '@flopflip/combine-adapters':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../combine-adapters
       '@flopflip/localstorage-adapter':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../localstorage-adapter
       '@flopflip/memory-adapter':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../memory-adapter
       '@flopflip/test-utils':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../test-utils
       react:
         specifier: 18.2.0
@@ -576,7 +576,7 @@ importers:
         version: 18.2.0(react@18.2.0)
       react-redux:
         specifier: 8.0.5
-        version: 8.0.5(@types/react@18.2.0)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
+        version: 8.0.5(@types/react-dom@18.2.0)(@types/react@18.2.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(redux@4.2.1)
       redux:
         specifier: 4.2.1
         version: 4.2.1
@@ -584,7 +584,7 @@ importers:
   packages/sessionstorage-cache:
     dependencies:
       '@flopflip/types':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../types
 
   packages/splitio-adapter:
@@ -593,10 +593,10 @@ importers:
         specifier: 7.24.4
         version: 7.24.4
       '@flopflip/adapter-utilities':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../adapter-utilities
       '@flopflip/types':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../types
       '@splitsoftware/splitio':
         specifier: 10.25.2
@@ -618,20 +618,20 @@ importers:
         specifier: 7.24.4
         version: 7.24.4
       '@flopflip/memory-adapter':
-        specifier: 14.0.0
+        specifier: workspace:*
         version: link:../memory-adapter
       '@testing-library/jest-dom':
         specifier: 6.4.2
-        version: 6.4.2(@types/jest@29.5.12)(jest@29.7.0)
+        version: 6.4.2(@jest/globals@29.7.0)(@types/jest@29.5.12)(jest@29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))
       '@testing-library/react':
         specifier: 14.3.0
-        version: 14.3.0(react-dom@18.2.0)(react@18.2.0)
+        version: 14.3.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       jest-runner-eslint:
         specifier: 2.2.0
-        version: 2.2.0(eslint@8.57.0)(jest@29.7.0)
+        version: 2.2.0(@jest/test-result@29.7.0)(eslint@8.57.0)(jest-runner@29.7.0)(jest@29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))
       jest-watch-typeahead:
         specifier: 2.2.2
-        version: 2.2.2(jest@29.7.0)
+        version: 2.2.2(jest@29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -6697,7 +6697,7 @@ snapshots:
       '@commitlint/types': 19.0.3
       chalk: 5.3.0
       cosmiconfig: 9.0.0(typescript@5.4.5)
-      cosmiconfig-typescript-loader: 5.0.0(@types/node@20.12.7)(cosmiconfig@9.0.0)(typescript@5.4.5)
+      cosmiconfig-typescript-loader: 5.0.0(@types/node@20.12.7)(cosmiconfig@9.0.0(typescript@5.4.5))(typescript@5.4.5)
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       lodash.uniq: 4.5.0
@@ -6844,7 +6844,7 @@ snapshots:
       jest-util: 29.7.0
       slash: 3.0.0
 
-  '@jest/core@29.7.0(ts-node@10.9.2)':
+  '@jest/core@29.7.0(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))':
     dependencies:
       '@jest/console': 29.7.0
       '@jest/reporters': 29.7.0
@@ -6858,7 +6858,7 @@ snapshots:
       exit: 0.1.2
       graceful-fs: 4.2.11
       jest-changed-files: 29.7.0
-      jest-config: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2)
+      jest-config: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
       jest-haste-map: 29.7.0
       jest-message-util: 29.7.0
       jest-regex-util: 29.6.3
@@ -7220,8 +7220,9 @@ snapshots:
 
   '@splitsoftware/splitio-commons@1.13.1(ioredis@4.28.5)':
     dependencies:
-      ioredis: 4.28.5
       tslib: 2.6.2
+    optionalDependencies:
+      ioredis: 4.28.5
 
   '@splitsoftware/splitio@10.25.2':
     dependencies:
@@ -7255,20 +7256,22 @@ snapshots:
       lz-string: 1.5.0
       pretty-format: 27.5.1
 
-  '@testing-library/jest-dom@6.4.2(@types/jest@29.5.12)(jest@29.7.0)':
+  '@testing-library/jest-dom@6.4.2(@jest/globals@29.7.0)(@types/jest@29.5.12)(jest@29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))':
     dependencies:
       '@adobe/css-tools': 4.3.3
       '@babel/runtime': 7.24.4
-      '@types/jest': 29.5.12
       aria-query: 5.3.0
       chalk: 3.0.0
       css.escape: 1.5.1
       dom-accessibility-api: 0.6.3
-      jest: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2)
       lodash: 4.17.21
       redent: 3.0.0
+    optionalDependencies:
+      '@jest/globals': 29.7.0
+      '@types/jest': 29.5.12
+      jest: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
 
-  '@testing-library/react@14.3.0(react-dom@18.2.0)(react@18.2.0)':
+  '@testing-library/react@14.3.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@babel/runtime': 7.24.4
       '@testing-library/dom': 9.3.4
@@ -7432,7 +7435,7 @@ snapshots:
       '@types/node': 20.12.7
     optional: true
 
-  '@typescript-eslint/eslint-plugin@7.6.0(@typescript-eslint/parser@7.6.0)(eslint@8.57.0)(typescript@5.4.5)':
+  '@typescript-eslint/eslint-plugin@7.6.0(@typescript-eslint/parser@7.6.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)':
     dependencies:
       '@eslint-community/regexpp': 4.10.0
       '@typescript-eslint/parser': 7.6.0(eslint@8.57.0)(typescript@5.4.5)
@@ -7447,6 +7450,7 @@ snapshots:
       natural-compare: 1.4.0
       semver: 7.6.0
       ts-api-utils: 1.3.0(typescript@5.4.5)
+    optionalDependencies:
       typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
@@ -7459,6 +7463,7 @@ snapshots:
       '@typescript-eslint/visitor-keys': 7.6.0
       debug: 4.3.4(supports-color@8.1.1)
       eslint: 8.57.0
+    optionalDependencies:
       typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
@@ -7485,6 +7490,7 @@ snapshots:
       debug: 4.3.4(supports-color@8.1.1)
       eslint: 8.57.0
       ts-api-utils: 1.3.0(typescript@5.4.5)
+    optionalDependencies:
       typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
@@ -7504,6 +7510,7 @@ snapshots:
       is-glob: 4.0.3
       semver: 7.6.0
       tsutils: 3.21.0(typescript@5.4.5)
+    optionalDependencies:
       typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
@@ -7518,6 +7525,7 @@ snapshots:
       minimatch: 9.0.3
       semver: 7.6.0
       ts-api-utils: 1.3.0(typescript@5.4.5)
+    optionalDependencies:
       typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
@@ -7532,6 +7540,7 @@ snapshots:
       minimatch: 9.0.4
       semver: 7.6.0
       ts-api-utils: 1.3.0(typescript@5.4.5)
+    optionalDependencies:
       typescript: 5.4.5
     transitivePeerDependencies:
       - supports-color
@@ -8170,7 +8179,7 @@ snapshots:
 
   core-util-is@1.0.2: {}
 
-  cosmiconfig-typescript-loader@5.0.0(@types/node@20.12.7)(cosmiconfig@9.0.0)(typescript@5.4.5):
+  cosmiconfig-typescript-loader@5.0.0(@types/node@20.12.7)(cosmiconfig@9.0.0(typescript@5.4.5))(typescript@5.4.5):
     dependencies:
       '@types/node': 20.12.7
       cosmiconfig: 9.0.0(typescript@5.4.5)
@@ -8191,21 +8200,25 @@ snapshots:
       import-fresh: 3.3.0
       js-yaml: 4.1.0
       parse-json: 5.2.0
+    optionalDependencies:
       typescript: 5.4.5
 
-  create-jest-runner@0.11.2:
+  create-jest-runner@0.11.2(@jest/test-result@29.7.0)(jest-runner@29.7.0):
     dependencies:
       chalk: 4.1.2
       jest-worker: 28.1.3
       throat: 6.0.2
+    optionalDependencies:
+      '@jest/test-result': 29.7.0
+      jest-runner: 29.7.0
 
-  create-jest@29.7.0(@types/node@20.12.7)(ts-node@10.9.2):
+  create-jest@29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)):
     dependencies:
       '@jest/types': 29.6.3
       chalk: 4.1.2
       exit: 0.1.2
       graceful-fs: 4.2.11
-      jest-config: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2)
+      jest-config: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
       jest-util: 29.7.0
       prompts: 2.4.2
     transitivePeerDependencies:
@@ -8347,11 +8360,13 @@ snapshots:
   debug@3.2.7(supports-color@8.1.1):
     dependencies:
       ms: 2.1.3
+    optionalDependencies:
       supports-color: 8.1.1
 
   debug@4.3.4(supports-color@8.1.1):
     dependencies:
       ms: 2.1.2
+    optionalDependencies:
       supports-color: 8.1.1
 
   decamelize-keys@1.1.1:
@@ -8616,15 +8631,15 @@ snapshots:
     dependencies:
       eslint: 8.57.0
 
-  eslint-config-xo-react@0.27.0(eslint-plugin-react-hooks@4.6.0)(eslint-plugin-react@7.34.1)(eslint@8.57.0):
+  eslint-config-xo-react@0.27.0(eslint-plugin-react-hooks@4.6.0(eslint@8.57.0))(eslint-plugin-react@7.34.1(eslint@8.57.0))(eslint@8.57.0):
     dependencies:
       eslint: 8.57.0
       eslint-plugin-react: 7.34.1(eslint@8.57.0)
       eslint-plugin-react-hooks: 4.6.0(eslint@8.57.0)
 
-  eslint-config-xo-typescript@4.0.0(@typescript-eslint/eslint-plugin@7.6.0)(@typescript-eslint/parser@7.6.0)(eslint@8.57.0)(typescript@5.4.5):
+  eslint-config-xo-typescript@4.0.0(@typescript-eslint/eslint-plugin@7.6.0(@typescript-eslint/parser@7.6.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5))(@typescript-eslint/parser@7.6.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5):
     dependencies:
-      '@typescript-eslint/eslint-plugin': 7.6.0(@typescript-eslint/parser@7.6.0)(eslint@8.57.0)(typescript@5.4.5)
+      '@typescript-eslint/eslint-plugin': 7.6.0(@typescript-eslint/parser@7.6.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
       '@typescript-eslint/parser': 7.6.0(eslint@8.57.0)(typescript@5.4.5)
       eslint: 8.57.0
       typescript: 5.4.5
@@ -8645,23 +8660,26 @@ snapshots:
       string-width: 4.2.3
       supports-hyperlinks: 2.3.0
 
-  eslint-plugin-jest@28.2.0(@typescript-eslint/eslint-plugin@7.6.0)(eslint@8.57.0)(jest@29.7.0)(typescript@5.4.5):
+  eslint-plugin-jest@28.2.0(@typescript-eslint/eslint-plugin@7.6.0(@typescript-eslint/parser@7.6.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(jest@29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))(typescript@5.4.5):
     dependencies:
-      '@typescript-eslint/eslint-plugin': 7.6.0(@typescript-eslint/parser@7.6.0)(eslint@8.57.0)(typescript@5.4.5)
       '@typescript-eslint/utils': 6.21.0(eslint@8.57.0)(typescript@5.4.5)
       eslint: 8.57.0
-      jest: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2)
+    optionalDependencies:
+      '@typescript-eslint/eslint-plugin': 7.6.0(@typescript-eslint/parser@7.6.0(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
+      jest: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
     transitivePeerDependencies:
       - supports-color
       - typescript
 
-  eslint-plugin-prettier@5.1.3(eslint-config-prettier@9.1.0)(eslint@8.57.0)(prettier@3.2.5):
+  eslint-plugin-prettier@5.1.3(@types/eslint@8.56.6)(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.2.5):
     dependencies:
       eslint: 8.57.0
-      eslint-config-prettier: 9.1.0(eslint@8.57.0)
       prettier: 3.2.5
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.8
+    optionalDependencies:
+      '@types/eslint': 8.56.6
+      eslint-config-prettier: 9.1.0(eslint@8.57.0)
 
   eslint-plugin-react-hooks@4.6.0(eslint@8.57.0):
     dependencies:
@@ -9540,16 +9558,16 @@ snapshots:
       - babel-plugin-macros
       - supports-color
 
-  jest-cli@29.7.0(@types/node@20.12.7)(ts-node@10.9.2):
+  jest-cli@29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)):
     dependencies:
-      '@jest/core': 29.7.0(ts-node@10.9.2)
+      '@jest/core': 29.7.0(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
       chalk: 4.1.2
-      create-jest: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2)
+      create-jest: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
       exit: 0.1.2
       import-local: 3.1.0
-      jest-config: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2)
+      jest-config: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
       jest-util: 29.7.0
       jest-validate: 29.7.0
       yargs: 17.7.2
@@ -9559,12 +9577,11 @@ snapshots:
       - supports-color
       - ts-node
 
-  jest-config@29.7.0(@types/node@20.12.7)(ts-node@10.9.2):
+  jest-config@29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)):
     dependencies:
       '@babel/core': 7.24.4
       '@jest/test-sequencer': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 20.12.7
       babel-jest: 29.7.0(@babel/core@7.24.4)
       chalk: 4.1.2
       ci-info: 3.9.0
@@ -9584,6 +9601,8 @@ snapshots:
       pretty-format: 29.7.0
       slash: 3.0.0
       strip-json-comments: 3.1.1
+    optionalDependencies:
+      '@types/node': 20.12.7
       ts-node: 10.9.2(@types/node@20.12.7)(typescript@5.4.5)
     transitivePeerDependencies:
       - babel-plugin-macros
@@ -9683,7 +9702,7 @@ snapshots:
       jest-util: 29.7.0
 
   jest-pnp-resolver@1.2.3(jest-resolve@29.7.0):
-    dependencies:
+    optionalDependencies:
       jest-resolve: 29.7.0
 
   jest-regex-util@29.6.3: {}
@@ -9707,14 +9726,14 @@ snapshots:
       resolve.exports: 2.0.2
       slash: 3.0.0
 
-  jest-runner-eslint@2.2.0(eslint@8.57.0)(jest@29.7.0):
+  jest-runner-eslint@2.2.0(@jest/test-result@29.7.0)(eslint@8.57.0)(jest-runner@29.7.0)(jest@29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))):
     dependencies:
       chalk: 4.1.2
       cosmiconfig: 7.1.0
-      create-jest-runner: 0.11.2
+      create-jest-runner: 0.11.2(@jest/test-result@29.7.0)(jest-runner@29.7.0)
       dot-prop: 6.0.1
       eslint: 8.57.0
-      jest: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2)
+      jest: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
     transitivePeerDependencies:
       - '@jest/test-result'
       - jest-runner
@@ -9815,11 +9834,11 @@ snapshots:
       leven: 3.1.0
       pretty-format: 29.7.0
 
-  jest-watch-typeahead@2.2.2(jest@29.7.0):
+  jest-watch-typeahead@2.2.2(jest@29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))):
     dependencies:
       ansi-escapes: 6.2.1
       chalk: 5.3.0
-      jest: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2)
+      jest: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
       jest-regex-util: 29.6.3
       jest-watcher: 29.7.0
       slash: 5.1.0
@@ -9856,12 +9875,12 @@ snapshots:
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  jest@29.7.0(@types/node@20.12.7)(ts-node@10.9.2):
+  jest@29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)):
     dependencies:
-      '@jest/core': 29.7.0(ts-node@10.9.2)
+      '@jest/core': 29.7.0(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
       '@jest/types': 29.6.3
       import-local: 3.1.0
-      jest-cli: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2)
+      jest-cli: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -10017,13 +10036,14 @@ snapshots:
     dependencies:
       cli-truncate: 2.1.0
       colorette: 2.0.20
-      enquirer: 2.4.1
       log-update: 4.0.0
       p-map: 4.0.0
       rfdc: 1.3.1
       rxjs: 7.8.1
       through: 2.3.8
       wrap-ansi: 7.0.0
+    optionalDependencies:
+      enquirer: 2.4.1
 
   listr2@8.0.1:
     dependencies:
@@ -10582,18 +10602,20 @@ snapshots:
 
   react-is@18.2.0: {}
 
-  react-redux@8.0.5(@types/react@18.2.0)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1):
+  react-redux@8.0.5(@types/react-dom@18.2.0)(@types/react@18.2.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(redux@4.2.1):
     dependencies:
       '@babel/runtime': 7.24.4
       '@types/hoist-non-react-statics': 3.3.5
-      '@types/react': 18.2.0
       '@types/use-sync-external-store': 0.0.3
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
       react-is: 18.2.0
-      redux: 4.2.1
       use-sync-external-store: 1.2.0(react@18.2.0)
+    optionalDependencies:
+      '@types/react': 18.2.0
+      '@types/react-dom': 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      redux: 4.2.1
 
   react@18.2.0:
     dependencies:
@@ -11147,13 +11169,11 @@ snapshots:
 
   ts-deepmerge@7.0.0: {}
 
-  ts-jest@29.1.2(@babel/core@7.24.4)(babel-jest@29.7.0)(jest@29.7.0)(typescript@5.4.5):
+  ts-jest@29.1.2(@babel/core@7.24.4)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.4))(jest@29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5)))(typescript@5.4.5):
     dependencies:
-      '@babel/core': 7.24.4
-      babel-jest: 29.7.0(@babel/core@7.24.4)
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
-      jest: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2)
+      jest: 29.7.0(@types/node@20.12.7)(ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5))
       jest-util: 29.7.0
       json5: 2.2.3
       lodash.memoize: 4.1.2
@@ -11161,6 +11181,10 @@ snapshots:
       semver: 7.6.0
       typescript: 5.4.5
       yargs-parser: 21.1.1
+    optionalDependencies:
+      '@babel/core': 7.24.4
+      '@jest/types': 29.6.3
+      babel-jest: 29.7.0(@babel/core@7.24.4)
 
   ts-node@10.9.2(@types/node@20.12.7)(typescript@5.4.5):
     dependencies:

@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.24.4",
-    "@flopflip/memory-adapter": "14.0.0",
+    "@flopflip/memory-adapter": "workspace:*",
     "@testing-library/jest-dom": "6.4.2",
     "@testing-library/react": "14.3.0",
     "jest-runner-eslint": "2.2.0",

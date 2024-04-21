@@ -30,14 +30,14 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.24.4",
-    "@flopflip/adapter-utilities": "14.0.0",
-    "@flopflip/types": "14.0.0",
+    "@flopflip/adapter-utilities": "workspace:*",
+    "@flopflip/types": "workspace:*",
     "mitt": "3.0.1",
     "tiny-warning": "1.0.3"
   },
   "devDependencies": {
-    "@flopflip/localstorage-adapter": "14.0.0",
-    "@flopflip/memory-adapter": "14.0.0",
+    "@flopflip/localstorage-adapter": "workspace:*",
+    "@flopflip/memory-adapter": "workspace:*",
     "globalthis": "1.0.3"
   }
 }

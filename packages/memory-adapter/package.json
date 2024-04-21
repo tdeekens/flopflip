@@ -30,8 +30,8 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.24.4",
-    "@flopflip/adapter-utilities": "14.0.0",
-    "@flopflip/types": "14.0.0",
+    "@flopflip/adapter-utilities": "workspace:*",
+    "@flopflip/types": "workspace:*",
     "mitt": "3.0.1",
     "tiny-warning": "1.0.3"
   },
