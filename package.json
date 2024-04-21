@@ -126,12 +126,11 @@
   },
   "pnpm": {
     "overrides": {
-      "@types/react": "18.2.0",
-      "@types/react-dom": "18.2.0"
+      "@types/react": "18.2.79",
+      "@types/react-dom": "18.2.25"
     },
     "patchedDependencies": {
-      "cypress@13.6.4": "patches/cypress@13.6.4.patch",
-      "@types/react@18.2.0": "patches/@types__react@18.2.0.patch"
+      "cypress@13.6.4": "patches/cypress@13.6.4.patch"
     }
   },
   "bundlewatch": {

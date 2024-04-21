@@ -5,13 +5,10 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@types/react': 18.2.0
-  '@types/react-dom': 18.2.0
+  '@types/react': 18.2.79
+  '@types/react-dom': 18.2.25
 
 patchedDependencies:
-  '@types/react@18.2.0':
-    hash: 3bodxm372hrikdmllofjvsnbo4
-    path: patches/@types__react@18.2.0.patch
   cypress@13.6.4:
     hash: bnmjxin5yu4gimwzcgzqydy6di
     path: patches/cypress@13.6.4.patch
@@ -489,11 +486,11 @@ importers:
         specifier: workspace:*
         version: link:../test-utils
       '@types/react':
-        specifier: 18.2.0
-        version: 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
+        specifier: 18.2.79
+        version: 18.2.79
       '@types/react-dom':
-        specifier: 18.2.0
-        version: 18.2.0
+        specifier: 18.2.25
+        version: 18.2.25
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -529,11 +526,11 @@ importers:
         specifier: workspace:*
         version: link:../test-utils
       '@types/react':
-        specifier: 18.2.0
-        version: 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
+        specifier: 18.2.79
+        version: 18.2.79
       '@types/react-dom':
-        specifier: 18.2.0
-        version: 18.2.0
+        specifier: 18.2.25
+        version: 18.2.25
       react:
         specifier: 18.2.0
         version: 18.2.0
@@ -553,8 +550,8 @@ importers:
         specifier: workspace:*
         version: link:../types
       '@types/react':
-        specifier: 18.2.0
-        version: 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
+        specifier: 18.2.79
+        version: 18.2.79
       '@types/react-redux':
         specifier: 7.1.33
         version: 7.1.33
@@ -579,7 +576,7 @@ importers:
         version: 18.2.0(react@18.2.0)
       react-redux:
         specifier: 8.0.5
-        version: 8.0.5(@types/react-dom@18.2.0)(@types/react@18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(redux@4.2.1)
+        version: 8.0.5(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(redux@4.2.1)
       redux:
         specifier: 4.2.1
         version: 4.2.1
@@ -649,8 +646,8 @@ importers:
         version: 3.2.0
     devDependencies:
       '@types/react':
-        specifier: 18.2.0
-        version: 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
+        specifier: 18.2.79
+        version: 18.2.79
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -1894,8 +1891,8 @@ packages:
   '@types/prop-types@15.7.12':
     resolution: {integrity: sha512-5zvhXYtRNRluoE/jAp4GVsSduVUzNWKkOZrCDBWYtE7biZywwdC2AcEzg+cSMLFRfVgeAFqpfNabiPjxFddV1Q==}
 
-  '@types/react-dom@18.2.0':
-    resolution: {integrity: sha512-8yQrvS6sMpSwIovhPOwfyNf2Wz6v/B62LFSVYQ85+Rq3tLsBIG7rP5geMxaijTUxSkrO6RzN/IRuIAADYQsleA==}
+  '@types/react-dom@18.2.25':
+    resolution: {integrity: sha512-o/V48vf4MQh7juIKZU2QGDfli6p1+OOi5oXx36Hffpc9adsHeXjVp8rHuPkjd8VT8sOJ2Zp05HR7CdpGTIUFUA==}
 
   '@types/react-is@17.0.7':
     resolution: {integrity: sha512-WrTEiT+c6rgq36QApoy0063uAOdltCrhF0QMXLIgYPaTvIdQhAB8hPb5oGGqX18xToElNILS9UprwU6GyINcJg==}
@@ -1903,14 +1900,11 @@ packages:
   '@types/react-redux@7.1.33':
     resolution: {integrity: sha512-NF8m5AjWCkert+fosDsN3hAlHzpjSiXlVy9EgQEmLoBhaNXbmyeGs/aj5dQzKuF+/q+S7JQagorGDW8pJ28Hmg==}
 
-  '@types/react@18.2.0':
-    resolution: {integrity: sha512-0FLj93y5USLHdnhIhABk83rm8XEGA7kH3cr+YUlvxoUGp1xNt/DINUMvqPxLyOQMzLmZe8i4RTHbvb8MC7NmrA==}
+  '@types/react@18.2.79':
+    resolution: {integrity: sha512-RwGAGXPl9kSXwdNTafkOEuFrTBD5SA2B3iEB96xi8+xu5ddUa/cpvyVCSNn+asgLCTHkb5ZxN8gbuibYJi4s1w==}
 
   '@types/resolve@1.17.1':
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
-
-  '@types/scheduler@0.23.0':
-    resolution: {integrity: sha512-YIoDCTH3Af6XM5VuwGG/QL/CJqga1Zm3NkU3HZ4ZHK2fRMPYP1VczsTUqtsf43PH/iJNVlPHAo2oWX7BSdB2Hw==}
 
   '@types/semver@6.2.7':
     resolution: {integrity: sha512-blctEWbzUFzQx799RZjzzIdBJOXmE37YYEyDtKkx5Dg+V7o/zyyAxLPiI98A2jdTtDgxZleMdfV+7p8WbRJ1OQ==}
@@ -4645,8 +4639,8 @@ packages:
   react-redux@8.0.5:
     resolution: {integrity: sha512-Q2f6fCKxPFpkXt1qNRZdEDLlScsDWyrgSj0mliK59qU6W5gvBiKkdMEG2lJzhd1rCctf0hb6EtePPLZ2e0m1uw==}
     peerDependencies:
-      '@types/react': 18.2.0
-      '@types/react-dom': 18.2.0
+      '@types/react': 18.2.79
+      '@types/react-dom': 18.2.25
       react: ^16.8 || ^17.0 || ^18.0
       react-dom: ^16.8 || ^17.0 || ^18.0
       react-native: '>=0.59'
@@ -7202,7 +7196,7 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.24.4
       '@testing-library/dom': 10.0.0
-      '@types/react-dom': 18.2.0
+      '@types/react-dom': 18.2.25
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
 
@@ -7262,7 +7256,7 @@ snapshots:
 
   '@types/hoist-non-react-statics@3.3.5':
     dependencies:
-      '@types/react': 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
+      '@types/react': 18.2.79
       hoist-non-react-statics: 3.3.2
 
   '@types/http-cache-semantics@4.0.4': {}
@@ -7310,32 +7304,29 @@ snapshots:
 
   '@types/prop-types@15.7.12': {}
 
-  '@types/react-dom@18.2.0':
+  '@types/react-dom@18.2.25':
     dependencies:
-      '@types/react': 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
+      '@types/react': 18.2.79
 
   '@types/react-is@17.0.7':
     dependencies:
-      '@types/react': 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
+      '@types/react': 18.2.79
 
   '@types/react-redux@7.1.33':
     dependencies:
       '@types/hoist-non-react-statics': 3.3.5
-      '@types/react': 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
+      '@types/react': 18.2.79
       hoist-non-react-statics: 3.3.2
       redux: 4.2.1
 
-  '@types/react@18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)':
+  '@types/react@18.2.79':
     dependencies:
       '@types/prop-types': 15.7.12
-      '@types/scheduler': 0.23.0
       csstype: 3.1.3
 
   '@types/resolve@1.17.1':
     dependencies:
       '@types/node': 20.12.7
-
-  '@types/scheduler@0.23.0': {}
 
   '@types/semver@6.2.7': {}
 
@@ -10482,7 +10473,7 @@ snapshots:
 
   react-is@18.2.0: {}
 
-  react-redux@8.0.5(@types/react-dom@18.2.0)(@types/react@18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(redux@4.2.1):
+  react-redux@8.0.5(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(redux@4.2.1):
     dependencies:
       '@babel/runtime': 7.24.4
       '@types/hoist-non-react-statics': 3.3.5
@@ -10492,8 +10483,8 @@ snapshots:
       react-is: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
     optionalDependencies:
-      '@types/react': 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
-      '@types/react-dom': 18.2.0
+      '@types/react': 18.2.79
+      '@types/react-dom': 18.2.25
       react-dom: 18.2.0(react@18.2.0)
       redux: 4.2.1
 
