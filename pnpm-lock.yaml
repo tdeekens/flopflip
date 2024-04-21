@@ -9,6 +9,9 @@ overrides:
   '@types/react-dom': 18.2.0
 
 patchedDependencies:
+  '@types/react@18.2.0':
+    hash: 3bodxm372hrikdmllofjvsnbo4
+    path: patches/@types__react@18.2.0.patch
   cypress@13.6.4:
     hash: bnmjxin5yu4gimwzcgzqydy6di
     path: patches/cypress@13.6.4.patch
@@ -487,7 +490,7 @@ importers:
         version: link:../test-utils
       '@types/react':
         specifier: 18.2.0
-        version: 18.2.0
+        version: 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
       '@types/react-dom':
         specifier: 18.2.0
         version: 18.2.0
@@ -527,7 +530,7 @@ importers:
         version: link:../test-utils
       '@types/react':
         specifier: 18.2.0
-        version: 18.2.0
+        version: 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
       '@types/react-dom':
         specifier: 18.2.0
         version: 18.2.0
@@ -551,7 +554,7 @@ importers:
         version: link:../types
       '@types/react':
         specifier: 18.2.0
-        version: 18.2.0
+        version: 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
       '@types/react-redux':
         specifier: 7.1.33
         version: 7.1.33
@@ -576,7 +579,7 @@ importers:
         version: 18.2.0(react@18.2.0)
       react-redux:
         specifier: 8.0.5
-        version: 8.0.5(@types/react-dom@18.2.0)(@types/react@18.2.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(redux@4.2.1)
+        version: 8.0.5(@types/react-dom@18.2.0)(@types/react@18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(redux@4.2.1)
       redux:
         specifier: 4.2.1
         version: 4.2.1
@@ -647,7 +650,7 @@ importers:
     devDependencies:
       '@types/react':
         specifier: 18.2.0
-        version: 18.2.0
+        version: 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
       typescript:
         specifier: 5.4.5
         version: 5.4.5
@@ -7281,7 +7284,7 @@ snapshots:
 
   '@types/hoist-non-react-statics@3.3.5':
     dependencies:
-      '@types/react': 18.2.0
+      '@types/react': 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
       hoist-non-react-statics: 3.3.2
 
   '@types/http-cache-semantics@4.0.4': {}
@@ -7331,20 +7334,20 @@ snapshots:
 
   '@types/react-dom@18.2.0':
     dependencies:
-      '@types/react': 18.2.0
+      '@types/react': 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
 
   '@types/react-is@17.0.7':
     dependencies:
-      '@types/react': 18.2.0
+      '@types/react': 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
 
   '@types/react-redux@7.1.33':
     dependencies:
       '@types/hoist-non-react-statics': 3.3.5
-      '@types/react': 18.2.0
+      '@types/react': 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
       hoist-non-react-statics: 3.3.2
       redux: 4.2.1
 
-  '@types/react@18.2.0':
+  '@types/react@18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)':
     dependencies:
       '@types/prop-types': 15.7.12
       '@types/scheduler': 0.23.0
@@ -10548,7 +10551,7 @@ snapshots:
 
   react-is@18.2.0: {}
 
-  react-redux@8.0.5(@types/react-dom@18.2.0)(@types/react@18.2.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(redux@4.2.1):
+  react-redux@8.0.5(@types/react-dom@18.2.0)(@types/react@18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(redux@4.2.1):
     dependencies:
       '@babel/runtime': 7.24.4
       '@types/hoist-non-react-statics': 3.3.5
@@ -10558,7 +10561,7 @@ snapshots:
       react-is: 18.2.0
       use-sync-external-store: 1.2.0(react@18.2.0)
     optionalDependencies:
-      '@types/react': 18.2.0
+      '@types/react': 18.2.0(patch_hash=3bodxm372hrikdmllofjvsnbo4)
       '@types/react-dom': 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       redux: 4.2.1

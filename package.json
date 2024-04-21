@@ -131,7 +131,8 @@
       "@types/react-dom": "18.2.0"
     },
     "patchedDependencies": {
-      "cypress@13.6.4": "patches/cypress@13.6.4.patch"
+      "cypress@13.6.4": "patches/cypress@13.6.4.patch",
+      "@types/react@18.2.0": "patches/@types__react@18.2.0.patch"
     }
   },
   "bundlewatch": {
