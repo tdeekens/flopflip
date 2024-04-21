@@ -29,7 +29,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.24.4",
-    "@flopflip/types": "14.0.0",
+    "@flopflip/types": "workspace:*",
     "globalthis": "1.0.3",
     "lodash": "4.17.21"
   },

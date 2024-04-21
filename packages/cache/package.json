@@ -29,8 +29,8 @@
     "client"
   ],
   "dependencies": {
-    "@flopflip/localstorage-cache": "14.0.0",
-    "@flopflip/sessionstorage-cache": "14.0.0",
-    "@flopflip/types": "14.0.0"
+    "@flopflip/localstorage-cache": "workspace:*",
+    "@flopflip/sessionstorage-cache": "workspace:*",
+    "@flopflip/types": "workspace:*"
   }
 }

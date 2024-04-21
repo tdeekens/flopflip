@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@flopflip/test-utils": "*",
+    "@flopflip/test-utils": "workspace:*",
     "@types/react": "18.2.75",
     "@types/react-dom": "18.2.24",
     "react": "18.2.0",
@@ -39,8 +39,8 @@
   },
   "dependencies": {
     "@babel/runtime": "7.24.4",
-    "@flopflip/cache": "14.0.0",
-    "@flopflip/types": "14.0.0",
+    "@flopflip/cache": "workspace:*",
+    "@flopflip/types": "workspace:*",
     "@types/react-is": "17.0.7",
     "lodash": "4.17.21",
     "react-is": "18.2.0",

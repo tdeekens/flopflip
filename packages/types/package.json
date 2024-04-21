@@ -4,6 +4,7 @@
   "description": "Type definitions for flipflop",
   "main": "dist/flopflip-types.cjs.js",
   "module": "dist/flopflip-types.esm.js",
+  "types": "dist/flopflip-types.cjs.d.ts",
   "files": [
     "readme.md",
     "dist/**"

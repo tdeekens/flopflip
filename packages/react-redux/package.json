@@ -27,10 +27,10 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "@flopflip/combine-adapters": "14.0.0",
-    "@flopflip/localstorage-adapter": "14.0.0",
-    "@flopflip/memory-adapter": "14.0.0",
-    "@flopflip/test-utils": "*",
+    "@flopflip/combine-adapters": "workspace:*",
+    "@flopflip/localstorage-adapter": "workspace:*",
+    "@flopflip/memory-adapter": "workspace:*",
+    "@flopflip/test-utils": "workspace:*",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "8.0.5",
@@ -38,8 +38,8 @@
   },
   "dependencies": {
     "@babel/runtime": "7.24.4",
-    "@flopflip/react": "^14.0.0",
-    "@flopflip/types": "14.0.0",
+    "@flopflip/react": "workspace:*",
+    "@flopflip/types": "workspace:*",
     "@types/react": "18.2.75",
     "@types/react-redux": "7.1.33"
   },

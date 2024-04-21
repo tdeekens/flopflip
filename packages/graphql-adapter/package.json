@@ -30,11 +30,11 @@
   ],
   "dependencies": {
     "@babel/runtime": "7.24.4",
-    "@flopflip/adapter-utilities": "14.0.0",
-    "@flopflip/cache": "14.0.0",
-    "@flopflip/localstorage-cache": "14.0.0",
-    "@flopflip/sessionstorage-cache": "14.0.0",
-    "@flopflip/types": "14.0.0",
+    "@flopflip/adapter-utilities": "workspace:*",
+    "@flopflip/cache": "workspace:*",
+    "@flopflip/localstorage-cache": "workspace:*",
+    "@flopflip/sessionstorage-cache": "workspace:*",
+    "@flopflip/types": "workspace:*",
     "lodash": "4.17.21",
     "mitt": "3.0.1",
     "tiny-warning": "1.0.3"

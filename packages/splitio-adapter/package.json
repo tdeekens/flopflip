@@ -27,8 +27,8 @@
   },
   "dependencies": {
     "@babel/runtime": "7.24.4",
-    "@flopflip/adapter-utilities": "14.0.0",
-    "@flopflip/types": "14.0.0",
+    "@flopflip/adapter-utilities": "workspace:*",
+    "@flopflip/types": "workspace:*",
     "@splitsoftware/splitio": "10.25.2",
     "lodash": "4.17.21",
     "ts-deepmerge": "7.0.0"

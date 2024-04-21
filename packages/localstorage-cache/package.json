@@ -30,6 +30,6 @@
     "client"
   ],
   "dependencies": {
-    "@flopflip/types": "14.0.0"
+    "@flopflip/types": "workspace:*"
   }
 }
