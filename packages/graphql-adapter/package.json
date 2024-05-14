@@ -29,7 +29,7 @@
     "client"
   ],
   "dependencies": {
-    "@babel/runtime": "7.24.4",
+    "@babel/runtime": "7.24.5",
     "@flopflip/adapter-utilities": "workspace:*",
     "@flopflip/cache": "workspace:*",
     "@flopflip/localstorage-cache": "workspace:*",
@@ -40,6 +40,6 @@
     "tiny-warning": "1.0.3"
   },
   "devDependencies": {
-    "globalthis": "1.0.3"
+    "globalthis": "1.0.4"
   }
 }

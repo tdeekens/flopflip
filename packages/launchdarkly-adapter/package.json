@@ -23,17 +23,17 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "globalthis": "1.0.3"
+    "globalthis": "1.0.4"
   },
   "dependencies": {
-    "@babel/runtime": "7.24.4",
+    "@babel/runtime": "7.24.5",
     "@flopflip/adapter-utilities": "workspace:*",
     "@flopflip/cache": "workspace:*",
     "@flopflip/localstorage-cache": "workspace:*",
     "@flopflip/sessionstorage-cache": "workspace:*",
     "@flopflip/types": "workspace:*",
     "debounce-fn": "4.0.0",
-    "launchdarkly-js-client-sdk": "3.2.0",
+    "launchdarkly-js-client-sdk": "3.3.0",
     "lodash": "4.17.21",
     "mitt": "3.0.1",
     "tiny-warning": "1.0.3",
