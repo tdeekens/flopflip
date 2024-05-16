@@ -29,7 +29,7 @@
   },
   "author": "Tobias Deekens <nerd@tdeekens.name>",
   "engines": {
-    "node": ">=22",
+    "node": ">=20",
     "npm": ">=10",
     "pnpm": ">=9"
   },
