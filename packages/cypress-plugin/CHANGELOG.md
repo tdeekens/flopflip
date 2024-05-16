@@ -1,5 +1,14 @@
 # @flopflip/cypress-plugin
 
+## 14.0.1
+
+### Patch Changes
+
+- [#1896](https://github.com/tdeekens/flopflip/pull/1896) [`66df5a0`](https://github.com/tdeekens/flopflip/commit/66df5a08a4882279d6479cb7293627fe970b52e0) Thanks [@renovate](https://github.com/apps/renovate)! - Update to pnpm v9
+
+- Updated dependencies [[`66a404d`](https://github.com/tdeekens/flopflip/commit/66a404daec61c1b048de4ea44ab5f0bf600b931b), [`66df5a0`](https://github.com/tdeekens/flopflip/commit/66df5a08a4882279d6479cb7293627fe970b52e0)]:
+  - @flopflip/types@14.0.1
+
 ## 14.0.0
 
 ### Patch Changes
