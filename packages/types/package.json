@@ -29,10 +29,10 @@
     "types"
   ],
   "dependencies": {
-    "launchdarkly-js-client-sdk": "3.2.0"
+    "launchdarkly-js-client-sdk": "3.3.0"
   },
   "devDependencies": {
-    "@types/react": "18.2.75",
+    "@types/react": "18.3.2",
     "typescript": "5.4.5"
   },
   "peerDependencies": {
