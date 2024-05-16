@@ -264,31 +264,33 @@ class HttpAdapter implements THttpAdapterInterface {
         )
       );
 
-    this.#adapterState.flags = {};
-
-    if (adapterArgs.cacheIdentifier) {
-      const cache = await getCache(
-        adapterArgs.cacheIdentifier,
-        adapterIdentifiers.http,
-        this.#adapterState.user?.key
-      );
-
-      cache.unset();
-    }
-
     const nextUser = adapterArgs.user;
 
-    this.#adapterState.user = nextUser;
+    if (!isEqual(this.#adapterState.user, nextUser)) {
+      this.#adapterState.flags = {};
 
-    const flags = normalizeFlags(await this.#fetchFlags(adapterArgs));
+      if (adapterArgs.cacheIdentifier) {
+        const cache = await getCache(
+          adapterArgs.cacheIdentifier,
+          adapterIdentifiers.http,
+          this.#adapterState.user?.key
+        );
 
-    this.#adapterState.flags = flags;
+        cache.unset();
+      }
 
-    this.#adapterState.emitter.emit('flagsStateChange', flags);
+      this.#adapterState.user = nextUser;
 
-    this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
+      const flags = normalizeFlags(await this.#fetchFlags(adapterArgs));
 
-    this.#subscribeToFlagsChanges(adapterArgs);
+      this.#adapterState.flags = flags;
+
+      this.#adapterState.emitter.emit('flagsStateChange', flags);
+
+      this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
+
+      this.#subscribeToFlagsChanges(adapterArgs);
+    }
 
     return Promise.resolve({
       initializationStatus: AdapterInitializationStatus.Succeeded,

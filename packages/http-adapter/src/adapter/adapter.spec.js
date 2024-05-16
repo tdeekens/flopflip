@@ -108,6 +108,7 @@ describe('when configured', () => {
     const adapterArgs = {
       cacheIdentifier: 'session',
       execute: jest.fn().mockResolvedValue({ enabled: true, disabled: false }),
+      user: 'initial-user',
     };
     let configurationResult;
     let adapterEventHandlers;
@@ -259,50 +260,102 @@ describe('when configured', () => {
   });
 
   describe('when reconfiguring', () => {
-    const user = { id: 'bar' };
+    describe('when the user changed', () => {
+      const user = { id: 'changed-user' };
 
-    beforeEach(async () => {
-      configurationResult = await adapter.reconfigure({
-        ...adapterArgs,
-        user,
-        cacheIdentifier: 'session',
+      beforeEach(async () => {
+        configurationResult = await adapter.reconfigure({
+          ...adapterArgs,
+          user,
+          cacheIdentifier: 'session',
+        });
+      });
+
+      it('should resolve to a successful initialization status', () => {
+        expect(configurationResult).toEqual(
+          expect.objectContaining({
+            initializationStatus: 0,
+          })
+        );
+      });
+
+      it('should update the user', () => {
+        expect(adapter.getUser()).toEqual(user);
+      });
+
+      it('should invoke `onFlagsStateChange`', () => {
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalled();
+      });
+
+      it('should invoke `onFlagsStateChange` with all flags', () => {
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+          id: adapter.id,
+          flags: {
+            barFlag: false,
+            disabled: false,
+            enabled: true,
+            flagA1: false,
+            flagB: false,
+            fooFlag: true,
+          },
+        });
+      });
+
+      it('should reset cache', () => {
+        expect(sessionStorage.removeItem).toHaveBeenCalledWith(
+          '@flopflip/http-adapter/flags'
+        );
       });
     });
 
-    it('should resolve to a successful initialization status', () => {
-      expect(configurationResult).toEqual(
-        expect.objectContaining({
-          initializationStatus: 0,
-        })
-      );
-    });
+    describe('when the user did nt change', () => {
+      const initialUser = adapterArgs.user;
 
-    it('should update the user', () => {
-      expect(adapter.getUser()).toEqual(user);
-    });
+      beforeEach(async () => {
+        sessionStorage.removeItem.mockClear();
 
-    it('should invoke `onFlagsStateChange`', () => {
-      expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalled();
-    });
-
-    it('should invoke `onFlagsStateChange` with all flags', () => {
-      expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
-        id: adapter.id,
-        flags: {
-          barFlag: false,
-          disabled: false,
-          enabled: true,
-          flagA1: false,
-          flagB: false,
-          fooFlag: true,
-        },
+        configurationResult = await adapter.reconfigure({
+          ...adapterArgs,
+          user: initialUser,
+          cacheIdentifier: 'session',
+        });
       });
-    });
 
-    it('should reset cache', () => {
-      expect(sessionStorage.removeItem).toHaveBeenCalledWith(
-        '@flopflip/http-adapter/flags'
-      );
+      it('should resolve to a successful initialization status', () => {
+        expect(configurationResult).toEqual(
+          expect.objectContaining({
+            initializationStatus: 0,
+          })
+        );
+      });
+
+      it('should keep the original user', () => {
+        expect(adapter.getUser()).toEqual(initialUser);
+      });
+
+      it('should invoke `onFlagsStateChange`', () => {
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalled();
+      });
+
+      it('should invoke `onFlagsStateChange` with all flags', () => {
+        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
+          id: adapter.id,
+          flags: {
+            barFlag: false,
+            disabled: false,
+            enabled: true,
+            flagA1: false,
+            flagB: false,
+            fooFlag: true,
+          },
+        });
+      });
+
+      it('should not reset cache', () => {
+        expect(sessionStorage.removeItem).not.toHaveBeenCalledWith(
+          '@flopflip/http-adapter/flags'
+        );
+      });
     });
   });
 

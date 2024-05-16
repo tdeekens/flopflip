@@ -455,10 +455,6 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       this.#adapterState.context = nextContext;
 
       await this.#changeClientContext(this.#adapterState.context);
-
-      return Promise.resolve({
-        initializationStatus: AdapterInitializationStatus.Succeeded,
-      });
     }
 
     return Promise.resolve({
