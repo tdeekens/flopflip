@@ -12,10 +12,21 @@ type TProps = {
   variation?: TFlagVariation;
 } & Omit<TToggleFeatureProps, 'isFeatureEnabled'>;
 
-function ToggleFeature<OwnProps extends TProps>(props: OwnProps) {
-  const isFeatureEnabled = useFeatureToggle(props.flag, props.variation);
+function ToggleFeature<OwnProps extends TProps>({
+  flag,
+  variation,
+  ...remainingProps
+}: OwnProps) {
+  const isFeatureEnabled = useFeatureToggle(flag, variation);
 
-  return <SharedToggleFeature {...props} isFeatureEnabled={isFeatureEnabled} />;
+  return (
+    <SharedToggleFeature
+      flag={flag}
+      variation={variation}
+      {...remainingProps}
+      isFeatureEnabled={isFeatureEnabled}
+    />
+  );
 }
 
 ToggleFeature.displayName = 'ToggleFeature';

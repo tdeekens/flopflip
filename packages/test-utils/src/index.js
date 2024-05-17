@@ -95,10 +95,10 @@ function FlagChangeField() {
   );
 }
 
-function FlagsToComponent(props) {
+function FlagsToComponent({ propKey, ...remainingProps }) {
   return (
     <ul>
-      {Object.entries(props.propKey ? props[props.propKey] : props).map(
+      {Object.entries(propKey ? remainingProps[propKey] : remainingProps).map(
         ([flagName, flagVariation]) => (
           <li key={flagName} data-flag-name={flagName}>
             {String(flagVariation)}

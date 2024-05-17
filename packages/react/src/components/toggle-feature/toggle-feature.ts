@@ -14,41 +14,46 @@ export type TProps = {
   readonly isFeatureEnabled: boolean;
 };
 
-function ToggleFeature(props: TProps) {
-  if (props.untoggledComponent)
+function ToggleFeature({
+  untoggledComponent,
+  toggledComponent,
+  render,
+  children,
+  isFeatureEnabled,
+}: TProps) {
+  if (untoggledComponent)
     warning(
-      isValidElementType(props.untoggledComponent),
+      isValidElementType(untoggledComponent),
       `Invalid prop 'untoggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`
     );
 
-  if (props.toggledComponent)
+  if (toggledComponent)
     warning(
-      isValidElementType(props.toggledComponent),
+      isValidElementType(toggledComponent),
       `Invalid prop 'toggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`
     );
 
-  if (props.isFeatureEnabled) {
-    if (props.toggledComponent)
-      return React.createElement(props.toggledComponent);
+  if (isFeatureEnabled) {
+    if (toggledComponent) return React.createElement(toggledComponent);
 
-    if (props.children) {
-      if (typeof props.children === 'function')
-        return props.children({
-          isFeatureEnabled: props.isFeatureEnabled,
+    if (children) {
+      if (typeof children === 'function')
+        return children({
+          isFeatureEnabled,
         });
-      return React.Children.only<React.ReactNode>(props.children);
+      return React.Children.only<React.ReactNode>(children);
     }
 
-    if (typeof props.render === 'function') return props.render();
+    if (typeof render === 'function') return render();
   }
 
-  if (typeof props.children === 'function')
-    return props.children({
-      isFeatureEnabled: props.isFeatureEnabled,
+  if (typeof children === 'function')
+    return children({
+      isFeatureEnabled,
     });
 
-  if (props.untoggledComponent) {
-    return React.createElement(props.untoggledComponent);
+  if (untoggledComponent) {
+    return React.createElement(untoggledComponent);
   }
 
   return null;

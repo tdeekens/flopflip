@@ -5,7 +5,7 @@ import AdapterContext, { createAdapterContext } from './../adapter-context';
 import { AdapterStates } from './../configure-adapter';
 import ReconfigureAdapter from './reconfigure-adapter';
 
-function TestComponent(props) {
+function TestComponent({ reconfiguration, adapterContext }) {
   const [count, setCount] = useState(0);
   // eslint-disable-next-line react/hook-use-state
   const [, setState] = useState(0);
@@ -15,17 +15,17 @@ function TestComponent(props) {
 
   const user = useMemo(
     () => ({
-      ...props.reconfiguration.user,
+      ...reconfiguration.user,
       count,
     }),
-    [count, props.reconfiguration.user]
+    [count, reconfiguration.user]
   );
 
   return (
-    <AdapterContext.Provider value={props.adapterContext}>
+    <AdapterContext.Provider value={adapterContext}>
       <ReconfigureAdapter
         user={user}
-        shouldOverwrite={props.reconfiguration.shouldOverwrite}
+        shouldOverwrite={reconfiguration.shouldOverwrite}
       >
         <>
           <button type="button" onClick={increment}>
