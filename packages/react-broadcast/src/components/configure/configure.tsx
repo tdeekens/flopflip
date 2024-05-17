@@ -149,13 +149,14 @@ const useStatusState = ({
   return [status, setStatus];
 };
 
-function Configure<AdapterInstance extends TAdapter>(
-  props: Props<AdapterInstance>
-) {
-  const adapterIdentifiers = useMemo(
-    () => [props.adapter.id],
-    [props.adapter.id]
-  );
+function Configure<AdapterInstance extends TAdapter>({
+  children,
+  shouldDeferAdapterConfiguration = false,
+  defaultFlags = {},
+  adapter,
+  adapterArgs,
+}: Props<AdapterInstance>) {
+  const adapterIdentifiers = useMemo(() => [adapter.id], [adapter.id]);
 
   const [flags, updateFlags] = useFlagsState({ adapterIdentifiers });
   const [status, updateStatus] = useStatusState({ adapterIdentifiers });
@@ -163,7 +164,7 @@ function Configure<AdapterInstance extends TAdapter>(
   //   Using this prevents the callbacks being invoked
   //   which would trigger a setState as a result on an unmounted
   //   component.
-  const getHasAdapterSubscriptionStatus = useAdapterSubscription(props.adapter);
+  const getHasAdapterSubscriptionStatus = useAdapterSubscription(adapter);
 
   const handleUpdateFlags = useCallback<(flagsChange: TFlagsChange) => void>(
     (flagsChange) => {
@@ -196,24 +197,20 @@ function Configure<AdapterInstance extends TAdapter>(
   return (
     <FlagsContext.Provider value={flags}>
       <ConfigureAdapter
-        adapter={props.adapter}
-        adapterArgs={props.adapterArgs}
+        adapter={adapter}
+        adapterArgs={adapterArgs}
         adapterStatus={status}
-        defaultFlags={props.defaultFlags}
-        shouldDeferAdapterConfiguration={props.shouldDeferAdapterConfiguration}
+        defaultFlags={defaultFlags}
+        shouldDeferAdapterConfiguration={shouldDeferAdapterConfiguration}
         onFlagsStateChange={handleUpdateFlags}
         onStatusStateChange={handleUpdateStatus}
       >
-        {props.children}
+        {children}
       </ConfigureAdapter>
     </FlagsContext.Provider>
   );
 }
 
 Configure.displayName = 'ConfigureFlopflip';
-Configure.defaultProps = {
-  defaultFlags: {},
-  shouldDeferAdapterConfiguration: false,
-};
 
 export default Configure;

@@ -38,28 +38,33 @@ const defaultProps: Pick<
   },
 };
 
-function TestProvider(props: TProps) {
+function TestProvider({
+  adapterIdentifiers = defaultProps.adapterIdentifiers,
+  reconfigure,
+  flags,
+  children,
+  status = defaultProps.status,
+}: TProps) {
   const adapterContextValue = createAdapterContext(
-    props.adapterIdentifiers,
-    props.reconfigure,
-    props.status
+    adapterIdentifiers,
+    reconfigure,
+    status
   );
   const flagsContextValue = createIntialFlagsContext(
     // @ts-expect-error Can not remember. Sorry to myself.
-    props.adapterIdentifiers,
-    props.flags
+    adapterIdentifiers,
+    flags
   );
 
   return (
     <AdapterContext.Provider value={adapterContextValue}>
       <FlagsContext.Provider value={flagsContextValue}>
-        {props.children}
+        {children}
       </FlagsContext.Provider>
     </AdapterContext.Provider>
   );
 }
 
 TestProvider.displayName = 'TestProviderFlopFlip';
-TestProvider.defaultProps = defaultProps;
 
 export { TestProvider };

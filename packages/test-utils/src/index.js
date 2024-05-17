@@ -109,29 +109,24 @@ function FlagsToComponent(props) {
   );
 }
 
-function UntoggledComponent(props) {
+function UntoggledComponent({ flagName = 'isFeatureEnabled' }) {
   return (
-    <span data-flag-name={props.flagName} data-flag-status="disabled">
+    <span data-flag-name={flagName} data-flag-status="disabled">
       Feature is untoggled
     </span>
   );
 }
 
 UntoggledComponent.displayName = 'UntoggledComponent';
-UntoggledComponent.defaultProps = {
-  flagName: 'isFeatureEnabled',
-};
-function ToggledComponent(props) {
+
+function ToggledComponent({ flagName = 'isFeatureEnabled' }) {
   return (
-    <span data-flag-name={props.flagName} data-flag-status="enabled">
+    <span data-flag-name={flagName} data-flag-status="enabled">
       Feature is toggled
     </span>
   );
 }
 
-ToggledComponent.defaultProps = {
-  flagName: 'isFeatureEnabled',
-};
 ToggledComponent.displayName = 'ToggledComponent';
 
 const renderWithAdapter = (

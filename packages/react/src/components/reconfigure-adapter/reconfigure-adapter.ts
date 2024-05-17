@@ -11,29 +11,27 @@ type Props<TAdditionalUserProperties> = {
   readonly children?: React.ReactNode;
 };
 
-function ReconfigureAdapter<TAdditionalUserProperties>(
-  props: Props<TAdditionalUserProperties>
-) {
+function ReconfigureAdapter<TAdditionalUserProperties>({
+  shouldOverwrite = false,
+  user,
+  children = null,
+}: Props<TAdditionalUserProperties>) {
   const adapterContext = useAdapterContext();
 
   useEffect(() => {
     adapterContext.reconfigure(
       {
-        user: props.user,
+        user,
       },
       {
-        shouldOverwrite: props.shouldOverwrite,
+        shouldOverwrite,
       }
     );
-  }, [props.user, props.shouldOverwrite, adapterContext]);
+  }, [user, shouldOverwrite, adapterContext]);
 
-  return props.children ? Children.only(props.children) : null;
+  return children ? Children.only(children) : null;
 }
 
 ReconfigureAdapter.displayName = 'ReconfigureAdapter';
-ReconfigureAdapter.defaultProps = {
-  shouldOverwrite: false,
-  children: null,
-};
 
 export default ReconfigureAdapter;
