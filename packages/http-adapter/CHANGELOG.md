@@ -1,5 +1,22 @@
 # @flopflip/http-adapter
 
+## 14.0.1
+
+### Patch Changes
+
+- [#1899](https://github.com/tdeekens/flopflip/pull/1899) [`66a404d`](https://github.com/tdeekens/flopflip/commit/66a404daec61c1b048de4ea44ab5f0bf600b931b) Thanks [@renovate](https://github.com/apps/renovate)! - chore: update all dependencies
+
+- [#1896](https://github.com/tdeekens/flopflip/pull/1896) [`66df5a0`](https://github.com/tdeekens/flopflip/commit/66df5a08a4882279d6479cb7293627fe970b52e0) Thanks [@renovate](https://github.com/apps/renovate)! - Update to pnpm v9
+
+- [#1906](https://github.com/tdeekens/flopflip/pull/1906) [`d4079b3`](https://github.com/tdeekens/flopflip/commit/d4079b3869f55a6bfa9ddf5a4e05200cdb8a373a) Thanks [@tdeekens](https://github.com/tdeekens)! - Fix the `http-adapter` to not flush empty flags with unchanged reconfiguration of the same user.
+
+- Updated dependencies [[`66a404d`](https://github.com/tdeekens/flopflip/commit/66a404daec61c1b048de4ea44ab5f0bf600b931b), [`66df5a0`](https://github.com/tdeekens/flopflip/commit/66df5a08a4882279d6479cb7293627fe970b52e0)]:
+  - @flopflip/adapter-utilities@14.0.1
+  - @flopflip/types@14.0.1
+  - @flopflip/sessionstorage-cache@14.0.1
+  - @flopflip/localstorage-cache@14.0.1
+  - @flopflip/cache@14.0.1
+
 ## 14.0.0
 
 ### Minor Changes
