@@ -5,16 +5,16 @@ import warning from 'tiny-warning';
 type RenderFnArgs = {
   isFeatureEnabled: boolean;
 };
-type RenderFn = (args: RenderFnArgs) => React.ReactNode;
-export type Props = {
+type TRenderFn = (args: RenderFnArgs) => React.ReactNode;
+export type TProps = {
   readonly untoggledComponent?: React.ComponentType;
   readonly toggledComponent?: React.ComponentType;
   readonly render?: () => React.ReactNode;
-  readonly children?: RenderFn | React.ReactNode;
+  readonly children?: TRenderFn | React.ReactNode;
   readonly isFeatureEnabled: boolean;
 };
 
-function ToggleFeature(props: Props) {
+function ToggleFeature(props: TProps) {
   if (props.untoggledComponent)
     warning(
       isValidElementType(props.untoggledComponent),

@@ -1,5 +1,5 @@
-import type { Props } from './toggle-feature';
+import type { TProps as TToggleProps } from './toggle-feature';
 
-export type TProps = Props;
+export type TProps = TToggleProps;
 
 export { default } from './toggle-feature';

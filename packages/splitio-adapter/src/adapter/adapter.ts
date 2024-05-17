@@ -33,7 +33,7 @@ type TSplitIOAdapterState = {
   splitioSettings?: SplitIO.IBrowserSettings;
   treatmentAttributes?: SplitIO.Attributes;
 };
-type SplitIOClient = {
+type TSplitIOClient = {
   client: SplitIO.IClient;
   manager: SplitIO.IManager;
 };
@@ -118,7 +118,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
   readonly #ensureUser = (user: TUser): TUser =>
     merge(user, { key: user?.key ?? createAnonymousUserKey() });
 
-  readonly #initializeClient = (): SplitIOClient => {
+  readonly #initializeClient = (): TSplitIOClient => {
     if (!this.#adapterState.splitioSettings) {
       throw Error(
         'cannot initialize SplitIo without configured settings, call configure() first'

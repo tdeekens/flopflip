@@ -7,12 +7,12 @@ import React from 'react';
 
 import { useFeatureToggle } from '../../hooks/';
 
-type Props = {
+type TProps = {
   flag: TFlagName;
   variation?: TFlagVariation;
 } & Omit<TToggleFeatureProps, 'isFeatureEnabled'>;
 
-function ToggleFeature<OwnProps extends Props>(props: OwnProps) {
+function ToggleFeature<OwnProps extends TProps>(props: OwnProps) {
   const isFeatureEnabled = useFeatureToggle(props.flag, props.variation);
 
   return <SharedToggleFeature {...props} isFeatureEnabled={isFeatureEnabled} />;
