@@ -21,7 +21,7 @@ type BaseProps = {
   readonly shouldDeferAdapterConfiguration?: boolean;
   readonly defaultFlags?: TFlags;
 };
-type Props<AdapterInstance extends TAdapter> = BaseProps &
+type TProps<AdapterInstance extends TAdapter> = BaseProps &
   TConfigureAdapterProps<AdapterInstance>;
 type TFlagsState = Record<TAdapterIdentifiers, TFlags>;
 type TState = {
@@ -155,7 +155,7 @@ function Configure<AdapterInstance extends TAdapter>({
   defaultFlags = {},
   adapter,
   adapterArgs,
-}: Props<AdapterInstance>) {
+}: TProps<AdapterInstance>) {
   const adapterIdentifiers = useMemo(() => [adapter.id], [adapter.id]);
 
   const [flags, updateFlags] = useFlagsState({ adapterIdentifiers });

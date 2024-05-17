@@ -4,7 +4,7 @@ import { Children, useEffect } from 'react';
 
 import useAdapterContext from '../../hooks/use-adapter-context';
 
-type Props<TAdditionalUserProperties> = {
+type TProps<TAdditionalUserProperties> = {
   // eslint-disable-next-line react/boolean-prop-naming
   readonly shouldOverwrite?: boolean;
   readonly user: TUser<TAdditionalUserProperties>;
@@ -15,7 +15,7 @@ function ReconfigureAdapter<TAdditionalUserProperties>({
   shouldOverwrite = false,
   user,
   children = null,
-}: Props<TAdditionalUserProperties>) {
+}: TProps<TAdditionalUserProperties>) {
   const adapterContext = useAdapterContext();
 
   useEffect(() => {

@@ -9,12 +9,12 @@ import React from 'react';
 
 import { useUpdateFlags, useUpdateStatus } from '../../hooks';
 
-type BaseProps = {
+type TBaseProps = {
   readonly children?: TConfigureAdapterChildren;
   readonly shouldDeferAdapterConfiguration?: boolean;
   readonly defaultFlags?: TFlags;
 };
-type Props<AdapterInstance extends TAdapter> = BaseProps &
+type TProps<AdapterInstance extends TAdapter> = TBaseProps &
   TConfigureAdapterProps<AdapterInstance>;
 
 function Configure<AdapterInstance extends TAdapter>({
@@ -23,7 +23,7 @@ function Configure<AdapterInstance extends TAdapter>({
   children,
   defaultFlags = {},
   shouldDeferAdapterConfiguration = false,
-}: Props<AdapterInstance>) {
+}: TProps<AdapterInstance>) {
   const adapterIdentifiers = [adapter.id];
   const handleUpdateFlags = useUpdateFlags({ adapterIdentifiers });
   const handleUpdateStatus = useUpdateStatus();

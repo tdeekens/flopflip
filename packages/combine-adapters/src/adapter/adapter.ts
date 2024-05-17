@@ -23,11 +23,11 @@ type TEmitterEvents = {
   flagsStateChange: TFlags;
   statusStateChange: Partial<TAdapterStatus>;
 };
-type CombinedAdaptersState = {
+type TCombinedAdaptersState = {
   emitter: Emitter<TEmitterEvents>;
 };
 
-const intialAdapterState: TAdapterStatus & CombinedAdaptersState = {
+const intialAdapterState: TAdapterStatus & TCombinedAdaptersState = {
   configurationStatus: AdapterConfigurationStatus.Unconfigured,
   subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
   emitter: mitt(),
@@ -42,7 +42,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
     '__internalConfiguredStatusChange__';
 
   #adapters: TAdapter[] = [];
-  #adapterState: TAdapterStatus & CombinedAdaptersState;
+  #adapterState: TAdapterStatus & TCombinedAdaptersState;
 
   constructor() {
     this.#adapterState = {
