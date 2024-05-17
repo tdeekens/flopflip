@@ -68,7 +68,7 @@
     "@manypkg/cli": "0.21.4",
     "@preconstruct/cli": "2.8.4",
     "@types/jest": "29.5.12",
-    "@types/lodash": "4.17.1",
+    "@types/lodash": "4.17.4",
     "@types/node": "20.12.12",
     "@typescript-eslint/eslint-plugin": "7.9.0",
     "@typescript-eslint/parser": "7.9.0",
@@ -127,7 +127,7 @@
   "pnpm": {
     "overrides": {
       "@types/react": "18.3.2",
-      "@types/react-dom": "18.2.0"
+      "@types/react-dom": "18.3.0"
     },
     "patchedDependencies": {
       "cypress@13.6.4": "patches/cypress@13.6.4.patch"
