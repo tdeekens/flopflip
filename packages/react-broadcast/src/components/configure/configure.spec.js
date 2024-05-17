@@ -94,23 +94,3 @@ describe('when configured', () => {
     expect(screen.getByText(/Is configured: Yes/i)).toBeInTheDocument();
   });
 });
-
-describe('statics', () => {
-  describe('displayName', () => {
-    it('should be set to `ConfigureFlopflip`', () => {
-      expect(Configure.displayName).toEqual('ConfigureFlopflip');
-    });
-  });
-
-  describe('defaultProps', () => {
-    it('should default `defaultFlags` to an empty object', () => {
-      expect(Configure.defaultProps.defaultFlags).toEqual({});
-    });
-
-    it('should default `shouldDeferAdapterConfiguration` to `true`', () => {
-      expect(Configure.defaultProps.shouldDeferAdapterConfiguration).toBe(
-        false
-      );
-    });
-  });
-});

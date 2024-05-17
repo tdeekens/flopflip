@@ -17,38 +17,33 @@ type BaseProps = {
 type Props<AdapterInstance extends TAdapter> = BaseProps &
   TConfigureAdapterProps<AdapterInstance>;
 
-const defaultProps: Pick<
-  BaseProps,
-  'defaultFlags' | 'shouldDeferAdapterConfiguration'
-> = {
-  defaultFlags: {},
-  shouldDeferAdapterConfiguration: false,
-};
-
-function Configure<AdapterInstance extends TAdapter>(
-  props: Props<AdapterInstance>
-) {
-  const adapterIdentifiers = [props.adapter.id];
+function Configure<AdapterInstance extends TAdapter>({
+  adapter,
+  adapterArgs,
+  children,
+  defaultFlags = {},
+  shouldDeferAdapterConfiguration = false,
+}: Props<AdapterInstance>) {
+  const adapterIdentifiers = [adapter.id];
   const handleUpdateFlags = useUpdateFlags({ adapterIdentifiers });
   const handleUpdateStatus = useUpdateStatus();
 
-  useAdapterSubscription(props.adapter);
+  useAdapterSubscription(adapter);
 
   return (
     <ConfigureAdapter
-      adapter={props.adapter}
-      adapterArgs={props.adapterArgs}
-      defaultFlags={props.defaultFlags}
-      shouldDeferAdapterConfiguration={props.shouldDeferAdapterConfiguration}
+      adapter={adapter}
+      adapterArgs={adapterArgs}
+      defaultFlags={defaultFlags}
+      shouldDeferAdapterConfiguration={shouldDeferAdapterConfiguration}
       onFlagsStateChange={handleUpdateFlags}
       onStatusStateChange={handleUpdateStatus}
     >
-      {props.children}
+      {children}
     </ConfigureAdapter>
   );
 }
 
 Configure.displayName = 'ConfigureFlopflip';
-Configure.defaultProps = defaultProps;
 
 export default Configure;

@@ -421,9 +421,19 @@ const usePendingAdapterArgsEffect = ({
   return [reconfigureOrQueue];
 };
 
-function ConfigureAdapter(props: TProps) {
+function ConfigureAdapter({
+  shouldDeferAdapterConfiguration = false,
+  adapter,
+  adapterArgs,
+  adapterStatus,
+  defaultFlags = {},
+  onFlagsStateChange,
+  onStatusStateChange,
+  render,
+  children,
+}: TProps) {
   const [appliedAdapterArgs, applyAdapterArgs] = useAppliedAdapterArgsState({
-    initialAdapterArgs: props.adapterArgs,
+    initialAdapterArgs: adapterArgs,
   });
   const [
     pendingAdapterArgsRef,
@@ -437,31 +447,31 @@ function ConfigureAdapter(props: TProps) {
     getDoesAdapterNeedInitialConfiguration,
   ] = useAdapterStateRef();
   useDefaultFlagsEffect({
-    adapter: props.adapter,
+    adapter,
     defaultFlags: {
-      ...props.defaultFlags,
-      ...getAllCachedFlags(props.adapter, props.adapterArgs.cacheIdentifier),
+      ...defaultFlags,
+      ...getAllCachedFlags(adapter, adapterArgs.cacheIdentifier),
     },
-    onFlagsStateChange: props.onFlagsStateChange,
-    onStatusStateChange: props.onStatusStateChange,
-    shouldDeferAdapterConfiguration: props.shouldDeferAdapterConfiguration,
+    onFlagsStateChange,
+    onStatusStateChange,
+    shouldDeferAdapterConfiguration,
     setAdapterState,
     pendingAdapterArgsRef,
     getAdapterArgsForConfiguration,
     applyAdapterArgs,
   });
   const [reconfigureOrQueue] = usePendingAdapterArgsEffect({
-    adapterArgs: props.adapterArgs,
+    adapterArgs,
     appliedAdapterArgs,
     applyAdapterArgs,
     getIsAdapterConfigured,
     setPendingAdapterArgs,
   });
   useConfigurationEffect({
-    adapter: props.adapter,
-    shouldDeferAdapterConfiguration: props.shouldDeferAdapterConfiguration,
-    onFlagsStateChange: props.onFlagsStateChange,
-    onStatusStateChange: props.onStatusStateChange,
+    adapter,
+    shouldDeferAdapterConfiguration,
+    onFlagsStateChange,
+    onStatusStateChange,
     setAdapterState,
     pendingAdapterArgsRef,
     getDoesAdapterNeedInitialConfiguration,
@@ -470,34 +480,32 @@ function ConfigureAdapter(props: TProps) {
     applyAdapterArgs,
     appliedAdapterArgs,
   });
-  const adapterEffectIdentifiers = props.adapter.effectIds ?? [
-    props.adapter.id,
-  ];
+  const adapterEffectIdentifiers = adapter.effectIds ?? [adapter.id];
 
   return (
     <AdapterContext.Provider
       value={createAdapterContext(
         adapterEffectIdentifiers,
         reconfigureOrQueue,
-        props.adapterStatus
+        adapterStatus
       )}
     >
       {(() => {
-        const isAdapterConfigured = props.adapter.getIsConfigurationStatus(
+        const isAdapterConfigured = adapter.getIsConfigurationStatus(
           AdapterConfigurationStatus.Configured
         );
 
         if (isAdapterConfigured) {
-          if (typeof props.render === 'function') return props.render();
+          if (typeof render === 'function') return render();
         }
 
-        if (props.children && isFunctionChildren(props.children))
-          return props.children({
+        if (children && isFunctionChildren(children))
+          return children({
             isAdapterConfigured,
           });
 
-        if (props.children && !isEmptyChildren(props.children))
-          return React.Children.only<React.ReactNode>(props.children);
+        if (children && !isEmptyChildren(children))
+          return React.Children.only<React.ReactNode>(children);
 
         return null;
       })()}
@@ -505,12 +513,6 @@ function ConfigureAdapter(props: TProps) {
   );
 }
 
-ConfigureAdapter.defaultProps = {
-  shouldDeferAdapterConfiguration: false,
-  defaultFlags: {},
-  children: null,
-  render: null,
-};
 ConfigureAdapter.displayName = 'ConfigureAdapter';
 
 export default ConfigureAdapter;

@@ -31,8 +31,8 @@
     "@flopflip/localstorage-adapter": "workspace:*",
     "@flopflip/memory-adapter": "workspace:*",
     "@flopflip/test-utils": "workspace:*",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "react-redux": "8.0.5",
     "redux": "4.2.1"
   },

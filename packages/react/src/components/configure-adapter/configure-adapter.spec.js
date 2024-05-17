@@ -435,11 +435,3 @@ describe('when adapter was configured and component updates', () => {
     await waitUntilStatus();
   });
 });
-
-describe('statics', () => {
-  describe('defaultProps', () => {
-    it('should default `defaultFlags` to an empty object', () => {
-      expect(ConfigureAdapter.defaultProps.defaultFlags).toEqual({});
-    });
-  });
-});
