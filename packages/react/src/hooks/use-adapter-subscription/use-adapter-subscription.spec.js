@@ -17,10 +17,10 @@ const createAdapter = () => ({
   unsubscribe: jest.fn(),
 });
 
-function TestComponent(props) {
-  const getHasAdapterSubscriptionStatus = useAdapterSubscription(props.adapter);
+function TestComponent({ adapter }) {
+  const getHasAdapterSubscriptionStatus = useAdapterSubscription(adapter);
 
-  const isConfigured = props.adapter.getIsConfigurationStatus(
+  const isConfigured = adapter.getIsConfigurationStatus(
     AdapterConfigurationStatus.Configured
   );
 

@@ -32,7 +32,7 @@ const createTestProps = ({ adapter }) => ({
   adapter,
 });
 
-function AdapterStatus(props) {
+function AdapterStatus({ children }) {
   const adapterContext = useContext(AdapterContext);
   const isAdapterStatus = (status) => adapterContext.status === status;
 
@@ -52,7 +52,7 @@ function AdapterStatus(props) {
           {isAdapterStatus(AdapterStates.UNCONFIGURED) ? 'Yes' : 'No'}
         </li>
       </ul>
-      {props.children}
+      {children}
     </>
   );
 }
