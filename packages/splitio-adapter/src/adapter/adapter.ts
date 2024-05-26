@@ -5,6 +5,7 @@ import {
   adapterIdentifiers,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
+  type TAdapterEmitFunction,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TFlag,
@@ -323,6 +324,12 @@ class SplitioAdapter implements TSplitioAdapterInterface {
   subscribe = () => {
     this.#adapterState.subscriptionStatus =
       AdapterSubscriptionStatus.Subscribed;
+  };
+
+  emit: TAdapterEmitFunction = () => {
+    console.warn(
+      '@flopflip/splitio-adapter: adapter does not support an event emitter.'
+    );
   };
 }
 

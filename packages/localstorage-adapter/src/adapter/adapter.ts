@@ -9,6 +9,7 @@ import {
   adapterIdentifiers,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
+  type TAdapterEmitFunction,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
@@ -99,7 +100,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
         if (this.#didFlagsChange(nextFlags)) {
           this.#adapterState.flags = nextFlags;
-          this.#adapterState.emitter.emit('flagsStateChange', nextFlags);
+          this.emit();
         }
       }
     }, pollingIntervalMs);
@@ -154,7 +155,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     this.#cache.set(flagsCacheKey, nextFlags);
     this.#adapterState.flags = nextFlags;
 
-    this.#adapterState.emitter.emit('flagsStateChange', nextFlags);
+    this.emit();
   };
 
   async configure(
@@ -196,7 +197,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       );
 
       this.#adapterState.flags = flags;
-      this.#adapterState.emitter.emit('flagsStateChange', flags);
+      this.emit();
       this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
       this.#subscribeToFlagsChanges({
@@ -222,7 +223,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     const nextUser = adapterArgs.user;
     this.#adapterState.user = nextUser;
 
-    this.#adapterState.emitter.emit('flagsStateChange', {});
+    this.emit();
 
     return Promise.resolve({
       initializationStatus: AdapterInitializationStatus.Succeeded,
@@ -248,10 +249,19 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   setConfigurationStatus(nextConfigurationStatus: AdapterConfigurationStatus) {
     this.#adapterState.configurationStatus = nextConfigurationStatus;
 
+    this.emit();
+  }
+
+  emit: TAdapterEmitFunction = () => {
     this.#adapterState.emitter.emit('statusStateChange', {
       configurationStatus: this.#adapterState.configurationStatus,
     });
-  }
+
+    this.#adapterState.emitter.emit(
+      'flagsStateChange',
+      this.#adapterState.flags
+    );
+  };
 
   unsubscribe = () => {
     this.#adapterState.subscriptionStatus =

@@ -400,8 +400,8 @@ describe('when configuring', () => {
             );
           });
 
-          it('should `dispatch` `onFlagsStateChange` action once', () => {
-            expect(onFlagsStateChange).toHaveBeenCalledTimes(1);
+          it('should `dispatch` `onFlagsStateChange` action', () => {
+            expect(onFlagsStateChange).toHaveBeenCalled();
           });
 
           describe('when flag update occurs', () => {
@@ -411,13 +411,13 @@ describe('when configuring', () => {
               });
 
               it('should not `dispatch` `onFlagsStateChange` action immidiately', () => {
-                expect(onFlagsStateChange).toHaveBeenCalledTimes(1);
+                expect(onFlagsStateChange).toHaveBeenCalledTimes(3);
               });
 
               it('should `dispatch` `onFlagsStateChange` action after the delay passed', () => {
                 jest.advanceTimersByTime(flagsUpdateDelayMs);
 
-                expect(onFlagsStateChange).toHaveBeenCalledTimes(4);
+                expect(onFlagsStateChange).toHaveBeenCalledTimes(6);
               });
             });
 

@@ -167,6 +167,8 @@ export type TFlagsUpdateFunction = (
   options?: TUpdateFlagsOptions
 ) => void;
 
+export type TAdapterEmitFunction = () => void;
+
 // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface TAdapterInterface<Args extends TAdapterArgs> {
   // Identifiers are used to uniquely identify an interface when performing a condition check.
@@ -191,6 +193,7 @@ export interface TAdapterInterface<Args extends TAdapterArgs> {
   reset?: () => void;
   getFlag?: (flagName: TFlagName) => TFlagVariation | undefined;
   unsubscribe: () => void;
+  emit: TAdapterEmitFunction;
   subscribe: () => void;
   updateFlags: TFlagsUpdateFunction;
   getUser?: () => TUser | undefined;
