@@ -245,12 +245,10 @@ describe('when configuring', () => {
         expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalled();
       });
 
-      it('should invoke `onFlagsStateChange` with previous flags', () => {
+      it('should invoke `onFlagsStateChange` with empty flags', () => {
         expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
           id: adapter.id,
-          flags: {
-            foo: 'bar',
-          },
+          flags: {},
         });
       });
 

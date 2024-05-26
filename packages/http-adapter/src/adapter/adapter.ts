@@ -10,7 +10,6 @@ import {
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   cacheModes,
-  type TAdapterEmitFunction,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
@@ -104,9 +103,9 @@ class HttpAdapter implements THttpAdapterInterface {
         const nextFlags = normalizeFlags(await this.#fetchFlags(adapterArgs));
 
         if (this.#didFlagsChange(nextFlags)) {
-          if (this.#adapterState.cacheIdentifier) {
+          if (adapterArgs.cacheIdentifier) {
             const cache = await getCache(
-              this.#adapterState.cacheIdentifier,
+              adapterArgs.cacheIdentifier,
               adapterIdentifiers.http,
               this.#adapterState.user?.key
             );
@@ -120,24 +119,13 @@ class HttpAdapter implements THttpAdapterInterface {
             return;
           }
 
-          this.emit();
+          this.#adapterState.emitter.emit('flagsStateChange', nextFlags);
         }
       }
     }, pollingIntervalMs);
   };
 
   getUser = () => this.#adapterState.user;
-
-  emit: TAdapterEmitFunction = () => {
-    this.#adapterState.emitter.emit('statusStateChange', {
-      configurationStatus: this.#adapterState.configurationStatus,
-    });
-
-    this.#adapterState.emitter.emit(
-      'flagsStateChange',
-      this.#adapterState.flags
-    );
-  };
 
   updateFlags: TFlagsUpdateFunction = (flags, options) => {
     const isAdapterConfigured = this.getIsConfigurationStatus(
@@ -182,7 +170,7 @@ class HttpAdapter implements THttpAdapterInterface {
     };
 
     this.#adapterState.flags = nextFlags;
-    this.emit();
+    this.#adapterState.emitter.emit('flagsStateChange', nextFlags);
   };
 
   async configure(
@@ -213,14 +201,13 @@ class HttpAdapter implements THttpAdapterInterface {
     this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 
     this.#adapterState.user = adapterArgs.user;
-    this.#adapterState.cacheIdentifier = adapterArgs.cacheIdentifier;
 
     return Promise.resolve().then(async () => {
       let cachedFlags;
 
-      if (this.#adapterState.cacheIdentifier) {
+      if (adapterArgs.cacheIdentifier) {
         const cache = await getCache(
-          this.#adapterState.cacheIdentifier,
+          adapterArgs.cacheIdentifier,
           adapterIdentifiers.http,
           this.#adapterState.user?.key
         );
@@ -229,7 +216,10 @@ class HttpAdapter implements THttpAdapterInterface {
 
         if (cachedFlags) {
           this.#adapterState.flags = cachedFlags;
-          this.emit();
+          this.#adapterState.emitter.emit(
+            'flagsStateChange',
+            cachedFlags as TFlags
+          );
         }
       }
 
@@ -239,9 +229,9 @@ class HttpAdapter implements THttpAdapterInterface {
 
       this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
 
-      if (this.#adapterState.cacheIdentifier) {
+      if (adapterArgs.cacheIdentifier) {
         const cache = await getCache(
-          this.#adapterState.cacheIdentifier,
+          adapterArgs.cacheIdentifier,
           adapterIdentifiers.http,
           this.#adapterState.user?.key
         );
@@ -250,7 +240,7 @@ class HttpAdapter implements THttpAdapterInterface {
       }
 
       if (adapterArgs.cacheMode !== cacheModes.lazy) {
-        this.emit();
+        this.#adapterState.emitter.emit('flagsStateChange', flags);
       }
 
       this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
@@ -274,16 +264,14 @@ class HttpAdapter implements THttpAdapterInterface {
         )
       );
 
-    this.#adapterState.cacheIdentifier = adapterArgs.cacheIdentifier;
-
     const nextUser = adapterArgs.user;
 
     if (!isEqual(this.#adapterState.user, nextUser)) {
       this.#adapterState.flags = {};
 
-      if (this.#adapterState.cacheIdentifier) {
+      if (adapterArgs.cacheIdentifier) {
         const cache = await getCache(
-          this.#adapterState.cacheIdentifier,
+          adapterArgs.cacheIdentifier,
           adapterIdentifiers.http,
           this.#adapterState.user?.key
         );
@@ -297,7 +285,7 @@ class HttpAdapter implements THttpAdapterInterface {
 
       this.#adapterState.flags = flags;
 
-      this.emit();
+      this.#adapterState.emitter.emit('flagsStateChange', flags);
 
       this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
@@ -338,7 +326,9 @@ class HttpAdapter implements THttpAdapterInterface {
   setConfigurationStatus(nextConfigurationStatus: AdapterConfigurationStatus) {
     this.#adapterState.configurationStatus = nextConfigurationStatus;
 
-    this.emit();
+    this.#adapterState.emitter.emit('statusStateChange', {
+      configurationStatus: this.#adapterState.configurationStatus,
+    });
   }
 
   unsubscribe = () => {

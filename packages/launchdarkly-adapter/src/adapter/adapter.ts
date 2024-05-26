@@ -11,7 +11,6 @@ import {
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   cacheModes,
-  type TAdapterEmitFunction,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
@@ -215,7 +214,10 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
             this.#updateFlagsInAdapterState(flags);
 
             if (cacheMode !== cacheModes.lazy) {
-              this.emit();
+              this.#adapterState.emitter.emit(
+                'flagsStateChange',
+                this.#adapterState.flags
+              );
             }
           }
 
@@ -310,7 +312,10 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
                 return;
               }
 
-              this.emit();
+              this.#adapterState.emitter.emit(
+                'flagsStateChange',
+                this.#adapterState.flags
+              );
             };
 
             const scheduleImmediately = { before: true, after: false };
@@ -333,7 +338,10 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     this.#updateFlagsInAdapterState(flags, options);
 
     // ...and flush initial state of flags
-    this.emit();
+    this.#adapterState.emitter.emit(
+      'flagsStateChange',
+      this.#adapterState.flags
+    );
   };
 
   async configure(
@@ -364,7 +372,9 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     this.#adapterState.emitter.on('flagsStateChange', handleFlagsChange);
     this.#adapterState.emitter.on('statusStateChange', handleStatusChange);
 
-    this.emit();
+    this.#adapterState.emitter.emit('statusStateChange', {
+      configurationStatus: this.#adapterState.configurationStatus,
+    });
 
     const {
       sdk,
@@ -389,7 +399,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       if (cachedFlags) {
         this.#updateFlagsInAdapterState(cachedFlags);
         this.#adapterState.flags = cachedFlags;
-        this.emit();
+        this.#adapterState.emitter.emit('flagsStateChange', cachedFlags);
       }
     }
 
@@ -459,7 +469,9 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   setConfigurationStatus(nextConfigurationStatus: AdapterConfigurationStatus) {
     this.#adapterState.configurationStatus = nextConfigurationStatus;
 
-    this.emit();
+    this.#adapterState.emitter.emit('statusStateChange', {
+      configurationStatus: this.#adapterState.configurationStatus,
+    });
   }
 
   getClient() {
@@ -492,17 +504,6 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       ...updatedContextProps,
     });
   }
-
-  emit: TAdapterEmitFunction = () => {
-    this.#adapterState.emitter.emit('statusStateChange', {
-      configurationStatus: this.#adapterState.configurationStatus,
-    });
-
-    this.#adapterState.emitter.emit(
-      'flagsStateChange',
-      this.#adapterState.flags
-    );
-  };
 
   unsubscribe = () => {
     this.#adapterState.subscriptionStatus =

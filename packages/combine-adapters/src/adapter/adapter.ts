@@ -5,7 +5,6 @@ import {
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   type TAdapter,
-  type TAdapterEmitFunction,
   type TAdapterEventHandlers,
   type TAdapterIdentifiers,
   type TAdapterStatus,
@@ -233,14 +232,10 @@ class CombineAdapters implements TCombinedAdapterInterface {
   setConfigurationStatus(nextConfigurationStatus: AdapterConfigurationStatus) {
     this.#adapterState.configurationStatus = nextConfigurationStatus;
 
-    this.emit();
-  }
-
-  emit: TAdapterEmitFunction = () => {
     this.#adapterState.emitter.emit('statusStateChange', {
       configurationStatus: this.#adapterState.configurationStatus,
     });
-  };
+  }
 
   reset = () => {
     this.#adapterState = {
