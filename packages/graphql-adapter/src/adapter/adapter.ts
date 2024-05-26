@@ -10,6 +10,7 @@ import {
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   cacheModes,
+  type TAdapterEmitFunction,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
@@ -136,7 +137,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
             return;
           }
 
-          this.#adapterState.emitter.emit('flagsStateChange', nextFlags);
+          this.emit();
         }
       }
     }, pollingIntervalMs);
@@ -187,7 +188,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
     };
 
     this.#adapterState.flags = nextFlags;
-    this.#adapterState.emitter.emit('flagsStateChange', nextFlags);
+    this.emit();
   };
 
   async configure(
@@ -233,10 +234,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
 
         if (cachedFlags) {
           this.#adapterState.flags = cachedFlags;
-          this.#adapterState.emitter.emit(
-            'flagsStateChange',
-            cachedFlags as TFlags
-          );
+          this.emit();
         }
       }
 
@@ -257,7 +255,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
       }
 
       if (adapterArgs.cacheMode !== cacheModes.lazy) {
-        this.#adapterState.emitter.emit('flagsStateChange', flags);
+        this.emit();
       }
 
       this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
@@ -301,7 +299,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
 
     this.#adapterState.flags = flags;
 
-    this.#adapterState.emitter.emit('flagsStateChange', flags);
+    this.emit();
 
     this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
@@ -328,6 +326,17 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
     return this.#adapterState.configurationStatus === configurationStatus;
   }
 
+  emit: TAdapterEmitFunction = () => {
+    this.#adapterState.emitter.emit('statusStateChange', {
+      configurationStatus: this.#adapterState.configurationStatus,
+    });
+
+    this.#adapterState.emitter.emit(
+      'flagsStateChange',
+      this.#adapterState.flags
+    );
+  };
+
   getFlag(flagName: TFlagName): TFlagVariation {
     return this.#adapterState?.flags[flagName];
   }
@@ -341,9 +350,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
   setConfigurationStatus(nextConfigurationStatus: AdapterConfigurationStatus) {
     this.#adapterState.configurationStatus = nextConfigurationStatus;
 
-    this.#adapterState.emitter.emit('statusStateChange', {
-      configurationStatus: this.#adapterState.configurationStatus,
-    });
+    this.emit();
   }
 
   unsubscribe = () => {

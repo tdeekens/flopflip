@@ -4,6 +4,7 @@ import {
   adapterIdentifiers,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
+  type TAdapterEmitFunction,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
@@ -100,10 +101,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
       };
     });
 
-    this.#adapterState.emitter.emit(
-      'flagsStateChange',
-      this.#adapterState.flags
-    );
+    this.emit();
   };
 
   async configure(
@@ -144,10 +142,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
       this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
 
-      this.#adapterState.emitter.emit(
-        'flagsStateChange',
-        this.#adapterState.flags
-      );
+      this.emit();
 
       this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
 
@@ -169,10 +164,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
     this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
 
-    this.#adapterState.emitter.emit(
-      'flagsStateChange',
-      this.#adapterState.flags
-    );
+    this.emit();
 
     return Promise.resolve({
       initializationStatus: AdapterInitializationStatus.Succeeded,
@@ -186,9 +178,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   setConfigurationStatus(nextConfigurationStatus: AdapterConfigurationStatus) {
     this.#adapterState.configurationStatus = nextConfigurationStatus;
 
-    this.#adapterState.emitter.emit('statusStateChange', {
-      configurationStatus: this.#adapterState.configurationStatus,
-    });
+    this.emit();
   }
 
   reset = () => {
@@ -221,6 +211,17 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   subscribe = () => {
     this.#adapterState.subscriptionStatus =
       AdapterSubscriptionStatus.Subscribed;
+  };
+
+  emit: TAdapterEmitFunction = () => {
+    this.#adapterState.emitter.emit('statusStateChange', {
+      configurationStatus: this.#adapterState.configurationStatus,
+    });
+
+    this.#adapterState.emitter.emit(
+      'flagsStateChange',
+      this.#adapterState.flags
+    );
   };
 }
 
