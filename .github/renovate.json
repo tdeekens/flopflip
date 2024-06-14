@@ -18,10 +18,6 @@
       "groupSlug": "all"
     },
     {
-      "matchPackageNames": ["react-redux"],
-      "allowedVersions": "<=8.0.5"
-    },
-    {
       "extends": "monorepo:babel",
       "groupName": "babel monorepo",
       "matchUpdateTypes": [
@@ -30,6 +26,14 @@
         "minor",
         "major"
       ]
+    },
+    {
+      "matchPackageNames": ["react-redux"],
+      "allowedVersions": "<=8.0.5"
+    },
+    {
+      "matchPackageNames": ["cypress"],
+      "allowedVersions": "<=13.6.4"
     }
   ],
   "circleci": { "enabled": false },
