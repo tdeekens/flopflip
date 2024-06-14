@@ -114,7 +114,7 @@
     "HoC",
     "store-enhancer"
   ],
-  "packageManager": "pnpm@9.1.1",
+  "packageManager": "pnpm@9.3.0",
   "preconstruct": {
     "packages": [
       "demo",
@@ -125,7 +125,7 @@
   },
   "pnpm": {
     "overrides": {
-      "@types/react": "18.3.2",
+      "@types/react": "18.3.3",
       "@types/react-dom": "18.3.0"
     },
     "patchedDependencies": {
