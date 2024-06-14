@@ -20,6 +20,16 @@
     {
       "matchPackageNames": ["react-redux"],
       "allowedVersions": "<=8.0.5"
+    },
+    {
+      "extends": "monorepo:babel",
+      "groupName": "babel monorepo",
+      "matchUpdateTypes": [
+        "digest",
+        "patch",
+        "minor",
+        "major"
+      ]
     }
   ],
   "circleci": { "enabled": false },
