@@ -204,8 +204,8 @@ importers:
         specifier: 5.0.7
         version: 5.0.7
       ts-jest:
-        specifier: 29.1.4
-        version: 29.1.4(@babel/core@7.24.5)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.5))(jest@29.7.0(@types/node@20.14.2)(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5)))(typescript@5.4.5)
+        specifier: 29.1.5
+        version: 29.1.5(@babel/core@7.24.5)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.5))(jest@29.7.0(@types/node@20.14.2)(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5)))(typescript@5.4.5)
       ts-node:
         specifier: 10.9.2
         version: 10.9.2(@types/node@20.14.2)(typescript@5.4.5)
@@ -596,8 +596,8 @@ importers:
         specifier: workspace:*
         version: link:../types
       '@splitsoftware/splitio':
-        specifier: 10.26.0
-        version: 10.26.0
+        specifier: 10.26.1
+        version: 10.26.1
       lodash:
         specifier: 4.17.21
         version: 4.17.21
@@ -1740,16 +1740,16 @@ packages:
   '@sinonjs/fake-timers@10.3.0':
     resolution: {integrity: sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA==}
 
-  '@splitsoftware/splitio-commons@1.14.0':
-    resolution: {integrity: sha512-ANP0NRPAMehi4bUQsb19kP5W5NVuCYUKRsDC5Nl78xHIu6cskAej1rXkjsocLnWerz2rO0H9kMjRKZj9lVsvKA==}
+  '@splitsoftware/splitio-commons@1.16.0':
+    resolution: {integrity: sha512-k16cCWJOWut/NB5W1d9hQEYPxFrZXO66manp+8d6RjZYH4r+Q6lu82NYjDcfh5E93H9v+TVKcQLAmpVofbjcvg==}
     peerDependencies:
       ioredis: ^4.28.0
     peerDependenciesMeta:
       ioredis:
         optional: true
 
-  '@splitsoftware/splitio@10.26.0':
-    resolution: {integrity: sha512-sACjAcov/Zn1gYaN6m0qQb9G/LDk43c8rEzFaabhlnWOsH0W22ImVHGx8iU3I/DyC1S2wrsjXTSnW1GQlbb7+Q==}
+  '@splitsoftware/splitio@10.26.1':
+    resolution: {integrity: sha512-Az/IHGXAk8vrCPtM1qh0fTU+5AewAk8n8tc3dGnHdEynco9kAJMgEQZgNcO8aw/5S8j8rmOl+ozL5fxEtXyiGQ==}
     engines: {node: '>=6', npm: '>=3'}
 
   '@szmarczak/http-timer@5.0.1':
@@ -3058,10 +3058,6 @@ packages:
 
   eventemitter3@5.0.1:
     resolution: {integrity: sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==}
-
-  eventsource@1.1.2:
-    resolution: {integrity: sha512-xAH3zWhgO2/3KIniEKYPr8plNSzlGINOUqYj0m0u7AB81iRw8b/3E73W6AuU+6klLbaSFmZnaETQ2lXPfAydrA==}
-    engines: {node: '>=0.12.0'}
 
   execa@4.1.0:
     resolution: {integrity: sha512-j5W0//W7f8UxAn8hXVnwG8tLwdiUy4FJLcSupCg6maBYZDpyBvTApK7KyuI4bKj8KOh1r2YH+6ucuYtJv1bTZA==}
@@ -5155,8 +5151,8 @@ packages:
     resolution: {integrity: sha512-WZ/iAJrKDhdINv1WG6KZIGHrZDar6VfhftG1QJFpVbOYZMYJLJOvZOo1amictRXVdBXZIgBHKswMTXzElngprA==}
     engines: {node: '>=14.13.1'}
 
-  ts-jest@29.1.4:
-    resolution: {integrity: sha512-YiHwDhSvCiItoAgsKtoLFCuakDzDsJ1DLDnSouTaTmdOcOwIkSzbLXduaQ6M5DRVhuZC/NYaaZ/mtHbWMv/S6Q==}
+  ts-jest@29.1.5:
+    resolution: {integrity: sha512-UuClSYxM7byvvYfyWdFI+/2UxMmwNyJb0NPkZPQE2hew3RurV7l7zURgOHAd/1I1ZdPpe3GUsXNXAcN8TFKSIg==}
     engines: {node: ^14.15.0 || ^16.10.0 || ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
@@ -5195,9 +5191,6 @@ packages:
 
   tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
-
-  tslib@2.6.2:
-    resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
 
   tslib@2.6.3:
     resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
@@ -7129,25 +7122,23 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
-  '@splitsoftware/splitio-commons@1.14.0(ioredis@4.28.5)':
+  '@splitsoftware/splitio-commons@1.16.0(ioredis@4.28.5)':
     dependencies:
       tslib: 2.6.3
     optionalDependencies:
       ioredis: 4.28.5
 
-  '@splitsoftware/splitio@10.26.0':
+  '@splitsoftware/splitio@10.26.1':
     dependencies:
-      '@splitsoftware/splitio-commons': 1.14.0(ioredis@4.28.5)
+      '@splitsoftware/splitio-commons': 1.16.0(ioredis@4.28.5)
       '@types/google.analytics': 0.0.40
       '@types/ioredis': 4.28.10
       bloom-filters: 3.0.1
       ioredis: 4.28.5
       js-yaml: 3.14.1
       node-fetch: 2.7.0
-      tslib: 2.6.2
+      tslib: 2.6.3
       unfetch: 4.2.0
-    optionalDependencies:
-      eventsource: 1.1.2
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -8658,9 +8649,6 @@ snapshots:
   eventemitter2@6.4.7: {}
 
   eventemitter3@5.0.1: {}
-
-  eventsource@1.1.2:
-    optional: true
 
   execa@4.1.0:
     dependencies:
@@ -10975,7 +10963,7 @@ snapshots:
 
   ts-deepmerge@7.0.0: {}
 
-  ts-jest@29.1.4(@babel/core@7.24.5)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.5))(jest@29.7.0(@types/node@20.14.2)(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5)))(typescript@5.4.5):
+  ts-jest@29.1.5(@babel/core@7.24.5)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.5))(jest@29.7.0(@types/node@20.14.2)(ts-node@10.9.2(@types/node@20.14.2)(typescript@5.4.5)))(typescript@5.4.5):
     dependencies:
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
@@ -11012,8 +11000,6 @@ snapshots:
       yn: 3.1.1
 
   tslib@1.14.1: {}
-
-  tslib@2.6.2: {}
 
   tslib@2.6.3: {}
 

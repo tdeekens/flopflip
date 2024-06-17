@@ -100,7 +100,7 @@
     "raf": "3.4.1",
     "regenerator-runtime": "0.14.1",
     "rimraf": "5.0.7",
-    "ts-jest": "29.1.4",
+    "ts-jest": "29.1.5",
     "ts-node": "10.9.2",
     "tslib": "2.6.3",
     "typescript": "5.4.5"
