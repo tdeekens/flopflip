@@ -78,7 +78,7 @@
     "colors": "1.4.0",
     "core-js": "3.37.1",
     "cross-env": "7.0.3",
-    "eslint": "8.57.0",
+    "eslint": "9.6.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-config-xo": "0.45.0",
     "eslint-config-xo-react": "0.27.0",
