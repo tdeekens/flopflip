@@ -124,7 +124,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
             const cache = await getCache(
               adapterArgs.cacheIdentifier,
               adapterIdentifiers.graphql,
-              this.#adapterState.user?.key
+              { key: this.#adapterState.user?.key }
             );
 
             cache.set(nextFlags);
@@ -226,7 +226,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
         const cache = await getCache(
           adapterArgs.cacheIdentifier,
           adapterIdentifiers.graphql,
-          this.#adapterState.user?.key
+          { key: this.#adapterState.user?.key }
         );
 
         cachedFlags = cache.get();
@@ -250,7 +250,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
         const cache = await getCache(
           adapterArgs.cacheIdentifier,
           adapterIdentifiers.graphql,
-          this.#adapterState.user?.key
+          { key: this.#adapterState.user?.key }
         );
 
         cache.set(flags);
@@ -287,7 +287,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
       const cache = await getCache(
         adapterArgs.cacheIdentifier,
         adapterIdentifiers.graphql,
-        this.#adapterState.user?.key
+        { key: this.#adapterState.user?.key }
       );
 
       cache.unset();

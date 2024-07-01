@@ -107,7 +107,7 @@ class HttpAdapter implements THttpAdapterInterface {
             const cache = await getCache(
               adapterArgs.cacheIdentifier,
               adapterIdentifiers.http,
-              this.#adapterState.user?.key
+              { key: this.#adapterState.user?.key }
             );
 
             cache.set(nextFlags);
@@ -209,7 +209,7 @@ class HttpAdapter implements THttpAdapterInterface {
         const cache = await getCache(
           adapterArgs.cacheIdentifier,
           adapterIdentifiers.http,
-          this.#adapterState.user?.key
+          { key: this.#adapterState.user?.key }
         );
 
         cachedFlags = cache.get();
@@ -233,7 +233,7 @@ class HttpAdapter implements THttpAdapterInterface {
         const cache = await getCache(
           adapterArgs.cacheIdentifier,
           adapterIdentifiers.http,
-          this.#adapterState.user?.key
+          { key: this.#adapterState.user?.key }
         );
 
         cache.set(flags);
@@ -273,7 +273,7 @@ class HttpAdapter implements THttpAdapterInterface {
         const cache = await getCache(
           adapterArgs.cacheIdentifier,
           adapterIdentifiers.http,
-          this.#adapterState.user?.key
+          { key: this.#adapterState.user?.key }
         );
 
         cache.unset();

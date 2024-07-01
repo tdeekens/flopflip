@@ -1,3 +1,4 @@
+import { encodeCacheContext } from '@flopflip/cache';
 import { AdapterConfigurationStatus } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
@@ -35,6 +36,7 @@ describe('when configuring', () => {
 describe('when configured', () => {
   const adapterArgs = {
     execute: jest.fn().mockResolvedValue({ enabled: true, disabled: false }),
+    user: { key: 'initial-user' },
   };
   let configurationResult;
   let adapterEventHandlers;
@@ -108,7 +110,7 @@ describe('when configured', () => {
     const adapterArgs = {
       cacheIdentifier: 'session',
       execute: jest.fn().mockResolvedValue({ enabled: true, disabled: false }),
-      user: 'initial-user',
+      user: { key: 'initial-user' },
     };
     let configurationResult;
     let adapterEventHandlers;
@@ -139,7 +141,7 @@ describe('when configured', () => {
 
     it('should restore cached flags', () => {
       expect(sessionStorage.getItem).toHaveBeenCalledWith(
-        '@flopflip/http-adapter/flags'
+        `@flopflip/http-adapter/${encodeCacheContext(adapterArgs.user)}/flags`
       );
 
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
@@ -152,7 +154,11 @@ describe('when configured', () => {
 
     it('should cache newly fetched flags', () => {
       expect(
-        JSON.parse(sessionStorage.getItem('@flopflip/http-adapter/flags'))
+        JSON.parse(
+          sessionStorage.getItem(
+            `@flopflip/http-adapter/${encodeCacheContext(adapterArgs.user)}/flags`
+          )
+        )
       ).toStrictEqual({ disabled: false, enabled: true });
     });
 
@@ -261,7 +267,7 @@ describe('when configured', () => {
 
   describe('when reconfiguring', () => {
     describe('when the user changed', () => {
-      const user = { id: 'changed-user' };
+      const user = { key: 'changed-user' };
 
       beforeEach(async () => {
         configurationResult = await adapter.reconfigure({
@@ -303,7 +309,7 @@ describe('when configured', () => {
 
       it('should reset cache', () => {
         expect(sessionStorage.removeItem).toHaveBeenCalledWith(
-          '@flopflip/http-adapter/flags'
+          `@flopflip/http-adapter/${encodeCacheContext(adapterArgs.user)}/flags`
         );
       });
     });

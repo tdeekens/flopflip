@@ -1,3 +1,4 @@
+import { encodeCacheContext } from '@flopflip/cache';
 import { AdapterConfigurationStatus } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 import ldClient from 'launchdarkly-js-client-sdk';
@@ -10,7 +11,7 @@ jest.mock('launchdarkly-js-client-sdk', () => ({
 jest.mock('tiny-warning');
 
 const clientSideId = '123-abc';
-const userWithKey = { kind: 'user', key: 'foo-user' };
+const userWithKey = { kind: 'user', key: 'foo-user', anonymous: false };
 const userWithoutKey = {
   kind: 'user',
   group: 'foo-group',
@@ -488,7 +489,7 @@ describe('when configuring', () => {
 
         it('should restore cached flags', () => {
           expect(sessionStorage.getItem).toHaveBeenCalledWith(
-            '@flopflip/launchdarkly-adapter/foo-user/flags'
+            `@flopflip/launchdarkly-adapter/${encodeCacheContext(userWithKey)}/flags`
           );
 
           expect(onFlagsStateChange).toHaveBeenCalledWith({
@@ -503,7 +504,7 @@ describe('when configuring', () => {
           expect(
             JSON.parse(
               sessionStorage.getItem(
-                '@flopflip/launchdarkly-adapter/foo-user/flags'
+                `@flopflip/launchdarkly-adapter/${encodeCacheContext(userWithKey)}/flags`
               )
             )
           ).toStrictEqual({
