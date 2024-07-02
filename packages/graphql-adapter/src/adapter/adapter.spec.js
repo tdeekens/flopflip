@@ -1,3 +1,4 @@
+import { encodeCacheContext } from '@flopflip/cache';
 import { AdapterConfigurationStatus } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
@@ -35,6 +36,7 @@ describe('when configuring', () => {
 describe('when configured', () => {
   const adapterArgs = {
     url: `https://localhost:8080/graphql`,
+    user: { key: 'initial-user' },
     query: 'query AllFeatures { flags: allFeatures { name \n value} }',
     getQueryVariables: jest.fn(() => ({ userId: '123' })),
     getRequestHeaders: jest.fn(() => ({})),
@@ -142,6 +144,7 @@ describe('when configured', () => {
     const adapterArgs = {
       cacheIdentifier: 'session',
       url: `https://localhost:8080/graphql`,
+      user: { key: 'initial-user' },
       query: 'query AllFeatures { flags: allFeatures { name \n value} }',
       getQueryVariables: jest.fn(() => ({ userId: '123' })),
       getRequestHeaders: jest.fn(() => ({})),
@@ -180,7 +183,7 @@ describe('when configured', () => {
 
     it('should restore cached flags', () => {
       expect(sessionStorage.getItem).toHaveBeenCalledWith(
-        '@flopflip/graphql-adapter/flags'
+        `@flopflip/graphql-adapter/${encodeCacheContext(adapterArgs.user)}/flags`
       );
 
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
@@ -193,7 +196,11 @@ describe('when configured', () => {
 
     it('should cache newly fetched flags', () => {
       expect(
-        JSON.parse(sessionStorage.getItem('@flopflip/graphql-adapter/flags'))
+        JSON.parse(
+          sessionStorage.getItem(
+            `@flopflip/graphql-adapter/${encodeCacheContext(adapterArgs.user)}/flags`
+          )
+        )
       ).toStrictEqual({ disabled: false, enabled: true });
     });
 
@@ -343,7 +350,7 @@ describe('when configured', () => {
 
     it('should reset cache', () => {
       expect(sessionStorage.removeItem).toHaveBeenCalledWith(
-        '@flopflip/graphql-adapter/flags'
+        `@flopflip/graphql-adapter/${encodeCacheContext(adapterArgs.user)}/flags`
       );
     });
   });

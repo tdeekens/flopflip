@@ -1,13 +1,14 @@
 import { adapterIdentifiers, cacheIdentifiers } from '@flopflip/types';
 
 import {
+  encodeCacheContext,
   getAllCachedFlags,
   getCache,
   getCachedFlags,
   getCachePrefix,
 } from './cache';
 
-const cacheKey = 'test';
+const cacheContext = { key: 'some-user-key', value: 'some-other-value' };
 
 describe('general caching', () => {
   it('should allow writing values to the cache', async () => {
@@ -17,7 +18,7 @@ describe('general caching', () => {
     const cache = await getCache(
       cacheIdentifiers.session,
       adapterIdentifiers.memory,
-      cacheKey
+      cacheContext
     );
 
     cache.set(flags);
@@ -32,7 +33,7 @@ describe('general caching', () => {
     const cache = await getCache(
       cacheIdentifiers.session,
       adapterIdentifiers.memory,
-      cacheKey
+      cacheContext
     );
 
     cache.set(flags);
@@ -48,13 +49,15 @@ describe('general caching', () => {
     const cache = await getCache(
       cacheIdentifiers.session,
       adapterIdentifiers.memory,
-      cacheKey
+      cacheContext
     );
 
     cache.set(flags);
 
     expect(sessionStorage.getItem).toHaveBeenLastCalledWith(
-      `${getCachePrefix(adapterIdentifiers.memory)}/${cacheKey}/flags`
+      expect.stringContaining(
+        `${getCachePrefix(adapterIdentifiers.memory)}/${encodeCacheContext(cacheContext)}/flags`
+      )
     );
   });
 });
@@ -68,7 +71,7 @@ describe('flag caching', () => {
       const cache = await getCache(
         cacheIdentifiers.session,
         adapterIdentifiers.memory,
-        cacheKey
+        cacheContext
       );
 
       cache.set(flags);
@@ -78,7 +81,7 @@ describe('flag caching', () => {
       ).toStrictEqual(flags);
 
       expect(sessionStorage.getItem).toHaveBeenLastCalledWith(
-        `${getCachePrefix(adapterIdentifiers.memory)}/${cacheKey}/flags`
+        `${getCachePrefix(adapterIdentifiers.memory)}/${encodeCacheContext(cacheContext)}/flags`
       );
     });
   });
@@ -94,12 +97,12 @@ describe('flag caching', () => {
       const memoryAdapterCache = await getCache(
         cacheIdentifiers.session,
         adapterIdentifiers.memory,
-        cacheKey
+        cacheContext
       );
       const localstorageAdapterCache = await getCache(
         cacheIdentifiers.session,
         adapterIdentifiers.localstorage,
-        cacheKey
+        cacheContext
       );
 
       localstorageAdapterCache.set(localstorageAdapterFlags);

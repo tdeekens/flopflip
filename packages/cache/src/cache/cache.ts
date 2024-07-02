@@ -13,6 +13,20 @@ function getCachePrefix(adapterIdentifiers: TAdapterIdentifiers) {
   return `@flopflip/${adapterIdentifiers}-adapter`;
 }
 
+export function encodeCacheContext(cacheContext: any) {
+  const encodedAsJson = JSON.stringify(cacheContext);
+
+  const hashCode = [...encodedAsJson].reduce(
+    // eslint-disable-next-line no-bitwise
+    (hash, c) => (Math.imul(31, hash) + c.charCodeAt(0)) | 0,
+    0
+  );
+
+  const encodedCacheContext = Math.abs(hashCode).toString();
+
+  return encodedCacheContext;
+}
+
 async function importCache(cacheIdentifier: TCacheIdentifiers) {
   let cacheModule;
 
@@ -34,13 +48,20 @@ async function importCache(cacheIdentifier: TCacheIdentifiers) {
 async function getCache(
   cacheIdentifier: TCacheIdentifiers,
   adapterIdentifiers: TAdapterIdentifiers,
-  cacheKey?: string
+  cacheContext?: any
 ) {
   const cacheModule = await importCache(cacheIdentifier);
 
   const CACHE_PREFIX = getCachePrefix(adapterIdentifiers);
   const createCache = cacheModule.default;
-  const flagsCachePrefix = [CACHE_PREFIX, cacheKey].filter(Boolean).join('/');
+  let encodedCacheContext = '';
+  try {
+    encodedCacheContext = encodeCacheContext(cacheContext);
+  } catch (error) {}
+
+  const flagsCachePrefix = [CACHE_PREFIX, encodedCacheContext]
+    .filter(Boolean)
+    .join('/');
 
   const flagsCache = createCache({ prefix: flagsCachePrefix });
   const referenceCache = createCache({ prefix: CACHE_PREFIX });
