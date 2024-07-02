@@ -1,5 +1,15 @@
 # @flopflip/memory-adapter
 
+## 14.0.2
+
+### Patch Changes
+
+- [#1907](https://github.com/tdeekens/flopflip/pull/1907) [`700a2b2`](https://github.com/tdeekens/flopflip/commit/700a2b2c5921e0760ec2f4e43294718129109eed) Thanks [@renovate](https://github.com/apps/renovate)! - Update react and react-dom while removing usage of defaultProps.
+
+- Updated dependencies [[`700a2b2`](https://github.com/tdeekens/flopflip/commit/700a2b2c5921e0760ec2f4e43294718129109eed)]:
+  - @flopflip/adapter-utilities@14.0.2
+  - @flopflip/types@14.0.2
+
 ## 14.0.1
 
 ### Patch Changes
@@ -940,7 +950,7 @@
   You can now:
 
   ```js
-  import { updateFlags } from "@flopflip/launchdarkly-adapter";
+  import { updateFlags } from '@flopflip/launchdarkly-adapter';
 
   updateFlags({ myFlag: true });
   ```

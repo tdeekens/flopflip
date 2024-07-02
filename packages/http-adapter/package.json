@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/http-adapter",
-  "version": "14.0.1",
+  "version": "14.0.2",
   "description": "An HTTP adapter for flipflop",
   "main": "dist/flopflip-http-adapter.cjs.js",
   "module": "dist/flopflip-http-adapter.esm.js",

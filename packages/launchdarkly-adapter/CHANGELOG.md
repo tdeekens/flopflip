@@ -1,5 +1,20 @@
 # @flopflip/launchdarkly-adapter
 
+## 14.0.2
+
+### Patch Changes
+
+- [#1922](https://github.com/tdeekens/flopflip/pull/1922) [`56f387f`](https://github.com/tdeekens/flopflip/commit/56f387f510f62d169eb103321c889545f71a4c66) Thanks [@tdeekens](https://github.com/tdeekens)! - Refactor cache keys to be bound to adapter context.
+
+- [#1907](https://github.com/tdeekens/flopflip/pull/1907) [`700a2b2`](https://github.com/tdeekens/flopflip/commit/700a2b2c5921e0760ec2f4e43294718129109eed) Thanks [@renovate](https://github.com/apps/renovate)! - Update react and react-dom while removing usage of defaultProps.
+
+- Updated dependencies [[`56f387f`](https://github.com/tdeekens/flopflip/commit/56f387f510f62d169eb103321c889545f71a4c66), [`700a2b2`](https://github.com/tdeekens/flopflip/commit/700a2b2c5921e0760ec2f4e43294718129109eed)]:
+  - @flopflip/cache@14.0.2
+  - @flopflip/sessionstorage-cache@14.0.2
+  - @flopflip/localstorage-cache@14.0.2
+  - @flopflip/adapter-utilities@14.0.2
+  - @flopflip/types@14.0.2
+
 ## 14.0.1
 
 ### Patch Changes
@@ -395,20 +410,20 @@
 
   ```js
   const deviceContext = {
-    kind: "device",
-    type: "iPad",
-    key: "device-key-123abc",
+    kind: 'device',
+    type: 'iPad',
+    key: 'device-key-123abc',
   };
 
   const userContext = {
-    kind: "user",
-    key: "user-key-123abc",
-    name: "Sandy",
-    role: "doctor",
+    kind: 'user',
+    key: 'user-key-123abc',
+    name: 'Sandy',
+    role: 'doctor',
   };
 
   const multiContext = {
-    kind: "multi",
+    kind: 'multi',
 
     device: deviceContext,
   };
@@ -1162,7 +1177,7 @@
   You can now:
 
   ```js
-  import { updateFlags } from "@flopflip/launchdarkly-adapter";
+  import { updateFlags } from '@flopflip/launchdarkly-adapter';
 
   updateFlags({ myFlag: true });
   ```

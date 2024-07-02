@@ -1,5 +1,19 @@
 # @flopflip/react
 
+## 14.0.2
+
+### Patch Changes
+
+- [#1909](https://github.com/tdeekens/flopflip/pull/1909) [`fd07633`](https://github.com/tdeekens/flopflip/commit/fd07633b5231fe11036b3b1ddba86e8b6e9cdab8) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: all types for be prefixed with T
+
+- [#1910](https://github.com/tdeekens/flopflip/pull/1910) [`45609ed`](https://github.com/tdeekens/flopflip/commit/45609ed49f07596d521d7f30e325ac863f21db12) Thanks [@tdeekens](https://github.com/tdeekens)! - refactor: to always destructure props
+
+- [#1907](https://github.com/tdeekens/flopflip/pull/1907) [`700a2b2`](https://github.com/tdeekens/flopflip/commit/700a2b2c5921e0760ec2f4e43294718129109eed) Thanks [@renovate](https://github.com/apps/renovate)! - Update react and react-dom while removing usage of defaultProps.
+
+- Updated dependencies [[`56f387f`](https://github.com/tdeekens/flopflip/commit/56f387f510f62d169eb103321c889545f71a4c66), [`700a2b2`](https://github.com/tdeekens/flopflip/commit/700a2b2c5921e0760ec2f4e43294718129109eed)]:
+  - @flopflip/cache@14.0.2
+  - @flopflip/types@14.0.2
+
 ## 14.0.1
 
 ### Patch Changes
@@ -620,19 +634,19 @@
   You can wrap your application using for instance `react-testing-library` as
 
   ```jsx
-  import { TestProviderFlopFlip } from "@flopflip/react-broadcast";
-  import { render } from "@testing-library/react";
+  import { TestProviderFlopFlip } from '@flopflip/react-broadcast';
+  import { render } from '@testing-library/react';
 
   const testFlags = {
     myFlag: true,
   };
 
-  describe("rendering", () => {
-    it("should render the application with feature flags", () => {
+  describe('rendering', () => {
+    it('should render the application with feature flags', () => {
       render(
         <TestProviderFlopFlip flags={testFlags}>
           <App />
-        </TestProviderFlopFlip>,
+        </TestProviderFlopFlip>
       );
     });
   });
@@ -979,15 +993,15 @@
   You can now conveniently a flag variation without evaluating its actual state (as with `useFeatureToggle`).
 
   ```js
-  const variation = useFlagVariation("myFlagName");
+  const variation = useFlagVariation('myFlagName');
 
   const isAEnabled = variation === VARIATION_A;
   const isBEnabled = variation === VARIATION_B;
 
   // Is the same as
 
-  const isAEnabled = useFlagVariation("myFlagName", VARIATION_A);
-  const isBEnabled = useFlagVariation("myFlagName", VARIATION_B);
+  const isAEnabled = useFlagVariation('myFlagName', VARIATION_A);
+  const isBEnabled = useFlagVariation('myFlagName', VARIATION_B);
   ```
 
   Using `useFlagVariation` is often a bit more concise if you want to work with the variation value yourself.

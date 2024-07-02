@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/cache",
-  "version": "14.0.1",
+  "version": "14.0.2",
   "description": "Caching for flipflop adapters",
   "main": "dist/flopflip-cache.cjs.js",
   "module": "dist/flopflip-cache.esm.js",
