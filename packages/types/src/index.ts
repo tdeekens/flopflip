@@ -1,7 +1,7 @@
-import {
-  type LDClient as TLDClient,
-  type LDContext,
-  type LDOptions as TLDOptions,
+import type {
+  LDContext,
+  LDClient as TLDClient,
+  LDOptions as TLDOptions,
 } from 'launchdarkly-js-client-sdk';
 import type React from 'react';
 
@@ -18,17 +18,17 @@ export type TUser<TAdditionalUserProperties = Record<string, unknown>> = {
   key?: string;
 } & TAdditionalUserProperties;
 export enum AdapterSubscriptionStatus {
-  Subscribed,
-  Unsubscribed,
+  Subscribed = 0,
+  Unsubscribed = 1,
 }
 export enum AdapterConfigurationStatus {
-  Unconfigured,
-  Configuring,
-  Configured,
+  Unconfigured = 0,
+  Configuring = 1,
+  Configured = 2,
 }
 export enum AdapterInitializationStatus {
-  Succeeded,
-  Failed,
+  Succeeded = 0,
+  Failed = 1,
 }
 export type TAdapterConfiguration = {
   initializationStatus?: AdapterInitializationStatus;
@@ -167,7 +167,6 @@ export type TFlagsUpdateFunction = (
   options?: TUpdateFlagsOptions
 ) => void;
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface TAdapterInterface<Args extends TAdapterArgs> {
   // Identifiers are used to uniquely identify an interface when performing a condition check.
   id: TAdapterIdentifiers;
@@ -196,7 +195,6 @@ export interface TAdapterInterface<Args extends TAdapterArgs> {
   getUser?: () => TUser | undefined;
 }
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface TLaunchDarklyAdapterInterface
   extends TAdapterInterface<TLaunchDarklyAdapterArgs> {
   id: typeof adapterIdentifiers.launchdarkly;
@@ -220,7 +218,6 @@ export interface TLaunchDarklyAdapterInterface
   subscribe: () => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface TLocalStorageAdapterInterface
   extends TAdapterInterface<TLocalStorageAdapterArgs> {
   id: typeof adapterIdentifiers.localstorage;
@@ -240,7 +237,6 @@ export interface TLocalStorageAdapterInterface
   subscribe: () => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface TGraphQlAdapterInterface
   extends TAdapterInterface<TGraphQlAdapterArgs> {
   id: typeof adapterIdentifiers.graphql;
@@ -260,7 +256,6 @@ export interface TGraphQlAdapterInterface
   subscribe: () => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface THttpAdapterInterface
   extends TAdapterInterface<THttpAdapterArgs> {
   id: typeof adapterIdentifiers.http;
@@ -280,7 +275,6 @@ export interface THttpAdapterInterface
   subscribe: () => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface TMemoryAdapterInterface
   extends TAdapterInterface<TMemoryAdapterArgs> {
   id: typeof adapterIdentifiers.memory;
@@ -302,7 +296,6 @@ export interface TMemoryAdapterInterface
   subscribe: () => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface TCombinedAdapterInterface
   extends TAdapterInterface<TCombinedAdapterArgs> {
   id: typeof adapterIdentifiers.combined;
@@ -328,7 +321,6 @@ export interface TCombinedAdapterInterface
   subscribe: () => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 export interface TSplitioAdapterInterface
   extends TAdapterInterface<TSplitioAdapterArgs> {
   id: typeof adapterIdentifiers.splitio;
@@ -453,7 +445,6 @@ export type TFlopflipGlobal = {
   [adapterIdentifiers.combined]?: TCombinedAdapterGlobal;
 };
 declare global {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface Window {
     __flopflip__: TFlopflipGlobal;
   }

@@ -1,15 +1,12 @@
-// eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference types="cypress" />
 
-import { type TAdapterIdentifiers, type TFlags } from '@flopflip/types';
+import type { TAdapterIdentifiers, TFlags } from '@flopflip/types';
 
 type TCypressPluginAddCommandOptions = {
   adapterId: TAdapterIdentifiers;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
 declare namespace Cypress {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface Chainable {
     updateFeatureFlags: (flags: TFlags) => Chainable;
   }

@@ -380,7 +380,7 @@ describe('when adapter args change after adapter was configured', () => {
     const adapter = createAdapter();
     const props = {};
 
-    const { triggerReconfiguration, waitUntilStatus, mergedRenderProps } =
+    const { triggerReconfiguration, waitUntilStatus } =
       renderWithReconfiguration({
         props,
         adapter,

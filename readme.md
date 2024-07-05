@@ -13,10 +13,9 @@
   React
   · Redux
   · Jest
-  · Prettier
   · TypeScript
   · @testing-library/react
-  · ESLint
+  · Biome
   · Babel
   · Lodash
   · Changesets

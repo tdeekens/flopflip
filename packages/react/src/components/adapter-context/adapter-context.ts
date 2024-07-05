@@ -27,7 +27,9 @@ function hasEveryAdapterStatus(
   adaptersStatus?: TAdaptersStatus,
   adapterIdentifiers?: TAdapterIdentifiers[]
 ) {
-  if (Object.keys(adaptersStatus ?? {}).length === 0) return false;
+  if (Object.keys(adaptersStatus ?? {}).length === 0) {
+    return false;
+  }
 
   if (Array.isArray(adapterIdentifiers)) {
     return adapterIdentifiers.every(

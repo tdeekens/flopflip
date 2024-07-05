@@ -1,10 +1,10 @@
 import { isNil } from '@flopflip/react';
-import {
-  type TAdapterIdentifiers,
-  type TFlagName,
-  type TFlagsChange,
-  type TFlagsContext,
-  type TFlagVariation,
+import type {
+  TAdapterIdentifiers,
+  TFlagName,
+  TFlagVariation,
+  TFlagsChange,
+  TFlagsContext,
 } from '@flopflip/types';
 import type { Reducer } from 'redux';
 
@@ -19,7 +19,7 @@ const initialState: TFlagsContext = { memory: {} };
 
 // Reducer
 const reducer = (
-  // eslint-disable-next-line @typescript-eslint/default-param-last
+  // biome-ignore lint/style/useDefaultParameterLast: <explanation>
   state: TFlagsContext = initialState,
   action: TUpdateFlagsAction
 ): TFlagsContext => {
@@ -63,7 +63,7 @@ export const createReducer =
     preloadedState: TFlagsContext = initialState
   ): Reducer<TFlagsContext, TUpdateFlagsAction> =>
   (
-    // eslint-disable-next-line @typescript-eslint/default-param-last
+    // biome-ignore lint/style/useDefaultParameterLast: <explanation>
     state = preloadedState,
     action
   ) =>

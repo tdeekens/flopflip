@@ -2,18 +2,18 @@
 import { exposeGlobally, normalizeFlags } from '@flopflip/adapter-utilities';
 import {
   AdapterConfigurationStatus,
-  adapterIdentifiers,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TFlag,
   type TFlagName,
-  type TFlags,
   type TFlagVariation,
+  type TFlags,
   type TSplitioAdapterArgs,
   type TSplitioAdapterInterface,
   type TUser,
+  adapterIdentifiers,
 } from '@flopflip/types';
 import { SplitFactory } from '@splitsoftware/splitio';
 import camelCase from 'lodash/camelCase';
@@ -48,7 +48,6 @@ const normalizeFlag = (
     normalizeFlagValue = true;
   } else if (flagValue === 'off') {
     normalizeFlagValue = false;
-    // eslint-disable-next-line no-eq-null, eqeqeq, no-negated-condition
   } else if (flagValue != null) {
     normalizeFlagValue = flagValue;
   } else {
@@ -125,7 +124,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
       );
     }
 
-    const sdk = SplitFactory(this.#adapterState.splitioSettings); // eslint-disable-line new-cap
+    const sdk = SplitFactory(this.#adapterState.splitioSettings);
 
     return {
       client: sdk.client(),
@@ -204,7 +203,9 @@ class SplitioAdapter implements TSplitioAdapterInterface {
             }
           }
         );
-      } else reject(new Error());
+      } else {
+        reject(new Error());
+      }
     });
 
   readonly #configureSplitio = async () => {

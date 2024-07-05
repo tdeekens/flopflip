@@ -147,7 +147,7 @@ describe('when combining adapters', () => {
         await waitUntilConfiguredFirstRender();
 
         expect(
-          screen.queryByText(`updatedFlag is enabled`)
+          screen.queryByText('updatedFlag is enabled')
         ).not.toBeInTheDocument();
 
         act(() => {
@@ -157,7 +157,7 @@ describe('when combining adapters', () => {
         });
 
         expect(
-          screen.getByText(`updatedMemoryAdapterFlag is enabled`)
+          screen.getByText('updatedMemoryAdapterFlag is enabled')
         ).toBeInTheDocument();
 
         act(() => {
@@ -167,7 +167,7 @@ describe('when combining adapters', () => {
         });
 
         expect(
-          screen.getByText(`updatedLocalstorageAdapterFlag is enabled`)
+          screen.getByText('updatedLocalstorageAdapterFlag is enabled')
         ).toBeInTheDocument();
       });
     });
@@ -184,7 +184,7 @@ describe('when combining adapters', () => {
         await waitUntilConfiguredFirstRender();
 
         expect(
-          screen.queryByText(`updatedFlag is enabled`)
+          screen.queryByText('updatedFlag is enabled')
         ).not.toBeInTheDocument();
 
         act(() => {
@@ -197,7 +197,7 @@ describe('when combining adapters', () => {
         });
 
         expect(
-          screen.getByText(`updatedShared is enabled`)
+          screen.getByText('updatedShared is enabled')
         ).toBeInTheDocument();
 
         act(() => {
@@ -210,7 +210,7 @@ describe('when combining adapters', () => {
         });
 
         expect(
-          screen.getByText(`updatedShared is disabled`)
+          screen.getByText('updatedShared is disabled')
         ).toBeInTheDocument();
       });
     });

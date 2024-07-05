@@ -6,22 +6,22 @@ import {
 import { getCache } from '@flopflip/cache';
 import {
   AdapterConfigurationStatus,
-  adapterIdentifiers,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
-  cacheModes,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
   type TCacheIdentifiers,
   type TFlagName,
+  type TFlagVariation,
   type TFlags,
   type TFlagsChange,
   type TFlagsUpdateFunction,
-  type TFlagVariation,
   type TGraphQlAdapterArgs,
   type TGraphQlAdapterInterface,
   type TUser,
+  adapterIdentifiers,
+  cacheModes,
 } from '@flopflip/types';
 import isEqual from 'lodash/isEqual';
 import mitt, { type Emitter } from 'mitt';
@@ -53,7 +53,6 @@ const intialAdapterState: TAdapterStatus & TGraphQlAdapterState = {
 class GraphQlAdapter implements TGraphQlAdapterInterface {
   id: typeof adapterIdentifiers.graphql;
 
-  // eslint-disable-next-line @typescript-eslint/prefer-readonly
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
 
@@ -78,7 +77,9 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
   readonly #didFlagsChange = (nextFlags: TFlags) => {
     const previousFlags = this.#adapterState.flags;
 
-    if (previousFlags === undefined) return true;
+    if (previousFlags === undefined) {
+      return true;
+    }
 
     return !isEqual(nextFlags, previousFlags);
   };
@@ -154,7 +155,9 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
       '@flopflip/graphql-adapter: adapter not configured. Flags can not be updated before.'
     );
 
-    if (!isAdapterConfigured) return;
+    if (!isAdapterConfigured) {
+      return;
+    }
 
     const previousFlags: TFlags | undefined = this.#adapterState.flags;
 
@@ -165,18 +168,20 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
           flagValue
         );
 
-        if (this.#getIsFlagLocked(normalizedFlagName)) return updatedFlags;
+        if (this.#getIsFlagLocked(normalizedFlagName)) {
+          return updatedFlags;
+        }
 
         if (options?.lockFlags) {
           this.#adapterState.lockedFlags.add(normalizedFlagName);
         }
 
-        updatedFlags = {
+        const updated = {
           ...updatedFlags,
           [normalizedFlagName]: normalizedFlagValue,
         };
 
-        return updatedFlags;
+        return updated;
       },
       {}
     );
@@ -195,7 +200,9 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
     adapterEventHandlers: TAdapterEventHandlers
   ) {
     const handleFlagsChange = (nextFlags: TFlagsChange['flags']) => {
-      if (this.#getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) {
+        return;
+      }
 
       adapterEventHandlers.onFlagsStateChange({
         flags: nextFlags,
@@ -204,7 +211,9 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
     };
 
     const handleStatusChange = (nextStatus: TAdapterStatusChange['status']) => {
-      if (this.#getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) {
+        return;
+      }
 
       adapterEventHandlers.onStatusStateChange({
         status: nextStatus,
@@ -220,7 +229,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
     this.#adapterState.user = adapterArgs.user;
 
     return Promise.resolve().then(async () => {
-      let cachedFlags;
+      let cachedFlags = null;
 
       if (adapterArgs.cacheIdentifier) {
         const cache = await getCache(
@@ -274,12 +283,13 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
     adapterArgs: TGraphQlAdapterArgs,
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
-    if (!this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured))
+    if (!this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)) {
       return Promise.reject(
         new Error(
           '@flopflip/graphql-adapter: please configure adapter before reconfiguring.'
         )
       );
+    }
 
     this.#adapterState.flags = {};
 
@@ -314,13 +324,16 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
 
   async waitUntilConfigured() {
     return new Promise<void>((resolve) => {
-      if (this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured))
+      if (
+        this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+      ) {
         resolve();
-      else
+      } else {
         this.#adapterState.emitter.on(
           this.#__internalConfiguredStatusChange__,
           resolve
         );
+      }
     });
   }
 

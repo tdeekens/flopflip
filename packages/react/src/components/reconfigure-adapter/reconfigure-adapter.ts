@@ -1,11 +1,11 @@
-import { type TUser } from '@flopflip/types';
-import type React from 'react';
+import type { TUser } from '@flopflip/types';
+// biome-ignore lint/style/useImportType: <explanation>
+import React from 'react';
 import { Children, useEffect } from 'react';
 
 import useAdapterContext from '../../hooks/use-adapter-context';
 
 type TProps<TAdditionalUserProperties> = {
-  // eslint-disable-next-line react/boolean-prop-naming
   readonly shouldOverwrite?: boolean;
   readonly user: TUser<TAdditionalUserProperties>;
   readonly children?: React.ReactNode;

@@ -7,11 +7,7 @@
     }
   ],
   "commit": false,
-  "fixed": [
-    [
-      "@flopflip/*"
-    ]
-  ],
+  "fixed": [["@flopflip/*"]],
   "access": "restricted",
   "baseBranch": "main"
 }

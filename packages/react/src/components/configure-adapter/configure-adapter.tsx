@@ -33,7 +33,6 @@ export const AdapterStates = {
 export type TAdapterStates = ValueOf<typeof AdapterStates>;
 
 type TProps = {
-  // eslint-disable-next-line react/boolean-prop-naming
   readonly shouldDeferAdapterConfiguration?: boolean;
   readonly adapter: TAdapter;
   readonly adapterArgs: TAdapterArgs;
@@ -58,6 +57,7 @@ const useAppliedAdapterArgsState = ({
   const [appliedAdapterArgs, setAppliedAdapterArgs] =
     useState<TAdapterArgs>(initialAdapterArgs);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const applyAdapterArgs = useCallback(
     (nextAdapterArgs: TAdapterArgs) => {
       /**
@@ -83,6 +83,7 @@ type TUseAdapterStateRefReturn = [
 const useAdapterStateRef = (): TUseAdapterStateRefReturn => {
   const adapterStateRef = useRef<TAdapterStates>(AdapterStates.UNCONFIGURED);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const setAdapterState = useCallback(
     (nextAdapterState: TAdapterStates) => {
       adapterStateRef.current = nextAdapterState;
@@ -90,11 +91,13 @@ const useAdapterStateRef = (): TUseAdapterStateRefReturn => {
     [adapterStateRef]
   );
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const getIsAdapterConfigured = useCallback(
     () => adapterStateRef.current === AdapterStates.CONFIGURED,
     [adapterStateRef]
   );
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const getDoesAdapterNeedInitialConfiguration = useCallback(
     () =>
       adapterStateRef.current !== AdapterStates.CONFIGURED &&
@@ -120,6 +123,7 @@ const usePendingAdapterArgsRef = (
 ): TUsePendingAdapterArgsRefReturn => {
   const pendingAdapterArgsRef = useRef<TAdapterArgs | undefined>(undefined);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const setPendingAdapterArgs = useCallback(
     (nextReconfiguration: TAdapterReconfiguration): void => {
       /**
@@ -138,6 +142,7 @@ const usePendingAdapterArgsRef = (
     [appliedAdapterArgs, pendingAdapterArgsRef]
   );
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const unsetPendingAdapterArgs = useCallback(() => {
     pendingAdapterArgsRef.current = undefined;
   }, [pendingAdapterArgsRef]);
@@ -153,6 +158,8 @@ const usePendingAdapterArgsRef = (
    *    be passed pending or applied adapterArgs.
    *
    */
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const getAdapterArgsForConfiguration = useCallback(
     (): TAdapterArgs => pendingAdapterArgsRef.current ?? appliedAdapterArgs,
     [appliedAdapterArgs, pendingAdapterArgsRef]
@@ -161,6 +168,8 @@ const usePendingAdapterArgsRef = (
   /**
    * NOTE: Clears the pending adapter args when applied adapter args changed.
    */
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(unsetPendingAdapterArgs, [
     appliedAdapterArgs,
     unsetPendingAdapterArgs,
@@ -217,6 +226,7 @@ const useConfigurationEffect = ({
   pendingAdapterArgsRef,
   appliedAdapterArgs,
 }: TUseConfigurationEffectOptions) => {
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (
       !shouldDeferAdapterConfiguration &&
@@ -325,8 +335,11 @@ const useDefaultFlagsEffect = ({
     onFlagsStateChange,
   });
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
-    if (defaultFlags) handleDefaultFlags(defaultFlags);
+    if (defaultFlags) {
+      handleDefaultFlags(defaultFlags);
+    }
 
     if (!shouldDeferAdapterConfiguration) {
       setAdapterState(AdapterStates.CONFIGURING);
@@ -361,7 +374,6 @@ const useDefaultFlagsEffect = ({
           warning(false, '@flopflip/react: adapter could not be configured.');
         });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 
@@ -496,16 +508,20 @@ function ConfigureAdapter({
         );
 
         if (isAdapterConfigured) {
-          if (typeof render === 'function') return render();
+          if (typeof render === 'function') {
+            return render();
+          }
         }
 
-        if (children && isFunctionChildren(children))
+        if (children && isFunctionChildren(children)) {
           return children({
             isAdapterConfigured,
           });
+        }
 
-        if (children && !isEmptyChildren(children))
+        if (children && !isEmptyChildren(children)) {
           return React.Children.only<React.ReactNode>(children);
+        }
 
         return null;
       })()}

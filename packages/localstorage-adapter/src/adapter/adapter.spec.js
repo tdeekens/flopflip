@@ -275,8 +275,8 @@ describe('when configuring', () => {
 
 describe('exposeGlobally', () => {
   it('should expose `adapter` globally', () => {
-    const globalThis = getGlobalThis();
+    const global = getGlobalThis();
 
-    expect(globalThis).toHaveProperty('__flopflip__.localstorage', adapter);
+    expect(global).toHaveProperty('__flopflip__.localstorage', adapter);
   });
 });

@@ -1,18 +1,12 @@
 {
- "extends": [
-    "config:base",
-    "group:monorepos",
-    "schedule:weekly"
-  ],
+  "extends": ["config:base", "group:monorepos", "schedule:weekly"],
   "separateMajorMinor": true,
   "lockFileMaintenance": {
     "enabled": true
   },
   "packageRules": [
     {
-      "packagePatterns": [
-        "*"
-      ],
+      "packagePatterns": ["*"],
       "updateTypes": ["minor", "patch"],
       "groupName": "all dependencies",
       "groupSlug": "all"
@@ -20,12 +14,7 @@
     {
       "extends": "monorepo:babel",
       "groupName": "babel monorepo",
-      "matchUpdateTypes": [
-        "digest",
-        "patch",
-        "minor",
-        "major"
-      ]
+      "matchUpdateTypes": ["digest", "patch", "minor", "major"]
     },
     {
       "matchPackageNames": ["react-redux"],

@@ -6,22 +6,22 @@ import {
 import { getCache } from '@flopflip/cache';
 import {
   AdapterConfigurationStatus,
-  adapterIdentifiers,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
-  cacheModes,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
   type TCacheIdentifiers,
   type TFlagName,
+  type TFlagVariation,
   type TFlags,
   type TFlagsChange,
   type TFlagsUpdateFunction,
-  type TFlagVariation,
   type THttpAdapterArgs,
   type THttpAdapterInterface,
   type TUser,
+  adapterIdentifiers,
+  cacheModes,
 } from '@flopflip/types';
 import isEqual from 'lodash/isEqual';
 import mitt, { type Emitter } from 'mitt';
@@ -52,7 +52,6 @@ const intialAdapterState: TAdapterStatus & THttpAdapterState = {
 
 class HttpAdapter implements THttpAdapterInterface {
   id: typeof adapterIdentifiers.http;
-  // eslint-disable-next-line @typescript-eslint/prefer-readonly
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
 
@@ -77,7 +76,9 @@ class HttpAdapter implements THttpAdapterInterface {
   readonly #didFlagsChange = (nextFlags: TFlags) => {
     const previousFlags = this.#adapterState.flags;
 
-    if (previousFlags === undefined) return true;
+    if (previousFlags === undefined) {
+      return true;
+    }
 
     return !isEqual(nextFlags, previousFlags);
   };
@@ -137,7 +138,9 @@ class HttpAdapter implements THttpAdapterInterface {
       '@flopflip/http-adapter: adapter not configured. Flags can not be updated before.'
     );
 
-    if (!isAdapterConfigured) return;
+    if (!isAdapterConfigured) {
+      return;
+    }
 
     const previousFlags: TFlags | undefined = this.#adapterState.flags;
 
@@ -148,18 +151,20 @@ class HttpAdapter implements THttpAdapterInterface {
           flagValue
         );
 
-        if (this.#getIsFlagLocked(normalizedFlagName)) return updatedFlags;
+        if (this.#getIsFlagLocked(normalizedFlagName)) {
+          return updatedFlags;
+        }
 
         if (options?.lockFlags) {
           this.#adapterState.lockedFlags.add(normalizedFlagName);
         }
 
-        updatedFlags = {
+        const updated = {
           ...updatedFlags,
           [normalizedFlagName]: normalizedFlagValue,
         };
 
-        return updatedFlags;
+        return updated;
       },
       {}
     );
@@ -178,7 +183,9 @@ class HttpAdapter implements THttpAdapterInterface {
     adapterEventHandlers: TAdapterEventHandlers
   ) {
     const handleFlagsChange = (nextFlags: TFlagsChange['flags']) => {
-      if (this.#getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) {
+        return;
+      }
 
       adapterEventHandlers.onFlagsStateChange({
         flags: nextFlags,
@@ -187,7 +194,9 @@ class HttpAdapter implements THttpAdapterInterface {
     };
 
     const handleStatusChange = (nextStatus: TAdapterStatusChange['status']) => {
-      if (this.#getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) {
+        return;
+      }
 
       adapterEventHandlers.onStatusStateChange({
         status: nextStatus,
@@ -203,7 +212,7 @@ class HttpAdapter implements THttpAdapterInterface {
     this.#adapterState.user = adapterArgs.user;
 
     return Promise.resolve().then(async () => {
-      let cachedFlags;
+      let cachedFlags = null;
 
       if (adapterArgs.cacheIdentifier) {
         const cache = await getCache(
@@ -257,12 +266,13 @@ class HttpAdapter implements THttpAdapterInterface {
     adapterArgs: THttpAdapterArgs,
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
-    if (!this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured))
+    if (!this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)) {
       return Promise.reject(
         new Error(
           '@flopflip/http-adapter: please configure adapter before reconfiguring.'
         )
       );
+    }
 
     const nextUser = adapterArgs.user;
 
@@ -299,13 +309,16 @@ class HttpAdapter implements THttpAdapterInterface {
 
   async waitUntilConfigured() {
     return new Promise<void>((resolve) => {
-      if (this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured))
+      if (
+        this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+      ) {
         resolve();
-      else
+      } else {
         this.#adapterState.emitter.on(
           this.#__internalConfiguredStatusChange__,
           resolve
         );
+      }
     });
   }
 

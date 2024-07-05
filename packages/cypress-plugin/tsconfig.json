@@ -7,8 +7,5 @@
     "types": ["cypress"]
   },
   "exclude": [""],
-  "include": [
-    "../node_modules/cypress",
-    "./**/*.ts"
-  ]
+  "include": ["../node_modules/cypress", "./**/*.ts"]
 }

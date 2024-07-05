@@ -1,12 +1,12 @@
-import { type TAdapter } from '@flopflip/types';
+import type { TAdapter } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 
 const exposeGlobally = (adapter: TAdapter) => {
-  const globalThis = getGlobalThis();
+  const global = getGlobalThis();
 
-  globalThis.__flopflip__ ||= {};
+  global.__flopflip__ ||= {};
 
-  globalThis.__flopflip__[adapter.id] = adapter;
+  global.__flopflip__[adapter.id] = adapter;
 };
 
 export default exposeGlobally;

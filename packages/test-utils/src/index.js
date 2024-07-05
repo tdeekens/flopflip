@@ -29,9 +29,9 @@ const defaultAdapterArgs = {
 
 const queryByAllByFlagName = (...args) =>
   queryHelpers.queryAllByAttribute('data-flag-name', ...args);
-const getMultipleFlagNamesError = (c, flagName) =>
+const getMultipleFlagNamesError = (_, flagName) =>
   `Found multiple elements with the 'data-flag-name' attribute of: '${flagName}'.`;
-const getMissingFlagNameError = (c, flagName) =>
+const getMissingFlagNameError = (_, flagName) =>
   `Unable to find an element with the 'data-flag-name' attribute of: '${flagName}'.`;
 
 const [
@@ -60,7 +60,6 @@ const changeFlagVariation = (flagName, flagVariation) =>
   });
 
 const defaultRender = (ui, { ...rtlOptions } = {}) => {
-  // eslint-disable-next-line testing-library/render-result-naming-convention
   const rendered = render(ui, {
     ...rtlOptions,
     queries: {
@@ -146,7 +145,6 @@ const renderWithAdapter = (
   const wrapUiIfNeeded = (innerElement) =>
     Wrapper ? cloneElement(Wrapper, null, innerElement) : innerElement;
 
-  // eslint-disable-next-line testing-library/render-result-naming-convention
   const rendered = render(
     wrapUiIfNeeded(
       <ConfigureFlopFlip

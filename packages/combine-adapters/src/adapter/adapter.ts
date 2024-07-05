@@ -1,7 +1,6 @@
 import { exposeGlobally } from '@flopflip/adapter-utilities';
 import {
   AdapterConfigurationStatus,
-  adapterIdentifiers,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   type TAdapter,
@@ -13,6 +12,7 @@ import {
   type TCombinedAdapterInterface,
   type TFlags,
   type TUpdateFlagsOptions,
+  adapterIdentifiers,
 } from '@flopflip/types';
 import mitt, { type Emitter } from 'mitt';
 import warning from 'tiny-warning';
@@ -37,7 +37,6 @@ class CombineAdapters implements TCombinedAdapterInterface {
   id: typeof adapterIdentifiers.combined;
   effectIds?: TAdapterIdentifiers[];
 
-  // eslint-disable-next-line @typescript-eslint/prefer-readonly
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
 
@@ -78,9 +77,9 @@ class CombineAdapters implements TCombinedAdapterInterface {
       return;
     }
 
-    this.#adapters.forEach((adapter) => {
+    for (const adapter of this.#adapters) {
       adapter.updateFlags(flags, options);
-    });
+    }
   };
 
   combine(adapters: TAdapter[]) {
@@ -111,7 +110,9 @@ class CombineAdapters implements TCombinedAdapterInterface {
     }
 
     const handleStatusChange = (nextStatus: TAdapterStatusChange['status']) => {
-      if (this.#getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) {
+        return;
+      }
 
       adapterEventHandlers.onStatusStateChange({
         status: nextStatus,
@@ -127,7 +128,6 @@ class CombineAdapters implements TCombinedAdapterInterface {
       this.#adapters.map(async (adapter) => {
         const adapterArgsForAdapter = adapterArgs[adapter.id];
 
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         return adapter.configure(adapterArgsForAdapter, {
           onFlagsStateChange: adapterEventHandlers.onFlagsStateChange,
           onStatusStateChange: adapterEventHandlers.onStatusStateChange,
@@ -192,7 +192,6 @@ class CombineAdapters implements TCombinedAdapterInterface {
       this.#adapters.map(async (adapter) => {
         const adapterArgsForAdapter = adapterArgs[adapter.id];
 
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         return adapter.reconfigure(adapterArgsForAdapter, {
           onFlagsStateChange: adapterEventHandlers.onFlagsStateChange,
           onStatusStateChange: adapterEventHandlers.onStatusStateChange,

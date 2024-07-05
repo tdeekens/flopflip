@@ -6,7 +6,6 @@ import {
 import createCache from '@flopflip/localstorage-cache';
 import {
   AdapterConfigurationStatus,
-  adapterIdentifiers,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   type TAdapterEventHandlers,
@@ -19,6 +18,7 @@ import {
   type TLocalStorageAdapterInterface,
   type TUpdateFlagsOptions,
   type TUser,
+  adapterIdentifiers,
 } from '@flopflip/types';
 import isEqual from 'lodash/isEqual';
 import mitt, { type Emitter } from 'mitt';
@@ -53,7 +53,6 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   id: typeof adapterIdentifiers.localstorage;
   readonly #adapterState: TAdapterStatus & TLocalStorageAdapterState;
 
-  // eslint-disable-next-line @typescript-eslint/prefer-readonly
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
 
@@ -76,7 +75,9 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   readonly #didFlagsChange = (nextFlags: TFlags) => {
     const previousFlags = this.#adapterState.flags;
 
-    if (previousFlags === undefined) return true;
+    if (previousFlags === undefined) {
+      return true;
+    }
 
     return !isEqual(nextFlags, previousFlags);
   };
@@ -115,8 +116,11 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       '@flopflip/localstorage-adapter: adapter not configured. Flags can not be updated before.'
     );
 
-    if (!isAdapterConfigured) return;
+    if (!isAdapterConfigured) {
+      return;
+    }
 
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
     const flagsCacheKey = this.#getFlagsCacheKey(this.#adapterState.user!);
     const previousFlags: TFlags | undefined =
       this.#cache.get<TFlags>(flagsCacheKey);
@@ -136,12 +140,12 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
           this.#adapterState.lockedFlags.add(normalizedFlagName);
         }
 
-        updatedFlags = {
+        const updated = {
           ...updatedFlags,
           [normalizedFlagName]: normalizedFlagValue,
         };
 
-        return updatedFlags;
+        return updated;
       },
       {}
     );
@@ -162,7 +166,9 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     adapterEventHandlers: TAdapterEventHandlers
   ) {
     const handleFlagsChange = (nextFlags: TFlagsChange['flags']) => {
-      if (this.#getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) {
+        return;
+      }
 
       adapterEventHandlers.onFlagsStateChange({
         flags: nextFlags,
@@ -171,7 +177,9 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     };
 
     const handleStatusChange = (nextStatus: TAdapterStatusChange['status']) => {
-      if (this.#getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) {
+        return;
+      }
 
       adapterEventHandlers.onStatusStateChange({
         status: nextStatus,
@@ -231,13 +239,16 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
   async waitUntilConfigured() {
     return new Promise<void>((resolve) => {
-      if (this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured))
+      if (
+        this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+      ) {
         resolve();
-      else
+      } else {
         this.#adapterState.emitter.on(
           this.#__internalConfiguredStatusChange__,
           resolve
         );
+      }
     });
   }
 

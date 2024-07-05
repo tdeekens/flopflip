@@ -7,28 +7,28 @@ import {
 import { getCache } from '@flopflip/cache';
 import {
   AdapterConfigurationStatus,
-  adapterIdentifiers,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
-  cacheModes,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
   type TCacheIdentifiers,
   type TCacheModes,
   type TFlagName,
+  type TFlagVariation,
   type TFlags,
   type TFlagsChange,
-  type TFlagVariation,
   type TLaunchDarklyAdapterArgs,
   type TLaunchDarklyAdapterInterface,
   type TUpdateFlagsOptions,
+  adapterIdentifiers,
+  cacheModes,
 } from '@flopflip/types';
 import debounce from 'debounce-fn';
 import {
-  initialize as initializeLaunchDarklyClient,
   type LDClient,
   type LDContext,
+  initialize as initializeLaunchDarklyClient,
 } from 'launchdarkly-js-client-sdk';
 import isEqual from 'lodash/isEqual';
 import mitt, { type Emitter } from 'mitt';
@@ -76,7 +76,9 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   ): void => {
     const updatedFlags = Object.entries(flags).reduce(
       (updatedFlags, [flagName, flagValue]) => {
-        if (this.#getIsFlagLocked(flagName)) return updatedFlags;
+        if (this.#getIsFlagLocked(flagName)) {
+          return updatedFlags;
+        }
 
         if (options?.lockFlags) {
           this.#adapterState.lockedFlags.add(flagName);
@@ -86,12 +88,12 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
           this.#adapterState.unsubscribedFlags.add(flagName);
         }
 
-        updatedFlags = {
+        const updated = {
           ...updatedFlags,
           [flagName]: flagValue,
         };
 
-        return updatedFlags;
+        return updated;
       },
       {}
     );
@@ -229,12 +231,13 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
           });
         })
         .catch(async () => {
-          if (throwOnInitializationFailure)
+          if (throwOnInitializationFailure) {
             return Promise.reject(
               new Error(
                 '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
               )
             );
+          }
 
           console.warn(
             '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
@@ -260,7 +263,9 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   ) => {
     const previousFlagValue = this.getFlag(flagName);
 
-    if (previousFlagValue === undefined) return true;
+    if (previousFlagValue === undefined) {
+      return true;
+    }
 
     return previousFlagValue !== nextFlagValue;
   };
@@ -294,11 +299,14 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
               cacheIdentifier
             );
 
-            if (this.#getIsFlagUnsubcribed(normalizedFlagName)) return;
+            if (this.#getIsFlagUnsubcribed(normalizedFlagName)) {
+              return;
+            }
 
             // Sometimes the SDK flushes flag changes without a value having changed.
-            if (!this.#didFlagChange(normalizedFlagName, normalizedFlagValue))
+            if (!this.#didFlagChange(normalizedFlagName, normalizedFlagValue)) {
               return;
+            }
 
             const updatedFlags: TFlags = {
               [normalizedFlagName]: normalizedFlagValue,
@@ -349,7 +357,9 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     adapterEventHandlers: TAdapterEventHandlers
   ) {
     const handleFlagsChange = (nextFlags: TFlagsChange['flags']) => {
-      if (this.#getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) {
+        return;
+      }
 
       adapterEventHandlers.onFlagsStateChange({
         flags: nextFlags,
@@ -358,7 +368,9 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     };
 
     const handleStatusChange = (nextStatus: TAdapterStatusChange['status']) => {
-      if (this.#getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) {
+        return;
+      }
 
       adapterEventHandlers.onStatusStateChange({
         status: nextStatus,
@@ -432,12 +444,13 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     adapterArgs: TLaunchDarklyAdapterArgs,
     _adapterEventHandlers: TAdapterEventHandlers
   ) {
-    if (!this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured))
+    if (!this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)) {
       return Promise.reject(
         new Error(
           '@flopflip/launchdarkly-adapter: please configure adapter before reconfiguring.'
         )
       );
+    }
 
     const nextContext = this.#ensureContext(adapterArgs.context);
 
@@ -494,10 +507,11 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       '@flopflip/launchdarkly-adapter: adapter not configured. Client context can not be updated before.'
     );
 
-    if (!isAdapterConfigured)
+    if (!isAdapterConfigured) {
       return Promise.reject(
         new Error('Can not update client context: adapter not yet configured.')
       );
+    }
 
     return this.#changeClientContext({
       ...this.#adapterState.context,

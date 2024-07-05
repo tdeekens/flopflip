@@ -35,7 +35,7 @@ describe('when configuring', () => {
 
 describe('when configured', () => {
   const adapterArgs = {
-    url: `https://localhost:8080/graphql`,
+    url: 'https://localhost:8080/graphql',
     user: { key: 'initial-user' },
     query: 'query AllFeatures { flags: allFeatures { name \n value} }',
     getQueryVariables: jest.fn(() => ({ userId: '123' })),
@@ -143,7 +143,7 @@ describe('when configured', () => {
   describe('with cache', () => {
     const adapterArgs = {
       cacheIdentifier: 'session',
-      url: `https://localhost:8080/graphql`,
+      url: 'https://localhost:8080/graphql',
       user: { key: 'initial-user' },
       query: 'query AllFeatures { flags: allFeatures { name \n value} }',
       getQueryVariables: jest.fn(() => ({ userId: '123' })),
@@ -411,8 +411,8 @@ describe('when configured', () => {
 
 describe('exposeGlobally', () => {
   it('should expose `adapter` globally', () => {
-    const globalThis = getGlobalThis();
+    const global = getGlobalThis();
 
-    expect(globalThis).toHaveProperty('__flopflip__.graphql', adapter);
+    expect(global).toHaveProperty('__flopflip__.graphql', adapter);
   });
 });

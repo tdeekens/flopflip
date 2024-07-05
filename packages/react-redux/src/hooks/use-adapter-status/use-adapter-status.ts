@@ -1,4 +1,4 @@
-import { type TAdapterIdentifiers } from '@flopflip/types';
+import type { TAdapterIdentifiers } from '@flopflip/types';
 import { useDebugValue } from 'react';
 import { useSelector } from 'react-redux';
 

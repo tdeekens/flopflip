@@ -3,8 +3,8 @@ import {
   AdapterSubscriptionStatus,
   type TAdapter,
   type TAdapterIdentifiers,
-  type TAdaptersStatus,
   type TAdapterStatusChange,
+  type TAdaptersStatus,
   type TConfigureAdapterChildren,
   type TConfigureAdapterProps,
   type TFlags,
@@ -50,7 +50,7 @@ const useFlagsState = ({
   const updateFlags = useCallback(
     (flagsChange: TFlagsChange) => {
       store.setState((prevState) => {
-        let nextState;
+        let nextState: TState;
         if (flagsChange.id) {
           nextState = {
             ...prevState,
@@ -107,7 +107,7 @@ const useStatusState = ({
   const setStatus = useCallback(
     (statusChange: TAdapterStatusChange) => {
       store.setState((prevState) => {
-        let nextState;
+        let nextState: TState;
 
         if (statusChange.id) {
           nextState = {

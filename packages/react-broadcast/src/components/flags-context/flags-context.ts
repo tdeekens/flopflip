@@ -1,7 +1,7 @@
 import {
-  adapterIdentifiers as allAdapterIdentifiers,
   type TFlags,
   type TFlagsContext,
+  adapterIdentifiers as allAdapterIdentifiers,
 } from '@flopflip/types';
 import { createContext } from 'react';
 

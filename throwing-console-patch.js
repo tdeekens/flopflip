@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 const colors = require('colors/safe');
 
 const shouldSilenceWarnings = (...messages) =>
@@ -8,21 +7,26 @@ const shouldNotThrowWarnings = (...messages) =>
   [].some((msgRegex) => messages.some((msg) => msgRegex.test(msg)));
 
 const logOrThrow = (log, method, messages) => {
-  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   const warning = `console.${method} calls not allowed in tests`;
-  if (process.env.CI) {
-    if (shouldSilenceWarnings(messages)) return;
 
-    log(warning, '\n', ...messages);
-
-    // NOTE: That some warnings should be logged allowing us to refactor graceully
-    // without having to introduce a breaking change.
-    if (shouldNotThrowWarnings(messages)) return;
-
-    throw new Error(...messages);
-  } else {
+  if (!process.env.CI) {
     log(colors.bgYellow.black(' WARN '), warning, '\n', ...messages);
+    return;
   }
+
+  if (shouldSilenceWarnings(messages)) {
+    return;
+  }
+
+  log(warning, '\n', ...messages);
+
+  // NOTE: That some warnings should be logged allowing us to refactor graceully
+  // without having to introduce a breaking change.
+  if (shouldNotThrowWarnings(messages)) {
+    return;
+  }
+
+  throw new Error(...messages);
 };
 
 const logMessage = console.log;

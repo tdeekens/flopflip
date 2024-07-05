@@ -1,20 +1,20 @@
 import {
-  adapterIdentifiers as allAdapterIdentifiers,
   type TAdapter,
   type TAdapterArgs,
   type TAdapterInterface,
   type TAdapterStatusChange,
   type TFlagsChange,
+  adapterIdentifiers as allAdapterIdentifiers,
 } from '@flopflip/types';
-import {
-  type PreloadedState,
-  type Reducer,
-  type Store,
-  type StoreEnhancerStoreCreator,
+import type {
+  PreloadedState,
+  Reducer,
+  Store,
+  StoreEnhancerStoreCreator,
 } from 'redux';
 
 import { updateFlags, updateStatus } from '../../ducks';
-import { type TState } from '../../types';
+import type { TState } from '../../types';
 
 export default function createFlopFlipEnhancer(
   adapter: TAdapter,
@@ -29,7 +29,6 @@ export default function createFlopFlipEnhancer(
     (...args) => {
       const store: Store = next(...args);
 
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       (adapter as TAdapterInterface<TAdapterArgs>).configure(adapterArgs, {
         // NOTE: This is like `bindActionCreators` but the bound action
         // creators are renamed to fit the adapter API and conventions.
