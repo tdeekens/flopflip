@@ -13,7 +13,6 @@
   React
   · Redux
   · Jest
-  · Prettier
   · TypeScript
   · @testing-library/react
   · Biome

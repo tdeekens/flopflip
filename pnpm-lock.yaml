@@ -149,9 +149,6 @@ importers:
       pinst:
         specifier: 3.0.0
         version: 3.0.0
-      prettier:
-        specifier: 3.3.2
-        version: 3.3.2
       raf:
         specifier: 3.4.1
         version: 3.4.1
@@ -3880,11 +3877,6 @@ packages:
   prettier@2.8.8:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
-    hasBin: true
-
-  prettier@3.3.2:
-    resolution: {integrity: sha512-rAVeHYMcv8ATV5d508CFdn+8/pHPpXeIid1DdrPwXnaAdH7cqjVbpJaT5eq4yRAFU/lsbwYwSF/n5iNrdJHPQA==}
-    engines: {node: '>=14'}
     hasBin: true
 
   pretty-bytes@5.6.0:
@@ -8684,8 +8676,6 @@ snapshots:
       which-pm: 2.0.0
 
   prettier@2.8.8: {}
-
-  prettier@3.3.2: {}
 
   pretty-bytes@5.6.0: {}
 

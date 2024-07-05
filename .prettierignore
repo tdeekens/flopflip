@@ -1,6 +1,0 @@
-package.json
-**/dist/**
-.changeset
-CHANGELOG.md
-pnpm-lock.yaml
-pnpm-workspace.yaml
