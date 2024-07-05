@@ -1,9 +1,9 @@
 import { ConfigureAdapter, useAdapterSubscription } from '@flopflip/react';
-import {
-  type TAdapter,
-  type TConfigureAdapterChildren,
-  type TConfigureAdapterProps,
-  type TFlags,
+import type {
+  TAdapter,
+  TConfigureAdapterChildren,
+  TConfigureAdapterProps,
+  TFlags,
 } from '@flopflip/types';
 import React from 'react';
 

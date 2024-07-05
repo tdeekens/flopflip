@@ -35,6 +35,7 @@ function useAdapterSubscription(adapter: TAdapter) {
     };
   }, [subscribe, unsubscribe]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   return useCallback(
     (demandedAdapterSubscriptionStatus: AdapterSubscriptionStatus) =>
       useAdapterSubscriptionStatusRef.current ===

@@ -21,36 +21,44 @@ function ToggleFeature({
   children,
   isFeatureEnabled,
 }: TProps) {
-  if (untoggledComponent)
+  if (untoggledComponent) {
     warning(
       isValidElementType(untoggledComponent),
       `Invalid prop 'untoggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`
     );
+  }
 
-  if (toggledComponent)
+  if (toggledComponent) {
     warning(
       isValidElementType(toggledComponent),
       `Invalid prop 'toggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`
     );
+  }
 
   if (isFeatureEnabled) {
-    if (toggledComponent) return React.createElement(toggledComponent);
+    if (toggledComponent) {
+      return React.createElement(toggledComponent);
+    }
 
     if (children) {
-      if (typeof children === 'function')
+      if (typeof children === 'function') {
         return children({
           isFeatureEnabled,
         });
+      }
       return React.Children.only<React.ReactNode>(children);
     }
 
-    if (typeof render === 'function') return render();
+    if (typeof render === 'function') {
+      return render();
+    }
   }
 
-  if (typeof children === 'function')
+  if (typeof children === 'function') {
     return children({
       isFeatureEnabled,
     });
+  }
 
   if (untoggledComponent) {
     return React.createElement(untoggledComponent);

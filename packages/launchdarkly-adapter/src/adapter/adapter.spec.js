@@ -26,12 +26,13 @@ const createClient = jest.fn((apiOverwrites) => ({
   ...apiOverwrites,
 }));
 
-const triggerFlagValueChange = (client, { flagValue = false } = {}) =>
-  client.on.mock.calls.forEach(([event, cb]) => {
+const triggerFlagValueChange = (client, { flagValue = false } = {}) => {
+  for (const [event, cb] of client.on.mock.calls) {
     if (event.startsWith('change:')) {
       cb(flagValue);
     }
-  });
+  }
+};
 
 describe('when configuring', () => {
   let onStatusStateChange;
@@ -224,12 +225,12 @@ describe('when configuring', () => {
 
         it('should register callbacks to receive flag updates', () => {
           expect(client.on).toHaveBeenCalledWith(
-            `change:some-flag-1`,
+            'change:some-flag-1',
             expect.any(Function)
           );
 
           expect(client.on).toHaveBeenCalledWith(
-            `change:some-flag-2`,
+            'change:some-flag-2',
             expect.any(Function)
           );
         });
@@ -321,9 +322,7 @@ describe('when configuring', () => {
             onFlagsStateChange = jest.fn();
             client = createClient({
               allFlags: jest.fn(),
-              variation: jest.fn(
-                (flagName, defaultFlagValue) => defaultFlagValue
-              ),
+              variation: jest.fn((_, defaultFlagValue) => defaultFlagValue),
             });
 
             ldClient.initialize.mockReturnValue(client);
@@ -405,6 +404,7 @@ describe('when configuring', () => {
             expect(onFlagsStateChange).toHaveBeenCalledTimes(1);
           });
 
+          // biome-ignore lint/complexity/noExcessiveNestedTestSuites: these test suits could be reorganized
           describe('when flag update occurs', () => {
             describe('without opt-out of subscription', () => {
               beforeEach(() => {
@@ -560,6 +560,7 @@ describe('when configuring', () => {
             });
           });
 
+          // biome-ignore lint/complexity/noExcessiveNestedTestSuites: these test suits could be reorganized
           describe('when flag update occurs', () => {
             it('should resolve to a successful initialization status', () => {
               expect(configurationResult).toEqual(
@@ -708,8 +709,8 @@ describe('when configuring', () => {
 
 describe('exposeGlobally', () => {
   it('should expose `adapter` globally', () => {
-    const globalThis = getGlobalThis();
+    const global = getGlobalThis();
 
-    expect(globalThis).toHaveProperty('__flopflip__.launchdarkly', adapter);
+    expect(global).toHaveProperty('__flopflip__.launchdarkly', adapter);
   });
 });

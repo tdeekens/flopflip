@@ -4,8 +4,8 @@ import {
   encodeCacheContext,
   getAllCachedFlags,
   getCache,
-  getCachedFlags,
   getCachePrefix,
+  getCachedFlags,
 } from './cache';
 
 const cacheContext = { key: 'some-user-key', value: 'some-other-value' };
@@ -94,11 +94,6 @@ describe('flag caching', () => {
         flag2: true,
       };
 
-      const memoryAdapterCache = await getCache(
-        cacheIdentifiers.session,
-        adapterIdentifiers.memory,
-        cacheContext
-      );
       const localstorageAdapterCache = await getCache(
         cacheIdentifiers.session,
         adapterIdentifiers.localstorage,

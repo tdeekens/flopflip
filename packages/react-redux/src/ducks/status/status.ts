@@ -1,8 +1,8 @@
 import { selectAdapterConfigurationStatus } from '@flopflip/react';
-import {
-  type TAdapterIdentifiers,
-  type TAdaptersStatus,
-  type TAdapterStatusChange,
+import type {
+  TAdapterIdentifiers,
+  TAdapterStatusChange,
+  TAdaptersStatus,
 } from '@flopflip/types';
 
 import { STATE_SLICE } from '../../store/constants';
@@ -16,7 +16,7 @@ const initialState = {};
 
 // Reducer
 const reducer = (
-  // eslint-disable-next-line @typescript-eslint/default-param-last
+  // biome-ignore lint/style/useDefaultParameterLast: <explanation>
   state: TAdaptersStatus = initialState,
   action: TUpdateStatusAction
 ): TAdaptersStatus => {

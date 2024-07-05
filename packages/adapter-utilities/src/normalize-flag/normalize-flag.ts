@@ -1,8 +1,4 @@
-import {
-  type TFlag,
-  type TFlagName,
-  type TFlagVariation,
-} from '@flopflip/types';
+import type { TFlag, TFlagName, TFlagVariation } from '@flopflip/types';
 import camelCase from 'lodash/camelCase';
 
 const normalizeFlag = (
@@ -11,7 +7,6 @@ const normalizeFlag = (
 ): TFlag => [
   camelCase(flagName),
   // Multi variate flags contain a string or `null` - `false` seems more natural.
-  // eslint-disable-next-line no-eq-null, eqeqeq, @typescript-eslint/prefer-nullish-coalescing
   flagValue == null ? false : flagValue,
 ];
 

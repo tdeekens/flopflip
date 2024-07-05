@@ -421,8 +421,8 @@ describe('when configured', () => {
 
 describe('exposeGlobally', () => {
   it('should expose `adapter` globally', () => {
-    const globalThis = getGlobalThis();
+    const global = getGlobalThis();
 
-    expect(globalThis).toHaveProperty('__flopflip__.http', adapter);
+    expect(global).toHaveProperty('__flopflip__.http', adapter);
   });
 });

@@ -3,7 +3,8 @@ import {
   setDisplayName,
   wrapDisplayName,
 } from '@flopflip/react';
-import { type TFlagName, type TFlagVariation } from '@flopflip/types';
+import type { TFlagName, TFlagVariation } from '@flopflip/types';
+// biome-ignore lint/style/useImportType: <explanation>
 import React from 'react';
 
 import { useFlagVariations } from '../../hooks';
@@ -11,7 +12,7 @@ import { useFlagVariations } from '../../hooks';
 type InjectedProps = Record<string, TFlagVariation>;
 
 export default function injectFeatureToggle<
-  OwnProps extends Record<string, unknown>
+  OwnProps extends Record<string, unknown>,
 >(flagName: TFlagName, propKey: string = DEFAULT_FLAG_PROP_KEY) {
   return (
     Component: React.ComponentType<any>

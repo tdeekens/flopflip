@@ -1,4 +1,5 @@
-import { type TFlagName, type TFlagVariation } from '@flopflip/types';
+import type { TFlagName, TFlagVariation } from '@flopflip/types';
+// biome-ignore lint/style/useImportType: TS is just weird
 import React from 'react';
 
 import { useFeatureToggle } from '../../hooks';
@@ -8,7 +9,7 @@ type TBranchOnFeatureToggleOptions = {
   variation?: TFlagVariation;
 };
 export default function branchOnFeatureToggle<
-  OwnProps extends Record<string, unknown>
+  OwnProps extends Record<string, unknown>,
 >(
   { flag: flagName, variation: flagVariation }: TBranchOnFeatureToggleOptions,
   UntoggledComponent?: React.ComponentType
@@ -17,8 +18,12 @@ export default function branchOnFeatureToggle<
     function WrappedToggledComponent(ownProps: OwnProps) {
       const isFeatureEnabled = useFeatureToggle(flagName, flagVariation);
 
-      if (isFeatureEnabled) return <ToggledComponent {...ownProps} />;
-      if (UntoggledComponent) return <UntoggledComponent {...ownProps} />;
+      if (isFeatureEnabled) {
+        return <ToggledComponent {...ownProps} />;
+      }
+      if (UntoggledComponent) {
+        return <UntoggledComponent {...ownProps} />;
+      }
       return null;
     }
 

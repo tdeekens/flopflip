@@ -10,9 +10,9 @@ function createStore<TState extends Record<string, unknown>>(
   function setState(fn: (prevState: TState) => TState) {
     state = fn(state);
 
-    listeners.forEach((listener) => {
+    for (const listener of listeners) {
       listener();
-    });
+    }
   }
 
   function subscribe(listener: TListener) {

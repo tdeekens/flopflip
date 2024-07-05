@@ -1,9 +1,9 @@
 import {
-  cacheIdentifiers,
   type TAdapter,
   type TAdapterIdentifiers,
   type TCacheIdentifiers,
   type TFlags,
+  cacheIdentifiers,
 } from '@flopflip/types';
 
 const FLAGS_CACHE_KEY = 'flags';
@@ -17,7 +17,6 @@ export function encodeCacheContext(cacheContext: any) {
   const encodedAsJson = JSON.stringify(cacheContext);
 
   const hashCode = [...encodedAsJson].reduce(
-    // eslint-disable-next-line no-bitwise
     (hash, c) => (Math.imul(31, hash) + c.charCodeAt(0)) | 0,
     0
   );
@@ -28,7 +27,7 @@ export function encodeCacheContext(cacheContext: any) {
 }
 
 async function importCache(cacheIdentifier: TCacheIdentifiers) {
-  let cacheModule;
+  let cacheModule: any;
 
   switch (cacheIdentifier) {
     case cacheIdentifiers.local: {
@@ -57,7 +56,9 @@ async function getCache(
   let encodedCacheContext = '';
   try {
     encodedCacheContext = encodeCacheContext(cacheContext);
-  } catch (error) {}
+  } catch (_) {
+    // continue regardless of error
+  }
 
   const flagsCachePrefix = [CACHE_PREFIX, encodedCacheContext]
     .filter(Boolean)
@@ -110,7 +111,7 @@ function getCachedFlags(
       if (cacheKey && cachedFlags) {
         return JSON.parse(cachedFlags);
       }
-    } catch (error) {
+    } catch (_) {
       console.warn(
         `@flopflip/cache: Failed to parse cached flags from ${cacheIdentifier}.`
       );

@@ -1,20 +1,20 @@
 import { exposeGlobally, normalizeFlag } from '@flopflip/adapter-utilities';
 import {
   AdapterConfigurationStatus,
-  adapterIdentifiers,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
   type TFlagName,
+  type TFlagVariation,
   type TFlags,
   type TFlagsChange,
-  type TFlagVariation,
   type TMemoryAdapterArgs,
   type TMemoryAdapterInterface,
   type TUpdateFlagsOptions,
   type TUser,
+  adapterIdentifiers,
 } from '@flopflip/types';
 import mitt, { type Emitter } from 'mitt';
 import warning from 'tiny-warning';
@@ -44,7 +44,6 @@ const intialAdapterState: TAdapterStatus & TMemoryAdapterState = {
 class MemoryAdapter implements TMemoryAdapterInterface {
   id: typeof adapterIdentifiers.memory;
 
-  // eslint-disable-next-line @typescript-eslint/prefer-readonly
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
 
@@ -80,15 +79,19 @@ class MemoryAdapter implements TMemoryAdapterInterface {
       '@flopflip/memory-adapter: adapter is not configured. Flags can not be updated before.'
     );
 
-    if (!isAdapterConfigured) return;
+    if (!isAdapterConfigured) {
+      return;
+    }
 
-    Object.entries(flags).forEach(([flagName, flagValue]) => {
+    for (const [flagName, flagValue] of Object.entries(flags)) {
       const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
         flagName,
         flagValue
       );
 
-      if (this.#getIsFlagLocked(normalizedFlagName)) return;
+      if (this.#getIsFlagLocked(normalizedFlagName)) {
+        return;
+      }
 
       if (options?.lockFlags) {
         this.#adapterState.lockedFlags.add(normalizedFlagName);
@@ -98,7 +101,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
         ...this.#adapterState.flags,
         [normalizedFlagName]: normalizedFlagValue,
       };
-    });
+    }
 
     this.#adapterState.emitter.emit(
       'flagsStateChange',
@@ -111,7 +114,9 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     adapterEventHandlers: TAdapterEventHandlers
   ) {
     const handleFlagsChange = (nextFlags: TFlagsChange['flags']) => {
-      if (this.#getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) {
+        return;
+      }
 
       adapterEventHandlers.onFlagsStateChange({
         flags: nextFlags,
@@ -120,7 +125,9 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     };
 
     const handleStatusChange = (nextStatus: TAdapterStatusChange['status']) => {
-      if (this.#getIsAdapterUnsubscribed()) return;
+      if (this.#getIsAdapterUnsubscribed()) {
+        return;
+      }
 
       adapterEventHandlers.onStatusStateChange({
         status: nextStatus,
@@ -199,13 +206,16 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
   async waitUntilConfigured() {
     return new Promise<void>((resolve) => {
-      if (this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured))
+      if (
+        this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+      ) {
         resolve();
-      else
+      } else {
         this.#adapterState.emitter.on(
           this.#__internalConfiguredStatusChange__,
           resolve
         );
+      }
     });
   }
 

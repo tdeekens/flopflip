@@ -1,0 +1,97 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "vcs": {
+    "clientKind": "git",
+    "enabled": true,
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": true
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 80,
+    "ignore": [
+      "**/package.json",
+      "**/dist/**",
+      "**/.changeset",
+      "**/CHANGELOG.md",
+      "**/pnpm-lock.yaml",
+      "**/pnpm-workspace.yaml"
+    ]
+  },
+  "organizeImports": { "enabled": true },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "performance": {
+        "noAccumulatingSpread": "off"
+      },
+      "complexity": {
+        "noVoid": "error"
+      },
+      "correctness": {
+        "noUndeclaredVariables": "error",
+        "noUnreachableSuper": "error",
+        "noUnusedVariables": "error",
+        "useArrayLiterals": "error",
+        "useExhaustiveDependencies": "warn",
+        "useHookAtTopLevel": "error"
+      },
+      "style": {
+        "noNegationElse": "error",
+        "noRestrictedGlobals": {
+          "level": "error",
+          "options": { "deniedGlobals": ["event", "atob", "btoa"] }
+        },
+        "useBlockStatements": "error",
+        "useCollapsedElseIf": "error",
+        "useConsistentArrayType": {
+          "level": "error",
+          "options": { "syntax": "shorthand" }
+        },
+        "useForOf": "error",
+        "useFragmentSyntax": "error",
+        "useShorthandAssign": "error"
+      },
+      "suspicious": {
+        "noEmptyBlockStatements": "error",
+        "noSkippedTests": "warn",
+        "noExplicitAny": "off"
+      }
+    },
+    "ignore": ["**/node_modules/", "**/coverage/", "**/dist/"]
+  },
+  "javascript": {
+    "formatter": {
+      "jsxQuoteStyle": "double",
+      "quoteProperties": "asNeeded",
+      "trailingCommas": "es5",
+      "semicolons": "always",
+      "arrowParentheses": "always",
+      "bracketSpacing": true,
+      "quoteStyle": "single"
+    },
+    "globals": [
+      "cy",
+      "VERSION",
+      "Cypress",
+      "SplitIO",
+      "it",
+      "describe",
+      "expect",
+      "jest",
+      "before",
+      "beforeAll",
+      "beforeEach",
+      "after",
+      "afterAll",
+      "afterEach"
+    ]
+  }
+}

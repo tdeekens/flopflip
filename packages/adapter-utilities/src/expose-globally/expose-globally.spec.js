@@ -10,7 +10,7 @@ const testAdapter = {
 it('should expose `adapter` globally', () => {
   exposeGlobally(testAdapter);
 
-  const globalThis = getGlobalThis();
+  const global = getGlobalThis();
 
-  expect(globalThis).toHaveProperty('__flopflip__.test', testAdapter);
+  expect(global).toHaveProperty('__flopflip__.test', testAdapter);
 });

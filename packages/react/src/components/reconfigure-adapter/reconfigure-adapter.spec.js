@@ -7,7 +7,6 @@ import ReconfigureAdapter from './reconfigure-adapter';
 
 function TestComponent({ reconfiguration, adapterContext }) {
   const [count, setCount] = useState(0);
-  // eslint-disable-next-line react/hook-use-state
   const [, setState] = useState(0);
   const increment = () => {
     setCount(count + 1);

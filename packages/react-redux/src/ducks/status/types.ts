@@ -1,6 +1,6 @@
-import {
-  type TAdapterIdentifiers,
-  type TAdapterStatusChange,
+import type {
+  TAdapterIdentifiers,
+  TAdapterStatusChange,
 } from '@flopflip/types';
 
 export type TUpdateStatusAction = {
