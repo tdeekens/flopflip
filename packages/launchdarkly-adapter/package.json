@@ -26,7 +26,7 @@
     "globalthis": "1.0.4"
   },
   "dependencies": {
-    "@babel/runtime": "7.24.5",
+    "@babel/runtime": "7.24.8",
     "@flopflip/adapter-utilities": "workspace:*",
     "@flopflip/cache": "workspace:*",
     "@flopflip/localstorage-cache": "workspace:*",
