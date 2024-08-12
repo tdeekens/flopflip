@@ -62,13 +62,13 @@
     "@changesets/changelog-github": "0.5.0",
     "@changesets/cli": "2.27.7",
     "@commercetools/jest-enzyme-matchers": "1.1.2",
-    "@commitlint/cli": "19.3.0",
+    "@commitlint/cli": "19.4.0",
     "@commitlint/config-conventional": "19.2.2",
     "@manypkg/cli": "0.21.4",
     "@preconstruct/cli": "2.8.7",
     "@types/jest": "29.5.12",
     "@types/lodash": "4.17.7",
-    "@types/node": "20.14.14",
+    "@types/node": "20.14.15",
     "babel-jest": "29.7.0",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "check-node-version": "4.2.1",
@@ -98,7 +98,7 @@
     "HoC",
     "store-enhancer"
   ],
-  "packageManager": "pnpm@9.6.0",
+  "packageManager": "pnpm@9.7.0",
   "preconstruct": {
     "packages": [
       "demo",
