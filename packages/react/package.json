@@ -38,7 +38,7 @@
     "react-dom": "^16.8 || ^17.0 || ^18.0.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.25.4",
+    "@babel/runtime": "7.25.6",
     "@flopflip/cache": "workspace:*",
     "@flopflip/types": "workspace:*",
     "@types/react-is": "17.0.7",
