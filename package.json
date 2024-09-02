@@ -37,7 +37,7 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "dependencies": {
-    "@babel/cli": "7.24.8",
+    "@babel/cli": "7.25.6",
     "@babel/core": "7.25.2",
     "@babel/plugin-external-helpers": "7.24.7",
     "@babel/plugin-proposal-export-default-from": "7.24.7",

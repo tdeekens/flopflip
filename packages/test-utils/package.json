@@ -15,7 +15,7 @@
     "types"
   ],
   "dependencies": {
-    "@babel/runtime": "7.25.4",
+    "@babel/runtime": "7.25.6",
     "@flopflip/memory-adapter": "workspace:*",
     "@testing-library/jest-dom": "6.5.0",
     "@testing-library/react": "16.0.1",
