@@ -18,7 +18,7 @@
     "@babel/runtime": "7.25.4",
     "@flopflip/memory-adapter": "workspace:*",
     "@testing-library/jest-dom": "6.5.0",
-    "@testing-library/react": "16.0.0",
+    "@testing-library/react": "16.0.1",
     "jest-watch-typeahead": "2.2.2",
     "react": "18.3.1",
     "react-dom": "18.3.1"
