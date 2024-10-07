@@ -58,16 +58,16 @@
     "@babel/preset-env": "7.25.4",
     "@babel/preset-react": "7.24.7",
     "@babel/preset-typescript": "7.24.7",
-    "@biomejs/biome": "1.9.2",
+    "@biomejs/biome": "1.9.3",
     "@changesets/changelog-github": "0.5.0",
-    "@changesets/cli": "2.27.8",
+    "@changesets/cli": "2.27.9",
     "@commercetools/jest-enzyme-matchers": "1.1.2",
     "@commitlint/cli": "19.5.0",
     "@commitlint/config-conventional": "19.5.0",
     "@manypkg/cli": "0.21.4",
-    "@preconstruct/cli": "2.8.7",
+    "@preconstruct/cli": "2.8.8",
     "@types/jest": "29.5.13",
-    "@types/lodash": "4.17.9",
+    "@types/lodash": "4.17.10",
     "@types/node": "20.16.10",
     "babel-jest": "29.7.0",
     "babel-plugin-transform-dynamic-import": "2.1.0",
@@ -98,7 +98,7 @@
     "HoC",
     "store-enhancer"
   ],
-  "packageManager": "pnpm@9.11.0",
+  "packageManager": "pnpm@9.12.0",
   "preconstruct": {
     "packages": [
       "demo",
@@ -109,7 +109,7 @@
   },
   "pnpm": {
     "overrides": {
-      "@types/react": "18.3.10",
+      "@types/react": "18.3.11",
       "@types/react-dom": "18.3.0"
     },
     "patchedDependencies": {
