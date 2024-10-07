@@ -1,5 +1,13 @@
 # @flopflip/react-redux
 
+## 14.0.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/react@14.0.3
+  - @flopflip/types@14.0.3
+
 ## 14.0.2
 
 ### Patch Changes
@@ -165,7 +173,7 @@
   Example:
 
   ```javascript
-  import { useAllFeatureToggles } from '@flopflip/react-broadcast';
+  import { useAllFeatureToggles } from "@flopflip/react-broadcast";
 
   const MyComponent = () => {
     const allFeatureToggles = useAllFeatureToggles();
@@ -1066,15 +1074,15 @@
   You can now conveniently a flag variation without evaluating its actual state (as with `useFeatureToggle`).
 
   ```js
-  const variation = useFlagVariation('myFlagName');
+  const variation = useFlagVariation("myFlagName");
 
   const isAEnabled = variation === VARIATION_A;
   const isBEnabled = variation === VARIATION_B;
 
   // Is the same as
 
-  const isAEnabled = useFlagVariation('myFlagName', VARIATION_A);
-  const isBEnabled = useFlagVariation('myFlagName', VARIATION_B);
+  const isAEnabled = useFlagVariation("myFlagName", VARIATION_A);
+  const isBEnabled = useFlagVariation("myFlagName", VARIATION_B);
   ```
 
   Using `useFlagVariation` is often a bit more concise if you want to work with the variation value yourself.
