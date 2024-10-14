@@ -1,5 +1,16 @@
 # @flopflip/cache
 
+## 14.0.3
+
+### Patch Changes
+
+- [#1923](https://github.com/tdeekens/flopflip/pull/1923) [`f62ab95`](https://github.com/tdeekens/flopflip/commit/f62ab955815a295c23c1f2dab3901f6d5cbbc570) Thanks [@YahiaElTai](https://github.com/YahiaElTai)! - Replace eslint with biome
+
+- Updated dependencies []:
+  - @flopflip/localstorage-cache@14.0.3
+  - @flopflip/sessionstorage-cache@14.0.3
+  - @flopflip/types@14.0.3
+
 ## 14.0.2
 
 ### Patch Changes

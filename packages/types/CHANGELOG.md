@@ -1,5 +1,7 @@
 # @flopflip/types
 
+## 14.0.3
+
 ## 14.0.2
 
 ### Patch Changes
@@ -207,20 +209,20 @@
 
   ```js
   const deviceContext = {
-    kind: 'device',
-    type: 'iPad',
-    key: 'device-key-123abc',
+    kind: "device",
+    type: "iPad",
+    key: "device-key-123abc",
   };
 
   const userContext = {
-    kind: 'user',
-    key: 'user-key-123abc',
-    name: 'Sandy',
-    role: 'doctor',
+    kind: "user",
+    key: "user-key-123abc",
+    name: "Sandy",
+    role: "doctor",
   };
 
   const multiContext = {
-    kind: 'multi',
+    kind: "multi",
 
     device: deviceContext,
   };
