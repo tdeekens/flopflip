@@ -1,5 +1,12 @@
 # @flopflip/localstorage-cache
 
+## 14.0.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/types@14.0.3
+
 ## 14.0.2
 
 ### Patch Changes
