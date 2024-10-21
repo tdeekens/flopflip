@@ -1,5 +1,12 @@
 # @flopflip/test-utils
 
+## 14.0.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/memory-adapter@14.0.3
+
 ## 14.0.2
 
 ### Patch Changes
@@ -144,7 +151,7 @@
   Example:
 
   ```javascript
-  import { useAllFeatureToggles } from '@flopflip/react-broadcast';
+  import { useAllFeatureToggles } from "@flopflip/react-broadcast";
 
   const MyComponent = () => {
     const allFeatureToggles = useAllFeatureToggles();
