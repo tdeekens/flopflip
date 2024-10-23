@@ -58,17 +58,17 @@
     "@babel/preset-env": "7.25.8",
     "@babel/preset-react": "7.25.7",
     "@babel/preset-typescript": "7.25.7",
-    "@biomejs/biome": "1.9.3",
+    "@biomejs/biome": "1.9.4",
     "@changesets/changelog-github": "0.5.0",
     "@changesets/cli": "2.27.9",
     "@commercetools/jest-enzyme-matchers": "1.1.2",
     "@commitlint/cli": "19.5.0",
     "@commitlint/config-conventional": "19.5.0",
-    "@manypkg/cli": "0.21.4",
+    "@manypkg/cli": "0.22.0",
     "@preconstruct/cli": "2.8.9",
-    "@types/jest": "29.5.13",
-    "@types/lodash": "4.17.10",
-    "@types/node": "20.16.11",
+    "@types/jest": "29.5.14",
+    "@types/lodash": "4.17.12",
+    "@types/node": "20.17.0",
     "babel-jest": "29.7.0",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "check-node-version": "4.2.1",
@@ -86,7 +86,7 @@
     "rimraf": "6.0.1",
     "ts-jest": "29.2.5",
     "ts-node": "10.9.2",
-    "tslib": "2.7.0",
+    "tslib": "2.8.0",
     "typescript": "5.6.3"
   },
   "keywords": [
@@ -98,7 +98,7 @@
     "HoC",
     "store-enhancer"
   ],
-  "packageManager": "pnpm@9.12.1",
+  "packageManager": "pnpm@9.12.2",
   "preconstruct": {
     "packages": [
       "demo",
@@ -109,7 +109,7 @@
   },
   "pnpm": {
     "overrides": {
-      "@types/react": "18.3.11",
+      "@types/react": "18.3.12",
       "@types/react-dom": "18.3.1"
     },
     "patchedDependencies": {
