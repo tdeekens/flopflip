@@ -26,7 +26,7 @@
     "globalthis": "1.0.4"
   },
   "dependencies": {
-    "@babel/runtime": "7.25.7",
+    "@babel/runtime": "7.26.0",
     "@flopflip/adapter-utilities": "workspace:*",
     "@flopflip/types": "workspace:*",
     "@splitsoftware/splitio": "10.28.0",
