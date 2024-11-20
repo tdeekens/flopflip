@@ -64,7 +64,7 @@
     "@commercetools/jest-enzyme-matchers": "1.1.2",
     "@commitlint/cli": "19.6.0",
     "@commitlint/config-conventional": "19.6.0",
-    "@manypkg/cli": "0.22.0",
+    "@manypkg/cli": "0.21.4",
     "@preconstruct/cli": "2.8.10",
     "@types/jest": "29.5.14",
     "@types/lodash": "4.17.13",
