@@ -68,7 +68,7 @@
     "@preconstruct/cli": "2.8.9",
     "@types/jest": "29.5.13",
     "@types/lodash": "4.17.10",
-    "@types/node": "20.16.11",
+    "@types/node": "22.9.1",
     "babel-jest": "29.7.0",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "check-node-version": "4.2.1",
