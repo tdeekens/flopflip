@@ -26,7 +26,7 @@ function TestComponent({ adapter }) {
 
   return (
     <>
-      <h1>Test Component</h1>;
+      <h1>Test Component</h1>
       <ul>
         <li>Is configured: {isConfigured ? 'Yes' : 'No'}</li>
         <li>
