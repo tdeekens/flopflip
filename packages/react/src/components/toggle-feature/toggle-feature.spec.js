@@ -1,5 +1,5 @@
 import { components, render } from '@flopflip/test-utils';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import React from 'react';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { vi, it, expect } from 'vitest';
+import { expect, it, vi } from 'vitest';
 
 import useAdapterReconfiguration from './use-adapter-reconfiguration';
 

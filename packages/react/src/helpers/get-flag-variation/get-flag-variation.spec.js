@@ -1,5 +1,5 @@
 import warning from 'tiny-warning';
-import { vi, describe, it, expect } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import getFlagVariation from './get-flag-variation';
 

@@ -1,5 +1,5 @@
-import { TFlagName } from '@flopflip/types';
-import { describe, it, expect } from 'vitest';
+import type { TFlagName } from '@flopflip/types';
+import { describe, expect, it } from 'vitest';
 
 import denormalizeFlagName from './denormalize-flag-name';
 

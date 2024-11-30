@@ -1,5 +1,5 @@
 import { AdapterConfigurationStatus } from '@flopflip/types';
-import { vi, describe, beforeEach, it, expect } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { SplitFactory } from '@splitsoftware/splitio';
 import getGlobalThis from 'globalthis';

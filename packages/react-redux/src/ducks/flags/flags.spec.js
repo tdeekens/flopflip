@@ -1,5 +1,5 @@
+import { describe, expect, it } from 'vitest';
 import { STATE_SLICE } from '../../store/constants';
-import { describe, it, expect } from 'vitest';
 
 import reducer, {
   selectFlag,

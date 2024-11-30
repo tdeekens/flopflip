@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@flopflip/test-utils';
-import { describe, it, vi, expect } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import React, { useMemo, useState } from 'react';
 

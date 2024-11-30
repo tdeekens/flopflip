@@ -1,5 +1,5 @@
+import { describe, expect, it } from 'vitest';
 import getNormalizedFlagName from './get-normalized-flag-name';
-import { describe, it, expect } from 'vitest';
 
 describe('when not camel caased', () => {
   it('should normalized the flag name', () => {
