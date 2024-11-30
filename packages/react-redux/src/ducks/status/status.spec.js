@@ -2,8 +2,7 @@ import {
   AdapterConfigurationStatus,
   adapterIdentifiers as allAdapterIdentifiers,
 } from '@flopflip/types';
-import { describe, it, expect, beforeEach } from "vitest";
-
+import { describe, it, expect, beforeEach } from 'vitest';
 
 import { STATE_SLICE } from '../../store/constants';
 import reducer, { selectStatus, UPDATE_STATUS, updateStatus } from './status';

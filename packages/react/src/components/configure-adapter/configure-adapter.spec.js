@@ -1,5 +1,5 @@
 import { getCache } from '@flopflip/cache';
-import { vi, describe, it, expect, beforeEach } from "vitest";
+import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 import {
   fireEvent,

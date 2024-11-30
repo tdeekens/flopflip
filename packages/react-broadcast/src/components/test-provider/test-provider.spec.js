@@ -1,5 +1,5 @@
 import { render as rtlRender, screen } from '@flopflip/test-utils';
-import { describe, it, expect } from "vitest";
+import { describe, it, expect } from 'vitest';
 
 import {
   AdapterConfigurationStatus,

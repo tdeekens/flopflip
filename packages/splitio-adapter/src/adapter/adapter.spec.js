@@ -1,5 +1,5 @@
 import { AdapterConfigurationStatus } from '@flopflip/types';
-import { vi, describe, beforeEach, it, expect } from "vitest";
+import { vi, describe, beforeEach, it, expect } from 'vitest';
 
 import { SplitFactory } from '@splitsoftware/splitio';
 import getGlobalThis from 'globalthis';
@@ -53,8 +53,8 @@ describe('when configuring', () => {
   });
 
   describe('with user key', () => {
-    beforeEach(() =>
-      { adapter.configure(
+    beforeEach(() => {
+      adapter.configure(
         {
           sdk: { authorizationKey },
           user: userWithKey,
@@ -63,8 +63,8 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
-      ) }
-    );
+      );
+    });
 
     it('should initialize the `SplitFactory` client with `authorizationKey` and given `user`', () => {
       expect(SplitFactory).toHaveBeenCalledWith({
@@ -77,8 +77,8 @@ describe('when configuring', () => {
   });
 
   describe('without key', () => {
-    beforeEach(() =>
-      { adapter.configure(
+    beforeEach(() => {
+      adapter.configure(
         {
           sdk: { authorizationKey },
           user: userWithoutKey,
@@ -87,8 +87,8 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
-      ) }
-    );
+      );
+    });
 
     it('should initialize the `SplitFactory` with `authorizationKey` and random `user` `key`', () => {
       expect(SplitFactory).toHaveBeenCalledWith({
@@ -105,8 +105,8 @@ describe('when configuring', () => {
       additional: 'option',
     };
 
-    beforeEach(() =>
-      { adapter.configure(
+    beforeEach(() => {
+      adapter.configure(
         {
           sdk: { authorizationKey, options },
           user: userWithKey,
@@ -115,8 +115,8 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
-      ) }
-    );
+      );
+    });
 
     it('should initialize the `SplitFactory` client with `options`', () => {
       expect(SplitFactory).toHaveBeenCalledWith({
@@ -134,8 +134,8 @@ describe('when configuring', () => {
       additional: 'core-option',
     };
 
-    beforeEach(() =>
-      { adapter.configure(
+    beforeEach(() => {
+      adapter.configure(
         {
           sdk: { authorizationKey, options: { core: coreOptions } },
           user: userWithKey,
@@ -144,8 +144,8 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
-      ) }
-    );
+      );
+    });
 
     it('should initialize the `SplitFactory` client with `core` options in `core` property', () => {
       expect(SplitFactory).toHaveBeenCalledWith({

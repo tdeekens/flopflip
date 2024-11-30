@@ -1,5 +1,5 @@
 import normalizeFlag from '../normalize-flag';
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi } from 'vitest';
 
 import normalizeFlags from './normalize-flags';
 

@@ -1,5 +1,5 @@
 import combineAdapters from '@flopflip/combine-adapters';
-import { vi, describe, it, expect, beforeAll } from "vitest";
+import { vi, describe, it, expect, beforeAll } from 'vitest';
 
 import localstorageAdapter from '@flopflip/localstorage-adapter';
 import memoryAdapter from '@flopflip/memory-adapter';

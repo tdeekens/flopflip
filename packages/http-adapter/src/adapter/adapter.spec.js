@@ -1,5 +1,5 @@
 import { encodeCacheContext } from '@flopflip/cache';
-import { vi, describe, it, expect, beforeEach, afterEach } from "vitest";
+import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 
 import { AdapterConfigurationStatus } from '@flopflip/types';
 import getGlobalThis from 'globalthis';

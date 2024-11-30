@@ -1,6 +1,5 @@
 import getGlobalThis from 'globalthis';
-import { it, expect } from "vitest";
-
+import { it, expect } from 'vitest';
 
 import exposeGlobally from './expose-globally';
 

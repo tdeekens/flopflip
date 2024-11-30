@@ -1,5 +1,5 @@
 import memoryAdapter from '@flopflip/memory-adapter';
-import { afterEach } from "vitest";
+import { afterEach } from 'vitest';
 
 import {
   act,

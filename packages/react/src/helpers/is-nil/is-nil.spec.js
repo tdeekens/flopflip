@@ -1,6 +1,5 @@
 import isNil from './is-nil';
-import { describe, it, expect } from "vitest";
-
+import { describe, it, expect } from 'vitest';
 
 describe('when null', () => {
   it('should indicate that the value is nil', () => {

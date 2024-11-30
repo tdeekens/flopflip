@@ -2,8 +2,7 @@ import {
   AdapterConfigurationStatus,
   adapterIdentifiers as allAdapterIdentifiers,
 } from '@flopflip/types';
-import { vi, describe, beforeEach, it, expect } from "vitest";
-
+import { vi, describe, beforeEach, it, expect } from 'vitest';
 
 import { updateFlags, updateStatus } from '../../ducks';
 import createFlopFlipEnhancer from './enhancer';

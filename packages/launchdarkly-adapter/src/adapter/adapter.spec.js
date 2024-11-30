@@ -1,5 +1,5 @@
 import { encodeCacheContext } from '@flopflip/cache';
-import { vi, describe, beforeEach, it, expect } from "vitest";
+import { vi, describe, beforeEach, it, expect } from 'vitest';
 
 import { AdapterConfigurationStatus } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
@@ -83,8 +83,8 @@ describe('when configuring', () => {
   });
 
   describe('with user key', () => {
-    beforeEach(() =>
-      { adapter.configure(
+    beforeEach(() => {
+      adapter.configure(
         {
           sdk: { clientSideId },
           context: userWithKey,
@@ -93,8 +93,8 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
-      ) }
-    );
+      );
+    });
 
     it('should initialize the `ld-client` with `clientSideId` and given `user`', () => {
       expect(ldClient.initialize).toHaveBeenCalledWith(
@@ -114,8 +114,8 @@ describe('when configuring', () => {
   });
 
   describe('without key', () => {
-    beforeEach(() =>
-      { adapter.configure(
+    beforeEach(() => {
+      adapter.configure(
         {
           sdk: { clientSideId },
           context: userWithoutKey,
@@ -124,8 +124,8 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
-      ) }
-    );
+      );
+    });
 
     it('should initialize the `ld-client` with `clientSideId` and no `user` `key`', () => {
       expect(ldClient.initialize).toHaveBeenCalledWith(
@@ -667,7 +667,9 @@ describe('when configuring', () => {
       });
 
       describe('with partial prop update', () => {
-        beforeEach(() => { adapter.updateClientContext(updatedClientProps) });
+        beforeEach(() => {
+          adapter.updateClientContext(updatedClientProps);
+        });
 
         it('should invoke `identify` on the client with the updated props', () => {
           expect(client.identify).toHaveBeenCalledWith(
@@ -683,12 +685,12 @@ describe('when configuring', () => {
       });
 
       describe('with full prop update', () => {
-        beforeEach(() =>
-          { adapter.updateClientContext({
+        beforeEach(() => {
+          adapter.updateClientContext({
             ...userWithKey,
             ...updatedClientProps,
-          }) }
-        );
+          });
+        });
 
         it('should invoke `identify` on the client with the full props', () => {
           expect(client.identify).toHaveBeenCalledWith(
