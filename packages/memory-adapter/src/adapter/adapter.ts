@@ -238,4 +238,4 @@ const adapter = new MemoryAdapter();
 
 exposeGlobally(adapter);
 
-export default adapter;
+export { adapter };

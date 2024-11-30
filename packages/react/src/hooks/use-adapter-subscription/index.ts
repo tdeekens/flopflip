@@ -1,1 +1,1 @@
-export { default } from './use-adapter-subscription';
+export { useAdapterSubscription } from './use-adapter-subscription';

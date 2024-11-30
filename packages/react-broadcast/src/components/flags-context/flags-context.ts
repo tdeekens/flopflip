@@ -20,5 +20,4 @@ const FlagsContext = createContext<TFlagsContext>(
   createIntialFlagsContext(allAdapterIdentifiers, {})
 );
 
-export default FlagsContext;
-export { createIntialFlagsContext };
+export { FlagsContext, createIntialFlagsContext };

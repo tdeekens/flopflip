@@ -5,9 +5,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 
 import { createStore } from '../../../test-utils';
-import Configure from '../../components/configure';
+import { Configure } from '../../components/configure';
 import { STATE_SLICE } from '../../store/constants';
-import injectFeatureToggle from './inject-feature-toggle';
+import { injectFeatureToggle } from './inject-feature-toggle';
 
 const render = (store, TestComponent) =>
   renderWithAdapter(TestComponent, {

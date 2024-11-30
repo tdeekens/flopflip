@@ -5,7 +5,7 @@ import {
 import { beforeEach, describe, expect, it } from 'vitest';
 
 import { STATE_SLICE } from '../../store/constants';
-import reducer, { selectStatus, UPDATE_STATUS, updateStatus } from './status';
+import { UPDATE_STATUS, reducer, selectStatus, updateStatus } from './status';
 
 describe('constants', () => {
   it('should contain `UPDATE_STATUS`', () => {

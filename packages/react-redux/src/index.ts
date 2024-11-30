@@ -1,6 +1,6 @@
 const version = '__@FLOPFLIP/VERSION_OF_RELEASE__';
 
-export { default as createFlopFlipEnhancer } from './store/enhancer';
+export { createFlopFlipEnhancer } from './store/enhancer';
 // Import this separately to avoid a circular dependency
 export {
   ConfigureFlopFlip,

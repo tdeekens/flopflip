@@ -1,9 +1,9 @@
 import { useAdapterContext } from '@flopflip/react';
 import type { TFlags } from '@flopflip/types';
 
-import useFlagsContext from '../use-flags-context';
+import { useFlagsContext } from '../use-flags-context';
 
-export default function useAllFeatureToggles(): TFlags {
+function useAllFeatureToggles(): TFlags {
   const adapterContext = useAdapterContext();
   const flagsContext = useFlagsContext();
   const reversedAdapterEffectIdentifiers = [
@@ -18,3 +18,5 @@ export default function useAllFeatureToggles(): TFlags {
     {}
   );
 }
+
+export { useAllFeatureToggles };

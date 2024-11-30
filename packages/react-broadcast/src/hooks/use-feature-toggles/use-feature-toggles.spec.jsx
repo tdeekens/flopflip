@@ -3,8 +3,8 @@ import { expect, it } from 'vitest';
 
 import React from 'react';
 
-import Configure from '../../components/configure';
-import useFeatureToggles from './use-feature-toggles';
+import { Configure } from '../../components/configure';
+import { useFeatureToggles } from './use-feature-toggles';
 
 const render = (TestComponent) =>
   renderWithAdapter(TestComponent, {

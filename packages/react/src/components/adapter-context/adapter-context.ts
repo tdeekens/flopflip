@@ -75,5 +75,8 @@ const selectAdapterConfigurationStatus = (
   return status;
 };
 
-export default AdapterContext;
-export { createAdapterContext, selectAdapterConfigurationStatus };
+export {
+  createAdapterContext,
+  selectAdapterConfigurationStatus,
+  AdapterContext,
+};

@@ -1,1 +1,1 @@
-export { default as setDisplayName } from './set-display-name';
+export { setDisplayName } from './set-display-name';

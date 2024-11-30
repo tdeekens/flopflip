@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { SplitFactory } from '@splitsoftware/splitio';
 import getGlobalThis from 'globalthis';
 
-import adapter, { createAnonymousUserKey, normalizeFlag } from './adapter';
+import { adapter, createAnonymousUserKey, normalizeFlag } from './adapter';
 
 vi.mock('@splitsoftware/splitio', () => ({
   SplitFactory: vi.fn(() => ({

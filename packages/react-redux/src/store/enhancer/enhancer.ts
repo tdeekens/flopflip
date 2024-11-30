@@ -16,7 +16,7 @@ import type {
 import { updateFlags, updateStatus } from '../../ducks';
 import type { TState } from '../../types';
 
-export default function createFlopFlipEnhancer(
+function createFlopFlipEnhancer(
   adapter: TAdapter,
   adapterArgs: TAdapterArgs
 ): <StoreState extends TState>(
@@ -45,3 +45,5 @@ export default function createFlopFlipEnhancer(
       return store;
     };
 }
+
+export { createFlopFlipEnhancer };

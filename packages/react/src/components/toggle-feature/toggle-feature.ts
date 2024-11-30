@@ -69,4 +69,4 @@ function ToggleFeature({
 
 ToggleFeature.displayName = 'ToggleFeature';
 
-export default ToggleFeature;
+export { ToggleFeature };

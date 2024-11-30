@@ -1,9 +1,9 @@
 import { getIsFeatureEnabled, useAdapterContext } from '@flopflip/react';
 import type { TFlagName, TFlagVariation, TFlags } from '@flopflip/types';
 
-import useFlagsContext from '../use-flags-context';
+import { useFlagsContext } from '../use-flags-context';
 
-export default function useFeatureToggles(flags: TFlags) {
+function useFeatureToggles(flags: TFlags) {
   const adapterContext = useAdapterContext();
   const flagsContext = useFlagsContext();
   const requestedFlags: boolean[] = Object.entries(flags).reduce<boolean[]>(
@@ -24,3 +24,5 @@ export default function useFeatureToggles(flags: TFlags) {
 
   return requestedFlags;
 }
+
+export { useFeatureToggles };

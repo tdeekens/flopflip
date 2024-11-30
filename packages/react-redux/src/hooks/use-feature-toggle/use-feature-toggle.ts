@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import { selectFlags } from '../../ducks/flags';
 
-export default function useFeatureToggle(
+function useFeatureToggle(
   flagName: TFlagName,
   flagVariation: TFlagVariation = true
 ) {
@@ -27,3 +27,5 @@ export default function useFeatureToggle(
 
   return isFeatureEnabled;
 }
+
+export { useFeatureToggle };

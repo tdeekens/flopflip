@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
 
-import adapter, { STORAGE_SLICE } from './adapter';
+import { STORAGE_SLICE, adapter } from './adapter';
 
 vi.mock('tiny-warning');
 

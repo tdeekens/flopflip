@@ -1,8 +1,8 @@
 import combineAdapters from '@flopflip/combine-adapters';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 
-import localstorageAdapter from '@flopflip/localstorage-adapter';
-import memoryAdapter from '@flopflip/memory-adapter';
+import { adapter as localstorageAdapter } from '@flopflip/localstorage-adapter';
+import { adapter as memoryAdapter } from '@flopflip/memory-adapter';
 import {
   act,
   defaultFlags,
@@ -13,9 +13,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 
 import { createStore } from '../../../test-utils';
-import Configure from '../../components/configure';
+import { Configure } from '../../components/configure';
 import { STATE_SLICE } from '../../store/constants';
-import useAllFeatureToggles from './use-all-feature-toggles';
+import { useAllFeatureToggles } from './use-all-feature-toggles';
 
 vi.mock('tiny-warning');
 

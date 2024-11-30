@@ -26,4 +26,4 @@ function createStore<TState extends Record<string, unknown>>(
   return { getSnapshot, setState, subscribe };
 }
 
-export default createStore;
+export { createStore };

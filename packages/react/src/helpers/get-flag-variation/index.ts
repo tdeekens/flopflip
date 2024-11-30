@@ -1,1 +1,1 @@
-export { default } from './get-flag-variation';
+export { getFlagVariation } from './get-flag-variation';

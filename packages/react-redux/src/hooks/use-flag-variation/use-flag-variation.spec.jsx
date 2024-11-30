@@ -5,9 +5,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 
 import { createStore } from '../../../test-utils';
-import Configure from '../../components/configure';
+import { Configure } from '../../components/configure';
 import { STATE_SLICE } from '../../store/constants';
-import useFlagVariation from './use-flag-variation';
+import { useFlagVariation } from './use-flag-variation';
 
 const render = (store, TestComponent) =>
   renderWithAdapter(TestComponent, {

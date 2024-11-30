@@ -1,4 +1,4 @@
-import adapter from '@flopflip/memory-adapter';
+import { adapter } from '@flopflip/memory-adapter';
 import { describe, expect, it } from 'vitest';
 
 import { act, render as rtlRender, screen } from '@flopflip/test-utils';
@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { createStore } from '../../../test-utils';
 import { useAdapterStatus, useFeatureToggle } from '../../hooks';
 import { STATE_SLICE } from '../../store/constants';
-import Configure from './configure';
+import { Configure } from './configure';
 
 const testFlagName = 'firstFlag';
 function TestComponent() {

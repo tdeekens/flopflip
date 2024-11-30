@@ -374,4 +374,4 @@ const adapter = new GraphQlAdapter();
 
 exposeGlobally(adapter);
 
-export default adapter;
+export { adapter };

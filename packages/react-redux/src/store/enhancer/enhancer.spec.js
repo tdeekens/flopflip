@@ -5,7 +5,7 @@ import {
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { updateFlags, updateStatus } from '../../ducks';
-import createFlopFlipEnhancer from './enhancer';
+import { createFlopFlipEnhancer } from './enhancer';
 
 const adapterArgs = {
   clientSideId: '123-abc',

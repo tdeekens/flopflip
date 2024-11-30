@@ -3,8 +3,8 @@ import { expect, it } from 'vitest';
 
 import React from 'react';
 
-import Configure from '../../components/configure';
-import useFlagVariations from './use-flag-variations';
+import { Configure } from '../../components/configure';
+import { useFlagVariations } from './use-flag-variations';
 
 const render = (TestComponent) =>
   renderWithAdapter(TestComponent, {

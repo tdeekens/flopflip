@@ -3,8 +3,8 @@ import { describe, expect, it } from 'vitest';
 
 import React from 'react';
 
-import Configure from '../../components/configure';
-import branchOnFeatureToggle from './branch-on-feature-toggle';
+import { Configure } from '../../components/configure';
+import { branchOnFeatureToggle } from './branch-on-feature-toggle';
 
 const render = (TestComponent) =>
   renderWithAdapter(TestComponent, {

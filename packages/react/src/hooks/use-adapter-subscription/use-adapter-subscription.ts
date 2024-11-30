@@ -44,4 +44,4 @@ function useAdapterSubscription(adapter: TAdapter) {
   );
 }
 
-export default useAdapterSubscription;
+export { useAdapterSubscription };

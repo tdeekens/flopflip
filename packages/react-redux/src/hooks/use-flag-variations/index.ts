@@ -1,1 +1,1 @@
-export { default } from './use-flag-variations';
+export { useFlagVariations } from './use-flag-variations';

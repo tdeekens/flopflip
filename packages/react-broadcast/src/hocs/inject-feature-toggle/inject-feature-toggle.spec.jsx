@@ -3,8 +3,8 @@ import { describe, expect, it } from 'vitest';
 
 import React from 'react';
 
-import Configure from '../../components/configure';
-import injectFeatureToggle from './inject-feature-toggle';
+import { Configure } from '../../components/configure';
+import { injectFeatureToggle } from './inject-feature-toggle';
 
 const render = (TestComponent) =>
   renderWithAdapter(TestComponent, {

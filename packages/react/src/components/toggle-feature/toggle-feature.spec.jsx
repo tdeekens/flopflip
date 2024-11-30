@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import React from 'react';
 
-import ToggleFeature from './toggle-feature';
+import { ToggleFeature } from './toggle-feature';
 
 describe('when feature disabled', () => {
   describe('with untoggled component', () => {

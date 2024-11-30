@@ -1,1 +1,1 @@
-export { default } from './use-feature-toggles';
+export { useFeatureToggles } from './use-feature-toggles';

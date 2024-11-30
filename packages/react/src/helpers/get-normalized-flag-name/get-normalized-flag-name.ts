@@ -4,4 +4,4 @@ import camelCase from 'lodash/camelCase';
 const getNormalizedFlagName = (flagName: TFlagName): TFlagName =>
   camelCase(flagName);
 
-export default getNormalizedFlagName;
+export { getNormalizedFlagName };

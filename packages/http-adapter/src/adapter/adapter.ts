@@ -359,4 +359,4 @@ const adapter = new HttpAdapter();
 
 exposeGlobally(adapter);
 
-export default adapter;
+export { adapter };

@@ -10,9 +10,9 @@ import {
 import { adapterIdentifiers, cacheIdentifiers } from '@flopflip/types';
 import React, { useContext } from 'react';
 
-import useAdapterReconfiguration from '../../hooks/use-adapter-reconfiguration';
-import AdapterContext from '../adapter-context';
-import ConfigureAdapter, { AdapterStates } from './configure-adapter';
+import { useAdapterReconfiguration } from '../../hooks/use-adapter-reconfiguration';
+import { AdapterContext } from '../adapter-context';
+import { AdapterStates, ConfigureAdapter } from './configure-adapter';
 
 const createAdapter = () => ({
   id: adapterIdentifiers.memory,

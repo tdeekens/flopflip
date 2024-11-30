@@ -1,1 +1,1 @@
-export { default } from './use-all-feature-toggles';
+export { useAllFeatureToggles } from './use-all-feature-toggles';

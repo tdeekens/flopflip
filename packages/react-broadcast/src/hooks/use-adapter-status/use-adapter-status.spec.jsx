@@ -3,8 +3,8 @@ import { expect, it } from 'vitest';
 
 import React from 'react';
 
-import Configure from '../../components/configure';
-import useAdapterStatus from './';
+import { Configure } from '../../components/configure';
+import { useAdapterStatus } from './';
 
 const render = (TestComponent) =>
   renderWithAdapter(TestComponent, {

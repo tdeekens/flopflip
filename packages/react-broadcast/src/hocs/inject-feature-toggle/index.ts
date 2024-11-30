@@ -1,1 +1,1 @@
-export { default } from './inject-feature-toggle';
+export { injectFeatureToggle } from './inject-feature-toggle';

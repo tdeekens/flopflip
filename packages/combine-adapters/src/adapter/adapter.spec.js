@@ -1,15 +1,13 @@
 import localstorageAdapter from '@flopflip/localstorage-adapter';
-import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-
-import memoryAdapter from '@flopflip/memory-adapter';
+import { memoryAdapter } from '@flopflip/memory-adapter';
 import {
   AdapterConfigurationStatus,
   AdapterInitializationStatus,
 } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
-
-import adapter from './adapter';
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { adapter } from './adapter';
 
 vi.mock('tiny-warning');
 

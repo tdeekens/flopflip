@@ -1,10 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { STATE_SLICE } from '../../store/constants';
 
-import reducer, {
+import {
+  UPDATE_FLAGS,
+  reducer,
   selectFlag,
   selectFlags,
-  UPDATE_FLAGS,
   updateFlags,
 } from './flags';
 

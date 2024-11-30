@@ -1,11 +1,11 @@
-import adapter from '@flopflip/memory-adapter';
+import { adapter } from '@flopflip/memory-adapter';
 import { describe, expect, it, vi } from 'vitest';
 
 import { act, render as rtlRender, screen } from '@flopflip/test-utils';
 import React from 'react';
 
 import { useAdapterStatus, useFeatureToggle } from '../../hooks';
-import Configure from './configure';
+import { Configure } from './configure';
 
 const testFlagName = 'firstFlag';
 function TestComponent() {

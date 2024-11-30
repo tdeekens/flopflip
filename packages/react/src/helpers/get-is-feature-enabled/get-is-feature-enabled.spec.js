@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import getIsFeatureEnabled from './get-is-feature-enabled';
+import { getIsFeatureEnabled } from './get-is-feature-enabled';
 
 vi.mock('tiny-warning');
 

@@ -1,1 +1,1 @@
-export { TestProvider as default } from './test-provider';
+export { TestProvider } from './test-provider';

@@ -1,7 +1,7 @@
 import getGlobalThis from 'globalthis';
 import { expect, it } from 'vitest';
 
-import exposeGlobally from './expose-globally';
+import { exposeGlobally } from './expose-globally';
 
 const testAdapter = {
   id: 'test',

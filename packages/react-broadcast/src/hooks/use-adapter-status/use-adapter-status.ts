@@ -6,9 +6,7 @@ import type { TAdapterIdentifiers } from '@flopflip/types';
 import { useDebugValue } from 'react';
 
 type TUseAdapterStatusArgs = { adapterIdentifiers?: TAdapterIdentifiers[] };
-export default function useAdapterStatus({
-  adapterIdentifiers,
-}: TUseAdapterStatusArgs = {}) {
+function useAdapterStatus({ adapterIdentifiers }: TUseAdapterStatusArgs = {}) {
   const { status } = useAdapterContext();
 
   const adapterStatus = selectAdapterConfigurationStatus(
@@ -20,3 +18,5 @@ export default function useAdapterStatus({
 
   return adapterStatus;
 }
+
+export { useAdapterStatus };

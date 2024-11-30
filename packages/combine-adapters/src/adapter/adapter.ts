@@ -263,4 +263,4 @@ const adapter = new CombineAdapters();
 
 exposeGlobally(adapter);
 
-export default adapter;
+export { adapter };

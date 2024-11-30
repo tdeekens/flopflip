@@ -1,4 +1,4 @@
-export { default as ConfigureFlopFlip } from './configure';
-export { default as ReconfigureFlopFlip } from './reconfigure';
-export { default as TestProviderFlopFlip } from './test-provider';
-export { default as ToggleFeature } from './toggle-feature';
+export { Configure as ConfigureFlopFlip } from './configure';
+export { ReconfigureAdapter as ReconfigureFlopFlip } from './reconfigure';
+export { TestProvider as TestProviderFlopFlip } from './test-provider';
+export { ToggleFeature } from './toggle-feature';

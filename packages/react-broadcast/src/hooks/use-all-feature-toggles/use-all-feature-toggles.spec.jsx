@@ -1,9 +1,9 @@
 import { adapterIdentifiers } from '@flopflip/combine-adapters';
 import { beforeAll, describe, expect, it } from 'vitest';
 
-import combineAdapters from '@flopflip/combine-adapters';
-import localstorageAdapter from '@flopflip/localstorage-adapter';
-import memoryAdapter from '@flopflip/memory-adapter';
+import { adapter as combineAdapters } from '@flopflip/combine-adapters';
+import { adapter as localstorageAdapter } from '@flopflip/localstorage-adapter';
+import { adapter as memoryAdapter } from '@flopflip/memory-adapter';
 import {
   act,
   defaultFlags,
@@ -12,8 +12,8 @@ import {
 } from '@flopflip/test-utils';
 import React from 'react';
 
-import Configure from '../../components/configure';
-import useAllFeatureToggles from './use-all-feature-toggles';
+import { Configure } from '../../components/configure';
+import { useAllFeatureToggles } from './use-all-feature-toggles';
 
 const disabledDefaultFlags = Object.fromEntries(
   Object.entries(defaultFlags).filter(([, isEnabled]) => !isEnabled)

@@ -1,1 +1,1 @@
-export { default } from './use-adapter-reconfiguration';
+export { useAdapterReconfiguration } from './use-adapter-reconfiguration';

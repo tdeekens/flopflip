@@ -1,4 +1,4 @@
-export { default as getFlagVariation } from './get-flag-variation';
-export { default as getIsFeatureEnabled } from './get-is-feature-enabled';
-export { default as getNormalizedFlagName } from './get-normalized-flag-name';
-export { default as isNil } from './is-nil';
+export { getFlagVariation } from './get-flag-variation';
+export { getIsFeatureEnabled } from './get-is-feature-enabled';
+export { getNormalizedFlagName } from './get-normalized-flag-name';
+export { isNil } from './is-nil';

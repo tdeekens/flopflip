@@ -1,4 +1,4 @@
-import memoryAdapter from '@flopflip/memory-adapter';
+import { adapter as memoryAdapter } from '@flopflip/memory-adapter';
 import { afterEach } from 'vitest';
 
 import {

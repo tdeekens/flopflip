@@ -5,7 +5,7 @@ import { AdapterConfigurationStatus } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
 
-import adapter from './adapter';
+import { adapter } from './adapter';
 
 vi.mock('tiny-warning');
 

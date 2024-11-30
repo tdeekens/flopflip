@@ -1,5 +1,5 @@
-export { default } from './adapter-context';
 export {
+  AdapterContext,
   createAdapterContext,
   selectAdapterConfigurationStatus,
 } from './adapter-context';

@@ -1,1 +1,1 @@
-export { default } from './get-normalized-flag-name';
+export { getNormalizedFlagName } from './get-normalized-flag-name';

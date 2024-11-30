@@ -3,7 +3,7 @@ import {
   normalizeFlag,
   normalizeFlags,
 } from '@flopflip/adapter-utilities';
-import createCache from '@flopflip/localstorage-cache';
+import { createCache } from '@flopflip/localstorage-cache';
 import {
   AdapterConfigurationStatus,
   AdapterInitializationStatus,
@@ -279,5 +279,5 @@ const adapter = new LocalStorageAdapter();
 
 exposeGlobally(adapter);
 
-export default adapter;
+export { adapter };
 export { STORAGE_SLICE };

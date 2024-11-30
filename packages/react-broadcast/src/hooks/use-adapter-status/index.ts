@@ -1,1 +1,1 @@
-export { default } from './use-adapter-status';
+export { useAdapterStatus } from './use-adapter-status';

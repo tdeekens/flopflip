@@ -3,8 +3,10 @@ import { useContext } from 'react';
 
 import { AdapterContext } from '../../components';
 
-export default function useAdapterReconfiguration() {
+function useAdapterReconfiguration() {
   const adapterContext: TAdapterContext = useContext(AdapterContext);
 
   return adapterContext.reconfigure;
 }
+
+export { useAdapterReconfiguration };

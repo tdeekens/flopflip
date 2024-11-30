@@ -1,1 +1,1 @@
-export { default } from './reconfigure-adapter';
+export { ReconfigureAdapter } from './reconfigure-adapter';

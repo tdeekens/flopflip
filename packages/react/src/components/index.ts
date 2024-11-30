@@ -1,8 +1,8 @@
 export {
-  default as AdapterContext,
+  AdapterContext,
   createAdapterContext,
   selectAdapterConfigurationStatus,
 } from './adapter-context';
-export { default as ConfigureAdapter } from './configure-adapter';
-export { default as ReconfigureAdapter } from './reconfigure-adapter';
-export { default as ToggleFeature } from './toggle-feature';
+export { ConfigureAdapter } from './configure-adapter';
+export { ReconfigureAdapter } from './reconfigure-adapter';
+export { ToggleFeature } from './toggle-feature';

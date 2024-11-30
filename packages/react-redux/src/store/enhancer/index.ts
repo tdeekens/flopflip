@@ -1,1 +1,1 @@
-export { default } from './enhancer';
+export { createFlopFlipEnhancer } from './enhancer';

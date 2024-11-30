@@ -1,17 +1,17 @@
 import { encodeCacheContext } from '@flopflip/cache';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { AdapterConfigurationStatus } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 import { initialize as initializeLaunchDarklyClient } from 'launchdarkly-js-client-sdk';
-import adapter from './adapter';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { adapter } from './adapter';
 
-vi.mock(import("launchdarkly-js-client-sdk"), async (importOriginal) => {
-  const actual = await importOriginal()
+vi.mock(import('launchdarkly-js-client-sdk'), async (importOriginal) => {
+  const actual = await importOriginal();
   return {
     ...actual,
     initialize: vi.fn(),
-  }
-})
+  };
+});
 vi.mock('tiny-warning');
 
 const clientSideId = '123-abc';

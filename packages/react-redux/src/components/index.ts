@@ -1,3 +1,3 @@
-export { default as ConfigureFlopFlip } from './configure';
-export { default as ReconfigureFlopFlip } from './reconfigure';
-export { default as ToggleFeature } from './toggle-feature';
+export { Configure as ConfigureFlopFlip } from './configure';
+export { ReconfigureAdapter as ReconfigureFlopFlip } from './reconfigure';
+export { ToggleFeature } from './toggle-feature';

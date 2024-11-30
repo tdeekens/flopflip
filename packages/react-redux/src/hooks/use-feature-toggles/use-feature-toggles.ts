@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { selectFlags } from '../../ducks/flags';
 
-export default function useFeatureToggles(flags: TFlags) {
+function useFeatureToggles(flags: TFlags) {
   const allFlags = useSelector(selectFlags());
   const adapterContext = useAdapterContext();
 
@@ -26,3 +26,5 @@ export default function useFeatureToggles(flags: TFlags) {
 
   return requestedFlags;
 }
+
+export { useFeatureToggles };

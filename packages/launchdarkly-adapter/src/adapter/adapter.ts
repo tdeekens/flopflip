@@ -534,4 +534,4 @@ const adapter = new LaunchDarklyAdapter();
 
 exposeGlobally(adapter);
 
-export default adapter;
+export { adapter };

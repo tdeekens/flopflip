@@ -52,7 +52,7 @@ const reducer = (
   }
 };
 
-export default reducer;
+export { reducer };
 
 // Action Creators
 export const updateStatus = (
