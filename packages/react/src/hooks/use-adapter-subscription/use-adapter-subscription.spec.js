@@ -1,4 +1,6 @@
 import { render as rtlRender, screen } from '@flopflip/test-utils';
+import { vi, describe, it, expect } from "vitest";
+
 import {
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
@@ -8,13 +10,13 @@ import React from 'react';
 import useAdapterSubscription from './use-adapter-subscription';
 
 const createAdapter = () => ({
-  getIsConfigurationStatus: jest.fn(
+  getIsConfigurationStatus: vi.fn(
     () => AdapterConfigurationStatus.Unconfigured
   ),
-  configure: jest.fn(() => Promise.resolve()),
-  reconfigure: jest.fn(() => Promise.resolve()),
-  subscribe: jest.fn(),
-  unsubscribe: jest.fn(),
+  configure: vi.fn(() => Promise.resolve()),
+  reconfigure: vi.fn(() => Promise.resolve()),
+  subscribe: vi.fn(),
+  unsubscribe: vi.fn(),
 });
 
 function TestComponent({ adapter }) {

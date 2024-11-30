@@ -1,4 +1,6 @@
 import { renderWithAdapter, screen } from '@flopflip/test-utils';
+import { vi, describe, it, expect } from "vitest";
+
 import React from 'react';
 import { Provider } from 'react-redux';
 
@@ -7,7 +9,7 @@ import Configure from '../../components/configure';
 import { STATE_SLICE } from '../../store/constants';
 import useFeatureToggle from './use-feature-toggle';
 
-jest.mock('tiny-warning');
+vi.mock('tiny-warning');
 
 const render = (store, TestComponent) =>
   renderWithAdapter(TestComponent, {

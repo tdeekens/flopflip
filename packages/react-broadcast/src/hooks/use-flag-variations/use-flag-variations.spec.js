@@ -1,4 +1,6 @@
 import { renderWithAdapter, screen } from '@flopflip/test-utils';
+import { it, expect } from "vitest";
+
 import React from 'react';
 
 import Configure from '../../components/configure';

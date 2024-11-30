@@ -1,4 +1,6 @@
 import { getCache } from '@flopflip/cache';
+import { vi, describe, it, expect, beforeEach } from "vitest";
+
 import {
   fireEvent,
   render as rtlRender,
@@ -14,9 +16,9 @@ import ConfigureAdapter, { AdapterStates } from './configure-adapter';
 
 const createAdapter = () => ({
   id: adapterIdentifiers.memory,
-  getIsConfigurationStatus: jest.fn(() => false),
-  configure: jest.fn(() => Promise.resolve()),
-  reconfigure: jest.fn(() => Promise.resolve()),
+  getIsConfigurationStatus: vi.fn(() => false),
+  configure: vi.fn(() => Promise.resolve()),
+  reconfigure: vi.fn(() => Promise.resolve()),
 });
 
 const createTestProps = ({ adapter }) => ({
@@ -27,8 +29,8 @@ const createTestProps = ({ adapter }) => ({
     },
   },
   adapterStatus: AdapterStates.CONFIGURED,
-  onFlagsStateChange: jest.fn(),
-  onStatusStateChange: jest.fn(),
+  onFlagsStateChange: vi.fn(),
+  onStatusStateChange: vi.fn(),
   adapter,
 });
 
@@ -123,7 +125,7 @@ describe('rendering', () => {
     describe('when adapter is configured', () => {
       it('should invoke render prop', async () => {
         const adapter = createAdapter();
-        const props = { render: jest.fn(() => <AdapterStatus />) };
+        const props = { render: vi.fn(() => <AdapterStatus />) };
         adapter.getIsConfigurationStatus.mockReturnValue(true);
 
         const { waitUntilStatus } = render({ props, adapter });
@@ -138,7 +140,7 @@ describe('rendering', () => {
       it('should invoke render prop', async () => {
         const adapter = createAdapter();
 
-        const props = { render: jest.fn(() => <AdapterStatus />) };
+        const props = { render: vi.fn(() => <AdapterStatus />) };
 
         render({ props, adapter });
 
@@ -158,7 +160,7 @@ describe('rendering', () => {
 
         adapter.getIsConfigurationStatus.mockReturnValue(true);
 
-        const props = { children: jest.fn(() => <AdapterStatus />) };
+        const props = { children: vi.fn(() => <AdapterStatus />) };
 
         const { waitUntilStatus } = render({ props, adapter });
 

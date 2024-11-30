@@ -1,4 +1,6 @@
 import combineAdapters from '@flopflip/combine-adapters';
+import { vi, describe, it, expect, beforeAll } from "vitest";
+
 import localstorageAdapter from '@flopflip/localstorage-adapter';
 import memoryAdapter from '@flopflip/memory-adapter';
 import {
@@ -15,7 +17,7 @@ import Configure from '../../components/configure';
 import { STATE_SLICE } from '../../store/constants';
 import useAllFeatureToggles from './use-all-feature-toggles';
 
-jest.mock('tiny-warning');
+vi.mock('tiny-warning');
 
 const disabledDefaultFlags = Object.fromEntries(
   Object.entries(defaultFlags).filter(([, isEnabled]) => !isEnabled)

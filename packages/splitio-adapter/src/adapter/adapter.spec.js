@@ -1,21 +1,23 @@
 import { AdapterConfigurationStatus } from '@flopflip/types';
+import { vi, describe, beforeEach, it, expect } from "vitest";
+
 import { SplitFactory } from '@splitsoftware/splitio';
 import getGlobalThis from 'globalthis';
 
 import adapter, { createAnonymousUserKey, normalizeFlag } from './adapter';
 
-jest.mock('@splitsoftware/splitio', () => ({
-  SplitFactory: jest.fn(() => ({
-    client: jest.fn(() => ({
-      on: jest.fn((_, cb) => cb()),
-      getTreatments: jest.fn(() => ({})),
+vi.mock('@splitsoftware/splitio', () => ({
+  SplitFactory: vi.fn(() => ({
+    client: vi.fn(() => ({
+      on: vi.fn((_, cb) => cb()),
+      getTreatments: vi.fn(() => ({})),
       Event: {
         SDK_READY: 'SDK_READY',
         SDK_UPDATE: 'SDK_UPDATE',
       },
     })),
-    manager: jest.fn(() => ({
-      names: jest.fn(() => []),
+    manager: vi.fn(() => ({
+      names: vi.fn(() => []),
     })),
   })),
 }));
@@ -33,8 +35,8 @@ describe('when configuring', () => {
   let onFlagsStateChange;
 
   beforeEach(() => {
-    onStatusStateChange = jest.fn();
-    onFlagsStateChange = jest.fn();
+    onStatusStateChange = vi.fn();
+    onFlagsStateChange = vi.fn();
   });
 
   it('should indicate that the adapter is not configured', () => {
@@ -52,7 +54,7 @@ describe('when configuring', () => {
 
   describe('with user key', () => {
     beforeEach(() =>
-      adapter.configure(
+      { adapter.configure(
         {
           sdk: { authorizationKey },
           user: userWithKey,
@@ -61,7 +63,7 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
-      )
+      ) }
     );
 
     it('should initialize the `SplitFactory` client with `authorizationKey` and given `user`', () => {
@@ -76,7 +78,7 @@ describe('when configuring', () => {
 
   describe('without key', () => {
     beforeEach(() =>
-      adapter.configure(
+      { adapter.configure(
         {
           sdk: { authorizationKey },
           user: userWithoutKey,
@@ -85,7 +87,7 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
-      )
+      ) }
     );
 
     it('should initialize the `SplitFactory` with `authorizationKey` and random `user` `key`', () => {
@@ -104,7 +106,7 @@ describe('when configuring', () => {
     };
 
     beforeEach(() =>
-      adapter.configure(
+      { adapter.configure(
         {
           sdk: { authorizationKey, options },
           user: userWithKey,
@@ -113,7 +115,7 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
-      )
+      ) }
     );
 
     it('should initialize the `SplitFactory` client with `options`', () => {
@@ -133,7 +135,7 @@ describe('when configuring', () => {
     };
 
     beforeEach(() =>
-      adapter.configure(
+      { adapter.configure(
         {
           sdk: { authorizationKey, options: { core: coreOptions } },
           user: userWithKey,
@@ -142,7 +144,7 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
-      )
+      ) }
     );
 
     it('should initialize the `SplitFactory` client with `core` options in `core` property', () => {
@@ -157,7 +159,7 @@ describe('when configuring', () => {
   });
 
   describe('when configured', () => {
-    const treatmentStub = jest.fn(() => flags);
+    const treatmentStub = vi.fn(() => flags);
     let factory;
     let onStub;
     let onStatusStateChange;
@@ -165,12 +167,12 @@ describe('when configuring', () => {
     let configurationResult;
 
     beforeEach(async () => {
-      onStatusStateChange = jest.fn();
-      onFlagsStateChange = jest.fn();
-      onStub = jest.fn((_, cb) => cb());
+      onStatusStateChange = vi.fn();
+      onFlagsStateChange = vi.fn();
+      onStub = vi.fn((_, cb) => cb());
 
       factory = {
-        client: jest.fn(() => ({
+        client: vi.fn(() => ({
           on: onStub,
           getTreatments: treatmentStub,
           Event: {
@@ -178,8 +180,8 @@ describe('when configuring', () => {
             SDK_UPDATE: 'SDK_UPDATE',
           },
         })),
-        manager: jest.fn(() => ({
-          names: jest.fn(() => names),
+        manager: vi.fn(() => ({
+          names: vi.fn(() => names),
         })),
       };
 
@@ -267,22 +269,22 @@ describe('when configuring', () => {
       let factory;
 
       beforeEach(async () => {
-        onStatusStateChange = jest.fn();
-        onFlagsStateChange = jest.fn();
-        namesStub = jest.fn(() => names);
-        getTreatmentsStub = jest.fn(() => flags);
+        onStatusStateChange = vi.fn();
+        onFlagsStateChange = vi.fn();
+        namesStub = vi.fn(() => names);
+        getTreatmentsStub = vi.fn(() => flags);
 
         factory = {
-          client: jest.fn(() => ({
-            on: jest.fn((_, cb) => cb()),
+          client: vi.fn(() => ({
+            on: vi.fn((_, cb) => cb()),
             getTreatments: getTreatmentsStub,
             Event: {
               SDK_READY: 'SDK_READY',
               SDK_UPDATE: 'SDK_UPDATE',
             },
-            destroy: jest.fn(),
+            destroy: vi.fn(),
           })),
-          manager: jest.fn(() => ({
+          manager: vi.fn(() => ({
             names: namesStub,
           })),
         };

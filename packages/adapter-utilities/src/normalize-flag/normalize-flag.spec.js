@@ -1,4 +1,6 @@
 import normalizeFlag from './normalize-flag';
+import { describe, it, expect } from "vitest";
+
 
 describe('with dashes', () => {
   it('should camel case to uppercased flag names', () => {

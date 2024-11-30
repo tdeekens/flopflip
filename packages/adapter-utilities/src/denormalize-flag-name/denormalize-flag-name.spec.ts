@@ -1,4 +1,6 @@
 import { TFlagName } from '@flopflip/types';
+import { describe, it, expect } from "vitest";
+
 import denormalizeFlagName from './denormalize-flag-name';
 
 describe('with camel case', () => {

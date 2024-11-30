@@ -2,6 +2,8 @@ import {
   AdapterConfigurationStatus,
   adapterIdentifiers as allAdapterIdentifiers,
 } from '@flopflip/types';
+import { vi, describe, beforeEach, it, expect } from "vitest";
+
 
 import { updateFlags, updateStatus } from '../../ducks';
 import createFlopFlipEnhancer from './enhancer';
@@ -12,8 +14,8 @@ const adapterArgs = {
 };
 const adapter = {
   id: 'test',
-  configure: jest.fn(),
-  reconfigure: jest.fn(),
+  configure: vi.fn(),
+  reconfigure: vi.fn(),
 };
 
 describe('when creating enhancer', () => {
@@ -26,10 +28,10 @@ describe('when creating enhancer', () => {
     let dispatch;
 
     beforeEach(() => {
-      dispatch = jest.fn();
+      dispatch = vi.fn();
 
       const getState = () => ({});
-      const next = jest.fn(() => ({ getState, dispatch }));
+      const next = vi.fn(() => ({ getState, dispatch }));
       const args = [''];
 
       enhancer(next)(args);

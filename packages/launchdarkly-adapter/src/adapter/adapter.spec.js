@@ -1,14 +1,16 @@
 import { encodeCacheContext } from '@flopflip/cache';
+import { vi, describe, beforeEach, it, expect } from "vitest";
+
 import { AdapterConfigurationStatus } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 import ldClient from 'launchdarkly-js-client-sdk';
 
 import adapter from './adapter';
 
-jest.mock('launchdarkly-js-client-sdk', () => ({
-  initialize: jest.fn(),
+vi.mock('launchdarkly-js-client-sdk', () => ({
+  initialize: vi.fn(),
 }));
-jest.mock('tiny-warning');
+vi.mock('tiny-warning');
 
 const clientSideId = '123-abc';
 const userWithKey = { kind: 'user', key: 'foo-user', anonymous: false };
@@ -17,11 +19,11 @@ const userWithoutKey = {
   group: 'foo-group',
 };
 const flags = { 'some-flag-1': true, 'some-flag-2': false };
-const createClient = jest.fn((apiOverwrites) => ({
-  waitForInitialization: jest.fn(() => Promise.resolve()),
-  on: jest.fn((_, cb) => cb()),
-  allFlags: jest.fn(() => ({})),
-  variation: jest.fn(() => true),
+const createClient = vi.fn((apiOverwrites) => ({
+  waitForInitialization: vi.fn(() => Promise.resolve()),
+  on: vi.fn((_, cb) => cb()),
+  allFlags: vi.fn(() => ({})),
+  variation: vi.fn(() => true),
 
   ...apiOverwrites,
 }));
@@ -39,8 +41,8 @@ describe('when configuring', () => {
   let onFlagsStateChange;
 
   beforeEach(() => {
-    onStatusStateChange = jest.fn();
-    onFlagsStateChange = jest.fn();
+    onStatusStateChange = vi.fn();
+    onFlagsStateChange = vi.fn();
 
     ldClient.initialize.mockReturnValue(createClient());
   });
@@ -82,7 +84,7 @@ describe('when configuring', () => {
 
   describe('with user key', () => {
     beforeEach(() =>
-      adapter.configure(
+      { adapter.configure(
         {
           sdk: { clientSideId },
           context: userWithKey,
@@ -91,7 +93,7 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
-      )
+      ) }
     );
 
     it('should initialize the `ld-client` with `clientSideId` and given `user`', () => {
@@ -113,7 +115,7 @@ describe('when configuring', () => {
 
   describe('without key', () => {
     beforeEach(() =>
-      adapter.configure(
+      { adapter.configure(
         {
           sdk: { clientSideId },
           context: userWithoutKey,
@@ -122,7 +124,7 @@ describe('when configuring', () => {
           onStatusStateChange,
           onFlagsStateChange,
         }
-      )
+      ) }
     );
 
     it('should initialize the `ld-client` with `clientSideId` and no `user` `key`', () => {
@@ -153,11 +155,11 @@ describe('when configuring', () => {
 
     describe('without cache', () => {
       beforeEach(async () => {
-        onStatusStateChange = jest.fn();
-        onFlagsStateChange = jest.fn();
+        onStatusStateChange = vi.fn();
+        onFlagsStateChange = vi.fn();
         client = createClient({
-          allFlags: jest.fn(() => flags),
-          variation: jest.fn(() => true),
+          allFlags: vi.fn(() => flags),
+          variation: vi.fn(() => true),
         });
 
         ldClient.initialize.mockReturnValue(client);
@@ -245,10 +247,10 @@ describe('when configuring', () => {
       describe('when `waitForInitialization` throws', () => {
         describe('when it should `throwOnInitializationFailure`', () => {
           beforeEach(() => {
-            onStatusStateChange = jest.fn();
-            onFlagsStateChange = jest.fn();
+            onStatusStateChange = vi.fn();
+            onFlagsStateChange = vi.fn();
             client = createClient({
-              waitForInitialization: jest.fn(() =>
+              waitForInitialization: vi.fn(() =>
                 Promise.reject(
                   new Error(
                     '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
@@ -280,10 +282,10 @@ describe('when configuring', () => {
         });
         describe('when it should not `throwOnInitializationFailure`', () => {
           beforeEach(() => {
-            onStatusStateChange = jest.fn();
-            onFlagsStateChange = jest.fn();
+            onStatusStateChange = vi.fn();
+            onFlagsStateChange = vi.fn();
             client = createClient({
-              waitForInitialization: jest.fn(() =>
+              waitForInitialization: vi.fn(() =>
                 Promise.reject(
                   new Error(
                     '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
@@ -294,7 +296,7 @@ describe('when configuring', () => {
 
             ldClient.initialize.mockReturnValue(client);
 
-            console.warn = jest.fn();
+            console.warn = vi.fn();
           });
 
           it('should resolve the configuration', async () => {
@@ -318,11 +320,11 @@ describe('when configuring', () => {
 
         describe('when `flags` is passed', () => {
           beforeEach(() => {
-            onStatusStateChange = jest.fn();
-            onFlagsStateChange = jest.fn();
+            onStatusStateChange = vi.fn();
+            onFlagsStateChange = vi.fn();
             client = createClient({
-              allFlags: jest.fn(),
-              variation: jest.fn((_, defaultFlagValue) => defaultFlagValue),
+              allFlags: vi.fn(),
+              variation: vi.fn((_, defaultFlagValue) => defaultFlagValue),
             });
 
             ldClient.initialize.mockReturnValue(client);
@@ -372,17 +374,17 @@ describe('when configuring', () => {
           const flagsUpdateDelayMs = 1000;
 
           beforeEach(() => {
-            jest.useFakeTimers();
+            vi.useFakeTimers();
 
             // Reset due to preivous dispatches
             onFlagsStateChange.mockClear();
             client.on.mockClear();
 
-            onStatusStateChange = jest.fn();
-            onFlagsStateChange = jest.fn();
+            onStatusStateChange = vi.fn();
+            onFlagsStateChange = vi.fn();
             client = createClient({
-              allFlags: jest.fn(() => flags),
-              variation: jest.fn(() => true),
+              allFlags: vi.fn(() => flags),
+              variation: vi.fn(() => true),
             });
 
             ldClient.initialize.mockReturnValue(client);
@@ -416,7 +418,7 @@ describe('when configuring', () => {
               });
 
               it('should `dispatch` `onFlagsStateChange` action after the delay passed', () => {
-                jest.advanceTimersByTime(flagsUpdateDelayMs);
+                vi.advanceTimersByTime(flagsUpdateDelayMs);
 
                 expect(onFlagsStateChange).toHaveBeenCalledTimes(4);
               });
@@ -457,8 +459,8 @@ describe('when configuring', () => {
           onStatusStateChange.mockClear();
           onFlagsStateChange.mockClear();
           client = createClient({
-            allFlags: jest.fn(() => flags),
-            variation: jest.fn(() => true),
+            allFlags: vi.fn(() => flags),
+            variation: vi.fn(() => true),
           });
 
           ldClient.initialize.mockReturnValue(client);
@@ -518,11 +520,11 @@ describe('when configuring', () => {
             onStatusStateChange.mockClear();
             onFlagsStateChange.mockClear();
             client = createClient({
-              allFlags: jest.fn(() => ({
+              allFlags: vi.fn(() => ({
                 cached: false,
                 updated: false,
               })),
-              variation: jest.fn(() => true),
+              variation: vi.fn(() => true),
             });
 
             ldClient.initialize.mockReturnValue(client);
@@ -598,7 +600,7 @@ describe('when configuring', () => {
 
       beforeEach(async () => {
         client = createClient({
-          identify: jest.fn(() => Promise.resolve()),
+          identify: vi.fn(() => Promise.resolve()),
         });
 
         ldClient.initialize.mockReturnValue(client);
@@ -647,7 +649,7 @@ describe('when configuring', () => {
 
       beforeEach(() => {
         client = createClient({
-          identify: jest.fn(() => Promise.resolve()),
+          identify: vi.fn(() => Promise.resolve()),
         });
 
         ldClient.initialize.mockReturnValue(client);
@@ -665,7 +667,7 @@ describe('when configuring', () => {
       });
 
       describe('with partial prop update', () => {
-        beforeEach(() => adapter.updateClientContext(updatedClientProps));
+        beforeEach(() => { adapter.updateClientContext(updatedClientProps) });
 
         it('should invoke `identify` on the client with the updated props', () => {
           expect(client.identify).toHaveBeenCalledWith(
@@ -682,10 +684,10 @@ describe('when configuring', () => {
 
       describe('with full prop update', () => {
         beforeEach(() =>
-          adapter.updateClientContext({
+          { adapter.updateClientContext({
             ...userWithKey,
             ...updatedClientProps,
-          })
+          }) }
         );
 
         it('should invoke `identify` on the client with the full props', () => {

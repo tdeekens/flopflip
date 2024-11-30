@@ -1,4 +1,6 @@
 import adapter from '@flopflip/memory-adapter';
+import { describe, it, expect, vi } from "vitest";
+
 import { act, render as rtlRender, screen } from '@flopflip/test-utils';
 import React from 'react';
 
@@ -69,7 +71,7 @@ describe('when enabling feature', () => {
 
   it('should not reconfigure the adapter multiple times', async () => {
     const { waitUntilConfigured } = render();
-    const spy = jest.spyOn(adapter, 'reconfigure');
+    const spy = vi.spyOn(adapter, 'reconfigure');
 
     await waitUntilConfigured();
 

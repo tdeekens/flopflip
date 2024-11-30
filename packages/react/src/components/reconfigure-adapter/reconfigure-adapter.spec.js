@@ -1,4 +1,6 @@
 import { fireEvent, render, screen } from '@flopflip/test-utils';
+import { describe, it, vi, expect } from "vitest";
+
 import React, { useMemo, useState } from 'react';
 
 import AdapterContext, { createAdapterContext } from './../adapter-context';
@@ -52,7 +54,7 @@ describe('with children', () => {
   it('should render children', () => {
     const adapterContext = createAdapterContext(
       ['memory'],
-      jest.fn(),
+      vi.fn(),
       AdapterStates.UNCONFIGURED
     );
     const reconfiguration = createReconfiguration();
@@ -71,7 +73,7 @@ describe('when mounted', () => {
   it('should reconfigure with user and configuration', () => {
     const adapterContext = createAdapterContext(
       ['memory'],
-      jest.fn(),
+      vi.fn(),
       AdapterStates.UNCONFIGURED
     );
     const reconfiguration = createReconfiguration();
@@ -99,7 +101,7 @@ describe('when updated', () => {
     it('should not reconfigure again with user and configuration', () => {
       const adapterContext = createAdapterContext(
         ['memory'],
-        jest.fn(),
+        vi.fn(),
         AdapterStates.UNCONFIGURED
       );
       const reconfiguration = createReconfiguration();
@@ -121,7 +123,7 @@ describe('when updated', () => {
     it('should reconfigure again with user and configuration', () => {
       const adapterContext = createAdapterContext(
         ['memory'],
-        jest.fn(),
+        vi.fn(),
         AdapterStates.UNCONFIGURED
       );
       const reconfiguration = createReconfiguration();
