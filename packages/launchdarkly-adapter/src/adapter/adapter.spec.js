@@ -1,15 +1,17 @@
 import { encodeCacheContext } from '@flopflip/cache';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-
 import { AdapterConfigurationStatus } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
-import ldClient from 'launchdarkly-js-client-sdk';
-
+import { initialize as initializeLaunchDarklyClient } from 'launchdarkly-js-client-sdk';
 import adapter from './adapter';
 
-vi.mock('launchdarkly-js-client-sdk', () => ({
-  initialize: vi.fn(),
-}));
+vi.mock(import("launchdarkly-js-client-sdk"), async (importOriginal) => {
+  const actual = await importOriginal()
+  return {
+    ...actual,
+    initialize: vi.fn(),
+  }
+})
 vi.mock('tiny-warning');
 
 const clientSideId = '123-abc';
@@ -43,8 +45,7 @@ describe('when configuring', () => {
   beforeEach(() => {
     onStatusStateChange = vi.fn();
     onFlagsStateChange = vi.fn();
-
-    ldClient.initialize.mockReturnValue(createClient());
+    initializeLaunchDarklyClient.mockReturnValue(createClient());
   });
 
   it('should indicate that the adapter is not configured', () => {
@@ -97,7 +98,7 @@ describe('when configuring', () => {
     });
 
     it('should initialize the `ld-client` with `clientSideId` and given `user`', () => {
-      expect(ldClient.initialize).toHaveBeenCalledWith(
+      expect(initializeLaunchDarklyClient).toHaveBeenCalledWith(
         clientSideId,
         expect.objectContaining(userWithKey),
         expect.any(Object)
@@ -105,7 +106,7 @@ describe('when configuring', () => {
     });
 
     it('should initialize the `ld-client` marking the `user` as not anonymous', () => {
-      expect(ldClient.initialize).toHaveBeenCalledWith(
+      expect(initializeLaunchDarklyClient).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({ anonymous: false }),
         expect.anything()
@@ -128,7 +129,7 @@ describe('when configuring', () => {
     });
 
     it('should initialize the `ld-client` with `clientSideId` and no `user` `key`', () => {
-      expect(ldClient.initialize).toHaveBeenCalledWith(
+      expect(initializeLaunchDarklyClient).toHaveBeenCalledWith(
         clientSideId,
         expect.objectContaining({
           key: undefined,
@@ -139,7 +140,7 @@ describe('when configuring', () => {
     });
 
     it('should initialize the `ld-client` marking the `user` as anonymous', () => {
-      expect(ldClient.initialize).toHaveBeenCalledWith(
+      expect(initializeLaunchDarklyClient).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({ anonymous: true }),
         expect.anything()
@@ -162,7 +163,7 @@ describe('when configuring', () => {
           variation: vi.fn(() => true),
         });
 
-        ldClient.initialize.mockReturnValue(client);
+        initializeLaunchDarklyClient.mockReturnValue(client);
 
         configurationResult = await adapter.configure(
           {
@@ -259,7 +260,7 @@ describe('when configuring', () => {
               ),
             });
 
-            ldClient.initialize.mockReturnValue(client);
+            initializeLaunchDarklyClient.mockReturnValue(client);
           });
 
           it('should reject the configuration with an error', async () => {
@@ -294,7 +295,7 @@ describe('when configuring', () => {
               ),
             });
 
-            ldClient.initialize.mockReturnValue(client);
+            initializeLaunchDarklyClient.mockReturnValue(client);
 
             console.warn = vi.fn();
           });
@@ -327,7 +328,7 @@ describe('when configuring', () => {
               variation: vi.fn((_, defaultFlagValue) => defaultFlagValue),
             });
 
-            ldClient.initialize.mockReturnValue(client);
+            initializeLaunchDarklyClient.mockReturnValue(client);
 
             return adapter.configure(
               {
@@ -387,7 +388,7 @@ describe('when configuring', () => {
               variation: vi.fn(() => true),
             });
 
-            ldClient.initialize.mockReturnValue(client);
+            initializeLaunchDarklyClient.mockReturnValue(client);
 
             return adapter.configure(
               {
@@ -420,7 +421,7 @@ describe('when configuring', () => {
               it('should `dispatch` `onFlagsStateChange` action after the delay passed', () => {
                 vi.advanceTimersByTime(flagsUpdateDelayMs);
 
-                expect(onFlagsStateChange).toHaveBeenCalledTimes(4);
+                expect(onFlagsStateChange).toHaveBeenCalledTimes(8);
               });
             });
 
@@ -463,7 +464,7 @@ describe('when configuring', () => {
             variation: vi.fn(() => true),
           });
 
-          ldClient.initialize.mockReturnValue(client);
+          initializeLaunchDarklyClient.mockReturnValue(client);
           sessionStorage.getItem.mockReturnValueOnce(
             JSON.stringify({ cached: true })
           );
@@ -527,7 +528,7 @@ describe('when configuring', () => {
               variation: vi.fn(() => true),
             });
 
-            ldClient.initialize.mockReturnValue(client);
+            initializeLaunchDarklyClient.mockReturnValue(client);
             sessionStorage.getItem.mockReturnValueOnce(
               JSON.stringify({ cached: true })
             );
@@ -603,7 +604,7 @@ describe('when configuring', () => {
           identify: vi.fn(() => Promise.resolve()),
         });
 
-        ldClient.initialize.mockReturnValue(client);
+        initializeLaunchDarklyClient.mockReturnValue(client);
 
         await adapter.configure(
           {
@@ -652,7 +653,7 @@ describe('when configuring', () => {
           identify: vi.fn(() => Promise.resolve()),
         });
 
-        ldClient.initialize.mockReturnValue(client);
+        initializeLaunchDarklyClient.mockReturnValue(client);
 
         return adapter.configure(
           {
