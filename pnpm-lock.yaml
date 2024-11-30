@@ -101,6 +101,9 @@ importers:
       '@preconstruct/cli':
         specifier: 2.8.10
         version: 2.8.10
+      '@testing-library/jest-dom':
+        specifier: 6.6.3
+        version: 6.6.3
       '@types/lodash':
         specifier: 4.17.13
         version: 4.17.13

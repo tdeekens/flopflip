@@ -61,6 +61,7 @@
     "@commitlint/config-conventional": "19.6.0",
     "@manypkg/cli": "0.21.4",
     "@preconstruct/cli": "2.8.10",
+    "@testing-library/jest-dom": "6.6.3",
     "@types/lodash": "4.17.13",
     "@types/node": "22.9.1",
     "@vitejs/plugin-react": "4.3.4",
