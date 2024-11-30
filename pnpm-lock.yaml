@@ -164,6 +164,9 @@ importers:
       vitest:
         specifier: 2.1.6
         version: 2.1.6(@types/node@22.9.1)(@vitest/ui@2.1.6)(jsdom@25.0.1)(terser@5.36.0)
+      vitest-localstorage-mock:
+        specifier: 0.1.2
+        version: 0.1.2(vitest@2.1.6)
 
   packages/adapter-utilities:
     dependencies:
@@ -4736,6 +4739,11 @@ packages:
         optional: true
       terser:
         optional: true
+
+  vitest-localstorage-mock@0.1.2:
+    resolution: {integrity: sha512-1oee6iDWhhquzVogssbpwQi6a2F3L+nCKF2+qqyCs5tH0sOYRyTqnsfj2dtmEQiL4xtJkHLn42hEjHGESlsJHw==}
+    peerDependencies:
+      vitest: '*'
 
   vitest@2.1.6:
     resolution: {integrity: sha512-isUCkvPL30J4c5O5hgONeFRsDmlw6kzFEdLQHLezmDdKQHy8Ke/B/dgdTMEgU0vm+iZ0TjW8GuK83DiahBoKWQ==}
@@ -9591,6 +9599,10 @@ snapshots:
       '@types/node': 22.9.1
       fsevents: 2.3.3
       terser: 5.36.0
+
+  vitest-localstorage-mock@0.1.2(vitest@2.1.6):
+    dependencies:
+      vitest: 2.1.6(@types/node@22.9.1)(@vitest/ui@2.1.6)(jsdom@25.0.1)(terser@5.36.0)
 
   vitest@2.1.6(@types/node@22.9.1)(@vitest/ui@2.1.6)(jsdom@25.0.1)(terser@5.36.0):
     dependencies:
