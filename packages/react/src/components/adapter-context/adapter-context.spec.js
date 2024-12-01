@@ -1,4 +1,5 @@
 import { AdapterConfigurationStatus } from '@flopflip/types';
+import { describe, expect, it } from 'vitest';
 
 import { selectAdapterConfigurationStatus } from './adapter-context';
 

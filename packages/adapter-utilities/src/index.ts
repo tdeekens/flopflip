@@ -1,4 +1,4 @@
-export { default as denormalizeFlagName } from './denormalize-flag-name';
-export { default as exposeGlobally } from './expose-globally';
-export { default as normalizeFlag } from './normalize-flag';
-export { default as normalizeFlags } from './normalize-flags';
+export { denormalizeFlagName } from './denormalize-flag-name';
+export { exposeGlobally } from './expose-globally';
+export { normalizeFlag } from './normalize-flag';
+export { normalizeFlags } from './normalize-flags';

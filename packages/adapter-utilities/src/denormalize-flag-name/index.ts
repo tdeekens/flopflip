@@ -1,1 +1,1 @@
-export { default } from './denormalize-flag-name';
+export { denormalizeFlagName } from './denormalize-flag-name';

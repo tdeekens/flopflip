@@ -16,7 +16,7 @@ import {
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import warning from 'tiny-warning';
 
-import AdapterContext, { createAdapterContext } from '../adapter-context';
+import { AdapterContext, createAdapterContext } from '../adapter-context';
 import {
   isEmptyChildren,
   isFunctionChildren,
@@ -531,4 +531,4 @@ function ConfigureAdapter({
 
 ConfigureAdapter.displayName = 'ConfigureAdapter';
 
-export default ConfigureAdapter;
+export { ConfigureAdapter };

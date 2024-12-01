@@ -1,4 +1,5 @@
-import wrapDisplayName from './wrap-display-name';
+import { describe, expect, it } from 'vitest';
+import { wrapDisplayName } from './wrap-display-name';
 
 function BaseComponent() {
   return 'BaseComponent';

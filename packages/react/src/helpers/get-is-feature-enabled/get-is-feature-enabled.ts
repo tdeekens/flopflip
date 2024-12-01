@@ -6,7 +6,7 @@ import type {
 } from '@flopflip/types';
 
 import { DEFAULT_FLAG_PROP_KEY } from '../../constants';
-import getFlagVariation from '../get-flag-variation';
+import { getFlagVariation } from '../get-flag-variation';
 
 const getIsFeatureEnabled = (
   allFlags: TFlagsContext,
@@ -15,4 +15,4 @@ const getIsFeatureEnabled = (
   flagVariation: TFlagVariation = true
 ) => getFlagVariation(allFlags, adapterIdentifiers, flagName) === flagVariation;
 
-export default getIsFeatureEnabled;
+export { getIsFeatureEnabled };

@@ -46,4 +46,4 @@ function Configure<AdapterInstance extends TAdapter>({
 
 Configure.displayName = 'ConfigureFlopflip';
 
-export default Configure;
+export { Configure };

@@ -1,9 +1,9 @@
 import { getFlagVariation, useAdapterContext } from '@flopflip/react';
 import type { TFlagName, TFlagVariation } from '@flopflip/types';
 
-import useFlagsContext from '../use-flags-context';
+import { useFlagsContext } from '../use-flags-context';
 
-export default function useFlagVariations(
+function useFlagVariations(
   flagNames: Array<TFlagName | undefined>
 ): TFlagVariation[] {
   const adapterContext = useAdapterContext();
@@ -19,3 +19,5 @@ export default function useFlagVariations(
 
   return flagVariations;
 }
+
+export { useFlagVariations };

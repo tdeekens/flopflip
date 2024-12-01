@@ -1,1 +1,1 @@
-export { useUpdateFlags as default } from './use-update-flags';
+export { useUpdateFlags } from './use-update-flags';

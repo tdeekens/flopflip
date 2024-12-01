@@ -1,8 +1,11 @@
 import type React from 'react';
 
-export default <T extends React.ComponentType<any>>(nextDisplayName: string) =>
+const setDisplayName =
+  <T extends React.ComponentType<any>>(nextDisplayName: string) =>
   (BaseComponent: T): T => {
     BaseComponent.displayName = nextDisplayName;
 
     return BaseComponent;
   };
+
+export { setDisplayName };

@@ -56,7 +56,7 @@ const reducer = (
   }
 };
 
-export default reducer;
+export { reducer };
 
 export const createReducer =
   (

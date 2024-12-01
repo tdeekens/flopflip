@@ -12,7 +12,7 @@
   ❤️
   React
   · Redux
-  · Jest
+  · Vitest
   · TypeScript
   · @testing-library/react
   · Biome
@@ -80,8 +80,8 @@ Another example would be to show a `<button>` but disable it for users who shoul
 
 ```jsx
 const MyFunctionComponent = () => {
-  const isFeatureEnabled = useFeatureToggle('featureFlagName');
-  const handleClick = () => console.log('🦄');
+  const isFeatureEnabled = useFeatureToggle("featureFlagName");
+  const handleClick = () => console.log("🦄");
 
   return (
     <button disabled={!isFeatureEnabled} onClick={handleClick}>
@@ -339,10 +339,10 @@ minimal configuration for a setup with `@flopflip/react-broadcast` and
 LaunchDarkly would be nothing more than:
 
 ```js
-import { ConfigureFlopFlip } from '@flopflip/react-redux';
-import adapter from '@flopflip/launchdarkly-adapter';
-// or import adapter from '@flopflip/memory-adapter';
-// or import adapter from '@flopflip/localstorage-adapter';
+import { ConfigureFlopFlip } from "@flopflip/react-redux";
+import { adapter } from "@flopflip/launchdarkly-adapter";
+// or import { adapter } from '@flopflip/memory-adapter';
+// or import { adapter } from '@flopflip/localstorage-adapter';
 
 <ConfigureFlopFlip
   adapter={adapter}
@@ -392,8 +392,8 @@ import {
 } from '@flopflip/react-redux';
 
 // Maintained somewhere within your application
-import user from './user';
-import appReducer from './reducer';
+import { user } from './user';
+import { appReducer } from './reducer';
 
 const store = createStore(
   combineReducers({
@@ -428,11 +428,11 @@ import {
   // HoC and currently do not support a custom state slice.
   FLOPFLIP_STATE_SLICE
 } from '@flopflip/react-redux';
-import adapter from '@flopflip/launchdarkly-adapter';
+import { adapter } from '@flopflip/launchdarkly-adapter';
 
 // Maintained somewhere within your application
-import user from './user';
-import appReducer from './reducer';
+import { user } from './user';
+import { appReducer } from './reducer';
 
 const store = createStore(
   combineReducers({
@@ -487,7 +487,7 @@ In addition to initiating `flopflip` when creating your store, you could still w
 Note: This is not needed when using the memory-adapter.
 
 ```js
-import adapter from '@flopflip/launchdarkly-adapter';
+import adapter from "@flopflip/launchdarkly-adapter";
 
 <ConfigureFlopFlip
   adapter={adapter}
@@ -653,10 +653,10 @@ const ComponentWithFeatureToggle = props => {
 Given you want to use React hooks within a functional component you can read the adapter status as follows:
 
 ```js
-import { useAdapterStatus } from '@flopflip/react-broadcast';
+import { useAdapterStatus } from "@flopflip/react-broadcast";
 
 const ComponentWithFeatureToggle = () => {
-  const isFeatureEnabled = useFeatureToggle('myFeatureToggle');
+  const isFeatureEnabled = useFeatureToggle("myFeatureToggle");
   const { isConfigured } = useAdapterStatus();
 
   if (!isConfigured) return <LoadingSpinner />;
@@ -672,12 +672,12 @@ flag. It also allows passing an optional `untoggledComponent` which will be
 rendered whenever the feature is disabled instead of `null`.
 
 ```js
-import React, { Component } from 'react';
-import { ToggleFeature } from '@flopflip/react-redux';
+import React, { Component } from "react";
+import { ToggleFeature } from "@flopflip/react-redux";
 // or import { ToggleFeature } from '@flopflip/react-broadcast';
-import flagsNames from './feature-flags';
+import { flagsNames } from "./feature-flags";
 
-const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
+const UntoggledComponent = () => <h3>{"At least there is a fallback!"}</h3>;
 export default (
   <ToggleFeature
     flag={flagsNames.THE_FEATURE_TOGGLE}
@@ -691,7 +691,7 @@ export default (
 or with for multi variate feature toggles:
 
 ```js
-const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
+const UntoggledComponent = () => <h3>{"At least there is a fallback!"}</h3>;
 
 export default (
   <ToggleFeature
@@ -707,8 +707,8 @@ export default (
 or with `toggledComponent` prop:
 
 ```js
-const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
-const ToggledComponent = () => <h3>{'I might be gone or there!'}</h3>;
+const UntoggledComponent = () => <h3>{"At least there is a fallback!"}</h3>;
+const ToggledComponent = () => <h3>{"I might be gone or there!"}</h3>;
 
 export default (
   <ToggleFeature
@@ -723,7 +723,7 @@ export default (
 or with Function as a Child (FaaC) which is always invoked with an `isFeatureEnabled` argument:
 
 ```js
-const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
+const UntoggledComponent = () => <h3>{"At least there is a fallback!"}</h3>;
 
 export default (
   <ToggleFeature
@@ -739,7 +739,7 @@ export default (
 or with a `render` prop. Note that the `render` prop will only be invoked then the feature is turned on:
 
 ```js
-const UntoggledComponent = () => <h3>{'At least there is a fallback!'}</h3>;
+const UntoggledComponent = () => <h3>{"At least there is a fallback!"}</h3>;
 
 export default (
   <ToggleFeature
@@ -768,8 +768,8 @@ the feature is disabled.
 Without a component rendered in place of the `ComponentToBeToggled`:
 
 ```js
-import { branchOnFeatureToggle } from '@flopflip/react-redux';
-import flagsNames from './feature-flags';
+import { branchOnFeatureToggle } from "@flopflip/react-redux";
+import flagsNames from "./feature-flags";
 
 const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
 
@@ -781,8 +781,8 @@ export default branchOnFeatureToggle({ flag: flagsNames.THE_FEATURE_TOGGLE })(
 With a component rendered in place of the `ComponentToBeToggled`:
 
 ```js
-import { branchOnFeatureToggle } from '@flopflip/react-redux';
-import flagsNames from './feature-flags';
+import { branchOnFeatureToggle } from "@flopflip/react-redux";
+import { flagsNames } from "./feature-flags";
 
 const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
 const ComponentToBeRenderedInstead = () => (
@@ -798,8 +798,8 @@ export default branchOnFeatureToggle(
 or when the flag is multi variation
 
 ```js
-import { branchOnFeatureToggle } from '@flopflip/react-redux';
-import flagsNames from './feature-flags';
+import { branchOnFeatureToggle } from "@flopflip/react-redux";
+import { flagsNames } from "./feature-flags";
 
 const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
 const ComponentToBeRenderedInstead = () => (
@@ -809,7 +809,7 @@ const ComponentToBeRenderedInstead = () => (
 export default branchOnFeatureToggle(
   {
     flag: flagsNames.THE_FEATURE_TOGGLE,
-    variation: 'variate1',
+    variation: "variate1",
   },
   ComponentToBeRenderedInstead
 )(ComponentToBeToggled);
@@ -821,8 +821,8 @@ This HoC matches feature toggles given against configured ones and injects the
 matching result.
 
 ```js
-import { injectFeatureToggles } from '@flopflip/react-redux';
-import flagsNames from './feature-flags';
+import { injectFeatureToggles } from "@flopflip/react-redux";
+import { flagsNames } from "./feature-flags";
 
 const Component = (props) => {
   if (props.featureToggles[flagsNames.TOGGLE_A])
@@ -846,8 +846,8 @@ component. You also may pass a second argument to overwrite the default
 `propKey` of the injected toggle (defaults to `isFeatureEnabled`).
 
 ```js
-import { injectFeatureToggle } from '@flopflip/react-redux';
-import flagsNames from './feature-flags';
+import { injectFeatureToggle } from "@flopflip/react-redux";
+import { flagsNames } from "./feature-flags";
 
 const Component = (props) => {
   if (props.isFeatureEnabled) return <h3>Something to render!</h3>;
@@ -872,11 +872,11 @@ values for flags as `injectFeatureToggle` and `injectFeatureToggles` would.
 An example usage for a connected component would be:
 
 ```js
-import { selectFeatureFlag } from '@flopflip/react-redux';
+import { selectFeatureFlag } from "@flopflip/react-redux";
 
 const mapStateToProps = (state) => ({
   someOtherState: state.someOtherState,
-  isFeatureOn: selectFeatureFlag('fooFlagName')(state),
+  isFeatureOn: selectFeatureFlag("fooFlagName")(state),
 });
 
 export default connect(mapStateToProps)(FooComponent);
@@ -915,16 +915,16 @@ Changing flag state in End-to-End test runs helps ensuring that an application w
 Imagine having the following Cypress test suite:
 
 ```js
-describe('adding users', () => {
-  describe('with seaching by E-Mail being enabled', () => {
-    it('should allow adding users by E-Mail', () => {
+describe("adding users", () => {
+  describe("with seaching by E-Mail being enabled", () => {
+    it("should allow adding users by E-Mail", () => {
       cy.updateFeatureFlags({ searchUsersByEmail: true });
 
       //... expectations
     });
   });
-  describe('with seaching by E-Mail being disabled', () => {
-    it('should allow adding users by name', () => {
+  describe("with seaching by E-Mail being disabled", () => {
+    it("should allow adding users by name", () => {
       cy.updateFeatureFlags({ searchUsersByEmail: false });
 
       //... expectations
@@ -960,10 +960,10 @@ module.exports = (on, cypressConfig) => {
 In the `support/index.js` add the following to your existing commands:
 
 ```js
-import { addCommands as addFlopflipCommands } from '@flopflip/cypress-plugin';
+import { addCommands as addFlopflipCommands } from "@flopflip/cypress-plugin";
 
 addFlopflipCommands({
-  adapterId: 'launchdarkly',
+  adapterId: "launchdarkly",
 });
 ```
 

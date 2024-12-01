@@ -10,4 +10,4 @@ const normalizeFlag = (
   flagValue == null ? false : flagValue,
 ];
 
-export default normalizeFlag;
+export { normalizeFlag };

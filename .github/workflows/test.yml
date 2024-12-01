@@ -10,10 +10,6 @@ jobs:
   install:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [20.x, 22.x]
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,10 +19,10 @@ jobs:
         with:
           run_install: false
 
-      - name: Setup Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version-file: '.nvmrc'
           cache: 'pnpm'
 
       - name: Install
@@ -41,22 +37,21 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Test
-        if: startsWith(matrix.node-version, '20')
-        run: pnpm test:ci
-        env:
-          CI: true
-
       - name: Test (with coverage)
-        if: startsWith(matrix.node-version, '22')
-        run: pnpm test:ci:coverage
+        run: pnpm test:coverage
         env:
           CI: true
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Upload coverage
-        if: startsWith(matrix.node-version, '22')
         uses: codecov/codecov-action@v5
         with:
           fail_ci_if_error: true
+          verbose: true
           token: ${{ secrets.CODECOV_TOKEN }} # required
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

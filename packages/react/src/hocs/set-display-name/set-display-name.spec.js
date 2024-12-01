@@ -1,4 +1,5 @@
-import setDisplayName from './set-display-name';
+import { describe, expect, it } from 'vitest';
+import { setDisplayName } from './set-display-name';
 
 function BaseComponent() {
   return 'BaseComponent';

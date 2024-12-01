@@ -1,8 +1,9 @@
 import warning from 'tiny-warning';
+import { describe, expect, it, vi } from 'vitest';
 
-import getFlagVariation from './get-flag-variation';
+import { getFlagVariation } from './get-flag-variation';
 
-jest.mock('tiny-warning');
+vi.mock('tiny-warning');
 
 describe('with a single adapter interface identifier', () => {
   describe('with existing flag variation', () => {

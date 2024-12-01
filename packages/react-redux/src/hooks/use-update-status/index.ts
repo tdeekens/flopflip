@@ -1,1 +1,1 @@
-export { useUpdateStatus as default } from './use-update-status';
+export { useUpdateStatus } from './use-update-status';

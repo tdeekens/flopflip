@@ -28,4 +28,4 @@ const createCache = (options: TCacheOptions) => {
   return cache;
 };
 
-export default createCache;
+export { createCache };

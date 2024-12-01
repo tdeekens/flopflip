@@ -1,1 +1,1 @@
-export { default } from './normalize-flag';
+export { normalizeFlag } from './normalize-flag';

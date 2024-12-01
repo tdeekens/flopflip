@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { selectFlags } from '../../ducks/flags';
 
-export default function useFlagVariations(
+function useFlagVariations(
   flagNames: Array<TFlagName | undefined>
 ): TFlagVariation[] {
   const adapterContext = useAdapterContext();
@@ -19,3 +19,5 @@ export default function useFlagVariations(
 
   return flagVariations;
 }
+
+export { useFlagVariations };

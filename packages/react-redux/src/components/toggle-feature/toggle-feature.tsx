@@ -31,4 +31,4 @@ function ToggleFeature<OwnProps extends TProps>({
 
 ToggleFeature.displayName = 'ToggleFeature';
 
-export default ToggleFeature;
+export { ToggleFeature };

@@ -5,12 +5,12 @@ import { useSelector } from 'react-redux';
 import { selectStatus } from '../../ducks/status';
 
 type TUseAdapterStatusArgs = { adapterIdentifiers?: TAdapterIdentifiers[] };
-export default function useAdapterStatus({
-  adapterIdentifiers,
-}: TUseAdapterStatusArgs = {}) {
+function useAdapterStatus({ adapterIdentifiers }: TUseAdapterStatusArgs = {}) {
   const adapterStatus = useSelector(selectStatus({ adapterIdentifiers }));
 
   useDebugValue({ adapterStatus });
 
   return adapterStatus;
 }
+
+export { useAdapterStatus };

@@ -1,1 +1,1 @@
-export { default } from './use-flags-context';
+export { useFlagsContext } from './use-flags-context';

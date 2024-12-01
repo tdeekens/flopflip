@@ -77,21 +77,6 @@
       "bracketSpacing": true,
       "quoteStyle": "single"
     },
-    "globals": [
-      "cy",
-      "VERSION",
-      "Cypress",
-      "SplitIO",
-      "it",
-      "describe",
-      "expect",
-      "jest",
-      "before",
-      "beforeAll",
-      "beforeEach",
-      "after",
-      "afterAll",
-      "afterEach"
-    ]
+    "globals": ["cy", "VERSION", "Cypress", "SplitIO"]
   }
 }

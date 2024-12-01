@@ -52,7 +52,7 @@ async function getCache(
   const cacheModule = await importCache(cacheIdentifier);
 
   const CACHE_PREFIX = getCachePrefix(adapterIdentifiers);
-  const createCache = cacheModule.default;
+  const createCache = cacheModule.createCache;
   let encodedCacheContext = '';
   try {
     encodedCacheContext = encodeCacheContext(cacheContext);

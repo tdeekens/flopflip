@@ -1,6 +1,7 @@
-import getIsFeatureEnabled from './get-is-feature-enabled';
+import { describe, expect, it, vi } from 'vitest';
+import { getIsFeatureEnabled } from './get-is-feature-enabled';
 
-jest.mock('tiny-warning');
+vi.mock('tiny-warning');
 
 describe('with existing flag', () => {
   describe('with flag variation', () => {

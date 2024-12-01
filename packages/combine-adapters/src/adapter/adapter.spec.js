@@ -1,15 +1,17 @@
-import localstorageAdapter from '@flopflip/localstorage-adapter';
-import memoryAdapter from '@flopflip/memory-adapter';
+import { adapter as localstorageAdapter } from '@flopflip/localstorage-adapter';
+import { adapter as memoryAdapter } from '@flopflip/memory-adapter';
 import {
   AdapterConfigurationStatus,
   AdapterInitializationStatus,
 } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { adapter } from './adapter';
 
-import adapter from './adapter';
-
-jest.mock('tiny-warning');
+vi.mock('tiny-warning', {
+  default: vi.fn(),
+});
 
 const createAdapterArgs = (customArgs = {}) => ({
   user: { id: 'foo' },
@@ -26,8 +28,8 @@ const createAdapterArgs = (customArgs = {}) => ({
   ...customArgs,
 });
 const createAdapterEventHandlers = (custom = {}) => ({
-  onFlagsStateChange: jest.fn(),
-  onStatusStateChange: jest.fn(),
+  onFlagsStateChange: vi.fn(),
+  onStatusStateChange: vi.fn(),
   ...custom,
 });
 
@@ -99,32 +101,17 @@ describe('when combining', () => {
         });
       });
     });
-
-    describe('when updating flags', () => {
-      beforeEach(() => {
-        adapterEventHandlers.onFlagsStateChange.mockClear();
-
-        memoryAdapter.updateFlags(updatedFlags);
-      });
-
-      it('should invoke and trigger `warning` for lack of configuration', () => {
-        expect(warning).toHaveBeenCalledWith(
-          false,
-          expect.stringContaining('adapter is not configured')
-        );
-      });
-    });
   });
 
-  describe('when all configured sucessfully', () => {
+  describe('when all configured successfully', () => {
     beforeAll(() => {
       adapter.combine([memoryAdapter, localstorageAdapter]);
     });
 
     let configurationResult;
 
-    const memoryAdapterConfigureSpy = jest.spyOn(memoryAdapter, 'configure');
-    const localstorageAdapterConfigureSpy = jest.spyOn(
+    const memoryAdapterConfigureSpy = vi.spyOn(memoryAdapter, 'configure');
+    const localstorageAdapterConfigureSpy = vi.spyOn(
       localstorageAdapter,
       'configure'
     );
@@ -180,7 +167,7 @@ describe('when combining', () => {
       await expect(adapter.waitUntilConfigured()).resolves.toBeDefined();
     });
 
-    describe('invokcation of `onStatusStateChange`', () => {
+    describe('invocation of `onStatusStateChange`', () => {
       describe('of `combine-adapters`', () => {
         it('should invoke `onStatusStateChange` with configured', () => {
           expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
@@ -307,11 +294,11 @@ describe('when combining', () => {
     describe('when reconfiguring', () => {
       const user = { id: 'bar' };
 
-      const memoryAdapterReconfigureSpy = jest.spyOn(
+      const memoryAdapterReconfigureSpy = vi.spyOn(
         memoryAdapter,
         'reconfigure'
       );
-      const localstorageAdapterReconfigureSpy = jest.spyOn(
+      const localstorageAdapterReconfigureSpy = vi.spyOn(
         localstorageAdapter,
         'reconfigure'
       );

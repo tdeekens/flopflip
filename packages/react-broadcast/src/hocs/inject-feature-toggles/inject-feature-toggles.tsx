@@ -11,9 +11,10 @@ import { useFlagVariations } from '../../hooks';
 
 type InjectedProps = Record<string, TFlags>;
 
-export default function injectFeatureToggles<
-  OwnProps extends Record<string, unknown>,
->(flagNames: TFlagName[], propKey: string = DEFAULT_FLAGS_PROP_KEY) {
+function injectFeatureToggles<OwnProps extends Record<string, unknown>>(
+  flagNames: TFlagName[],
+  propKey: string = DEFAULT_FLAGS_PROP_KEY
+) {
   return (
     Component: React.ComponentType
   ): React.ComponentType<OwnProps & InjectedProps> => {
@@ -38,3 +39,5 @@ export default function injectFeatureToggles<
     return WrappedComponent;
   };
 }
+
+export { injectFeatureToggles };

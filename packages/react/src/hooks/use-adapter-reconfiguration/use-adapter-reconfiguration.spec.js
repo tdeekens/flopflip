@@ -1,10 +1,18 @@
-import React from 'react';
+import { useContext } from 'react';
+import { expect, it, vi } from 'vitest';
 
-import useAdapterReconfiguration from './use-adapter-reconfiguration';
+import { useAdapterReconfiguration } from './use-adapter-reconfiguration';
 
-const reconfigure = jest.fn();
+const reconfigure = vi.fn();
+
+vi.mock(import('react'), async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    useContext: vi.fn(() => ({ reconfigure })),
+  };
+});
 
 it('should return a function', () => {
-  React.useContext = jest.fn(() => ({ reconfigure }));
   expect(useAdapterReconfiguration()).toBe(reconfigure);
 });

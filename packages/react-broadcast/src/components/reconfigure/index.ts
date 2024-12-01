@@ -1,1 +1,1 @@
-export { ReconfigureAdapter as default } from '@flopflip/react';
+export { ReconfigureAdapter } from '@flopflip/react';

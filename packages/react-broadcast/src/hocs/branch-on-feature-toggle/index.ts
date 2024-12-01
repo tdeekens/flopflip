@@ -1,1 +1,1 @@
-export { default } from './branch-on-feature-toggle';
+export { branchOnFeatureToggle } from './branch-on-feature-toggle';

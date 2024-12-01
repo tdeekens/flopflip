@@ -9,7 +9,7 @@
     "jsx": "react",
     "lib": ["esnext", "dom"],
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
     "noImplicitReturns": true,
@@ -24,8 +24,7 @@
     "strictNullChecks": true,
     "stripInternal": true,
     "target": "ES2015",
-    "allowJs": false,
-    "types": ["jest"]
+    "allowJs": false
   },
   "exclude": ["packages/cypress-plugin"],
   "typeRoots": ["@types", "node_modules/@types"]

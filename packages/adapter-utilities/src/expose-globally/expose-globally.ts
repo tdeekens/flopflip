@@ -9,4 +9,4 @@ const exposeGlobally = (adapter: TAdapter) => {
   global.__flopflip__[adapter.id] = adapter;
 };
 
-export default exposeGlobally;
+export { exposeGlobally };

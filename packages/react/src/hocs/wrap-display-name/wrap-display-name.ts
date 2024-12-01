@@ -1,6 +1,6 @@
 import type React from 'react';
 
-export default function wrapDisplayName(
+function wrapDisplayName(
   BaseComponent: React.ComponentType<any>,
   hocName: string
 ) {
@@ -8,3 +8,5 @@ export default function wrapDisplayName(
 
   return `${hocName}(${previousDisplayName ?? 'Component'})`;
 }
+
+export { wrapDisplayName };

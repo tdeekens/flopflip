@@ -1,6 +1,6 @@
 import type { TFlag, TFlagVariation, TFlags } from '@flopflip/types';
 
-import defaultNormalizeFlag from '../normalize-flag/normalize-flag';
+import { normalizeFlag as defaultNormalizeFlag } from '../normalize-flag/normalize-flag';
 
 const normalizeFlags = (
   rawFlags: TFlags,
@@ -20,4 +20,4 @@ const normalizeFlags = (
     {}
   );
 
-export default normalizeFlags;
+export { normalizeFlags };

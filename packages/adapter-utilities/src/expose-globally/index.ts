@@ -1,1 +1,1 @@
-export { default } from './expose-globally';
+export { exposeGlobally } from './expose-globally';

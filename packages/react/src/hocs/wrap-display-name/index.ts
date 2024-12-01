@@ -1,1 +1,1 @@
-export { default as wrapDisplayName } from './wrap-display-name';
+export { wrapDisplayName } from './wrap-display-name';

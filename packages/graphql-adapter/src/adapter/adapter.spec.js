@@ -1,15 +1,17 @@
 import { encodeCacheContext } from '@flopflip/cache';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { AdapterConfigurationStatus } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
 
-import adapter from './adapter';
+import { adapter } from './adapter';
 
-jest.mock('tiny-warning');
+vi.mock('tiny-warning');
 
 const createAdapterEventHandlers = (custom = {}) => ({
-  onFlagsStateChange: jest.fn(),
-  onStatusStateChange: jest.fn(),
+  onFlagsStateChange: vi.fn(),
+  onStatusStateChange: vi.fn(),
   ...custom,
 });
 
@@ -38,10 +40,10 @@ describe('when configured', () => {
     url: 'https://localhost:8080/graphql',
     user: { key: 'initial-user' },
     query: 'query AllFeatures { flags: allFeatures { name \n value} }',
-    getQueryVariables: jest.fn(() => ({ userId: '123' })),
-    getRequestHeaders: jest.fn(() => ({})),
-    parseFlags: jest.fn((flags) => flags),
-    fetcher: jest.fn().mockResolvedValue({
+    getQueryVariables: vi.fn(() => ({ userId: '123' })),
+    getRequestHeaders: vi.fn(() => ({})),
+    parseFlags: vi.fn((flags) => flags),
+    fetcher: vi.fn().mockResolvedValue({
       json: () => Promise.resolve({ data: { enabled: true, disabled: false } }),
     }),
   };
@@ -49,13 +51,13 @@ describe('when configured', () => {
   let adapterEventHandlers;
 
   afterEach(() => {
-    jest.clearAllTimers();
+    vi.clearAllTimers();
   });
 
   describe('without cache', () => {
     beforeEach(async () => {
       adapterEventHandlers = createAdapterEventHandlers();
-      jest.useFakeTimers();
+      vi.useFakeTimers();
       configurationResult = await adapter.configure(
         adapterArgs,
         adapterEventHandlers
@@ -146,10 +148,10 @@ describe('when configured', () => {
       url: 'https://localhost:8080/graphql',
       user: { key: 'initial-user' },
       query: 'query AllFeatures { flags: allFeatures { name \n value} }',
-      getQueryVariables: jest.fn(() => ({ userId: '123' })),
-      getRequestHeaders: jest.fn(() => ({})),
-      parseFlags: jest.fn((flags) => flags),
-      fetcher: jest.fn().mockResolvedValue({
+      getQueryVariables: vi.fn(() => ({ userId: '123' })),
+      getRequestHeaders: vi.fn(() => ({})),
+      parseFlags: vi.fn((flags) => flags),
+      fetcher: vi.fn().mockResolvedValue({
         json: () =>
           Promise.resolve({ data: { enabled: true, disabled: false } }),
       }),
@@ -162,7 +164,7 @@ describe('when configured', () => {
         JSON.stringify({ cached: true })
       );
       adapterEventHandlers = createAdapterEventHandlers();
-      jest.useFakeTimers();
+      vi.useFakeTimers();
       configurationResult = await adapter.configure(
         adapterArgs,
         adapterEventHandlers
@@ -170,7 +172,7 @@ describe('when configured', () => {
     });
 
     afterEach(() => {
-      jest.clearAllTimers();
+      vi.clearAllTimers();
     });
 
     it('should resolve to a successful initialization status', () => {
@@ -220,7 +222,7 @@ describe('when configured', () => {
           JSON.stringify({ cached: true })
         );
         adapterEventHandlers = createAdapterEventHandlers();
-        jest.useFakeTimers();
+        vi.useFakeTimers();
         configurationResult = await adapter.configure(
           adapterArgs,
           adapterEventHandlers

@@ -1,1 +1,1 @@
-export { default } from './get-is-feature-enabled';
+export { getIsFeatureEnabled } from './get-is-feature-enabled';
