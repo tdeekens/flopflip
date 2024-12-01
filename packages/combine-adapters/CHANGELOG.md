@@ -1,5 +1,17 @@
 # @flopflip/combine-adapters
 
+## 14.0.3
+
+### Patch Changes
+
+- [#1923](https://github.com/tdeekens/flopflip/pull/1923) [`f62ab95`](https://github.com/tdeekens/flopflip/commit/f62ab955815a295c23c1f2dab3901f6d5cbbc570) Thanks [@YahiaElTai](https://github.com/YahiaElTai)! - Replace eslint with biome
+
+- [#1967](https://github.com/tdeekens/flopflip/pull/1967) [`7f1edb3`](https://github.com/tdeekens/flopflip/commit/7f1edb3105e589dae0b1d118111577c007f887cf) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependencies
+
+- Updated dependencies [[`f62ab95`](https://github.com/tdeekens/flopflip/commit/f62ab955815a295c23c1f2dab3901f6d5cbbc570), [`7f1edb3`](https://github.com/tdeekens/flopflip/commit/7f1edb3105e589dae0b1d118111577c007f887cf), [`1f527fc`](https://github.com/tdeekens/flopflip/commit/1f527fcdddcc2aa3009a1384810f28233c3fc141)]:
+  - @flopflip/adapter-utilities@14.0.3
+  - @flopflip/types@14.0.3
+
 ## 14.0.2
 
 ### Patch Changes
