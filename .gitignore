@@ -41,3 +41,5 @@ dist
 coverage
 
 .vscode
+
+junit.xml
