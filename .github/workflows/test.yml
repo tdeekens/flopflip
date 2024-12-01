@@ -39,9 +39,9 @@ jobs:
 
       - name: Test (with coverage)
         run: pnpm test:coverage
-        env:
-          CI: true
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Test (with report)
+        run: pnpm test:report
 
       - name: Upload coverage
         uses: codecov/codecov-action@v5
