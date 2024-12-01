@@ -12,7 +12,7 @@
   ❤️
   React
   · Redux
-  · Jest
+  · Vitest
   · TypeScript
   · @testing-library/react
   · Biome
