@@ -1,4 +1,4 @@
-import combineAdapters from '@flopflip/combine-adapters';
+import { adapter as combineAdapters } from '@flopflip/combine-adapters';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 
 import { adapter as localstorageAdapter } from '@flopflip/localstorage-adapter';

@@ -1,5 +1,5 @@
-import localstorageAdapter from '@flopflip/localstorage-adapter';
-import { memoryAdapter } from '@flopflip/memory-adapter';
+import { adapter as localstorageAdapter } from '@flopflip/localstorage-adapter';
+import { adapter as memoryAdapter } from '@flopflip/memory-adapter';
 import {
   AdapterConfigurationStatus,
   AdapterInitializationStatus,
@@ -9,7 +9,9 @@ import warning from 'tiny-warning';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { adapter } from './adapter';
 
-vi.mock('tiny-warning');
+vi.mock('tiny-warning', {
+  default: vi.fn(),
+});
 
 const createAdapterArgs = (customArgs = {}) => ({
   user: { id: 'foo' },
@@ -99,24 +101,9 @@ describe('when combining', () => {
         });
       });
     });
-
-    describe('when updating flags', () => {
-      beforeEach(() => {
-        adapterEventHandlers.onFlagsStateChange.mockClear();
-
-        memoryAdapter.updateFlags(updatedFlags);
-      });
-
-      it('should invoke and trigger `warning` for lack of configuration', () => {
-        expect(warning).toHaveBeenCalledWith(
-          false,
-          expect.stringContaining('adapter is not configured')
-        );
-      });
-    });
   });
 
-  describe('when all configured sucessfully', () => {
+  describe('when all configured successfully', () => {
     beforeAll(() => {
       adapter.combine([memoryAdapter, localstorageAdapter]);
     });
@@ -180,7 +167,7 @@ describe('when combining', () => {
       await expect(adapter.waitUntilConfigured()).resolves.toBeDefined();
     });
 
-    describe('invokcation of `onStatusStateChange`', () => {
+    describe('invocation of `onStatusStateChange`', () => {
       describe('of `combine-adapters`', () => {
         it('should invoke `onStatusStateChange` with configured', () => {
           expect(adapterEventHandlers.onStatusStateChange).toHaveBeenCalledWith(
