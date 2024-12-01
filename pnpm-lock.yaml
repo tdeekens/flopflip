@@ -16,7 +16,7 @@ patchedDependencies:
 importers:
 
   .:
-    devDependencies:
+    dependencies:
       '@babel/cli':
         specifier: 7.25.9
         version: 7.25.9(@babel/core@7.26.0)
