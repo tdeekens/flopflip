@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
-import { normalizeFlag } from '../normalize-flag';
-import { normalizeFlags } from './normalize-flags';
+import { normalizeFlag } from '../src/normalize-flag';
+import { normalizeFlags } from '../src/normalize-flags';
 
 const rawFlags = {
   'a-flag': true,
