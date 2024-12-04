@@ -1,13 +1,12 @@
 import { adapterIdentifiers, cacheIdentifiers } from '@flopflip/types';
 import { describe, expect, it } from 'vitest';
-
 import {
   encodeCacheContext,
   getAllCachedFlags,
   getCache,
   getCachePrefix,
   getCachedFlags,
-} from './cache';
+} from '../src/cache';
 
 const cacheContext = { key: 'some-user-key', value: 'some-other-value' };
 
