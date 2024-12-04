@@ -7,7 +7,7 @@ import {
 import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { adapter } from './adapter';
+import { adapter } from '../src/adapter';
 
 vi.mock('tiny-warning', {
   default: vi.fn(),
