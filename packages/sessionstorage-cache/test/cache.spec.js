@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createCache } from './cache';
+import { createCache } from '../src/cache';
 
 const cachePrefix = 'test';
 
