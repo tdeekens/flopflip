@@ -1,10 +1,8 @@
 import { AdapterConfigurationStatus } from '@flopflip/types';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-
 import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
-
-import { STORAGE_SLICE, adapter } from './adapter';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { STORAGE_SLICE, adapter } from '../src/adapter';
 
 vi.mock('tiny-warning');
 
