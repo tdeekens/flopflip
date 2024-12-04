@@ -1,10 +1,8 @@
 import { AdapterConfigurationStatus } from '@flopflip/types';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-
 import { SplitFactory } from '@splitsoftware/splitio';
 import getGlobalThis from 'globalthis';
-
-import { adapter, createAnonymousUserKey, normalizeFlag } from './adapter';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { adapter, createAnonymousUserKey, normalizeFlag } from '../src/adapter';
 
 vi.mock('@splitsoftware/splitio', () => ({
   SplitFactory: vi.fn(() => ({
