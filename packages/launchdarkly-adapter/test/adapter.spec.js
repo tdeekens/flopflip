@@ -3,7 +3,7 @@ import { AdapterConfigurationStatus } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 import { initialize as initializeLaunchDarklyClient } from 'launchdarkly-js-client-sdk';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { adapter } from './adapter';
+import { adapter } from '../src/adapter';
 
 vi.mock(import('launchdarkly-js-client-sdk'), async (importOriginal) => {
   const actual = await importOriginal();
