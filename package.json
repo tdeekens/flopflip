@@ -156,7 +156,7 @@
     "ts-node": "10.9.2",
     "tslib": "2.8.1",
     "typescript": "5.7.2",
-    "vite": "5.4.11",
+    "vite": "6.0.3",
     "vitest": "2.1.6",
     "vitest-localstorage-mock": "0.1.2"
   }
