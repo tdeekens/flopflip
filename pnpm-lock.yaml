@@ -428,8 +428,8 @@ importers:
         specifier: workspace:*
         version: link:../types
       '@types/react-is':
-        specifier: 17.0.7
-        version: 17.0.7
+        specifier: 19.0.0
+        version: 19.0.0
       lodash:
         specifier: 4.17.21
         version: 4.17.21
@@ -1907,8 +1907,8 @@ packages:
   '@types/react-dom@18.3.1':
     resolution: {integrity: sha512-qW1Mfv8taImTthu4KoXgDfLuk4bydU6Q/TkADnDWWHwi4NX4BR+LWfTp2sVmTqRrsHvyDDTelgelxJ+SsejKKQ==}
 
-  '@types/react-is@17.0.7':
-    resolution: {integrity: sha512-WrTEiT+c6rgq36QApoy0063uAOdltCrhF0QMXLIgYPaTvIdQhAB8hPb5oGGqX18xToElNILS9UprwU6GyINcJg==}
+  '@types/react-is@19.0.0':
+    resolution: {integrity: sha512-71dSZeeJ0t3aoPyY9x6i+JNSvg5m9EF2i2OlSZI5QoJuI8Ocgor610i+4A10TQmURR+0vLwcVCEYFpXdzM1Biw==}
 
   '@types/react-redux@7.1.34':
     resolution: {integrity: sha512-GdFaVjEbYv4Fthm2ZLvj1VSCedV7TqE5y1kNwnjSdBOTXuRSgowux6J8TAct15T3CKBr63UMk+2CO7ilRhyrAQ==}
@@ -6122,7 +6122,7 @@ snapshots:
     dependencies:
       '@types/react': 18.3.12
 
-  '@types/react-is@17.0.7':
+  '@types/react-is@19.0.0':
     dependencies:
       '@types/react': 18.3.12
 
