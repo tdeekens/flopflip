@@ -3,7 +3,7 @@ import type { TUser } from '@flopflip/types';
 import React from 'react';
 import { Children, useEffect } from 'react';
 
-import { useAdapterContext } from '../../hooks/use-adapter-context';
+import { useAdapterContext } from './use-adapter-context';
 
 type TProps<TAdditionalUserProperties> = {
   readonly shouldOverwrite?: boolean;
