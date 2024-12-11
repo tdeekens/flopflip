@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isNil } from './is-nil';
+import { isNil } from '../src/is-nil';
 
 describe('when null', () => {
   it('should indicate that the value is nil', () => {

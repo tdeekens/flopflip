@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { expect, it, vi } from 'vitest';
 
-import { useAdapterReconfiguration } from './use-adapter-reconfiguration';
+import { useAdapterReconfiguration } from '../src/use-adapter-reconfiguration';
 
 const reconfigure = vi.fn();
 

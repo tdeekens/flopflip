@@ -3,9 +3,9 @@ import { describe, expect, it, vi } from 'vitest';
 
 import React, { useMemo, useState } from 'react';
 
-import { AdapterContext, createAdapterContext } from './../adapter-context';
-import { AdapterStates } from './../configure-adapter';
-import { ReconfigureAdapter } from './reconfigure-adapter';
+import { AdapterContext, createAdapterContext } from '../src/adapter-context';
+import { AdapterStates } from '../src/configure-adapter';
+import { ReconfigureAdapter } from '../src/reconfigure-adapter';
 
 function TestComponent({ reconfiguration, adapterContext }) {
   const [count, setCount] = useState(0);

@@ -7,7 +7,7 @@ import {
 } from '@flopflip/types';
 import React from 'react';
 
-import { useAdapterSubscription } from './use-adapter-subscription';
+import { useAdapterSubscription } from '../src/use-adapter-subscription';
 
 const createAdapter = () => ({
   getIsConfigurationStatus: vi.fn(

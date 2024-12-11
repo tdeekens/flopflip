@@ -1,7 +1,7 @@
 import warning from 'tiny-warning';
 import { describe, expect, it, vi } from 'vitest';
 
-import { getFlagVariation } from './get-flag-variation';
+import { getFlagVariation } from '../src/get-flag-variation';
 
 vi.mock('tiny-warning');
 

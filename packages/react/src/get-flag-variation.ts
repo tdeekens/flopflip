@@ -7,8 +7,8 @@ import type {
 import warning from 'tiny-warning';
 
 import { DEFAULT_FLAG_PROP_KEY } from '../../constants';
-import { getNormalizedFlagName } from '../get-normalized-flag-name';
-import { isNil } from '../is-nil';
+import { getNormalizedFlagName } from './get-normalized-flag-name';
+import { isNil } from './is-nil';
 
 const getFlagVariation = (
   allFlags: TFlagsContext,

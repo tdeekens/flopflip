@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { AdapterContext } from '../../components/adapter-context';
+import { AdapterContext } from './adapter-context';
 
 const useAdapterContext = () => useContext(AdapterContext);
 

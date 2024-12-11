@@ -1,7 +1,7 @@
 import { AdapterConfigurationStatus } from '@flopflip/types';
 import { describe, expect, it } from 'vitest';
 
-import { selectAdapterConfigurationStatus } from './adapter-context';
+import { selectAdapterConfigurationStatus } from '../src/adapter-context';
 
 describe('selectAdapterConfigurationStatus', () => {
   describe('when configured', () => {
