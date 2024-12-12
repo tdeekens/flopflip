@@ -5,9 +5,8 @@ import {
   createReducer as createFlagsReducer,
   reducer as flagsReducer,
 } from './flags';
-import type { TUpdateFlagsAction } from './flags/types';
 import { reducer as statusReducer } from './status';
-import type { TUpdateStatusAction } from './types';
+import type { TUpdateFlagsAction, TUpdateStatusAction } from './types';
 
 type Actions = TUpdateFlagsAction & TUpdateStatusAction;
 
