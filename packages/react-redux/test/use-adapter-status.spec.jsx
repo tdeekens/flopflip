@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { Configure } from '../src/configure';
 import { STATE_SLICE } from '../src/constants';
 import { useAdapterStatus } from '../src/use-adapter-status';
-import { createStore } from '.test-utils';
+import { createStore } from './test-utils';
 
 const render = (store, TestComponent) =>
   renderWithAdapter(TestComponent, {

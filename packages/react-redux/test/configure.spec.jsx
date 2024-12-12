@@ -7,8 +7,9 @@ import { Provider } from 'react-redux';
 
 import { Configure } from '../src/configure';
 import { STATE_SLICE } from '../src/constants';
-import { useAdapterStatus, useFeatureToggle } from '../src/hooks';
-import { createStore } from '.test-utils';
+import { useAdapterStatus } from '../src/use-adapter-status';
+import { useFeatureToggle } from '../src/use-feature-toggle';
+import { createStore } from './test-utils';
 
 const testFlagName = 'firstFlag';
 function TestComponent() {

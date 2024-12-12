@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { Configure } from '../src/configure';
 import { STATE_SLICE } from '../src/constants';
 import { useFlagVariation } from '../src/use-flag-variation';
-import { createStore } from '.test-utils';
+import { createStore } from './test-utils';
 
 const render = (store, TestComponent) =>
   renderWithAdapter(TestComponent, {

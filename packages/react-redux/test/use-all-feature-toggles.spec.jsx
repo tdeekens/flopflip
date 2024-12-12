@@ -15,7 +15,7 @@ import { Provider } from 'react-redux';
 import { Configure } from '../src/configure';
 import { STATE_SLICE } from '../src/constants';
 import { useAllFeatureToggles } from '../src/use-all-feature-toggles';
-import { createStore } from '.test-utils';
+import { createStore } from './test-utils';
 
 vi.mock('tiny-warning');
 

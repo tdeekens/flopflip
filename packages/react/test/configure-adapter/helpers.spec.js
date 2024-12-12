@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { mergeAdapterArgs } from './helpers';
+import { mergeAdapterArgs } from '../../src/configure-adapter/helpers';
 
 describe('mergeAdapterArgs', () => {
   describe('when not `shouldOverwrite`', () => {

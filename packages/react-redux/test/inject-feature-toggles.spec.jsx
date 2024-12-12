@@ -4,10 +4,10 @@ import { describe, expect, it } from 'vitest';
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import { Configure } from '../src/components/configure';
+import { Configure } from '../src/configure';
 import { STATE_SLICE } from '../src/constants';
 import { injectFeatureToggles } from '../src/inject-feature-toggles';
-import { createStore } from '.test-utils';
+import { createStore } from './test-utils';
 
 const render = (store, TestComponent) =>
   renderWithAdapter(TestComponent, {

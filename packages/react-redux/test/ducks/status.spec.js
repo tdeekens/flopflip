@@ -4,8 +4,13 @@ import {
 } from '@flopflip/types';
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import { STATE_SLICE } from '../../store/constants';
-import { UPDATE_STATUS, reducer, selectStatus, updateStatus } from './status';
+import { STATE_SLICE } from '../../src/constants';
+import {
+  UPDATE_STATUS,
+  reducer,
+  selectStatus,
+  updateStatus,
+} from '../../src/ducks/status';
 
 describe('constants', () => {
   it('should contain `UPDATE_STATUS`', () => {

@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { branchOnFeatureToggle } from '../src/branch-on-feature-toggle';
 import { Configure } from '../src/configure';
 import { STATE_SLICE } from '../src/constants';
-import { createStore } from '.test-utils';
+import { createStore } from './test-utils';
 
 const render = (store, TestComponent) =>
   renderWithAdapter(TestComponent, {

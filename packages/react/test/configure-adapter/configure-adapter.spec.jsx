@@ -11,7 +11,7 @@ import { adapterIdentifiers, cacheIdentifiers } from '@flopflip/types';
 import React, { useContext } from 'react';
 
 import { AdapterContext } from '../../src/adapter-context';
-import { AdapterStates, ConfigureAdapter } from '../../src/adapter-context';
+import { AdapterStates, ConfigureAdapter } from '../../src/configure-adapter';
 import { useAdapterReconfiguration } from '../../src/use-adapter-reconfiguration';
 
 const createAdapter = () => ({

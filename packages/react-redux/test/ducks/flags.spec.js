@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { STATE_SLICE } from '../../store/constants';
+import { STATE_SLICE } from '../../src/constants';
 
 import {
   UPDATE_FLAGS,
@@ -7,7 +7,7 @@ import {
   selectFlag,
   selectFlags,
   updateFlags,
-} from './flags';
+} from '../../src/ducks/flags';
 
 const adapterIdentifiers = ['memory'];
 
