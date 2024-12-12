@@ -5,7 +5,7 @@ import type {
   TFlagsContext,
 } from '@flopflip/types';
 
-import { DEFAULT_FLAG_PROP_KEY } from '../../constants';
+import { DEFAULT_FLAG_PROP_KEY } from './constants';
 import { getFlagVariation } from './get-flag-variation';
 
 const getIsFeatureEnabled = (

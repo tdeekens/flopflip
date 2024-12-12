@@ -2,7 +2,7 @@ import type { TFlagName, TFlagVariation } from '@flopflip/types';
 // biome-ignore lint/style/useImportType: TS is just weird
 import React from 'react';
 
-import { useFeatureToggle } from './hooks';
+import { useFeatureToggle } from './use-feature-toggle';
 
 type TBranchOnFeatureToggleOptions = {
   flag: TFlagName;

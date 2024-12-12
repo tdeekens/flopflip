@@ -2,8 +2,8 @@ const version = '__@FLOPFLIP/VERSION_OF_RELEASE__';
 
 export { createFlopFlipEnhancer } from './enhancer';
 export { STATE_SLICE as FLOPFLIP_STATE_SLICE } from './constants';
-export { ConfigureFlopFlip } from './configure';
-export { ReconfigureFlopFlip } from './reconfigure';
+export { Configure as ConfigureFlopFlip } from './configure';
+export { ReconfigureAdapter as ReconfigureFlopFlip } from './reconfigure';
 export { ToggleFeature } from './toggle-feature';
 export {
   createFlopflipReducer,

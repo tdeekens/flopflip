@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { FlagsContext } from '../../components/flags-context';
+import { FlagsContext } from './flags-context';
 
 const useFlagsContext = () => useContext(FlagsContext);
 

@@ -4,9 +4,9 @@ export type TToggleFeatureProps = ToggleFeatureProps;
 
 const version = '__@FLOPFLIP/VERSION_OF_RELEASE__';
 
+export { ConfigureAdapter } from './configure-adapter';
 export {
   AdapterContext,
-  ConfigureAdapter,
   createAdapterContext,
   selectAdapterConfigurationStatus,
 } from './adapter-context';
