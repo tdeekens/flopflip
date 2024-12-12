@@ -1,34 +1,29 @@
 const version = '__@FLOPFLIP/VERSION_OF_RELEASE__';
 
-export { createFlopFlipEnhancer } from './store/enhancer';
-// Import this separately to avoid a circular dependency
-export {
-  ConfigureFlopFlip,
-  ReconfigureFlopFlip,
-  ToggleFeature,
-} from './components';
+export { createFlopFlipEnhancer } from './enhancer';
+export { STATE_SLICE as FLOPFLIP_STATE_SLICE } from './constants';
+export { ConfigureFlopFlip } from './configure';
+export { ReconfigureFlopFlip } from './reconfigure';
+export { ToggleFeature } from './toggle-feature';
 export {
   createFlopflipReducer,
   flopflipReducer,
-  selectFlag as selectFeatureFlag,
-  selectFlags as selectFeatureFlags,
   UPDATE_FLAGS,
   UPDATE_STATUS,
 } from './ducks';
 export {
-  branchOnFeatureToggle,
-  injectFeatureToggle,
-  injectFeatureToggles,
-} from './hocs';
-export {
-  useAdapterReconfiguration,
-  useAdapterStatus,
-  useAllFeatureToggles,
-  useFeatureToggle,
-  useFeatureToggles,
-  useFlagVariation,
-  useFlagVariations,
-} from './hooks';
-export { STATE_SLICE as FLOPFLIP_STATE_SLICE } from './store/constants';
+  selectFlag as selectFeatureFlag,
+  selectFlags as selectFeatureFlags,
+} from './ducks';
+export { branchOnFeatureToggle } from './branch-on-feature-toggle';
+export { injectFeatureToggle } from './inject-feature-toggle';
+export { injectFeatureToggles } from './inject-feature-toggles';
+export { useAdapterReconfiguration } from './use-adapter-reconfiguration';
+export { useAdapterStatus } from './use-adapter-status';
+export { useAllFeatureToggles } from './use-all-feature-toggles';
+export { useFeatureToggle } from './use-feature-toggle';
+export { useFeatureToggles } from './use-feature-toggles';
+export { useFlagVariation } from './use-flag-variation';
+export { useFlagVariations } from './use-flag-variations';
 
 export { version };

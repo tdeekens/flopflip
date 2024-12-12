@@ -1,1 +1,0 @@
-export { Configure } from './configure';

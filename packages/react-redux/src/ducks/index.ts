@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 import { createFlagsReducer, flagsReducer } from './flags';
 import type { TUpdateFlagsAction } from './flags/types';
 import { statusReducer } from './status';
-import type { TUpdateStatusAction } from './status/types';
+import type { TUpdateStatusAction } from './types';
 
 type Actions = TUpdateFlagsAction & TUpdateStatusAction;
 
