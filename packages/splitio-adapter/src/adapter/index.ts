@@ -1,1 +1,0 @@
-export { adapter } from './adapter';
