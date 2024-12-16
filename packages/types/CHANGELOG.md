@@ -1,5 +1,13 @@
 # @flopflip/types
 
+## 14.0.3
+
+### Patch Changes
+
+- [#1967](https://github.com/tdeekens/flopflip/pull/1967) [`7f1edb3`](https://github.com/tdeekens/flopflip/commit/7f1edb3105e589dae0b1d118111577c007f887cf) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependencies
+
+- [#1957](https://github.com/tdeekens/flopflip/pull/1957) [`1f527fc`](https://github.com/tdeekens/flopflip/commit/1f527fcdddcc2aa3009a1384810f28233c3fc141) Thanks [@renovate](https://github.com/apps/renovate)! - Update deps.
+
 ## 14.0.2
 
 ### Patch Changes
@@ -207,20 +215,20 @@
 
   ```js
   const deviceContext = {
-    kind: 'device',
-    type: 'iPad',
-    key: 'device-key-123abc',
+    kind: "device",
+    type: "iPad",
+    key: "device-key-123abc",
   };
 
   const userContext = {
-    kind: 'user',
-    key: 'user-key-123abc',
-    name: 'Sandy',
-    role: 'doctor',
+    kind: "user",
+    key: "user-key-123abc",
+    name: "Sandy",
+    role: "doctor",
   };
 
   const multiContext = {
-    kind: 'multi',
+    kind: "multi",
 
     device: deviceContext,
   };

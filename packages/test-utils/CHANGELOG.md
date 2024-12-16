@@ -1,5 +1,16 @@
 # @flopflip/test-utils
 
+## 14.0.3
+
+### Patch Changes
+
+- [#1967](https://github.com/tdeekens/flopflip/pull/1967) [`7f1edb3`](https://github.com/tdeekens/flopflip/commit/7f1edb3105e589dae0b1d118111577c007f887cf) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependencies
+
+- [#1957](https://github.com/tdeekens/flopflip/pull/1957) [`1f527fc`](https://github.com/tdeekens/flopflip/commit/1f527fcdddcc2aa3009a1384810f28233c3fc141) Thanks [@renovate](https://github.com/apps/renovate)! - Update deps.
+
+- Updated dependencies [[`7f1edb3`](https://github.com/tdeekens/flopflip/commit/7f1edb3105e589dae0b1d118111577c007f887cf)]:
+  - @flopflip/memory-adapter@14.0.3
+
 ## 14.0.2
 
 ### Patch Changes
@@ -144,7 +155,7 @@
   Example:
 
   ```javascript
-  import { useAllFeatureToggles } from '@flopflip/react-broadcast';
+  import { useAllFeatureToggles } from "@flopflip/react-broadcast";
 
   const MyComponent = () => {
     const allFeatureToggles = useAllFeatureToggles();
