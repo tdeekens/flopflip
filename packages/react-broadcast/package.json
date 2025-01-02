@@ -31,8 +31,8 @@
     "@flopflip/localstorage-adapter": "workspace:*",
     "@flopflip/memory-adapter": "workspace:*",
     "@flopflip/test-utils": "workspace:*",
-    "@types/react": "18.3.12",
-    "@types/react-dom": "18.3.1",
+    "@types/react": "18.3.18",
+    "@types/react-dom": "18.3.5",
     "react": "18.3.1",
     "react-dom": "18.3.1"
   },
@@ -44,7 +44,7 @@
     "@babel/runtime": "7.26.0",
     "@flopflip/react": "workspace:*",
     "@flopflip/types": "workspace:*",
-    "use-sync-external-store": "1.2.2"
+    "use-sync-external-store": "1.4.0"
   },
   "keywords": [
     "react",
