@@ -1,5 +1,22 @@
 # @flopflip/http-adapter
 
+## 14.0.3
+
+### Patch Changes
+
+- [#1974](https://github.com/tdeekens/flopflip/pull/1974) [`216ec4e`](https://github.com/tdeekens/flopflip/commit/216ec4ea59fa43863ef1dfe9ba56365e542b53e3) Thanks [@tdeekens](https://github.com/tdeekens)! - Refactor to remove internal barrel files.
+
+- [#1967](https://github.com/tdeekens/flopflip/pull/1967) [`7f1edb3`](https://github.com/tdeekens/flopflip/commit/7f1edb3105e589dae0b1d118111577c007f887cf) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependencies
+
+- [#1970](https://github.com/tdeekens/flopflip/pull/1970) [`6799832`](https://github.com/tdeekens/flopflip/commit/6799832bddb9a60ba6a8988974815998bead6ab0) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependencies
+
+- Updated dependencies [[`f62ab95`](https://github.com/tdeekens/flopflip/commit/f62ab955815a295c23c1f2dab3901f6d5cbbc570), [`216ec4e`](https://github.com/tdeekens/flopflip/commit/216ec4ea59fa43863ef1dfe9ba56365e542b53e3), [`7f1edb3`](https://github.com/tdeekens/flopflip/commit/7f1edb3105e589dae0b1d118111577c007f887cf), [`6799832`](https://github.com/tdeekens/flopflip/commit/6799832bddb9a60ba6a8988974815998bead6ab0), [`1f527fc`](https://github.com/tdeekens/flopflip/commit/1f527fcdddcc2aa3009a1384810f28233c3fc141)]:
+  - @flopflip/adapter-utilities@14.0.3
+  - @flopflip/cache@14.0.3
+  - @flopflip/sessionstorage-cache@14.0.3
+  - @flopflip/localstorage-cache@14.0.3
+  - @flopflip/types@14.0.3
+
 ## 14.0.2
 
 ### Patch Changes
