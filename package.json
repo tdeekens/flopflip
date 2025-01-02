@@ -104,7 +104,7 @@
       }
     ]
   },
-  "devDependencies": {
+  "dependencies": {
     "@babel/cli": "7.26.4",
     "@babel/core": "7.26.0",
     "@babel/plugin-external-helpers": "7.25.9",
@@ -131,7 +131,7 @@
     "@changesets/cli": "2.27.11",
     "@commitlint/cli": "19.6.1",
     "@commitlint/config-conventional": "19.6.0",
-    "@manypkg/cli": "0.23.0",
+    "@manypkg/cli": "0.21.4",
     "@preconstruct/cli": "2.8.10",
     "@testing-library/jest-dom": "6.6.3",
     "@types/jest": "29.5.14",
