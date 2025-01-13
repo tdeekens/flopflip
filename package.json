@@ -114,7 +114,7 @@
     "@babel/plugin-transform-destructuring": "7.25.9",
     "@babel/plugin-transform-export-namespace-from": "7.25.9",
     "@babel/plugin-transform-modules-commonjs": "7.26.3",
-    "@babel/plugin-transform-nullish-coalescing-operator": "7.25.9",
+    "@babel/plugin-transform-nullish-coalescing-operator": "7.26.5",
     "@babel/plugin-transform-object-rest-spread": "7.25.9",
     "@babel/plugin-transform-optional-chaining": "7.25.9",
     "@babel/plugin-transform-private-methods": "7.25.9",
