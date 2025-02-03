@@ -27,7 +27,7 @@
   "engines": {
     "node": ">=20",
     "npm": ">=10",
-    "pnpm": ">=9"
+    "pnpm": ">=10"
   },
   "bugs": {
     "url": "https://github.com/tdeekens/flopflip/issues"
@@ -42,7 +42,7 @@
     "HoC",
     "store-enhancer"
   ],
-  "packageManager": "pnpm@9.15.2",
+  "packageManager": "pnpm@10.1.0",
   "preconstruct": {
     "packages": [
       "demo",
@@ -58,7 +58,10 @@
     },
     "patchedDependencies": {
       "cypress@13.6.4": "patches/cypress@13.6.4.patch"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "cypress"
+    ]
   },
   "bundlewatch": {
     "files": [
