@@ -1,4 +1,4 @@
-name: Test and Build
+name: Quality
 
 on:
   push:
@@ -12,7 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install dependencies
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
         uses: ./.github/actions/ci
 
       - name: Lint
@@ -23,7 +26,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install dependencies
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
         uses: ./.github/actions/ci
 
       - name: TypeScript
@@ -34,7 +40,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install dependencies
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
         uses: ./.github/actions/ci
 
       - name: Test (with coverage)
