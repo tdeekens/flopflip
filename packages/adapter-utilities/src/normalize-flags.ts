@@ -4,11 +4,11 @@ import { normalizeFlag as defaultNormalizeFlag } from './normalize-flag';
 
 const normalizeFlags = (
   rawFlags: TFlags,
-  normalizeFlag: typeof defaultNormalizeFlag = defaultNormalizeFlag
+  normalizer: typeof defaultNormalizeFlag = defaultNormalizeFlag
 ): Record<string, TFlagVariation> =>
   Object.entries(rawFlags || {}).reduce<TFlags>(
     (normalizedFlags: TFlags, [flagName, flagValue]) => {
-      const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizeFlag(
+      const [normalizedFlagName, normalizedFlagValue]: TFlag = normalizer(
         flagName,
         flagValue
       );
