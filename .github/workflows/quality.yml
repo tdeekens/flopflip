@@ -46,6 +46,9 @@ jobs:
       - name: Setup
         uses: ./.github/actions/ci
 
+      - name: Build)
+        run: pnpm build
+
       - name: Test (with coverage)
         run: pnpm test:coverage
 
