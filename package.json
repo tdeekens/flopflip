@@ -3,25 +3,25 @@
   "name": "flopflip",
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
-    "postinstall": "husky install && preconstruct dev && manypkg check && check-node-version --package --print",
-    "reinstall": "manypkg exec rm -rf node_modules && rm -rf node_modules pnpm-lock.yaml && pnpm install",
     "auth": "npm_config_registry=https://registry.npmjs.org npm whoami",
-    "lint": "biome lint",
-    "typecheck": "tsc --project tsconfig.json --noEmit && tsc --project packages/cypress-plugin/tsconfig.json --noEmit",
-    "format": "biome format --write",
-    "fix:biome": "biome lint --write",
     "biome:check": "biome check --write",
-    "lint:ci": "biome ci",
-    "test:coverage": "pnpm test -- --coverage",
-    "test": "vitest run",
-    "test:report": "vitest --reporter=junit --outputFile=junit.xml",
-    "build": "preconstruct build",
-    "build:watch": "preconstruct watch",
-    "changeset": "changeset",
+    "build": "turbo build",
     "changeset:version-and-format": "changeset version && pnpm format && pnpm install --no-frozen-lockfile",
+    "changeset": "changeset",
+    "check-types": "turbo check-types",
+    "clean": "manypkg exec rm -rf dist && manypkg exec rm -rf .turbo && rm -rf .turbo",
+    "fix:biome": "biome lint --write",
+    "format": "biome format --write",
+    "lint:ci": "biome ci",
+    "lint": "biome lint",
+    "postinstall": "husky install && manypkg check && check-node-version --package --print",
+    "postpublish": "pinst --enable",
+    "preinstall": "npx only-allow pnpm",
     "prepublishOnly": "pinst --disable",
-    "postpublish": "pinst --enable"
+    "reinstall": "manypkg exec rm -rf node_modules && rm -rf node_modules pnpm-lock.yaml && pnpm install",
+    "test:coverage": "vitest run --coverage",
+    "test:report": "vitest run --reporter=junit --outputFile=junit.xml",
+    "test": "turbo test"
   },
   "author": "Tobias Deekens <nerd@tdeekens.name>",
   "engines": {
@@ -43,14 +43,6 @@
     "store-enhancer"
   ],
   "packageManager": "pnpm@9.15.5",
-  "preconstruct": {
-    "packages": [
-      "demo",
-      "packages/*",
-      "!packages/test-utils",
-      "!demo"
-    ]
-  },
   "pnpm": {
     "overrides": {
       "@types/react": "18.3.18",
@@ -63,43 +55,43 @@
   "bundlewatch": {
     "files": [
       {
-        "path": "./packages/launchdarkly-adapter/dist/flopflip-launchdarkly-adapter.esm.js",
+        "path": "./packages/launchdarkly-adapter/dist/index.js",
         "maxSize": "5Kb"
       },
       {
-        "path": "./packages/localstorage-adapter/dist/flopflip-localstorage-adapter.esm.js",
+        "path": "./packages/localstorage-adapter/dist/index.js",
         "maxSize": "3KB"
       },
       {
-        "path": "./packages/localstorage-cache/dist/flopflip-localstorage-cache.esm.js",
+        "path": "./packages/localstorage-cache/dist/index.js",
         "maxSize": "1KB"
       },
       {
-        "path": "./packages/memory-adapter/dist/flopflip-memory-adapter.esm.js",
+        "path": "./packages/memory-adapter/dist/index.js",
         "maxSize": "3KB"
       },
       {
-        "path": "./packages/graphql-adapter/dist/flopflip-graphql-adapter.esm.js",
+        "path": "./packages/graphql-adapter/dist/index.js",
         "maxSize": "4KB"
       },
       {
-        "path": "./packages/splitio-adapter/dist/flopflip-splitio-adapter.esm.js",
+        "path": "./packages/splitio-adapter/dist/index.js",
         "maxSize": "3.5Kb"
       },
       {
-        "path": "./packages/combine-adapters/dist/flopflip-combine-adapters.esm.js",
+        "path": "./packages/combine-adapters/dist/index.js",
         "maxSize": "3.0Kb"
       },
       {
-        "path": "./packages/react/dist/flopflip-react.esm.js",
+        "path": "./packages/react/dist/index.js",
         "maxSize": "6Kb"
       },
       {
-        "path": "./packages/react-broadcast/dist/flopflip-react-broadcast.browser.esm.js",
+        "path": "./packages/react-broadcast/dist/index.js",
         "maxSize": "3Kb"
       },
       {
-        "path": "./packages/react-redux/dist/flopflip-react-redux.browser.esm.js",
+        "path": "./packages/react-redux/dist/index.js",
         "maxSize": "4Kb"
       }
     ]
@@ -132,7 +124,6 @@
     "@commitlint/cli": "19.7.1",
     "@commitlint/config-conventional": "19.7.1",
     "@manypkg/cli": "0.23.0",
-    "@preconstruct/cli": "2.8.10",
     "@testing-library/jest-dom": "6.6.3",
     "@types/jest": "29.5.14",
     "@types/lodash": "4.17.15",
@@ -156,6 +147,7 @@
     "rimraf": "6.0.1",
     "ts-node": "10.9.2",
     "tslib": "2.8.1",
+    "turbo": "2.4.1",
     "typescript": "5.7.3",
     "vite": "6.1.0",
     "vitest": "3.0.5",

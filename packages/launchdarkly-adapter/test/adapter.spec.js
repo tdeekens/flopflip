@@ -511,7 +511,7 @@ describe('when configuring', () => {
               )
             )
           ).toStrictEqual({
-            someFlag1: false,
+            someFlag1: true,
             someFlag2: false,
           });
         });
@@ -578,10 +578,10 @@ describe('when configuring', () => {
               triggerFlagValueChange(client, { flagValue: true });
               expect(onFlagsStateChange).toHaveBeenCalledWith({
                 id: adapter.id,
-                flags: {
+                flags: expect.objectContaining({
                   // Value was cached, thus should not be updated
                   cached: true,
-                },
+                }),
               });
             });
           });

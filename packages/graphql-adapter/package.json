@@ -2,8 +2,30 @@
   "name": "@flopflip/graphql-adapter",
   "version": "14.0.2",
   "description": "An GraphQL adapter for flipflop",
-  "main": "dist/flopflip-graphql-adapter.cjs.js",
-  "module": "dist/flopflip-graphql-adapter.esm.js",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.js",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "dist/*.d.ts",
+        "dist/*.d.cts"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "rimraf dist && tsup",
+    "check-types": "tsc --noEmit",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "dev": "tsup --watch --clean=false"
+  },
   "files": [
     "readme.md",
     "dist/**"
@@ -40,6 +62,8 @@
     "tiny-warning": "1.0.3"
   },
   "devDependencies": {
-    "globalthis": "1.0.4"
+    "@flopflip/tsconfig": "workspace:*",
+    "globalthis": "1.0.4",
+    "tsup": "8.3.6"
   }
 }

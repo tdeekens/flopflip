@@ -1,0 +1,69 @@
+name: Quality
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  lint:
+    name: Linting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/ci
+
+      - name: Lint
+        run: pnpm lint:ci
+
+  check-types:
+    name: Type checking
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/ci
+
+      - name: TypeScript
+        run: pnpm check-types
+
+  testing:
+    name: Testing
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/ci
+
+      - name: Build
+        run: pnpm build
+
+      - name: Test (with coverage)
+        run: pnpm test:coverage --config vitest.shared.ts
+
+      - name: Test (with report)
+        run: pnpm test:report --config vitest.shared.ts
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v5
+        with:
+          fail_ci_if_error: true
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }} # required
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

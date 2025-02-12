@@ -2,9 +2,30 @@
   "name": "@flopflip/types",
   "version": "14.0.2",
   "description": "Type definitions for flipflop",
-  "main": "dist/flopflip-types.cjs.js",
-  "module": "dist/flopflip-types.esm.js",
-  "types": "dist/flopflip-types.cjs.d.ts",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.js",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "dist/*.d.ts",
+        "dist/*.d.cts"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "rimraf dist && tsup",
+    "check-types": "tsc --noEmit",
+    "test": "exit 0",
+    "test:watch": "exit 0",
+    "dev": "tsup --watch --clean=false"
+  },
   "files": [
     "readme.md",
     "dist/**"
@@ -32,7 +53,9 @@
     "launchdarkly-js-client-sdk": "3.5.0"
   },
   "devDependencies": {
+    "@flopflip/tsconfig": "workspace:*",
     "@types/react": "18.3.18",
+    "tsup": "8.3.6",
     "typescript": "5.7.3"
   },
   "peerDependencies": {
