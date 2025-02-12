@@ -55,43 +55,43 @@
   "bundlewatch": {
     "files": [
       {
-        "path": "./packages/launchdarkly-adapter/dist/flopflip-launchdarkly-adapter.esm.js",
+        "path": "./packages/launchdarkly-adapter/dist/index.js",
         "maxSize": "5Kb"
       },
       {
-        "path": "./packages/localstorage-adapter/dist/flopflip-localstorage-adapter.esm.js",
+        "path": "./packages/localstorage-adapter/dist/index.js",
         "maxSize": "3KB"
       },
       {
-        "path": "./packages/localstorage-cache/dist/flopflip-localstorage-cache.esm.js",
+        "path": "./packages/localstorage-cache/dist/index.js",
         "maxSize": "1KB"
       },
       {
-        "path": "./packages/memory-adapter/dist/flopflip-memory-adapter.esm.js",
+        "path": "./packages/memory-adapter/dist/index.js",
         "maxSize": "3KB"
       },
       {
-        "path": "./packages/graphql-adapter/dist/flopflip-graphql-adapter.esm.js",
+        "path": "./packages/graphql-adapter/dist/index.js",
         "maxSize": "4KB"
       },
       {
-        "path": "./packages/splitio-adapter/dist/flopflip-splitio-adapter.esm.js",
+        "path": "./packages/splitio-adapter/dist/index.js",
         "maxSize": "3.5Kb"
       },
       {
-        "path": "./packages/combine-adapters/dist/flopflip-combine-adapters.esm.js",
+        "path": "./packages/combine-adapters/dist/index.js",
         "maxSize": "3.0Kb"
       },
       {
-        "path": "./packages/react/dist/flopflip-react.esm.js",
+        "path": "./packages/react/dist/index.js",
         "maxSize": "6Kb"
       },
       {
-        "path": "./packages/react-broadcast/dist/flopflip-react-broadcast.browser.esm.js",
+        "path": "./packages/react-broadcast/dist/index.js",
         "maxSize": "3Kb"
       },
       {
-        "path": "./packages/react-redux/dist/flopflip-react-redux.browser.esm.js",
+        "path": "./packages/react-redux/dist/index.js",
         "maxSize": "4Kb"
       }
     ]
