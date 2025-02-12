@@ -46,14 +46,14 @@ jobs:
       - name: Setup
         uses: ./.github/actions/ci
 
-      - name: Build)
+      - name: Build
         run: pnpm build
 
       - name: Test (with coverage)
-        run: pnpm test:coverage
+        run: pnpm test:coverage --config vitest.shared.ts
 
       - name: Test (with report)
-        run: pnpm test:report
+        run: pnpm test:report --config vitest.shared.ts
 
       - name: Upload coverage
         uses: codecov/codecov-action@v5
