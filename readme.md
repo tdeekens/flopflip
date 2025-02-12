@@ -13,13 +13,14 @@
   React
   · Redux
   · Vitest
+  · Turbo
   · TypeScript
   · @testing-library/react
   · Biome
   · Babel
   · Lodash
   · Changesets
-  · Rollup
+  · tsup
   🙏
   </sub>
 </p>
