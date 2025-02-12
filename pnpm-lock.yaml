@@ -198,7 +198,7 @@ importers:
         specifier: 4.17.21
         version: 4.17.21
     devDependencies:
-      tsconfig:
+      '@flopflip/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/tsconfig
       tsup:
@@ -220,7 +220,7 @@ importers:
         specifier: workspace:*
         version: link:../types
     devDependencies:
-      tsconfig:
+      '@flopflip/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/tsconfig
       tsup:
@@ -251,12 +251,12 @@ importers:
       '@flopflip/memory-adapter':
         specifier: workspace:*
         version: link:../memory-adapter
+      '@flopflip/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       globalthis:
         specifier: 1.0.4
         version: 1.0.4
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -267,12 +267,12 @@ importers:
         specifier: workspace:*
         version: link:../types
     devDependencies:
+      '@flopflip/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       cypress:
         specifier: 13.6.4
         version: 13.6.4(patch_hash=bnmjxin5yu4gimwzcgzqydy6di)
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -307,12 +307,12 @@ importers:
         specifier: 1.0.3
         version: 1.0.3
     devDependencies:
+      '@flopflip/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       globalthis:
         specifier: 1.0.4
         version: 1.0.4
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -347,12 +347,12 @@ importers:
         specifier: 1.0.3
         version: 1.0.3
     devDependencies:
+      '@flopflip/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       globalthis:
         specifier: 1.0.4
         version: 1.0.4
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -396,12 +396,12 @@ importers:
         specifier: 7.0.2
         version: 7.0.2
     devDependencies:
+      '@flopflip/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       globalthis:
         specifier: 1.0.4
         version: 1.0.4
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -430,12 +430,12 @@ importers:
         specifier: 1.0.3
         version: 1.0.3
     devDependencies:
+      '@flopflip/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       globalthis:
         specifier: 1.0.4
         version: 1.0.4
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -446,7 +446,7 @@ importers:
         specifier: workspace:*
         version: link:../types
     devDependencies:
-      tsconfig:
+      '@flopflip/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/tsconfig
       tsup:
@@ -471,12 +471,12 @@ importers:
         specifier: 1.0.3
         version: 1.0.3
     devDependencies:
+      '@flopflip/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       globalthis:
         specifier: 1.0.4
         version: 1.0.4
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -510,7 +510,10 @@ importers:
     devDependencies:
       '@flopflip/test-utils':
         specifier: workspace:*
-        version: link:../test-utils
+        version: link:../../tooling/test-utils
+      '@flopflip/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       '@types/react':
         specifier: 18.3.18
         version: 18.3.18
@@ -523,9 +526,6 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -556,7 +556,10 @@ importers:
         version: link:../memory-adapter
       '@flopflip/test-utils':
         specifier: workspace:*
-        version: link:../test-utils
+        version: link:../../tooling/test-utils
+      '@flopflip/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       '@types/react':
         specifier: 18.3.18
         version: 18.3.18
@@ -569,9 +572,6 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -605,7 +605,10 @@ importers:
         version: link:../memory-adapter
       '@flopflip/test-utils':
         specifier: workspace:*
-        version: link:../test-utils
+        version: link:../../tooling/test-utils
+      '@flopflip/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -618,9 +621,6 @@ importers:
       redux:
         specifier: 4.2.1
         version: 4.2.1
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -631,7 +631,7 @@ importers:
         specifier: workspace:*
         version: link:../types
     devDependencies:
-      tsconfig:
+      '@flopflip/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/tsconfig
       tsup:
@@ -659,24 +659,46 @@ importers:
         specifier: 7.0.2
         version: 7.0.2
     devDependencies:
+      '@flopflip/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       globalthis:
         specifier: 1.0.4
         version: 1.0.4
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
 
-  packages/test-utils:
+  packages/types:
+    dependencies:
+      launchdarkly-js-client-sdk:
+        specifier: 3.5.0
+        version: 3.5.0
+    devDependencies:
+      '@flopflip/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
+      '@types/react':
+        specifier: 18.3.18
+        version: 18.3.18
+      tsup:
+        specifier: 8.3.6
+        version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
+      typescript:
+        specifier: 5.7.3
+        version: 5.7.3
+
+  tooling/test-utils:
     dependencies:
       '@babel/runtime':
         specifier: 7.26.7
         version: 7.26.7
       '@flopflip/memory-adapter':
         specifier: workspace:*
-        version: link:../memory-adapter
+        version: link:../../packages/memory-adapter
+      '@flopflip/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
       '@testing-library/jest-dom':
         specifier: 6.6.3
         version: 6.6.3
@@ -689,28 +711,6 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../tooling/tsconfig
-
-  packages/types:
-    dependencies:
-      launchdarkly-js-client-sdk:
-        specifier: 3.5.0
-        version: 3.5.0
-    devDependencies:
-      '@types/react':
-        specifier: 18.3.18
-        version: 18.3.18
-      tsconfig:
-        specifier: workspace:*
-        version: link:../../tooling/tsconfig
-      tsup:
-        specifier: 8.3.6
-        version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
-      typescript:
-        specifier: 5.7.3
-        version: 5.7.3
 
   tooling/tsconfig:
     devDependencies:

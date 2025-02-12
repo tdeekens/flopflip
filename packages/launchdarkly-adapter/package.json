@@ -45,8 +45,8 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
+    "@flopflip/tsconfig": "workspace:*",
     "globalthis": "1.0.4",
-    "tsconfig": "workspace:*",
     "tsup": "8.3.6"
   },
   "dependencies": {

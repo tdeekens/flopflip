@@ -60,8 +60,8 @@
     "tiny-warning": "1.0.3"
   },
   "devDependencies": {
+    "@flopflip/tsconfig": "workspace:*",
     "globalthis": "1.0.4",
-    "tsconfig": "workspace:*",
     "tsup": "8.3.6"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "extends": "tsconfig/base.json",
+  "extends": "@flopflip/tsconfig/base.json",
   "compilerOptions": {
     "noEmit": true,
     "types": ["cypress"]

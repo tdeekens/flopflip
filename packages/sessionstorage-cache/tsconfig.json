@@ -1,4 +1,4 @@
 {
-  "extends": "tsconfig/base.json",
+  "extends": "@flopflip/tsconfig/base.json",
   "exclude": ["**/dist/*", "**/vitest.config.ts"]
 }

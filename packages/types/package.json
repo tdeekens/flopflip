@@ -53,8 +53,8 @@
     "launchdarkly-js-client-sdk": "3.5.0"
   },
   "devDependencies": {
+    "@flopflip/tsconfig": "workspace:*",
     "@types/react": "18.3.18",
-    "tsconfig": "workspace:*",
     "tsup": "8.3.6",
     "typescript": "5.7.3"
   },
