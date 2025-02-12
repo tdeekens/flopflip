@@ -61,6 +61,7 @@
     "@flopflip/localstorage-adapter": "workspace:*",
     "@flopflip/memory-adapter": "workspace:*",
     "globalthis": "1.0.4",
+    "tsconfig": "workspace:*",
     "tsup": "8.3.6"
   }
 }

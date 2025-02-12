@@ -198,6 +198,9 @@ importers:
         specifier: 4.17.21
         version: 4.17.21
     devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -217,6 +220,9 @@ importers:
         specifier: workspace:*
         version: link:../types
     devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -248,6 +254,9 @@ importers:
       globalthis:
         specifier: 1.0.4
         version: 1.0.4
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -261,6 +270,9 @@ importers:
       cypress:
         specifier: 13.6.4
         version: 13.6.4(patch_hash=bnmjxin5yu4gimwzcgzqydy6di)
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -298,6 +310,9 @@ importers:
       globalthis:
         specifier: 1.0.4
         version: 1.0.4
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -335,6 +350,9 @@ importers:
       globalthis:
         specifier: 1.0.4
         version: 1.0.4
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -381,6 +399,9 @@ importers:
       globalthis:
         specifier: 1.0.4
         version: 1.0.4
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -412,6 +433,9 @@ importers:
       globalthis:
         specifier: 1.0.4
         version: 1.0.4
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -422,6 +446,9 @@ importers:
         specifier: workspace:*
         version: link:../types
     devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -447,6 +474,9 @@ importers:
       globalthis:
         specifier: 1.0.4
         version: 1.0.4
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -493,6 +523,9 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -536,6 +569,9 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -582,6 +618,9 @@ importers:
       redux:
         specifier: 4.2.1
         version: 4.2.1
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -592,6 +631,9 @@ importers:
         specifier: workspace:*
         version: link:../types
     devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -620,6 +662,9 @@ importers:
       globalthis:
         specifier: 1.0.4
         version: 1.0.4
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -644,6 +689,9 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
 
   packages/types:
     dependencies:
@@ -654,9 +702,18 @@ importers:
       '@types/react':
         specifier: 18.3.18
         version: 18.3.18
+      tsconfig:
+        specifier: workspace:*
+        version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
+      typescript:
+        specifier: 5.7.3
+        version: 5.7.3
+
+  tooling/tsconfig:
+    devDependencies:
       typescript:
         specifier: 5.7.3
         version: 5.7.3
