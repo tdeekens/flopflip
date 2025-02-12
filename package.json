@@ -42,7 +42,7 @@
     "HoC",
     "store-enhancer"
   ],
-  "packageManager": "pnpm@9.15.5",
+  "packageManager": "pnpm@10.3.0",
   "pnpm": {
     "overrides": {
       "@types/react": "18.3.18",
