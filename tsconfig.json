@@ -26,6 +26,10 @@
     "target": "ES2015",
     "allowJs": false
   },
-  "exclude": ["packages/cypress-plugin"],
+  "exclude": [
+    "packages/cypress-plugin",
+    "packages/*/vitest.config.ts",
+    "packages/*/dist/*"
+  ],
   "typeRoots": ["@types", "node_modules/@types"]
 }

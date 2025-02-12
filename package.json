@@ -4,20 +4,20 @@
   "description": "Monorepository for flipflop and its projects e.g. react-redux, react and the wrapper",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "husky install && preconstruct dev && manypkg check && check-node-version --package --print",
+    "clean": "manypkg exec rm -rf dist && manypkg exec rm -rf .turbo && rm -rf .turbo",
+    "postinstall": "husky install && manypkg check && check-node-version --package --print",
     "reinstall": "manypkg exec rm -rf node_modules && rm -rf node_modules pnpm-lock.yaml && pnpm install",
     "auth": "npm_config_registry=https://registry.npmjs.org npm whoami",
     "lint": "biome lint",
-    "typecheck": "tsc --project tsconfig.json --noEmit && tsc --project packages/cypress-plugin/tsconfig.json --noEmit",
+    "lint:ci": "biome ci",
     "format": "biome format --write",
     "fix:biome": "biome lint --write",
     "biome:check": "biome check --write",
-    "lint:ci": "biome ci",
     "test:coverage": "pnpm test -- --coverage",
-    "test": "vitest run",
+    "check-types": "turbo check-types",
+    "test": "turbo test",
     "test:report": "vitest --reporter=junit --outputFile=junit.xml",
-    "build": "preconstruct build",
-    "build:watch": "preconstruct watch",
+    "build": "turbo build",
     "changeset": "changeset",
     "changeset:version-and-format": "changeset version && pnpm format && pnpm install --no-frozen-lockfile",
     "prepublishOnly": "pinst --disable",
@@ -43,14 +43,6 @@
     "store-enhancer"
   ],
   "packageManager": "pnpm@9.15.5",
-  "preconstruct": {
-    "packages": [
-      "demo",
-      "packages/*",
-      "!packages/test-utils",
-      "!demo"
-    ]
-  },
   "pnpm": {
     "overrides": {
       "@types/react": "18.3.18",
@@ -132,7 +124,6 @@
     "@commitlint/cli": "19.7.1",
     "@commitlint/config-conventional": "19.7.1",
     "@manypkg/cli": "0.23.0",
-    "@preconstruct/cli": "2.8.10",
     "@testing-library/jest-dom": "6.6.3",
     "@types/jest": "29.5.14",
     "@types/lodash": "4.17.15",
@@ -156,6 +147,7 @@
     "rimraf": "6.0.1",
     "ts-node": "10.9.2",
     "tslib": "2.8.1",
+    "turbo": "2.4.1",
     "typescript": "5.7.3",
     "vite": "6.1.0",
     "vitest": "3.0.5",

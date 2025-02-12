@@ -2,11 +2,30 @@
   "name": "@flopflip/cypress-plugin",
   "version": "14.0.2",
   "description": "A plugin for Cypress change feature toggles in Cypress runs",
-  "main": "dist/flopflip-cypress-plugin.cjs.js",
-  "module": "dist/flopflip-cypress-plugin.esm.js",
-  "browser": {
-    "./dist/flopflip-cypress-plugin.cjs.js": "./dist/flopflip-cypress-plugin.browser.cjs.js",
-    "./dist/flopflip-cypress-plugin.esm.js": "./dist/flopflip-cypress-plugin.browser.esm.js"
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.js",
+  "browser": "./dist/index.js",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "dist/*.d.ts",
+        "dist/*.d.cts"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "rimraf dist && tsup",
+    "check-types": "tsc --noEmit",
+    "test": "exit 0",
+    "test:watch": "exit 0",
+    "dev": "tsup --watch --clean=false"
   },
   "files": [
     "readme.md",
@@ -27,7 +46,8 @@
   },
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
-    "cypress": "13.6.4"
+    "cypress": "13.6.4",
+    "tsup": "8.3.6"
   },
   "peerDependencies": {
     "cypress": "4.x || 5.x || 6.x || 7.x || 8.x || 9.x || 10.x || 11.x || 12.x || 13.x"

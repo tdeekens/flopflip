@@ -2,12 +2,34 @@
   "name": "@flopflip/combine-adapters",
   "version": "14.0.2",
   "description": "An adapter which combines other adapters for flipflop",
-  "main": "dist/flopflip-combine-adapters.cjs.js",
-  "module": "dist/flopflip-combine-adapters.esm.js",
+  "sideEffects": false,
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist/*.d.ts",
+        "dist/*.d.cts"
+      ]
+    }
+  },
   "files": [
     "readme.md",
     "dist/**"
   ],
+  "scripts": {
+    "build": "rimraf dist && tsup",
+    "check-types": "tsc --noEmit",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "dev": "tsup --watch --clean=false"
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -38,6 +60,7 @@
   "devDependencies": {
     "@flopflip/localstorage-adapter": "workspace:*",
     "@flopflip/memory-adapter": "workspace:*",
-    "globalthis": "1.0.4"
+    "globalthis": "1.0.4",
+    "tsup": "8.3.6"
   }
 }

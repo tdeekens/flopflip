@@ -2,8 +2,30 @@
   "name": "@flopflip/adapter-utilities",
   "version": "14.0.2",
   "description": "Adapter utilities for flipflop",
-  "main": "dist/flopflip-adapter-utilities.cjs.js",
-  "module": "dist/flopflip-adapter-utilities.esm.js",
+  "sideEffects": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.js",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "dist/*.d.ts",
+        "dist/*.d.cts"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "rimraf dist && tsup",
+    "check-types": "tsc --noEmit",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "dev": "tsup --watch --clean=false"
+  },
   "files": [
     "readme.md",
     "dist/**"
@@ -34,6 +56,7 @@
     "lodash": "4.17.21"
   },
   "devDependencies": {
+    "tsup": "8.3.6",
     "typescript": "5.7.3"
   },
   "peerDependencies": {

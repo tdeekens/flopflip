@@ -7,35 +7,35 @@ on:
   pull_request:
 
 jobs:
-  install:
+  lint:
+    name: Linting
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4.1.0
-        with:
-          run_install: false
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-
-      - name: Install
-        run: pnpm install
-
-      - name: Type check
-        run: pnpm typecheck
+      - name: Install dependencies
+        uses: ./.github/actions/ci
 
       - name: Lint
         run: pnpm lint:ci
 
-      - name: Build
-        run: pnpm build
+  check-types:
+    name: Type checking
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install dependencies
+        uses: ./.github/actions/ci
+
+      - name: TypeScript
+        run: pnpm check-types
+
+  testing:
+    name: Testing
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install dependencies
+        uses: ./.github/actions/ci
 
       - name: Test (with coverage)
         run: pnpm test:coverage
