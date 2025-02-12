@@ -10,7 +10,7 @@ overrides:
 
 patchedDependencies:
   cypress@13.6.4:
-    hash: bnmjxin5yu4gimwzcgzqydy6di
+    hash: 32b92e06b2ba249501769e5f048f75b3478c6c8e8b46362c1903c24f9d4b1ff9
     path: patches/cypress@13.6.4.patch
 
 importers:
@@ -272,7 +272,7 @@ importers:
         version: link:../../tooling/tsconfig
       cypress:
         specifier: 13.6.4
-        version: 13.6.4(patch_hash=bnmjxin5yu4gimwzcgzqydy6di)
+        version: 13.6.4(patch_hash=32b92e06b2ba249501769e5f048f75b3478c6c8e8b46362c1903c24f9d4b1ff9)
       tsup:
         specifier: 8.3.6
         version: 8.3.6(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0)
@@ -6644,7 +6644,7 @@ snapshots:
 
   cuint@0.2.2: {}
 
-  cypress@13.6.4(patch_hash=bnmjxin5yu4gimwzcgzqydy6di):
+  cypress@13.6.4(patch_hash=32b92e06b2ba249501769e5f048f75b3478c6c8e8b46362c1903c24f9d4b1ff9):
     dependencies:
       '@cypress/request': 3.0.7
       '@cypress/xvfb': 1.2.4(supports-color@8.1.1)
