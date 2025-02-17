@@ -6,12 +6,7 @@ import {
   type TFlagsChange,
   adapterIdentifiers as allAdapterIdentifiers,
 } from '@flopflip/types';
-import type {
-  PreloadedState,
-  Reducer,
-  Store,
-  StoreEnhancerStoreCreator,
-} from 'redux';
+import type { Store, StoreEnhancerStoreCreator } from 'redux';
 
 import { updateFlags, updateStatus } from './ducks';
 import type { TState } from './types';
@@ -21,10 +16,7 @@ function createFlopFlipEnhancer(
   adapterArgs: TAdapterArgs
 ): <StoreState extends TState>(
   next: StoreEnhancerStoreCreator<StoreState>
-) => (
-  reducer: Reducer<StoreState>,
-  preloadedState?: PreloadedState<StoreState>
-) => Store {
+) => (reducer, preloadedState) => Store {
   return (next) =>
     (...args) => {
       const store: Store = next(...args);
