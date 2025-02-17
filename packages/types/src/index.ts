@@ -68,6 +68,7 @@ export type TLaunchDarklyAdapterArgs = TLaunchDarklyContextArgs & {
   };
   flags?: TFlags;
   throwOnInitializationFailure?: boolean;
+  initializationTimeout?: number;
   flagsUpdateDelayMs?: number;
   cacheIdentifier?: TCacheIdentifiers;
   cacheMode?: TCacheModes;
