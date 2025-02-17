@@ -398,7 +398,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       context,
       flags,
       throwOnInitializationFailure = false,
-      initializationTimeout = 1000,
+      initializationTimeout = 2, // 2 seconds
       flagsUpdateDelayMs,
     } = adapterArgs;
     let cachedFlags: TFlags;
