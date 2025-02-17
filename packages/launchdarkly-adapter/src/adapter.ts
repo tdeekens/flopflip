@@ -171,16 +171,21 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     throwOnInitializationFailure,
     cacheIdentifier,
     cacheMode,
+    initializationTimeout,
   }: Pick<
     TLaunchDarklyAdapterArgs,
-    'flags' | 'throwOnInitializationFailure' | 'cacheIdentifier' | 'cacheMode'
+    | 'flags'
+    | 'throwOnInitializationFailure'
+    | 'cacheIdentifier'
+    | 'cacheMode'
+    | 'initializationTimeout'
   >): Promise<{
     flagsFromSdk?: TFlags;
     initializationStatus: AdapterInitializationStatus;
   }> => {
     if (this.#adapterState.client) {
       return this.#adapterState.client
-        .waitForInitialization()
+        .waitForInitialization(initializationTimeout)
         .then(async () => {
           let flagsFromSdk: TFlags | undefined;
 
@@ -393,6 +398,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       context,
       flags,
       throwOnInitializationFailure = false,
+      initializationTimeout = 1000,
       flagsUpdateDelayMs,
     } = adapterArgs;
     let cachedFlags: TFlags;
@@ -426,6 +432,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       throwOnInitializationFailure,
       cacheIdentifier: adapterArgs.cacheIdentifier,
       cacheMode: adapterArgs.cacheMode,
+      initializationTimeout,
     }).then(({ flagsFromSdk, initializationStatus }) => {
       if (flagsFromSdk) {
         this.#setupFlagSubcription({
