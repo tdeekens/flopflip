@@ -51,7 +51,7 @@
     "tsup": "8.3.6"
   },
   "peerDependencies": {
-    "cypress": "4.x || 5.x || 6.x || 7.x || 8.x || 9.x || 10.x || 11.x || 12.x || 13.x"
+    "cypress": "13.x || 14.x"
   },
   "dependencies": {
     "@flopflip/types": "workspace:*"

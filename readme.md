@@ -385,27 +385,29 @@ Given your preference is to have the feature flag's state persisted in redux you
 would simply add a reducer when creating your store.
 
 ```js
-import { createStore, compose, applyMiddleware } from 'redux';
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import {
   ConfigureFlopFlip,
   flopflipReducer,
-  FLOPFLIP_STATE_SLICE
-} from '@flopflip/react-redux';
+  FLOPFLIP_STATE_SLICE,
+} from "@flopflip/react-redux";
 
 // Maintained somewhere within your application
-import { user } from './user';
-import { appReducer } from './reducer';
+import { user } from "./user";
+import { appReducer } from "./reducer";
 
-const store = createStore(
-  combineReducers({
-    appReducer,
-    [FLOPFLIP_STATE_SLICE]: flopflipReducer,
-  }),
-  initialState,
-  compose(
-    applyMiddleware(...),
-  )
-)
+const rootReducer = combineReducers({
+  appReducer,
+  [FLOPFLIP_STATE_SLICE]: flopflipReducer,
+});
+
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+  preloadedState: initialState,
+});
+
+export default store;
 ```
 
 #### Setup through a Redux store enhancer
@@ -420,38 +422,36 @@ tree.
 In context this configuration could look like
 
 ```js
-import { createStore, compose, applyMiddleware } from 'redux';
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import {
   createFlopFlipEnhancer,
   flopflipReducer,
-
-  // We refer to this state slice in the `injectFeatureToggles`
-  // HoC and currently do not support a custom state slice.
-  FLOPFLIP_STATE_SLICE
-} from '@flopflip/react-redux';
-import { adapter } from '@flopflip/launchdarkly-adapter';
+  FLOPFLIP_STATE_SLICE,
+} from "@flopflip/react-redux";
+import { adapter } from "@flopflip/launchdarkly-adapter";
 
 // Maintained somewhere within your application
-import { user } from './user';
-import { appReducer } from './reducer';
+import { user } from "./user";
+import { appReducer } from "./reducer";
 
-const store = createStore(
-  combineReducers({
-    appReducer,
-    [FLOPFLIP_STATE_SLICE]: flopflipReducer,
-  }),
-  initialState,
-  compose(
-    applyMiddleware(...),
-    createFlopFlipEnhancer(
-      adapter,
-      {
+const rootReducer = combineReducers({
+  appReducer,
+  [FLOPFLIP_STATE_SLICE]: flopflipReducer,
+});
+
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(
+      createFlopFlipEnhancer(adapter, {
         sdk: { clientSideId: window.application.env.LD_CLIENT_ID },
-        user
-      }
-    )
-  )
-)
+        user,
+      })
+    ),
+  preloadedState: initialState,
+});
+
+export default store;
 ```
 
 Note that `@flopflip/react-redux` also exports a `createFlopflipReducer(preloadedState: Flags)`. This is useful when you want to populate the redux store with initial values for your flags.
@@ -461,9 +461,13 @@ Example:
 ```js
 const defaultFlags = { flagA: true, flagB: false };
 
-combineReducers({
+const rootReducer = combineReducers({
   appReducer,
   [FLOPFLIP_STATE_SLICE]: createFlopflipReducer(defaultFlags),
+});
+
+const store = configureStore({
+  reducer: rootReducer,
 });
 ```
 
@@ -473,11 +477,16 @@ This way you can pass `defaultFlags` as the `preloadedState` directly into the `
 const initialState = {
   [FLOPFLIP_STATE_SLICE]: { flagA: true, flagB: false },
 };
-const store = createStore(
-  // ...as before
-  initialState
-  // ...as before
-);
+
+const rootReducer = combineReducers({
+  appReducer,
+  [FLOPFLIP_STATE_SLICE]: flopflipReducer,
+});
+
+const store = configureStore({
+  reducer: rootReducer,
+  preloadedState: initialState,
+});
 ```
 
 #### Syncing the store reducer with adapters

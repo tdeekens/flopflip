@@ -35,6 +35,7 @@
   "homepage": "https://github.com/tdeekens/flopflip#readme",
   "keywords": [
     "react",
+    "@reduxjs/toolkit",
     "redux",
     "feature-flags",
     "feature-toggles",

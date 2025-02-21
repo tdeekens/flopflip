@@ -17,10 +17,6 @@
       "matchUpdateTypes": ["digest", "patch", "minor", "major"]
     },
     {
-      "matchPackageNames": ["react-redux"],
-      "allowedVersions": "<=8.0.5"
-    },
-    {
       "matchPackageNames": ["cypress"],
       "allowedVersions": "<=13.6.4"
     }

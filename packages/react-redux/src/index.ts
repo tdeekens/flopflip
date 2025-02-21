@@ -8,8 +8,6 @@ export { ToggleFeature } from './toggle-feature';
 export {
   createFlopflipReducer,
   flopflipReducer,
-  UPDATE_FLAGS,
-  UPDATE_STATUS,
 } from './ducks';
 export {
   selectFlag as selectFeatureFlag,

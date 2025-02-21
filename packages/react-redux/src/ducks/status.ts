@@ -4,72 +4,63 @@ import type {
   TAdapterStatusChange,
   TAdaptersStatus,
 } from '@flopflip/types';
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { STATE_SLICE } from '../constants';
 import type { TState } from '../types';
-import type { TUpdateStatusAction } from './types';
 
-// Actions
-export const UPDATE_STATUS = '@flopflip/status/update';
+const initialState: TAdaptersStatus = {};
 
-const initialState = {};
-
-// Reducer
-const reducer = (
-  // biome-ignore lint/style/useDefaultParameterLast: <explanation>
-  state: TAdaptersStatus = initialState,
-  action: TUpdateStatusAction
-): TAdaptersStatus => {
-  switch (action.type) {
-    case UPDATE_STATUS:
-      if (action.payload.id) {
-        return {
-          ...state,
-          [action.payload.id]: {
-            ...state?.[action.payload.id],
+const statusSlice = createSlice({
+  name: 'status',
+  initialState,
+  reducers: {
+    updateStatus: {
+      reducer(
+        state,
+        action: PayloadAction<
+          TAdapterStatusChange & { adapterIdentifiers: TAdapterIdentifiers[] }
+        >
+      ) {
+        if (action.payload.id) {
+          state[action.payload.id] = {
+            ...state[action.payload.id],
             ...action.payload.status,
-          },
+          };
+          return;
+        }
+
+        for (const adapterInterfaceIdentifier of action.payload
+          .adapterIdentifiers) {
+          state[adapterInterfaceIdentifier] = {
+            ...state[adapterInterfaceIdentifier],
+            ...action.payload.status,
+          };
+        }
+      },
+      prepare(
+        statusChange: TAdapterStatusChange,
+        adapterIdentifiers: TAdapterIdentifiers[]
+      ) {
+        return {
+          payload: { ...statusChange, adapterIdentifiers },
         };
-      }
-
-      return {
-        ...state,
-        ...Object.fromEntries(
-          action.payload.adapterIdentifiers.map(
-            (adapterInterfaceIdentifier) => [
-              adapterInterfaceIdentifier,
-              {
-                ...state?.[adapterInterfaceIdentifier],
-                ...action.payload.status,
-              },
-            ]
-          )
-        ),
-      };
-
-    default:
-      return state;
-  }
-};
-
-export { reducer };
-
-// Action Creators
-export const updateStatus = (
-  statusChange: TAdapterStatusChange,
-  adapterIdentifiers: TAdapterIdentifiers[]
-): TUpdateStatusAction => ({
-  type: UPDATE_STATUS,
-  payload: { ...statusChange, adapterIdentifiers },
+      },
+    },
+  },
 });
+
+export const { updateStatus } = statusSlice.actions;
+export const reducer = statusSlice.reducer;
+
 // Selectors
 type TSelectStatusArgs = {
   adapterIdentifiers?: TAdapterIdentifiers[];
 };
+
 export const selectStatus =
   ({ adapterIdentifiers }: TSelectStatusArgs = {}) =>
   (state: TState) => {
     const { status } = state[STATE_SLICE];
-
     return selectAdapterConfigurationStatus(status, adapterIdentifiers);
   };

@@ -5,24 +5,13 @@ import {
 import { beforeEach, describe, expect, it } from 'vitest';
 
 import { STATE_SLICE } from '../../src/constants';
-import {
-  UPDATE_STATUS,
-  reducer,
-  selectStatus,
-  updateStatus,
-} from '../../src/ducks/status';
-
-describe('constants', () => {
-  it('should contain `UPDATE_STATUS`', () => {
-    expect(UPDATE_STATUS).toEqual('@flopflip/status/update');
-  });
-});
+import { reducer, selectStatus, updateStatus } from '../../src/ducks/status';
 
 describe('action creators', () => {
   describe('when updating status', () => {
     it('should return `UPDATE_STATUS` type', () => {
       expect(updateStatus({ isReady: false })).toEqual({
-        type: UPDATE_STATUS,
+        type: 'status/updateStatus',
         payload: expect.any(Object),
       });
     });
@@ -87,7 +76,9 @@ describe('reducers', () => {
       });
 
       it('should set the new status', () => {
-        expect(reducer(undefined, { type: UPDATE_STATUS, payload })).toEqual(
+        expect(
+          reducer(undefined, { type: 'status/updateStatus', payload })
+        ).toEqual(
           expect.objectContaining({
             memory: {
               configurationStatus: AdapterConfigurationStatus.Configuring,
@@ -116,7 +107,7 @@ describe('reducers', () => {
                 configurationStatus: AdapterConfigurationStatus.Configured,
               },
             },
-            { type: UPDATE_STATUS, payload }
+            { type: 'status/updateStatus', payload }
           )
         ).toEqual({
           memory: {
