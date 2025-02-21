@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
-    "@types/react": "18.3.18",
+    "@types/react": "19.0.10",
     "tsup": "8.3.6",
     "typescript": "5.7.3"
   },
