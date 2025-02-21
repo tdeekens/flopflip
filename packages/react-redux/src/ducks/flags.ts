@@ -6,11 +6,7 @@ import type {
   TFlagsChange,
   TFlagsContext,
 } from '@flopflip/types';
-import {
-  type PayloadAction,
-  createSelector,
-  createSlice,
-} from '@reduxjs/toolkit';
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 import { STATE_SLICE } from '../constants';
 import type { TState } from '../types';
