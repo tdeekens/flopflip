@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import { STATE_SLICE } from '../../src/constants';
 
 import {
-  UPDATE_FLAGS,
   reducer,
   selectFlag,
   selectFlags,
@@ -11,19 +10,13 @@ import {
 
 const adapterIdentifiers = ['memory'];
 
-describe('constants', () => {
-  it('should contain `flags/updateFlags`', () => {
-    expect(UPDATE_FLAGS).toEqual('@flopflip/flags/update');
-  });
-});
-
 describe('action creators', () => {
   describe('when updating flags', () => {
     const flags = { a: 'b' };
 
     it('should return `flags/updateFlags` type', () => {
       expect(updateFlags({ flags }, adapterIdentifiers)).toEqual({
-        type: UPDATE_FLAGS,
+        type: 'flags/updateFlags',
         payload: expect.any(Object),
       });
     });
@@ -56,7 +49,10 @@ describe('reducers', () => {
           },
         };
         it('should set the new flags', () => {
-          const reduced = reducer(undefined, { type: UPDATE_FLAGS, payload });
+          const reduced = reducer(undefined, {
+            type: 'flags/updateFlags',
+            payload,
+          });
           expect(reduced).toHaveProperty('memory.a', payload.flags.a);
           expect(reduced).toHaveProperty('memory.b', payload.flags.b);
         });
@@ -72,7 +68,10 @@ describe('reducers', () => {
         };
 
         it('should set the new flags for all adapter interfaces', () => {
-          const reduced = reducer(undefined, { type: UPDATE_FLAGS, payload });
+          const reduced = reducer(undefined, {
+            type: 'flags/updateFlags',
+            payload,
+          });
           expect(reduced).toHaveProperty('memory.a', payload.flags.a);
           expect(reduced).toHaveProperty('memory.b', payload.flags.b);
 
@@ -98,7 +97,10 @@ describe('reducers', () => {
         };
 
         it('should merge with new flags', () => {
-          const reduced = reducer(state, { type: UPDATE_FLAGS, payload });
+          const reduced = reducer(state, {
+            type: 'flags/updateFlags',
+            payload,
+          });
 
           expect(reduced).toHaveProperty('memory.a', payload.flags.a);
           expect(reduced).toHaveProperty('memory.b', payload.flags.b);
@@ -121,7 +123,10 @@ describe('reducers', () => {
         };
 
         it('should merge with new flags', () => {
-          const reduced = reducer(state, { type: UPDATE_FLAGS, payload });
+          const reduced = reducer(state, {
+            type: 'flags/updateFlags',
+            payload,
+          });
 
           expect(reduced).toHaveProperty('memory.a', payload.flags.a);
           expect(reduced).toHaveProperty('memory.b', payload.flags.b);

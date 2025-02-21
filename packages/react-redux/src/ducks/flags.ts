@@ -6,96 +6,75 @@ import type {
   TFlagsChange,
   TFlagsContext,
 } from '@flopflip/types';
-import type { Reducer } from 'redux';
+import {
+  type PayloadAction,
+  createSelector,
+  createSlice,
+} from '@reduxjs/toolkit';
 
 import { STATE_SLICE } from '../constants';
 import type { TState } from '../types';
-import type { TUpdateFlagsAction } from './types';
-
-// Actions
-export const UPDATE_FLAGS = '@flopflip/flags/update';
 
 const initialState: TFlagsContext = { memory: {} };
 
-// Reducer
-const reducer = (
-  // biome-ignore lint/style/useDefaultParameterLast: <explanation>
-  state: TFlagsContext = initialState,
-  action: TUpdateFlagsAction
-): TFlagsContext => {
-  switch (action.type) {
-    case UPDATE_FLAGS: {
-      if (action.payload.id) {
-        return {
-          ...state,
-          [action.payload.id]: {
-            ...state?.[action.payload.id],
+const flagsSlice = createSlice({
+  name: 'flags',
+  initialState,
+  reducers: {
+    updateFlags: {
+      reducer(
+        state,
+        action: PayloadAction<
+          TFlagsChange & { adapterIdentifiers: TAdapterIdentifiers[] }
+        >
+      ) {
+        if (action.payload.id) {
+          state[action.payload.id] = {
+            ...state[action.payload.id],
             ...action.payload.flags,
-          },
+          };
+          return;
+        }
+
+        for (const adapterId of action.payload.adapterIdentifiers) {
+          state[adapterId] = {
+            ...state[adapterId],
+            ...action.payload.flags,
+          };
+        }
+      },
+      prepare(
+        flagsChange: TFlagsChange,
+        adapterIdentifiers: TAdapterIdentifiers[]
+      ) {
+        return {
+          payload: { ...flagsChange, adapterIdentifiers },
         };
-      }
-
-      return {
-        ...state,
-        ...Object.fromEntries(
-          action.payload.adapterIdentifiers.map(
-            (adapterInterfaceIdentifier) => [
-              adapterInterfaceIdentifier,
-              {
-                ...state?.[adapterInterfaceIdentifier],
-                ...action.payload.flags,
-              },
-            ]
-          )
-        ),
-      };
-    }
-
-    default:
-      return state;
-  }
-};
-
-export { reducer };
-
-export const createReducer =
-  (
-    preloadedState: TFlagsContext = initialState
-  ): Reducer<TFlagsContext, TUpdateFlagsAction> =>
-  (
-    // biome-ignore lint/style/useDefaultParameterLast: <explanation>
-    state = preloadedState,
-    action
-  ) =>
-    reducer(state, action);
-
-// Action Creators
-export const updateFlags = (
-  flagsChange: TFlagsChange,
-  adapterIdentifiers: TAdapterIdentifiers[]
-): TUpdateFlagsAction => ({
-  type: UPDATE_FLAGS,
-  payload: { ...flagsChange, adapterIdentifiers },
+      },
+    },
+  },
 });
 
-// Selectors
+export const { updateFlags } = flagsSlice.actions;
+export const reducer = flagsSlice.reducer;
+
+export const createReducer = (preloadedState: TFlagsContext = initialState) => {
+  // biome-ignore lint/style/useDefaultParameterLast: <explanation>
+  return (state = preloadedState, action: ReturnType<typeof updateFlags>) =>
+    reducer(state, action);
+};
+
 export const selectFlags = () => (state: TState) =>
   state[STATE_SLICE].flags ?? {};
 
 export const selectFlag =
-  (
-    flagName: TFlagName,
-    adapterIdentifiers: TAdapterIdentifiers[]
-  ): ((state: TState) => TFlagVariation) =>
-  (state) => {
+  (flagName: TFlagName, adapterIdentifiers: TAdapterIdentifiers[]) =>
+  (state: TState): TFlagVariation => {
     const allFlags = selectFlags()(state);
-
     let foundFlagVariation: TFlagVariation = false;
 
-    for (const adapterInterfaceIdentifier of adapterIdentifiers) {
-      const flagValue: TFlagVariation =
-        allFlags[adapterInterfaceIdentifier]?.[flagName];
-
+    for (const adapterId of adapterIdentifiers) {
+      const flagValue = allFlags[adapterId]?.[flagName];
       if (!isNil(flagValue)) {
         foundFlagVariation = flagValue;
       }
