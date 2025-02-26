@@ -798,7 +798,7 @@
 
   In the second example `memory` could be `id` of your adapter. In the future we plan to support multiple adapters resulting in an array being passed.
 
-  Note that in other locations, e.g. with `useFeatureToggle` we now which adapter you are using as we retrive it from the adapter context.
+  Note that in other locations, e.g. with `useFeatureToggle` you now need to specify which adapter you are using as we retrieve it from the adapter context.
 
 ### Patch Changes
 
