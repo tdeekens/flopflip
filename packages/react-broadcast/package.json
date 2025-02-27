@@ -55,7 +55,7 @@
     "@types/react-dom": "19.0.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "tsup": "8.3.6"
+    "tsup": "8.4.0"
   },
   "peerDependencies": {
     "react": "18.x || 19.x",
