@@ -1,5 +1,36 @@
 # @flopflip/launchdarkly-adapter
 
+## 15.0.0
+
+### Major Changes
+
+- [#2001](https://github.com/tdeekens/flopflip/pull/2001) [`fb263d3`](https://github.com/tdeekens/flopflip/commit/fb263d3762d1cff0220a094d445561141a31f01c) Thanks [@tdeekens](https://github.com/tdeekens)! - Requires react 18.x, react-redux 9.x and redux 5.x.
+
+### Patch Changes
+
+- [#1980](https://github.com/tdeekens/flopflip/pull/1980) [`40db6e1`](https://github.com/tdeekens/flopflip/commit/40db6e198cc252a8784ae96abde605a70990e1d1) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependencies.
+
+- [#1998](https://github.com/tdeekens/flopflip/pull/1998) [`b141399`](https://github.com/tdeekens/flopflip/commit/b141399fba7538b909bb7057e3830b8f3ef81176) Thanks [@tdeekens](https://github.com/tdeekens)! - Add default initialization timeout of 2s to waitForInitialization. This can be configured through adapter args and the `initializationTimeout` property.
+
+- [#1974](https://github.com/tdeekens/flopflip/pull/1974) [`216ec4e`](https://github.com/tdeekens/flopflip/commit/216ec4ea59fa43863ef1dfe9ba56365e542b53e3) Thanks [@tdeekens](https://github.com/tdeekens)! - Refactor to remove internal barrel files.
+
+- [#1967](https://github.com/tdeekens/flopflip/pull/1967) [`7f1edb3`](https://github.com/tdeekens/flopflip/commit/7f1edb3105e589dae0b1d118111577c007f887cf) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependencies
+
+- [#2006](https://github.com/tdeekens/flopflip/pull/2006) [`df749f7`](https://github.com/tdeekens/flopflip/commit/df749f753726edffaf58631180553a6c564b2844) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency debounce-fn to v6
+
+- [#1970](https://github.com/tdeekens/flopflip/pull/1970) [`6799832`](https://github.com/tdeekens/flopflip/commit/6799832bddb9a60ba6a8988974815998bead6ab0) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependencies
+
+- [#1994](https://github.com/tdeekens/flopflip/pull/1994) [`5df599d`](https://github.com/tdeekens/flopflip/commit/5df599d181739136dc01a1f0b0ed237c1f8a4570) Thanks [@tdeekens](https://github.com/tdeekens)! - Refactor to use turborepo and tsup
+
+- [#1957](https://github.com/tdeekens/flopflip/pull/1957) [`1f527fc`](https://github.com/tdeekens/flopflip/commit/1f527fcdddcc2aa3009a1384810f28233c3fc141) Thanks [@renovate](https://github.com/apps/renovate)! - Update deps.
+
+- Updated dependencies [[`40db6e1`](https://github.com/tdeekens/flopflip/commit/40db6e198cc252a8784ae96abde605a70990e1d1), [`f62ab95`](https://github.com/tdeekens/flopflip/commit/f62ab955815a295c23c1f2dab3901f6d5cbbc570), [`216ec4e`](https://github.com/tdeekens/flopflip/commit/216ec4ea59fa43863ef1dfe9ba56365e542b53e3), [`fb263d3`](https://github.com/tdeekens/flopflip/commit/fb263d3762d1cff0220a094d445561141a31f01c), [`7f1edb3`](https://github.com/tdeekens/flopflip/commit/7f1edb3105e589dae0b1d118111577c007f887cf), [`6799832`](https://github.com/tdeekens/flopflip/commit/6799832bddb9a60ba6a8988974815998bead6ab0), [`5df599d`](https://github.com/tdeekens/flopflip/commit/5df599d181739136dc01a1f0b0ed237c1f8a4570), [`1f527fc`](https://github.com/tdeekens/flopflip/commit/1f527fcdddcc2aa3009a1384810f28233c3fc141)]:
+  - @flopflip/adapter-utilities@15.0.0
+  - @flopflip/types@15.0.0
+  - @flopflip/cache@15.0.0
+  - @flopflip/localstorage-cache@15.0.0
+  - @flopflip/sessionstorage-cache@15.0.0
+
 ## 14.0.2
 
 ### Patch Changes
@@ -410,20 +441,20 @@
 
   ```js
   const deviceContext = {
-    kind: 'device',
-    type: 'iPad',
-    key: 'device-key-123abc',
+    kind: "device",
+    type: "iPad",
+    key: "device-key-123abc",
   };
 
   const userContext = {
-    kind: 'user',
-    key: 'user-key-123abc',
-    name: 'Sandy',
-    role: 'doctor',
+    kind: "user",
+    key: "user-key-123abc",
+    name: "Sandy",
+    role: "doctor",
   };
 
   const multiContext = {
-    kind: 'multi',
+    kind: "multi",
 
     device: deviceContext,
   };
@@ -1177,7 +1208,7 @@
   You can now:
 
   ```js
-  import { updateFlags } from '@flopflip/launchdarkly-adapter';
+  import { updateFlags } from "@flopflip/launchdarkly-adapter";
 
   updateFlags({ myFlag: true });
   ```

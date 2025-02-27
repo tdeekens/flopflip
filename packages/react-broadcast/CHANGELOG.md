@@ -1,5 +1,25 @@
 # @flopflip/react-broadcast
 
+## 15.0.0
+
+### Major Changes
+
+- [#2001](https://github.com/tdeekens/flopflip/pull/2001) [`fb263d3`](https://github.com/tdeekens/flopflip/commit/fb263d3762d1cff0220a094d445561141a31f01c) Thanks [@tdeekens](https://github.com/tdeekens)! - Requires react 18.x, react-redux 9.x and redux 5.x.
+
+### Patch Changes
+
+- [#1980](https://github.com/tdeekens/flopflip/pull/1980) [`40db6e1`](https://github.com/tdeekens/flopflip/commit/40db6e198cc252a8784ae96abde605a70990e1d1) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependencies.
+
+- [#1967](https://github.com/tdeekens/flopflip/pull/1967) [`7f1edb3`](https://github.com/tdeekens/flopflip/commit/7f1edb3105e589dae0b1d118111577c007f887cf) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependencies
+
+- [#1970](https://github.com/tdeekens/flopflip/pull/1970) [`6799832`](https://github.com/tdeekens/flopflip/commit/6799832bddb9a60ba6a8988974815998bead6ab0) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependencies
+
+- [#1957](https://github.com/tdeekens/flopflip/pull/1957) [`1f527fc`](https://github.com/tdeekens/flopflip/commit/1f527fcdddcc2aa3009a1384810f28233c3fc141) Thanks [@renovate](https://github.com/apps/renovate)! - Update deps.
+
+- Updated dependencies [[`40db6e1`](https://github.com/tdeekens/flopflip/commit/40db6e198cc252a8784ae96abde605a70990e1d1), [`fb263d3`](https://github.com/tdeekens/flopflip/commit/fb263d3762d1cff0220a094d445561141a31f01c), [`7f1edb3`](https://github.com/tdeekens/flopflip/commit/7f1edb3105e589dae0b1d118111577c007f887cf), [`6799832`](https://github.com/tdeekens/flopflip/commit/6799832bddb9a60ba6a8988974815998bead6ab0), [`1f527fc`](https://github.com/tdeekens/flopflip/commit/1f527fcdddcc2aa3009a1384810f28233c3fc141)]:
+  - @flopflip/types@15.0.0
+  - @flopflip/react@15.0.0
+
 ## 14.0.2
 
 ### Patch Changes
@@ -165,7 +185,7 @@
   Example:
 
   ```javascript
-  import { useAllFeatureToggles } from '@flopflip/react-broadcast';
+  import { useAllFeatureToggles } from "@flopflip/react-broadcast";
 
   const MyComponent = () => {
     const allFeatureToggles = useAllFeatureToggles();
@@ -699,15 +719,15 @@
   You can wrap your application using for instance `react-testing-library` as
 
   ```jsx
-  import { TestProviderFlopFlip } from '@flopflip/react-broadcast';
-  import { render } from '@testing-library/react';
+  import { TestProviderFlopFlip } from "@flopflip/react-broadcast";
+  import { render } from "@testing-library/react";
 
   const testFlags = {
     myFlag: true,
   };
 
-  describe('rendering', () => {
-    it('should render the application with feature flags', () => {
+  describe("rendering", () => {
+    it("should render the application with feature flags", () => {
       render(
         <TestProviderFlopFlip flags={testFlags}>
           <App />
@@ -1113,15 +1133,15 @@
   You can now conveniently a flag variation without evaluating its actual state (as with `useFeatureToggle`).
 
   ```js
-  const variation = useFlagVariation('myFlagName');
+  const variation = useFlagVariation("myFlagName");
 
   const isAEnabled = variation === VARIATION_A;
   const isBEnabled = variation === VARIATION_B;
 
   // Is the same as
 
-  const isAEnabled = useFlagVariation('myFlagName', VARIATION_A);
-  const isBEnabled = useFlagVariation('myFlagName', VARIATION_B);
+  const isAEnabled = useFlagVariation("myFlagName", VARIATION_A);
+  const isBEnabled = useFlagVariation("myFlagName", VARIATION_B);
   ```
 
   Using `useFlagVariation` is often a bit more concise if you want to work with the variation value yourself.

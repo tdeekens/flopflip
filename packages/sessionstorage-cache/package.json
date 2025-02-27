@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/sessionstorage-cache",
-  "version": "14.0.2",
+  "version": "15.0.0",
   "description": "Sessionstorage cache for flipflop adapters",
   "sideEffects": false,
   "type": "module",
