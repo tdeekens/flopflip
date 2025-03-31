@@ -62,7 +62,7 @@
     "react-dom": "18.x || 19.x"
   },
   "dependencies": {
-    "@babel/runtime": "7.26.10",
+    "@babel/runtime": "7.27.0",
     "@flopflip/react": "workspace:*",
     "@flopflip/types": "workspace:*",
     "use-sync-external-store": "1.4.0"
