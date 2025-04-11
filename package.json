@@ -43,11 +43,11 @@
     "HoC",
     "store-enhancer"
   ],
-  "packageManager": "pnpm@10.7.0",
+  "packageManager": "pnpm@10.8.0",
   "pnpm": {
     "overrides": {
-      "@types/react": "19.0.12",
-      "@types/react-dom": "19.0.4"
+      "@types/react": "19.1.1",
+      "@types/react-dom": "19.1.2"
     },
     "patchedDependencies": {
       "cypress@13.6.4": "patches/cypress@13.6.4.patch"
@@ -131,10 +131,10 @@
     "@testing-library/jest-dom": "6.6.3",
     "@types/jest": "29.5.14",
     "@types/lodash": "4.17.16",
-    "@types/node": "22.13.14",
+    "@types/node": "22.14.0",
     "@vitejs/plugin-react": "4.3.4",
-    "@vitest/coverage-v8": "3.0.9",
-    "@vitest/ui": "3.0.9",
+    "@vitest/coverage-v8": "3.1.1",
+    "@vitest/ui": "3.1.1",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "check-node-version": "4.2.1",
     "colors": "1.4.0",
@@ -151,10 +151,10 @@
     "rimraf": "6.0.1",
     "ts-node": "10.9.2",
     "tslib": "2.8.1",
-    "turbo": "2.4.4",
-    "typescript": "5.8.2",
-    "vite": "6.2.3",
-    "vitest": "3.0.9",
+    "turbo": "2.5.0",
+    "typescript": "5.8.3",
+    "vite": "6.2.6",
+    "vitest": "3.1.1",
     "vitest-localstorage-mock": "0.1.2"
   }
 }
