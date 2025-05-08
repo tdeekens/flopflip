@@ -57,11 +57,11 @@
     "@flopflip/sessionstorage-cache": "workspace:*",
     "@flopflip/types": "workspace:*",
     "debounce-fn": "6.0.0",
-    "launchdarkly-js-client-sdk": "3.5.0",
+    "launchdarkly-js-client-sdk": "3.7.0",
     "lodash": "4.17.21",
     "mitt": "3.0.1",
     "tiny-warning": "1.0.3",
-    "ts-deepmerge": "7.0.2"
+    "ts-deepmerge": "7.0.3"
   },
   "keywords": [
     "feature-flags",
