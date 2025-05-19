@@ -57,6 +57,6 @@
   },
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
-    "tsup": "8.4.0"
+    "tsup": "8.5.0"
   }
 }
