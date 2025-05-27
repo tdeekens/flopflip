@@ -142,7 +142,7 @@
     "find-up": "7.0.0",
     "husky": "9.1.7",
     "jsdom": "26.1.0",
-    "lint-staged": "15.5.2",
+    "lint-staged": "16.1.0",
     "pinst": "3.0.0",
     "raf": "3.4.1",
     "react": "19.1.0",
