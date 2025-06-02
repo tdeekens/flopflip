@@ -50,11 +50,11 @@
     "types"
   ],
   "dependencies": {
-    "launchdarkly-js-client-sdk": "3.7.0"
+    "launchdarkly-js-client-sdk": "3.8.1"
   },
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
-    "@types/react": "19.1.5",
+    "@types/react": "19.1.6",
     "tsup": "8.5.0",
     "typescript": "5.8.3"
   },
