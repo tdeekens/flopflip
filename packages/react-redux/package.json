@@ -59,7 +59,7 @@
     "tsup": "8.5.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.27.1",
+    "@babel/runtime": "7.27.4",
     "@flopflip/react": "workspace:*",
     "@flopflip/types": "workspace:*",
     "@types/react": "19.1.6",
