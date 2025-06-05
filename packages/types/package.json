@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/types",
-  "version": "15.1.1",
+  "version": "15.1.2",
   "description": "Type definitions for flipflop",
   "sideEffects": false,
   "type": "module",
