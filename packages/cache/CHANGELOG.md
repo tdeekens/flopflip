@@ -1,5 +1,18 @@
 # @flopflip/cache
 
+## 15.1.0
+
+### Minor Changes
+
+- [`5e47dbb`](https://github.com/tdeekens/flopflip/commit/5e47dbbe428d003b4162fd194c7b8c5404555f45) Thanks [@tdeekens](https://github.com/tdeekens)! - Combined release
+
+### Patch Changes
+
+- Updated dependencies [[`5e47dbb`](https://github.com/tdeekens/flopflip/commit/5e47dbbe428d003b4162fd194c7b8c5404555f45)]:
+  - @flopflip/localstorage-cache@15.1.0
+  - @flopflip/sessionstorage-cache@15.1.0
+  - @flopflip/types@15.1.0
+
 ## 15.0.1
 
 ### Patch Changes
