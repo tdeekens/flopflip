@@ -1,5 +1,14 @@
 # @flopflip/sessionstorage-cache
 
+## 15.1.2
+
+### Patch Changes
+
+- [`469e9fe`](https://github.com/tdeekens/flopflip/commit/469e9fed68cfd6f791e2ca208c905981160834af) Thanks [@tdeekens](https://github.com/tdeekens)! - Fix lodash imports to be fully qualified
+
+- Updated dependencies [[`469e9fe`](https://github.com/tdeekens/flopflip/commit/469e9fed68cfd6f791e2ca208c905981160834af)]:
+  - @flopflip/types@15.1.2
+
 ## 15.1.1
 
 ### Patch Changes
