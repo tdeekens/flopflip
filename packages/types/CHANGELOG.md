@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 15.1.0
+
+### Minor Changes
+
+- [`5e47dbb`](https://github.com/tdeekens/flopflip/commit/5e47dbbe428d003b4162fd194c7b8c5404555f45) Thanks [@tdeekens](https://github.com/tdeekens)! - Combined release
+
 ## 15.0.1
 
 ## 15.0.0
