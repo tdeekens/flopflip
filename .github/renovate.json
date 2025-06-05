@@ -19,6 +19,10 @@
     {
       "matchPackageNames": ["cypress"],
       "allowedVersions": "<=13.6.4"
+    },
+    {
+      "matchPackageNames": ["debounce-fn"],
+      "allowedVersions": "<=4.0.0"
     }
   ],
   "circleci": { "enabled": false },

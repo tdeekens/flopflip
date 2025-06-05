@@ -56,7 +56,7 @@
     "@flopflip/localstorage-cache": "workspace:*",
     "@flopflip/sessionstorage-cache": "workspace:*",
     "@flopflip/types": "workspace:*",
-    "debounce-fn": "6.0.0",
+    "debounce-fn": "4.0.0",
     "launchdarkly-js-client-sdk": "3.8.1",
     "lodash": "4.17.21",
     "mitt": "3.0.1",
