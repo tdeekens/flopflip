@@ -1,5 +1,15 @@
 # @flopflip/react-redux
 
+## 15.0.1
+
+### Patch Changes
+
+- [#2034](https://github.com/tdeekens/flopflip/pull/2034) [`9e6d763`](https://github.com/tdeekens/flopflip/commit/9e6d76381d067a43668731d01afd008015a34902) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: add @reduxjs/toolkit as a dependency to react-redux package
+
+- Updated dependencies []:
+  - @flopflip/react@15.0.1
+  - @flopflip/types@15.0.1
+
 ## 15.0.0
 
 ### Major Changes
