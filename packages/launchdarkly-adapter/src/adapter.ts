@@ -30,7 +30,7 @@ import {
   type LDContext,
   initialize as initializeLaunchDarklyClient,
 } from 'launchdarkly-js-client-sdk';
-import isEqual from 'lodash/isEqual';
+import isEqual from 'lodash/isEqual.js';
 import mitt, { type Emitter } from 'mitt';
 import warning from 'tiny-warning';
 import { merge } from 'ts-deepmerge';

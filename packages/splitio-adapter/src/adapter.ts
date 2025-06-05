@@ -16,10 +16,10 @@ import {
   adapterIdentifiers,
 } from '@flopflip/types';
 import { SplitFactory } from '@splitsoftware/splitio';
-import camelCase from 'lodash/camelCase';
-import cloneDeep from 'lodash/cloneDeep';
-import isEqual from 'lodash/isEqual';
-import omit from 'lodash/omit';
+import camelCase from 'lodash/camelCase.js';
+import cloneDeep from 'lodash/cloneDeep.js';
+import isEqual from 'lodash/isEqual.js';
+import omit from 'lodash/omit.js';
 import { merge } from 'ts-deepmerge';
 
 type TSplitIOAdapterState = {

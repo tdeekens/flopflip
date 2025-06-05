@@ -1,5 +1,5 @@
 import type { TFlag, TFlagName, TFlagVariation } from '@flopflip/types';
-import camelCase from 'lodash/camelCase';
+import camelCase from 'lodash/camelCase.js';
 
 const normalizeFlag = (
   flagName: TFlagName,

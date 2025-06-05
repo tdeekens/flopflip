@@ -23,7 +23,7 @@ import {
   adapterIdentifiers,
   cacheModes,
 } from '@flopflip/types';
-import isEqual from 'lodash/isEqual';
+import isEqual from 'lodash/isEqual.js';
 import mitt, { type Emitter } from 'mitt';
 import warning from 'tiny-warning';
 
