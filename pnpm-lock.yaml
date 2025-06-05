@@ -587,6 +587,9 @@ importers:
       '@flopflip/types':
         specifier: workspace:*
         version: link:../types
+      '@reduxjs/toolkit':
+        specifier: 2.8.2
+        version: 2.8.2(react-redux@9.2.0(@types/react@19.1.6)(react@19.1.0)(redux@5.0.1))(react@19.1.0)
       '@types/react':
         specifier: 19.1.6
         version: 19.1.6
@@ -609,9 +612,6 @@ importers:
       '@flopflip/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/tsconfig
-      '@reduxjs/toolkit':
-        specifier: 2.8.2
-        version: 2.8.2(react-redux@9.2.0(@types/react@19.1.6)(react@19.1.0)(redux@5.0.1))(react@19.1.0)
       react:
         specifier: 19.1.0
         version: 19.1.0
