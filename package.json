@@ -43,11 +43,11 @@
     "HoC",
     "store-enhancer"
   ],
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.11.1",
   "pnpm": {
     "overrides": {
       "@types/react": "19.1.6",
-      "@types/react-dom": "19.1.5"
+      "@types/react-dom": "19.1.6"
     },
     "patchedDependencies": {
       "cypress@13.6.4": "patches/cypress@13.6.4.patch"
@@ -132,9 +132,9 @@
     "@types/jest": "29.5.14",
     "@types/lodash": "4.17.17",
     "@types/node": "22.15.29",
-    "@vitejs/plugin-react": "4.5.0",
-    "@vitest/coverage-v8": "3.1.4",
-    "@vitest/ui": "3.1.4",
+    "@vitejs/plugin-react": "4.5.1",
+    "@vitest/coverage-v8": "3.2.1",
+    "@vitest/ui": "3.2.1",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "check-node-version": "4.2.1",
     "colors": "1.4.0",
@@ -154,7 +154,7 @@
     "turbo": "2.5.4",
     "typescript": "5.8.3",
     "vite": "6.3.5",
-    "vitest": "3.1.4",
+    "vitest": "3.2.1",
     "vitest-localstorage-mock": "0.1.2"
   }
 }
