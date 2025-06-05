@@ -51,7 +51,6 @@
     "@flopflip/memory-adapter": "workspace:*",
     "@flopflip/test-utils": "workspace:*",
     "@flopflip/tsconfig": "workspace:*",
-    "@reduxjs/toolkit": "2.8.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-redux": "9.2.0",
@@ -62,6 +61,7 @@
     "@babel/runtime": "7.27.4",
     "@flopflip/react": "workspace:*",
     "@flopflip/types": "workspace:*",
+    "@reduxjs/toolkit": "2.8.2",
     "@types/react": "19.1.6",
     "@types/react-redux": "7.1.34"
   },
