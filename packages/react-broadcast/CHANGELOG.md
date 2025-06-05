@@ -1,5 +1,15 @@
 # @flopflip/react-broadcast
 
+## 15.1.1
+
+### Patch Changes
+
+- [`ac606fa`](https://github.com/tdeekens/flopflip/commit/ac606fa23ec2e9325cdb575b57e1b342453c00ae) Thanks [@tdeekens](https://github.com/tdeekens)! - Fix downgrade debounce-fn to not be ESM
+
+- Updated dependencies [[`ac606fa`](https://github.com/tdeekens/flopflip/commit/ac606fa23ec2e9325cdb575b57e1b342453c00ae)]:
+  - @flopflip/react@15.1.1
+  - @flopflip/types@15.1.1
+
 ## 15.1.0
 
 ### Minor Changes
