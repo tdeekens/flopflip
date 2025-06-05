@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/localstorage-adapter",
-  "version": "15.0.0",
+  "version": "15.0.1",
   "description": "An localstorage adapter for flipflop",
   "sideEffects": false,
   "type": "module",
