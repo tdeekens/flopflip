@@ -50,7 +50,7 @@
     "types"
   ],
   "dependencies": {
-    "@babel/runtime": "7.27.4",
+    "@babel/runtime": "7.27.6",
     "@flopflip/types": "workspace:*",
     "globalthis": "1.0.4",
     "lodash": "4.17.21"
