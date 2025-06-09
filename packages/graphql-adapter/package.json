@@ -51,7 +51,7 @@
     "client"
   ],
   "dependencies": {
-    "@babel/runtime": "7.27.4",
+    "@babel/runtime": "7.27.6",
     "@flopflip/adapter-utilities": "workspace:*",
     "@flopflip/cache": "workspace:*",
     "@flopflip/localstorage-cache": "workspace:*",

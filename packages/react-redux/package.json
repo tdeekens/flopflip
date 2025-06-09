@@ -58,7 +58,7 @@
     "tsup": "8.5.0"
   },
   "dependencies": {
-    "@babel/runtime": "7.27.4",
+    "@babel/runtime": "7.27.6",
     "@flopflip/react": "workspace:*",
     "@flopflip/types": "workspace:*",
     "@reduxjs/toolkit": "2.8.2",
