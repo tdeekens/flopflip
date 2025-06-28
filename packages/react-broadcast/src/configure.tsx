@@ -10,7 +10,8 @@ import {
   type TFlags,
   type TFlagsChange,
 } from '@flopflip/types';
-import { useCallback, useMemo } from 'react';
+// biome-ignore lint/correctness/noUnusedImports: false positive
+import React, { useCallback, useMemo } from 'react';
 import { useSyncExternalStore } from 'use-sync-external-store/shim';
 
 import { FlagsContext } from './flags-context';
