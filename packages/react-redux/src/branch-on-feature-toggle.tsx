@@ -1,5 +1,5 @@
 import type { TFlagName, TFlagVariation } from '@flopflip/types';
-// biome-ignore lint/style/useImportType: <explanation>
+// biome-ignore lint/style/useImportType: false positive
 import React from 'react';
 
 import { useFeatureToggle } from './use-feature-toggle';

@@ -4,7 +4,7 @@ import {
   wrapDisplayName,
 } from '@flopflip/react';
 import type { TFlagName, TFlagVariation } from '@flopflip/types';
-// biome-ignore lint/style/useImportType: <explanation>
+// biome-ignore lint/style/useImportType: false positive
 import React from 'react';
 
 import { useFlagVariations } from './use-flag-variations';

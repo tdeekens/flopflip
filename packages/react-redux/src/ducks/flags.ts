@@ -2,11 +2,11 @@ import { isNil } from '@flopflip/react';
 import type {
   TAdapterIdentifiers,
   TFlagName,
-  TFlagVariation,
   TFlagsChange,
   TFlagsContext,
+  TFlagVariation,
 } from '@flopflip/types';
-import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import { STATE_SLICE } from '../constants';
 import type { TState } from '../types';
@@ -55,7 +55,7 @@ export const { updateFlags } = flagsSlice.actions;
 export const reducer = flagsSlice.reducer;
 
 export const createReducer = (preloadedState: TFlagsContext = initialState) => {
-  // biome-ignore lint/style/useDefaultParameterLast: <explanation>
+  // biome-ignore lint/style/useDefaultParameterLast: false positive
   return (state = preloadedState, action: ReturnType<typeof updateFlags>) =>
     reducer(state, action);
 };

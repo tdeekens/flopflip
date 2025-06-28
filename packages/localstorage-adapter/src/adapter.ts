@@ -8,6 +8,7 @@ import {
   AdapterConfigurationStatus,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
+  adapterIdentifiers,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
@@ -18,7 +19,6 @@ import {
   type TLocalStorageAdapterInterface,
   type TUpdateFlagsOptions,
   type TUser,
-  adapterIdentifiers,
 } from '@flopflip/types';
 import isEqual from 'lodash/isEqual.js';
 import mitt, { type Emitter } from 'mitt';
@@ -120,7 +120,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       return;
     }
 
-    // biome-ignore lint/style/noNonNullAssertion: <explanation>
+    // biome-ignore lint/style/noNonNullAssertion: false positive
     const flagsCacheKey = this.#getFlagsCacheKey(this.#adapterState.user!);
     const previousFlags: TFlags | undefined =
       this.#cache.get<TFlags>(flagsCacheKey);

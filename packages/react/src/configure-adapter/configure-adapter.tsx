@@ -57,7 +57,7 @@ const useAppliedAdapterArgsState = ({
   const [appliedAdapterArgs, setAppliedAdapterArgs] =
     useState<TAdapterArgs>(initialAdapterArgs);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   const applyAdapterArgs = useCallback(
     (nextAdapterArgs: TAdapterArgs) => {
       /**
@@ -83,7 +83,7 @@ type TUseAdapterStateRefReturn = [
 const useAdapterStateRef = (): TUseAdapterStateRefReturn => {
   const adapterStateRef = useRef<TAdapterStates>(AdapterStates.UNCONFIGURED);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   const setAdapterState = useCallback(
     (nextAdapterState: TAdapterStates) => {
       adapterStateRef.current = nextAdapterState;
@@ -91,13 +91,13 @@ const useAdapterStateRef = (): TUseAdapterStateRefReturn => {
     [adapterStateRef]
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   const getIsAdapterConfigured = useCallback(
     () => adapterStateRef.current === AdapterStates.CONFIGURED,
     [adapterStateRef]
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   const getDoesAdapterNeedInitialConfiguration = useCallback(
     () =>
       adapterStateRef.current !== AdapterStates.CONFIGURED &&
@@ -123,7 +123,7 @@ const usePendingAdapterArgsRef = (
 ): TUsePendingAdapterArgsRefReturn => {
   const pendingAdapterArgsRef = useRef<TAdapterArgs | undefined>(undefined);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   const setPendingAdapterArgs = useCallback(
     (nextReconfiguration: TAdapterReconfiguration): void => {
       /**
@@ -142,7 +142,7 @@ const usePendingAdapterArgsRef = (
     [appliedAdapterArgs, pendingAdapterArgsRef]
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   const unsetPendingAdapterArgs = useCallback(() => {
     pendingAdapterArgsRef.current = undefined;
   }, [pendingAdapterArgsRef]);
@@ -159,7 +159,7 @@ const usePendingAdapterArgsRef = (
    *
    */
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   const getAdapterArgsForConfiguration = useCallback(
     (): TAdapterArgs => pendingAdapterArgsRef.current ?? appliedAdapterArgs,
     [appliedAdapterArgs, pendingAdapterArgsRef]
@@ -169,7 +169,7 @@ const usePendingAdapterArgsRef = (
    * NOTE: Clears the pending adapter args when applied adapter args changed.
    */
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   useEffect(unsetPendingAdapterArgs, [
     appliedAdapterArgs,
     unsetPendingAdapterArgs,
@@ -226,7 +226,7 @@ const useConfigurationEffect = ({
   pendingAdapterArgsRef,
   appliedAdapterArgs,
 }: TUseConfigurationEffectOptions) => {
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   useEffect(() => {
     if (
       !shouldDeferAdapterConfiguration &&
@@ -335,7 +335,7 @@ const useDefaultFlagsEffect = ({
     onFlagsStateChange,
   });
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   useEffect(() => {
     if (defaultFlags) {
       handleDefaultFlags(defaultFlags);
