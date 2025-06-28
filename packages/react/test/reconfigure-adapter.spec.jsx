@@ -27,14 +27,16 @@ function TestComponent({ reconfiguration, adapterContext }) {
         user={user}
         shouldOverwrite={reconfiguration.shouldOverwrite}
       >
-        <button type="button" onClick={increment}>
-          Reconfigure with changes
-        </button>
-        <button type="button" onClick={setState}>
-          Reconfigure without changes
-        </button>
-        <p>Count is: {count}</p>
-        <p>Children</p>
+        <>
+          <button type="button" onClick={increment}>
+            Reconfigure with changes
+          </button>
+          <button type="button" onClick={setState}>
+            Reconfigure without changes
+          </button>
+          <p>Count is: {count}</p>
+          <p>Children</p>
+        </>
       </ReconfigureAdapter>
     </AdapterContext.Provider>
   );
