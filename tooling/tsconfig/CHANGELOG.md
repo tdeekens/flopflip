@@ -1,5 +1,11 @@
 # @flopflip/tsconfig
 
+## 15.1.3
+
+### Patch Changes
+
+- [#2044](https://github.com/tdeekens/flopflip/pull/2044) [`7e4b35d`](https://github.com/tdeekens/flopflip/commit/7e4b35d13a0f0976ccbf4686fd53bac4ca3827bc) Thanks [@renovate](https://github.com/apps/renovate)! - Migrate to biome v2
+
 ## 15.1.2
 
 ### Patch Changes
