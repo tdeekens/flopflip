@@ -1,6 +1,4 @@
 import { getCache } from '@flopflip/cache';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
-
 import {
   fireEvent,
   render as rtlRender,
@@ -8,7 +6,8 @@ import {
   waitFor,
 } from '@flopflip/test-utils';
 import { adapterIdentifiers, cacheIdentifiers } from '@flopflip/types';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { AdapterContext } from '../../src/adapter-context';
 import { AdapterStates, ConfigureAdapter } from '../../src/configure-adapter';

@@ -1,8 +1,6 @@
 import { components, render } from '@flopflip/test-utils';
 import { describe, expect, it, vi } from 'vitest';
 
-import React from 'react';
-
 import { ToggleFeature } from '../src/toggle-feature';
 
 describe('when feature disabled', () => {

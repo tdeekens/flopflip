@@ -3,7 +3,6 @@ import {
   type TToggleFeatureProps,
 } from '@flopflip/react';
 import type { TFlagName, TFlagVariation } from '@flopflip/types';
-import React from 'react';
 
 import { useFeatureToggle } from './use-feature-toggle';
 

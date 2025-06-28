@@ -10,7 +10,7 @@ import {
   type TFlags,
   type TFlagsChange,
 } from '@flopflip/types';
-import React, { useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useSyncExternalStore } from 'use-sync-external-store/shim';
 
 import { FlagsContext } from './flags-context';

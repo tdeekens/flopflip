@@ -1,6 +1,4 @@
 import { adapter as memoryAdapter } from '@flopflip/memory-adapter';
-import { afterEach } from 'vitest';
-
 import {
   act,
   buildQueries,
@@ -10,7 +8,8 @@ import {
   render,
   screen,
 } from '@testing-library/react';
-import React, { cloneElement } from 'react';
+import { cloneElement } from 'react';
+import { afterEach } from 'vitest';
 
 afterEach(memoryAdapter.reset);
 
@@ -154,11 +153,9 @@ const renderWithAdapter = (
         adapterArgs={defaultedAdapterArgs}
         defaultFlags={defaultedFlags}
       >
-        <>
-          <FlagChangeField />
-          <ToggledComponent flagName={INTERNAL_FLAG_NAME} />
-          {ui}
-        </>
+        <FlagChangeField />
+        <ToggledComponent flagName={INTERNAL_FLAG_NAME} />
+        {ui}
       </ConfigureFlopFlip>
     ),
     {

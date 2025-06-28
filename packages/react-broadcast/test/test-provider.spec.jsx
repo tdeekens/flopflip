@@ -1,11 +1,9 @@
 import { render as rtlRender, screen } from '@flopflip/test-utils';
-import { describe, expect, it } from 'vitest';
-
 import {
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
 } from '@flopflip/types';
-import React from 'react';
+import { describe, expect, it } from 'vitest';
 
 import { TestProvider } from '../src/test-provider';
 import { useAdapterStatus } from '../src/use-adapter-status';
