@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/adapter-utilities",
-  "version": "15.1.2",
+  "version": "15.1.3",
   "description": "Adapter utilities for flipflop",
   "sideEffects": false,
   "type": "module",
