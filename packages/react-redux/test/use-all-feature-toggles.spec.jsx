@@ -1,6 +1,4 @@
 import { adapter as combineAdapters } from '@flopflip/combine-adapters';
-import { beforeAll, describe, expect, it, vi } from 'vitest';
-
 import { adapter as localstorageAdapter } from '@flopflip/localstorage-adapter';
 import { adapter as memoryAdapter } from '@flopflip/memory-adapter';
 import {
@@ -9,8 +7,8 @@ import {
   renderWithAdapter,
   screen,
 } from '@flopflip/test-utils';
-import React from 'react';
 import { Provider } from 'react-redux';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
 
 import { Configure } from '../src/configure';
 import { STATE_SLICE } from '../src/constants';

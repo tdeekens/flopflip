@@ -407,7 +407,6 @@ describe('when configuring', () => {
             expect(onFlagsStateChange).toHaveBeenCalledTimes(1);
           });
 
-          // biome-ignore lint/complexity/noExcessiveNestedTestSuites: these test suits could be reorganized
           describe('when flag update occurs', () => {
             describe('without opt-out of subscription', () => {
               beforeEach(() => {
@@ -492,7 +491,9 @@ describe('when configuring', () => {
 
         it('should restore cached flags', () => {
           expect(sessionStorage.getItem).toHaveBeenCalledWith(
-            `@flopflip/launchdarkly-adapter/${encodeCacheContext(userWithKey)}/flags`
+            `@flopflip/launchdarkly-adapter/${encodeCacheContext(
+              userWithKey
+            )}/flags`
           );
 
           expect(onFlagsStateChange).toHaveBeenCalledWith({
@@ -507,7 +508,9 @@ describe('when configuring', () => {
           expect(
             JSON.parse(
               sessionStorage.getItem(
-                `@flopflip/launchdarkly-adapter/${encodeCacheContext(userWithKey)}/flags`
+                `@flopflip/launchdarkly-adapter/${encodeCacheContext(
+                  userWithKey
+                )}/flags`
               )
             )
           ).toStrictEqual({
@@ -563,7 +566,6 @@ describe('when configuring', () => {
             });
           });
 
-          // biome-ignore lint/complexity/noExcessiveNestedTestSuites: these test suits could be reorganized
           describe('when flag update occurs', () => {
             it('should resolve to a successful initialization status', () => {
               expect(configurationResult).toEqual(

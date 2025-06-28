@@ -1,8 +1,6 @@
 import { components, renderWithAdapter } from '@flopflip/test-utils';
 import { describe, expect, it } from 'vitest';
 
-import React from 'react';
-
 import { Configure } from '../src/configure';
 import { ToggleFeature } from '../src/toggle-feature';
 

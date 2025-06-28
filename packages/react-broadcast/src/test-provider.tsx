@@ -2,16 +2,16 @@ import { AdapterContext, createAdapterContext } from '@flopflip/react';
 import {
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
+  adapterIdentifiers,
   type TAdapterIdentifiers,
   type TAdaptersStatus,
   type TFlags,
   type TReconfigureAdapter,
-  adapterIdentifiers,
 } from '@flopflip/types';
-// biome-ignore lint/style/useImportType: <explanation>
+// biome-ignore lint/style/useImportType: false positive
 import React from 'react';
 
-import { FlagsContext, createIntialFlagsContext } from './flags-context';
+import { createIntialFlagsContext, FlagsContext } from './flags-context';
 
 type TProps = {
   readonly children: React.ReactNode;

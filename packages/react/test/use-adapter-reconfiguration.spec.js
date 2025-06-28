@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { expect, it, vi } from 'vitest';
 
 import { useAdapterReconfiguration } from '../src/use-adapter-reconfiguration';

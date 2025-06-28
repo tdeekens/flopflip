@@ -1,8 +1,6 @@
 import { renderWithAdapter, screen } from '@flopflip/test-utils';
 import { expect, it } from 'vitest';
 
-import React from 'react';
-
 import { Configure } from '../src/configure';
 import { useFlagVariation } from '../src/use-flag-variation';
 

@@ -1,8 +1,6 @@
 import { renderWithAdapter, screen } from '@flopflip/test-utils';
-import { describe, expect, it, vi } from 'vitest';
-
-import React from 'react';
 import { Provider } from 'react-redux';
+import { describe, expect, it, vi } from 'vitest';
 
 import { Configure } from '../src/configure';
 import { STATE_SLICE } from '../src/constants';

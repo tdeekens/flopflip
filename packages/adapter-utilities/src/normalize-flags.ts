@@ -1,4 +1,4 @@
-import type { TFlag, TFlagVariation, TFlags } from '@flopflip/types';
+import type { TFlag, TFlags, TFlagVariation } from '@flopflip/types';
 
 import { normalizeFlag as defaultNormalizeFlag } from './normalize-flag';
 

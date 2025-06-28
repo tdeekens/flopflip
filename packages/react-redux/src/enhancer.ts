@@ -1,10 +1,10 @@
 import {
+  adapterIdentifiers as allAdapterIdentifiers,
   type TAdapter,
   type TAdapterArgs,
   type TAdapterInterface,
   type TAdapterStatusChange,
   type TFlagsChange,
-  adapterIdentifiers as allAdapterIdentifiers,
 } from '@flopflip/types';
 import { createAction } from '@reduxjs/toolkit';
 import type { Reducer, Store, StoreEnhancerStoreCreator } from 'redux';

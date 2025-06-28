@@ -1,6 +1,3 @@
-import { adapterIdentifiers } from '@flopflip/combine-adapters';
-import { beforeAll, describe, expect, it } from 'vitest';
-
 import { adapter as combineAdapters } from '@flopflip/combine-adapters';
 import { adapter as localstorageAdapter } from '@flopflip/localstorage-adapter';
 import { adapter as memoryAdapter } from '@flopflip/memory-adapter';
@@ -10,7 +7,7 @@ import {
   renderWithAdapter,
   screen,
 } from '@flopflip/test-utils';
-import React from 'react';
+import { beforeAll, describe, expect, it } from 'vitest';
 
 import { Configure } from '../src//configure';
 import { useAllFeatureToggles } from '../src/use-all-feature-toggles';

@@ -1,9 +1,9 @@
 import {
+  cacheIdentifiers,
   type TAdapter,
   type TAdapterIdentifiers,
   type TCacheIdentifiers,
   type TFlags,
-  cacheIdentifiers,
 } from '@flopflip/types';
 
 const FLAGS_CACHE_KEY = 'flags';

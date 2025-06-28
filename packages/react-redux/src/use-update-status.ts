@@ -1,7 +1,7 @@
 import {
+  adapterIdentifiers as allAdapterIdentifiers,
   type TAdapterEventHandlers,
   type TAdapterStatusChange,
-  adapterIdentifiers as allAdapterIdentifiers,
 } from '@flopflip/types';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';

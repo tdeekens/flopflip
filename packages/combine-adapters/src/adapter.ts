@@ -3,6 +3,7 @@ import {
   AdapterConfigurationStatus,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
+  adapterIdentifiers,
   type TAdapter,
   type TAdapterEventHandlers,
   type TAdapterIdentifiers,
@@ -12,7 +13,6 @@ import {
   type TCombinedAdapterInterface,
   type TFlags,
   type TUpdateFlagsOptions,
-  adapterIdentifiers,
 } from '@flopflip/types';
 import mitt, { type Emitter } from 'mitt';
 import warning from 'tiny-warning';
