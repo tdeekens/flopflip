@@ -4,7 +4,7 @@ import type {
   TAdapterStatusChange,
   TAdaptersStatus,
 } from '@flopflip/types';
-import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 import { STATE_SLICE } from '../constants';
 import type { TState } from '../types';

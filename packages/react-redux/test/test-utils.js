@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import { FLOPFLIP_STATE_SLICE, createFlopflipReducer } from '../src/';
+import { createFlopflipReducer, FLOPFLIP_STATE_SLICE } from '../src/';
 
 const defaultInitialState = {};
 

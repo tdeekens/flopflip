@@ -3,18 +3,18 @@ import {
   AdapterConfigurationStatus,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
+  adapterIdentifiers,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
   type TFlagName,
-  type TFlagVariation,
   type TFlags,
   type TFlagsChange,
+  type TFlagVariation,
   type TMemoryAdapterArgs,
   type TMemoryAdapterInterface,
   type TUpdateFlagsOptions,
   type TUser,
-  adapterIdentifiers,
 } from '@flopflip/types';
 import mitt, { type Emitter } from 'mitt';
 import warning from 'tiny-warning';

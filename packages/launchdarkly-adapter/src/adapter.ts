@@ -9,26 +9,26 @@ import {
   AdapterConfigurationStatus,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
+  adapterIdentifiers,
+  cacheModes,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
   type TCacheIdentifiers,
   type TCacheModes,
   type TFlagName,
-  type TFlagVariation,
   type TFlags,
   type TFlagsChange,
+  type TFlagVariation,
   type TLaunchDarklyAdapterArgs,
   type TLaunchDarklyAdapterInterface,
   type TUpdateFlagsOptions,
-  adapterIdentifiers,
-  cacheModes,
 } from '@flopflip/types';
 import debounce from 'debounce-fn';
 import {
+  initialize as initializeLaunchDarklyClient,
   type LDClient,
   type LDContext,
-  initialize as initializeLaunchDarklyClient,
 } from 'launchdarkly-js-client-sdk';
 import isEqual from 'lodash/isEqual.js';
 import mitt, { type Emitter } from 'mitt';

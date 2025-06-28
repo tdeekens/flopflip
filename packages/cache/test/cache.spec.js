@@ -4,8 +4,8 @@ import {
   encodeCacheContext,
   getAllCachedFlags,
   getCache,
-  getCachePrefix,
   getCachedFlags,
+  getCachePrefix,
 } from '../src/cache';
 
 const cacheContext = { key: 'some-user-key', value: 'some-other-value' };

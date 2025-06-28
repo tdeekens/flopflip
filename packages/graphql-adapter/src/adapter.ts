@@ -8,20 +8,20 @@ import {
   AdapterConfigurationStatus,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
+  adapterIdentifiers,
+  cacheModes,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TAdapterStatusChange,
   type TCacheIdentifiers,
   type TFlagName,
-  type TFlagVariation,
   type TFlags,
   type TFlagsChange,
   type TFlagsUpdateFunction,
+  type TFlagVariation,
   type TGraphQlAdapterArgs,
   type TGraphQlAdapterInterface,
   type TUser,
-  adapterIdentifiers,
-  cacheModes,
 } from '@flopflip/types';
 import isEqual from 'lodash/isEqual.js';
 import mitt, { type Emitter } from 'mitt';

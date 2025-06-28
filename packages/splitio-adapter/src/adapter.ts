@@ -4,16 +4,16 @@ import {
   AdapterConfigurationStatus,
   AdapterInitializationStatus,
   AdapterSubscriptionStatus,
+  adapterIdentifiers,
   type TAdapterEventHandlers,
   type TAdapterStatus,
   type TFlag,
   type TFlagName,
-  type TFlagVariation,
   type TFlags,
+  type TFlagVariation,
   type TSplitioAdapterArgs,
   type TSplitioAdapterInterface,
   type TUser,
-  adapterIdentifiers,
 } from '@flopflip/types';
 import { SplitFactory } from '@splitsoftware/splitio';
 import camelCase from 'lodash/camelCase.js';
