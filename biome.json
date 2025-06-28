@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
   "vcs": {
     "clientKind": "git",
     "enabled": true,
@@ -15,16 +15,17 @@
     "indentWidth": 2,
     "lineEnding": "lf",
     "lineWidth": 80,
-    "ignore": [
-      "**/package.json",
-      "**/dist/**",
-      "**/.changeset",
-      "**/CHANGELOG.md",
-      "**/pnpm-lock.yaml",
-      "**/pnpm-workspace.yaml"
+    "includes": [
+      "**",
+      "!**/package.json",
+      "!**/dist/**",
+      "!**/.changeset",
+      "!**/CHANGELOG.md",
+      "!**/pnpm-lock.yaml",
+      "!**/pnpm-workspace.yaml"
     ]
   },
-  "organizeImports": { "enabled": true },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
     "rules": {
@@ -39,7 +40,6 @@
         "noUndeclaredVariables": "error",
         "noUnreachableSuper": "error",
         "noUnusedVariables": "error",
-        "useArrayLiterals": "error",
         "useExhaustiveDependencies": "warn",
         "useHookAtTopLevel": "error"
       },
@@ -47,7 +47,13 @@
         "noNegationElse": "error",
         "noRestrictedGlobals": {
           "level": "error",
-          "options": { "deniedGlobals": ["event", "atob", "btoa"] }
+          "options": {
+            "deniedGlobals": {
+              "event": "TODO: Add a custom message here.",
+              "atob": "TODO: Add a custom message here.",
+              "btoa": "TODO: Add a custom message here."
+            }
+          }
         },
         "useBlockStatements": "error",
         "useCollapsedElseIf": "error",
@@ -57,7 +63,18 @@
         },
         "useForOf": "error",
         "useFragmentSyntax": "error",
-        "useShorthandAssign": "error"
+        "useShorthandAssign": "error",
+        "noParameterAssign": "error",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error",
+        "useArrayLiterals": "error"
       },
       "suspicious": {
         "noEmptyBlockStatements": "error",
@@ -65,7 +82,7 @@
         "noExplicitAny": "off"
       }
     },
-    "ignore": ["**/node_modules/", "**/coverage/", "**/dist/"]
+    "includes": ["**", "!**/node_modules/", "!**/coverage/", "!**/dist/"]
   },
   "javascript": {
     "formatter": {
