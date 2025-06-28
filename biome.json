@@ -34,7 +34,8 @@
         "noAccumulatingSpread": "off"
       },
       "complexity": {
-        "noVoid": "error"
+        "noVoid": "error",
+        "noUselessFragments": "off"
       },
       "correctness": {
         "noUndeclaredVariables": "error",

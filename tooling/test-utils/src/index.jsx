@@ -153,9 +153,11 @@ const renderWithAdapter = (
         adapterArgs={defaultedAdapterArgs}
         defaultFlags={defaultedFlags}
       >
-        <FlagChangeField />
-        <ToggledComponent flagName={INTERNAL_FLAG_NAME} />
-        {ui}
+        <>
+          <FlagChangeField />
+          <ToggledComponent flagName={INTERNAL_FLAG_NAME} />
+          {ui}
+        </>
       </ConfigureFlopFlip>
     ),
     {
