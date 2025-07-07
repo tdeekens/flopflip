@@ -43,7 +43,7 @@
     "HoC",
     "store-enhancer"
   ],
-  "packageManager": "pnpm@10.12.2",
+  "packageManager": "pnpm@10.12.4",
   "pnpm": {
     "overrides": {
       "@types/react": "19.1.8",
@@ -130,8 +130,8 @@
     "@manypkg/cli": "0.24.0",
     "@testing-library/jest-dom": "6.6.3",
     "@types/jest": "29.5.14",
-    "@types/lodash": "4.17.18",
-    "@types/node": "22.15.32",
+    "@types/lodash": "4.17.20",
+    "@types/node": "22.16.0",
     "@vitejs/plugin-react": "4.6.0",
     "@vitest/coverage-v8": "3.2.4",
     "@vitest/ui": "3.2.4",
