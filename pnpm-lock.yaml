@@ -653,8 +653,8 @@ importers:
         specifier: workspace:*
         version: link:../types
       '@splitsoftware/splitio':
-        specifier: 10.28.0
-        version: 10.28.0
+        specifier: 11.4.1
+        version: 11.4.1
       lodash:
         specifier: 4.17.21
         version: 4.17.21
@@ -1962,17 +1962,17 @@ packages:
   '@sinclair/typebox@0.27.8':
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
 
-  '@splitsoftware/splitio-commons@1.17.0':
-    resolution: {integrity: sha512-rvP+0LGUN92bcTytiqyVxq9UzBG5kTkIYjU7b7AU2awBUYgM0bqT3xhQ9/MJ/2fsBbqC6QIsxoKDOz9pMgbAQw==}
+  '@splitsoftware/splitio-commons@2.4.1':
+    resolution: {integrity: sha512-VcbWpPykfx19LTJ0yeZbV0u3PUIt8MuiZ2a8zqkNf9KnDnhau/XxS/ctoO5jYrg4Nk2rCi0fpt1TkTstqzbaYA==}
     peerDependencies:
       ioredis: ^4.28.0
     peerDependenciesMeta:
       ioredis:
         optional: true
 
-  '@splitsoftware/splitio@10.28.0':
-    resolution: {integrity: sha512-hzBnBZHmUTXvyMBbVTDUYtspLHjyjb/YqKtetNh7pAvkmj37vOXyXfF50Of5jr3Qmvdo0YFbKvMIOEXlXSGWaQ==}
-    engines: {node: '>=6', npm: '>=3'}
+  '@splitsoftware/splitio@11.4.1':
+    resolution: {integrity: sha512-wipPwsWwXPRzvEs28VYahILsF8+Lor4tby2GB3CD9kn0C3sQ2Zf3/NaDH4i7acobMlRy2sQ5mu4eeRt15gLJyw==}
+    engines: {node: '>=14.0.0'}
 
   '@standard-schema/spec@1.0.0':
     resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
@@ -2041,9 +2041,6 @@ packages:
 
   '@types/estree@1.0.8':
     resolution: {integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==}
-
-  '@types/google.analytics@0.0.40':
-    resolution: {integrity: sha512-R3HpnLkqmKxhUAf8kIVvDVGJqPtaaZlW4yowNwjOZUTmYUQEgHh8Nh5wkSXKMroNAuQM8gbXJHmNbbgA8tdb7Q==}
 
   '@types/hoist-non-react-statics@3.3.6':
     resolution: {integrity: sha512-lPByRJUer/iN/xa4qpyL0qmL11DqNW81iU/IG1S3uvRUq4oKagz8VCxZjiWkumgt66YT3vOdDgZ0o32sGKtCEw==}
@@ -6115,17 +6112,16 @@ snapshots:
 
   '@sinclair/typebox@0.27.8': {}
 
-  '@splitsoftware/splitio-commons@1.17.0(ioredis@4.30.0)':
+  '@splitsoftware/splitio-commons@2.4.1(ioredis@4.30.0)':
     dependencies:
+      '@types/ioredis': 4.28.10
       tslib: 2.8.1
     optionalDependencies:
       ioredis: 4.30.0
 
-  '@splitsoftware/splitio@10.28.0':
+  '@splitsoftware/splitio@11.4.1':
     dependencies:
-      '@splitsoftware/splitio-commons': 1.17.0(ioredis@4.30.0)
-      '@types/google.analytics': 0.0.40
-      '@types/ioredis': 4.28.10
+      '@splitsoftware/splitio-commons': 2.4.1(ioredis@4.30.0)
       bloom-filters: 3.0.4
       ioredis: 4.30.0
       js-yaml: 3.14.1
@@ -6213,8 +6209,6 @@ snapshots:
   '@types/deep-eql@4.0.2': {}
 
   '@types/estree@1.0.8': {}
-
-  '@types/google.analytics@0.0.40': {}
 
   '@types/hoist-non-react-statics@3.3.6':
     dependencies:
