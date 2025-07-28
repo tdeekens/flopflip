@@ -18,7 +18,7 @@
     "@babel/runtime": "7.27.6",
     "@flopflip/memory-adapter": "workspace:*",
     "@flopflip/tsconfig": "workspace:*",
-    "@testing-library/jest-dom": "6.6.3",
+    "@testing-library/jest-dom": "6.6.4",
     "@testing-library/react": "16.3.0",
     "react": "19.1.0",
     "react-dom": "19.1.0"
