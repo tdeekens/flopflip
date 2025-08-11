@@ -48,10 +48,10 @@
   "devDependencies": {
     "@flopflip/test-utils": "workspace:*",
     "@flopflip/tsconfig": "workspace:*",
-    "@types/react": "19.1.8",
-    "@types/react-dom": "19.1.6",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "@types/react": "19.1.9",
+    "@types/react-dom": "19.1.7",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
     "tsup": "8.5.0"
   },
   "peerDependencies": {
@@ -64,7 +64,7 @@
     "@flopflip/types": "workspace:*",
     "@types/react-is": "19.0.0",
     "lodash": "4.17.21",
-    "react-is": "19.1.0",
+    "react-is": "19.1.1",
     "tiny-warning": "1.0.3",
     "ts-deepmerge": "7.0.3"
   },
