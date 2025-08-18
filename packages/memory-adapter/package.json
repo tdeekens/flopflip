@@ -51,7 +51,7 @@
     "client"
   ],
   "dependencies": {
-    "@babel/runtime": "7.28.2",
+    "@babel/runtime": "7.28.3",
     "@flopflip/adapter-utilities": "workspace:*",
     "@flopflip/types": "workspace:*",
     "mitt": "3.0.1",
