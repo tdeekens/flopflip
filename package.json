@@ -43,10 +43,10 @@
     "HoC",
     "store-enhancer"
   ],
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@10.15.0",
   "pnpm": {
     "overrides": {
-      "@types/react": "19.1.10",
+      "@types/react": "19.1.11",
       "@types/react-dom": "19.1.7"
     },
     "patchedDependencies": {
@@ -122,13 +122,13 @@
     "@babel/preset-env": "7.28.3",
     "@babel/preset-react": "7.27.1",
     "@babel/preset-typescript": "7.27.1",
-    "@biomejs/biome": "2.2.0",
+    "@biomejs/biome": "2.2.2",
     "@changesets/changelog-github": "0.5.1",
     "@changesets/cli": "2.29.6",
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
     "@manypkg/cli": "0.25.0",
-    "@testing-library/jest-dom": "6.7.0",
+    "@testing-library/jest-dom": "6.8.0",
     "@types/jest": "29.5.14",
     "@types/lodash": "4.17.20",
     "@types/node": "22.17.2",
@@ -138,7 +138,7 @@
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "check-node-version": "4.2.1",
     "colors": "1.4.0",
-    "core-js": "3.45.0",
+    "core-js": "3.45.1",
     "find-up": "7.0.0",
     "husky": "9.1.7",
     "jsdom": "26.1.0",
