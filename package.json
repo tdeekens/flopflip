@@ -129,7 +129,7 @@
     "@commitlint/config-conventional": "19.8.1",
     "@manypkg/cli": "0.25.1",
     "@testing-library/jest-dom": "6.9.1",
-    "@types/jest": "29.5.14",
+    "@types/jest": "30.0.0",
     "@types/lodash": "4.17.20",
     "@types/node": "22.18.10",
     "@vitejs/plugin-react": "4.7.0",
