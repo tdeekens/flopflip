@@ -43,11 +43,11 @@
     "HoC",
     "store-enhancer"
   ],
-  "packageManager": "pnpm@10.18.0",
+  "packageManager": "pnpm@10.18.2",
   "pnpm": {
     "overrides": {
-      "@types/react": "19.2.0",
-      "@types/react-dom": "19.2.0"
+      "@types/react": "19.2.2",
+      "@types/react-dom": "19.2.1"
     },
     "patchedDependencies": {
       "cypress@13.6.4": "patches/cypress@13.6.4.patch"
@@ -131,18 +131,18 @@
     "@testing-library/jest-dom": "6.9.1",
     "@types/jest": "29.5.14",
     "@types/lodash": "4.17.20",
-    "@types/node": "22.18.8",
+    "@types/node": "22.18.10",
     "@vitejs/plugin-react": "4.7.0",
     "@vitest/coverage-v8": "3.2.4",
     "@vitest/ui": "3.2.4",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "check-node-version": "4.2.1",
     "colors": "1.4.0",
-    "core-js": "3.45.1",
+    "core-js": "3.46.0",
     "find-up": "7.0.0",
     "husky": "9.1.7",
     "jsdom": "26.1.0",
-    "lint-staged": "16.2.3",
+    "lint-staged": "16.2.4",
     "pinst": "3.0.0",
     "raf": "3.4.1",
     "react": "19.2.0",

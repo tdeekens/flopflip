@@ -62,7 +62,7 @@
     "@flopflip/react": "workspace:*",
     "@flopflip/types": "workspace:*",
     "@reduxjs/toolkit": "2.9.0",
-    "@types/react": "19.2.0",
+    "@types/react": "19.2.2",
     "@types/react-redux": "7.1.34"
   },
   "peerDependencies": {
