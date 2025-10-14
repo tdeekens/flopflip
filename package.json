@@ -153,7 +153,7 @@
     "tslib": "2.8.1",
     "turbo": "2.5.8",
     "typescript": "5.9.3",
-    "vite": "6.3.6",
+    "vite": "7.1.10",
     "vitest": "3.2.4",
     "vitest-localstorage-mock": "0.1.2"
   }
