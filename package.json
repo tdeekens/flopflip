@@ -132,7 +132,7 @@
     "@types/jest": "30.0.0",
     "@types/lodash": "4.17.20",
     "@types/node": "22.18.10",
-    "@vitejs/plugin-react": "4.7.0",
+    "@vitejs/plugin-react": "5.0.4",
     "@vitest/coverage-v8": "3.2.4",
     "@vitest/ui": "3.2.4",
     "babel-plugin-transform-dynamic-import": "2.1.0",
