@@ -1,10 +1,8 @@
 import { getAllCachedFlags } from '@flopflip/cache';
 import {
   AdapterConfigurationStatus,
-  AdapterInitializationStatus,
   type TAdapter,
   type TAdapterArgs,
-  type TAdapterConfiguration,
   type TAdapterEventHandlers,
   type TAdapterInterface,
   type TAdapterReconfiguration,
@@ -14,8 +12,11 @@ import {
   type TFlags,
 } from '@flopflip/types';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import warning from 'tiny-warning';
 
+import {
+  configureAdapter,
+  reconfigureAdapter,
+} from '../adapters/configure-adapter-utility';
 import { AdapterContext, createAdapterContext } from '../adapter-context';
 import {
   isEmptyChildren,
@@ -74,56 +75,78 @@ const useAppliedAdapterArgsState = ({
   return [appliedAdapterArgs, applyAdapterArgs];
 };
 
-type TUseAdapterStateRefReturn = [
-  React.MutableRefObject<TAdapterStates>,
-  (nextAdapterState: TAdapterStates) => void,
-  () => boolean,
-  () => boolean,
-];
+interface TUseAdapterStateRefReturn {
+  readonly adapterStateRef: React.MutableRefObject<TAdapterStates>;
+  readonly setAdapterState: (nextAdapterState: TAdapterStates) => void;
+  readonly getIsAdapterConfigured: () => boolean;
+  readonly getDoesAdapterNeedInitialConfiguration: () => boolean;
+}
+
 const useAdapterStateRef = (): TUseAdapterStateRefReturn => {
   const adapterStateRef = useRef<TAdapterStates>(AdapterStates.UNCONFIGURED);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  /**
+   * We intentionally omit `adapterStateRef` from dependencies because:
+   * 1. Ref object identity is stable across renders
+   * 2. Including it would cause the callback to recreate unnecessarily
+   * 3. The callback only reads from the ref, doesn't depend on its value
+   */
+  // biome-ignore lint/correctness/useExhaustiveDependencies: justified - ref identity is stable
   const setAdapterState = useCallback(
     (nextAdapterState: TAdapterStates) => {
       adapterStateRef.current = nextAdapterState;
     },
-    [adapterStateRef]
+    []
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  /**
+   * Same justification as setAdapterState - we're reading a stable ref
+   */
+  // biome-ignore lint/correctness/useExhaustiveDependencies: justified - ref identity is stable
   const getIsAdapterConfigured = useCallback(
     () => adapterStateRef.current === AdapterStates.CONFIGURED,
-    [adapterStateRef]
+    []
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  /**
+   * Same justification as setAdapterState and getIsAdapterConfigured
+   */
+  // biome-ignore lint/correctness/useExhaustiveDependencies: justified - ref identity is stable
   const getDoesAdapterNeedInitialConfiguration = useCallback(
     () =>
       adapterStateRef.current !== AdapterStates.CONFIGURED &&
       adapterStateRef.current !== AdapterStates.CONFIGURING,
-    [adapterStateRef]
+    []
   );
 
-  return [
+  return {
     adapterStateRef,
     setAdapterState,
     getIsAdapterConfigured,
     getDoesAdapterNeedInitialConfiguration,
-  ];
+  };
 };
 
-type TUsePendingAdapterArgsRefReturn = [
-  React.MutableRefObject<TAdapterArgs | undefined>,
-  (nextReconfiguration: TAdapterReconfiguration) => void,
-  () => TAdapterArgs,
-];
+interface TUsePendingAdapterArgsRefReturn {
+  readonly pendingAdapterArgsRef: React.MutableRefObject<
+    TAdapterArgs | undefined
+  >;
+  readonly setPendingAdapterArgs: (
+    nextReconfiguration: TAdapterReconfiguration
+  ) => void;
+  readonly getAdapterArgsForConfiguration: () => TAdapterArgs;
+}
+
 const usePendingAdapterArgsRef = (
   appliedAdapterArgs: TAdapterArgs
 ): TUsePendingAdapterArgsRefReturn => {
   const pendingAdapterArgsRef = useRef<TAdapterArgs | undefined>(undefined);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  /**
+   * We depend on appliedAdapterArgs to properly merge reconfigurations,
+   * but we read the current value from the ref to avoid losing previous
+   * pending args during transitions.
+   */
   const setPendingAdapterArgs = useCallback(
     (nextReconfiguration: TAdapterReconfiguration): void => {
       /**
@@ -139,13 +162,16 @@ const usePendingAdapterArgsRef = (
         nextReconfiguration
       );
     },
-    [appliedAdapterArgs, pendingAdapterArgsRef]
+    [appliedAdapterArgs]
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  /**
+   * Ref identity is stable, so we don't need it in dependencies.
+   */
+  // biome-ignore lint/correctness/useExhaustiveDependencies: justified - ref identity is stable
   const unsetPendingAdapterArgs = useCallback(() => {
     pendingAdapterArgsRef.current = undefined;
-  }, [pendingAdapterArgsRef]);
+  }, []);
 
   /**
    * NOTE:
@@ -156,30 +182,30 @@ const usePendingAdapterArgsRef = (
    *
    *    In any case, when the adapter should be configured it should either
    *    be passed pending or applied adapterArgs.
-   *
    */
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  /**
+   * We depend on appliedAdapterArgs to ensure we return the current applied
+   * args when there are no pending args. The ref itself is stable.
+   */
   const getAdapterArgsForConfiguration = useCallback(
     (): TAdapterArgs => pendingAdapterArgsRef.current ?? appliedAdapterArgs,
-    [appliedAdapterArgs, pendingAdapterArgsRef]
+    [appliedAdapterArgs]
   );
 
   /**
    * NOTE: Clears the pending adapter args when applied adapter args changed.
    */
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
   useEffect(unsetPendingAdapterArgs, [
     appliedAdapterArgs,
     unsetPendingAdapterArgs,
   ]);
 
-  return [
+  return {
     pendingAdapterArgsRef,
     setPendingAdapterArgs,
     getAdapterArgsForConfiguration,
-  ];
+  };
 };
 
 type TUseHandleDefaultFlagsCallbackOptions = {
@@ -203,16 +229,17 @@ const useHandleDefaultFlagsCallback = ({
 type TUseConfigurationEffectOptions = {
   adapter: TAdapter;
   shouldDeferAdapterConfiguration: TProps['shouldDeferAdapterConfiguration'];
-  getDoesAdapterNeedInitialConfiguration: TUseAdapterStateRefReturn['3'];
-  setAdapterState: TUseAdapterStateRefReturn['1'];
+  getDoesAdapterNeedInitialConfiguration: TUseAdapterStateRefReturn['getDoesAdapterNeedInitialConfiguration'];
+  setAdapterState: TUseAdapterStateRefReturn['setAdapterState'];
   onFlagsStateChange: TAdapterEventHandlers['onFlagsStateChange'];
   onStatusStateChange: TAdapterEventHandlers['onStatusStateChange'];
   applyAdapterArgs: TUseAppliedAdapterArgsStateReturn['1'];
-  getAdapterArgsForConfiguration: TUsePendingAdapterArgsRefReturn['2'];
-  getIsAdapterConfigured: TUseAdapterStateRefReturn['2'];
-  pendingAdapterArgsRef: TUsePendingAdapterArgsRefReturn['0'];
+  getAdapterArgsForConfiguration: TUsePendingAdapterArgsRefReturn['getAdapterArgsForConfiguration'];
+  getIsAdapterConfigured: TUseAdapterStateRefReturn['getIsAdapterConfigured'];
+  pendingAdapterArgsRef: TUsePendingAdapterArgsRefReturn['pendingAdapterArgsRef'];
   appliedAdapterArgs: TAdapterArgs;
 };
+
 const useConfigurationEffect = ({
   adapter,
   shouldDeferAdapterConfiguration,
@@ -226,7 +253,10 @@ const useConfigurationEffect = ({
   pendingAdapterArgsRef,
   appliedAdapterArgs,
 }: TUseConfigurationEffectOptions) => {
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  /**
+   * We depend on all parameters to ensure effect runs when any value changes,
+   * but we read current values from callbacks/refs to avoid stale closures.
+   */
   useEffect(() => {
     if (
       !shouldDeferAdapterConfiguration &&
@@ -234,65 +264,39 @@ const useConfigurationEffect = ({
     ) {
       setAdapterState(AdapterStates.CONFIGURING);
 
-      (adapter as TAdapterInterface<TAdapterArgs>)
-        .configure(getAdapterArgsForConfiguration(), {
+      configureAdapter(
+        adapter as TAdapterInterface<TAdapterArgs>,
+        getAdapterArgsForConfiguration(),
+        {
           onFlagsStateChange,
           onStatusStateChange,
-        })
-        .then((configuration: TAdapterConfiguration) => {
-          /**
-           * NOTE:
-           *    The configuration can be `undefined` then assuming `initializationStatus` to have
-           *    succeeded to work with old adapters.
-           */
-          const isAdapterWithoutInitializationStatus =
-            !configuration?.initializationStatus;
+        }
+      ).then((result) => {
+        if (result.wasInitializationSuccessful) {
+          setAdapterState(AdapterStates.CONFIGURED);
 
-          if (
-            isAdapterWithoutInitializationStatus ||
-            configuration.initializationStatus ===
-              AdapterInitializationStatus.Succeeded
-          ) {
-            setAdapterState(AdapterStates.CONFIGURED);
-
-            if (pendingAdapterArgsRef.current) {
-              applyAdapterArgs(pendingAdapterArgsRef.current);
-            }
+          if (pendingAdapterArgsRef.current) {
+            applyAdapterArgs(pendingAdapterArgsRef.current);
           }
-        })
-        .catch(() => {
-          warning(false, '@flopflip/react: adapter could not be configured.');
-        });
+        }
+      });
     }
 
     if (getIsAdapterConfigured()) {
       setAdapterState(AdapterStates.CONFIGURING);
 
-      (adapter as TAdapterInterface<TAdapterArgs>)
-        .reconfigure(getAdapterArgsForConfiguration(), {
+      reconfigureAdapter(
+        adapter as TAdapterInterface<TAdapterArgs>,
+        getAdapterArgsForConfiguration(),
+        {
           onFlagsStateChange,
           onStatusStateChange,
-        })
-        .then((reconfiguration: TAdapterConfiguration) => {
-          /**
-           * NOTE:
-           *    The configuration can be `undefined` then assuming `initializationStatus` to have
-           *    succeeded to work with old adapters.
-           */
-          const isAdapterWithoutInitializationStatus =
-            !reconfiguration?.initializationStatus;
-
-          if (
-            isAdapterWithoutInitializationStatus ||
-            reconfiguration.initializationStatus ===
-              AdapterInitializationStatus.Succeeded
-          ) {
-            setAdapterState(AdapterStates.CONFIGURED);
-          }
-        })
-        .catch(() => {
-          warning(false, '@flopflip/react: adapter could not be reconfigured.');
-        });
+        }
+      ).then((result) => {
+        if (result.wasInitializationSuccessful) {
+          setAdapterState(AdapterStates.CONFIGURED);
+        }
+      });
     }
   }, [
     adapter,
@@ -314,12 +318,13 @@ type TUseDefaultFlagsEffectOptions = {
   defaultFlags?: TFlags;
   onFlagsStateChange: TAdapterEventHandlers['onFlagsStateChange'];
   onStatusStateChange: TAdapterEventHandlers['onStatusStateChange'];
-  setAdapterState: TUseAdapterStateRefReturn['1'];
-  pendingAdapterArgsRef: TUsePendingAdapterArgsRefReturn['0'];
+  setAdapterState: TUseAdapterStateRefReturn['setAdapterState'];
+  pendingAdapterArgsRef: TUsePendingAdapterArgsRefReturn['pendingAdapterArgsRef'];
   shouldDeferAdapterConfiguration: TProps['shouldDeferAdapterConfiguration'];
   applyAdapterArgs: TUseAppliedAdapterArgsStateReturn['1'];
-  getAdapterArgsForConfiguration: TUsePendingAdapterArgsRefReturn['2'];
+  getAdapterArgsForConfiguration: TUsePendingAdapterArgsRefReturn['getAdapterArgsForConfiguration'];
 };
+
 const useDefaultFlagsEffect = ({
   adapter,
   defaultFlags,
@@ -335,7 +340,10 @@ const useDefaultFlagsEffect = ({
     onFlagsStateChange,
   });
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  /**
+   * This effect runs only once on mount (empty dependency array).
+   * We capture the current values through closures from parameters.
+   */
   useEffect(() => {
     if (defaultFlags) {
       handleDefaultFlags(defaultFlags);
@@ -344,35 +352,22 @@ const useDefaultFlagsEffect = ({
     if (!shouldDeferAdapterConfiguration) {
       setAdapterState(AdapterStates.CONFIGURING);
 
-      (adapter as TAdapterInterface<TAdapterArgs>)
-        .configure(getAdapterArgsForConfiguration(), {
+      configureAdapter(
+        adapter as TAdapterInterface<TAdapterArgs>,
+        getAdapterArgsForConfiguration(),
+        {
           onFlagsStateChange,
           onStatusStateChange,
-        })
-        .then((configuration: TAdapterConfiguration) => {
-          /**
-           * NOTE:
-           *    The configuration can be `undefined` then assuming `initializationStatus` to have
-           *    succeeded to work with old adapters.
-           */
-          const isAdapterWithoutInitializationStatus =
-            !configuration?.initializationStatus;
+        }
+      ).then((result) => {
+        if (result.wasInitializationSuccessful) {
+          setAdapterState(AdapterStates.CONFIGURED);
 
-          if (
-            isAdapterWithoutInitializationStatus ||
-            configuration.initializationStatus ===
-              AdapterInitializationStatus.Succeeded
-          ) {
-            setAdapterState(AdapterStates.CONFIGURED);
-
-            if (pendingAdapterArgsRef.current) {
-              applyAdapterArgs(pendingAdapterArgsRef.current);
-            }
+          if (pendingAdapterArgsRef.current) {
+            applyAdapterArgs(pendingAdapterArgsRef.current);
           }
-        })
-        .catch(() => {
-          warning(false, '@flopflip/react: adapter could not be configured.');
-        });
+        }
+      });
     }
   }, []);
 };
@@ -381,9 +376,10 @@ type TUsePendingAdapterArgsEffectOptions = {
   adapterArgs: TAdapterArgs;
   appliedAdapterArgs: TAdapterArgs;
   applyAdapterArgs: TUseAppliedAdapterArgsStateReturn['1'];
-  getIsAdapterConfigured: TUseAdapterStateRefReturn['2'];
-  setPendingAdapterArgs: TUsePendingAdapterArgsRefReturn['1'];
+  getIsAdapterConfigured: TUseAdapterStateRefReturn['getIsAdapterConfigured'];
+  setPendingAdapterArgs: TUsePendingAdapterArgsRefReturn['setPendingAdapterArgs'];
 };
+
 const usePendingAdapterArgsEffect = ({
   adapterArgs,
   appliedAdapterArgs,
@@ -395,7 +391,7 @@ const usePendingAdapterArgsEffect = ({
    * NOTE:
    *   This is passed through the React context (it's a public API).
    *   Internally this component has a `ReconfigureAdapter` type;
-   *   this function has two arguments for clarify.
+   *   this function has two arguments for clarity.
    */
   const reconfigureOrQueue = useCallback(
     (
@@ -447,17 +443,17 @@ function ConfigureAdapter({
   const [appliedAdapterArgs, applyAdapterArgs] = useAppliedAdapterArgsState({
     initialAdapterArgs: adapterArgs,
   });
-  const [
+  const {
     pendingAdapterArgsRef,
     setPendingAdapterArgs,
     getAdapterArgsForConfiguration,
-  ] = usePendingAdapterArgsRef(appliedAdapterArgs);
-  const [
-    ,
+  } = usePendingAdapterArgsRef(appliedAdapterArgs);
+  const {
     setAdapterState,
     getIsAdapterConfigured,
     getDoesAdapterNeedInitialConfiguration,
-  ] = useAdapterStateRef();
+  } = useAdapterStateRef();
+
   useDefaultFlagsEffect({
     adapter,
     defaultFlags: {
@@ -472,6 +468,7 @@ function ConfigureAdapter({
     getAdapterArgsForConfiguration,
     applyAdapterArgs,
   });
+
   const [reconfigureOrQueue] = usePendingAdapterArgsEffect({
     adapterArgs,
     appliedAdapterArgs,
@@ -479,6 +476,7 @@ function ConfigureAdapter({
     getIsAdapterConfigured,
     setPendingAdapterArgs,
   });
+
   useConfigurationEffect({
     adapter,
     shouldDeferAdapterConfiguration,
@@ -492,6 +490,7 @@ function ConfigureAdapter({
     applyAdapterArgs,
     appliedAdapterArgs,
   });
+
   const adapterEffectIdentifiers = adapter.effectIds ?? [adapter.id];
 
   return (

@@ -26,4 +26,12 @@ export { useAdapterReconfiguration } from './use-adapter-reconfiguration';
 export { useAdapterSubscription } from './use-adapter-subscription';
 export { wrapDisplayName } from './wrap-display-name';
 
+// New consumer-level hooks
+export type { TAdapterStatusResult } from './hooks/use-adapter-status';
+export { useAdapterStatus } from './hooks/use-adapter-status';
+export { useFeatureToggle } from './hooks/use-feature-toggle';
+export { useFeatureToggles } from './hooks/use-feature-toggles';
+export { useFlagVariation } from './hooks/use-flag-variation';
+export { useReconfigureAdapter } from './hooks/use-reconfigure-adapter';
+
 export { version };

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(openspec list:*)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm changeset:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
