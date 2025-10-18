@@ -1,5 +1,18 @@
 # @flopflip/launchdarkly-adapter
 
+## 15.1.5
+
+### Patch Changes
+
+- [#2077](https://github.com/tdeekens/flopflip/pull/2077) [`1bf6ce7`](https://github.com/tdeekens/flopflip/commit/1bf6ce73efe5d5f5c0530ed8abff86272d260d27) Thanks [@tdeekens](https://github.com/tdeekens)! - Migrate to Trusted Publishing and update all dependencies.
+
+- Updated dependencies [[`1bf6ce7`](https://github.com/tdeekens/flopflip/commit/1bf6ce73efe5d5f5c0530ed8abff86272d260d27)]:
+  - @flopflip/adapter-utilities@15.1.5
+  - @flopflip/cache@15.1.5
+  - @flopflip/localstorage-cache@15.1.5
+  - @flopflip/sessionstorage-cache@15.1.5
+  - @flopflip/types@15.1.5
+
 ## 15.1.4
 
 ### Patch Changes
