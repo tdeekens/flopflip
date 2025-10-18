@@ -1,5 +1,14 @@
 # @flopflip/cypress-plugin
 
+## 15.1.4
+
+### Patch Changes
+
+- [#2074](https://github.com/tdeekens/flopflip/pull/2074) [`3f6ad4f`](https://github.com/tdeekens/flopflip/commit/3f6ad4f5b99fa267cf3adac5f8b52824ec835d77) Thanks [@renovate](https://github.com/apps/renovate)! - Setup Trusted Publishing and update all dependencies.
+
+- Updated dependencies [[`3f6ad4f`](https://github.com/tdeekens/flopflip/commit/3f6ad4f5b99fa267cf3adac5f8b52824ec835d77)]:
+  - @flopflip/types@15.1.4
+
 ## 15.1.3
 
 ### Patch Changes
