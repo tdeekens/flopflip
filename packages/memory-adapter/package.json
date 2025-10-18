@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/memory-adapter",
-  "version": "15.1.4",
+  "version": "15.1.5",
   "description": "An in memory adapter for flipflop",
   "sideEffects": false,
   "type": "module",
