@@ -24,7 +24,7 @@ jobs:
           run_install: false
 
       - name: Setup Node (uses version in .nvmrc)
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
