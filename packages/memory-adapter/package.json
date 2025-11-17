@@ -60,6 +60,6 @@
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
     "globalthis": "1.0.4",
-    "tsup": "8.5.0"
+    "tsup": "8.5.1"
   }
 }
