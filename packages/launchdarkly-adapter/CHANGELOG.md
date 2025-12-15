@@ -1,5 +1,16 @@
 # @flopflip/launchdarkly-adapter
 
+## 15.1.6
+
+### Patch Changes
+
+- Updated dependencies [[`0541e88`](https://github.com/tdeekens/flopflip/commit/0541e888193431ab1617c1bdd1ae7fcc2f0e4809)]:
+  - @flopflip/types@15.1.6
+  - @flopflip/adapter-utilities@15.1.6
+  - @flopflip/cache@15.1.6
+  - @flopflip/localstorage-cache@15.1.6
+  - @flopflip/sessionstorage-cache@15.1.6
+
 ## 15.1.5
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/react",
-  "version": "15.1.5",
+  "version": "15.1.6",
   "description": "A feature toggle wrapper to use LaunchDarkly with React",
   "sideEffects": false,
   "type": "module",
