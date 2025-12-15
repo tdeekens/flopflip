@@ -50,38 +50,34 @@ function TestComponent() {
 
 describe('with one adapter', () => {
   describe('disabled features', () => {
-    it.each(Object.keys(disabledDefaultFlags))(
-      'should list disabled feature "%s"',
-      async (featureName) => {
-        const store = createStore({
-          [STATE_SLICE]: { flags: { memory: defaultFlags } },
-        });
-        const { waitUntilConfigured } = render(store, <TestComponent />);
+    it.each(
+      Object.keys(disabledDefaultFlags)
+    )('should list disabled feature "%s"', async (featureName) => {
+      const store = createStore({
+        [STATE_SLICE]: { flags: { memory: defaultFlags } },
+      });
+      const { waitUntilConfigured } = render(store, <TestComponent />);
 
-        await waitUntilConfigured();
+      await waitUntilConfigured();
 
-        expect(
-          screen.getByText(`${featureName} is disabled`)
-        ).toBeInTheDocument();
-      }
-    );
+      expect(
+        screen.getByText(`${featureName} is disabled`)
+      ).toBeInTheDocument();
+    });
   });
   describe('enabled features', () => {
-    it.each(Object.keys(enabledDefaultFlags))(
-      'should list enabled feature "%s"',
-      async (featureName) => {
-        const store = createStore({
-          [STATE_SLICE]: { flags: { memory: defaultFlags } },
-        });
-        const { waitUntilConfigured } = render(store, <TestComponent />);
+    it.each(
+      Object.keys(enabledDefaultFlags)
+    )('should list enabled feature "%s"', async (featureName) => {
+      const store = createStore({
+        [STATE_SLICE]: { flags: { memory: defaultFlags } },
+      });
+      const { waitUntilConfigured } = render(store, <TestComponent />);
 
-        await waitUntilConfigured();
+      await waitUntilConfigured();
 
-        expect(
-          screen.getByText(`${featureName} is enabled`)
-        ).toBeInTheDocument();
-      }
-    );
+      expect(screen.getByText(`${featureName} is enabled`)).toBeInTheDocument();
+    });
   });
 });
 
@@ -110,48 +106,44 @@ describe('when combining adapters', () => {
   });
 
   describe('without flag updating', () => {
-    it.each(Object.keys(disabledDefaultFlags))(
-      'should list disabled feature "%s"',
-      async (featureName) => {
-        const store = createStore({
-          [STATE_SLICE]: {
-            flags: { memory: defaultFlags, localstorage: defaultFlags },
-          },
-        });
-        const { waitUntilConfigured } = render(store, <TestComponent />, {
-          adapter: combineAdapters,
-          adapterArgs,
-        });
+    it.each(
+      Object.keys(disabledDefaultFlags)
+    )('should list disabled feature "%s"', async (featureName) => {
+      const store = createStore({
+        [STATE_SLICE]: {
+          flags: { memory: defaultFlags, localstorage: defaultFlags },
+        },
+      });
+      const { waitUntilConfigured } = render(store, <TestComponent />, {
+        adapter: combineAdapters,
+        adapterArgs,
+      });
 
-        await waitUntilConfigured();
+      await waitUntilConfigured();
 
-        expect(
-          screen.getByText(`${featureName} is disabled`)
-        ).toBeInTheDocument();
-      }
-    );
+      expect(
+        screen.getByText(`${featureName} is disabled`)
+      ).toBeInTheDocument();
+    });
 
-    it.each(Object.keys(enabledDefaultFlags))(
-      'should list enabled feature "%s"',
-      async (featureName) => {
-        const store = createStore({
-          [STATE_SLICE]: {
-            flags: { memory: defaultFlags, localstorage: defaultFlags },
-          },
-        });
+    it.each(
+      Object.keys(enabledDefaultFlags)
+    )('should list enabled feature "%s"', async (featureName) => {
+      const store = createStore({
+        [STATE_SLICE]: {
+          flags: { memory: defaultFlags, localstorage: defaultFlags },
+        },
+      });
 
-        const { waitUntilConfigured } = render(store, <TestComponent />, {
-          adapter: combineAdapters,
-          adapterArgs,
-        });
+      const { waitUntilConfigured } = render(store, <TestComponent />, {
+        adapter: combineAdapters,
+        adapterArgs,
+      });
 
-        await waitUntilConfigured();
+      await waitUntilConfigured();
 
-        expect(
-          screen.getByText(`${featureName} is enabled`)
-        ).toBeInTheDocument();
-      }
-    );
+      expect(screen.getByText(`${featureName} is enabled`)).toBeInTheDocument();
+    });
   });
 
   describe('with flag updating', () => {
