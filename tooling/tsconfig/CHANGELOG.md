@@ -1,5 +1,7 @@
 # @flopflip/tsconfig
 
+## 15.1.6
+
 ## 15.1.5
 
 ### Patch Changes

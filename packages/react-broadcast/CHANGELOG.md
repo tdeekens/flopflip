@@ -1,5 +1,15 @@
 # @flopflip/react-broadcast
 
+## 15.1.6
+
+### Patch Changes
+
+- [#2088](https://github.com/tdeekens/flopflip/pull/2088) [`0541e88`](https://github.com/tdeekens/flopflip/commit/0541e888193431ab1617c1bdd1ae7fcc2f0e4809) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update all dependencies
+
+- Updated dependencies [[`0541e88`](https://github.com/tdeekens/flopflip/commit/0541e888193431ab1617c1bdd1ae7fcc2f0e4809)]:
+  - @flopflip/react@15.1.6
+  - @flopflip/types@15.1.6
+
 ## 15.1.5
 
 ### Patch Changes
