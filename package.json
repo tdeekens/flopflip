@@ -43,7 +43,7 @@
     "HoC",
     "store-enhancer"
   ],
-  "packageManager": "pnpm@10.26.1",
+  "packageManager": "pnpm@10.26.2",
   "pnpm": {
     "overrides": {
       "@types/react": "19.2.7",
@@ -141,7 +141,7 @@
     "core-js": "3.47.0",
     "find-up": "8.0.0",
     "husky": "9.1.7",
-    "jsdom": "27.3.0",
+    "jsdom": "27.4.0",
     "lint-staged": "16.2.7",
     "pinst": "3.0.0",
     "raf": "3.4.1",
@@ -151,7 +151,7 @@
     "rimraf": "6.1.2",
     "ts-node": "10.9.2",
     "tslib": "2.8.1",
-    "turbo": "2.7.1",
+    "turbo": "2.7.2",
     "typescript": "5.9.3",
     "vite": "7.3.0",
     "vitest": "3.2.4",
