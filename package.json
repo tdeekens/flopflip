@@ -133,8 +133,8 @@
     "@types/lodash": "4.17.21",
     "@types/node": "24.10.4",
     "@vitejs/plugin-react": "5.1.2",
-    "@vitest/coverage-v8": "3.2.4",
-    "@vitest/ui": "3.2.4",
+    "@vitest/coverage-v8": "4.0.16",
+    "@vitest/ui": "4.0.16",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "check-node-version": "4.2.1",
     "colors": "1.4.0",
@@ -154,7 +154,7 @@
     "turbo": "2.7.2",
     "typescript": "5.9.3",
     "vite": "7.3.0",
-    "vitest": "3.2.4",
+    "vitest": "4.0.16",
     "vitest-localstorage-mock": "0.1.2"
   }
 }
