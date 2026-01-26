@@ -19,7 +19,7 @@
     "@flopflip/memory-adapter": "workspace:*",
     "@flopflip/tsconfig": "workspace:*",
     "@testing-library/jest-dom": "6.9.1",
-    "@testing-library/react": "16.3.1",
+    "@testing-library/react": "16.3.2",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   }

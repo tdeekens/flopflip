@@ -55,7 +55,7 @@
     "@flopflip/adapter-utilities": "workspace:*",
     "@flopflip/localstorage-cache": "workspace:*",
     "@flopflip/types": "workspace:*",
-    "lodash": "4.17.21",
+    "lodash": "4.17.23",
     "mitt": "3.0.1",
     "tiny-warning": "1.0.3"
   },

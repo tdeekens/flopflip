@@ -48,7 +48,7 @@
   "devDependencies": {
     "@flopflip/test-utils": "workspace:*",
     "@flopflip/tsconfig": "workspace:*",
-    "@types/react": "19.2.8",
+    "@types/react": "19.2.9",
     "@types/react-dom": "19.2.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
@@ -63,7 +63,7 @@
     "@flopflip/cache": "workspace:*",
     "@flopflip/types": "workspace:*",
     "@types/react-is": "19.2.0",
-    "lodash": "4.17.21",
+    "lodash": "4.17.23",
     "react-is": "19.2.3",
     "tiny-warning": "1.0.3",
     "ts-deepmerge": "7.0.3"
