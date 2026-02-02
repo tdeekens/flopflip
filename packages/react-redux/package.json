@@ -51,8 +51,8 @@
     "@flopflip/memory-adapter": "workspace:*",
     "@flopflip/test-utils": "workspace:*",
     "@flopflip/tsconfig": "workspace:*",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
     "react-redux": "9.2.0",
     "redux": "5.0.1",
     "tsup": "8.5.1"
@@ -62,7 +62,7 @@
     "@flopflip/react": "workspace:*",
     "@flopflip/types": "workspace:*",
     "@reduxjs/toolkit": "2.11.2",
-    "@types/react": "19.2.9",
+    "@types/react": "19.2.10",
     "@types/react-redux": "7.1.34"
   },
   "peerDependencies": {
