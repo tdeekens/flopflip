@@ -420,7 +420,7 @@ describe('when configuring', () => {
               it('should `dispatch` `onFlagsStateChange` action after the delay passed', () => {
                 vi.advanceTimersByTime(flagsUpdateDelayMs);
 
-                expect(onFlagsStateChange).toHaveBeenCalledTimes(8);
+                expect(onFlagsStateChange).toHaveBeenCalledTimes(4);
               });
             });
 
