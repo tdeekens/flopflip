@@ -53,7 +53,9 @@
       "cypress@13.6.4": "patches/cypress@13.6.4.patch"
     },
     "onlyBuiltDependencies": [
-      "cypress"
+      "core-js",
+      "cypress",
+      "esbuild"
     ]
   },
   "bundlewatch": {
