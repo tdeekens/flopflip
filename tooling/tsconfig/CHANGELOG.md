@@ -1,5 +1,11 @@
 # @flopflip/tsconfig
 
+## 15.1.7
+
+### Patch Changes
+
+- [`72bb924`](https://github.com/tdeekens/flopflip/commit/72bb924f77b709de350ff350578e57fde83cc246) Thanks [@tdeekens](https://github.com/tdeekens)! - Update all dependencies.
+
 ## 15.1.6
 
 ## 15.1.5

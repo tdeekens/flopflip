@@ -1,5 +1,15 @@
 # @flopflip/react-redux
 
+## 15.1.7
+
+### Patch Changes
+
+- [`72bb924`](https://github.com/tdeekens/flopflip/commit/72bb924f77b709de350ff350578e57fde83cc246) Thanks [@tdeekens](https://github.com/tdeekens)! - Update all dependencies.
+
+- Updated dependencies [[`72bb924`](https://github.com/tdeekens/flopflip/commit/72bb924f77b709de350ff350578e57fde83cc246)]:
+  - @flopflip/react@15.1.7
+  - @flopflip/types@15.1.7
+
 ## 15.1.6
 
 ### Patch Changes
