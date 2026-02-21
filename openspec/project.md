@@ -3,6 +3,7 @@
 ## Purpose
 
 **Flopflip** is a modern feature toggling (feature flag) library for React applications. It enables developers to:
+
 - Toggle features on/off without redeploying applications
 - Run A/B tests and multivariate experiments
 - Manage feature releases in real-time
@@ -95,6 +96,7 @@ The library provides React components, hooks, and higher-order components for co
 ## Domain Context
 
 **Feature Toggling Concepts**:
+
 - **Feature Flags**: Boolean toggles for on/off control
 - **Variants/Experiments**: Multi-variate flags (A/B tests, canary releases)
 - **User Context**: Flags evaluated based on user properties (ID, segment, custom attributes)
@@ -102,6 +104,7 @@ The library provides React components, hooks, and higher-order components for co
 - **Provider Agnostic**: Designed to work with any feature flag service or custom backend
 
 **Key Components & Hooks**:
+
 - `ConfigureAdapter` - Set up feature flag provider
 - `ToggleFeature` - Conditional rendering based on flags
 - `useFeatureToggle()` - Read single flag value
@@ -113,6 +116,7 @@ The library provides React components, hooks, and higher-order components for co
 
 **Adapter Interface Contract**:
 All adapters must implement:
+
 - `configure(config, callbacks)` - Initialize with user context
 - `reconfigure(config)` - Update user context
 - Callbacks: `onFlagsStateChange`, `onStatusStateChange` for state updates
@@ -137,7 +141,7 @@ All adapters must implement:
   - Split.io (via @flopflip/splitio-adapter)
   - Custom GraphQL endpoints (via @flopflip/graphql-adapter)
   - Custom HTTP endpoints (via @flopflip/http-adapter)
-- **Package Registry**: npm (published as scoped packages @flopflip/*)
+- **Package Registry**: npm (published as scoped packages @flopflip/\*)
 - **CDN**: unpkg.com (UMD builds available)
 - **CI/CD**: GitHub Actions
 - **Version Control**: Git/GitHub
