@@ -396,53 +396,62 @@ All adapters are configured through the `adapterArgs` prop of `ConfigureFlopFlip
 
 The `ConfigureFlopFlip` component accepts the following props:
 
-- `adapter` -- the adapter to use (e.g. `launchdarkly-adapter`)
-  - An `adapter` should implement the `configure` and `reconfigure` methods, which both must return a `Promise` as configuration can be asynchronous
-- `adapterArgs` -- whatever the underlying `adapter` accepts
-  - The `adapter` will receive `onFlagsStateChange` and `onStatusStateChange` which should be invoked accordingly to notify `react-broadcast` and `react-redux` about flag and status changes
-- `shouldDeferAdapterConfiguration` -- defer initial adapter configuration (useful when waiting for a `key` to be present)
-- `defaultFlags` -- default flag values until an `adapter` responds or in case flags were removed
-- Adapters expose `adapter.updateFlags` to update flags explicitly, flushing them to all components via `react-broadcast` or `react-redux`
+| Prop                              | Description                                                                                                                                                                                                                           |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `adapter`                         | The adapter to use (e.g. `launchdarkly-adapter`). An `adapter` should implement the `configure` and `reconfigure` methods, which both must return a `Promise` as configuration can be asynchronous.                                   |
+| `adapterArgs`                     | Whatever the underlying `adapter` accepts. The `adapter` will receive `onFlagsStateChange` and `onStatusStateChange` which should be invoked accordingly to notify `react-broadcast` and `react-redux` about flag and status changes. |
+| `shouldDeferAdapterConfiguration` | Defer initial adapter configuration (useful when waiting for a `key` to be present).                                                                                                                                                  |
+| `defaultFlags`                    | Default flag values until an `adapter` responds or in case flags were removed.                                                                                                                                                        |
+
+Adapters expose `adapter.updateFlags` to update flags explicitly, flushing them to all components via `react-broadcast` or `react-redux`.
 
 #### LaunchDarkly adapter
 
 > **Note:** The LaunchDarkly adapter uses `context: LDContext` instead of `user`.
 
-- `context` -- the LaunchDarkly context (`LDContext`) used to identify the user
-- `sdk.clientSideId` -- the client side id of LaunchDarkly
-- `sdk.clientOptions` -- additional options to be passed to the underlying SDK
-- `flags` -- defaulting to `null` to subscribe only to specific flags. Helpful when not wanting to subscribe to all flags to utilise LaunchDarkly's automatic flag archiving functionality
-- `cacheMode` -- defaulting to `null` to change application of cached flags
-  - `eager` -- remote values should have effect immediately
-  - `lazy` -- values should be updated in the cache but only be applied once the adapter is configured again
-- `throwOnInitializationFailure` -- defaulting to `false` to indicate if the adapter should re-throw an error during initialization
-- `flagsUpdateDelayMs` -- defaulting to `0` to debounce the flag update subscription
-- `initializationTimeout` -- defaulting to `2` (seconds) to set the timeout for `waitForInitialization`
+| Prop                           | Default       | Description                                                                                                                                                                                        |
+| ------------------------------ | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `context`                      |               | The LaunchDarkly context (`LDContext`) used to identify the user.                                                                                                                                  |
+| `sdk.clientSideId`             |               | The client side id of LaunchDarkly.                                                                                                                                                                |
+| `sdk.clientOptions`            |               | Additional options to be passed to the underlying SDK.                                                                                                                                             |
+| `flags`                        | `null`        | Subscribe only to specific flags. Helpful when not wanting to subscribe to all flags to utilise LaunchDarkly's automatic flag archiving functionality.                                             |
+| `cacheMode`                    | `null`        | Change application of cached flags. `eager`: remote values should have effect immediately. `lazy`: values should be updated in the cache but only be applied once the adapter is configured again. |
+| `throwOnInitializationFailure` | `false`       | Indicate if the adapter should re-throw an error during initialization.                                                                                                                            |
+| `flagsUpdateDelayMs`           | `0`           | Debounce the flag update subscription.                                                                                                                                                             |
+| `initializationTimeout`        | `2` (seconds) | Set the timeout for `waitForInitialization`.                                                                                                                                                       |
 
 #### Split.io adapter
 
-- `sdk.authorizationKey` -- authorization key for splitio
-- `sdk.options` -- general attributes passed to splitio SDK
-- `sdk.treatmentAttributes` -- the treatment attributes passed to splitio
+| Prop                      | Description                                 |
+| ------------------------- | ------------------------------------------- |
+| `sdk.authorizationKey`    | Authorization key for splitio.              |
+| `sdk.options`             | General attributes passed to splitio SDK.   |
+| `sdk.treatmentAttributes` | The treatment attributes passed to splitio. |
 
 #### GraphQL adapter
 
-- `uri` -- the URI to the GraphQL endpoint (e.g. `https://graphql.com/graphql`)
-- `query` -- the GraphQL query which returns features (e.g. `query AllFeatures { flags: allFeatures { name \n value} }`)
-- `getQueryVariables` -- a function called with `adapterArgs` returning variables for your GraphQL query
-- `getRequestHeaders` -- a function called with `adapterArgs` returning headers for your GraphQL request
-- `parseFlags` -- a function called with the `data` of fetched flags to parse the result into the `TFlags` type
-- `fetcher` -- a fetch implementation if you prefer to not rely on the global `fetch`
-- `pollingIntervalMs` -- the polling interval to check for updated flag values (defaults to 60000ms)
+| Prop                | Default | Description                                                                                                  |
+| ------------------- | ------- | ------------------------------------------------------------------------------------------------------------ |
+| `uri`               |         | The URI to the GraphQL endpoint (e.g. `https://graphql.com/graphql`).                                        |
+| `query`             |         | The GraphQL query which returns features (e.g. `query AllFeatures { flags: allFeatures { name \n value} }`). |
+| `getQueryVariables` |         | A function called with `adapterArgs` returning variables for your GraphQL query.                             |
+| `getRequestHeaders` |         | A function called with `adapterArgs` returning headers for your GraphQL request.                             |
+| `parseFlags`        |         | A function called with the `data` of fetched flags to parse the result into the `TFlags` type.               |
+| `fetcher`           |         | A fetch implementation if you prefer to not rely on the global `fetch`.                                      |
+| `pollingIntervalMs` | `60000` | The polling interval in milliseconds to check for updated flag values.                                       |
 
 #### HTTP adapter
 
-- `execute` -- a function called with `adapterArgs` which must return a `Promise` resolving to flags
-- `pollingIntervalMs` -- the polling interval in milliseconds (defaults to 60000ms)
+| Prop                | Default | Description                                                                            |
+| ------------------- | ------- | -------------------------------------------------------------------------------------- |
+| `execute`           |         | A function called with `adapterArgs` which must return a `Promise` resolving to flags. |
+| `pollingIntervalMs` | `60000` | The polling interval in milliseconds.                                                  |
 
 #### LocalStorage adapter
 
-- `pollingIntervalMs` -- an interval at which the adapter polls for new flags from localstorage in milliseconds (defaults to 60000ms)
+| Prop                | Default | Description                                                                              |
+| ------------------- | ------- | ---------------------------------------------------------------------------------------- |
+| `pollingIntervalMs` | `60000` | The interval in milliseconds at which the adapter polls for new flags from localstorage. |
 
 #### Memory adapter
 
@@ -608,13 +617,13 @@ For multi-variate feature toggles, pass a `variation` prop:
 
 `ToggleFeature` supports several rendering patterns:
 
-| Pattern               | Description                                          |
-| --------------------- | ---------------------------------------------------- |
-| `children` (element)  | Rendered when the feature is enabled                 |
-| `children` (function) | Called with `{ isFeatureEnabled }` -- always invoked |
-| `render` (function)   | Called only when the feature is enabled              |
-| `toggledComponent`    | Component rendered when the feature is enabled       |
-| `untoggledComponent`  | Component rendered when the feature is disabled      |
+| Pattern               | Description                                        |
+| --------------------- | -------------------------------------------------- |
+| `children` (element)  | Rendered when the feature is enabled               |
+| `children` (function) | Called with `{ isFeatureEnabled }`, always invoked |
+| `render` (function)   | Called only when the feature is enabled            |
+| `toggledComponent`    | Component rendered when the feature is enabled     |
+| `untoggledComponent`  | Component rendered when the feature is disabled    |
 
 Example with `toggledComponent` prop:
 
