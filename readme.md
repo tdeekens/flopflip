@@ -17,10 +17,10 @@
   · TypeScript
   · @testing-library/react
   · Biome
-  · Babel
   · Lodash
   · Changesets
   · tsup
+  · pnpm
   🙏
   </sub>
 </p>
@@ -96,22 +96,19 @@ In all examples flags will update in realtime (depending on the adapter and prov
 
 ## ❯ Browser support
 
-```bash
-npx browserlist
+Configured via `.browserslistrc`:
 
-and_chr 110
-chrome 110
-chrome 109
-edge 110
-edge 109
-firefox 109
-ios_saf 16.3
-ios_saf 16.2
-ios_saf 16.1
-ios_saf 16.0
-ios_saf 15.6
-samsung 19.0
 ```
+[production]
+supports es6-module and >0.25%
+not ie 11
+not op_mini all
+
+[ssr]
+node 12
+```
+
+Run `npx browserslist` to see the resolved browser list for the current environment.
 
 ## ❯ Package Status
 
@@ -125,7 +122,9 @@ samsung 19.0
 | [`memory-adapter`](/packages/memory-adapter)             | [![memory-adapter Version][memory-adapter-latest-icon]][memory-adapter-latest-version] [![memory-adapter Version][memory-adapter-next-icon]][memory-adapter-next-version]                                     | [![memory-adapter Downloads][memory-adapter-downloads]][memory-adapter-downloads]                   | [![memory-adapter Minified + GZipped][memory-adapter-size]][memory-adapter-size]                   |
 | [`localstorage-adapter`](/packages/localstorage-adapter) | [![localstorage-adapter Version][localstorage-adapter-latest-icon]][localstorage-adapter-latest-version] [![localstorage-adapter Version][localstorage-adapter-next-icon]][localstorage-adapter-next-version] | [![localstorage-adapter Downloads][localstorage-adapter-downloads]][localstorage-adapter-downloads] | [![localstorage-adapter Minified + GZipped][localstorage-adapter-size]][localstorage-adapter-size] |
 | [`graphql-adapter`](/packages/graphql-adapter)           | [![graphql-adapter Version][graphql-adapter-latest-icon]][graphql-adapter-latest-version] [![graphql-adapter Version][graphql-adapter-next-icon]][graphql-adapter-next-version]                               | [![graphql-adapter Downloads][graphql-adapter-downloads]][graphql-adapter-downloads]                | [![graphql-adapter Minified + GZipped][graphql-adapter-size]][graphql-adapter-size]                |
-| [`cypress-plugin`](/packages/cypress-plugin)             | [![cypress-plugin Version][cypress-plugin-latest-icon]][cypress-plugin-latest-version] [![cypress-plugin Version][cypress-plugin-next-icon]][cypress-plugin-next-version]                                     | [![cypress-plugin Downloads][cypress-plugin-downloads]][cypress-plugin-downloads]                   | [![cypress-plugin Minified + GZipped][localstorage-adapter-size]][localstorage-adapter-size]       |
+| [`http-adapter`](/packages/http-adapter)                 | [![http-adapter Version][http-adapter-latest-icon]][http-adapter-latest-version] [![http-adapter Version][http-adapter-next-icon]][http-adapter-next-version]                                                 | [![http-adapter Downloads][http-adapter-downloads]][http-adapter-downloads]                         | [![http-adapter Minified + GZipped][http-adapter-size]][http-adapter-size]                         |
+| [`combine-adapters`](/packages/combine-adapters)         | [![combine-adapters Version][combine-adapters-latest-icon]][combine-adapters-latest-version] [![combine-adapters Version][combine-adapters-next-icon]][combine-adapters-next-version]                         | [![combine-adapters Downloads][combine-adapters-downloads]][combine-adapters-downloads]             | [![combine-adapters Minified + GZipped][combine-adapters-size]][combine-adapters-size]             |
+| [`cypress-plugin`](/packages/cypress-plugin)             | [![cypress-plugin Version][cypress-plugin-latest-icon]][cypress-plugin-latest-version] [![cypress-plugin Version][cypress-plugin-next-icon]][cypress-plugin-next-version]                                     | [![cypress-plugin Downloads][cypress-plugin-downloads]][cypress-plugin-downloads]                   | [![cypress-plugin Minified + GZipped][cypress-plugin-size]][cypress-plugin-size]                   |
 | [`types`](/packages/types)                               | [![types Version][types-latest-icon]][types-latest-version] [![types Version][types-next-icon]][types-next-version]                                                                                           | [![types Downloads][types-downloads]][types-downloads]                                              | [![types Minified + GZipped][types-size]][types-size]                                              |
 
 [types-latest-version]: https://flat.badgen.net/npm/v/@flopflip/types
@@ -188,16 +187,30 @@ samsung 19.0
 [cypress-plugin-next-icon]: https://flat.badgen.net/npm/v/@flopflip/cypress-plugin/next
 [cypress-plugin-downloads]: https://flat.badgen.net/npm/dm/@flopflip/cypress-plugin
 [cypress-plugin-size]: https://flat.badgen.net/bundlephobia/minzip/@flopflip/cypress-plugin
+[http-adapter-latest-version]: https://flat.badgen.net/npm/v/@flopflip/http-adapter
+[http-adapter-next-version]: https://flat.badgen.net/npm/v/@flopflip/http-adapter
+[http-adapter-latest-icon]: https://flat.badgen.net/npm/v/@flopflip/http-adapter
+[http-adapter-next-icon]: https://flat.badgen.net/npm/v/@flopflip/http-adapter/next
+[http-adapter-downloads]: https://flat.badgen.net/npm/dm/@flopflip/http-adapter
+[http-adapter-size]: https://flat.badgen.net/bundlephobia/minzip/@flopflip/http-adapter
+[combine-adapters-latest-version]: https://flat.badgen.net/npm/v/@flopflip/combine-adapters
+[combine-adapters-next-version]: https://flat.badgen.net/npm/v/@flopflip/combine-adapters
+[combine-adapters-latest-icon]: https://flat.badgen.net/npm/v/@flopflip/combine-adapters
+[combine-adapters-next-icon]: https://flat.badgen.net/npm/v/@flopflip/combine-adapters/next
+[combine-adapters-downloads]: https://flat.badgen.net/npm/dm/@flopflip/combine-adapters
+[combine-adapters-size]: https://flat.badgen.net/bundlephobia/minzip/@flopflip/combine-adapters
 
 ## ❯ Installation
 
 This is a mono repository maintained using
-[changesets](https://github.com/atlassian/changesets). It currently contains five
-[packages](/packages) in a `memory-adapter`, a `localstorage-adapter` or
-`launchdarkly-adapter`, `react`, `react-redux` and `react-broadcast`. You should
-not need the `launchdarkly-adapter` yourself but one of our bindings
-(react-broadcast or react-redux). Both use the `react` package to share
-components.
+[changesets](https://github.com/atlassian/changesets). It currently contains
+multiple [packages](/packages) including adapters (`launchdarkly-adapter`,
+`splitio-adapter`, `graphql-adapter`, `http-adapter`, `memory-adapter`,
+`localstorage-adapter`), integration bindings (`react-broadcast`, `react-redux`),
+a shared `react` package, a `cypress-plugin`, `combine-adapters`, and supporting
+utilities (`types`, `cache`, `adapter-utilities`). You should not need an adapter
+package directly but rather one of our bindings (`react-broadcast` or
+`react-redux`). Both use the `react` package to share components.
 
 Depending on the preferred integration (with or without redux) use:
 
@@ -209,20 +222,7 @@ or
 
 ## ❯ Demo
 
-A minimal [demo](/demo) exists and can be adjusted to point to a
-[custom](https://github.com/tdeekens/flopflip/blob/main/demo/src/App.js#L108)
-LaunchDarkly account. You would have to create feature toggles according to the
-existing
-[flags](https://github.com/tdeekens/flopflip/blob/main/demo/src/flags.js),
-though.
-
-Then simply run:
-
-1.  From the repositories root: `yarn build:watch`
-2.  From `/demo`: first `yarn` and then `yarn start`
-
-A browser window should open and the network tab should show feature flags being
-loaded from LaunchDarkly.
+A demo GIF is shown above. The demo application has been removed from the repository.
 
 ## ❯ Documentation
 
@@ -234,9 +234,9 @@ without Redux.
 
 - `ConfigureFlopFlip` a component to configure flopflip with an adapter
   (alternative to the store enhancer)
-- `ReconfigureFlopFlip` a component to reconfigure flopflip with new user properties
+- `ReconfigureFlopFlip` a component to reconfigure flopflip with new properties
   either merged or overwriting old properties (`shouldOverwrite` prop)
-  - `useAdapterReconfiguration` a hook to reconfigure flopflip with new user properties
+  - `useAdapterReconfiguration` a hook to reconfigure flopflip with new properties
     either merged or overwriting old properties (`shouldOverwrite` prop)
 - `branchOnFeatureToggle` a Higher-Order Component (HoC) to conditionally render
   components depending on feature toggle state
@@ -246,11 +246,18 @@ without Redux.
   feature toggles onto the `props` of a component
 - `ToggleFeature` a component conditionally rendering its `children` based on
   the status of a passed feature flag
-  `<ToggleFeature>` child based on the status of its passed feature flag
-- `reducer` and `STATE_SLICE` a reducer and the state slice for the feature
-  toggle state
-- `createFlopFlipEnhancer` a redux store enhancer to configure flipflip and add
-  feature toggle state to your redux store
+- `useFeatureToggle` a React hook to read a single flag
+- `useFeatureToggles` a React hook to read multiple flags at once
+- `useFlagVariation` a React hook to read a single variation of a flag
+- `useFlagVariations` a React hook to read multiple variations of a flag at once
+- `useAdapterStatus` a React hook to read the underlying adapter's status
+- `useAllFeatureToggles` a React hook to read all feature toggles
+- `flopflipReducer` and `FLOPFLIP_STATE_SLICE` a reducer and the state slice for the feature
+  toggle state (`@flopflip/react-redux` only)
+- `createFlopFlipEnhancer` a redux store enhancer to configure flopflip and add
+  feature toggle state to your redux store (`@flopflip/react-redux` only)
+- `TestProviderFlopFlip` a test provider component for testing
+  (`@flopflip/react-broadcast` only)
 
 ### Configuration
 
@@ -298,18 +305,20 @@ It takes the `props`:
 
 **Different adapters allow for different configurations:**
 
-Please note that all adapters accept a `user: TUser` which has an optional `key` of type string. This `user` attribute can be used by each adapter to identify a user uniquely. Some adapters which require a `user.key` will generate a uuid whenever no `key` is passed.
+Please note that most adapters accept a `user: TUser` which has an optional `key` of type string. This `user` attribute can be used by each adapter to identify a user uniquely. The LaunchDarkly adapter uses `context: LDContext` instead of `user` (see below).
 
 _1. The `@flopflip/launchdarkly-adapter` accepts_
 
+- `context`: The LaunchDarkly context (`LDContext`) used to identify the user (note: this adapter uses `context` instead of `user`)
 - `sdk.clientSideId`: The client side id of LaunchDarkly
 - `sdk.clientOptions`: additional options to be passed to the underlying SDK
 - `flags`: defaulting to `null` to subscribe only to specific flags. Helpful when not wanting to subscribe to all flags to utilise LaunchDarkly's automatic flag archiving functionality
 - `cacheMode`: defaulting to `null` to change application of cached flags
   - The value can be `eager` to indicate that remote values should have effect immediately
   - The value can be `lazy` to indicate that values should be updated in the cache but only be applied once the adapter is configured again
-- `throwOnInitializationFailure`: defaulting to `false` to indicate if the adapter just re-throw an error during initialization
+- `throwOnInitializationFailure`: defaulting to `false` to indicate if the adapter should re-throw an error during initialization
 - `flagsUpdateDelayMs`: defaulting to `0` to debounce the flag update subscription
+- `initializationTimeout`: defaulting to `2` (seconds) to set the timeout for `waitForInitialization`
 
 _2. The `@flopflip/splitio-adapter` accepts_
 
@@ -324,14 +333,19 @@ _3. The `@flopflip/graphql-adapter` accepts_
 - `getQueryVariables`: a function called with `adapterArgs` being variables to your GraphQL query
 - `getRequestHeaders`: a function called with `adapterArgs` being headers to your GraphQL request
 - `parseFlags`: a function called with the `data` of fetched flags to parse the result before being exposed to your application. This function should be used to parse a query response into the `TFlags` type.
-- `fetcher`: a fetch implemtation if you prefer to not rely on the global `fetch`
-- `pollingIntervalMs`: the polling interval to check for updated flag values
+- `fetcher`: a fetch implementation if you prefer to not rely on the global `fetch`
+- `pollingIntervalMs`: the polling interval to check for updated flag values (defaults to 60000ms)
 
-_4. The `@flopflip/localstorage-adapter` accepts_
+_4. The `@flopflip/http-adapter` accepts_
 
-- `pollingIntervalMs`: an interval at which the adapter polls for new flags from localstorage in milliseconds
+- `execute`: a function called with `adapterArgs` which must return a `Promise` resolving to flags
+- `pollingIntervalMs`: the polling interval in milliseconds (defaults to 60000ms)
 
-_5. The `@flopflip/memory-adapter` accepts_
+_5. The `@flopflip/localstorage-adapter` accepts_
+
+- `pollingIntervalMs`: an interval at which the adapter polls for new flags from localstorage in milliseconds (defaults to 60000ms)
+
+_6. The `@flopflip/memory-adapter` accepts_
 
 No special configuration is required for the memory adapter at this point.
 
@@ -347,7 +361,7 @@ import { adapter } from "@flopflip/launchdarkly-adapter";
 
 <ConfigureFlopFlip
   adapter={adapter}
-  adapterArgs={{ sdk: { clientSideId }, user }}
+  adapterArgs={{ sdk: { clientSideId }, context }}
 >
   <App />
 </ConfigureFlopFlip>;
@@ -358,7 +372,7 @@ You can also pass `render` or `children` as a function to act differently based 
 ```jsx
 <ConfigureFlopFlip
   adapter={adapter}
-  adapterArgs={{ sdk: { clientSideId }, user }}
+  adapterArgs={{ sdk: { clientSideId }, context }}
 >
   {(isAdapterConfigured) =>
     isAdapterConfigured ? <App /> : <LoadingSpinner />
@@ -369,7 +383,7 @@ You can also pass `render` or `children` as a function to act differently based 
 ```jsx
 <ConfigureFlopFlip
   adapter={adapter}
-  adapterArgs={{ sdk: { clientSideId }, user }}
+  adapterArgs={{ sdk: { clientSideId }, context }}
   render={() => <App />}
 />
 ```
@@ -431,7 +445,7 @@ import {
 import { adapter } from "@flopflip/launchdarkly-adapter";
 
 // Maintained somewhere within your application
-import { user } from "./user";
+import { context } from "./context";
 import { appReducer } from "./reducer";
 
 const rootReducer = combineReducers({
@@ -445,7 +459,7 @@ const store = configureStore({
     getDefaultMiddleware().concat(
       createFlopFlipEnhancer(adapter, {
         sdk: { clientSideId: window.application.env.LD_CLIENT_ID },
-        user,
+        context,
       })
     ),
   preloadedState: initialState,
@@ -497,20 +511,20 @@ In addition to initiating `flopflip` when creating your store, you could still w
 Note: This is not needed when using the memory-adapter.
 
 ```js
-import adapter from "@flopflip/launchdarkly-adapter";
+import { adapter } from "@flopflip/launchdarkly-adapter";
 
 <ConfigureFlopFlip
   adapter={adapter}
-  adapterArgs={{ sdk: { clientSideId }, user }}
+  adapterArgs={{ sdk: { clientSideId }, context }}
 >
   <App />
 </ConfigureFlopFlip>;
 ```
 
 Whenever your application "gains" certain information (e.g. with `react-router`) only further
-down the tree but that information should be used for user targeting (through `adapterArgs.user`) you
+down the tree but that information should be used for user targeting (through `adapterArgs.context` for LaunchDarkly or `adapterArgs.user` for other adapters) you
 can use `ReconfigureFlopflip`. `ReconfigureFlopflip` itself communicates with `ConfigureFlopflip`
-to reconfigure the given adapter for more fine grained targeting with the passed `user`.
+to reconfigure the given adapter for more fine grained targeting with the passed context.
 You also do not have to worry about rendering any number of `ReconfigureFlopflip`s before the adapter is
 initialized (e.g. LaunchDarkly). Requested reconfigurations will be queued and processed once the adapter is configured.
 
@@ -519,7 +533,7 @@ Imagine having `ConfigureFlopflip` above a given component wrapped by a `Route`:
 ```jsx
 <ConfigureFlopFlip
   adapter={adapter}
-  adapterArgs={{ sdk: { clientSideId }, user }}
+  adapterArgs={{ sdk: { clientSideId }, context }}
 >
   <>
     <SomeOtherAppComponent />
@@ -542,32 +556,18 @@ Imagine having `ConfigureFlopflip` above a given component wrapped by a `Route`:
 </ConfigureFlopFlip>
 ```
 
-Internally, `ReconfigureFlopFlip` will pass the `projectKey` to `ConfigureFlopFlip`, causing the adapter to automatically update the user context and therefore to flush new flags from the adapter (given they are provided by e.g. LaunchDarkly).
+Internally, `ReconfigureFlopFlip` will pass the `projectKey` to `ConfigureFlopFlip`, causing the adapter to automatically update the context and therefore to flush new flags from the adapter (given they are provided by e.g. LaunchDarkly).
 
-_Note:_ Whenever `shouldOverwrite` is `true` the existing user configuration will be overwritten not merged. Use with care as any
-subsequent `shouldOverwrite={true}` will overwrite any previously passed `user` with `shouldOverwrite={false}` (default).
+_Note:_ Whenever `shouldOverwrite` is `true` the existing configuration will be overwritten not merged. Use with care as any
+subsequent `shouldOverwrite={true}` will overwrite any previously passed properties with `shouldOverwrite={false}` (default).
 
-### `@flopflip/react-broadcast` & `@flopflip/react-redux` API
+### `@flopflip/react-broadcast` & `@flopflip/react-redux` detailed API
 
-Apart from `ConfigureFlopFlip` both packages `@flopflip/react-broadcast` and
-`@flopflip/react-redux` export the same set of components to toggle based on
-features. Only the import changes depending on if you chose to integrate with
-redux or without. Again, behind the scenes the build on `@flopflip/react` to
-share common logic.
-
-- `useFeatureToggle` a React hook to read a single flag
-- `useFeatureToggles` a React hook to read multiple flags at once
-- `useFlagVariation` a React hook to read a single variation of a flag
-- `useFlagVariations` a React hook to read multiple variations of a flag at once
-- `useAdapterStatus` a React hook to read the underlying adapter's status
-- `branchOnFeatureToggle` a Higher-Order Component (HoC) to conditionally render
-  components depending on feature toggle state
-- `injectFeatureToggle` a HoC to inject a feature toggle onto the `props` of a
-  component
-- `injectFeatureToggles` a HoC to inject requested feature toggles from existing
-  feature toggles onto the `props` of a component
-- `ToggleFeature` a component conditionally rendering its `children` based on
-  the status of a passed feature flag
+Both packages `@flopflip/react-broadcast` and `@flopflip/react-redux` export
+the same set of hooks, components, and HoCs to toggle based on features (as
+listed in the summary above). Only the import changes depending on if you chose
+to integrate with redux or without. Behind the scenes they build on
+`@flopflip/react` to share common logic.
 
 [Note:](#flag-normalization) that all passed `flagNames` passed as `flag` are a string. Depending on the adapter used _these are normalized_ to be camel cased. This means that whenever a `foo-flag-name` is received in e.g. LaunchDarkly or splitio it will be converted to `fooFlagName`. The same applies for a `foo_flag_name`. This is meant to help using flags in an adapter agnostic way. Whenever a flag is passed in the non-normalized form it is also normalized again. Lastly, `flopflip` will show a warning message in the console in development mode whenever a non normalized flag name is passed.
 
@@ -634,7 +634,7 @@ const ComponentWithFeatureToggle = props => {
 }
 ```
 
-#### `useFlagVaritions([flagName: string]): FlagVariation[]`
+#### `useFlagVariations([flagName: string]): FlagVariation[]`
 
 Given you want to use React hooks within a functional component you can read multiple variations as follows:
 
@@ -909,12 +909,11 @@ The same example above applies for `selectFeatureFlags`.
 
 #### `createFlopFlipEnhancer`
 
-Requires arguments of `clientSideId:string`, `user:object`.
+Requires two arguments:
 
-- The `adapter`
-- The `adapterArgs` object
-  - Often with the before mentioned user object `user` object which often needs
-    at least a `key` attribute
+- The `adapter` (e.g. imported from `@flopflip/launchdarkly-adapter`)
+- The `adapterArgs` object containing the adapter-specific configuration
+  (e.g. `{ sdk: { clientSideId }, context }` for LaunchDarkly)
 
 ### `@flopflip/cypress-plugin`
 
@@ -950,8 +949,8 @@ In the example above we test two variations of a feature. Being able to alter fl
 To install the `@flopflip/cypress-plugin` you will have to add the respective command and plugin as follows after installing it as a `devDependency`.
 
 ```bash
-yarn add --dev @floplfip/cypress-plugin
-npm install --save-dev @floplfip/cypress-plugin
+yarn add --dev @flopflip/cypress-plugin
+npm install --save-dev @flopflip/cypress-plugin
 ```
 
 In the `plugins/index.js` add the following to your existing config:
@@ -977,33 +976,19 @@ addFlopflipCommands({
 });
 ```
 
-Please note that the `adapterId` should be one of `launchdarkly`, `memory`, `localstorage` or `splitio`. It allows the `cypress-plugin` to hook into the respective adapter. Also make sure to update to the most recent version of any adapter to ensure a smooth integration between the plugin and the adapter.
+Please note that the `adapterId` should be one of `launchdarkly`, `memory`, `localstorage`, `splitio`, `graphql` or `http`. It allows the `cypress-plugin` to hook into the respective adapter. Also make sure to update to the most recent version of any adapter to ensure a smooth integration between the plugin and the adapter.
 
 ### Module formats
 
-`@flopflip/react-redux` and `@flopflip/react-broadcast` is built for UMD (un-
-and minified) and ESM using
-[`rollup`](https://github.com/tdeekens/flopflip/blob/main/rollup.config.js).
+All packages are built for ESM and CommonJS using
+[`tsup`](https://github.com/egoist/tsup) (powered by esbuild).
 
-Both our `@flopflip/launchdarkly-wrapper` and `@flopflip/react` packages are
-"only" build for ESM and CommonJS (not UMD) as they are meant to be consumed by
-a module loader to be integrated.
+The `package.json` files contain a `main` entry pointing to `./dist/index.js`
+and an `exports` map with `import` and `require` conditions:
 
-The `package.json` files contain a `main` and `module` entry to point to a
-CommonJS and ESM build.
-
-- ...ESM just import the `dist/@flopflip/<package>.es.js` within your app.
-  - ...it's a transpiled version accessible via the `pkg.module`
-- ...CommonJS use the `dist/@flopflip/<package>.cjsjs`
-- ...AMD use the `dist/@flopflip/<package>.umd.js`
-- ...`<script />` link it to `dist/@flopflip/<package>.umd.js` or
-  `dist/@flopflip/<package>.umd.min.js`
+- ESM: `./dist/index.js`
+- CommonJS: `./dist/index.cjs`
 
 All build files are part of the npm distribution using the
 [`files`](https://github.com/tdeekens/flopflip/blob/main/packages/react-redux/package.json)
 array to keep install time short.
-
-Also feel free to use
-[unpkg.com](https://unpkg.com/@flopflip/react-redux@latest/dist/@flopflip-react-redux.umd.min.js)
-as a CDN to the [dist](https://unpkg.com/@flopflip/react-redux@latest/dist/)
-files.
