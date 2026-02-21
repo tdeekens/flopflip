@@ -1,5 +1,5 @@
 import type { TFlagName, TFlagVariation } from '@flopflip/types';
-import type React from 'react';
+import React from 'react';
 
 import { useFeatureToggle } from './use-feature-toggle';
 

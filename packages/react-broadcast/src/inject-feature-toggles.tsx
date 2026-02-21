@@ -4,7 +4,7 @@ import {
   wrapDisplayName,
 } from '@flopflip/react';
 import type { TFlagName, TFlags } from '@flopflip/types';
-import type React from 'react';
+import React from 'react';
 
 import { useFlagVariations } from './use-flag-variations';
 

@@ -1,19 +1,19 @@
 {
-  "private": true,
   "name": "@flopflip/test-utils",
   "version": "15.1.7",
+  "private": true,
   "description": "Test utils for flipflop",
-  "main": "index.js",
-  "author": "Tobias Deekens <nerd@tdeekens.name>",
-  "bugs": {
-    "url": "https://github.com/tdeekens/flopflip/issues"
-  },
-  "homepage": "https://github.com/tdeekens/flopflip#readme",
   "keywords": [
     "feature-flags",
     "feature-toggles",
     "types"
   ],
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
+  },
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "main": "index.js",
   "dependencies": {
     "@babel/runtime": "7.28.6",
     "@flopflip/memory-adapter": "workspace:*",

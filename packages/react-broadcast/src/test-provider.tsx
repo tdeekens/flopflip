@@ -8,7 +8,7 @@ import {
   type TFlags,
   type TReconfigureAdapter,
 } from '@flopflip/types';
-import type React from 'react';
+import React from 'react';
 
 import { createIntialFlagsContext, FlagsContext } from './flags-context';
 
