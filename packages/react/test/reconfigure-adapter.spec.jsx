@@ -18,7 +18,7 @@ function TestComponent({ reconfiguration, adapterContext }) {
       ...reconfiguration.user,
       count,
     }),
-    [count, reconfiguration.user]
+    [count, reconfiguration.user],
   );
 
   return (
@@ -54,14 +54,14 @@ describe('with children', () => {
     const adapterContext = createAdapterContext(
       ['memory'],
       vi.fn(),
-      AdapterStates.UNCONFIGURED
+      AdapterStates.UNCONFIGURED,
     );
     const reconfiguration = createReconfiguration();
     render(
       <TestComponent
         adapterContext={adapterContext}
         reconfiguration={reconfiguration}
-      />
+      />,
     );
 
     expect(screen.getByText('Children')).toBeInTheDocument();
@@ -73,7 +73,7 @@ describe('when mounted', () => {
     const adapterContext = createAdapterContext(
       ['memory'],
       vi.fn(),
-      AdapterStates.UNCONFIGURED
+      AdapterStates.UNCONFIGURED,
     );
     const reconfiguration = createReconfiguration();
 
@@ -81,7 +81,7 @@ describe('when mounted', () => {
       <TestComponent
         adapterContext={adapterContext}
         reconfiguration={reconfiguration}
-      />
+      />,
     );
 
     expect(adapterContext.reconfigure).toHaveBeenCalledWith(
@@ -90,7 +90,7 @@ describe('when mounted', () => {
       },
       {
         shouldOverwrite: reconfiguration.shouldOverwrite,
-      }
+      },
     );
   });
 });
@@ -101,7 +101,7 @@ describe('when updated', () => {
       const adapterContext = createAdapterContext(
         ['memory'],
         vi.fn(),
-        AdapterStates.UNCONFIGURED
+        AdapterStates.UNCONFIGURED,
       );
       const reconfiguration = createReconfiguration();
 
@@ -109,7 +109,7 @@ describe('when updated', () => {
         <TestComponent
           adapterContext={adapterContext}
           reconfiguration={reconfiguration}
-        />
+        />,
       );
 
       fireEvent.click(screen.queryByText(/Reconfigure without changes/i));
@@ -123,7 +123,7 @@ describe('when updated', () => {
       const adapterContext = createAdapterContext(
         ['memory'],
         vi.fn(),
-        AdapterStates.UNCONFIGURED
+        AdapterStates.UNCONFIGURED,
       );
       const reconfiguration = createReconfiguration();
 
@@ -131,7 +131,7 @@ describe('when updated', () => {
         <TestComponent
           adapterContext={adapterContext}
           reconfiguration={reconfiguration}
-        />
+        />,
       );
 
       fireEvent.click(screen.queryByText(/Reconfigure with changes/i));
@@ -143,7 +143,7 @@ describe('when updated', () => {
         },
         {
           shouldOverwrite: reconfiguration.shouldOverwrite,
-        }
+        },
       );
     });
   });

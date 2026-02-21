@@ -35,7 +35,7 @@ const render = () => {
       <Configure {...props}>
         <TestComponent />
       </Configure>
-    </Provider>
+    </Provider>,
   );
 
   const waitUntilConfigured = () => screen.findByText(/Is configured: Yes/i);

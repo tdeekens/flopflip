@@ -12,7 +12,7 @@ function useAdapterSubscription(adapter: TAdapter) {
    *    is a singleton).
    */
   const useAdapterSubscriptionStatusRef = useRef(
-    AdapterSubscriptionStatus.Subscribed
+    AdapterSubscriptionStatus.Subscribed,
   );
 
   const { subscribe, unsubscribe } = adapter;
@@ -35,12 +35,12 @@ function useAdapterSubscription(adapter: TAdapter) {
     };
   }, [subscribe, unsubscribe]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  // oxlint-disable-next-line react-hooks/exhaustive-deps -- false positive
   return useCallback(
     (demandedAdapterSubscriptionStatus: AdapterSubscriptionStatus) =>
       useAdapterSubscriptionStatusRef.current ===
       demandedAdapterSubscriptionStatus,
-    [useAdapterSubscriptionStatusRef]
+    [useAdapterSubscriptionStatusRef],
   );
 }
 

@@ -2,14 +2,28 @@
   "name": "@flopflip/types",
   "version": "15.1.7",
   "description": "Type definitions for flipflop",
-  "sideEffects": false,
-  "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    }
+  "keywords": [
+    "feature-flags",
+    "feature-toggles",
+    "types"
+  ],
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
   },
+  "license": "MIT",
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tdeekens/flopflip.git",
+    "directory": "packages/types"
+  },
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
+  "type": "module",
+  "sideEffects": false,
   "main": "./dist/index.js",
   "typesVersions": {
     "*": {
@@ -19,6 +33,15 @@
       ]
     }
   },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "rimraf dist && tsup",
     "check-types": "tsc --noEmit",
@@ -26,29 +49,6 @@
     "test:watch": "exit 0",
     "dev": "tsup --watch --clean=false"
   },
-  "files": [
-    "readme.md",
-    "dist/**"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tdeekens/flopflip.git",
-    "directory": "packages/types"
-  },
-  "author": "Tobias Deekens <nerd@tdeekens.name>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/tdeekens/flopflip/issues"
-  },
-  "homepage": "https://github.com/tdeekens/flopflip#readme",
-  "keywords": [
-    "feature-flags",
-    "feature-toggles",
-    "types"
-  ],
   "dependencies": {
     "launchdarkly-js-client-sdk": "3.9.0"
   },

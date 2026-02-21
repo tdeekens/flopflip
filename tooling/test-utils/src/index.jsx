@@ -44,7 +44,7 @@ const [
 ] = buildQueries(
   queryByAllByFlagName,
   getMultipleFlagNamesError,
-  getMissingFlagNameError
+  getMissingFlagNameError,
 );
 
 const flagNameQueries = {
@@ -103,7 +103,7 @@ function FlagsToComponent({ propKey, ...remainingProps }) {
           <li key={flagName} data-flag-name={flagName}>
             {String(flagVariation)}
           </li>
-        )
+        ),
       )}
     </ul>
   );
@@ -137,7 +137,7 @@ const renderWithAdapter = (
     adapterArgs,
     flags,
     ...rtlOptions
-  }
+  },
 ) => {
   const defaultedAdapterArgs = mergeOptional(defaultAdapterArgs, adapterArgs);
   const defaultedFlags = mergeOptional(defaultFlags, flags);
@@ -158,7 +158,7 @@ const renderWithAdapter = (
           <ToggledComponent flagName={INTERNAL_FLAG_NAME} />
           {ui}
         </>
-      </ConfigureFlopFlip>
+      </ConfigureFlopFlip>,
     ),
     {
       ...rtlOptions,
@@ -166,7 +166,7 @@ const renderWithAdapter = (
         ...queries,
         ...flagNameQueries,
       },
-    }
+    },
   );
 
   return {

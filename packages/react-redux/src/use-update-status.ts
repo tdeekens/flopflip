@@ -14,7 +14,7 @@ const useUpdateStatus = (): TAdapterEventHandlers['onStatusStateChange'] => {
   return useCallback(
     (statusChange: TAdapterStatusChange) =>
       dispatch(updateStatus(statusChange, Object.keys(allAdapterIdentifiers))),
-    [dispatch]
+    [dispatch],
   );
 };
 

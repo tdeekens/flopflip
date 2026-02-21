@@ -2,6 +2,7 @@ import { AdapterConfigurationStatus } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { adapter } from '../src/adapter';
 
 vi.mock('tiny-warning');
@@ -29,7 +30,7 @@ describe('when configuring', () => {
 
   it('should indicate that the adapter is not configured', () => {
     expect(
-      adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+      adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured),
     ).toBe(false);
   });
 
@@ -49,7 +50,7 @@ describe('when configuring', () => {
     beforeEach(async () => {
       configurationResult = await adapter.configure(
         adapterArgs,
-        adapterEventHandlers
+        adapterEventHandlers,
       );
     });
 
@@ -57,7 +58,7 @@ describe('when configuring', () => {
       expect(configurationResult).toEqual(
         expect.objectContaining({
           initializationStatus: 0,
-        })
+        }),
       );
     });
 
@@ -68,13 +69,13 @@ describe('when configuring', () => {
           status: {
             configurationStatus: AdapterConfigurationStatus.Configuring,
           },
-        })
+        }),
       );
     });
 
     it('should indicate that the adapter is configured', () => {
       expect(
-        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured),
       ).toBe(true);
     });
 
@@ -93,7 +94,7 @@ describe('when configuring', () => {
           status: {
             configurationStatus: AdapterConfigurationStatus.Configured,
           },
-        })
+        }),
       );
     });
 
@@ -172,7 +173,7 @@ describe('when configuring', () => {
         expect(configurationResult).toEqual(
           expect.objectContaining({
             initializationStatus: 0,
-          })
+          }),
         );
       });
 
@@ -225,15 +226,15 @@ describe('when configuring', () => {
             status: {
               configurationStatus: AdapterConfigurationStatus.Configuring,
             },
-          })
+          }),
         );
       });
 
       it('should indicate that the adapter is not configured', () => {
         expect(
           adapter.getIsConfigurationStatus(
-            AdapterConfigurationStatus.Configured
-          )
+            AdapterConfigurationStatus.Configured,
+          ),
         ).toBe(false);
       });
 
@@ -244,7 +245,7 @@ describe('when configuring', () => {
             status: {
               configurationStatus: AdapterConfigurationStatus.Configuring,
             },
-          })
+          }),
         );
       });
     });

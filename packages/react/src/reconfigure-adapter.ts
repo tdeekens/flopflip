@@ -1,6 +1,6 @@
 import type { TUser } from '@flopflip/types';
-// biome-ignore lint/style/useImportType: false positive
-import React, { Children, useEffect } from 'react';
+import type React from 'react';
+import { Children, useEffect } from 'react';
 
 import { useAdapterContext } from './use-adapter-context';
 
@@ -24,7 +24,7 @@ function ReconfigureAdapter<TAdditionalUserProperties>({
       },
       {
         shouldOverwrite,
-      }
+      },
     );
   }, [user, shouldOverwrite, adapterContext]);
 

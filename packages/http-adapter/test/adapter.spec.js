@@ -3,6 +3,7 @@ import { AdapterConfigurationStatus } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { adapter } from '../src/adapter';
 
 vi.mock('tiny-warning');
@@ -17,7 +18,7 @@ describe('when configuring', () => {
   describe('when not configured', () => {
     it('should indicate that the adapter is not configured', () => {
       expect(
-        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured),
       ).toBe(false);
     });
 
@@ -51,7 +52,7 @@ describe('when configured', () => {
       vi.useFakeTimers();
       configurationResult = await adapter.configure(
         adapterArgs,
-        adapterEventHandlers
+        adapterEventHandlers,
       );
     });
 
@@ -59,7 +60,7 @@ describe('when configured', () => {
       expect(configurationResult).toEqual(
         expect.objectContaining({
           initializationStatus: 0,
-        })
+        }),
       );
     });
 
@@ -74,7 +75,7 @@ describe('when configured', () => {
 
     it('should indicate that the adapter is configured', () => {
       expect(
-        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured),
       ).toBe(true);
     });
 
@@ -117,13 +118,13 @@ describe('when configured', () => {
 
     beforeEach(async () => {
       sessionStorage.getItem.mockReturnValueOnce(
-        JSON.stringify({ cached: true })
+        JSON.stringify({ cached: true }),
       );
       adapterEventHandlers = createAdapterEventHandlers();
       vi.useFakeTimers();
       configurationResult = await adapter.configure(
         adapterArgs,
-        adapterEventHandlers
+        adapterEventHandlers,
       );
     });
 
@@ -135,13 +136,13 @@ describe('when configured', () => {
       expect(configurationResult).toEqual(
         expect.objectContaining({
           initializationStatus: 0,
-        })
+        }),
       );
     });
 
     it('should restore cached flags', () => {
       expect(sessionStorage.getItem).toHaveBeenCalledWith(
-        `@flopflip/http-adapter/${encodeCacheContext(adapterArgs.user)}/flags`
+        `@flopflip/http-adapter/${encodeCacheContext(adapterArgs.user)}/flags`,
       );
 
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
@@ -156,9 +157,9 @@ describe('when configured', () => {
       expect(
         JSON.parse(
           sessionStorage.getItem(
-            `@flopflip/http-adapter/${encodeCacheContext(adapterArgs.user)}/flags`
-          )
-        )
+            `@flopflip/http-adapter/${encodeCacheContext(adapterArgs.user)}/flags`,
+          ),
+        ),
       ).toStrictEqual({ disabled: false, enabled: true });
     });
 
@@ -175,13 +176,13 @@ describe('when configured', () => {
     describe('with lazy cache mode', () => {
       beforeEach(async () => {
         sessionStorage.getItem.mockReturnValueOnce(
-          JSON.stringify({ cached: true })
+          JSON.stringify({ cached: true }),
         );
         adapterEventHandlers = createAdapterEventHandlers();
         vi.useFakeTimers();
         configurationResult = await adapter.configure(
           adapterArgs,
-          adapterEventHandlers
+          adapterEventHandlers,
         );
       });
 
@@ -281,7 +282,7 @@ describe('when configured', () => {
         expect(configurationResult).toEqual(
           expect.objectContaining({
             initializationStatus: 0,
-          })
+          }),
         );
       });
 
@@ -309,7 +310,7 @@ describe('when configured', () => {
 
       it('should reset cache', () => {
         expect(sessionStorage.removeItem).toHaveBeenCalledWith(
-          `@flopflip/http-adapter/${encodeCacheContext(adapterArgs.user)}/flags`
+          `@flopflip/http-adapter/${encodeCacheContext(adapterArgs.user)}/flags`,
         );
       });
     });
@@ -331,7 +332,7 @@ describe('when configured', () => {
         expect(configurationResult).toEqual(
           expect.objectContaining({
             initializationStatus: 0,
-          })
+          }),
         );
       });
 
@@ -359,7 +360,7 @@ describe('when configured', () => {
 
       it('should not reset cache', () => {
         expect(sessionStorage.removeItem).not.toHaveBeenCalledWith(
-          '@flopflip/http-adapter/flags'
+          '@flopflip/http-adapter/flags',
         );
       });
     });
@@ -404,7 +405,7 @@ describe('when configured', () => {
 
     it('should indicate that the adapter is not configured', () => {
       expect(
-        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured),
       ).toBe(false);
     });
 

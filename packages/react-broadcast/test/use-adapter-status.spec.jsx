@@ -29,6 +29,7 @@ it('should indicate the adapter not configured yet', async () => {
   await waitUntilConfigured();
 });
 
+// oxlint-disable-next-line jest/expect-expect -- assertions via screen.findByText which throws on failure
 it('should indicate the adapter is configured', async () => {
   const { waitUntilConfigured } = render(<TestComponent />);
 

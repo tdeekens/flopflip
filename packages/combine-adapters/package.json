@@ -2,15 +2,30 @@
   "name": "@flopflip/combine-adapters",
   "version": "15.1.7",
   "description": "An adapter which combines other adapters for flipflop",
-  "sideEffects": false,
-  "type": "module",
-  "main": "./dist/index.js",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    }
+  "keywords": [
+    "client",
+    "feature-flags",
+    "feature-toggles",
+    "memory"
+  ],
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
   },
+  "license": "MIT",
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tdeekens/flopflip.git",
+    "directory": "packages/combine-adapters"
+  },
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
   "typesVersions": {
     "*": {
       "*": [
@@ -19,10 +34,15 @@
       ]
     }
   },
-  "files": [
-    "readme.md",
-    "dist/**"
-  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "rimraf dist && tsup",
     "check-types": "tsc --noEmit",
@@ -30,26 +50,6 @@
     "test:watch": "vitest",
     "dev": "tsup --watch --clean=false"
   },
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tdeekens/flopflip.git",
-    "directory": "packages/combine-adapters"
-  },
-  "author": "Tobias Deekens <nerd@tdeekens.name>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/tdeekens/flopflip/issues"
-  },
-  "homepage": "https://github.com/tdeekens/flopflip#readme",
-  "keywords": [
-    "feature-flags",
-    "feature-toggles",
-    "memory",
-    "client"
-  ],
   "dependencies": {
     "@babel/runtime": "7.28.6",
     "@flopflip/adapter-utilities": "workspace:*",

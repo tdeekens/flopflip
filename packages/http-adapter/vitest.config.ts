@@ -1,4 +1,5 @@
 import { defineProject, mergeConfig } from 'vitest/config';
+
 import configShared from '../../vitest.shared.ts';
 
 export default mergeConfig(
@@ -7,5 +8,5 @@ export default mergeConfig(
     test: {
       environment: 'jsdom',
     },
-  })
+  }),
 );

@@ -20,9 +20,9 @@ const configureAdapter = createAction<{
 
 function createFlopFlipEnhancer(
   adapter: TAdapter,
-  adapterArgs: TAdapterArgs
+  adapterArgs: TAdapterArgs,
 ): <StoreState extends TState>(
-  next: StoreEnhancerStoreCreator<StoreState>
+  next: StoreEnhancerStoreCreator<StoreState>,
 ) => (reducer: Reducer<StoreState>, preloadedState?: StoreState) => Store {
   return (next) =>
     (...args) => {
@@ -38,7 +38,7 @@ function createFlopFlipEnhancer(
         },
         onStatusStateChange: (statusChange: TAdapterStatusChange) => {
           store.dispatch(
-            updateStatus(statusChange, Object.keys(allAdapterIdentifiers))
+            updateStatus(statusChange, Object.keys(allAdapterIdentifiers)),
           );
         },
       });

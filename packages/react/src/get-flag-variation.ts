@@ -13,13 +13,13 @@ import { isNil } from './is-nil';
 const getFlagVariation = (
   allFlags: TFlagsContext,
   adapterIdentifiers: TAdapterIdentifiers[],
-  flagName: TFlagName = DEFAULT_FLAG_PROP_KEY
+  flagName: TFlagName = DEFAULT_FLAG_PROP_KEY,
 ): TFlagVariation => {
   const normalizedFlagName = getNormalizedFlagName(flagName);
 
   warning(
     normalizedFlagName === flagName,
-    '@flopflip/react: passed flag name does not seem to be normalized which may result in unexpected toggling. Please refer to our readme for more information: https://github.com/tdeekens/flopflip#flag-normalization'
+    '@flopflip/react: passed flag name does not seem to be normalized which may result in unexpected toggling. Please refer to our readme for more information: https://github.com/tdeekens/flopflip#flag-normalization',
   );
 
   for (const adapterInterfaceIdentifier of adapterIdentifiers) {

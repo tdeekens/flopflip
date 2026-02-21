@@ -37,7 +37,7 @@ describe('injectFeatureToggles', () => {
 
       const { waitUntilConfigured, queryByFlagName } = render(
         store,
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
@@ -58,7 +58,7 @@ describe('injectFeatureToggles', () => {
 
       const { waitUntilConfigured, queryByFlagName } = render(
         store,
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
@@ -99,12 +99,12 @@ describe('injectFeatureToggles', () => {
       });
       const TestComponent = injectFeatureToggles(
         ['disabledFeature', 'enabledFeature'],
-        'onOffs'
+        'onOffs',
       )(FlagsToComponentWithPropKey);
 
       const { waitUntilConfigured, queryByFlagName } = render(
         store,
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
@@ -120,12 +120,12 @@ describe('injectFeatureToggles', () => {
       });
       const TestComponent = injectFeatureToggles(
         ['disabledFeature', 'enabledFeature'],
-        'onOffs'
+        'onOffs',
       )(FlagsToComponentWithPropKey);
 
       const { waitUntilConfigured, queryByFlagName } = render(
         store,
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();

@@ -21,7 +21,7 @@ describe('when feature disabled', () => {
 
       expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
-        'disabled'
+        'disabled',
       );
     });
 
@@ -41,7 +41,7 @@ describe('when feature disabled', () => {
 
       expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
         'data-flag-status',
-        'enabled'
+        'enabled',
       );
     });
   });
@@ -82,7 +82,7 @@ describe('when feature enabled', () => {
 
         expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
           'data-flag-status',
-          'disabled'
+          'disabled',
         );
       });
 
@@ -102,7 +102,7 @@ describe('when feature enabled', () => {
 
         expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
           'data-flag-status',
-          'enabled'
+          'enabled',
         );
       });
     });
@@ -152,7 +152,7 @@ describe('when feature enabled', () => {
 
       expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
         'data-flag-status',
-        'disabled'
+        'disabled',
       );
     });
 
@@ -171,7 +171,7 @@ describe('when feature enabled', () => {
 
       expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
-        'enabled'
+        'enabled',
       );
     });
   });
@@ -200,7 +200,7 @@ describe('when feature enabled', () => {
 
       expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
-        'enabled'
+        'enabled',
       );
     });
   });

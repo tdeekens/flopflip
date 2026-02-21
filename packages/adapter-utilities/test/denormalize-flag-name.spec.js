@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { denormalizeFlagName } from '../src/denormalize-flag-name';
 
 describe('with camel case', () => {

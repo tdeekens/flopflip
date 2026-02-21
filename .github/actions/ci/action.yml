@@ -14,8 +14,8 @@ runs:
     - name: Setup Node.js
       uses: actions/setup-node@v6
       with:
-        node-version-file: ".nvmrc"
-        cache: "pnpm"
+        node-version-file: '.nvmrc'
+        cache: 'pnpm'
 
     - name: Install
       run: pnpm install

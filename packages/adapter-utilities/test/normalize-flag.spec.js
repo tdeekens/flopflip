@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { normalizeFlag } from '../src/normalize-flag';
 
 describe('with dashes', () => {

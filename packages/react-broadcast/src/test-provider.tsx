@@ -8,8 +8,7 @@ import {
   type TFlags,
   type TReconfigureAdapter,
 } from '@flopflip/types';
-// biome-ignore lint/style/useImportType: false positive
-import React from 'react';
+import type React from 'react';
 
 import { createIntialFlagsContext, FlagsContext } from './flags-context';
 
@@ -26,17 +25,15 @@ const defaultProps: Pick<
   'adapterIdentifiers' | 'reconfigure' | 'status'
 > = {
   adapterIdentifiers: ['test'],
-  status: {
-    ...Object.fromEntries(
-      Object.values(adapterIdentifiers).map((adapterInterfaceIdentifier) => [
-        adapterInterfaceIdentifier,
-        {
-          subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
-          configurationStatus: AdapterConfigurationStatus.Configured,
-        },
-      ])
-    ),
-  },
+  status: Object.fromEntries(
+    Object.values(adapterIdentifiers).map((adapterInterfaceIdentifier) => [
+      adapterInterfaceIdentifier,
+      {
+        subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
+        configurationStatus: AdapterConfigurationStatus.Configured,
+      },
+    ]),
+  ),
 };
 
 function TestProvider({
@@ -49,12 +46,12 @@ function TestProvider({
   const adapterContextValue = createAdapterContext(
     adapterIdentifiers,
     reconfigure,
-    status
+    status,
   );
   const flagsContextValue = createIntialFlagsContext(
     // @ts-expect-error Can not remember. Sorry to myself.
     adapterIdentifiers,
-    flags
+    flags,
   );
 
   return (

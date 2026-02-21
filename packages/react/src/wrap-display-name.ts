@@ -2,7 +2,7 @@ import type React from 'react';
 
 function wrapDisplayName(
   BaseComponent: React.ComponentType<any>,
-  hocName: string
+  hocName: string,
 ) {
   const previousDisplayName = BaseComponent.displayName ?? BaseComponent.name;
 

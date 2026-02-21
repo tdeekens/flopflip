@@ -82,10 +82,10 @@ export type TGraphQlAdapterArgs<
   pollingIntervalMs?: number;
   getQueryVariables?: (adapterArgs: TGraphQlAdapterArgs) => unknown;
   getRequestHeaders?: (
-    adapterArgs: TGraphQlAdapterArgs
+    adapterArgs: TGraphQlAdapterArgs,
   ) => Record<string, string>;
   parseFlags?: <TFetchedFlags = unknown, TParsedFlags = TFlags>(
-    fetchedFlags: TFetchedFlags
+    fetchedFlags: TFetchedFlags,
   ) => TParsedFlags;
 };
 export type THttpAdapterArgs<
@@ -94,7 +94,7 @@ export type THttpAdapterArgs<
   execute: <
     TPassedAdapterArgs extends TBaseAdapterArgs<TAdditionalUserProperties>,
   >(
-    adapterArgs: TPassedAdapterArgs
+    adapterArgs: TPassedAdapterArgs,
   ) => Promise<any>;
   pollingIntervalMs?: number;
 };
@@ -165,7 +165,7 @@ export type TUpdateFlagsOptions = {
 };
 export type TFlagsUpdateFunction = (
   flags: TFlags,
-  options?: TUpdateFlagsOptions
+  options?: TUpdateFlagsOptions,
 ) => void;
 
 export interface TAdapterInterface<Args extends TAdapterArgs> {
@@ -175,17 +175,17 @@ export interface TAdapterInterface<Args extends TAdapterArgs> {
   effectIds?: TAdapterIdentifiers[];
   configure: (
     adapterArgs: Args,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) => Promise<TAdapterConfiguration>;
   reconfigure: (
     adapterArgs: Args,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) => Promise<TAdapterConfiguration>;
   getIsConfigurationStatus: (
-    configurationStatus: AdapterConfigurationStatus
+    configurationStatus: AdapterConfigurationStatus,
   ) => boolean;
   setConfigurationStatus?: (
-    nextConfigurationStatus: AdapterConfigurationStatus
+    nextConfigurationStatus: AdapterConfigurationStatus,
   ) => void;
   waitUntilConfigured?: () => Promise<unknown>;
   reset?: () => void;
@@ -196,99 +196,94 @@ export interface TAdapterInterface<Args extends TAdapterArgs> {
   getUser?: () => TUser | undefined;
 }
 
-export interface TLaunchDarklyAdapterInterface
-  extends TAdapterInterface<TLaunchDarklyAdapterArgs> {
+export interface TLaunchDarklyAdapterInterface extends TAdapterInterface<TLaunchDarklyAdapterArgs> {
   id: typeof adapterIdentifiers.launchdarkly;
   configure: (
     adapterArgs: TLaunchDarklyAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) => Promise<TAdapterConfiguration>;
   reconfigure: (
     adapterArgs: TLaunchDarklyAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) => Promise<TAdapterConfiguration>;
   getIsConfigurationStatus: (
-    adapterConfigurationStatus: AdapterConfigurationStatus
+    adapterConfigurationStatus: AdapterConfigurationStatus,
   ) => boolean;
   getClient: () => TLDClient | undefined;
   getFlag: (flagName: TFlagName) => TFlagVariation | undefined;
   updateClientContext: (
-    updatedContextProps: TLaunchDarklyAdapterArgs['context']
+    updatedContextProps: TLaunchDarklyAdapterArgs['context'],
   ) => Promise<unknown>;
   unsubscribe: () => void;
   subscribe: () => void;
 }
 
-export interface TLocalStorageAdapterInterface
-  extends TAdapterInterface<TLocalStorageAdapterArgs> {
+export interface TLocalStorageAdapterInterface extends TAdapterInterface<TLocalStorageAdapterArgs> {
   id: typeof adapterIdentifiers.localstorage;
   configure: (
     adapterArgs: TLocalStorageAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) => Promise<TAdapterConfiguration>;
   reconfigure: (
     adapterArgs: TLocalStorageAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) => Promise<TAdapterConfiguration>;
   getIsConfigurationStatus: (
-    adapterConfigurationStatus: AdapterConfigurationStatus
+    adapterConfigurationStatus: AdapterConfigurationStatus,
   ) => boolean;
   waitUntilConfigured: () => Promise<unknown>;
   unsubscribe: () => void;
   subscribe: () => void;
 }
 
-export interface TGraphQlAdapterInterface
-  extends TAdapterInterface<TGraphQlAdapterArgs> {
+export interface TGraphQlAdapterInterface extends TAdapterInterface<TGraphQlAdapterArgs> {
   id: typeof adapterIdentifiers.graphql;
   configure: (
     adapterArgs: TGraphQlAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) => Promise<TAdapterConfiguration>;
   reconfigure: (
     adapterArgs: TGraphQlAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) => Promise<TAdapterConfiguration>;
   getIsConfigurationStatus: (
-    adapterConfigurationStatus: AdapterConfigurationStatus
+    adapterConfigurationStatus: AdapterConfigurationStatus,
   ) => boolean;
   waitUntilConfigured: () => Promise<unknown>;
   unsubscribe: () => void;
   subscribe: () => void;
 }
 
-export interface THttpAdapterInterface
-  extends TAdapterInterface<THttpAdapterArgs> {
+export interface THttpAdapterInterface extends TAdapterInterface<THttpAdapterArgs> {
   id: typeof adapterIdentifiers.http;
   configure: (
     adapterArgs: THttpAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) => Promise<TAdapterConfiguration>;
   reconfigure: (
     adapterArgs: THttpAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) => Promise<TAdapterConfiguration>;
   getIsConfigurationStatus: (
-    adapterConfigurationStatus: AdapterConfigurationStatus
+    adapterConfigurationStatus: AdapterConfigurationStatus,
   ) => boolean;
   waitUntilConfigured: () => Promise<unknown>;
   unsubscribe: () => void;
   subscribe: () => void;
 }
 
-export interface TMemoryAdapterInterface
-  extends TAdapterInterface<TMemoryAdapterArgs> {
+export interface TMemoryAdapterInterface extends TAdapterInterface<TMemoryAdapterArgs> {
   id: typeof adapterIdentifiers.memory;
   configure: (
     adapterArgs: TMemoryAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) => Promise<TAdapterConfiguration>;
   reconfigure: (
     adapterArgs: TMemoryAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) => Promise<TAdapterConfiguration>;
   getIsConfigurationStatus: (
-    adapterConfigurationStatus: AdapterConfigurationStatus
+    adapterConfigurationStatus: AdapterConfigurationStatus,
   ) => boolean;
   waitUntilConfigured: () => Promise<unknown>;
   reset: () => void;
@@ -297,23 +292,22 @@ export interface TMemoryAdapterInterface
   subscribe: () => void;
 }
 
-export interface TCombinedAdapterInterface
-  extends TAdapterInterface<TCombinedAdapterArgs> {
+export interface TCombinedAdapterInterface extends TAdapterInterface<TCombinedAdapterArgs> {
   id: typeof adapterIdentifiers.combined;
   effectIds?: TAdapterIdentifiers[];
   combine: <TAdapterInstance extends TAdapter>(
-    adapters: TAdapterInstance[]
+    adapters: TAdapterInstance[],
   ) => void;
   configure: (
     adapterArgs: TCombinedAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) => Promise<TAdapterConfiguration>;
   reconfigure: (
     adapterArgs: TCombinedAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) => Promise<TAdapterConfiguration>;
   getIsConfigurationStatus: (
-    adapterConfigurationStatus: AdapterConfigurationStatus
+    adapterConfigurationStatus: AdapterConfigurationStatus,
   ) => boolean;
   waitUntilConfigured: () => Promise<unknown>;
   reset: () => void;
@@ -322,19 +316,18 @@ export interface TCombinedAdapterInterface
   subscribe: () => void;
 }
 
-export interface TSplitioAdapterInterface
-  extends TAdapterInterface<TSplitioAdapterArgs> {
+export interface TSplitioAdapterInterface extends TAdapterInterface<TSplitioAdapterArgs> {
   id: typeof adapterIdentifiers.splitio;
   configure: (
     adapterArgs: TSplitioAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) => Promise<TAdapterConfiguration>;
   reconfigure: (
     adapterArgs: TSplitioAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) => Promise<TAdapterConfiguration>;
   getIsConfigurationStatus: (
-    adapterConfigurationStatus: AdapterConfigurationStatus
+    adapterConfigurationStatus: AdapterConfigurationStatus,
   ) => boolean;
   unsubscribe: () => void;
   subscribe: () => void;
@@ -392,14 +385,14 @@ export type TConfigureAdapterChildrenAsFunctionArgs = {
   isAdapterConfigured: boolean;
 };
 export type TConfigureAdapterChildrenAsFunction = (
-  args: TConfigureAdapterChildrenAsFunctionArgs
+  args: TConfigureAdapterChildrenAsFunctionArgs,
 ) => React.ReactNode;
 export type TConfigureAdapterChildren =
   | TConfigureAdapterChildrenAsFunction
   | React.ReactNode;
 export type TReconfigureAdapter = (
   adapterArgs: TAdapterArgs,
-  options: TAdapterReconfigurationOptions
+  options: TAdapterReconfigurationOptions,
 ) => void;
 export type TAdapterContext = {
   adapterEffectIdentifiers: TAdapterIdentifiers[];

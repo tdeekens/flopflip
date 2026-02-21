@@ -4,7 +4,7 @@ import type { TFlagName, TFlagVariation } from '@flopflip/types';
 import { useFlagsContext } from './use-flags-context';
 
 function useFlagVariations(
-  flagNames: Array<TFlagName | undefined>
+  flagNames: (TFlagName | undefined)[],
 ): TFlagVariation[] {
   const adapterContext = useAdapterContext();
   const flagsContext = useFlagsContext();
@@ -13,8 +13,8 @@ function useFlagVariations(
     getFlagVariation(
       flagsContext,
       adapterContext.adapterEffectIdentifiers,
-      requestedVariation
-    )
+      requestedVariation,
+    ),
   );
 
   return flagVariations;

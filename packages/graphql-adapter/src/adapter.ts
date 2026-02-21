@@ -85,7 +85,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
   };
 
   readonly #fetchFlags = async (
-    adapterArgs: TGraphQlAdapterArgs
+    adapterArgs: TGraphQlAdapterArgs,
   ): Promise<TFlags> => {
     const fetcher = adapterArgs.fetcher ?? fetch;
 
@@ -93,7 +93,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        ...(adapterArgs.getRequestHeaders?.(adapterArgs) ?? {}),
+        ...adapterArgs.getRequestHeaders?.(adapterArgs),
       },
       body: JSON.stringify({
         query: adapterArgs.query,
@@ -125,7 +125,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
             const cache = await getCache(
               adapterArgs.cacheIdentifier,
               adapterIdentifiers.graphql,
-              { key: this.#adapterState.user?.key }
+              { key: this.#adapterState.user?.key },
             );
 
             cache.set(nextFlags);
@@ -147,12 +147,12 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
 
   updateFlags: TFlagsUpdateFunction = (flags, options) => {
     const isAdapterConfigured = this.getIsConfigurationStatus(
-      AdapterConfigurationStatus.Configured
+      AdapterConfigurationStatus.Configured,
     );
 
     warning(
       isAdapterConfigured,
-      '@flopflip/graphql-adapter: adapter not configured. Flags can not be updated before.'
+      '@flopflip/graphql-adapter: adapter not configured. Flags can not be updated before.',
     );
 
     if (!isAdapterConfigured) {
@@ -165,7 +165,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
       (updatedFlags, [flagName, flagValue]) => {
         const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
           flagName,
-          flagValue
+          flagValue,
         );
 
         if (this.#getIsFlagLocked(normalizedFlagName)) {
@@ -183,7 +183,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
 
         return updated;
       },
-      {}
+      {},
     );
 
     const nextFlags: TFlags = {
@@ -197,7 +197,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
 
   async configure(
     adapterArgs: TGraphQlAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) {
     const handleFlagsChange = (nextFlags: TFlagsChange['flags']) => {
       if (this.#getIsAdapterUnsubscribed()) {
@@ -235,7 +235,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
         const cache = await getCache(
           adapterArgs.cacheIdentifier,
           adapterIdentifiers.graphql,
-          { key: this.#adapterState.user?.key }
+          { key: this.#adapterState.user?.key },
         );
 
         cachedFlags = cache.get();
@@ -244,7 +244,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
           this.#adapterState.flags = cachedFlags;
           this.#adapterState.emitter.emit(
             'flagsStateChange',
-            cachedFlags as TFlags
+            cachedFlags as TFlags,
           );
         }
       }
@@ -259,7 +259,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
         const cache = await getCache(
           adapterArgs.cacheIdentifier,
           adapterIdentifiers.graphql,
-          { key: this.#adapterState.user?.key }
+          { key: this.#adapterState.user?.key },
         );
 
         cache.set(flags);
@@ -281,13 +281,13 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
 
   async reconfigure(
     adapterArgs: TGraphQlAdapterArgs,
-    _adapterEventHandlers: TAdapterEventHandlers
+    _adapterEventHandlers: TAdapterEventHandlers,
   ) {
     if (!this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)) {
       return Promise.reject(
         new Error(
-          '@flopflip/graphql-adapter: please configure adapter before reconfiguring.'
-        )
+          '@flopflip/graphql-adapter: please configure adapter before reconfiguring.',
+        ),
       );
     }
 
@@ -297,7 +297,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
       const cache = await getCache(
         adapterArgs.cacheIdentifier,
         adapterIdentifiers.graphql,
-        { key: this.#adapterState.user?.key }
+        { key: this.#adapterState.user?.key },
       );
 
       cache.unset();
@@ -331,7 +331,7 @@ class GraphQlAdapter implements TGraphQlAdapterInterface {
       } else {
         this.#adapterState.emitter.on(
           this.#__internalConfiguredStatusChange__,
-          resolve
+          resolve,
         );
       }
     });

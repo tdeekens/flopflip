@@ -9,14 +9,14 @@ function useAllFeatureToggles(): TFlags {
   const allFlags = useSelector(selectFlags());
   const reversedAdapterEffectIdentifiers = [
     ...adapterContext.adapterEffectIdentifiers,
-  ].reverse();
+  ].toReversed();
 
   return reversedAdapterEffectIdentifiers.reduce<TFlags>(
     (_allFlags, adapterIdentifier) => ({
       ..._allFlags,
       ...allFlags[adapterIdentifier],
     }),
-    {}
+    {},
   );
 }
 

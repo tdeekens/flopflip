@@ -3,6 +3,7 @@ import { AdapterConfigurationStatus } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 import { initialize as initializeLaunchDarklyClient } from 'launchdarkly-js-client-sdk';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { adapter } from '../src/adapter';
 
 vi.mock(import('launchdarkly-js-client-sdk'), async (importOriginal) => {
@@ -50,7 +51,7 @@ describe('when configuring', () => {
 
   it('should indicate that the adapter is not configured', () => {
     expect(
-      adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+      adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured),
     ).toBe(false);
   });
 
@@ -61,7 +62,7 @@ describe('when configuring', () => {
   describe('when reconfiguring before configured', () => {
     it('should reject reconfiguration', () =>
       expect(adapter.reconfigure({ context: userWithKey })).rejects.toEqual(
-        expect.any(Error)
+        expect.any(Error),
       ));
   });
 
@@ -93,7 +94,7 @@ describe('when configuring', () => {
         {
           onStatusStateChange,
           onFlagsStateChange,
-        }
+        },
       );
     });
 
@@ -101,7 +102,7 @@ describe('when configuring', () => {
       expect(initializeLaunchDarklyClient).toHaveBeenCalledWith(
         clientSideId,
         expect.objectContaining(userWithKey),
-        expect.any(Object)
+        expect.any(Object),
       );
     });
 
@@ -109,7 +110,7 @@ describe('when configuring', () => {
       expect(initializeLaunchDarklyClient).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({ anonymous: false }),
-        expect.anything()
+        expect.anything(),
       );
     });
   });
@@ -124,7 +125,7 @@ describe('when configuring', () => {
         {
           onStatusStateChange,
           onFlagsStateChange,
-        }
+        },
       );
     });
 
@@ -135,7 +136,7 @@ describe('when configuring', () => {
           key: undefined,
           group: 'foo-group',
         }),
-        expect.any(Object)
+        expect.any(Object),
       );
     });
 
@@ -143,7 +144,7 @@ describe('when configuring', () => {
       expect(initializeLaunchDarklyClient).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({ anonymous: true }),
-        expect.anything()
+        expect.anything(),
       );
     });
   });
@@ -173,7 +174,7 @@ describe('when configuring', () => {
           {
             onStatusStateChange,
             onFlagsStateChange,
-          }
+          },
         );
       });
 
@@ -181,7 +182,7 @@ describe('when configuring', () => {
         expect(configurationResult).toEqual(
           expect.objectContaining({
             initializationStatus: 0,
-          })
+          }),
         );
       });
 
@@ -190,8 +191,8 @@ describe('when configuring', () => {
           it('should indicate that the adapter is configured', () => {
             expect(
               adapter.getIsConfigurationStatus(
-                AdapterConfigurationStatus.Configured
-              )
+                AdapterConfigurationStatus.Configured,
+              ),
             ).toBe(true);
           });
 
@@ -202,7 +203,7 @@ describe('when configuring', () => {
                 on: expect.any(Function),
                 variation: expect.any(Function),
                 waitForInitialization: expect.any(Function),
-              })
+              }),
             );
           });
         });
@@ -229,12 +230,12 @@ describe('when configuring', () => {
         it('should register callbacks to receive flag updates', () => {
           expect(client.on).toHaveBeenCalledWith(
             'change:some-flag-1',
-            expect.any(Function)
+            expect.any(Function),
           );
 
           expect(client.on).toHaveBeenCalledWith(
             'change:some-flag-2',
-            expect.any(Function)
+            expect.any(Function),
           );
         });
 
@@ -254,9 +255,9 @@ describe('when configuring', () => {
               waitForInitialization: vi.fn(() =>
                 Promise.reject(
                   new Error(
-                    '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
-                  )
-                )
+                    '@flopflip/launchdarkly-adapter: adapter failed to initialize.',
+                  ),
+                ),
               ),
             });
 
@@ -274,10 +275,10 @@ describe('when configuring', () => {
                 {
                   onStatusStateChange,
                   onFlagsStateChange,
-                }
-              )
+                },
+              ),
             ).rejects.toThrow(
-              '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
+              '@flopflip/launchdarkly-adapter: adapter failed to initialize.',
             );
           });
         });
@@ -289,9 +290,9 @@ describe('when configuring', () => {
               waitForInitialization: vi.fn(() =>
                 Promise.reject(
                   new Error(
-                    '@flopflip/launchdarkly-adapter: adapter failed to initialize.'
-                  )
-                )
+                    '@flopflip/launchdarkly-adapter: adapter failed to initialize.',
+                  ),
+                ),
               ),
             });
 
@@ -311,8 +312,8 @@ describe('when configuring', () => {
                 {
                   onStatusStateChange,
                   onFlagsStateChange,
-                }
-              )
+                },
+              ),
             ).resolves.toEqual(expect.anything());
 
             expect(console.warn).toHaveBeenCalled();
@@ -339,7 +340,7 @@ describe('when configuring', () => {
               {
                 onStatusStateChange,
                 onFlagsStateChange,
-              }
+              },
             );
           });
 
@@ -399,7 +400,7 @@ describe('when configuring', () => {
               {
                 onStatusStateChange,
                 onFlagsStateChange,
-              }
+              },
             );
           });
 
@@ -429,7 +430,7 @@ describe('when configuring', () => {
                 onFlagsStateChange.mockClear();
                 adapter.updateFlags(
                   { someFlag1: true },
-                  { unsubscribeFlags: true }
+                  { unsubscribeFlags: true },
                 );
                 triggerFlagValueChange(client, { flagValue: true });
               });
@@ -465,7 +466,7 @@ describe('when configuring', () => {
 
           initializeLaunchDarklyClient.mockReturnValue(client);
           sessionStorage.getItem.mockReturnValueOnce(
-            JSON.stringify({ cached: true })
+            JSON.stringify({ cached: true }),
           );
 
           configurationResult = await adapter.configure(
@@ -477,7 +478,7 @@ describe('when configuring', () => {
             {
               onStatusStateChange,
               onFlagsStateChange,
-            }
+            },
           );
         });
 
@@ -485,15 +486,15 @@ describe('when configuring', () => {
           expect(configurationResult).toEqual(
             expect.objectContaining({
               initializationStatus: 0,
-            })
+            }),
           );
         });
 
         it('should restore cached flags', () => {
           expect(sessionStorage.getItem).toHaveBeenCalledWith(
             `@flopflip/launchdarkly-adapter/${encodeCacheContext(
-              userWithKey
-            )}/flags`
+              userWithKey,
+            )}/flags`,
           );
 
           expect(onFlagsStateChange).toHaveBeenCalledWith({
@@ -509,10 +510,10 @@ describe('when configuring', () => {
             JSON.parse(
               sessionStorage.getItem(
                 `@flopflip/launchdarkly-adapter/${encodeCacheContext(
-                  userWithKey
-                )}/flags`
-              )
-            )
+                  userWithKey,
+                )}/flags`,
+              ),
+            ),
           ).toStrictEqual({
             someFlag1: true,
             someFlag2: false,
@@ -533,7 +534,7 @@ describe('when configuring', () => {
 
             initializeLaunchDarklyClient.mockReturnValue(client);
             sessionStorage.getItem.mockReturnValueOnce(
-              JSON.stringify({ cached: true })
+              JSON.stringify({ cached: true }),
             );
 
             configurationResult = await adapter.configure(
@@ -546,7 +547,7 @@ describe('when configuring', () => {
               {
                 onStatusStateChange,
                 onFlagsStateChange,
-              }
+              },
             );
           });
 
@@ -571,7 +572,7 @@ describe('when configuring', () => {
               expect(configurationResult).toEqual(
                 expect.objectContaining({
                   initializationStatus: 0,
-                })
+                }),
               );
             });
 
@@ -616,7 +617,7 @@ describe('when configuring', () => {
           {
             onStatusStateChange,
             onFlagsStateChange,
-          }
+          },
         );
 
         configurationResult = await adapter.reconfigure({
@@ -628,18 +629,18 @@ describe('when configuring', () => {
         expect(configurationResult).toEqual(
           expect.objectContaining({
             initializationStatus: 0,
-          })
+          }),
         );
       });
 
       it('should invoke `identify` on the `client` with the `context`', () => {
         expect(client.identify).toHaveBeenCalledWith(
-          expect.objectContaining(nextContext)
+          expect.objectContaining(nextContext),
         );
       });
       it('should invoke `identify` on the `client` marking the user as not anonymous', () => {
         expect(client.identify).toHaveBeenCalledWith(
-          expect.objectContaining({ anonymous: false })
+          expect.objectContaining({ anonymous: false }),
         );
       });
     });
@@ -665,7 +666,7 @@ describe('when configuring', () => {
           {
             onStatusStateChange,
             onFlagsStateChange,
-          }
+          },
         );
       });
 
@@ -676,13 +677,13 @@ describe('when configuring', () => {
 
         it('should invoke `identify` on the client with the updated props', () => {
           expect(client.identify).toHaveBeenCalledWith(
-            expect.objectContaining(updatedClientProps)
+            expect.objectContaining(updatedClientProps),
           );
         });
 
         it('should invoke `identify` on the client with the old props', () => {
           expect(client.identify).toHaveBeenCalledWith(
-            expect.objectContaining(userWithKey)
+            expect.objectContaining(userWithKey),
           );
         });
       });
@@ -700,13 +701,13 @@ describe('when configuring', () => {
             expect.objectContaining({
               ...userWithKey,
               ...updatedClientProps,
-            })
+            }),
           );
         });
 
         it('should invoke `identify` the `ld-client` marking the `user` as not anonymous', () => {
           expect(client.identify).toHaveBeenCalledWith(
-            expect.objectContaining({ anonymous: false })
+            expect.objectContaining({ anonymous: false }),
           );
         });
       });

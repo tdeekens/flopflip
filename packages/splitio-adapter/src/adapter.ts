@@ -40,7 +40,7 @@ type TSplitIOClient = {
 
 const normalizeFlag = (
   flagName: TFlagName,
-  flagValue?: TFlagVariation
+  flagValue?: TFlagVariation,
 ): TFlag => {
   let normalizeFlagValue: TFlagVariation;
 
@@ -48,10 +48,10 @@ const normalizeFlag = (
     normalizeFlagValue = true;
   } else if (flagValue === 'off') {
     normalizeFlagValue = false;
-  } else if (flagValue != null) {
-    normalizeFlagValue = flagValue;
-  } else {
+  } else if (flagValue == null) {
     normalizeFlagValue = false;
+  } else {
+    normalizeFlagValue = flagValue;
   }
 
   return [camelCase(flagName), normalizeFlagValue];
@@ -102,14 +102,14 @@ class SplitioAdapter implements TSplitioAdapterInterface {
               {
                 ...this.#adapterState.user,
                 ...this.#adapterState.treatmentAttributes,
-              } as SplitIO.Attributes
+              } as SplitIO.Attributes,
             );
 
             if (!this.#getIsAdapterUnsubscribed()) {
               onFlagsStateChange({ id: this.id, flags: normalizeFlags(flags) });
             }
           }
-        }
+        },
       );
     }
   };
@@ -120,7 +120,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
   readonly #initializeClient = (): TSplitIOClient => {
     if (!this.#adapterState.splitioSettings) {
       throw Error(
-        'cannot initialize SplitIo without configured settings, call configure() first'
+        'cannot initialize SplitIo without configured settings, call configure() first',
       );
     }
 
@@ -169,7 +169,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
                 {
                   ...this.#adapterState.user,
                   ...this.#adapterState.treatmentAttributes,
-                } as SplitIO.Attributes
+                } as SplitIO.Attributes,
               );
 
               if (!this.#getIsAdapterUnsubscribed()) {
@@ -201,7 +201,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
 
               resolve();
             }
-          }
+          },
         );
       } else {
         reject(new Error());
@@ -227,18 +227,18 @@ class SplitioAdapter implements TSplitioAdapterInterface {
   readonly #cloneTreatmentAttributes = <
     T = TSplitioAdapterArgs['sdk']['treatmentAttributes'],
   >(
-    treatmentAttributes: T
+    treatmentAttributes: T,
   ): T => cloneDeep<T>(treatmentAttributes);
 
   updateFlags() {
     console.log(
-      '@flopflip/splitio-adapter: update flags it not yet implemented.'
+      '@flopflip/splitio-adapter: update flags it not yet implemented.',
     );
   }
 
   async configure(
     adapterArgs: TSplitioAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) {
     const { sdk, user } = adapterArgs;
 
@@ -247,7 +247,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
 
     this.#adapterState.user = this.#ensureUser(user);
     this.#adapterState.treatmentAttributes = this.#cloneTreatmentAttributes(
-      sdk.treatmentAttributes
+      sdk.treatmentAttributes,
     );
     this.#adapterState.configuredCallbacks.onFlagsStateChange =
       adapterEventHandlers.onFlagsStateChange;
@@ -268,7 +268,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
 
   async reconfigure(
     adapterArgs: TSplitioAdapterArgs,
-    _adapterEventHandlers: TAdapterEventHandlers
+    _adapterEventHandlers: TAdapterEventHandlers,
   ) {
     if (
       !this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured) ||
@@ -276,15 +276,15 @@ class SplitioAdapter implements TSplitioAdapterInterface {
     ) {
       return Promise.reject(
         new Error(
-          '@flopflip/splitio-adapter: please configure adapter before reconfiguring.'
-        )
+          '@flopflip/splitio-adapter: please configure adapter before reconfiguring.',
+        ),
       );
     }
 
     const hasUserChanged = !isEqual(this.#adapterState.user, adapterArgs.user);
     const hasTreatmentChanged = !isEqual(
       this.#adapterState.treatmentAttributes,
-      adapterArgs.sdk?.treatmentAttributes
+      adapterArgs.sdk?.treatmentAttributes,
     );
 
     if (hasUserChanged) {
@@ -293,7 +293,7 @@ class SplitioAdapter implements TSplitioAdapterInterface {
 
     if (hasTreatmentChanged) {
       this.#adapterState.treatmentAttributes = this.#cloneTreatmentAttributes(
-        adapterArgs.sdk.treatmentAttributes
+        adapterArgs.sdk.treatmentAttributes,
       );
     }
 

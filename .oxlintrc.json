@@ -1,0 +1,60 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "react", "jest", "import"],
+  "env": {
+    "node": true,
+    "browser": true,
+    "es2024": true
+  },
+  "globals": {
+    "cy": "readonly",
+    "Cypress": "readonly",
+    "VERSION": "readonly",
+    "SplitIO": "readonly"
+  },
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn"
+  },
+  "ignorePatterns": ["**/node_modules/", "**/coverage/", "**/dist/"],
+  "rules": {
+    "eqeqeq": ["error", "smart"],
+    "no-console": "warn",
+    "no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_", "caughtErrorsIgnorePattern": "^_" }
+    ],
+    "no-undef": "error",
+    "no-void": "error",
+    "no-negated-condition": "error",
+    "no-restricted-globals": ["error", "event", "atob", "btoa"],
+    "curly": "error",
+    "no-lonely-if": "error",
+    "no-param-reassign": "error",
+    "default-param-last": "error",
+    "no-empty": "error",
+    "no-empty-function": "error",
+    "no-array-constructor": "error",
+    "typescript/no-explicit-any": "off",
+    "typescript/no-inferrable-types": "error",
+    "typescript/array-type": ["error", { "default": "array" }],
+    "typescript/prefer-for-of": "error",
+    "typescript/prefer-enum-initializers": "error",
+    "typescript/no-unnecessary-template-expression": "error",
+    "unicorn/prefer-number-properties": "error",
+    "react/self-closing-comp": "error",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-no-useless-fragment": "off",
+    "react-hooks/exhaustive-deps": "warn",
+    "import/no-duplicates": "error",
+    "jest/no-disabled-tests": "warn"
+  },
+  "overrides": [
+    {
+      "files": ["demo/**", "scripts/**"],
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ]
+}

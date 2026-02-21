@@ -12,14 +12,14 @@ function useFeatureToggles(flags: TFlags) {
         flagsContext,
         adapterContext.adapterEffectIdentifiers,
         flagName,
-        flagVariation
+        flagVariation,
       );
 
       previousFlags.push(isFeatureEnabled);
 
       return previousFlags;
     },
-    []
+    [],
   );
 
   return requestedFlags;

@@ -7,7 +7,7 @@ import { selectFlags } from './ducks/flags';
 
 function useFeatureToggle(
   flagName: TFlagName,
-  flagVariation: TFlagVariation = true
+  flagVariation: TFlagVariation = true,
 ) {
   const adapterContext = useAdapterContext();
   const allFlags = useSelector(selectFlags());
@@ -16,7 +16,7 @@ function useFeatureToggle(
     allFlags,
     adapterContext.adapterEffectIdentifiers,
     flagName,
-    flagVariation
+    flagVariation,
   );
 
   useDebugValue({

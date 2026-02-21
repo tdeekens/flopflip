@@ -2,6 +2,7 @@ import { AdapterConfigurationStatus } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { adapter, STORAGE_SLICE } from '../src/adapter';
 
 vi.mock('tiny-warning');
@@ -23,7 +24,7 @@ describe('when configuring', () => {
   describe('when not configured', () => {
     it('should indicate that the adapter is not configured', () => {
       expect(
-        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured),
       ).toBe(false);
     });
 
@@ -44,7 +45,7 @@ describe('when configuring', () => {
       vi.useFakeTimers();
       configurationResult = await adapter.configure(
         adapterArgs,
-        adapterEventHandlers
+        adapterEventHandlers,
       );
     });
 
@@ -56,7 +57,7 @@ describe('when configuring', () => {
       expect(configurationResult).toEqual(
         expect.objectContaining({
           initializationStatus: 0,
-        })
+        }),
       );
     });
 
@@ -67,13 +68,13 @@ describe('when configuring', () => {
           status: {
             configurationStatus: AdapterConfigurationStatus.Configuring,
           },
-        })
+        }),
       );
     });
 
     it('should indicate that the adapter is configured', () => {
       expect(
-        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured),
       ).toBe(true);
     });
 
@@ -112,9 +113,9 @@ describe('when configuring', () => {
         expect(
           JSON.parse(
             localStorage.getItem(
-              `${STORAGE_SLICE}/${adapterArgs.user.key}/flags`
-            )
-          )
+              `${STORAGE_SLICE}/${adapterArgs.user.key}/flags`,
+            ),
+          ),
         ).toStrictEqual(updatedFlags);
       });
 
@@ -169,9 +170,9 @@ describe('when configuring', () => {
           expect(
             JSON.parse(
               localStorage.getItem(
-                `${STORAGE_SLICE}/${adapterArgs.user.key}/flags`
-              )
-            )
+                `${STORAGE_SLICE}/${adapterArgs.user.key}/flags`,
+              ),
+            ),
           ).toHaveProperty('fooFlag', true);
         });
       });
@@ -187,14 +188,14 @@ describe('when configuring', () => {
 
         localStorage.setItem(
           `${STORAGE_SLICE}/${adapterArgs.user.key}/flags`,
-          JSON.stringify(updatedFlags)
+          JSON.stringify(updatedFlags),
         );
       });
 
       it('should invoke `onFlagsStateChange`', () => {
         vi.advanceTimersByTime(5 * 60 * 1000);
         expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledTimes(
-          1
+          1,
         );
       });
     });
@@ -221,7 +222,7 @@ describe('when configuring', () => {
 
         localStorage.setItem(
           `${STORAGE_SLICE}/${user.key}/flags`,
-          JSON.stringify({ foo: 'bar' })
+          JSON.stringify({ foo: 'bar' }),
         );
 
         configurationResult = await adapter.reconfigure({ user });
@@ -231,13 +232,13 @@ describe('when configuring', () => {
         expect(configurationResult).toEqual(
           expect.objectContaining({
             initializationStatus: 0,
-          })
+          }),
         );
       });
 
       it('should restore flags from localstorage', () => {
         expect(localStorage.getItem).toHaveBeenCalledWith(
-          `${STORAGE_SLICE}/${user.key}/flags`
+          `${STORAGE_SLICE}/${user.key}/flags`,
         );
       });
 

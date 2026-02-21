@@ -2,14 +2,29 @@
   "name": "@flopflip/splitio-adapter",
   "version": "15.1.7",
   "description": "A adapter around the split.io client for flipflop",
-  "sideEffects": false,
-  "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    }
+  "keywords": [
+    "client",
+    "feature-flags",
+    "feature-toggles",
+    "split.io"
+  ],
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
   },
+  "license": "MIT",
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tdeekens/flopflip.git",
+    "directory": "packages/splitio-adapter"
+  },
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
+  "type": "module",
+  "sideEffects": false,
   "main": "./dist/index.js",
   "typesVersions": {
     "*": {
@@ -19,35 +34,21 @@
       ]
     }
   },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "rimraf dist && tsup",
     "check-types": "tsc --noEmit",
     "test": "vitest --run",
     "test:watch": "vitest",
     "dev": "tsup --watch --clean=false"
-  },
-  "files": [
-    "readme.md",
-    "dist/**"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tdeekens/flopflip.git",
-    "directory": "packages/splitio-adapter"
-  },
-  "author": "Tobias Deekens <nerd@tdeekens.name>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/tdeekens/flopflip/issues"
-  },
-  "homepage": "https://github.com/tdeekens/flopflip#readme",
-  "devDependencies": {
-    "@flopflip/tsconfig": "workspace:*",
-    "globalthis": "1.0.4",
-    "tsup": "8.5.1"
   },
   "dependencies": {
     "@babel/runtime": "7.28.6",
@@ -57,10 +58,9 @@
     "lodash": "4.17.23",
     "ts-deepmerge": "7.0.3"
   },
-  "keywords": [
-    "feature-flags",
-    "feature-toggles",
-    "split.io",
-    "client"
-  ]
+  "devDependencies": {
+    "@flopflip/tsconfig": "workspace:*",
+    "globalthis": "1.0.4",
+    "tsup": "8.5.1"
+  }
 }

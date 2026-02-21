@@ -36,7 +36,7 @@ const render = () => {
   rtlRender(
     <Configure {...props}>
       <TestComponent />
-    </Configure>
+    </Configure>,
   );
   const waitUntilConfigured = () => screen.findByText(/Is configured: Yes/i);
 

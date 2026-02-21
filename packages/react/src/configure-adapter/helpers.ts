@@ -8,7 +8,7 @@ import { Children } from 'react';
 import { merge } from 'ts-deepmerge';
 
 const isFunctionChildren = (
-  children: TConfigureAdapterChildren
+  children: TConfigureAdapterChildren,
 ): children is TConfigureAdapterChildrenAsFunction =>
   typeof children === 'function';
 
@@ -17,7 +17,7 @@ const isEmptyChildren = (children: TConfigureAdapterChildren) =>
 
 const mergeAdapterArgs = (
   previousAdapterArgs: TAdapterArgs,
-  { adapterArgs: nextAdapterArgs, options = {} }: TAdapterReconfiguration
+  { adapterArgs: nextAdapterArgs, options = {} }: TAdapterReconfiguration,
 ): TAdapterArgs =>
   options.shouldOverwrite
     ? nextAdapterArgs

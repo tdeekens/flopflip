@@ -1,7 +1,7 @@
 type TListener = () => void;
 
 function createStore<TState extends Record<string, unknown>>(
-  initialState: TState
+  initialState: TState,
 ) {
   let state = initialState;
   const getSnapshot = () => state;

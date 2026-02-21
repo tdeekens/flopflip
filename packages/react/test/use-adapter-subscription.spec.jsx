@@ -9,7 +9,7 @@ import { useAdapterSubscription } from '../src/use-adapter-subscription';
 
 const createAdapter = () => ({
   getIsConfigurationStatus: vi.fn(
-    () => AdapterConfigurationStatus.Unconfigured
+    () => AdapterConfigurationStatus.Unconfigured,
   ),
   configure: vi.fn(() => Promise.resolve()),
   reconfigure: vi.fn(() => Promise.resolve()),
@@ -21,7 +21,7 @@ function TestComponent({ adapter }) {
   const getHasAdapterSubscriptionStatus = useAdapterSubscription(adapter);
 
   const isConfigured = adapter.getIsConfigurationStatus(
-    AdapterConfigurationStatus.Configured
+    AdapterConfigurationStatus.Configured,
   );
 
   return (
@@ -38,7 +38,7 @@ function TestComponent({ adapter }) {
         <li>
           Is unsubscribed:{' '}
           {getHasAdapterSubscriptionStatus(
-            AdapterSubscriptionStatus.Unsubscribed
+            AdapterSubscriptionStatus.Unsubscribed,
           )
             ? 'Yes'
             : 'No'}

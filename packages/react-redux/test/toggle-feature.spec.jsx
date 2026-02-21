@@ -32,7 +32,7 @@ describe('<ToggleFeature>', () => {
 
       const { waitUntilConfigured, queryByFlagName } = render(
         store,
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
@@ -81,14 +81,14 @@ describe('<ToggleFeature>', () => {
 
       const { waitUntilConfigured, queryByFlagName } = render(
         store,
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
 
       expect(queryByFlagName('enabledFeature')).toHaveAttribute(
         'data-flag-status',
-        'enabled'
+        'enabled',
       );
     });
   });

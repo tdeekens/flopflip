@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { STATE_SLICE } from '../../src/constants';
 
+import { STATE_SLICE } from '../../src/constants';
 import {
   reducer,
   selectFlag,
@@ -172,7 +172,7 @@ describe('selectors', () => {
         expect(selectFlag('flagC', ['graphql'])(state)).toEqual(true);
         expect(selectFlag('flagA', ['graphql', 'memory'])(state)).toEqual(true);
         expect(selectFlag('flagA', ['memory', 'graphql'])(state)).toEqual(
-          false
+          false,
         );
       });
     });

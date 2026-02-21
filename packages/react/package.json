@@ -2,14 +2,30 @@
   "name": "@flopflip/react",
   "version": "15.1.7",
   "description": "A feature toggle wrapper to use LaunchDarkly with React",
-  "sideEffects": false,
-  "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    }
+  "keywords": [
+    "LaunchDarkly",
+    "client",
+    "feature-flags",
+    "feature-toggles",
+    "react"
+  ],
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
   },
+  "license": "MIT",
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tdeekens/flopflip.git",
+    "directory": "packages/react"
+  },
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
+  "type": "module",
+  "sideEffects": false,
   "main": "./dist/index.js",
   "browser": "./dist/index.js",
   "typesVersions": {
@@ -20,6 +36,15 @@
       ]
     }
   },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "rimraf dist && tsup",
     "check-types": "tsc --noEmit",
@@ -27,24 +52,16 @@
     "test:watch": "vitest",
     "dev": "tsup --watch --clean=false"
   },
-  "files": [
-    "readme.md",
-    "dist/**"
-  ],
-  "publishConfig": {
-    "access": "public"
+  "dependencies": {
+    "@babel/runtime": "7.28.6",
+    "@flopflip/cache": "workspace:*",
+    "@flopflip/types": "workspace:*",
+    "@types/react-is": "19.2.0",
+    "lodash": "4.17.23",
+    "react-is": "19.2.4",
+    "tiny-warning": "1.0.3",
+    "ts-deepmerge": "7.0.3"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tdeekens/flopflip.git",
-    "directory": "packages/react"
-  },
-  "author": "Tobias Deekens <nerd@tdeekens.name>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/tdeekens/flopflip/issues"
-  },
-  "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
     "@flopflip/test-utils": "workspace:*",
     "@flopflip/tsconfig": "workspace:*",
@@ -57,22 +74,5 @@
   "peerDependencies": {
     "react": "18.x || 19.x",
     "react-dom": "18.x || 19.x"
-  },
-  "dependencies": {
-    "@babel/runtime": "7.28.6",
-    "@flopflip/cache": "workspace:*",
-    "@flopflip/types": "workspace:*",
-    "@types/react-is": "19.2.0",
-    "lodash": "4.17.23",
-    "react-is": "19.2.4",
-    "tiny-warning": "1.0.3",
-    "ts-deepmerge": "7.0.3"
-  },
-  "keywords": [
-    "react",
-    "feature-flags",
-    "feature-toggles",
-    "LaunchDarkly",
-    "client"
-  ]
+  }
 }

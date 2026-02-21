@@ -3,7 +3,7 @@ import {
   type TToggleFeatureProps,
 } from '@flopflip/react';
 import type { TFlagName, TFlagVariation } from '@flopflip/types';
-// biome-ignore lint/correctness/noUnusedImports: false positive
+// oxlint-disable-next-line no-unused-vars -- false positive
 import React from 'react';
 
 import { useFeatureToggle } from './use-feature-toggle';
