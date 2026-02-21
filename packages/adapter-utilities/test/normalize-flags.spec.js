@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
+
 import { normalizeFlag } from '../src/normalize-flag';
 import { normalizeFlags } from '../src/normalize-flags';
 

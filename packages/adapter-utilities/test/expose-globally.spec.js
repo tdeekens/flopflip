@@ -1,5 +1,6 @@
 import getGlobalThis from 'globalthis';
 import { expect, it } from 'vitest';
+
 import { exposeGlobally } from '../src/expose-globally';
 
 const testAdapter = {

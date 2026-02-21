@@ -60,17 +60,17 @@ class CombineAdapters implements TCombinedAdapterInterface {
 
   updateFlags = (flags: TFlags, options?: TUpdateFlagsOptions) => {
     const isAdapterConfigured = this.getIsConfigurationStatus(
-      AdapterConfigurationStatus.Configured
+      AdapterConfigurationStatus.Configured,
     );
     const hasCombinedAdapters = this.#getHasCombinedAdapters();
 
     warning(
       isAdapterConfigured,
-      '@flopflip/combine-adapters: adapter is not configured. Flags can not be updated before.'
+      '@flopflip/combine-adapters: adapter is not configured. Flags can not be updated before.',
     );
     warning(
       hasCombinedAdapters,
-      '@flopflip/combine-adapters: adapter has no combined adapters. Please combine before updating flags.'
+      '@flopflip/combine-adapters: adapter has no combined adapters. Please combine before updating flags.',
     );
 
     if (!isAdapterConfigured || !hasCombinedAdapters) {
@@ -89,18 +89,18 @@ class CombineAdapters implements TCombinedAdapterInterface {
 
   async configure(
     adapterArgs: TCombinedAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) {
     const hasCombinedAdapters = this.#getHasCombinedAdapters();
     const hasArgsForAllAdapters = this.#getHasArgsForAllAdapters(adapterArgs);
 
     warning(
       hasCombinedAdapters,
-      '@flopflip/combine-adapters: adapter has no combined adapters. Please combine before reconfiguring flags.'
+      '@flopflip/combine-adapters: adapter has no combined adapters. Please combine before reconfiguring flags.',
     );
     warning(
       hasArgsForAllAdapters,
-      '@flopflip/combine-adapters: not all adapters have args. Please provide args for all adapters.'
+      '@flopflip/combine-adapters: not all adapters have args. Please provide args for all adapters.',
     );
 
     if (!hasCombinedAdapters || !hasArgsForAllAdapters) {
@@ -132,12 +132,12 @@ class CombineAdapters implements TCombinedAdapterInterface {
           onFlagsStateChange: adapterEventHandlers.onFlagsStateChange,
           onStatusStateChange: adapterEventHandlers.onStatusStateChange,
         });
-      })
+      }),
     ).then((allInitializationStatus) => {
       const haveAllAdaptersInitializedSuccessfully =
         allInitializationStatus.every(
           ({ initializationStatus }) =>
-            initializationStatus === AdapterInitializationStatus.Succeeded
+            initializationStatus === AdapterInitializationStatus.Succeeded,
         );
 
       // NOTE: We consider this adapter configured if all adapters have been asked to do so
@@ -166,7 +166,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
 
   async reconfigure(
     adapterArgs: TCombinedAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) {
     this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 
@@ -175,11 +175,11 @@ class CombineAdapters implements TCombinedAdapterInterface {
 
     warning(
       hasCombinedAdapters,
-      '@flopflip/combine-adapters: adapter has no combined adapters. Please combine before reconfiguring flags.'
+      '@flopflip/combine-adapters: adapter has no combined adapters. Please combine before reconfiguring flags.',
     );
     warning(
       hasArgsForAllAdapters,
-      '@flopflip/combine-adapters: not all adapters have args. Please provide args for all adapters.'
+      '@flopflip/combine-adapters: not all adapters have args. Please provide args for all adapters.',
     );
 
     if (!hasCombinedAdapters || !hasArgsForAllAdapters) {
@@ -196,12 +196,12 @@ class CombineAdapters implements TCombinedAdapterInterface {
           onFlagsStateChange: adapterEventHandlers.onFlagsStateChange,
           onStatusStateChange: adapterEventHandlers.onStatusStateChange,
         });
-      })
+      }),
     ).then((allInitializationStatus) => {
       const haveAllAdaptersInitializedSuccessfully =
         allInitializationStatus.every(
           ({ initializationStatus }) =>
-            initializationStatus === AdapterInitializationStatus.Succeeded
+            initializationStatus === AdapterInitializationStatus.Succeeded,
         );
 
       // NOTE: We consider this adapter reconfigured if all adapters have been asked to do so
@@ -244,7 +244,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
 
   async waitUntilConfigured() {
     return Promise.all(
-      this.#adapters.map(async (adapter) => adapter?.waitUntilConfigured?.())
+      this.#adapters.map(async (adapter) => adapter?.waitUntilConfigured?.()),
     );
   }
 

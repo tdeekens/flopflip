@@ -13,10 +13,10 @@ import { Configure } from '../src//configure';
 import { useAllFeatureToggles } from '../src/use-all-feature-toggles';
 
 const disabledDefaultFlags = Object.fromEntries(
-  Object.entries(defaultFlags).filter(([, isEnabled]) => !isEnabled)
+  Object.entries(defaultFlags).filter(([, isEnabled]) => !isEnabled),
 );
 const enabledDefaultFlags = Object.fromEntries(
-  Object.entries(defaultFlags).filter(([, isEnabled]) => isEnabled)
+  Object.entries(defaultFlags).filter(([, isEnabled]) => isEnabled),
 );
 
 const render = (TestComponent, { adapter, adapterArgs } = {}) =>
@@ -44,29 +44,33 @@ function TestComponent() {
 
 describe('with one adapter', () => {
   describe('disabled features', () => {
-    it.each(
-      Object.keys(disabledDefaultFlags)
-    )('should list disabled feature "%s"', async (featureName) => {
-      const { waitUntilConfigured } = render(<TestComponent />);
+    it.each(Object.keys(disabledDefaultFlags))(
+      'should list disabled feature "%s"',
+      async (featureName) => {
+        const { waitUntilConfigured } = render(<TestComponent />);
 
-      await waitUntilConfigured();
+        await waitUntilConfigured();
 
-      expect(
-        screen.getByText(`${featureName} is disabled`)
-      ).toBeInTheDocument();
-    });
+        expect(
+          screen.getByText(`${featureName} is disabled`),
+        ).toBeInTheDocument();
+      },
+    );
   });
 
   describe('enabled features', () => {
-    it.each(
-      Object.keys(enabledDefaultFlags)
-    )('should list enabled feature "%s"', async (featureName) => {
-      const { waitUntilConfigured } = render(<TestComponent />);
+    it.each(Object.keys(enabledDefaultFlags))(
+      'should list enabled feature "%s"',
+      async (featureName) => {
+        const { waitUntilConfigured } = render(<TestComponent />);
 
-      await waitUntilConfigured();
+        await waitUntilConfigured();
 
-      expect(screen.getByText(`${featureName} is enabled`)).toBeInTheDocument();
-    });
+        expect(
+          screen.getByText(`${featureName} is enabled`),
+        ).toBeInTheDocument();
+      },
+    );
   });
 });
 
@@ -95,33 +99,37 @@ describe('when combining adapters', () => {
   });
 
   describe('without flag updating', () => {
-    it.each(
-      Object.keys(disabledDefaultFlags)
-    )('should list disabled feature "%s"', async (featureName) => {
-      const { waitUntilConfigured } = render(<TestComponent />, {
-        adapter: combineAdapters,
-        adapterArgs,
-      });
+    it.each(Object.keys(disabledDefaultFlags))(
+      'should list disabled feature "%s"',
+      async (featureName) => {
+        const { waitUntilConfigured } = render(<TestComponent />, {
+          adapter: combineAdapters,
+          adapterArgs,
+        });
 
-      await waitUntilConfigured();
+        await waitUntilConfigured();
 
-      expect(
-        screen.getByText(`${featureName} is disabled`)
-      ).toBeInTheDocument();
-    });
+        expect(
+          screen.getByText(`${featureName} is disabled`),
+        ).toBeInTheDocument();
+      },
+    );
 
-    it.each(
-      Object.keys(enabledDefaultFlags)
-    )('should list enabled feature "%s"', async (featureName) => {
-      const { waitUntilConfigured } = render(<TestComponent />, {
-        adapter: combineAdapters,
-        adapterArgs,
-      });
+    it.each(Object.keys(enabledDefaultFlags))(
+      'should list enabled feature "%s"',
+      async (featureName) => {
+        const { waitUntilConfigured } = render(<TestComponent />, {
+          adapter: combineAdapters,
+          adapterArgs,
+        });
 
-      await waitUntilConfigured();
+        await waitUntilConfigured();
 
-      expect(screen.getByText(`${featureName} is enabled`)).toBeInTheDocument();
-    });
+        expect(
+          screen.getByText(`${featureName} is enabled`),
+        ).toBeInTheDocument();
+      },
+    );
   });
 
   describe('with flag updating', () => {
@@ -132,13 +140,13 @@ describe('when combining adapters', () => {
           {
             adapter: combineAdapters,
             adapterArgs,
-          }
+          },
         );
 
         await waitUntilConfiguredFirstRender();
 
         expect(
-          screen.queryByText('updatedFlag is enabled')
+          screen.queryByText('updatedFlag is enabled'),
         ).not.toBeInTheDocument();
 
         act(() => {
@@ -148,7 +156,7 @@ describe('when combining adapters', () => {
         });
 
         expect(
-          screen.getByText('updatedMemoryAdapterFlag is enabled')
+          screen.getByText('updatedMemoryAdapterFlag is enabled'),
         ).toBeInTheDocument();
 
         act(() => {
@@ -158,7 +166,7 @@ describe('when combining adapters', () => {
         });
 
         expect(
-          screen.getByText('updatedLocalstorageAdapterFlag is enabled')
+          screen.getByText('updatedLocalstorageAdapterFlag is enabled'),
         ).toBeInTheDocument();
       });
     });
@@ -169,13 +177,13 @@ describe('when combining adapters', () => {
           {
             adapter: combineAdapters,
             adapterArgs,
-          }
+          },
         );
 
         await waitUntilConfiguredFirstRender();
 
         expect(
-          screen.queryByText('updatedFlag is enabled')
+          screen.queryByText('updatedFlag is enabled'),
         ).not.toBeInTheDocument();
 
         act(() => {
@@ -188,7 +196,7 @@ describe('when combining adapters', () => {
         });
 
         expect(
-          screen.getByText('updatedShared is enabled')
+          screen.getByText('updatedShared is enabled'),
         ).toBeInTheDocument();
 
         act(() => {
@@ -201,7 +209,7 @@ describe('when combining adapters', () => {
         });
 
         expect(
-          screen.getByText('updatedShared is disabled')
+          screen.getByText('updatedShared is disabled'),
         ).toBeInTheDocument();
       });
     });

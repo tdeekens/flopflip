@@ -11,7 +11,7 @@ function useAdapterStatus({ adapterIdentifiers }: TUseAdapterStatusArgs = {}) {
 
   const adapterStatus = selectAdapterConfigurationStatus(
     status,
-    adapterIdentifiers
+    adapterIdentifiers,
   );
 
   useDebugValue({ adapterStatus });

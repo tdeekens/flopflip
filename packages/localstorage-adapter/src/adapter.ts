@@ -95,7 +95,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     setInterval(() => {
       if (!this.#getIsAdapterUnsubscribed()) {
         const nextFlags = normalizeFlags(
-          this.#cache.get<TFlags>(this.#getFlagsCacheKey(user))
+          this.#cache.get<TFlags>(this.#getFlagsCacheKey(user)),
         );
 
         if (this.#didFlagsChange(nextFlags)) {
@@ -108,19 +108,19 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
   updateFlags = (flags: TFlags, options?: TUpdateFlagsOptions) => {
     const isAdapterConfigured = this.getIsConfigurationStatus(
-      AdapterConfigurationStatus.Configured
+      AdapterConfigurationStatus.Configured,
     );
 
     warning(
       isAdapterConfigured,
-      '@flopflip/localstorage-adapter: adapter not configured. Flags can not be updated before.'
+      '@flopflip/localstorage-adapter: adapter not configured. Flags can not be updated before.',
     );
 
     if (!isAdapterConfigured) {
       return;
     }
 
-    // biome-ignore lint/style/noNonNullAssertion: false positive
+    // oxlint-disable-next-line typescript/no-non-null-assertion -- false positive
     const flagsCacheKey = this.#getFlagsCacheKey(this.#adapterState.user!);
     const previousFlags: TFlags | undefined =
       this.#cache.get<TFlags>(flagsCacheKey);
@@ -129,7 +129,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       (updatedFlags: TFlags, [flagName, flagValue]) => {
         const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
           flagName,
-          flagValue
+          flagValue,
         );
 
         if (this.#getIsFlagLocked(normalizedFlagName)) {
@@ -147,7 +147,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
         return updated;
       },
-      {}
+      {},
     );
 
     const nextFlags: TFlags = {
@@ -163,7 +163,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
   async configure(
     adapterArgs: TLocalStorageAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) {
     const handleFlagsChange = (nextFlags: TFlagsChange['flags']) => {
       if (this.#getIsAdapterUnsubscribed()) {
@@ -200,7 +200,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       this.setConfigurationStatus(AdapterConfigurationStatus.Configured);
 
       const flags = normalizeFlags(
-        this.#cache.get(this.#getFlagsCacheKey(user))
+        this.#cache.get(this.#getFlagsCacheKey(user)),
       );
 
       this.#adapterState.flags = flags;
@@ -220,10 +220,10 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
 
   async reconfigure(
     adapterArgs: TLocalStorageAdapterArgs,
-    _adapterEventHandlers: TAdapterEventHandlers
+    _adapterEventHandlers: TAdapterEventHandlers,
   ) {
     const previousFlags = this.#cache.get<TFlags>(
-      this.#getFlagsCacheKey(adapterArgs.user)
+      this.#getFlagsCacheKey(adapterArgs.user),
     );
     this.#adapterState.flags = previousFlags || {};
 
@@ -246,7 +246,7 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       } else {
         this.#adapterState.emitter.on(
           this.#__internalConfiguredStatusChange__,
-          resolve
+          resolve,
         );
       }
     });

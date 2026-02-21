@@ -12,7 +12,7 @@ const initialReconfigureAdapter: TReconfigureAdapter = () => undefined;
 const createAdapterContext = (
   adapterIdentifiers?: TAdapterIdentifiers[],
   reconfigure?: TReconfigureAdapter,
-  status?: TAdaptersStatus
+  status?: TAdaptersStatus,
 ): TAdapterContext => ({
   adapterEffectIdentifiers: adapterIdentifiers ?? [],
   reconfigure: reconfigure ?? initialReconfigureAdapter,
@@ -25,7 +25,7 @@ const AdapterContext = createContext(initialAdapterContext);
 function hasEveryAdapterStatus(
   adapterConfigurationStatus: AdapterConfigurationStatus,
   adaptersStatus?: TAdaptersStatus,
-  adapterIdentifiers?: TAdapterIdentifiers[]
+  adapterIdentifiers?: TAdapterIdentifiers[],
 ) {
   if (Object.keys(adaptersStatus ?? {}).length === 0) {
     return false;
@@ -35,39 +35,39 @@ function hasEveryAdapterStatus(
     return adapterIdentifiers.every(
       (adapterIdentifier) =>
         adaptersStatus?.[adapterIdentifier]?.configurationStatus ===
-        adapterConfigurationStatus
+        adapterConfigurationStatus,
     );
   }
 
   return Object.values(adaptersStatus ?? {}).every(
     (adapterStatus) =>
-      adapterStatus.configurationStatus === adapterConfigurationStatus
+      adapterStatus.configurationStatus === adapterConfigurationStatus,
   );
 }
 
 const selectAdapterConfigurationStatus = (
   adaptersStatus?: TAdaptersStatus,
-  adapterIdentifiers?: TAdapterIdentifiers[]
+  adapterIdentifiers?: TAdapterIdentifiers[],
 ) => {
   const isReady = hasEveryAdapterStatus(
     AdapterConfigurationStatus.Configured,
     adaptersStatus,
-    adapterIdentifiers
+    adapterIdentifiers,
   );
   const isUnconfigured = hasEveryAdapterStatus(
     AdapterConfigurationStatus.Unconfigured,
     adaptersStatus,
-    adapterIdentifiers
+    adapterIdentifiers,
   );
   const isConfiguring = hasEveryAdapterStatus(
     AdapterConfigurationStatus.Configuring,
     adaptersStatus,
-    adapterIdentifiers
+    adapterIdentifiers,
   );
   const isConfigured = hasEveryAdapterStatus(
     AdapterConfigurationStatus.Configured,
     adaptersStatus,
-    adapterIdentifiers
+    adapterIdentifiers,
   );
 
   const status = { isReady, isUnconfigured, isConfiguring, isConfigured };

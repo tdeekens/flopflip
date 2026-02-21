@@ -22,12 +22,12 @@ describe('without `untoggledComponent', () => {
         [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
       });
       const TestComponent = branchOnFeatureToggle({ flag: 'disabledFeature' })(
-        components.ToggledComponent
+        components.ToggledComponent,
       );
 
       const { waitUntilConfigured, queryByFlagName } = render(
         store,
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
@@ -62,19 +62,19 @@ describe('without `untoggledComponent', () => {
         [STATE_SLICE]: { flags: { memory: { enabledFeature: true } } },
       });
       const TestComponent = branchOnFeatureToggle({ flag: 'enabledFeature' })(
-        components.ToggledComponent
+        components.ToggledComponent,
       );
 
       const { waitUntilConfigured, queryByFlagName } = render(
         store,
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
 
       expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
-        'enabled'
+        'enabled',
       );
     });
   });
@@ -88,19 +88,19 @@ describe('with `untoggledComponent', () => {
       });
       const TestComponent = branchOnFeatureToggle(
         { flag: 'disabledFeature' },
-        components.UntoggledComponent
+        components.UntoggledComponent,
       )(components.ToggledComponent);
 
       const { waitUntilConfigured, queryByFlagName } = render(
         store,
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
 
       expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
         'data-flag-status',
-        'enabled'
+        'enabled',
       );
     });
 
@@ -110,19 +110,19 @@ describe('with `untoggledComponent', () => {
       });
       const TestComponent = branchOnFeatureToggle(
         { flag: 'disabledFeature' },
-        components.UntoggledComponent
+        components.UntoggledComponent,
       )(components.ToggledComponent);
 
       const { waitUntilConfigured, queryByFlagName } = render(
         store,
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
 
       expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
-        'disabled'
+        'disabled',
       );
     });
   });
@@ -133,19 +133,19 @@ describe('with `untoggledComponent', () => {
         [STATE_SLICE]: { flags: { memory: { enabledFeature: true } } },
       });
       const TestComponent = branchOnFeatureToggle({ flag: 'enabledFeature' })(
-        components.ToggledComponent
+        components.ToggledComponent,
       );
 
       const { waitUntilConfigured, queryByFlagName } = render(
         store,
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
 
       expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
-        'enabled'
+        'enabled',
       );
     });
 
@@ -154,19 +154,19 @@ describe('with `untoggledComponent', () => {
         [STATE_SLICE]: { flags: { memory: { enabledFeature: true } } },
       });
       const TestComponent = branchOnFeatureToggle({ flag: 'enabledFeature' })(
-        components.ToggledComponent
+        components.ToggledComponent,
       );
 
       const { waitUntilConfigured, queryByFlagName } = render(
         store,
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
 
       expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
         'data-flag-status',
-        'disabled'
+        'disabled',
       );
     });
   });

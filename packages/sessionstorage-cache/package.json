@@ -2,14 +2,30 @@
   "name": "@flopflip/sessionstorage-cache",
   "version": "15.1.7",
   "description": "Sessionstorage cache for flipflop adapters",
-  "sideEffects": false,
-  "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    }
+  "keywords": [
+    "cache",
+    "client",
+    "feature-flags",
+    "feature-toggles",
+    "sessionstorage"
+  ],
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
   },
+  "license": "MIT",
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tdeekens/flopflip.git",
+    "directory": "packages/sessionstorage-cache"
+  },
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
+  "type": "module",
+  "sideEffects": false,
   "main": "./dist/index.js",
   "typesVersions": {
     "*": {
@@ -19,6 +35,15 @@
       ]
     }
   },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "rimraf dist && tsup",
     "check-types": "tsc --noEmit",
@@ -26,31 +51,6 @@
     "test:watch": "vitest",
     "dev": "tsup --watch --clean=false"
   },
-  "files": [
-    "readme.md",
-    "dist/**"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tdeekens/flopflip.git",
-    "directory": "packages/sessionstorage-cache"
-  },
-  "author": "Tobias Deekens <nerd@tdeekens.name>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/tdeekens/flopflip/issues"
-  },
-  "homepage": "https://github.com/tdeekens/flopflip#readme",
-  "keywords": [
-    "feature-flags",
-    "feature-toggles",
-    "sessionstorage",
-    "cache",
-    "client"
-  ],
   "dependencies": {
     "@flopflip/types": "workspace:*"
   },

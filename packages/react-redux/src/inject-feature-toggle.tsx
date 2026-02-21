@@ -4,7 +4,6 @@ import {
   wrapDisplayName,
 } from '@flopflip/react';
 import type { TFlagName, TFlagVariation } from '@flopflip/types';
-// biome-ignore lint/style/useImportType: false positive
 import React from 'react';
 
 import { useFlagVariations } from './use-flag-variations';
@@ -14,10 +13,10 @@ type InjectedProps = Record<string, TFlagVariation>;
 const injectFeatureToggle =
   <OwnProps extends Record<string, unknown>>(
     flagName: TFlagName,
-    propKey: string = DEFAULT_FLAG_PROP_KEY
+    propKey: string = DEFAULT_FLAG_PROP_KEY,
   ) =>
   (
-    Component: React.ComponentType<any>
+    Component: React.ComponentType<any>,
   ): React.ComponentType<OwnProps & InjectedProps> => {
     function WrappedComponent(ownProps: OwnProps) {
       const [flagVariation] = useFlagVariations([flagName]);

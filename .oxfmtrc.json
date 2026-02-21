@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 80,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "experimentalSortImports": {},
+  "ignorePatterns": [
+    "**/dist/**",
+    "**/.changeset",
+    "**/CHANGELOG.md",
+    "**/pnpm-lock.yaml",
+    "**/pnpm-workspace.yaml"
+  ]
+}

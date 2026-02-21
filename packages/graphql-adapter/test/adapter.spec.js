@@ -3,6 +3,7 @@ import { AdapterConfigurationStatus } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { adapter } from '../src/adapter';
 
 vi.mock('tiny-warning');
@@ -17,7 +18,7 @@ describe('when configuring', () => {
   describe('when not configured', () => {
     it('should indicate that the adapter is not configured', () => {
       expect(
-        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured),
       ).toBe(false);
     });
 
@@ -58,7 +59,7 @@ describe('when configured', () => {
       vi.useFakeTimers();
       configurationResult = await adapter.configure(
         adapterArgs,
-        adapterEventHandlers
+        adapterEventHandlers,
       );
     });
 
@@ -66,14 +67,14 @@ describe('when configured', () => {
       expect(configurationResult).toEqual(
         expect.objectContaining({
           initializationStatus: 0,
-        })
+        }),
       );
     });
 
     it('should invoke the fetcher with uri', () => {
       expect(adapterArgs.fetcher).toHaveBeenCalledWith(
         adapterArgs.uri,
-        expect.anything()
+        expect.anything(),
       );
     });
 
@@ -96,7 +97,7 @@ describe('when configured', () => {
 
     it('should indicate that the adapter is configured', () => {
       expect(
-        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured),
       ).toBe(true);
     });
 
@@ -159,13 +160,13 @@ describe('when configured', () => {
 
     beforeEach(async () => {
       sessionStorage.getItem.mockReturnValueOnce(
-        JSON.stringify({ cached: true })
+        JSON.stringify({ cached: true }),
       );
       adapterEventHandlers = createAdapterEventHandlers();
       vi.useFakeTimers();
       configurationResult = await adapter.configure(
         adapterArgs,
-        adapterEventHandlers
+        adapterEventHandlers,
       );
     });
 
@@ -177,13 +178,13 @@ describe('when configured', () => {
       expect(configurationResult).toEqual(
         expect.objectContaining({
           initializationStatus: 0,
-        })
+        }),
       );
     });
 
     it('should restore cached flags', () => {
       expect(sessionStorage.getItem).toHaveBeenCalledWith(
-        `@flopflip/graphql-adapter/${encodeCacheContext(adapterArgs.user)}/flags`
+        `@flopflip/graphql-adapter/${encodeCacheContext(adapterArgs.user)}/flags`,
       );
 
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
@@ -198,9 +199,9 @@ describe('when configured', () => {
       expect(
         JSON.parse(
           sessionStorage.getItem(
-            `@flopflip/graphql-adapter/${encodeCacheContext(adapterArgs.user)}/flags`
-          )
-        )
+            `@flopflip/graphql-adapter/${encodeCacheContext(adapterArgs.user)}/flags`,
+          ),
+        ),
       ).toStrictEqual({ disabled: false, enabled: true });
     });
 
@@ -217,13 +218,13 @@ describe('when configured', () => {
     describe('with lazy cache mode', () => {
       beforeEach(async () => {
         sessionStorage.getItem.mockReturnValueOnce(
-          JSON.stringify({ cached: true })
+          JSON.stringify({ cached: true }),
         );
         adapterEventHandlers = createAdapterEventHandlers();
         vi.useFakeTimers();
         configurationResult = await adapter.configure(
           adapterArgs,
-          adapterEventHandlers
+          adapterEventHandlers,
         );
       });
 
@@ -322,7 +323,7 @@ describe('when configured', () => {
       expect(configurationResult).toEqual(
         expect.objectContaining({
           initializationStatus: 0,
-        })
+        }),
       );
     });
 
@@ -350,7 +351,7 @@ describe('when configured', () => {
 
     it('should reset cache', () => {
       expect(sessionStorage.removeItem).toHaveBeenCalledWith(
-        `@flopflip/graphql-adapter/${encodeCacheContext(adapterArgs.user)}/flags`
+        `@flopflip/graphql-adapter/${encodeCacheContext(adapterArgs.user)}/flags`,
       );
     });
   });
@@ -394,7 +395,7 @@ describe('when configured', () => {
 
     it('should indicate that the adapter is not configured', () => {
       expect(
-        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured),
       ).toBe(false);
     });
 

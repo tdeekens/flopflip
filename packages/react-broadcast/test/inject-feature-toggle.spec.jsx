@@ -13,11 +13,11 @@ describe('without `propKey`', () => {
   describe('when feature is disabled', () => {
     it('should render receive the flag value as `false`', async () => {
       const TestComponent = injectFeatureToggle('disabledFeature')(
-        components.FlagsToComponent
+        components.FlagsToComponent,
       );
 
       const { waitUntilConfigured, queryByFlagName } = render(
-        <TestComponent />
+        <TestComponent />,
       );
 
       expect(queryByFlagName('isFeatureEnabled')).toHaveTextContent('false');
@@ -28,7 +28,7 @@ describe('without `propKey`', () => {
     describe('when enabling feature', () => {
       it('should render the component representing a enabled feature', async () => {
         const TestComponent = injectFeatureToggle('disabledFeature')(
-          components.FlagsToComponent
+          components.FlagsToComponent,
         );
 
         const { waitUntilConfigured, queryByFlagName, changeFlagVariation } =
@@ -46,11 +46,11 @@ describe('without `propKey`', () => {
   describe('when feature is enabled', () => {
     it('should render receive the flag value as `true`', async () => {
       const TestComponent = injectFeatureToggle('enabledFeature')(
-        components.FlagsToComponent
+        components.FlagsToComponent,
       );
 
       const { waitUntilConfigured, queryByFlagName } = render(
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
@@ -65,11 +65,11 @@ describe('with `propKey`', () => {
     it('should render receive the flag value as `false`', async () => {
       const TestComponent = injectFeatureToggle(
         'disabledFeature',
-        'customPropKey'
+        'customPropKey',
       )(components.FlagsToComponent);
 
       const { waitUntilConfigured, queryByFlagName } = render(
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();

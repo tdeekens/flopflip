@@ -57,7 +57,7 @@ const useAppliedAdapterArgsState = ({
   const [appliedAdapterArgs, setAppliedAdapterArgs] =
     useState<TAdapterArgs>(initialAdapterArgs);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  // oxlint-disable-next-line react-hooks/exhaustive-deps -- false positive
   const applyAdapterArgs = useCallback(
     (nextAdapterArgs: TAdapterArgs) => {
       /**
@@ -68,7 +68,7 @@ const useAppliedAdapterArgsState = ({
        */
       setAppliedAdapterArgs(nextAdapterArgs);
     },
-    [setAppliedAdapterArgs]
+    [setAppliedAdapterArgs],
   );
 
   return [appliedAdapterArgs, applyAdapterArgs];
@@ -83,26 +83,26 @@ type TUseAdapterStateRefReturn = [
 const useAdapterStateRef = (): TUseAdapterStateRefReturn => {
   const adapterStateRef = useRef<TAdapterStates>(AdapterStates.UNCONFIGURED);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  // oxlint-disable-next-line react-hooks/exhaustive-deps -- false positive
   const setAdapterState = useCallback(
     (nextAdapterState: TAdapterStates) => {
       adapterStateRef.current = nextAdapterState;
     },
-    [adapterStateRef]
+    [adapterStateRef],
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  // oxlint-disable-next-line react-hooks/exhaustive-deps -- false positive
   const getIsAdapterConfigured = useCallback(
     () => adapterStateRef.current === AdapterStates.CONFIGURED,
-    [adapterStateRef]
+    [adapterStateRef],
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  // oxlint-disable-next-line react-hooks/exhaustive-deps -- false positive
   const getDoesAdapterNeedInitialConfiguration = useCallback(
     () =>
       adapterStateRef.current !== AdapterStates.CONFIGURED &&
       adapterStateRef.current !== AdapterStates.CONFIGURING,
-    [adapterStateRef]
+    [adapterStateRef],
   );
 
   return [
@@ -119,11 +119,11 @@ type TUsePendingAdapterArgsRefReturn = [
   () => TAdapterArgs,
 ];
 const usePendingAdapterArgsRef = (
-  appliedAdapterArgs: TAdapterArgs
+  appliedAdapterArgs: TAdapterArgs,
 ): TUsePendingAdapterArgsRefReturn => {
   const pendingAdapterArgsRef = useRef<TAdapterArgs | undefined>(undefined);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  // oxlint-disable-next-line react-hooks/exhaustive-deps -- false positive
   const setPendingAdapterArgs = useCallback(
     (nextReconfiguration: TAdapterReconfiguration): void => {
       /**
@@ -136,13 +136,13 @@ const usePendingAdapterArgsRef = (
        */
       pendingAdapterArgsRef.current = mergeAdapterArgs(
         pendingAdapterArgsRef.current ?? appliedAdapterArgs,
-        nextReconfiguration
+        nextReconfiguration,
       );
     },
-    [appliedAdapterArgs, pendingAdapterArgsRef]
+    [appliedAdapterArgs, pendingAdapterArgsRef],
   );
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  // oxlint-disable-next-line react-hooks/exhaustive-deps -- false positive
   const unsetPendingAdapterArgs = useCallback(() => {
     pendingAdapterArgsRef.current = undefined;
   }, [pendingAdapterArgsRef]);
@@ -159,17 +159,17 @@ const usePendingAdapterArgsRef = (
    *
    */
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  // oxlint-disable-next-line react-hooks/exhaustive-deps -- false positive
   const getAdapterArgsForConfiguration = useCallback(
     (): TAdapterArgs => pendingAdapterArgsRef.current ?? appliedAdapterArgs,
-    [appliedAdapterArgs, pendingAdapterArgsRef]
+    [appliedAdapterArgs, pendingAdapterArgsRef],
   );
 
   /**
    * NOTE: Clears the pending adapter args when applied adapter args changed.
    */
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  // oxlint-disable-next-line react-hooks/exhaustive-deps -- false positive
   useEffect(unsetPendingAdapterArgs, [
     appliedAdapterArgs,
     unsetPendingAdapterArgs,
@@ -194,7 +194,7 @@ const useHandleDefaultFlagsCallback = ({
         onFlagsStateChange({ flags: defaultFlags });
       }
     },
-    [onFlagsStateChange]
+    [onFlagsStateChange],
   );
 
   return handleDefaultFlags;
@@ -226,7 +226,7 @@ const useConfigurationEffect = ({
   pendingAdapterArgsRef,
   appliedAdapterArgs,
 }: TUseConfigurationEffectOptions) => {
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  // oxlint-disable-next-line react-hooks/exhaustive-deps -- false positive
   useEffect(() => {
     if (
       !shouldDeferAdapterConfiguration &&
@@ -335,7 +335,7 @@ const useDefaultFlagsEffect = ({
     onFlagsStateChange,
   });
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: false positive
+  // oxlint-disable-next-line react-hooks/exhaustive-deps -- false positive
   useEffect(() => {
     if (defaultFlags) {
       handleDefaultFlags(defaultFlags);
@@ -400,14 +400,14 @@ const usePendingAdapterArgsEffect = ({
   const reconfigureOrQueue = useCallback(
     (
       nextAdapterArgs: TAdapterArgs,
-      options: TAdapterReconfigurationOptions
+      options: TAdapterReconfigurationOptions,
     ): void => {
       if (getIsAdapterConfigured()) {
         applyAdapterArgs(
           mergeAdapterArgs(appliedAdapterArgs, {
             adapterArgs: nextAdapterArgs,
             options,
-          })
+          }),
         );
         return;
       }
@@ -419,7 +419,7 @@ const usePendingAdapterArgsEffect = ({
       applyAdapterArgs,
       getIsAdapterConfigured,
       setPendingAdapterArgs,
-    ]
+    ],
   );
 
   useEffect(() => {
@@ -499,12 +499,12 @@ function ConfigureAdapter({
       value={createAdapterContext(
         adapterEffectIdentifiers,
         reconfigureOrQueue,
-        adapterStatus
+        adapterStatus,
       )}
     >
       {(() => {
         const isAdapterConfigured = adapter.getIsConfigurationStatus(
-          AdapterConfigurationStatus.Configured
+          AdapterConfigurationStatus.Configured,
         );
 
         if (isAdapterConfigured) {

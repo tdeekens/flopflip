@@ -51,8 +51,6 @@ jobs:
       - name: Ouptut version
         run: echo "The version is ${{ steps.release_version.outputs.VERSION }}"
 
-
-
       - name: Building packages
         run: pnpm build
 

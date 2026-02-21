@@ -24,7 +24,7 @@ describe('action creators', () => {
             status: {
               configurationStatus: AdapterConfigurationStatus.Configured,
             },
-          })
+          }),
         ).toEqual({
           type: expect.any(String),
           payload: {
@@ -46,8 +46,8 @@ describe('action creators', () => {
                 configurationStatus: AdapterConfigurationStatus.Configured,
               },
             },
-            allAdapterIdentifiers
-          )
+            allAdapterIdentifiers,
+          ),
         ).toEqual({
           type: expect.any(String),
           payload: {
@@ -77,13 +77,13 @@ describe('reducers', () => {
 
       it('should set the new status', () => {
         expect(
-          reducer(undefined, { type: 'status/updateStatus', payload })
+          reducer(undefined, { type: 'status/updateStatus', payload }),
         ).toEqual(
           expect.objectContaining({
             memory: {
               configurationStatus: AdapterConfigurationStatus.Configuring,
             },
-          })
+          }),
         );
       });
     });
@@ -107,8 +107,8 @@ describe('reducers', () => {
                 configurationStatus: AdapterConfigurationStatus.Configured,
               },
             },
-            { type: 'status/updateStatus', payload }
-          )
+            { type: 'status/updateStatus', payload },
+          ),
         ).toEqual({
           memory: {
             configurationStatus: AdapterConfigurationStatus.Configuring,
@@ -148,7 +148,7 @@ describe('selectors', () => {
           isConfiguring: false,
           isReady: false,
           isUnconfigured: false,
-        })
+        }),
       );
     });
   });
@@ -157,14 +157,14 @@ describe('selectors', () => {
       expect(selectStatus({ adapterIdentifiers: ['http'] })(state)).toEqual(
         expect.objectContaining({
           isUnconfigured: true,
-        })
+        }),
       );
     });
     it('should return configuring status', () => {
       expect(selectStatus({ adapterIdentifiers: ['memory'] })(state)).toEqual(
         expect.objectContaining({
           isConfiguring: true,
-        })
+        }),
       );
     });
   });

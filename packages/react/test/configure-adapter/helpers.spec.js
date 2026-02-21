@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { mergeAdapterArgs } from '../../src/configure-adapter/helpers';
 
 describe('mergeAdapterArgs', () => {
@@ -15,7 +16,7 @@ describe('mergeAdapterArgs', () => {
         mergeAdapterArgs(previousAdapterArgs, {
           adapterArgs: nextAdapterArgs,
           options: { shouldOverwrite: false },
-        })
+        }),
       ).toEqual(expect.objectContaining(nextAdapterArgs));
     });
 
@@ -24,7 +25,7 @@ describe('mergeAdapterArgs', () => {
         mergeAdapterArgs(previousAdapterArgs, {
           adapterArgs: nextAdapterArgs,
           options: { shouldOverwrite: false },
-        })
+        }),
       ).toEqual(expect.objectContaining(previousAdapterArgs));
     });
   });
@@ -42,7 +43,7 @@ describe('mergeAdapterArgs', () => {
         mergeAdapterArgs(previousAdapterArgs, {
           adapterArgs: nextAdapterArgs,
           options: { shouldOverwrite: true },
-        })
+        }),
       ).toEqual(expect.objectContaining(nextAdapterArgs));
     });
 
@@ -51,7 +52,7 @@ describe('mergeAdapterArgs', () => {
         mergeAdapterArgs(previousAdapterArgs, {
           adapterArgs: nextAdapterArgs,
           options: { shouldOverwrite: true },
-        })
+        }),
       ).not.toEqual(expect.objectContaining(previousAdapterArgs));
     });
   });

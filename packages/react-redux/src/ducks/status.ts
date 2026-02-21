@@ -20,7 +20,7 @@ const statusSlice = createSlice({
         state,
         action: PayloadAction<
           TAdapterStatusChange & { adapterIdentifiers: TAdapterIdentifiers[] }
-        >
+        >,
       ) {
         if (action.payload.id) {
           state[action.payload.id] = {
@@ -40,7 +40,7 @@ const statusSlice = createSlice({
       },
       prepare(
         statusChange: TAdapterStatusChange,
-        adapterIdentifiers: TAdapterIdentifiers[]
+        adapterIdentifiers: TAdapterIdentifiers[],
       ) {
         return {
           payload: { ...statusChange, adapterIdentifiers },

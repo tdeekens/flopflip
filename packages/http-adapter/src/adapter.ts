@@ -84,7 +84,7 @@ class HttpAdapter implements THttpAdapterInterface {
   };
 
   readonly #fetchFlags = async (
-    adapterArgs: THttpAdapterArgs
+    adapterArgs: THttpAdapterArgs,
   ): Promise<TFlags> => {
     const flags = await adapterArgs.execute(adapterArgs);
 
@@ -108,7 +108,7 @@ class HttpAdapter implements THttpAdapterInterface {
             const cache = await getCache(
               adapterArgs.cacheIdentifier,
               adapterIdentifiers.http,
-              { key: this.#adapterState.user?.key }
+              { key: this.#adapterState.user?.key },
             );
 
             cache.set(nextFlags);
@@ -130,12 +130,12 @@ class HttpAdapter implements THttpAdapterInterface {
 
   updateFlags: TFlagsUpdateFunction = (flags, options) => {
     const isAdapterConfigured = this.getIsConfigurationStatus(
-      AdapterConfigurationStatus.Configured
+      AdapterConfigurationStatus.Configured,
     );
 
     warning(
       isAdapterConfigured,
-      '@flopflip/http-adapter: adapter not configured. Flags can not be updated before.'
+      '@flopflip/http-adapter: adapter not configured. Flags can not be updated before.',
     );
 
     if (!isAdapterConfigured) {
@@ -148,7 +148,7 @@ class HttpAdapter implements THttpAdapterInterface {
       (updatedFlags, [flagName, flagValue]) => {
         const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
           flagName,
-          flagValue
+          flagValue,
         );
 
         if (this.#getIsFlagLocked(normalizedFlagName)) {
@@ -166,7 +166,7 @@ class HttpAdapter implements THttpAdapterInterface {
 
         return updated;
       },
-      {}
+      {},
     );
 
     const nextFlags: TFlags = {
@@ -180,7 +180,7 @@ class HttpAdapter implements THttpAdapterInterface {
 
   async configure(
     adapterArgs: THttpAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) {
     const handleFlagsChange = (nextFlags: TFlagsChange['flags']) => {
       if (this.#getIsAdapterUnsubscribed()) {
@@ -218,7 +218,7 @@ class HttpAdapter implements THttpAdapterInterface {
         const cache = await getCache(
           adapterArgs.cacheIdentifier,
           adapterIdentifiers.http,
-          { key: this.#adapterState.user?.key }
+          { key: this.#adapterState.user?.key },
         );
 
         cachedFlags = cache.get();
@@ -227,7 +227,7 @@ class HttpAdapter implements THttpAdapterInterface {
           this.#adapterState.flags = cachedFlags;
           this.#adapterState.emitter.emit(
             'flagsStateChange',
-            cachedFlags as TFlags
+            cachedFlags as TFlags,
           );
         }
       }
@@ -242,7 +242,7 @@ class HttpAdapter implements THttpAdapterInterface {
         const cache = await getCache(
           adapterArgs.cacheIdentifier,
           adapterIdentifiers.http,
-          { key: this.#adapterState.user?.key }
+          { key: this.#adapterState.user?.key },
         );
 
         cache.set(flags);
@@ -264,13 +264,13 @@ class HttpAdapter implements THttpAdapterInterface {
 
   async reconfigure(
     adapterArgs: THttpAdapterArgs,
-    _adapterEventHandlers: TAdapterEventHandlers
+    _adapterEventHandlers: TAdapterEventHandlers,
   ) {
     if (!this.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)) {
       return Promise.reject(
         new Error(
-          '@flopflip/http-adapter: please configure adapter before reconfiguring.'
-        )
+          '@flopflip/http-adapter: please configure adapter before reconfiguring.',
+        ),
       );
     }
 
@@ -283,7 +283,7 @@ class HttpAdapter implements THttpAdapterInterface {
         const cache = await getCache(
           adapterArgs.cacheIdentifier,
           adapterIdentifiers.http,
-          { key: this.#adapterState.user?.key }
+          { key: this.#adapterState.user?.key },
         );
 
         cache.unset();
@@ -316,7 +316,7 @@ class HttpAdapter implements THttpAdapterInterface {
       } else {
         this.#adapterState.emitter.on(
           this.#__internalConfiguredStatusChange__,
-          resolve
+          resolve,
         );
       }
     });

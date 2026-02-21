@@ -27,7 +27,7 @@ const addCommands = (options: TCypressPluginAddCommandOptions) => {
 
           if (!flopflipAdapterGlobal) {
             throw new Error(
-              '@flopflip/cypress: namespace or adapter of the passed id does not exist. Make sure you use one and the specified adapter.'
+              '@flopflip/cypress: namespace or adapter of the passed id does not exist. Make sure you use one and the specified adapter.',
             );
           }
 
@@ -42,7 +42,7 @@ const addCommands = (options: TCypressPluginAddCommandOptions) => {
           flopflipAdapterGlobal?.updateFlags(flags, {
             unsubscribeFlags: true,
           });
-        })
+        }),
   );
 };
 

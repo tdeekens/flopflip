@@ -13,11 +13,11 @@ describe('without `untoggledComponent', () => {
   describe('when feature is disabled', () => {
     it('should render neither the component representing an disabled or enabled feature', async () => {
       const TestComponent = branchOnFeatureToggle({ flag: 'disabledFeature' })(
-        components.ToggledComponent
+        components.ToggledComponent,
       );
 
       const { waitUntilConfigured, queryByFlagName } = render(
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
@@ -46,18 +46,18 @@ describe('without `untoggledComponent', () => {
   describe('when feature is enabled', () => {
     it('should render the component representing an enabled feature', async () => {
       const TestComponent = branchOnFeatureToggle({ flag: 'enabledFeature' })(
-        components.ToggledComponent
+        components.ToggledComponent,
       );
 
       const { waitUntilConfigured, queryByFlagName } = render(
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
 
       expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
-        'enabled'
+        'enabled',
       );
     });
   });
@@ -68,36 +68,36 @@ describe('with `untoggledComponent', () => {
     it('should not render the component representing a enabled feature', async () => {
       const TestComponent = branchOnFeatureToggle(
         { flag: 'disabledFeature' },
-        components.UntoggledComponent
+        components.UntoggledComponent,
       )(components.ToggledComponent);
 
       const { waitUntilConfigured, queryByFlagName } = render(
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
 
       expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
         'data-flag-status',
-        'enabled'
+        'enabled',
       );
     });
 
     it('should render the component representing a disabled feature', async () => {
       const TestComponent = branchOnFeatureToggle(
         { flag: 'disabledFeature' },
-        components.UntoggledComponent
+        components.UntoggledComponent,
       )(components.ToggledComponent);
 
       const { waitUntilConfigured, queryByFlagName } = render(
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
 
       expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
-        'disabled'
+        'disabled',
       );
     });
   });
@@ -106,36 +106,36 @@ describe('with `untoggledComponent', () => {
     it('should render the component representing a enabled feature', async () => {
       const TestComponent = branchOnFeatureToggle(
         { flag: 'enabledFeature' },
-        components.UntoggledComponent
+        components.UntoggledComponent,
       )(components.ToggledComponent);
 
       const { waitUntilConfigured, queryByFlagName } = render(
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
 
       expect(queryByFlagName('isFeatureEnabled')).toHaveAttribute(
         'data-flag-status',
-        'enabled'
+        'enabled',
       );
     });
 
     it('should not render the component representing a disabled feature', async () => {
       const TestComponent = branchOnFeatureToggle(
         { flag: 'enabledFeature' },
-        components.UntoggledComponent
+        components.UntoggledComponent,
       )(components.ToggledComponent);
 
       const { waitUntilConfigured, queryByFlagName } = render(
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
 
       expect(queryByFlagName('isFeatureEnabled')).not.toHaveAttribute(
         'data-flag-status',
-        'disabled'
+        'disabled',
       );
     });
   });

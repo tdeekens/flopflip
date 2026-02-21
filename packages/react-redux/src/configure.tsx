@@ -5,8 +5,9 @@ import type {
   TConfigureAdapterProps,
   TFlags,
 } from '@flopflip/types';
-// biome-ignore lint/correctness/noUnusedImports: false positive
+// oxlint-disable-next-line no-unused-vars -- false positive
 import React from 'react';
+
 import { useUpdateFlags } from './use-update-flags';
 import { useUpdateStatus } from './use-update-status';
 

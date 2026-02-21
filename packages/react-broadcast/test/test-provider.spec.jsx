@@ -29,7 +29,7 @@ const render = ({ flags, status } = {}) => {
   rtlRender(
     <TestProvider flags={flags} status={status}>
       <TestComponent />
-    </TestProvider>
+    </TestProvider>,
   );
 };
 

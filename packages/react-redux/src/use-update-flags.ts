@@ -19,7 +19,7 @@ const useUpdateFlags = ({
   return useCallback(
     (flagsChange: TFlagsChange) =>
       dispatch(updateFlags(flagsChange, adapterIdentifiers)),
-    [dispatch, adapterIdentifiers]
+    [dispatch, adapterIdentifiers],
   );
 };
 

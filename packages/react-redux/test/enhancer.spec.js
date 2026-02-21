@@ -41,7 +41,7 @@ describe('when creating enhancer', () => {
         adapterArgs,
         expect.objectContaining({
           onFlagsStateChange: expect.any(Function),
-        })
+        }),
       );
     });
 
@@ -50,7 +50,7 @@ describe('when creating enhancer', () => {
         adapterArgs,
         expect.objectContaining({
           onStatusStateChange: expect.any(Function),
-        })
+        }),
       );
     });
 
@@ -74,7 +74,7 @@ describe('when creating enhancer', () => {
 
       it('should invoke `dispatch` with `updateFlags`', () => {
         expect(dispatch).toHaveBeenCalledWith(
-          updateFlags(nextFlags, [adapter.id])
+          updateFlags(nextFlags, [adapter.id]),
         );
       });
     });
@@ -99,7 +99,7 @@ describe('when creating enhancer', () => {
 
       it('should invoke `dispatch` with `updateStatus`', () => {
         expect(dispatch).toHaveBeenCalledWith(
-          updateStatus(nextStatus, Object.keys(allAdapterIdentifiers))
+          updateStatus(nextStatus, Object.keys(allAdapterIdentifiers)),
         );
       });
     });

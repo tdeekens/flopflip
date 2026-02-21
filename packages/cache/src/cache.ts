@@ -18,7 +18,7 @@ export function encodeCacheContext(cacheContext: any) {
 
   const hashCode = [...encodedAsJson].reduce(
     (hash, c) => (Math.imul(31, hash) + c.charCodeAt(0)) | 0,
-    0
+    0,
   );
 
   const encodedCacheContext = Math.abs(hashCode).toString();
@@ -47,7 +47,7 @@ async function importCache(cacheIdentifier: TCacheIdentifiers) {
 async function getCache(
   cacheIdentifier: TCacheIdentifiers,
   adapterIdentifiers: TAdapterIdentifiers,
-  cacheContext?: any
+  cacheContext?: any,
 ) {
   const cacheModule = await importCache(cacheIdentifier);
 
@@ -74,7 +74,7 @@ async function getCache(
       if (haveFlagsBeenWritten) {
         referenceCache.set(
           FLAGS_REFERENCE_CACHE_KEY,
-          [flagsCachePrefix, FLAGS_CACHE_KEY].join('/')
+          [flagsCachePrefix, FLAGS_CACHE_KEY].join('/'),
         );
       }
 
@@ -93,7 +93,7 @@ async function getCache(
 
 function getCachedFlags(
   cacheIdentifier: TCacheIdentifiers,
-  adapterIdentifiers: TAdapterIdentifiers
+  adapterIdentifiers: TAdapterIdentifiers,
 ): TFlags {
   const CACHE_PREFIX = getCachePrefix(adapterIdentifiers);
 
@@ -113,7 +113,7 @@ function getCachedFlags(
       }
     } catch (_) {
       console.warn(
-        `@flopflip/cache: Failed to parse cached flags from ${cacheIdentifier}.`
+        `@flopflip/cache: Failed to parse cached flags from ${cacheIdentifier}.`,
       );
     }
   }
@@ -123,7 +123,7 @@ function getCachedFlags(
 
 function getAllCachedFlags(
   adapter: TAdapter,
-  cacheIdentifier?: TCacheIdentifiers
+  cacheIdentifier?: TCacheIdentifiers,
 ) {
   if (!cacheIdentifier) {
     return {};
@@ -135,7 +135,7 @@ function getAllCachedFlags(
         ...defaultFlags,
         ...getCachedFlags(cacheIdentifier, effectId),
       }),
-      {}
+      {},
     );
   }
 

@@ -98,7 +98,7 @@ const renderWithReconfiguration = ({ props, adapter }) => {
       <AdapterStatus>
         <Reconfiguration />
       </AdapterStatus>
-    </ConfigureAdapter>
+    </ConfigureAdapter>,
   );
 
   const waitUntilStatus = (status = AdapterStates.CONFIGURED) =>
@@ -164,7 +164,7 @@ describe('rendering', () => {
         const { waitUntilStatus } = render({ props, adapter });
 
         expect(props.children).toHaveBeenCalledWith(
-          expect.objectContaining({ isAdapterConfigured: true })
+          expect.objectContaining({ isAdapterConfigured: true }),
         );
 
         await waitUntilStatus();
@@ -237,7 +237,7 @@ describe('when adapter configuration should not be deferred', () => {
       {
         onFlagsStateChange: mergedRenderProps.onFlagsStateChange,
         onStatusStateChange: mergedRenderProps.onStatusStateChange,
-      }
+      },
     );
 
     await waitUntilStatus();
@@ -273,7 +273,7 @@ describe('when providing default flags', () => {
       cache = await getCache(
         cacheIdentifiers.session,
         adapterIdentifiers.memory,
-        cacheKey
+        cacheKey,
       );
 
       cache.set(cachedFlags);
@@ -334,12 +334,12 @@ describe('when adapter args change before adapter was configured', () => {
         adapterArgs={nextAdapterArgs}
       >
         <AdapterStatus />
-      </ConfigureAdapter>
+      </ConfigureAdapter>,
     );
 
     expect(adapter.configure).toHaveBeenCalledWith(
       { ...mergedRenderProps.adapterArgs, ...nextAdapterArgs },
-      expect.anything()
+      expect.anything(),
     );
 
     await waitUntilStatus();
@@ -364,7 +364,7 @@ describe('when adapter args change after adapter was configured', () => {
     rerender(
       <ConfigureAdapter {...mergedRenderProps} adapterArgs={nextAdapterArgs}>
         <AdapterStatus />
-      </ConfigureAdapter>
+      </ConfigureAdapter>,
     );
 
     await waitUntilStatus();
@@ -372,7 +372,7 @@ describe('when adapter args change after adapter was configured', () => {
     await waitFor(() => {
       expect(adapter.reconfigure).toHaveBeenCalledWith(
         nextAdapterArgs,
-        expect.anything()
+        expect.anything(),
       );
     });
   });
@@ -397,7 +397,7 @@ describe('when adapter args change after adapter was configured', () => {
             group: 'reconfigured-user-group',
           },
         }),
-        expect.anything()
+        expect.anything(),
       );
     });
 
@@ -428,7 +428,7 @@ describe('when adapter was configured and component updates', () => {
     rerender(
       <ConfigureAdapter {...nextProps}>
         <AdapterStatus />
-      </ConfigureAdapter>
+      </ConfigureAdapter>,
     );
 
     expect(adapter.configure).toHaveBeenCalledTimes(1);

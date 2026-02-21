@@ -1,5 +1,6 @@
 import { adapterIdentifiers, cacheIdentifiers } from '@flopflip/types';
 import { describe, expect, it } from 'vitest';
+
 import {
   encodeCacheContext,
   getAllCachedFlags,
@@ -18,7 +19,7 @@ describe('general caching', () => {
     const cache = await getCache(
       cacheIdentifiers.session,
       adapterIdentifiers.memory,
-      cacheContext
+      cacheContext,
     );
 
     cache.set(flags);
@@ -33,7 +34,7 @@ describe('general caching', () => {
     const cache = await getCache(
       cacheIdentifiers.session,
       adapterIdentifiers.memory,
-      cacheContext
+      cacheContext,
     );
 
     cache.set(flags);
@@ -49,15 +50,15 @@ describe('general caching', () => {
     const cache = await getCache(
       cacheIdentifiers.session,
       adapterIdentifiers.memory,
-      cacheContext
+      cacheContext,
     );
 
     cache.set(flags);
 
     expect(sessionStorage.getItem).toHaveBeenLastCalledWith(
       expect.stringContaining(
-        `${getCachePrefix(adapterIdentifiers.memory)}/${encodeCacheContext(cacheContext)}/flags`
-      )
+        `${getCachePrefix(adapterIdentifiers.memory)}/${encodeCacheContext(cacheContext)}/flags`,
+      ),
     );
   });
 });
@@ -71,17 +72,17 @@ describe('flag caching', () => {
       const cache = await getCache(
         cacheIdentifiers.session,
         adapterIdentifiers.memory,
-        cacheContext
+        cacheContext,
       );
 
       cache.set(flags);
 
       expect(
-        getCachedFlags(cacheIdentifiers.session, adapterIdentifiers.memory)
+        getCachedFlags(cacheIdentifiers.session, adapterIdentifiers.memory),
       ).toStrictEqual(flags);
 
       expect(sessionStorage.getItem).toHaveBeenLastCalledWith(
-        `${getCachePrefix(adapterIdentifiers.memory)}/${encodeCacheContext(cacheContext)}/flags`
+        `${getCachePrefix(adapterIdentifiers.memory)}/${encodeCacheContext(cacheContext)}/flags`,
       );
     });
   });
@@ -97,7 +98,7 @@ describe('flag caching', () => {
       const localstorageAdapterCache = await getCache(
         cacheIdentifiers.session,
         adapterIdentifiers.localstorage,
-        cacheContext
+        cacheContext,
       );
 
       localstorageAdapterCache.set(localstorageAdapterFlags);
@@ -107,7 +108,7 @@ describe('flag caching', () => {
       };
 
       expect(
-        getAllCachedFlags(fakeAdapter, cacheIdentifiers.session)
+        getAllCachedFlags(fakeAdapter, cacheIdentifiers.session),
       ).toStrictEqual({ ...memoryAdapterFlags, ...localstorageAdapterFlags });
     });
   });

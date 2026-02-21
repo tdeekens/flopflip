@@ -2,14 +2,30 @@
   "name": "@flopflip/cypress-plugin",
   "version": "15.1.7",
   "description": "A plugin for Cypress change feature toggles in Cypress runs",
-  "sideEffects": false,
-  "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    }
+  "keywords": [
+    "LaunchDarkly",
+    "client",
+    "feature-flags",
+    "feature-toggles",
+    "react"
+  ],
+  "homepage": "https://github.com/tdeekens/flopflip#readme",
+  "bugs": {
+    "url": "https://github.com/tdeekens/flopflip/issues"
   },
+  "license": "MIT",
+  "author": "Tobias Deekens <nerd@tdeekens.name>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tdeekens/flopflip.git",
+    "directory": "packages/cypress-plugin"
+  },
+  "files": [
+    "readme.md",
+    "dist/**"
+  ],
+  "type": "module",
+  "sideEffects": false,
   "main": "./dist/index.js",
   "browser": "./dist/index.js",
   "typesVersions": {
@@ -20,6 +36,15 @@
       ]
     }
   },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "rimraf dist && tsup",
     "check-types": "tsc --noEmit",
@@ -27,24 +52,9 @@
     "test:watch": "exit 0",
     "dev": "tsup --watch --clean=false"
   },
-  "files": [
-    "readme.md",
-    "dist/**"
-  ],
-  "publishConfig": {
-    "access": "public"
+  "dependencies": {
+    "@flopflip/types": "workspace:*"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tdeekens/flopflip.git",
-    "directory": "packages/cypress-plugin"
-  },
-  "author": "Tobias Deekens <nerd@tdeekens.name>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/tdeekens/flopflip/issues"
-  },
-  "homepage": "https://github.com/tdeekens/flopflip#readme",
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
     "cypress": "13.6.4",
@@ -52,15 +62,5 @@
   },
   "peerDependencies": {
     "cypress": "13.x || 14.x"
-  },
-  "dependencies": {
-    "@flopflip/types": "workspace:*"
-  },
-  "keywords": [
-    "react",
-    "feature-flags",
-    "feature-toggles",
-    "LaunchDarkly",
-    "client"
-  ]
+  }
 }

@@ -10,7 +10,7 @@ import {
   type TFlags,
   type TFlagsChange,
 } from '@flopflip/types';
-// biome-ignore lint/correctness/noUnusedImports: false positive
+// oxlint-disable-next-line no-unused-vars -- false positive
 import React, { useCallback, useMemo } from 'react';
 import { useSyncExternalStore } from 'use-sync-external-store/shim';
 
@@ -45,7 +45,7 @@ const useFlagsState = ({
   const flags = useSyncExternalStore(
     store.subscribe,
     () => store.getSnapshot().flags,
-    () => store.getSnapshot().flags
+    () => store.getSnapshot().flags,
   );
 
   const updateFlags = useCallback(
@@ -78,7 +78,7 @@ const useFlagsState = ({
                   ...prevState.flags[adapterInterfaceIdentifier],
                   ...flagsChange.flags,
                 },
-              ])
+              ]),
             ),
           },
         };
@@ -86,7 +86,7 @@ const useFlagsState = ({
         return nextState;
       });
     },
-    [adapterIdentifiers]
+    [adapterIdentifiers],
   );
 
   return [flags, updateFlags];
@@ -102,7 +102,7 @@ const useStatusState = ({
   const status = useSyncExternalStore(
     store.subscribe,
     () => store.getSnapshot().status,
-    () => store.getSnapshot().status
+    () => store.getSnapshot().status,
   );
 
   const setStatus = useCallback(
@@ -136,7 +136,7 @@ const useStatusState = ({
                   ...prevState.status[adapterInterfaceIdentifier],
                   ...statusChange.status,
                 },
-              ])
+              ]),
             ),
           },
         };
@@ -144,7 +144,7 @@ const useStatusState = ({
         return nextState;
       });
     },
-    [adapterIdentifiers]
+    [adapterIdentifiers],
   );
 
   return [status, setStatus];
@@ -177,7 +177,7 @@ function Configure<AdapterInstance extends TAdapter>({
 
       updateFlags(flagsChange);
     },
-    [updateFlags, getHasAdapterSubscriptionStatus]
+    [updateFlags, getHasAdapterSubscriptionStatus],
   );
 
   const handleUpdateStatus = useCallback<
@@ -192,7 +192,7 @@ function Configure<AdapterInstance extends TAdapter>({
 
       updateStatus(statusChange);
     },
-    [updateStatus, getHasAdapterSubscriptionStatus]
+    [updateStatus, getHasAdapterSubscriptionStatus],
   );
 
   return (

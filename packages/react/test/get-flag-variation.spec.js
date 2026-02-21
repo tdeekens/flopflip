@@ -14,7 +14,7 @@ describe('with a single adapter interface identifier', () => {
           const adapterIdentifiers = ['memory'];
 
           expect(
-            getFlagVariation(allFlags, adapterIdentifiers, 'fooFlag')
+            getFlagVariation(allFlags, adapterIdentifiers, 'fooFlag'),
           ).toBe('foo-variation');
         });
       });
@@ -25,7 +25,7 @@ describe('with a single adapter interface identifier', () => {
           const adapterIdentifiers = ['memory'];
 
           expect(
-            getFlagVariation(allFlags, adapterIdentifiers, 'fooFlag')
+            getFlagVariation(allFlags, adapterIdentifiers, 'fooFlag'),
           ).toBe(123);
         });
       });
@@ -36,7 +36,7 @@ describe('with a single adapter interface identifier', () => {
           const adapterIdentifiers = ['memory'];
 
           expect(
-            getFlagVariation(allFlags, adapterIdentifiers, 'fooFlag')
+            getFlagVariation(allFlags, adapterIdentifiers, 'fooFlag'),
           ).toStrictEqual({ a: 'b' });
         });
       });
@@ -49,7 +49,7 @@ describe('with a single adapter interface identifier', () => {
       const adapterIdentifiers = ['memory'];
 
       expect(getFlagVariation(allFlags, adapterIdentifiers, 'foo-flag')).toBe(
-        true
+        true,
       );
     });
 
@@ -69,7 +69,7 @@ describe('with a single adapter interface identifier', () => {
       const adapterIdentifiers = ['memory'];
 
       expect(getFlagVariation(allFlags, adapterIdentifiers, 'fooFlag2')).toBe(
-        false
+        false,
       );
     });
   });
@@ -86,7 +86,7 @@ describe('with multiple adapter interface identifier', () => {
         const adapterIdentifiers = ['memory', 'graphql'];
 
         expect(getFlagVariation(allFlags, adapterIdentifiers, 'fooFlag')).toBe(
-          'memory-foo-variation'
+          'memory-foo-variation',
         );
       });
     });
@@ -100,7 +100,7 @@ describe('with multiple adapter interface identifier', () => {
         const adapterIdentifiers = ['memory', 'graphql'];
 
         expect(getFlagVariation(allFlags, adapterIdentifiers, 'fooFlag')).toBe(
-          false
+          false,
         );
       });
     });
@@ -114,7 +114,7 @@ describe('with multiple adapter interface identifier', () => {
         const adapterIdentifiers = ['memory', 'graphql'];
 
         expect(getFlagVariation(allFlags, adapterIdentifiers, 'fooFlag')).toBe(
-          'graphql-foo-variation'
+          'graphql-foo-variation',
         );
       });
     });

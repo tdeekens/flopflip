@@ -22,7 +22,7 @@ const flagsSlice = createSlice({
         state,
         action: PayloadAction<
           TFlagsChange & { adapterIdentifiers: TAdapterIdentifiers[] }
-        >
+        >,
       ) {
         if (action.payload.id) {
           state[action.payload.id] = {
@@ -41,7 +41,7 @@ const flagsSlice = createSlice({
       },
       prepare(
         flagsChange: TFlagsChange,
-        adapterIdentifiers: TAdapterIdentifiers[]
+        adapterIdentifiers: TAdapterIdentifiers[],
       ) {
         return {
           payload: { ...flagsChange, adapterIdentifiers },
@@ -55,7 +55,7 @@ export const { updateFlags } = flagsSlice.actions;
 export const reducer = flagsSlice.reducer;
 
 export const createReducer = (preloadedState: TFlagsContext = initialState) => {
-  // biome-ignore lint/style/useDefaultParameterLast: false positive
+  // oxlint-disable-next-line default-param-last -- false positive
   return (state = preloadedState, action: ReturnType<typeof updateFlags>) =>
     reducer(state, action);
 };

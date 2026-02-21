@@ -27,7 +27,7 @@ function TestDisabledComponent() {
 describe('when feature is disabled', () => {
   it('should not render the component representing a enabled feature', async () => {
     const { waitUntilConfigured, queryByFlagName } = render(
-      <TestEnabledComponent />
+      <TestEnabledComponent />,
     );
 
     expect(queryByFlagName('disabledFeature')).not.toBeInTheDocument();
@@ -52,14 +52,14 @@ describe('when feature is disabled', () => {
 describe('when feature is enabled', () => {
   it('should render the component representing a enabled feature', async () => {
     const { waitUntilConfigured, queryByFlagName } = render(
-      <TestDisabledComponent />
+      <TestDisabledComponent />,
     );
 
     await waitUntilConfigured();
 
     expect(queryByFlagName('enabledFeature')).toHaveAttribute(
       'data-flag-status',
-      'enabled'
+      'enabled',
     );
   });
 });

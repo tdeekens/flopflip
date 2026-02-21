@@ -2,6 +2,7 @@ import { AdapterConfigurationStatus } from '@flopflip/types';
 import { SplitFactory } from '@splitsoftware/splitio';
 import getGlobalThis from 'globalthis';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { adapter, createAnonymousUserKey, normalizeFlag } from '../src/adapter';
 
 vi.mock('@splitsoftware/splitio', () => ({
@@ -39,14 +40,14 @@ describe('when configuring', () => {
 
   it('should indicate that the adapter is not configured', () => {
     expect(
-      adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+      adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured),
     ).toBe(false);
   });
 
   describe('when reconfiguring before configured', () => {
     it('should reject reconfiguration', () =>
       expect(adapter.reconfigure({ user: userWithKey })).rejects.toEqual(
-        expect.any(Error)
+        expect.any(Error),
       ));
   });
 
@@ -60,7 +61,7 @@ describe('when configuring', () => {
         {
           onStatusStateChange,
           onFlagsStateChange,
-        }
+        },
       );
     });
 
@@ -84,7 +85,7 @@ describe('when configuring', () => {
         {
           onStatusStateChange,
           onFlagsStateChange,
-        }
+        },
       );
     });
 
@@ -112,7 +113,7 @@ describe('when configuring', () => {
         {
           onStatusStateChange,
           onFlagsStateChange,
-        }
+        },
       );
     });
 
@@ -141,7 +142,7 @@ describe('when configuring', () => {
         {
           onStatusStateChange,
           onFlagsStateChange,
-        }
+        },
       );
     });
 
@@ -198,7 +199,7 @@ describe('when configuring', () => {
         {
           onStatusStateChange,
           onFlagsStateChange,
-        }
+        },
       );
     });
 
@@ -206,7 +207,7 @@ describe('when configuring', () => {
       expect(configurationResult).toEqual(
         expect.objectContaining({
           initializationStatus: 0,
-        })
+        }),
       );
     });
 
@@ -228,8 +229,8 @@ describe('when configuring', () => {
       it('should indicate that the adapter is not configured', () => {
         expect(
           adapter.getIsConfigurationStatus(
-            AdapterConfigurationStatus.Configured
-          )
+            AdapterConfigurationStatus.Configured,
+          ),
         ).toBe(true);
       });
 
@@ -255,7 +256,7 @@ describe('when configuring', () => {
       it('should register callbacks to receive flag updates', () => {
         expect(onStub).toHaveBeenCalledWith(
           factory.client().Event.SDK_UPDATE,
-          expect.any(Function)
+          expect.any(Function),
         );
       });
     });
@@ -303,7 +304,7 @@ describe('when configuring', () => {
             {
               onStatusStateChange,
               onFlagsStateChange,
-            }
+            },
           )
           .then(() => {
             // NOTE: Clearing stubs as they are invoked
@@ -320,7 +321,7 @@ describe('when configuring', () => {
                   },
                 },
               },
-              { onStatusStateChange, onFlagsStateChange }
+              { onStatusStateChange, onFlagsStateChange },
             );
           });
       });
@@ -329,7 +330,7 @@ describe('when configuring', () => {
         expect(configurationResult).toEqual(
           expect.objectContaining({
             initializationStatus: 0,
-          })
+          }),
         );
       });
 

@@ -71,12 +71,12 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
   updateFlags = (flags: TFlags, options?: TUpdateFlagsOptions) => {
     const isAdapterConfigured = this.getIsConfigurationStatus(
-      AdapterConfigurationStatus.Configured
+      AdapterConfigurationStatus.Configured,
     );
 
     warning(
       isAdapterConfigured,
-      '@flopflip/memory-adapter: adapter is not configured. Flags can not be updated before.'
+      '@flopflip/memory-adapter: adapter is not configured. Flags can not be updated before.',
     );
 
     if (!isAdapterConfigured) {
@@ -86,7 +86,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
     for (const [flagName, flagValue] of Object.entries(flags)) {
       const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
         flagName,
-        flagValue
+        flagValue,
       );
 
       if (this.#getIsFlagLocked(normalizedFlagName)) {
@@ -105,13 +105,13 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
     this.#adapterState.emitter.emit(
       'flagsStateChange',
-      this.#adapterState.flags
+      this.#adapterState.flags,
     );
   };
 
   async configure(
     adapterArgs: TMemoryAdapterArgs,
-    adapterEventHandlers: TAdapterEventHandlers
+    adapterEventHandlers: TAdapterEventHandlers,
   ) {
     const handleFlagsChange = (nextFlags: TFlagsChange['flags']) => {
       if (this.#getIsAdapterUnsubscribed()) {
@@ -153,7 +153,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
       this.#adapterState.emitter.emit(
         'flagsStateChange',
-        this.#adapterState.flags
+        this.#adapterState.flags,
       );
 
       this.#adapterState.emitter.emit(this.#__internalConfiguredStatusChange__);
@@ -166,7 +166,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
   async reconfigure(
     adapterArgs: TMemoryAdapterArgs,
-    _adapterEventHandlers: TAdapterEventHandlers
+    _adapterEventHandlers: TAdapterEventHandlers,
   ) {
     this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 
@@ -178,7 +178,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
     this.#adapterState.emitter.emit(
       'flagsStateChange',
-      this.#adapterState.flags
+      this.#adapterState.flags,
     );
 
     return Promise.resolve({
@@ -213,7 +213,7 @@ class MemoryAdapter implements TMemoryAdapterInterface {
       } else {
         this.#adapterState.emitter.on(
           this.#__internalConfiguredStatusChange__,
-          resolve
+          resolve,
         );
       }
     });

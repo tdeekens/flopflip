@@ -8,14 +8,14 @@ function useAllFeatureToggles(): TFlags {
   const flagsContext = useFlagsContext();
   const reversedAdapterEffectIdentifiers = [
     ...adapterContext.adapterEffectIdentifiers,
-  ].reverse();
+  ].toReversed();
 
   return reversedAdapterEffectIdentifiers.reduce<TFlags>(
     (_allFlags, adapterIdentifier) => ({
       ..._allFlags,
       ...flagsContext[adapterIdentifier],
     }),
-    {}
+    {},
   );
 }
 

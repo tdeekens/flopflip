@@ -22,12 +22,12 @@ describe('without `propKey`', () => {
         [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
       });
       const TestComponent = injectFeatureToggle('disabledFeature')(
-        components.FlagsToComponent
+        components.FlagsToComponent,
       );
 
       const { waitUntilConfigured, queryByFlagName } = render(
         store,
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
@@ -41,7 +41,7 @@ describe('without `propKey`', () => {
           [STATE_SLICE]: { flags: { memory: { disabledFeature: false } } },
         });
         const TestComponent = injectFeatureToggle('disabledFeature')(
-          components.FlagsToComponent
+          components.FlagsToComponent,
         );
 
         const { waitUntilConfigured, queryByFlagName, changeFlagVariation } =
@@ -62,12 +62,12 @@ describe('without `propKey`', () => {
         [STATE_SLICE]: { flags: { memory: { enabledFeature: true } } },
       });
       const TestComponent = injectFeatureToggle('enabledFeature')(
-        components.FlagsToComponent
+        components.FlagsToComponent,
       );
 
       const { waitUntilConfigured, queryByFlagName } = render(
         store,
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();
@@ -85,12 +85,12 @@ describe('with `propKey`', () => {
       });
       const TestComponent = injectFeatureToggle(
         'disabledFeature',
-        'customPropKey'
+        'customPropKey',
       )(components.FlagsToComponent);
 
       const { waitUntilConfigured, queryByFlagName } = render(
         store,
-        <TestComponent />
+        <TestComponent />,
       );
 
       await waitUntilConfigured();

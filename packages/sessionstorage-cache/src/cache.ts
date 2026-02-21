@@ -4,7 +4,7 @@ const createCache = (options: TCacheOptions) => {
   const cache: TCache = {
     get(key) {
       const sessionStorageValue = sessionStorage.getItem(
-        [options.prefix, key].join('/')
+        [options.prefix, key].join('/'),
       );
 
       return sessionStorageValue ? JSON.parse(sessionStorageValue) : null;
@@ -13,7 +13,7 @@ const createCache = (options: TCacheOptions) => {
       try {
         sessionStorage.setItem(
           [options.prefix, key].join('/'),
-          JSON.stringify(value)
+          JSON.stringify(value),
         );
         return true;
       } catch (_error) {

@@ -15,7 +15,7 @@ export const flopflipReducer = combineReducers({
   status: statusReducer,
 });
 export const createFlopflipReducer = (
-  preloadedState: TFlagsContext = { memory: {} }
+  preloadedState: TFlagsContext = { memory: {} },
 ) =>
   combineReducers({
     flags: createFlagsReducer(preloadedState),

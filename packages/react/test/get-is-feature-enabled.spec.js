@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
+
 import { getIsFeatureEnabled } from '../src/get-is-feature-enabled';
 
 vi.mock('tiny-warning');
@@ -14,8 +15,8 @@ describe('with existing flag', () => {
           allFlags,
           adapterIdentifiers,
           'fooFlag',
-          'foo-variation'
-        )
+          'foo-variation',
+        ),
       ).toBe(true);
     });
 
@@ -25,8 +26,8 @@ describe('with existing flag', () => {
           allFlags,
           adapterIdentifiers,
           'fooFlag',
-          'foo-variation-1'
-        )
+          'foo-variation-1',
+        ),
       ).toBe(false);
     });
   });
@@ -37,7 +38,7 @@ describe('with existing flag', () => {
       const adapterIdentifiers = ['memory'];
 
       expect(getIsFeatureEnabled(allFlags, adapterIdentifiers, 'fooFlag')).toBe(
-        true
+        true,
       );
     });
 
@@ -46,7 +47,7 @@ describe('with existing flag', () => {
       const adapterIdentifiers = ['memory'];
 
       expect(getIsFeatureEnabled(allFlags, adapterIdentifiers, 'fooFlag')).toBe(
-        false
+        false,
       );
     });
   });
@@ -58,7 +59,7 @@ describe('with non existing flag', () => {
     const adapterIdentifiers = ['memory'];
 
     expect(getIsFeatureEnabled(allFlags, adapterIdentifiers, 'fooFlag2')).toBe(
-      false
+      false,
     );
   });
 });

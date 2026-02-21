@@ -6,7 +6,7 @@ import { useFlagsContext } from './use-flags-context';
 
 function useFeatureToggle(
   flagName: TFlagName,
-  flagVariation: TFlagVariation = true
+  flagVariation: TFlagVariation = true,
 ) {
   const adapterContext = useAdapterContext();
   const flagsContext = useFlagsContext();
@@ -14,7 +14,7 @@ function useFeatureToggle(
     flagsContext,
     adapterContext.adapterEffectIdentifiers,
     flagName,
-    flagVariation
+    flagVariation,
   );
 
   useDebugValue({

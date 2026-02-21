@@ -7,6 +7,7 @@ import {
 import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
 import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { adapter } from '../src/adapter';
 
 vi.mock('tiny-warning', {
@@ -46,7 +47,7 @@ describe('when combining', () => {
 
   it('should indicate that the adapter is not configured', () => {
     expect(
-      adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+      adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured),
     ).toBe(false);
   });
 
@@ -57,14 +58,14 @@ describe('when combining', () => {
       beforeEach(async () => {
         configurationResult = await adapter.configure(
           adapterArgs,
-          adapterEventHandlers
+          adapterEventHandlers,
         );
       });
 
       it('should invoke and trigger `warning`', () => {
         expect(warning).toHaveBeenCalledWith(
           false,
-          expect.stringContaining('adapter has no combined adapters')
+          expect.stringContaining('adapter has no combined adapters'),
         );
       });
 
@@ -84,14 +85,14 @@ describe('when combining', () => {
         adapterArgs = createAdapterArgs({ [memoryAdapter.id]: null });
         configurationResult = await adapter.configure(
           adapterArgs,
-          adapterEventHandlers
+          adapterEventHandlers,
         );
       });
 
       it('should invoke and trigger `warning`', () => {
         expect(warning).toHaveBeenCalledWith(
           false,
-          expect.stringContaining('not all adapters have args')
+          expect.stringContaining('not all adapters have args'),
         );
       });
 
@@ -113,13 +114,13 @@ describe('when combining', () => {
     const memoryAdapterConfigureSpy = vi.spyOn(memoryAdapter, 'configure');
     const localstorageAdapterConfigureSpy = vi.spyOn(
       localstorageAdapter,
-      'configure'
+      'configure',
     );
 
     beforeEach(async () => {
       configurationResult = await adapter.configure(
         adapterArgs,
-        adapterEventHandlers
+        adapterEventHandlers,
       );
     });
 
@@ -138,24 +139,24 @@ describe('when combining', () => {
           status: {
             configurationStatus: AdapterConfigurationStatus.Configuring,
           },
-        })
+        }),
       );
     });
 
     it('should indicate that the adapter is configured', () => {
       expect(
-        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured),
       ).toBe(true);
     });
 
     it('should invoke `configure` on all adapters', () => {
       expect(memoryAdapterConfigureSpy).toHaveBeenCalledWith(
         adapterArgs[memoryAdapter.id],
-        expect.anything()
+        expect.anything(),
       );
       expect(localstorageAdapterConfigureSpy).toHaveBeenCalledWith(
         adapterArgs[localstorageAdapter.id],
-        expect.anything()
+        expect.anything(),
       );
     });
 
@@ -176,7 +177,7 @@ describe('when combining', () => {
               status: {
                 configurationStatus: AdapterConfigurationStatus.Configured,
               },
-            })
+            }),
           );
         });
       });
@@ -189,7 +190,7 @@ describe('when combining', () => {
               status: {
                 configurationStatus: AdapterConfigurationStatus.Configured,
               },
-            })
+            }),
           );
         });
       });
@@ -202,7 +203,7 @@ describe('when combining', () => {
               status: {
                 configurationStatus: AdapterConfigurationStatus.Configured,
               },
-            })
+            }),
           );
         });
       });
@@ -296,17 +297,17 @@ describe('when combining', () => {
 
       const memoryAdapterReconfigureSpy = vi.spyOn(
         memoryAdapter,
-        'reconfigure'
+        'reconfigure',
       );
       const localstorageAdapterReconfigureSpy = vi.spyOn(
         localstorageAdapter,
-        'reconfigure'
+        'reconfigure',
       );
 
       beforeEach(async () => {
         configurationResult = await adapter.reconfigure(
           { [localstorageAdapter.id]: { user }, [memoryAdapter.id]: { user } },
-          adapterEventHandlers
+          adapterEventHandlers,
         );
         adapterEventHandlers = createAdapterEventHandlers();
       });
@@ -315,20 +316,20 @@ describe('when combining', () => {
         expect(configurationResult).toEqual(
           expect.objectContaining({
             initializationStatus: 0,
-          })
+          }),
         );
       });
 
       it('should invoke `reconfigure` on all adapters', () => {
         expect(memoryAdapterReconfigureSpy).toHaveBeenCalledWith(
           { user },
-          expect.anything()
+          expect.anything(),
         );
         expect(localstorageAdapterReconfigureSpy).toHaveBeenCalledWith(
           {
             user,
           },
-          expect.anything()
+          expect.anything(),
         );
       });
     });
@@ -351,7 +352,7 @@ describe('when combining', () => {
     beforeEach(async () => {
       configurationResult = await adapter.configure(
         adapterArgs,
-        adapterEventHandlers
+        adapterEventHandlers,
       );
     });
 
@@ -359,13 +360,13 @@ describe('when combining', () => {
       expect(configurationResult).toEqual(
         expect.objectContaining({
           initializationStatus: 1,
-        })
+        }),
       );
     });
 
     it('should indicate that the adapter is configured regardless', () => {
       expect(
-        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured)
+        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured),
       ).toBe(true);
     });
   });
@@ -384,8 +385,8 @@ describe('when combining', () => {
     it('should reset the configuration status', () => {
       expect(
         adapter.getIsConfigurationStatus(
-          AdapterConfigurationStatus.Unconfigured
-        )
+          AdapterConfigurationStatus.Unconfigured,
+        ),
       ).toBe(true);
     });
   });

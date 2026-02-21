@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { setDisplayName } from '../src/set-display-name';
 
 function BaseComponent() {

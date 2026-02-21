@@ -24,14 +24,14 @@ function ToggleFeature({
   if (untoggledComponent) {
     warning(
       isValidElementType(untoggledComponent),
-      `Invalid prop 'untoggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`
+      `Invalid prop 'untoggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`,
     );
   }
 
   if (toggledComponent) {
     warning(
       isValidElementType(toggledComponent),
-      `Invalid prop 'toggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`
+      `Invalid prop 'toggledComponent' supplied to 'ToggleFeature': the prop is not a valid React component`,
     );
   }
 
