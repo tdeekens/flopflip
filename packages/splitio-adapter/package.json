@@ -54,7 +54,7 @@
     "@babel/runtime": "7.28.6",
     "@flopflip/adapter-utilities": "workspace:*",
     "@flopflip/types": "workspace:*",
-    "@splitsoftware/splitio": "10.28.1",
+    "@splitsoftware/splitio": "11.11.0",
     "lodash": "4.17.23",
     "ts-deepmerge": "7.0.3"
   },
