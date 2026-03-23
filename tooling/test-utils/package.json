@@ -15,7 +15,7 @@
   "author": "Tobias Deekens <nerd@tdeekens.name>",
   "main": "index.js",
   "dependencies": {
-    "@babel/runtime": "7.28.6",
+    "@babel/runtime": "7.29.2",
     "@flopflip/memory-adapter": "workspace:*",
     "@flopflip/tsconfig": "workspace:*",
     "@testing-library/jest-dom": "6.9.1",
