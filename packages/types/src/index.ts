@@ -113,7 +113,7 @@ export type TSplitioAdapterArgs = TBaseAdapterArgs & {
     // Matches the signature of SplitIO.Attributes
     treatmentAttributes?: Record<
       string,
-      string | number | boolean | Array<string | number>
+      string | number | boolean | (string | number)[]
     >;
   };
 };
