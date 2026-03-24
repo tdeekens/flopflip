@@ -3,6 +3,7 @@ import {
   AdapterConfigurationStatus,
   AdapterSubscriptionStatus,
 } from '@flopflip/types';
+import React from 'react';
 import { describe, expect, it } from 'vitest';
 
 import { TestProvider } from '../src/test-provider';

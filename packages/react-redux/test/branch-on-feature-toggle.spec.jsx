@@ -1,4 +1,5 @@
 import { components, renderWithAdapter } from '@flopflip/test-utils';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { describe, expect, it } from 'vitest';
 

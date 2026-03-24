@@ -6,7 +6,7 @@ import {
   waitFor,
 } from '@flopflip/test-utils';
 import { adapterIdentifiers, cacheIdentifiers } from '@flopflip/types';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { AdapterContext } from '../../src/adapter-context';

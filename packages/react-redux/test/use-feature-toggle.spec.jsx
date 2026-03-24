@@ -1,4 +1,5 @@
 import { renderWithAdapter, screen } from '@flopflip/test-utils';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { describe, expect, it, vi } from 'vitest';
 

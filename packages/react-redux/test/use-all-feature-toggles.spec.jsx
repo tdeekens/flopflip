@@ -7,6 +7,7 @@ import {
   renderWithAdapter,
   screen,
 } from '@flopflip/test-utils';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 
