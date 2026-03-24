@@ -69,7 +69,7 @@
     "@types/jest": "30.0.0",
     "@types/lodash": "4.17.24",
     "@types/node": "24.12.0",
-    "@vitejs/plugin-react": "5.2.0",
+    "@vitejs/plugin-react": "6.0.1",
     "@vitest/coverage-v8": "4.1.1",
     "@vitest/ui": "4.1.1",
     "babel-plugin-transform-dynamic-import": "2.1.0",
