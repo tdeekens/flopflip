@@ -1,5 +1,6 @@
 import { adapter } from '@flopflip/memory-adapter';
 import { act, render as rtlRender, screen } from '@flopflip/test-utils';
+import React from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { Configure } from '../src/configure';

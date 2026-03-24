@@ -1,4 +1,5 @@
 import { components, renderWithAdapter } from '@flopflip/test-utils';
+import React from 'react';
 import { describe, expect, it } from 'vitest';
 
 import { branchOnFeatureToggle } from '../src/branch-on-feature-toggle';

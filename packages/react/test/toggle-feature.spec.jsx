@@ -1,4 +1,5 @@
 import { components, render } from '@flopflip/test-utils';
+import React from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { ToggleFeature } from '../src/toggle-feature';
