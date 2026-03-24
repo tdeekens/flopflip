@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/memory-adapter",
-  "version": "15.1.8",
+  "version": "15.1.9",
   "description": "An in memory adapter for flipflop",
   "keywords": [
     "client",
