@@ -24,7 +24,7 @@ import { merge } from 'ts-deepmerge';
 
 type TSplitIOAdapterState = {
   user?: TUser;
-  client?: SplitIO.IClient;
+  client?: SplitIO.IBrowserClient;
   manager?: SplitIO.IManager;
   configuredCallbacks: {
     onFlagsStateChange: TAdapterEventHandlers['onFlagsStateChange'];
@@ -34,7 +34,7 @@ type TSplitIOAdapterState = {
   treatmentAttributes?: SplitIO.Attributes;
 };
 type TSplitIOClient = {
-  client: SplitIO.IClient;
+  client: SplitIO.IBrowserClient;
   manager: SplitIO.IManager;
 };
 
@@ -96,14 +96,10 @@ class SplitioAdapter implements TSplitioAdapterInterface {
         this.#adapterState.client.Event.SDK_UPDATE,
         () => {
           if (this.#adapterState.client && this.#adapterState.user?.key) {
-            const flags = this.#adapterState.client.getTreatments(
-              this.#adapterState.user.key,
-              flagNames,
-              {
-                ...this.#adapterState.user,
-                ...this.#adapterState.treatmentAttributes,
-              } as SplitIO.Attributes,
-            );
+            const flags = this.#adapterState.client.getTreatments(flagNames, {
+              ...this.#adapterState.user,
+              ...this.#adapterState.treatmentAttributes,
+            } as SplitIO.Attributes);
 
             if (!this.#getIsAdapterUnsubscribed()) {
               onFlagsStateChange({ id: this.id, flags: normalizeFlags(flags) });
@@ -163,14 +159,10 @@ class SplitioAdapter implements TSplitioAdapterInterface {
               this.#adapterState.user?.key
             ) {
               flagNames = this.#adapterState.manager.names();
-              flags = this.#adapterState.client.getTreatments(
-                this.#adapterState.user.key,
-                flagNames,
-                {
-                  ...this.#adapterState.user,
-                  ...this.#adapterState.treatmentAttributes,
-                } as SplitIO.Attributes,
-              );
+              flags = this.#adapterState.client.getTreatments(flagNames, {
+                ...this.#adapterState.user,
+                ...this.#adapterState.treatmentAttributes,
+              } as SplitIO.Attributes);
 
               if (!this.#getIsAdapterUnsubscribed()) {
                 onFlagsStateChange({

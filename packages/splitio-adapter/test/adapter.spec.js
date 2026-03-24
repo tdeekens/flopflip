@@ -220,7 +220,7 @@ describe('when configuring', () => {
 
     describe('when `splitio` is configured', () => {
       it('should call getTreatments with attributes', () => {
-        expect(treatmentStub).toHaveBeenCalledWith(userWithKey.key, names, {
+        expect(treatmentStub).toHaveBeenCalledWith(names, {
           ...userWithKey,
           platform: 'iOS',
         });
@@ -335,7 +335,7 @@ describe('when configuring', () => {
       });
 
       it('should call getTreatments with attributes', () => {
-        expect(getTreatmentsStub).toHaveBeenCalledWith(nextUser.key, names, {
+        expect(getTreatmentsStub).toHaveBeenCalledWith(names, {
           ...nextUser,
           platform: 'android',
         });
