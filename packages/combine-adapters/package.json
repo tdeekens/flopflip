@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/combine-adapters",
-  "version": "15.1.7",
+  "version": "15.1.8",
   "description": "An adapter which combines other adapters for flipflop",
   "keywords": [
     "client",

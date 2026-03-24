@@ -1,5 +1,21 @@
 # @flopflip/react-redux
 
+## 15.1.8
+
+### Patch Changes
+
+- [#2127](https://github.com/tdeekens/flopflip/pull/2127) [`defabef`](https://github.com/tdeekens/flopflip/commit/defabef1e973fb5b4711d70019aa997c2a2f0156) Thanks [@renovate](https://github.com/apps/renovate)! - Update to TypeScript v6.
+
+- [#2129](https://github.com/tdeekens/flopflip/pull/2129) [`aee3ebd`](https://github.com/tdeekens/flopflip/commit/aee3ebdf85c9b2735920d0df4abc813698eadb30) Thanks [@renovate](https://github.com/apps/renovate)! - Update to Vite v8
+
+- [#2131](https://github.com/tdeekens/flopflip/pull/2131) [`7ece829`](https://github.com/tdeekens/flopflip/commit/7ece8296e36744173dc039ae28612baa71c478f4) Thanks [@tdeekens](https://github.com/tdeekens)! - Replace the Vitest JSX React injection workaround with explicit React imports in JSX tests.
+
+- [#2123](https://github.com/tdeekens/flopflip/pull/2123) [`1034520`](https://github.com/tdeekens/flopflip/commit/10345203ee85092674c297ba982e399ff50ae81d) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependencies.
+
+- Updated dependencies [[`defabef`](https://github.com/tdeekens/flopflip/commit/defabef1e973fb5b4711d70019aa997c2a2f0156), [`aee3ebd`](https://github.com/tdeekens/flopflip/commit/aee3ebdf85c9b2735920d0df4abc813698eadb30), [`7ece829`](https://github.com/tdeekens/flopflip/commit/7ece8296e36744173dc039ae28612baa71c478f4), [`1034520`](https://github.com/tdeekens/flopflip/commit/10345203ee85092674c297ba982e399ff50ae81d)]:
+  - @flopflip/types@15.1.8
+  - @flopflip/react@15.1.8
+
 ## 15.1.7
 
 ### Patch Changes
