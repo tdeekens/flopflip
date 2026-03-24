@@ -1,5 +1,22 @@
 # @flopflip/graphql-adapter
 
+## 15.1.8
+
+### Patch Changes
+
+- [#2127](https://github.com/tdeekens/flopflip/pull/2127) [`defabef`](https://github.com/tdeekens/flopflip/commit/defabef1e973fb5b4711d70019aa997c2a2f0156) Thanks [@renovate](https://github.com/apps/renovate)! - Update to TypeScript v6.
+
+- [#2129](https://github.com/tdeekens/flopflip/pull/2129) [`aee3ebd`](https://github.com/tdeekens/flopflip/commit/aee3ebdf85c9b2735920d0df4abc813698eadb30) Thanks [@renovate](https://github.com/apps/renovate)! - Update to Vite v8
+
+- [#2123](https://github.com/tdeekens/flopflip/pull/2123) [`1034520`](https://github.com/tdeekens/flopflip/commit/10345203ee85092674c297ba982e399ff50ae81d) Thanks [@renovate](https://github.com/apps/renovate)! - Update dependencies.
+
+- Updated dependencies [[`defabef`](https://github.com/tdeekens/flopflip/commit/defabef1e973fb5b4711d70019aa997c2a2f0156), [`aee3ebd`](https://github.com/tdeekens/flopflip/commit/aee3ebdf85c9b2735920d0df4abc813698eadb30), [`1034520`](https://github.com/tdeekens/flopflip/commit/10345203ee85092674c297ba982e399ff50ae81d)]:
+  - @flopflip/adapter-utilities@15.1.8
+  - @flopflip/types@15.1.8
+  - @flopflip/cache@15.1.8
+  - @flopflip/localstorage-cache@15.1.8
+  - @flopflip/sessionstorage-cache@15.1.8
+
 ## 15.1.7
 
 ### Patch Changes

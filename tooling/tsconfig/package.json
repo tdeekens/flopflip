@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/tsconfig",
-  "version": "15.1.7",
+  "version": "15.1.8",
   "private": true,
   "license": "MIT",
   "devDependencies": {
