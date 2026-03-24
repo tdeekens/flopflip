@@ -58,9 +58,9 @@
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
     "tsup": "8.5.1",
-    "typescript": "5.9.3"
+    "typescript": "6.0.2"
   },
   "peerDependencies": {
-    "typescript": "4.x || 5.x"
+    "typescript": "4.x || 5.x || 6.x"
   }
 }
