@@ -1,5 +1,16 @@
 # @flopflip/http-adapter
 
+## 15.1.9
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/adapter-utilities@15.1.9
+  - @flopflip/cache@15.1.9
+  - @flopflip/localstorage-cache@15.1.9
+  - @flopflip/sessionstorage-cache@15.1.9
+  - @flopflip/types@15.1.9
+
 ## 15.1.8
 
 ### Patch Changes

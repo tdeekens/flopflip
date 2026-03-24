@@ -1,5 +1,15 @@
 # @flopflip/splitio-adapter
 
+## 15.1.9
+
+### Patch Changes
+
+- [#1961](https://github.com/tdeekens/flopflip/pull/1961) [`01c696b`](https://github.com/tdeekens/flopflip/commit/01c696b4d4a5e9e4a8cf5945703431b3d4073cb3) Thanks [@renovate](https://github.com/apps/renovate)! - Update splitio SDK to v11
+
+- Updated dependencies []:
+  - @flopflip/adapter-utilities@15.1.9
+  - @flopflip/types@15.1.9
+
 ## 15.1.8
 
 ### Patch Changes

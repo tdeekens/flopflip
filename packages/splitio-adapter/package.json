@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/splitio-adapter",
-  "version": "15.1.8",
+  "version": "15.1.9",
   "description": "A adapter around the split.io client for flipflop",
   "keywords": [
     "client",

@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/cypress-plugin",
-  "version": "15.1.8",
+  "version": "15.1.9",
   "description": "A plugin for Cypress change feature toggles in Cypress runs",
   "keywords": [
     "LaunchDarkly",

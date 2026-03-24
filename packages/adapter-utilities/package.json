@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/adapter-utilities",
-  "version": "15.1.8",
+  "version": "15.1.9",
   "description": "Adapter utilities for flipflop",
   "keywords": [
     "feature-flags",
