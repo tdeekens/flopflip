@@ -1,4 +1,4 @@
-name: 'Bundles'
+name: "Bundles"
 
 on:
   push:
@@ -26,8 +26,8 @@ jobs:
       - name: Setup Node (uses version in .nvmrc)
         uses: actions/setup-node@v6
         with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install
