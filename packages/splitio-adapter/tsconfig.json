@@ -1,4 +1,7 @@
 {
   "extends": "@flopflip/tsconfig/base.json",
+  "compilerOptions": {
+    "skipLibCheck": true
+  },
   "exclude": ["**/dist/*", "**/vitest.config.ts"]
 }
