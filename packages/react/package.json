@@ -57,7 +57,7 @@
     "@flopflip/cache": "workspace:*",
     "@flopflip/types": "workspace:*",
     "@types/react-is": "19.2.0",
-    "lodash": "4.17.23",
+    "lodash": "4.18.1",
     "react-is": "19.2.4",
     "tiny-warning": "1.0.3",
     "ts-deepmerge": "7.0.3"
