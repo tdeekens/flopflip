@@ -50,7 +50,7 @@
     "dev": "tsup --watch --clean=false"
   },
   "dependencies": {
-    "launchdarkly-js-client-sdk": "3.9.0"
+    "launchdarkly-js-client-sdk": "3.9.1"
   },
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",

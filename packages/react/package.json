@@ -58,7 +58,7 @@
     "@flopflip/types": "workspace:*",
     "@types/react-is": "19.2.0",
     "lodash": "4.18.1",
-    "react-is": "19.2.4",
+    "react-is": "19.2.5",
     "tiny-warning": "1.0.3",
     "ts-deepmerge": "7.0.3"
   },
@@ -67,8 +67,8 @@
     "@flopflip/tsconfig": "workspace:*",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
     "tsup": "8.5.1"
   },
   "peerDependencies": {
