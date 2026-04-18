@@ -56,7 +56,7 @@ jobs:
         run: pnpm test:report --config vitest.shared.ts
 
       - name: Upload coverage
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         with:
           fail_ci_if_error: true
           verbose: true
