@@ -56,7 +56,7 @@
     "@flopflip/tsconfig": "workspace:*",
     "@types/react": "19.2.14",
     "tsup": "8.5.1",
-    "typescript": "6.0.2"
+    "typescript": "6.0.3"
   },
   "peerDependencies": {
     "typescript": "4.x || 5.x || 6.x"
