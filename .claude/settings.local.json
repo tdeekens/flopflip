@@ -4,7 +4,9 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Bash(gh pr create:*)"
+      "Bash(gh pr create:*)",
+      "Bash(curl -sL https://pnpm.io/11.x/migration)",
+      "Bash(grep -E '^\\(clean|setup|deploy|rebuild\\)$')"
     ]
   }
 }

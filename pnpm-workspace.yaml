@@ -1,3 +1,12 @@
 packages:
   - packages/*
   - tooling/*
+overrides:
+  '@types/react': 19.2.14
+  '@types/react-dom': 19.2.3
+patchedDependencies:
+  cypress@13.6.4: patches/cypress@13.6.4.patch
+allowBuilds:
+  core-js: true
+  cypress: true
+  esbuild: true
