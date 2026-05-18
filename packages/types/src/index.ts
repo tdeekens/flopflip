@@ -2,7 +2,7 @@ import type {
   LDContext,
   LDClient as TLDClient,
   LDOptions as TLDOptions,
-} from 'launchdarkly-js-client-sdk';
+} from '@launchdarkly/js-client-sdk';
 import type React from 'react';
 
 export type TFlagName = string;

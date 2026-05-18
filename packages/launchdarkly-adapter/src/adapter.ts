@@ -24,12 +24,12 @@ import {
   type TLaunchDarklyAdapterInterface,
   type TUpdateFlagsOptions,
 } from '@flopflip/types';
-import debounce from 'debounce-fn';
 import {
-  initialize as initializeLaunchDarklyClient,
+  createClient as createLaunchDarklyClient,
   type LDClient,
   type LDContext,
-} from 'launchdarkly-js-client-sdk';
+} from '@launchdarkly/js-client-sdk';
+import debounce from 'debounce-fn';
 import isEqual from 'lodash/isEqual.js';
 import mitt, { type Emitter } from 'mitt';
 import warning from 'tiny-warning';
@@ -125,21 +125,21 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
 
   readonly #getIsAnonymousContext = (context: LDContext) => !context?.key;
 
-  readonly #ensureContext = (context: LDContext) => {
+  readonly #ensureContext = (context: LDContext): LDContext => {
     const isAnonymousContext = this.#getIsAnonymousContext(context);
 
     // NOTE: When marked `anonymous` the SDK will generate a unique key and cache it in local storage
     return merge(context, {
       key: isAnonymousContext ? undefined : context.key,
       anonymous: isAnonymousContext,
-    });
+    }) as LDContext;
   };
 
   readonly #initializeClient = (
     clientSideId: TLaunchDarklyAdapterArgs['sdk']['clientSideId'],
     context: LDContext,
     options: TLaunchDarklyAdapterArgs['sdk']['clientOptions'],
-  ) => initializeLaunchDarklyClient(clientSideId, context, options);
+  ) => createLaunchDarklyClient(clientSideId, context, options);
 
   readonly #changeClientContext = async (nextContext: LDContext) =>
     this.#adapterState.client?.identify
@@ -185,8 +185,27 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   }> => {
     if (this.#adapterState.client) {
       return this.#adapterState.client
-        .waitForInitialization(initializationTimeout)
-        .then(async () => {
+        .waitForInitialization({ timeout: initializationTimeout })
+        .then(async (result) => {
+          if (result.status !== 'complete') {
+            if (throwOnInitializationFailure) {
+              return Promise.reject(
+                new Error(
+                  '@flopflip/launchdarkly-adapter: adapter failed to initialize.',
+                ),
+              );
+            }
+
+            console.warn(
+              '@flopflip/launchdarkly-adapter: adapter failed to initialize.',
+            );
+
+            return Promise.resolve({
+              flagsFromSdk: undefined,
+              initializationStatus: AdapterInitializationStatus.Failed,
+            });
+          }
+
           let flagsFromSdk: TFlags | undefined;
 
           if (this.#adapterState.client && !flags) {
@@ -234,24 +253,6 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
             flagsFromSdk,
             initializationStatus: AdapterInitializationStatus.Succeeded,
           });
-        })
-        .catch(async () => {
-          if (throwOnInitializationFailure) {
-            return Promise.reject(
-              new Error(
-                '@flopflip/launchdarkly-adapter: adapter failed to initialize.',
-              ),
-            );
-          }
-
-          console.warn(
-            '@flopflip/launchdarkly-adapter: adapter failed to initialize.',
-          );
-
-          return Promise.resolve({
-            flagsFromSdk: undefined,
-            initializationStatus: AdapterInitializationStatus.Failed,
-          });
         });
     }
 
@@ -289,59 +290,57 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     for (const flagName in flagsFromSdk) {
       // Dispatch whenever a configured flag value changes
       if (Object.hasOwn(flagsFromSdk, flagName) && this.#adapterState.client) {
-        this.#adapterState.client.on(
-          `change:${flagName}`,
-          async (flagValue) => {
-            const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
-              flagName,
-              flagValue as TFlagVariation,
-            );
+        this.#adapterState.client.on(`change:${flagName}`, async () => {
+          const flagValue = this.#adapterState.client?.variation(flagName);
+          const [normalizedFlagName, normalizedFlagValue] = normalizeFlag(
+            flagName,
+            flagValue as TFlagVariation,
+          );
 
-            await this.#maybeUpdateFlagsInCache(
-              {
-                [normalizedFlagName]: normalizedFlagValue,
-              },
-              cacheIdentifier,
-            );
-
-            if (this.#getIsFlagUnsubcribed(normalizedFlagName)) {
-              return;
-            }
-
-            // Sometimes the SDK flushes flag changes without a value having changed.
-            if (!this.#didFlagChange(normalizedFlagName, normalizedFlagValue)) {
-              return;
-            }
-
-            const updatedFlags: TFlags = {
+          await this.#maybeUpdateFlagsInCache(
+            {
               [normalizedFlagName]: normalizedFlagValue,
-            };
-            // NOTE: Adapter state needs to be updated outside of debounced-fn
-            // so that no flag updates are lost.
-            this.#updateFlagsInAdapterState(updatedFlags);
+            },
+            cacheIdentifier,
+          );
 
-            const flushFlagsUpdate = () => {
-              if (cacheMode === cacheModes.lazy) {
-                return;
-              }
+          if (this.#getIsFlagUnsubcribed(normalizedFlagName)) {
+            return;
+          }
 
-              this.#adapterState.emitter.emit(
-                'flagsStateChange',
-                this.#adapterState.flags,
-              );
-            };
+          // Sometimes the SDK flushes flag changes without a value having changed.
+          if (!this.#didFlagChange(normalizedFlagName, normalizedFlagValue)) {
+            return;
+          }
 
-            const scheduleImmediately = { before: true, after: false };
-            const scheduleTrailingEdge = { before: false, after: true };
+          const updatedFlags: TFlags = {
+            [normalizedFlagName]: normalizedFlagValue,
+          };
+          // NOTE: Adapter state needs to be updated outside of debounced-fn
+          // so that no flag updates are lost.
+          this.#updateFlagsInAdapterState(updatedFlags);
 
-            debounce(flushFlagsUpdate, {
-              wait: flagsUpdateDelayMs,
-              ...(flagsUpdateDelayMs
-                ? scheduleTrailingEdge
-                : scheduleImmediately),
-            })();
-          },
-        );
+          const flushFlagsUpdate = () => {
+            if (cacheMode === cacheModes.lazy) {
+              return;
+            }
+
+            this.#adapterState.emitter.emit(
+              'flagsStateChange',
+              this.#adapterState.flags,
+            );
+          };
+
+          const scheduleImmediately = { before: true, after: false };
+          const scheduleTrailingEdge = { before: false, after: true };
+
+          debounce(flushFlagsUpdate, {
+            wait: flagsUpdateDelayMs,
+            ...(flagsUpdateDelayMs
+              ? scheduleTrailingEdge
+              : scheduleImmediately),
+          })();
+        });
       }
     }
   };
@@ -423,7 +422,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
 
     this.#adapterState.client = this.#initializeClient(
       sdk.clientSideId,
-      this.#adapterState.context,
+      this.#adapterState.context!,
       sdk.clientOptions ?? {},
     );
 
@@ -474,7 +473,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
 
       this.#adapterState.context = nextContext;
 
-      await this.#changeClientContext(this.#adapterState.context);
+      await this.#changeClientContext(this.#adapterState.context!);
     }
 
     return Promise.resolve({
