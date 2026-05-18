@@ -1,6 +1,3 @@
 export default {
-  '*': [
-    'oxlint --fix', // Lint and apply safe fixes
-    'oxfmt --write', // Format and sort imports
-  ],
+  '*': ['oxlint --fix --no-error-on-unmatched-pattern', 'oxfmt --write'],
 };
