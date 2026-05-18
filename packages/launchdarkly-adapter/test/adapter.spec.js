@@ -1,16 +1,16 @@
 import { encodeCacheContext } from '@flopflip/cache';
 import { AdapterConfigurationStatus } from '@flopflip/types';
+import { createClient as createLaunchDarklyClient } from '@launchdarkly/js-client-sdk';
 import getGlobalThis from 'globalthis';
-import { initialize as initializeLaunchDarklyClient } from 'launchdarkly-js-client-sdk';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { adapter } from '../src/adapter';
 
-vi.mock(import('launchdarkly-js-client-sdk'), async (importOriginal) => {
+vi.mock(import('@launchdarkly/js-client-sdk'), async (importOriginal) => {
   const actual = await importOriginal();
   return {
     ...actual,
-    initialize: vi.fn(),
+    createClient: vi.fn(),
   };
 });
 vi.mock('tiny-warning');
@@ -23,8 +23,8 @@ const userWithoutKey = {
 };
 const flags = { 'some-flag-1': true, 'some-flag-2': false };
 const createClient = vi.fn((apiOverwrites) => ({
-  waitForInitialization: vi.fn(() => Promise.resolve()),
-  on: vi.fn((_, cb) => cb()),
+  waitForInitialization: vi.fn(() => Promise.resolve({ status: 'complete' })),
+  on: vi.fn(),
   allFlags: vi.fn(() => ({})),
   variation: vi.fn(() => true),
 
@@ -32,9 +32,10 @@ const createClient = vi.fn((apiOverwrites) => ({
 }));
 
 const triggerFlagValueChange = (client, { flagValue = false } = {}) => {
+  client.variation.mockReturnValue(flagValue);
   for (const [event, cb] of client.on.mock.calls) {
     if (event.startsWith('change:')) {
-      cb(flagValue);
+      cb();
     }
   }
 };
@@ -46,7 +47,7 @@ describe('when configuring', () => {
   beforeEach(() => {
     onStatusStateChange = vi.fn();
     onFlagsStateChange = vi.fn();
-    initializeLaunchDarklyClient.mockReturnValue(createClient());
+    createLaunchDarklyClient.mockReturnValue(createClient());
   });
 
   it('should indicate that the adapter is not configured', () => {
@@ -99,7 +100,7 @@ describe('when configuring', () => {
     });
 
     it('should initialize the `ld-client` with `clientSideId` and given `user`', () => {
-      expect(initializeLaunchDarklyClient).toHaveBeenCalledWith(
+      expect(createLaunchDarklyClient).toHaveBeenCalledWith(
         clientSideId,
         expect.objectContaining(userWithKey),
         expect.any(Object),
@@ -107,7 +108,7 @@ describe('when configuring', () => {
     });
 
     it('should initialize the `ld-client` marking the `user` as not anonymous', () => {
-      expect(initializeLaunchDarklyClient).toHaveBeenCalledWith(
+      expect(createLaunchDarklyClient).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({ anonymous: false }),
         expect.anything(),
@@ -130,7 +131,7 @@ describe('when configuring', () => {
     });
 
     it('should initialize the `ld-client` with `clientSideId` and no `user` `key`', () => {
-      expect(initializeLaunchDarklyClient).toHaveBeenCalledWith(
+      expect(createLaunchDarklyClient).toHaveBeenCalledWith(
         clientSideId,
         expect.objectContaining({
           key: undefined,
@@ -141,7 +142,7 @@ describe('when configuring', () => {
     });
 
     it('should initialize the `ld-client` marking the `user` as anonymous', () => {
-      expect(initializeLaunchDarklyClient).toHaveBeenCalledWith(
+      expect(createLaunchDarklyClient).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({ anonymous: true }),
         expect.anything(),
@@ -164,7 +165,7 @@ describe('when configuring', () => {
           variation: vi.fn(() => true),
         });
 
-        initializeLaunchDarklyClient.mockReturnValue(client);
+        createLaunchDarklyClient.mockReturnValue(client);
 
         configurationResult = await adapter.configure(
           {
@@ -240,8 +241,11 @@ describe('when configuring', () => {
         });
 
         describe('`getFlag`', () => {
+          // Value matches allFlags. The old SDK mock auto-fired change callbacks
+          // on subscription which overwrote this to false; the new SDK does not
+          // fire change events on subscription.
           it('should return the flag', () => {
-            expect(adapter.getFlag('someFlag1')).toBe(false);
+            expect(adapter.getFlag('someFlag1')).toBe(true);
           });
         });
       });
@@ -253,15 +257,11 @@ describe('when configuring', () => {
             onFlagsStateChange = vi.fn();
             client = createClient({
               waitForInitialization: vi.fn(() =>
-                Promise.reject(
-                  new Error(
-                    '@flopflip/launchdarkly-adapter: adapter failed to initialize.',
-                  ),
-                ),
+                Promise.resolve({ status: 'failed' }),
               ),
             });
 
-            initializeLaunchDarklyClient.mockReturnValue(client);
+            createLaunchDarklyClient.mockReturnValue(client);
           });
 
           it('should reject the configuration with an error', async () => {
@@ -288,15 +288,11 @@ describe('when configuring', () => {
             onFlagsStateChange = vi.fn();
             client = createClient({
               waitForInitialization: vi.fn(() =>
-                Promise.reject(
-                  new Error(
-                    '@flopflip/launchdarkly-adapter: adapter failed to initialize.',
-                  ),
-                ),
+                Promise.resolve({ status: 'failed' }),
               ),
             });
 
-            initializeLaunchDarklyClient.mockReturnValue(client);
+            createLaunchDarklyClient.mockReturnValue(client);
 
             console.warn = vi.fn();
           });
@@ -329,7 +325,7 @@ describe('when configuring', () => {
               variation: vi.fn((_, defaultFlagValue) => defaultFlagValue),
             });
 
-            initializeLaunchDarklyClient.mockReturnValue(client);
+            createLaunchDarklyClient.mockReturnValue(client);
 
             return adapter.configure(
               {
@@ -389,7 +385,7 @@ describe('when configuring', () => {
               variation: vi.fn(() => true),
             });
 
-            initializeLaunchDarklyClient.mockReturnValue(client);
+            createLaunchDarklyClient.mockReturnValue(client);
 
             return adapter.configure(
               {
@@ -418,10 +414,13 @@ describe('when configuring', () => {
                 expect(onFlagsStateChange).toHaveBeenCalledTimes(1);
               });
 
+              // 1 from initial configure + 1 debounced from the flag that
+              // actually changed (some-flag-2: false→true via variation mock).
+              // some-flag-1 stays true→true so no change is detected.
               it('should `dispatch` `onFlagsStateChange` action after the delay passed', () => {
                 vi.advanceTimersByTime(flagsUpdateDelayMs);
 
-                expect(onFlagsStateChange).toHaveBeenCalledTimes(4);
+                expect(onFlagsStateChange).toHaveBeenCalledTimes(2);
               });
             });
 
@@ -464,7 +463,7 @@ describe('when configuring', () => {
             variation: vi.fn(() => true),
           });
 
-          initializeLaunchDarklyClient.mockReturnValue(client);
+          createLaunchDarklyClient.mockReturnValue(client);
           sessionStorage.getItem.mockReturnValueOnce(
             JSON.stringify({ cached: true }),
           );
@@ -532,7 +531,7 @@ describe('when configuring', () => {
               variation: vi.fn(() => true),
             });
 
-            initializeLaunchDarklyClient.mockReturnValue(client);
+            createLaunchDarklyClient.mockReturnValue(client);
             sessionStorage.getItem.mockReturnValueOnce(
               JSON.stringify({ cached: true }),
             );
@@ -607,7 +606,7 @@ describe('when configuring', () => {
           identify: vi.fn(() => Promise.resolve()),
         });
 
-        initializeLaunchDarklyClient.mockReturnValue(client);
+        createLaunchDarklyClient.mockReturnValue(client);
 
         await adapter.configure(
           {
@@ -656,7 +655,7 @@ describe('when configuring', () => {
           identify: vi.fn(() => Promise.resolve()),
         });
 
-        initializeLaunchDarklyClient.mockReturnValue(client);
+        createLaunchDarklyClient.mockReturnValue(client);
 
         return adapter.configure(
           {
