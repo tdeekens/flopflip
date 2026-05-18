@@ -55,7 +55,7 @@
     "@babel/runtime": "7.29.2",
     "@flopflip/react": "workspace:*",
     "@flopflip/types": "workspace:*",
-    "@reduxjs/toolkit": "2.11.2",
+    "@reduxjs/toolkit": "2.12.0",
     "@types/react": "19.2.14",
     "@types/react-redux": "7.1.34"
   },
@@ -67,7 +67,7 @@
     "@flopflip/tsconfig": "workspace:*",
     "react": "19.2.6",
     "react-dom": "19.2.6",
-    "react-redux": "9.2.0",
+    "react-redux": "9.3.0",
     "redux": "5.0.1",
     "tsup": "8.5.1"
   },
