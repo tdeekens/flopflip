@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/http-adapter",
-  "version": "15.1.9",
+  "version": "15.1.10",
   "description": "An HTTP adapter for flipflop",
   "keywords": [
     "client",

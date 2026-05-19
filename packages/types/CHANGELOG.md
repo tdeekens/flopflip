@@ -1,5 +1,11 @@
 # @flopflip/types
 
+## 15.1.10
+
+### Patch Changes
+
+- [#2149](https://github.com/tdeekens/flopflip/pull/2149) [`689cd06`](https://github.com/tdeekens/flopflip/commit/689cd06fe493986fffd6f479966b2453cc94630d) Thanks [@ByronDWall](https://github.com/ByronDWall)! - migrate from deprecated launchdarkly-js-client-sdk to @launchdarkly/js-client-sdk to resolve CVE-2026-41907 in transitive uuid@8.3.2 dependency
+
 ## 15.1.9
 
 ## 15.1.8

@@ -1,5 +1,12 @@
 # @flopflip/adapter-utilities
 
+## 15.1.10
+
+### Patch Changes
+
+- Updated dependencies [[`689cd06`](https://github.com/tdeekens/flopflip/commit/689cd06fe493986fffd6f479966b2453cc94630d)]:
+  - @flopflip/types@15.1.10
+
 ## 15.1.9
 
 ### Patch Changes
