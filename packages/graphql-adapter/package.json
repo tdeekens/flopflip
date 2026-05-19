@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/graphql-adapter",
-  "version": "15.1.9",
+  "version": "15.1.10",
   "description": "An GraphQL adapter for flipflop",
   "keywords": [
     "client",

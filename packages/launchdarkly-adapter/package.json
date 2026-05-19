@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/launchdarkly-adapter",
-  "version": "15.1.9",
+  "version": "15.1.10",
   "description": "A adapter around the LaunchDarkly client for flipflop",
   "keywords": [
     "LaunchDarkly",
