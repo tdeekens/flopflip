@@ -70,8 +70,8 @@
     "@types/lodash": "4.17.24",
     "@types/node": "24.12.4",
     "@vitejs/plugin-react": "6.0.2",
-    "@vitest/coverage-v8": "4.1.6",
-    "@vitest/ui": "4.1.6",
+    "@vitest/coverage-v8": "4.1.7",
+    "@vitest/ui": "4.1.7",
     "babel-plugin-transform-dynamic-import": "2.1.0",
     "check-node-version": "4.2.1",
     "colors": "1.4.0",
@@ -80,8 +80,8 @@
     "husky": "9.1.7",
     "jsdom": "29.1.1",
     "lint-staged": "16.4.0",
-    "oxfmt": "0.50.0",
-    "oxlint": "1.65.0",
+    "oxfmt": "0.51.0",
+    "oxlint": "1.66.0",
     "pinst": "3.0.0",
     "raf": "3.4.1",
     "react": "19.2.6",
@@ -92,8 +92,8 @@
     "tslib": "2.8.1",
     "turbo": "2.9.14",
     "typescript": "6.0.3",
-    "vite": "8.0.13",
-    "vitest": "4.1.6",
+    "vite": "8.0.14",
+    "vitest": "4.1.7",
     "vitest-localstorage-mock": "0.1.2"
   },
   "engines": {
@@ -101,7 +101,7 @@
     "npm": ">=11",
     "pnpm": ">=11"
   },
-  "packageManager": "pnpm@11.1.2",
+  "packageManager": "pnpm@11.3.0",
   "bundlewatch": {
     "files": [
       {
