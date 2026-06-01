@@ -53,7 +53,7 @@
     "dev": "tsup --watch --clean=false"
   },
   "dependencies": {
-    "@babel/runtime": "7.29.2",
+    "@babel/runtime": "7.29.7",
     "@flopflip/cache": "workspace:*",
     "@flopflip/types": "workspace:*",
     "@types/react-is": "19.2.0",
