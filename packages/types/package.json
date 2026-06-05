@@ -50,11 +50,11 @@
     "dev": "tsup --watch --clean=false"
   },
   "dependencies": {
-    "@launchdarkly/js-client-sdk": "4.7.1"
+    "@launchdarkly/js-client-sdk": "4.8.0"
   },
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
-    "@types/react": "19.2.15",
+    "@types/react": "19.2.16",
     "tsup": "8.5.1",
     "typescript": "6.0.3"
   },
