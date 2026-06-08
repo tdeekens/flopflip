@@ -6,7 +6,11 @@
       "Bash(git push:*)",
       "Bash(gh pr create:*)",
       "Bash(curl -sL https://pnpm.io/11.x/migration)",
-      "Bash(grep -E '^\\(clean|setup|deploy|rebuild\\)$')"
+      "Bash(grep -E '^\\(clean|setup|deploy|rebuild\\)$')",
+      "Bash(git branch *)",
+      "Bash(git checkout *)",
+      "Bash(node -e \"const p=require\\('./packages/react/package.json'\\); console.log\\('version:',p.version,'| tsup:',p.devDependencies.tsup,'| build:',p.scripts.build\\)\")",
+      "Bash(node -e \"const f=require\\('./package.json'\\).bundlewatch.files.find\\(x=>x.path.includes\\('react-broadcast'\\)\\);console.log\\(f\\)\")"
     ]
   }
 }
