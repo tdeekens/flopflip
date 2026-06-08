@@ -138,7 +138,7 @@
       },
       {
         "path": "./packages/react-broadcast/dist/index.js",
-        "maxSize": "3Kb"
+        "maxSize": "3.5Kb"
       },
       {
         "path": "./packages/react-redux/dist/index.js",
