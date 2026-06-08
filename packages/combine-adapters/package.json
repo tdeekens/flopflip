@@ -44,11 +44,11 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rimraf dist && tsup",
+    "build": "tsdown",
     "check-types": "tsc --noEmit",
     "test": "vitest --run",
     "test:watch": "vitest",
-    "dev": "tsup --watch --clean=false"
+    "dev": "tsdown --watch"
   },
   "dependencies": {
     "@babel/runtime": "7.29.7",
@@ -61,7 +61,8 @@
     "@flopflip/localstorage-adapter": "workspace:*",
     "@flopflip/memory-adapter": "workspace:*",
     "@flopflip/tsconfig": "workspace:*",
+    "@flopflip/tsdown-config": "workspace:*",
     "globalthis": "1.0.4",
-    "tsup": "8.5.1"
+    "tsdown": "0.22.2"
   }
 }

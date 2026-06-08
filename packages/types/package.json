@@ -43,19 +43,20 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rimraf dist && tsup",
+    "build": "tsdown",
     "check-types": "tsc --noEmit",
     "test": "exit 0",
     "test:watch": "exit 0",
-    "dev": "tsup --watch --clean=false"
+    "dev": "tsdown --watch"
   },
   "dependencies": {
     "@launchdarkly/js-client-sdk": "4.8.1"
   },
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
+    "@flopflip/tsdown-config": "workspace:*",
     "@types/react": "19.2.17",
-    "tsup": "8.5.1",
+    "tsdown": "0.22.2",
     "typescript": "6.0.3"
   },
   "peerDependencies": {

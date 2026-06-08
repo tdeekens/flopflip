@@ -46,19 +46,20 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rimraf dist && tsup",
+    "build": "tsdown",
     "check-types": "tsc --noEmit",
     "test": "exit 0",
     "test:watch": "exit 0",
-    "dev": "tsup --watch --clean=false"
+    "dev": "tsdown --watch"
   },
   "dependencies": {
     "@flopflip/types": "workspace:*"
   },
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
+    "@flopflip/tsdown-config": "workspace:*",
     "cypress": "13.6.4",
-    "tsup": "8.5.1"
+    "tsdown": "0.22.2"
   },
   "peerDependencies": {
     "cypress": "13.x || 14.x"

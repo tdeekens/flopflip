@@ -1,0 +1,16 @@
+{
+  "name": "@flopflip/tsdown-config",
+  "version": "15.1.10",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "dependencies": {
+    "tsdown": "0.22.2"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3"
+  }
+}
