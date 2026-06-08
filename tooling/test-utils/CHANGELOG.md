@@ -1,5 +1,13 @@
 # @flopflip/test-utils
 
+## 15.1.11
+
+### Patch Changes
+
+- Updated dependencies [[`1f9ebcf`](https://github.com/tdeekens/flopflip/commit/1f9ebcf2a9196c675714ee6f9b829fa536b7bc6c)]:
+  - @flopflip/memory-adapter@15.1.11
+  - @flopflip/tsconfig@15.1.11
+
 ## 15.1.10
 
 ### Patch Changes
