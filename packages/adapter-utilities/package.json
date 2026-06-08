@@ -43,11 +43,11 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rimraf dist && tsup",
+    "build": "tsdown",
     "check-types": "tsc --noEmit",
     "test": "vitest --run",
     "test:watch": "vitest",
-    "dev": "tsup --watch --clean=false"
+    "dev": "tsdown --watch"
   },
   "dependencies": {
     "@babel/runtime": "7.29.7",
@@ -57,7 +57,8 @@
   },
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
-    "tsup": "8.5.1",
+    "@flopflip/tsdown-config": "workspace:*",
+    "tsdown": "0.22.2",
     "typescript": "6.0.3"
   },
   "peerDependencies": {

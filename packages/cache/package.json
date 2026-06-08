@@ -44,11 +44,11 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rimraf dist && tsup",
+    "build": "tsdown",
     "check-types": "tsc --noEmit",
     "test": "vitest --run",
     "test:watch": "vitest",
-    "dev": "tsup --watch --clean=false"
+    "dev": "tsdown --watch"
   },
   "dependencies": {
     "@flopflip/localstorage-cache": "workspace:*",
@@ -57,6 +57,7 @@
   },
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
-    "tsup": "8.5.1"
+    "@flopflip/tsdown-config": "workspace:*",
+    "tsdown": "0.22.2"
   }
 }

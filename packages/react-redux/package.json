@@ -45,11 +45,11 @@
     "access": "public"
   },
   "scripts": {
-    "build": "rimraf dist && tsup",
+    "build": "tsdown",
     "check-types": "tsc --noEmit",
     "test": "vitest --run",
     "test:watch": "vitest",
-    "dev": "tsup --watch --clean=false"
+    "dev": "tsdown --watch"
   },
   "dependencies": {
     "@babel/runtime": "7.29.7",
@@ -65,11 +65,12 @@
     "@flopflip/memory-adapter": "workspace:*",
     "@flopflip/test-utils": "workspace:*",
     "@flopflip/tsconfig": "workspace:*",
+    "@flopflip/tsdown-config": "workspace:*",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "react-redux": "9.3.0",
     "redux": "5.0.1",
-    "tsup": "8.5.1"
+    "tsdown": "0.22.2"
   },
   "peerDependencies": {
     "react": "18.x || 19.x",
