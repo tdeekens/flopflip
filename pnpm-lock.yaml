@@ -107,7 +107,7 @@ importers:
         version: 24.13.1
       '@vitejs/plugin-react':
         specifier: 6.0.2
-        version: 6.0.2(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.8.3))
+        version: 6.0.2(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.9.0))
       '@vitest/coverage-v8':
         specifier: 4.1.8
         version: 4.1.8(vitest@4.1.8)
@@ -136,8 +136,8 @@ importers:
         specifier: 29.1.1
         version: 29.1.1
       lint-staged:
-        specifier: 16.4.0
-        version: 16.4.0
+        specifier: 17.0.7
+        version: 17.0.7
       oxfmt:
         specifier: 0.53.0
         version: 0.53.0
@@ -176,10 +176,10 @@ importers:
         version: 6.0.3
       vite:
         specifier: 8.0.16
-        version: 8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.8.3)
+        version: 8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.9.0)
       vitest:
         specifier: 4.1.8
-        version: 4.1.8(@types/node@24.13.1)(@vitest/coverage-v8@4.1.8)(@vitest/ui@4.1.8)(jsdom@29.1.1)(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.8.3))
+        version: 4.1.8(@types/node@24.13.1)(@vitest/coverage-v8@4.1.8)(@vitest/ui@4.1.8)(jsdom@29.1.1)(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.9.0))
       vitest-localstorage-mock:
         specifier: 0.1.2
         version: 0.1.2(vitest@4.1.8)
@@ -204,7 +204,7 @@ importers:
         version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.9.0)
       typescript:
         specifier: 6.0.3
         version: 6.0.3
@@ -226,7 +226,7 @@ importers:
         version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.9.0)
 
   packages/combine-adapters:
     dependencies:
@@ -260,7 +260,7 @@ importers:
         version: 1.0.4
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.9.0)
 
   packages/cypress-plugin:
     dependencies:
@@ -276,7 +276,7 @@ importers:
         version: 13.6.4(patch_hash=32b92e06b2ba249501769e5f048f75b3478c6c8e8b46362c1903c24f9d4b1ff9)
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.9.0)
 
   packages/graphql-adapter:
     dependencies:
@@ -316,7 +316,7 @@ importers:
         version: 1.0.4
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.9.0)
 
   packages/http-adapter:
     dependencies:
@@ -356,7 +356,7 @@ importers:
         version: 1.0.4
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.9.0)
 
   packages/launchdarkly-adapter:
     dependencies:
@@ -405,7 +405,7 @@ importers:
         version: 1.0.4
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.9.0)
 
   packages/localstorage-adapter:
     dependencies:
@@ -439,7 +439,7 @@ importers:
         version: 1.0.4
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.9.0)
 
   packages/localstorage-cache:
     dependencies:
@@ -452,7 +452,7 @@ importers:
         version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.9.0)
 
   packages/memory-adapter:
     dependencies:
@@ -480,7 +480,7 @@ importers:
         version: 1.0.4
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.9.0)
 
   packages/react:
     dependencies:
@@ -529,7 +529,7 @@ importers:
         version: 19.2.7(react@19.2.7)
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.9.0)
 
   packages/react-broadcast:
     dependencies:
@@ -575,7 +575,7 @@ importers:
         version: 19.2.7(react@19.2.7)
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.9.0)
 
   packages/react-redux:
     dependencies:
@@ -627,7 +627,7 @@ importers:
         version: 5.0.1
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.9.0)
 
   packages/sessionstorage-cache:
     dependencies:
@@ -640,7 +640,7 @@ importers:
         version: link:../../tooling/tsconfig
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.9.0)
 
   packages/splitio-adapter:
     dependencies:
@@ -671,7 +671,7 @@ importers:
         version: 1.0.4
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.9.0)
 
   packages/types:
     dependencies:
@@ -687,7 +687,7 @@ importers:
         version: 19.2.17
       tsup:
         specifier: 8.5.1
-        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.8.3)
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.9.0)
       typescript:
         specifier: 6.0.3
         version: 6.0.3
@@ -2935,10 +2935,6 @@ packages:
     resolution: {integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==}
     engines: {node: '>= 0.8'}
 
-  commander@14.0.3:
-    resolution: {integrity: sha512-H+y0Jo/T1RZ9qPP4Eh1pkcQcLRglraJaSLoyOtHxu6AapkjWVCy2Sit1QQ4x3Dng8qDlSsZEet7g5Pq06MvTgw==}
-    engines: {node: '>=20'}
-
   commander@4.1.1:
     resolution: {integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==}
     engines: {node: '>= 6'}
@@ -3786,10 +3782,14 @@ packages:
   lines-and-columns@1.2.4:
     resolution: {integrity: sha512-7ylylesZQ/PV29jhEDl3Ufjo6ZX7gCqJr5F7PKrqc93v7fzSymt1BpwEU8nAUXs8qzzvqhbjhK5QZg6Mt/HkBg==}
 
-  lint-staged@16.4.0:
-    resolution: {integrity: sha512-lBWt8hujh/Cjysw5GYVmZpFHXDCgZzhrOm8vbcUdobADZNOK/bRshr2kM3DfgrrtR1DQhfupW9gnIXOfiFi+bw==}
-    engines: {node: '>=20.17'}
+  lint-staged@17.0.7:
+    resolution: {integrity: sha512-JrSobt+tW3rH8IOMi8tDZd3foorM5yPEkLD/V2NxobgHrFfHWGee4MOLVuZeScgxftEwbHrPHIFA/ZL+nUJeuA==}
+    engines: {node: '>=22.22.1'}
     hasBin: true
+
+  listr2@10.2.1:
+    resolution: {integrity: sha512-7I5knELsJKTUjXG+A6BkKAiGkW1i25fNa/xlUl9hFtk15WbE9jndA89xu5FzQKrY5llajE1hfZZFMILXkDHk/Q==}
+    engines: {node: '>=22.13.0'}
 
   listr2@3.14.0:
     resolution: {integrity: sha512-TyWI8G99GX9GjE54cJ+RrNMcIFBfwMPxc3XTFiAYGN4s10hWROGtOg7+O6u6LE3mNkyld7RSLE6nrKBvTfcs3g==}
@@ -3799,10 +3799,6 @@ packages:
     peerDependenciesMeta:
       enquirer:
         optional: true
-
-  listr2@9.0.5:
-    resolution: {integrity: sha512-ME4Fb83LgEgwNw96RKNvKV4VTLuXfoKudAmm2lP8Kk87KaMK0/Xrx/aAkMWmT8mDb+3MlFDspfbCs7adjRxA2g==}
-    engines: {node: '>=20.0.0'}
 
   load-tsconfig@0.2.5:
     resolution: {integrity: sha512-IXO6OCs9yg8tMKzfPZ1YmheJbZCiEsnBdcB03l0OcfK9prKnJb96siuHCr5Fl37/yo9DnKU+TLpxzTUspw9shg==}
@@ -4626,6 +4622,10 @@ packages:
     resolution: {integrity: sha512-VKS/ZaQhhkKFMANmAOhhXVoIfBXblQxGX1myCQ2faQrfmobMftXeJPcZGp0gS07ocvGJWDLZGyOZDadDBqYIJg==}
     engines: {node: '>=18'}
 
+  tinyexec@1.2.4:
+    resolution: {integrity: sha512-SHf/r48b7vOrjve9PxJo3MN5v5yuyjHvdUcrQffT3WXMUfnGmHDVbC4k3sHJaJTgZCwpUplIaAo5ANtMyp3YHg==}
+    engines: {node: '>=18'}
+
   tinyglobby@0.2.16:
     resolution: {integrity: sha512-pn99VhoACYR8nFHhxqix+uvsbXineAasWm5ojXoN8xEwK5Kd3/TrhNn1wByuD52UxWRLy8pu+kRMniEi6Eq9Zg==}
     engines: {node: '>=12.0.0'}
@@ -4942,6 +4942,10 @@ packages:
     engines: {node: '>=8'}
     hasBin: true
 
+  wrap-ansi@10.0.0:
+    resolution: {integrity: sha512-SGcvg80f0wUy2/fXES19feHMz8E0JoXv2uNgHOu4Dgi2OrCy1lqwFYEJz1BLbDI0exjPMe/ZdzZ/YpGECBG/aQ==}
+    engines: {node: '>=20'}
+
   wrap-ansi@6.2.0:
     resolution: {integrity: sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==}
     engines: {node: '>=8'}
@@ -4974,8 +4978,8 @@ packages:
   yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
 
-  yaml@2.8.3:
-    resolution: {integrity: sha512-AvbaCLOO2Otw/lW5bmh9d/WEdcDFdQp2Z2ZUH3pX9U2ihyUY0nvLv7J6TrWowklRGPYbB/IuIMfYgxaCPg5Bpg==}
+  yaml@2.9.0:
+    resolution: {integrity: sha512-2AvhNX3mb8zd6Zy7INTtSpl1F15HW6Wnqj0srWlkKLcpYl/gMIMJiyuGq2KeI2YFxUPjdlB+3Lc10seMLtL4cA==}
     engines: {node: '>= 14.6'}
     hasBin: true
 
@@ -6873,10 +6877,10 @@ snapshots:
       '@types/node': 24.13.0
     optional: true
 
-  '@vitejs/plugin-react@6.0.2(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.8.3))':
+  '@vitejs/plugin-react@6.0.2(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.9.0))':
     dependencies:
       '@rolldown/pluginutils': 1.0.0
-      vite: 8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.8.3)
+      vite: 8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.9.0)
 
   '@vitest/coverage-v8@4.1.8(vitest@4.1.8)':
     dependencies:
@@ -6890,7 +6894,7 @@ snapshots:
       obug: 2.1.1
       std-env: 4.1.0
       tinyrainbow: 3.1.0
-      vitest: 4.1.8(@types/node@24.13.1)(@vitest/coverage-v8@4.1.8)(@vitest/ui@4.1.8)(jsdom@29.1.1)(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.8.3))
+      vitest: 4.1.8(@types/node@24.13.1)(@vitest/coverage-v8@4.1.8)(@vitest/ui@4.1.8)(jsdom@29.1.1)(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.9.0))
 
   '@vitest/expect@4.1.8':
     dependencies:
@@ -6901,13 +6905,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.0
 
-  '@vitest/mocker@4.1.8(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.8.3))':
+  '@vitest/mocker@4.1.8(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.9.0))':
     dependencies:
       '@vitest/spy': 4.1.8
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.8.3)
+      vite: 8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.9.0)
 
   '@vitest/pretty-format@4.1.8':
     dependencies:
@@ -6936,7 +6940,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.16
       tinyrainbow: 3.1.0
-      vitest: 4.1.8(@types/node@24.13.1)(@vitest/coverage-v8@4.1.8)(@vitest/ui@4.1.8)(jsdom@29.1.1)(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.8.3))
+      vitest: 4.1.8(@types/node@24.13.1)(@vitest/coverage-v8@4.1.8)(@vitest/ui@4.1.8)(jsdom@29.1.1)(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.9.0))
 
   '@vitest/utils@4.1.8':
     dependencies:
@@ -7262,8 +7266,6 @@ snapshots:
   combined-stream@1.0.8:
     dependencies:
       delayed-stream: 1.0.0
-
-  commander@14.0.3: {}
 
   commander@4.1.1: {}
 
@@ -8128,14 +8130,22 @@ snapshots:
 
   lines-and-columns@1.2.4: {}
 
-  lint-staged@16.4.0:
+  lint-staged@17.0.7:
     dependencies:
-      commander: 14.0.3
-      listr2: 9.0.5
+      listr2: 10.2.1
       picomatch: 4.0.4
       string-argv: 0.3.2
-      tinyexec: 1.1.1
-      yaml: 2.8.3
+      tinyexec: 1.2.4
+    optionalDependencies:
+      yaml: 2.9.0
+
+  listr2@10.2.1:
+    dependencies:
+      cli-truncate: 5.2.0
+      eventemitter3: 5.0.4
+      log-update: 6.1.0
+      rfdc: 1.4.1
+      wrap-ansi: 10.0.0
 
   listr2@3.14.0(enquirer@2.4.1):
     dependencies:
@@ -8149,15 +8159,6 @@ snapshots:
       wrap-ansi: 7.0.0
     optionalDependencies:
       enquirer: 2.4.1
-
-  listr2@9.0.5:
-    dependencies:
-      cli-truncate: 5.2.0
-      colorette: 2.0.20
-      eventemitter3: 5.0.4
-      log-update: 6.1.0
-      rfdc: 1.4.1
-      wrap-ansi: 9.0.2
 
   load-tsconfig@0.2.5: {}
 
@@ -8485,13 +8486,13 @@ snapshots:
       mlly: 1.8.2
       pathe: 2.0.3
 
-  postcss-load-config@6.0.1(jiti@2.6.1)(postcss@8.5.15)(yaml@2.8.3):
+  postcss-load-config@6.0.1(jiti@2.6.1)(postcss@8.5.15)(yaml@2.9.0):
     dependencies:
       lilconfig: 3.1.3
     optionalDependencies:
       jiti: 2.6.1
       postcss: 8.5.15
-      yaml: 2.8.3
+      yaml: 2.9.0
 
   postcss@8.5.15:
     dependencies:
@@ -8949,6 +8950,8 @@ snapshots:
 
   tinyexec@1.1.1: {}
 
+  tinyexec@1.2.4: {}
+
   tinyglobby@0.2.16:
     dependencies:
       fdir: 6.5.0(picomatch@4.0.4)
@@ -9023,7 +9026,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsup@8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.8.3):
+  tsup@8.5.1(jiti@2.6.1)(postcss@8.5.15)(supports-color@8.1.1)(typescript@6.0.3)(yaml@2.9.0):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.27.7)
       cac: 6.7.14
@@ -9034,7 +9037,7 @@ snapshots:
       fix-dts-default-cjs-exports: 1.0.1
       joycon: 3.1.1
       picocolors: 1.1.1
-      postcss-load-config: 6.0.1(jiti@2.6.1)(postcss@8.5.15)(yaml@2.8.3)
+      postcss-load-config: 6.0.1(jiti@2.6.1)(postcss@8.5.15)(yaml@2.9.0)
       resolve-from: 5.0.0
       rollup: 4.60.2
       source-map: 0.7.6
@@ -9119,7 +9122,7 @@ snapshots:
       core-util-is: 1.0.2
       extsprintf: 1.3.0
 
-  vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.8.3):
+  vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.9.0):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.4
@@ -9131,16 +9134,16 @@ snapshots:
       esbuild: 0.27.7
       fsevents: 2.3.3
       jiti: 2.6.1
-      yaml: 2.8.3
+      yaml: 2.9.0
 
   vitest-localstorage-mock@0.1.2(vitest@4.1.8):
     dependencies:
-      vitest: 4.1.8(@types/node@24.13.1)(@vitest/coverage-v8@4.1.8)(@vitest/ui@4.1.8)(jsdom@29.1.1)(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.8.3))
+      vitest: 4.1.8(@types/node@24.13.1)(@vitest/coverage-v8@4.1.8)(@vitest/ui@4.1.8)(jsdom@29.1.1)(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.9.0))
 
-  vitest@4.1.8(@types/node@24.13.1)(@vitest/coverage-v8@4.1.8)(@vitest/ui@4.1.8)(jsdom@29.1.1)(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.8.3)):
+  vitest@4.1.8(@types/node@24.13.1)(@vitest/coverage-v8@4.1.8)(@vitest/ui@4.1.8)(jsdom@29.1.1)(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.9.0)):
     dependencies:
       '@vitest/expect': 4.1.8
-      '@vitest/mocker': 4.1.8(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.8.3))
+      '@vitest/mocker': 4.1.8(vite@8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.9.0))
       '@vitest/pretty-format': 4.1.8
       '@vitest/runner': 4.1.8
       '@vitest/snapshot': 4.1.8
@@ -9157,7 +9160,7 @@ snapshots:
       tinyexec: 1.1.1
       tinyglobby: 0.2.16
       tinyrainbow: 3.1.0
-      vite: 8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.8.3)
+      vite: 8.0.16(@types/node@24.13.1)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.9.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 24.13.1
@@ -9199,6 +9202,12 @@ snapshots:
       siginfo: 2.0.0
       stackback: 0.0.2
 
+  wrap-ansi@10.0.0:
+    dependencies:
+      ansi-styles: 6.2.3
+      string-width: 8.2.0
+      strip-ansi: 7.2.0
+
   wrap-ansi@6.2.0:
     dependencies:
       ansi-styles: 4.3.0
@@ -9231,7 +9240,8 @@ snapshots:
 
   yallist@3.1.1: {}
 
-  yaml@2.8.3: {}
+  yaml@2.9.0:
+    optional: true
 
   yargs-parser@21.1.1: {}
 
