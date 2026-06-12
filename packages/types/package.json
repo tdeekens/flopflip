@@ -50,7 +50,7 @@
     "dev": "tsdown --watch"
   },
   "dependencies": {
-    "@launchdarkly/js-client-sdk": "4.8.1"
+    "@launchdarkly/js-client-sdk": "4.9.0"
   },
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
