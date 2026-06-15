@@ -56,7 +56,7 @@
     "@flopflip/types": "workspace:*",
     "@splitsoftware/splitio": "11.11.1",
     "lodash": "4.18.1",
-    "ts-deepmerge": "7.0.3"
+    "ts-deepmerge": "8.0.0"
   },
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
