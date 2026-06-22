@@ -57,6 +57,6 @@
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
     "@flopflip/tsdown-config": "workspace:*",
-    "tsdown": "0.22.2"
+    "tsdown": "0.22.3"
   }
 }
