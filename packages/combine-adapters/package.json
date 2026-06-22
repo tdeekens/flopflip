@@ -63,6 +63,6 @@
     "@flopflip/tsconfig": "workspace:*",
     "@flopflip/tsdown-config": "workspace:*",
     "globalthis": "1.0.4",
-    "tsdown": "0.22.2"
+    "tsdown": "0.22.3"
   }
 }
