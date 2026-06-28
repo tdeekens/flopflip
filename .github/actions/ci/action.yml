@@ -7,9 +7,6 @@ runs:
 
   steps:
     - name: Setup pnpm with runtime
-      # pnpm version is read from `packageManager` and the Node runtime from
-      # `devEngines.runtime` in package.json. `install` defaults to true, so
-      # `pnpm install` runs automatically.
       uses: pnpm/setup@v1
       with:
         cache: true
