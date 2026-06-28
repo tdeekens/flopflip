@@ -45,3 +45,6 @@ coverage
 junit.xml
 
 .turbo
+
+# Claude Code per-developer settings (shared config in .claude/ stays tracked)
+.claude/settings.local.json

@@ -96,12 +96,19 @@
     "vitest": "4.1.9",
     "vitest-localstorage-mock": "0.1.2"
   },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "24.17",
+      "onFail": "warn"
+    }
+  },
   "engines": {
     "node": ">=24",
     "npm": ">=11",
     "pnpm": ">=11"
   },
-  "packageManager": "pnpm@11.8.0",
+  "packageManager": "pnpm@11.9.0",
   "bundlewatch": {
     "files": [
       {

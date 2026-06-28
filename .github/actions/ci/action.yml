@@ -6,17 +6,7 @@ runs:
   using: composite
 
   steps:
-    - name: Install pnpm
-      uses: pnpm/action-setup@v6.0.9
+    - name: Setup pnpm with runtime
+      uses: pnpm/setup@v1
       with:
-        run_install: false
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v6
-      with:
-        node-version-file: '.nvmrc'
-        cache: 'pnpm'
-
-    - name: Install
-      run: pnpm install
-      shell: bash
+        cache: true
