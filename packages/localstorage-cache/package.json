@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/localstorage-cache",
-  "version": "15.1.11",
+  "version": "15.1.12",
   "description": "Localstorage cache for flipflop adapters",
   "keywords": [
     "cache",

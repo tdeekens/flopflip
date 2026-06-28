@@ -1,5 +1,13 @@
 # @flopflip/react-broadcast
 
+## 15.1.12
+
+### Patch Changes
+
+- Updated dependencies [[`31fcdcf`](https://github.com/tdeekens/flopflip/commit/31fcdcfa30f626afad05a8f548a0782c6b964b12)]:
+  - @flopflip/react@15.1.12
+  - @flopflip/types@15.1.12
+
 ## 15.1.11
 
 ### Patch Changes
