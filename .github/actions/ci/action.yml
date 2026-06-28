@@ -6,17 +6,10 @@ runs:
   using: composite
 
   steps:
-    - name: Install pnpm
-      uses: pnpm/action-setup@v6.0.9
+    - name: Setup pnpm with runtime
+      # pnpm version is read from `packageManager` and the Node runtime from
+      # `devEngines.runtime` in package.json. `install` defaults to true, so
+      # `pnpm install` runs automatically.
+      uses: pnpm/setup@v1
       with:
-        run_install: false
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v6
-      with:
-        node-version-file: '.nvmrc'
-        cache: 'pnpm'
-
-    - name: Install
-      run: pnpm install
-      shell: bash
+        cache: true

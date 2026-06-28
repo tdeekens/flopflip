@@ -96,6 +96,13 @@
     "vitest": "4.1.9",
     "vitest-localstorage-mock": "0.1.2"
   },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "24.17",
+      "onFail": "warn"
+    }
+  },
   "engines": {
     "node": ">=24",
     "npm": ">=11",

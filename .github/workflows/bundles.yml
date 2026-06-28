@@ -18,19 +18,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v6.0.9
-        with:
-          run_install: false
-
-      - name: Setup Node (uses version in .nvmrc)
-        uses: actions/setup-node@v6
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install
+      - name: Setup
+        uses: ./.github/actions/ci
 
       - uses: jackyef/bundlewatch-gh-action@master
         with:
