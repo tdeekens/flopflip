@@ -108,7 +108,7 @@
     "npm": ">=11",
     "pnpm": ">=11"
   },
-  "packageManager": "pnpm@11.8.0",
+  "packageManager": "pnpm@11.9.0",
   "bundlewatch": {
     "files": [
       {
