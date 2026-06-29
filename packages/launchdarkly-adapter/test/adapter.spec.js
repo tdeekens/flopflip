@@ -33,8 +33,8 @@ const createClient = vi.fn((apiOverwrites) => ({
 
 const triggerFlagValueChange = (client, { flagValue = false } = {}) => {
   client.variation.mockReturnValue(flagValue);
-  for (const [event, cb] of client.on.mock.calls) {
-    if (event.startsWith('change:')) {
+  for (const [eventName, cb] of client.on.mock.calls) {
+    if (eventName.startsWith('change:')) {
       cb();
     }
   }

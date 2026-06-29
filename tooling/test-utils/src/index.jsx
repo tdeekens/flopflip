@@ -83,8 +83,10 @@ function FlagChangeField() {
       <input
         id={INTERNAL_FLAG_VARIATION_LABEL}
         type="text"
-        onChange={(event) => {
-          const { flagName, flagVariation } = JSON.parse(event.target.value);
+        onChange={(changeEvent) => {
+          const { flagName, flagVariation } = JSON.parse(
+            changeEvent.target.value,
+          );
 
           memoryAdapter.updateFlags({
             [flagName]: fromEventString(flagVariation),
