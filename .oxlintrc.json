@@ -27,7 +27,11 @@
   "ignorePatterns": ["**/node_modules/", "**/coverage/", "**/dist/"],
   "rules": {
     "eqeqeq": ["error", "smart"],
-    "no-console": "warn",
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "no-underscore-dangle": [
+      "warn",
+      { "allow": ["__flopflip__", "__internalConfiguredStatusChange__"] }
+    ],
     "no-unused-vars": [
       "error",
       { "argsIgnorePattern": "^_", "caughtErrorsIgnorePattern": "^_" }
@@ -62,6 +66,12 @@
       "files": ["demo/**", "scripts/**"],
       "rules": {
         "no-console": "off"
+      }
+    },
+    {
+      "files": ["setup-tests.ts"],
+      "rules": {
+        "import/no-unassigned-import": "off"
       }
     }
   ]

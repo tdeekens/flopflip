@@ -335,7 +335,7 @@ const useDefaultFlagsEffect = ({
     onFlagsStateChange,
   });
 
-  // oxlint-disable-next-line react-hooks/exhaustive-deps -- false positive
+  // oxlint-disable react-hooks/exhaustive-deps -- intentional: configure adapter once on mount
   useEffect(() => {
     if (defaultFlags) {
       handleDefaultFlags(defaultFlags);
@@ -375,6 +375,7 @@ const useDefaultFlagsEffect = ({
         });
     }
   }, []);
+  // oxlint-enable react-hooks/exhaustive-deps
 };
 
 type TUsePendingAdapterArgsEffectOptions = {
