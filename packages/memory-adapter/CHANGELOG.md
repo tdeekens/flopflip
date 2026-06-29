@@ -1,5 +1,13 @@
 # @flopflip/memory-adapter
 
+## 15.1.12
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/adapter-utilities@15.1.12
+  - @flopflip/types@15.1.12
+
 ## 15.1.11
 
 ### Patch Changes

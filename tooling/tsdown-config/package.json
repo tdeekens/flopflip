@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/tsdown-config",
-  "version": "15.1.11",
+  "version": "15.1.12",
   "private": true,
   "license": "MIT",
   "type": "module",

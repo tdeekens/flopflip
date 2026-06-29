@@ -1,5 +1,15 @@
 # @flopflip/react
 
+## 15.1.12
+
+### Patch Changes
+
+- [#2161](https://github.com/tdeekens/flopflip/pull/2161) [`31fcdcf`](https://github.com/tdeekens/flopflip/commit/31fcdcfa30f626afad05a8f548a0782c6b964b12) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency ts-deepmerge to v8
+
+- Updated dependencies []:
+  - @flopflip/cache@15.1.12
+  - @flopflip/types@15.1.12
+
 ## 15.1.11
 
 ### Patch Changes
