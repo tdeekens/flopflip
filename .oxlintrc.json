@@ -73,6 +73,14 @@
       "rules": {
         "import/no-unassigned-import": "off"
       }
+    },
+    {
+      "files": ["**/test/**", "**/*.spec.*", "throwing-console-patch.js"],
+      "rules": {
+        "no-shadow": "off",
+        "no-console": "off",
+        "unicorn/consistent-function-scoping": "off"
+      }
     }
   ]
 }
