@@ -4,6 +4,5 @@
     "noEmit": true,
     "types": ["cypress"]
   },
-  "exclude": [""],
-  "include": ["../node_modules/cypress", "./**/*.ts"]
+  "exclude": ["**/dist/*", "**/vitest.config.ts"]
 }
