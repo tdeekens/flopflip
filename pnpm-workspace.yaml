@@ -10,3 +10,6 @@ allowBuilds:
   core-js: true
   cypress: true
   esbuild: true
+peerDependencyRules:
+  allowedVersions:
+    'tsdown>typescript': '7'
