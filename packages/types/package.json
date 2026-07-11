@@ -56,10 +56,10 @@
     "@flopflip/tsconfig": "workspace:*",
     "@flopflip/tsdown-config": "workspace:*",
     "@types/react": "19.2.17",
-    "tsdown": "0.22.3",
-    "typescript": "6.0.3"
+    "tsdown": "0.22.4",
+    "typescript": "7.0.2"
   },
   "peerDependencies": {
-    "typescript": "4.x || 5.x || 6.x"
+    "typescript": "4.x || 5.x || 6.x || 7.x"
   }
 }
