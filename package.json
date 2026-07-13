@@ -39,7 +39,7 @@
     "test": "turbo test"
   },
   "devDependencies": {
-    "@babel/cli": "8.0.1",
+    "@babel/cli": "8.0.4",
     "@babel/core": "8.0.1",
     "@babel/plugin-external-helpers": "8.0.1",
     "@babel/plugin-proposal-export-default-from": "8.0.1",
