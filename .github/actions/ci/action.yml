@@ -7,6 +7,6 @@ runs:
 
   steps:
     - name: Setup pnpm with runtime
-      uses: pnpm/setup@v1
+      uses: pnpm/setup@v2
       with:
         cache: true
