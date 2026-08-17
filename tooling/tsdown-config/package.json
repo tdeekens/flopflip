@@ -8,7 +8,7 @@
     ".": "./index.ts"
   },
   "dependencies": {
-    "tsdown": "0.22.4"
+    "tsdown": "0.22.14"
   },
   "devDependencies": {
     "typescript": "7.0.2"

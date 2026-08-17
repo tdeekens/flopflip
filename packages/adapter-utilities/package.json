@@ -58,7 +58,7 @@
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
     "@flopflip/tsdown-config": "workspace:*",
-    "tsdown": "0.22.4",
+    "tsdown": "0.22.14",
     "typescript": "7.0.2"
   },
   "peerDependencies": {
