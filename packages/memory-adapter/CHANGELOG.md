@@ -1,5 +1,20 @@
 # @flopflip/memory-adapter
 
+## 15.1.12
+
+### Patch Changes
+
+- [#2166](https://github.com/tdeekens/flopflip/pull/2166) [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9) Thanks [@tdeekens](https://github.com/tdeekens)! - fix(deps): update all dependencies
+
+- [#2166](https://github.com/tdeekens/flopflip/pull/2166) [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9) Thanks [@tdeekens](https://github.com/tdeekens)! - Update to TypeScript v7
+
+- [#2166](https://github.com/tdeekens/flopflip/pull/2166) [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9) Thanks [@tdeekens](https://github.com/tdeekens)! - Migrate to pnpm/setup action in repo
+
+- [#2166](https://github.com/tdeekens/flopflip/pull/2166) [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9) Thanks [@tdeekens](https://github.com/tdeekens)! - fix(deps): update babel monorepo to v8
+- Updated dependencies [[`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9), [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9), [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9), [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9)]:
+  - @flopflip/adapter-utilities@15.1.12
+  - @flopflip/types@15.1.12
+
 ## 15.1.11
 
 ### Patch Changes

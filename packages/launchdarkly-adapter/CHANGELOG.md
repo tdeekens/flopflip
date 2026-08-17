@@ -1,5 +1,29 @@
 # @flopflip/launchdarkly-adapter
 
+## 15.1.12
+
+### Patch Changes
+
+- [#2183](https://github.com/tdeekens/flopflip/pull/2183) [`44d20b8`](https://github.com/tdeekens/flopflip/commit/44d20b82745e78cc873ca90805801871d087d98b) Thanks [@nima-ct](https://github.com/nima-ct)! - fix: start the LaunchDarkly client before waiting for initialization
+
+- [#2166](https://github.com/tdeekens/flopflip/pull/2166) [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9) Thanks [@tdeekens](https://github.com/tdeekens)! - fix(deps): update all dependencies
+
+- [#2161](https://github.com/tdeekens/flopflip/pull/2161) [`31fcdcf`](https://github.com/tdeekens/flopflip/commit/31fcdcfa30f626afad05a8f548a0782c6b964b12) Thanks [@renovate](https://github.com/apps/renovate)! - Fix to remove linting errors
+
+- [#2166](https://github.com/tdeekens/flopflip/pull/2166) [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9) Thanks [@tdeekens](https://github.com/tdeekens)! - Update to TypeScript v7
+
+- [#2161](https://github.com/tdeekens/flopflip/pull/2161) [`31fcdcf`](https://github.com/tdeekens/flopflip/commit/31fcdcfa30f626afad05a8f548a0782c6b964b12) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update dependency ts-deepmerge to v8
+
+- [#2166](https://github.com/tdeekens/flopflip/pull/2166) [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9) Thanks [@tdeekens](https://github.com/tdeekens)! - Migrate to pnpm/setup action in repo
+
+- [#2166](https://github.com/tdeekens/flopflip/pull/2166) [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9) Thanks [@tdeekens](https://github.com/tdeekens)! - fix(deps): update babel monorepo to v8
+- Updated dependencies [[`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9), [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9), [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9), [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9)]:
+  - @flopflip/adapter-utilities@15.1.12
+  - @flopflip/cache@15.1.12
+  - @flopflip/localstorage-cache@15.1.12
+  - @flopflip/sessionstorage-cache@15.1.12
+  - @flopflip/types@15.1.12
+
 ## 15.1.11
 
 ### Patch Changes
