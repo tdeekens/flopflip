@@ -1,5 +1,22 @@
 # @flopflip/test-utils
 
+## 15.1.12
+
+### Patch Changes
+
+- [#2166](https://github.com/tdeekens/flopflip/pull/2166) [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9) Thanks [@tdeekens](https://github.com/tdeekens)! - fix(deps): update all dependencies
+
+- [#2161](https://github.com/tdeekens/flopflip/pull/2161) [`31fcdcf`](https://github.com/tdeekens/flopflip/commit/31fcdcfa30f626afad05a8f548a0782c6b964b12) Thanks [@renovate](https://github.com/apps/renovate)! - Fix to remove linting errors
+
+- [#2166](https://github.com/tdeekens/flopflip/pull/2166) [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9) Thanks [@tdeekens](https://github.com/tdeekens)! - Update to TypeScript v7
+
+- [#2166](https://github.com/tdeekens/flopflip/pull/2166) [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9) Thanks [@tdeekens](https://github.com/tdeekens)! - Migrate to pnpm/setup action in repo
+
+- [#2166](https://github.com/tdeekens/flopflip/pull/2166) [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9) Thanks [@tdeekens](https://github.com/tdeekens)! - fix(deps): update babel monorepo to v8
+- Updated dependencies [[`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9), [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9), [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9), [`8807e1f`](https://github.com/tdeekens/flopflip/commit/8807e1f41e38dcc0e89c05176a0562145c3225c9)]:
+  - @flopflip/memory-adapter@15.1.12
+  - @flopflip/tsconfig@15.1.12
+
 ## 15.1.11
 
 ### Patch Changes
