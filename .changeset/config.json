@@ -1,5 +1,5 @@
 {
-  "$schema": "https://unpkg.com/@changesets/config@1.6.1/schema.json",
+  "$schema": "https://unpkg.com/@changesets/config@4.0.0/schema.json",
   "changelog": [
     "@changesets/changelog-github",
     {
@@ -9,5 +9,7 @@
   "commit": false,
   "fixed": [["@flopflip/*"]],
   "access": "restricted",
-  "baseBranch": "main"
+  "baseBranch": "main",
+  "format": "oxfmt",
+  "privatePackages": { "version": true, "tag": false }
 }
