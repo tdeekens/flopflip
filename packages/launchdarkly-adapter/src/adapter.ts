@@ -425,6 +425,7 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
       this.#adapterState.context!,
       sdk.clientOptions ?? {},
     );
+    this.#adapterState.client.start();
 
     return this.#getInitialFlags({
       flags,
