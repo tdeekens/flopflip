@@ -2,6 +2,13 @@ name: CI
 
 description: Shared action to install dependencies
 
+inputs:
+  runtime:
+    description: |
+      Runtime to install, in `<name>@<version>` form (e.g. `node@26`).
+      When omitted, `pnpm/setup` reads `devEngines.runtime` from package.json.
+    required: false
+
 runs:
   using: composite
 
@@ -10,3 +17,4 @@ runs:
       uses: pnpm/setup@v2
       with:
         cache: true
+        runtime: ${{ inputs.runtime }}
