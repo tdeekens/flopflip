@@ -23,6 +23,7 @@ const userWithoutKey = {
 };
 const flags = { 'some-flag-1': true, 'some-flag-2': false };
 const createClient = vi.fn((apiOverwrites) => ({
+  start: vi.fn(() => Promise.resolve({ status: 'complete' })),
   waitForInitialization: vi.fn(() => Promise.resolve({ status: 'complete' })),
   on: vi.fn(),
   allFlags: vi.fn(() => ({})),
@@ -205,6 +206,13 @@ describe('when configuring', () => {
                 variation: expect.any(Function),
                 waitForInitialization: expect.any(Function),
               }),
+            );
+          });
+
+          it('should start the client before waiting for initialization', () => {
+            expect(client.start).toHaveBeenCalledOnce();
+            expect(client.start.mock.invocationCallOrder[0]).toBeLessThan(
+              client.waitForInitialization.mock.invocationCallOrder[0],
             );
           });
         });
