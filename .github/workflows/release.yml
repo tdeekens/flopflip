@@ -42,24 +42,22 @@ jobs:
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
-        # uses: changesets/action@v1
-        uses: dotansimha/changesets-action@v1.5.2
+        uses: changesets/action@v2
         with:
-          publish: pnpm changeset publish
-          version: pnpm changeset:version-and-format
-          title: 'ci(changesets): version packages'
-          commit: 'ci(changesets): version packages'
-          createGithubReleases: aggregate
-          githubReleaseName: v${{ steps.release_version.outputs.VERSION }}
-          githubTagName: v${{ steps.release_version.outputs.VERSION }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          github-token: ${{ secrets.GH_TOKEN }}
+          publish-script: pnpm changeset publish
+          version-script: pnpm changeset:version-and-format
+          pr-title: 'ci(changesets): version packages'
+          commit-message: 'ci(changesets): version packages'
+          # One aggregate release per version is created below instead of one
+          # GitHub release per package.
+          create-github-releases: false
 
-      - name: Publishing canary releases to npm registry
-        if: steps.changesets.outputs.published != 'true' && github.ref == 'refs/heads/main'
-        run: |
-          git checkout main
-          pnpm changeset version --snapshot canary
-          pnpm changeset publish --tag canary
+      - name: Creating aggregate GitHub release
+        if: steps.changesets.outputs.published == 'true'
+        run: ./scripts/create-aggregate-release.sh
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          VERSION: ${{ steps.release_version.outputs.VERSION }}
+          PUBLISHED_PACKAGES: ${{ steps.changesets.outputs.published-packages }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_REPO: ${{ github.repository }}
