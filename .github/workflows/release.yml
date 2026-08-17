@@ -33,10 +33,8 @@ jobs:
       - name: Storing release version for changeset
         id: release_version
         run: ./scripts/echo-release-version.sh
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
-      - name: Ouptut version
+      - name: Output version
         run: echo "The version is ${{ steps.release_version.outputs.VERSION }}"
 
       - name: Building packages

@@ -1,26 +1,27 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
-echo "Running 'changeset version' to know the new release version"
+release_plan=$(mktemp)
+trap 'rm -f "$release_plan"' EXIT
 
-pnpm changeset version
+echo "Running 'changeset status' to know the next release version"
 
-echo "Running 'git status' to see the worktree changes"
+pnpm changeset status --output="$release_plan"
 
-git status
+# All @flopflip/* packages release in lockstep through the "fixed" group in
+# .changeset/config.json, so any one of them carries the release version. With no
+# pending changesets the release plan is empty and the version already on disk is
+# the one the release will carry.
+release_version=$(node -e '
+  const { readFileSync } = require("node:fs");
 
-echo "Determining the version from the package.json of a package"
-release_version=$(node -e "console.log(require('./packages/react/package.json').version)")
+  const plan = JSON.parse(readFileSync(process.argv[1], "utf8"));
+  const release = plan.releases.find(({ name }) => name === "@flopflip/react");
+
+  console.log(release?.newVersion ?? require("./packages/react/package.json").version);
+' "$release_plan")
 
 echo "Version for release is $release_version"
 
-echo "Running 'git reset' and exporting to GITHUB_OUTPUT"
-
-git reset --hard
-
-echo "VERSION=$release_version" >> $GITHUB_OUTPUT
-
-echo "GITHUB_OUTPUT is:"
-echo $GITHUB_OUTPUT
-
+echo "VERSION=$release_version" >>"$GITHUB_OUTPUT"
