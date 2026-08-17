@@ -99,7 +99,7 @@
   "devEngines": {
     "runtime": {
       "name": "node",
-      "version": "24.17",
+      "version": "24",
       "onFail": "warn"
     }
   },
