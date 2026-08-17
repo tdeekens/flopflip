@@ -25,4 +25,5 @@ Track these steps as TODOs and complete them one by one.
 **Reference**
 
 - Use `openspec show <id> --json --deltas-only` if you need additional context from the proposal while implementing.
+
 <!-- OPENSPEC:END -->

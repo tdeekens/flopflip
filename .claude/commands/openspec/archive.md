@@ -23,4 +23,5 @@ tags: [openspec, archive]
 **Reference**
 
 - Inspect refreshed specs with `openspec list --specs` and address any validation issues before handing off.
+
 <!-- OPENSPEC:END -->
