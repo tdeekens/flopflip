@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/types",
-  "version": "15.1.12",
+  "version": "15.1.13",
   "description": "Type definitions for flipflop",
   "keywords": [
     "feature-flags",
