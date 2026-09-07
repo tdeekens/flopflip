@@ -70,7 +70,7 @@
     "react-dom": "19.2.8",
     "react-redux": "9.3.0",
     "redux": "5.0.1",
-    "tsdown": "0.22.14"
+    "tsdown": "0.23.0"
   },
   "peerDependencies": {
     "react": "18.x || 19.x",
