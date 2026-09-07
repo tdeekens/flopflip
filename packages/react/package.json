@@ -67,10 +67,10 @@
     "@flopflip/tsconfig": "workspace:*",
     "@flopflip/tsdown-config": "workspace:*",
     "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.5",
+    "@types/react-dom": "19.2.7",
     "react": "19.2.8",
     "react-dom": "19.2.8",
-    "tsdown": "0.22.14"
+    "tsdown": "0.23.0"
   },
   "peerDependencies": {
     "react": "18.x || 19.x",
