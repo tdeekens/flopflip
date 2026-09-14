@@ -56,7 +56,7 @@
     "@babel/runtime": "8.0.0",
     "@flopflip/react": "workspace:*",
     "@flopflip/types": "workspace:*",
-    "use-sync-external-store": "1.6.0"
+    "use-sync-external-store": "1.7.0"
   },
   "devDependencies": {
     "@flopflip/combine-adapters": "workspace:*",
@@ -65,10 +65,10 @@
     "@flopflip/test-utils": "workspace:*",
     "@flopflip/tsconfig": "workspace:*",
     "@flopflip/tsdown-config": "workspace:*",
-    "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.7",
-    "react": "19.2.8",
-    "react-dom": "19.2.8",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
     "tsdown": "0.23.0"
   },
   "peerDependencies": {
