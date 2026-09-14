@@ -52,7 +52,7 @@
     "dev": "tsdown --watch"
   },
   "dependencies": {
-    "@babel/runtime": "8.0.0",
+    "@babel/runtime": "8.0.5",
     "@flopflip/react": "workspace:*",
     "@flopflip/types": "workspace:*",
     "@reduxjs/toolkit": "2.12.0",
