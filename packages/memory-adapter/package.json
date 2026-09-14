@@ -51,7 +51,7 @@
     "dev": "tsdown --watch"
   },
   "dependencies": {
-    "@babel/runtime": "8.0.0",
+    "@babel/runtime": "8.0.5",
     "@flopflip/adapter-utilities": "workspace:*",
     "@flopflip/types": "workspace:*",
     "mitt": "3.0.1",
