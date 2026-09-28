@@ -312,6 +312,17 @@ describe('when configured', () => {
     const user = { id: 'bar' };
 
     beforeEach(async () => {
+      adapterEventHandlers = createAdapterEventHandlers();
+      vi.useFakeTimers();
+      await adapter.configure(
+        { ...adapterArgs, cacheIdentifier: 'session' },
+        adapterEventHandlers,
+      );
+
+      // Only assert on what `reconfigure` does, not `configure`.
+      adapterEventHandlers.onFlagsStateChange.mockClear();
+      sessionStorage.removeItem.mockClear();
+
       configurationResult = await adapter.reconfigure({
         ...adapterArgs,
         user,
@@ -335,16 +346,12 @@ describe('when configured', () => {
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalled();
     });
 
-    it('should invoke `onFlagsStateChange` with all flags', () => {
+    it('should invoke `onFlagsStateChange` with the refetched flags', () => {
       expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
         id: adapter.id,
         flags: {
-          barFlag: false,
           disabled: false,
           enabled: true,
-          flagA1: false,
-          flagB: false,
-          fooFlag: true,
         },
       });
     });

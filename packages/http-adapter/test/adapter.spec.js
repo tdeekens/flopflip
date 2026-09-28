@@ -267,6 +267,19 @@ describe('when configured', () => {
   });
 
   describe('when reconfiguring', () => {
+    beforeEach(async () => {
+      adapterEventHandlers = createAdapterEventHandlers();
+      vi.useFakeTimers();
+      await adapter.configure(
+        { ...adapterArgs, cacheIdentifier: 'session' },
+        adapterEventHandlers,
+      );
+
+      // Only assert on what `reconfigure` does, not `configure`.
+      adapterEventHandlers.onFlagsStateChange.mockClear();
+      sessionStorage.removeItem.mockClear();
+    });
+
     describe('when the user changed', () => {
       const user = { key: 'changed-user' };
 
@@ -290,20 +303,12 @@ describe('when configured', () => {
         expect(adapter.getUser()).toEqual(user);
       });
 
-      it('should invoke `onFlagsStateChange`', () => {
-        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalled();
-      });
-
-      it('should invoke `onFlagsStateChange` with all flags', () => {
+      it('should invoke `onFlagsStateChange` with the refetched flags', () => {
         expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
           id: adapter.id,
           flags: {
-            barFlag: false,
             disabled: false,
             enabled: true,
-            flagA1: false,
-            flagB: false,
-            fooFlag: true,
           },
         });
       });
@@ -315,12 +320,10 @@ describe('when configured', () => {
       });
     });
 
-    describe('when the user did nt change', () => {
+    describe('when the user did not change', () => {
       const initialUser = adapterArgs.user;
 
       beforeEach(async () => {
-        sessionStorage.removeItem.mockClear();
-
         configurationResult = await adapter.reconfigure({
           ...adapterArgs,
           user: initialUser,
@@ -340,28 +343,12 @@ describe('when configured', () => {
         expect(adapter.getUser()).toEqual(initialUser);
       });
 
-      it('should invoke `onFlagsStateChange`', () => {
-        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalled();
-      });
-
-      it('should invoke `onFlagsStateChange` with all flags', () => {
-        expect(adapterEventHandlers.onFlagsStateChange).toHaveBeenCalledWith({
-          id: adapter.id,
-          flags: {
-            barFlag: false,
-            disabled: false,
-            enabled: true,
-            flagA1: false,
-            flagB: false,
-            fooFlag: true,
-          },
-        });
+      it('should not invoke `onFlagsStateChange`', () => {
+        expect(adapterEventHandlers.onFlagsStateChange).not.toHaveBeenCalled();
       });
 
       it('should not reset cache', () => {
-        expect(sessionStorage.removeItem).not.toHaveBeenCalledWith(
-          '@flopflip/http-adapter/flags',
-        );
+        expect(sessionStorage.removeItem).not.toHaveBeenCalled();
       });
     });
   });

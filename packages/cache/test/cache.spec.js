@@ -55,8 +55,9 @@ describe('general caching', () => {
 
     cache.set(flags);
 
-    expect(sessionStorage.getItem).toHaveBeenLastCalledWith(
-      expect.stringContaining(
+    expect(sessionStorage.setItem).toHaveBeenLastCalledWith(
+      `${getCachePrefix(adapterIdentifiers.memory)}/flags-reference`,
+      JSON.stringify(
         `${getCachePrefix(adapterIdentifiers.memory)}/${encodeCacheContext(cacheContext)}/flags`,
       ),
     );
