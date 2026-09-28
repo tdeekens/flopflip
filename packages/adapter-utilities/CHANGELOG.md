@@ -1,5 +1,15 @@
 # @flopflip/adapter-utilities
 
+## 15.1.14
+
+### Patch Changes
+
+- [#2213](https://github.com/tdeekens/flopflip/pull/2213) [`fea22e2`](https://github.com/tdeekens/flopflip/commit/fea22e2a1711f2f8bb4a60e8f9d9313b00da5f53) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: drop the unused `@babel/runtime` dependency
+  
+  The packages are built with tsdown, which does not use Babel, so nothing imports `@babel/runtime`. Consumers no longer install it.
+- Updated dependencies []:
+  - @flopflip/types@15.1.14
+
 ## 15.1.13
 
 ### Patch Changes
