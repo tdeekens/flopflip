@@ -1,5 +1,29 @@
 # @flopflip/graphql-adapter
 
+## 15.1.14
+
+### Patch Changes
+
+- [#2208](https://github.com/tdeekens/flopflip/pull/2208) [`66ae5fb`](https://github.com/tdeekens/flopflip/commit/66ae5fbd2c652976d53b40c57e75864346d09d33) Thanks [@tdeekens](https://github.com/tdeekens)! - fix(adapters): stop leaking state across `reset()` and repeated `configure()`
+  
+  - `reset()` now returns an adapter to its initial state. Previously, locked flags and event handlers survived a reset because every instance and reset shared the same `Set` and emitter, so updates to a previously locked flag were ignored. The http and graphql adapters also stop polling for flags on `reset()`.
+  - `configure()` now replaces the event handlers of a previous `configure()` call instead of adding to them. Previously, calling it twice, for example through a remount or React's StrictMode, invoked every handler set on each change. If you relied on handlers from an earlier `configure()` call staying active, pass all handlers to the latest call.
+  - The localstorage adapter no longer starts an additional polling interval on every `configure()`.
+
+- [#2213](https://github.com/tdeekens/flopflip/pull/2213) [`fea22e2`](https://github.com/tdeekens/flopflip/commit/fea22e2a1711f2f8bb4a60e8f9d9313b00da5f53) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: drop the unused `@babel/runtime` dependency
+  
+  The packages are built with tsdown, which does not use Babel, so nothing imports `@babel/runtime`. Consumers no longer install it.
+
+- [#2213](https://github.com/tdeekens/flopflip/pull/2213) [`fea22e2`](https://github.com/tdeekens/flopflip/commit/fea22e2a1711f2f8bb4a60e8f9d9313b00da5f53) Thanks [@tdeekens](https://github.com/tdeekens)! - fix: export the package version again
+  
+  Since 15.0.0 the exported `version` was the unreplaced placeholder `"__@FLOPFLIP/VERSION_OF_RELEASE__"`, as the Babel plugin replacing it no longer ran after the move to tsup and later tsdown. The build now replaces it with the version of each package.
+- Updated dependencies [[`fea22e2`](https://github.com/tdeekens/flopflip/commit/fea22e2a1711f2f8bb4a60e8f9d9313b00da5f53), [`fea22e2`](https://github.com/tdeekens/flopflip/commit/fea22e2a1711f2f8bb4a60e8f9d9313b00da5f53)]:
+  - @flopflip/adapter-utilities@15.1.14
+  - @flopflip/cache@15.1.14
+  - @flopflip/localstorage-cache@15.1.14
+  - @flopflip/sessionstorage-cache@15.1.14
+  - @flopflip/types@15.1.14
+
 ## 15.1.13
 
 ### Patch Changes
