@@ -11,9 +11,6 @@ export default defineConfig({
   ],
   test: {
     globals: true,
-    // The default from vitest 5 on. Set explicitly so tests cannot rely on
-    // mock calls leaking in from earlier tests.
-    clearMocks: true,
     environment: 'jsdom',
     setupFiles: [fileURLToPath(new URL('setup-tests.ts', import.meta.url))],
   },

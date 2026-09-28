@@ -4,7 +4,7 @@ import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { adapter } from '../src/adapter';
+import { adapter as defaultAdapter, GraphQlAdapter } from '../src/adapter';
 
 vi.mock('tiny-warning');
 
@@ -12,6 +12,13 @@ const createAdapterEventHandlers = (custom = {}) => ({
   onFlagsStateChange: vi.fn(),
   onStatusStateChange: vi.fn(),
   ...custom,
+});
+
+// A fresh adapter per test, so no test depends on state left by another.
+let adapter = new GraphQlAdapter();
+
+beforeEach(() => {
+  adapter = new GraphQlAdapter();
 });
 
 describe('when configuring', () => {
@@ -429,7 +436,7 @@ describe('exposeGlobally', () => {
   it('should expose `adapter` globally', () => {
     const global = getGlobalThis();
 
-    expect(global).toHaveProperty('__flopflip__.graphql', adapter);
+    expect(global).toHaveProperty('__flopflip__.graphql', defaultAdapter);
   });
 });
 

@@ -14,13 +14,13 @@ The library provides React components, hooks, and higher-order components for co
 
 ## Tech Stack
 
-- **Language**: TypeScript 5.9.3 (strict mode)
-- **Frontend Framework**: React 19.2.0
-- **State Management**: Redux 5.0.1 with Redux Toolkit 2.9.0
+- **Language**: TypeScript 7 (strict mode)
+- **Frontend Framework**: React 19 (packages support React 18 and 19)
+- **State Management**: Redux 5 with Redux Toolkit 2
 - **Build Tool**: pnpm pipeline (task orchestration) with tsdown for package building
 - **Package Manager**: pnpm 12 (enforced via preinstall hook)
-- **Testing**: Vitest 3.2.4 with @testing-library/react and Cypress 13.6.4 for E2E
-- **Code Quality**: Biome 2.2.5 (linting & formatting, replaces ESLint/Prettier)
+- **Testing**: Vitest 5 with @testing-library/react and Cypress 13 for E2E
+- **Code Quality**: oxlint (linting) and oxfmt (formatting)
 - **Release Management**: Changesets for versioning and changelog management
 - **Key Libraries**: Babel, Lodash, ts-deepmerge, mitt (event emitter)
 - **Distribution Formats**: ESM, CommonJS, UMD via unpkg.com CDN
@@ -29,8 +29,8 @@ The library provides React components, hooks, and higher-order components for co
 
 ### Code Style
 
-- **Formatter/Linter**: Biome 2.2.5 (strict enforcement)
-- **Line Width**: 80 characters (configured in biome.json)
+- **Formatter/Linter**: oxfmt and oxlint (strict enforcement)
+- **Line Width**: 80 characters (configured in .oxfmtrc.json)
 - **Indentation**: 2 spaces (no tabs)
 - **Quotes**: Double quotes for strings
 - **Semicolons**: Required
@@ -127,9 +127,9 @@ All adapters must implement:
 - **Package Manager**: pnpm 9+ enforced (preinstall hook prevents npm/yarn)
 - **Browser Support**: Modern browsers (ES2020+ target)
 - **TypeScript**: Strict mode mandatory
-- **Code Quality**: Biome checks must pass in CI/CD
+- **Code Quality**: oxlint and oxfmt checks must pass in CI/CD
 - **Testing**: Tests must pass before merge
-- **Line Length**: 80-character limit (Biome enforced)
+- **Line Length**: 80-character limit (oxfmt enforced)
 - **Dependency Management**: Use pnpm workspaces; no hoisting issues with dependencies
 - **Breaking Changes**: Require major version bump and thorough documentation
 - **Performance**: Libraries must support tree-shaking; avoid side effects in modules

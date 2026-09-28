@@ -6,9 +6,9 @@ import {
 } from '@flopflip/types';
 import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
-import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { adapter } from '../src/adapter';
+import { adapter as defaultAdapter, CombineAdapters } from '../src/adapter';
 
 vi.mock('tiny-warning', {
   default: vi.fn(),
@@ -32,6 +32,13 @@ const createAdapterEventHandlers = (custom = {}) => ({
   onFlagsStateChange: vi.fn(),
   onStatusStateChange: vi.fn(),
   ...custom,
+});
+
+// A fresh adapter per test, so no test depends on state left by another.
+let adapter = new CombineAdapters();
+
+beforeEach(() => {
+  adapter = new CombineAdapters();
 });
 
 describe('when combining', () => {
@@ -105,7 +112,7 @@ describe('when combining', () => {
   });
 
   describe('when all configured successfully', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       adapter.combine([memoryAdapter, localstorageAdapter]);
     });
 
@@ -338,12 +345,12 @@ describe('when combining', () => {
   describe('when not all configured sucessfully', () => {
     const failingAdapter = {
       id: 'failing',
-      configure: async () => ({
+      configure: vi.fn(async () => ({
         initializationStatus: AdapterInitializationStatus.Failed,
-      }),
+      })),
     };
 
-    beforeAll(() => {
+    beforeEach(() => {
       adapter.combine([memoryAdapter, failingAdapter]);
     });
 
@@ -351,9 +358,13 @@ describe('when combining', () => {
 
     beforeEach(async () => {
       configurationResult = await adapter.configure(
-        adapterArgs,
+        createAdapterArgs({ [failingAdapter.id]: {} }),
         adapterEventHandlers,
       );
+    });
+
+    it('should invoke `configure` on the failing adapter', () => {
+      expect(failingAdapter.configure).toHaveBeenCalled();
     });
 
     it('should resolve to a failed initialization status', () => {
@@ -364,9 +375,11 @@ describe('when combining', () => {
       );
     });
 
-    it('should indicate that the adapter is configured regardless', () => {
+    it('should indicate that the adapter is not configured', () => {
       expect(
-        adapter.getIsConfigurationStatus(AdapterConfigurationStatus.Configured),
+        adapter.getIsConfigurationStatus(
+          AdapterConfigurationStatus.Unconfigured,
+        ),
       ).toBe(true);
     });
   });
@@ -396,7 +409,7 @@ describe('exposeGlobally', () => {
   it('should expose `adapter` globally', () => {
     const global = getGlobalThis();
 
-    expect(global).toHaveProperty('__flopflip__.combined', adapter);
+    expect(global).toHaveProperty('__flopflip__.combined', defaultAdapter);
   });
 });
 

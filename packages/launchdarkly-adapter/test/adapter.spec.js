@@ -4,7 +4,7 @@ import { createClient as createLaunchDarklyClient } from '@launchdarkly/js-clien
 import getGlobalThis from 'globalthis';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { adapter } from '../src/adapter';
+import { adapter as defaultAdapter, LaunchDarklyAdapter } from '../src/adapter';
 
 vi.mock(import('@launchdarkly/js-client-sdk'), async (importOriginal) => {
   const actual = await importOriginal();
@@ -40,6 +40,13 @@ const triggerFlagValueChange = (client, { flagValue = false } = {}) => {
     }
   }
 };
+
+// A fresh adapter per test, so no test depends on state left by another.
+let adapter = new LaunchDarklyAdapter();
+
+beforeEach(() => {
+  adapter = new LaunchDarklyAdapter();
+});
 
 describe('when configuring', () => {
   let onStatusStateChange;
@@ -153,8 +160,6 @@ describe('when configuring', () => {
 
   describe('when configured', () => {
     let client;
-    let onStatusStateChange;
-    let onFlagsStateChange;
     let configurationResult;
 
     describe('without cache', () => {
@@ -600,6 +605,17 @@ describe('when configuring', () => {
     });
 
     describe('`getFlag`', () => {
+      beforeEach(async () => {
+        createLaunchDarklyClient.mockReturnValue(
+          createClient({ allFlags: vi.fn(() => ({ updated: true })) }),
+        );
+
+        await adapter.configure(
+          { sdk: { clientSideId }, context: userWithKey },
+          { onStatusStateChange, onFlagsStateChange },
+        );
+      });
+
       it('should return the flag', () => {
         expect(adapter.getFlag('updated')).toBe(true);
       });
@@ -726,7 +742,7 @@ describe('exposeGlobally', () => {
   it('should expose `adapter` globally', () => {
     const global = getGlobalThis();
 
-    expect(global).toHaveProperty('__flopflip__.launchdarkly', adapter);
+    expect(global).toHaveProperty('__flopflip__.launchdarkly', defaultAdapter);
   });
 });
 
