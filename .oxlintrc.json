@@ -69,7 +69,7 @@
       }
     },
     {
-      "files": ["setup-tests.ts"],
+      "files": ["**/setup-tests.ts"],
       "rules": {
         "import/no-unassigned-import": "off"
       }

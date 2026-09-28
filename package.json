@@ -64,13 +64,11 @@
     "@changesets/cli": "3.0.3",
     "@commitlint/cli": "21.2.3",
     "@commitlint/config-conventional": "21.2.3",
+    "@flopflip/vitest-config": "workspace:*",
     "@manypkg/cli": "0.25.1",
-    "@testing-library/dom": "catalog:",
-    "@testing-library/jest-dom": "catalog:",
     "@types/jest": "30.0.0",
     "@types/lodash": "4.17.25",
     "@types/node": "24.19.0",
-    "@vitejs/plugin-react": "6.1.1",
     "@vitest/coverage-v8": "4.1.11",
     "@vitest/ui": "4.1.11",
     "babel-plugin-transform-dynamic-import": "2.1.0",
@@ -93,8 +91,7 @@
     "tslib": "2.8.1",
     "typescript": "catalog:",
     "vite": "8.3.1",
-    "vitest": "4.1.11",
-    "vitest-localstorage-mock": "0.1.2"
+    "vitest": "catalog:"
   },
   "devEngines": {
     "runtime": {

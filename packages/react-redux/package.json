@@ -66,6 +66,7 @@
     "@flopflip/test-utils": "workspace:*",
     "@flopflip/tsconfig": "workspace:*",
     "@flopflip/tsdown-config": "workspace:*",
+    "@flopflip/vitest-config": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
     "react-redux": "9.3.0",

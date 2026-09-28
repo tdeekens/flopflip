@@ -1,0 +1,17 @@
+{
+  "name": "@flopflip/vitest-config",
+  "version": "15.1.12",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "dependencies": {
+    "@testing-library/dom": "catalog:",
+    "@testing-library/jest-dom": "catalog:",
+    "@vitejs/plugin-react": "6.1.1",
+    "vitest": "catalog:",
+    "vitest-localstorage-mock": "0.1.2"
+  }
+}

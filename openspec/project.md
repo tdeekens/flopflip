@@ -67,7 +67,7 @@ The library provides React components, hooks, and higher-order components for co
 - **Unit Tests**: Vitest with @testing-library/react for component testing
 - **Test Coverage**: Expected to cover business logic and edge cases
 - **Test Files**: Colocated with source code (`*.spec.ts` or `*.test.ts`)
-- **Shared Config**: `vitest.shared.ts` for consistent test setup across packages
+- **Shared Config**: `@flopflip/vitest-config` (`tooling/vitest-config`) for consistent test setup across packages
 - **E2E Tests**: Cypress for integration testing with custom Flopflip plugin
 - **Testing Utilities**: `@flopflip/test-utils` provides mock adapters and test helpers
 - **Requirements**:

@@ -60,10 +60,10 @@ jobs:
         run: pnpm build
 
       - name: Test (with coverage)
-        run: pnpm test:coverage --config vitest.shared.ts
+        run: pnpm test:coverage
 
       - name: Test (with report)
-        run: pnpm test:report --config vitest.shared.ts
+        run: pnpm test:report
 
       # Only the LTS leg reports, so the matrix does not upload the same
       # coverage and test results twice per commit.

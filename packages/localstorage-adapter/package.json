@@ -62,6 +62,7 @@
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
     "@flopflip/tsdown-config": "workspace:*",
+    "@flopflip/vitest-config": "workspace:*",
     "globalthis": "catalog:",
     "tsdown": "catalog:"
   }

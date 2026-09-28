@@ -17,6 +17,7 @@ catalog:
   ts-deepmerge: 8.0.0
   tsdown: 0.23.0
   typescript: 7.0.2
+  vitest: 4.1.11
 overrides:
   '@types/react': 'catalog:'
   '@types/react-dom': 'catalog:'
