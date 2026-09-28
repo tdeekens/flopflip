@@ -15,7 +15,6 @@
   "author": "Tobias Deekens <nerd@tdeekens.name>",
   "main": "index.js",
   "dependencies": {
-    "@babel/runtime": "catalog:",
     "@flopflip/memory-adapter": "workspace:*",
     "@flopflip/tsconfig": "workspace:*",
     "@testing-library/dom": "catalog:",

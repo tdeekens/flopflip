@@ -2,7 +2,6 @@ packages:
   - packages/*
   - tooling/*
 catalog:
-  '@babel/runtime': 8.0.5
   '@launchdarkly/js-client-sdk': 4.10.3
   '@testing-library/dom': 10.4.2
   '@testing-library/jest-dom': 7.0.1
@@ -24,7 +23,6 @@ overrides:
 patchedDependencies:
   cypress@13.6.4: patches/cypress@13.6.4.patch
 allowBuilds:
-  core-js: true
   cypress: true
   esbuild: true
 peerDependencyRules:
