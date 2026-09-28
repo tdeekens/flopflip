@@ -14,7 +14,7 @@ runs:
 
   steps:
     - name: Setup pnpm with runtime
-      uses: pnpm/setup@v2
+      uses: pnpm/setup@v3
       with:
         cache: true
         runtime: ${{ inputs.runtime }}
