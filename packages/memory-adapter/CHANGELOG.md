@@ -1,5 +1,16 @@
 # @flopflip/memory-adapter
 
+## 15.1.13
+
+### Patch Changes
+
+- [#2198](https://github.com/tdeekens/flopflip/pull/2198) [`566b82d`](https://github.com/tdeekens/flopflip/commit/566b82d3184050ffa2b736429a9811ccba248988) Thanks [@tdeekens](https://github.com/tdeekens)! - build: adopt pnpm 12 features
+
+- [`54e05b3`](https://github.com/tdeekens/flopflip/commit/54e05b32cc6ed35e1e7408cf10dccb7bd28ff840) Thanks [@tdeekens](https://github.com/tdeekens)! - build: replace turbo with pnpm pipeline
+- Updated dependencies [[`566b82d`](https://github.com/tdeekens/flopflip/commit/566b82d3184050ffa2b736429a9811ccba248988), [`54e05b3`](https://github.com/tdeekens/flopflip/commit/54e05b32cc6ed35e1e7408cf10dccb7bd28ff840)]:
+  - @flopflip/adapter-utilities@15.1.13
+  - @flopflip/types@15.1.13
+
 ## 15.1.12
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @flopflip/splitio-adapter
 
+## 15.1.13
+
+### Patch Changes
+
+- [#2196](https://github.com/tdeekens/flopflip/pull/2196) [`b71b0ee`](https://github.com/tdeekens/flopflip/commit/b71b0eeccaec7c83007371dc0e63b370097f15a1) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update all dependencies
+
+- [#2198](https://github.com/tdeekens/flopflip/pull/2198) [`566b82d`](https://github.com/tdeekens/flopflip/commit/566b82d3184050ffa2b736429a9811ccba248988) Thanks [@tdeekens](https://github.com/tdeekens)! - build: adopt pnpm 12 features
+- Updated dependencies [[`566b82d`](https://github.com/tdeekens/flopflip/commit/566b82d3184050ffa2b736429a9811ccba248988), [`54e05b3`](https://github.com/tdeekens/flopflip/commit/54e05b32cc6ed35e1e7408cf10dccb7bd28ff840)]:
+  - @flopflip/adapter-utilities@15.1.13
+  - @flopflip/types@15.1.13
+
 ## 15.1.12
 
 ### Patch Changes
