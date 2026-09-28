@@ -11,7 +11,7 @@ import {
   type TFlagsChange,
 } from '@flopflip/types';
 // oxlint-disable-next-line no-unused-vars -- false positive
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useSyncExternalStore } from 'use-sync-external-store/shim';
 
 import { FlagsContext } from './flags-context';
@@ -30,17 +30,24 @@ type TState = {
   status: TAdaptersStatus;
 };
 
-const store = createStore<TState>({
-  status: {},
-  flags: {},
-});
+type TStore = ReturnType<typeof createStore<TState>>;
+
+// Each `Configure` gets its own store, so a remount or a second `Configure`
+// does not start with the flags and status of another one.
+const createConfigureStore = (): TStore =>
+  createStore<TState>({
+    status: {},
+    flags: {},
+  });
 
 type TUseFlagsStateOptions = {
   adapterIdentifiers: TAdapterIdentifiers[];
+  store: TStore;
 };
 type TFlagUpdateFunction = (flagsChange: TFlagsChange) => void;
 const useFlagsState = ({
   adapterIdentifiers,
+  store,
 }: TUseFlagsStateOptions): [TFlagsState, TFlagUpdateFunction] => {
   const flags = useSyncExternalStore(
     store.subscribe,
@@ -86,7 +93,7 @@ const useFlagsState = ({
         return nextState;
       });
     },
-    [adapterIdentifiers],
+    [adapterIdentifiers, store],
   );
 
   return [flags, updateFlags];
@@ -94,10 +101,12 @@ const useFlagsState = ({
 
 type TUseStatusStateOptions = {
   adapterIdentifiers: TAdapterIdentifiers[];
+  store: TStore;
 };
 type TStatusUpdateFunction = (statusChange: TAdapterStatusChange) => void;
 const useStatusState = ({
   adapterIdentifiers,
+  store,
 }: TUseStatusStateOptions): [TAdaptersStatus, TStatusUpdateFunction] => {
   const status = useSyncExternalStore(
     store.subscribe,
@@ -144,7 +153,7 @@ const useStatusState = ({
         return nextState;
       });
     },
-    [adapterIdentifiers],
+    [adapterIdentifiers, store],
   );
 
   return [status, setStatus];
@@ -159,8 +168,9 @@ function Configure<AdapterInstance extends TAdapter>({
 }: TProps<AdapterInstance>) {
   const adapterIdentifiers = useMemo(() => [adapter.id], [adapter.id]);
 
-  const [flags, updateFlags] = useFlagsState({ adapterIdentifiers });
-  const [status, updateStatus] = useStatusState({ adapterIdentifiers });
+  const [store] = useState(createConfigureStore);
+  const [flags, updateFlags] = useFlagsState({ adapterIdentifiers, store });
+  const [status, updateStatus] = useStatusState({ adapterIdentifiers, store });
   // NOTE:
   //   Using this prevents the callbacks being invoked
   //   which would trigger a setState as a result on an unmounted
