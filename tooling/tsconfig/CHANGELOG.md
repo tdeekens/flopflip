@@ -1,5 +1,11 @@
 # @flopflip/tsconfig
 
+## 15.1.13
+
+### Patch Changes
+
+- [#2198](https://github.com/tdeekens/flopflip/pull/2198) [`566b82d`](https://github.com/tdeekens/flopflip/commit/566b82d3184050ffa2b736429a9811ccba248988) Thanks [@tdeekens](https://github.com/tdeekens)! - build: adopt pnpm 12 features
+
 ## 15.1.12
 
 ### Patch Changes

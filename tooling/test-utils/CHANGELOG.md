@@ -1,5 +1,16 @@
 # @flopflip/test-utils
 
+## 15.1.13
+
+### Patch Changes
+
+- [#2201](https://github.com/tdeekens/flopflip/pull/2201) [`ba3cb40`](https://github.com/tdeekens/flopflip/commit/ba3cb407445d88fde7f6b0faefe97f691f827681) Thanks [@tdeekens](https://github.com/tdeekens)! - build: declare @testing-library/dom explicitly
+
+- [#2198](https://github.com/tdeekens/flopflip/pull/2198) [`566b82d`](https://github.com/tdeekens/flopflip/commit/566b82d3184050ffa2b736429a9811ccba248988) Thanks [@tdeekens](https://github.com/tdeekens)! - build: adopt pnpm 12 features
+- Updated dependencies [[`566b82d`](https://github.com/tdeekens/flopflip/commit/566b82d3184050ffa2b736429a9811ccba248988), [`54e05b3`](https://github.com/tdeekens/flopflip/commit/54e05b32cc6ed35e1e7408cf10dccb7bd28ff840)]:
+  - @flopflip/memory-adapter@15.1.13
+  - @flopflip/tsconfig@15.1.13
+
 ## 15.1.12
 
 ### Patch Changes
