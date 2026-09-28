@@ -4,7 +4,7 @@ import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { adapter } from '../src/adapter';
+import { adapter as defaultAdapter, HttpAdapter } from '../src/adapter';
 
 vi.mock('tiny-warning');
 
@@ -12,6 +12,13 @@ const createAdapterEventHandlers = (custom = {}) => ({
   onFlagsStateChange: vi.fn(),
   onStatusStateChange: vi.fn(),
   ...custom,
+});
+
+// A fresh adapter per test, so no test depends on state left by another.
+let adapter = new HttpAdapter();
+
+beforeEach(() => {
+  adapter = new HttpAdapter();
 });
 
 describe('when configuring', () => {
@@ -419,7 +426,7 @@ describe('exposeGlobally', () => {
   it('should expose `adapter` globally', () => {
     const global = getGlobalThis();
 
-    expect(global).toHaveProperty('__flopflip__.http', adapter);
+    expect(global).toHaveProperty('__flopflip__.http', defaultAdapter);
   });
 });
 

@@ -324,5 +324,6 @@ const adapter = new LocalStorageAdapter();
 
 exposeGlobally(adapter);
 
-export { adapter };
+// The class is exported for tests only. The package exports the instance.
+export { adapter, LocalStorageAdapter };
 export { STORAGE_SLICE };
