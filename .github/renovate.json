@@ -1,5 +1,5 @@
 {
-  "extends": ["config:base", "group:monorepos", "schedule:weekly"],
+  "extends": ["config:recommended", "group:monorepos", "schedule:weekly"],
   "separateMajorMinor": true,
   "minimumReleaseAge": "1 day",
   "internalChecksFilter": "strict",
@@ -8,13 +8,13 @@
   },
   "packageRules": [
     {
-      "packagePatterns": ["*"],
-      "updateTypes": ["minor", "patch"],
+      "matchUpdateTypes": ["minor", "patch"],
       "groupName": "all dependencies",
-      "groupSlug": "all"
+      "groupSlug": "all",
+      "matchPackageNames": ["*"]
     },
     {
-      "extends": "monorepo:babel",
+      "extends": ["monorepo:babel"],
       "groupName": "babel monorepo",
       "matchUpdateTypes": ["digest", "patch", "minor", "major"]
     },
