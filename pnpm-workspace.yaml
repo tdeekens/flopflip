@@ -32,7 +32,6 @@ peerDependencyRules:
     'tsdown>typescript': '7'
 autoDedupe: true
 minimumReleaseAge: 1440
-publishWaitTimeout: 300000
 tasks:
   build:
     dependsOn: ['^build']
