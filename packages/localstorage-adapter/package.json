@@ -51,7 +51,6 @@
     "dev": "tsdown --watch"
   },
   "dependencies": {
-    "@babel/runtime": "catalog:",
     "@flopflip/adapter-utilities": "workspace:*",
     "@flopflip/localstorage-cache": "workspace:*",
     "@flopflip/types": "workspace:*",

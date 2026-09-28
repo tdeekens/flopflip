@@ -51,7 +51,6 @@
     "dev": "tsdown --watch"
   },
   "dependencies": {
-    "@babel/runtime": "catalog:",
     "@flopflip/adapter-utilities": "workspace:*",
     "@flopflip/types": "workspace:*",
     "@splitsoftware/splitio": "11.12.0",

@@ -50,7 +50,6 @@
     "dev": "tsdown --watch"
   },
   "dependencies": {
-    "@babel/runtime": "catalog:",
     "@flopflip/types": "workspace:*",
     "globalthis": "catalog:",
     "lodash": "catalog:"
