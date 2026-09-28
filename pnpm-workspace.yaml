@@ -3,7 +3,7 @@ packages:
   - tooling/*
 catalog:
   '@babel/runtime': 8.0.5
-  '@launchdarkly/js-client-sdk': 4.10.2
+  '@launchdarkly/js-client-sdk': 4.10.3
   '@testing-library/jest-dom': 6.9.1
   '@types/react': 19.3.0
   '@types/react-dom': 19.3.0
