@@ -17,8 +17,8 @@ The library provides React components, hooks, and higher-order components for co
 - **Language**: TypeScript 5.9.3 (strict mode)
 - **Frontend Framework**: React 19.2.0
 - **State Management**: Redux 5.0.1 with Redux Toolkit 2.9.0
-- **Build Tool**: Turbo (monorepo orchestration) with tsup for package building
-- **Package Manager**: pnpm 10.18.2 (enforced via preinstall hook)
+- **Build Tool**: pnpm pipeline (task orchestration) with tsdown for package building
+- **Package Manager**: pnpm 12 (enforced via preinstall hook)
 - **Testing**: Vitest 3.2.4 with @testing-library/react and Cypress 13.6.4 for E2E
 - **Code Quality**: Biome 2.2.5 (linting & formatting, replaces ESLint/Prettier)
 - **Release Management**: Changesets for versioning and changelog management
@@ -49,7 +49,7 @@ The library provides React components, hooks, and higher-order components for co
 
 ### Architecture Patterns
 
-- **Monorepo Structure**: pnpm workspaces with Turbo orchestration
+- **Monorepo Structure**: pnpm workspaces with pnpm pipeline orchestration
   - `/packages/` - Core libraries and adapters
   - `/tooling/` - Shared tooling and configurations
 - **Adapter Pattern**: All feature flag providers implement a common adapter interface with `configure()` and `reconfigure()` methods

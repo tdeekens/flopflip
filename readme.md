@@ -13,7 +13,7 @@
   React
   · Redux
   · Vitest
-  · Turbo
+  · pnpm
   · TypeScript
   · @testing-library/react
   · Biome
