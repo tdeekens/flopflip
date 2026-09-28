@@ -47,3 +47,5 @@ pipelines:
   build: [build]
   check-types: [check-types]
   test: [test]
+blockExoticSubdeps: true
+trustPolicy: no-downgrade
