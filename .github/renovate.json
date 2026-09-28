@@ -8,20 +8,13 @@
   },
   "packageRules": [
     {
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
+      "matchUpdateTypes": ["minor", "patch"],
       "groupName": "all dependencies",
       "groupSlug": "all",
-      "matchPackageNames": [
-        "*"
-      ]
+      "matchPackageNames": ["*"]
     },
     {
-      "extends": [
-        "monorepo:babel"
-      ],
+      "extends": ["monorepo:babel"],
       "groupName": "babel monorepo",
       "matchUpdateTypes": ["digest", "patch", "minor", "major"]
     },
