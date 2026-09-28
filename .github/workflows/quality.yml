@@ -31,9 +31,14 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/ci
+        with:
+          pipeline-cache: true
 
       - name: TypeScript
         run: pnpm check-types
+
+      - name: Prune pipeline cache
+        run: node scripts/prune-pipeline-cache.mjs
 
   testing:
     name: Testing (Node ${{ matrix.node }})
@@ -55,15 +60,19 @@ jobs:
         uses: ./.github/actions/ci
         with:
           runtime: node@${{ matrix.node }}
+          pipeline-cache: true
 
       - name: Build
         run: pnpm build
 
+      - name: Prune pipeline cache
+        run: node scripts/prune-pipeline-cache.mjs
+
       - name: Test (with coverage)
-        run: pnpm test:coverage --config vitest.shared.ts
+        run: pnpm test:coverage
 
       - name: Test (with report)
-        run: pnpm test:report --config vitest.shared.ts
+        run: pnpm test:report
 
       # Only the LTS leg reports, so the matrix does not upload the same
       # coverage and test results twice per commit.

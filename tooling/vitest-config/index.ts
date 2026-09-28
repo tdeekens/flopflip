@@ -1,4 +1,4 @@
-import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
@@ -12,6 +12,6 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: [path.resolve(__dirname, 'setup-tests.ts')],
+    setupFiles: [fileURLToPath(new URL('setup-tests.ts', import.meta.url))],
   },
 });

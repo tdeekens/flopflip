@@ -17,6 +17,7 @@ catalog:
   ts-deepmerge: 8.0.0
   tsdown: 0.23.0
   typescript: 7.0.2
+  vitest: 4.1.11
 overrides:
   '@types/react': 'catalog:'
   '@types/react-dom': 'catalog:'
@@ -32,3 +33,17 @@ peerDependencyRules:
 autoDedupe: true
 minimumReleaseAge: 1440
 publishWaitTimeout: 300000
+tasks:
+  build:
+    dependsOn: ['^build']
+    outputs: ['dist/**']
+  check-types:
+    dependsOn: ['^build']
+    outputs: []
+  test:
+    dependsOn: ['^build']
+    outputs: []
+pipelines:
+  build: [build]
+  check-types: [check-types]
+  test: [test]
