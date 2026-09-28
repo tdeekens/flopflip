@@ -15,12 +15,12 @@
   "author": "Tobias Deekens <nerd@tdeekens.name>",
   "main": "index.js",
   "dependencies": {
-    "@babel/runtime": "8.0.5",
+    "@babel/runtime": "catalog:",
     "@flopflip/memory-adapter": "workspace:*",
     "@flopflip/tsconfig": "workspace:*",
-    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/jest-dom": "catalog:",
     "@testing-library/react": "16.3.3",
-    "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react": "catalog:",
+    "react-dom": "catalog:"
   }
 }
