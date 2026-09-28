@@ -65,6 +65,7 @@
     "@commitlint/cli": "21.2.3",
     "@commitlint/config-conventional": "21.2.3",
     "@manypkg/cli": "0.25.1",
+    "@testing-library/dom": "catalog:",
     "@testing-library/jest-dom": "catalog:",
     "@types/jest": "30.0.0",
     "@types/lodash": "4.17.25",

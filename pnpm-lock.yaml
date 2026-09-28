@@ -195,6 +195,9 @@ catalogs:
     '@launchdarkly/js-client-sdk':
       specifier: 4.10.3
       version: 4.10.3
+    '@testing-library/dom':
+      specifier: 10.4.1
+      version: 10.4.1
     '@testing-library/jest-dom':
       specifier: 6.9.1
       version: 6.9.1
@@ -315,6 +318,9 @@ importers:
       '@manypkg/cli':
         specifier: 0.25.1
         version: 0.25.1
+      '@testing-library/dom':
+        specifier: 'catalog:'
+        version: 10.4.1
       '@testing-library/jest-dom':
         specifier: 'catalog:'
         version: 6.9.1
@@ -973,6 +979,9 @@ importers:
       '@flopflip/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
+      '@testing-library/dom':
+        specifier: 'catalog:'
+        version: 10.4.1
       '@testing-library/jest-dom':
         specifier: 'catalog:'
         version: 6.9.1
