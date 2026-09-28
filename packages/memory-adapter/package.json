@@ -51,16 +51,16 @@
     "dev": "tsdown --watch"
   },
   "dependencies": {
-    "@babel/runtime": "8.0.0",
+    "@babel/runtime": "catalog:",
     "@flopflip/adapter-utilities": "workspace:*",
     "@flopflip/types": "workspace:*",
-    "mitt": "3.0.1",
-    "tiny-warning": "1.0.3"
+    "mitt": "catalog:",
+    "tiny-warning": "catalog:"
   },
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
     "@flopflip/tsdown-config": "workspace:*",
-    "globalthis": "1.0.4",
-    "tsdown": "0.22.14"
+    "globalthis": "catalog:",
+    "tsdown": "catalog:"
   }
 }

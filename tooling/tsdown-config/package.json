@@ -8,9 +8,9 @@
     ".": "./index.ts"
   },
   "dependencies": {
-    "tsdown": "0.22.14"
+    "tsdown": "catalog:"
   },
   "devDependencies": {
-    "typescript": "7.0.2"
+    "typescript": "catalog:"
   }
 }

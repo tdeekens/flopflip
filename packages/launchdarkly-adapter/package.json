@@ -51,23 +51,23 @@
     "dev": "tsdown --watch"
   },
   "dependencies": {
-    "@babel/runtime": "8.0.0",
+    "@babel/runtime": "catalog:",
     "@flopflip/adapter-utilities": "workspace:*",
     "@flopflip/cache": "workspace:*",
     "@flopflip/localstorage-cache": "workspace:*",
     "@flopflip/sessionstorage-cache": "workspace:*",
     "@flopflip/types": "workspace:*",
-    "@launchdarkly/js-client-sdk": "4.10.0",
+    "@launchdarkly/js-client-sdk": "catalog:",
     "debounce-fn": "4.0.0",
-    "lodash": "4.18.1",
-    "mitt": "3.0.1",
-    "tiny-warning": "1.0.3",
-    "ts-deepmerge": "8.0.0"
+    "lodash": "catalog:",
+    "mitt": "catalog:",
+    "tiny-warning": "catalog:",
+    "ts-deepmerge": "catalog:"
   },
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
     "@flopflip/tsdown-config": "workspace:*",
-    "globalthis": "1.0.4",
-    "tsdown": "0.22.14"
+    "globalthis": "catalog:",
+    "tsdown": "catalog:"
   }
 }

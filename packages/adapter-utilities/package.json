@@ -50,16 +50,16 @@
     "dev": "tsdown --watch"
   },
   "dependencies": {
-    "@babel/runtime": "8.0.0",
+    "@babel/runtime": "catalog:",
     "@flopflip/types": "workspace:*",
-    "globalthis": "1.0.4",
-    "lodash": "4.18.1"
+    "globalthis": "catalog:",
+    "lodash": "catalog:"
   },
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
     "@flopflip/tsdown-config": "workspace:*",
-    "tsdown": "0.22.14",
-    "typescript": "7.0.2"
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "typescript": "4.x || 5.x || 6.x || 7.x"
