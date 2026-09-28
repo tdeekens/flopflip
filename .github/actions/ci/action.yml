@@ -8,6 +8,13 @@ inputs:
       Runtime to install, in `<name>@<version>` form (e.g. `node@26`).
       When omitted, `pnpm/setup` reads `devEngines.runtime` from package.json.
     required: false
+  pipeline-cache:
+    description: |
+      Restore and save the `pnpm pipeline` task cache across runs. Jobs that
+      enable it should run `node scripts/prune-pipeline-cache.mjs` as their
+      last step, as pnpm does not evict cache entries itself.
+    required: false
+    default: 'false'
 
 runs:
   using: composite
@@ -18,3 +25,21 @@ runs:
       with:
         cache: true
         runtime: ${{ inputs.runtime }}
+
+    - name: Resolve pipeline cache directory
+      if: inputs.pipeline-cache == 'true'
+      id: pipeline-cache-dir
+      shell: bash
+      run: echo "dir=${XDG_CACHE_HOME:-$HOME/.cache}/pnpm/pipeline" >> "$GITHUB_OUTPUT"
+
+    # Keyed per job and runtime so matrix legs and pipelines do not evict
+    # each other. The sha makes every run save its pruned cache; the prefix
+    # restores the latest one.
+    - name: Cache pipeline task results
+      if: inputs.pipeline-cache == 'true'
+      uses: actions/cache@v6
+      with:
+        path: ${{ steps.pipeline-cache-dir.outputs.dir }}
+        key: pnpm-pipeline-${{ runner.os }}-${{ github.job }}-${{ inputs.runtime }}-${{ github.sha }}
+        restore-keys: |
+          pnpm-pipeline-${{ runner.os }}-${{ github.job }}-${{ inputs.runtime }}-

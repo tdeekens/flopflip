@@ -20,8 +20,13 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/ci
+        with:
+          pipeline-cache: true
 
       - uses: jackyef/bundlewatch-gh-action@master
         with:
           build-script: pnpm build
           bundlewatch-github-token: ${{ secrets.BUNDLEWATCH_GITHUB_TOKEN }}
+
+      - name: Prune pipeline cache
+        run: node scripts/prune-pipeline-cache.mjs
