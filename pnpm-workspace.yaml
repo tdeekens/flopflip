@@ -14,3 +14,4 @@ peerDependencyRules:
   allowedVersions:
     'tsdown>typescript': '7'
 autoDedupe: true
+minimumReleaseAge: 1440
