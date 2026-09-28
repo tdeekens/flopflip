@@ -50,14 +50,14 @@
     "dev": "tsdown --watch"
   },
   "dependencies": {
-    "@launchdarkly/js-client-sdk": "4.10.2"
+    "@launchdarkly/js-client-sdk": "catalog:"
   },
   "devDependencies": {
     "@flopflip/tsconfig": "workspace:*",
     "@flopflip/tsdown-config": "workspace:*",
-    "@types/react": "19.3.0",
-    "tsdown": "0.23.0",
-    "typescript": "7.0.2"
+    "@types/react": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "typescript": "4.x || 5.x || 6.x || 7.x"
