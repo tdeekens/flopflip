@@ -96,3 +96,26 @@ describe('when configured', () => {
     expect(screen.getByText(/Is configured: Yes/i)).toBeInTheDocument();
   });
 });
+
+describe('when mounted again', () => {
+  it('should not start with the flags of a previous mount', async () => {
+    const renderConfigure = () =>
+      rtlRender(
+        <Configure {...createTestProps()}>
+          <TestComponent />
+        </Configure>,
+      );
+
+    const { unmount } = renderConfigure();
+    await screen.findByText(/Is configured: Yes/i);
+    act(() => {
+      adapter.updateFlags({ [testFlagName]: true });
+    });
+    expect(screen.getByText(/Feature enabled: Yes/i)).toBeInTheDocument();
+    unmount();
+
+    renderConfigure();
+
+    expect(screen.getByText(/Feature enabled: No/i)).toBeInTheDocument();
+  });
+});

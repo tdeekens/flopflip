@@ -281,3 +281,35 @@ describe('exposeGlobally', () => {
     expect(global).toHaveProperty('__flopflip__.localstorage', adapter);
   });
 });
+
+describe('when configured more than once', () => {
+  it('should only invoke the event handlers of the latest configuration', async () => {
+    const previousEventHandlers = createAdapterEventHandlers();
+    const latestEventHandlers = createAdapterEventHandlers();
+
+    await adapter.configure({ user: { key: 'user' } }, previousEventHandlers);
+    previousEventHandlers.onStatusStateChange.mockClear();
+
+    await adapter.configure({ user: { key: 'user' } }, latestEventHandlers);
+
+    expect(previousEventHandlers.onStatusStateChange).not.toHaveBeenCalled();
+    expect(latestEventHandlers.onStatusStateChange).toHaveBeenCalled();
+  });
+});
+
+describe('when configured more than once while polling', () => {
+  it('should only poll for flags once', async () => {
+    vi.useFakeTimers();
+    await adapter.configure(
+      { user: { key: 'user' } },
+      createAdapterEventHandlers(),
+    );
+    await adapter.configure(
+      { user: { key: 'user' } },
+      createAdapterEventHandlers(),
+    );
+
+    expect(vi.getTimerCount()).toBe(1);
+    vi.useRealTimers();
+  });
+});

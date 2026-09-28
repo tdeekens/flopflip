@@ -399,3 +399,34 @@ describe('exposeGlobally', () => {
     expect(global).toHaveProperty('__flopflip__.combined', adapter);
   });
 });
+
+describe('when configured more than once', () => {
+  it('should only invoke the event handlers of the latest configuration', async () => {
+    const previousEventHandlers = createAdapterEventHandlers();
+    const latestEventHandlers = createAdapterEventHandlers();
+
+    adapter.combine([memoryAdapter, localstorageAdapter]);
+    await adapter.configure(createAdapterArgs(), previousEventHandlers);
+    previousEventHandlers.onStatusStateChange.mockClear();
+
+    await adapter.configure(createAdapterArgs(), latestEventHandlers);
+
+    expect(previousEventHandlers.onStatusStateChange).not.toHaveBeenCalled();
+    expect(latestEventHandlers.onStatusStateChange).toHaveBeenCalled();
+  });
+});
+
+describe('when reset and configured again', () => {
+  it('should not invoke the event handlers of before the reset', async () => {
+    const previousEventHandlers = createAdapterEventHandlers();
+
+    adapter.combine([memoryAdapter, localstorageAdapter]);
+    await adapter.configure(createAdapterArgs(), previousEventHandlers);
+    adapter.reset();
+    previousEventHandlers.onStatusStateChange.mockClear();
+
+    await adapter.configure(createAdapterArgs(), createAdapterEventHandlers());
+
+    expect(previousEventHandlers.onStatusStateChange).not.toHaveBeenCalled();
+  });
+});

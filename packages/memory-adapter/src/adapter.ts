@@ -25,6 +25,10 @@ type TEmitterEvents = {
   flagsStateChange: TFlags;
   statusStateChange: Partial<TAdapterStatus>;
 };
+type TEventHandlers = {
+  flagsStateChange: (flags: TFlags) => void;
+  statusStateChange: (status: Partial<TAdapterStatus>) => void;
+};
 type TMemoryAdapterState = {
   flags: TFlags;
   lockedFlags: Set<TFlagName>;
@@ -32,14 +36,18 @@ type TMemoryAdapterState = {
   emitter: Emitter<TEmitterEvents>;
 };
 
-const intialAdapterState: TAdapterStatus & TMemoryAdapterState = {
+// A factory, so no two adapters or resets share the same flags, locked
+// flags or emitter.
+const createInitialAdapterState = (
+  emitter: Emitter<TEmitterEvents> = mitt<TEmitterEvents>(),
+): TAdapterStatus & TMemoryAdapterState => ({
   configurationStatus: AdapterConfigurationStatus.Unconfigured,
   subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
   flags: {},
   lockedFlags: new Set<TFlagName>(),
   user: {},
-  emitter: mitt(),
-};
+  emitter,
+});
 
 class MemoryAdapter implements TMemoryAdapterInterface {
   id: typeof adapterIdentifiers.memory;
@@ -49,10 +57,41 @@ class MemoryAdapter implements TMemoryAdapterInterface {
 
   #adapterState: TAdapterStatus & TMemoryAdapterState;
 
+  #eventHandlers?: TEventHandlers;
+
+  readonly #removeEventHandlers = () => {
+    if (!this.#eventHandlers) {
+      return;
+    }
+
+    this.#adapterState.emitter.off(
+      'flagsStateChange',
+      this.#eventHandlers.flagsStateChange,
+    );
+    this.#adapterState.emitter.off(
+      'statusStateChange',
+      this.#eventHandlers.statusStateChange,
+    );
+    this.#eventHandlers = undefined;
+  };
+
+  // Each `configure` replaces the event handlers of a previous one, so only
+  // the latest handlers are invoked.
+  readonly #replaceEventHandlers = (eventHandlers: TEventHandlers) => {
+    this.#removeEventHandlers();
+    this.#eventHandlers = eventHandlers;
+    this.#adapterState.emitter.on(
+      'flagsStateChange',
+      eventHandlers.flagsStateChange,
+    );
+    this.#adapterState.emitter.on(
+      'statusStateChange',
+      eventHandlers.statusStateChange,
+    );
+  };
+
   constructor() {
-    this.#adapterState = {
-      ...intialAdapterState,
-    };
+    this.#adapterState = createInitialAdapterState();
     this.id = adapterIdentifiers.memory;
   }
 
@@ -135,8 +174,10 @@ class MemoryAdapter implements TMemoryAdapterInterface {
       });
     };
 
-    this.#adapterState.emitter.on('flagsStateChange', handleFlagsChange);
-    this.#adapterState.emitter.on('statusStateChange', handleStatusChange);
+    this.#replaceEventHandlers({
+      flagsStateChange: handleFlagsChange,
+      statusStateChange: handleStatusChange,
+    });
 
     this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 
@@ -199,9 +240,10 @@ class MemoryAdapter implements TMemoryAdapterInterface {
   }
 
   reset = () => {
-    this.#adapterState = {
-      ...intialAdapterState,
-    };
+    this.#removeEventHandlers();
+    // Keeps the emitter, so pending `waitUntilConfigured` calls still resolve
+    // once the adapter is configured again.
+    this.#adapterState = createInitialAdapterState(this.#adapterState.emitter);
   };
 
   async waitUntilConfigured() {

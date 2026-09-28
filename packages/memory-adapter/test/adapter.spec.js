@@ -259,3 +259,43 @@ describe('exposeGlobally', () => {
     expect(global).toHaveProperty('__flopflip__.memory', adapter);
   });
 });
+
+describe('when configured more than once', () => {
+  it('should only invoke the event handlers of the latest configuration', async () => {
+    const previousEventHandlers = createAdapterEventHandlers();
+    const latestEventHandlers = createAdapterEventHandlers();
+
+    await adapter.configure(createAdapterArgs(), previousEventHandlers);
+    previousEventHandlers.onStatusStateChange.mockClear();
+
+    await adapter.configure(createAdapterArgs(), latestEventHandlers);
+
+    expect(previousEventHandlers.onStatusStateChange).not.toHaveBeenCalled();
+    expect(latestEventHandlers.onStatusStateChange).toHaveBeenCalled();
+  });
+});
+
+describe('when reset and configured again', () => {
+  it('should not invoke the event handlers of before the reset', async () => {
+    const previousEventHandlers = createAdapterEventHandlers();
+
+    await adapter.configure(createAdapterArgs(), previousEventHandlers);
+    adapter.reset();
+    previousEventHandlers.onStatusStateChange.mockClear();
+
+    await adapter.configure(createAdapterArgs(), createAdapterEventHandlers());
+
+    expect(previousEventHandlers.onStatusStateChange).not.toHaveBeenCalled();
+  });
+
+  it('should not keep flags locked before the reset', async () => {
+    await adapter.configure(createAdapterArgs(), createAdapterEventHandlers());
+    adapter.updateFlags({ lockedFlag: true }, { lockFlags: true });
+    adapter.reset();
+
+    await adapter.configure(createAdapterArgs(), createAdapterEventHandlers());
+    adapter.updateFlags({ lockedFlag: false });
+
+    expect(adapter.getFlag('lockedFlag')).toBe(false);
+  });
+});

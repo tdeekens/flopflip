@@ -23,15 +23,22 @@ type TEmitterEvents = {
   flagsStateChange: TFlags;
   statusStateChange: Partial<TAdapterStatus>;
 };
+type TEventHandlers = {
+  statusStateChange: (status: Partial<TAdapterStatus>) => void;
+};
 type TCombinedAdaptersState = {
   emitter: Emitter<TEmitterEvents>;
 };
 
-const intialAdapterState: TAdapterStatus & TCombinedAdaptersState = {
+// A factory, so no two adapters or resets share the same flags, locked
+// flags or emitter.
+const createInitialAdapterState = (
+  emitter: Emitter<TEmitterEvents> = mitt<TEmitterEvents>(),
+): TAdapterStatus & TCombinedAdaptersState => ({
   configurationStatus: AdapterConfigurationStatus.Unconfigured,
   subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
-  emitter: mitt(),
-};
+  emitter,
+});
 
 class CombineAdapters implements TCombinedAdapterInterface {
   id: typeof adapterIdentifiers.combined;
@@ -43,10 +50,33 @@ class CombineAdapters implements TCombinedAdapterInterface {
   #adapters: TAdapter[] = [];
   #adapterState: TAdapterStatus & TCombinedAdaptersState;
 
+  #eventHandlers?: TEventHandlers;
+
+  readonly #removeEventHandlers = () => {
+    if (!this.#eventHandlers) {
+      return;
+    }
+
+    this.#adapterState.emitter.off(
+      'statusStateChange',
+      this.#eventHandlers.statusStateChange,
+    );
+    this.#eventHandlers = undefined;
+  };
+
+  // Each `configure` replaces the event handlers of a previous one, so only
+  // the latest handlers are invoked.
+  readonly #replaceEventHandlers = (eventHandlers: TEventHandlers) => {
+    this.#removeEventHandlers();
+    this.#eventHandlers = eventHandlers;
+    this.#adapterState.emitter.on(
+      'statusStateChange',
+      eventHandlers.statusStateChange,
+    );
+  };
+
   constructor() {
-    this.#adapterState = {
-      ...intialAdapterState,
-    };
+    this.#adapterState = createInitialAdapterState();
     this.id = adapterIdentifiers.combined;
   }
 
@@ -120,7 +150,7 @@ class CombineAdapters implements TCombinedAdapterInterface {
       });
     };
 
-    this.#adapterState.emitter.on('statusStateChange', handleStatusChange);
+    this.#replaceEventHandlers({ statusStateChange: handleStatusChange });
 
     this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 
@@ -237,9 +267,10 @@ class CombineAdapters implements TCombinedAdapterInterface {
   }
 
   reset = () => {
-    this.#adapterState = {
-      ...intialAdapterState,
-    };
+    this.#removeEventHandlers();
+    // Keeps the emitter, so pending `waitUntilConfigured` calls still resolve
+    // once the adapter is configured again.
+    this.#adapterState = createInitialAdapterState(this.#adapterState.emitter);
   };
 
   async waitUntilConfigured() {
