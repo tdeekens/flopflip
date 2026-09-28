@@ -39,6 +39,10 @@ type TEmitterEvents = {
   flagsStateChange: TFlags;
   statusStateChange: Partial<TAdapterStatus>;
 };
+type TEventHandlers = {
+  flagsStateChange: (flags: TFlags) => void;
+  statusStateChange: (status: Partial<TAdapterStatus>) => void;
+};
 
 type TLaunchDarklyAdapterState = {
   context?: LDContext;
@@ -53,6 +57,39 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
   id: typeof adapterIdentifiers.launchdarkly;
 
   readonly #adapterState: TAdapterStatus & TLaunchDarklyAdapterState;
+
+  #eventHandlers?: TEventHandlers;
+
+  readonly #removeEventHandlers = () => {
+    if (!this.#eventHandlers) {
+      return;
+    }
+
+    this.#adapterState.emitter.off(
+      'flagsStateChange',
+      this.#eventHandlers.flagsStateChange,
+    );
+    this.#adapterState.emitter.off(
+      'statusStateChange',
+      this.#eventHandlers.statusStateChange,
+    );
+    this.#eventHandlers = undefined;
+  };
+
+  // Each `configure` replaces the event handlers of a previous one, so only
+  // the latest handlers are invoked.
+  readonly #replaceEventHandlers = (eventHandlers: TEventHandlers) => {
+    this.#removeEventHandlers();
+    this.#eventHandlers = eventHandlers;
+    this.#adapterState.emitter.on(
+      'flagsStateChange',
+      eventHandlers.flagsStateChange,
+    );
+    this.#adapterState.emitter.on(
+      'statusStateChange',
+      eventHandlers.statusStateChange,
+    );
+  };
 
   constructor() {
     this.#adapterState = {
@@ -385,8 +422,10 @@ class LaunchDarklyAdapter implements TLaunchDarklyAdapterInterface {
     this.#adapterState.configurationStatus =
       AdapterConfigurationStatus.Configuring;
 
-    this.#adapterState.emitter.on('flagsStateChange', handleFlagsChange);
-    this.#adapterState.emitter.on('statusStateChange', handleStatusChange);
+    this.#replaceEventHandlers({
+      flagsStateChange: handleFlagsChange,
+      statusStateChange: handleStatusChange,
+    });
 
     this.#adapterState.emitter.emit('statusStateChange', {
       configurationStatus: this.#adapterState.configurationStatus,

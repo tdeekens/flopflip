@@ -249,7 +249,11 @@ describe('when configured', () => {
   describe('when updating flags', () => {
     const updatedFlags = { fooFlag: true, barFlag: false };
 
-    beforeEach(() => {
+    beforeEach(async () => {
+      adapterEventHandlers = createAdapterEventHandlers();
+      vi.useFakeTimers();
+      await adapter.configure(adapterArgs, adapterEventHandlers);
+
       // From `configure`
       adapterEventHandlers.onFlagsStateChange.mockClear();
 
@@ -385,7 +389,11 @@ describe('when configured', () => {
   });
 
   describe('when setting configuration status to configuring', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
+      adapterEventHandlers = createAdapterEventHandlers();
+      vi.useFakeTimers();
+      await adapter.configure(adapterArgs, adapterEventHandlers);
+
       adapterEventHandlers.onStatusStateChange.mockClear();
 
       adapter.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
@@ -422,5 +430,79 @@ describe('exposeGlobally', () => {
     const global = getGlobalThis();
 
     expect(global).toHaveProperty('__flopflip__.graphql', adapter);
+  });
+});
+
+const createMinimalAdapterArgs = () => ({
+  url: 'https://localhost:8080/graphql',
+  user: { key: 'user' },
+  query: 'query AllFeatures { flags: allFeatures { name \\n value} }',
+  fetcher: vi.fn().mockResolvedValue({
+    json: () => Promise.resolve({ data: {} }),
+  }),
+});
+
+describe('when configured more than once', () => {
+  it('should only invoke the event handlers of the latest configuration', async () => {
+    const previousEventHandlers = createAdapterEventHandlers();
+    const latestEventHandlers = createAdapterEventHandlers();
+
+    await adapter.configure(createMinimalAdapterArgs(), previousEventHandlers);
+    previousEventHandlers.onStatusStateChange.mockClear();
+
+    await adapter.configure(createMinimalAdapterArgs(), latestEventHandlers);
+
+    expect(previousEventHandlers.onStatusStateChange).not.toHaveBeenCalled();
+    expect(latestEventHandlers.onStatusStateChange).toHaveBeenCalled();
+  });
+});
+
+describe('when reset and configured again', () => {
+  it('should not invoke the event handlers of before the reset', async () => {
+    const previousEventHandlers = createAdapterEventHandlers();
+
+    await adapter.configure(createMinimalAdapterArgs(), previousEventHandlers);
+    adapter.reset();
+    previousEventHandlers.onStatusStateChange.mockClear();
+
+    await adapter.configure(
+      createMinimalAdapterArgs(),
+      createAdapterEventHandlers(),
+    );
+
+    expect(previousEventHandlers.onStatusStateChange).not.toHaveBeenCalled();
+  });
+
+  it('should not keep flags locked before the reset', async () => {
+    await adapter.configure(
+      createMinimalAdapterArgs(),
+      createAdapterEventHandlers(),
+    );
+    adapter.updateFlags({ lockedFlag: true }, { lockFlags: true });
+    adapter.reset();
+
+    await adapter.configure(
+      createMinimalAdapterArgs(),
+      createAdapterEventHandlers(),
+    );
+    adapter.updateFlags({ lockedFlag: false });
+
+    expect(adapter.getFlag('lockedFlag')).toBe(false);
+  });
+});
+
+describe('when reset while polling', () => {
+  it('should stop polling for flags', async () => {
+    vi.useFakeTimers();
+    await adapter.configure(
+      createMinimalAdapterArgs(),
+      createAdapterEventHandlers(),
+    );
+    expect(vi.getTimerCount()).toBe(1);
+
+    adapter.reset();
+
+    expect(vi.getTimerCount()).toBe(0);
+    vi.useRealTimers();
   });
 });

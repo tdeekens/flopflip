@@ -207,7 +207,11 @@ describe('when configured', () => {
   describe('when updating flags', () => {
     const updatedFlags = { fooFlag: true, barFlag: false };
 
-    beforeEach(() => {
+    beforeEach(async () => {
+      adapterEventHandlers = createAdapterEventHandlers();
+      vi.useFakeTimers();
+      await adapter.configure(adapterArgs, adapterEventHandlers);
+
       // From `configure`
       adapterEventHandlers.onFlagsStateChange.mockClear();
 
@@ -375,7 +379,11 @@ describe('when configured', () => {
   });
 
   describe('when setting configuration status to configuring', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
+      adapterEventHandlers = createAdapterEventHandlers();
+      vi.useFakeTimers();
+      await adapter.configure(adapterArgs, adapterEventHandlers);
+
       adapterEventHandlers.onStatusStateChange.mockClear();
 
       adapter.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
@@ -412,5 +420,79 @@ describe('exposeGlobally', () => {
     const global = getGlobalThis();
 
     expect(global).toHaveProperty('__flopflip__.http', adapter);
+  });
+});
+
+describe('when configured more than once', () => {
+  it('should only invoke the event handlers of the latest configuration', async () => {
+    const previousEventHandlers = createAdapterEventHandlers();
+    const latestEventHandlers = createAdapterEventHandlers();
+
+    await adapter.configure(
+      { execute: vi.fn().mockResolvedValue({}), user: { key: 'user' } },
+      previousEventHandlers,
+    );
+    previousEventHandlers.onStatusStateChange.mockClear();
+
+    await adapter.configure(
+      { execute: vi.fn().mockResolvedValue({}), user: { key: 'user' } },
+      latestEventHandlers,
+    );
+
+    expect(previousEventHandlers.onStatusStateChange).not.toHaveBeenCalled();
+    expect(latestEventHandlers.onStatusStateChange).toHaveBeenCalled();
+  });
+});
+
+describe('when reset and configured again', () => {
+  it('should not invoke the event handlers of before the reset', async () => {
+    const previousEventHandlers = createAdapterEventHandlers();
+
+    await adapter.configure(
+      { execute: vi.fn().mockResolvedValue({}), user: { key: 'user' } },
+      previousEventHandlers,
+    );
+    adapter.reset();
+    previousEventHandlers.onStatusStateChange.mockClear();
+
+    await adapter.configure(
+      { execute: vi.fn().mockResolvedValue({}), user: { key: 'user' } },
+      createAdapterEventHandlers(),
+    );
+
+    expect(previousEventHandlers.onStatusStateChange).not.toHaveBeenCalled();
+  });
+
+  it('should not keep flags locked before the reset', async () => {
+    await adapter.configure(
+      { execute: vi.fn().mockResolvedValue({}), user: { key: 'user' } },
+      createAdapterEventHandlers(),
+    );
+    adapter.updateFlags({ lockedFlag: true }, { lockFlags: true });
+    adapter.reset();
+
+    await adapter.configure(
+      { execute: vi.fn().mockResolvedValue({}), user: { key: 'user' } },
+      createAdapterEventHandlers(),
+    );
+    adapter.updateFlags({ lockedFlag: false });
+
+    expect(adapter.getFlag('lockedFlag')).toBe(false);
+  });
+});
+
+describe('when reset while polling', () => {
+  it('should stop polling for flags', async () => {
+    vi.useFakeTimers();
+    await adapter.configure(
+      { execute: vi.fn().mockResolvedValue({}), user: { key: 'user' } },
+      createAdapterEventHandlers(),
+    );
+    expect(vi.getTimerCount()).toBe(1);
+
+    adapter.reset();
+
+    expect(vi.getTimerCount()).toBe(0);
+    vi.useRealTimers();
   });
 });

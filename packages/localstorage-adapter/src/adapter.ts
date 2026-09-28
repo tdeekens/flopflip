@@ -30,6 +30,10 @@ type TEmitterEvents = {
   flagsStateChange: TFlags;
   statusStateChange: Partial<TAdapterStatus>;
 };
+type TEventHandlers = {
+  flagsStateChange: (flags: TFlags) => void;
+  statusStateChange: (status: Partial<TAdapterStatus>) => void;
+};
 
 type TLocalStorageAdapterState = {
   flags: TFlags;
@@ -38,14 +42,18 @@ type TLocalStorageAdapterState = {
   lockedFlags: Set<TFlagName>;
 };
 
-const intialAdapterState: TAdapterStatus & TLocalStorageAdapterState = {
+// A factory, so no two adapters or resets share the same flags, locked
+// flags or emitter.
+const createInitialAdapterState = (
+  emitter: Emitter<TEmitterEvents> = mitt<TEmitterEvents>(),
+): TAdapterStatus & TLocalStorageAdapterState => ({
   subscriptionStatus: AdapterSubscriptionStatus.Subscribed,
   configurationStatus: AdapterConfigurationStatus.Unconfigured,
   flags: {},
   lockedFlags: new Set<TFlagName>(),
   user: {},
-  emitter: mitt(),
-};
+  emitter,
+});
 
 const STORAGE_SLICE = '@flopflip';
 
@@ -53,15 +61,48 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
   id: typeof adapterIdentifiers.localstorage;
   readonly #adapterState: TAdapterStatus & TLocalStorageAdapterState;
 
+  #eventHandlers?: TEventHandlers;
+
+  readonly #removeEventHandlers = () => {
+    if (!this.#eventHandlers) {
+      return;
+    }
+
+    this.#adapterState.emitter.off(
+      'flagsStateChange',
+      this.#eventHandlers.flagsStateChange,
+    );
+    this.#adapterState.emitter.off(
+      'statusStateChange',
+      this.#eventHandlers.statusStateChange,
+    );
+    this.#eventHandlers = undefined;
+  };
+
+  // Each `configure` replaces the event handlers of a previous one, so only
+  // the latest handlers are invoked.
+  readonly #replaceEventHandlers = (eventHandlers: TEventHandlers) => {
+    this.#removeEventHandlers();
+    this.#eventHandlers = eventHandlers;
+    this.#adapterState.emitter.on(
+      'flagsStateChange',
+      eventHandlers.flagsStateChange,
+    );
+    this.#adapterState.emitter.on(
+      'statusStateChange',
+      eventHandlers.statusStateChange,
+    );
+  };
+
   #__internalConfiguredStatusChange__: TInternalStatusChange =
     '__internalConfiguredStatusChange__';
 
   readonly #cache = createCache({ prefix: STORAGE_SLICE });
 
+  #flagPollingInterval?: ReturnType<typeof setInterval>;
+
   constructor() {
-    this.#adapterState = {
-      ...intialAdapterState,
-    };
+    this.#adapterState = createInitialAdapterState();
     this.id = adapterIdentifiers.localstorage;
   }
 
@@ -92,7 +133,9 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
     pollingIntervalMs?: TLocalStorageAdapterArgs['pollingIntervalMs'];
     user: TUser;
   }) => {
-    setInterval(() => {
+    clearInterval(this.#flagPollingInterval);
+
+    this.#flagPollingInterval = setInterval(() => {
       if (!this.#getIsAdapterUnsubscribed()) {
         const nextFlags = normalizeFlags(
           this.#cache.get<TFlags>(this.#getFlagsCacheKey(user)),
@@ -187,8 +230,10 @@ class LocalStorageAdapter implements TLocalStorageAdapterInterface {
       });
     };
 
-    this.#adapterState.emitter.on('flagsStateChange', handleFlagsChange);
-    this.#adapterState.emitter.on('statusStateChange', handleStatusChange);
+    this.#replaceEventHandlers({
+      flagsStateChange: handleFlagsChange,
+      statusStateChange: handleStatusChange,
+    });
 
     this.setConfigurationStatus(AdapterConfigurationStatus.Configuring);
 

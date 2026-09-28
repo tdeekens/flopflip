@@ -729,3 +729,25 @@ describe('exposeGlobally', () => {
     expect(global).toHaveProperty('__flopflip__.launchdarkly', adapter);
   });
 });
+
+describe('when configured more than once', () => {
+  it('should only invoke the event handlers of the latest configuration', async () => {
+    const createAdapterEventHandlers = () => ({
+      onFlagsStateChange: vi.fn(),
+      onStatusStateChange: vi.fn(),
+    });
+    const previousEventHandlers = createAdapterEventHandlers();
+    const latestEventHandlers = createAdapterEventHandlers();
+    const adapterArgs = { sdk: { clientSideId }, context: userWithKey };
+
+    createLaunchDarklyClient.mockReturnValue(createClient());
+    await adapter.configure(adapterArgs, previousEventHandlers);
+    previousEventHandlers.onStatusStateChange.mockClear();
+
+    createLaunchDarklyClient.mockReturnValue(createClient());
+    await adapter.configure(adapterArgs, latestEventHandlers);
+
+    expect(previousEventHandlers.onStatusStateChange).not.toHaveBeenCalled();
+    expect(latestEventHandlers.onStatusStateChange).toHaveBeenCalled();
+  });
+});
