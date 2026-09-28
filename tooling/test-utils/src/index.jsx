@@ -2,6 +2,7 @@ import { adapter as memoryAdapter } from '@flopflip/memory-adapter';
 import {
   act,
   buildQueries,
+  cleanup,
   fireEvent,
   queries,
   queryHelpers,
@@ -11,7 +12,12 @@ import {
 import { cloneElement } from 'react';
 import { afterEach } from 'vitest';
 
-afterEach(memoryAdapter.reset);
+// Unmount before resetting: unmounting unsubscribes from the adapter, which
+// would otherwise leave the reset adapter unsubscribed for the next test.
+afterEach(() => {
+  cleanup();
+  memoryAdapter.reset();
+});
 
 const mergeOptional = (defaultValue, value) =>
   value === null ? undefined : { ...defaultValue, ...value };

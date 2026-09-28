@@ -1,4 +1,4 @@
-import { vi } from 'vitest';
+import { beforeEach, vi } from 'vitest';
 
 // Replaces `localStorage` and `sessionStorage` with in-memory stores whose
 // methods are `vi.fn()` spies, so tests can assert on and stub storage access.
@@ -35,10 +35,18 @@ class StorageMock {
   }
 }
 
-for (const name of ['localStorage', 'sessionStorage'] as const) {
-  Object.defineProperty(globalThis, name, {
-    value: new StorageMock(),
-    configurable: true,
-    writable: true,
-  });
-}
+const installStorageMocks = () => {
+  for (const name of ['localStorage', 'sessionStorage'] as const) {
+    Object.defineProperty(globalThis, name, {
+      value: new StorageMock(),
+      configurable: true,
+      writable: true,
+    });
+  }
+};
+
+installStorageMocks();
+
+// Fresh storage per test, so neither stored values nor queued
+// `mockReturnValueOnce` results leak into the next test.
+beforeEach(installStorageMocks);
