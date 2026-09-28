@@ -403,4 +403,5 @@ const adapter = new HttpAdapter();
 
 exposeGlobally(adapter);
 
-export { adapter };
+// The class is exported for tests only. The package exports the instance.
+export { adapter, HttpAdapter };
