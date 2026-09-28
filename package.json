@@ -23,7 +23,7 @@
     "changeset:version-and-format": "changeset version && pnpm format && pnpm install --no-frozen-lockfile",
     "changeset": "changeset",
     "check-types": "pnpm pipeline check-types --full",
-    "clean": "manypkg exec rm -rf dist && manypkg exec rm -rf .turbo && rm -rf .turbo",
+    "clean": "manypkg exec rm -rf dist",
     "format": "oxfmt --write",
     "format:check": "oxfmt --check",
     "lint": "oxlint",
