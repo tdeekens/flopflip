@@ -3,7 +3,12 @@ import { SplitFactory } from '@splitsoftware/splitio';
 import getGlobalThis from 'globalthis';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { adapter, createAnonymousUserKey, normalizeFlag } from '../src/adapter';
+import {
+  adapter as defaultAdapter,
+  createAnonymousUserKey,
+  normalizeFlag,
+  SplitioAdapter,
+} from '../src/adapter';
 
 vi.mock('@splitsoftware/splitio', () => ({
   SplitFactory: vi.fn(() => ({
@@ -28,6 +33,13 @@ const userWithoutKey = {
 };
 const names = ['some-flag-1', 'some-flag-2'];
 const flags = { 'some-flag-1': true, 'some-flag-2': false };
+
+// A fresh adapter per test, so no test depends on state left by another.
+let adapter = new SplitioAdapter();
+
+beforeEach(() => {
+  adapter = new SplitioAdapter();
+});
 
 describe('when configuring', () => {
   let onStatusStateChange;
@@ -397,6 +409,6 @@ describe('exposeGlobally', () => {
   it('should expose `adapter` globally', () => {
     const global = getGlobalThis();
 
-    expect(global).toHaveProperty('__flopflip__.splitio', adapter);
+    expect(global).toHaveProperty('__flopflip__.splitio', defaultAdapter);
   });
 });

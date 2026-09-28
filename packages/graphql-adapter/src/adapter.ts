@@ -418,4 +418,5 @@ const adapter = new GraphQlAdapter();
 
 exposeGlobally(adapter);
 
-export { adapter };
+// The class is exported for tests only. The package exports the instance.
+export { adapter, GraphQlAdapter };

@@ -3,7 +3,7 @@ import getGlobalThis from 'globalthis';
 import warning from 'tiny-warning';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { adapter } from '../src/adapter';
+import { adapter as defaultAdapter, MemoryAdapter } from '../src/adapter';
 
 vi.mock('tiny-warning');
 
@@ -15,6 +15,13 @@ const createAdapterEventHandlers = (custom = {}) => ({
   onFlagsStateChange: vi.fn(),
   onStatusStateChange: vi.fn(),
   ...custom,
+});
+
+// A fresh adapter per test, so no test depends on state left by another.
+let adapter = new MemoryAdapter();
+
+beforeEach(() => {
+  adapter = new MemoryAdapter();
 });
 
 describe('when configuring', () => {
@@ -256,7 +263,7 @@ describe('exposeGlobally', () => {
   it('should expose `adapter` globally', () => {
     const global = getGlobalThis();
 
-    expect(global).toHaveProperty('__flopflip__.memory', adapter);
+    expect(global).toHaveProperty('__flopflip__.memory', defaultAdapter);
   });
 });
 

@@ -323,4 +323,5 @@ const adapter = new SplitioAdapter();
 
 exposeGlobally(adapter);
 
-export { adapter, createAnonymousUserKey, normalizeFlag };
+// The class is exported for tests only. The package exports the instance.
+export { adapter, createAnonymousUserKey, normalizeFlag, SplitioAdapter };

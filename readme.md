@@ -13,13 +13,13 @@
   React
   · Redux
   · Vitest
-  · pnpm
   · TypeScript
   · @testing-library/react
-  · Biome
+  · oxlint
+  · oxfmt
   · Lodash
   · Changesets
-  · tsup
+  · tsdown
   · pnpm
   🙏
   </sub>
@@ -888,7 +888,7 @@ Please note that the `adapterId` should be one of `launchdarkly`, `memory`, `loc
 ## ❯ Module Formats
 
 All packages are built for ESM and CommonJS using
-[`tsup`](https://github.com/egoist/tsup) (powered by esbuild).
+[`tsdown`](https://tsdown.dev) (powered by Rolldown).
 
 The `package.json` files contain a `main` entry pointing to `./dist/index.js`
 and an `exports` map with `import` and `require` conditions:

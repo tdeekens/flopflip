@@ -96,12 +96,18 @@ describe('flag caching', () => {
         flag2: true,
       };
 
+      const memoryAdapterCache = await getCache(
+        cacheIdentifiers.session,
+        adapterIdentifiers.memory,
+        cacheContext,
+      );
       const localstorageAdapterCache = await getCache(
         cacheIdentifiers.session,
         adapterIdentifiers.localstorage,
         cacheContext,
       );
 
+      memoryAdapterCache.set(memoryAdapterFlags);
       localstorageAdapterCache.set(localstorageAdapterFlags);
 
       const fakeAdapter = {
