@@ -13,3 +13,4 @@ allowBuilds:
 peerDependencyRules:
   allowedVersions:
     'tsdown>typescript': '7'
+autoDedupe: true
