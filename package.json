@@ -19,10 +19,10 @@
   "author": "Tobias Deekens <nerd@tdeekens.name>",
   "scripts": {
     "auth": "npm_config_registry=https://registry.npmjs.org npm whoami",
-    "build": "turbo build",
+    "build": "pnpm pipeline build --full",
     "changeset:version-and-format": "changeset version && pnpm format && pnpm install --no-frozen-lockfile",
     "changeset": "changeset",
-    "check-types": "turbo check-types",
+    "check-types": "pnpm pipeline check-types --full",
     "clean": "manypkg exec rm -rf dist && manypkg exec rm -rf .turbo && rm -rf .turbo",
     "format": "oxfmt --write",
     "format:check": "oxfmt --check",
@@ -36,7 +36,7 @@
     "reinstall": "manypkg exec rm -rf node_modules && rm -rf node_modules pnpm-lock.yaml && pnpm install",
     "test:coverage": "vitest run --coverage",
     "test:report": "vitest run --reporter=junit --outputFile=junit.xml",
-    "test": "turbo test"
+    "test": "pnpm pipeline test --full"
   },
   "devDependencies": {
     "@babel/cli": "8.0.6",
@@ -106,7 +106,7 @@
   },
   "engines": {
     "node": ">=24",
-    "pnpm": ">=12"
+    "pnpm": ">=12.4"
   },
   "packageManager": "pnpm@12.8.1",
   "bundlewatch": {
