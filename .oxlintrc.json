@@ -75,7 +75,7 @@
       }
     },
     {
-      "files": ["**/test/**", "**/*.spec.*", "throwing-console-patch.js"],
+      "files": ["**/test/**", "**/*.spec.*"],
       "rules": {
         "no-shadow": "off",
         "no-console": "off",
