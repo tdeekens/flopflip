@@ -2,7 +2,7 @@ packages:
   - packages/*
   - tooling/*
 catalog:
-  '@launchdarkly/js-client-sdk': 4.10.4
+  '@launchdarkly/js-client-sdk': 4.11.0
   '@testing-library/dom': 10.4.2
   '@testing-library/jest-dom': 7.0.1
   '@types/react': 19.3.0
