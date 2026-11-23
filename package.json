@@ -47,7 +47,7 @@
     "@manypkg/cli": "0.25.1",
     "@types/jest": "30.0.0",
     "@types/lodash": "4.17.27",
-    "@types/node": "24.19.2",
+    "@types/node": "26.6.6",
     "@vitest/coverage-v8": "5.1.1",
     "@vitest/ui": "5.1.1",
     "husky": "9.1.7",
@@ -70,7 +70,7 @@
   "devEngines": {
     "runtime": {
       "name": "node",
-      "version": "24",
+      "version": "26",
       "onFail": "warn"
     }
   },
