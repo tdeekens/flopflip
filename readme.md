@@ -182,8 +182,8 @@ The minimal configuration for a setup with `@flopflip/react-broadcast` and
 LaunchDarkly would be nothing more than:
 
 ```jsx
-import { ConfigureFlopFlip } from '@flopflip/react-broadcast';
 import { adapter } from '@flopflip/launchdarkly-adapter';
+import { ConfigureFlopFlip } from '@flopflip/react-broadcast';
 // or import { adapter } from '@flopflip/memory-adapter';
 // or import { adapter } from '@flopflip/localstorage-adapter';
 
@@ -229,16 +229,16 @@ If you prefer to have the feature flag's state persisted in redux you
 would add a reducer when creating your store.
 
 ```jsx
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import {
   ConfigureFlopFlip,
   flopflipReducer,
   FLOPFLIP_STATE_SLICE,
 } from '@flopflip/react-redux';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 
+import { appReducer } from './reducer';
 // Maintained somewhere within your application
 import { user } from './user';
-import { appReducer } from './reducer';
 
 const rootReducer = combineReducers({
   appReducer,
@@ -266,13 +266,13 @@ tree.
 In context this configuration could look like:
 
 ```jsx
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { adapter } from '@flopflip/launchdarkly-adapter';
 import {
   createFlopFlipEnhancer,
   flopflipReducer,
   FLOPFLIP_STATE_SLICE,
 } from '@flopflip/react-redux';
-import { adapter } from '@flopflip/launchdarkly-adapter';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 
 // Maintained somewhere within your application
 import { context } from './context';
@@ -589,6 +589,7 @@ rendered whenever the feature is disabled instead of `null`.
 
 ```jsx
 import { ToggleFeature } from '@flopflip/react-redux';
+
 // or import { ToggleFeature } from '@flopflip/react-broadcast';
 import { flagsNames } from './feature-flags';
 
@@ -682,6 +683,7 @@ Without a component rendered in place of the `ComponentToBeToggled`:
 
 ```jsx
 import { branchOnFeatureToggle } from '@flopflip/react-redux';
+
 import flagsNames from './feature-flags';
 
 const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
@@ -695,6 +697,7 @@ With a component rendered in place of the `ComponentToBeToggled`:
 
 ```jsx
 import { branchOnFeatureToggle } from '@flopflip/react-redux';
+
 import { flagsNames } from './feature-flags';
 
 const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
@@ -712,6 +715,7 @@ With a multi-variate flag:
 
 ```jsx
 import { branchOnFeatureToggle } from '@flopflip/react-redux';
+
 import { flagsNames } from './feature-flags';
 
 const ComponentToBeToggled = () => <h3>I might be gone or there!</h3>;
@@ -735,6 +739,7 @@ matching result.
 
 ```jsx
 import { injectFeatureToggles } from '@flopflip/react-redux';
+
 import { flagsNames } from './feature-flags';
 
 const Component = (props) => {
@@ -760,6 +765,7 @@ component. You also may pass a second argument to overwrite the default
 
 ```jsx
 import { injectFeatureToggle } from '@flopflip/react-redux';
+
 import { flagsNames } from './feature-flags';
 
 const Component = (props) => {
