@@ -57,7 +57,7 @@
     "@flopflip/types": "workspace:*",
     "@types/react-is": "19.3.0",
     "lodash": "catalog:",
-    "react-is": "19.3.0",
+    "react-is": "19.3.1",
     "tiny-warning": "catalog:",
     "ts-deepmerge": "catalog:"
   },
