@@ -1,6 +1,6 @@
 {
   "name": "@flopflip/cache",
-  "version": "15.1.14",
+  "version": "15.1.15",
   "description": "Caching for flipflop adapters",
   "keywords": [
     "cache",

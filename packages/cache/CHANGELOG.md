@@ -1,5 +1,14 @@
 # @flopflip/cache
 
+## 15.1.15
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @flopflip/localstorage-cache@15.1.15
+  - @flopflip/sessionstorage-cache@15.1.15
+  - @flopflip/types@15.1.15
+
 ## 15.1.14
 
 ### Patch Changes
